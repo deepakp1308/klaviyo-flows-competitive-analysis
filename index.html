@@ -1,0 +1,685 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Klaviyo Flows — Competitive Analysis (Executive 2-Pager)</title>
+<meta name="description" content="A two-page executive competitive brief on Klaviyo Flows: capabilities, AI, customers, JTBD, differentiators, pricing, and strategic implications." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E1116;
+    --ink-2: #1F2937;
+    --muted: #4B5563;
+    --line: #E5E7EB;
+    --line-2: #D1D5DB;
+    --bg: #F8F7F4;
+    --paper: #FFFFFF;
+    --brand: #5A2BFF;       /* Klaviyo-ish purple */
+    --brand-2: #FF7A1A;     /* warm accent */
+    --good: #047857;
+    --warn: #B45309;
+    --bad: #B91C1C;
+    --chip: #F1EEFF;
+    --chip-ink: #3A1ACC;
+    --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.45;
+  }
+  .toolbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(248,247,244,.85);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .toolbar-inner {
+    max-width: 1180px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; gap: 12px;
+  }
+  .brand-mark {
+    display:flex; align-items:center; gap:10px;
+    font-weight: 700; font-size: 14px; color: var(--ink-2);
+  }
+  .brand-dot { width: 10px; height: 10px; border-radius: 3px; background: var(--brand); box-shadow: 0 0 0 3px rgba(90,43,255,.15); }
+  .toolbar a.btn, .toolbar button.btn {
+    border: 1px solid var(--line-2);
+    background: var(--paper);
+    color: var(--ink-2);
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .toolbar .btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .toolbar .btn:hover { transform: translateY(-1px); }
+
+  .page-wrap { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+
+  /* "Page" cards modeled after letter-size sheets */
+  .page {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 28px 32px 26px;
+    margin-bottom: 22px;
+  }
+
+  .page-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700;
+  }
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 1.15;
+    margin: 6px 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; }
+  .meta {
+    text-align: right;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .meta strong { color: var(--ink-2); }
+
+  .grid { display: grid; gap: 16px; }
+  .grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid.cols-5-3 { grid-template-columns: 5fr 3fr; }
+  .grid.cols-3-2 { grid-template-columns: 3fr 2fr; }
+
+  @media (max-width: 880px) {
+    .grid.cols-2, .grid.cols-3, .grid.cols-4, .grid.cols-5-3, .grid.cols-3-2 { grid-template-columns: 1fr; }
+    .page { padding: 20px; }
+    h1 { font-size: 24px; }
+  }
+
+  h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    margin: 0 0 8px;
+    letter-spacing: -0.005em;
+  }
+  h2 .num {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--brand);
+    background: var(--chip);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 8px;
+    transform: translateY(-2px);
+    letter-spacing: .08em;
+  }
+  p { margin: 0 0 8px; font-size: 13.5px; color: var(--ink-2); }
+  ul { margin: 4px 0 8px; padding-left: 18px; }
+  li { font-size: 13px; color: var(--ink-2); margin-bottom: 4px; }
+  li strong { color: var(--ink); }
+
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .card.tinted { background: #FBFAFF; border-color: #ECE6FF; }
+  .card.warm { background: #FFF8F0; border-color: #FCE6CC; }
+  .card.olive { background: #F4F6EE; border-color: #E1E7CB; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .kpi {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFB 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .kpi .v {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .kpi .l { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .chip {
+    background: var(--chip);
+    color: var(--chip-ink);
+    border-radius: 999px;
+    padding: 3px 9px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    border: 1px solid #E1D8FF;
+  }
+  .chip.warm { background: #FFEFE0; color: #9A4A00; border-color: #FCD9B6; }
+  .chip.green { background: #E6F5EE; color: #036A4F; border-color: #BFE6D3; }
+  .chip.gray { background: #F1F2F4; color: #374151; border-color: #E2E5EA; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: #FAFAFB;
+  }
+  td.nowrap { white-space: nowrap; }
+  .dot { display:inline-block; width:8px; height:8px; border-radius:999px; margin-right:6px; vertical-align: middle; }
+  .dot.good { background: var(--good); }
+  .dot.mid  { background: var(--warn); }
+  .dot.bad  { background: var(--bad); }
+
+  .pull {
+    border-left: 3px solid var(--brand);
+    padding: 8px 12px;
+    background: #FBFAFF;
+    border-radius: 6px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .pull cite {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-style: normal;
+  }
+
+  .source {
+    font-size: 10.5px; color: var(--muted);
+    border-top: 1px dashed var(--line);
+    margin-top: 14px;
+    padding-top: 10px;
+  }
+  .source a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Pricing matrix small visual */
+  .price-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .price {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px;
+    background: #fff;
+  }
+  .price h4 {
+    margin: 0 0 4px; font-size: 13px; font-weight: 700; color: var(--ink);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .price .p { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .price ul { margin: 0; padding-left: 16px; }
+  .price li { font-size: 11.5px; }
+  .price.spotlight { border-color: #C7B8FF; background: linear-gradient(180deg,#FBFAFF,#FFFFFF); }
+  .pill { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+  .pill.included { background: #E6F5EE; color: #036A4F; }
+  .pill.partial  { background: #FFF1DD; color: #8A4A00; }
+
+  /* Print styles */
+  @media print {
+    @page { size: Letter; margin: 0.45in; }
+    body { background: white; }
+    .toolbar { display: none; }
+    .page-wrap { padding: 0; max-width: none; }
+    .page { box-shadow: none; border: none; padding: 0; margin: 0 0 0.4in; page-break-after: always; }
+    .page:last-of-type { page-break-after: auto; }
+    a { color: inherit; text-decoration: none; }
+    .source { color: #333; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="brand-mark"><span class="brand-dot"></span> Competitive Brief · Klaviyo Flows</div>
+    <div style="display:flex; gap:8px;">
+      <button class="btn" onclick="window.print()">Print / Save as PDF</button>
+      <a class="btn primary" href="https://www.klaviyo.com/features/flows" target="_blank" rel="noopener">Source: Klaviyo.com</a>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <!-- ============== PAGE 1 ============== -->
+  <section class="page" aria-label="Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Competitive Intelligence · Executive 2-Pager</div>
+        <h1>Klaviyo <em style="font-style: italic; color:#5A2BFF;">Flows</em>: cross-channel marketing automation, increasingly run by AI</h1>
+        <div class="subtitle">What it is, why it wins for B2C/ecommerce, where AI is going, and what it means for us.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Prepared for:</strong> Executive review</div>
+        <div><strong>Subject:</strong> Klaviyo Flows (campaign automation)</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 1 of 2</div>
+      </div>
+    </header>
+
+    <!-- Snapshot KPIs -->
+    <div class="kpi-row" style="margin-bottom: 18px;">
+      <div class="kpi">
+        <div class="v">60+</div>
+        <div class="l">Pre-built flow templates (welcome, cart, browse, win-back, post-purchase, back-in-stock, price drop, etc.)</div>
+      </div>
+      <div class="kpi">
+        <div class="v">5</div>
+        <div class="l">Native channels in one flow: <strong>Email · SMS · WhatsApp · Push · In-app</strong></div>
+      </div>
+      <div class="kpi">
+        <div class="v">350+</div>
+        <div class="l">Integrations & APIs (Shopify, BigCommerce, WooCommerce, Gorgias, Zendesk…) feeding real-time triggers</div>
+      </div>
+      <div class="kpi">
+        <div class="v">40+</div>
+        <div class="l">AI features in K:AI suite, including <strong>Flows AI</strong>, Segments AI, Smart Send Time, Channel Affinity, Predicted CLV</div>
+      </div>
+    </div>
+
+    <!-- 1. What is it -->
+    <div class="grid cols-5-3" style="margin-bottom: 14px;">
+      <div>
+        <h2><span class="num">01</span>What “Flows” is</h2>
+        <p>
+          <strong>Flows</strong> are Klaviyo's automated, multi-step customer journeys—what other vendors call "automations,"
+          "drip campaigns," or "journeys." Each flow is started by a <strong>trigger</strong> (behavior, list/segment join, event,
+          date, or webhook), then executes a sequence of <strong>messages, delays, conditional splits, trigger splits, A/B tests,
+          and webhooks</strong> across channels.
+        </p>
+        <p>
+          Klaviyo positions Flows as the activation layer of its <strong>B2C CRM</strong>: every message is informed by a unified
+          real-time customer profile (orders, browse, predictive scores, service tickets) rather than a static list. That data-first
+          posture is the through-line of Klaviyo's pitch since 2012 and the basis of its differentiation vs. legacy ESPs.
+        </p>
+        <div class="chips">
+          <span class="chip">Drag-and-drop builder</span>
+          <span class="chip">No-code</span>
+          <span class="chip">Real-time triggers</span>
+          <span class="chip">Cross-channel orchestration</span>
+          <span class="chip">In-flow analytics</span>
+          <span class="chip warm">AI-generated flows</span>
+        </div>
+      </div>
+
+      <div class="card tinted">
+        <h2 style="margin-bottom: 6px;"><span class="num">02</span>Klaviyo's own framing</h2>
+        <div class="pull">
+          “Build the ultimate customer journey. Smart automation sends targeted messages that respond to customer data and real-time behavior.”
+          <cite>— klaviyo.com/features/flows</cite>
+        </div>
+        <p style="margin-top: 10px;">
+          Marketing positioning emphasizes three repeatable promises: <strong>(1)</strong> ship a flow in seconds with AI or templates,
+          <strong>(2)</strong> personalize every touch from a unified profile, and <strong>(3)</strong> orchestrate across channels
+          from one canvas with timing that prevents fatigue.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. Capabilities table -->
+    <h2><span class="num">03</span>Key capabilities (what's in the product today)</h2>
+    <div class="grid cols-2" style="margin-bottom: 14px;">
+      <div class="card">
+        <strong style="font-size:13px;">Triggers & entry points</strong>
+        <ul>
+          <li><strong>Behavior:</strong> viewed product, started checkout, placed order, form fill, signed up for SMS</li>
+          <li><strong>Predictive:</strong> predicted next order date, churn risk, no engagement</li>
+          <li><strong>Lifecycle:</strong> birthday/anniversary, price drop, back in stock</li>
+          <li><strong>List/segment join</strong> with re-entry controls (one-time, re-qualify, time-windowed)</li>
+          <li><strong>Custom events & webhooks</strong> from any of 350+ integrations</li>
+        </ul>
+      </div>
+      <div class="card">
+        <strong style="font-size:13px;">Logic, personalization & orchestration</strong>
+        <ul>
+          <li><strong>Conditional splits</strong> on cart value, VIP/new/returning, location, LTV, product type, recent visit, RFM groups</li>
+          <li><strong>Trigger splits</strong> for differentiated paths off the same event</li>
+          <li><strong>Cross-channel</strong> email → SMS → push fallback in a single canvas; <strong>Smart Send</strong> coordinates frequency</li>
+          <li><strong>Dynamic content</strong> blocks (product recs, abandoned items, loyalty status)</li>
+          <li><strong>Webhooks</strong> for loyalty points, gift cards, thank-you cards, downstream systems</li>
+        </ul>
+      </div>
+      <div class="card">
+        <strong style="font-size:13px;">Optimization & measurement</strong>
+        <ul>
+          <li><strong>A/B tests</strong> on send time, channel, content, and offer</li>
+          <li><strong>In-builder metrics</strong>: open, click, conversion, revenue per recipient</li>
+          <li><strong>Scheduled flow reports</strong> by time period and engagement</li>
+          <li><strong>Auto-monitors</strong> alert on performance regressions to protect conversion</li>
+          <li>Revenue attribution rolled up against Klaviyo profile</li>
+        </ul>
+      </div>
+      <div class="card">
+        <strong style="font-size:13px;">Templates & speed-to-value</strong>
+        <ul>
+          <li><strong>60+ pre-built flows</strong>: welcome series, abandoned cart, browse abandonment, post-purchase, win-back, price drop, back-in-stock, replenishment</li>
+          <li><strong>Flows AI</strong>: describe the flow in plain English; Klaviyo builds triggers, splits, and structure</li>
+          <li><strong>Marketing Agent</strong> (K:AI) can set "must-have" flows live from a website URL in 3 clicks</li>
+          <li>Library is segmented by industry vertical and lifecycle stage</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4. AI deep-dive + JTBD -->
+    <div class="grid cols-2" style="margin-bottom: 14px;">
+      <div class="card warm">
+        <h2 style="margin-bottom: 6px;"><span class="num">04</span>AI inside Flows — the <em>K:AI</em> story</h2>
+        <p>Klaviyo splits AI into <strong>predictive</strong>, <strong>assistive</strong>, and <strong>autonomous</strong>. Flows now sit at the intersection of all three:</p>
+        <ul>
+          <li><strong>Flows AI (assistive):</strong> natural-language flow generation incl. trigger, splits, delays, and structure. Available on paid accounts with 250+ active profiles.</li>
+          <li><strong>Marketing Agent (autonomous):</strong> learns the brand from its website, generates on-brand campaigns, and automatically sets must-have flows live; "optimize growth" loop tests timing/creative/offers and applies winners (rolling out).</li>
+          <li><strong>Personalized Send Time / Smart Send Time:</strong> per-profile optimal delivery time across channels.</li>
+          <li><strong>Channel Affinity:</strong> picks email vs. SMS vs. push per profile.</li>
+          <li><strong>Predicted CLV, churn risk, next-order date</strong> become flow filters and split conditions.</li>
+          <li><strong>Image Remix</strong> (in-editor generative image edits) and <strong>AI subject line generator</strong> reduce content time inside flow steps.</li>
+          <li><strong>MCP server</strong>: Klaviyo exposes a remote MCP so external agents (Cursor, Claude, ChatGPT) can read/act on Klaviyo data — a meaningful "open by design" bet.</li>
+        </ul>
+        <div class="chips">
+          <span class="chip warm">Assistive</span>
+          <span class="chip warm">Predictive</span>
+          <span class="chip warm">Autonomous (agentic)</span>
+          <span class="chip warm">MCP-exposed</span>
+        </div>
+      </div>
+
+      <div class="card olive">
+        <h2 style="margin-bottom: 6px;"><span class="num">05</span>Who buys it & the <em>Jobs To Be Done</em></h2>
+        <p style="margin-bottom: 6px;"><strong>Buyer profile.</strong> 143K+ brands; heavy concentration in <strong>Shopify</strong> ecommerce, then BigCommerce / WooCommerce / Magento. Buyers range from solo founders on the Free tier to enterprise DTC (Glossier, Living Proof, Brooklinen, Chubbies, Culture Kings, Hard Yakka, P.E Nation, Corkcicle, Caden Lane, Wilkinson Sword, Lifestraw).</p>
+        <p style="margin: 6px 0 4px;"><strong>Operator JTBD (the lifecycle marketer):</strong></p>
+        <ul>
+          <li>"<strong>Recover revenue I'm leaking</strong> from cart, browse, and checkout abandonment — without writing code."</li>
+          <li>"<strong>Onboard new subscribers</strong> with a branded series the moment they sign up."</li>
+          <li>"<strong>Bring lapsed customers back</strong> with win-back / replenishment timed to predicted next-order date."</li>
+          <li>"<strong>Coordinate email + SMS + push</strong> so I stop double-messaging the same shopper."</li>
+          <li>"<strong>Reward and protect VIPs</strong> with split logic on LTV, RFM, and channel affinity."</li>
+          <li>"<strong>Stand up the program in days, not quarters</strong>" — solved with templates + Flows AI + Marketing Agent."</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="source">
+      Sources reviewed: Klaviyo product pages — <a href="https://www.klaviyo.com/features/flows">/features/flows</a>,
+      <a href="https://klaviyo.com/solutions/marketing-automation/workflows">/solutions/marketing-automation/workflows</a>,
+      <a href="https://klaviyo.com/products/ai">/products/ai</a>,
+      <a href="https://klaviyo.com/tools/flows-ai">/tools/flows-ai</a>;
+      Help Center "Getting started with flows"; Klaviyo Academy "Best practices for flows"; Klaviyo Newsroom (K:AI expansion);
+      Klaviyo customer case studies (Hard Yakka, P.E Nation, Corkcicle, Popflex, Caden Lane, Wilkinson Sword, Lifestraw, Culture Kings);
+      Klaviyo investor materials &amp; pricing pages (klaviyo.com/pricing); third-party comparisons (Costbench 2026 pricing audit; Jellyreach &amp; AI:Productivity Klaviyo-vs-Mailchimp; Nudgify Bloomreach-vs-Klaviyo).
+    </p>
+  </section>
+
+  <!-- ============== PAGE 2 ============== -->
+  <section class="page" aria-label="Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Competitive Intelligence · Executive 2-Pager (cont.)</div>
+        <h1>Differentiation, customer proof, pricing &amp; <em style="color:#5A2BFF;">what it means for us</em></h1>
+        <div class="subtitle">A read on where Klaviyo Flows is moat-building, and where it remains exposed.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Prepared for:</strong> Executive review</div>
+        <div><strong>Subject:</strong> Klaviyo Flows (campaign automation)</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 2 of 2</div>
+      </div>
+    </header>
+
+    <!-- 6. Differentiation matrix -->
+    <h2><span class="num">06</span>Differentiation: Klaviyo Flows vs. closest comps</h2>
+    <div style="overflow-x:auto; margin-bottom: 14px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Klaviyo Flows</th>
+            <th>Mailchimp Customer Journeys</th>
+            <th>Bloomreach Engagement</th>
+            <th>Why Klaviyo wins / loses</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Data foundation</strong></td>
+            <td><span class="dot good"></span>Real-time B2C CRM profile (orders, browse, predictive scores, service)</td>
+            <td><span class="dot mid"></span>List/contact-centric, ecommerce bolted on</td>
+            <td><span class="dot good"></span>CDP-grade, omnichannel events</td>
+            <td>Klaviyo &gt; Mailchimp on data depth; comparable to Bloomreach but cheaper to deploy.</td>
+          </tr>
+          <tr>
+            <td><strong>Channel coverage in one flow</strong></td>
+            <td><span class="dot good"></span>Email, SMS, WhatsApp, push, in-app — single canvas</td>
+            <td><span class="dot mid"></span>Email + SMS + limited social</td>
+            <td><span class="dot good"></span>Full omnichannel incl. web personalization</td>
+            <td>Klaviyo's single-canvas orchestration is the salient daily-workflow win.</td>
+          </tr>
+          <tr>
+            <td><strong>Trigger granularity</strong></td>
+            <td><span class="dot good"></span>Behavior + predictive (next order, churn) + custom events + webhooks</td>
+            <td><span class="dot mid"></span>Standard ecom triggers; weaker predictive</td>
+            <td><span class="dot good"></span>Strong real-time + ML triggers</td>
+            <td>Klaviyo's predictive triggers (next order, CLV, churn) are productized for the marketer, not a data-scientist.</td>
+          </tr>
+          <tr>
+            <td><strong>AI in the flow</strong></td>
+            <td><span class="dot good"></span>Flows AI (NL-to-flow), Marketing Agent (autonomous setup), Channel Affinity, Smart Send Time, Image Remix</td>
+            <td><span class="dot mid"></span>Subject-line / content assist; less workflow-native</td>
+            <td><span class="dot good"></span>Loomi AI for personalization &amp; experimentation</td>
+            <td>Klaviyo's AI is shipping into the <em>flow canvas</em>, not just adjacent tools — and it's exposed via MCP.</td>
+          </tr>
+          <tr>
+            <td><strong>Time-to-first-flow</strong></td>
+            <td><span class="dot good"></span>3-click Marketing Agent setup; 60+ templates; AI generation</td>
+            <td><span class="dot good"></span>Templates available; simpler UX</td>
+            <td><span class="dot bad"></span>Implementation-heavy; usually services-led</td>
+            <td>Klaviyo wins SMB/mid-market on speed-to-value; Bloomreach loses on TCO &amp; ramp.</td>
+          </tr>
+          <tr>
+            <td><strong>Ecosystem &amp; integrations</strong></td>
+            <td><span class="dot good"></span>350+ integrations; deepest Shopify integration in market</td>
+            <td><span class="dot mid"></span>Broad but shallow ecom integrations</td>
+            <td><span class="dot good"></span>Enterprise stack integrations</td>
+            <td>Shopify gravity = Klaviyo's structural moat for DTC.</td>
+          </tr>
+          <tr>
+            <td><strong>Pricing posture</strong></td>
+            <td><span class="dot good"></span>Free tier, then usage-based; transparent</td>
+            <td><span class="dot mid"></span>Tiered, gets pricey at scale</td>
+            <td><span class="dot bad"></span>Enterprise / quoted</td>
+            <td>Klaviyo lands free, expands silently as profiles grow — strong PLG.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 7. Customer proof -->
+    <div class="grid cols-3-2" style="margin-bottom: 14px;">
+      <div>
+        <h2><span class="num">07</span>Customer proof — what Flows actually moves</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Brand</th>
+              <th>Vertical</th>
+              <th>What they did with Flows</th>
+              <th>Reported outcome</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Hard Yakka</strong></td>
+              <td>Workwear / apparel</td>
+              <td>Cross-channel BFCM flows; segmented dynamic recs</td>
+              <td><strong>+308% YoY</strong> flows revenue at BFCM; 60% of EOY sale revenue from flows</td>
+            </tr>
+            <tr>
+              <td><strong>Caden Lane</strong></td>
+              <td>Maternity / baby</td>
+              <td>Email flows for welcome, cart, post-purchase</td>
+              <td><strong>24.2x YoY</strong> flow revenue in Q1; +157% Klaviyo-attributed revenue</td>
+            </tr>
+            <tr>
+              <td><strong>P.E Nation</strong></td>
+              <td>Athleisure (AU)</td>
+              <td>60 flows incl. region-specific A/B tests &amp; product recs</td>
+              <td><strong>35%</strong> of total ecom revenue attributed to Klaviyo</td>
+            </tr>
+            <tr>
+              <td><strong>Corkcicle</strong></td>
+              <td>Drinkware</td>
+              <td>Consolidated email + SMS + reviews on Klaviyo</td>
+              <td><strong>+93% QoQ</strong> flow revenue; 56% of Klaviyo revenue from flows</td>
+            </tr>
+            <tr>
+              <td><strong>Popflex</strong></td>
+              <td>Activewear</td>
+              <td>Hybrid email/SMS flows for BFCM</td>
+              <td><strong>3.3x YoY</strong> BFCM flow revenue</td>
+            </tr>
+            <tr>
+              <td><strong>Lifestraw</strong></td>
+              <td>Outdoor / DTC</td>
+              <td>Adopted Flows AI to compress flow build time</td>
+              <td>Publicly cited time savings; case study used in Klaviyo's AI marketing</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card tinted">
+        <h2 style="margin-bottom: 6px;"><span class="num">08</span>Voice of the buyer</h2>
+        <div class="pull" style="margin-bottom: 10px;">
+          “Klaviyo, supercharged by its powerful AI features, enables us to easily and effectively build complex automated flows that deliver the right message to the right customers, in the right region, at the right time.”
+          <cite>— Jarrod Hinvest, Head of Ecommerce, Culture Kings</cite>
+        </div>
+        <div class="pull">
+          “We retarget people based on what they've clicked within an email… we get really high open rates—around 60%—and a really strong conversion rate.”
+          <cite>— John Pagni, Edgewell (Wilkinson Sword)</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Pricing & access -->
+    <h2><span class="num">09</span>Pricing &amp; access — where Flows sits on the price card</h2>
+    <p style="margin-bottom: 10px;">
+      Critically, <strong>flows are not gated behind a premium tier</strong>. Klaviyo includes flows in <em>every</em> plan including
+      Free — usage scales with active profiles and message volume, and the <strong>AI-powered</strong> flow features (Flows AI, Marketing Agent)
+      require a paid account with 250+ active profiles. This is a deliberate PLG move: get the automation muscle in, then expand.
+    </p>
+    <div class="price-grid">
+      <div class="price">
+        <h4>Free <span class="pill included">Flows: included</span></h4>
+        <div class="p">$0/mo · up to 250 profiles · 500 emails/mo · 150 SMS credits</div>
+        <ul>
+          <li>Pre-built automation flows</li>
+          <li>Segmentation &amp; A/B testing</li>
+          <li>Shopify / ecom integrations</li>
+          <li>Email support (60 days)</li>
+        </ul>
+      </div>
+      <div class="price spotlight">
+        <h4>Email <span class="pill included">Flows: full + AI</span></h4>
+        <div class="p">From $20/mo · scales with profiles · 5K emails/mo at base</div>
+        <ul>
+          <li><strong>All automation flows</strong> + advanced segmentation</li>
+          <li><strong>Flows AI</strong> &amp; predictive analytics</li>
+          <li>Unlimited A/B tests; remove Klaviyo branding</li>
+          <li>Email + chat support</li>
+        </ul>
+      </div>
+      <div class="price">
+        <h4>Email + SMS <span class="pill included">Flows: + cross-channel</span></h4>
+        <div class="p">From $35/mo · 1,250 SMS/MMS credits included</div>
+        <ul>
+          <li>Everything in Email</li>
+          <li>SMS automation flows + 2-way SMS</li>
+          <li>Smart sending across email/SMS</li>
+          <li>TCPA / compliance tooling</li>
+        </ul>
+      </div>
+      <div class="price">
+        <h4>Enterprise <span class="pill partial">Flows: + governance</span></h4>
+        <div class="p">Custom · for 100K+ profiles &amp; complex orgs</div>
+        <ul>
+          <li>Dedicated CSM, onboarding, migration</li>
+          <li>Custom sending infrastructure</li>
+          <li>SSO, audit logs, advanced security</li>
+          <li>QBRs &amp; custom integrations</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 10. Implications -->
+    <div class="grid cols-2" style="margin-top: 16px;">
+      <div class="card">
+        <h2 style="margin-bottom: 6px;"><span class="num">10</span>Strategic read — where they're strong</h2>
+        <ul>
+          <li><strong>Data + activation in one product.</strong> The B2C CRM positioning means Flows aren't a tactic, they're the <em>output</em> of the platform.</li>
+          <li><strong>Speed-to-value.</strong> 3-click Marketing Agent + 60+ templates + Flows AI dramatically compress the gap between "signed up" and "first revenue from automation."</li>
+          <li><strong>Agentic direction is real.</strong> Marketing Agent and Customer Agent move Klaviyo from "tool" to "teammate." MCP exposure makes them ecosystem-friendly to Cursor/Claude/ChatGPT.</li>
+          <li><strong>PLG flywheel.</strong> Free tier ships full flow capability — friction to expansion is just contact growth.</li>
+          <li><strong>Shopify gravity.</strong> Deepest ecom integration plus largest DTC reference list (143K+ brands) makes them the default option in the buyer's consideration set.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 style="margin-bottom: 6px;"><span class="num">11</span>Where they're exposed (our opportunities)</h2>
+        <ul>
+          <li><strong>B2B / non-ecom workflows</strong> remain a weak spot — playbooks, lead routing, sales handoff, account-based journeys are not their native muscle.</li>
+          <li><strong>Pricing complaints at scale.</strong> Public reviews cite confusing tier upgrades, billing for inactive profiles, and support quality friction at higher tiers — opening for transparent, predictable pricing.</li>
+          <li><strong>Bring-your-own-AI / model choice.</strong> K:AI is opinionated; teams that want to plug their own models or fine-tune have only the MCP escape hatch.</li>
+          <li><strong>Service depth at enterprise.</strong> Bloomreach-class omnichannel + governance is still considered more "enterprise-grade"; Klaviyo is closing this with Helpdesk, Customer Hub, and Customer Agent — but not closed yet.</li>
+          <li><strong>Marketer trust in autonomous AI.</strong> "Marketing Agent sets your must-have flows live" is bold — many brands will want preview/approval guardrails before they cede that ground.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="source">
+      Compiled from Klaviyo's product, AI, pricing, help-center, and customer-story properties; Klaviyo Academy &amp; webinar content (BigMarker / Livestorm strategy sessions); Klaviyo Newsroom announcements; and independent comparison/pricing sources (Costbench 2026, Jellyreach, AI:Productivity, Nudgify). Figures cited are the brands' own self-reported outcomes published on klaviyo.com/customers.
+    </p>
+  </section>
+
+</div>
+
+</body>
+</html>
