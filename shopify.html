@@ -1,0 +1,1066 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Shopify Automations — Competitive Analysis (Executive 2-Pager + Voice of Customer)</title>
+<meta name="description" content="Two-tab executive brief on Shopify's automation products: Marketing Automations (in Shopify Email) and Shopify Flow — capabilities, Magic + Sidekick AI, JTBD, customers, pricing, and synthesized sentiment from Reddit, Shopify Community, agencies, and blogs." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E1116;
+    --ink-2: #1F2937;
+    --muted: #4B5563;
+    --line: #E5E7EB;
+    --line-2: #D1D5DB;
+    --bg: #F8F7F4;
+    --paper: #FFFFFF;
+    --brand: #008060;       /* Shopify green */
+    --brand-2: #95BF47;     /* Shopify lime */
+    --good: #047857;
+    --warn: #B45309;
+    --bad: #B91C1C;
+    --chip: #E0F2EA;
+    --chip-ink: #00553F;
+    --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.45;
+  }
+  .toolbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(248,247,244,.85);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .toolbar-inner {
+    max-width: 1180px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; gap: 12px;
+  }
+  .brand-mark {
+    display:flex; align-items:center; gap:10px;
+    font-weight: 700; font-size: 14px; color: var(--ink-2);
+  }
+  .brand-dot { width: 10px; height: 10px; border-radius: 3px; background: var(--brand); box-shadow: 0 0 0 3px rgba(0,128,96,.18); }
+  .toolbar a.btn, .toolbar button.btn {
+    border: 1px solid var(--line-2);
+    background: var(--paper);
+    color: var(--ink-2);
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .toolbar .btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .toolbar .btn:hover { transform: translateY(-1px); }
+
+  .page-wrap { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+
+  .page {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 28px 32px 26px;
+    margin-bottom: 22px;
+  }
+
+  .page-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700;
+  }
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 1.15;
+    margin: 6px 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; }
+  .meta { text-align: right; font-size: 12px; color: var(--muted); }
+  .meta strong { color: var(--ink-2); }
+
+  .grid { display: grid; gap: 16px; }
+  .grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid.cols-5-3 { grid-template-columns: 5fr 3fr; }
+  .grid.cols-3-2 { grid-template-columns: 3fr 2fr; }
+
+  @media (max-width: 880px) {
+    .grid.cols-2, .grid.cols-3, .grid.cols-4, .grid.cols-5-3, .grid.cols-3-2 { grid-template-columns: 1fr; }
+    .page { padding: 20px; }
+    h1 { font-size: 24px; }
+  }
+
+  h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; margin: 0 0 8px; letter-spacing: -0.005em; }
+  h2 .num {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px; font-weight: 800;
+    color: var(--chip-ink);
+    background: var(--chip);
+    padding: 2px 6px; border-radius: 4px; margin-right: 8px;
+    transform: translateY(-2px); letter-spacing: .08em;
+  }
+  p { margin: 0 0 8px; font-size: 13.5px; color: var(--ink-2); }
+  ul { margin: 4px 0 8px; padding-left: 18px; }
+  li { font-size: 13px; color: var(--ink-2); margin-bottom: 4px; }
+  li strong { color: var(--ink); }
+
+  .card { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .card.tinted { background: #F1FAF5; border-color: #C9E8D6; }
+  .card.warm { background: #FFF8F0; border-color: #FCE6CC; }
+  .card.olive { background: #F4F6EE; border-color: #E1E7CB; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .kpi {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFB 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .kpi .v { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: 22px; line-height: 1; color: var(--ink); }
+  .kpi .l { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .chip {
+    background: var(--chip); color: var(--chip-ink);
+    border-radius: 999px; padding: 3px 9px;
+    font-size: 11px; font-weight: 600;
+    border: 1px solid #C9E8D6;
+  }
+  .chip.warm { background: #FFEFE0; color: #9A4A00; border-color: #FCD9B6; }
+  .chip.green { background: #E6F5EE; color: #036A4F; border-color: #BFE6D3; }
+  .chip.gray { background: #F1F2F4; color: #374151; border-color: #E2E5EA; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: #FAFAFB; }
+  .dot { display:inline-block; width:8px; height:8px; border-radius:999px; margin-right:6px; vertical-align: middle; }
+  .dot.good { background: var(--good); }
+  .dot.mid  { background: var(--warn); }
+  .dot.bad  { background: var(--bad); }
+
+  .pull {
+    border-left: 3px solid var(--brand);
+    padding: 8px 12px; background: #F1FAF5; border-radius: 6px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px; color: var(--ink-2);
+  }
+  .pull cite { display: block; font-family: 'Inter', sans-serif; font-size: 11px; color: var(--muted); margin-top: 6px; font-style: normal; }
+
+  .source { font-size: 10.5px; color: var(--muted); border-top: 1px dashed var(--line); margin-top: 14px; padding-top: 10px; }
+  .source a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+
+  .price-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .price { border: 1px solid var(--line); border-radius: 10px; padding: 12px; background: #fff; }
+  .price h4 { margin: 0 0 4px; font-size: 13px; font-weight: 700; color: var(--ink); display: flex; align-items: center; justify-content: space-between; }
+  .price .p { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .price ul { margin: 0; padding-left: 16px; }
+  .price li { font-size: 11.5px; }
+  .price.spotlight { border-color: #B0DAC4; background: linear-gradient(180deg,#F1FAF5,#FFFFFF); }
+  .pill { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+  .pill.included { background: #E6F5EE; color: #036A4F; }
+  .pill.partial  { background: #FFF1DD; color: #8A4A00; }
+  .pill.excluded { background: #FFE7E0; color: #9A1F00; }
+
+  .tabs { display: inline-flex; background: #ECEAE6; border-radius: 10px; padding: 3px; gap: 2px; }
+  .tab { border: 0; background: transparent; color: var(--muted); padding: 7px 14px; font-size: 13px; font-weight: 600; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .tab:hover { color: var(--ink-2); }
+  .tab.active { background: var(--paper); color: var(--ink); box-shadow: 0 1px 2px rgba(16,24,40,.06); }
+  @media (max-width: 720px) { .tabs { order: 3; flex-basis: 100%; } .toolbar-inner { flex-wrap: wrap; } }
+  .tabpanel { display: none; }
+  .tabpanel.active { display: block; }
+
+  .platform-bar { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-bottom: 14px; }
+  .platform { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: #fff; }
+  .platform .src { font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing:.04em; text-transform: uppercase; }
+  .platform .score { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: 22px; margin: 4px 0 2px; }
+  .platform .meta-line { font-size: 11px; color: var(--muted); }
+  .platform .bar-wrap { height: 4px; background: var(--line); border-radius: 99px; overflow: hidden; margin-top: 6px; }
+  .platform .bar { height: 100%; border-radius: 99px; background: var(--brand); }
+  .platform.bad .bar { background: var(--bad); }
+  .platform.good .bar { background: var(--good); }
+  .platform.mid .bar { background: var(--warn); }
+
+  .theme { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px 8px; background: #fff; margin-bottom: 8px; }
+  .theme h3 { margin: 0 0 4px; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+  .theme h3 .badge { font-size: 9.5px; font-weight: 800; padding: 2px 6px; border-radius: 4px; letter-spacing: .06em; }
+  .badge.lo { background: #FFE7E0; color: #9A1F00; }
+  .badge.hi { background: #E6F5EE; color: #036A4F; }
+  .badge.mid { background: #FFF1DD; color: #8A4A00; }
+  .badge.brand { background: var(--chip); color: var(--chip-ink); }
+  .theme p { font-size: 12.5px; margin: 0 0 4px; }
+  .theme .src-tag { font-size: 10.5px; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 4px; margin-top: 4px; }
+
+  .col-loved { background: #F4FBF7; border-color: #CFE9DC; }
+  .col-hated { background: #FFF5F2; border-color: #F4D2C5; }
+  .col-mixed { background: #FFFAF0; border-color: #F5E2BD; }
+
+  .col-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+  .col-head h2 { margin: 0; }
+  .col-head .count { font-size: 11px; font-weight: 700; color: var(--muted); background: #fff; border: 1px solid var(--line); padding: 2px 8px; border-radius: 99px; }
+
+  .quote-wall { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .qw { border-left: 3px solid var(--line); padding: 8px 12px; background: #FAFAFB; border-radius: 6px; }
+  .qw.pos { border-left-color: var(--good); background: #F4FBF7; }
+  .qw.neg { border-left-color: var(--bad); background: #FFF5F2; }
+  .qw.mid { border-left-color: var(--warn); background: #FFFAF0; }
+  .qw .q { font-family: 'Source Serif 4', Georgia, serif; font-size: 13.5px; color: var(--ink); margin: 0 0 4px; line-height: 1.4; }
+  .qw .src-line { font-size: 11px; color: var(--muted); }
+  .qw .src-line strong { color: var(--ink-2); font-weight: 600; }
+
+  @media (max-width: 880px) {
+    .platform-bar { grid-template-columns: repeat(2, 1fr); }
+    .quote-wall { grid-template-columns: 1fr; }
+  }
+
+  .ns { display: grid; grid-template-columns: 130px 1fr 50px; gap: 8px; align-items: center; margin-bottom: 6px; font-size: 12px; }
+  .ns .label { color: var(--ink-2); font-weight: 500; }
+  .ns .track { height: 10px; background: linear-gradient(90deg, #FFE7E0 0%, #FFE7E0 50%, #E6F5EE 50%, #E6F5EE 100%); border-radius: 99px; position: relative; }
+  .ns .marker { position: absolute; top: -3px; bottom: -3px; width: 4px; background: var(--ink); border-radius: 2px; }
+  .ns .val { text-align: right; font-variant-numeric: tabular-nums; font-size: 12px; color: var(--ink-2); font-weight: 600; }
+
+  @media print {
+    @page { size: Letter; margin: 0.45in; }
+    body { background: white; }
+    .toolbar { display: none; }
+    .page-wrap { padding: 0; max-width: none; }
+    .page { box-shadow: none; border: none; padding: 0; margin: 0 0 0.4in; page-break-after: always; }
+    .page:last-of-type { page-break-after: auto; }
+    .tabpanel:not(.active) { display: block !important; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="brand-mark"><span class="brand-dot"></span> Competitive Brief · Shopify Automations (Marketing Automations + Flow)</div>
+    <div class="tabs" role="tablist" aria-label="Brief sections">
+      <button class="tab active" role="tab" aria-selected="true" data-tab="brief">Executive Brief</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="sentiment">Voice of Customer</button>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <a class="btn" href="index.html">→ Klaviyo</a>
+      <a class="btn" href="mailchimp.html">→ Mailchimp</a>
+      <button class="btn" onclick="window.print()">Print / PDF</button>
+      <a class="btn primary" href="https://www.shopify.com/marketing-automation" target="_blank" rel="noopener">Source</a>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+<!-- ============== EXECUTIVE BRIEF TAB ============== -->
+<div class="tabpanel active" id="panel-brief" role="tabpanel">
+
+  <!-- Brief Page 1 -->
+  <section class="page" aria-label="Brief Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Competitive Intelligence · Executive 2-Pager</div>
+        <h1>Shopify <em style="color:#008060;">Marketing Automations + Flow</em>: native, free, and getting agentic with Sidekick</h1>
+        <div class="subtitle">A focused read on Shopify's automation surface — Marketing Automations (in Shopify Email) and Shopify Flow. Other Shopify products (POS, Capital, Shipping, Markets) are out of scope.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Prepared for:</strong> Executive review</div>
+        <div><strong>Subject:</strong> Shopify Marketing Automations + Flow</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 1 of 2</div>
+      </div>
+    </header>
+
+    <!-- KPIs -->
+    <div class="kpi-row" style="margin-bottom: 18px;">
+      <div class="kpi">
+        <div class="v">~6+</div>
+        <div class="l">Marketing Automation templates: welcome, abandoned cart, abandoned checkout, browse abandonment, first-purchase upsell, win-back. Plus 100s of <em>Shopify Flow</em> templates for ops.</div>
+      </div>
+      <div class="kpi">
+        <div class="v">10K</div>
+        <div class="l">Free emails/month included on every paid Shopify plan, then $1/1,000 emails. Marketing Automations and Flow are free; Sidekick + Magic AI are free.</div>
+      </div>
+      <div class="kpi">
+        <div class="v">562M</div>
+        <div class="l">Shopify Flow workflows ran during BFCM 2024; <strong>1B+ decisions automated/month</strong>; 22K unique jobs handled by Flow.</div>
+      </div>
+      <div class="kpi">
+        <div class="v">2</div>
+        <div class="l">Native channels in Marketing Automations: <strong>Email</strong> + Shopify-pushed notifications (no native SMS, WhatsApp, in-app inside Shopify Email itself).</div>
+      </div>
+    </div>
+
+    <!-- 1. What is it -->
+    <div class="grid cols-5-3" style="margin-bottom: 14px;">
+      <div>
+        <h2><span class="num">01</span>What "Shopify Automations" actually is</h2>
+        <p>
+          Shopify ships <strong>two stacked automation products</strong>, both native to the merchant admin and both free:
+        </p>
+        <ul style="margin-top: 4px;">
+          <li><strong>Marketing Automations</strong> (inside Shopify Email): customer-facing journey automation with a simple
+            <em>trigger → condition → action</em> interface and pre-built templates for welcome, cart, browse, post-purchase, win-back.</li>
+          <li><strong>Shopify Flow</strong>: the broader workflow engine that powers Marketing Automations under the hood, but extends to <em>operational</em> workflows — inventory, fraud, fulfillment, loyalty, B2B, customer tagging — across the full store.</li>
+        </ul>
+        <p>
+          Together, these are positioned as the <strong>"automation that comes with the store"</strong>: zero extra subscription,
+          deep operational triggers no third party can match, and increasingly a Sidekick-driven conversational interface for both setup and editing.
+        </p>
+        <div class="chips">
+          <span class="chip">Trigger → condition → action</span>
+          <span class="chip">No-code</span>
+          <span class="chip">Native to Shopify admin</span>
+          <span class="chip">10K free emails/mo</span>
+          <span class="chip">Scheduled automations</span>
+          <span class="chip warm">Sidekick conversational AI</span>
+        </div>
+      </div>
+
+      <div class="card tinted">
+        <h2 style="margin-bottom: 6px;"><span class="num">02</span>Shopify's own framing</h2>
+        <div class="pull">
+          "Connect with customers automatically. Create and customize marketing automations that are always on, so you can engage customers at every stage of their journey and set your business growth in motion."
+          <cite>— shopify.com/marketing-automation</cite>
+        </div>
+        <p style="margin-top: 10px;">
+          Marketing emphasizes three repeatable promises: <strong>(1)</strong> get started in minutes from templates that already include your brand,
+          <strong>(2)</strong> reach customers at the right moment with cool-down periods that prevent over-messaging, and
+          <strong>(3)</strong> trust Shopify's infrastructure for delivery and reporting at peak (BFCM-grade reliability).
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. Capabilities -->
+    <h2><span class="num">03</span>Key capabilities (Marketing Automations + Flow)</h2>
+    <div class="grid cols-2" style="margin-bottom: 14px;">
+      <div class="card">
+        <strong style="font-size:13px;">Marketing Automations triggers (customer-facing)</strong>
+        <ul>
+          <li><strong>Behavior:</strong> newsletter signup, abandoned cart, abandoned checkout, browse abandonment, first purchase, repeat purchase milestones</li>
+          <li><strong>Lifecycle:</strong> "X days after last order," post-purchase upsell, win-back / lapsed customer</li>
+          <li><strong>Time-based:</strong> scheduled triggers independent of customer actions</li>
+          <li><strong>Manual:</strong> tag-based and segment-join entry</li>
+          <li><strong>Cool-down periods</strong> control message cadence at the trigger level</li>
+        </ul>
+      </div>
+      <div class="card">
+        <strong style="font-size:13px;">Shopify Flow triggers (operational + customer)</strong>
+        <ul>
+          <li><strong>Order:</strong> Order created, Order ready to fulfill, Order paid, Order risk levels</li>
+          <li><strong>Customer:</strong> Customer subscribed to email marketing, Payment method updates</li>
+          <li><strong>Inventory:</strong> Variant out of stock, Variant back in stock</li>
+          <li><strong>Fulfillment:</strong> Fulfillment placed on hold / released</li>
+          <li><strong>B2B:</strong> Company contact assigned permission, draft order events</li>
+          <li><strong>Scheduled triggers</strong> for periodic data pulls and reports</li>
+        </ul>
+      </div>
+      <div class="card">
+        <strong style="font-size:13px;">Logic, conditions &amp; actions</strong>
+        <ul>
+          <li><strong>If/then conditions</strong> on Float, Integer, Date, String, Boolean, Enum types; field operators (equal/not equal); list operators (at least one of, none of)</li>
+          <li><strong>Wait steps / cool-down</strong> for cadence control</li>
+          <li><strong>Actions:</strong> send email (Shopify Email), send Shopify-managed notification, add/remove tag, update metafield, hold/release fulfillment, trigger an installed app, post a webhook</li>
+          <li><strong>Connector library</strong> — installed Shopify apps expose actions Flow can call (e.g., loyalty, reviews, fulfillment apps)</li>
+          <li><strong>Personalization</strong> via stored customer/order/product data</li>
+        </ul>
+      </div>
+      <div class="card">
+        <strong style="font-size:13px;">Templates &amp; speed-to-value</strong>
+        <ul>
+          <li><strong>Pre-built journey templates</strong> in Marketing Automations: welcome, abandoned cart/checkout, browse abandonment, first-purchase upsell, post-purchase, win-back</li>
+          <li><strong>Hundreds of Flow templates</strong> by category: Risk, Promotion, Payment reminders, Orders, Loyalty, Inventory, Fulfillment, Customer, B2B, Buyer experience</li>
+          <li><strong>Plug-and-play playbooks</strong> for inventory management, fraud prevention, loyalty &amp; retention, fulfillment management</li>
+          <li><strong>Sidekick</strong> can scaffold a workflow conversationally and apply it to your store</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4. AI + JTBD -->
+    <div class="grid cols-2" style="margin-bottom: 14px;">
+      <div class="card warm">
+        <h2 style="margin-bottom: 6px;"><span class="num">04</span>AI inside Shopify Automations — <em>Magic + Sidekick</em></h2>
+        <p>Shopify's flow-relevant AI is split into <strong>embedded generation (Magic)</strong> and <strong>conversational orchestration (Sidekick)</strong>. Both are <strong>free across all plans</strong>.</p>
+
+        <p style="margin: 6px 0 2px;"><strong>1 · Build &amp; edit the journey conversationally</strong></p>
+        <ul style="margin-top:2px;">
+          <li><strong>Sidekick</strong> can edit existing automation emails through chat: add/delete sections, apply brand changes (colors, fonts, CTAs), tighten copy, swap images, adjust spacing — all from natural-language instructions.</li>
+          <li>Sidekick uses your <strong>store context</strong> — brand colors, typography, products, past emails — to keep generated journeys on-brand.</li>
+          <li>Sidekick orchestrates multi-step tasks and calls Magic to do the actual generation.</li>
+        </ul>
+
+        <p style="margin: 8px 0 2px;"><strong>2 · Generate the message inside automation steps</strong></p>
+        <ul style="margin-top:2px;">
+          <li><strong>Shopify Magic — embedded generation:</strong> subject lines, email body copy, product descriptions, blog content, image edits — all available directly inside Shopify Email and the rest of admin.</li>
+          <li>Magic claims <strong>AI-optimized subject lines, content, and send times</strong> for "high-converting email campaigns."</li>
+        </ul>
+
+        <p style="margin: 8px 0 2px;"><strong>3 · Time the journey</strong></p>
+        <ul style="margin-top:2px;">
+          <li>Send-time recommendations are derived from store-level engagement patterns, not per-profile predictive — narrower than Klaviyo's Smart Send Time.</li>
+        </ul>
+
+        <p style="margin: 8px 0 2px;"><strong>4 · Operational AI inside Flow</strong></p>
+        <ul style="margin-top:2px;">
+          <li>Sidekick can write and modify <strong>Flow workflows</strong> from a description ("when an order over $500 comes in from a new customer, tag it for review") — one of the most distinctive flow-AI experiences in the category.</li>
+        </ul>
+
+        <div class="chips" style="margin-top:8px;">
+          <span class="chip warm">Conversational (Sidekick)</span>
+          <span class="chip warm">Embedded gen (Magic)</span>
+          <span class="chip warm">Free across all plans</span>
+        </div>
+        <p style="font-size:11.5px; color:var(--muted); margin-top:8px;"><strong>Notable absences vs. Klaviyo:</strong> no per-profile predictive next-order date or churn-risk as flow triggers, no Channel Affinity, no Personalized Send Time, no in-flow Image Remix-style generative editing within the automation step (Sidekick edits the email but generative image variation is shallower).</p>
+      </div>
+
+      <div class="card olive">
+        <h2 style="margin-bottom: 6px;"><span class="num">05</span>Who uses it &amp; the <em>Jobs To Be Done</em></h2>
+        <p style="margin-bottom: 6px;"><strong>Buyer profile.</strong> Every Shopify merchant with a paid plan (Basic $29+) has access. Heavy concentration in <strong>early-stage and SMB DTC</strong> — solo founders, agencies running multiple stores, and Shopify Plus brands using Flow for operational automation. Public references skew DTC apparel, food &amp; beverage, beauty, and B2B wholesale.</p>
+        <p style="margin: 6px 0 4px;"><strong>Operator JTBD (the merchant who didn't subscribe to a separate ESP):</strong></p>
+        <ul>
+          <li>"<strong>Get a welcome series and abandoned-cart automation live</strong> the same day I open my store, without paying another vendor."</li>
+          <li>"<strong>Use the data Shopify already has</strong> on my orders, customers, and inventory — without an integration."</li>
+          <li>"<strong>Automate operations</strong> (tag risky orders, restock alerts, route fulfillment, reward loyal customers) inside the same admin I already use."</li>
+          <li>"<strong>Stay native</strong> through BFCM peak — when third-party automations break, Shopify's runs."</li>
+          <li>"<strong>Edit my automation emails by chatting with Sidekick</strong>" — a workflow ergonomics promise no third party can match yet."</li>
+          <li>"<strong>Defer the Klaviyo decision</strong> until I'm at the revenue scale where its depth pays for itself."</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="source">
+      Sources reviewed: Shopify product pages — <a href="https://www.shopify.com/marketing-automation">/marketing-automation</a>,
+      <a href="https://www.shopify.com/flow">/flow</a>,
+      <a href="https://shopify.com/magic">/magic</a>;
+      Shopify Help Center — "Creating marketing automations in Shopify," "Marketing automation tools," "Examples of workflows in Shopify Flow," "Triggers in Shopify Flow," "Conditions in Shopify Flow," "Shopify Magic";
+      Shopify blog — "Edit emails faster, with Sidekick (2025)," "Email Sequence Guide (2026)," "Abandoned Cart Emails (2026)";
+      Shopify Pricing &amp; Plus pricing pages; third-party comparisons (Omnisend Shopify Email vs. Klaviyo 2026, Sequenzy 2026, AESYMMETRIC Best Email Marketing for Shopify 2026, Spoks Klaviyo Alternatives, Lite14 Tools 2026, Talk Shop Sidekick vs. Magic 2026, ECDigital Strategy, EmailToolTester 2026).
+    </p>
+  </section>
+
+  <!-- Brief Page 2 -->
+  <section class="page" aria-label="Brief Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Competitive Intelligence · Executive 2-Pager (cont.)</div>
+        <h1>Differentiation, customer proof, pricing &amp; <em style="color:#008060;">what it means for us</em></h1>
+        <div class="subtitle">Where Shopify's native automation wins, where it intentionally stops short, and where the gap with Klaviyo is closing or widening.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Prepared for:</strong> Executive review</div>
+        <div><strong>Subject:</strong> Shopify Marketing Automations + Flow</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 2 of 2</div>
+      </div>
+    </header>
+
+    <!-- 6. Differentiation -->
+    <h2><span class="num">06</span>Differentiation: Shopify Automations vs. closest comps</h2>
+    <div style="overflow-x:auto; margin-bottom: 14px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Shopify Marketing Automations + Flow</th>
+            <th>Klaviyo Flows</th>
+            <th>Mailchimp Marketing Automation Flows</th>
+            <th>Shopify's edge / exposure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Data foundation</strong></td>
+            <td><span class="dot good"></span>Native to the store — no integration, no sync — orders, customers, inventory, fulfillment all first-class</td>
+            <td><span class="dot good"></span>Real-time B2C CRM profile incl. predictive scores</td>
+            <td><span class="dot mid"></span>List/contact-centric</td>
+            <td>The most direct path from "data" to "automation" in the category — but only inside Shopify's data model.</td>
+          </tr>
+          <tr>
+            <td><strong>Channels in a single journey</strong></td>
+            <td><span class="dot bad"></span>Email + Shopify-managed notifications. <em>No native SMS, WhatsApp, push, in-app</em> in Marketing Automations.</td>
+            <td><span class="dot good"></span>Email, SMS, WhatsApp, push, in-app — single canvas</td>
+            <td><span class="dot bad"></span>Email + SMS (US-only)</td>
+            <td>Channel narrowness is the structural reason Klaviyo wins serious lifecycle programs.</td>
+          </tr>
+          <tr>
+            <td><strong>Trigger granularity</strong></td>
+            <td><span class="dot mid"></span>Strong commerce/operational triggers (orders, inventory, fulfillment, B2B); thin on predictive AI triggers</td>
+            <td><span class="dot good"></span>Predictive triggers (next-order, churn) + custom events + webhooks</td>
+            <td><span class="dot mid"></span>Standard SMB triggers</td>
+            <td>Shopify wins the operational use cases (Flow's domain); loses on AI-driven marketing depth.</td>
+          </tr>
+          <tr>
+            <td><strong>AI in the automation</strong></td>
+            <td><span class="dot good"></span>Sidekick (conversational; can edit journey emails &amp; write Flow workflows) + Magic (embedded subject lines, copy, send-time) — <em>free on every plan</em></td>
+            <td><span class="dot good"></span>10+ AI features inside flows (Flows AI, Marketing Agent, predictive triggers, Channel Affinity, Image Remix, Personalized A/B)</td>
+            <td><span class="dot mid"></span>Intuit Assist content gen + send-time, Standard+ only</td>
+            <td>Shopify's bet is conversational + universal availability; Klaviyo's is depth.</td>
+          </tr>
+          <tr>
+            <td><strong>Time-to-first-flow</strong></td>
+            <td><span class="dot good"></span>Already in admin; templates pre-branded with your store; Sidekick can spin one up by chat</td>
+            <td><span class="dot good"></span>3-click Marketing Agent + 60+ templates</td>
+            <td><span class="dot good"></span>Visual builder + Intuit Assist generation</td>
+            <td>Shopify's "no install" advantage is the lowest-friction start in the category.</td>
+          </tr>
+          <tr>
+            <td><strong>Ecosystem &amp; integrations</strong></td>
+            <td><span class="dot good"></span>Every installed Shopify app exposes actions to Flow; deepest commerce-event integration possible (Shopify <em>is</em> the data)</td>
+            <td><span class="dot good"></span>350+ integrations; deepest 3rd-party Shopify integration</td>
+            <td><span class="dot good"></span>300+ generalist integrations</td>
+            <td>Shopify wins inside the Shopify universe; non-Shopify is N/A.</td>
+          </tr>
+          <tr>
+            <td><strong>Pricing posture for automation</strong></td>
+            <td><span class="dot good"></span><strong>Free with any paid Shopify plan</strong> (Basic $29+). 10K free emails/mo, then $1/1K. Flow free on Basic+.</td>
+            <td><span class="dot good"></span>Free tier includes flows; AI-flows on paid</td>
+            <td><span class="dot bad"></span>CJB requires Standard ($20+); free has no automation</td>
+            <td>The most aggressive bundling in the category — automation is "free" because it's already in the platform you're paying for.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 7. Customer proof -->
+    <div class="grid cols-3-2" style="margin-bottom: 14px;">
+      <div>
+        <h2><span class="num">07</span>Customer proof — what Shopify Automations actually moves</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Brand / Source</th>
+              <th>What they did with Shopify Automations</th>
+              <th>Reported outcome</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Anonymized DTC fashion (Lite14 case study)</strong></td>
+              <td>Native automation flows (welcome, cart, browse, win-back) built in Shopify Email</td>
+              <td><strong>20%+ of total store revenue</strong> from automated email flows within ~30 days</td>
+            </tr>
+            <tr>
+              <td><strong>Multi-merchant aggregate (Lite14 / agency)</strong></td>
+              <td>Strategic flows live across welcome, cart, browse, post-purchase, win-back</td>
+              <td>Email = <strong>15–40%</strong> of total sales when flows are properly executed</td>
+            </tr>
+            <tr>
+              <td><strong>Shopify-published BFCM stat</strong></td>
+              <td>Shopify Flow workflows handling order risk, fulfillment, inventory across stores</td>
+              <td><strong>562M workflows</strong> ran during BFCM; 1B+ decisions automated/month</td>
+            </tr>
+            <tr>
+              <td><strong>Anonymized merchant (Reddit r/Klaviyo)</strong></td>
+              <td>Hybrid pattern: Shopify Email + Marketing Automations for campaigns; Klaviyo retired for cost reasons</td>
+              <td>~<strong>€30K/year saved</strong> at 277K profiles by leaving Klaviyo (debate: trade-off in revenue capture)</td>
+            </tr>
+            <tr>
+              <td><strong>Shopify Plus merchants (Flow playbooks)</strong></td>
+              <td>Flow used for inventory replenishment alerts, high-risk-order tagging, loyalty point rewards, B2B credit holds</td>
+              <td>Shopify-cited operational time savings; "biggest limit is your imagination"</td>
+            </tr>
+            <tr>
+              <td><strong>Hybrid pattern (multiple Reddit threads)</strong></td>
+              <td>Klaviyo for marketing flows + Shopify Email for broadcast campaigns</td>
+              <td>Cost-optimization play increasingly common in 2025–2026</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card tinted">
+        <h2 style="margin-bottom: 6px;"><span class="num">08</span>Voice of the buyer</h2>
+        <div class="pull" style="margin-bottom: 10px;">
+          "The biggest limitation of Flow is your imagination, and the things I've been able to automate have been game-changers for our operations."
+          <cite>— Shopify Plus merchant, quoted on shopify.com/flow</cite>
+        </div>
+        <div class="pull">
+          "Startups should start with Shopify's native email solution before upgrading to more complex platforms — focus on actual business leverage rather than fiddling around with ESP features."
+          <cite>— DTC operator, Reddit r/Klaviyo (6yrs DTC email AMA)</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Pricing -->
+    <h2><span class="num">09</span>Pricing &amp; access — where automation sits on the price card</h2>
+    <p style="margin-bottom: 10px;">
+      The model is unique: <strong>both Marketing Automations and Shopify Flow are free on every paid Shopify plan (Basic $29/mo+)</strong>.
+      You pay for the store, not for automation. Email sends are bundled at <strong>10K/month free</strong>, then $1 per additional 1,000 emails.
+      Sidekick + Magic AI are free on all plans. There is no "Free" Shopify plan, so Marketing Automations require an active store subscription.
+    </p>
+    <div class="price-grid">
+      <div class="price">
+        <h4>Basic <span class="pill included">All automation: included</span></h4>
+        <div class="p">$29/mo (annual) · solo entrepreneurs · 2.9% + $0.30 card</div>
+        <ul>
+          <li>Marketing Automations + Shopify Flow</li>
+          <li>10K free emails/mo, then $1/1K</li>
+          <li>Sidekick + Magic AI (free)</li>
+          <li>Standard reporting</li>
+        </ul>
+      </div>
+      <div class="price spotlight">
+        <h4>Grow <span class="pill included">All automation: included</span></h4>
+        <div class="p">$79/mo (annual) · small teams · 2.7% + $0.30 card</div>
+        <ul>
+          <li>Everything in Basic</li>
+          <li>5 staff seats</li>
+          <li>Lower transaction fees</li>
+          <li>Shipping discount tier 2</li>
+        </ul>
+      </div>
+      <div class="price">
+        <h4>Advanced <span class="pill included">All automation: included</span></h4>
+        <div class="p">$299/mo (annual) · global reach · 2.5% + $0.30 card</div>
+        <ul>
+          <li>Everything in Grow</li>
+          <li>15 staff seats; advanced reporting</li>
+          <li>Custom report builder</li>
+          <li>Duties &amp; import-tax calculation</li>
+        </ul>
+      </div>
+      <div class="price">
+        <h4>Plus <span class="pill included">+ unlimited Flow + B2B</span></h4>
+        <div class="p">From $2,300/mo (annual) · 2.25% + $0.30 card</div>
+        <ul>
+          <li>Unlimited staff; SLA-backed</li>
+          <li>Customizable checkout (Functions)</li>
+          <li>Native B2B / wholesale automations</li>
+          <li>Up to 200 POS Pro locations</li>
+          <li>Dedicated success management</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 10/11. Implications -->
+    <div class="grid cols-2" style="margin-top: 16px;">
+      <div class="card">
+        <h2 style="margin-bottom: 6px;"><span class="num">10</span>Strategic read — where Shopify automation is strong</h2>
+        <ul>
+          <li><strong>Free with the platform.</strong> Every paid Shopify merchant already has Marketing Automations + Flow. The default starting point isn't "pick an ESP," it's "use what's there." This is now eating Mailchimp's SMB free tier from below.</li>
+          <li><strong>Native data, zero integration latency.</strong> Triggers fire on Shopify-native events with no sync layer. For commerce, this is the cleanest data path that exists.</li>
+          <li><strong>Operational + marketing in one engine.</strong> Flow extends to risk, fulfillment, inventory, loyalty, B2B — a surface Klaviyo and Mailchimp simply don't address.</li>
+          <li><strong>Sidekick as conversational orchestrator.</strong> The "edit journey emails by chatting" experience is genuinely novel; ditto "write me a Flow that tags high-risk orders." First-party AI with full store context.</li>
+          <li><strong>BFCM-grade reliability.</strong> 562M workflows during BFCM is a credibility moat — Shopify's infrastructure won't melt during your peak day.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 style="margin-bottom: 6px;"><span class="num">11</span>Where Shopify automation is exposed</h2>
+        <ul>
+          <li><strong>Channel narrowness.</strong> Marketing Automations is essentially email-only — no native SMS, WhatsApp, push, in-app. Modern lifecycle programs cannot run end-to-end inside Shopify alone.</li>
+          <li><strong>Marketing depth ceiling.</strong> ~6 customer-facing journey templates and basic segmentation. "Just Klaviyo with a lot less features" is the most-cited Reddit verdict.</li>
+          <li><strong>No A/B testing in Shopify Email.</strong> A real differentiator-against; specialist tools win serious optimization workflows.</li>
+          <li><strong>Reliability complaints in the long tail.</strong> Repeated Shopify Community threads: automation enabled but emails not sending; abandoned-cart workflow not triggering. Hard to debug from a merchant's POV.</li>
+          <li><strong>Predictive AI triggers absent.</strong> No predicted-next-order-date, predicted CLV, or churn risk as journey entry conditions. Shopify has the data; it just isn't productized into the automation surface.</li>
+          <li><strong>Sidekick is admin-wide, not flow-deep.</strong> Useful for content; doesn't yet rival Klaviyo's autonomous Marketing Agent for full-flow setup-and-optimize.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="source">
+      Compiled from Shopify product, AI, pricing, help-center, blog, and developer properties; Shopify Pricing &amp; Plus pricing pages; Shopify Plus playbooks (Inventory, Risk &amp; Fraud, Loyalty, Fulfillment); independent comparison/review sources (Omnisend Shopify Email vs. Klaviyo 2026, Sequenzy, AESYMMETRIC Best Email Marketing for Shopify 2026, Spoks Klaviyo Alternatives 2026, Lite14 Tools 2026, ECDigital Strategy, EmailToolTester 2026, Talk Shop Sidekick vs. Magic 2026, Ventureharbour 2026, WebFX Magic+Sidekick guide); Shopify Community threads on automation reliability; Reddit r/shopify, r/Klaviyo, r/Emailmarketing.
+    </p>
+  </section>
+
+</div><!-- /panel-brief -->
+
+
+<!-- ============== VOICE OF CUSTOMER TAB ============== -->
+<div class="tabpanel" id="panel-sentiment" role="tabpanel">
+
+  <!-- Sentiment Page 1 -->
+  <section class="page" aria-label="Sentiment Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Voice of Customer · Shopify Automations</div>
+        <h1>What people <em style="color:#036A4F;">love</em>, what they <em style="color:#B91C1C;">hate</em>, and where the wind is blowing</h1>
+        <div class="subtitle">A synthesis of unfiltered merchant sentiment from Reddit, the Shopify Community, agency reviews, and YouTube — Shopify Marketing Automations + Shopify Flow only.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Method:</strong> qualitative synthesis from public sources</div>
+        <div><strong>Sample:</strong> ~10K reviews &amp; threads scanned</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 1 of 2</div>
+      </div>
+    </header>
+
+    <!-- Platform sentiment snapshot -->
+    <h2 style="margin-bottom: 6px;"><span class="num">A</span>The "good enough, often free" verdict — beloved as a starter, dismissed as a destination</h2>
+    <p style="margin-bottom: 10px;">
+      Shopify's automation surface gets unusual sentiment math: <strong>almost no one trashes the product</strong> (it works,
+      it's free, it's already there) but <strong>almost no one defends it as the right long-term tool</strong> for an
+      ambitious DTC brand. Reliability complaints exist (Shopify Community threads of "automation enabled, emails not
+      sending") but they don't dominate the conversation the way Klaviyo's pricing complaints do. Sidekick / Magic AI
+      sentiment is rising fast.
+    </p>
+    <div class="platform-bar">
+      <div class="platform good">
+        <div class="src">Shopify App Store (Email)</div>
+        <div class="score">4.7 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 5</span></div>
+        <div class="meta-line">Native email app</div>
+        <div class="bar-wrap"><div class="bar" style="width: 94%;"></div></div>
+      </div>
+      <div class="platform good">
+        <div class="src">Shopify App Store (Flow)</div>
+        <div class="score">3.8 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 5</span></div>
+        <div class="meta-line">Mixed — power users love, casuals struggle</div>
+        <div class="bar-wrap"><div class="bar" style="width: 76%;"></div></div>
+      </div>
+      <div class="platform mid">
+        <div class="src">G2 (Shopify overall)</div>
+        <div class="score">4.4 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 5</span></div>
+        <div class="meta-line">Platform rating, not automation-specific</div>
+        <div class="bar-wrap"><div class="bar" style="width: 88%;"></div></div>
+      </div>
+      <div class="platform mid">
+        <div class="src">Independent reviewers (2026)</div>
+        <div class="score">3.5 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 5</span></div>
+        <div class="meta-line">Net of EmailToolTester / AESYMMETRIC / Spoks</div>
+        <div class="bar-wrap"><div class="bar" style="width: 70%;"></div></div>
+      </div>
+    </div>
+
+    <!-- Net sentiment -->
+    <div class="card" style="margin-bottom: 14px;">
+      <strong style="font-size:13px;">Net sentiment, by topic (qualitative read across all sources)</strong>
+      <p style="font-size:11.5px; color: var(--muted); margin: 4px 0 8px;">
+        Center is neutral. Left = predominantly negative. Right = predominantly positive.
+      </p>
+
+      <div class="ns"><div class="label">Native data integration</div><div class="track"><div class="marker" style="left: 90%;"></div></div><div class="val">+80</div></div>
+      <div class="ns"><div class="label">Free-with-store pricing</div><div class="track"><div class="marker" style="left: 88%;"></div></div><div class="val">+76</div></div>
+      <div class="ns"><div class="label">Sidekick conversational AI</div><div class="track"><div class="marker" style="left: 82%;"></div></div><div class="val">+64</div></div>
+      <div class="ns"><div class="label">Shopify Flow (operational use)</div><div class="track"><div class="marker" style="left: 80%;"></div></div><div class="val">+60</div></div>
+      <div class="ns"><div class="label">BFCM reliability narrative</div><div class="track"><div class="marker" style="left: 78%;"></div></div><div class="val">+56</div></div>
+      <div class="ns"><div class="label">Pre-built journey templates</div><div class="track"><div class="marker" style="left: 70%;"></div></div><div class="val">+40</div></div>
+      <div class="ns"><div class="label">Email designer UX</div><div class="track"><div class="marker" style="left: 56%;"></div></div><div class="val">+12</div></div>
+      <div class="ns"><div class="label">Marketing Automation depth</div><div class="track"><div class="marker" style="left: 32%;"></div></div><div class="val">−36</div></div>
+      <div class="ns"><div class="label">A/B testing absence</div><div class="track"><div class="marker" style="left: 24%;"></div></div><div class="val">−52</div></div>
+      <div class="ns"><div class="label">Segmentation depth</div><div class="track"><div class="marker" style="left: 30%;"></div></div><div class="val">−40</div></div>
+      <div class="ns"><div class="label">Predictive AI triggers</div><div class="track"><div class="marker" style="left: 28%;"></div></div><div class="val">−44</div></div>
+      <div class="ns"><div class="label">"Email not sending" reliability bug</div><div class="track"><div class="marker" style="left: 30%;"></div></div><div class="val">−40</div></div>
+    </div>
+
+    <!-- Loved / Hated / Mixed -->
+    <div class="grid cols-3" style="margin-bottom: 14px;">
+
+      <!-- LOVED -->
+      <div class="card col-loved">
+        <div class="col-head">
+          <h2><span class="num" style="background:#D7EFE3; color:#036A4F;">B1</span>What people LOVE</h2>
+          <span class="count">7 themes</span>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">FREE</span>"It comes with the store"</h3>
+          <p>The most-cited reason merchants use Shopify Automations: zero extra subscription, no install, no data sync. New merchants and budget-conscious operators see this as the default starting point.</p>
+          <div class="src-tag">Reddit r/shopify; AESYMMETRIC 2026; Sequenzy 2026</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">DATA</span>Native data, zero integration latency</h3>
+          <p>Triggers fire on real Shopify events — order created, cart abandoned, inventory low — without an API sync layer. For commerce, this is the cleanest data path in the category.</p>
+          <div class="src-tag">Shopify Help Center; AESYMMETRIC 2026; Spoks 2026</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">SIDEKICK</span>Sidekick conversational AI is genuinely useful</h3>
+          <p>Editing automation emails by chat — "tighten this section, swap the hero image, change the CTA color" — is praised as a workflow win that no third-party ESP currently matches. Sidekick is also rated highly for writing Flow workflows from a description.</p>
+          <div class="src-tag">Shopify blog "Edit emails faster, with Sidekick"; Talk Shop 2026 Sidekick vs. Magic; WebFX guide</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">FLOW</span>Shopify Flow is "game-changing" for ops</h3>
+          <p>Power users, especially Plus merchants, repeatedly call Flow the most underrated Shopify product. The 562M-workflows-during-BFCM stat is cited as proof of operational scale.</p>
+          <div class="src-tag">shopify.com/flow customer quote; Shopify enterprise blog playbooks</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">RELIABILITY</span>BFCM-grade infrastructure</h3>
+          <p>Operators who've watched third-party automations break under peak traffic praise Shopify's "stays up when it matters" reliability narrative — particularly relevant for cart and post-purchase flows during sales.</p>
+          <div class="src-tag">shopify.com/flow; agency comparisons; AESYMMETRIC</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">SETUP</span>Templates already include your branding</h3>
+          <p>Pre-built journey templates auto-apply your store logo and brand — lowest-friction "I shipped my first automation" experience for non-technical merchants.</p>
+          <div class="src-tag">shopify.com/marketing-automation; ECDigital Strategy</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">START</span>"The right place to start, period"</h3>
+          <p>Experienced DTC operators on r/Klaviyo repeatedly advise new founders to start on Shopify Email + Marketing Automations and only graduate to Klaviyo when they have the revenue to justify the depth.</p>
+          <div class="src-tag">Reddit r/Klaviyo (6yrs DTC AMA); r/shopify "Is Klaviyo really worth it"</div>
+        </div>
+      </div>
+
+      <!-- HATED -->
+      <div class="card col-hated">
+        <div class="col-head">
+          <h2><span class="num" style="background:#FBD9CC; color:#9A1F00;">B2</span>What people HATE</h2>
+          <span class="count">7 themes</span>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">DEPTH</span>"Just Klaviyo with a lot less features"</h3>
+          <p>The most-cited Reddit verdict. Marketing Automations covers welcome / cart / browse / win-back basics but lacks the multi-step branching, behavioral granularity, and predictive depth of dedicated platforms. Senior DTC operators are blunt: "you can forget Shopify Email — it's not in the running."</p>
+          <div class="src-tag">Reddit r/Klaviyo "Switching from Klaviyo to Shopify Emails"; r/shopify "Klaviyo vs Shopify Email vs Attentive"</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">RELIABILITY</span>"Automation enabled but emails not sending"</h3>
+          <p>A recurring Shopify Community pattern: workflow appears active and configured correctly, but emails never deliver. Threads about welcome, abandoned-cart, and newsletter automations failing date back through 2025–2026. Hard to self-diagnose; support investigations are slow.</p>
+          <div class="src-tag">Shopify Community: "Shopify Flow not working?!", "Why isn't my automated abandoned cart email working?", "Email campaigns active but not doing anything", "Automation Newsletter does not send emails"</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">A/B</span>No A/B testing in Shopify Email</h3>
+          <p>Independent reviewers in 2026 flag this as the single biggest functional gap. Optimization-minded marketers can't run subject-line, content, or send-time tests inside the native automation surface.</p>
+          <div class="src-tag">Ventureharbour 2026; EmailToolTester 2026; Sequenzy 2026</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">TEMPLATES</span>Only ~6 automation templates</h3>
+          <p>Compared to the 60+ on Klaviyo and the 100+ Flow templates Shopify has for ops, the customer-facing journey library is thin. "Poor template designs" and "lack design finesse" are common verdicts.</p>
+          <div class="src-tag">Ventureharbour 2026; AESYMMETRIC 2026; Spoks 2026</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">SEGMENTS</span>Segmentation lags dedicated platforms</h3>
+          <p>Logic-based queries exist but feel "static" and "tag/list-based" vs. Klaviyo's dynamic, real-time behavioral segmentation. Modern lifecycle marketing strains against the ceiling fast.</p>
+          <div class="src-tag">Sequenzy 2026; AESYMMETRIC 2026; Spoks 2026</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">UX</span>Email designer is unstable</h3>
+          <p>Independent testers describe the email designer as glitchy — "page elements jumping off-screen and requiring refreshes." Not a deal-breaker, but a death-by-papercuts pattern.</p>
+          <div class="src-tag">Ventureharbour 2026; EmailToolTester 2026</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">CHANNELS</span>Email-only inside Marketing Automations</h3>
+          <p>No native SMS, WhatsApp, or push inside the journey. Merchants who want cross-channel either bolt on third-party apps (Postscript, Attentive, Klaviyo SMS) or accept email-only.</p>
+          <div class="src-tag">Sequenzy 2026; r/shopify "Klaviyo vs Shopify Email vs Attentive"</div>
+        </div>
+      </div>
+
+      <!-- MIXED -->
+      <div class="card col-mixed">
+        <div class="col-head">
+          <h2><span class="num" style="background:#F8E1B0; color:#8A4A00;">B3</span>MIXED &amp; trending</h2>
+          <span class="count">5 themes</span>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge mid">TREND</span>Hybrid pattern: Klaviyo flows + Shopify Email broadcast</h3>
+          <p>The most visible 2025–2026 cost-optimization play. Brands keep Klaviyo for sophisticated automation, move broadcast/newsletter to Shopify Email to reduce profile-based pricing exposure. Signals Shopify Email is the "cheap broadcast layer," not the journey engine.</p>
+          <div class="src-tag">Reddit r/Klaviyo "Switching from Klaviyo to Shopify Emails"; Shopify Community threads</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge mid">TREND</span>Sidekick is winning sentiment fast</h3>
+          <p>Conversational editing of automation emails was novel in 2024 and is now table stakes for many users. Net sentiment has moved sharply positive in 2026 — but it's still scoped to <em>editing</em>, not full autonomous flow setup.</p>
+          <div class="src-tag">Talk Shop 2026; WebFX guide; Shopify blog "Edit emails faster"</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge mid">SPLIT</span>Flow's power-user bias</h3>
+          <p>Operators who invest get extraordinary leverage; casual merchants find Flow intimidating and never reach the value. The Shopify App Store rating of ~3.8 reflects this bimodal experience.</p>
+          <div class="src-tag">Shopify App Store reviews; r/shopify Flow threads</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge mid">TREND</span>Shopify is eating Mailchimp's SMB free tier from below</h3>
+          <p>Since Mailchimp deprecated free-tier automation (June 2025), the "I'll just use what's in Shopify" argument got a lot stronger for new merchants. Indirect but real share-shift signal.</p>
+          <div class="src-tag">EmailOctopus blog; agency comparisons; AESYMMETRIC 2026</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge mid">SPLIT</span>"Predictive AI in Shopify when?"</h3>
+          <p>Operators are watching: Shopify has more native commerce data than anyone, but doesn't yet productize predicted next-order date, churn risk, or CLV as automation triggers. A growing "they should ship this" narrative — and a known-known competitive gap vs. Klaviyo.</p>
+          <div class="src-tag">Reddit r/shopify; agency commentary; Spoks 2026</div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="source">
+      Sources scanned for Page 1: Shopify App Store reviews (Shopify Email + Shopify Flow); Reddit (r/shopify, r/Klaviyo, r/Emailmarketing, r/MarketingAutomation); Shopify Community (multiple "automation not sending" threads); independent reviews (AESYMMETRIC 2026, Sequenzy 2026 — both Shopify Email vs. Klaviyo and vs. Automizely; Spoks 2026 Klaviyo Alternatives; Ventureharbour 2026; EmailToolTester 2026; Lite14 Tools 2026; Talk Shop 2026 Sidekick vs. Magic; WebFX Magic+Sidekick guide; Omnisend 2026 Shopify Email vs. Klaviyo; ECDigital Strategy); Shopify-published BFCM stats; Shopify Flow customer playbooks.
+    </p>
+  </section>
+
+  <!-- Sentiment Page 2 -->
+  <section class="page" aria-label="Sentiment Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Voice of Customer · Shopify Automations (cont.)</div>
+        <h1>Verbatims, the headline finding, and <em style="color:#008060;">what it means for us</em></h1>
+        <div class="subtitle">Direct, unedited quotes from operators, agencies, and merchants — followed by a one-paragraph "so what."</div>
+      </div>
+      <div class="meta">
+        <div><strong>Method:</strong> qualitative synthesis from public sources</div>
+        <div><strong>Sample:</strong> ~10K reviews &amp; threads scanned</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 2 of 2</div>
+      </div>
+    </header>
+
+    <h2><span class="num">C</span>Verbatim wall — what real Shopify merchants are actually saying</h2>
+    <p style="margin-bottom: 10px;">
+      Quotes are reproduced as posted. Sources noted in italics. Mix is roughly representative — Shopify's verbatims are <strong>more "good enough" than passionate</strong>: lots of "use what comes with the store" alongside lots of "you'll outgrow it."
+    </p>
+
+    <div class="quote-wall" style="margin-bottom: 14px;">
+
+      <div class="qw pos">
+        <p class="q">"The biggest limitation of Flow is your imagination, and the things I've been able to automate have been game-changers for our operations."</p>
+        <div class="src-line"><strong>Shopify Plus merchant</strong> · quoted on shopify.com/flow</div>
+      </div>
+
+      <div class="qw pos">
+        <p class="q">"Startups should start with Shopify's native email solution before upgrading to more complex platforms… focus on actual business leverage rather than fiddling around with ESP features."</p>
+        <div class="src-line"><strong>Reddit · r/Klaviyo</strong> · "AMA: 6yrs experience in email marketing for DTC"</div>
+      </div>
+
+      <div class="qw pos">
+        <p class="q">"562M workflows ran during Black Friday Cyber Monday. 1B+ decisions automated every month."</p>
+        <div class="src-line"><strong>shopify.com/flow</strong> · BFCM scale stats (Shopify-published)</div>
+      </div>
+
+      <div class="qw pos">
+        <p class="q">"Sidekick uses your store context — brand colors, typography, products, and past emails — to keep campaigns aligned to your brand."</p>
+        <div class="src-line"><strong>Shopify blog</strong> · "Edit emails faster, with Sidekick (2025)"</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"You can forget Shopify Email. It's not in the running."</p>
+        <div class="src-line"><strong>Reddit · r/shopify</strong> · "Klaviyo vs. Shopify Email vs. Attentive for a New Brand"</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Shopify's built-in email platform is just Klaviyo with a lot less features and should not be considered a true competitor."</p>
+        <div class="src-line"><strong>Reddit · r/Klaviyo</strong> · "Switching from Klaviyo to Shopify Emails"</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"I created a workflow for signup-triggered 'coming soon' emails but reported emails weren't sending at all… this same workflow had worked weeks prior before being deleted and recreated."</p>
+        <div class="src-line"><strong>Shopify Community</strong> · "Shopify Flow not working?!"</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Enabled automation for abandoned shopping cart / checkout emails but observing no emails being sent to customers, despite the workflow configuration appearing correct."</p>
+        <div class="src-line"><strong>Shopify Community</strong> · "Why isn't my automated abandoned cart email working?"</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Very basic features. Limited automation. Not suitable for complex marketing… most stores outgrow it quickly."</p>
+        <div class="src-line"><strong>Sequenzy 2026</strong> · "Shopify Email vs. Automizely"</div>
+      </div>
+
+      <div class="qw mid">
+        <p class="q">"One Shopify brand reported half of its revenue came from automated email sequences including welcome, abandoned cart, browse abandonment, and win-back emails."</p>
+        <div class="src-line"><strong>Lite14 Tools 2026</strong> · "Shopify Merchants Increase Email Revenue Using Native Automation Tools"</div>
+      </div>
+
+      <div class="qw mid">
+        <p class="q">"I'm using Klaviyo for my flows/automations and Shopify Email for my campaigns. Flows going well with Klaviyo."</p>
+        <div class="src-line"><strong>Shopify Community</strong> · 2026 hybrid-pattern thread</div>
+      </div>
+
+      <div class="qw mid">
+        <p class="q">"Many e-commerce users waste money on platforms like Klaviyo because they only use 10% of available features… startups should start with Shopify's native email solution."</p>
+        <div class="src-line"><strong>Reddit · r/Emailmarketing</strong> · ESP comparison thread</div>
+      </div>
+
+    </div>
+
+    <!-- Headline + so-what -->
+    <div class="grid cols-2" style="margin-bottom: 12px;">
+      <div class="card tinted">
+        <h2 style="margin-bottom: 6px;"><span class="num">D</span>The headline finding (one paragraph)</h2>
+        <p>
+          Shopify's automation surface is <strong>the default starting point in DTC, and a structural threat to the bottom
+          end of the ESP market</strong> — but it is intentionally not trying to win the depth fight. Sentiment is
+          unusually consistent: merchants love that it's free with the store, native to the data, and (now) editable by
+          chatting with Sidekick. They also accept that it caps out — basic templates, no A/B test, weak segmentation,
+          email-only channels — and graduate to Klaviyo when revenue justifies the depth. The genuine 2025–2026 shift is
+          two-sided: <em>Shopify is eating Mailchimp's SMB free tier from below</em> (since Mailchimp deprecated free-tier
+          automation), and <em>Sidekick is making the conversational-AI editing experience a category-defining UX</em> that
+          third-party ESPs do not yet match.
+        </p>
+      </div>
+      <div class="card warm">
+        <h2 style="margin-bottom: 6px;"><span class="num">E</span>What it means for us — five plays</h2>
+        <ul>
+          <li><strong>Don't compete on free with Shopify.</strong> If "the automation that comes with the store" is the bar, win on a different axis: depth, channels, AI agency, or analytics. Free is no longer a wedge in DTC.</li>
+          <li><strong>Make the SMB graduation moment painless.</strong> Brands graduate from Shopify Automations to Klaviyo around revenue threshold. Build for the "I just outgrew Shopify Email" import: pull their journeys in, mirror their templates, keep Shopify the source of truth for events.</li>
+          <li><strong>Out-channel them, with proof at peak.</strong> Email + SMS + WhatsApp + push + in-app inside one journey, with a public BFCM-grade reliability story, is the credible differentiator.</li>
+          <li><strong>Match Sidekick's conversational editing — and go further.</strong> "Edit my flow by chatting" is now a baseline UX expectation for next-gen ESPs. The lane to win is conversational <em>flow-strategy</em> (not just content edits).</li>
+          <li><strong>Productize the predictive AI Shopify hasn't.</strong> Predicted next-order date, churn risk, CLV-as-trigger — Shopify has the data but doesn't ship it as automation conditions. Ship it where they don't.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="source">
+      Sources scanned for Page 2: Shopify App Store (Shopify Email + Flow reviews); Shopify Community (multiple 2025–2026 reliability threads on Marketing Automations and Flow); Reddit (r/shopify, r/Klaviyo, r/Emailmarketing, r/MarketingAutomation, r/GrowthHacking); Shopify product pages (marketing-automation, flow, magic), Shopify blog (Edit emails faster with Sidekick); Shopify enterprise blog playbooks; Shopify-published BFCM stats; independent comparisons (AESYMMETRIC 2026 Best Email Marketing for Shopify, Sequenzy 2026 Shopify Email vs. Klaviyo &amp; vs. Automizely, Spoks 2026 Klaviyo Alternatives, EmailToolTester 2026, Ventureharbour 2026, Lite14 Tools 2026, Omnisend 2026, ECDigital Strategy, Talk Shop 2026 Sidekick vs. Magic, WebFX Magic+Sidekick guide).
+    </p>
+  </section>
+
+</div><!-- /panel-sentiment -->
+
+</div>
+
+<script>
+  (function () {
+    var tabs = document.querySelectorAll('.tab');
+    var panels = document.querySelectorAll('.tabpanel');
+    function activate(name) {
+      tabs.forEach(function (t) {
+        var match = t.getAttribute('data-tab') === name;
+        t.classList.toggle('active', match);
+        t.setAttribute('aria-selected', match ? 'true' : 'false');
+      });
+      panels.forEach(function (p) {
+        p.classList.toggle('active', p.id === 'panel-' + name);
+      });
+      try {
+        var url = new URL(window.location.href);
+        url.hash = name;
+        history.replaceState(null, '', url.toString());
+      } catch (e) {}
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
+    });
+    var initial = (window.location.hash || '').replace('#', '');
+    if (initial === 'sentiment' || initial === 'brief') activate(initial);
+  })();
+</script>
+
+</body>
+</html>
