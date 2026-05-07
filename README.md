@@ -6,8 +6,15 @@ A succinct, executive-grade two-page brief on Klaviyo's campaign automation prod
 
 ## What's in the brief
 
-- **Page 1** — What Flows is, key capabilities (triggers, logic, optimization, templates), AI deep-dive (Flows AI, Marketing Agent, Channel Affinity, Smart Send Time, Image Remix, MCP), buyer profile, and JTBD.
+The site has **two tabs** (toggle in the top toolbar):
+
+### 1. Executive Brief (2 pages)
+- **Page 1** — What Flows is, key capabilities (triggers, logic, optimization, templates), the full AI-in-Flows surface (Flows AI, Marketing Agent, predictive triggers, Smart Send Time, Channel Affinity, AI subject-lines, Image Remix in flow editor, AI product recs, Personalized A/B, auto-monitors), buyer profile, and JTBD.
 - **Page 2** — Differentiation matrix vs. Mailchimp Customer Journeys and Bloomreach Engagement; six customer proof points (Hard Yakka, Caden Lane, P.E Nation, Corkcicle, Popflex, Lifestraw); pricing across Free / Email / Email+SMS / Enterprise; strategic strengths and exposures.
+
+### 2. Voice of Customer (2 pages)
+- **Page 1** — Cross-platform rating snapshot (G2 4.6, Capterra 4.6, Shopify App Store 4.5, Trustpilot 1.8); net-sentiment view by topic; three columns of synthesized themes — **What people LOVE** (7), **What people HATE** (7), **MIXED & trending** (5).
+- **Page 2** — A verbatim quote wall (12 unedited quotes from Reddit, Klaviyo Community, Trustpilot, LinkedIn, Shopify Community, Mailflow Authority, etc.), the one-paragraph headline finding, and five plays for what it means.
 
 ## How to use
 
