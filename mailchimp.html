@@ -1,0 +1,1255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mailchimp Marketing Automation Flows — Competitive Analysis (Executive 2-Pager + Voice of Customer)</title>
+<meta name="description" content="Two-tab executive brief on Mailchimp's automation product (Customer Journey Builder / Marketing Automation Flows): capabilities, Intuit Assist AI, JTBD, customers, pricing, and synthesized sentiment from Reddit, G2, Trustpilot, Klaviyo Community, blogs." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E1116;
+    --ink-2: #1F2937;
+    --muted: #4B5563;
+    --line: #E5E7EB;
+    --line-2: #D1D5DB;
+    --bg: #F8F7F4;
+    --paper: #FFFFFF;
+    --brand: #C28A00;       /* Mailchimp amber */
+    --brand-2: #FF7A1A;
+    --good: #047857;
+    --warn: #B45309;
+    --bad: #B91C1C;
+    --chip: #FFF6D9;
+    --chip-ink: #6B4A00;
+    --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.45;
+  }
+  .toolbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(248,247,244,.85);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .toolbar-inner {
+    max-width: 1180px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; gap: 12px;
+  }
+  .brand-mark {
+    display:flex; align-items:center; gap:10px;
+    font-weight: 700; font-size: 14px; color: var(--ink-2);
+  }
+  .brand-dot { width: 10px; height: 10px; border-radius: 3px; background: #FFE01B; box-shadow: 0 0 0 3px rgba(255,224,27,.35); border: 1px solid #C28A00; }
+  .toolbar a.btn, .toolbar button.btn {
+    border: 1px solid var(--line-2);
+    background: var(--paper);
+    color: var(--ink-2);
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .toolbar .btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .toolbar .btn:hover { transform: translateY(-1px); }
+
+  .page-wrap { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+
+  .page {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 28px 32px 26px;
+    margin-bottom: 22px;
+  }
+
+  .page-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700;
+  }
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 1.15;
+    margin: 6px 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; }
+  .meta {
+    text-align: right;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .meta strong { color: var(--ink-2); }
+
+  .grid { display: grid; gap: 16px; }
+  .grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid.cols-5-3 { grid-template-columns: 5fr 3fr; }
+  .grid.cols-3-2 { grid-template-columns: 3fr 2fr; }
+
+  @media (max-width: 880px) {
+    .grid.cols-2, .grid.cols-3, .grid.cols-4, .grid.cols-5-3, .grid.cols-3-2 { grid-template-columns: 1fr; }
+    .page { padding: 20px; }
+    h1 { font-size: 24px; }
+  }
+
+  h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    margin: 0 0 8px;
+    letter-spacing: -0.005em;
+  }
+  h2 .num {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--chip-ink);
+    background: var(--chip);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 8px;
+    transform: translateY(-2px);
+    letter-spacing: .08em;
+  }
+  p { margin: 0 0 8px; font-size: 13.5px; color: var(--ink-2); }
+  ul { margin: 4px 0 8px; padding-left: 18px; }
+  li { font-size: 13px; color: var(--ink-2); margin-bottom: 4px; }
+  li strong { color: var(--ink); }
+
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .card.tinted { background: #FFFCF0; border-color: #F2E8C2; }
+  .card.warm { background: #FFF8F0; border-color: #FCE6CC; }
+  .card.olive { background: #F4F6EE; border-color: #E1E7CB; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .kpi {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFB 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .kpi .v {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .kpi .l { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .chip {
+    background: var(--chip);
+    color: var(--chip-ink);
+    border-radius: 999px;
+    padding: 3px 9px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    border: 1px solid #F2E8C2;
+  }
+  .chip.warm { background: #FFEFE0; color: #9A4A00; border-color: #FCD9B6; }
+  .chip.green { background: #E6F5EE; color: #036A4F; border-color: #BFE6D3; }
+  .chip.gray { background: #F1F2F4; color: #374151; border-color: #E2E5EA; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: #FAFAFB;
+  }
+  td.nowrap { white-space: nowrap; }
+  .dot { display:inline-block; width:8px; height:8px; border-radius:999px; margin-right:6px; vertical-align: middle; }
+  .dot.good { background: var(--good); }
+  .dot.mid  { background: var(--warn); }
+  .dot.bad  { background: var(--bad); }
+
+  .pull {
+    border-left: 3px solid var(--brand);
+    padding: 8px 12px;
+    background: #FFFCF0;
+    border-radius: 6px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .pull cite {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-style: normal;
+  }
+
+  .source {
+    font-size: 10.5px; color: var(--muted);
+    border-top: 1px dashed var(--line);
+    margin-top: 14px;
+    padding-top: 10px;
+  }
+  .source a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+
+  .price-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .price {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px;
+    background: #fff;
+  }
+  .price h4 {
+    margin: 0 0 4px; font-size: 13px; font-weight: 700; color: var(--ink);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .price .p { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .price ul { margin: 0; padding-left: 16px; }
+  .price li { font-size: 11.5px; }
+  .price.spotlight { border-color: #F2D879; background: linear-gradient(180deg,#FFFCF0,#FFFFFF); }
+  .pill { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+  .pill.included { background: #E6F5EE; color: #036A4F; }
+  .pill.partial  { background: #FFF1DD; color: #8A4A00; }
+  .pill.excluded { background: #FFE7E0; color: #9A1F00; }
+
+  /* Tabs */
+  .tabs {
+    display: inline-flex;
+    background: #ECEAE6;
+    border-radius: 10px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .tab {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .tab:hover { color: var(--ink-2); }
+  .tab.active {
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 1px 2px rgba(16,24,40,.06);
+  }
+  @media (max-width: 720px) {
+    .tabs { order: 3; flex-basis: 100%; }
+    .toolbar-inner { flex-wrap: wrap; }
+  }
+  .tabpanel { display: none; }
+  .tabpanel.active { display: block; }
+
+  /* Sentiment */
+  .platform-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .platform {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    background: #fff;
+  }
+  .platform .src { font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing:.04em; text-transform: uppercase; }
+  .platform .score {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin: 4px 0 2px;
+  }
+  .platform .meta-line { font-size: 11px; color: var(--muted); }
+  .platform .bar-wrap { height: 4px; background: var(--line); border-radius: 99px; overflow: hidden; margin-top: 6px; }
+  .platform .bar { height: 100%; border-radius: 99px; background: var(--brand); }
+  .platform.bad .bar { background: var(--bad); }
+  .platform.good .bar { background: var(--good); }
+  .platform.mid .bar { background: var(--warn); }
+
+  .theme {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px 8px;
+    background: #fff;
+    margin-bottom: 8px;
+  }
+  .theme h3 {
+    margin: 0 0 4px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .theme h3 .badge {
+    font-size: 9.5px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: .06em;
+  }
+  .badge.lo { background: #FFE7E0; color: #9A1F00; }
+  .badge.hi { background: #E6F5EE; color: #036A4F; }
+  .badge.mid { background: #FFF1DD; color: #8A4A00; }
+  .badge.brand { background: var(--chip); color: var(--chip-ink); }
+
+  .theme p { font-size: 12.5px; margin: 0 0 4px; }
+  .theme .src-tag {
+    font-size: 10.5px; color: var(--muted);
+    border-top: 1px dashed var(--line);
+    padding-top: 4px;
+    margin-top: 4px;
+  }
+
+  .col-loved { background: #F4FBF7; border-color: #CFE9DC; }
+  .col-hated { background: #FFF5F2; border-color: #F4D2C5; }
+  .col-mixed { background: #FFFAF0; border-color: #F5E2BD; }
+
+  .col-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .col-head h2 { margin: 0; }
+  .col-head .count {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 2px 8px;
+    border-radius: 99px;
+  }
+
+  .quote-wall {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .qw {
+    border-left: 3px solid var(--line);
+    padding: 8px 12px;
+    background: #FAFAFB;
+    border-radius: 6px;
+  }
+  .qw.pos { border-left-color: var(--good); background: #F4FBF7; }
+  .qw.neg { border-left-color: var(--bad); background: #FFF5F2; }
+  .qw.mid { border-left-color: var(--warn); background: #FFFAF0; }
+  .qw .q {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 13.5px;
+    color: var(--ink);
+    margin: 0 0 4px;
+    line-height: 1.4;
+  }
+  .qw .src-line {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .qw .src-line strong { color: var(--ink-2); font-weight: 600; }
+
+  @media (max-width: 880px) {
+    .platform-bar { grid-template-columns: repeat(2, 1fr); }
+    .quote-wall { grid-template-columns: 1fr; }
+  }
+
+  .ns {
+    display: grid;
+    grid-template-columns: 110px 1fr 50px;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 6px;
+    font-size: 12px;
+  }
+  .ns .label { color: var(--ink-2); font-weight: 500; }
+  .ns .track {
+    height: 10px; background: linear-gradient(90deg, #FFE7E0 0%, #FFE7E0 50%, #E6F5EE 50%, #E6F5EE 100%);
+    border-radius: 99px; position: relative;
+  }
+  .ns .marker {
+    position: absolute; top: -3px; bottom: -3px;
+    width: 4px; background: var(--ink); border-radius: 2px;
+  }
+  .ns .val { text-align: right; font-variant-numeric: tabular-nums; font-size: 12px; color: var(--ink-2); font-weight: 600; }
+
+  /* Print */
+  @media print {
+    @page { size: Letter; margin: 0.45in; }
+    body { background: white; }
+    .toolbar { display: none; }
+    .page-wrap { padding: 0; max-width: none; }
+    .page { box-shadow: none; border: none; padding: 0; margin: 0 0 0.4in; page-break-after: always; }
+    .page:last-of-type { page-break-after: auto; }
+    .tabpanel:not(.active) { display: block !important; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="brand-mark"><span class="brand-dot"></span> Competitive Brief · Mailchimp Marketing Automation Flows</div>
+    <div class="tabs" role="tablist" aria-label="Brief sections">
+      <button class="tab active" role="tab" aria-selected="true" data-tab="brief">Executive Brief</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="sentiment">Voice of Customer</button>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <a class="btn" href="index.html">→ Klaviyo brief</a>
+      <button class="btn" onclick="window.print()">Print / PDF</button>
+      <a class="btn primary" href="https://mailchimp.com/features/automations/customer-journey-builder/" target="_blank" rel="noopener">Source</a>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+<!-- ============== EXECUTIVE BRIEF TAB ============== -->
+<div class="tabpanel active" id="panel-brief" role="tabpanel">
+
+  <!-- Brief Page 1 -->
+  <section class="page" aria-label="Brief Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Competitive Intelligence · Executive 2-Pager</div>
+        <h1>Mailchimp <em style="color:#C28A00;">Marketing Automation Flows</em>: a generalist journey builder, now AI-assisted by Intuit Assist</h1>
+        <div class="subtitle">A focused read on Mailchimp's automation product — Customer Journey Builder (CJB) / Marketing Automation Flows only. Other Mailchimp products (campaigns, websites, transactional, content studio) are out of scope.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Prepared for:</strong> Executive review</div>
+        <div><strong>Subject:</strong> Mailchimp CJB / Automation Flows</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 1 of 2</div>
+      </div>
+    </header>
+
+    <!-- Snapshot KPIs -->
+    <div class="kpi-row" style="margin-bottom: 18px;">
+      <div class="kpi">
+        <div class="v">12+</div>
+        <div class="l">Pre-built journey templates: welcome, abandoned cart, birthdays, post-purchase, cross-sell, review request, tag-triggered, lead-form, cart-recovery</div>
+      </div>
+      <div class="kpi">
+        <div class="v">2</div>
+        <div class="l">Native channels in a journey: <strong>Email + SMS</strong> (SMS US-only paid add-on). Push, WhatsApp, in-app are not supported.</div>
+      </div>
+      <div class="kpi">
+        <div class="v">300+</div>
+        <div class="l">Integrations (Shopify, WooCommerce, Squarespace Commerce, Salesforce, QuickBooks, Canva, Zapier) feeding triggers</div>
+      </div>
+      <div class="kpi">
+        <div class="v">+115%</div>
+        <div class="l">Click-rate lift Mailchimp claims for AI-generated automation flows vs. bulk emails (4x more orders also self-reported)</div>
+      </div>
+    </div>
+
+    <!-- 1. What is it -->
+    <div class="grid cols-5-3" style="margin-bottom: 14px;">
+      <div>
+        <h2><span class="num">01</span>What "Marketing Automation Flows" is</h2>
+        <p>
+          Mailchimp's automation product is officially called <strong>Marketing Automation Flows</strong> (formerly
+          <strong>Customer Journey Builder, "CJB"</strong>; older copy still uses "Customer Journeys" and "Automations").
+          It is a <strong>visual flowchart builder</strong> in which contacts enter through a <em>Starting Point</em>
+          (trigger), then move through <em>Flow Points</em> (rules and actions) — sending emails/SMS, applying tags,
+          waiting, splitting on conditions, and exiting on defined events.
+        </p>
+        <p>
+          Mailchimp positions Flows as the <strong>generalist journey tool for SMBs and creators</strong>, paired
+          with a familiar drag-and-drop email editor and a 300+ app integration library. The product sits
+          inside a broader Intuit Mailchimp suite (campaigns, audience, content studio, websites), but the
+          journey product itself has a deliberately narrower depth than dedicated commerce automation tools.
+        </p>
+        <div class="chips">
+          <span class="chip">Visual flowchart builder</span>
+          <span class="chip">No-code</span>
+          <span class="chip">Email + SMS</span>
+          <span class="chip">Up to 3 triggers per flow</span>
+          <span class="chip warm">AI-generated journeys (Intuit Assist)</span>
+        </div>
+      </div>
+
+      <div class="card tinted">
+        <h2 style="margin-bottom: 6px;"><span class="num">02</span>Mailchimp's own framing</h2>
+        <div class="pull">
+          "Automate your marketing. Deliver better emails. Drive more repeat business, increase customer retention, and see up to 4x more orders by creating marketing automation flows."
+          <cite>— mailchimp.com/features/automations/customer-journey-builder</cite>
+        </div>
+        <p style="margin-top: 10px;">
+          The marketing emphasizes three repeatable promises: <strong>(1)</strong> convert at scale with always-on automation,
+          <strong>(2)</strong> get recommendations / pre-built templates so you don't start blank, and <strong>(3)</strong>
+          create a connected experience by integrating data from your favorite apps.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. Capabilities -->
+    <h2><span class="num">03</span>Key capabilities (what's in the product today)</h2>
+    <div class="grid cols-2" style="margin-bottom: 14px;">
+      <div class="card">
+        <strong style="font-size:13px;">Triggers &amp; entry points (Starting Points)</strong>
+        <ul>
+          <li><strong>Contact activity:</strong> signups, link clicks, page views, tag added, group joined/left</li>
+          <li><strong>Date-based:</strong> birthdays, anniversaries, recurring dates, specific dates</li>
+          <li><strong>SMS:</strong> SMS signups, keyword texts (US paid add-on)</li>
+          <li><strong>E-commerce:</strong> abandoned cart, purchase, purchase review, refund, product/category bought</li>
+          <li><strong>Manual / API:</strong> manual adds, audience field changes, Customer Journeys API trigger for a contact</li>
+          <li><strong>Up to 3 triggers per flow</strong> on Standard+ plans</li>
+        </ul>
+      </div>
+      <div class="card">
+        <strong style="font-size:13px;">Logic, rules &amp; actions (Flow Points)</strong>
+        <ul>
+          <li><strong>Conditional split rules (If/Else)</strong> with <em>up to 5 conditions</em> per split — Standard+ only</li>
+          <li><strong>Time delays</strong> and <strong>wait-for-trigger</strong> rules</li>
+          <li><strong>Actions:</strong> send email, send SMS, add/remove tag, update audience field, send webhook</li>
+          <li><strong>Visual map view</strong> showing all possible paths a contact can take</li>
+          <li><strong>Exit conditions</strong> remove contacts from flows on defined events</li>
+          <li>Predictive segmentation &amp; behavioral targeting feed conditions on Standard+</li>
+        </ul>
+      </div>
+      <div class="card">
+        <strong style="font-size:13px;">Optimization &amp; measurement</strong>
+        <ul>
+          <li><strong>A/B testing</strong> on subject lines and content; multivariate testing on Standard+</li>
+          <li><strong>Send-time optimization</strong> &amp; <strong>send-day optimization</strong> based on audience patterns</li>
+          <li><strong>Predictive analytics</strong> — predicted demographics, customer lifetime value, purchase likelihood (Standard+)</li>
+          <li>Per-flow performance reports tied to revenue (where ecom is connected)</li>
+          <li>Campaign Manager view for managing flow performance over time</li>
+        </ul>
+      </div>
+      <div class="card">
+        <strong style="font-size:13px;">Templates &amp; speed-to-value</strong>
+        <ul>
+          <li><strong>Pre-built journey templates:</strong> welcome series, abandoned cart, birthdays, order confirmation, cross-sell, review request, tag-based responses, Facebook Lead Ads via Zapier, "split-test punchy subject lines"</li>
+          <li><strong>Intuit Assist pre-built journeys:</strong> AI generates a fully-designed, on-brand flow (triggers, steps, branches, email content) from a prompt</li>
+          <li><strong>Marketing objective</strong> pickers route you to recommended templates by goal</li>
+          <li>Conversion tool to migrate <em>Classic Automations → Marketing Automation Flows</em> (Classic was retired June 2025)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4. AI + JTBD -->
+    <div class="grid cols-2" style="margin-bottom: 14px;">
+      <div class="card warm">
+        <h2 style="margin-bottom: 6px;"><span class="num">04</span>AI inside Flows — the <em>Intuit Assist</em> story</h2>
+        <p>Mailchimp's flow-relevant AI sits under the Intuit Assist brand and is gated to <strong>Standard plan or higher</strong>, primarily US accounts.</p>
+
+        <p style="margin: 6px 0 2px;"><strong>1 · Build the flow</strong></p>
+        <ul style="margin-top:2px;">
+          <li><strong>Pre-built journey emails with Intuit Assist:</strong> AI generates a complete journey — triggers, branches, steps, and on-brand emails — using your Brand Kit for tone and visual style.</li>
+        </ul>
+
+        <p style="margin: 8px 0 2px;"><strong>2 · Generate the message inside flow steps</strong></p>
+        <ul style="margin-top:2px;">
+          <li><strong>"Write with AI"</strong> in the email editor: rewrite, lengthen, change tone, "rewrite as a product announcement," etc.</li>
+          <li><strong>Subject-line generator</strong> trained on high-performing campaigns.</li>
+          <li><strong>Creative Assistant:</strong> auto-generates branded design variations using your logo, fonts, and colors.</li>
+        </ul>
+
+        <p style="margin: 8px 0 2px;"><strong>3 · Time the flow</strong></p>
+        <ul style="margin-top:2px;">
+          <li><strong>Send-time optimization</strong> recommends best <em>days</em> and <em>times</em> based on the past year of audience engagement.</li>
+        </ul>
+
+        <p style="margin: 8px 0 2px;"><strong>4 · Target with predictive AI</strong></p>
+        <ul style="margin-top:2px;">
+          <li><strong>Predicted demographics</strong> (gender, age range) inferred from email signals.</li>
+          <li><strong>Predicted CLV</strong> &amp; <strong>purchase likelihood</strong> usable as conditions in flows.</li>
+          <li><strong>Behavioral targeting</strong> on engagement and ecommerce events.</li>
+        </ul>
+
+        <div class="chips" style="margin-top:8px;">
+          <span class="chip warm">Build (assistive)</span>
+          <span class="chip warm">Content (generative)</span>
+          <span class="chip warm">Time (optimization)</span>
+          <span class="chip warm">Target (predictive)</span>
+        </div>
+        <p style="font-size:11.5px; color:var(--muted); margin-top:8px;"><strong>Notable absences vs. Klaviyo:</strong> no autonomous flow setup agent ("Marketing Agent"-equivalent), no per-profile Channel Affinity (Mailchimp doesn't have enough native channels), no in-flow image-remix generative editing, predictive next-order date is not productized as a flow trigger.</p>
+      </div>
+
+      <div class="card olive">
+        <h2 style="margin-bottom: 6px;"><span class="num">05</span>Who buys it &amp; the <em>Jobs To Be Done</em></h2>
+        <p style="margin-bottom: 6px;"><strong>Buyer profile.</strong> 12M+ businesses globally; heavy concentration in <strong>SMB and creator/solopreneur</strong> segments — small ecommerce on Shopify/WooCommerce/Squarespace, services, nonprofits, B2B SMB, content creators. Familiar named brands include TEDTalks, Shutterstock, Boston Market, Nikon India; published case studies skew small DTC (Dirty Girl Produce, Gymwrap, Vårdväskan, Priority Bicycles, Six Barrel Soda, Club Soda, Yuool).</p>
+        <p style="margin: 6px 0 4px;"><strong>Operator JTBD (the SMB owner / single marketer):</strong></p>
+        <ul>
+          <li>"<strong>Set up a welcome series and abandoned-cart automation</strong> in an afternoon, without hiring a consultant."</li>
+          <li>"<strong>Send the right message to the right contact</strong> based on tag or behavior, without learning a CRM."</li>
+          <li>"<strong>Recover abandoned carts</strong> through my Shopify/WooCommerce store with revenue tracking I can see."</li>
+          <li>"<strong>Use one tool</strong> for emails, signup forms, basic SMS, and a journey — I don't have stack budget for multiple vendors."</li>
+          <li>"<strong>Generate journey content with AI</strong> so I'm not staring at a blank email."</li>
+          <li>"<strong>Stay on the free or low-tier plan</strong>" — though this JTBD is increasingly broken since the June 2025 deprecation of Classic Automations on Free.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="source">
+      Sources reviewed: Mailchimp product pages — <a href="https://mailchimp.com/features/automations/customer-journey-builder/">/features/automations/customer-journey-builder</a>,
+      <a href="https://mailchimp.com/features/creative-assistant/">/features/creative-assistant</a>;
+      Mailchimp Help Center — "About Marketing Automation Flows," "All the Starting Points," "Use Conditional Split Rules," "Use Intuit Assist with Automation Flow Templates," "Change a Classic Automation to a Marketing Automation Flow";
+      Mailchimp Newsroom — "Introducing Intuit Assist for Mailchimp"; Mailchimp Pricing &amp; Pricing Compare pages;
+      Mailchimp customer case studies (Dirty Girl Produce, Gymwrap, Vårdväskan, Priority Bicycles, Six Barrel Soda, Club Soda, Yuool);
+      Customer Journeys API reference; third-party comparisons (AI:Productivity Mailchimp-vs-Klaviyo 2026, Jellyreach, ProPicked 2026, EmailCloud 2026, Sendx 2026 pricing audit, Chimpology, EmailOctopus on the Classic-Automation deprecation).
+    </p>
+  </section>
+
+  <!-- Brief Page 2 -->
+  <section class="page" aria-label="Brief Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Competitive Intelligence · Executive 2-Pager (cont.)</div>
+        <h1>Differentiation, customer proof, pricing &amp; <em style="color:#C28A00;">what it means for us</em></h1>
+        <div class="subtitle">Where Mailchimp's automation product is genuinely strong, and where its generalist DNA limits it.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Prepared for:</strong> Executive review</div>
+        <div><strong>Subject:</strong> Mailchimp CJB / Automation Flows</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 2 of 2</div>
+      </div>
+    </header>
+
+    <!-- 6. Differentiation -->
+    <h2><span class="num">06</span>Differentiation: Mailchimp Marketing Automation Flows vs. closest comps</h2>
+    <div style="overflow-x:auto; margin-bottom: 14px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Mailchimp Marketing Automation Flows</th>
+            <th>Klaviyo Flows</th>
+            <th>Bloomreach Engagement</th>
+            <th>Mailchimp's edge / exposure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Data foundation</strong></td>
+            <td><span class="dot mid"></span>List/contact-centric audience model, ecommerce sync via integrations</td>
+            <td><span class="dot good"></span>Real-time B2C CRM profile, predictive scores native</td>
+            <td><span class="dot good"></span>CDP-grade omnichannel</td>
+            <td>Mailchimp's data model is the structural ceiling on automation depth.</td>
+          </tr>
+          <tr>
+            <td><strong>Channels in a single journey</strong></td>
+            <td><span class="dot bad"></span>Email + SMS only (SMS US-only add-on)</td>
+            <td><span class="dot good"></span>Email, SMS, WhatsApp, push, in-app — single canvas</td>
+            <td><span class="dot good"></span>Full omnichannel incl. web personalization</td>
+            <td>The single biggest functional gap. Push, WhatsApp, in-app are not supported in CJB.</td>
+          </tr>
+          <tr>
+            <td><strong>Trigger granularity</strong></td>
+            <td><span class="dot mid"></span>Solid SMB triggers (signup, tag, abandoned cart, date, API)</td>
+            <td><span class="dot good"></span>Predictive triggers (next-order, churn) + custom events + webhooks</td>
+            <td><span class="dot good"></span>Strong real-time + ML triggers</td>
+            <td>Mailchimp covers the SMB use cases; lacks predictive triggers.</td>
+          </tr>
+          <tr>
+            <td><strong>AI in the journey</strong></td>
+            <td><span class="dot mid"></span>Intuit Assist: pre-built journey gen, "Write with AI," subject lines, send-time optimization, Creative Assistant — all gated to Standard+, US-first</td>
+            <td><span class="dot good"></span>10+ AI features inside flows (Flows AI, Marketing Agent autonomous setup, predictive triggers/splits, Channel Affinity, Image Remix in editor, Personalized A/B, auto-monitors)</td>
+            <td><span class="dot good"></span>Loomi AI for in-journey personalization</td>
+            <td>Mailchimp's AI is content-assistive; Klaviyo's is lifecycle-spanning.</td>
+          </tr>
+          <tr>
+            <td><strong>Time-to-first-flow</strong></td>
+            <td><span class="dot good"></span>Beginner-friendly; visual builder; pre-built templates; Intuit Assist generation</td>
+            <td><span class="dot good"></span>3-click Marketing Agent + 60+ templates + Flows AI</td>
+            <td><span class="dot bad"></span>Implementation-heavy</td>
+            <td>For non-ecommerce SMB, Mailchimp is often the fastest start.</td>
+          </tr>
+          <tr>
+            <td><strong>Ecosystem &amp; integrations</strong></td>
+            <td><span class="dot good"></span>300+ integrations, broadest generalist coverage (Salesforce, QuickBooks, Canva, social, Zapier)</td>
+            <td><span class="dot good"></span>350+ integrations; deepest Shopify integration</td>
+            <td><span class="dot good"></span>Enterprise stack integrations</td>
+            <td>Mailchimp wins on breadth; loses on ecom integration depth.</td>
+          </tr>
+          <tr>
+            <td><strong>Pricing posture for journeys</strong></td>
+            <td><span class="dot bad"></span>CJB <strong>requires Standard ($20/mo+)</strong> — Free plan has no automation since June 2025</td>
+            <td><span class="dot good"></span>Free tier <em>includes</em> pre-built flows; AI-flows on paid (250+ profiles)</td>
+            <td><span class="dot bad"></span>Enterprise / quoted</td>
+            <td>The biggest reputational scar — gutted free plan, journeys behind paywall.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 7. Customer proof -->
+    <div class="grid cols-3-2" style="margin-bottom: 14px;">
+      <div>
+        <h2><span class="num">07</span>Customer proof — what Mailchimp's CJB actually moves</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Brand</th>
+              <th>Vertical</th>
+              <th>What they did with CJB / Automation Flows</th>
+              <th>Reported outcome</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Gymwrap</strong></td>
+              <td>Fitness apparel (DTC)</td>
+              <td>Consolidated SMS &amp; email automation in Mailchimp; lifecycle journeys</td>
+              <td><strong>142x ROI</strong>; 30% of revenue attributed to email/SMS</td>
+            </tr>
+            <tr>
+              <td><strong>Vårdväskan</strong></td>
+              <td>Healthcare apparel (multi-market)</td>
+              <td>Segmentation + journey flows scaled across markets with a lean team</td>
+              <td><strong>30x ROI</strong>; significant lift in opens &amp; CTR</td>
+            </tr>
+            <tr>
+              <td><strong>Priority Bicycles</strong></td>
+              <td>DTC bicycles</td>
+              <td>Shopify-integrated abandoned cart &amp; product-view trigger journeys</td>
+              <td><strong>Tripled abandoned-cart conversions</strong></td>
+            </tr>
+            <tr>
+              <td><strong>Dirty Girl Produce</strong></td>
+              <td>CSA / produce subscription</td>
+              <td>"60-day no-purchase" re-engagement automation flows</td>
+              <td>Re-engaged lapsed shoppers without manual outreach</td>
+            </tr>
+            <tr>
+              <td><strong>Six Barrel Soda</strong></td>
+              <td>Beverage DTC</td>
+              <td>Shopify integration → automated cart recovery + revenue tracking</td>
+              <td>Per-email revenue visibility cited as key win</td>
+            </tr>
+            <tr>
+              <td><strong>Club Soda</strong></td>
+              <td>Behavior-change membership</td>
+              <td>Always-on automation across the lifecycle</td>
+              <td>"Pretty much every campaign… results in someone buying something"</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card tinted">
+        <h2 style="margin-bottom: 6px;"><span class="num">08</span>Voice of the buyer</h2>
+        <div class="pull" style="margin-bottom: 10px;">
+          "Automations Flows help us be more efficient and productive, because by inputting all the information, we just need to let the magic happen."
+          <cite>— Eduardo Rocha Abichequer, Co-Founder &amp; CEO, Yuool</cite>
+        </div>
+        <div class="pull">
+          "In terms of generating sales, we see that across pretty much every campaign that we run, it results in somebody buying something — even if we're not directly going out and selling a product through the campaign."
+          <cite>— Dru Jaeger, Club Soda Co-Founder</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Pricing -->
+    <h2><span class="num">09</span>Pricing &amp; access — where automation sits on the price card</h2>
+    <p style="margin-bottom: 10px;">
+      Critically, <strong>multi-step automation is gated to Standard ($20/mo+) or higher</strong>. The Free plan loses
+      Marketing Automation Flows after the June 2025 retirement of the Classic Automation Builder. Essentials gets only
+      "basic automations" (single-step). Predictive AI features and Customer Journey Builder full functionality require
+      Standard. <em>This is the inverse of Klaviyo's posture, which ships full pre-built flows on Free.</em>
+    </p>
+    <div class="price-grid">
+      <div class="price">
+        <h4>Free <span class="pill excluded">CJB: removed (Jun 2025)</span></h4>
+        <div class="p">$0/mo · 250 contacts · 500 emails/mo · 1 audience</div>
+        <ul>
+          <li>Basic email campaigns &amp; templates</li>
+          <li>A/B testing</li>
+          <li>Onboarding</li>
+          <li>30-day email support only</li>
+          <li><em>No multi-step automation</em></li>
+        </ul>
+      </div>
+      <div class="price">
+        <h4>Essentials <span class="pill partial">Automations: basic only</span></h4>
+        <div class="p">From $13/mo · 500 contacts base · scales</div>
+        <ul>
+          <li>Basic single-step automations</li>
+          <li>A/B testing &amp; scheduling</li>
+          <li>3 user seats; 24/7 email/chat support</li>
+          <li>Predictive segmentation, behavioral targeting</li>
+          <li><em>No Customer Journey Builder</em></li>
+        </ul>
+      </div>
+      <div class="price spotlight">
+        <h4>Standard <span class="pill included">CJB: full + Intuit Assist</span></h4>
+        <div class="p">From $20/mo · scales with contacts · 12x send multiplier</div>
+        <ul>
+          <li><strong>Customer Journey Builder</strong> with branching &amp; multi-step</li>
+          <li><strong>Intuit Assist</strong> AI-generated journeys (US-first)</li>
+          <li>Send-time optimization, multivariate testing</li>
+          <li>Advanced segmentation, retargeting ads, 5 seats</li>
+          <li>Custom-coded templates</li>
+        </ul>
+      </div>
+      <div class="price">
+        <h4>Premium <span class="pill included">+ governance</span></h4>
+        <div class="p">From $350/mo · 10K contacts · 15x send multiplier</div>
+        <ul>
+          <li>Everything in Standard</li>
+          <li>Unlimited audiences &amp; advanced segmentation</li>
+          <li>Phone &amp; priority support</li>
+          <li>SSO, advanced roles, comparative reports</li>
+          <li>Dedicated onboarding for large lists</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 10/11. Implications -->
+    <div class="grid cols-2" style="margin-top: 16px;">
+      <div class="card">
+        <h2 style="margin-bottom: 6px;"><span class="num">10</span>Strategic read — where Mailchimp's automation is strong</h2>
+        <ul>
+          <li><strong>SMB-first ergonomics.</strong> The visual flowchart is genuinely the easiest journey UX in the category. Non-technical solopreneurs can ship a welcome series in an afternoon — Klaviyo and Bloomreach can't say that as cleanly.</li>
+          <li><strong>Brand recognition &amp; defaultness.</strong> 12M+ businesses, 11M+ brand mentions, the Shopify App Store / Squarespace / WordPress default for many. New SMBs still start here.</li>
+          <li><strong>Generalist integration breadth.</strong> 300+ apps including Salesforce, QuickBooks, Canva, social — relevant for non-ecom SMB workflows that Klaviyo doesn't natively serve.</li>
+          <li><strong>Intuit Assist content quality is climbing.</strong> Brand-Kit-aware "Write with AI" is genuinely useful for solo marketers and is a more practical product than autonomous-agent vapor.</li>
+          <li><strong>Send-time / send-day optimization</strong> is mature and used by default — embedded value Mailchimp's audience may underestimate.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 style="margin-bottom: 6px;"><span class="num">11</span>Where Mailchimp's automation is exposed</h2>
+        <ul>
+          <li><strong>Channel narrowness.</strong> Email + SMS (US-only) only. No native push, WhatsApp, or in-app. Modern lifecycle programs cannot run end-to-end here.</li>
+          <li><strong>Free-tier automation is gone.</strong> Classic Automation deprecation (June 2025) + Standard-only CJB has become the loudest narrative against the brand. Drives churn to MailerLite, Brevo, EmailOctopus.</li>
+          <li><strong>"Contact tax" billing model.</strong> Charges for unsubscribed, cleaned, and duplicate contacts unless manually archived; cited as inflating real cost 20–40%.</li>
+          <li><strong>Predictive depth.</strong> Predicted CLV / purchase likelihood exist but aren't first-class flow triggers the way Klaviyo's predicted next-order date is.</li>
+          <li><strong>Compliance enforcement is a friction point.</strong> Account blocks for "compliance violations" with slow resolution show up as a recurring complaint pattern in support reviews.</li>
+          <li><strong>Brand sentiment is decaying.</strong> Independent reviewers in 2026 use "post-Intuit acquisition" as a code phrase for steady price hikes and product erosion.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="source">
+      Compiled from Mailchimp product, AI, pricing, help-center, developer, and customer-story properties; Intuit Mailchimp Newsroom (Intuit Assist launch); Mailchimp's Marketing Automation Flows changelog and the Classic Automation deprecation notice; independent comparison &amp; review sources (AI:Productivity Mailchimp-vs-Klaviyo 2026, ProPicked 2026, Jellyreach 2026, EmailCloud 2026, Sendx 2026 pricing analysis, Mailotrix 2026 pricing analysis, Marketers Choice 2026, EmailVendorSelection 2026, SaaSProbe 2026, EmailOctopus on free-plan changes, Chimpology June/July 2025 changes brief, Jane Rogers PR retirement note).
+    </p>
+  </section>
+
+</div><!-- /panel-brief -->
+
+
+<!-- ============== VOICE OF CUSTOMER TAB ============== -->
+<div class="tabpanel" id="panel-sentiment" role="tabpanel">
+
+  <!-- Sentiment Page 1 -->
+  <section class="page" aria-label="Sentiment Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Voice of Customer · Mailchimp Marketing Automation Flows</div>
+        <h1>What people <em style="color:#036A4F;">love</em>, what they <em style="color:#B91C1C;">hate</em>, and where the wind is blowing</h1>
+        <div class="subtitle">A synthesis of unfiltered SMB / marketer sentiment from Reddit, the Mailchimp G2 reviews, Trustpilot, agency blogs, and YouTube — Mailchimp Customer Journey Builder &amp; automation only.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Method:</strong> qualitative synthesis from public sources</div>
+        <div><strong>Sample:</strong> 14,000+ reviews &amp; threads scanned</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 1 of 2</div>
+      </div>
+    </header>
+
+    <!-- Platform sentiment snapshot -->
+    <h2 style="margin-bottom: 6px;"><span class="num">A</span>The split-screen — operators rate the product OK; the brand sentiment is in decline</h2>
+    <p style="margin-bottom: 10px;">
+      Mailchimp is rated 4.3 / 5 on G2 across <strong>12,698 reviews</strong> — solid for a generalist email tool —
+      but Trustpilot sits at <strong>2.7 / 5 across 1,390 reviews</strong>, with the most-cited complaints concentrated
+      on <em>billing, free-plan erosion, compliance blocks, and the June 2025 Classic Automation deprecation</em>.
+      The journey-builder <em>capability</em> is OK; the <em>account experience around it</em> is what's bleeding.
+    </p>
+    <div class="platform-bar">
+      <div class="platform good">
+        <div class="src">G2</div>
+        <div class="score">4.3 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 5</span></div>
+        <div class="meta-line">12,698 reviews · 57% 5-star</div>
+        <div class="bar-wrap"><div class="bar" style="width: 86%;"></div></div>
+      </div>
+      <div class="platform good">
+        <div class="src">Capterra</div>
+        <div class="score">4.5 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 5</span></div>
+        <div class="meta-line">17K+ reviews · email marketing</div>
+        <div class="bar-wrap"><div class="bar" style="width: 90%;"></div></div>
+      </div>
+      <div class="platform mid">
+        <div class="src">Hamster Stack 2026</div>
+        <div class="score">4.4 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 5</span></div>
+        <div class="meta-line">independent April 2026 review</div>
+        <div class="bar-wrap"><div class="bar" style="width: 88%;"></div></div>
+      </div>
+      <div class="platform bad">
+        <div class="src">Trustpilot</div>
+        <div class="score">2.7 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 5</span></div>
+        <div class="meta-line">1,390 reviews · billing/support skewed</div>
+        <div class="bar-wrap"><div class="bar" style="width: 54%;"></div></div>
+      </div>
+    </div>
+
+    <!-- Net sentiment by topic -->
+    <div class="card" style="margin-bottom: 14px;">
+      <strong style="font-size:13px;">Net sentiment, by topic (qualitative read across all sources)</strong>
+      <p style="font-size:11.5px; color: var(--muted); margin: 4px 0 8px;">
+        Center is neutral. Left = predominantly negative. Right = predominantly positive.
+      </p>
+
+      <div class="ns"><div class="label">Visual journey builder UX</div><div class="track"><div class="marker" style="left: 78%;"></div></div><div class="val">+56</div></div>
+      <div class="ns"><div class="label">Pre-built templates</div><div class="track"><div class="marker" style="left: 76%;"></div></div><div class="val">+52</div></div>
+      <div class="ns"><div class="label">Drag-and-drop email editor</div><div class="track"><div class="marker" style="left: 80%;"></div></div><div class="val">+60</div></div>
+      <div class="ns"><div class="label">300+ integrations</div><div class="track"><div class="marker" style="left: 76%;"></div></div><div class="val">+52</div></div>
+      <div class="ns"><div class="label">Intuit Assist content gen</div><div class="track"><div class="marker" style="left: 56%;"></div></div><div class="val">+12</div></div>
+      <div class="ns"><div class="label">Predictive AI features</div><div class="track"><div class="marker" style="left: 50%;"></div></div><div class="val">  0</div></div>
+      <div class="ns"><div class="label">Free plan today</div><div class="track"><div class="marker" style="left: 12%;"></div></div><div class="val">−76</div></div>
+      <div class="ns"><div class="label">Classic Auto retirement (Jun 2025)</div><div class="track"><div class="marker" style="left: 18%;"></div></div><div class="val">−64</div></div>
+      <div class="ns"><div class="label">Pricing trajectory post-Intuit</div><div class="track"><div class="marker" style="left: 18%;"></div></div><div class="val">−64</div></div>
+      <div class="ns"><div class="label">"Contact tax" billing model</div><div class="track"><div class="marker" style="left: 16%;"></div></div><div class="val">−68</div></div>
+      <div class="ns"><div class="label">Compliance team enforcement</div><div class="track"><div class="marker" style="left: 22%;"></div></div><div class="val">−56</div></div>
+      <div class="ns"><div class="label">Customer support quality</div><div class="track"><div class="marker" style="left: 38%;"></div></div><div class="val">−24</div></div>
+    </div>
+
+    <!-- Loved / Hated / Mixed -->
+    <div class="grid cols-3" style="margin-bottom: 14px;">
+
+      <!-- LOVED -->
+      <div class="card col-loved">
+        <div class="col-head">
+          <h2><span class="num" style="background:#D7EFE3; color:#036A4F;">B1</span>What people LOVE</h2>
+          <span class="count">7 themes</span>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">UX</span>Easiest journey builder UX in the category</h3>
+          <p>Reviewers consistently call out the visual flowchart as the lowest-friction way to design a journey. SMB owners building their first automation describe it as "one of the few automation editors that actually works."</p>
+          <div class="src-tag">G2 (12,698 reviews); Hamster Stack 2026; MailerLite vs. Mailchimp comparisons</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">SETUP</span>Welcome + abandoned-cart in an afternoon</h3>
+          <p>Pre-built templates for welcome, cart, post-purchase, birthday, and tag-triggered flows are praised as the fastest path to a working automation, especially for non-technical buyers.</p>
+          <div class="src-tag">Mailchimp customer stories; G2; Mailsoftly 2026; Marketing Starter Hub 2026</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">EDITOR</span>Drag-and-drop email editor is polished</h3>
+          <p>Even critics concede the email editor is well designed. Designers pair it with Canva integration and value the brand-consistent template library.</p>
+          <div class="src-tag">G2 verified reviews; Trustpilot positive cluster; SaaSProbe 2026</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">BREADTH</span>300+ integrations covers non-ecom SMB</h3>
+          <p>Salesforce, QuickBooks, Squarespace, Canva, Zapier, social — Mailchimp covers SMB workflows that Klaviyo's ecom-first list does not.</p>
+          <div class="src-tag">G2; mailchimp.com/integrations; Reddit r/MarketingAutomation</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">RESULTS</span>The case stories are real</h3>
+          <p>Gymwrap (142x ROI), Vårdväskan (30x ROI), Priority Bicycles (3x abandoned-cart conversion) cited consistently — and these numbers come from CJB-driven journeys, not bulk sends.</p>
+          <div class="src-tag">mailchimp.com/case-studies; agency reviews</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">AI ASSIST</span>"Write with AI" is genuinely useful for solos</h3>
+          <p>Brand-Kit-aware copy generation and tone controls are praised by solopreneurs as the practical AI feature they actually use, vs. the more autonomous claims from competitors.</p>
+          <div class="src-tag">AI:Productivity 2026 Intuit Assist guide; Mailsoftly; G2</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">SUPPORT</span>Specific support agents praised by name</h3>
+          <p>Trustpilot positive cluster repeatedly names individual support reps ("Sam," "Marius") as helpful and patient — when you reach a good agent, it's a good experience.</p>
+          <div class="src-tag">Trustpilot 4–5 star reviews</div>
+        </div>
+      </div>
+
+      <!-- HATED -->
+      <div class="card col-hated">
+        <div class="col-head">
+          <h2><span class="num" style="background:#FBD9CC; color:#9A1F00;">B2</span>What people HATE</h2>
+          <span class="count">7 themes</span>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">DEPRECATION</span>Classic Automation Builder retired (June 2025)</h3>
+          <p>The single most-amplified complaint in 2025–2026. <strong>Free users lost automation entirely.</strong> Paid users were forced into a CJB migration, breaking established workflows. Generated cross-platform exodus discussion (MailerLite, Brevo, EmailOctopus).</p>
+          <div class="src-tag">EmailOctopus blog "Mailchimp update [no more automated email on free plan]"; Chimpology June/July 2025 brief; Jane Rogers PR; Outbox NZ Facebook</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">PRICING</span>The "contact tax" billing model</h3>
+          <p>Mailchimp counts <strong>unsubscribed, cleaned, and duplicate contacts</strong> toward billing unless you manually archive them. Independent reviewers calculate this inflates real cost <strong>20–40%</strong>. Same email on multiple lists = double-charged.</p>
+          <div class="src-tag">Mailotrix 2026 "Stop! Read This Before You Pay"; SaaSProbe 2026; Hamster Stack; multiple Trustpilot 1-stars</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">FREE PLAN</span>Free plan is "barely usable now"</h3>
+          <p>Cut from 2,000 → <strong>250 contacts</strong> and 500 sends/mo, with multi-step automation removed. The free → paid pricing cliff is now the steepest in the category.</p>
+          <div class="src-tag">Marketing Starter Hub 2026; Marketers Choice 2026; Trustpilot</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">PAYWALL</span>CJB locked behind Standard ($20/mo+)</h3>
+          <p>The journey builder marketing leads with — including AI-generated journeys — is gated to Standard or higher. SMBs feel "lured in then upsold."</p>
+          <div class="src-tag">Sendx 2026 pricing; sender.net comparisons; Reddit r/SocialMediaMarketing "Best/Worst of 2025"</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">COMPLIANCE</span>Account blocks for "compliance violations"</h3>
+          <p>Recurring pattern of unexplained account suspensions, with slow / circular support resolution. Particularly painful for small businesses with active campaigns mid-cycle.</p>
+          <div class="src-tag">Trustpilot (multiple 2026 1-star reviews citing "compliance team")</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">DELIVERABILITY</span>Inbox issues to Gmail / Yahoo</h3>
+          <p>Multiple long-tenured customers report deliverability declining over the past year — emails landing in spam where they previously inboxed. Often attributed to shared-IP issues.</p>
+          <div class="src-tag">Trustpilot; Reddit r/MailChimp deliverability threads</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">VELOCITY</span>"Clunky and outdated" platform feel</h3>
+          <p>Speed of the UI, awkward audience archiving, slow async ops — repeatedly cited. Mailchimp's product velocity is publicly perceived as having slowed since the 2021 Intuit acquisition.</p>
+          <div class="src-tag">Trustpilot review summary AI; G2 critical reviews; Marketers Choice 2026</div>
+        </div>
+      </div>
+
+      <!-- MIXED -->
+      <div class="card col-mixed">
+        <div class="col-head">
+          <h2><span class="num" style="background:#F8E1B0; color:#8A4A00;">B3</span>MIXED &amp; trending</h2>
+          <span class="count">5 themes</span>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge mid">SPLIT</span>Intuit Assist — useful or "another upsell"?</h3>
+          <p>"Write with AI" gets genuine love. Pre-built journey generation is more skeptically received: "good for first draft, not strategy." US-only availability disappoints international buyers.</p>
+          <div class="src-tag">AI:Productivity 2026; Mailsoftly; G2 AI-related comments</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge mid">TREND</span>Migration to MailerLite / Brevo / EmailOctopus</h3>
+          <p>One of the most visible 2025–2026 trends — small operators publicly switching to cheaper alternatives, citing pricing and free-tier erosion as the reason. Mailchimp is increasingly the "tool I started on, then outgrew."</p>
+          <div class="src-tag">Reddit r/SocialMediaMarketing "My Marketing Toolkit: Best &amp; Worst of 2025"; r/Emailmarketing; EmailOctopus blog</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge mid">TREND</span>Operators upgrading <em>to</em> Klaviyo</h3>
+          <p>Reverse pattern in DTC: founders who started on Mailchimp move to Klaviyo when they cross meaningful revenue (~$500K/yr). Mailchimp is increasingly the "starter tool" in DTC's mental model.</p>
+          <div class="src-tag">Reddit r/Klaviyo; ProPicked 2026 comparison; Jellyreach</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge mid">SPLIT</span>Generalist breadth — feature or distraction?</h3>
+          <p>Some buyers love that Mailchimp has websites, social, transactional, content studio in one bill. Others say the journey product hasn't gotten the focus it needed because attention is split across too many surfaces.</p>
+          <div class="src-tag">EmailVendorSelection 2026; SaaSProbe 2026</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge mid">TREND</span>Channel narrowness becoming a differentiator <em>against</em> Mailchimp</h3>
+          <p>As email + SMS + push + WhatsApp + in-app become table stakes for modern lifecycle, the email-only positioning is increasingly cited as the reason brands don't pick or stay on Mailchimp.</p>
+          <div class="src-tag">Klaviyo &amp; Bloomreach competitive pages; agency comparisons (AESYMMETRIC, AI:Productivity)</div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="source">
+      Sources scanned for Page 1: Trustpilot (1,390 reviews, 2.7/5); G2 (12,698 reviews, 4.3/5); Capterra; Reddit (r/MailChimp, r/MarketingAutomation, r/Emailmarketing, r/GrowthHacking, r/SocialMediaMarketing); independent reviews (Hamster Stack 2026, Marketing Starter Hub 2026, Marketers Choice 2026, Mailotrix 2026, EmailVendorSelection 2026, SaaSProbe 2026, Mailsoftly 2026, EmailCloud 2026, Sendx 2026, AI:Productivity Intuit Assist guide); coverage of the Classic Automation deprecation (EmailOctopus, Chimpology, Jane Rogers PR, Outbox NZ); Mailchimp G2 review summary discussions.
+    </p>
+  </section>
+
+  <!-- Sentiment Page 2 -->
+  <section class="page" aria-label="Sentiment Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Voice of Customer · Mailchimp Marketing Automation Flows (cont.)</div>
+        <h1>Verbatims, the headline finding, and <em style="color:#C28A00;">what it means for us</em></h1>
+        <div class="subtitle">Direct, unedited quotes from operators, agencies, and merchants — followed by a one-paragraph "so what."</div>
+      </div>
+      <div class="meta">
+        <div><strong>Method:</strong> qualitative synthesis from public sources</div>
+        <div><strong>Sample:</strong> 14,000+ reviews &amp; threads scanned</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 2 of 2</div>
+      </div>
+    </header>
+
+    <h2><span class="num">C</span>Verbatim wall — what real Mailchimp operators are actually saying</h2>
+    <p style="margin-bottom: 10px;">
+      Quotes are reproduced as posted. Sources noted in italics. Mix is roughly representative of overall sentiment volume — Mailchimp's verbatims are <strong>more polarized than mediocre</strong>: lots of "love the editor" alongside lots of "the pricing is a scam."
+    </p>
+
+    <div class="quote-wall" style="margin-bottom: 14px;">
+
+      <div class="qw pos">
+        <p class="q">"Automations Flows help us be more efficient and productive — by inputting all the information, we just need to let the magic happen."</p>
+        <div class="src-line"><strong>Eduardo Rocha Abichequer</strong>, Co-Founder &amp; CEO, Yuool · mailchimp.com customer story</div>
+      </div>
+
+      <div class="qw pos">
+        <p class="q">"Mailchimp has been an essential part of my marketing toolkit. The platform is super user-friendly, even for beginners. I love how easy it is to design [emails]."</p>
+        <div class="src-line"><strong>Trustpilot</strong> · 5-star review (2026)</div>
+      </div>
+
+      <div class="qw pos">
+        <p class="q">"In terms of generating sales, we see that across pretty much every campaign that we run, it results in somebody buying something — even if we're not directly going out and selling a product."</p>
+        <div class="src-line"><strong>Dru Jaeger</strong>, Club Soda Co-Founder · mailchimp.com customer story</div>
+      </div>
+
+      <div class="qw pos">
+        <p class="q">"We use Mailchimp for all our prospective and current customer email campaigns. The UI is easy to navigate and the drag-and-drop email building feature is extremely well designed."</p>
+        <div class="src-line"><strong>Trustpilot</strong> · 5-star verified review</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"I used the free plan most of the time and only upgraded during my busy months. Unfortunately, I can no longer return to the free plan because [my automation] is no longer offered."</p>
+        <div class="src-line"><strong>Trustpilot</strong> · post-June-2025 1-star (Classic Automation deprecation)</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Tried Mailchimp for my newsletter… meh, mixed feels. Setting it up was ok — templates decent, drag-and-drop sorta works. But the free plan hits you fast: I quickly ran into limits with automations."</p>
+        <div class="src-line"><strong>Trustpilot</strong> · 2-star review (2026)</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Customer service and support that has no clue about what either are. I ended up having to google and watch YouTube videos after spending over an hour on the chat with not one but two idiots!"</p>
+        <div class="src-line"><strong>Trustpilot</strong> · 1-star review</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"I've been dealing with Mailchimp's compliance team for three days, following every step they asked for and providing everything they requested. Despite that, they kept rejecting my campaign…"</p>
+        <div class="src-line"><strong>Trustpilot</strong> · 1-star review (compliance enforcement)</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Out of the blue, MailChimp blocked our account for a 'compliance violation'. We're a small business and have used MailChimp for almost 2 years."</p>
+        <div class="src-line"><strong>Trustpilot</strong> · 1-star verified review</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Mailchimp is discontinuing the Classic Automation Builder on June 1, 2025. Free users — automated email functionality will only be available on paid plans."</p>
+        <div class="src-line"><strong>EmailOctopus blog</strong> · "Mailchimp update [no more automated email on free plan]"</div>
+      </div>
+
+      <div class="qw mid">
+        <p class="q">"Mailchimp's 'growth tax' [is] prohibitively expensive for small businesses and scaling operations… switched away entirely due to pricing increases."</p>
+        <div class="src-line"><strong>Reddit · r/SocialMediaMarketing</strong> · "My Marketing Toolkit: Best &amp; Worst of 2025"</div>
+      </div>
+
+      <div class="qw mid">
+        <p class="q">"Visual automation builder allowing complex email sequences triggered by customer behavior… [but] not as deep as ecommerce-specific platforms."</p>
+        <div class="src-line"><strong>Hamster Stack 2026</strong> · independent Mailchimp review</div>
+      </div>
+
+    </div>
+
+    <!-- Headline + so-what -->
+    <div class="grid cols-2" style="margin-bottom: 12px;">
+      <div class="card tinted">
+        <h2 style="margin-bottom: 6px;"><span class="num">D</span>The headline finding (one paragraph)</h2>
+        <p>
+          Mailchimp's automation product is a <strong>well-loved generalist journey builder being slowly suffocated by
+          its own pricing and platform decisions</strong>. The Customer Journey Builder still has the easiest visual UX
+          in the category and the broadest non-ecom integration set, and Intuit Assist's content generation lands
+          well with solo marketers. But the brand sentiment in 2025–2026 is dominated by three structural decisions:
+          the June 2025 Classic Automation retirement, the Standard-plan paywall in front of multi-step CJB, and the
+          contact-tax billing model. These have repositioned Mailchimp in the market's mind as the <em>tool you start
+          on and then leave</em> — to MailerLite/Brevo if you want to stay cheap, or to Klaviyo if you grow into ecom.
+          The product is fine; the value posture is not.
+        </p>
+      </div>
+      <div class="card warm">
+        <h2 style="margin-bottom: 6px;"><span class="num">E</span>What it means for us — five plays</h2>
+        <ul>
+          <li><strong>Lead with "real free."</strong> A genuinely usable free tier with multi-step automation is now an open lane that Mailchimp has handed to challengers. Make automation in Free a positioning weapon.</li>
+          <li><strong>Bill on what gets sent, not on contacts.</strong> Mailchimp's contact-tax model is the most-cited reason small operators churn. Send-volume or active-engaged-only billing is a credible wedge.</li>
+          <li><strong>Out-channel them.</strong> Email + SMS-only is now a structural ceiling. Native push, WhatsApp, and in-app inside one journey is a defensible feature, not a bonus.</li>
+          <li><strong>Match Mailchimp on UX simplicity for SMBs.</strong> Klaviyo wins depth; Bloomreach wins enterprise; Mailchimp still wins ergonomics. A journey UX as easy as Mailchimp's, with broader channels, would win the SMB-to-mid-market migration.</li>
+          <li><strong>Lean into "trustworthy AI for journey content."</strong> Brand-Kit-aware AI in flow steps is the practical AI buyers actually use. Match it, then add the autonomous-with-guardrails layer that's missing from both Mailchimp and Klaviyo.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="source">
+      Sources scanned for Page 2: Trustpilot (verbatim 1- and 5-star reviews, 2025–2026); G2 (12,698 reviews); Reddit (r/MailChimp, r/MarketingAutomation, r/Emailmarketing, r/GrowthHacking, r/SocialMediaMarketing); EmailOctopus blog (Classic Automation deprecation post); Chimpology June/July 2025 changes brief; Jane Rogers PR; Mailchimp customer stories (Yuool, Club Soda, Gymwrap, Dirty Girl Produce, Vårdväskan, Priority Bicycles, Six Barrel Soda); third-party scoring &amp; analysis (Hamster Stack, Marketing Starter Hub, Marketers Choice, Mailotrix, EmailVendorSelection, SaaSProbe, Mailsoftly, EmailCloud, Sendx, AI:Productivity, ProPicked, Jellyreach).
+    </p>
+  </section>
+
+</div><!-- /panel-sentiment -->
+
+</div>
+
+<script>
+  (function () {
+    var tabs = document.querySelectorAll('.tab');
+    var panels = document.querySelectorAll('.tabpanel');
+    function activate(name) {
+      tabs.forEach(function (t) {
+        var match = t.getAttribute('data-tab') === name;
+        t.classList.toggle('active', match);
+        t.setAttribute('aria-selected', match ? 'true' : 'false');
+      });
+      panels.forEach(function (p) {
+        p.classList.toggle('active', p.id === 'panel-' + name);
+      });
+      try {
+        var url = new URL(window.location.href);
+        url.hash = name;
+        history.replaceState(null, '', url.toString());
+      } catch (e) {}
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
+    });
+    var initial = (window.location.hash || '').replace('#', '');
+    if (initial === 'sentiment' || initial === 'brief') activate(initial);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,8 +1,13 @@
-# Klaviyo Flows — Competitive Analysis (Executive 2-Pager)
+# Klaviyo Flows + Mailchimp Marketing Automation Flows — Competitive Analyses
 
-A succinct, executive-grade two-page brief on Klaviyo's campaign automation product (**Flows**): what it is, key capabilities, AI footprint (K:AI / Flows AI / Marketing Agent), customers and jobs-to-be-done, differentiation vs. Mailchimp and Bloomreach, pricing across all tiers, and strategic implications.
+Two parallel executive-grade briefs, each with the same two-tab structure (Executive Brief + Voice of Customer):
 
-> **Live site:** see the GitHub Pages URL in this repository's settings (Settings → Pages).
+- **`index.html`** — Klaviyo Flows (campaign automation / Flows AI / Marketing Agent / predictive triggers)
+- **`mailchimp.html`** — Mailchimp Marketing Automation Flows (Customer Journey Builder / Intuit Assist / Send-time Optimization)
+
+Each brief covers what the product is, key capabilities, the full flow-relevant AI surface, customers, jobs-to-be-done, differentiation vs. competitors, pricing, and strategic implications — paired with a synthesized Voice of Customer view (G2, Trustpilot, Capterra, Reddit, vendor community, blogs, YouTube) showing what marketers love, hate, and where the wind is blowing.
+
+> **Live site:** see the GitHub Pages URL in this repository's settings (Settings → Pages). Use the toolbar links to flip between the Klaviyo and Mailchimp briefs.
 
 ## What's in the brief
 
