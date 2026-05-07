@@ -314,8 +314,8 @@
         <div class="l">Integrations & APIs (Shopify, BigCommerce, WooCommerce, Gorgias, Zendesk…) feeding real-time triggers</div>
       </div>
       <div class="kpi">
-        <div class="v">5+</div>
-        <div class="l">AI capabilities <em>inside the flow canvas</em>: <strong>Flows AI</strong>, Smart Send Time, Channel Affinity, Predicted CLV/next-order/churn as triggers &amp; splits</div>
+        <div class="v">10+</div>
+        <div class="l">AI capabilities <em>inside the flow canvas</em>: Flows AI, Marketing Agent (flow setup), predictive triggers, Smart Send Time, Channel Affinity, AI product recs, subject-line gen, Image Remix, personalized A/B, auto-monitors</div>
       </div>
     </div>
 
@@ -382,13 +382,13 @@
         </ul>
       </div>
       <div class="card">
-        <strong style="font-size:13px;">Optimization & measurement</strong>
+        <strong style="font-size:13px;">Optimization &amp; measurement</strong>
         <ul>
-          <li><strong>A/B tests</strong> on send time, channel, content, and offer</li>
+          <li><strong>A/B tests</strong> on send time, channel, content, and offer; <strong>Personalized A/B (AI)</strong> picks the winning variant per profile</li>
           <li><strong>In-builder metrics</strong>: open, click, conversion, revenue per recipient</li>
           <li><strong>Scheduled flow reports</strong> by time period and engagement</li>
-          <li><strong>Auto-monitors</strong> alert on performance regressions to protect conversion</li>
-          <li>Revenue attribution rolled up against Klaviyo profile</li>
+          <li><strong>AI auto-monitors</strong> alert on flow-level performance regressions to protect conversion</li>
+          <li><strong>Marketing Agent — Optimize Growth (rolling out):</strong> autonomously tests &amp; applies winners inside live flows</li>
         </ul>
       </div>
       <div class="card">
@@ -405,19 +405,49 @@
     <!-- 4. AI deep-dive + JTBD -->
     <div class="grid cols-2" style="margin-bottom: 14px;">
       <div class="card warm">
-        <h2 style="margin-bottom: 6px;"><span class="num">04</span>AI inside Flows (only the flow-automation pieces)</h2>
-        <p>Three categories of AI now live <em>inside the flow builder itself</em> — not adjacent tools:</p>
-        <ul>
-          <li><strong>Generative flow build (assistive) — Flows AI:</strong> describe the journey in plain English; Klaviyo constructs the trigger, conditional splits, delays, and message steps. Available on paid plans with 250+ active profiles.</li>
-          <li><strong>Autonomous flow setup — Marketing Agent (flow scope only):</strong> reads a brand's website and <em>automatically sets the "must-have" flows live</em> (welcome, abandoned cart, browse abandonment, post-purchase). An "optimize growth" loop (rolling out) continuously tests timing, creative, and offers inside live flows and applies winners.</li>
-          <li><strong>Predictive triggers &amp; splits:</strong> <em>Predicted CLV</em>, <em>predicted next-order date</em>, and <em>churn risk</em> are first-class entry conditions and split branches in any flow.</li>
-          <li><strong>Smart / Personalized Send Time:</strong> each flow message ships at the per-profile optimal time across channels.</li>
-          <li><strong>Channel Affinity:</strong> within a cross-channel flow, AI selects email vs. SMS vs. push per profile.</li>
+        <h2 style="margin-bottom: 6px;"><span class="num">04</span>AI inside Flows — the full flow-automation surface</h2>
+        <p>Every AI feature listed below is used <em>inside</em> the flow builder, in flow message steps, or to operate live flows — not adjacent tools.</p>
+
+        <p style="margin: 6px 0 2px;"><strong>1 · Build the flow (assistive &amp; autonomous)</strong></p>
+        <ul style="margin-top:2px;">
+          <li><strong>Flows AI:</strong> describe a journey in plain English; Klaviyo generates the trigger, conditional splits, delays, and message steps. Paid plans with 250+ active profiles.</li>
+          <li><strong>Marketing Agent (flow scope):</strong> reads the brand's website and <em>autonomously sets the "must-have" flows live</em> — welcome, abandoned cart, browse abandonment, post-purchase — in 3 clicks.</li>
         </ul>
-        <div class="chips">
-          <span class="chip warm">Assistive (build)</span>
-          <span class="chip warm">Predictive (target)</span>
-          <span class="chip warm">Autonomous (setup &amp; optimize)</span>
+
+        <p style="margin: 8px 0 2px;"><strong>2 · Target with AI (predictive triggers &amp; splits)</strong></p>
+        <ul style="margin-top:2px;">
+          <li><strong>Predicted next-order date</strong> as a flow trigger (replenishment / win-back timing).</li>
+          <li><strong>Predicted CLV</strong> as a split condition (VIP vs. non-VIP paths inside a flow).</li>
+          <li><strong>Churn risk</strong> as a flow filter / entry condition.</li>
+          <li><strong>Segments AI</strong>: AI-generated segments become flow triggers and audience filters.</li>
+        </ul>
+
+        <p style="margin: 8px 0 2px;"><strong>3 · Time &amp; channel inside the flow</strong></p>
+        <ul style="margin-top:2px;">
+          <li><strong>Smart / Personalized Send Time:</strong> each flow message ships at the per-profile optimal time, per channel.</li>
+          <li><strong>Channel Affinity:</strong> in a cross-channel flow, AI picks email vs. SMS vs. push per profile.</li>
+        </ul>
+
+        <p style="margin: 8px 0 2px;"><strong>4 · Generate the message inside flow steps</strong></p>
+        <ul style="margin-top:2px;">
+          <li><strong>AI subject-line generator</strong> in flow email steps.</li>
+          <li><strong>Image Remix:</strong> generative image edits inside the flow content editor (prompt-based variations of product hero images, etc.).</li>
+          <li><strong>AI product-recommendation blocks</strong> ("next best product," "products you may like") drop into any flow email/SMS as dynamic content.</li>
+        </ul>
+
+        <p style="margin: 8px 0 2px;"><strong>5 · Optimize live flows (autonomous)</strong></p>
+        <ul style="margin-top:2px;">
+          <li><strong>Marketing Agent — Optimize Growth (rolling out):</strong> continuously tests timing, creative, and offers <em>inside live flows</em> and auto-applies winners.</li>
+          <li><strong>Personalized Campaigns / Smart A/B:</strong> turns flow A/B tests from one-size-fits-all into per-profile variant selection.</li>
+          <li><strong>Auto-monitors:</strong> AI alerts on flow-level performance regressions (open, click, conversion) so you can protect revenue.</li>
+        </ul>
+
+        <div class="chips" style="margin-top:8px;">
+          <span class="chip warm">Build</span>
+          <span class="chip warm">Target</span>
+          <span class="chip warm">Time / Channel</span>
+          <span class="chip warm">Content</span>
+          <span class="chip warm">Optimize</span>
         </div>
       </div>
 
@@ -500,10 +530,10 @@
           </tr>
           <tr>
             <td><strong>AI in the flow canvas</strong></td>
-            <td><span class="dot good"></span>Flows AI (NL → full flow), autonomous flow setup via Marketing Agent, Channel Affinity, Smart Send Time, predictive triggers</td>
-            <td><span class="dot mid"></span>Subject-line / content assist; AI is largely outside the journey builder</td>
+            <td><span class="dot good"></span>10+ AI features <em>inside flows</em>: Flows AI (NL→flow), Marketing Agent (autonomous setup &amp; optimize), predictive triggers/splits, Smart Send Time, Channel Affinity, AI subject-lines, Image Remix, AI product recs, Personalized A/B, auto-monitors</td>
+            <td><span class="dot mid"></span>Subject-line / content assist; AI largely outside the journey builder</td>
             <td><span class="dot good"></span>Loomi AI for in-journey personalization &amp; experimentation</td>
-            <td>Klaviyo's AI ships <em>inside</em> the flow builder — generation, predictive splits, send-time, channel selection — not as adjacent tools.</td>
+            <td>Klaviyo's AI ships <em>across the full flow lifecycle</em> — build, target, time, content, optimize — not as adjacent tools.</td>
           </tr>
           <tr>
             <td><strong>Time-to-first-flow</strong></td>
