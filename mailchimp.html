@@ -800,6 +800,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="research">User Research</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="health">Product Health</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="prdaudit">PRD Audit</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="strategy">Strategy 6-Pager</button>
     </div>
     <div style="display:flex; gap:8px;">
       <a class="btn" href="index.html">→ Klaviyo</a>
@@ -6111,6 +6112,316 @@ Reactions: ack (1)"</p>
 </div><!-- /panel-prdaudit -->
 
 
+<!-- ============== STRATEGY 6-PAGER TAB (executive read: Arial 10, black/grey, tight) ============== -->
+<div class="tabpanel" id="panel-strategy" role="tabpanel">
+<style>
+  #panel-strategy { font-family: Arial, Helvetica, sans-serif; color: #000; font-size: 10pt; line-height: 1.3; }
+  #panel-strategy * { font-family: Arial, Helvetica, sans-serif !important; color: #000; }
+  #panel-strategy a { color: #000; text-decoration: underline; }
+  #panel-strategy .pg {
+    background: #fff; border: 1px solid #cfcfcf; box-shadow: none;
+    padding: 16pt 18pt; margin: 0 0 12pt 0; border-radius: 0;
+  }
+  #panel-strategy .doctitle {
+    font-size: 12pt; font-weight: bold; margin: 0 0 3pt 0; padding: 0; border: 0; background: none;
+  }
+  #panel-strategy .docmeta { font-size: 8.5pt; color: #555 !important; margin: 0 0 8pt 0; }
+  #panel-strategy .docmeta * { color: #555 !important; }
+  #panel-strategy h2, #panel-strategy h3 {
+    font-size: 10pt; font-weight: bold; margin: 8pt 0 2pt 0; padding: 0;
+    border: 0; background: none; letter-spacing: 0; line-height: 1.25;
+  }
+  #panel-strategy h2 .num { display: none; }
+  #panel-strategy p { font-size: 10pt; margin: 0 0 4pt 0; line-height: 1.3; }
+  #panel-strategy ul, #panel-strategy ol { margin: 1pt 0 6pt 0; padding-left: 16pt; }
+  #panel-strategy li { font-size: 10pt; margin: 0 0 1.5pt 0; line-height: 1.3; }
+  #panel-strategy strong { font-weight: bold; }
+  #panel-strategy em { font-style: italic; }
+  #panel-strategy table {
+    width: 100%; border: 1px solid #999; border-collapse: collapse;
+    font-size: 9pt; margin: 3pt 0 6pt 0;
+  }
+  #panel-strategy th, #panel-strategy td {
+    border: 1px solid #999; padding: 3pt 5pt; vertical-align: top; line-height: 1.25;
+    background: #fff; text-align: left;
+  }
+  #panel-strategy th { background: #ececec; font-weight: bold; font-size: 9pt; text-transform: none; letter-spacing: 0; color: #000; }
+  #panel-strategy tr:nth-child(even) td { background: #f7f7f7; }
+  #panel-strategy .source { font-size: 8.5pt; color: #555 !important; margin-top: 8pt; }
+  #panel-strategy .source * { color: #555 !important; }
+  #panel-strategy code { font-family: Arial, Helvetica, sans-serif !important; font-size: 9pt; background: #f0f0f0; padding: 0 2pt; }
+  @media print {
+    #panel-strategy .pg { border: none; padding: 0; margin: 0 0 0.4in 0; page-break-after: always; }
+    #panel-strategy .pg:last-of-type { page-break-after: auto; }
+  }
+</style>
+
+<!-- PAGE 1 -->
+<section class="pg" aria-label="Strategy Page 1">
+  <div class="doctitle">Mailchimp Automations &mdash; FY27 Strategy</div>
+  <div class="docmeta">Mailchimp standalone &middot; 6-page executive read &middot; Prepared May 2026 &middot; Author: PM, Mailchimp Automations</div>
+
+  <h2>Strategy question</h2>
+  <p>What is the boldest way Mailchimp Automations can deliver <strong>$20&ndash;32M of incremental ARR in FY27</strong> &mdash; the Automations share of Mailchimp's 5% standalone growth target?</p>
+
+  <h2>Financial anchor</h2>
+  <p>MC FY26 revenue baseline (planning scenario, Finance to confirm): $1.28&ndash;1.31B. A 5% FY27 lift = ~<strong>$65M incremental ARR</strong>. Automations is targeted to drive <strong>30&ndash;50% of that lift = $20&ndash;32M ARR</strong>; every initiative below is bounded against this number. <em>Note:</em> 5% sits at the lower bound of the FY27 corp template ($1.28B &rarr; $1.38&ndash;1.46B = +8&ndash;11%); see Page 6 critic-review point #8 for the trade.</p>
+
+  <h2>Customer problem (4 quantified gaps)</h2>
+  <ul>
+    <li><strong>Adoption gap.</strong> 84% of eligible customers have no active automation despite Automations being 2&times; more effective than bulk email and generating $616/mo attributed revenue per adopter (PRD source).</li>
+    <li><strong>Activation gap.</strong> Only 6.8% of new users turn on an automation in the first 30 days; CJB Activation rate sits at 33.6% (BigQuery <code>bi_aggregate.product_journey_monthly</code>, 89.4M rows, May 2025&ndash;Apr 2026).</li>
+    <li><strong>Retention gap.</strong> $53.5K/mo of HVC MRR is exposed to automation pain across 73 thematic issues (HVC Risk Map, 18mo Slack VoC + 38 UX research entries). Largest single exposure: Editor / UI Glitches in Journey Builder = $16,507/mo HVC.</li>
+    <li><strong>Revenue gap.</strong> $616/mo per adopter not earned by 84% of base. Free-plan adoption is structurally broken at 1.1% vs Standard 17.6% / Premium 32.1%.</li>
+  </ul>
+
+  <h2>Why this is winnable in FY27 (illustrative ceiling)</h2>
+  <p><em>Illustrative.</em> +1pp on the 16% active-automation rate across ~1M paid accounts &asymp; <strong>+10K incremental adopters</strong> &times; $616/mo &times; 12 &asymp; <strong>~$74M annualized revenue</strong> at full ramp. FY27 captures only a fraction (partial-year, conversion ramp, retention curve). The 5 pillars below convert a defensible slice of that ceiling into a <strong>$20&ndash;32M FY27 contribution</strong> &mdash; sequenced to (i) stop the bleeding immediately, (ii) close the named competitive gaps, then (iii) surpass competitors to become the leading omnichannel automation platform.</p>
+</section>
+
+<!-- PAGE 2 -->
+<section class="pg" aria-label="Strategy Page 2">
+
+  <h2>Vision</h2>
+  <p>Mailchimp Automations becomes the AI-native activation layer that turns Mailchimp's 1M+ paid customers from email senders into automated marketers &mdash; and contributes 30&ndash;50% of Mailchimp's FY27 5% growth target.</p>
+
+  <h2>Who we serve</h2>
+  <ul>
+    <li><strong>Primary.</strong> Transactional / DSB ecommerce, community, subscription. Mailchimp's core ICP and largest revenue contributor.</li>
+    <li><strong>Secondary.</strong> SMB Pro Serve standalone (legal, financial, advisory) &mdash; they use Mailchimp directly. Pro Serve via Customer Hub / Fusion is explicitly out of scope.</li>
+    <li><strong>Cohort focus.</strong> &lt;$299 FTU (where activation lift moves the needle); HVC ($299+) where churn risk is concentrated.</li>
+  </ul>
+
+  <h2>Right to win (3, defensible vs the named competitive set)</h2>
+  <ol>
+    <li><strong>1M+ paid install base.</strong> Roughly an order of magnitude larger than Klaviyo's customer base and ~100&times; Customer.io's; private agentic challengers (Auxia, Loops, Mailmodo) are smaller still. <em>Source:</em> public investor decks / 10-K filings as of CY2025; Mailchimp internal customer count. Largest SMB email-automation distribution moat in this segment.</li>
+    <li><strong>CJB momentum is real and growing.</strong> Established users +18.4% YoY; Activation rate +14.4pp YoY (BigQuery <em>bi_aggregate.product_journey_monthly</em>, May 2025&ndash;Apr 2026 vs prior 12mo). Among legacy ESPs &gt;$100M ARR with public usage data, we are the only one demonstrating positive YoY automation activation lift in this window.</li>
+    <li><strong>Intuit Assist + Freddie AI infra in production.</strong> Shared LLM/agent infra with QBO/TurboTax means our Automations team consumes capability rather than builds it. <em>Comparator (directional):</em> Shopify Sidekick and Klaviyo Marketing Agent each took multiple quarters to ship from announcement to GA; we expect to compress that timeline by leveraging shared components &mdash; to be validated against actual ship dates in program review.</li>
+  </ol>
+
+  <h2>Differentiation posture (the lead claim, the proof needed, the FY27 milestone)</h2>
+  <p style="font-size:8.5pt; color:#555 !important;">Lead claims below are framed as hypotheses to validate (bake-off / program review). Where Klaviyo or Shopify may remain ahead on a specific JTBD, that is named explicitly; this is not a blanket "we are better."</p>
+  <table>
+    <thead><tr><th style="width: 26%;">Competitor</th><th style="width: 12%;">Pillar</th><th>Lead claim &middot; where they may remain ahead &middot; FY27 proof needed</th></tr></thead>
+    <tbody>
+      <tr><td>Klaviyo Marketing Agent / Flows AI</td><td><strong>P4</strong></td><td><em>Breadth lead (hypothesis):</em> AI generation entry-points listed across 7 PRD surfaces vs Klaviyo's narrower agent placement today. <em>Klaviyo may remain ahead on:</em> autonomous sophistication on core agent JTBDs until our own M2/M3 evals land. <em>Proof:</em> bake-off vs Klaviyo Marketing Agent in Q3 FY26 with Mailchimp HVCs.</td></tr>
+      <tr><td>Shopify Sidekick</td><td><strong>P4 + P5</strong></td><td><em>Cross-channel + cross-platform lead:</em> WhatsApp/RCS/SMS automation alongside AI generation; Sidekick is email-only and Shopify-merchant-only. <em>Shopify may remain ahead on:</em> ecomm-data depth for Shopify-native merchants. <em>Proof:</em> non-Shopify merchant traction + cross-channel send-volume metric.</td></tr>
+      <tr><td>Customer.io</td><td><strong>P2 + P3</strong></td><td><em>Closer on trigger + segmentation depth for ecommerce-centric journeys</em> on a much larger SMB base. <em>Customer.io may remain ahead on:</em> Liquid templating + SaaS-technical / unlimited-event JTBDs (deferred per Roadmap F1/D8). <em>Proof:</em> trigger-count + adv-seg adoption parity in BigQuery by Q4 FY26.</td></tr>
+      <tr><td>Attentive (SMS-first)</td><td><strong>P5</strong></td><td><em>Reach lead:</em> SMS + WhatsApp + RCS surfaced inside automation flows on the 1M+ MC install base, at a lower entry-tier than Attentive's enterprise positioning. <em>Attentive may remain ahead on:</em> SMS conversion-rate craft for &gt;$3K/mo customers. <em>Proof:</em> SMS automation send rate + revenue/account in mid-market cohort.</td></tr>
+      <tr><td>Auxia (agentic-first, F500)</td><td><strong>P4</strong></td><td><em>Democratization lead:</em> agentic automation surfaced to SMB, not just F500. <em>Auxia may remain ahead on:</em> enterprise-grade orchestration depth. <em>Proof:</em> SMB AI-generated automation activation rate vs Auxia case-study claims.</td></tr>
+      <tr><td>Postscript (Shopify SMS)</td><td><strong>P5 + P2</strong></td><td><em>Default-platform lead:</em> SMS automation native inside MC vs separate Shopify-app integration. <em>Postscript may remain ahead on:</em> Shopify-native merchant retention. <em>Proof:</em> non-Postscript merchants choosing MC SMS automation.</td></tr>
+      <tr><td>Mailmodo / Loops.so (prompt-first / SaaS-native)</td><td><strong>P4 + P3</strong></td><td><em>Wedge defense:</em> prompt-first generation matches their UX bet; FTU activation lift removes their entry wedge. <em>They may remain ahead on:</em> prompt-quality polish on a smaller, focused base. <em>Proof:</em> M1 AI Skill turn-on rate &gt; 40% PRD target.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Proof points we can win</h2>
+  <ul>
+    <li>CJB Established users +18.4% YoY (BigQuery validated, 89.4M rows). Mailchimp's nearest legacy competitor net-flat over same window.</li>
+    <li>Activation rate +14.4pp YoY (recent UX work is moving the metric).</li>
+    <li>ECU (ecomm-connected) cohort already at 29.7% adoption &mdash; the upside ceiling is real.</li>
+    <li>Premium plan at 32.1% adoption &mdash; when value is surfaced clearly, it is adopted.</li>
+    <li>"It's just an email" PRD &#10003; approved with $74K FY26 lift (early proof).</li>
+    <li>AI Skill PRD: 16% &rarr; 22% adoption; 6.8% &rarr; 15% FTU turn-on (PRD-stated targets).</li>
+    <li>Mailchimp competitor on Trustpilot 1.8/5 (HVC Risk Map source); Mailchimp 2.7/5 &mdash; competitor brand decay is reversible by P1.</li>
+  </ul>
+</section>
+
+<!-- PAGE 3 -->
+<section class="pg" aria-label="Strategy Page 3">
+
+  <h2>Pillar rank-order logic</h2>
+  <p>Five pillars sequenced into three phases by four prioritization criteria. Each phase compounds on the prior.</p>
+  <table>
+    <thead><tr><th style="width: 5%;">#</th><th style="width: 18%;">Phase</th><th style="width: 21%;">Pillar</th><th>Why this rank</th><th style="width: 11%;">Time-to-impact</th></tr></thead>
+    <tbody>
+      <tr><td><strong>P1</strong></td><td><strong>Stop the bleeding</strong> (0&ndash;3mo)</td><td><strong>Quality &amp; Trust</strong></td><td>Targets ~50% of $53.5K/mo HVC MRR exposure (P1 FE/UX + P2 Eventbus jointly resolve Editor / Sending / Reporting root causes). Most fixes are shovel-ready (FE bug fixes, free-plan toggle). Without this, customers churn faster than we acquire.</td><td>Weeks</td></tr>
+      <tr><td><strong>P2</strong></td><td><strong>Build the foundation</strong> (0&ndash;6mo, &#8741; P1)</td><td><strong>Data Activation</strong></td><td>Closes the #1 named competitive gap (Klaviyo trigger depth). Eventbus migration is dependency for P3 + P4 + P5 and addresses root cause of $4.8K/mo Automations Not Sending.</td><td>Quarters</td></tr>
+      <tr><td><strong>P3</strong></td><td><strong>Light up install base</strong> (3&ndash;9mo)</td><td><strong>Activation Foundation</strong></td><td>With data + bugs fixed, lighting up FTU activation across 1M+ base = highest-leverage user impact. "It's just an email" PRD already approved.</td><td>Quarters</td></tr>
+      <tr><td><strong>P4</strong></td><td><strong>Move parity &rarr; LEAD</strong> (6&ndash;12mo)</td><td><strong>Agentic Marketing</strong></td><td>AI Skill across 7 surfaces &gt; Klaviyo's 1-surface. This is where we surpass &mdash; not match &mdash; competitors. Conversational Automations needs WhatsApp Public Beta (July 2026).</td><td>Half-year</td></tr>
+      <tr><td><strong>P5</strong></td><td><strong>Omnichannel leadership</strong> (9&ndash;18mo)</td><td><strong>Cross-Channel Reach</strong></td><td>WhatsApp + RCS + SMS + email in one canvas = THE leading omnichannel position. Requires P2 (data) + P4 (agentic infra). Final form makes us the omnichannel leader.</td><td>Year</td></tr>
+    </tbody>
+  </table>
+  <p><strong>Dependency &amp; value chain.</strong> P1 &#8741; P2 (different teams, both urgent) &rarr; P2 ships triggers + Eventbus &rarr; P3 unlocks &rarr; P4 requires P2 + P3 (surface coverage) &rarr; P5 requires P2 + P4. WhatsApp Public Beta (July 2026) is the natural deadline gate for P5.</p>
+
+  <h2>Prioritization scorecard (4 criteria &times; 5 pillars)</h2>
+  <table>
+    <thead><tr><th style="width: 22%;">Criterion</th><th>P1 Quality &amp; Trust</th><th>P2 Data Activation</th><th>P3 Activation Foundation</th><th>P4 Agentic Marketing</th><th>P5 Cross-Channel</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Immediate value unlock</strong></td><td>HIGH ($53.5K/mo HVC)</td><td>MED (Wix $3.9M sized)</td><td>HIGH (1M base &times; FTU lift)</td><td>MED (PRD +6pp adoption)</td><td>MED (SMS revenue lift)</td></tr>
+      <tr><td><strong>Closes competitive gap (depth, agent JTBD parity)</strong></td><td>LOW (defensive)</td><td>HIGH (Klaviyo trigger gap)</td><td>MED (surface coverage)</td><td>MATCH (Klaviyo agent JTBD: parity target by Q3 FY26)</td><td>MATCH (Attentive cross-channel reach, lower entry tier)</td></tr>
+      <tr><td><strong>Surpasses competitors (breadth, reach)</strong></td><td>LOW</td><td>MED (Customer.io seg depth on much-larger SMB base)</td><td>MED (multi-surface entry vs single-surface)</td><td>LEAD (entry-point breadth across 7 PRD surfaces; Sidekick is single-platform)</td><td>LEAD (cross-channel + cross-platform; no SMB-tier peer)</td></tr>
+      <tr><td><strong>Time-to-impact</strong></td><td>Weeks</td><td>Quarters</td><td>Quarters</td><td>Half-year</td><td>Year</td></tr>
+    </tbody>
+  </table>
+
+  <h2>P1 &middot; Quality &amp; Trust &nbsp;&middot;&nbsp; 0&ndash;3mo &nbsp;&middot;&nbsp; $2&ndash;4M ARR (retention save)</h2>
+  <p><strong>Initiatives</strong> (5 NEW PRDs needed, identified in PRD Audit): Free-plan adoption fix (1.1% &rarr; 5%+ via partial CJB on Free); Editor / UI Glitches fix (Journey Builder front-end); Reporting correctness (Sept 2025 attribution change ripple-effect); Frequency cap / suppression across flows (Klaviyo / Bloomreach parity); Per-step KPIs in journey builder (CTM escalation, P-level).</p>
+  <p><strong>Reason to believe.</strong> Editor UI Glitches alone = $16,507/mo HVC = ~$200K/yr HVC ARR retention save. Trustpilot 2.7/5 brand decay is reversible. Free-plan fix brings Free adoption toward Standard-tier order-of-magnitude (1.1% &rarr; 5%+ target; today's gap is ~16:1).</p>
+  <p><strong>Success metrics.</strong> Churn 40.2% &rarr; 35&ndash;37%; HVC MRR exposure -50% (P1 FE/UX share, jointly with P2 Eventbus on root-cause subset); free-plan adoption 1.1% &rarr; 5%+.</p>
+  <p><strong>Sized contribution.</strong> ~50% reduction in $53.5K/mo HVC MRR (~$320K/yr direct save) plus free-plan adoption uplift on the under-served Free base = <strong>$2&ndash;4M ARR</strong>. <em>Note:</em> the free-plan portion (~$2M of the range) is the most speculative input &mdash; flagged in critic-review #4.</p>
+  <p><strong>Why P1.</strong> Largest pile of immediate-value, low-risk wins. Most fixes ship in weeks, not quarters. Stops the churn that is actively eroding our base TODAY.</p>
+
+  <h2>P2 &middot; Data Activation &nbsp;&middot;&nbsp; 0&ndash;6mo (&#8741; P1) &nbsp;&middot;&nbsp; $4&ndash;7M ARR</h2>
+  <p><strong>Initiatives.</strong> 12 new triggers (Klaviyo parity, in development); Advanced Segmentation in CJB ($600K ARR PRD-sized); Wix Bookings data activation ($3.9M ARR PRD-sized); Discount code trigger (~$500K annualized recurring per PRD; validate before commit); Segments-as-trigger; <strong>Event-driven processing modernization (Monolith &rarr; Eventbus) &mdash; CRITICAL DEPENDENCY for P3, P4, P5; also root-cause mitigator for the Editor / Sending / Reporting subset of P1 HVC themes</strong>.</p>
+  <p><strong>Reason to believe.</strong> 5 PRD-sized initiatives sum to $5M+. HVC Risk Map shows $10K/mo HVC pain on Event-Property Access alone. Klaviyo trigger gap is the #1 named competitive complaint in Voice of Customer.</p>
+  <p><strong>Success metrics.</strong> Triggers activated/account; % accounts using &gt;2 triggers; Eventbus latency.</p>
+  <p><strong>Sized contribution.</strong> PRD-stated figures sum to ~$5M; assume 80% achievement = <strong>$4&ndash;7M ARR</strong>.</p>
+  <p><strong>Why P2.</strong> Foundational. Closes the #1 named competitive gap. Eventbus migration unblocks P3, P4, P5 &mdash; without it, the rest of the strategy is gated.</p>
+</section>
+
+<!-- PAGE 4 -->
+<section class="pg" aria-label="Strategy Page 4">
+
+  <h2>P3 &middot; Activation Foundation &nbsp;&middot;&nbsp; 3&ndash;9mo &nbsp;&middot;&nbsp; $5&ndash;8M ARR</h2>
+  <p><strong>Initiatives</strong> (from PRD Audit, MC-standalone only): "It's just an email" welcome flow (&#10003; PRD approved, $74K stated); Trigger modal redesign (in design, mixed user testing); ICP-focused automations homepage iteration (Bayesian test). <em>Note:</em> AI Skill M1 sits in P4 sizing only &mdash; P3 ARR is non-AI activation UX exclusively (no double-count).</p>
+  <p><strong>Reason to believe.</strong> PRD-stated lifts. +14.4pp YoY activation already in market without these initiatives &mdash; proves the product responds to UX work. FTU 30-day turn-on baseline is 6.8% so any lift is meaningful. 1M+ install base means small % lifts compound to large absolute numbers.</p>
+  <p><strong>Success metrics.</strong> FTU 30-day turn-on 6.8% &rarr; 15%+ (non-AI portion); Activation rate 33.6% &rarr; 42%+; Time-to-first-value (median signup &rarr; first automation).</p>
+  <p><strong>Sized contribution.</strong> Non-AI activation UX delta only. 5K&ndash;15K incremental adopters/month &times; $616/mo &times; FY27 retention curve = <strong>$5&ndash;8M ARR</strong>.</p>
+  <p><strong>Why P3.</strong> Once P2 fills the trigger library and P1 stops bug-driven churn, lighting up FTU activation = the highest-leverage non-AI user impact at scale.</p>
+
+  <h2>P4 &middot; Agentic Marketing &nbsp;&middot;&nbsp; 6&ndash;12mo &nbsp;&middot;&nbsp; $6&ndash;10M ARR (largest single bet)</h2>
+  <p><strong>Initiatives.</strong> AI Automation Generation Skill (M1 + M2 + M3) &mdash; PRD-stated 16% &rarr; 22% adoption lift, available across 7 surfaces per PRD (onboarding, homepage, post-import, post-form, post-send, chat, ecomm coach); Conversational Automations (WhatsApp Public Beta dependency, Q4 FY26); Single modernized Automations builder (Q4 FY26 &rarr; Q1 FY27).</p>
+  <p><strong>Reason to believe.</strong> Klaviyo Marketing Agent + Shopify Sidekick are eating share (Emerging Threats tab). Auxia raised ~$23.5M Series A on agentic-first model &mdash; market-validated thesis. 51% of marketers cite "limited time" (User Research) &mdash; AI directly removes that barrier.</p>
+  <p><strong>Success metrics.</strong> AI-generated create-to-turn-on rate &gt;40% (PRD target); % of FTUs touching AI generation entry point &gt;30% (PRD target); Adoption 16% &rarr; 22%.</p>
+  <p><strong>Sized contribution.</strong> AI Skill is the largest single bet and holds <em>all</em> AI-attributable ARR (no overlap with P3). Gross opportunity: 6pp adoption lift &times; ~1M paid &times; $616/mo &times; 12 &asymp; <strong>~$443M annualized at full ramp</strong>. FY27 captures only a slice: <em>partial-year shipping</em> (M1 onboarding Q3 FY26, full set by Q1 FY27), <em>cohort coverage</em> (only ~50% of base on AI surfaces in FY27), <em>conversion ramp</em>, and <em>retention curve</em>. Net FY27 realization &asymp; <strong>$6&ndash;10M ARR</strong>; full-ramp effect lands in FY28.</p>
+  <p><strong>Why P4.</strong> Where we surpass &mdash; not just match &mdash; competitors on agentic <em>breadth</em>. Entry-point coverage across 7 PRD surfaces, combined with the 1M+ install base, compounds faster than any startup challenger. Match-vs-lead on autonomous-agent <em>depth</em> is to be validated in Q3 FY26 bake-off (see Page 2 differentiation table).</p>
+</section>
+
+<!-- PAGE 5 -->
+<section class="pg" aria-label="Strategy Page 5">
+
+  <h2>P5 &middot; Cross-Channel Reach &nbsp;&middot;&nbsp; 9&ndash;18mo &nbsp;&middot;&nbsp; $3&ndash;5M ARR (omnichannel leader)</h2>
+  <p><strong>Initiatives.</strong> WhatsApp send action in automations (Q3); Conversational Automations (channel-multiplier overlap with P4); Dynamic ecomm content in SMS; Bypass SMS quiet hours; Send-time optimization in automations (Klaviyo Smart Send Time parity); A/B testing in automations.</p>
+  <p><strong>Reason to believe.</strong> Klaviyo wins cross-channel canvas (Emerging Threats tab). Attentive raised $864M on SMS-first but charges $3K/mo entry &mdash; unreachable for SMB. Mailchimp's H2 FY26 KR is "Increase SMS Revenue to $23.75M" &mdash; automations are the leverage. Klaviyo Smart Send Time benchmark: +10&ndash;30% open/click lift.</p>
+  <p><strong>Success metrics.</strong> % automations using &gt;1 channel; SMS automation send rate; A/B test usage rate.</p>
+  <p><strong>Sized contribution.</strong> SMS revenue lift for automation-using cohort + send-time optimization revenue lift = <strong>$3&ndash;5M ARR</strong>.</p>
+  <p><strong>Why P5.</strong> The final form. WhatsApp + RCS + SMS + email in one agentic canvas = THE leading omnichannel automation platform. Requires P2 (event-driven processing) + P4 (agentic infra). WhatsApp Public Beta (July 2026) is the natural deadline gate.</p>
+
+  <h2>How we win (synthesis)</h2>
+  <ul>
+    <li><strong>The math.</strong> P1&ndash;P5 sized contributions sum to <strong>$20&ndash;34M ARR</strong>. Upper band ($34M) sits ~$2M above the $32M anchor as intentional headroom against execution risk; pillars are <strong>not strictly additive</strong> on AI &mdash; all AI-attributable ARR is held in P4 only (P3 = non-AI activation UX).</li>
+    <li><strong>Initiative coverage.</strong> 22 PRD-Audit initiatives cover P2&ndash;P4. 5 NEW PRDs needed for P1.</li>
+    <li><strong>Critical dependency chain.</strong> P1 stops the bleeding &rarr; P2 builds the foundation (Eventbus is also a P1 root-cause mitigator on Editor / Sending / Reporting) &rarr; P3 lights up the install base &rarr; P4 moves us to LEAD on agentic breadth &rarr; P5 establishes omnichannel leadership.</li>
+  </ul>
+
+  <h2>Customer pain coverage matrix (every named pain mapped to a pillar)</h2>
+  <table>
+    <thead><tr><th style="width: 58%;">Customer pain area &middot; source: HVC Risk Map / User Research / PRD Audit</th><th>Pillar that resolves it</th></tr></thead>
+    <tbody>
+      <tr><td colspan="2" style="background:#dcdcdc; font-weight:bold;">BUGS</td></tr>
+      <tr><td>Editor / UI Glitches in Journey Builder ($16.5K/mo HVC)</td><td><strong>P1</strong> (FE refactor) + <strong>P2</strong> (event-driven processing root cause)</td></tr>
+      <tr><td>Reporting / Stats Wrong on Automations ($6.2K/mo HVC)</td><td><strong>P1</strong> (UI/attribution fix) + <strong>P2</strong> (Eventbus, where pipeline-latency causes mis-reporting)</td></tr>
+      <tr><td>Per-Step KPIs Not Viewable ($5.1K/mo HVC)</td><td><strong>P1</strong> (analytics surface in builder)</td></tr>
+      <tr><td>Automations Not Sending / Delivery Failures ($4.8K/mo HVC)</td><td><strong>P2</strong> (Monolith &rarr; Eventbus migration)</td></tr>
+      <tr><td>Migration Bugs (Classic &rarr; CJB) ($1.7K/mo HVC)</td><td><strong>P4</strong> (single modernized builder consolidates legacy)</td></tr>
+      <tr><td>Pop-ups / Forms Not Feeding Flows</td><td><strong>P3</strong> (post-form publish surface)</td></tr>
+      <tr><td colspan="2" style="background:#dcdcdc; font-weight:bold;">BARRIERS</td></tr>
+      <tr><td>Slow / Confusing Journey Builder UX ($5.2K/mo HVC)</td><td><strong>P3</strong> ("It's just an email" + trigger modal redesign)</td></tr>
+      <tr><td>Premature 'Turn On' Before Content Ready ($6K/mo HVC)</td><td><strong>P3</strong> (content-completion gating)</td></tr>
+      <tr><td>Trigger Selection Not Searchable ($5K/mo HVC)</td><td><strong>P3</strong> (trigger modal redesign)</td></tr>
+      <tr><td>Loading Spinner Misleading on Trigger Panels ($5K/mo HVC)</td><td><strong>P3</strong> (UX fix)</td></tr>
+      <tr><td>Edit Panel Blocks Flow Canvas ($5K/mo HVC)</td><td><strong>P4</strong> (single modernized builder)</td></tr>
+      <tr><td>Flow Templates Have No Search ($5K/mo HVC)</td><td><strong>P3</strong> (template-gallery refresh)</td></tr>
+      <tr><td>Flow Deactivation Behavior Unclear ($5K/mo HVC)</td><td><strong>P1</strong> (UX clarity fix)</td></tr>
+      <tr><td>'Wait for Trigger' Rule Pass-Through Confusing ($5K/mo HVC)</td><td><strong>P3</strong> (UX clarity)</td></tr>
+      <tr><td>CJB Still Uses Legacy Editor ($1.3K/mo HVC)</td><td><strong>P4</strong> (single modernized builder, eliminates legacy)</td></tr>
+      <tr><td>No Frequency Cap / Suppression Across Flows ($2.6K/mo HVC)</td><td><strong>P1</strong> (NEW PRD needed)</td></tr>
+      <tr><td>Cannot Rename Automations or Steps from Canvas ($2K/mo HVC)</td><td><strong>P4</strong> (single modernized builder)</td></tr>
+      <tr><td>Sharing / Export / Permissions on Flow Reports ($2.8K/mo HVC)</td><td><strong>P1</strong> (collaboration fix)</td></tr>
+      <tr><td colspan="2" style="background:#dcdcdc; font-weight:bold;">MISSING FEATURES (NEEDS)</td></tr>
+      <tr><td>Event-Property Access in Flow Branches/Emails ($10K/mo HVC)</td><td><strong>P2</strong> (Advanced Segmentation in CJB)</td></tr>
+      <tr><td>Conversational AI / Generative Copy in Journeys ($6.5K/mo HVC)</td><td><strong>P4</strong> (AI Automation Generation Skill)</td></tr>
+      <tr><td>Brand Kit Not Applied to Automation Email Templates ($5K/mo HVC)</td><td><strong>P4</strong> (AI Skill uses Brand Kit)</td></tr>
+      <tr><td>Better Templates / Pre-built Flows ($5K/mo HVC)</td><td><strong>P3</strong> (ICP-focused homepage + AI Skill)</td></tr>
+      <tr><td>Advanced Segmentation in CJB ($3K/mo HVC)</td><td><strong>P2</strong> (PRD-sized at $600K ARR)</td></tr>
+      <tr><td>Cross-Channel: SMS / Push / WhatsApp in Journey ($1.2K/mo HVC)</td><td><strong>P5</strong> (WhatsApp send + Conversational + dynamic SMS)</td></tr>
+      <tr><td>Date-Relative / Recurring / Event-Based Triggers ($1.7K/mo HVC)</td><td><strong>P2</strong> (12 new triggers + Wix Bookings)</td></tr>
+      <tr><td>Flow-Specific Email Templates ($5K/mo HVC)</td><td><strong>P3</strong> (ICP templates)</td></tr>
+      <tr><td>Operational Workflow / Tag Automation ($5K/mo HVC)</td><td><strong>P2</strong> (Segments-as-trigger + event-driven)</td></tr>
+      <tr><td>Better A/B Testing in Automations ($455/mo HVC)</td><td><strong>P5</strong> (A/B testing in automations)</td></tr>
+      <tr><td>Central A/B Experiment Repository ($2K/mo HVC)</td><td><strong>P5</strong></td></tr>
+      <tr><td colspan="2" style="background:#dcdcdc; font-weight:bold;">STRATEGIC GAPS (PRD AUDIT)</td></tr>
+      <tr><td>Free-plan adoption is structurally broken (1.1% vs Standard 17.6%)</td><td><strong>P1</strong> (NEW PRD)</td></tr>
+      <tr><td><strong>TOTAL HVC MRR EXPOSURE COVERED BY THE 5 PILLARS</strong></td><td><strong>&gt;$53K/mo of named thematic exposure mapped; remainder &lt;$500/mo per theme routed to platform team</strong></td></tr>
+    </tbody>
+  </table>
+  <p>Items not covered are 1-of-1 themes with &lt;$500/mo HVC exposure (e.g., 2FA / Login disrupting workflow, Drip Inbox breaking real inbox) &mdash; flagged as platform-team-owned, not Automations-team.</p>
+</section>
+
+<!-- PAGE 6 -->
+<section class="pg" aria-label="Strategy Page 6">
+
+  <h2>Leadership position summary &mdash; one FY27 proof milestone per pillar</h2>
+  <p style="font-size:8.5pt; color:#555 !important;">Lead claim detail and "where they may remain ahead" lives in Page 2 differentiation table; this is the executable proof line.</p>
+  <table>
+    <thead><tr><th style="width: 6%;">Rank</th><th style="width: 22%;">Pillar</th><th>Lead claim &middot; FY27 proof milestone (what we will demonstrate)</th></tr></thead>
+    <tbody>
+      <tr><td><strong>P1</strong></td><td>Quality &amp; Trust</td><td>Brand-trust recovery: Trustpilot &uarr; from 2.7/5; HVC MRR exposure &darr; 50%; Free-plan adoption 1.1% &rarr; 5%+.</td></tr>
+      <tr><td><strong>P2</strong></td><td>Data Activation</td><td>Trigger-count parity vs Klaviyo (12 new shipped); Eventbus migration GA; Adv Seg + Wix Bookings live by Q4 FY26.</td></tr>
+      <tr><td><strong>P3</strong></td><td>Activation Foundation</td><td>FTU 30-day turn-on 6.8% &rarr; 15%+; CJB Activation 33.6% &rarr; 42%+; "It's just an email" $74K PRD lift validated.</td></tr>
+      <tr><td><strong>P4</strong></td><td>Agentic Marketing</td><td>AI Skill on &gt;3 surfaces shipped; create-to-turn-on rate &gt;40%; Q3 FY26 bake-off vs Klaviyo Marketing Agent on shared HVC tasks.</td></tr>
+      <tr><td><strong>P5</strong></td><td>Cross-Channel Reach</td><td>WhatsApp send action GA post Public-Beta (Jul 2026); &gt;X% of automations using &gt;1 channel; SMS automation revenue toward H2 FY26 KR ($23.75M).</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Success metrics (4-tier, Intuit-style)</h2>
+  <ul>
+    <li><strong>L0 North Star.</strong> Automations contribution to MC FY27 revenue growth = $20&ndash;32M ARR (30&ndash;50% of $65M target).</li>
+    <li><strong>L1 Outcome.</strong> Active automation adoption (16% &rarr; 22%+); CJB Established users; Activation rate; Churn rate.</li>
+    <li><strong>L2 Behaviors.</strong> FTU 30-day turn-on (6.8% &rarr; 15%+); AI-generated create-to-turn-on (&gt;40%); Time-to-first-value.</li>
+    <li><strong>L3 Operational.</strong> Triggers activated/account; channels/flow; Eventbus latency; automation send volume.</li>
+  </ul>
+
+  <h2>FY27 outcomes (Mailchimp standalone)</h2>
+  <table>
+    <thead><tr><th>Metric</th><th>Today</th><th>FY27 target</th><th>&Delta;</th></tr></thead>
+    <tbody>
+      <tr><td>CJB Established users</td><td>132K</td><td>155&ndash;170K</td><td>+18&ndash;28%</td></tr>
+      <tr><td>Activation rate</td><td>33.6%</td><td>42&ndash;48%</td><td>+8&ndash;14pp</td></tr>
+      <tr><td>Churn rate</td><td>40.2%</td><td>35&ndash;37%</td><td>-3 to -5pp</td></tr>
+      <tr><td>Revenue per adopter (per month)</td><td>$616</td><td>$700&ndash;800</td><td>+14 to +30%</td></tr>
+      <tr><td><strong>Automations ARR contribution</strong></td><td>&mdash;</td><td><strong>$20&ndash;32M</strong></td><td><strong>30&ndash;50% of $65M target</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Tradeoffs &amp; constraints</h2>
+  <ul>
+    <li><strong>Engineering capacity.</strong> "Automations team roadmap is already full" (Conversational Automations Product Review). Mitigated by P1 (FE) &#8741; P2 (BE) parallelization.</li>
+    <li><strong>Sequencing.</strong> Eventbus is owned by P2 and gates P3, P4, P5; it is also a root-cause mitigator for a subset of P1 HVC themes (Editor / Sending / Reporting). P1 still ships FE and policy fixes in parallel without waiting on Eventbus.</li>
+    <li><strong>Build vs buy.</strong> P5 cross-channel &mdash; partner with Postscript / Attentive vs build SMS depth in-house.</li>
+    <li><strong>Rank-order risk.</strong> P1-first delays the visible "wow" of P4. Mitigation: start P1 + P2 + P3 in parallel with P4 discovery so P4 ships in the 6&ndash;12mo window.</li>
+  </ul>
+
+  <h2>Cutline / deprioritization</h2>
+  <ul>
+    <li><strong>De-prioritize.</strong> Auto-on transactional automations (1-of-4 evidence in PRD Audit).</li>
+    <li><strong>Re-validate sizing before commit.</strong> Discount code trigger ($500K MRR claim); Wix Bookings ($3.9M ARR claim).</li>
+    <li><strong>Out of scope (per direction).</strong> Anything Fusion / QBO / L2C / Customer Hub / Marketing Hub Pkg 1 + 3.</li>
+  </ul>
+
+  <h2>Critic agent self-review (open risks &amp; trade-offs)</h2>
+  <ol>
+    <li>$20&ndash;32M sizing: math is shown; the 30&ndash;50% Automations-share assumption is a leadership decision, not a measured number.</li>
+    <li>FY26 baseline ($1.28&ndash;1.31B) is a planning-scenario reference, not Finance-confirmed in this doc. Anchor needs corp-plan harmonization before commit.</li>
+    <li>5% MC growth target is the LOWER bound of the FY27 template ($1.28B &rarr; $1.38&ndash;1.46B = +8&ndash;11%); chosen deliberately to anchor Automations to a defensible floor.</li>
+    <li>PRD-stated lifts (16% &rarr; 22% AI Skill adoption) are distinguished from industry benchmarks (Klaviyo Smart Send Time +10&ndash;30%) and from this doc's projections; uneven labeling fixed in this revision.</li>
+    <li>CJB +18.4% YoY may include carry-over momentum &mdash; not all attributable to new initiatives.</li>
+    <li>Free-plan adoption fix sized contribution is the most speculative (~$2M of P1's $2&ndash;4M range).</li>
+    <li>P3 vs P4 AI Skill double-count resolved: <strong>all</strong> AI-attributable ARR sits in P4; P3 is non-AI activation UX only.</li>
+    <li>P4 back-solve closed: gross opportunity ~$443M annualized at full ramp; FY27 captures $6&ndash;10M due to partial-year shipping, cohort coverage, conversion ramp, retention curve. Full-ramp lands FY28.</li>
+    <li>Engineering capacity isn't quantified. Rank-order partially mitigates by allowing P1 (FE) &#8741; P2 (BE).</li>
+    <li>Auxia / Klaviyo competitive baseline is ~6mo old &mdash; may already be partially closed; bake-off in Q3 FY26 (P4) is the calibration moment.</li>
+    <li>Fusion / QBO / L2C / Customer Hub removal eliminates a real competitive edge against Klaviyo (cross-Intuit financial truth) <em>and</em> a commercial expansion vector (Marketing Hub Pkg cross-sell). Explicit strategic trade per direction; revisit in FY28 planning.</li>
+    <li>P1-first risks looking "defensive" to leadership &mdash; counter-balanced with P3&ndash;P5 vision in same narrative.</li>
+    <li>WhatsApp Public Beta (July 2026) is dependency for P5; if it slips, P5 timeline slips even with P1&ndash;P4 on track.</li>
+    <li>Pillar ARR ranges sum to $20&ndash;34M. Upper $34M sits ~$2M above $32M anchor as intentional headroom; pillars are <strong>not strictly additive</strong> on AI overlap (resolved by partition rule above).</li>
+    <li>Competitive "we lead" claims are framed as hypotheses with named "where they may remain ahead" (Page 2 table) and explicit FY27 proof milestones (Page 6 leadership summary).</li>
+  </ol>
+
+  <p class="source"><strong>Sources reviewed:</strong> 9 PRDs (Sep '25&ndash;Apr '26): FY26_MC Automations Roadmap, Q2 Planning Comprehensive List, AI Automation Generation Skill PRD, AI Auto Gen Skill Engineering PRD, "It's just an email" welcome flow PRD (&#10003; Approved), Mailchimp H2 FY26 Product Priorities &amp; Roadmapping (&times;2), Automations triggers design review, Conversational Automations Product Review (Apr 15, 2026). 7 in-document tabs: Executive Brief, Voice of Customer, Roadmap to Win, HVC Risk Map (73 themes, $53.5K/mo HVC MRR exposure, 18-month Slack VoC + 38 UX research entries), User Research (50 HeyMarvin videos / 21 customer briefs / 13 product barriers), Product Health (BigQuery <code>bi_aggregate.product_journey_monthly</code>, 89.4M rows, May 2025&ndash;Apr 2026 vs prior 12mo), PRD Audit. Emerging Threats analysis (6 bespoke flow startups + Klaviyo / Shopify gap analysis). All "+/-" projections are pre-launch directional ranges; not measured outcomes.</p>
+</section>
+
+</div><!-- /panel-strategy -->
 
 
 </div>
@@ -6139,7 +6450,7 @@ Reactions: ack (1)"</p>
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','roadmap','hvcrisk','research','health','prdaudit'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','roadmap','hvcrisk','research','health','prdaudit','strategy'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
