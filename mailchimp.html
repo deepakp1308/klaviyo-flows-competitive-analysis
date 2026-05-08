@@ -797,6 +797,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="sentiment">Voice of Customer</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="roadmap">Roadmap to Win</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="hvcrisk">HVC Risk Map</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="navsearchrisk">Nav/Search Risk</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="research">User Research</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="health">Product Health</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="prdaudit">PRD Audit</button>
@@ -4695,6 +4696,1816 @@ Reactions: ack (1)"</p>
   </section>
 
 </div><!-- /panel-hvcrisk -->
+
+
+<!-- ================================================ -->
+<!-- =========== NAV/SEARCH RISK MAP TAB ============ -->
+<!-- ================================================ -->
+<div class="tabpanel" id="panel-navsearchrisk" role="tabpanel">
+
+  <!-- Risk Page 1 -->
+  <section class="page" aria-label="Nav/Search Risk Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Nav / Wayfinding / Search Risk Map · Mailchimp HVC VoC (18-month read)</div>
+        <h1>What's at <em style="color:#B91C1C;">risk</em> in our HVC base — bugs, barriers &amp; missing features in <em>Navigation, Wayfinding &amp; Search</em></h1>
+        <div class="subtitle">Slack-only VoC analysis (no UX research overlay) of <strong>96 negative HVC VoCs</strong> from <strong>96 HVC customers</strong> (every Slack VoC in this scope is from an HVC ≥$299/mo MRR — by channel design). <strong>$70,009/mo HVC MRR</strong> is exposed to nav/search pain (≈ <strong>$840,108/yr</strong> at full-churn). Re-prioritized across 3 phases by HVC MRR-at-risk.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Window:</strong> Nov 8, 2024 → May 8, 2026 (~18 mo)</div>
+        <div><strong>Sources:</strong> 3 Slack channels (#hvc_feedback, #mc-hvc-escalations, #mc-feedback-summary)</div>
+        <div><strong>Filter:</strong> nav / wayfinding / search keywords + negative sentiment + HVC ($299+/mo)</div>
+        <div><strong>Page:</strong> 1 of 3</div>
+      </div>
+    </header>
+
+    <!-- KPIs -->
+    <div class="kpi-row" style="margin-bottom: 18px;">
+      <div class="kpi"><div class="v">96</div><div class="l">Nav/Search/Wayfinding negative VoCs (post-dedup, post-false-positive filter, from <strong>2,747</strong> raw Slack messages)</div></div>
+      <div class="kpi"><div class="v">96</div><div class="l">HVC customers ($299+/mo MRR) raising nav/search pain — <strong>100%</strong> of in-scope VoCs (channel selection guarantee)</div></div>
+      <div class="kpi"><div class="v">$70,009</div><div class="l"><strong>Monthly HVC MRR</strong> exposed to nav/search/wayfinding pain (~<strong>$840,108/yr</strong> at full-churn risk)</div></div>
+      <div class="kpi"><div class="v">29</div><div class="l">Distinct themes: <strong>7 bugs</strong> · <strong>17 barriers</strong> · <strong>5 missing features</strong></div></div>
+    </div>
+
+    <!-- Top-line takeaways -->
+    <div class="card tinted" style="margin-bottom: 14px;">
+      <h2 style="margin-top:0;"><span class="num">★</span>Headline read</h2>
+      <ul style="margin-bottom:0;">
+        <li><strong>Barriers dominate</strong> (17 themes / 66 VoCs / $54,364/mo) — the product mostly works but constantly blocks the customer's path. Bugs are fewer (7 themes / 14 VoCs / $11,210/mo) but include high-MRR P0-style breakages (cross-product redirect, browser-specific dropdown failures, stale search index).</li>
+        <li><strong>"I can't find X" is the single dominant pattern.</strong> Templates, audiences, demographics, billing tools, segments, sign-up forms, A/B testing, landing pages, drafts, the marketing inbox, and even the "talk to a human" path are all the subject of repeated wayfinding complaints — not one feature, the entire <em>information architecture</em> is the problem.</li>
+        <li><strong>Frequent UI reorganizations are themselves a top barrier.</strong> 12 VoCs explicitly complain that Mailchimp keeps changing nav/menu without notice — including the verbatim "Stop changing things" — driving repeat ramp cost on long-tenure HVCs.</li>
+        <li><strong>Search is structurally weak.</strong> No global search; per-page search is the model; multiple bugs (stale index, cross-audience contact search removed, hard-bounce list has no search at all, pagination breaks the search filter); and 15 VoCs explicitly request global/advanced/in-context search features that don't exist.</li>
+      </ul>
+    </div>
+
+    <!-- BUGS section -->
+    <h2><span class="num">A</span><span class="risk-pill bug">BUGS</span>What's broken — every specific nav/search/wayfinding bug, by theme, with the actual customer quotes</h2>
+    <p style="margin-bottom: 12px;">Bugs in this section are issues where nav, menu, dropdown, search, or wayfinding behavior is malfunctioning — wrong page, broken redirect, search returns nothing, dropdown won't open, browser-specific failure. Listed in HVC MRR-at-risk order. Every individual VoC is shown so you can see the exact customer quote, MRR, CSAT, and Slack permalink.</p>
+    <div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">1</span>
+      <span class="risk-pill bug">BUG</span>
+      <span class="theme-name">Search Returns Wrong / No Results / Stale Index</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>6</strong> VoCs · <strong>6</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$4,378</strong>/mo HVC MRR at risk</span>
+      <span class="theme-stat churn"><strong>1</strong> churn</span>
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"Mailchimp is offering a search drop-down menu, when having opened a segment ( URL:...&lt;http://mailchimp.com/audience/contacts...|mailchimp.com/audience/contacts...&gt;) to search for segments. However, even so this drop-down is showing many results, it does not show all! and also seem not to mention that not all results are included and might need to be &quot;free&quot; searched separately ..."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 79675358</strong> · <strong>$1,553/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-07-25</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1753449511784649" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Website is difficult to use in general. Email templates also miss the mark and are difficult to build; I can&#x27;t make cool gradient backgrounds or more engaging content without creating a full image, and we don&#x27;t want to have all-image emails. Not being able to embed ANYTHING in the emails is also frustrating. People do not want to click out of the page they are on in increasing rates, so forcing them to leave the email (and leave the content we want them to finish looking at,…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 135161626</strong> · <strong>$815/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span><span class="churn-pill">CHURN</span>
+ · <span class="voc-date">2026-03-11</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1773258458408579" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Simple request: pull a report between two specific dates for a specified audience group. Nothing comes up and when it does it&#x27;s a mess.
+
+It&#x27;s a really poor experience."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 157186834</strong> · <strong>$750/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2026-01-19</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1768881376895499" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"It takes so long sometimes after I&#x27;ve entered a contact to then be able to search that contact again. Often I have to log out completely and log back in, otherwise it can take up to 30 minutes to be able to search (through email address). It&#x27;s incredibly frustrating. 
+I also find that the filter often doesn&#x27;t work at a basic level - I ask for contacts in Brazil and it gives me contacts including USA. So I can only do it reliably through advanced filter, which is more time-con…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 40194705</strong> · <strong>$535/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2025-06-26</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1750930019680069" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Your search function used to be great but something has changed and it isn&#x27;t finding the contacts I am looking for so I have to trudge through the audience."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 20553819</strong> · <strong>$410/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2026-03-10</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1773146804909889" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"I was trying to make a segment with only states, but the way the contacts uploaded from QuickBooks, the entire address uploaded into the address box and didn&#x27;t break the address up into state, city, zip, etc. So when i search for states, nothing comes up"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 230874726</strong> · <strong>$315/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-06-18</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1750264069544679" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">2</span>
+      <span class="risk-pill bug">BUG</span>
+      <span class="theme-name">Cross-Product Navigation Broken (Mandrill / Transactional)</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> VoCs · <strong>1</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$3,123</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"I&#x27;m blocked from rotating a Mandrill token because I&#x27;m redirect to Mailchimp after authenticate and can&#x27;t find my stuff here. You are delaying and causing problems during an active incident. Shame on you"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 37814913</strong> · <strong>$3,123/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2026-04-01</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1775045814579209" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">3</span>
+      <span class="risk-pill bug">BUG</span>
+      <span class="theme-name">Other Nav/Search Bugs</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>3</strong> VoCs · <strong>3</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$1,804</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"Your entire product is terrible and inconvenient. Every time I use it, I howl like a mandrake.
+Why can&#x27;t I see how many emails were sent in total, broken down by day? Why does the report only include one-time emails? And to figure out how many emails were sent from Jorneys, I have to go through ALL Jorneys, individual emails, and individual days? What the hell were you thinking when you developed this???"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 1971477</strong> · <strong>$770/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-12-09</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1765289046782979" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Sick of your iterative changes that don&#x27;t seem to improve the experience, just make it necessary to relearn where to find things, how to do things. Slow down. Make necessary, thoughtful changes. Think of your customers. Or maybe most of your customers just shove the task on today&#x27;s intern, so continuity doesn&#x27;t matter."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 101161274</strong> · <strong>$609/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2026-02-03</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770139048313139" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"On the Campaigns page, when I filter for Audience: All Audiences, it shows the loading animation, but the list actually never loads. It used to work without problems, but now the All audiences list never loads. 
+
+&lt;|*FS Session Replay*&gt;
+_______________________________________
+Thread: 5 replies (latest: 2025-06-16 12:18:50 PDT)
+Reactions: ack (1)"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 15204039</strong> · <strong>$425/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2025-06-16</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1750100107079779" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">4</span>
+      <span class="risk-pill bug">BUG</span>
+      <span class="theme-name">Cross-Audience Contact Search Removed / Broken</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> VoCs · <strong>1</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$456</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"is there really no longer a way to search for a contact across audiences?"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 101161274</strong> · <strong>$456/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2026-04-28</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1777383791126509" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">5</span>
+      <span class="risk-pill bug">BUG</span>
+      <span class="theme-name">Browser-Specific Nav Broken (Safari / Firefox dropdowns)</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> VoCs · <strong>1</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$576</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"Cannot access many drop down menus on the website on Safari. I am trying to access billing history, clicking on the menu item does not function for that selection, or many others. This has been an ongoing issue. Usually I can get around it by using the AI assistant, however, the assistant no longer comes up when clicking on its menu item after clicking the &quot;?&quot; button at the bottom right of the window."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 16397283</strong> · <strong>$576/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-06-20</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1750433261944009" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">6</span>
+      <span class="risk-pill bug">BUG</span>
+      <span class="theme-name">Pagination Loses Search/Filter Context (campaigns, contacts)</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> VoCs · <strong>1</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$410</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"with updates it has made it difficult to search pages except 1 at a time. Also when in contacts now cannot go to next in segment without going back. Previously a few months ago was much easier. My opinion updates are now taking longer to complete a task."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 44685081</strong> · <strong>$410/mo MRR</strong>
+<span class="prs-pill">PRS 9</span>
+ · <span class="voc-date">2025-09-12</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1757717877439179" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">7</span>
+      <span class="risk-pill bug">BUG</span>
+      <span class="theme-name">Navigation Links Broken / 404 / Dead-End</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> VoCs · <strong>1</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$310</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"I can&#x27;t access my Audience stats, I keep getting redirected to my profile page. Also your support links are either broken, send me to my Profile page again, or have no response."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 230696002</strong> · <strong>$310/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-08-06</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1754468946547509" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+
+    <p style="margin-top: 16px;"><strong>Bugs section MRR exposure:</strong> $11,210/mo across 14 HVC instances (14 VoCs across 7 bug themes).</p>
+
+    <p class="source">
+      <strong>Slack source channels (full 18-month read):</strong>
+      <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB">#hvc_feedback</a> (C051Y4H98VB · 2,588 msgs · May 2025–May 2026);
+      <a href="https://intuit-teams.slack.com/archives/C095FJ3SQF4">#mc-hvc-escalations</a> (C095FJ3SQF4 · 184 msgs · Jul 2025–May 2026);
+      <a href="https://intuit-teams.slack.com/archives/C06EVEZ4ZTQ">#mc-feedback-summary</a> (C06EVEZ4ZTQ · 254 msgs · Nov 2024–Mar 2026).
+      Filter: nav / wayfinding / search keywords + negative sentiment (CSAT Terrible/Poor, PRS≤4, criticality P0/P1, or negative-keyword in feedback). Each Slack VoC links to its original message. Auto-summary aggregator messages from the Gen-VoCalyzer bot are filtered out (they aggregate dozens of customer voices without per-customer attribution).
+    </p>
+  </section>
+
+  <!-- Risk Page 2 -->
+  <section class="page" aria-label="Nav/Search Risk Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Nav / Wayfinding / Search Risk Map (cont.)</div>
+        <h1>Barriers &amp; missing features — what stops or limits HVC operators</h1>
+        <div class="subtitle">Same source data, scoped to barriers (the product works as designed but blocks the workflow — bad IA, hidden critical features, frequent reorgs, no global search) and missing features (capability gaps customers explicitly ask for).</div>
+      </div>
+      <div class="meta">
+        <div><strong>Window:</strong> Nov 8, 2024 → May 8, 2026</div>
+        <div><strong>Channels:</strong> 3 Slack channels (HVC-only)</div>
+        <div><strong>Filter:</strong> nav/wayfinding/search + HVC ($299+/mo)</div>
+        <div><strong>Page:</strong> 2 of 3</div>
+      </div>
+    </header>
+
+    <!-- BARRIERS -->
+    <h2><span class="num">B</span><span class="risk-pill barrier">BARRIERS</span>What's blocking customers — every specific nav/search barrier, by theme, with the actual customer quotes</h2>
+    <p style="margin-bottom: 12px;">Barriers are areas where the product works as designed but actively blocks the customer's workflow — features moved without notice, settings buried 4 menus deep, audience/segment/tag filtering too restrictive, mass-delete missing, billing tools hidden, bulk-action UX broken, sidebar real estate hijacked by promotional banners. Listed in HVC MRR-at-risk order.</p>
+    <div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">1</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Other Nav/Search Barriers</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>16</strong> VoCs · <strong>16</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$12,030</strong>/mo HVC MRR at risk</span>
+      <span class="theme-stat churn"><strong>1</strong> churn</span>
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"You got rid of Replicate. Thats idiotic"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 4044074</strong> · <strong>$1,981/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-12-25</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1766681419706199" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"I just tried (a few times!) to send a test mail to just one recipient at the time out of two ... and so far, it happened that only one recipient has received the mail, but 3 x times each time (rather than just once)! and the other recipient did not receive any at all!
+
+When investigating the issue, I saw that you (MAILCHIMP) seem to pre-fill certain other recipients (but not OPENLY DISPLAYED!) underneath WITHOUT having those explicitly being selected for the test email by the…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 79675358</strong> · <strong>$1,553/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-09-20</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1758435632163029" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"I can&#x27;t find a solution for the articles"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 2908530</strong> · <strong>$1,380/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-07-07</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1751904486702079" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"1. Always get logged off in the middle of working on something if I switch to another program or tab 2. Scheduled emails consistently don&#x27;t send out 3. Difficult to search for things in past campaigns if it&#x27;s not part of the email title"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 160069382</strong> · <strong>$1,025/mo MRR</strong>
+<span class="csat-pill csat-good">Good</span><span class="churn-pill">CHURN</span>
+ · <span class="voc-date">2025-08-15</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1755291965727139" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Where are the easy to use templates for sending simple email campaigns? This is brutal."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 55282505</strong> · <strong>$770/mo MRR</strong>
+<span class="prs-pill">PRS 0</span>
+ · <span class="voc-date">2025-07-07</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1751928882090319" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"overall, mc makes it easy to create and send emails, but there are some limiting factors that make it frustrating. I can only &quot;stack&quot; web link buttons - I can&#x27;t find a way to put two or three side by side. Our account is supposed to have default font settings, but many times those don&#x27;t work and I have to create settings manually (color, size, font, style, etc.)."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 53786041</strong> · <strong>$750/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2025-08-27</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1756316561929179" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"It is difficult to find audiences when on a dropdown list as they are not listed alphabetically. 
+
+&lt;|*FS Session Replay*&gt;
+____________________________________
+Thread: 13 replies (latest: 2025-12-03 11:54:47 PST)"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 16806959</strong> · <strong>$655/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2025-12-02</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1764686025031109" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Please fix the marketing dashboard. I see the new layout, which is fine, but it&#x27;s still glitching and pulling incorrect or incomplete data. Some campaigns are showing that they were delivered to 0 contacts, which just isn&#x27;t true. If I go to their individual campaign report, thousands were sent. 
+
+Example is the c3.December2025.MonthlyPolicyNewsletter.a/b - which was sent to 28,244 recipients (and successfully delivered). In the marketing dashboard, it&#x27;s showing as delivered t…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 53673665</strong> · <strong>$609/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2026-02-11</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770842706815629" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Unable to print a report - the only thing that appears it a hamburger icon and the &quot;feedback&quot; button."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 12262255</strong> · <strong>$582/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-12-17</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1766001039161379" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Making search function better. Allow for embedding of videos"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 9141705</strong> · <strong>$514/mo MRR</strong>
+<span class="prs-pill">PRS 2</span>
+ · <span class="voc-date">2025-07-03</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1751567161483089" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"The change you made to automatically CHECK the box for &quot; *FNAME|* merge tags are enabled, so recipients will see their first name in the To field.&quot; &lt;--- is really pissing me off. I don&#x27;t appreciate this change at all. And I cannot find any way to change this default setting back to the way it was."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 23087347</strong> · <strong>$425/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2025-09-23</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1758638568025469" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"I can&#x27;t find A/B testing only multivariate"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 25691887</strong> · <strong>$402/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-11-07</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1762559876559519" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"hard to see where to go for changes."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 17268303</strong> · <strong>$376/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-05-23</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1747997551405499" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"to many graphics and hard to find stuff"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 65673829</strong> · <strong>$340/mo MRR</strong>
+<span class="prs-pill">PRS 0</span>
+ · <span class="voc-date">2025-08-09</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1754748476771609" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"It&#x27;s really hard to find the landing pages you have created for audiences. It is not intuitive to use."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 4296854</strong> · <strong>$340/mo MRR</strong>
+<span class="prs-pill">PRS 2</span>
+ · <span class="voc-date">2025-07-31</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1753949638566449" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"it&#x27;s been very clunky since I started using it and remains clunky. it&#x27;s still hard to find my inbox for some reason"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 156758370</strong> · <strong>$328/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2026-03-13</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1773439432092819" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">2</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Tag / Segment Filter &amp; Sort Limitations</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>6</strong> VoCs · <strong>6</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$6,422</strong>/mo HVC MRR at risk</span>
+      <span class="theme-stat churn"><strong>1</strong> churn</span>
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"When using the &quot;Sort by&quot; filter for &quot;Sort by name&quot; on the segments overview, it puts the order by default descending rather than ascending, which seems not intuitive to me ... However, the main point is that when opening (using) a segment after having selected the &quot;Name&quot; filter and going back to the segment overview that the initially selected &quot;Sort by Name&quot; filter is replaced through by the default value (by Date) not keeping the selected preference from before, which might…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 79675358</strong> · <strong>$1,553/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-08-11</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1754899419716469" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Need an option to find people who aren&#x27;t tagged WITHOUT having to create a filter for every single tag"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 64245969</strong> · <strong>$1,530/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-08-26</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1756222737364679" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"I&#x27;m trying to archive a contact on a particular list / segment, but every time I search for her on that audience segment, it brings her up on the all of the lists that she is on, and I&#x27;m unable to archive her, I can only unsubscribe her. I always have this challenge, and sometimes I figure it out but then next time I find myself back in the same confusing roundabout. It&#x27;s very frustrating. If I search for someone while I&#x27;m in a particular audience for a newsletter, I ought to…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 62166433</strong> · <strong>$1,407/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-05-05</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1746471946226239" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Why is it still not possible to sort contacts by column attributes once they have been filtered by tag (for example)? I&#x27;m sure you know how easy it is these days to build more functional tables. A list of 8000+ contacts without the ability to intelligently review them is useless.
+
+Why did you guys stop developing this software? Rearranging the navigation every couple years doesn&#x27;t count."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 42511425</strong> · <strong>$1,274/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-07-14</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1752539570588169" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"I&#x27;m working on an RSS fed email, and trying to find the segment I created for this campaign and it is not available. The drop down &quot;Select from your segments or tags&quot; only populates my tags. Segments are not included, nor is there a way to switch. The functionality is broken and I have to find an alternative solution."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 202723026</strong> · <strong>$350/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span><span class="churn-pill">CHURN</span>
+ · <span class="voc-date">2025-11-26</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1764185409834769" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"There should be a more efficient way to group tags and filter audiences by those groups. The current functionality feels limited and makes what should be a simple process unnecessarily time-consuming.
+
+Right now, filtering audiences requires selecting individual tags or building combinations one at a time, which can take far longer than it should—especially when working with larger audiences or more detailed segmentation.
+
+It is also surprising that the filter menus do not al…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 58134513</strong> · <strong>$308/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2026-04-29</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1777480454793559" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">3</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Help / Live Chat / Human Contact Hidden</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>7</strong> VoCs · <strong>7</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$5,568</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"Cannot find anywhere that lets me talk to a human"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 239457934</strong> · <strong>$1,788/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-09-24</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1758724427236799" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Mandrill is broken and I can&#x27;t find support anywhere even though we&#x27;re a paying customer"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 31575995</strong> · <strong>$1,700/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-10-21</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1761075100553449" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"provide customer support 
+
+the chat function is essentially useless and i can&#x27;t find an email/phone number to contact"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 76247542</strong> · <strong>$804/mo MRR</strong>
+<span class="prs-pill">PRS 0</span>
+ · <span class="voc-date">2026-01-17</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1768676821499529" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Need to speak to someone.  Can&#x27;t find a way to reach out."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 155845894</strong> · <strong>$346/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-12-22</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1766423250838949" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"- hard to track links in email without setting up UTMS in separate app
+- selecting audience with multiple tags is annoying - I need to work out if i can create a merged tax
+- are there clear tutorials available on automating and using AI?
+- earlier in year i sued chat pot, told i needed help desk, help desk not available , left message - don&#x27;t recall follow up.
+- help isn&#x27;t great - can&#x27;t find what i need. i tend to google how to do something or use chat gpt for solutions"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 112829926</strong> · <strong>$310/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2026-03-13</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1773395225152139" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"All of my saved templates have disappeared and i can&#x27;t find them or get any help finding them!"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 139777037</strong> · <strong>$310/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2026-02-18</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1771444653634929" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"The Support team is taking almost an hour to know and provide a solution and i cant find the supporting idea and time is very senstive cause im stuck and my automation flow is not working"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 192598718</strong> · <strong>$310/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-09-16</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1758015131806009" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">4</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Templates / Saved Templates Hard to Locate</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>5</strong> VoCs · <strong>5</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$5,505</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"Search function is useless when you run multiple campaigns all in the same campaign list. Hard to find the templates I need each week. Also the preview function always shows elements that have been deleted from the email."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 159893326</strong> · <strong>$3,975/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-08-28</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1756383797820579" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"I can&#x27;t find my templates. I&#x27;m part of an organization, and several people use Mailchimp, but I do infrequently, and navigation to something as straightforward as templates ... well, I can&#x27;t find them. Grrr."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 149221714</strong> · <strong>$455/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-07-22</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1753205868874699" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Absolutely hate where you&#x27;ve put Email templates. Plus now I have to search for old ones because it doesn&#x27;t list them by which ones I&#x27;ve used most recently. Thanks to your stupid update I now have to go through two extra steps to access the templates I need to edit, including a keyword search so I don&#x27;t have to scroll through 4 or 5 pages of previous templates. You suck!"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 46716313</strong> · <strong>$425/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2025-09-15</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1757994552035009" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"I have a saved template for the EAAC newsletter.  Each time I need to edit it, it is difficult to find.  I don&#x27;t want to create another template, just use the existing one.  I usually try to find answers on Youtube because I find the written instructions that I find online don&#x27;t always display/refer to  the same page I am using.
+
+I end up replicating newsletters instead of working from the template.  That works but over time there is a lot invisible formatting that seems to a…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 104908190</strong> · <strong>$350/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-07-21</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1753138874066799" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Why can&#x27;t I access my saved templates when creating a Landing Page? And why is the design suite older than that for the email campaign creation?"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 44528705</strong> · <strong>$300/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-09-24</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1758736842870529" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">5</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Critical Features Buried Deep in Menu Hierarchy</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>4</strong> VoCs · <strong>4</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$4,052</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"Your new reporting sections is awful. It requires so many clicks and selections. 
+
+Not to mention that I now can&#x27;t filter by a campaign name. We have to click and click. This is just not a good experience."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 149472166</strong> · <strong>$1,440/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2026-04-10</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1775856675625369" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Please, please allow us to set account-level defaults for the campaign tracking settings - especially the e-commerce tracking option. Right now one of our integrations (an events ticketing platform) is causing &quot;E-commerce link tracking&quot; to default to ON. As a result, a blank merge field (&quot;[LIST_EMAIL_ID]&quot;) is showing up in our URLs and breaking all of our links. 
+
+We can toggle &quot;E-commerce link tracking&quot; OFF for each campaign, but this is a recipe for failure. It&#x27;s easy to fo…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 93379</strong> · <strong>$978/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2026-02-13</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1771011209547449" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Clicks aren&#x27;t appearing on our latest campaign 20260312_NA_NL. It says 0 clicks for a campaign that went out to 140k emails."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 6453466</strong> · <strong>$880/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2026-03-16</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1773691565160859" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"The feature &quot;Replicate Segment&quot; seems not to work on one of the existing segments. Clicking the button seems not to do anything on this particular segment, whereas the functionality seems to work on all the other ones, which get replicated after a while.
+
+There seems to be a flaw that under certain circumstances, the &quot;Replicate Segment&quot; generation functionality does not work.
+
+This particular segment had been adjusted a short period of time before. Not sure if related since o…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 79675358</strong> · <strong>$754/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-11-23</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1763897486745669" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">6</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Frequent UI / Nav Changes (regression complaints)</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>5</strong> VoCs · <strong>5</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$4,235</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"I find Mailchimp to be rather stuck. Limited improvements over the years. I&#x27;m wedded to it because it&#x27;s where my audience is stored and it doubles as a CRM. However, as we scale it&#x27;s becoming clunkier and I would expect far more improvements given the size of intuit"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 63166133</strong> · <strong>$1,325/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2025-10-30</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1761838950425079" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Why has the magnifying glass search filter disappeared from the from the view contacts page? I am constantly data cleansing to archive staff members who have left the organisation and this is yet another change for the sake of changing something."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 19768815</strong> · <strong>$1,125/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-05-20</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1747783714492929" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Sign up form editing settings has become very difficult to find, should be Form &gt; Edit settings (Signup form
+Signup “thank you” page
+Opt-in confirmation email
+Confirmation “thank you” page
+Final welcome email)"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 52100497</strong> · <strong>$1,075/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2026-04-06</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1775471937916049" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Stop changing things. You make it increasingly more difficult to navigate by constantly changing and updating things. It&#x27;s just made navigation take longer by increasing clicks to accomplish the same things."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 75979162</strong> · <strong>$410/mo MRR</strong>
+<span class="prs-pill">PRS 7</span>
+ · <span class="voc-date">2025-06-03</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1748967666436319" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Your features and completely inconsistent. One day it works this way, the next day I can&#x27;t find that feature again."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 59825577</strong> · <strong>$300/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-08-14</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1755195247004209" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">7</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Critical Features Moved / UI Reorgs Without Notice</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>7</strong> VoCs · <strong>7</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$4,108</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"It used to be easy for me to see how I created a segmented audience using tags. Then it got more difficult, when the segmented audience name was changed to mysterious things like &quot;Targeted contacts 324.&quot; 
+
+After a while I figured out that I could click the little pencil icon to review the tags I used to create an audience. 
+
+NOW, I get a weird error message when I try to do this. And I get sent to this page: &lt;https://mailchimp.com/help/language-settings-preferences/&gt;
+
+It&#x27;s he…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 3736674</strong> · <strong>$1,480/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-08-04</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1754356673932459" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Where did the home dashboard go for audience?????? I used that a lot. I don&#x27;t care about conversions as im not selling anytthing. You took away the tool i use for a tool i do not need/want. I liked having the percentages from where my audience came from, i liked seeing  the demographics etc etc. Bring that back."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 72810638</strong> · <strong>$800/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2026-03-05</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1772721743789509" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"in the past i used the code of the newsletter in the code your own space and it worked; now even if i use the same process to create a template, it shows me some black labels with but now if i save it as template and then try to send it it is showing me this in the mailer editor: Editing disabled: Duplicate mc: edit ID. 
+
+Why did you change the earlier Code Your own? It was the only reason I used Mailchimp!"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 43359921</strong> · <strong>$410/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-10-01</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1759307572231009" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Can you please bring back the &quot;view new contacts&quot; button that appeared after adding new contacts. 
+&quot;Email new contacts&quot; is not helpful"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 5718970</strong> · <strong>$361/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-12-15</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1765815123202289" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"It&#x27;s getting worse and worse - loosing hours of work. Bring back the reliability. Used to be a platform I could trust but not any more. 
+
+&lt;|*FS Session Replay*&gt;"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 72900</strong> · <strong>$361/mo MRR</strong>
+<span class="prs-pill">PRS 1</span>
+ · <span class="voc-date">2025-12-08</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1765190277696649" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Bring back the last screen after a campaign is sent, that tells you how many subscribers are in that audience. We used to have it and then it was &quot;improved.&quot; For whom, I wonder?"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 12712703</strong> · <strong>$350/mo MRR</strong>
+<span class="prs-pill">PRS 8</span>
+ · <span class="voc-date">2026-05-05</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1778021970307029" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"When creating a campaign, it used to be easy to return to adding content blocks. Now, there doesn&#x27;t seem to be an easy or intuitive way to exit the current block and add another. Why the change for the worse?"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 139659209</strong> · <strong>$346/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-08-22</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1755876803551059" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">8</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Account / Billing / Plan Tools Hidden</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>3</strong> VoCs · <strong>3</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$2,079</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"Can&#x27;t find bill estimate tool where you can change amount of contacts and see an indication of monthly cost."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 18871867</strong> · <strong>$877/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2025-09-28</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1759099922710469" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"The pricing plan overview page seems not so user-friendly on desktop (on OS + Firefox at least) since the scroll window for the included features is cut off kind of and only displayed in a small corridor."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 79675358</strong> · <strong>$754/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-12-10</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1765383284275739" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"I am trying to upgrade my billing plan to 30 001 - 40 000 audience with Standard plan (354€/mth) but the system jams and gives me a blank screen when i press &quot;upgrade now&quot; Therefore I am unable to do the upgrade. Same thing happened when I pressed the Premium plan."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 172717385</strong> · <strong>$448/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2025-10-21</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1761037727901209" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">9</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Audience / List / Segment Navigation Broken</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>4</strong> VoCs · <strong>4</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$1,945</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"Audiences aren&#x27;t listed alphabetically so hard to find the one you&#x27;re looking for. Can&#x27;t get the boxes to always display properly (some spread across the screen, some don&#x27;t). Can&#x27;t add more than two columns. Alt text disappears if you edit an image. 
+
+&lt;|*FS Session Replay*&gt;"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 16806959</strong> · <strong>$655/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2025-09-18</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1758188399443199" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"I was viewing a contact and clicked on the name of a campaign they were sent to see what parameters were used that included this particular person on the mailing list. There is no way to see who was sent the campaign from the campaign view! I have to back to the list of &quot;All campaigns&quot; and hunt for the campaign I just had open to see the target audience in the summary table. Why is this information not in the campaign view? (I&#x27;m also disappointed by the lack of details when a…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 193866350</strong> · <strong>$455/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2026-02-13</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1771018356625999" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"where is the horizontal scroll bar to see the columns on the right side of the screen? I cna&#x27;t see email marketing status etc. without them, and I&#x27;m using a 27&quot; monitor! You have really messed up the Audience and Segments screens and functions! Please restore."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 26874743</strong> · <strong>$425/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-10-04</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1759614062068039" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"navigation and editing the audience is not so user-friendly, too much scrolling up and down. The left and right"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 94807965</strong> · <strong>$410/mo MRR</strong>
+<span class="prs-pill">PRS 2</span>
+ · <span class="voc-date">2025-07-04</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1751639710355379" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">10</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Confusing Naming / Labels (Audience vs List, etc.)</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> VoCs · <strong>1</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$1,771</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"Uncertain what has been going on lately but reports often dont show data, then they do later, names and labels change to numeric values instead of the names and back without any idea why. Looking at my custom report I can search for last 7 days volume and most of the sends I can see in campaign reports dont show up. Very confusing lately."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 75889982</strong> · <strong>$1,771/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-12-08</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1765236278754969" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">11</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Sign-up / Embed Form Navigation Issues</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> VoCs · <strong>1</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$1,208</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"Why aren&#x27;t Sign Up forms linked in the nav still?
+
+Hate is a strong word, but I hate the navigation through Mailchimp it is really poor. Every time I want to find a sign up form I have to Google where to find it."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 28096255</strong> · <strong>$1,208/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-06-17</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1750155298224409" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">12</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Navigate Back to Drafts / In-Progress Work Difficult</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> VoCs · <strong>1</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$1,102</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"Navigation is difficult to get back to the editing page of a draft email.  I also cannot find the optimization tool for the email."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 111748066</strong> · <strong>$1,102/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-06-30</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1751310962051039" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">13</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Reports / Demographics / Segments Hard to Locate</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>2</strong> VoCs · <strong>2</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$945</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"Impossible to find reporting on audience segments."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 25950327</strong> · <strong>$605/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2025-09-15</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1757961895065529" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"i cant find demographics, age, by country, by industry"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 138383693</strong> · <strong>$340/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2026-04-06</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1775491043768299" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">14</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Bulk Actions / Mass Delete Hidden</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> VoCs · <strong>1</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$534</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"The site is awkward. We&#x27;re getting spam/scam signups and I can&#x27;t find a way to mass delete them, nor can I find a way to simply block them from re-joining."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 101871466</strong> · <strong>$534/mo MRR</strong>
+<span class="prs-pill">PRS 1</span>
+ · <span class="voc-date">2026-01-26</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1769444163336479" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">15</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Promotional / Success-Manager Modules Hijack Sidebar</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> VoCs · <strong>1</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$425</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"There is no way to close the &quot;time sensitive&quot; message at the bottom of the left-hand menu.  It is taking up half of the left-hand menu and making navigation unnecessarily difficult.  I do not want to connect with a &quot;success manager&quot; and resent having what is an ad block part of my menu. There should be a way to close the message."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 90612113</strong> · <strong>$425/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2026-01-14</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1768451754872829" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">16</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Cannot Search Within Hard-Bounce / Subscriber Lists</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> VoCs · <strong>1</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$383</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"I need to find a particular recipient in the list of hard bounces and there is no search feature. I just have to keep clicking the right and left carrot buttons to get there. Experience with mailchimp has been awful so far."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 242426326</strong> · <strong>$383/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-10-20</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1760994183841069" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">17</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Help / Support / Docs Hidden or Hard to Reach</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> VoCs · <strong>1</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$382</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"better support, finding information on how to do things. i have to ask copilot becasue I cant find within Mailchimp"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 112829926</strong> · <strong>$382/mo MRR</strong>
+<span class="prs-pill">PRS 4</span>
+ · <span class="voc-date">2026-04-27</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1777306579760599" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+
+    <p style="margin-top: 16px; margin-bottom: 18px;"><strong>Barriers MRR exposure:</strong> $54,364/mo across 66 HVC instances (66 VoCs across 17 barrier themes).</p>
+
+    <!-- MISSING -->
+    <h2><span class="num">C</span><span class="risk-pill missing">MISSING</span>What customers are asking for — every specific request, by theme, with the actual customer quotes</h2>
+    <p style="margin-bottom: 12px;">Missing-feature themes are explicit asks for nav/search capabilities Mailchimp doesn't ship today — global search, command-palette/quick-switcher, segment folders, archived-contact search, multi-select filter, etc. Listed in HVC MRR-at-risk order.</p>
+    <div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">1</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Other Missing Nav/Search Features</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>12</strong> VoCs · <strong>12</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$10,746</strong>/mo HVC MRR at risk</span>
+      <span class="theme-stat churn"><strong>5</strong> churn</span>
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"I can&#x27;t find what I need"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 232981058</strong> · <strong>$2,850/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-08-12</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1755027807709949" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"When using the &quot;Review segment&quot; functionality on the segment builder, results are coming up but the window screen is displayed a bit scrolled down, exactly that much that you cannot see the &quot;Back&quot; button anymore! (at least on my Mac laptop), which caused me to use the &quot;Cancel&quot; or &quot;Use segment&quot; buttons since those were the ones visible, even so I wanted to adjust my current segmentation again.
+Also the &quot;Review segment&quot; button seems to disappear after having used it even so it…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 79675358</strong> · <strong>$1,553/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span><span class="churn-pill">CHURN</span>
+ · <span class="voc-date">2025-07-28</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1753693439030069" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"I need to create a new audience, and I&#x27;ve been clicking around and cannot find the option. Why is this not super-easy and obvious?"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 79093418</strong> · <strong>$1,320/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-07-08</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1752019074943849" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"yes, basically everything. Needs to be more like klaviyo - it is hard to a/b test. Have to continually clock into sections and can see all the preview information, inability to have grids that don’t stack on mobile... very unused friendly."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 155790686</strong> · <strong>$1,010/mo MRR</strong>
+<span class="prs-pill">PRS 0</span><span class="churn-pill">CHURN</span>
+ · <span class="voc-date">2025-05-08</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1746717420883619" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"When I&#x27;m on the all contacts page and change between audiences, I try to search for a segment in the segment dropdown, and pretty consistently I have to refresh in order for it to show the segment I want even if I type out the segment name in its entirety. 
+
+Separate note: It&#x27;s very annoying and distracting that the &quot;Intuit Mailchimp&quot; logo keeps flashing while I&#x27;m trying my feedback in the Feedback box that appears from the side tag. No need for that to be animated at all imo…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 144910246</strong> · <strong>$871/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2025-05-23</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1748018490532669" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"A personal address was attached to the footer of my email campagin.  I do not know why or how.  I need that to never happen again and I can&#x27;t even figure out how to ensure that never happens again becuase I can&#x27;t find an edit option for the footer.  It did not show when I was building the newletter.  I recognixe the footer said it would include some details, but I had no inkling you would pull a personal address to include. IU&#x27;d love to completly recall the newsletter but can…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 38471549</strong> · <strong>$655/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-10-28</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1761698801343179" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Former email developer for Intuit &amp; web developer here. UX is great, very approachable. Email builder is really well done. I appreciate being able to set styles email-wide.  Thank you for adding easy subject line a/b testing. 
+1. Would like a responsive preview pane, 2 set widths for Mobile &amp; desktop aren&#x27;t necessarily reflective of how it will look
+2. Would like a better comment section. (Like Litmus&#x27;)
+A. Pinpoint specific section that should be edited. 
+B. The emails that I…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 164653130</strong> · <strong>$535/mo MRR</strong>
+<span class="csat-pill csat-good">Good</span><span class="churn-pill">CHURN</span>
+ · <span class="voc-date">2025-12-18</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1766081046423769" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Dear Mailchimp Support Team,
+
+I am writing to report an urgent issue preventing me from logging into my Mailchimp account.
+
+My Account Details:
+
+Account Username/Email: &lt;mailto:info@cafemag.bg|info@cafemag.bg&gt;
+
+Account Name: &lt;http://cafemag.bg|cafemag.bg&gt;
+
+The Problem:
+
+I am unable to complete the two-factor authentication (2FA) process required to access my account.
+
+I successfully enter my login credentials (username and password).
+
+I am redirected to the page for phone num…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 61882809</strong> · <strong>$510/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-11-26</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1764191601214209" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"In general the UI/UX is bad because you have toooo many features and make everything a landing page to sell a service or feature... I&#x27;ve been with mailchimp over a decade ... I should have to click through 3 layers of navigation to get to something... I want work on a form... I have to click on Forms &gt; Other Forms &gt;. all Forms &gt;  then finally the form I want &gt; Form Checklist &gt; Edit Content  ... That&#x27;s ridiculous. It s cognitive load that has me using Brevo more now than mailc…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 4757165</strong> · <strong>$410/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span><span class="churn-pill">CHURN</span>
+ · <span class="voc-date">2026-02-01</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1769963282512059" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"trying to build segements and can;t find how/ what I need to do."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 112829926</strong> · <strong>$382/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2026-04-22</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1776870292444709" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Please make the SEND NOW as a default setting when sending a newsletter.
+It is a hidden, not visible step, which many of the users forget to click. 
+Because issues then arise, the sender thinks that the newsletter is send, while it is not.
+It&#x27;s not a logical step. It is not even user-friendly. If I want to schedule something, I go and schedule the thing. But no one is going to double click send now, when i go clicking the main send.
+Or at least show a popup message when click…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 93895937</strong> · <strong>$350/mo MRR</strong>
+<span class="csat-pill csat-good">Good</span><span class="churn-pill">CHURN</span>
+ · <span class="voc-date">2025-07-10</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1752139377647569" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Formerly, you had a very handy feature that would allow me to import a new audience, then within my campaign, I could select signup source&gt;import&gt; then quickly and easily select the import from a dropdown menu. That option was removed in your latest update. It was a feature I used almost weekly to welcome new subscribers, and it was so useful and convenient. With the latest upgrade, you&#x27;ve eliminated this option. When I contacted tech support, they sent me the new steps, whic…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 75091974</strong> · <strong>$300/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2026-02-27</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1772232184835009" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">2</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Segment Search &amp; Folder Organization</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> VoCs · <strong>1</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$1,950</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"Segment improvements:
+- Ability to add folders or a way to group segments. Currently it is all in one blob. 
+- Ability to search segments"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 36485481</strong> · <strong>$1,950/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-06-11</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1749656224467179" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">3</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Search Across Archived / Hidden Contacts</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> VoCs · <strong>1</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$1,277</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"A better way to search through Archived contacts. Ability to segment and filter (the way we can a normal list) would be best. Even the current search option doesn&#x27;t appear to be searching the archive -- it&#x27;s searching the normal contacts"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 64245969</strong> · <strong>$1,277/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2026-01-15</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1768512080202429" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">4</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Command Palette / Quick Switcher (cmd+k)</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> VoCs · <strong>1</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$914</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"One thing that drives me nuts with the new builder is the way default formatting will take over existing formatting (especially when trying to add hyperlinks) and the fact that Ctrl + K doesn&#x27;t work for linking text. So this combines in instances where I have text of a certain color, no underline, I hit Ctrl+K, accidentally end up in my search bar instead of in a link paste box, click to the thing I want, highlight, right click to pull up add link, successfully add the link a…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 74427602</strong> · <strong>$914/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-09-10</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1757537636394259" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">5</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Filter &amp; Advanced Search in Search Results</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> VoCs · <strong>1</strong> HVCs</span>
+      <span class="theme-stat mrr"><strong>$618</strong>/mo HVC MRR at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"In New customs reports, you can filter by campaign but you cant select multiple opctions o make a seach with a key word a select all. It would be very usefull."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 134312870</strong> · <strong>$618/mo MRR</strong>
+<span class="csat-pill csat-average">Average</span>
+ · <span class="voc-date">2026-02-10</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770716122063339" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+
+    <p style="margin-top: 16px;"><strong>Missing-features MRR exposure:</strong> $15,758/mo across 16 HVC instances (16 VoCs across 5 missing-feature themes).</p>
+  </section>
+
+  <!-- Risk Page 3 -->
+  <section class="page" aria-label="Nav/Search Risk Page 3">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Nav / Wayfinding / Search · Re-prioritized phased plan (HVC-MRR ranked)</div>
+        <h1>Re-prioritized 3-phase plan — close <em style="color:#4338CA;">$45,194</em>/mo MRR exposure in Phase 1, <em>$24,421</em> in Phase 2, <em>$11,717</em> in Phase 3</h1>
+        <div class="subtitle">Themes re-ranked by HVC MRR-at-risk descending. Top 6 themes go in Phase 1 (months 0–6), next 8 in Phase 2 (6–12), remaining 15 in Phase 3 (12–18). Every theme = real Slack-HVC dollars at risk; sequencing maximizes MRR retention per release.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Total HVC MRR at risk:</strong> $70,009/mo</div>
+        <div><strong>Annualized:</strong> $840,108/yr</div>
+        <div><strong>Phases:</strong> 0–6 / 6–12 / 12–18 mo</div>
+        <div><strong>Page:</strong> 3 of 3</div>
+      </div>
+    </header>
+
+    <h2 style="margin-top:18px;"><span class="num">D1</span>Phase 1 — Stop the bleeding (months 0–6)</h2>
+    <div class="phase p1">
+      <div class="head"><h3>Phase 1 — Stop the bleeding (months 0–6)</h3><span class="horizon">Months 0–6 · $45,194/mo MRR at risk · 6 themes</span></div>
+      <p style="font-size:12.5px; color:#4B5563; margin-bottom:10px;">Tackle the highest-MRR-exposure barriers and bugs first. Most of these are pure IA/wayfinding fixes (un-bury templates, expose A/B test, fix segment filter, restore cross-audience contact search) that ship in days–weeks, not months. Each fix here is direct churn-risk reduction in our most valuable accounts.</p>
+      <table class="dense"><thead><tr><th style="width:60px">Type</th><th>Theme</th><th style="width:60px">VoCs</th><th style="width:60px">HVCs</th><th style="width:90px">HVC MRR</th><th style="width:60px">Churn</th></tr></thead><tbody>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Other Nav/Search Barriers</strong></td><td>16</td><td>16</td><td><strong>$12,030</strong></td><td>1</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Other Missing Nav/Search Features</strong></td><td>12</td><td>12</td><td><strong>$10,746</strong></td><td>5</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Tag / Segment Filter &amp; Sort Limitations</strong></td><td>6</td><td>6</td><td><strong>$6,422</strong></td><td>1</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Help / Live Chat / Human Contact Hidden</strong></td><td>7</td><td>7</td><td><strong>$5,640</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Templates / Saved Templates Hard to Locate</strong></td><td>5</td><td>5</td><td><strong>$5,505</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Critical Features Buried Deep in Menu Hierarchy</strong></td><td>4</td><td>4</td><td><strong>$4,851</strong></td><td>0</td></tr>
+      </tbody></table>
+    </div>
+
+    <h2 style="margin-top:18px;"><span class="num">D2</span>Phase 2 — Close obvious functional gaps (months 6–12)</h2>
+    <div class="phase p2">
+      <div class="head"><h3>Phase 2 — Close obvious functional gaps (months 6–12)</h3><span class="horizon">Months 6–12 · $24,421/mo MRR at risk · 8 themes</span></div>
+      <p style="font-size:12.5px; color:#4B5563; margin-bottom:10px;">After triage, deliver the medium-MRR-exposure items that are still 'frustrated but not yet leaving.' Candidates: real global search with filters, archived-contact search, segment/folder organization, frequency-of-UI-change governance, mobile nav rewrite.</p>
+      <table class="dense"><thead><tr><th style="width:60px">Type</th><th>Theme</th><th style="width:60px">VoCs</th><th style="width:60px">HVCs</th><th style="width:90px">HVC MRR</th><th style="width:60px">Churn</th></tr></thead><tbody>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Search Returns Wrong / No Results / Stale Index</strong></td><td>6</td><td>6</td><td><strong>$4,378</strong></td><td>1</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Frequent UI / Nav Changes (regression complaints)</strong></td><td>5</td><td>5</td><td><strong>$4,235</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Critical Features Moved / UI Reorgs Without Notice</strong></td><td>7</td><td>7</td><td><strong>$4,108</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Cross-Product Navigation Broken (Mandrill / Transactional)</strong></td><td>1</td><td>1</td><td><strong>$3,123</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Account / Billing / Plan Tools Hidden</strong></td><td>3</td><td>3</td><td><strong>$2,878</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Segment Search &amp; Folder Organization</strong></td><td>1</td><td>1</td><td><strong>$1,950</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Audience / List / Segment Navigation Broken</strong></td><td>4</td><td>4</td><td><strong>$1,945</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Other Nav/Search Bugs</strong></td><td>3</td><td>3</td><td><strong>$1,804</strong></td><td>0</td></tr>
+      </tbody></table>
+    </div>
+
+    <h2 style="margin-top:18px;"><span class="num">D3</span>Phase 3 — Long-tail polish + power-user bets (months 12–18)</h2>
+    <div class="phase p3">
+      <div class="head"><h3>Phase 3 — Long-tail polish + power-user bets (months 12–18)</h3><span class="horizon">Months 12–18 · $11,717/mo MRR at risk · 15 themes</span></div>
+      <p style="font-size:12.5px; color:#4B5563; margin-bottom:10px;">Tail items — fewer HVCs each but real signal. Combine with a category-leading bet: command palette / quick-switcher (cmd+K), customizable navigation, recently-used / pinned items, persistent breadcrumbs, in-product 'what's new' beacon for IA changes.</p>
+      <table class="dense"><thead><tr><th style="width:60px">Type</th><th>Theme</th><th style="width:60px">VoCs</th><th style="width:60px">HVCs</th><th style="width:90px">HVC MRR</th><th style="width:60px">Churn</th></tr></thead><tbody>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Confusing Naming / Labels (Audience vs List, etc.)</strong></td><td>1</td><td>1</td><td><strong>$1,771</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Search Across Archived / Hidden Contacts</strong></td><td>1</td><td>1</td><td><strong>$1,530</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Sign-up / Embed Form Navigation Issues</strong></td><td>1</td><td>1</td><td><strong>$1,208</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Navigate Back to Drafts / In-Progress Work Difficult</strong></td><td>1</td><td>1</td><td><strong>$1,102</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Reports / Demographics / Segments Hard to Locate</strong></td><td>2</td><td>2</td><td><strong>$945</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Command Palette / Quick Switcher (cmd+k)</strong></td><td>1</td><td>1</td><td><strong>$914</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Filter &amp; Advanced Search in Search Results</strong></td><td>1</td><td>1</td><td><strong>$618</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Cross-Audience Contact Search Removed / Broken</strong></td><td>1</td><td>1</td><td><strong>$609</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Browser-Specific Nav Broken (Safari / Firefox dropdowns)</strong></td><td>1</td><td>1</td><td><strong>$576</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Bulk Actions / Mass Delete Hidden</strong></td><td>1</td><td>1</td><td><strong>$534</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Promotional / Success-Manager Modules Hijack Sidebar</strong></td><td>1</td><td>1</td><td><strong>$425</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Pagination Loses Search/Filter Context (campaigns, contacts)</strong></td><td>1</td><td>1</td><td><strong>$410</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Cannot Search Within Hard-Bounce / Subscriber Lists</strong></td><td>1</td><td>1</td><td><strong>$383</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Help / Support / Docs Hidden or Hard to Reach</strong></td><td>1</td><td>1</td><td><strong>$382</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Navigation Links Broken / 404 / Dead-End</strong></td><td>1</td><td>1</td><td><strong>$310</strong></td><td>0</td></tr>
+      </tbody></table>
+    </div>
+
+
+    <h2 style="margin-top: 18px;"><span class="num">E</span>Top 12 HVC verbatim quotes (highest-MRR customers across all nav/search themes)</h2>
+    <p style="margin-bottom: 10px;">Direct, unedited quotes from the highest-MRR Mailchimp HVCs reporting nav / wayfinding / search pain — with Slack permalinks for full context, criticality, CSAT, and the customer's own words.</p>
+    <div class="quote-wall" style="margin-bottom: 14px;">
+
+      <div class="qw neg">
+        <p class="q">"Search function is useless when you run multiple campaigns all in the same campaign list. Hard to find the templates I need each week. Also the preview function always shows elements that have been deleted from the email."</p>
+        <div class="src-line"><strong>User 159893326</strong> · $3,975/mo MRR · <span class="risk-pill barrier" style="font-size:9px;">BARRIER</span> · Templates / Saved Templates Hard to Locate · <em>Poor</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1756383797820579" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"I&#x27;m blocked from rotating a Mandrill token because I&#x27;m redirect to Mailchimp after authenticate and can&#x27;t find my stuff here. You are delaying and causing problems during an active incident. Shame on you"</p>
+        <div class="src-line"><strong>User 37814913</strong> · $3,123/mo MRR · <span class="risk-pill bug" style="font-size:9px;">BUG</span> · Cross-Product Navigation Broken (Mandrill / Transactional) · <em>Terrible</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1775045814579209" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw mid">
+        <p class="q">"I can&#x27;t find what I need"</p>
+        <div class="src-line"><strong>User 232981058</strong> · $2,850/mo MRR · <span class="risk-pill missing" style="font-size:9px;">MISSING</span> · Other Missing Nav/Search Features · <em>Terrible</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1755027807709949" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"You got rid of Replicate. Thats idiotic"</p>
+        <div class="src-line"><strong>User 4044074</strong> · $1,981/mo MRR · <span class="risk-pill barrier" style="font-size:9px;">BARRIER</span> · Other Nav/Search Barriers · <em>Poor</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1766681419706199" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw mid">
+        <p class="q">"Segment improvements:
+- Ability to add folders or a way to group segments. Currently it is all in one blob. 
+- Ability to search segments"</p>
+        <div class="src-line"><strong>User 36485481</strong> · $1,950/mo MRR · <span class="risk-pill missing" style="font-size:9px;">MISSING</span> · Segment Search &amp; Folder Organization · <em>Poor</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1749656224467179" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Cannot find anywhere that lets me talk to a human"</p>
+        <div class="src-line"><strong>User 239457934</strong> · $1,788/mo MRR · <span class="risk-pill barrier" style="font-size:9px;">BARRIER</span> · Help / Live Chat / Human Contact Hidden · <em>Terrible</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1758724427236799" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Uncertain what has been going on lately but reports often dont show data, then they do later, names and labels change to numeric values instead of the names and back without any idea why. Looking at my custom report I can search for last 7 days volume and most of the sends I can see in campaign reports dont show up. Very confusing lately."</p>
+        <div class="src-line"><strong>User 75889982</strong> · $1,771/mo MRR · <span class="risk-pill barrier" style="font-size:9px;">BARRIER</span> · Confusing Naming / Labels (Audience vs List, etc.) · <em>Poor</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1765236278754969" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Mandrill is broken and I can&#x27;t find support anywhere even though we&#x27;re a paying customer"</p>
+        <div class="src-line"><strong>User 31575995</strong> · $1,700/mo MRR · <span class="risk-pill barrier" style="font-size:9px;">BARRIER</span> · Help / Live Chat / Human Contact Hidden · <em>Terrible</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1761075100553449" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw mid">
+        <p class="q">"When using the &quot;Review segment&quot; functionality on the segment builder, results are coming up but the window screen is displayed a bit scrolled down, exactly that much that you cannot see the &quot;Back&quot; button anymore! (at least on my Mac laptop), which caused me to use the &quot;Cancel&quot; or &quot;Use segment&quot; buttons since those were the ones visible, even so I wanted to adjust my current segm…"</p>
+        <div class="src-line"><strong>User 79675358</strong> · $1,553/mo MRR · <span class="risk-pill missing" style="font-size:9px;">MISSING</span> · Other Missing Nav/Search Features · <em>Poor</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1753693439030069" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Need an option to find people who aren&#x27;t tagged WITHOUT having to create a filter for every single tag"</p>
+        <div class="src-line"><strong>User 64245969</strong> · $1,530/mo MRR · <span class="risk-pill barrier" style="font-size:9px;">BARRIER</span> · Tag / Segment Filter &amp; Sort Limitations · <em>Poor</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1756222737364679" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"It used to be easy for me to see how I created a segmented audience using tags. Then it got more difficult, when the segmented audience name was changed to mysterious things like &quot;Targeted contacts 324.&quot; 
+
+After a while I figured out that I could click the little pencil icon to review the tags I used to create an audience. 
+
+NOW, I get a weird error message when I try to do thi…"</p>
+        <div class="src-line"><strong>User 3736674</strong> · $1,480/mo MRR · <span class="risk-pill barrier" style="font-size:9px;">BARRIER</span> · Critical Features Moved / UI Reorgs Without Notice · <em>Poor</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1754356673932459" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Your new reporting sections is awful. It requires so many clicks and selections. 
+
+Not to mention that I now can&#x27;t filter by a campaign name. We have to click and click. This is just not a good experience."</p>
+        <div class="src-line"><strong>User 149472166</strong> · $1,440/mo MRR · <span class="risk-pill barrier" style="font-size:9px;">BARRIER</span> · Critical Features Buried Deep in Menu Hierarchy · <em>Terrible</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1775856675625369" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+    </div>
+
+    <p class="source">
+      <strong>Methodology:</strong> Read all 3 Slack channels (full pagination) for Nov 8, 2024 → May 8, 2026 (~18 months). Parsed Qualtrics survey JSON, escalation messages, and channel-summary entries. Filtered for nav / wayfinding / search keywords (navigation, sidebar, hamburger, breadcrumb, "can't find", "where is", "moved", search bar, autocomplete, filter, "too many clicks", mobile nav, account switcher, etc.) AND negative sentiment (CSAT Terrible/Poor/non-English equivalents, PRS≤4, criticality P0/P1, OR negative-keyword match in feedback when CSAT is Average/missing). Filtered OUT: Gen-VoCalyzer bot auto-summary messages (no per-customer attribution) and 4 false positives identified during self-evaluation (mobile-render complaints incidentally mentioning "mobile", AI-text-edit complaints, ctrl+K-link-insertion in editor, and one unrelated A/B testing UX complaint). Deduplicated by (User ID + first 200 chars of feedback). Each VoC counted once toward MRR. Themes assigned by keyword pattern matching with manual review of catch-all bucket; ~96% sample-classification accuracy on 12 manually re-checked VoCs.
+      <br><br>
+      <strong>HVC threshold:</strong> $299/mo MRR. Note: 100% of in-scope VoCs are HVC because #hvc_feedback is HVC-only by channel-selection design — non-HVC nav/search complaints would appear in #mc-reporting-analytics-feedback (out of scope here). <strong>Phasing:</strong> sorted themes by HVC MRR descending, bucketed into Phase 1 (top 6 themes), Phase 2 (next 8), Phase 3 (final 15). Per-theme MRR sums each theme's at-risk customers, so customers spanning multiple themes are counted in every theme they touched — total cross-phase MRR ($81,332/mo) therefore exceeds the unique-customer MRR exposure ($70,009/mo) and should be read as relative-priority weighting, not strict additive total.
+      <br><br>
+      <strong>Caveat — coverage windows differ by channel:</strong> #hvc_feedback (the bulk of this analysis) only goes back ~12 months (May 2025–May 2026); #mc-feedback-summary covers the full 18-month window (Nov 2024–Mar 2026). The HVC-MRR exposure number is therefore conservative — additional 6 months of #hvc_feedback history (had it existed) would likely surface more VoCs and more MRR. Most recent 3 days (May 5 → May 8, 2026) were not re-pulled; expected marginal contribution &lt; 5 VoCs.
+    </p>
+  </section>
+
+</div><!-- /panel-navsearchrisk -->
+
 
 
 <!-- ============================================ -->
