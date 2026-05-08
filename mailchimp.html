@@ -673,6 +673,79 @@
   .voc-meta a:hover { text-decoration: underline; }
   .voc-date { color: var(--muted); }
 
+  /* Source badges (Slack vs Research) on each VoC */
+  .src-badge {
+    display: inline-block;
+    font-size: 9px; font-weight: 800;
+    padding: 1px 5px; border-radius: 3px;
+    letter-spacing: .06em;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .src-badge.slack { background: #DBEAFE; color: #1E3A8A; }
+  .src-badge.research { background: #EDE9FE; color: #5B21B6; }
+
+  ol.voc-specifics > li.voc-item.research {
+    border-left: 3px solid #8B5CF6;
+    padding-left: 8px;
+    margin-left: -10px;
+  }
+
+  /* Theme stat color variants */
+  .theme-stat.slack strong { color: #1E3A8A; }
+  .theme-stat.research-stat strong { color: #5B21B6; }
+
+  /* Research-specific pills */
+  .research-detail {
+    font-size: 10.5px; color: #5B21B6;
+    background: #F5F3FF; padding: 1px 6px;
+    border-radius: 3px; font-weight: 600;
+  }
+
+  .frust-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 700;
+    padding: 1px 5px; border-radius: 3px;
+    margin-left: 0;
+  }
+  .frust-pill.high { background: #FBE7E8; color: #9A1F00; }
+  .frust-pill.medium { background: #FEEAD0; color: #8A4A00; }
+  .frust-pill.low { background: #F1F2F4; color: #374151; }
+
+  .size-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 700;
+    padding: 1px 5px; border-radius: 3px;
+  }
+  .size-pill.quickwin { background: #DCFCE7; color: #14532D; }
+  .size-pill.mediumlift { background: #FEF3C7; color: #78350F; }
+  .size-pill.biglift { background: #FCE7F3; color: #9D174D; }
+
+  .ipri-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 800;
+    padding: 1px 5px; border-radius: 3px;
+    letter-spacing: .04em;
+  }
+  .ipri-pill.high { background: #B91C1C; color: white; }
+  .ipri-pill.medium { background: #F59E0B; color: white; }
+  .ipri-pill.low { background: #6B7280; color: white; }
+
+  .score-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 700;
+    padding: 1px 5px; border-radius: 3px;
+    background: #EEF0FF; color: #2A1FA8;
+  }
+
+  .excl-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 800;
+    padding: 1px 5px; border-radius: 3px;
+    background: #312E81; color: white;
+    letter-spacing: .04em;
+  }
+
   /* Print */
   @media print {
     @page { size: Letter; margin: 0.45in; }
@@ -1766,30 +1839,34 @@
 <!-- ============================================ -->
 <!-- ============== HVC RISK MAP TAB ============ -->
 <!-- ============================================ -->
+
+<!-- ============================================ -->
+<!-- ============== HVC RISK MAP TAB ============ -->
+<!-- ============================================ -->
 <div class="tabpanel" id="panel-hvcrisk" role="tabpanel">
 
   <!-- Risk Page 1 -->
   <section class="page" aria-label="HVC Risk Page 1">
     <header class="page-head">
       <div>
-        <div class="eyebrow">HVC Risk Map · Mailchimp Automation/Flow Voice of Customer (Slack)</div>
-        <h1>What's at <em style="color:#B91C1C;">risk</em> in our HVC base — bugs, barriers &amp; missing features in CJB and Marketing Automation Flows</h1>
-        <div class="subtitle">18-month synthesis of <strong>3,001 VoC messages</strong> across <strong>#hvc_feedback · #mc-hvc-escalations · #mc-feedback-summary</strong>, filtered to <strong>66 negative automation/flow VoCs</strong> from <strong>65 HVC customers</strong> ($299+ MRR), totaling <strong>$53,547 in monthly MRR at risk</strong>.</div>
+        <div class="eyebrow">HVC Risk Map · Mailchimp Automation/Flow VoC (Slack + UX Research, integrated)</div>
+        <h1>What's at <em style="color:#B91C1C;">risk</em> in our HVC + strategic-research base — bugs, barriers &amp; missing features in CJB and Marketing Automation Flows</h1>
+        <div class="subtitle">Integrated analysis combining <strong>66 negative Slack VoCs from 103 HVC customers</strong> ($177,547/mo at risk) AND <strong>38 UX research entries from Jacob/Eric/Nina interviews with strategic-MRR customers</strong> (categorized HIGH: 19 · MED: 10 · LOW: 9). Re-prioritized across 3 phases.</div>
       </div>
       <div class="meta">
-        <div><strong>Window:</strong> Nov 18, 2024 → May 7, 2026</div>
-        <div><strong>Channels:</strong> 3 Slack channels</div>
-        <div><strong>Filter:</strong> automation/flow + HVC ($299+/mo)</div>
+        <div><strong>Window:</strong> Nov 18, 2024 → May 7, 2026 (Slack); UX research current</div>
+        <div><strong>Sources:</strong> 3 Slack channels + UX research DB</div>
+        <div><strong>Filter:</strong> automation/flow + HVC ($299+/mo) or strategic-MRR research</div>
         <div><strong>Page:</strong> 1 of 3</div>
       </div>
     </header>
 
     <!-- KPIs -->
     <div class="kpi-row" style="margin-bottom: 18px;">
-      <div class="kpi"><div class="v">66</div><div class="l">Negative automation/flow VoCs across all 3 Slack channels in 18 months</div></div>
-      <div class="kpi"><div class="v">65</div><div class="l">From <strong>HVC customers</strong> ($299+/mo MRR) — virtually <em>all</em> automation pain is in HVC</div></div>
-      <div class="kpi"><div class="v">$53,547</div><div class="l">Total <strong>monthly</strong> HVC MRR exposed to automation/flow pain (~<strong>$642,564/yr</strong> at full-churn risk)</div></div>
-      <div class="kpi"><div class="v">42</div><div class="l">Distinct themes across <strong>11 bug categories</strong>, <strong>18 barriers</strong>, <strong>13 missing features</strong></div></div>
+      <div class="kpi"><div class="v">104</div><div class="l">Combined VoC signals: <strong>66</strong> Slack VoCs + <strong>38</strong> UX research entries</div></div>
+      <div class="kpi"><div class="v">103</div><div class="l">Slack HVC customers ($299+/mo MRR) — every Slack VoC is from an HVC. Plus <strong>38</strong> strategic-MRR research voices.</div></div>
+      <div class="kpi"><div class="v">$177,547</div><div class="l"><strong>Monthly HVC MRR</strong> exposed to automation pain in Slack (~<strong>$2,130,564/yr</strong> at full-churn). UX research is additional unquantified strategic risk.</div></div>
+      <div class="kpi"><div class="v">73</div><div class="l">Distinct themes: <strong>14 bugs</strong>, <strong>35 barriers</strong>, <strong>24 missing features</strong> — re-prioritized below</div></div>
     </div>
 
     <!-- BUGS section -->
@@ -1803,39 +1880,53 @@
       <span class="theme-name">Editor / UI Glitches in Journey Builder</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>4</strong> VoCs</span>
-      <span class="theme-stat"><strong>4</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$11,507</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>5</strong> total</span>
+      <span class="theme-stat slack"><strong>4</strong> Slack</span><span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      <span class="theme-stat mrr"><strong>$10,559</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item research">
+<div class="voc-text">"Scroll bug in automation canvas prevents scrolling to the top of the flow."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.40</strong>
+ · <span class="research-detail">Flow builder</span>
+ · <span class="frust-pill medium">Frust: Medium</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 4/5</span>
+</div>
+</li>
+<li class="voc-item slack">
 <div class="voc-text">"Keep getting an error when trying to replicate a flow. Tried to create from scratch and site locked up and now getting &quot;An error occurred&quot; so I can&#x27;t even access the flow now. Been waiting for a chat rep to come online for more than 30 minutes. 
 
 &lt;|*FS Session Replay*&gt;
 _______________________________________
 Reactions: ack (1), warroom (1), google (1)"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 104713590</strong> · <strong>$4,150/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2025-06-12</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1749769621001519" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"We&#x27;ve been working on updating some emails for our automated journeys. Once updated, the &#x27;View email&#x27; option shows us the old email, even after unpausing the automated journey. As we understand it, the link is showing us the web version, which will only be updated once the edited one is sent.
 
 The issue with this is not knowing what the newest/current version is without pausing to edit the email or sending a test."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 9556325</strong> · <strong>$2,906/mo MRR</strong>
 <span class="csat-pill csat-average">Average</span>
  · <span class="voc-date">2025-08-27</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1756287982288699" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"I was just on the phone for one hour regarding the classic automations, which you no longer support.
 
 I edited an email for Local Edition&#x27;s welcome series on 2/6 which then sent to 6840 people and it should not have happened. 
@@ -1844,15 +1935,17 @@ We checked that the box was not checked for a user to re-enter the flow.
 
 We should have been notified that classic automations were no longer supported and that there were glitches. This is unacceptable."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 149472166</strong> · <strong>$1,950/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2026-02-07</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770485643609489" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"On the customer-journey-builder seems no scroll bar on the right hand side, when the content gets longer. (At least on my end: I am using Mac OS with Firefox.)"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 79675358</strong> · <strong>$1,553/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2025-09-14</span>
@@ -1870,15 +1963,15 @@ We should have been notified that classic automations were no longer supported a
       <span class="theme-name">Reporting / Stats Wrong on Automations</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>5</strong> VoCs</span>
-      <span class="theme-stat"><strong>3</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$6,218</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>5</strong> total</span>
+      <span class="theme-stat slack"><strong>5</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$4,010</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"Flow queues are showing incorrect numbers. Example: Queue on flow chart shows 29 in queue, but there are only 7 actual emails in queue. 
 
 &lt;|*FS Session Replay*&gt;
@@ -1886,44 +1979,49 @@ _______________________________________
 Thread: 75 replies (latest: 2025-07-29 06:23:48 PDT)
 Reactions: ack (1)"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 104713590</strong> · <strong>$2,580/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2025-07-23</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1753279829356669" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"SMS reporting is showing 0% and N/A for stats, what is the point of reporting if it doesn&#x27;t show data"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 215343870</strong> · <strong>$810/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2025-10-01</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1759329465840369" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"My SMS credits went into the negative because of a Flow. I added more credits and the number of credits was still showing zero. After talking to support, they told me that I was in the negative, but I had no way of knowing that without talking to them."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 152116526</strong> · <strong>$310/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2025-09-24</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1758725941688229" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"Date range reporting for my automaton is not working. It says the average open rate Jan-June is 40%. It then says the average open rate Jan-March is 34% and April-June is 20%. That doesn&#x27;t make sense."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 152116526</strong> · <strong>$310/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2025-06-24</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1750778882490549" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"=== Message from Khadijah Parks (U02KMC4S798) at 2025-12-11 08:45:46 PST === 
 Message TS: 1765471546.538069
 :question: Hello! I am an on-call eng from Audience Organization. We received a report of an issue from an HVC and would like to request for someone to reach out for more information on the specific issues. I don&#x27;t have permissions to run a workflow like the above posts, so hopefully this post is okay :grimacing:  &lt;https://intuit-teams.slack.com/archives/C051Y4H98VB/p17…"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>Anonymous</strong> · <strong>$0/mo MRR</strong>
 
  · <span class="voc-date">2025-12-11</span>
@@ -1941,15 +2039,15 @@ Message TS: 1765471546.538069
       <span class="theme-name">Per-Step KPIs / Performance Not Viewable in Journeys</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$5,098</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$5,098</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"=== Message from SupportBot (Dev 2.0) (U05V8VCHMFE) at 2025-07-24 13:33:54 PDT === 
 Message TS: 1753389234.081769
 :postal_horn: *New Product Feedback Received* :postal_horn:
@@ -1964,6 +2062,7 @@ Performance Issues
 For: CTM RE: They are trying to view the KPIs for each of their flow steps. Currently that is not working.
 *Constraints: what constrai…"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 104713590</strong> · <strong>$5,098/mo MRR</strong>
 
  · <span class="voc-date">2025-07-24</span>
@@ -1978,40 +2077,103 @@ For: CTM RE: They are trying to view the KPIs for each of their flow steps. Curr
     <div class="theme-card-title">
       <span class="theme-num">4</span>
       <span class="risk-pill bug">BUG</span>
-      <span class="theme-name">Automations Not Sending / Delivery Failures</span>
+      <span class="theme-name">Flow Templates Link Goes to Help Article</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>3</strong> VoCs</span>
-      <span class="theme-stat"><strong>3</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$4,780</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item research">
+<div class="voc-text">"Automation flow templates&#x27; link navigates to a help article instead of the expected template library."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.44</strong>
+ · <span class="research-detail">Flow templates</span>
+ · <span class="frust-pill medium">Frust: Medium</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 4/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">5</span>
+      <span class="risk-pill bug">BUG</span>
+      <span class="theme-name">SMS Abandoned Cart Template TCPA Compliance Risks</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"SMS abandoned cart template has three TCPA litigation risks: two SMS messages for one abandonment event, no quiet hours enforcement, and SMS sent on a 1-week delay (must be within 48h)."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.55</strong>
+ · <span class="research-detail">SMS Compliance</span>
+ · <span class="frust-pill high">Frust: High</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 5/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">6</span>
+      <span class="risk-pill bug">BUG</span>
+      <span class="theme-name">Automations Not Sending / Delivery Failures</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>3</strong> total</span>
+      <span class="theme-stat slack"><strong>3</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$4,780</strong>/mo Slack-HVC at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
 <div class="voc-text">"Bugs cause frustration quite frequently — especially when it comes to audiences and &lt;http://automations.In|automations.In&gt; addition, the requirements for GDPR-compliant email marketing in the EU are not really adequately supported. For example, the double opt-in email is very basic and offers hardly any customization options, such as different layouts or languages. In addition, the deliverability of the double opt-in email is demonstrably quite poor (it often ends up in spam)…"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 18546599</strong> · <strong>$3,000/mo MRR</strong>
 <span class="prs-pill">PRS 4</span>
  · <span class="voc-date">2026-02-25</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1772013853566469" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"The reporting feature has stopped working for my classic automations"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 1152561</strong> · <strong>$1,150/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2025-06-10</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1749569788892999" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"It would be very helpful to be able to see which contacts are started (or in progress) in a flow.  As is, I can only see the contacts in a flow within the reporting data for specific emails.  Since I have a delay before the first email is sent, I&#x27;m not able to confirm which contacts are in a flow for certain until after the delay, when the first email is sent.
 
 Otherwise, I&#x27;m fine.  I gave the low rating only because this morning, I&#x27;m unable to do the specific thing I need to…"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 178011569</strong> · <strong>$630/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2025-07-13</span>
@@ -2024,31 +2186,33 @@ Otherwise, I&#x27;m fine.  I gave the low rating only because this morning, I&#x
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">5</span>
+      <span class="theme-num">7</span>
       <span class="risk-pill bug">BUG</span>
       <span class="theme-name">Default View / Sort Order Broken in Campaigns/Automations</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>2</strong> VoCs</span>
-      <span class="theme-stat"><strong>2</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$2,925</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>2</strong> total</span>
+      <span class="theme-stat slack"><strong>2</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$2,925</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"Your new changes to campaigns features &quot;All&quot; which causes journeys to be featured first. We don&#x27;t ever edit journeys, and 99% of campaigns are email. This should at least default to email, but these other sorting options don&#x27;t belong in this view. I literally thought the UI was broken yesterday."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 3458510</strong> · <strong>$2,500/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2025-05-15</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1747316252957129" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"automation sorting is not working"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 31312991</strong> · <strong>$425/mo MRR</strong>
 <span class="prs-pill">PRS 0</span>
  · <span class="voc-date">2025-10-08</span>
@@ -2061,35 +2225,37 @@ Otherwise, I&#x27;m fine.  I gave the low rating only because this morning, I&#x
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">6</span>
+      <span class="theme-num">8</span>
       <span class="risk-pill bug">BUG</span>
       <span class="theme-name">Migration &amp; Conversion Bugs (Classic → CJB / Marketing Automation Flows)</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>2</strong> VoCs</span>
-      <span class="theme-stat"><strong>2</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$1,715</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>2</strong> total</span>
+      <span class="theme-stat slack"><strong>2</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$1,715</strong>/mo Slack-HVC at risk</span>
       <span class="theme-stat churn"><strong>1</strong> churn</span>
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"I have emailed about this before and I will continue to do so. It&#x27;s absolutely ridiculous that people have to switch to the flows from the classic automation yet the numbers and stats are not moving with it. You are a billion dollar company and you would think that MC could afford to hire developers that can figure this out."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 129947190</strong> · <strong>$1,010/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span><span class="churn-pill">CHURN</span>
  · <span class="voc-date">2026-04-21</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1776813157652549" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"I understand that Mailchimp plans to sunset classic automations in favor of journeys. I just learned that if we migrate an existing automation to a journey, the historical performance data—sales, opens, clicks—will not carry over. According to the agent I spoke with, this data will be inaccessible once the automation is converted.
 
 This is unacceptable.
 
 We rely on that data to evaluate long-term performance and audience behavior. I was preparing to convert our welcome automa…"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 44181209</strong> · <strong>$705/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2025-10-31</span>
@@ -2102,23 +2268,55 @@ We rely on that data to evaluate long-term performance and audience behavior. I 
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">7</span>
+      <span class="theme-num">9</span>
       <span class="risk-pill bug">BUG</span>
-      <span class="theme-name">Aggregate Reporting Across Journeys Missing/Painful</span>
+      <span class="theme-name">Cannot Delete Individual Split Paths</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$770</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item research">
+<div class="voc-text">"Can&#x27;t delete individual split paths (A or B) - deleting removes the entire split rule. User called this &#x27;a huge problem&#x27;."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Eric · S1.42</strong>
+ · <span class="research-detail">Split Paths</span>
+ · <span class="frust-pill high">Frust: High</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill low">LOW priority</span>
+ · <span class="score-pill">Score 4/5</span>
+ · <span class="excl-pill">EXCLUSIVE</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">10</span>
+      <span class="risk-pill bug">BUG</span>
+      <span class="theme-name">Aggregate Reporting Across Journeys Missing/Painful</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$770</strong>/mo Slack-HVC at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
 <div class="voc-text">"Your entire product is terrible and inconvenient. Every time I use it, I howl like a mandrake.
 Why can&#x27;t I see how many emails were sent in total, broken down by day? Why does the report only include one-time emails? And to figure out how many emails were sent from Jorneys, I have to go through ALL Jorneys, individual emails, and individual days? What the hell were you thinking when you developed this???"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 1971477</strong> · <strong>$770/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2025-12-09</span>
@@ -2131,22 +2329,23 @@ Why can&#x27;t I see how many emails were sent in total, broken down by day? Why
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">8</span>
+      <span class="theme-num">11</span>
       <span class="risk-pill bug">BUG</span>
       <span class="theme-name">Pop-ups / Forms Not Feeding Flows</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$450</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$450</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"Since the launch of the new pop ups, it&#x27;s not worked properly for us and doesn&#x27;t feed people into our flows like it used to.  I reported it to you guys over 3 weeks ago and I still don&#x27;t have an answer."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 154383246</strong> · <strong>$450/mo MRR</strong>
 <span class="csat-pill csat-average">Average</span>
  · <span class="voc-date">2025-09-01</span>
@@ -2159,22 +2358,23 @@ Why can&#x27;t I see how many emails were sent in total, broken down by day? Why
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">9</span>
+      <span class="theme-num">12</span>
       <span class="risk-pill bug">BUG</span>
       <span class="theme-name">SMS Quiet Hours Block Keyword Auto-Replies</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$310</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$310</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"Please remove SMS Quiet Hours for flows that are triggered by a keyword. If a customer replies with a keyword, they should get a text response immediately. It shouldn&#x27;t be held until it is no longer quiet hours."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 152116526</strong> · <strong>$310/mo MRR</strong>
 <span class="csat-pill csat-average">Average</span>
  · <span class="voc-date">2025-09-18</span>
@@ -2187,22 +2387,23 @@ Why can&#x27;t I see how many emails were sent in total, broken down by day? Why
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">10</span>
+      <span class="theme-num">13</span>
       <span class="risk-pill bug">BUG</span>
       <span class="theme-name">Other Bugs</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$300</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$300</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"Benutzerfreundlicher, DOI einfacher einzurichten, weniger Bugs in der Journey"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 35769881</strong> · <strong>$300/mo MRR</strong>
 <span class="prs-pill">PRS 3</span>
  · <span class="voc-date">2026-02-16</span>
@@ -2215,22 +2416,23 @@ Why can&#x27;t I see how many emails were sent in total, broken down by day? Why
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">11</span>
+      <span class="theme-num">14</span>
       <span class="risk-pill bug">BUG</span>
       <span class="theme-name">Re-entry / Cool-down Settings Reset to Default</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$300</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$300</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"In automations, there seems to be a bug where clicking contacts can re-enter flow defaults to every 5 minutes. I change it to the desired amout and when I check again after saving, it&#x27;s back to 5 minutes."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 31103075</strong> · <strong>$300/mo MRR</strong>
 <span class="csat-pill csat-average">Average</span>
  · <span class="voc-date">2025-08-07</span>
@@ -2241,10 +2443,10 @@ Why can&#x27;t I see how many emails were sent in total, broken down by day? Why
   </div>
 </div>
 
-    <p style="margin-top: 16px;"><strong>Bug section MRR exposure:</strong> $34,373/mo across 20 HVC customer instances (22 VoCs across 11 bug themes).</p>
+    <p style="margin-top: 16px;"><strong>Bug section MRR exposure:</strong> $50,373/mo across 24 HVC customer instances (26 VoCs across 14 bug themes).</p>
 
     <p class="source">
-      Source channels (full read): <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB">#hvc_feedback</a> (C051Y4H98VB · 2,588 msgs · May 2025–May 2026); <a href="https://intuit-teams.slack.com/archives/C095FJ3SQF4">#mc-hvc-escalations</a> (C095FJ3SQF4 · 184 msgs · Jul 2025–May 2026); <a href="https://intuit-teams.slack.com/archives/C06EVEZ4ZTQ">#mc-feedback-summary</a> (C06EVEZ4ZTQ · 254 msgs · Nov 2024–Mar 2026). Filter: automation/flow keywords + negative sentiment (CSAT Terrible/Poor, PRS≤4, P0/P1, or churn signals). Each VoC links to its original Slack message.
+      <strong>Slack source channels (full 18-month read):</strong> <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB">#hvc_feedback</a> (C051Y4H98VB · 2,588 msgs · May 2025–May 2026); <a href="https://intuit-teams.slack.com/archives/C095FJ3SQF4">#mc-hvc-escalations</a> (C095FJ3SQF4 · 184 msgs · Jul 2025–May 2026); <a href="https://intuit-teams.slack.com/archives/C06EVEZ4ZTQ">#mc-feedback-summary</a> (C06EVEZ4ZTQ · 254 msgs · Nov 2024–Mar 2026). Filter: automation/flow keywords + negative sentiment. Each Slack VoC links to its original message. <strong>UX research source:</strong> Internal "Full Opportunity Database" — 38 customer-interview entries from Jacob, Eric, Nina; each represents a strategic-MRR customer voice (treated as HVC-equivalent). Synthetic MRR weights for prioritization: HIGH=$5K, MEDIUM=$2K, LOW=$1K (per user-stated treatment of these as "high value strategic MRR customers").
     </p>
   </section>
 
@@ -2272,56 +2474,145 @@ Why can&#x27;t I see how many emails were sent in total, broken down by day? Why
     <div class="theme-card-title">
       <span class="theme-num">1</span>
       <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Time Delay UX Inconsistent / Restricted</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>2</strong> total</span>
+      <span class="theme-stat research-stat"><strong>2</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Cannot set a time delay shorter than the minimum for automation triggers. Abandoned flows need 30+ minute delays before first message to avoid premature sends."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Nina · S3.16</strong>
+ · <span class="research-detail">Flow Builder</span>
+ · <span class="frust-pill medium">Frust: Medium</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 4/5</span>
+</div>
+</li>
+<li class="voc-item research">
+<div class="voc-text">"Time delays are embedded in trigger configuration rather than being standalone flow steps. Contradicts mental model from other ESPs."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Eric · S1.49</strong>
+ · <span class="research-detail">Time Delays</span>
+ · <span class="frust-pill medium">Frust: Medium</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill medium">MEDIUM priority</span>
+ · <span class="score-pill">Score 4/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">2</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Premature &#x27;Turn On&#x27; / Activation Before Content Ready</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>2</strong> total</span>
+      <span class="theme-stat research-stat"><strong>2</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Automation template offers &#x27;Turn on&#x27; button before any content is configured. Should gate activation behind content completion."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.27</strong>
+ · <span class="research-detail">Simplified Template</span>
+ · <span class="frust-pill medium">Frust: Medium</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 4/5</span>
+</div>
+</li>
+<li class="voc-item research">
+<div class="voc-text">"&#x27;Turn on&#x27; button is too prominent and accessible before email content is edited. Risk of accidentally activating an unconfigured automation."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Eric · S1.35</strong>
+ · <span class="research-detail">Welcome flow simplified experience</span>
+ · <span class="frust-pill high">Frust: High</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill low">LOW priority</span>
+ · <span class="score-pill">Score 5/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">3</span>
+      <span class="risk-pill barrier">BARRIER</span>
       <span class="theme-name">Slow / Confusing Journey Builder UX</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>5</strong> VoCs</span>
-      <span class="theme-stat"><strong>5</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$5,205</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>5</strong> total</span>
+      <span class="theme-stat slack"><strong>5</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$5,205</strong>/mo Slack-HVC at risk</span>
       <span class="theme-stat churn"><strong>1</strong> churn</span>
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"Site load speed is terrible and is affecting our ability to work efficiently and effectively. Journeys/Flows are complicated, not intuitive, and difficult to run."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 222378130</strong> · <strong>$2,400/mo MRR</strong>
 <span class="csat-pill csat-average">Average</span>
  · <span class="voc-date">2025-10-27</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1761588143912359" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"Can you **PLEASE** stop changing the UI and workflow for creating a campaign almost every time I create one??? There is something to be said for leaving things tf alone and letting us get on with our work."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 50554633</strong> · <strong>$1,092/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span><span class="churn-pill">CHURN</span>
  · <span class="voc-date">2026-05-05</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1778010104724599" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"The UX flow for template use is extremely confusing and unintuitive"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 204539978</strong> · <strong>$978/mo MRR</strong>
 <span class="prs-pill">PRS 1</span>
  · <span class="voc-date">2025-10-29</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1761753787106789" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"unintuitive and unhelpful"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 9039125</strong> · <strong>$425/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2025-09-22</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1758527556875409" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"The Support team is taking almost an hour to know and provide a solution and i cant find the supporting idea and time is very senstive cause im stuck and my automation flow is not working"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 192598718</strong> · <strong>$310/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2025-09-16</span>
@@ -2334,31 +2625,244 @@ Why can&#x27;t I see how many emails were sent in total, broken down by day? Why
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">2</span>
+      <span class="theme-num">4</span>
       <span class="risk-pill barrier">BARRIER</span>
-      <span class="theme-name">Sharing / Export / Permissions on Flow Reports</span>
+      <span class="theme-name">Slider-Only Split Percentage / Numeric Input Missing</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>2</strong> VoCs</span>
-      <span class="theme-stat"><strong>2</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$2,808</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item research">
+<div class="voc-text">"Split path percentage control is slider-only. Needs numeric input for precise control, especially for common values like 50/50."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.43</strong>
+ · <span class="research-detail">Flow builder</span>
+ · <span class="frust-pill high">Frust: High</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 4/5</span>
+ · <span class="excl-pill">EXCLUSIVE</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">5</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Flow Deactivation Behavior Unclear</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Flow deactivation behavior is unclear - no explanation of whether in-progress contacts finish the flow or are immediately stopped."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.61</strong>
+ · <span class="research-detail">General</span>
+ · <span class="frust-pill medium">Frust: Medium</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 4/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">6</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Trigger Selection List Not Searchable</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Automation trigger selection list is not searchable. Users must scroll through the full list to find what they need."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.64</strong>
+ · <span class="research-detail">Trigger split</span>
+ · <span class="frust-pill low">Frust: Low</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 3/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">7</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Loading Spinner Misleading on Trigger Panels</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Loading/spinner icon on trigger/action panels is misleading - user interpreted it as &#x27;saving/processing&#x27; and waited for it to finish, but it just indicates the panel is open."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Eric · S1.39</strong>
+ · <span class="research-detail">General</span>
+ · <span class="frust-pill medium">Frust: Medium</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 4/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">8</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Edit Panel Blocks Flow Canvas</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Edit panel overlays and blocks the flow canvas when editing. Can&#x27;t see the full flow while making changes to a step."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Eric · S1.40</strong>
+ · <span class="research-detail">Flow Creation</span>
+ · <span class="frust-pill high">Frust: High</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 5/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">9</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">&#x27;Wait for Trigger&#x27; Rule Pass-Through Behavior Confusing</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"&#x27;Wait for trigger&#x27; rule is confusing - unclear what happens when condition is met vs. not met. No explanation of pass-through behavior."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Eric · S1.41</strong>
+ · <span class="research-detail">Wait trigger</span>
+ · <span class="frust-pill medium">Frust: Medium</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 4/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">10</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Flow Templates Have No Search / Filter</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"No search on Flow Templates screen. With many templates, finding a specific one requires scrolling through the entire list."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Eric · S1.43</strong>
+ · <span class="research-detail">Flow templates</span>
+ · <span class="frust-pill high">Frust: High</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 5/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">11</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Sharing / Export / Permissions on Flow Reports</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>2</strong> total</span>
+      <span class="theme-stat slack"><strong>2</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$2,808</strong>/mo Slack-HVC at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
 <div class="voc-text">"We are now unable to share campaign reports with individuals who do not have a mail chimp login. It has greatly interrupted our process and workflow."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 1449861</strong> · <strong>$1,658/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2026-01-21</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1769008655532779" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"There&#x27;s so many issues working with you. For example I can&#x27;t export monthly automation data."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 82827370</strong> · <strong>$1,150/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2026-04-20</span>
@@ -2371,221 +2875,38 @@ Why can&#x27;t I see how many emails were sent in total, broken down by day? Why
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">3</span>
-      <span class="risk-pill barrier">BARRIER</span>
-      <span class="theme-name">Other Barriers / UX Friction</span>
-    </div>
-    <div class="theme-card-stats">
-      <span class="theme-stat"><strong>3</strong> VoCs</span>
-      <span class="theme-stat"><strong>3</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$1,761</strong>/mo at risk</span>
-      
-    </div>
-  </div>
-  <div class="theme-card-body">
-<ol class="voc-specifics">
-<li class="voc-item">
-<div class="voc-text">"bitte nicht alle 3 wochen das UI ädern und BITTE ua die Automations-Suchfunktion verbessern"</div>
-<div class="voc-meta">
-<strong>User 151042006</strong> · <strong>$706/mo MRR</strong>
-<span class="prs-pill">PRS 4</span>
- · <span class="voc-date">2025-11-06</span>
- · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1762433215747479" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-</div>
-</li>
-<li class="voc-item">
-<div class="voc-text">"Looks like 1980 website"</div>
-<div class="voc-meta">
-<strong>User 12664015</strong> · <strong>$705/mo MRR</strong>
-<span class="csat-pill csat-terrible">Terrible</span>
- · <span class="voc-date">2025-07-17</span>
- · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1752745244100739" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-</div>
-</li>
-<li class="voc-item">
-<div class="voc-text">"The features have changed, however, are not fully functional and are messing up our workflow. We cannot use our old process either."</div>
-<div class="voc-meta">
-<strong>User 81157094</strong> · <strong>$350/mo MRR</strong>
-
- · <span class="voc-date">2025-05-07</span>
- · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1746661194489109" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-</div>
-</li>
-</ol>
-  </div>
-</div>
-<div class="theme-card">
-  <div class="theme-card-head">
-    <div class="theme-card-title">
-      <span class="theme-num">4</span>
-      <span class="risk-pill barrier">BARRIER</span>
-      <span class="theme-name">Deliverability / Inbox Placement</span>
-    </div>
-    <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$1,553</strong>/mo at risk</span>
-      
-    </div>
-  </div>
-  <div class="theme-card-body">
-<ol class="voc-specifics">
-<li class="voc-item">
-<div class="voc-text">"Just provided a feedback about the usability of the test email workflow, which seems to be in-transparent and not user-friendly in my view in terms of who else might receive a test mail and/or comment without obviously/explicitly knowing about it.
-
-I also mentioned that one test email (even with the same (our) company domain ending did not go through. I just checked it again and the email went in the SPAM folder."</div>
-<div class="voc-meta">
-<strong>User 79675358</strong> · <strong>$1,553/mo MRR</strong>
-<span class="csat-pill csat-poor">Poor</span>
- · <span class="voc-date">2025-09-20</span>
- · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1758437742397979" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-</div>
-</li>
-</ol>
-  </div>
-</div>
-<div class="theme-card">
-  <div class="theme-card-head">
-    <div class="theme-card-title">
-      <span class="theme-num">5</span>
-      <span class="risk-pill barrier">BARRIER</span>
-      <span class="theme-name">CJB Still Uses Legacy Editor</span>
-    </div>
-    <div class="theme-card-stats">
-      <span class="theme-stat"><strong>2</strong> VoCs</span>
-      <span class="theme-stat"><strong>2</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$1,265</strong>/mo at risk</span>
-      <span class="theme-stat churn"><strong>1</strong> churn</span>
-    </div>
-  </div>
-  <div class="theme-card-body">
-<ol class="voc-specifics">
-<li class="voc-item">
-<div class="voc-text">"I&#x27;m actually quite disappointed that your customer journeys are still edited in your legacy builder. Kind of takes away the point..."</div>
-<div class="voc-meta">
-<strong>User 242035718</strong> · <strong>$904/mo MRR</strong>
-<span class="csat-pill csat-poor">Poor</span>
- · <span class="voc-date">2026-03-06</span>
- · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1772789988305819" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-</div>
-</li>
-<li class="voc-item">
-<div class="voc-text">"Hello! It would be nice if there was a way to easily switch the email builder from Classic to New, even in an automation flow. Specifically, if an email was created in a Classic/Legacy builder and you had the option to turn it into an email with the New Builder WITHOUT having to do it manually each email"</div>
-<div class="voc-meta">
-<strong>User 52532</strong> · <strong>$361/mo MRR</strong>
-<span class="csat-pill csat-good">Good</span><span class="churn-pill">CHURN</span>
- · <span class="voc-date">2025-09-10</span>
- · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1757527489992949" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-</div>
-</li>
-</ol>
-  </div>
-</div>
-<div class="theme-card">
-  <div class="theme-card-head">
-    <div class="theme-card-title">
-      <span class="theme-num">6</span>
-      <span class="risk-pill barrier">BARRIER</span>
-      <span class="theme-name">Support Quality on Automation Issues</span>
-    </div>
-    <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$1,150</strong>/mo at risk</span>
-      
-    </div>
-  </div>
-  <div class="theme-card-body">
-<ol class="voc-specifics">
-<li class="voc-item">
-<div class="voc-text">"Didn&#x27;t receive a reply for the live chat"</div>
-<div class="voc-meta">
-<strong>User 174950573</strong> · <strong>$1,150/mo MRR</strong>
-<span class="csat-pill csat-terrible">Terrible</span>
- · <span class="voc-date">2026-03-02</span>
- · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1772475179964829" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-</div>
-</li>
-</ol>
-  </div>
-</div>
-<div class="theme-card">
-  <div class="theme-card-head">
-    <div class="theme-card-title">
-      <span class="theme-num">7</span>
-      <span class="risk-pill barrier">BARRIER</span>
-      <span class="theme-name">Date Picker / Date-Range UI Painful for Reports</span>
-    </div>
-    <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$770</strong>/mo at risk</span>
-      
-    </div>
-  </div>
-  <div class="theme-card-body">
-<ol class="voc-specifics">
-<li class="voc-item">
-<div class="voc-text">"The interface is absolutely terrible. It&#x27;s IMPOSSIBLE to analyze the newsletter data. The date picker is completely useless. To get daily statistics, you have to cycle through the days (with this terrible date picker). Your product managers and developers will go to hell."</div>
-<div class="voc-meta">
-<strong>User 1971477</strong> · <strong>$705/mo MRR</strong>
-<span class="csat-pill csat-terrible">Terrible</span>
- · <span class="voc-date">2025-12-01</span>
- · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1764585537464869" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-</div>
-</li>
-</ol>
-  </div>
-</div>
-<div class="theme-card">
-  <div class="theme-card-head">
-    <div class="theme-card-title">
-      <span class="theme-num">8</span>
-      <span class="risk-pill barrier">BARRIER</span>
-      <span class="theme-name">2FA / Login Disrupting Automation Workflow</span>
-    </div>
-    <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$684</strong>/mo at risk</span>
-      
-    </div>
-  </div>
-  <div class="theme-card-body">
-<ol class="voc-specifics">
-<li class="voc-item">
-<div class="voc-text">"my team facing huge issues with 2 factors notification as they don&#x27;t get the code.. and this effecting the workflow and time of the operation"</div>
-<div class="voc-meta">
-<strong>User 156507822</strong> · <strong>$684/mo MRR</strong>
-<span class="prs-pill">PRS 3</span>
- · <span class="voc-date">2025-11-24</span>
- · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1764056644733869" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-</div>
-</li>
-</ol>
-  </div>
-</div>
-<div class="theme-card">
-  <div class="theme-card-head">
-    <div class="theme-card-title">
-      <span class="theme-num">9</span>
+      <span class="theme-num">12</span>
       <span class="risk-pill barrier">BARRIER</span>
       <span class="theme-name">No Frequency Cap / Suppression Across Flows</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$576</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>2</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span><span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      <span class="theme-stat mrr"><strong>$576</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item research">
+<div class="voc-text">"Cannot exclude users from a flow based on subsequent actions (e.g., exclude cart-adders from browse abandonment flow). Core workflow in Klaviyo -- without it, users receive duplicate/irrelevant automation messages."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Nina · S3.9</strong>
+ · <span class="research-detail">Flow Builder</span>
+ · <span class="frust-pill high">Frust: High</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill medium">MEDIUM priority</span>
+ · <span class="score-pill">Score 4/5</span>
+ · <span class="excl-pill">EXCLUSIVE</span>
+</div>
+</li>
+<li class="voc-item slack">
 <div class="voc-text">"There is no automated way to make sure that a contact is only receiving one flow at a time and no extra emails.
 
 For example. When someone subscribes and enters welcome flow automation there is no automated way to make sure, they don&#x27;t receive other regular emails as well at a time. I use tags that are removed at the end of the flow but I have other people working on regular emails and they sometimes forget to exclude those tags... So it would be nice to maybe just be able to…"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 17515943</strong> · <strong>$576/mo MRR</strong>
 <span class="csat-pill csat-average">Average</span>
  · <span class="voc-date">2026-02-18</span>
@@ -2598,22 +2919,486 @@ For example. When someone subscribes and enters welcome flow automation there is
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">10</span>
+      <span class="theme-num">13</span>
       <span class="risk-pill barrier">BARRIER</span>
-      <span class="theme-name">Trigger Setup Confusion / &#x27;Not Activated&#x27; States</span>
+      <span class="theme-name">Cannot Rename Automations or Steps from Canvas</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$535</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>2</strong> total</span>
+      <span class="theme-stat research-stat"><strong>2</strong> Research</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item research">
+<div class="voc-text">"Can&#x27;t rename automations from within the flow or from the list view. User had to duplicate the flow just to give it a new name."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Eric · S1.38</strong>
+ · <span class="research-detail">Flow Creation</span>
+ · <span class="frust-pill high">Frust: High</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill low">LOW priority</span>
+ · <span class="score-pill">Score 4/5</span>
+ · <span class="excl-pill">EXCLUSIVE</span>
+</div>
+</li>
+<li class="voc-item research">
+<div class="voc-text">"Can&#x27;t rename automation steps or emails directly from the flow canvas. Basic organizational action requires workarounds."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Eric · S1.45</strong>
+ · <span class="research-detail">Flow Creation</span>
+ · <span class="frust-pill high">Frust: High</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill low">LOW priority</span>
+ · <span class="score-pill">Score 4/5</span>
+ · <span class="excl-pill">EXCLUSIVE</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">14</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Integration-Specific Templates Not Prioritized</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Automation template library surfaces integration-specific templates above universal ones. Should prioritize by user&#x27;s connected integrations."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.45</strong>
+ · <span class="research-detail">Flow templates</span>
+ · <span class="frust-pill low">Frust: Low</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill medium">MEDIUM priority</span>
+ · <span class="score-pill">Score 3/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">15</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Multi-Trigger Type Mismatch Confusing</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Multiple trigger feature requires both triggers to be the same type, making it confusing. If two triggers must match, the multi-trigger option is misleading."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.58</strong>
+ · <span class="research-detail">Trigger split</span>
+ · <span class="frust-pill medium">Frust: Medium</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill medium">MEDIUM priority</span>
+ · <span class="score-pill">Score 3/5</span>
+ · <span class="excl-pill">EXCLUSIVE</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">16</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Email Editing Has Unnecessary Intermediate Click</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Email editing in automations has an unnecessary intermediate location before reaching the actual editor. Extra click with no clear purpose."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Eric · S1.37</strong>
+ · <span class="research-detail">Email within automation</span>
+ · <span class="frust-pill medium">Frust: Medium</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill medium">MEDIUM priority</span>
+ · <span class="score-pill">Score 4/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">17</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Cannot Drag-Reorder Steps in Flow</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Can&#x27;t reorder steps in the automation flow by dragging. Limits ability to restructure flows quickly."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Eric · S1.44</strong>
+ · <span class="research-detail">Flow Creation</span>
+ · <span class="frust-pill medium">Frust: Medium</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill medium">MEDIUM priority</span>
+ · <span class="score-pill">Score 4/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">18</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Jargon-Heavy Trigger/Condition Labels</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Trigger/condition configuration panels contain jargon-heavy labels with no inline explanations. User felt completely blocked."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Eric · S1.48</strong>
+ · <span class="research-detail">General</span>
+ · <span class="frust-pill high">Frust: High</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill medium">MEDIUM priority</span>
+ · <span class="score-pill">Score 5/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">19</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Other Barriers / UX Friction</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>3</strong> total</span>
+      <span class="theme-stat slack"><strong>3</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$1,761</strong>/mo Slack-HVC at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"bitte nicht alle 3 wochen das UI ädern und BITTE ua die Automations-Suchfunktion verbessern"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 151042006</strong> · <strong>$706/mo MRR</strong>
+<span class="prs-pill">PRS 4</span>
+ · <span class="voc-date">2025-11-06</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1762433215747479" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Looks like 1980 website"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 12664015</strong> · <strong>$705/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-07-17</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1752745244100739" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"The features have changed, however, are not fully functional and are messing up our workflow. We cannot use our old process either."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 81157094</strong> · <strong>$350/mo MRR</strong>
+
+ · <span class="voc-date">2025-05-07</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1746661194489109" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">20</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Deliverability / Inbox Placement</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$1,553</strong>/mo Slack-HVC at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"Just provided a feedback about the usability of the test email workflow, which seems to be in-transparent and not user-friendly in my view in terms of who else might receive a test mail and/or comment without obviously/explicitly knowing about it.
+
+I also mentioned that one test email (even with the same (our) company domain ending did not go through. I just checked it again and the email went in the SPAM folder."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 79675358</strong> · <strong>$1,553/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-09-20</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1758437742397979" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">21</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">CJB Still Uses Legacy Editor</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>2</strong> total</span>
+      <span class="theme-stat slack"><strong>2</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$1,265</strong>/mo Slack-HVC at risk</span>
+      <span class="theme-stat churn"><strong>1</strong> churn</span>
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"I&#x27;m actually quite disappointed that your customer journeys are still edited in your legacy builder. Kind of takes away the point..."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 242035718</strong> · <strong>$904/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2026-03-06</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1772789988305819" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+<li class="voc-item slack">
+<div class="voc-text">"Hello! It would be nice if there was a way to easily switch the email builder from Classic to New, even in an automation flow. Specifically, if an email was created in a Classic/Legacy builder and you had the option to turn it into an email with the New Builder WITHOUT having to do it manually each email"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 52532</strong> · <strong>$361/mo MRR</strong>
+<span class="csat-pill csat-good">Good</span><span class="churn-pill">CHURN</span>
+ · <span class="voc-date">2025-09-10</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1757527489992949" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">22</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Support Quality on Automation Issues</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$1,150</strong>/mo Slack-HVC at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"Didn&#x27;t receive a reply for the live chat"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 174950573</strong> · <strong>$1,150/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2026-03-02</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1772475179964829" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">23</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">&#x27;From Audience&#x27; Setting Surfaces Unnecessarily</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Automation setup surfaces the option to change &#x27;from audience&#x27; unnecessarily, adding confusion."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.28</strong>
+ · <span class="research-detail">General</span>
+ · <span class="frust-pill low">Frust: Low</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill low">LOW priority</span>
+ · <span class="score-pill">Score 2/5</span>
+ · <span class="excl-pill">EXCLUSIVE</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">24</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">If/Else vs Split Visual Differentiation</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"If/Else and Split blocks look similar on the canvas. No clear visual differentiation at a glance."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Eric · S1.47</strong>
+ · <span class="research-detail">Split Paths</span>
+ · <span class="frust-pill medium">Frust: Medium</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill low">LOW priority</span>
+ · <span class="score-pill">Score 3/5</span>
+ · <span class="excl-pill">EXCLUSIVE</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">25</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Date Picker / Date-Range UI Painful for Reports</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$705</strong>/mo Slack-HVC at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"The interface is absolutely terrible. It&#x27;s IMPOSSIBLE to analyze the newsletter data. The date picker is completely useless. To get daily statistics, you have to cycle through the days (with this terrible date picker). Your product managers and developers will go to hell."</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 1971477</strong> · <strong>$705/mo MRR</strong>
+<span class="csat-pill csat-terrible">Terrible</span>
+ · <span class="voc-date">2025-12-01</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1764585537464869" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">26</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">2FA / Login Disrupting Automation Workflow</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$684</strong>/mo Slack-HVC at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"my team facing huge issues with 2 factors notification as they don&#x27;t get the code.. and this effecting the workflow and time of the operation"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 156507822</strong> · <strong>$684/mo MRR</strong>
+<span class="prs-pill">PRS 3</span>
+ · <span class="voc-date">2025-11-24</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1764056644733869" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">27</span>
+      <span class="risk-pill barrier">BARRIER</span>
+      <span class="theme-name">Trigger Setup Confusion / &#x27;Not Activated&#x27; States</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$535</strong>/mo Slack-HVC at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
 <div class="voc-text">"Chose a trigger I have no idea what the issues are &#x27;not activated&#x27; etc. I&#x27;m trying to active a simple sign up + email"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 144467329</strong> · <strong>$535/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2026-01-22</span>
@@ -2626,26 +3411,27 @@ For example. When someone subscribes and enters welcome flow automation there is
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">11</span>
+      <span class="theme-num">28</span>
       <span class="risk-pill barrier">BARRIER</span>
       <span class="theme-name">Drip Inbox / Reply-Detection Requirements Break Real Inbox</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$455</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$455</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"This is actually about setting up the inbox for a drip campaign.
 
 I was advised by your team to set up the Mailchimp Inbox to make sure my automated flow worked. I was told without it, mailchimp would fail to detect replies and consequently the flow wouldn&#x27;t progress. 
 
 Upon setting it up, now my actual inbox doesn&#x27;t get emails at all, which is where I want to manage them from - NOT from mailchimp. We proceeded to disconnect all the forwarding options in the &quot;inbox&quot; section o…"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 218455102</strong> · <strong>$455/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2026-02-04</span>
@@ -2658,22 +3444,23 @@ Upon setting it up, now my actual inbox doesn&#x27;t get emails at all, which is
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">12</span>
+      <span class="theme-num">29</span>
       <span class="risk-pill barrier">BARRIER</span>
       <span class="theme-name">Downgrade / Plan-Change Flow Terrible</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$420</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$420</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"downgrade flow is terrible."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 223214774</strong> · <strong>$420/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2025-12-15</span>
@@ -2686,22 +3473,23 @@ Upon setting it up, now my actual inbox doesn&#x27;t get emails at all, which is
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">13</span>
+      <span class="theme-num">30</span>
       <span class="risk-pill barrier">BARRIER</span>
       <span class="theme-name">Pop-up / Sign-up Form Builder Complex</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$410</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$410</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"Such bad popup form user flow, so complex."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 185869850</strong> · <strong>$410/mo MRR</strong>
 <span class="prs-pill">PRS 0</span>
  · <span class="voc-date">2025-06-25</span>
@@ -2714,22 +3502,23 @@ Upon setting it up, now my actual inbox doesn&#x27;t get emails at all, which is
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">14</span>
+      <span class="theme-num">31</span>
       <span class="risk-pill barrier">BARRIER</span>
       <span class="theme-name">Automation Turned Off Without Notice</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$384</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$384</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"YOU ARE FUCKING EXPENSIVE! And you turned off one of our automations so FUCK YOU!"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 34213821</strong> · <strong>$384/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2025-05-12</span>
@@ -2742,22 +3531,23 @@ Upon setting it up, now my actual inbox doesn&#x27;t get emails at all, which is
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">15</span>
+      <span class="theme-num">32</span>
       <span class="risk-pill barrier">BARRIER</span>
       <span class="theme-name">Cannot Replicate / Clone Entire Journey</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$350</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$350</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"Why can&#x27;t I replicate an entire journey as it is why do I have to repopulate the entire journey."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 181094334</strong> · <strong>$350/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2025-11-13</span>
@@ -2770,22 +3560,23 @@ Upon setting it up, now my actual inbox doesn&#x27;t get emails at all, which is
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">16</span>
+      <span class="theme-num">33</span>
       <span class="risk-pill barrier">BARRIER</span>
       <span class="theme-name">Email Template Library View / Limit</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$350</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$350</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"this new area for viewing your email templates is so hard to use. and althought i like the preview of the tool - I dislike the limited number of items on display as I&#x27;m managing over 22 emial templates, some go to journeys, others go to transactional templates."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 168503626</strong> · <strong>$350/mo MRR</strong>
 <span class="prs-pill">PRS 3</span>
  · <span class="voc-date">2025-09-14</span>
@@ -2798,22 +3589,23 @@ Upon setting it up, now my actual inbox doesn&#x27;t get emails at all, which is
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">17</span>
+      <span class="theme-num">34</span>
       <span class="risk-pill barrier">BARRIER</span>
       <span class="theme-name">B2B / Sophisticated Use-Case Inadequate</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$321</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$321</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"We&#x27;re trying to use Mailchimp for a B2B SaaS company, and its tools for setting up sophisticated automations and viewing reports are inadequate. It&#x27;s probably a great platform for a small business."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 212737874</strong> · <strong>$321/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2025-06-04</span>
@@ -2826,26 +3618,27 @@ Upon setting it up, now my actual inbox doesn&#x27;t get emails at all, which is
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">18</span>
+      <span class="theme-num">35</span>
       <span class="risk-pill barrier">BARRIER</span>
       <span class="theme-name">Custom-Field Sorting Removed in Audience</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$310</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$310</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"I was surprised to learn that sorting by custom fields like First Name, Birthday, and Gender is no longer supported in the Audience list.
 This feature was incredibly helpful for organizing and working with my contacts directly within Mailchimp, without having to export to a spreadsheet.
 
 I’ve been using it regularly for years, and its removal has significantly impacted my workflow.
 I strongly urge you to bring this back - it was one of the reasons I appreciated the Mailchimp…"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 6604902</strong> · <strong>$310/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2025-08-06</span>
@@ -2856,7 +3649,7 @@ I strongly urge you to bring this back - it was one of the reasons I appreciated
   </div>
 </div>
 
-    <p style="margin-top: 16px; margin-bottom: 18px;"><strong>Barriers MRR exposure:</strong> $19,307/mo across 26 HVC instances (26 VoCs across 18 barrier themes).</p>
+    <p style="margin-top: 16px; margin-bottom: 18px;"><strong>Barriers MRR exposure:</strong> $83,307/mo across 47 HVC instances (47 VoCs across 35 barrier themes).</p>
 
     <!-- MISSING FEATURES -->
     <h2><span class="num">C</span><span class="risk-pill missing">MISSING</span>What customers are asking for — every specific request, by theme, with the actual customer quotes</h2>
@@ -2866,24 +3659,39 @@ I strongly urge you to bring this back - it was one of the reasons I appreciated
     <div class="theme-card-title">
       <span class="theme-num">1</span>
       <span class="risk-pill missing">MISSING</span>
-      <span class="theme-name">Advanced Segmentation in CJB</span>
+      <span class="theme-name">Event-Property Access in Flow Branches/Emails</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$3,000</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>2</strong> total</span>
+      <span class="theme-stat research-stat"><strong>2</strong> Research</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
-<div class="voc-text">"Automations/Customer Journeys REALLY need advanced segmentation (not the old basic segmentations).  Furthermore, segmentations of any kind should also allow for nesting.  This has been a basic feature for email platforms for over 20 years and it would be nice of Mail Chimp would catch up :)  I&#x27;m happy to give any further feedback on desired features and usability.  All as a user of communications platforms since 1999 in both large and small companies within the marketing spac…"</div>
+<li class="voc-item research">
+<div class="voc-text">"Automation filters only support customer-level properties, not triggering event data. Can&#x27;t dynamically filter or branch based on the abandoned products&#x27; attributes."</div>
 <div class="voc-meta">
-<strong>User 180695314</strong> · <strong>$3,000/mo MRR</strong>
-<span class="csat-pill csat-poor">Poor</span>
- · <span class="voc-date">2026-02-17</span>
- · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1771356874900729" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.57</strong>
+ · <span class="research-detail">Product Exclusions/Inclusions</span>
+ · <span class="frust-pill high">Frust: High</span>
+ · <span class="size-pill biglift">Big Lift</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 4/5</span>
+</div>
+</li>
+<li class="voc-item research">
+<div class="voc-text">"Limited event property access in emails. Only name/image from product block - can&#x27;t access deeper properties from triggering events (e.g., product tags, collections, custom fields)."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.59</strong>
+ · <span class="research-detail">Flow Builder</span>
+ · <span class="frust-pill high">Frust: High</span>
+ · <span class="size-pill biglift">Big Lift</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 4/5</span>
+ · <span class="excl-pill">EXCLUSIVE</span>
 </div>
 </li>
 </ol>
@@ -2894,80 +3702,63 @@ I strongly urge you to bring this back - it was one of the reasons I appreciated
     <div class="theme-card-title">
       <span class="theme-num">2</span>
       <span class="risk-pill missing">MISSING</span>
-      <span class="theme-name">Date-Relative / Recurring / Event-Based Triggers</span>
-    </div>
-    <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$1,701</strong>/mo at risk</span>
-      
-    </div>
-  </div>
-  <div class="theme-card-body">
-<ol class="voc-specifics">
-<li class="voc-item">
-<div class="voc-text">"We would like to be able to send an email after our events (several a day everyday) and at the current moment all date automations require either a specific date or a future date
-
-&lt;|*FS Session Replay*&gt;
-_______________________________________
-Thread: 1 replies (latest: 2025-06-26 11:14:21 PDT)
-Reactions: ack (1)"</div>
-<div class="voc-meta">
-<strong>User 36238105</strong> · <strong>$1,701/mo MRR</strong>
-<span class="csat-pill csat-poor">Poor</span>
- · <span class="voc-date">2025-06-26</span>
- · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1750961377721449" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-</div>
-</li>
-</ol>
-  </div>
-</div>
-<div class="theme-card">
-  <div class="theme-card-head">
-    <div class="theme-card-title">
-      <span class="theme-num">3</span>
-      <span class="risk-pill missing">MISSING</span>
       <span class="theme-name">Conversational AI / Generative Copy in Journeys</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>4</strong> VoCs</span>
-      <span class="theme-stat"><strong>4</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$1,485</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>5</strong> total</span>
+      <span class="theme-stat slack"><strong>4</strong> Slack</span><span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      <span class="theme-stat mrr"><strong>$1,485</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item research">
+<div class="voc-text">"Can&#x27;t modify time delay on first automation email or reorder steps by dragging. Fundamental automation building flexibility is missing."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.48</strong>
+ · <span class="research-detail">Flow builder</span>
+ · <span class="frust-pill medium">Frust: Medium</span>
+ · <span class="size-pill biglift">Big Lift</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 4/5</span>
+</div>
+</li>
+<li class="voc-item slack">
 <div class="voc-text">"The cumulative layout shift of elements that loads on the automation flow homepage causes you to inadvertently click the suggested AI powered automations instead of the &quot;View my flows&quot; link because the AI powered suggestions loads a second or 2 after the entire page loads, causing the contents to shift around."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 7004749</strong> · <strong>$425/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2025-09-04</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1757004904129789" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"I hate MailChimp&#x27;s interface. When I click on Email, I want to see what email template options I have to build with, not be funneled through three force fed options (regular email/automation/landing). Very annoying."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 4527190</strong> · <strong>$410/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2025-08-26</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1756220033671939" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"MailChimp crashes every time I open a journey point to view a specific contact queue. I need to remove a contact from that queue, and it will not let me do it. Also, it would be very nice if MailChimp allowed for more than 3 journey start points."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 152409026</strong> · <strong>$340/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2025-05-12</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1747077149666789" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"I hate all the AI tools and want them gone completely from my UI. I don&#x27;t want to be asked if I want to optimise anything using AI tools and I don&#x27;t want them popping up randomly in my workflow. I want a big button that says &#x27;turn off all AI tools&#x27; and then to never have to see any of it ever again. It&#x27;s useless, it slows me down, and it looks terrible for my brand if my customers think I might have been using it."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 16534319</strong> · <strong>$310/mo MRR</strong>
 <span class="csat-pill csat-average">Average</span>
  · <span class="voc-date">2025-08-27</span>
@@ -2980,22 +3771,297 @@ Reactions: ack (1)"</div>
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">4</span>
+      <span class="theme-num">3</span>
       <span class="risk-pill missing">MISSING</span>
-      <span class="theme-name">Cross-Channel: SMS / Push / WhatsApp in Journey</span>
+      <span class="theme-name">Better Templates / Pre-built Flows</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$1,182</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item research">
+<div class="voc-text">"Automation template library search/filtering needs improvement to help users find relevant templates faster."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.46</strong>
+ · <span class="research-detail">Flow templates</span>
+ · <span class="frust-pill high">Frust: High</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 5/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">4</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Brand Kit Not Applied to Automation Email Templates</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Automation email templates don&#x27;t pull in brand kit settings by default. Out-of-the-box state has multiple issues needing fixes before activation."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.47</strong>
+ · <span class="research-detail">Email within automation</span>
+ · <span class="frust-pill high">Frust: High</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 5/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">5</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Operational Workflow / Tag Automation (Shopify-Flow-style)</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Time delay options are inconsistent across triggers. Order confirmation has none while abandoned cart does. Experienced user needs delays for Shopify sync timing."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Eric · S1.46</strong>
+ · <span class="research-detail">Flow Creation</span>
+ · <span class="frust-pill medium">Frust: Medium</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 4/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">6</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Flow-Specific Email Templates</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Limited flow-specific email templates. Welcome flow has options but abandoned cart/browse flows lack dedicated templates -- expert had to use generic campaign templates instead."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Nina · S3.15</strong>
+ · <span class="research-detail">Flow Templates</span>
+ · <span class="frust-pill high">Frust: High</span>
+ · <span class="size-pill quickwin">Quick Win</span>
+ · <span class="ipri-pill high">HIGH priority</span>
+ · <span class="score-pill">Score 5/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">7</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Advanced Segmentation in CJB</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$3,000</strong>/mo Slack-HVC at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"Automations/Customer Journeys REALLY need advanced segmentation (not the old basic segmentations).  Furthermore, segmentations of any kind should also allow for nesting.  This has been a basic feature for email platforms for over 20 years and it would be nice of Mail Chimp would catch up :)  I&#x27;m happy to give any further feedback on desired features and usability.  All as a user of communications platforms since 1999 in both large and small companies within the marketing spac…"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 180695314</strong> · <strong>$3,000/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2026-02-17</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1771356874900729" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">8</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Named / Reusable Filter Conditions</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Can&#x27;t name filter conditions in automations. Expected ability to create named, reusable condition groups (e.g., &#x27;Non-purchasers&#x27;)."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.41</strong>
+ · <span class="research-detail">Filter Conditions</span>
+ · <span class="frust-pill medium">Frust: Medium</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill medium">MEDIUM priority</span>
+ · <span class="score-pill">Score 4/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">9</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Central A/B Experiment Repository</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"AB tests siloed within individual flows via split paths. No central experiment repository to track current and historical tests."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.52</strong>
+ · <span class="research-detail">AB Test</span>
+ · <span class="frust-pill medium">Frust: Medium</span>
+ · <span class="size-pill biglift">Big Lift</span>
+ · <span class="ipri-pill medium">MEDIUM priority</span>
+ · <span class="score-pill">Score 3/5</span>
+ · <span class="excl-pill">EXCLUSIVE</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">10</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Advanced Product Exclusion / Filter by Collections / Tags</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Product exclusion on cart abandonment triggers is great but needs expansion to filter by collections or tags, not just individual products."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.56</strong>
+ · <span class="research-detail">Product Exclusions/Inclusions</span>
+ · <span class="frust-pill low">Frust: Low</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill medium">MEDIUM priority</span>
+ · <span class="score-pill">Score 3/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">11</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Date-Relative / Recurring / Event-Based Triggers</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$1,701</strong>/mo Slack-HVC at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
+<div class="voc-text">"We would like to be able to send an email after our events (several a day everyday) and at the current moment all date automations require either a specific date or a future date
+
+&lt;|*FS Session Replay*&gt;
+_______________________________________
+Thread: 1 replies (latest: 2025-06-26 11:14:21 PDT)
+Reactions: ack (1)"</div>
+<div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
+<strong>User 36238105</strong> · <strong>$1,701/mo MRR</strong>
+<span class="csat-pill csat-poor">Poor</span>
+ · <span class="voc-date">2025-06-26</span>
+ · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1750961377721449" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">12</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Cross-Channel: SMS / Push / WhatsApp in Journey</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$1,182</strong>/mo Slack-HVC at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
 <div class="voc-text">"SMS Automations will not load or save"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 26957511</strong> · <strong>$1,182/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2025-11-13</span>
@@ -3008,22 +4074,115 @@ Reactions: ack (1)"</div>
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">5</span>
+      <span class="theme-num">13</span>
       <span class="risk-pill missing">MISSING</span>
-      <span class="theme-name">Internal Notifications / Staff Alerts from Flow (TO field)</span>
+      <span class="theme-name">Calculated Send Day Visibility (Day 0 / Day 1)</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$939</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item research">
+<div class="voc-text">"Automation view doesn&#x27;t display the calculated send day for each email relative to trigger (e.g., Day 0, Day 1)."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.42</strong>
+ · <span class="research-detail">Flow builder</span>
+ · <span class="frust-pill low">Frust: Low</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill low">LOW priority</span>
+ · <span class="score-pill">Score 3/5</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">14</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Schedule Flow Activation / Email Live Date</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"No ability to schedule flow activation or schedule individual emails within a flow to go live at a specific date/time."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.60</strong>
+ · <span class="research-detail">Schedule</span>
+ · <span class="frust-pill low">Frust: Low</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill low">LOW priority</span>
+ · <span class="score-pill">Score 2/5</span>
+ · <span class="excl-pill">EXCLUSIVE</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">15</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Parallel Triggers / Identity Resolution</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat research-stat"><strong>1</strong> Research</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item research">
+<div class="voc-text">"Multiple triggers don&#x27;t solve identity resolution partner workflows. Brands using Elevar, retention.com, etc. need parallel triggers that share the same flow but from different sources."</div>
+<div class="voc-meta">
+<span class="src-badge research">UX RESEARCH</span> 
+<strong>Jacob · S2.63</strong>
+ · <span class="research-detail">Trigger split</span>
+ · <span class="frust-pill low">Frust: Low</span>
+ · <span class="size-pill mediumlift">Medium Lift</span>
+ · <span class="ipri-pill low">LOW priority</span>
+ · <span class="score-pill">Score 2/5</span>
+ · <span class="excl-pill">EXCLUSIVE</span>
+</div>
+</li>
+</ol>
+  </div>
+</div>
+<div class="theme-card">
+  <div class="theme-card-head">
+    <div class="theme-card-title">
+      <span class="theme-num">16</span>
+      <span class="risk-pill missing">MISSING</span>
+      <span class="theme-name">Internal Notifications / Staff Alerts from Flow (TO field)</span>
+    </div>
+    <div class="theme-card-stats">
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$939</strong>/mo Slack-HVC at risk</span>
+      
+    </div>
+  </div>
+  <div class="theme-card-body">
+<ol class="voc-specifics">
+<li class="voc-item slack">
 <div class="voc-text">"I am trying to add an email in to a flow that alerts staff that an email was sent. I am unable to change the TO of emails. Since that is a limitation, I was trying to find a way to send a report periodically but that is a limitation as well. Ideally there would be an automated solution (simply allowing change of the TO field would be perfect) so we can get timely alerts to manage contact interactions."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 236062498</strong> · <strong>$939/mo MRR</strong>
 <span class="csat-pill csat-average">Average</span>
  · <span class="voc-date">2025-10-02</span>
@@ -3036,26 +4195,27 @@ Reactions: ack (1)"</div>
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">6</span>
+      <span class="theme-num">17</span>
       <span class="risk-pill missing">MISSING</span>
       <span class="theme-name">More Than 3 Triggers / Limits in CJB</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$900</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$900</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"Need to be able to add more than 3 triggers, not sure why it is limitied.
 
 &lt;|*FS Session Replay*&gt;
 _______________________________________
 Thread: 8 replies (latest: 2025-12-12 13:03:14 PST)"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 238740590</strong> · <strong>$900/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2025-12-08</span>
@@ -3068,31 +4228,33 @@ Thread: 8 replies (latest: 2025-12-12 13:03:14 PST)"</div>
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">7</span>
+      <span class="theme-num">18</span>
       <span class="risk-pill missing">MISSING</span>
       <span class="theme-name">Other Missing Features</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>2</strong> VoCs</span>
-      <span class="theme-stat"><strong>2</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$800</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>2</strong> total</span>
+      <span class="theme-stat slack"><strong>2</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$800</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"All the open data for SMS is missing."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 144538229</strong> · <strong>$450/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2026-02-10</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770724816346329" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"I need step-by-step of how to clean our email lists, then archive those with bad emails, hard bounces, etc. Other platforms I&#x27;ve used have had step by step instructions with links to follow. This is ridiculous how long it takes to try and find anything. No flow of steps. step 1&gt;step2&gt;step3&gt;etc. with teh actual name of where you are to go. No screen shots either that I can find."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 118359946</strong> · <strong>$350/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2025-06-24</span>
@@ -3105,22 +4267,23 @@ Thread: 8 replies (latest: 2025-12-12 13:03:14 PST)"</div>
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">8</span>
+      <span class="theme-num">19</span>
       <span class="risk-pill missing">MISSING</span>
       <span class="theme-name">Birthday / Profile-Update via Automation</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$755</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$755</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"There is no option to update a profile with birthday information through automations. The only way to have a customer add their birthday is using the &quot;Update Profile&quot; merge tag, which sends a SEPARATE email with ANOTHER link they have to click to update their information. This is unnecessary extra work for the audience, and it is even more confusing because the body text in the second email that contains the actual link to update their preferences is unable to be edited. Maki…"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 16322507</strong> · <strong>$755/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2026-04-08</span>
@@ -3133,31 +4296,33 @@ Thread: 8 replies (latest: 2025-12-12 13:03:14 PST)"</div>
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">9</span>
+      <span class="theme-num">20</span>
       <span class="risk-pill missing">MISSING</span>
       <span class="theme-name">Per-Flow Send Timing &amp; Granular Reports</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>2</strong> VoCs</span>
-      <span class="theme-stat"><strong>2</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$676</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>2</strong> total</span>
+      <span class="theme-stat slack"><strong>2</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$676</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"I think it would be beneficial to see a report that lists when a automated &quot;flow&quot; email was sent and to who. I can see the total deliveries, but I can&#x27;t see cohesive report about exactly when an automated email was sent, and to who it was sent to. I think many people would benefit from adding this feature to the flow&#x27;s step analysis for each email."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 223362146</strong> · <strong>$376/mo MRR</strong>
 <span class="csat-pill csat-average">Average</span>
  · <span class="voc-date">2025-08-01</span>
  · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1754066496207149" target="_blank" rel="noopener">#hvc_feedback ↗</a>
 </div>
 </li>
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"Need ability to print/save-to-PDF all the emails of a campaign automation. (Can&#x27;t even print/save one email at a time properly!!! Chat support could not help; said it&#x27;s a known issue."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 53634909</strong> · <strong>$300/mo MRR</strong>
 <span class="csat-pill csat-terrible">Terrible</span>
  · <span class="voc-date">2025-08-06</span>
@@ -3170,22 +4335,23 @@ Thread: 8 replies (latest: 2025-12-12 13:03:14 PST)"</div>
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">10</span>
+      <span class="theme-num">21</span>
       <span class="risk-pill missing">MISSING</span>
       <span class="theme-name">Better A/B Testing in Automations</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$455</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$455</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"Setting up A/B testing for a simple 3-email drip campaign turns into 14 emails and like 30+ steps. that is waaaaaaaaay to complicated even for an experienced automation flow professional."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 218455102</strong> · <strong>$455/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2026-02-04</span>
@@ -3198,22 +4364,23 @@ Thread: 8 replies (latest: 2025-12-12 13:03:14 PST)"</div>
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">11</span>
+      <span class="theme-num">22</span>
       <span class="risk-pill missing">MISSING</span>
       <span class="theme-name">Email Template Management in Flows</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$450</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$450</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"Make it much easier to manage email templates created for automated flows."</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 239055926</strong> · <strong>$450/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2025-09-25</span>
@@ -3226,23 +4393,24 @@ Thread: 8 replies (latest: 2025-12-12 13:03:14 PST)"</div>
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">12</span>
+      <span class="theme-num">23</span>
       <span class="risk-pill missing">MISSING</span>
       <span class="theme-name">Saved Template Selection Removed in Duplicated Journeys</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$425</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$425</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"I have chatted with customer support twice in the past year about this issue and was told that it is a permanent change today. I was told to send in my feedback for additional consideration.
 In the past year a permanent change was made to the Journey creation functionality. There used to be an option to select a saved template in a duplicated journey, but now due to this update the journey step must be deleted and created again every time. This adds several extra steps that w…"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 72527010</strong> · <strong>$425/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2026-02-04</span>
@@ -3255,22 +4423,23 @@ In the past year a permanent change was made to the Journey creation functionali
 <div class="theme-card">
   <div class="theme-card-head">
     <div class="theme-card-title">
-      <span class="theme-num">13</span>
+      <span class="theme-num">24</span>
       <span class="risk-pill missing">MISSING</span>
       <span class="theme-name">Reporting / Analytics on Automations</span>
     </div>
     <div class="theme-card-stats">
-      <span class="theme-stat"><strong>1</strong> VoCs</span>
-      <span class="theme-stat"><strong>1</strong> HVCs</span>
-      <span class="theme-stat mrr"><strong>$383</strong>/mo at risk</span>
+      <span class="theme-stat"><strong>1</strong> total</span>
+      <span class="theme-stat slack"><strong>1</strong> Slack</span>
+      <span class="theme-stat mrr"><strong>$383</strong>/mo Slack-HVC at risk</span>
       
     </div>
   </div>
   <div class="theme-card-body">
 <ol class="voc-specifics">
-<li class="voc-item">
+<li class="voc-item slack">
 <div class="voc-text">"I need to be able to run a monthly report for each of my flows that shows total clicks for each individual link in the email (for the calendar month - NOT all time). I haven&#x27;t found anything that can give me the total clicks by month. I can use the flow report to show basic performance stats for a specific date range, but this doesn&#x27;t show me the performance of the individual links in the email - I can only see &#x27;all time&#x27; data for this via the campaign reports dashboard. I ha…"</div>
 <div class="voc-meta">
+<span class="src-badge slack">SLACK VOC</span> 
 <strong>User 13014699</strong> · <strong>$383/mo MRR</strong>
 <span class="csat-pill csat-poor">Poor</span>
  · <span class="voc-date">2025-08-10</span>
@@ -3281,20 +4450,20 @@ In the past year a permanent change was made to the Journey creation functionali
   </div>
 </div>
 
-    <p style="margin-top: 16px;"><strong>Missing-features MRR exposure:</strong> $13,151/mo across 18 HVC instances (18 VoCs across 13 missing-feature themes).</p>
+    <p style="margin-top: 16px;"><strong>Missing-features MRR exposure:</strong> $57,151/mo across 31 HVC instances (31 VoCs across 24 missing-feature themes).</p>
   </section>
 
   <!-- Risk Page 3 -->
   <section class="page" aria-label="HVC Risk Page 3">
     <header class="page-head">
       <div>
-        <div class="eyebrow">HVC Risk Map · Phased plan to close MRR exposure</div>
-        <h1>3-phase plan ranked by HVC MRR at risk — close <em style="color:#4338CA;">$35,808</em> in Phase 1, <em>$15,213</em> in Phase 2, <em>$15,810</em> in Phase 3</h1>
-        <div class="subtitle">Themes ordered by total HVC MRR exposure, then bucketed into 3 phases targeting ~50% / ~30% / ~20% of the at-risk MRR. Pair with the "Roadmap to Win" tab for the strategic-build plan.</div>
+        <div class="eyebrow">HVC Risk Map · Re-prioritized phased plan (Slack VoCs + UX research integrated)</div>
+        <h1>Re-prioritized 3-phase plan — close <em style="color:#4338CA;">$52,210</em> in Phase 1, <em>$40,303</em> in Phase 2, <em>$98,318</em> in Phase 3</h1>
+        <div class="subtitle">Themes re-ranked using <em>both</em> Slack-HVC MRR exposure AND UX research priority weight (each strategic-MRR research voice = $5K HIGH / $2K MED / $1K LOW). Top 6 themes grab Phase 1, next 8 go in Phase 2, remaining 59 in Phase 3.</div>
       </div>
       <div class="meta">
-        <div><strong>Total HVC MRR at risk:</strong> $53,547/mo</div>
-        <div><strong>Phase split:</strong> 50% / 30% / 20%</div>
+        <div><strong>Slack HVC MRR at risk:</strong> $177,547/mo</div>
+        <div><strong>Research-strategic voices:</strong> 38</div>
         <div><strong>Phases:</strong> 0–6 / 6–12 / 12–18 mo</div>
         <div><strong>Page:</strong> 3 of 3</div>
       </div>
@@ -3302,41 +4471,73 @@ In the past year a permanent change was made to the Journey creation functionali
 
     <h2 style="margin-top:18px;"><span class="num">D1</span>Phase 1 — Stop the bleeding</h2>
     <div class="phase p1">
-      <div class="head"><h3>Phase 1 — Stop the bleeding</h3><span class="horizon">Months 0–6 · $35,808/mo MRR at risk · 6 themes</span></div>
+      <div class="head"><h3>Phase 1 — Stop the bleeding</h3><span class="horizon">Months 0–6 · $52,210/mo MRR at risk · 6 themes</span></div>
       <p style="font-size:12.5px; color:#4B5563; margin-bottom:10px;">Address the highest-MRR-exposure bugs and barriers first. Every fix here is a churn-risk reduction in our most valuable accounts.</p>
       <table class="dense"><thead><tr><th style="width:60px">Type</th><th>Theme</th><th style="width:60px">VoCs</th><th style="width:60px">HVCs</th><th style="width:90px">HVC MRR</th><th style="width:60px">Churn</th></tr></thead><tbody>
-        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Editor / UI Glitches in Journey Builder</strong></td><td>4</td><td>4</td><td><strong>$11,507</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Editor / UI Glitches in Journey Builder</strong></td><td>5</td><td>5</td><td><strong>$16,507</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Event-Property Access in Flow Branches/Emails</strong></td><td>2</td><td>2</td><td><strong>$10,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Time Delay UX Inconsistent / Restricted</strong></td><td>2</td><td>2</td><td><strong>$7,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Conversational AI / Generative Copy in Journeys</strong></td><td>5</td><td>5</td><td><strong>$6,485</strong></td><td>0</td></tr>
         <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Reporting / Stats Wrong on Automations</strong></td><td>5</td><td>3</td><td><strong>$6,218</strong></td><td>0</td></tr>
-        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Slow / Confusing Journey Builder UX</strong></td><td>5</td><td>5</td><td><strong>$5,205</strong></td><td>1</td></tr>
-        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Per-Step KPIs / Performance Not Viewable in Journeys</strong></td><td>1</td><td>1</td><td><strong>$5,098</strong></td><td>0</td></tr>
-        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Automations Not Sending / Delivery Failures</strong></td><td>3</td><td>3</td><td><strong>$4,780</strong></td><td>0</td></tr>
-        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Advanced Segmentation in CJB</strong></td><td>1</td><td>1</td><td><strong>$3,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Premature &#x27;Turn On&#x27; / Activation Before Content Ready</strong></td><td>2</td><td>2</td><td><strong>$6,000</strong></td><td>0</td></tr>
       </tbody></table>
     </div>
 
     <h2 style="margin-top:18px;"><span class="num">D2</span>Phase 2 — Close obvious functional gaps</h2>
     <div class="phase p2">
-      <div class="head"><h3>Phase 2 — Close obvious functional gaps</h3><span class="horizon">Months 6–12 · $15,213/mo MRR at risk · 8 themes</span></div>
+      <div class="head"><h3>Phase 2 — Close obvious functional gaps</h3><span class="horizon">Months 6–12 · $40,303/mo MRR at risk · 8 themes</span></div>
       <p style="font-size:12.5px; color:#4B5563; margin-bottom:10px;">After triage, close the medium-MRR-exposure items. These are where customers are 'frustrated but not yet leaving.'</p>
       <table class="dense"><thead><tr><th style="width:60px">Type</th><th>Theme</th><th style="width:60px">VoCs</th><th style="width:60px">HVCs</th><th style="width:90px">HVC MRR</th><th style="width:60px">Churn</th></tr></thead><tbody>
-        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Default View / Sort Order Broken in Campaigns/Automations</strong></td><td>2</td><td>2</td><td><strong>$2,925</strong></td><td>0</td></tr>
-        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Sharing / Export / Permissions on Flow Reports</strong></td><td>2</td><td>2</td><td><strong>$2,808</strong></td><td>0</td></tr>
-        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Other Barriers / UX Friction</strong></td><td>3</td><td>3</td><td><strong>$1,761</strong></td><td>0</td></tr>
-        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Migration &amp; Conversion Bugs (Classic → CJB / Marketing Automation Flows)</strong></td><td>2</td><td>2</td><td><strong>$1,715</strong></td><td>1</td></tr>
-        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Date-Relative / Recurring / Event-Based Triggers</strong></td><td>1</td><td>1</td><td><strong>$1,701</strong></td><td>0</td></tr>
-        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Deliverability / Inbox Placement</strong></td><td>1</td><td>1</td><td><strong>$1,553</strong></td><td>0</td></tr>
-        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Conversational AI / Generative Copy in Journeys</strong></td><td>4</td><td>4</td><td><strong>$1,485</strong></td><td>0</td></tr>
-        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>CJB Still Uses Legacy Editor</strong></td><td>2</td><td>2</td><td><strong>$1,265</strong></td><td>1</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Slow / Confusing Journey Builder UX</strong></td><td>5</td><td>5</td><td><strong>$5,205</strong></td><td>1</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Per-Step KPIs / Performance Not Viewable in Journeys</strong></td><td>1</td><td>1</td><td><strong>$5,098</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Slider-Only Split Percentage / Numeric Input Missing</strong></td><td>1</td><td>1</td><td><strong>$5,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Flow Templates Link Goes to Help Article</strong></td><td>1</td><td>1</td><td><strong>$5,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Better Templates / Pre-built Flows</strong></td><td>1</td><td>1</td><td><strong>$5,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Brand Kit Not Applied to Automation Email Templates</strong></td><td>1</td><td>1</td><td><strong>$5,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>SMS Abandoned Cart Template TCPA Compliance Risks</strong></td><td>1</td><td>1</td><td><strong>$5,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Flow Deactivation Behavior Unclear</strong></td><td>1</td><td>1</td><td><strong>$5,000</strong></td><td>0</td></tr>
       </tbody></table>
     </div>
 
     <h2 style="margin-top:18px;"><span class="num">D3</span>Phase 3 — Long-tail polish + capability bets</h2>
     <div class="phase p3">
-      <div class="head"><h3>Phase 3 — Long-tail polish + capability bets</h3><span class="horizon">Months 12–18 · $15,810/mo MRR at risk · 28 themes</span></div>
+      <div class="head"><h3>Phase 3 — Long-tail polish + capability bets</h3><span class="horizon">Months 12–18 · $98,318/mo MRR at risk · 59 themes</span></div>
       <p style="font-size:12.5px; color:#4B5563; margin-bottom:10px;">The tail items — fewer HVCs each but real signal. Combine with the Roadmap-to-Win differentiated bets to ship a category-leading product.</p>
       <table class="dense"><thead><tr><th style="width:60px">Type</th><th>Theme</th><th style="width:60px">VoCs</th><th style="width:60px">HVCs</th><th style="width:90px">HVC MRR</th><th style="width:60px">Churn</th></tr></thead><tbody>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Trigger Selection List Not Searchable</strong></td><td>1</td><td>1</td><td><strong>$5,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Loading Spinner Misleading on Trigger Panels</strong></td><td>1</td><td>1</td><td><strong>$5,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Edit Panel Blocks Flow Canvas</strong></td><td>1</td><td>1</td><td><strong>$5,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>&#x27;Wait for Trigger&#x27; Rule Pass-Through Behavior Confusing</strong></td><td>1</td><td>1</td><td><strong>$5,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Flow Templates Have No Search / Filter</strong></td><td>1</td><td>1</td><td><strong>$5,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Operational Workflow / Tag Automation (Shopify-Flow-style)</strong></td><td>1</td><td>1</td><td><strong>$5,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Flow-Specific Email Templates</strong></td><td>1</td><td>1</td><td><strong>$5,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Automations Not Sending / Delivery Failures</strong></td><td>3</td><td>3</td><td><strong>$4,780</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Advanced Segmentation in CJB</strong></td><td>1</td><td>1</td><td><strong>$3,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Default View / Sort Order Broken in Campaigns/Automations</strong></td><td>2</td><td>2</td><td><strong>$2,925</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Sharing / Export / Permissions on Flow Reports</strong></td><td>2</td><td>2</td><td><strong>$2,808</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>No Frequency Cap / Suppression Across Flows</strong></td><td>2</td><td>2</td><td><strong>$2,576</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Cannot Rename Automations or Steps from Canvas</strong></td><td>2</td><td>2</td><td><strong>$2,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Named / Reusable Filter Conditions</strong></td><td>1</td><td>1</td><td><strong>$2,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Integration-Specific Templates Not Prioritized</strong></td><td>1</td><td>1</td><td><strong>$2,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Central A/B Experiment Repository</strong></td><td>1</td><td>1</td><td><strong>$2,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Advanced Product Exclusion / Filter by Collections / Tags</strong></td><td>1</td><td>1</td><td><strong>$2,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Multi-Trigger Type Mismatch Confusing</strong></td><td>1</td><td>1</td><td><strong>$2,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Email Editing Has Unnecessary Intermediate Click</strong></td><td>1</td><td>1</td><td><strong>$2,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Cannot Drag-Reorder Steps in Flow</strong></td><td>1</td><td>1</td><td><strong>$2,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Jargon-Heavy Trigger/Condition Labels</strong></td><td>1</td><td>1</td><td><strong>$2,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Other Barriers / UX Friction</strong></td><td>3</td><td>3</td><td><strong>$1,761</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Migration &amp; Conversion Bugs (Classic → CJB / Marketing Automation Flows)</strong></td><td>2</td><td>2</td><td><strong>$1,715</strong></td><td>1</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Date-Relative / Recurring / Event-Based Triggers</strong></td><td>1</td><td>1</td><td><strong>$1,701</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Deliverability / Inbox Placement</strong></td><td>1</td><td>1</td><td><strong>$1,553</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>CJB Still Uses Legacy Editor</strong></td><td>2</td><td>2</td><td><strong>$1,265</strong></td><td>1</td></tr>
         <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Cross-Channel: SMS / Push / WhatsApp in Journey</strong></td><td>1</td><td>1</td><td><strong>$1,182</strong></td><td>0</td></tr>
         <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Support Quality on Automation Issues</strong></td><td>1</td><td>1</td><td><strong>$1,150</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>&#x27;From Audience&#x27; Setting Surfaces Unnecessarily</strong></td><td>1</td><td>1</td><td><strong>$1,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Calculated Send Day Visibility (Day 0 / Day 1)</strong></td><td>1</td><td>1</td><td><strong>$1,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Schedule Flow Activation / Email Live Date</strong></td><td>1</td><td>1</td><td><strong>$1,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Parallel Triggers / Identity Resolution</strong></td><td>1</td><td>1</td><td><strong>$1,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Cannot Delete Individual Split Paths</strong></td><td>1</td><td>1</td><td><strong>$1,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>If/Else vs Split Visual Differentiation</strong></td><td>1</td><td>1</td><td><strong>$1,000</strong></td><td>0</td></tr>
         <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Internal Notifications / Staff Alerts from Flow (TO field)</strong></td><td>1</td><td>1</td><td><strong>$939</strong></td><td>0</td></tr>
         <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>More Than 3 Triggers / Limits in CJB</strong></td><td>1</td><td>1</td><td><strong>$900</strong></td><td>0</td></tr>
         <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Other Missing Features</strong></td><td>2</td><td>2</td><td><strong>$800</strong></td><td>0</td></tr>
@@ -3345,7 +4546,6 @@ In the past year a permanent change was made to the Journey creation functionali
         <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Birthday / Profile-Update via Automation</strong></td><td>1</td><td>1</td><td><strong>$755</strong></td><td>0</td></tr>
         <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>2FA / Login Disrupting Automation Workflow</strong></td><td>1</td><td>1</td><td><strong>$684</strong></td><td>0</td></tr>
         <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Per-Flow Send Timing &amp; Granular Reports</strong></td><td>2</td><td>2</td><td><strong>$676</strong></td><td>0</td></tr>
-        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>No Frequency Cap / Suppression Across Flows</strong></td><td>1</td><td>1</td><td><strong>$576</strong></td><td>0</td></tr>
         <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Trigger Setup Confusion / &#x27;Not Activated&#x27; States</strong></td><td>1</td><td>1</td><td><strong>$535</strong></td><td>0</td></tr>
         <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Better A/B Testing in Automations</strong></td><td>1</td><td>1</td><td><strong>$455</strong></td><td>0</td></tr>
         <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Drip Inbox / Reply-Detection Requirements Break Real Inbox</strong></td><td>1</td><td>1</td><td><strong>$455</strong></td><td>0</td></tr>
