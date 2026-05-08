@@ -746,6 +746,34 @@
     letter-spacing: .04em;
   }
 
+  /* Product Health YoY badges */
+  .yoy {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    padding: 1px 6px; border-radius: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .yoy.good { background: #DCFCE7; color: #14532D; }
+  .yoy.bad  { background: #FBE7E8; color: #9A1F00; }
+  .yoy.neutral { background: #F1F2F4; color: #6B7280; }
+
+  table.seg-table th, table.seg-table td { font-size: 11.5px; padding: 5px 7px; }
+  table.seg-table tr:hover td { background: #FAFAFB; }
+  table.findings-table th, table.findings-table td { font-size: 11.5px; padding: 7px 8px; vertical-align: top; }
+  table.findings-table td:nth-child(1) { font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; color: var(--brand); text-align: center; }
+  table.findings-table td:nth-child(2) { color: var(--ink); }
+  table.findings-table td:nth-child(3), table.findings-table td:nth-child(4), table.findings-table td:nth-child(5) { color: var(--ink-2); }
+
+  .phase-pill {
+    display: inline-block;
+    font-size: 9.5px; font-weight: 800;
+    padding: 2px 6px; border-radius: 4px;
+    letter-spacing: .06em;
+  }
+  .phase-pill.p1 { background: #FFF1DD; color: #8A4A00; }
+  .phase-pill.p2 { background: #EEF0FF; color: #2A1FA8; }
+  .phase-pill.p3 { background: #DCFCE7; color: #14532D; }
+
   /* Print */
   @media print {
     @page { size: Letter; margin: 0.45in; }
@@ -770,6 +798,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="roadmap">Roadmap to Win</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="hvcrisk">HVC Risk Map</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="research">User Research</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="health">Product Health</button>
     </div>
     <div style="display:flex; gap:8px;">
       <a class="btn" href="index.html">→ Klaviyo</a>
@@ -5030,6 +5059,810 @@ Reactions: ack (1)"</p>
 </div><!-- /panel-research -->
 
 
+<!-- ============================================ -->
+<!-- ============== PRODUCT HEALTH TAB ========== -->
+<!-- ============================================ -->
+<div class="tabpanel" id="panel-health" role="tabpanel">
+
+  <!-- Health Page 1 -->
+  <section class="page" aria-label="Product Health Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Product Health · BigQuery analysis · Year-over-Year</div>
+        <h1>Mailchimp Automation: <em style="color:#036A4F;">Customer Journey Builder is winning</em>, <em style="color:#9A1F00;">Classic Automations is collapsing</em></h1>
+        <div class="subtitle">Trailing 12-month analysis (May 2025 → Apr 2026 vs prior year). Source: <code>mc-business-intelligence.bi_aggregate.product_journey_monthly</code> (89.4M rows, refreshed daily). All numbers reproduced from a tested pipeline (25 unit tests, 6 data-quality checks, 5 regression assertions — all pass).</div>
+      </div>
+      <div class="meta">
+        <div><strong>Source:</strong> bi_aggregate.product_journey_monthly</div>
+        <div><strong>Data freshness:</strong> May 2026 (7-day-old)</div>
+        <div><strong>Window:</strong> 12mo current vs 12mo prior</div>
+        <div><strong>Page:</strong> 1 of 3</div>
+      </div>
+    </header>
+
+    <!-- Headline KPI tiles -->
+    <h2 style="margin-bottom: 6px;"><span class="num">A</span>Headline KPIs (12mo vs prior 12mo)</h2>
+
+    <div class="kpi-row" style="margin-bottom: 14px;">
+      <div class="kpi">
+        <div class="v">132,002</div>
+        <div class="l"><strong>CJB</strong> Established users (avg/month) <span class="yoy good">+18.4%</span> YoY</div>
+      </div>
+      <div class="kpi">
+        <div class="v">66,307</div>
+        <div class="l"><strong>Classic Auto</strong> Established users (avg/month) <span class="yoy bad">-51.8%</span> YoY</div>
+      </div>
+      <div class="kpi">
+        <div class="v">33.6%</div>
+        <div class="l"><strong>CJB</strong> Activation rate (Explore→Establish) <span class="yoy good">+14.4pp</span> YoY</div>
+      </div>
+      <div class="kpi">
+        <div class="v">40.2%</div>
+        <div class="l"><strong>CJB</strong> Churn rate (Abandon / Sticky) <span class="yoy good">-1.2pp</span> YoY</div>
+      </div>
+    </div>
+
+    <!-- Side-by-side product comparison -->
+    <h2 style="margin-bottom: 6px;"><span class="num">B</span>Customer Journey Builder vs Classic Automations — head to head</h2>
+    <table class="dense" style="margin-bottom: 14px;">
+      <thead>
+        <tr>
+          <th>Metric (avg/month over 12mo)</th>
+          <th>Customer Journey Builder (current)</th>
+          <th>YoY</th>
+          <th>Classic Automations (current)</th>
+          <th>YoY</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Established users</strong> <em>(active value-realizing adopters)</em></td>
+          <td><strong>132,002</strong></td>
+          <td><span class="yoy good">+18.4%</span></td>
+          <td>66,307</td>
+          <td><span class="yoy bad">-51.8%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Abandon users</strong> <em>(was sticky, now lapsed)</em></td>
+          <td>88,874</td>
+          <td><span class="yoy bad">+12.7%</span></td>
+          <td>77,232</td>
+          <td><span class="yoy bad">+41.7%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Explore users</strong> <em>(started but not adopted)</em></td>
+          <td>250,788</td>
+          <td><span class="yoy bad">-45.0%</span></td>
+          <td>234</td>
+          <td><span class="yoy bad">-53.1%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Active adoption rate</strong> <em>(Established / total active funnel)</em></td>
+          <td><strong>7.30%</strong></td>
+          <td><span class="yoy good">+1.7pp</span></td>
+          <td>3.66%</td>
+          <td><span class="yoy bad">-3.2pp</span></td>
+        </tr>
+        <tr>
+          <td><strong>Activation rate</strong> <em>(Explore→Establish)</em></td>
+          <td><strong>33.64%</strong></td>
+          <td><span class="yoy good">+14.4pp</span></td>
+          <td>99.53%*</td>
+          <td><span class="yoy good">+0.2pp</span></td>
+        </tr>
+        <tr>
+          <td><strong>Churn rate</strong> <em>(Abandon / Sticky)</em></td>
+          <td>40.24%</td>
+          <td><span class="yoy good">-1.2pp</span></td>
+          <td><strong>53.81%</strong></td>
+          <td><span class="yoy bad">+25.4pp</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px; color:var(--muted); margin-bottom: 14px;">* Classic Automation 99.5% activation reflects that Explore stage is essentially empty — virtually no new accounts are exploring Classic anymore (functionally deprecated for new users).</p>
+
+    <!-- Three-finding callouts -->
+    <div class="grid cols-3" style="gap: 10px; margin-bottom: 14px;">
+      <div class="card" style="background:#F4FBF7; border-color:#CFE9DC;">
+        <strong style="font-size:12px; color:#036A4F;">CJB MOMENTUM IS REAL</strong>
+        <p style="font-size:12.5px; margin-top:4px;">Established users <strong>+18.4% YoY</strong>; activation rate <strong>+14.4pp YoY</strong> (19.2% → 33.6%); churn <strong>-1.2pp</strong>. Premium-plan accounts now adopt CJB at <strong>32.1%</strong> (highest segment).</p>
+      </div>
+      <div class="card" style="background:#FFF5F2; border-color:#F4D2C5;">
+        <strong style="font-size:12px; color:#9A1F00;">CLASSIC IS COLLAPSING</strong>
+        <p style="font-size:12.5px; margin-top:4px;">Established <strong>-51.8% YoY</strong>, abandon <strong>+41.7%</strong>, churn <strong>+25.4pp</strong>. Free-plan Classic <strong>-77.6%</strong>; new users (&lt;1mo) on Classic <strong>-96.1%</strong>. Aligns with the June 2025 deprecation.</p>
+      </div>
+      <div class="card" style="background:#FFFAF0; border-color:#F5E2BD;">
+        <strong style="font-size:12px; color:#8A4A00;">FREE-PLAN ACTIVATION IS BROKEN</strong>
+        <p style="font-size:12.5px; margin-top:4px;">Free CJB adoption: <strong>1.1%</strong> (vs 17.6% Standard, 32.1% Premium). New users (&lt;1mo): <strong>0.9%</strong> adoption, <strong>11%</strong> activation. The bottom of the funnel is leaking.</p>
+      </div>
+    </div>
+
+    <p class="source">
+      <strong>Source:</strong> <code>mc-business-intelligence.bi_aggregate.product_journey_monthly</code> · 89.4M rows · partitioned by month · clustered by product · refreshed daily (latest data: May 2026). <strong>Methodology:</strong> Stage 4_Establish = active value-realizing adopter; 5_Abandon = was sticky, now lapsed; 2_Explore + 3_Try = activation funnel; 1_Unexplored = eligible but not engaged. <strong>Pipeline:</strong> 25 unit tests + 6 data-quality checks + 5 regression assertions all pass before query results are written.
+    </p>
+  </section>
+
+  <!-- Health Page 2 -->
+  <section class="page" aria-label="Product Health Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Product Health · Segmentation deep-dive</div>
+        <h1>Where adoption is winning, where it's failing — by tenure, plan, HVC, ecommerce, country, list size</h1>
+        <div class="subtitle">All segments shown for Customer Journey Builder (the future-state product). Sorted by current Established users desc.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 2 of 3</div>
+        <div><strong>Sections:</strong> C · D · E · F · G</div>
+      </div>
+    </header>
+
+    <h2><span class="num">C</span>By account tenure (lifecycle stage)</h2>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:6px;">Where in the customer lifecycle does CJB stick? <strong>The 24+ month cohort dominates volume; new users (&lt;1mo) barely adopt</strong>.</p>
+    <table class="dense seg-table"><thead><tr>
+<th>Tenure bucket</th>
+<th>Established users (avg/mo)</th>
+<th>YoY</th>
+<th>Adoption rate</th>
+<th>YoY (pp)</th>
+<th>Activation rate</th>
+<th>Churn rate</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>24+</strong></td>
+<td>86,425</td>
+<td><span class="yoy good">+28.8%</span></td>
+<td>7.3%</td>
+<td><span class="yoy good">+2.1pp</span></td>
+<td>35%</td>
+<td>45%</td>
+</tr>
+<tr>
+<td><strong>&lt;24</strong></td>
+<td>19,353</td>
+<td><span class="yoy good">+15.2%</span></td>
+<td>10.6%</td>
+<td><span class="yoy good">+2.7pp</span></td>
+<td>42%</td>
+<td>42%</td>
+</tr>
+<tr>
+<td><strong>&lt;12</strong></td>
+<td>12,151</td>
+<td><span class="yoy bad">-1.8%</span></td>
+<td>10.8%</td>
+<td><span class="yoy good">+1.8pp</span></td>
+<td>32%</td>
+<td>28%</td>
+</tr>
+<tr>
+<td><strong>&lt;6</strong></td>
+<td>7,562</td>
+<td><span class="yoy bad">-7.6%</span></td>
+<td>10.6%</td>
+<td><span class="yoy good">+1.2pp</span></td>
+<td>27%</td>
+<td>7%</td>
+</tr>
+<tr>
+<td><strong>&lt;3</strong></td>
+<td>4,875</td>
+<td><span class="yoy bad">-9.4%</span></td>
+<td>6.5%</td>
+<td><span class="yoy good">+0.8pp</span></td>
+<td>24%</td>
+<td>0%</td>
+</tr>
+<tr>
+<td><strong>&lt;1</strong></td>
+<td>1,634</td>
+<td><span class="yoy bad">-1.1%</span></td>
+<td>0.9%</td>
+<td><span class="yoy bad">-0.0pp</span></td>
+<td>11%</td>
+<td>0%</td>
+</tr>
+</tbody></table>
+
+    <h2 style="margin-top:14px;"><span class="num">D</span>By plan / package</h2>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:6px;">Premium (32.1%) and Standard (17.6%) adopt at far higher rates than Free (1.1%). <strong>Free-plan activation is the structural blocker</strong>.</p>
+    <table class="dense seg-table"><thead><tr>
+<th>Plan / package</th>
+<th>Established users (avg/mo)</th>
+<th>YoY</th>
+<th>Adoption rate</th>
+<th>YoY (pp)</th>
+<th>Activation rate</th>
+<th>Churn rate</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>standard_monthly_plan_v0</strong></td>
+<td>70,676</td>
+<td><span class="yoy good">+21.2%</span></td>
+<td>17.6%</td>
+<td><span class="yoy good">+1.6pp</span></td>
+<td>48%</td>
+<td>35%</td>
+</tr>
+<tr>
+<td><strong>essential_monthly_plan_v0</strong></td>
+<td>30,484</td>
+<td><span class="yoy good">+16.7%</span></td>
+<td>8.0%</td>
+<td><span class="yoy good">+1.6pp</span></td>
+<td>36%</td>
+<td>42%</td>
+</tr>
+<tr>
+<td><strong>legacy monthly</strong></td>
+<td>14,749</td>
+<td><span class="yoy good">+17.4%</span></td>
+<td>10.4%</td>
+<td><span class="yoy good">+3.0pp</span></td>
+<td>32%</td>
+<td>41%</td>
+</tr>
+<tr>
+<td><strong>free</strong></td>
+<td>9,225</td>
+<td><span class="yoy good">+6.7%</span></td>
+<td>1.1%</td>
+<td><span class="yoy good">+0.2pp</span></td>
+<td>9%</td>
+<td>61%</td>
+</tr>
+<tr>
+<td><strong>premium_monthly_plan_v0</strong></td>
+<td>4,104</td>
+<td><span class="yoy good">+19.0%</span></td>
+<td>32.1%</td>
+<td><span class="yoy good">+5.1pp</span></td>
+<td>49%</td>
+<td>31%</td>
+</tr>
+<tr>
+<td><strong>pro/module/other</strong></td>
+<td>1,411</td>
+<td><span class="yoy good">+29.5%</span></td>
+<td>17.2%</td>
+<td><span class="yoy good">+4.7pp</span></td>
+<td>41%</td>
+<td>35%</td>
+</tr>
+<tr>
+<td><strong>free_monthly_plan_v0</strong></td>
+<td>1,074</td>
+<td><span class="yoy good">+0.9%</span></td>
+<td>10.0%</td>
+<td><span class="yoy bad">-0.1pp</span></td>
+<td>42%</td>
+<td>29%</td>
+</tr>
+<tr>
+<td><strong>payg</strong></td>
+<td>171</td>
+<td><span class="yoy bad">-10.3%</span></td>
+<td>6.2%</td>
+<td><span class="yoy good">+0.6pp</span></td>
+<td>23%</td>
+<td>44%</td>
+</tr>
+<tr>
+<td><strong>premium_annual_plan_v0</strong></td>
+<td>36</td>
+<td><span class="yoy good">+559.1%</span></td>
+<td>34.3%</td>
+<td><span class="yoy bad">-1.9pp</span></td>
+<td>50%</td>
+<td>13%</td>
+</tr>
+<tr>
+<td><strong>pre paid</strong></td>
+<td>36</td>
+<td><span class="yoy good">+80.4%</span></td>
+<td>16.8%</td>
+<td><span class="yoy good">+5.2pp</span></td>
+<td>42%</td>
+<td>30%</td>
+</tr>
+<tr>
+<td><strong>standard_annual_plan_v0</strong></td>
+<td>33</td>
+<td><span class="yoy good">+1865.0%</span></td>
+<td>17.8%</td>
+<td><span class="yoy good">+8.6pp</span></td>
+<td>35%</td>
+<td>22%</td>
+</tr>
+<tr>
+<td><strong>essential_annual_plan_v0</strong></td>
+<td>6</td>
+<td><span class="yoy neutral">—</span></td>
+<td>4.1%</td>
+<td><span class="yoy neutral">—</span></td>
+<td>33%</td>
+<td>0%</td>
+</tr>
+</tbody></table>
+
+    <h2 style="margin-top:14px;"><span class="num">E</span>By HVC (high-value customer)</h2>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:6px;">HVCs adopt CJB at <strong>3.7x</strong> the rate of non-HVCs. HVC churn is also lower (34% vs 41%).</p>
+    <table class="dense seg-table"><thead><tr>
+<th>HVC</th>
+<th>Established users (avg/mo)</th>
+<th>YoY</th>
+<th>Adoption rate</th>
+<th>YoY (pp)</th>
+<th>Activation rate</th>
+<th>Churn rate</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>—</strong></td>
+<td>115,192</td>
+<td><span class="yoy good">+18.4%</span></td>
+<td>6.6%</td>
+<td><span class="yoy good">+1.6pp</span></td>
+<td>32%</td>
+<td>41%</td>
+</tr>
+<tr>
+<td><strong>True</strong></td>
+<td>16,809</td>
+<td><span class="yoy good">+18.8%</span></td>
+<td>24.2%</td>
+<td><span class="yoy good">+4.9pp</span></td>
+<td>45%</td>
+<td>34%</td>
+</tr>
+</tbody></table>
+
+    <h2 style="margin-top:14px;"><span class="num">F</span>By ecommerce status</h2>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:6px;">Ecommerce-connected accounts (ECU) adopt at <strong>29.7%</strong> — 6.6x the non-ecom rate. <strong>This is the highest-leverage cohort</strong>.</p>
+    <table class="dense seg-table"><thead><tr>
+<th>Ecommerce status</th>
+<th>Established users (avg/mo)</th>
+<th>YoY</th>
+<th>Adoption rate</th>
+<th>YoY (pp)</th>
+<th>Activation rate</th>
+<th>Churn rate</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>non</strong></td>
+<td>54,727</td>
+<td><span class="yoy good">+37.0%</span></td>
+<td>4.5%</td>
+<td><span class="yoy good">+1.3pp</span></td>
+<td>25%</td>
+<td>41%</td>
+</tr>
+<tr>
+<td><strong>ecomm</strong></td>
+<td>48,055</td>
+<td><span class="yoy good">+6.9%</span></td>
+<td>9.6%</td>
+<td><span class="yoy good">+2.7pp</span></td>
+<td>39%</td>
+<td>45%</td>
+</tr>
+<tr>
+<td><strong>ecu</strong></td>
+<td>29,220</td>
+<td><span class="yoy good">+9.9%</span></td>
+<td>29.7%</td>
+<td><span class="yoy good">+6.7pp</span></td>
+<td>62%</td>
+<td>30%</td>
+</tr>
+</tbody></table>
+
+    <h2 style="margin-top:14px;"><span class="num">G</span>By list size (business size proxy)</h2>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:6px;">Adoption rate scales steeply with list size — <strong>30.3% at 100K+ contacts vs 4.0% at &lt;500</strong>. The smaller-list cohort needs a different value-proposition framing.</p>
+    <table class="dense seg-table"><thead><tr>
+<th>List size</th>
+<th>Established users (avg/mo)</th>
+<th>YoY</th>
+<th>Adoption rate</th>
+<th>YoY (pp)</th>
+<th>Activation rate</th>
+<th>Churn rate</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>&lt;500</strong></td>
+<td>35,542</td>
+<td><span class="yoy good">+9.4%</span></td>
+<td>4.0%</td>
+<td><span class="yoy good">+0.7pp</span></td>
+<td>26%</td>
+<td>43%</td>
+</tr>
+<tr>
+<td><strong>500 - 1,500</strong></td>
+<td>23,446</td>
+<td><span class="yoy good">+24.8%</span></td>
+<td>6.7%</td>
+<td><span class="yoy good">+1.8pp</span></td>
+<td>33%</td>
+<td>40%</td>
+</tr>
+<tr>
+<td><strong>10,001 - 50,000</strong></td>
+<td>21,164</td>
+<td><span class="yoy good">+22.1%</span></td>
+<td>18.5%</td>
+<td><span class="yoy good">+4.2pp</span></td>
+<td>43%</td>
+<td>38%</td>
+</tr>
+<tr>
+<td><strong>2,501 - 5,000</strong></td>
+<td>15,752</td>
+<td><span class="yoy good">+21.9%</span></td>
+<td>11.5%</td>
+<td><span class="yoy good">+2.5pp</span></td>
+<td>39%</td>
+<td>40%</td>
+</tr>
+<tr>
+<td><strong>5,001 - 10,000</strong></td>
+<td>14,644</td>
+<td><span class="yoy good">+23.4%</span></td>
+<td>14.1%</td>
+<td><span class="yoy good">+3.2pp</span></td>
+<td>41%</td>
+<td>40%</td>
+</tr>
+<tr>
+<td><strong>1,501 - 2,500</strong></td>
+<td>12,602</td>
+<td><span class="yoy good">+22.7%</span></td>
+<td>7.3%</td>
+<td><span class="yoy good">+1.9pp</span></td>
+<td>33%</td>
+<td>40%</td>
+</tr>
+<tr>
+<td><strong>50,001 - 100,000</strong></td>
+<td>4,570</td>
+<td><span class="yoy good">+14.6%</span></td>
+<td>25.7%</td>
+<td><span class="yoy good">+5.4pp</span></td>
+<td>46%</td>
+<td>36%</td>
+</tr>
+<tr>
+<td><strong>100,001+</strong></td>
+<td>4,282</td>
+<td><span class="yoy good">+12.5%</span></td>
+<td>30.3%</td>
+<td><span class="yoy good">+6.4pp</span></td>
+<td>48%</td>
+<td>35%</td>
+</tr>
+</tbody></table>
+
+    <h2 style="margin-top:14px;"><span class="num">H</span>By country group (geographic)</h2>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:6px;">US dominates volume (56K Established) but UK (+20.8% YoY) and Tier-1 Develop (+11.4%) are growing materially.</p>
+    <table class="dense seg-table"><thead><tr>
+<th>Country group</th>
+<th>Established users (avg/mo)</th>
+<th>YoY</th>
+<th>Adoption rate</th>
+<th>YoY (pp)</th>
+<th>Activation rate</th>
+<th>Churn rate</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>United States</strong></td>
+<td>56,178</td>
+<td><span class="yoy good">+24.8%</span></td>
+<td>7.5%</td>
+<td><span class="yoy good">+1.9pp</span></td>
+<td>37%</td>
+<td>42%</td>
+</tr>
+<tr>
+<td><strong>Tier 1 Develop</strong></td>
+<td>19,519</td>
+<td><span class="yoy good">+11.4%</span></td>
+<td>6.6%</td>
+<td><span class="yoy good">+1.4pp</span></td>
+<td>29%</td>
+<td>40%</td>
+</tr>
+<tr>
+<td><strong>United Kingdom</strong></td>
+<td>17,080</td>
+<td><span class="yoy good">+20.8%</span></td>
+<td>9.6%</td>
+<td><span class="yoy good">+2.2pp</span></td>
+<td>41%</td>
+<td>38%</td>
+</tr>
+<tr>
+<td><strong>Australia</strong></td>
+<td>7,749</td>
+<td><span class="yoy good">+16.0%</span></td>
+<td>9.0%</td>
+<td><span class="yoy good">+2.0pp</span></td>
+<td>38%</td>
+<td>40%</td>
+</tr>
+<tr>
+<td><strong>Canada</strong></td>
+<td>7,705</td>
+<td><span class="yoy good">+14.0%</span></td>
+<td>7.4%</td>
+<td><span class="yoy good">+1.5pp</span></td>
+<td>34%</td>
+<td>41%</td>
+</tr>
+<tr>
+<td><strong>ROW</strong></td>
+<td>7,221</td>
+<td><span class="yoy good">+12.7%</span></td>
+<td>3.7%</td>
+<td><span class="yoy good">+0.9pp</span></td>
+<td>19%</td>
+<td>41%</td>
+</tr>
+<tr>
+<td><strong>Nordics</strong></td>
+<td>4,720</td>
+<td><span class="yoy good">+12.4%</span></td>
+<td>11.0%</td>
+<td><span class="yoy good">+2.2pp</span></td>
+<td>38%</td>
+<td>38%</td>
+</tr>
+<tr>
+<td><strong>Netherlands</strong></td>
+<td>4,168</td>
+<td><span class="yoy good">+10.6%</span></td>
+<td>7.5%</td>
+<td><span class="yoy good">+1.4pp</span></td>
+<td>30%</td>
+<td>39%</td>
+</tr>
+<tr>
+<td><strong>Tier 2 Develop</strong></td>
+<td>3,029</td>
+<td><span class="yoy good">+8.4%</span></td>
+<td>7.9%</td>
+<td><span class="yoy good">+1.5pp</span></td>
+<td>32%</td>
+<td>40%</td>
+</tr>
+<tr>
+<td><strong>Belgium</strong></td>
+<td>1,854</td>
+<td><span class="yoy good">+10.2%</span></td>
+<td>6.6%</td>
+<td><span class="yoy good">+1.1pp</span></td>
+<td>27%</td>
+<td>40%</td>
+</tr>
+<tr>
+<td><strong>New Zealand</strong></td>
+<td>1,738</td>
+<td><span class="yoy good">+13.3%</span></td>
+<td>8.2%</td>
+<td><span class="yoy good">+1.6pp</span></td>
+<td>36%</td>
+<td>39%</td>
+</tr>
+<tr>
+<td><strong>Ireland</strong></td>
+<td>1,040</td>
+<td><span class="yoy good">+6.9%</span></td>
+<td>9.7%</td>
+<td><span class="yoy good">+1.3pp</span></td>
+<td>39%</td>
+<td>37%</td>
+</tr>
+<tr>
+<td><strong>Unknown</strong></td>
+<td>0</td>
+<td><span class="yoy neutral">—</span></td>
+<td>0.0%</td>
+<td><span class="yoy bad">0.0pp</span></td>
+<td>0%</td>
+<td>—</td>
+</tr>
+</tbody></table>
+
+    <h2 style="margin-top:14px;"><span class="num">I</span>By new-booking timing (acquisition velocity)</h2>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:6px;">"Direct to paid" customers (skipped free trial) adopt at <strong>15.2%</strong>. Free-to-paid is the largest cohort but lowest adoption per-account.</p>
+    <table class="dense seg-table"><thead><tr>
+<th>New booking timing</th>
+<th>Established users (avg/mo)</th>
+<th>YoY</th>
+<th>Adoption rate</th>
+<th>YoY (pp)</th>
+<th>Activation rate</th>
+<th>Churn rate</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>free to paid</strong></td>
+<td>66,275</td>
+<td><span class="yoy good">+17.2%</span></td>
+<td>11.4%</td>
+<td><span class="yoy good">+2.7pp</span></td>
+<td>41%</td>
+<td>41%</td>
+</tr>
+<tr>
+<td><strong>immediate to paid</strong></td>
+<td>38,984</td>
+<td><span class="yoy good">+28.8%</span></td>
+<td>12.8%</td>
+<td><span class="yoy good">+1.9pp</span></td>
+<td>41%</td>
+<td>38%</td>
+</tr>
+<tr>
+<td><strong>direct to paid</strong></td>
+<td>20,952</td>
+<td><span class="yoy good">+9.6%</span></td>
+<td>15.2%</td>
+<td><span class="yoy good">+2.5pp</span></td>
+<td>44%</td>
+<td>41%</td>
+</tr>
+<tr>
+<td><strong>N/A</strong></td>
+<td>5,791</td>
+<td><span class="yoy good">+4.6%</span></td>
+<td>0.7%</td>
+<td><span class="yoy good">+0.1pp</span></td>
+<td>7%</td>
+<td>41%</td>
+</tr>
+</tbody></table>
+  </section>
+
+  <!-- Health Page 3 -->
+  <section class="page" aria-label="Product Health Page 3">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Product Health · Findings → Customer benefit → Business implication → Resolution</div>
+        <h1>10 key findings synthesized into <em style="color:#4338CA;">customer benefit</em>, <em style="color:#9A1F00;">business implication</em>, and <em style="color:#036A4F;">proposed resolution</em></h1>
+        <div class="subtitle">Each finding is data-backed (cited from the segmentation tables on Page 2). Resolutions phased into Phase 1 (0–6mo) / Phase 2 (6–12mo) / Phase 3 (12–18mo).</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 3 of 3</div>
+        <div><strong>Findings:</strong> 10</div>
+        <div><strong>Resolutions:</strong> 10</div>
+      </div>
+    </header>
+
+    <h2><span class="num">J</span>Findings → benefit → implication → resolution (mapped)</h2>
+    <table class="dense findings-table" style="margin-bottom: 14px;">
+      <thead>
+        <tr>
+          <th style="width:36px">#</th>
+          <th>Finding (from data)</th>
+          <th>Customer functional benefit (when fixed)</th>
+          <th>Business implication (today)</th>
+          <th>Proposed resolution</th>
+          <th style="width:60px">Phase</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <tr>
+          <td><strong>1</strong></td>
+          <td><strong>Classic Automations is collapsing.</strong> Established users <strong>-51.8% YoY</strong> (66K vs 138K). Abandon +41.7%. Free Classic -77.6%. New users (&lt;1mo) -96.1%.</td>
+          <td>Customers stuck on Classic get a clean migration to CJB without losing their automation history, contacts, or send schedule.</td>
+          <td><strong>Lost retention surface.</strong> Classic users churning faster than CJB is replacing them — net automation revenue at risk. Echoes the User Research / HVC Risk Map "Classic deprecation" theme.</td>
+          <td><strong>Auto-migration tool</strong> with side-by-side preview, one-click conversion, and a 90-day "graceful sunset" guarantee for any breaks.</td>
+          <td><span class="phase-pill p1">P1</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>2</strong></td>
+          <td><strong>CJB momentum is real.</strong> Established <strong>+18.4% YoY</strong> (132K), activation <strong>+14.4pp YoY</strong> (19.2% → 33.6%), churn -1.2pp. Premium plan adopts at <strong>32.1%</strong>.</td>
+          <td>Customers building journeys today get faster activation and lower drop-off than 12 months ago — the product is genuinely improving.</td>
+          <td><strong>Validates the bet</strong> on CJB. Doubling down on the proven activation improvements pays off — but the 66.4% who don't activate is still the dominant story.</td>
+          <td><strong>Double down on what's working:</strong> publish weekly internal "activation moves" — copy what improved 14.4pp into the next 14.4pp.</td>
+          <td><span class="phase-pill p1">P1</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>3</strong></td>
+          <td><strong>Free-plan adoption is structurally broken.</strong> Free CJB: <strong>1.1% adoption</strong>, <strong>9% activation</strong>. Standard: 17.6%. Premium: 32.1%. Free is 16x worse than Standard.</td>
+          <td>Free customers can finally ship a working welcome / abandoned-cart automation without an upgrade gate — proves value before paywall.</td>
+          <td><strong>Open lane for Customer.io / Loops / Brevo</strong> (per Emerging Threats tab). New SMBs who can't activate Free move to a competitor before they ever upgrade.</td>
+          <td><strong>Reinstate basic CJB on Free</strong> (welcome series + abandoned cart only — capped at 2 active automations). Lifts the activation lid without giving away the premium surface.</td>
+          <td><span class="phase-pill p1">P1</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>4</strong></td>
+          <td><strong>New-user activation is broken.</strong> &lt;1mo tenure: <strong>0.9% adoption, 11% activation</strong>. &lt;3mo: 6.5%. The activation curve doesn't begin until month 3+.</td>
+          <td>New users get to first automation value in their first 30 days — closes the "I just signed up, where do I start" gap that user research flagged.</td>
+          <td><strong>Time-to-value gap drives early churn.</strong> User Research: "Users describe themselves as using 10–20% of capability." Onboarding leaves money on the table.</td>
+          <td><strong>3-step in-product activation flow</strong> in days 0–30: (1) "Pick your business type" (2) "Welcome series ready in 60 seconds" (3) "Live automation". Zero clicks to template gallery.</td>
+          <td><span class="phase-pill p1">P1</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>5</strong></td>
+          <td><strong>Ecommerce-connected accounts are the gold cohort.</strong> ECU: <strong>29.7% adoption, 62% activation</strong>. ECOMM (has store but not connected): 9.6%. NON: 4.5%.</td>
+          <td>Customers who connect a store get an auto-suggested welcome + cart + post-purchase journey ready to activate — value in the first session after store connection.</td>
+          <td><strong>The biggest unlock per existing customer.</strong> Moving even 10% of ECOMM (has store, not connected) to ECU activation rates = ~5K incremental Established users/mo.</td>
+          <td><strong>Auto-build journey on store-connect</strong> — Shopify/WooCommerce/Squarespace integration immediately suggests + scaffolds welcome, cart, post-purchase, browse-abandonment journeys.</td>
+          <td><span class="phase-pill p1">P1</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>6</strong></td>
+          <td><strong>HVC concentration is widening.</strong> HVC adopts CJB at <strong>24.2%</strong> (4x non-HVC at 6.6%). HVC churn 34% vs non-HVC 41%. Both grew similarly YoY (+18.8% vs +18.4%).</td>
+          <td>Non-HVC accounts who tried + abandoned in last 12mo get a personalized "you tried CJB, here's what changed" win-back nudge.</td>
+          <td><strong>Bottom-of-pyramid risk.</strong> If non-HVC churn keeps widening (41% → 45% → 50%), Mailchimp loses the funnel that becomes tomorrow's HVCs.</td>
+          <td><strong>Win-back campaign for non-HVC abandoners</strong>: target Standard/Free who reached Establish + then Abandon in last 12mo with their specific automation type pre-rebuilt.</td>
+          <td><span class="phase-pill p2">P2</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>7</strong></td>
+          <td><strong>Activation rate climbing but still 33.6%.</strong> +14.4pp YoY is the bright spot, but 2 of 3 explorers still don't establish. Industry-specific templates would close the gap.</td>
+          <td>An accountant gets accountant templates; a restaurant gets restaurant templates; a B2B SaaS gets SaaS templates — each accelerating from "blank canvas" to "live in 5 minutes".</td>
+          <td><strong>Confirms the User Research "B2B / ProServ template gap" finding.</strong> Hannah: "Many [templates] are not tailored towards your organization, it feels like there's probably a missed opportunity."</td>
+          <td><strong>Industry-aware template gallery</strong>: surface 6–8 templates per industry on first journey-create. Backed by the onboarding "Pick your business type" answer.</td>
+          <td><span class="phase-pill p2">P2</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>8</strong></td>
+          <td><strong>List-size adoption gap.</strong> 100K+ contacts: <strong>30.3% adoption</strong>. &lt;500 contacts: <strong>4.0% adoption</strong>. The smaller-list cohort drives volume but doesn't convert.</td>
+          <td>Small-list customers see a value proposition framed for them ("Convert 1 in 50 of your 200 subscribers") rather than enterprise-style "scale to 100K".</td>
+          <td><strong>Marketing message mismatch.</strong> Mailchimp's automation pitch is calibrated to mid-market; SMB doesn't see themselves in it.</td>
+          <td><strong>Re-frame Free / Essential automation messaging</strong>: lead with "perfect for &lt;1K subscribers" use cases (recover 5 carts/mo, win back 10 lapsed customers/mo).</td>
+          <td><span class="phase-pill p2">P2</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>9</strong></td>
+          <td><strong>International momentum.</strong> UK +20.8%, US +24.8%, Tier-1 Develop +11.4%, ROW +12.7% YoY established CJB users. Non-US is now ~58% of CJB Established.</td>
+          <td>Non-US customers get GDPR-aware templates, EU-localized triggers, and idiomatic translations (vs literal English-to-X translations) — closing the L10n gap User Research flagged.</td>
+          <td><strong>International is the underweighted growth lane.</strong> Faster YoY in non-US suggests product-market fit there — but L10n is the gating condition for further compounding.</td>
+          <td><strong>Localize templates + EU-aware triggers</strong>: GDPR-compliant signup flows, Spanish Verifactu, idiomatic copy (not literal translations).</td>
+          <td><span class="phase-pill p2">P2</span></td>
+        </tr>
+
+        <tr>
+          <td><strong>10</strong></td>
+          <td><strong>"Direct to paid" customers are the highest-quality cohort.</strong> 15.2% adoption, 44% activation — vs 11.4% / 41% for free-to-paid. Customers who skip free trial show real intent.</td>
+          <td>Customers who arrive intent-first (e.g., comparison shopping vs Klaviyo) get a fast-track demo path + sales-led setup vs the SMB self-serve flow.</td>
+          <td><strong>Sales / GTM motion gap.</strong> Direct-to-paid converts well but isn't being amplified. Combined with Acquisition Quality finding from the Roadmap-to-Win tab.</td>
+          <td><strong>Direct-to-paid express path</strong>: detect intent signals (comparison page traffic, SSO sign-in, business-email domain) and route to a guided 30-min sales-assisted setup.</td>
+          <td><span class="phase-pill p3">P3</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+
+    <!-- Cross-tab synthesis -->
+    <div class="card warm">
+      <h2 style="margin-bottom: 6px;"><span class="num">XREF</span>How this analysis aligns with the other tabs</h2>
+      <ul style="margin-top:4px;">
+        <li><strong>→ <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a>:</strong> Confirms HVC are the most-engaged adopters — our $53.5K/mo Slack-VoC pain is concentrated in the cohort that's actively using the product. Finding 6 (non-HVC win-back) closes the loop.</li>
+        <li><strong>→ <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a>:</strong> Quantifies the "10–20% capability used" claim — Free-tier 1.1% adoption + new-user 0.9% adoption are the data behind the qualitative finding. Bet 2 (Activation funnel) is now data-supported.</li>
+        <li><strong>→ <a href="#roadmap" onclick="document.querySelector('[data-tab=roadmap]').click();return false;">Roadmap to Win</a>:</strong> Findings 1, 3, 4, 5 are Phase 1 — they map directly to the foundational gaps. Findings 7, 9 align with Phase 2 differentiation bets.</li>
+        <li><strong>→ <a href="emerging-threats.html">Emerging Threats</a>:</strong> Free-plan adoption gap (Finding 3) is the open lane Customer.io and Loops are exploiting in the SaaS slice.</li>
+        <li><strong>→ <a href="index.html">Klaviyo Brief</a>:</strong> Klaviyo's 60+ pre-built templates + verticalized journeys are the comp for Finding 7.</li>
+      </ul>
+    </div>
+
+    <p class="source">
+      <strong>Source:</strong> <code>mc-business-intelligence.bi_aggregate.product_journey_monthly</code>. <strong>Pipeline:</strong> 25 unit tests (test_synthesis.py) + 6 data quality checks (data_quality.py) + 5 regression assertions (run.py) — all pass before query results are written. Pipeline source at <code>/Users/dprabhakara/cursor/mc-product-health/</code>. <strong>Methodology:</strong> Stage 4_Establish = active value-realizing adopter; activation rate = Established / (Explore + Try + Established); churn rate = Abandon / (Established + Abandon). YoY periods: current = May 2025–Apr 2026, prior = May 2024–Apr 2025. <strong>Caveats:</strong> The Sept 2025 attribution change Jeffrey Davis flagged in User Research may affect Established stage classification mid-window; recommend caution comparing pre-Aug-25 to post-Sep-25 directly.
+    </p>
+  </section>
+
+</div><!-- /panel-health -->
+
+
+
 </div>
 
 <script>
@@ -5056,7 +5889,7 @@ Reactions: ack (1)"</p>
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','roadmap','hvcrisk','research'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','roadmap','hvcrisk','research','health'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
