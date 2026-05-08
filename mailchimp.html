@@ -515,6 +515,61 @@
   }
   .phase .outcome strong { color: var(--brand); }
 
+  /* HVC Risk Map specific */
+  .risk-pill {
+    display: inline-block;
+    font-size: 9.5px; font-weight: 800;
+    padding: 2px 6px; border-radius: 4px;
+    letter-spacing: .06em;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .risk-pill.bug { background: #FFE7E0; color: #9A1F00; }
+  .risk-pill.barrier { background: #FFF1DD; color: #8A4A00; }
+  .risk-pill.missing { background: #EEF0FF; color: #2A1FA8; }
+
+  table.voc-table td { vertical-align: top; }
+  table.voc-table tr:hover td { background: #FAFAFB; }
+
+  .quote-cell .q-text {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 12.5px;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .quote-cell .q-meta {
+    font-size: 10.5px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .quote-cell .q-meta strong { color: var(--ink-2); font-weight: 600; }
+  .quote-cell .q-meta a { color: var(--brand); text-decoration: none; font-weight: 600; }
+  .quote-cell .q-meta a:hover { text-decoration: underline; }
+
+  .csat-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 700;
+    padding: 1px 5px; border-radius: 3px;
+    margin-left: 4px;
+  }
+  .csat-pill.terrible, .csat-pill.muyinsatisfecho, .csat-pill.pessimo { background: #FBE7E8; color: #9A1F00; }
+  .csat-pill.poor, .csat-pill.pocosatisfecho { background: #FEEAD0; color: #8A4A00; }
+  .csat-pill.average { background: #F1F2F4; color: #374151; }
+  .csat-pill.good, .csat-pill.muysatisfecho, .csat-pill.satisfecho { background: #E0F2EA; color: #036A4F; }
+  .csat-pill.excellent { background: #DCFCE7; color: #166534; }
+
+  .crit-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 800;
+    padding: 1px 5px; border-radius: 3px;
+    margin-left: 4px;
+  }
+  .crit-pill.P0 { background: #B91C1C; color: white; }
+  .crit-pill.P1 { background: #DC2626; color: white; }
+  .crit-pill.P2 { background: #F59E0B; color: white; }
+  .crit-pill.P3 { background: #6B7280; color: white; }
+
   /* Print */
   @media print {
     @page { size: Letter; margin: 0.45in; }
@@ -537,6 +592,7 @@
       <button class="tab active" role="tab" aria-selected="true" data-tab="brief">Executive Brief</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="sentiment">Voice of Customer</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="roadmap">Roadmap to Win</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="hvcrisk">HVC Risk Map</button>
     </div>
     <div style="display:flex; gap:8px;">
       <a class="btn" href="index.html">→ Klaviyo</a>
@@ -1603,6 +1659,485 @@
 
 </div><!-- /panel-roadmap -->
 
+
+<!-- ============================================ -->
+<!-- ============== HVC RISK MAP TAB ============ -->
+<!-- ============================================ -->
+<div class="tabpanel" id="panel-hvcrisk" role="tabpanel">
+
+  <!-- Risk Page 1 -->
+  <section class="page" aria-label="HVC Risk Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">HVC Risk Map · Mailchimp Automation/Flow Voice of Customer (Slack)</div>
+        <h1>What's at <em style="color:#B91C1C;">risk</em> in our HVC base — bugs, barriers &amp; missing features in CJB and Marketing Automation Flows</h1>
+        <div class="subtitle">18-month synthesis of <strong>3,001 VoC messages</strong> across <strong>#hvc_feedback · #mc-hvc-escalations · #mc-feedback-summary</strong>, filtered to <strong>66 negative automation/flow VoCs</strong> from <strong>65 HVC customers</strong> ($299+ MRR), totaling <strong>$53,547 in monthly MRR at risk</strong>.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Window:</strong> Nov 18, 2024 → May 7, 2026</div>
+        <div><strong>Channels:</strong> 3 Slack channels</div>
+        <div><strong>Filter:</strong> automation/flow + HVC ($299+/mo)</div>
+        <div><strong>Page:</strong> 1 of 3</div>
+      </div>
+    </header>
+
+    <!-- KPIs -->
+    <div class="kpi-row" style="margin-bottom: 18px;">
+      <div class="kpi"><div class="v">66</div><div class="l">Negative automation/flow VoCs across all 3 Slack channels in 18 months</div></div>
+      <div class="kpi"><div class="v">65</div><div class="l">From <strong>HVC customers</strong> ($299+/mo MRR) — virtually <em>all</em> automation pain is in HVC</div></div>
+      <div class="kpi"><div class="v">$53,547</div><div class="l">Total <strong>monthly</strong> HVC MRR exposed to automation/flow pain (~<strong>$642,564/yr</strong> at full-churn risk)</div></div>
+      <div class="kpi"><div class="v">24</div><div class="l">Distinct themes across <strong>7 bug categories</strong>, <strong>7 barriers</strong>, <strong>10 missing features</strong></div></div>
+    </div>
+
+    <!-- BUGS section -->
+    <h2><span class="num">A</span><span class="risk-pill bug">BUGS</span>What's broken — themed by frequency &amp; HVC MRR exposure</h2>
+    <p style="margin-bottom: 8px;">Bugs are issues where the product is malfunctioning — automations not sending, triggers misfiring, editor crashes, wrong stats. Listed in HVC MRR-at-risk order.</p>
+    <table class="dense voc-table"><thead><tr>
+<th style="width:42px">#</th>
+<th>Bug theme</th>
+<th style="width:50px">VoCs</th>
+<th style="width:50px">HVCs</th>
+<th style="width:80px">HVC MRR</th>
+<th style="width:60px">Churn</th>
+<th>Top customer quote (highest-MRR HVC)</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>Editor / UI Glitches in Journey Builder</strong></td>
+<td><strong>4</strong></td>
+<td><strong>4</strong></td>
+<td><strong>$11,507</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"Keep getting an error when trying to replicate a flow. Tried to create from scratch and site locked up and now getting &quot;An error occurred&quot; so I can&#x27;t even access the flow now. Been waiting for a chat rep to come online for more than 30 minutes.   &lt;|*FS Session Replay*&gt; __________…"</div><div class="q-meta"><strong>User 104713590</strong> · $4,150/mo<span class="csat-pill csat-terrible">Terrible</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1749769621001519" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td><strong>Other Bugs</strong></td>
+<td><strong>5</strong></td>
+<td><strong>5</strong></td>
+<td><strong>$9,093</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"=== Message from SupportBot (Dev 2.0) (U05V8VCHMFE) at 2025-07-24 13:33:54 PDT ===  Message TS: 1753389234.081769 :postal_horn: *New Product Feedback Received* :postal_horn:  *Source* Customer Success – Strategic *Submitter* &lt;@U039L9NTBNV|Rachel (Ray) Rowley&gt; *Impacted Product* P…"</div><div class="q-meta"><strong>User 104713590</strong> · $5,098/mo · <a href="https://intuit-teams.slack.com/archives/C095FJ3SQF4/p1753389234081769" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td><strong>Reporting / Stats Wrong on Automations</strong></td>
+<td><strong>5</strong></td>
+<td><strong>3</strong></td>
+<td><strong>$6,218</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"Flow queues are showing incorrect numbers. Example: Queue on flow chart shows 29 in queue, but there are only 7 actual emails in queue.   &lt;|*FS Session Replay*&gt; _______________________________________ Thread: 75 replies (latest: 2025-07-29 06:23:48 PDT) Reactions: ack (1)"</div><div class="q-meta"><strong>User 104713590</strong> · $2,580/mo<span class="csat-pill csat-poor">Poor</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1753279829356669" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><strong>Automations Not Sending / Delivery Failures</strong></td>
+<td><strong>3</strong></td>
+<td><strong>3</strong></td>
+<td><strong>$4,780</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"Bugs cause frustration quite frequently — especially when it comes to audiences and &lt;http://automations.In|automations.In&gt; addition, the requirements for GDPR-compliant email marketing in the EU are not really adequately supported. For example, the double opt-in email is very bas…"</div><div class="q-meta"><strong>User 18546599</strong> · $3,000/mo · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1772013853566469" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td><strong>Migration &amp; Conversion Bugs (Classic → CJB / Marketing Automation Flows)</strong></td>
+<td><strong>2</strong></td>
+<td><strong>2</strong></td>
+<td><strong>$1,715</strong></td>
+<td>1</td>
+<td><div class="quote-cell"><div class="q-text">"I have emailed about this before and I will continue to do so. It&#x27;s absolutely ridiculous that people have to switch to the flows from the classic automation yet the numbers and stats are not moving with it. You are a billion dollar company and you would think that MC could affor…"</div><div class="q-meta"><strong>User 129947190</strong> · $1,010/mo<span class="csat-pill csat-poor">Poor</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1776813157652549" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td><strong>Pop-ups / Forms Not Feeding Flows</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>$450</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"Since the launch of the new pop ups, it&#x27;s not worked properly for us and doesn&#x27;t feed people into our flows like it used to.  I reported it to you guys over 3 weeks ago and I still don&#x27;t have an answer."</div><div class="q-meta"><strong>User 154383246</strong> · $450/mo<span class="csat-pill csat-average">Average</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1756796287417299" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>7</strong></td>
+<td><strong>Re-entry / Cool-down Settings Reset to Default</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>$300</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"In automations, there seems to be a bug where clicking contacts can re-enter flow defaults to every 5 minutes. I change it to the desired amout and when I check again after saving, it&#x27;s back to 5 minutes."</div><div class="q-meta"><strong>User 31103075</strong> · $300/mo<span class="csat-pill csat-average">Average</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1754557028570109" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+</tbody></table>
+
+    <p style="margin-top: 16px;"><strong>Bug section MRR exposure:</strong> $34,063/mo across 19 HVC customer instances (21 VoCs).</p>
+
+    <p class="source">
+      Source channels (full read): <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB">#hvc_feedback</a> (C051Y4H98VB · 2,588 msgs · May 2025–May 2026); <a href="https://intuit-teams.slack.com/archives/C095FJ3SQF4">#mc-hvc-escalations</a> (C095FJ3SQF4 · 184 msgs · Jul 2025–May 2026); <a href="https://intuit-teams.slack.com/archives/C06EVEZ4ZTQ">#mc-feedback-summary</a> (C06EVEZ4ZTQ · 254 msgs · Nov 2024–Mar 2026). Filter: automation/flow keywords + negative sentiment (CSAT Terrible/Poor, PRS≤4, P0/P1, or churn signals). Each VoC links to its original Slack message.
+    </p>
+  </section>
+
+  <!-- Risk Page 2 -->
+  <section class="page" aria-label="HVC Risk Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">HVC Risk Map · Mailchimp Automation/Flow VoC (cont.)</div>
+        <h1>Barriers &amp; missing features — what stops or limits HVC operators</h1>
+        <div class="subtitle">Same source data, scoped to barriers (workflow friction, paywalls, UX) and missing features (capability gaps).</div>
+      </div>
+      <div class="meta">
+        <div><strong>Window:</strong> Nov 18, 2024 → May 7, 2026</div>
+        <div><strong>Channels:</strong> 3 Slack channels</div>
+        <div><strong>Filter:</strong> automation/flow + HVC ($299+/mo)</div>
+        <div><strong>Page:</strong> 2 of 3</div>
+      </div>
+    </header>
+
+    <!-- BARRIERS -->
+    <h2><span class="num">B</span><span class="risk-pill barrier">BARRIERS</span>What's blocking customers — friction, paywalls, UX</h2>
+    <p style="margin-bottom: 8px;">Barriers are areas where the product works as designed but actively blocks the customer's workflow — bad UX, paywalls, missing controls. Listed in HVC MRR-at-risk order.</p>
+    <table class="dense voc-table"><thead><tr>
+<th style="width:42px">#</th>
+<th>Barrier theme</th>
+<th style="width:50px">VoCs</th>
+<th style="width:50px">HVCs</th>
+<th style="width:80px">HVC MRR</th>
+<th style="width:60px">Churn</th>
+<th>Top customer quote (highest-MRR HVC)</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>Other Barriers / UX Friction</strong></td>
+<td><strong>14</strong></td>
+<td><strong>14</strong></td>
+<td><strong>$6,605</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"bitte nicht alle 3 wochen das UI ädern und BITTE ua die Automations-Suchfunktion verbessern"</div><div class="q-meta"><strong>User 151042006</strong> · $706/mo · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1762433215747479" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td><strong>Slow / Confusing Journey Builder UX</strong></td>
+<td><strong>7</strong></td>
+<td><strong>7</strong></td>
+<td><strong>$6,415</strong></td>
+<td>1</td>
+<td><div class="quote-cell"><div class="q-text">"Site load speed is terrible and is affecting our ability to work efficiently and effectively. Journeys/Flows are complicated, not intuitive, and difficult to run."</div><div class="q-meta"><strong>User 222378130</strong> · $2,400/mo<span class="csat-pill csat-average">Average</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1761588143912359" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td><strong>Sharing / Export / Permissions on Flow Reports</strong></td>
+<td><strong>2</strong></td>
+<td><strong>2</strong></td>
+<td><strong>$2,808</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"We are now unable to share campaign reports with individuals who do not have a mail chimp login. It has greatly interrupted our process and workflow."</div><div class="q-meta"><strong>User 1449861</strong> · $1,658/mo<span class="csat-pill csat-poor">Poor</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1769008655532779" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><strong>Deliverability / Inbox Placement</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>$1,553</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"Just provided a feedback about the usability of the test email workflow, which seems to be in-transparent and not user-friendly in my view in terms of who else might receive a test mail and/or comment without obviously/explicitly knowing about it.  I also mentioned that one test…"</div><div class="q-meta"><strong>User 79675358</strong> · $1,553/mo<span class="csat-pill csat-poor">Poor</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1758437742397979" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td><strong>CJB Still Uses Legacy Editor</strong></td>
+<td><strong>2</strong></td>
+<td><strong>2</strong></td>
+<td><strong>$1,265</strong></td>
+<td>1</td>
+<td><div class="quote-cell"><div class="q-text">"I&#x27;m actually quite disappointed that your customer journeys are still edited in your legacy builder. Kind of takes away the point..."</div><div class="q-meta"><strong>User 242035718</strong> · $904/mo<span class="csat-pill csat-poor">Poor</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1772789988305819" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td><strong>Support Quality on Automation Issues</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>$1,150</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"Didn&#x27;t receive a reply for the live chat"</div><div class="q-meta"><strong>User 174950573</strong> · $1,150/mo<span class="csat-pill csat-terrible">Terrible</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1772475179964829" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>7</strong></td>
+<td><strong>No Frequency Cap / Suppression Across Flows</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>$576</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"There is no automated way to make sure that a contact is only receiving one flow at a time and no extra emails.  For example. When someone subscribes and enters welcome flow automation there is no automated way to make sure, they don&#x27;t receive other regular emails as well at a ti…"</div><div class="q-meta"><strong>User 17515943</strong> · $576/mo<span class="csat-pill csat-average">Average</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1771425744421319" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+</tbody></table>
+
+    <p style="margin-top: 16px; margin-bottom: 18px;"><strong>Barriers MRR exposure:</strong> $20,372/mo across 28 HVC instances (28 VoCs).</p>
+
+    <!-- MISSING FEATURES -->
+    <h2><span class="num">C</span><span class="risk-pill missing">MISSING</span>What customers are asking for — capability gaps</h2>
+    <p style="margin-bottom: 8px;">Missing features are explicit asks for capabilities Mailchimp doesn't ship today. Listed in HVC MRR-at-risk order.</p>
+    <table class="dense voc-table"><thead><tr>
+<th style="width:42px">#</th>
+<th>Missing feature theme</th>
+<th style="width:50px">VoCs</th>
+<th style="width:50px">HVCs</th>
+<th style="width:80px">HVC MRR</th>
+<th style="width:60px">Churn</th>
+<th>Top customer quote (highest-MRR HVC)</th>
+</tr></thead><tbody>
+<tr>
+<td><strong>1</strong></td>
+<td><strong>Advanced Segmentation in CJB</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>$3,000</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"Automations/Customer Journeys REALLY need advanced segmentation (not the old basic segmentations).  Furthermore, segmentations of any kind should also allow for nesting.  This has been a basic feature for email platforms for over 20 years and it would be nice of Mail Chimp would…"</div><div class="q-meta"><strong>User 180695314</strong> · $3,000/mo<span class="csat-pill csat-poor">Poor</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1771356874900729" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td><strong>Other Missing Features</strong></td>
+<td><strong>4</strong></td>
+<td><strong>4</strong></td>
+<td><strong>$2,164</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"I am trying to add an email in to a flow that alerts staff that an email was sent. I am unable to change the TO of emails. Since that is a limitation, I was trying to find a way to send a report periodically but that is a limitation as well. Ideally there would be an automated so…"</div><div class="q-meta"><strong>User 236062498</strong> · $939/mo<span class="csat-pill csat-average">Average</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1759432792489999" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td><strong>Date-Relative / Recurring / Event-Based Triggers</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>$1,701</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"We would like to be able to send an email after our events (several a day everyday) and at the current moment all date automations require either a specific date or a future date  &lt;|*FS Session Replay*&gt; _______________________________________ Thread: 1 replies (latest: 2025-06-26…"</div><div class="q-meta"><strong>User 36238105</strong> · $1,701/mo<span class="csat-pill csat-poor">Poor</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1750961377721449" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td><strong>Conversational AI / Generative Copy in Journeys</strong></td>
+<td><strong>4</strong></td>
+<td><strong>4</strong></td>
+<td><strong>$1,485</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"The cumulative layout shift of elements that loads on the automation flow homepage causes you to inadvertently click the suggested AI powered automations instead of the &quot;View my flows&quot; link because the AI powered suggestions loads a second or 2 after the entire page loads, causin…"</div><div class="q-meta"><strong>User 7004749</strong> · $425/mo<span class="csat-pill csat-poor">Poor</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1757004904129789" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td><strong>Cross-Channel: SMS / Push / WhatsApp in Journey</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>$1,182</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"SMS Automations will not load or save"</div><div class="q-meta"><strong>User 26957511</strong> · $1,182/mo<span class="csat-pill csat-terrible">Terrible</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1763059139423639" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td><strong>More Than 3 Triggers / Limits in CJB</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>$900</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"Need to be able to add more than 3 triggers, not sure why it is limitied.  &lt;|*FS Session Replay*&gt; _______________________________________ Thread: 8 replies (latest: 2025-12-12 13:03:14 PST)"</div><div class="q-meta"><strong>User 238740590</strong> · $900/mo<span class="csat-pill csat-poor">Poor</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1765243480737799" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>7</strong></td>
+<td><strong>Per-Flow Send Timing &amp; Granular Reports</strong></td>
+<td><strong>2</strong></td>
+<td><strong>2</strong></td>
+<td><strong>$676</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"I think it would be beneficial to see a report that lists when a automated &quot;flow&quot; email was sent and to who. I can see the total deliveries, but I can&#x27;t see cohesive report about exactly when an automated email was sent, and to who it was sent to. I think many people would benefi…"</div><div class="q-meta"><strong>User 223362146</strong> · $376/mo<span class="csat-pill csat-average">Average</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1754066496207149" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>8</strong></td>
+<td><strong>Better A/B Testing in Automations</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>$455</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"Setting up A/B testing for a simple 3-email drip campaign turns into 14 emails and like 30+ steps. that is waaaaaaaaay to complicated even for an experienced automation flow professional."</div><div class="q-meta"><strong>User 218455102</strong> · $455/mo<span class="csat-pill csat-poor">Poor</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770249167168949" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>9</strong></td>
+<td><strong>Email Template Management in Flows</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>$450</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"Make it much easier to manage email templates created for automated flows."</div><div class="q-meta"><strong>User 239055926</strong> · $450/mo<span class="csat-pill csat-poor">Poor</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1758803501578799" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+<tr>
+<td><strong>10</strong></td>
+<td><strong>Reporting / Analytics on Automations</strong></td>
+<td><strong>1</strong></td>
+<td><strong>1</strong></td>
+<td><strong>$383</strong></td>
+<td>0</td>
+<td><div class="quote-cell"><div class="q-text">"I need to be able to run a monthly report for each of my flows that shows total clicks for each individual link in the email (for the calendar month - NOT all time). I haven&#x27;t found anything that can give me the total clicks by month. I can use the flow report to show basic perfo…"</div><div class="q-meta"><strong>User 13014699</strong> · $383/mo<span class="csat-pill csat-poor">Poor</span> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1754861373935739" target="_blank" rel="noopener">Slack ↗</a></div></div></td>
+</tr>
+</tbody></table>
+
+    <p style="margin-top: 16px;"><strong>Missing-features MRR exposure:</strong> $12,396/mo across 17 HVC instances (17 VoCs).</p>
+  </section>
+
+  <!-- Risk Page 3 -->
+  <section class="page" aria-label="HVC Risk Page 3">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">HVC Risk Map · Phased plan to close MRR exposure</div>
+        <h1>3-phase plan ranked by HVC MRR at risk — close <em style="color:#4338CA;">$44,618</em> in Phase 1, <em>$15,691</em> in Phase 2, <em>$6,522</em> in Phase 3</h1>
+        <div class="subtitle">Themes ordered by total HVC MRR exposure, then bucketed into 3 phases targeting ~50% / ~30% / ~20% of the at-risk MRR. Pair with the "Roadmap to Win" tab for the strategic-build plan.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Total HVC MRR at risk:</strong> $53,547/mo</div>
+        <div><strong>Phase split:</strong> 50% / 30% / 20%</div>
+        <div><strong>Phases:</strong> 0–6 / 6–12 / 12–18 mo</div>
+        <div><strong>Page:</strong> 3 of 3</div>
+      </div>
+    </header>
+
+    <h2 style="margin-top:18px;"><span class="num">D1</span>Phase 1 — Stop the bleeding</h2>
+    <div class="phase p1">
+      <div class="head"><h3>Phase 1 — Stop the bleeding</h3><span class="horizon">Months 0–6 · $44,618/mo MRR at risk · 6 themes</span></div>
+      <p style="font-size:12.5px; color:#4B5563; margin-bottom:10px;">Address the highest-MRR-exposure bugs and barriers first. Every fix here is a churn-risk reduction in our most valuable accounts.</p>
+      <table class="dense"><thead><tr><th style="width:60px">Type</th><th>Theme</th><th style="width:60px">VoCs</th><th style="width:60px">HVCs</th><th style="width:90px">HVC MRR</th><th style="width:60px">Churn</th></tr></thead><tbody>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Editor / UI Glitches in Journey Builder</strong></td><td>4</td><td>4</td><td><strong>$11,507</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Other Bugs</strong></td><td>5</td><td>5</td><td><strong>$9,093</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Other Barriers / UX Friction</strong></td><td>14</td><td>14</td><td><strong>$6,605</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Slow / Confusing Journey Builder UX</strong></td><td>7</td><td>7</td><td><strong>$6,415</strong></td><td>1</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Reporting / Stats Wrong on Automations</strong></td><td>5</td><td>3</td><td><strong>$6,218</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Automations Not Sending / Delivery Failures</strong></td><td>3</td><td>3</td><td><strong>$4,780</strong></td><td>0</td></tr>
+      </tbody></table>
+    </div>
+
+    <h2 style="margin-top:18px;"><span class="num">D2</span>Phase 2 — Close obvious functional gaps</h2>
+    <div class="phase p2">
+      <div class="head"><h3>Phase 2 — Close obvious functional gaps</h3><span class="horizon">Months 6–12 · $15,691/mo MRR at risk · 8 themes</span></div>
+      <p style="font-size:12.5px; color:#4B5563; margin-bottom:10px;">After triage, close the medium-MRR-exposure items. These are where customers are 'frustrated but not yet leaving.'</p>
+      <table class="dense"><thead><tr><th style="width:60px">Type</th><th>Theme</th><th style="width:60px">VoCs</th><th style="width:60px">HVCs</th><th style="width:90px">HVC MRR</th><th style="width:60px">Churn</th></tr></thead><tbody>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Advanced Segmentation in CJB</strong></td><td>1</td><td>1</td><td><strong>$3,000</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Sharing / Export / Permissions on Flow Reports</strong></td><td>2</td><td>2</td><td><strong>$2,808</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Other Missing Features</strong></td><td>4</td><td>4</td><td><strong>$2,164</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Migration &amp; Conversion Bugs (Classic → CJB / Marketing Automation Flows)</strong></td><td>2</td><td>2</td><td><strong>$1,715</strong></td><td>1</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Date-Relative / Recurring / Event-Based Triggers</strong></td><td>1</td><td>1</td><td><strong>$1,701</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Deliverability / Inbox Placement</strong></td><td>1</td><td>1</td><td><strong>$1,553</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Conversational AI / Generative Copy in Journeys</strong></td><td>4</td><td>4</td><td><strong>$1,485</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>CJB Still Uses Legacy Editor</strong></td><td>2</td><td>2</td><td><strong>$1,265</strong></td><td>1</td></tr>
+      </tbody></table>
+    </div>
+
+    <h2 style="margin-top:18px;"><span class="num">D3</span>Phase 3 — Long-tail polish + capability bets</h2>
+    <div class="phase p3">
+      <div class="head"><h3>Phase 3 — Long-tail polish + capability bets</h3><span class="horizon">Months 12–18 · $6,522/mo MRR at risk · 10 themes</span></div>
+      <p style="font-size:12.5px; color:#4B5563; margin-bottom:10px;">The tail items — fewer HVCs each but real signal. Combine with the Roadmap-to-Win differentiated bets to ship a category-leading product.</p>
+      <table class="dense"><thead><tr><th style="width:60px">Type</th><th>Theme</th><th style="width:60px">VoCs</th><th style="width:60px">HVCs</th><th style="width:90px">HVC MRR</th><th style="width:60px">Churn</th></tr></thead><tbody>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Cross-Channel: SMS / Push / WhatsApp in Journey</strong></td><td>1</td><td>1</td><td><strong>$1,182</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>Support Quality on Automation Issues</strong></td><td>1</td><td>1</td><td><strong>$1,150</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>More Than 3 Triggers / Limits in CJB</strong></td><td>1</td><td>1</td><td><strong>$900</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Per-Flow Send Timing &amp; Granular Reports</strong></td><td>2</td><td>2</td><td><strong>$676</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill barrier">BARRIER</span></td><td><strong>No Frequency Cap / Suppression Across Flows</strong></td><td>1</td><td>1</td><td><strong>$576</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Better A/B Testing in Automations</strong></td><td>1</td><td>1</td><td><strong>$455</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Email Template Management in Flows</strong></td><td>1</td><td>1</td><td><strong>$450</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Pop-ups / Forms Not Feeding Flows</strong></td><td>1</td><td>1</td><td><strong>$450</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill missing">MISSING</span></td><td><strong>Reporting / Analytics on Automations</strong></td><td>1</td><td>1</td><td><strong>$383</strong></td><td>0</td></tr>
+        <tr><td><span class="risk-pill bug">BUG</span></td><td><strong>Re-entry / Cool-down Settings Reset to Default</strong></td><td>1</td><td>1</td><td><strong>$300</strong></td><td>0</td></tr>
+      </tbody></table>
+    </div>
+
+
+    <h2 style="margin-top: 18px;"><span class="num">E</span>Top 12 HVC verbatim quotes (highest-MRR customers across all themes)</h2>
+    <p style="margin-bottom: 10px;">Direct, unedited quotes from highest-MRR Mailchimp HVCs reporting automation/flow pain, with Slack permalinks.</p>
+    <div class="quote-wall" style="margin-bottom: 14px;">
+
+      <div class="qw neg">
+        <p class="q">"=== Message from SupportBot (Dev 2.0) (U05V8VCHMFE) at 2025-07-24 13:33:54 PDT === 
+Message TS: 1753389234.081769
+:postal_horn: *New Product Feedback Received* :postal_horn:
+
+*Source*
+Customer Success – Strategic
+*Submitter*
+&lt;@U039L9NTBNV|Rachel (Ray) Rowley&gt;
+*Impacted Product*
+Performance Issues
+*Goal: what is the user trying to accomplish?* 
+For: CTM RE: They are trying to vi…"</p>
+        <div class="src-line"><strong>User 104713590</strong> · $5,098/mo MRR · <span class="risk-pill bug" style="font-size:9px;">BUG</span> · Other Bugs · <a href="https://intuit-teams.slack.com/archives/C095FJ3SQF4/p1753389234081769" target="_blank" rel="noopener">#mc-hvc-escalations ↗</a></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Bugs cause frustration quite frequently — especially when it comes to audiences and &lt;http://automations.In|automations.In&gt; addition, the requirements for GDPR-compliant email marketing in the EU are not really adequately supported. For example, the double opt-in email is very basic and offers hardly any customization options, such as different layouts or languages. In addition,…"</p>
+        <div class="src-line"><strong>User 18546599</strong> · $3,000/mo MRR · <span class="risk-pill bug" style="font-size:9px;">BUG</span> · Automations Not Sending / Delivery Failures · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1772013853566469" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw mid">
+        <p class="q">"Automations/Customer Journeys REALLY need advanced segmentation (not the old basic segmentations).  Furthermore, segmentations of any kind should also allow for nesting.  This has been a basic feature for email platforms for over 20 years and it would be nice of Mail Chimp would catch up :)  I&#x27;m happy to give any further feedback on desired features and usability.  All as a use…"</p>
+        <div class="src-line"><strong>User 180695314</strong> · $3,000/mo MRR · <span class="risk-pill missing" style="font-size:9px;">MISSING</span> · Advanced Segmentation in CJB · <em>Poor</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1771356874900729" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"We&#x27;ve been working on updating some emails for our automated journeys. Once updated, the &#x27;View email&#x27; option shows us the old email, even after unpausing the automated journey. As we understand it, the link is showing us the web version, which will only be updated once the edited one is sent.
+
+The issue with this is not knowing what the newest/current version is without pausing…"</p>
+        <div class="src-line"><strong>User 9556325</strong> · $2,906/mo MRR · <span class="risk-pill bug" style="font-size:9px;">BUG</span> · Editor / UI Glitches in Journey Builder · <em>Average</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1756287982288699" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Your new changes to campaigns features &quot;All&quot; which causes journeys to be featured first. We don&#x27;t ever edit journeys, and 99% of campaigns are email. This should at least default to email, but these other sorting options don&#x27;t belong in this view. I literally thought the UI was broken yesterday."</p>
+        <div class="src-line"><strong>User 3458510</strong> · $2,500/mo MRR · <span class="risk-pill bug" style="font-size:9px;">BUG</span> · Other Bugs · <em>Poor</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1747316252957129" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Site load speed is terrible and is affecting our ability to work efficiently and effectively. Journeys/Flows are complicated, not intuitive, and difficult to run."</p>
+        <div class="src-line"><strong>User 222378130</strong> · $2,400/mo MRR · <span class="risk-pill barrier" style="font-size:9px;">BARRIER</span> · Slow / Confusing Journey Builder UX · <em>Average</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1761588143912359" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"I was just on the phone for one hour regarding the classic automations, which you no longer support.
+
+I edited an email for Local Edition&#x27;s welcome series on 2/6 which then sent to 6840 people and it should not have happened. 
+
+We checked that the box was not checked for a user to re-enter the flow.
+
+We should have been notified that classic automations were no longer supported…"</p>
+        <div class="src-line"><strong>User 149472166</strong> · $1,950/mo MRR · <span class="risk-pill bug" style="font-size:9px;">BUG</span> · Editor / UI Glitches in Journey Builder · <em>Terrible</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770485643609489" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw mid">
+        <p class="q">"We would like to be able to send an email after our events (several a day everyday) and at the current moment all date automations require either a specific date or a future date
+
+&lt;|*FS Session Replay*&gt;
+_______________________________________
+Thread: 1 replies (latest: 2025-06-26 11:14:21 PDT)
+Reactions: ack (1)"</p>
+        <div class="src-line"><strong>User 36238105</strong> · $1,701/mo MRR · <span class="risk-pill missing" style="font-size:9px;">MISSING</span> · Date-Relative / Recurring / Event-Based Triggers · <em>Poor</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1750961377721449" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"We are now unable to share campaign reports with individuals who do not have a mail chimp login. It has greatly interrupted our process and workflow."</p>
+        <div class="src-line"><strong>User 1449861</strong> · $1,658/mo MRR · <span class="risk-pill barrier" style="font-size:9px;">BARRIER</span> · Sharing / Export / Permissions on Flow Reports · <em>Poor</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1769008655532779" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"On the customer-journey-builder seems no scroll bar on the right hand side, when the content gets longer. (At least on my end: I am using Mac OS with Firefox.)"</p>
+        <div class="src-line"><strong>User 79675358</strong> · $1,553/mo MRR · <span class="risk-pill bug" style="font-size:9px;">BUG</span> · Editor / UI Glitches in Journey Builder · <em>Poor</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1757843796290509" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw mid">
+        <p class="q">"SMS Automations will not load or save"</p>
+        <div class="src-line"><strong>User 26957511</strong> · $1,182/mo MRR · <span class="risk-pill missing" style="font-size:9px;">MISSING</span> · Cross-Channel: SMS / Push / WhatsApp in Journey · <em>Terrible</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1763059139423639" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"The reporting feature has stopped working for my classic automations"</p>
+        <div class="src-line"><strong>User 1152561</strong> · $1,150/mo MRR · <span class="risk-pill bug" style="font-size:9px;">BUG</span> · Automations Not Sending / Delivery Failures · <em>Terrible</em> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1749569788892999" target="_blank" rel="noopener">#hvc_feedback ↗</a></div>
+      </div>
+
+    </div>
+
+    <p class="source">
+      <strong>Methodology:</strong> Read all 3 Slack channels (full pagination) for Nov 18, 2024 → May 7, 2026. Parsed Qualtrics survey JSON + escalation messages. Filtered for automation/flow keywords AND negative sentiment (CSAT Terrible/Poor, PRS&le;4, criticality P0/P1, OR negative-keyword match in feedback). Deduplicated by (User ID + first 200 chars of feedback). Each VoC counted once toward MRR. Themes assigned by keyword pattern matching with manual review of catch-all bucket. <strong>HVC threshold:</strong> $299/mo MRR. <strong>Phasing:</strong> sorted themes by HVC MRR descending, bucketed into Phase 1 (top ~50% of MRR), Phase 2 (next ~30%), Phase 3 (final ~20%).
+    </p>
+  </section>
+
+</div><!-- /panel-hvcrisk -->
+
+
 </div>
 
 <script>
@@ -1629,7 +2164,7 @@
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (initial === 'sentiment' || initial === 'brief' || initial === 'roadmap') activate(initial);
+    if (initial === 'sentiment' || initial === 'brief' || initial === 'roadmap' || initial === 'hvcrisk') activate(initial);
   })();
 </script>
 
