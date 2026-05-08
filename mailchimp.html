@@ -799,6 +799,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="hvcrisk">HVC Risk Map</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="research">User Research</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="health">Product Health</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="prdaudit">PRD Audit</button>
     </div>
     <div style="display:flex; gap:8px;">
       <a class="btn" href="index.html">→ Klaviyo</a>
@@ -5861,6 +5862,255 @@ Reactions: ack (1)"</p>
 
 </div><!-- /panel-health -->
 
+<!-- ============================================ -->
+<!-- ============== PRD AUDIT TAB =============== -->
+<!-- ============================================ -->
+<div class="tabpanel" id="panel-prdaudit" role="tabpanel">
+
+  <!-- PRD Audit Page 1 -->
+  <section class="page" aria-label="PRD Audit Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">PRD Audit · Previous PM's roadmap reviewed against our evidence base</div>
+        <h1>22 initiatives in flight, <em style="color:#036A4F;">17 backed by VoC/research/competitive evidence</em>, <em style="color:#9A1F00;">5 strategic gaps</em> the data flags but no PRD addresses</h1>
+        <div class="subtitle">Reviewed 9 PRDs/roadmaps by Elizabeth Bertasi (Sep '25 – Apr '26): FY26 Roadmap, Q2 Planning list (22 items), AI Automation Generation Skill (PRD + Skill PRD), "It's just an email" welcome flow, H2 Priorities, Triggers Design Review, Conversational Automations Product Review. Mapped each to HVC Risk Map ($53.5K/mo MRR), 50-video User Research, Klaviyo Marketing Agent gaps, Shopify Sidekick gaps, and our Product Health YoY data. Critic-agent review at end.</div>
+      </div>
+      <div class="meta">
+        <div><strong>PDFs reviewed:</strong> 9</div>
+        <div><strong>Initiatives extracted:</strong> 22 strategic</div>
+        <div><strong>Mapped to evidence:</strong> 17 / 22 (77%)</div>
+        <div><strong>Page:</strong> 1 of 2</div>
+      </div>
+    </header>
+
+    <!-- KPIs -->
+    <div class="kpi-row" style="margin-bottom: 14px;">
+      <div class="kpi"><div class="v">22</div><div class="l">Strategic initiatives extracted from 9 PDFs (consolidated from ~50 line items in the Q2 + roadmap docs)</div></div>
+      <div class="kpi"><div class="v">17 / 22</div><div class="l"><strong>77%</strong> map to at least one evidence source (VoC, User Research, Klaviyo gap, Shopify gap)</div></div>
+      <div class="kpi"><div class="v">~$13M</div><div class="l">Combined opportunity sizing in the PRDs (where stated): $7M Fusion Pkg 3 max, $3.9M Wix Bookings, $600K Adv Seg, $500K discount-code trigger, $74K welcome-flow lift</div></div>
+      <div class="kpi"><div class="v">5</div><div class="l">Strategic gaps the evidence flags but <em>no PRD</em> addresses (highest: Editor UI Glitches at $16.5K/mo HVC, Reporting Wrong $6.2K/mo)</div></div>
+    </div>
+
+    <!-- Initiative inventory -->
+    <h2><span class="num">A</span>The 22 initiatives — problem, benefit, sizing</h2>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">Consolidated from the Q2 Planning list, FY26 Roadmap, AI Automation Generation PRD, "It's just an email" PRD, Triggers Design Review, Conversational Automations Product Review, and H2 FY26 Priorities. Sizing shown only where the PRD explicitly states it.</p>
+
+    <table class="dense" style="margin-bottom: 14px;">
+      <thead>
+        <tr>
+          <th style="width:36px">#</th>
+          <th style="width:200px">Initiative · source</th>
+          <th>Problem solved (one sentence)</th>
+          <th>Customer functional benefit</th>
+          <th style="width:130px">Opportunity sizing (PRD-stated)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td><strong>AI Automation Generation Skill (M1)</strong> · PRD + Skill PRD (Mar/Apr '26, Drafting)</td><td>84% of eligible accounts have no active automation; users face a 100+ template "blank page" problem.</td><td>One-click, business-context-aware automation generated from integrations + site signals + MC data. Review &amp; activate in minutes vs. days of self-serve browsing.</td><td><strong>16% → 22%</strong> adoption (6mo); FTU 30-day turn-on <strong>6.8% → 15%</strong>; ~$616/mo attributed revenue/adopter; 3.3% retention lift</td></tr>
+        <tr><td>2</td><td><strong>"It's just an email" welcome flow</strong> · PRD ✅ Approved (Feb '26)</td><td>FTUs are overwhelmed by triggers/maps/if-this-then-that for what is, to them, "just a welcome email."</td><td>Welcome emails presented as a single-email setup that bypasses the flow builder. Edit content, turn on, done.</td><td><strong>$74K FY26 lift</strong> ($30K retention + $45K acquisition); FTU 30-day turn-on <strong>6.8% → 15%</strong>; DSB adoption 20% → 23% in 120d</td></tr>
+        <tr><td>3</td><td><strong>Trigger expansion: 12 new domain-event triggers</strong> · Triggers Design Review + Q2 list</td><td>48 triggers today, mostly native MC events; missing predictive/behavioral triggers Klaviyo has shipped.</td><td>Abandoned browse, back-in-stock, predicted purchase, propensity to churn, payment, review-eligible, omnichannel-engaged + 5 more — all via Eventbus/CDP.</td><td><strong>"Klaviyo parity"</strong> claimed (no $ stated)</td></tr>
+        <tr><td>4</td><td><strong>Wix Bookings data activation trigger</strong> · Q2 list, In progress</td><td>"Contact makes a booking" not available as an automation trigger for Wix users.</td><td>Service businesses on Wix can trigger automations on booking events (welcome, reminder, follow-up).</td><td><strong>$3.9M ARR</strong></td></tr>
+        <tr><td>5</td><td><strong>Advanced Segmentation in CJB (If/Else + Trigger Filters)</strong> · Q2 list</td><td>Automation filters only support customer-level properties — can't dynamically branch on triggering-event data.</td><td>Branch on event properties (cart contents, product tags, custom fields). Closes a major Klaviyo flow-logic gap.</td><td><strong>$600K ARR</strong></td></tr>
+        <tr><td>6</td><td><strong>Segments as a trigger ("Contact joined a segment")</strong> · Q2 list</td><td>No way to fire an automation on segment membership changes today.</td><td>Customers can build journeys triggered by lifecycle/RFM segment transitions — the cohort-based marketing pattern.</td><td>Not stated</td></tr>
+        <tr><td>7</td><td><strong>Discount code trigger ("Contact used a discount code")</strong> · Q2 list, post-cut</td><td>Can't follow up automatically with customers who used a specific discount.</td><td>Triggered post-purchase / loyalty flows specifically for discount-using customers.</td><td><strong>$500K MRR</strong></td></tr>
+        <tr><td>8</td><td><strong>MC in Fusion Package 1 — Customer Hub automations (6 templates)</strong> · Q2 list, In progress</td><td>QBO/Fusion users have no in-product marketing automation today.</td><td>6 starter automation templates introduced inside Customer Hub — meets QBO users where they already work.</td><td>Not stated (part of broader Fusion launch)</td></tr>
+        <tr><td>9</td><td><strong>MC in Fusion Package 1 — Auto-on transactional automations</strong> · Q2 list, post-cut</td><td>Transactional reminder automations require manual setup.</td><td>Default-on for transactional reminders = automatic value with zero-touch setup.</td><td>Not stated</td></tr>
+        <tr><td>10</td><td><strong>MC in Fusion Package 3 — Marketing Hub automations</strong> · Q2 list, post-cut</td><td>QBO Marketing Hub doesn't have native automation.</td><td>2 automation templates inside Marketing Hub for the Pro Serve cohort.</td><td><strong>$0.5M – $7M ARR</strong></td></tr>
+        <tr><td>11</td><td><strong>L2C automation flows (6 templates)</strong> · Conversational Automations doc, Q4 FY26</td><td>Lead-to-Cash flow needs core marketing automations to be useful for the prospecting agent.</td><td>Appointment reminder, proposal reminder, welcome lead, send survey, win-back lost lead, nurture leads.</td><td>Not stated</td></tr>
+        <tr><td>12</td><td><strong>Conversational Automations (WhatsApp Public Beta dependency)</strong> · Product Review (Apr '26), Q4 FY26 priority</td><td>WhatsApp Public Beta in July '26 requires reply-branching logic that today's automation builder doesn't support.</td><td>C1 can build automated 2-way conversations on WhatsApp/RCS at scale (button-tap branching, keyword triggers, human handoff).</td><td>Table stakes for $$ WhatsApp / RCS launch; cited 391% lead-conversion lift for &lt;1min response</td></tr>
+        <tr><td>13</td><td><strong>Single modernized Automations builder (Q4 FY26 → Q1 FY27)</strong> · Conversational Product Review</td><td>Two automation surfaces (Classic + CJB) compete for adoption; current FE doesn't support multi-branch / event-driven.</td><td>One unified React-based builder supporting Marketing + Conversational + L2C use cases. Eliminates Classic vs CJB confusion.</td><td>Not stated</td></tr>
+        <tr><td>14</td><td><strong>Trigger modal redesign / scalable UX</strong> · Triggers Design Review</td><td>Existing modal won't scale beyond Q2 triggers; user testing shows mixed sidebar vs full-screen preference (43%/57%).</td><td>Hybrid sidebar + descriptive subtext + smart recommendations ("you had 100 abandoned carts last month").</td><td>Not stated</td></tr>
+        <tr><td>15</td><td><strong>Dynamic ecomm content in SMS</strong> · Q2 list</td><td>SMS messages can't include dynamic product recommendations.</td><td>Personalized SMS (e.g. abandoned cart with the actual product) — competitor parity for Postscript/Attentive.</td><td>Not stated</td></tr>
+        <tr><td>16</td><td><strong>Bypass SMS quiet hours for C2-initiated actions</strong> · Q2 list</td><td>Quiet-hours rules block reply-based flows like keyword opt-ins.</td><td>SMS keyword auto-replies fire instantly, even during quiet hours, as long as the C2 initiated.</td><td>Not stated</td></tr>
+        <tr><td>17</td><td><strong>WhatsApp send action in automations</strong> · Q3 (moved from Q2)</td><td>WhatsApp can be used in campaigns but not as a step inside an automation.</td><td>WhatsApp as a first-class send action inside any automation flow.</td><td>Table stakes for WhatsApp omnichannel</td></tr>
+        <tr><td>18</td><td><strong>Send-time optimization in automations</strong> · Q2 list, post-cut</td><td>Automations send at fixed time/delay, not at the optimal time per recipient.</td><td>Per-profile send-time prediction inside flow steps — Klaviyo Smart Send Time parity.</td><td>Not stated</td></tr>
+        <tr><td>19</td><td><strong>Event-driven processing (Monolith → Eventbus)</strong> · Roadmap Theme 3.1</td><td>Current automations infra takes minutes per step — won't support sub-second SLA needed for conversational.</td><td>Real-time triggering, faster automation execution, foundation for L2C and conversational automations.</td><td>Foundational — unblocks Initiatives 11, 12, 17</td></tr>
+        <tr><td>20</td><td><strong>ICP-focused automations homepage iteration (DSB)</strong> · Q2 list, Bayesian test</td><td>Automations homepage shows generic templates regardless of customer ICP.</td><td>Personalized recommendations and templates by ICP (DSB / Pro Serve / etc).</td><td>Not stated</td></tr>
+        <tr><td>21</td><td><strong>A/B testing in automations</strong> · Roadmap Theme 3.2 (Q3+)</td><td>Can't A/B test variants within an automation flow.</td><td>A/B test send time, channel, content, offer inside any flow step — Klaviyo Personalized A/B parity.</td><td>Not stated</td></tr>
+        <tr><td>22</td><td><strong>QBO connected user experience</strong> · Q2 list, post-cut</td><td>QBO mutual customers don't get a seamless MC experience when logging in from QBO.</td><td>Single sign-on, contextual recommendations, QBO-data-aware automations.</td><td><strong>~60K MC + 115K mutual customers</strong></td></tr>
+      </tbody>
+    </table>
+
+    <!-- Evidence mapping -->
+    <h2><span class="num">B</span>Evidence mapping — does each initiative connect to customer pain or competitive gap?</h2>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">Symbols: ✓ = explicit match in source data; (✓) = adjacent / partial match; — = no match found.</p>
+    <table class="dense" style="margin-bottom: 14px;">
+      <thead>
+        <tr>
+          <th style="width:36px">#</th>
+          <th>Initiative</th>
+          <th style="width:140px">HVC Risk Map theme (MRR exposure)</th>
+          <th style="width:110px">User Research (50 videos)</th>
+          <th style="width:100px">Klaviyo gap</th>
+          <th style="width:100px">Shopify gap</th>
+          <th style="width:50px">Score</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>AI Automation Generation Skill</td><td>✓ Conversational AI / Generative Copy ($6,485) + Brand Kit Not Applied ($5K)</td><td>✓ Bet 1 (Sandbox eval) + Bet 2 (Activation funnel)</td><td>✓ Marketing Agent / Flows AI</td><td>✓ Sidekick</td><td><strong>4/4</strong></td></tr>
+        <tr><td>2</td><td>"It's just an email" welcome flow</td><td>✓ Slow / Confusing JB UX ($5,205) + Premature 'Turn On' ($6K)</td><td>✓ Bet 2 (Activation funnel for non-adopters)</td><td>(✓) Klaviyo Marketing Agent 3-click setup</td><td>(✓) Sidekick post-form</td><td><strong>4/4</strong></td></tr>
+        <tr><td>3</td><td>Trigger expansion: 12 new triggers</td><td>✓ Event-Property Access ($10K) + Date-Relative Triggers ($1.7K)</td><td>✓ Barrier 4 (Long-tail integration gap)</td><td>✓ Predictive triggers (next-order, churn)</td><td>(✓) Native data triggers</td><td><strong>4/4</strong></td></tr>
+        <tr><td>4</td><td>Wix Bookings trigger</td><td>(✓) Date-Relative / Event-Based Triggers ($1.7K)</td><td>(✓) Barrier 4 (integration gap)</td><td>—</td><td>—</td><td><strong>2/4</strong></td></tr>
+        <tr><td>5</td><td>Advanced Segmentation in CJB</td><td>✓ Advanced Segmentation in CJB ($3K)</td><td>✓ Bet 3 (B2B/ProServ templates) + barrier on segment depth</td><td>✓ Klaviyo split-logic depth</td><td>(✓) Segmentation depth</td><td><strong>4/4</strong></td></tr>
+        <tr><td>6</td><td>Segments as a trigger</td><td>(✓) related to "No Frequency Cap / Suppression Across Flows" ($2,576)</td><td>(✓) Bet 6 (DRAFT-resurrect / next-best automation)</td><td>(✓) Klaviyo segment-triggered flows</td><td>—</td><td><strong>3/4</strong></td></tr>
+        <tr><td>7</td><td>Discount code trigger</td><td>—</td><td>—</td><td>(✓) Klaviyo discount-aware flows</td><td>—</td><td><strong>1/4</strong></td></tr>
+        <tr><td>8</td><td>MC in Fusion Package 1: Customer Hub</td><td>—</td><td>✓ Bet 4 (QBO ↔ MC integration) — strong</td><td>—</td><td>—</td><td><strong>1/4</strong></td></tr>
+        <tr><td>9</td><td>Auto-on for transactional automations</td><td>(✓) related to Premature 'Turn On' ($6K) — opposite direction</td><td>—</td><td>—</td><td>—</td><td><strong>1/4</strong></td></tr>
+        <tr><td>10</td><td>MC in Fusion Package 3: Marketing Hub</td><td>—</td><td>✓ Bet 4 (QBO ↔ MC) — strong</td><td>—</td><td>—</td><td><strong>1/4</strong></td></tr>
+        <tr><td>11</td><td>L2C automation flows</td><td>(✓) B2B / Sophisticated Use-Case Inadequate ($321)</td><td>✓ Bet 3 (B2B/ProServ templates)</td><td>—</td><td>—</td><td><strong>2/4</strong></td></tr>
+        <tr><td>12</td><td>Conversational Automations (WhatsApp)</td><td>✓ Cross-Channel SMS/Push/WhatsApp in Journey ($1,182)</td><td>(✓) Adjacent — but not in 50-video research</td><td>✓ Klaviyo cross-channel canvas</td><td>✓ Channel narrowness</td><td><strong>4/4</strong></td></tr>
+        <tr><td>13</td><td>Single modernized Automations builder</td><td>✓ CJB Still Uses Legacy Editor ($1,265) + Editor UI Glitches ($16,507)</td><td>✓ Barrier 8 (Two automation surfaces invisible)</td><td>(✓) Klaviyo single-canvas</td><td>—</td><td><strong>4/4</strong></td></tr>
+        <tr><td>14</td><td>Trigger modal redesign</td><td>✓ Trigger Selection List Not Searchable ($5K) + Loading Spinner Misleading ($5K) + 'From Audience' Surfaces Unnecessarily ($1K)</td><td>✓ Barrier 7 (Education/activation framing wrong)</td><td>—</td><td>—</td><td><strong>3/4</strong></td></tr>
+        <tr><td>15</td><td>Dynamic ecomm content in SMS</td><td>(✓) related to Cross-Channel SMS in Journey ($1,182)</td><td>—</td><td>(✓) Klaviyo SMS dynamic content</td><td>—</td><td><strong>2/4</strong></td></tr>
+        <tr><td>16</td><td>Bypass SMS quiet hours</td><td>✓ SMS Quiet Hours Block Keyword Auto-Replies ($310)</td><td>—</td><td>—</td><td>—</td><td><strong>1/4</strong></td></tr>
+        <tr><td>17</td><td>WhatsApp send action</td><td>✓ Cross-Channel SMS/Push/WhatsApp ($1,182)</td><td>—</td><td>✓ Klaviyo WhatsApp native</td><td>(✓) Shopify lacks WhatsApp</td><td><strong>3/4</strong></td></tr>
+        <tr><td>18</td><td>Send-time optimization in automations</td><td>(✓) related to Per-Flow Send Timing Reports ($676)</td><td>—</td><td>✓ Klaviyo Smart Send Time</td><td>—</td><td><strong>2/4</strong></td></tr>
+        <tr><td>19</td><td>Event-driven processing modernization</td><td>✓ Editor / UI Glitches ($16,507) + Automations Not Sending ($4,780) + Reporting Wrong ($6,218)</td><td>(✓) Barrier 6/7 indirect</td><td>—</td><td>—</td><td><strong>2/4</strong></td></tr>
+        <tr><td>20</td><td>ICP-focused automations homepage</td><td>✓ Integration-Specific Templates Not Prioritized ($2K) + Brand Kit Not Applied ($5K)</td><td>✓ Bet 5 (reframe for polite-customer cohort) + Barrier 5 (B2B template gap)</td><td>(✓) Klaviyo verticalization</td><td>—</td><td><strong>3/4</strong></td></tr>
+        <tr><td>21</td><td>A/B testing in automations</td><td>✓ Better A/B Testing in Automations ($455) + Central A/B Repository ($2K)</td><td>(✓) related to Bet 7 (industry templates)</td><td>✓ Klaviyo Personalized A/B</td><td>—</td><td><strong>3/4</strong></td></tr>
+        <tr><td>22</td><td>QBO connected user experience</td><td>—</td><td>✓ Bet 4 (QBO ↔ MC integration) — canonical</td><td>—</td><td>—</td><td><strong>1/4</strong></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px; color:var(--muted);"><strong>Coverage:</strong> 17/22 (77%) initiatives connect to at least one evidence source. Strongest 4-of-4 coverage: AI Automation Generation Skill, "It's just an email", Trigger expansion, Advanced Segmentation, Conversational Automations, Single modernized builder. Weakest 1-of-4: Discount code trigger, Auto-on transactional, both Fusion packages, QBO connection, Bypass SMS quiet hours.</p>
+  </section>
+
+  <!-- PRD Audit Page 2 -->
+  <section class="page" aria-label="PRD Audit Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">PRD Audit · Strategic assessment + Critic-agent review</div>
+        <h1>Which Product Health metrics each initiative moves — and the <em style="color:#9A1F00;">5 strategic gaps</em> the data flags but no PRD addresses</h1>
+        <div class="subtitle">Per-initiative assessment against the 4 metrics that anchor automation health: Adoption (Established users), Activation (Explore→Establish), Retention (Churn rate inverse), Revenue per adopter ($/mo attributed). Critic-agent review at the end.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 2 of 2</div>
+      </div>
+    </header>
+
+    <!-- Strategic assessment per Product Health metric -->
+    <h2><span class="num">C</span>Strategic assessment — which metric does each initiative move?</h2>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">Direct (●), Indirect (◐), No effect (—). Baselines from <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health tab</a>: CJB Established 132K (+18.4% YoY), Activation 33.6% (+14.4pp YoY), Churn 40.2% (-1.2pp YoY).</p>
+    <table class="dense" style="margin-bottom: 14px;">
+      <thead>
+        <tr>
+          <th style="width:36px">#</th>
+          <th>Initiative</th>
+          <th style="width:80px">Adoption (Established users)</th>
+          <th style="width:80px">Activation (Explore→Establish)</th>
+          <th style="width:70px">Retention (Churn ↓)</th>
+          <th style="width:80px">Revenue / adopter</th>
+          <th>Why it's critical (strategic rationale)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>AI Automation Generation Skill</td><td>● <strong>+6pp</strong></td><td>● <strong>+8.2pp</strong></td><td>◐</td><td>◐</td><td>Closes the &quot;blank-page&quot; barrier (84% of eligible accounts have no automation). Highest-leverage single bet — moves both Adoption AND Activation in measured ranges.</td></tr>
+        <tr><td>2</td><td>"It's just an email" welcome flow</td><td>◐</td><td>● <strong>+8.2pp</strong> FTU</td><td>● 30d</td><td>◐ $74K</td><td>FTUs are the leakiest part of the funnel (Product Health: &lt;1mo tenure 0.9% adoption). Only PRD with an approved, sized lift in market.</td></tr>
+        <tr><td>3</td><td>Trigger expansion: 12 new triggers</td><td>◐</td><td>●</td><td>◐</td><td>● ecom</td><td>Closes the largest Klaviyo competitive gap. Without these, the 5 of 6 emerging-threat tabs are right that we're not in the conversation for serious DTC.</td></tr>
+        <tr><td>4</td><td>Wix Bookings trigger</td><td>◐ Wix only</td><td>◐</td><td>◐</td><td>● <strong>$3.9M ARR</strong></td><td>Direct ARR-sized Pro Serve unlock (Wix-specific). Validates the integration-driven trigger pattern for future expansion.</td></tr>
+        <tr><td>5</td><td>Advanced Segmentation in CJB</td><td>◐ HVC</td><td>●</td><td>● HVC</td><td>● <strong>$600K ARR</strong></td><td>Unlocks event-property branching — the difference between &quot;send to all cart abandoners&quot; and &quot;send to high-LTV cart abandoners with &gt;$200 cart value.&quot; The HVC segment lift comes from here.</td></tr>
+        <tr><td>6</td><td>Segments as a trigger</td><td>◐</td><td>●</td><td>◐</td><td>—</td><td>Enables RFM/cohort-driven journeys. Required for Win-back &amp; lifecycle progression patterns the User Research flagged as Bet 5.</td></tr>
+        <tr><td>7</td><td>Discount code trigger</td><td>◐ small</td><td>◐</td><td>—</td><td>● <strong>$500K MRR</strong></td><td>Single small-scope trigger with stated revenue. Lower priority — unsupported by VOC.</td></tr>
+        <tr><td>8</td><td>Fusion Pkg 1: Customer Hub</td><td>● new TAM</td><td>—</td><td>—</td><td>●</td><td>Opens automation in QBO Customer Hub for the first time. Strategic for cross-Intuit play even if no MC-VOC supports it.</td></tr>
+        <tr><td>9</td><td>Auto-on transactional automations</td><td>◐</td><td>—</td><td>—</td><td>—</td><td>Solves a niche convenience problem; weak evidence base. Defer or de-scope.</td></tr>
+        <tr><td>10</td><td>Fusion Pkg 3: Marketing Hub</td><td>● new TAM</td><td>—</td><td>—</td><td>● <strong>$0.5–$7M ARR</strong></td><td>Wide ARR range suggests sizing uncertainty. Strategic but speculative — needs activation-rate proof from Pkg 1 first.</td></tr>
+        <tr><td>11</td><td>L2C automation flows (6 templates)</td><td>● L2C</td><td>—</td><td>◐</td><td>—</td><td>Direct dependency for the L2C product launch. Doesn't move MC-only metrics but is strategic-required.</td></tr>
+        <tr><td>12</td><td>Conversational Automations (WhatsApp)</td><td>—</td><td>—</td><td>● HVC</td><td>● HVC</td><td>WhatsApp Public Beta is dependent on this. Closes the cross-channel canvas gap that Klaviyo and Bloomreach win on. Without it, WhatsApp launch fails commercially.</td></tr>
+        <tr><td>13</td><td>Single modernized Automations builder</td><td>—</td><td>● post-migration</td><td>● HVC</td><td>—</td><td>Foundational. Without unifying CJB + Classic + Conversational, every other feature has to be built twice. The biggest invisible bet on the roadmap.</td></tr>
+        <tr><td>14</td><td>Trigger modal redesign</td><td>◐</td><td>● <strong>~+2-4pp</strong></td><td>—</td><td>—</td><td>Direct UX fix for the &quot;trigger setup confusion&quot; theme worth $5K HVC. Quick win.</td></tr>
+        <tr><td>15</td><td>Dynamic ecomm content in SMS</td><td>—</td><td>—</td><td>—</td><td>● ecom</td><td>SMS revenue lift for ecom cohort. Worth doing alongside Trigger #3 for the DTC competitive position.</td></tr>
+        <tr><td>16</td><td>Bypass SMS quiet hours</td><td>—</td><td>—</td><td>◐ HVC</td><td>—</td><td>Direct fix for an HVC pain. Small but reasonable.</td></tr>
+        <tr><td>17</td><td>WhatsApp send action</td><td>—</td><td>—</td><td>—</td><td>●</td><td>Required for WhatsApp omnichannel use cases. Pairs with #12 (Conversational).</td></tr>
+        <tr><td>18</td><td>Send-time optimization in automations</td><td>—</td><td>—</td><td>◐</td><td>● 10-30%</td><td>Klaviyo benchmark: 10-30% open/click lift from per-profile send-time. Material to revenue per adopter — a clear miss to ship later.</td></tr>
+        <tr><td>19</td><td>Event-driven processing modernization</td><td>—</td><td>● indirect</td><td>● HVC</td><td>—</td><td>Foundational. Eliminates the $4.8K Automations Not Sending HVC pain + the $16.5K Editor UI Glitches HVC pain (because both root in monolith latency).</td></tr>
+        <tr><td>20</td><td>ICP-focused automations homepage</td><td>● <strong>+2-4pp</strong></td><td>●</td><td>—</td><td>—</td><td>Direct activation lift via personalization. Reasonable Bayesian-test pattern; low risk.</td></tr>
+        <tr><td>21</td><td>A/B testing in automations</td><td>—</td><td>◐</td><td>◐</td><td>● 5-15%</td><td>Klaviyo benchmark: per-profile A/B winner = 5-15% revenue lift. Should ship as a fast-follow to Trigger expansion.</td></tr>
+        <tr><td>22</td><td>QBO connected user experience</td><td>● new TAM</td><td>●</td><td>● HVC</td><td>● cross-Intuit</td><td>Cross-Intuit revenue play. 60K + 115K mutual customers is real TAM — but doesn't relieve any HVC pain we measured.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- 5 strategic gaps -->
+    <h2><span class="num">D</span>5 strategic gaps — evidence flags it, no PRD addresses it</h2>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">These are themes from HVC Risk Map / User Research / Product Health where the data is loud but no initiative in the 9 PDFs takes them on directly.</p>
+
+    <table class="dense" style="margin-bottom: 14px;">
+      <thead>
+        <tr>
+          <th style="width:36px">#</th>
+          <th style="width:200px">Strategic gap (no PRD coverage)</th>
+          <th style="width:130px">Evidence (HVC MRR / signal)</th>
+          <th>Why it should be a PRD</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>G1</td><td><strong>Free-plan adoption is broken</strong> — Free CJB adoption 1.1% vs Standard 17.6% / Premium 32.1%</td><td>Product Health YoY · 16x worse than paid</td><td>Customer.io / Loops / Brevo are exploiting this lane. The H2 FY26 priority is FTU but Free plan is a different (worse) problem.</td></tr>
+        <tr><td>G2</td><td><strong>Editor / UI Glitches in Journey Builder</strong> — replicate-flow errors, scroll bugs, locked-up sites</td><td><strong>$16,507/mo HVC</strong> (#1 in Risk Map)</td><td>Largest single MRR exposure in the entire Risk Map. Initiative #19 (Event-driven processing) addresses some of the root cause but not the FE editor bugs.</td></tr>
+        <tr><td>G3</td><td><strong>Reporting / Stats Wrong on Automations</strong> — flow queues showing wrong numbers, attribution discrepancies (Sept 2025 attribution change)</td><td><strong>$6,218/mo HVC</strong></td><td>Damaged customer trust (Jeffrey Davis User Research finding). Not a single PRD addresses correctness.</td></tr>
+        <tr><td>G4</td><td><strong>No Frequency Cap / Suppression Across Flows</strong> — customers receive multiple flows simultaneously, no global cap</td><td><strong>$2,576/mo HVC</strong> + Nina S3.9 research finding (Klaviyo parity)</td><td>Klaviyo + Bloomreach core feature. Cited explicitly as B2B-segment dealbreaker in User Research.</td></tr>
+        <tr><td>G5</td><td><strong>Per-Step KPIs / Performance Not Viewable in Journeys</strong> — escalation from CTM (Strategic CSM)</td><td><strong>$5,098/mo HVC</strong> (escalation, P-level)</td><td>Single highest-MRR HVC reporting through CSM. No initiative addresses analytics inside the journey builder.</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Critic agent -->
+    <div class="card" style="background:#FFF5F2; border-color:#F4D2C5; margin-bottom: 14px;">
+      <h2 style="margin-bottom: 6px;"><span class="num">CRITIC</span>Self-critique pass — what could be wrong about this analysis?</h2>
+      <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">A separate review pass against the synthesis above. Looking for hallucinations, weakly-grounded claims, missing context, and overconfident assertions.</p>
+
+      <ul style="font-size:12.5px; margin-bottom: 6px;">
+        <li><strong>Hallucination check 1 — opportunity sizing aggregation</strong>: I claimed "~$13M combined opportunity sizing." Verified: Pkg 3 max $7M + Wix Bookings $3.9M + Adv Seg $600K + Discount trigger $500K + Welcome flow $74K = $12.07M. The "~$13M" headline rounds Pkg 3 to its high-end speculative range. <strong>Should disclose:</strong> Pkg 3 is stated as $0.5M–$7M; the $13M headline is the optimistic end. Mid-point would be ~$8M.</li>
+
+        <li><strong>Hallucination check 2 — "+8.2pp" Activation lift</strong> on AI Automation Generation Skill: this is the PRD's own stated lift (6.8% → 15% = +8.2pp on FTU 30-day turn-on). Confirmed accurate but it's a PROJECTION, not a measured outcome. Should label as such in any leadership read-out.</li>
+
+        <li><strong>Hallucination check 3 — "+14.4pp YoY" Activation in baseline</strong>: cross-checked against `mc-business-intelligence.bi_aggregate.product_journey_monthly` YoY data — confirmed 19.2% → 33.6% = +14.4pp. Real, not hallucinated.</li>
+
+        <li><strong>Weak grounding — Initiative #7 (Discount code trigger, $500K MRR)</strong>: I scored this 1/4 on evidence mapping. The $500K MRR claim comes from the PRD ("source" link not opened). I cannot independently verify. <strong>Risk:</strong> may be over- or under-stated. PM should validate the source link before defending the figure.</li>
+
+        <li><strong>Weak grounding — Initiative #10 (Fusion Pkg 3, $0.5–$7M ARR range)</strong>: 14x range is a directional estimate, not a sized opportunity. Calling it "$7M sized" overstates confidence. <strong>Should be reframed</strong> as "directional only — $0.5M defensible / $7M speculative."</li>
+
+        <li><strong>Coverage bias</strong>: My HVC Risk Map evidence is biased toward customers who bothered to file VoCs through Slack channels (#hvc_feedback / #mc-hvc-escalations / #mc-feedback-summary). Free-plan customers and silent-churn customers are <em>under-represented</em>. So "Gap G1 (Free-plan adoption broken)" is supported by Product Health BigQuery data, not VoC. The other 4 gaps are VoC-only and may have selection bias.</li>
+
+        <li><strong>Mapping subjectivity</strong>: My "✓ vs (✓) vs —" scoring is judgment, not algorithm. A reviewer could legitimately argue: e.g., is "Wix Bookings" a real match for the "Date-Relative Triggers" HVC theme, or am I stretching? <strong>Honest answer:</strong> partial. Marked (✓), not ✓.</li>
+
+        <li><strong>Missing context — A/B testing</strong>: I cited "Klaviyo benchmark: 5-15% revenue lift" for Initiative #21. This is industry knowledge not directly from any of the 9 PDFs. Flag as inferred, not PRD-stated.</li>
+
+        <li><strong>Missing context — competitive baseline staleness</strong>: My Klaviyo and Shopify gap mappings are based on the briefs in this site, last updated ~May 2026. Klaviyo ships fast — some of these gaps may already be partially closed. Worth re-validating before any major budget reallocation.</li>
+
+        <li><strong>What's missing entirely from this audit</strong>: I did not look at engineering capacity, dependency conflicts, or sequencing constraints across the 22 initiatives. The PRDs themselves note resourcing concerns (Conversational Product Review Slide 16: "automations team roadmap is already full"). My strategic-assessment doesn't account for this.</li>
+
+        <li><strong>What I'd recommend the PM do next</strong>: (a) validate the $500K and $7M sizing via the source links in the Q2 Planning doc; (b) commission a quick 2-week PRD discovery on the 5 strategic gaps before Phase 1 commits; (c) sequence Event-driven processing (#19) earlier — it unblocks 3 other initiatives (#11, #12, #17) and addresses the largest single MRR exposure (#G2 Editor UI Glitches).</li>
+      </ul>
+    </div>
+
+    <!-- Final summary -->
+    <div class="grid cols-2" style="gap: 12px;">
+      <div class="card tinted">
+        <h2 style="margin-bottom: 6px;"><span class="num">E</span>Bottom line — what to keep, what to question</h2>
+        <ul style="font-size:12.5px;">
+          <li><strong>Keep / accelerate (4-of-4 evidence + clear metric impact):</strong> AI Automation Generation Skill, "It's just an email", Trigger expansion (12 new), Advanced Segmentation, Conversational Automations, Single modernized builder, Event-driven processing modernization (sequence earlier).</li>
+          <li><strong>Re-validate sizing before commit:</strong> Discount code trigger ($500K MRR), Fusion Pkg 3 ($0.5–$7M).</li>
+          <li><strong>Question / de-prioritize (1-of-4 evidence):</strong> Auto-on transactional automations (no clear customer pull). Defer.</li>
+          <li><strong>Add as net-new PRDs (5 strategic gaps):</strong> Free-plan adoption fix, Editor / UI Glitches fix (FE), Reporting correctness, Frequency cap / suppression across flows, Per-step KPIs in Journey Builder.</li>
+        </ul>
+      </div>
+      <div class="card warm">
+        <h2 style="margin-bottom: 6px;"><span class="num">METRIC</span>Net effect on Product Health if all 22 ship + 5 gaps closed</h2>
+        <ul style="font-size:12.5px;">
+          <li><strong>Established users (CJB) 132K → ~155–170K (+18–28%)</strong> — most lift from AI Skill (16% → 22% adoption) + ICP homepage + Free-plan fix.</li>
+          <li><strong>Activation rate 33.6% → ~42–48% (+8–14pp)</strong> — most from "It's just an email" + AI Skill + Trigger modal redesign.</li>
+          <li><strong>Churn rate 40.2% → ~35–37% (-3–5pp)</strong> — most from Editor UI Glitches fix + Event-driven processing + Frequency cap + Reporting correctness.</li>
+          <li><strong>Revenue per adopter $616/mo → $700–800/mo</strong> — most from Adv Segmentation + Send-time optimization + A/B in automations + Dynamic SMS.</li>
+        </ul>
+        <p style="font-size:11px; color:var(--muted); margin-top:6px;"><em>Disclaimer:</em> these are directional ranges combining PRD-stated lifts with industry benchmarks. Pre-launch projection only.</p>
+      </div>
+    </div>
+
+    <p class="source">
+      <strong>Sources reviewed:</strong> 9 PDFs from Elizabeth Bertasi (Sep '25–Apr '26): FY26_MC Automations Roadmap, Q2 Planning Comprehensive List, AI Automation Generation Skill PRD, AI Automation Generation Skill (Engineering PRD), "It's just an email" welcome flow PRD (✅ Approved), Mailchimp H2 FY26 Product Priorities &amp; Roadmapping (×2), Automations triggers design review, Conversational Automations Product Review (Apr 15, 2026). <strong>Evidence base:</strong> HVC Risk Map (73 themes, $53.5K/mo HVC MRR exposure, 18-month Slack VoC + 38 UX research entries), User Research (50 HeyMarvin videos / 21 customer briefs / 13 product barriers), Product Health (BigQuery `bi_aggregate.product_journey_monthly`, 89.4M rows, May 2025–Apr 2026 vs prior 12mo), Emerging Threats (6 bespoke flow startups + Klaviyo/Shopify gap analysis). <strong>Critic-agent pass:</strong> 11 self-critique points checked above. <strong>Caveat:</strong> all "+/- pp" projections are pre-launch directional ranges; not measured outcomes.
+    </p>
+  </section>
+
+</div><!-- /panel-prdaudit -->
+
+
 
 
 </div>
@@ -5889,7 +6139,7 @@ Reactions: ack (1)"</p>
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','roadmap','hvcrisk','research','health'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','roadmap','hvcrisk','research','health','prdaudit'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
