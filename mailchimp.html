@@ -420,6 +420,101 @@
   }
   .ns .val { text-align: right; font-variant-numeric: tabular-nums; font-size: 12px; color: var(--ink-2); font-weight: 600; }
 
+  /* Roadmap-specific */
+  .gap-tag {
+    display: inline-block;
+    font-size: 9.5px; font-weight: 800;
+    padding: 2px 6px; border-radius: 4px;
+    letter-spacing: .06em;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .gap-tag.foundation { background: #FFE7E0; color: #9A1F00; }
+  .gap-tag.differ { background: #EEF0FF; color: #2A1FA8; }
+  .gap-tag.have { background: #E6F5EE; color: #036A4F; }
+
+  .src-pill {
+    display: inline-block;
+    font-size: 10px; font-weight: 700;
+    padding: 1px 6px; border-radius: 4px;
+    background: #F1F2F4; color: #374151;
+    border: 1px solid #E2E5EA;
+    margin-right: 4px;
+  }
+  .src-pill.klaviyo { background: #F1EEFF; color: #3A1ACC; border-color: #E1D8FF; }
+  .src-pill.shopify { background: #E0F2EA; color: #00553F; border-color: #C9E8D6; }
+  .src-pill.attentive { background: #FCE7F3; color: #9D174D; border-color: #FBCFE8; }
+  .src-pill.customerio { background: #DBEAFE; color: #1E3A8A; border-color: #BFDBFE; }
+  .src-pill.auxia { background: #EDE9FE; color: #5B21B6; border-color: #DDD6FE; }
+  .src-pill.postscript { background: #DCFCE7; color: #14532D; border-color: #BBF7D0; }
+  .src-pill.mailmodo { background: #FEF3C7; color: #78350F; border-color: #FDE68A; }
+  .src-pill.loops { background: #E0E7FF; color: #312E81; border-color: #C7D2FE; }
+
+  table.dense th, table.dense td { padding: 6px 8px; font-size: 12px; }
+  table.dense th { font-size: 10.5px; }
+
+  .phase {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: #fff;
+  }
+  .phase.p1 { border-color: #F2D879; background: linear-gradient(180deg,#FFFCF0,#FFFFFF); }
+  .phase.p2 { border-color: #DCD7F8; background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  .phase.p3 { border-color: #BFE6D3; background: linear-gradient(180deg,#F1FAF5,#FFFFFF); }
+
+  .phase .head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-bottom: 1px dashed var(--line); padding-bottom: 8px; margin-bottom: 10px;
+  }
+  .phase .head h3 {
+    margin: 0;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px; font-weight: 700; color: var(--ink);
+  }
+  .phase .head .horizon {
+    font-size: 11px; color: var(--muted); font-weight: 600;
+    background: #fff; padding: 2px 8px; border-radius: 99px;
+    border: 1px solid var(--line);
+  }
+  .phase .swims {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  @media (max-width: 720px) { .phase .swims { grid-template-columns: 1fr; } }
+  .swim {
+    border: 1px solid var(--line); border-radius: 8px;
+    padding: 8px 10px; background: #fff;
+  }
+  .swim h4 {
+    margin: 0 0 6px;
+    font-size: 11px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .swim h4 .marker {
+    display: inline-block; width: 6px; height: 6px; border-radius: 99px;
+  }
+  .swim.foundation h4 .marker { background: #B91C1C; }
+  .swim.differ h4 .marker { background: #4338CA; }
+  .swim ul { margin: 0; padding-left: 16px; }
+  .swim li { font-size: 12px; margin-bottom: 4px; line-height: 1.4; }
+  .swim li code {
+    background: #F1F2F4; color: #374151;
+    padding: 1px 5px; border-radius: 3px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px; font-weight: 700;
+  }
+
+  .phase .outcome {
+    margin-top: 10px; padding: 8px 10px;
+    background: var(--paper);
+    border: 1px dashed var(--line);
+    border-radius: 6px;
+    font-size: 12px; color: var(--ink-2);
+  }
+  .phase .outcome strong { color: var(--brand); }
+
   /* Print */
   @media print {
     @page { size: Letter; margin: 0.45in; }
@@ -441,6 +536,7 @@
     <div class="tabs" role="tablist" aria-label="Brief sections">
       <button class="tab active" role="tab" aria-selected="true" data-tab="brief">Executive Brief</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="sentiment">Voice of Customer</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="roadmap">Roadmap to Win</button>
     </div>
     <div style="display:flex; gap:8px;">
       <a class="btn" href="index.html">→ Klaviyo</a>
@@ -1223,6 +1319,290 @@
 
 </div><!-- /panel-sentiment -->
 
+
+<!-- ============================================ -->
+<!-- ============== ROADMAP TO WIN ============== -->
+<!-- ============================================ -->
+<div class="tabpanel" id="panel-roadmap" role="tabpanel">
+
+  <!-- Roadmap Page 1 -->
+  <section class="page" aria-label="Roadmap Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Roadmap to Win · Mailchimp Marketing Automation Flows</div>
+        <h1>What Mailchimp must <em style="color:#B91C1C;">match</em> and what we should <em style="color:#4338CA;">steal</em> to become the front-runner</h1>
+        <div class="subtitle">Foundational gaps to close for parity with Klaviyo &amp; Shopify, plus differentiated bets to leapfrog from emerging threats. Synthesized from the Klaviyo / Shopify / Emerging Threats briefs in this site.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Prepared for:</strong> Mailchimp product strategy</div>
+        <div><strong>Goal:</strong> Phase-1 credible threat to Klaviyo + Shopify</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 1 of 2</div>
+      </div>
+    </header>
+
+    <div class="kpi-row" style="margin-bottom: 18px;">
+      <div class="kpi">
+        <div class="v">9</div>
+        <div class="l">Foundational parity gaps to close — table-stakes Mailchimp lacks but every credible competitor ships</div>
+      </div>
+      <div class="kpi">
+        <div class="v">12</div>
+        <div class="l">Differentiated features to selectively steal — bets that, sequenced right, move us from "credible" to "front-runner"</div>
+      </div>
+      <div class="kpi">
+        <div class="v">3</div>
+        <div class="l">Phases (0-6 / 6-12 / 12-18 months) with two swim lanes each (Foundation + Differentiation)</div>
+      </div>
+      <div class="kpi">
+        <div class="v">Phase 1</div>
+        <div class="l">By end of <strong>month 6</strong>: Mailchimp is a credible threat to Klaviyo &amp; Shopify in mid-market DTC + SMB</div>
+      </div>
+    </div>
+
+    <!-- Section A: Foundational gaps -->
+    <h2><span class="num">A</span><span class="gap-tag foundation">FOUNDATION</span>What Mailchimp must <em>have</em> to be credible (parity gaps)</h2>
+    <p style="margin-bottom: 8px;">If Mailchimp lacks any of these, it can't credibly enter a head-to-head sales conversation against Klaviyo or Shopify in 2026. None of these are "novel" — they're table-stakes the field has set.</p>
+    <div style="overflow-x:auto; margin-bottom: 16px;">
+      <table class="dense">
+        <thead>
+          <tr>
+            <th style="width: 40px;">#</th>
+            <th>Foundational gap</th>
+            <th>Already shipped by</th>
+            <th>Mailchimp's status today</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>F1</strong></td><td><strong>Native channel breadth</strong> — Push, WhatsApp, In-app inside the journey canvas</td><td><span class="src-pill klaviyo">Klaviyo</span><span class="src-pill customerio">Customer.io</span><span class="src-pill attentive">Attentive</span></td><td><span class="dot bad"></span>Email + US-only SMS only. No native push, WhatsApp, in-app.</td></tr>
+          <tr><td><strong>F2</strong></td><td><strong>Free-tier multi-step automation</strong> — real journeys on the free plan</td><td><span class="src-pill klaviyo">Klaviyo</span><span class="src-pill shopify">Shopify</span><span class="src-pill loops">Loops</span></td><td><span class="dot bad"></span>Removed in June 2025 (Classic Auto deprecation).</td></tr>
+          <tr><td><strong>F3</strong></td><td><strong>Real-time event-driven triggers</strong> — flows fire on any tracked event in real time</td><td><span class="src-pill klaviyo">Klaviyo</span><span class="src-pill customerio">Customer.io</span><span class="src-pill shopify">Shopify</span></td><td><span class="dot mid"></span>Has standard ecom triggers but not "any event, real-time" flexibility.</td></tr>
+          <tr><td><strong>F4</strong></td><td><strong>Deep ecommerce-event integration</strong> (Shopify-deep)</td><td><span class="src-pill klaviyo">Klaviyo</span><span class="src-pill shopify">Shopify</span><span class="src-pill postscript">Postscript</span></td><td><span class="dot mid"></span>Shopify integration exists but surface-level; lacks granular event triggers.</td></tr>
+          <tr><td><strong>F5</strong></td><td><strong>Predictive triggers as flow entry conditions</strong> (next-order date, churn risk, CLV)</td><td><span class="src-pill klaviyo">Klaviyo</span><span class="src-pill customerio">Customer.io</span><span class="src-pill auxia">Auxia</span></td><td><span class="dot mid"></span>Has predicted CLV/likelihood as <em>conditions</em>; not first-class flow <em>triggers</em>.</td></tr>
+          <tr><td><strong>F6</strong></td><td><strong>Per-profile send-time optimization</strong> (Smart Send Time)</td><td><span class="src-pill klaviyo">Klaviyo</span><span class="src-pill attentive">Attentive</span><span class="src-pill customerio">Customer.io</span></td><td><span class="dot mid"></span>Has store-level send-time / send-day; not per-individual.</td></tr>
+          <tr><td><strong>F7</strong></td><td><strong>In-flow performance auto-monitors</strong> with regression alerts</td><td><span class="src-pill klaviyo">Klaviyo</span></td><td><span class="dot bad"></span>Not shipped. Marketers don't know when a flow degrades.</td></tr>
+          <tr><td><strong>F8</strong></td><td><strong>Per-profile A/B winner application</strong> (Personalized Campaigns / Smart A/B)</td><td><span class="src-pill klaviyo">Klaviyo</span><span class="src-pill customerio">Customer.io</span></td><td><span class="dot mid"></span>Has multivariate testing; doesn't auto-pick per-profile winners.</td></tr>
+          <tr><td><strong>F9</strong></td><td><strong>Engagement-based or send-volume billing</strong> (eliminate the "contact tax")</td><td><span class="src-pill loops">Loops</span><span class="src-pill klaviyo">Klaviyo (partial)</span></td><td><span class="dot bad"></span>Charges for unsubs/cleaned/duplicates — inflates real cost ~20–40%.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section B: Differentiated steals -->
+    <h2><span class="num">B</span><span class="gap-tag differ">DIFFERENTIATE</span>What Mailchimp should <em>steal</em> to be the front-runner (uniqueness bets)</h2>
+    <p style="margin-bottom: 8px;">Each row below is a feature one of the 8 competitors ships uniquely. Some are pure UX bets (Sidekick-style chat editing); some are autonomy bets (Auxia, Marketing Agent); some are format bets (AMP-interactive emails). Selectively stealing 4–6 of these — not all 12 — is the differentiation strategy.</p>
+    <div style="overflow-x:auto; margin-bottom: 14px;">
+      <table class="dense">
+        <thead>
+          <tr>
+            <th style="width: 40px;">#</th>
+            <th>Differentiator to steal</th>
+            <th>Source of inspiration</th>
+            <th>Why it's defensible</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>D1</strong></td><td><strong>Conversational journey editing</strong> — "edit my flow / write me a flow by chatting"</td><td><span class="src-pill shopify">Shopify Sidekick</span></td><td>Most-praised novel UX in category 2025–26. Mailchimp has Brand Kit foundation to make this on-brand.</td></tr>
+          <tr><td><strong>D2</strong></td><td><strong>Autonomous setup agent</strong> — "set up the must-have flows from my website URL in 3 clicks"</td><td><span class="src-pill klaviyo">Klaviyo Marketing Agent</span></td><td>Compresses the "blank canvas" problem. Owns the demo moment.</td></tr>
+          <tr><td><strong>D3</strong></td><td><strong>Agentic per-user treatment selection</strong> — agent picks message + channel + surface + timing per profile in real time</td><td><span class="src-pill auxia">Auxia</span></td><td>The "the entire product is an agent" bet. Currently F500-only — Mailchimp can democratize it for SMB+mid-market.</td></tr>
+          <tr><td><strong>D4</strong></td><td><strong>AMP interactive emails</strong> — forms, polls, surveys, carts <em>inside</em> the email (no landing page needed)</td><td><span class="src-pill mailmodo">Mailmodo AI</span></td><td>Format no incumbent ships. 5x email-to-sales conversion case studies. Defensible if launched fast.</td></tr>
+          <tr><td><strong>D5</strong></td><td><strong>Prompt-first journey builder</strong> — the entire builder UX is a prompt, not a sub-feature</td><td><span class="src-pill mailmodo">Mailmodo AI</span></td><td>Klaviyo's Flows AI is a feature; Shopify's Sidekick is a sidebar. Whole-product conversational is open lane.</td></tr>
+          <tr><td><strong>D6</strong></td><td><strong>In-flow generative image editing</strong> — Image Remix-style edits inside the journey email step</td><td><span class="src-pill klaviyo">Klaviyo Image Remix</span></td><td>Saves design/agency time inside the flow. Practical AI buyers actually use.</td></tr>
+          <tr><td><strong>D7</strong></td><td><strong>Two-way conversational SMS</strong> in the journey (not just outbound)</td><td><span class="src-pill postscript">Postscript</span><span class="src-pill attentive">Attentive</span></td><td>SMS journey table-stakes for DTC. Postscript / Attentive own this lane today.</td></tr>
+          <tr><td><strong>D8</strong></td><td><strong>Liquid templating + unlimited events</strong> for power users / technical buyers</td><td><span class="src-pill customerio">Customer.io</span></td><td>Closes the "Mailchimp wasn't built for SaaS" gap that Customer.io and Loops are exploiting.</td></tr>
+          <tr><td><strong>D9</strong></td><td><strong>Vertical-specific journey UIs</strong> (DTC, B2B SaaS, services, restaurants, B2B distribution)</td><td><span class="src-pill customerio">Customer.io (SaaS)</span><span class="src-pill loops">Loops (SaaS)</span></td><td>Direct counter to startups winning verticalized slices. Mailchimp's installed base spans verticals — distinct edge.</td></tr>
+          <tr><td><strong>D10</strong></td><td><strong>Combined transactional + marketing</strong> in one journey product (no separate add-on)</td><td><span class="src-pill loops">Loops</span></td><td>SMB &amp; SaaS buyers love single-bill simplicity. Mailchimp Transactional already exists — just bundle it.</td></tr>
+          <tr><td><strong>D11</strong></td><td><strong>Notion-style editor</strong> — modern, lightweight, distraction-free journey content authoring</td><td><span class="src-pill loops">Loops</span></td><td>Mailchimp's editor is the most-cited "clunky/outdated" complaint. New editor = fresh launch narrative.</td></tr>
+          <tr><td><strong>D12</strong></td><td><strong>Uplift analysis</strong> in flow reports — causal measurement of journey effectiveness, not just open/click</td><td><span class="src-pill auxia">Auxia</span></td><td>Moves the conversation from "did people click" to "did the journey cause incremental revenue." Owns the CFO conversation.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p class="source">
+      Synthesized from the four briefs in this site — <a href="index.html">Klaviyo Flows</a>, <a href="shopify.html">Shopify Marketing Automations + Flow</a>, <a href="emerging-threats.html">Emerging Threats</a>, and the Mailchimp Executive Brief above. Source pills indicate which competitor ships the feature today.
+    </p>
+  </section>
+
+  <!-- Roadmap Page 2 -->
+  <section class="page" aria-label="Roadmap Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Roadmap to Win · Mailchimp (cont.)</div>
+        <h1>Problem &amp; benefit per feature, then sequenced into <em style="color:#C28A00;">3 phases × 2 swim lanes</em></h1>
+        <div class="subtitle">For each feature: the core problem it solves and the customer functional benefit. Then the 18-month sequencing plan that gets us to Phase-1 credibility against Klaviyo &amp; Shopify.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Prepared for:</strong> Mailchimp product strategy</div>
+        <div><strong>Goal:</strong> Phase-1 credible threat to Klaviyo + Shopify</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 2 of 2</div>
+      </div>
+    </header>
+
+    <!-- Section C: Problem-Benefit master table -->
+    <h2><span class="num">C</span>Problem &amp; benefit per feature (foundational + differentiated, in one view)</h2>
+    <div style="overflow-x:auto; margin-bottom: 16px;">
+      <table class="dense">
+        <thead>
+          <tr>
+            <th style="width: 36px;">#</th>
+            <th style="width: 90px;">Type</th>
+            <th>Feature</th>
+            <th>Core problem solved (operator's pain today)</th>
+            <th>Customer functional benefit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>F1</td><td><span class="gap-tag foundation">FOUND</span></td><td>Native push + WhatsApp + in-app channels in CJB</td><td>Operators stitch journeys across separate tools (push via OneSignal, WhatsApp via WATI). Double-messaging and frequency conflicts.</td><td>One canvas reaches the customer on the channel they prefer; one frequency cap prevents fatigue and unsubs.</td></tr>
+          <tr><td>F2</td><td><span class="gap-tag foundation">FOUND</span></td><td>Free-tier multi-step automation</td><td>Brand-new merchants can't ship a welcome series until they pay $20+/mo. Friction kills first-revenue moment.</td><td>Day-1 automation lets a small business start capturing recovered-cart and welcome revenue with zero spend.</td></tr>
+          <tr><td>F3</td><td><span class="gap-tag foundation">FOUND</span></td><td>Real-time event-driven triggers</td><td>Behavioral nuance (e.g., "viewed product 3x in 24h") can't be expressed; flows fire late or miss.</td><td>Right-moment messages improve conversion by reaching customers when intent is highest.</td></tr>
+          <tr><td>F4</td><td><span class="gap-tag foundation">FOUND</span></td><td>Deep Shopify event integration</td><td>Mailchimp sees orders/customers but not browse, checkout-step, or product-affinity events.</td><td>Shopify merchants get Klaviyo-grade attribution and triggers without leaving Mailchimp.</td></tr>
+          <tr><td>F5</td><td><span class="gap-tag foundation">FOUND</span></td><td>Predictive triggers (next-order/churn/CLV) as flow entry</td><td>Replenishment + win-back flows are scheduled, not predicted; high-CLV customers get the same timing as everyone else.</td><td>Flows reach lapsing customers before they churn; replenishment fires at the optimal personal moment.</td></tr>
+          <tr><td>F6</td><td><span class="gap-tag foundation">FOUND</span></td><td>Per-profile Smart Send Time</td><td>Best-time recommendations are store-level — customers in different time zones / habits get the same send.</td><td>Open and click rates lift 10-30% (Klaviyo benchmark) by sending to each customer at their optimal moment.</td></tr>
+          <tr><td>F7</td><td><span class="gap-tag foundation">FOUND</span></td><td>AI auto-monitors on flow performance</td><td>Marketers don't notice when an automation degrades for weeks. Revenue leaks silently.</td><td>Alerts when conversion or revenue per recipient drops, so the team fixes it before the quarter is hit.</td></tr>
+          <tr><td>F8</td><td><span class="gap-tag foundation">FOUND</span></td><td>Per-profile A/B winner (Personalized Campaigns)</td><td>"Winning variant" is a global average. Different segments respond to different content.</td><td>Each customer gets the variant the AI predicts will work best for <em>them</em>, lifting overall flow revenue.</td></tr>
+          <tr><td>F9</td><td><span class="gap-tag foundation">FOUND</span></td><td>Send-volume / engagement billing (no contact tax)</td><td>Pricing inflates 20-40% because unsubs/cleaned/duplicates count as paid contacts.</td><td>Predictable bill that scales with actual marketing volume. Removes the loudest reason customers churn.</td></tr>
+
+          <tr><td>D1</td><td><span class="gap-tag differ">DIFF</span></td><td>Conversational journey editing (Sidekick-style)</td><td>Tweaking a flow today means clicking through nested screens. Slow and tedious.</td><td>"Add a 24h delay before the second message and tighten this copy" — done in chat. Edit time drops 5-10x.</td></tr>
+          <tr><td>D2</td><td><span class="gap-tag differ">DIFF</span></td><td>Autonomous setup agent (from website URL)</td><td>Blank canvas + 60-template overwhelm = paralysis. Many merchants never ship a flow.</td><td>3-click setup gets the must-have flows live the day they sign up. Owns the activation moment.</td></tr>
+          <tr><td>D3</td><td><span class="gap-tag differ">DIFF</span></td><td>Agentic per-user treatment selection</td><td>Even with split logic, the marketer is choosing the rules. Doesn't scale to per-individual nuance.</td><td>An agent picks the best message + channel + timing per customer in real time. Auxia-class outcomes (84% LTV lift) for everyone.</td></tr>
+          <tr><td>D4</td><td><span class="gap-tag differ">DIFF</span></td><td>AMP interactive emails (in-mail forms / polls / carts)</td><td>Click-to-landing-page is the leakiest funnel step. 80%+ drop off before form completion.</td><td>Customer completes the action inside the email. 5x email-to-sales conversion in Mailmodo's case studies.</td></tr>
+          <tr><td>D5</td><td><span class="gap-tag differ">DIFF</span></td><td>Prompt-first journey builder (whole UX is the prompt)</td><td>Even with AI helpers, the marketer still has to know <em>where</em> to invoke them and <em>which</em> ones to use.</td><td>Marketer describes the campaign once; the platform builds, segments, optimizes. Strategy → live in minutes.</td></tr>
+          <tr><td>D6</td><td><span class="gap-tag differ">DIFF</span></td><td>In-flow generative image editing</td><td>Updating a hero image for a seasonal campaign requires designer / Canva round-trip.</td><td>Marketer changes the image with a prompt inside the flow step. Eliminates the design bottleneck.</td></tr>
+          <tr><td>D7</td><td><span class="gap-tag differ">DIFF</span></td><td>Two-way conversational SMS in journey</td><td>Outbound-only SMS feels like spam. No way to handle replies / drive a conversation.</td><td>Customer replies "STOP," "BUY," "INFO" and the journey responds intelligently. Lifts SMS revenue and reduces complaints.</td></tr>
+          <tr><td>D8</td><td><span class="gap-tag differ">DIFF</span></td><td>Liquid templating + unlimited events for power users</td><td>SaaS / B2B / technical buyers hit the ceiling on Mailchimp's merge tags &amp; event model.</td><td>Engineering teams can fire any event, branch on anything. Closes the "Mailchimp wasn't built for SaaS" gap.</td></tr>
+          <tr><td>D9</td><td><span class="gap-tag differ">DIFF</span></td><td>Vertical-specific journey UIs (DTC / SaaS / services)</td><td>One generalist UI fits no vertical perfectly. Operators waste time customizing.</td><td>The journey builder is pre-configured to your vertical's lifecycle and metrics. Faster time-to-value.</td></tr>
+          <tr><td>D10</td><td><span class="gap-tag differ">DIFF</span></td><td>Combined transactional + marketing in one product</td><td>Mailchimp Transactional is a separate add-on with separate billing. Friction.</td><td>One bill, one editor, one events stream. Particularly compelling for SaaS &amp; SMB.</td></tr>
+          <tr><td>D11</td><td><span class="gap-tag differ">DIFF</span></td><td>Notion-style email editor</td><td>Current editor is "clunky/outdated" — the most-cited UX complaint in our VoC analysis.</td><td>Modern, distraction-free authoring matches buyer expectations and refreshes the brand narrative.</td></tr>
+          <tr><td>D12</td><td><span class="gap-tag differ">DIFF</span></td><td>Uplift analysis in flow reports</td><td>Reports show open/click/revenue, not whether the journey <em>caused</em> the revenue.</td><td>CFO-grade causal measurement. Marketers defend budget with "the journey drove $X incremental."</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Section D: 3-Phase Sequencing -->
+    <h2><span class="num">D</span>3-phase sequencing — two swim lanes per phase</h2>
+    <p style="margin-bottom: 12px;">Goal: <strong>by the end of Phase 1 (month 6), Mailchimp is a credible threat to Klaviyo &amp; Shopify in mid-market DTC and SMB.</strong> Phases 2–3 move us from credible to category-defining. Foundational items are <span class="gap-tag foundation">F#</span>; Differentiated items are <span class="gap-tag differ">D#</span>.</p>
+
+    <div class="grid" style="grid-template-columns: 1fr; gap: 12px; margin-bottom: 16px;">
+
+      <!-- PHASE 1 -->
+      <div class="phase p1">
+        <div class="head">
+          <h3>Phase 1 — Reach parity &amp; pick the differentiator that grabs the headline</h3>
+          <span class="horizon">Months 0–6</span>
+        </div>
+        <div class="swims">
+          <div class="swim foundation">
+            <h4><span class="marker"></span>Foundation swim lane (parity blockers)</h4>
+            <ul>
+              <li><code>F1</code> Ship <strong>Push + WhatsApp</strong> in CJB (in-app deferred to P2). Single-canvas cross-channel narrative.</li>
+              <li><code>F2</code> Restore <strong>multi-step automation on Free</strong> (capped). Reverse the June-2025 narrative damage.</li>
+              <li><code>F3</code> Promote any tracked event to a <strong>real-time CJB trigger</strong>. Close the granularity gap.</li>
+              <li><code>F4</code> Ship <strong>deep Shopify event triggers</strong> (browse, checkout-step, product-affinity).</li>
+              <li><code>F9</code> Launch <strong>send-volume billing option</strong> alongside contact billing. Stop the "contact tax" churn.</li>
+            </ul>
+          </div>
+          <div class="swim differ">
+            <h4><span class="marker"></span>Differentiation swim lane (1 bold bet)</h4>
+            <ul>
+              <li><code>D1</code> Ship <strong>conversational journey editing</strong> on top of Intuit Assist. "Edit my flow by chatting." This is the keynote-grade headline that re-positions Mailchimp as AI-native.</li>
+              <li><em>Why only one differentiator in Phase 1:</em> shipping all 5 foundational items is hard. Pick one bold bet that owns the press cycle and proves AI-native intent.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="outcome"><strong>Phase 1 outcome:</strong> Mailchimp re-enters head-to-head conversations against Klaviyo (channel parity, event-driven parity, real free) and against Shopify (the conversational-AI editing story is now Mailchimp's, not Sidekick's exclusive). Sales motion: "you don't have to leave Mailchimp anymore."</div>
+      </div>
+
+      <!-- PHASE 2 -->
+      <div class="phase p2">
+        <div class="head">
+          <h3>Phase 2 — Match Klaviyo on AI &amp; predictive; out-position Shopify on autonomy</h3>
+          <span class="horizon">Months 6–12</span>
+        </div>
+        <div class="swims">
+          <div class="swim foundation">
+            <h4><span class="marker"></span>Foundation swim lane (AI/predictive parity)</h4>
+            <ul>
+              <li><code>F5</code> <strong>Predictive triggers</strong> as first-class flow entry: next-order date, churn risk, CLV.</li>
+              <li><code>F6</code> <strong>Per-profile Smart Send Time</strong>. Move from store-level to individual.</li>
+              <li><code>F7</code> <strong>AI auto-monitors</strong> on flow regressions. Protect customer revenue.</li>
+              <li><code>F8</code> <strong>Per-profile A/B winner</strong> (Personalized Campaigns). Each customer gets the optimal variant.</li>
+            </ul>
+          </div>
+          <div class="swim differ">
+            <h4><span class="marker"></span>Differentiation swim lane (2 bets)</h4>
+            <ul>
+              <li><code>D2</code> <strong>Autonomous Marketing Agent</strong>: 3-click flow setup from a website URL. Match Klaviyo's flagship agent move with Mailchimp-grade brand polish.</li>
+              <li><code>D7</code> <strong>Two-way conversational SMS</strong> in the journey. Take the SMS-only conversation back from Postscript / Attentive for Mailchimp's installed base.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="outcome"><strong>Phase 2 outcome:</strong> Mailchimp is no longer "the SMB tool people outgrow into Klaviyo." Predictive + autonomous + conversational SMS gives mid-market a reason to consolidate <em>onto</em> Mailchimp. The Klaviyo-vs-Mailchimp comparison narrows from "no contest" to "real choice."</div>
+      </div>
+
+      <!-- PHASE 3 -->
+      <div class="phase p3">
+        <div class="head">
+          <h3>Phase 3 — Leapfrog with bespoke bets no incumbent ships</h3>
+          <span class="horizon">Months 12–18</span>
+        </div>
+        <div class="swims">
+          <div class="swim foundation">
+            <h4><span class="marker"></span>Foundation swim lane (residuals + scale)</h4>
+            <ul>
+              <li><code>F1</code> Add <strong>in-app messages</strong> as the 5th channel. Close the canvas to Klaviyo + Customer.io parity.</li>
+              <li><code>D6</code> <strong>In-flow generative image editing</strong> (Image Remix-class). Ship the practical AI feature buyers actually use.</li>
+              <li><code>D11</code> <strong>Notion-style editor refresh</strong>. End the "clunky/outdated" complaint cycle.</li>
+              <li><code>D8</code> <strong>Liquid templating + unlimited events</strong> for SaaS/technical buyers. Re-open the Customer.io / Loops fight.</li>
+              <li><code>D10</code> <strong>Bundle Transactional</strong> into Marketing plans. Single-bill simplicity.</li>
+            </ul>
+          </div>
+          <div class="swim differ">
+            <h4><span class="marker"></span>Differentiation swim lane (the moonshots)</h4>
+            <ul>
+              <li><code>D3</code> <strong>Agentic per-user treatment selection</strong> (Auxia-class). The agent picks message + channel + timing per profile in real time. Democratize Auxia's F500-only product for SMB+mid-market.</li>
+              <li><code>D4</code> <strong>AMP interactive emails</strong> (forms / polls / carts in-mail). Format leadership no incumbent ships.</li>
+              <li><code>D5</code> <strong>Prompt-first journey builder</strong> as the primary UX (beyond just editing). Whole-product conversational.</li>
+              <li><code>D9</code> <strong>Vertical-specific journey UIs</strong> (DTC, B2B SaaS, services). Counter Customer.io / Loops verticalization.</li>
+              <li><code>D12</code> <strong>Uplift analysis</strong> in flow reports. CFO-grade causal measurement.</li>
+            </ul>
+          </div>
+        </div>
+        <div class="outcome"><strong>Phase 3 outcome:</strong> Mailchimp is the front-runner. Channel parity + autonomous setup + agentic personalization + AMP-interactive + uplift analysis = a product no single incumbent or startup ships completely. The conversation shifts from "Mailchimp vs. Klaviyo" to "what else does Mailchimp ship next?"</div>
+      </div>
+
+    </div>
+
+    <!-- Section E: Phase 1 emphasis -->
+    <h2><span class="num">E</span>Why Phase 1 specifically gets us to credible-threat status</h2>
+    <div class="grid cols-2">
+      <div class="card tinted">
+        <strong style="font-size:13px;">The 3 things in-market sales loses on today (per the VoC analysis)</strong>
+        <ul style="margin-top: 6px;">
+          <li><strong>Channel narrowness</strong> ("Mailchimp doesn't even do push or WhatsApp") — closed by F1.</li>
+          <li><strong>Free plan reputation damage</strong> ("the tool that took away free automation") — closed by F2.</li>
+          <li><strong>Story flatness on AI</strong> ("Klaviyo has agents, Shopify has Sidekick, Mailchimp has Intuit Assist for emails") — closed by D1's conversational flow editing.</li>
+        </ul>
+        <p style="font-size:11.5px; color: var(--muted); margin-top: 8px;">All three are addressed in Phase 1. After month 6, Mailchimp's losing reasons in the sales conversation drop from "structural disqualification" to "feature-by-feature trade-off."</p>
+      </div>
+      <div class="card warm">
+        <strong style="font-size:13px;">Why this sequencing — design principles</strong>
+        <ul style="margin-top: 6px;">
+          <li><strong>Parity is non-negotiable for Phase 1.</strong> Differentiation without parity is "a cool feature on a tool nobody picks."</li>
+          <li><strong>One headline differentiator per phase.</strong> Concentrating PR &amp; sales narrative around one bold bet beats fragmenting attention across many.</li>
+          <li><strong>Predictive AI in P2, agentic in P3.</strong> Predictive proves the data; agentic earns the trust to act on it.</li>
+          <li><strong>AMP + prompt-first + uplift analysis are Phase 3 precisely because they're moonshots.</strong> Earn the right to ship them by being credible first.</li>
+          <li><strong>Pricing fix is Phase 1.</strong> Without F9 (engagement-based billing), every other improvement is offset by churn from the contact-tax narrative.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="source">
+      Source briefs in this site: <a href="index.html">Klaviyo Flows</a> (capabilities, AI, customer outcomes); <a href="shopify.html">Shopify Marketing Automations + Flow</a> (Sidekick/Magic AI, native data); <a href="emerging-threats.html">Emerging Threats</a> (Customer.io, Attentive, Auxia, Postscript, Mailmodo AI, Loops.so); the Mailchimp Executive Brief and Voice of Customer tabs above (gaps, pricing complaints, free-tier deprecation impact).
+    </p>
+  </section>
+
+</div><!-- /panel-roadmap -->
+
 </div>
 
 <script>
@@ -1249,7 +1629,7 @@
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (initial === 'sentiment' || initial === 'brief') activate(initial);
+    if (initial === 'sentiment' || initial === 'brief' || initial === 'roadmap') activate(initial);
   })();
 </script>
 
