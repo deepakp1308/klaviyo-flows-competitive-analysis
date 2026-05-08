@@ -1,10 +1,11 @@
-# Klaviyo + Mailchimp + Shopify — Marketing Automation Competitive Analyses
+# Marketing Automation Competitive Landscape — Klaviyo + Mailchimp + Shopify + Emerging Threats
 
-Three parallel executive-grade briefs, each with the same two-tab structure (Executive Brief + Voice of Customer):
+Four parallel executive-grade briefs, each with the same two-tab structure (Executive Brief + Voice of Customer):
 
 - **`index.html`** — Klaviyo Flows (campaign automation / Flows AI / Marketing Agent / predictive triggers)
 - **`mailchimp.html`** — Mailchimp Marketing Automation Flows (Customer Journey Builder / Intuit Assist / Send-time Optimization)
 - **`shopify.html`** — Shopify Marketing Automations + Shopify Flow (native automation / Sidekick + Magic AI / BFCM-grade infrastructure)
+- **`emerging-threats.html`** — The 6 bespoke flow startups coming for the incumbents: Customer.io, Attentive, Auxia, Postscript, Mailmodo AI, Loops.so — with explicit head-to-head differentiation against Klaviyo / Mailchimp / Shopify
 
 Each brief covers what the product is, key capabilities, the full flow-relevant AI surface, customers, jobs-to-be-done, differentiation vs. competitors, pricing, and strategic implications — paired with a synthesized Voice of Customer view (G2, Trustpilot, Capterra, Reddit, vendor community, blogs, YouTube) showing what marketers love, hate, and where the wind is blowing.
 

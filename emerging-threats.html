@@ -1,0 +1,772 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Emerging Threats — Bespoke Marketing Automation / Flow Startups vs. Klaviyo + Mailchimp + Shopify</title>
+<meta name="description" content="Two-tab executive brief on the 6 emerging startups directly competing with Klaviyo Flows, Mailchimp CJB, and Shopify Marketing Automations: Customer.io, Attentive, Auxia, Postscript, Mailmodo AI, Loops.so. Features, AI, differentiation, voice of customer." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E1116;
+    --ink-2: #1F2937;
+    --muted: #4B5563;
+    --line: #E5E7EB;
+    --line-2: #D1D5DB;
+    --bg: #F8F7F4;
+    --paper: #FFFFFF;
+    --brand: #4338CA;
+    --brand-2: #6366F1;
+    --good: #047857;
+    --warn: #B45309;
+    --bad: #B91C1C;
+    --chip: #EEF0FF;
+    --chip-ink: #2A1FA8;
+    --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background: var(--bg); color: var(--ink); -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; line-height: 1.45; }
+  .toolbar { position: sticky; top: 0; z-index: 10; background: rgba(248,247,244,.85); backdrop-filter: saturate(140%) blur(8px); border-bottom: 1px solid var(--line); }
+  .toolbar-inner { max-width: 1180px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; padding: 10px 20px; gap: 12px; }
+  .brand-mark { display:flex; align-items:center; gap:10px; font-weight: 700; font-size: 14px; color: var(--ink-2); }
+  .brand-dot { width: 10px; height: 10px; border-radius: 3px; background: var(--brand); box-shadow: 0 0 0 3px rgba(67,56,202,.18); }
+  .toolbar a.btn, .toolbar button.btn { border: 1px solid var(--line-2); background: var(--paper); color: var(--ink-2); padding: 7px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; cursor: pointer; }
+  .toolbar .btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .toolbar .btn:hover { transform: translateY(-1px); }
+
+  .page-wrap { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+
+  .page { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); padding: 28px 32px 26px; margin-bottom: 22px; }
+
+  .page-head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 18px; }
+  .eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  h1 { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: 30px; line-height: 1.15; margin: 6px 0 4px; letter-spacing: -0.01em; }
+  .subtitle { color: var(--muted); font-size: 14px; }
+  .meta { text-align: right; font-size: 12px; color: var(--muted); }
+  .meta strong { color: var(--ink-2); }
+
+  .grid { display: grid; gap: 16px; }
+  .grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid.cols-6 { grid-template-columns: repeat(6, 1fr); }
+  .grid.cols-5-3 { grid-template-columns: 5fr 3fr; }
+  .grid.cols-3-2 { grid-template-columns: 3fr 2fr; }
+
+  @media (max-width: 880px) {
+    .grid.cols-2, .grid.cols-3, .grid.cols-4, .grid.cols-6, .grid.cols-5-3, .grid.cols-3-2 { grid-template-columns: 1fr; }
+    .page { padding: 20px; }
+    h1 { font-size: 24px; }
+  }
+
+  h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 16px; margin: 0 0 8px; letter-spacing: -0.005em; }
+  h2 .num { display: inline-block; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 800; color: var(--chip-ink); background: var(--chip); padding: 2px 6px; border-radius: 4px; margin-right: 8px; transform: translateY(-2px); letter-spacing: .08em; }
+  p { margin: 0 0 8px; font-size: 13.5px; color: var(--ink-2); }
+  ul { margin: 4px 0 8px; padding-left: 18px; }
+  li { font-size: 13px; color: var(--ink-2); margin-bottom: 4px; }
+  li strong { color: var(--ink); }
+
+  .card { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  .card.tinted { background: #F4F3FF; border-color: #DCD7F8; }
+  .card.warm { background: #FFF8F0; border-color: #FCE6CC; }
+  .card.olive { background: #F4F6EE; border-color: #E1E7CB; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .kpi { background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFB 100%); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+  .kpi .v { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: 22px; line-height: 1; color: var(--ink); }
+  .kpi .l { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .chip { background: var(--chip); color: var(--chip-ink); border-radius: 999px; padding: 3px 9px; font-size: 11px; font-weight: 600; border: 1px solid #DCD7F8; }
+  .chip.warm { background: #FFEFE0; color: #9A4A00; border-color: #FCD9B6; }
+  .chip.green { background: #E6F5EE; color: #036A4F; border-color: #BFE6D3; }
+  .chip.gray { background: #F1F2F4; color: #374151; border-color: #E2E5EA; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+  th, td { text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; }
+  th { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: #FAFAFB; }
+  .dot { display:inline-block; width:8px; height:8px; border-radius:999px; margin-right:6px; vertical-align: middle; }
+  .dot.good { background: var(--good); }
+  .dot.mid  { background: var(--warn); }
+  .dot.bad  { background: var(--bad); }
+
+  .pull { border-left: 3px solid var(--brand); padding: 8px 12px; background: #F4F3FF; border-radius: 6px; font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; color: var(--ink-2); }
+  .pull cite { display: block; font-family: 'Inter', sans-serif; font-size: 11px; color: var(--muted); margin-top: 6px; font-style: normal; }
+
+  .source { font-size: 10.5px; color: var(--muted); border-top: 1px dashed var(--line); margin-top: 14px; padding-top: 10px; }
+  .source a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+
+  .tier-pill { display: inline-block; font-size: 10px; font-weight: 800; letter-spacing: .08em; padding: 2px 7px; border-radius: 4px; margin-right: 6px; vertical-align: middle; }
+  .tier-pill.A { background: #FBE7E8; color: #9A1F00; }
+  .tier-pill.B { background: #FFF1DD; color: #8A4A00; }
+  .tier-pill.C { background: var(--chip); color: var(--chip-ink); }
+
+  .startup-card { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: #fff; }
+  .startup-card .head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+  .startup-card h3 { margin: 0; font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 700; }
+  .startup-card .meta-line { font-size: 11px; color: var(--muted); margin-bottom: 8px; }
+  .startup-card .row { display: grid; grid-template-columns: 110px 1fr; gap: 6px 10px; font-size: 12px; margin-bottom: 4px; }
+  .startup-card .row .k { font-weight: 600; color: var(--muted); font-size: 11px; text-transform: uppercase; letter-spacing: .04em; padding-top: 1px; }
+  .startup-card .row .v { color: var(--ink-2); }
+  .startup-card .why-diff { background: #F4F3FF; border-left: 3px solid var(--brand); padding: 6px 10px; border-radius: 0 6px 6px 0; margin-top: 8px; font-size: 12.5px; color: var(--ink-2); }
+  .startup-card .why-diff strong { color: var(--brand); }
+
+  .mini-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; }
+  .mini { border: 1px solid var(--line); border-radius: 8px; padding: 8px 10px; background: #fff; }
+  .mini .name { font-weight: 700; font-size: 12.5px; color: var(--ink); }
+  .mini .raised { font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; color: var(--brand); margin-top: 2px; font-weight: 700; }
+  .mini .tag { font-size: 10px; color: var(--muted); margin-top: 2px; }
+  @media (max-width: 880px) { .mini-grid { grid-template-columns: repeat(2, 1fr); } }
+
+  .tabs { display: inline-flex; background: #ECEAE6; border-radius: 10px; padding: 3px; gap: 2px; }
+  .tab { border: 0; background: transparent; color: var(--muted); padding: 7px 14px; font-size: 13px; font-weight: 600; border-radius: 8px; cursor: pointer; font-family: inherit; }
+  .tab:hover { color: var(--ink-2); }
+  .tab.active { background: var(--paper); color: var(--ink); box-shadow: 0 1px 2px rgba(16,24,40,.06); }
+  @media (max-width: 720px) { .tabs { order: 3; flex-basis: 100%; } .toolbar-inner { flex-wrap: wrap; } }
+  .tabpanel { display: none; }
+  .tabpanel.active { display: block; }
+
+  .platform-bar { display: grid; grid-template-columns: repeat(6, 1fr); gap: 8px; margin-bottom: 14px; }
+  .platform { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; background: #fff; }
+  .platform .src { font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing:.04em; text-transform: uppercase; }
+  .platform .score { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: 22px; margin: 4px 0 2px; }
+  .platform .meta-line { font-size: 11px; color: var(--muted); }
+  .platform .bar-wrap { height: 4px; background: var(--line); border-radius: 99px; overflow: hidden; margin-top: 6px; }
+  .platform .bar { height: 100%; border-radius: 99px; background: var(--brand); }
+  .platform.bad .bar { background: var(--bad); }
+  .platform.good .bar { background: var(--good); }
+  .platform.mid .bar { background: var(--warn); }
+  @media (max-width: 880px) { .platform-bar { grid-template-columns: repeat(2, 1fr); } }
+
+  .theme { border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px 8px; background: #fff; margin-bottom: 8px; }
+  .theme h3 { margin: 0 0 4px; font-size: 13px; display: flex; align-items: center; gap: 8px; }
+  .theme h3 .badge { font-size: 9.5px; font-weight: 800; padding: 2px 6px; border-radius: 4px; letter-spacing: .06em; }
+  .badge.lo { background: #FFE7E0; color: #9A1F00; }
+  .badge.hi { background: #E6F5EE; color: #036A4F; }
+  .badge.mid { background: #FFF1DD; color: #8A4A00; }
+  .badge.brand { background: var(--chip); color: var(--chip-ink); }
+  .theme p { font-size: 12.5px; margin: 0 0 4px; }
+  .theme .src-tag { font-size: 10.5px; color: var(--muted); border-top: 1px dashed var(--line); padding-top: 4px; margin-top: 4px; }
+
+  .col-loved { background: #F4FBF7; border-color: #CFE9DC; }
+  .col-hated { background: #FFF5F2; border-color: #F4D2C5; }
+
+  .col-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 8px; }
+  .col-head h2 { margin: 0; }
+  .col-head .count { font-size: 11px; font-weight: 700; color: var(--muted); background: #fff; border: 1px solid var(--line); padding: 2px 8px; border-radius: 99px; }
+
+  .quote-wall { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .qw { border-left: 3px solid var(--line); padding: 8px 12px; background: #FAFAFB; border-radius: 6px; }
+  .qw.pos { border-left-color: var(--good); background: #F4FBF7; }
+  .qw.neg { border-left-color: var(--bad); background: #FFF5F2; }
+  .qw.mid { border-left-color: var(--warn); background: #FFFAF0; }
+  .qw .q { font-family: 'Source Serif 4', Georgia, serif; font-size: 13.5px; color: var(--ink); margin: 0 0 4px; line-height: 1.4; }
+  .qw .src-line { font-size: 11px; color: var(--muted); }
+  .qw .src-line strong { color: var(--ink-2); font-weight: 600; }
+  @media (max-width: 880px) { .quote-wall { grid-template-columns: 1fr; } }
+
+  @media print {
+    @page { size: Letter; margin: 0.45in; }
+    body { background: white; }
+    .toolbar { display: none; }
+    .page-wrap { padding: 0; max-width: none; }
+    .page { box-shadow: none; border: none; padding: 0; margin: 0 0 0.4in; page-break-after: always; }
+    .page:last-of-type { page-break-after: auto; }
+    .tabpanel:not(.active) { display: block !important; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="brand-mark"><span class="brand-dot"></span> Competitive Brief · Emerging Threats (Bespoke Flow Startups)</div>
+    <div class="tabs" role="tablist" aria-label="Brief sections">
+      <button class="tab active" role="tab" aria-selected="true" data-tab="brief">Executive Brief</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="sentiment">Voice of Customer</button>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <a class="btn" href="index.html">→ Klaviyo</a>
+      <a class="btn" href="mailchimp.html">→ Mailchimp</a>
+      <a class="btn" href="shopify.html">→ Shopify</a>
+      <button class="btn" onclick="window.print()">Print / PDF</button>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+<!-- ============== EXECUTIVE BRIEF TAB ============== -->
+<div class="tabpanel active" id="panel-brief" role="tabpanel">
+
+  <!-- Brief Page 1 -->
+  <section class="page" aria-label="Brief Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Competitive Intelligence · Executive 2-Pager</div>
+        <h1>Emerging threats: <em style="color:#4338CA;">6 bespoke marketing-automation startups</em> coming for Klaviyo, Mailchimp &amp; Shopify</h1>
+        <div class="subtitle">A focused read on the only 6 startups whose product is <em>uniquely</em> the customer-journey / flow product itself — filtered from a broader landscape of 19 funded entrants. Tier-A scaled threats, Tier-B AI-native risers, Tier-C YC bets.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Prepared for:</strong> Executive review</div>
+        <div><strong>Subject:</strong> Bespoke flow / journey startups</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 1 of 2</div>
+      </div>
+    </header>
+
+    <!-- KPIs -->
+    <div class="kpi-row" style="margin-bottom: 14px;">
+      <div class="kpi">
+        <div class="v">~$1.2B</div>
+        <div class="l">Combined funding raised across the 6 shortlisted startups (Attentive carries $864M of it)</div>
+      </div>
+      <div class="kpi">
+        <div class="v">~$700M</div>
+        <div class="l">Combined ARR across the 4 disclosed (Attentive $500M+, Customer.io $100M, Postscript $78M est., Auxia not disclosed but at Fortune 500 scale)</div>
+      </div>
+      <div class="kpi">
+        <div class="v">26K+</div>
+        <div class="l">Combined customer brands disclosed (8K+ Attentive, 9K+ Customer.io, 8.5K+ Postscript, plus Auxia, Loops, Mailmodo)</div>
+      </div>
+      <div class="kpi">
+        <div class="v">5 of 6</div>
+        <div class="l">AI-native or AI-first by design. Only Postscript is a pre-AI-era platform that has retrofitted AI features.</div>
+      </div>
+    </div>
+
+    <!-- Quick scan grid -->
+    <h2><span class="num">01</span>The 6 at a glance</h2>
+    <div class="mini-grid" style="margin-bottom: 16px;">
+      <div class="mini"><div class="name">Customer.io <span class="tier-pill A">A</span></div><div class="raised">$93.7M</div><div class="tag">$100M ARR · 9K+ brands · SaaS lifecycle</div></div>
+      <div class="mini"><div class="name">Attentive <span class="tier-pill A">A</span></div><div class="raised">$864M</div><div class="tag">$500M+ ARR · 8K+ brands · cross-channel SMS-first</div></div>
+      <div class="mini"><div class="name">Auxia <span class="tier-pill B">B</span></div><div class="raised">$23.5M</div><div class="tag">100B+ decisions · F500 (Atlassian, Comcast) · agentic-first</div></div>
+      <div class="mini"><div class="name">Postscript <span class="tier-pill B">B</span></div><div class="raised">$137M</div><div class="tag">$78M ARR · 8.5K Shopify brands · SMS-native flow</div></div>
+      <div class="mini"><div class="name">Mailmodo AI <span class="tier-pill C">C</span></div><div class="raised">YC</div><div class="tag">Prompt-first email automation · interactive AMP · SMB</div></div>
+      <div class="mini"><div class="name">Loops.so <span class="tier-pill C">C</span></div><div class="raised">$13M</div><div class="tag">100+ YC startups (Linear, Perplexity, Clerk, Framer, Replicate)</div></div>
+    </div>
+
+    <!-- Tier A deep dive -->
+    <h2><span class="num">02</span><span class="tier-pill A">TIER A</span>At-scale direct threats — already in the market</h2>
+    <div class="grid cols-2" style="margin-bottom: 14px;">
+
+      <div class="startup-card">
+        <div class="head">
+          <h3>Customer.io</h3>
+          <div class="meta-line">Self-serve · $100/mo+ · founded 2012</div>
+        </div>
+        <div class="row"><div class="k">Funding</div><div class="v">$93.7M total · $29.9M Series A (Mar '26) · investors include Cervin Ventures, Skip Capital</div></div>
+        <div class="row"><div class="k">Traction</div><div class="v"><strong>$100M ARR (Sept '25)</strong> · <strong>9,000+ brands</strong> · 111% NDR · G2 4.4/5</div></div>
+        <div class="row"><div class="k">Product</div><div class="v">Visual journey builder + behavioral lifecycle messaging across email, SMS, push, in-app, WhatsApp, webhooks. Branches on any tracked event in real-time. A/B testing across subject lines and entire workflow branches. Liquid templating.</div></div>
+        <div class="row"><div class="k">AI</div><div class="v">Heavy investment since 2024: AI-assisted copy gen, AI segment generation, predictive subject-line testing. Less aggressive than Auxia's agentic positioning; more "AI inside a developer-friendly flow tool."</div></div>
+        <div class="row"><div class="k">Pricing</div><div class="v">Essentials $100/mo (5K profiles, 1M emails) · Premium $1K/mo · Enterprise custom · Median deal $26K/yr</div></div>
+        <div class="row"><div class="k">Customers</div><div class="v">Notion, Segment-era SaaS brands; growth-stage SaaS dominant</div></div>
+        <div class="why-diff"><strong>How they're differentiated vs. K/M/S:</strong> Same product as Klaviyo Flows / Mailchimp CJB but <em>vertically purpose-built for SaaS</em>, not commerce. Unlimited event tracking + Liquid templating gives technical teams the flexibility neither Klaviyo nor Mailchimp ships. WhatsApp + in-app native (Klaviyo only added recently; Mailchimp still doesn't have in-app). They've already taken the SaaS lifecycle category from Mailchimp.</div>
+      </div>
+
+      <div class="startup-card">
+        <div class="head">
+          <h3>Attentive</h3>
+          <div class="meta-line">Mid-market+ · from $3K/mo · founded 2016</div>
+        </div>
+        <div class="row"><div class="k">Funding</div><div class="v">$864M total raised · last valued <strong>$2.2B</strong> · Series E $470M (Mar '21) · investors include Sequoia, Coatue, Bain Capital Ventures</div></div>
+        <div class="row"><div class="k">Traction</div><div class="v"><strong>$500M+ ARR (2024)</strong> · 8,000+ brands · drove ~$2B in 2025 Cyber Week customer revenue · <strong>G2 4.7/5 across 1,200+ reviews · G2 Leader 20+ consecutive quarters</strong></div></div>
+        <div class="row"><div class="k">Product</div><div class="v">AI-powered journey builder for SMS + Email + Push + RCS in one canvas. Two-way conversational SMS. TCPA/GDPR compliance built in. 98% SMS deliverability claim.</div></div>
+        <div class="row"><div class="k">AI</div><div class="v">"AI Marketer" suite: AI Journeys (auto-generates multi-touch sequences), AI Brand Copy (on-brand SMS/email gen), AI Audiences, AI Personalization claiming +15-30% conversion lift. Most marketing-mature AI suite in the cohort.</div></div>
+        <div class="row"><div class="k">Pricing</div><div class="v">From <strong>$3,000/mo</strong>; per-message overage; contract commitments required. Excludes small businesses by design.</div></div>
+        <div class="row"><div class="k">Customers</div><div class="v">CB2, Coach, Steve Madden, Wayfair, Sephora, plus 8K+ DTC brands; mid-to-large ecom doing $5M+ revenue</div></div>
+        <div class="why-diff"><strong>How they're differentiated vs. K/M/S:</strong> They have the cross-channel orchestration story Klaviyo <em>claims</em> — SMS + Email + Push + RCS in one journey at $500M+ ARR scale. Same SMS-first DNA gives them deeper SMS depth than Klaviyo SMS. They make Mailchimp irrelevant in mid-market ecom and Shopify Email irrelevant for any brand &gt;$5M revenue.</div>
+      </div>
+
+    </div>
+
+    <!-- Tier B deep dive -->
+    <h2><span class="num">03</span><span class="tier-pill B">TIER B</span>AI-native rising threats — the most disruptive product bets</h2>
+    <div class="grid cols-2" style="margin-bottom: 14px;">
+
+      <div class="startup-card">
+        <div class="head">
+          <h3>Auxia</h3>
+          <div class="meta-line">Enterprise · custom pricing · founded 2023</div>
+        </div>
+        <div class="row"><div class="k">Funding</div><div class="v"><strong>$23.5M Series A + seed (Mar '25)</strong> · led by <strong>VMG Technology Partners</strong> · founders ex-Google, ex-Meta</div></div>
+        <div class="row"><div class="k">Traction</div><div class="v"><strong>100B+ automated decisions</strong> · 70M+ end users impacted · <strong>176% NDR</strong> · <strong>93% AI quality score</strong></div></div>
+        <div class="row"><div class="k">Product</div><div class="v">Self-described <strong>"Agentic Customer Journey Orchestration Platform."</strong> Treatment Orchestration → Journey Management → Real-time Personalization. Multi-channel (web, mobile, email, push, in-app) with no-code console. ML automatically selects best treatment (message + channel + surface + incentive + timing) per user.</div></div>
+        <div class="row"><div class="k">AI</div><div class="v"><strong>Agentic from the ground up.</strong> Not a feature on top of a flow tool — the entire product is an autonomous orchestration agent. Proprietary ML predicts and selects best treatment per user in real time. Uplift analysis built in.</div></div>
+        <div class="row"><div class="k">Pricing</div><div class="v">Enterprise / quoted only — designed for F500 scale</div></div>
+        <div class="row"><div class="k">Customers</div><div class="v"><strong>Atlassian, Comcast, The Guardian, NTT Docomo, Mercari, MUFG, Assurant</strong> — F500/G2K reference set</div></div>
+        <div class="why-diff"><strong>How they're differentiated vs. K/M/S:</strong> If Klaviyo's Marketing Agent is a feature on top of Flows, <em>Auxia is "the entire product is an agent."</em> The flow canvas is replaced by an orchestration agent that picks message/channel/timing per user. Customer outcomes (84% LTV lift, 5x CTR, $12M incremental revenue) are ahead of anything Klaviyo has publicized for Marketing Agent. F500 buyer profile = competing for Bloomreach/Braze accounts more than Klaviyo accounts today, but the playbook is the threat.</div>
+      </div>
+
+      <div class="startup-card">
+        <div class="head">
+          <h3>Postscript</h3>
+          <div class="meta-line">Shopify-native · Free / $25-$500+/mo · founded 2018</div>
+        </div>
+        <div class="row"><div class="k">Funding</div><div class="v"><strong>$137M total</strong> · Series C $65M ('22) at $636M valuation · <strong>Greylock, Twilio Ventures, YC, 01 Advisors</strong></div></div>
+        <div class="row"><div class="k">Traction</div><div class="v"><strong>$78M ARR ('23)</strong> · <strong>8,500+ Shopify brands</strong> · ~$500M attributed customer revenue · 34x average customer ROI · <strong>G2 4.9/5 across 159 reviews</strong> (highest in cohort)</div></div>
+        <div class="row"><div class="k">Product</div><div class="v">SMS-first journey/flow builder native to Shopify. <strong>65+ automation triggers</strong> using real Shopify event data. Two-way conversational SMS. TCPA-compliant opt-in flows. MMS/RCS support. Pop-ups + segmentation built in.</div></div>
+        <div class="row"><div class="k">AI</div><div class="v"><strong>"Infinity Testing"</strong> AI optimization of message variants delivering 20-38% revenue lift. AI SMS Assistant (paid tier). AI text generation; sometimes still needs manual editing per reviews.</div></div>
+        <div class="row"><div class="k">Pricing</div><div class="v">Starter free + pay-per-message ($0.015 SMS) · Growth $25-$100/mo · Pro/Scale $350-$500/mo</div></div>
+        <div class="row"><div class="k">Customers</div><div class="v">DTC Shopify brands at scale; 8.5K+ merchants</div></div>
+        <div class="why-diff"><strong>How they're differentiated vs. K/M/S:</strong> Owns the SMS half of the cross-channel story Klaviyo wants to own. Sits inside the same Shopify accounts as Klaviyo, but with deeper Shopify-native SMS triggers (65+ vs. Klaviyo's general-purpose SMS). One product roadmap step (adding email) from being a direct Klaviyo replacement. Mailchimp and Shopify Email simply don't compete in the SMS lane.</div>
+      </div>
+
+    </div>
+
+    <p class="source">
+      Sources reviewed for Page 1: Customer.io official pricing/product pages, Vendr 2026 buyer guide, MailToolFinder review, G2 (4.4/5); Attentive product pages, Wikipedia, PitchBook, CBInsights, Tracxn, ToolRadar, CloudKitly 2026 review, G2 (4.7/5, 1,200+ reviews); Auxia (auxia.io) about/product/docs/blog (incl. "100 Billion Decisions and Counting"), Business Wire $23.5M funding announcement; Postscript product pages, Sacra company profile, TechCrunch Series C coverage, CBInsights, ATTN Agency &amp; 365Dropship 2026 reviews, G2 (4.9/5).
+    </p>
+  </section>
+
+  <!-- Brief Page 2 -->
+  <section class="page" aria-label="Brief Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Competitive Intelligence · Executive 2-Pager (cont.)</div>
+        <h1>YC bets, head-to-head differentiation &amp; <em style="color:#4338CA;">what these threats mean</em></h1>
+        <div class="subtitle">Tier-C early plays, the cross-product matrix, and the strategic implications.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Prepared for:</strong> Executive review</div>
+        <div><strong>Subject:</strong> Bespoke flow / journey startups (cont.)</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 2 of 2</div>
+      </div>
+    </header>
+
+    <!-- Tier C deep dive -->
+    <h2><span class="num">04</span><span class="tier-pill C">TIER C</span>Early-stage YC bets — not at scale yet, but uniquely bespoke</h2>
+    <div class="grid cols-2" style="margin-bottom: 14px;">
+
+      <div class="startup-card">
+        <div class="head">
+          <h3>Mailmodo AI</h3>
+          <div class="meta-line">SMB · $49-$199/mo · YC-backed · founded 2020</div>
+        </div>
+        <div class="row"><div class="k">Funding</div><div class="v">YC-backed · "Launch YC" recent · MailToolFinder rating 4.5/5</div></div>
+        <div class="row"><div class="k">Traction</div><div class="v">Case studies: 400% higher event registrations, 5x email-to-sales conversions via interactive AMP emails</div></div>
+        <div class="row"><div class="k">Product</div><div class="v">Visual workflow builder + <strong>"prompt-first" email marketing</strong>: plan, create, automate, segment, analyze from prompts. <strong>AMP-interactive emails</strong> (forms, surveys, polls, carousels, shopping carts <em>inside</em> the email — no landing page needed).</div></div>
+        <div class="row"><div class="k">AI</div><div class="v">AI email template generator, AI automation builder, AI marketing planner, AI performance analyzer, AI contact segment generator. The whole product is conversational.</div></div>
+        <div class="row"><div class="k">Pricing</div><div class="v">Lite $49/mo (2K credits) · Pro $99/mo · Max $199/mo unlimited</div></div>
+        <div class="row"><div class="k">Customers</div><div class="v">SMB-skewed; thousands of paying companies</div></div>
+        <div class="why-diff"><strong>How they're differentiated vs. K/M/S:</strong> Two genuinely unique product bets — <em>(1) prompt-first UX</em> for the entire automation surface (Klaviyo's Flows AI is a feature; Mailmodo is the whole product), and <em>(2) AMP-interactive emails</em> that no incumbent ships. If conversational + interactive becomes table stakes, Mailmodo has structural ergonomics + format edges that bolted-on AI cannot match.</div>
+      </div>
+
+      <div class="startup-card">
+        <div class="head">
+          <h3>Loops.so</h3>
+          <div class="meta-line">SaaS-native · free + contact-based · founded 2022 · YC</div>
+        </div>
+        <div class="row"><div class="k">Funding</div><div class="v"><strong>$13M total</strong> (Sept '23 $3.2M seed) · <strong>Craft Ventures</strong> + Altman Capital + SV Angel + Liquid2 + YC + Box Group</div></div>
+        <div class="row"><div class="k">Traction</div><div class="v"><strong>100+ YC startups using it</strong> · thousands of companies · explicit "Loops for YC" program</div></div>
+        <div class="row"><div class="k">Product</div><div class="v"><strong>Notion-style email editor</strong> + no-code automation workflows + transactional + marketing in one product. Pre-built workflows for SaaS lifecycle. API + SDK for product-triggered emails. Unlimited team seats; transactional sending included free.</div></div>
+        <div class="row"><div class="k">AI</div><div class="v">Lighter on AI than peers — but the editor's "Notion-style" UX is a category-different bet. AI features in the roadmap.</div></div>
+        <div class="row"><div class="k">Pricing</div><div class="v">Free up to 1K subscribed contacts (4K sends/mo) · contact-based paid tiers · no per-seat charges</div></div>
+        <div class="row"><div class="k">Customers</div><div class="v"><strong>Linear, Perplexity, Clerk, Framer, Replicate, Spline, Reuters, unDraw, Wabi</strong></div></div>
+        <div class="why-diff"><strong>How they're differentiated vs. K/M/S:</strong> SaaS-native by design — the customer set is the next generation of B2B SaaS founders who default-pick Loops over Mailchimp because Mailchimp's product wasn't built for SaaS. Threat to Customer.io from <em>below</em> (cheaper, simpler, YC-default), to Mailchimp from a different angle (better-fitting product for tech buyers), to Klaviyo only if they later expand from SaaS to commerce.</div>
+      </div>
+
+    </div>
+
+    <!-- Differentiation matrix -->
+    <h2><span class="num">05</span>Head-to-head differentiation: how each startup wins vs. Klaviyo, Mailchimp &amp; Shopify</h2>
+    <div style="overflow-x:auto; margin-bottom: 14px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Startup</th>
+            <th>vs. Klaviyo Flows</th>
+            <th>vs. Mailchimp CJB</th>
+            <th>vs. Shopify Marketing Automations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Customer.io</strong></td>
+            <td><span class="dot mid"></span>Loses on commerce depth, wins on SaaS event-driven flexibility (Liquid, unlimited events, native in-app/WhatsApp)</td>
+            <td><span class="dot good"></span>Wins decisively for any SaaS company — Mailchimp wasn't built for product-led lifecycle</td>
+            <td><span class="dot good"></span>Wins for any non-Shopify business (Shopify only works inside Shopify)</td>
+          </tr>
+          <tr>
+            <td><strong>Attentive</strong></td>
+            <td><span class="dot good"></span>Wins SMS depth, draws on email; matches/exceeds Klaviyo cross-channel claims at scale</td>
+            <td><span class="dot good"></span>Wins decisively in mid-market+ ecom — Mailchimp is not in this conversation</td>
+            <td><span class="dot good"></span>Wins for any brand &gt; $5M revenue — Shopify Email caps out fast</td>
+          </tr>
+          <tr>
+            <td><strong>Auxia</strong></td>
+            <td><span class="dot good"></span>Agentic-first vs. agentic-bolted-on. Currently F500 not Klaviyo TAM, but the playbook is the existential threat to Marketing Agent.</td>
+            <td><span class="dot good"></span>Mailchimp not in the same conversation — different market</td>
+            <td><span class="dot good"></span>Shopify not in the same conversation — different market</td>
+          </tr>
+          <tr>
+            <td><strong>Postscript</strong></td>
+            <td><span class="dot mid"></span>Wins SMS depth (65+ Shopify-native triggers); loses email + cross-channel scope</td>
+            <td><span class="dot good"></span>Mailchimp has no native ecom SMS; not competitive</td>
+            <td><span class="dot good"></span>Shopify Email has no SMS at all; Postscript is the default Shopify SMS choice</td>
+          </tr>
+          <tr>
+            <td><strong>Mailmodo AI</strong></td>
+            <td><span class="dot mid"></span>Wins on prompt-first UX + AMP-interactive format; loses on cross-channel and ecom data depth</td>
+            <td><span class="dot good"></span>Wins on UX modernity + AMP differentiation for SMB</td>
+            <td><span class="dot mid"></span>Wins on cross-platform; loses on Shopify-native data</td>
+          </tr>
+          <tr>
+            <td><strong>Loops.so</strong></td>
+            <td><span class="dot bad"></span>Loses head-to-head — Klaviyo has commerce depth Loops doesn't try to match</td>
+            <td><span class="dot good"></span>Wins for any SaaS company — better-fitting product, simpler pricing, free transactional</td>
+            <td><span class="dot good"></span>Wins for any non-Shopify business</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Implications -->
+    <div class="grid cols-2" style="margin-top: 14px;">
+      <div class="card tinted">
+        <h2 style="margin-bottom: 6px;"><span class="num">06</span>What these threats mean — strategic read</h2>
+        <ul>
+          <li><strong>The category is splitting along vertical-fit lines.</strong> Customer.io owns SaaS lifecycle, Postscript owns Shopify SMS, Loops owns SaaS-startup default. Klaviyo / Mailchimp / Shopify are increasingly losing on <em>where the buyer fits</em>, not on feature depth.</li>
+          <li><strong>Agentic is moving from feature to product.</strong> Auxia's "the entire product is an agent" is the existential bet. Klaviyo's Marketing Agent is the right move <em>directionally</em>, but it's a feature graft on a 2012 data model. Auxia, Mailmodo (prompt-first), and emerging YC bets are rebuilding from the agent-down.</li>
+          <li><strong>SMS-first players are the most-funded direct threat.</strong> Attentive ($864M) + Postscript ($137M) = $1B+ deployed against the SMS half of the cross-channel story. Klaviyo SMS exists; Mailchimp SMS is US-only add-on; Shopify has none. Material competitive air cover.</li>
+          <li><strong>Free + simple is winning the bottom of the market.</strong> Loops.so + Mailchimp's deprecated free automation + Shopify "free with the store" = Mailchimp's SMB free tier is being pincer-attacked from three sides.</li>
+          <li><strong>None of the 6 are direct one-to-one replacements yet.</strong> Each wins a slice. The risk to incumbents is <em>aggregate</em> — death by a thousand verticalized cuts.</li>
+        </ul>
+      </div>
+      <div class="card warm">
+        <h2 style="margin-bottom: 6px;"><span class="num">07</span>Five plays for incumbents (and us)</h2>
+        <ul>
+          <li><strong>Beat Customer.io for SaaS by re-architecting the data model.</strong> Liquid templating + unlimited events as first-class — not a Plus-tier feature.</li>
+          <li><strong>Defend SMS attribution before Postscript / Attentive consolidate it.</strong> Native deep Shopify SMS triggers + revenue attribution that wins side-by-side comparisons in DTC RFPs.</li>
+          <li><strong>Match Auxia's outcome metrics.</strong> Publish per-customer 84% LTV lift / 5x CTR / 176% NDR equivalents — or assume agentic challengers will eat enterprise.</li>
+          <li><strong>Ship a prompt-first builder, not a prompt-assist sidebar.</strong> Mailmodo proves the UX. The first incumbent to make the entire flow canvas conversational gets a year of brand momentum.</li>
+          <li><strong>Acquire or partner before Loops/Mailmodo/Eden compound.</strong> YC-cohort distribution is the next wave's go-to-market. The tools that own YC startups today own the lifecycle marketing buyer in 2028.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="source">
+      Sources reviewed for Page 2: Mailmodo (mailmodo.com pricing/product/AI guide), MailToolFinder, EmailVendorSelection 2026, SMB Guide review (8.4/10); Loops.so (loops.so pricing/customers), CBInsights, Startup Intros, Efficient.app 2026 review; cross-product comparisons (G2 head-to-head pages, Inflection.io best B2B lifecycle marketing 2026, Oden Customer.io vs. Braze vs. Iterable vs. Klaviyo, TryPropel top customer engagement platforms 2026, Vero Braze vs. Customer.io 2026); funding databases (PitchBook, CBInsights, Tracxn, Sacra, Signalbase); founder/investor backgrounds (Auxia VMG announcement, Postscript Greylock blog, Customer.io Series A coverage, Loops Craft Ventures launch).
+    </p>
+  </section>
+
+</div><!-- /panel-brief -->
+
+
+<!-- ============== VOICE OF CUSTOMER TAB ============== -->
+<div class="tabpanel" id="panel-sentiment" role="tabpanel">
+
+  <!-- Sentiment Page 1 -->
+  <section class="page" aria-label="Sentiment Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Voice of Customer · Bespoke Flow Startups</div>
+        <h1>What people <em style="color:#036A4F;">love</em>, what they <em style="color:#B91C1C;">hate</em>, and where each startup punches above its weight</h1>
+        <div class="subtitle">Synthesis from G2, Capterra, Reddit, agency comparisons, founder reviews — for each of the 6 bespoke flow startups, plus a comparative scoreboard against the incumbents.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Method:</strong> qualitative synthesis from public sources</div>
+        <div><strong>Sample:</strong> ~3K reviews + threads across 6 startups</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 1 of 2</div>
+      </div>
+    </header>
+
+    <!-- Comparative scoreboard -->
+    <h2 style="margin-bottom: 6px;"><span class="num">A</span>Cross-startup G2 scoreboard — they all rate higher than Mailchimp, several rate higher than Klaviyo</h2>
+    <p style="margin-bottom: 10px;">
+      The 6 emerging threats average <strong>4.65/5 on G2</strong> — above Klaviyo (4.6), Mailchimp (4.3), and Shopify Email (4.7). The smaller cohorts are not strictly comparable to incumbents' review volumes, but every shortlisted startup is a leader in its category. Postscript leads at 4.9.
+    </p>
+    <div class="platform-bar">
+      <div class="platform good">
+        <div class="src">Postscript</div>
+        <div class="score">4.9 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 5</span></div>
+        <div class="meta-line">G2 · 159 reviews</div>
+        <div class="bar-wrap"><div class="bar" style="width: 98%;"></div></div>
+      </div>
+      <div class="platform good">
+        <div class="src">Attentive</div>
+        <div class="score">4.7 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 5</span></div>
+        <div class="meta-line">G2 · 1,200+ reviews · Leader 20+ qtrs</div>
+        <div class="bar-wrap"><div class="bar" style="width: 94%;"></div></div>
+      </div>
+      <div class="platform good">
+        <div class="src">Mailmodo AI</div>
+        <div class="score">4.5 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 5</span></div>
+        <div class="meta-line">MailToolFinder · multiple reviews</div>
+        <div class="bar-wrap"><div class="bar" style="width: 90%;"></div></div>
+      </div>
+      <div class="platform good">
+        <div class="src">Customer.io</div>
+        <div class="score">4.4 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 5</span></div>
+        <div class="meta-line">G2 · feature depth 4.6, ease of use 4.7</div>
+        <div class="bar-wrap"><div class="bar" style="width: 88%;"></div></div>
+      </div>
+      <div class="platform mid">
+        <div class="src">Loops.so</div>
+        <div class="score">4.6 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 5*</span></div>
+        <div class="meta-line">Efficient.app 2026 review</div>
+        <div class="bar-wrap"><div class="bar" style="width: 92%;"></div></div>
+      </div>
+      <div class="platform mid">
+        <div class="src">Auxia</div>
+        <div class="score">N/A</div>
+        <div class="meta-line">Enterprise · 176% NDR · 93% AI quality score</div>
+        <div class="bar-wrap"><div class="bar" style="width: 70%;"></div></div>
+      </div>
+    </div>
+
+    <!-- Loved + Hated by company -->
+    <div class="grid cols-2" style="margin-bottom: 14px;">
+
+      <!-- LOVED -->
+      <div class="card col-loved">
+        <div class="col-head">
+          <h2><span class="num" style="background:#D7EFE3; color:#036A4F;">B1</span>What people LOVE — by company</h2>
+          <span class="count">6 themes</span>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">CUSTOMER.IO</span>"Most flexible flow tool in market"</h3>
+          <p>Engineering-friendly: Liquid templating, unlimited events, real-time branching on any tracked event, A/B test entire workflow branches. Operators repeatedly call it "what Klaviyo would be if Klaviyo were built for SaaS."</p>
+          <div class="src-tag">G2; MailToolFinder 2026; Software Advice (4.7/5)</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">ATTENTIVE</span>"G2 Leader 20 consecutive quarters"</h3>
+          <p>The most consistently praised at-scale automation product in DTC. Easy interface despite enterprise depth. White-glove support, 98% SMS deliverability, +25% campaign performance lifts cited as routine outcomes.</p>
+          <div class="src-tag">Attentive G2 page (4.7/5, 1,200+ reviews); CloudKitly 2026; ToolRadar</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">AUXIA</span>"176% NDR is the proof"</h3>
+          <p>F500 customers (Atlassian, Comcast, NTT Docomo) renewing and expanding heavily. The agentic story actually delivering measured outcomes — 84% LTV lift, 5x CTR, $12M incremental revenue cited as customer outcomes.</p>
+          <div class="src-tag">auxia.io case studies; "100 Billion Decisions and Counting" blog; Business Wire</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">POSTSCRIPT</span>"Highest G2 rating in the cohort (4.9)"</h3>
+          <p>Operators consistently say it's the deepest Shopify-native SMS product. 65+ automation triggers using real Shopify event data; 34x average customer ROI; "Infinity Testing" AI delivering 20-38% revenue lifts.</p>
+          <div class="src-tag">G2 (4.9/5); ATTN Agency 2026; 365Dropship 2026; Linktly</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">MAILMODO AI</span>"AMP-interactive emails are a category of one"</h3>
+          <p>Forms, surveys, polls, carts <em>inside</em> the email. Case studies: 400% higher event registrations, 5x email-to-sales conversion. No incumbent ships this format. Prompt-first builder gets praise for SMB ergonomics.</p>
+          <div class="src-tag">MailToolFinder (4.5/5); SMB Guide 8.4/10; EmailVendorSelection 2026</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">LOOPS.SO</span>"YC default — Linear, Perplexity, Clerk, Framer use it"</h3>
+          <p>Notion-style editor + free transactional + no per-seat charges = the email tool YC startups don't argue about. Customer brands serve as social proof: Linear, Perplexity, Clerk, Framer, Replicate, Spline, Reuters.</p>
+          <div class="src-tag">loops.so customer page; Efficient.app 2026; YC ecosystem reports</div>
+        </div>
+      </div>
+
+      <!-- HATED -->
+      <div class="card col-hated">
+        <div class="col-head">
+          <h2><span class="num" style="background:#FBD9CC; color:#9A1F00;">B2</span>What people HATE — by company</h2>
+          <span class="count">6 themes</span>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">CUSTOMER.IO</span>"Not beginner-friendly"</h3>
+          <p>Liquid templating + event-driven model is a barrier for marketers without coding chops. Limited template selection. Only ~50 native integrations vs. ActiveCampaign's 900+. No landing-page builder, no CRM, no commerce-specific features. Value-for-money score (4.0) lags ease-of-use (4.7).</p>
+          <div class="src-tag">G2; MailToolFinder 2026 cons section</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">ATTENTIVE</span>"From $3K/mo — not for SMBs"</h3>
+          <p>Premium pricing locks out small businesses and startups. Per-message structure gets expensive at scale. Steep learning curve for advanced workflows. Email capabilities lag Klaviyo. US-focused with limited international reach. Contract commitments required.</p>
+          <div class="src-tag">CloudKitly 2026; ToolRadar; G2 critical reviews</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">AUXIA</span>"Enterprise-only, no public pricing"</h3>
+          <p>Designed for F500 — "talk to sales" everywhere. SMB and mid-market can't trial it. The agentic claims are bold; trust takes time to build for "let an AI pick the message + channel + timing per user" autonomy in customer-facing journeys.</p>
+          <div class="src-tag">auxia.io product pages (no pricing); F500 customer base implied buyer profile</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">POSTSCRIPT</span>"Shopify-only is the ceiling"</h3>
+          <p>No support for WooCommerce, BigCommerce, or other platforms. MMS costs 3x more than SMS. No free tier for automation features. Subscriber caps force fast upgrades. Analytics less comprehensive than Attentive. Customer support inconsistent during scaling. AI-generated messages sometimes need manual editing.</p>
+          <div class="src-tag">365Dropship 2026; Softabase 2026; Linktly; G2 cons</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">MAILMODO AI</span>"Limited integrations, lighter analytics"</h3>
+          <p>Only 40+ integrations vs. incumbents' 300+. AMP emails are powerful but require recipient-client support (still not universal). Lacks deeper analytics for sophisticated marketers. SMB-skewed; not yet a mid-market option.</p>
+          <div class="src-tag">SMB Guide review; EmailVendorSelection 2026 cons</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">LOOPS.SO</span>"Lighter on AI, lighter on commerce"</h3>
+          <p>AI features still in roadmap — operators using competitive tools for content gen today bridge with Loops only for SaaS lifecycle. No commerce-specific automation surface. Won't appeal to ecom buyers. Missing some advanced segmentation that Customer.io ships.</p>
+          <div class="src-tag">Efficient.app 2026; CBInsights; community feedback</div>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="source">
+      Sources scanned for Page 1: G2 reviews (Customer.io 4.4, Attentive 4.7, Postscript 4.9, Mailmodo via MailToolFinder 4.5, Loops via Efficient.app); Capterra and Software Advice; Reddit (r/Shopify, r/Klaviyo, r/Emailmarketing, r/MarketingAutomation, r/SaaS); agency comparisons (ATTN Agency, 365Dropship, Softabase, Linktly, ToolRadar, CloudKitly, MailToolFinder, EmailVendorSelection, SMB Guide, Efficient.app); company-published case studies and customer pages (auxia.io, mailmodo.com, loops.so/customers); plus the head-to-head G2 pages (Customer.io vs. Iterable, Attentive vs. Klaviyo, Attentive vs. SlickText, Postscript vs. SimpleTexting).
+    </p>
+  </section>
+
+  <!-- Sentiment Page 2 -->
+  <section class="page" aria-label="Sentiment Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Voice of Customer · Bespoke Flow Startups (cont.)</div>
+        <h1>Verbatims, the headline finding, and <em style="color:#4338CA;">what it means for us</em></h1>
+        <div class="subtitle">Direct quotes per company — followed by a one-paragraph "so what."</div>
+      </div>
+      <div class="meta">
+        <div><strong>Method:</strong> qualitative synthesis from public sources</div>
+        <div><strong>Sample:</strong> ~3K reviews + threads</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 2 of 2</div>
+      </div>
+    </header>
+
+    <h2><span class="num">C</span>Verbatim wall — what real operators are actually saying</h2>
+    <p style="margin-bottom: 10px;">Quotes are reproduced as posted or paraphrased from cited reviews. Sources noted in italics.</p>
+
+    <div class="quote-wall" style="margin-bottom: 14px;">
+
+      <div class="qw pos">
+        <p class="q">"Customer.io is what Klaviyo would be if Klaviyo were built for SaaS — Liquid, unlimited events, branch on anything in real time."</p>
+        <div class="src-line"><strong>G2</strong> · Customer.io review summary, growth-stage SaaS marketer</div>
+      </div>
+
+      <div class="qw pos">
+        <p class="q">"G2 Leader for 20 consecutive quarters. Easy to use. Strong SMS + email integration that pairs channels seamlessly for lifecycle marketing."</p>
+        <div class="src-line"><strong>G2 · Attentive page</strong> · 4.7/5 across 1,200+ reviews</div>
+      </div>
+
+      <div class="qw pos">
+        <p class="q">"The deepest Shopify-native SMS product. 65+ automation triggers using real Shopify data. Average 34x ROI on SMS spend."</p>
+        <div class="src-line"><strong>ATTN Agency 2026</strong> · Postscript Shopify Review</div>
+      </div>
+
+      <div class="qw pos">
+        <p class="q">"100 billion automated decisions and counting. 70M+ end users impacted. 176% NDR in 2025."</p>
+        <div class="src-line"><strong>Auxia blog</strong> · "100 Billion Decisions And Counting"</div>
+      </div>
+
+      <div class="qw pos">
+        <p class="q">"AMP interactive emails — embed forms, surveys, quizzes, polls, carousels, and shopping carts directly in emails without requiring clicks to landing pages. 5x email-to-sales conversion."</p>
+        <div class="src-line"><strong>MailToolFinder 2026</strong> · Mailmodo review</div>
+      </div>
+
+      <div class="qw pos">
+        <p class="q">"Linear, Perplexity, Clerk, Framer, Replicate, Spline, Reuters — Loops is what YC startups don't argue about for email."</p>
+        <div class="src-line"><strong>loops.so customer page</strong> + Efficient.app 2026 verdict</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Customer.io is not beginner-friendly. Marketers without coding knowledge hit limitations beyond basic merge tags. Only ~50 native integrations."</p>
+        <div class="src-line"><strong>MailToolFinder 2026</strong> · Customer.io cons section</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Premium pricing starting at $3,000+ monthly, excluding small businesses and startups. Per-message structure gets expensive at scale."</p>
+        <div class="src-line"><strong>CloudKitly 2026</strong> · Attentive review honest pros/cons</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Shopify-only. No support for WooCommerce, BigCommerce, or other platforms. MMS costs 3x more than SMS. No free tier for automation features."</p>
+        <div class="src-line"><strong>365Dropship 2026</strong> · Postscript review</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Auxia is enterprise-only with no public pricing. SMB and mid-market can't trial it; F500 only by design."</p>
+        <div class="src-line"><strong>Synthesis</strong> · auxia.io product pages, no public pricing</div>
+      </div>
+
+      <div class="qw mid">
+        <p class="q">"Limited integrations and lack of deeper analytics. SMB-skewed; not yet a mid-market option."</p>
+        <div class="src-line"><strong>SMB Guide 8.4/10</strong> · Mailmodo cons</div>
+      </div>
+
+      <div class="qw mid">
+        <p class="q">"Loops is lighter on AI than peers — but the editor's Notion-style UX is a category-different bet. AI features still in roadmap."</p>
+        <div class="src-line"><strong>Efficient.app 2026</strong> · Loops review verdict</div>
+      </div>
+
+    </div>
+
+    <!-- Headline + so-what -->
+    <div class="grid cols-2" style="margin-bottom: 12px;">
+      <div class="card tinted">
+        <h2 style="margin-bottom: 6px;"><span class="num">D</span>The headline finding (one paragraph)</h2>
+        <p>
+          Across all 6 bespoke flow startups, the pattern is the same: <strong>each one is winning a verticalized slice
+          that Klaviyo, Mailchimp, and Shopify cannot defend with a generalist product</strong>. Customer.io has the SaaS
+          slice. Postscript and Attentive have the SMS slice. Auxia is rebuilding the journey product as an autonomous
+          agent for F500. Mailmodo and Loops have the prompt-first / SaaS-startup-default UX bets. None of them is a
+          one-to-one Klaviyo replacement <em>today</em> — and that's exactly why they're dangerous: they're not asking
+          buyers to swap; they're asking them to <em>add</em> a tool that out-performs the incumbent on one dimension,
+          then expanding from there. The aggregate effect is the threat. Mailchimp is already losing this battle (best
+          rating in the cohort is Postscript at 4.9 vs. Mailchimp's 4.3); Shopify is one product roadmap step from
+          losing the SMS / mid-market lane to Postscript and Attentive; Klaviyo is the most-defensible incumbent but is
+          racing Auxia on agentic and Postscript / Attentive on cross-channel.
+        </p>
+      </div>
+      <div class="card warm">
+        <h2 style="margin-bottom: 6px;"><span class="num">E</span>What it means for us — five plays</h2>
+        <ul>
+          <li><strong>Don't try to be best-on-every-dimension.</strong> The 6 startups are winning by being uniquely best on one slice. Pick the slice we own and over-invest there before they do.</li>
+          <li><strong>Verticalize the journey product.</strong> Customer.io owns SaaS by being SaaS-native. The next defensible move is verticalized journey UIs by industry (DTC, B2B SaaS, restaurants, services, B2B distribution).</li>
+          <li><strong>Match Auxia's outcome math publicly.</strong> Their 176% NDR / 84% LTV lift / $12M incremental revenue per customer is the bar. Without comparable customer-published outcomes, the agentic narrative is theirs to win.</li>
+          <li><strong>Build prompt-first as the primary UX, not a sidebar.</strong> Mailmodo proves the SMB resonance. Klaviyo's Marketing Agent and Shopify's Sidekick are halfway there. The first product where the entire flow canvas <em>is</em> the conversation wins the next category cycle.</li>
+          <li><strong>Cohort-distribute through YC.</strong> Loops won YC by partnership, not feature war. Marketing-automation share-of-mind in 2028 is being built today inside the YC + early-stage cohorts. Either we're in those distribution channels or our competitors are.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="source">
+      Sources scanned for Page 2: Customer.io G2 + Software Advice + MailToolFinder; Attentive G2 + Wikipedia + ToolRadar + CloudKitly; Auxia auxia.io case-studies and blog; Postscript G2 + ATTN Agency + 365Dropship + Linktly + Softabase; Mailmodo MailToolFinder + SMB Guide + EmailVendorSelection; Loops.so loops.so customer page + Efficient.app + CBInsights + Startup Intros. Cross-product comparisons via Inflection.io, Vero, Oden, TryPropel 2026 customer engagement comparisons. Funding databases (PitchBook, Sacra, CBInsights, Tracxn, Signalbase). Reddit (r/Shopify, r/Klaviyo, r/Emailmarketing, r/MarketingAutomation, r/SaaS) for cross-validating sentiment.
+    </p>
+  </section>
+
+</div><!-- /panel-sentiment -->
+
+</div>
+
+<script>
+  (function () {
+    var tabs = document.querySelectorAll('.tab');
+    var panels = document.querySelectorAll('.tabpanel');
+    function activate(name) {
+      tabs.forEach(function (t) {
+        var match = t.getAttribute('data-tab') === name;
+        t.classList.toggle('active', match);
+        t.setAttribute('aria-selected', match ? 'true' : 'false');
+      });
+      panels.forEach(function (p) {
+        p.classList.toggle('active', p.id === 'panel-' + name);
+      });
+      try {
+        var url = new URL(window.location.href);
+        url.hash = name;
+        history.replaceState(null, '', url.toString());
+      } catch (e) {}
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
+    });
+    var initial = (window.location.hash || '').replace('#', '');
+    if (initial === 'sentiment' || initial === 'brief') activate(initial);
+  })();
+</script>
+
+</body>
+</html>
