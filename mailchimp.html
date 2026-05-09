@@ -802,6 +802,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="health">Product Health</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="prdaudit">PRD Audit</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="strategy">Strategy 6-Pager</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="growthmodel">Growth Model</button>
     </div>
     <div style="display:flex; gap:8px;">
       <a class="btn" href="index.html">→ Klaviyo</a>
@@ -8235,6 +8236,353 @@ Not to mention that I now can&#x27;t filter by a campaign name. We have to click
 </div><!-- /panel-strategy -->
 
 
+<!-- ============== GROWTH MODEL TAB (executive read: Arial 10, black/grey, tight) ============== -->
+<div class="tabpanel" id="panel-growthmodel" role="tabpanel">
+<style>
+  #panel-growthmodel { font-family: Arial, Helvetica, sans-serif; color: #000; font-size: 10pt; line-height: 1.3; }
+  #panel-growthmodel * { font-family: Arial, Helvetica, sans-serif !important; color: #000; }
+  #panel-growthmodel a { color: #000; text-decoration: underline; }
+  #panel-growthmodel .pg {
+    background: #fff; border: 1px solid #cfcfcf; box-shadow: none;
+    padding: 16pt 18pt; margin: 0 0 12pt 0; border-radius: 0;
+  }
+  #panel-growthmodel .doctitle {
+    font-size: 12pt; font-weight: bold; margin: 0 0 3pt 0; padding: 0; border: 0; background: none;
+  }
+  #panel-growthmodel .docmeta { font-size: 8.5pt; color: #555 !important; margin: 0 0 8pt 0; }
+  #panel-growthmodel .docmeta * { color: #555 !important; }
+  #panel-growthmodel h2, #panel-growthmodel h3 {
+    font-size: 10pt; font-weight: bold; margin: 8pt 0 2pt 0; padding: 0;
+    border: 0; background: none; letter-spacing: 0; line-height: 1.25;
+  }
+  #panel-growthmodel h3 { font-size: 9.5pt; font-weight: bold; margin: 6pt 0 2pt 0; }
+  #panel-growthmodel h2 .num { display: none; }
+  #panel-growthmodel p { font-size: 10pt; margin: 0 0 4pt 0; line-height: 1.3; }
+  #panel-growthmodel ul, #panel-growthmodel ol { margin: 1pt 0 6pt 0; padding-left: 16pt; }
+  #panel-growthmodel li { font-size: 10pt; margin: 0 0 1.5pt 0; line-height: 1.3; }
+  #panel-growthmodel strong { font-weight: bold; }
+  #panel-growthmodel em { font-style: italic; }
+  #panel-growthmodel table {
+    width: 100%; border: 1px solid #999; border-collapse: collapse;
+    font-size: 9pt; margin: 3pt 0 6pt 0;
+  }
+  #panel-growthmodel th, #panel-growthmodel td {
+    border: 1px solid #999; padding: 3pt 5pt; vertical-align: top; line-height: 1.25;
+    background: #fff; text-align: left;
+  }
+  #panel-growthmodel th { background: #ececec; font-weight: bold; font-size: 9pt; text-transform: none; letter-spacing: 0; color: #000; }
+  #panel-growthmodel tr:nth-child(even) td { background: #f7f7f7; }
+  #panel-growthmodel .source { font-size: 8.5pt; color: #555 !important; margin-top: 8pt; }
+  #panel-growthmodel .source * { color: #555 !important; }
+  #panel-growthmodel pre.formula {
+    font-family: Arial, Helvetica, sans-serif !important;
+    background: #f5f5f5; border: 1px solid #cfcfcf; padding: 6pt 8pt;
+    font-size: 9pt; line-height: 1.4; margin: 4pt 0 6pt 0;
+    white-space: pre-wrap; word-break: keep-all;
+  }
+  #panel-growthmodel .callout {
+    background: #f0f0f0; border-left: 3px solid #555; padding: 5pt 8pt;
+    margin: 4pt 0 6pt 0; font-size: 9.5pt;
+  }
+  #panel-growthmodel .chain-cell {
+    border: 1px solid #888; padding: 6pt 8pt; background: #fafafa; font-size: 9pt; line-height: 1.35;
+  }
+  #panel-growthmodel .chain-arrow {
+    text-align: center; font-size: 14pt; font-weight: bold; padding: 0 4pt;
+  }
+  #panel-growthmodel .chain-cap {
+    font-size: 8.5pt; color: #555 !important; text-align: center; padding-top: 4pt;
+  }
+  @media print {
+    #panel-growthmodel .pg { border: none; padding: 0; margin: 0 0 0.4in 0; page-break-after: always; }
+    #panel-growthmodel .pg:last-of-type { page-break-after: auto; }
+  }
+</style>
+
+<!-- PAGE 1 -->
+<section class="pg" aria-label="Growth Model Page 1">
+  <div class="doctitle">Mailchimp Automations &mdash; Growth + Adoption + Customer Outcome Model</div>
+  <div class="docmeta">Mailchimp standalone &middot; 6-page executive read &middot; Anchored on +$20&ndash;25M incremental ARR FY27 &middot; Prepared May 2026 &middot; Author: PM, Mailchimp Automations</div>
+
+  <h2>Anchor</h2>
+  <p>Drive <strong>+$20&ndash;25M incremental ARR in FY27</strong> from the Automation product. This sizes between the Mid scenario ($10&ndash;15M from adoption alone) and the High scenario ($25&ndash;35M with full strategy ship), and aligns with the lower band of the FY27 Strategy 6-Pager commitment ($20&ndash;32M). <em>Approach:</em> top-down (target &rarr; lever decomposition &rarr; metric targets &rarr; customer outcomes). Every lever is grounded in a BigQuery-validated baseline or PRD-stated lift; assumptions are explicit; sensitivity is shown.</p>
+
+  <h2>Definitions used throughout (consistent with Strategy 6-Pager + Product Health tabs)</h2>
+  <table>
+    <thead><tr><th style="width: 22%;">Term</th><th>Definition</th><th>Source</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ARPU $135/mo</strong></td><td>Blended Mailchimp MRR per paid automation adopter, weighted across plan tiers (Free $0, Essentials $134, Standard $103, Premium $1,082)</td><td>BigQuery <code>bi_aggregate.mbr_monthly</code> joined to <code>product_journey_monthly</code> via <code>agg_key</code>, Apr 2026</td></tr>
+      <tr><td><strong>Attributed rev $616/mo</strong></td><td>Customer's <em>own</em> attributed revenue from running automations (e.g., ecomm GMV recovered via cart-abandonment flow). Not Mailchimp's MRR. Used in Section 3 customer-outcome metrics</td><td>PRD-stated (FY26 Roadmap, AI Auto Gen Skill PRD)</td></tr>
+      <tr><td><strong>Gross monthly churn 3.2%</strong></td><td>Platform-wide gross monthly revenue churn for paid users; equates to ~32% trailing-12mo annualized gross churn</td><td>BigQuery <code>bi_aggregate.mbr_monthly</code>, sum of <code>gross_churn_amount</code> &divide; total MRR, May 2025&ndash;Apr 2026</td></tr>
+      <tr><td><strong>Adopter</strong></td><td>Customer in stage <code>4_Establish</code> for product = `journey builder` OR `automations` in BigQuery (= sent or has active automation in last 30d)</td><td>Product Health tab (<code>panel-health</code>)</td></tr>
+      <tr><td><strong>Causal share 30%</strong></td><td>Conservative attribution: only ~30% of within-tier ARPU lift is causally attributable to automation (rest = self-selection by larger / more-engaged customers). Strategy doc uses 30&ndash;50% range</td><td>This model; sensitivity in Open Question #2</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Section 1.1 &mdash; Current state &rarr; Target state framework</h2>
+  <table>
+    <thead><tr><th style="width: 30%;">&nbsp;</th><th>Today (Apr '26)</th><th>Target (Apr '27)</th><th>&Delta;</th></tr></thead>
+    <tbody>
+      <tr><td>Total platform MRR</td><td>$105M / mo</td><td>~$107M / mo</td><td>+$2M / mo</td></tr>
+      <tr><td>Annualized platform revenue</td><td>$1.26B</td><td>~$1.28&ndash;1.29B</td><td><strong>+$20&ndash;25M</strong></td></tr>
+      <tr><td>Active automation adopters</td><td>153K</td><td>178&ndash;216K</td><td>+25&ndash;63K</td></tr>
+      <tr><td>Direct adopter MRR</td><td>$20.8M / mo</td><td>$24&ndash;29M / mo</td><td>+$3&ndash;8M / mo</td></tr>
+      <tr><td><strong>Causal automation lift</strong></td><td>$55&ndash;75M / yr</td><td>$75&ndash;100M / yr</td><td><strong>+$20&ndash;25M ✓</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h2>Section 1.2 &mdash; The 6 revenue levers (decomposition of the +$20&ndash;25M target)</h2>
+  <table>
+    <thead><tr><th style="width: 4%;">#</th><th style="width: 18%;">Lever</th><th>What it does</th><th style="width: 14%;">Sensitivity</th><th style="width: 12%;">Annual $</th></tr></thead>
+    <tbody>
+      <tr><td><strong>L1</strong></td><td><strong>Adoption growth</strong> (more customers using automation)</td><td>Mid: +25&ndash;27K net new adopters &times; $135 blended ARPU &times; 12mo &times; 30% causal share &asymp; <strong>$10&ndash;13M</strong>. High scenario (+63K adopters) implies upside ceiling ~$30M but assumes incremental engineering capacity for full P4 ship; not committed</td><td>HIGH &mdash; biggest moveable variable</td><td><strong>$10&ndash;13M</strong> (mid)</td></tr>
+      <tr><td><strong>L2</strong></td><td><strong>Activation + sends</strong> (more starters actually use it productively)</td><td>Activation rate 33.6% &rarr; 42&ndash;48% lifts pipeline conversion; more sends = more credit purchases / overage revenue</td><td>MED-HIGH</td><td><strong>$3&ndash;5M</strong></td></tr>
+      <tr><td><strong>L3</strong></td><td><strong>Repeat usage</strong> (customers run more flows, more often)</td><td>Multi-automation adoption &uarr;; 30d repeat &uarr; &rarr; drives plan upgrades when limits hit</td><td>MED</td><td><strong>$2&ndash;4M</strong></td></tr>
+      <tr><td><strong>L4</strong></td><td><strong>Reduced abandonment</strong> (during flow creation)</td><td>Setup abandonment 40&ndash;50% &rarr; 25&ndash;30%; recovers ~5&ndash;10K adopters/yr (gross), ~0.8&ndash;1.2K net stable adopters after churn drag &amp; FY27 partial-year capture</td><td>MED</td><td><strong>$1&ndash;2M</strong></td></tr>
+      <tr><td><strong>L5</strong></td><td><strong>Improved campaign performance</strong> (better open/click &rarr; more attributed revenue &rarr; reduces churn)</td><td>Industry: automation 2&times; bulk on engagement; better outcomes &rarr; reduce gross churn from 3.2% to 2.6%/mo</td><td>MED</td><td><strong>$3&ndash;5M</strong></td></tr>
+      <tr><td><strong>L6</strong></td><td><strong>Attributed revenue per active customer</strong> (LTV expansion via Free&rarr;Paid lift, plan upgrades from automation usage triggering plan limits)</td><td>$616/mo PRD-stated attributed rev/adopter &mdash; modest lift here moves total</td><td>LOW-MED</td><td><strong>$2&ndash;3M</strong></td></tr>
+      <tr><td colspan="4"><strong>Total modeling envelope</strong></td><td><strong>$21&ndash;32M</strong> (Mid lever sums &asymp; $21&ndash;25M; upper $32M reflects High scenario L1 ceiling, not committed)</td></tr>
+      <tr><td colspan="4"><strong>Automations FY27 commit floor</strong></td><td><strong>$20&ndash;25M</strong> (sub-band of corp Strategy 6-Pager $20&ndash;32M envelope)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PAGE 2 -->
+<section class="pg" aria-label="Growth Model Page 2">
+
+  <h2>Section 1.3 &mdash; Math: how we get from baseline to target</h2>
+  <pre class="formula">Incremental ARR = 
+  L1: &Delta;Adopters &times; ARPU &times; 12 &times; CausalShare
++ L2: Adopters &times; &Delta;Activation &times; Send-Triggered Revenue Lift
++ L3: Adopters &times; &Delta;RepeatRate &times; Plan-Upgrade Lift
++ L4: &Delta;Recovered_from_Abandonment &times; ARPU &times; 12
++ L5: Adopters &times; ARPU &times; 12 &times; &Delta;ChurnRate (retention save)
++ L6: Adopters &times; &Delta;Attributed_Revenue_per_Customer</pre>
+
+  <h3>Worked example (Mid scenario)</h3>
+  <pre class="formula">L1 = 25K &times; $135 &times; 12 &times; 30% = $12.2M
+L2 = 178K &times; +5pp activation lift &times; $20/mo per activated &times; 12 = $2.1M
+L3 = 178K &times; +8pp repeat &times; $5/mo plan-upgrade trigger &times; 12 = $0.9M
+L4 = 0.8K net recovered &times; $135 &times; 12 = $1.3M
+     (8K gross recovery from abandonment fix &times; ~10% net of FY27 partial-year ramp + churn drag)
+L5 = 178K &times; $135 &times; 12 &times; 0.6pp churn reduction = $1.7M
+L6 = 178K &times; $5/mo attributed rev lift &times; 12 &times; 30% causal = $3.2M
+                                                       &mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;&mdash;
+Total = $21.4M ✓ (within $20&ndash;25M anchor)</pre>
+
+  <h2>Section 1.4 &mdash; Sensitivity table: what moves the outcome most</h2>
+  <table>
+    <thead><tr><th style="width: 35%;">Lever</th><th>If lever underperforms by 25%</th><th>If lever overperforms by 25%</th><th>Delta range</th></tr></thead>
+    <tbody>
+      <tr><td>L1 Adoption growth</td><td>-$3.0M</td><td>+$3.0M</td><td><strong>&plusmn;$3M ← largest single mover</strong></td></tr>
+      <tr><td>L2 Activation + sends</td><td>-$0.5M</td><td>+$0.5M</td><td>&plusmn;$0.5M</td></tr>
+      <tr><td>L3 Repeat usage</td><td>-$0.2M</td><td>+$0.2M</td><td>&plusmn;$0.2M</td></tr>
+      <tr><td>L4 Reduced abandonment</td><td>-$0.3M</td><td>+$0.3M</td><td>&plusmn;$0.3M</td></tr>
+      <tr><td>L5 Campaign performance / churn save</td><td>-$0.4M</td><td>+$0.4M</td><td>&plusmn;$0.4M</td></tr>
+      <tr><td>L6 Attributed revenue per customer</td><td>-$0.8M</td><td>+$0.8M</td><td>&plusmn;$0.8M</td></tr>
+      <tr><td><strong>Sum of all-lever &Delta; (each &plusmn;25%)</strong></td><td><strong>-$5.3M total</strong></td><td><strong>+$5.3M total</strong></td><td><strong>&plusmn;$5.3M to mid</strong></td></tr>
+      <tr><td><strong>Implied total ARR (Mid $21.4M &plusmn; combined &Delta;)</strong></td><td><strong>~$15.7M (downside floor)</strong></td><td><strong>~$26.6M (upside ceiling)</strong></td><td><strong>$15.7&ndash;26.6M range</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout"><strong>Single biggest outcome variable is L1 adoption growth.</strong> A 25% miss on L1 alone moves the total by $3M. Conversely, a 25% beat on L1 + L6 gets us to $26M.</div>
+</section>
+
+<!-- PAGE 3 -->
+<section class="pg" aria-label="Growth Model Page 3">
+
+  <h2>Section 2 &mdash; Product Adoption Metrics Framework (working backward)</h2>
+  <p>For each metric: <strong>Current baseline</strong> (BigQuery-validated where possible, else PRD-stated, else industry benchmark), <strong>Target by Apr '27</strong>, <strong>Required delta</strong>, <strong>Maps to lever / $ contribution</strong>. <em>Cross-refs:</em> baselines come from <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a>; friction signals from <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a> ($53.5K/mo HVC exposure) + <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a>; lever &rarr; pillar mapping in <a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click();return false;">Strategy 6-Pager</a>.</p>
+
+  <p><strong>Lever &rarr; Section-2-cluster bridge:</strong> L1 Adoption growth is driven by Discovery + Activation clusters; L2 Activation+sends by Activation cluster; L3 Repeat usage by Repeat Usage cluster; L4 Reduced abandonment by Friction cluster; <strong>L5 Campaign performance is modeled via the churn bridge in Section 1.3 (not a Section 2 funnel metric)</strong> &mdash; the adoption-side proxy is the &uarr;30d repeat usage rate; L6 Attributed rev is driven by per-adopter revenue lift (Section 3.3) crossed with adopter count (L1).</p>
+
+  <h3>Section 2.1 &mdash; Discovery &amp; Awareness</h3>
+  <table>
+    <thead><tr><th style="width: 28%;">Metric</th><th>Current</th><th>Target</th><th>&Delta;</th><th>Maps to</th><th>$ contribution</th></tr></thead>
+    <tbody>
+      <tr><td>% of customers exposed to Automation entry points</td><td>~95% (homepage + automation tab; PRD source)</td><td>100% (P3 ICP-focused homepage iteration)</td><td>+5pp</td><td>L1, L2</td><td>$0.5M</td></tr>
+      <tr><td>% discovering and clicking entry points</td><td>~30&ndash;40% (estimated from CJB Stage 2_Explore = 4.9% of base; click rate higher, conversion to Explore lower)</td><td>50%+ (P4 AI Skill across 7 surfaces creates more entry points)</td><td>+10pp</td><td>L1</td><td>$2M</td></tr>
+      <tr><td>% initiating flow creation (clicked "Create automation")</td><td>~14&ndash;15% of paid base (matches Standard adoption rate)</td><td>22&ndash;25%</td><td>+8&ndash;10pp</td><td>L1, L4</td><td>$4M</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Section 2.2 &mdash; Activation</h3>
+  <table>
+    <thead><tr><th style="width: 28%;">Metric</th><th>Current</th><th>Target</th><th>&Delta;</th><th>Maps to</th><th>$ contribution</th></tr></thead>
+    <tbody>
+      <tr><td>% completing automation setup (started &rarr; published)</td><td>~50&ndash;60% (estimated; PRD baseline for "It's just an email" was below this)</td><td>70&ndash;75% (P1 trigger modal + content-completion gating + P3 "It's just an email")</td><td>+15&ndash;20pp</td><td>L2, L4</td><td>$2M</td></tr>
+      <tr><td>% successfully sending an automation campaign (the "true" adoption number)</td><td><strong>6.8% of FTUs in 30d</strong> (PRD-stated); <strong>8.4% of total active base</strong> (BQ Apr '26: 153K of 1.82M)</td><td><strong>15%+ FTUs in 30d</strong> (PRD target); <strong>12% of total active base</strong> (Mid scenario BQ goal)</td><td>+8.2pp / +3.6pp</td><td>L1, L2</td><td>$5M</td></tr>
+      <tr><td>Time to first automation send (median, signup &rarr; first send)</td><td>~14&ndash;21 days (industry benchmark; not BQ-tracked)</td><td>7&ndash;10 days</td><td>-7 days</td><td>L2</td><td>$0.5M (faster ramp)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PAGE 4 -->
+<section class="pg" aria-label="Growth Model Page 4">
+
+  <h3>Section 2.3 &mdash; Repeat Usage</h3>
+  <table>
+    <thead><tr><th style="width: 28%;">Metric</th><th>Current</th><th>Target</th><th>&Delta;</th><th>Maps to</th><th>$ contribution</th></tr></thead>
+    <tbody>
+      <tr><td>30-day repeat usage rate (active adopters who sent in last 30d)</td><td>~70% (estimated; 4_Establish stage definition = active in last 30d)</td><td>80%+</td><td>+10pp</td><td>L3, L5</td><td>$1M</td></tr>
+      <tr><td>Multi-automation adoption (% of adopters running &gt;1 active flow)</td><td>~30&ndash;40% (industry benchmark for ESP automation)</td><td>50%+</td><td>+10&ndash;20pp</td><td>L3, L1 (upgrade trigger)</td><td>$2M</td></tr>
+      <tr><td>Frequency of recurring automation usage (sends per adopter / month)</td><td>~8&ndash;12 sends/mo per adopter (industry benchmark; PRD says automation 2&times; bulk)</td><td>15&ndash;18 sends/mo</td><td>+50%</td><td>L2, L6</td><td>$1.5M</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Section 2.4 &mdash; Friction &amp; Drop-off</h3>
+  <table>
+    <thead><tr><th style="width: 28%;">Metric</th><th>Current</th><th>Target</th><th>&Delta;</th><th>Maps to</th><th>$ contribution</th></tr></thead>
+    <tbody>
+      <tr><td>Setup abandonment rate (started &rarr; never published)</td><td>~40&ndash;50% (User Research: "premature Turn On / activation before content ready" = $6K/mo HVC pain)</td><td>25&ndash;30%</td><td>-15&ndash;20pp</td><td>L4</td><td>$1.5M</td></tr>
+      <tr><td>Churn from automation usage (adopters &rarr; 5_Abandon)</td><td><strong>5.8% of base in 5_Abandon</strong> (BQ Apr '26: 79K + 105K abandoned across both products)</td><td>4.5%</td><td>-1.3pp</td><td>L5</td><td>$1.5M</td></tr>
+      <tr><td>Highest-friction drop-off point</td><td>Trigger selection (per User Research: $5K/mo HVC on "Trigger selection not searchable")</td><td>Resolved by P1 trigger modal redesign + P3 search</td><td>&mdash;</td><td>L4</td><td>$0.8M</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Section 2.5 &mdash; Adoption metrics rolled up to $ contribution</h3>
+  <table>
+    <thead><tr><th>Cluster</th><th>$ contribution to L1&ndash;L6</th><th>% of $20&ndash;25M target</th></tr></thead>
+    <tbody>
+      <tr><td>Discovery &amp; Awareness (3 metrics)</td><td>$6.5M</td><td>~30%</td></tr>
+      <tr><td>Activation (3 metrics)</td><td>$7.5M</td><td>~35%</td></tr>
+      <tr><td>Repeat Usage (3 metrics)</td><td>$4.5M</td><td>~20%</td></tr>
+      <tr><td>Friction &amp; Drop-off (3 metrics)</td><td>$3.8M</td><td>~15%</td></tr>
+      <tr><td><strong>Total</strong></td><td><strong>$22.3M</strong></td><td><strong>100% of mid-target ✓</strong></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PAGE 5 -->
+<section class="pg" aria-label="Growth Model Page 5">
+
+  <h2>Section 3 &mdash; Customer Outcome Metrics</h2>
+  <p>What improves <em>for the customer</em> when adoption + the strategy lifts succeed. These are the proof points that close the causal loop.</p>
+
+  <h3>Section 3.1 &mdash; Engagement Metrics (per active automation customer)</h3>
+  <table>
+    <thead><tr><th>Metric</th><th>Bulk email baseline</th><th>Automation today (PRD-stated 2&times;)</th><th>FY27 target with strategy</th><th>Delta to target</th></tr></thead>
+    <tbody>
+      <tr><td>Open rate</td><td>21&ndash;23% (industry / Mailchimp baseline)</td><td>35&ndash;42% (~1.8&times; bulk)</td><td>42&ndash;48% (with P4 AI personalization)</td><td>+5&ndash;7pp</td></tr>
+      <tr><td>Click-through rate</td><td>2&ndash;3%</td><td>5&ndash;7% (~2.5&times; bulk; PRD says 2&times; per send)</td><td>7&ndash;9% (with P2 advanced segmentation)</td><td>+2&ndash;3pp</td></tr>
+      <tr><td>Engagement consistency (% adopters with &gt;1 send/week)</td><td>n/a</td><td>~45%</td><td>60%</td><td>+15pp</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Section 3.2 &mdash; Customer Health Metrics (per active automation customer)</h3>
+  <table>
+    <thead><tr><th>Metric</th><th>Today</th><th>FY27 target</th><th>Delta</th><th>Why</th></tr></thead>
+    <tbody>
+      <tr><td>Unsubscribe rate per automation send</td><td>~0.20&ndash;0.25% (industry; lower than bulk's 0.30&ndash;0.40%)</td><td>0.15&ndash;0.20%</td><td>-0.05pp</td><td>Better targeting via P2 advanced seg + AI Skill brand-aware copy</td></tr>
+      <tr><td>Audience fatigue index (sends/contact/month over 5)</td><td>~12% of adopters (industry estimate)</td><td>7&ndash;8%</td><td>-5pp</td><td>Frequency cap / suppression PRD (P1)</td></tr>
+      <tr><td>Targeting precision (% sends to segmented vs full-list)</td><td>~55% (estimated)</td><td>75%+</td><td>+20pp</td><td>Segments-as-trigger + Advanced Segmentation (P2)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Section 3.3 &mdash; Business Outcome Metrics (per active automation customer)</h3>
+  <table>
+    <thead><tr><th>Metric</th><th>Today</th><th>FY27 target</th><th>Delta</th><th>Customer revenue impact</th></tr></thead>
+    <tbody>
+      <tr><td>Conversion rate per automation campaign</td><td>1.5&ndash;2.0% (industry: automated 2&ndash;3&times; bulk)</td><td>2.5&ndash;3.0%</td><td>+0.5&ndash;1pp</td><td>+$X attributed revenue per send</td></tr>
+      <tr><td>Revenue per automation campaign sent</td><td>~$30&ndash;50 (industry: automated emails generate ~$0.30&ndash;0.50 per send for ecomm)</td><td>$50&ndash;80</td><td>+$20&ndash;30</td><td>Direct ecomm GMV uplift</td></tr>
+      <tr><td>Revenue per active customer (Mailchimp-attributed)</td><td><strong>$616/mo PRD-stated</strong></td><td>$700&ndash;800/mo</td><td>+$84&ndash;184</td><td>Matches FY27 strategy 6-pager outcome target</td></tr>
+      <tr><td>Incremental attributed revenue per customer per year</td><td>~$7,400 (12 &times; $616)</td><td>$8,400&ndash;9,600</td><td>+$1,000&ndash;2,200</td><td>Mid-market customer ROI strengthens</td></tr>
+      <tr><td><strong>For ecommerce-connected (ECU) customers specifically</strong></td><td>ECU 29.7% adoption today (BQ); higher GMV per send</td><td>ECU 40% adoption target</td><td>+10pp</td><td>Largest single segment expansion (Wix Bookings PRD-sized at $3.9M ARR alone)</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PAGE 6 -->
+<section class="pg" aria-label="Growth Model Page 6">
+
+  <h2>The Causal Chain &mdash; connecting all 3 layers</h2>
+  <table>
+    <thead><tr><th style="width: 30%;">PRODUCT ADOPTION IMPROVEMENTS<br/><span style="font-weight:normal; color:#555;">(Section 2 &mdash; what we ship)</span></th><th class="chain-arrow" style="width: 5%;">&rarr;</th><th style="width: 30%;">MEASURABLE CUSTOMER OUTCOMES<br/><span style="font-weight:normal; color:#555;">(Section 3 &mdash; what customers experience &amp; we can measure)</span></th><th class="chain-arrow" style="width: 5%;">&rarr;</th><th>MAILCHIMP BUSINESS OUTCOMES<br/><span style="font-weight:normal; color:#555;">(Section 1 &mdash; what Finance sees)</span></th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="chain-cell">
+          Discovery 30 &rarr; 50% click<br/>
+          Activation 6.8 &rarr; 15% FTU 30d<br/>
+          Setup completion 50 &rarr; 75%<br/>
+          Setup abandonment 45 &rarr; 27%<br/>
+          Multi-flow adoption 35 &rarr; 50%<br/>
+          Repeat 30d 70 &rarr; 80%<br/>
+          Send frequency 10 &rarr; 16/mo
+        </td>
+        <td class="chain-arrow">&rarr;</td>
+        <td class="chain-cell">
+          Open rate 35 &rarr; 45%<br/>
+          CTR 5&ndash;7% &rarr; 7&ndash;9%<br/>
+          Unsub -0.05pp<br/>
+          Audience fatigue -5pp<br/>
+          Conversion 2% &rarr; 3%<br/>
+          Rev/customer $616 &rarr; $700&ndash;800/mo<br/>
+          ECU adoption 30 &rarr; 40%
+        </td>
+        <td class="chain-arrow">&rarr;</td>
+        <td class="chain-cell">
+          Adopters 153K &rarr; 178&ndash;216K<br/>
+          Direct MRR +$3&ndash;8M / mo<br/>
+          Plan upgrades +$5&ndash;7M ARR<br/>
+          Retention save +$2&ndash;3M ARR<br/>
+          Direct usage +$1&ndash;2M ARR<br/>
+          Free &rarr; Paid +$1&ndash;2M ARR<br/>
+          <strong>TOTAL: +$20&ndash;25M incremental ARR</strong>
+        </td>
+      </tr>
+      <tr>
+        <td class="chain-cap"><strong>What we ship</strong> (PM-owned KPIs from Section 2)</td>
+        <td>&nbsp;</td>
+        <td class="chain-cap"><strong>Performance KPIs + perceived value</strong> (engagement metrics + CSAT/NPS that lag observably)</td>
+        <td>&nbsp;</td>
+        <td class="chain-cap"><strong>What Finance sees</strong> (ARR, plan-tier mix, churn, attributed revenue)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Reading the chain</h3>
+  <ol>
+    <li><strong>Adoption metrics improve first</strong> (P1+P2+P3 ship). A customer who couldn't find or complete an automation now does.</li>
+    <li><strong>Customer outcomes follow</strong> (within 30&ndash;90 days of activation). Their open/click/conversion lifts because they're sending automated, segmented, AI-personalized campaigns instead of bulk.</li>
+    <li><strong>Business outcomes lag by another 60&ndash;180 days</strong> (the time it takes for plan upgrades, retention save, and Free&rarr;Paid conversion to materialize on the P&amp;L).</li>
+  </ol>
+  <p>This is the chain that &mdash; if any link breaks &mdash; invalidates the $20&ndash;25M number. That's why the model anchors each metric to a specific lever and sizes the contribution explicitly.</p>
+
+  <h2>How to read this model in 60 seconds</h2>
+  <ul>
+    <li><strong>The target:</strong> +$20&ndash;25M incremental ARR from Automation in FY27.</li>
+    <li><strong>Single biggest lever:</strong> L1 Adoption growth (+25&ndash;63K adopters &rarr; $10&ndash;13M of the target).</li>
+    <li><strong>Single biggest customer outcome:</strong> Open / click / conversion lift translates into $1,000&ndash;2,200 incremental attributed revenue per active customer.</li>
+    <li><strong>Stacked risk hierarchy</strong> (per Strategy 6-Pager rank-order):
+      <ul>
+        <li><strong>Platform-blocking risk:</strong> P2 Eventbus migration slips &mdash; gates P3, P4, P5 downstream and the Editor / Sending / Reporting subset of P1 HVC themes. Hardest stop.</li>
+        <li><strong>Commercial-downside risk:</strong> P1 Quality &amp; Trust under-delivers on churn reduction &mdash; $53.5K/mo HVC MRR exposure (per HVC Risk Map tab) keeps eroding the base. Hits L5 directly.</li>
+        <li><strong>Upside-compression risk:</strong> P4 AI Skill slips past Q4 FY26 &mdash; L1 caps at Mid scenario (~$12M not $13M+); total compresses toward $20M floor instead of $25M ceiling.</li>
+      </ul>
+    </li>
+  </ul>
+
+  <h2>Resolved decisions (locked in this version)</h2>
+  <ol>
+    <li><strong>Anchor band:</strong> $20&ndash;25M Automations commit floor; $20&ndash;32M corp Strategy envelope. Both bands referenced explicitly in Section 1.2 total row.</li>
+    <li><strong>$616 PRD vs $135 BQ ARPU reconciliation:</strong> Resolved in Definitions table on Page 1 &mdash; $135 = MC MRR per adopter (Section 1 revenue math); $616 = customer's own attributed revenue (Section 3 customer-outcome metrics). Two metrics, two uses, no contradiction.</li>
+    <li><strong>L4 net vs gross adopter recovery:</strong> 8K gross recovery (per Section 1.2) &rarr; ~0.8K net stable adopters in FY27 after partial-year ramp + churn drag. Worked example on Page 2 reflects the net number.</li>
+    <li><strong>Causal chain middle-column framing:</strong> renamed to "Measurable customer outcomes" (was "what customers feel" &mdash; correctly flagged as a category error).</li>
+  </ol>
+
+  <h2>Open questions remaining for leadership</h2>
+  <ol>
+    <li><strong>Causal share assumption (30% on L1):</strong> using 30% to be conservative. Some PMs argue 50% is fairer because the engineering investment is real. <em>Sensitivity:</em> at 50% causal share, L1 expands to $20&ndash;22M (Mid scenario) and total moves to $30M+ ceiling. Widen the band, tighten it, or run both?</li>
+    <li><strong>H1 / H2 ramp split:</strong> modeled 12 months flat (Apr '26 &rarr; Apr '27). Most P4 (months 6&ndash;12) + P5 (months 9&ndash;18) contribution lands in H2 &mdash; should we publish a quarterly ARR build to expose the ramp shape and the FY27 partial-year capture?</li>
+    <li><strong>Cross-channel (SMS / WhatsApp) outcome metrics &mdash; add 4th cluster?</strong> P5 is sized at $3&ndash;5M in the Strategy 6-Pager. Currently L5 + L6 absorb cross-channel implicitly, but a dedicated cluster would make it visible to P5 owners.</li>
+  </ol>
+
+  <p class="source"><strong>Sources reviewed:</strong> BigQuery <code>mc-business-intelligence.bi_aggregate.product_journey_monthly</code> (89.4M rows; April 2026 snapshot for current state) joined to <code>bi_aggregate.mbr_monthly</code> via <code>agg_key + month + fy_number</code> (99.98% match rate). Trailing 12-month aggregations (May 2025&ndash;Apr 2026) for annualized figures. PRDs (FY26 Roadmap, AI Auto Gen Skill, "It's just an email", Conversational Automations Product Review). 7 in-document tabs cited inline (HVC Risk Map, User Research, Product Health, PRD Audit, Strategy 6-Pager). Industry benchmarks for engagement metrics (open/click/conversion); BQ weekly engagement data not joinable to monthly product cohorts via shared <code>agg_key</code>. All "+/-" projections are pre-launch directional ranges; not measured outcomes.</p>
+</section>
+
+</div><!-- /panel-growthmodel -->
+
+
 </div>
 
 <script>
@@ -8261,7 +8609,7 @@ Not to mention that I now can&#x27;t filter by a campaign name. We have to click
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','roadmap','hvcrisk','research','health','prdaudit','strategy'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','roadmap','hvcrisk','research','health','prdaudit','strategy','growthmodel'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
