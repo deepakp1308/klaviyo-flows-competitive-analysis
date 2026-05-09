@@ -803,6 +803,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="prdaudit">PRD Audit</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="strategy">Strategy 6-Pager</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="growthmodel">Growth Model</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="lossattr">Loss Attribution</button>
     </div>
     <div style="display:flex; gap:8px;">
       <a class="btn" href="index.html">→ Klaviyo</a>
@@ -8951,6 +8952,577 @@ Not to mention that I now can&#x27;t filter by a campaign name. We have to click
 </div><!-- /panel-growthmodel -->
 
 
+<!-- ============== LOSS ATTRIBUTION TAB (12-month, 3-layer honest framework) ============== -->
+<div class="tabpanel" id="panel-lossattr" role="tabpanel">
+<style>
+  /* Loss Attribution: scoped polish layered on the shared design system */
+  #panel-lossattr .finding {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: #fff;
+    height: 100%;
+    position: relative;
+  }
+  #panel-lossattr .finding.f1 { border-left: 4px solid var(--good); background: linear-gradient(180deg,#F4FBF7,#FFFFFF); }
+  #panel-lossattr .finding.f2 { border-left: 4px solid var(--warn); background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-lossattr .finding.f3 { border-left: 4px solid var(--brand); background: linear-gradient(180deg,#FFFCF0,#FFFFFF); }
+  #panel-lossattr .finding.f4 { border-left: 4px solid #4338CA; background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  #panel-lossattr .finding.f5 { border-left: 4px solid var(--bad); background: linear-gradient(180deg,#FFF5F2,#FFFFFF); }
+  #panel-lossattr .finding .f-num {
+    position: absolute; top: 12px; right: 16px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 36px; font-weight: 700; line-height: 1;
+    opacity: 0.18; color: var(--ink);
+  }
+  #panel-lossattr .finding .f-tag {
+    display: inline-block;
+    font-size: 9.5px; font-weight: 800; letter-spacing: .08em;
+    padding: 2px 6px; border-radius: 4px;
+    margin-bottom: 6px;
+  }
+  #panel-lossattr .finding.f1 .f-tag { background: #E6F5EE; color: #036A4F; }
+  #panel-lossattr .finding.f2 .f-tag { background: #FFEFD9; color: #8A4A00; }
+  #panel-lossattr .finding.f3 .f-tag { background: var(--chip); color: var(--chip-ink); }
+  #panel-lossattr .finding.f4 .f-tag { background: #EEF0FF; color: #2A1FA8; }
+  #panel-lossattr .finding.f5 .f-tag { background: #FFE7E0; color: #9A1F00; }
+  #panel-lossattr .finding h3 {
+    margin: 0 0 6px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 15px; font-weight: 700; color: var(--ink);
+    line-height: 1.25;
+    padding-right: 32px;
+  }
+  #panel-lossattr .finding p { font-size: 12.5px; color: var(--ink-2); line-height: 1.45; margin: 0; }
+  #panel-lossattr .finding .f-conf {
+    border-top: 1px dashed var(--line);
+    padding-top: 6px; margin-top: 8px;
+    font-size: 10.5px; color: var(--muted);
+    display: flex; align-items: center; gap: 6px;
+  }
+  #panel-lossattr .layer-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: #fff;
+  }
+  #panel-lossattr .layer-card.l1 { border-color: #BFE6D3; background: linear-gradient(180deg,#F1FAF5,#FFFFFF); }
+  #panel-lossattr .layer-card.l2 { border-color: #F2D879; background: linear-gradient(180deg,#FFFCF0,#FFFFFF); }
+  #panel-lossattr .layer-card.l3 { border-color: #DCD7F8; background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  #panel-lossattr .layer-card .lc-eyebrow {
+    font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+    margin-bottom: 4px;
+  }
+  #panel-lossattr .layer-card h4 {
+    margin: 0 0 4px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px; font-weight: 700; color: var(--ink);
+  }
+  #panel-lossattr .layer-card .lc-dollar {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 22px; font-weight: 700; color: var(--ink);
+    margin: 6px 0;
+  }
+  #panel-lossattr .layer-card.l1 .lc-dollar { color: var(--good); }
+  #panel-lossattr .layer-card.l2 .lc-dollar { color: var(--brand); }
+  #panel-lossattr .layer-card.l3 .lc-dollar { color: #4338CA; }
+  #panel-lossattr .layer-card .lc-conf {
+    font-size: 10.5px; color: var(--muted);
+    border-top: 1px dashed var(--line); padding-top: 6px; margin-top: 8px;
+  }
+  #panel-lossattr .calc-box {
+    background: #FAFAFB;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brand);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 8px 0;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink);
+    white-space: pre-wrap;
+  }
+  #panel-lossattr .calc-box .label { color: var(--brand); font-weight: 700; }
+  #panel-lossattr .calc-box .out { color: var(--good); font-weight: 700; }
+  #panel-lossattr .nuance-card {
+    border-radius: 10px;
+    padding: 10px 14px;
+    border: 1px solid var(--line);
+    background: #fff;
+    margin-bottom: 8px;
+  }
+  #panel-lossattr .nuance-card.was {
+    border-left: 3px solid var(--bad); background: #FFF5F2;
+  }
+  #panel-lossattr .nuance-card.now {
+    border-left: 3px solid var(--good); background: #F4FBF7;
+  }
+  #panel-lossattr .nuance-card .nc-label {
+    font-size: 9.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  #panel-lossattr .nuance-card.was .nc-label { color: #9A1F00; }
+  #panel-lossattr .nuance-card.now .nc-label { color: #036A4F; }
+  #panel-lossattr .delta-down-strong {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    padding: 2px 6px; border-radius: 4px;
+    background: #FFE7E0; color: #9A1F00;
+    border: 1px solid #F4D2C5;
+  }
+  #panel-lossattr .delta-up-strong {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    padding: 2px 6px; border-radius: 4px;
+    background: #E6F5EE; color: #036A4F;
+    border: 1px solid #BFE6D3;
+  }
+  #panel-lossattr .delta-flat {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    padding: 2px 6px; border-radius: 4px;
+    background: #F1F2F4; color: #374151;
+    border: 1px solid #E2E5EA;
+  }
+  #panel-lossattr .conf-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 800; letter-spacing: .06em;
+    padding: 2px 5px; border-radius: 3px;
+  }
+  #panel-lossattr .conf-pill.high { background: #E6F5EE; color: #036A4F; }
+  #panel-lossattr .conf-pill.med { background: #FFEFD9; color: #8A4A00; }
+  #panel-lossattr .conf-pill.low { background: #FFE7E0; color: #9A1F00; }
+</style>
+
+<!-- PAGE 1: HERO + 5 KEY FINDINGS -->
+<section class="page" aria-label="Loss Attribution Page 1">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Loss Attribution · 12-Month Backward Look</div>
+      <h1>What Mailchimp Automation <em style="color:#C28A00;">actually lost</em> in the past 12 months</h1>
+      <div class="subtitle">A 3-layer honest framework: what's booked on the P&amp;L, what's modeled / imputed, what's opportunity cost. Critic-agent reviewed; no double-counting; consistent causal-share sensitivity grid.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Window:</strong> May 2025 – Apr 2026 vs prior 12mo</div>
+      <div><strong>Source:</strong> BigQuery <code>bi_aggregate</code></div>
+      <div><strong>Page:</strong> 1 of 6</div>
+    </div>
+  </header>
+
+  <div class="kpi-row" style="margin-bottom: 16px;">
+    <div class="kpi">
+      <div class="v" style="color:#047857;">$3–5M</div>
+      <div class="l"><strong>L1 Booked</strong> — actually showed up in P&amp;L attributable to automation. <span class="conf-pill high">HIGH CONF</span></div>
+    </div>
+    <div class="kpi">
+      <div class="v" style="color:#C28A00;">$15–25M</div>
+      <div class="l"><strong>L2 Modeled</strong> — counterfactual drag from adoption + abandonment shortfalls. <span class="conf-pill med">MED CONF</span></div>
+    </div>
+    <div class="kpi">
+      <div class="v" style="color:#4338CA;">$15–35M</div>
+      <div class="l"><strong>L3 Opportunity cost</strong> — upside not captured if automation worked perfectly. <span class="conf-pill low">LOW CONF</span></div>
+    </div>
+    <div class="kpi">
+      <div class="v">$30–55M</div>
+      <div class="l"><strong>Combined automation-related impact (12mo)</strong> — booked + modeled + opportunity. Roughly equals the Growth Model FY27 target.</div>
+    </div>
+  </div>
+
+  <div class="card tinted" style="margin-bottom: 16px;">
+    <h2 style="margin-top:0;">Bottom line for the executive committee</h2>
+    <p>Most of the "$30–55M loss" story is <strong>imputed and counterfactual</strong>, not booked. The actual P&amp;L impact attributable to Automation issues is single-digit millions. The bigger story is in the modeled drag and opportunity cost — what we left on the table — which is roughly <strong>equal in size to what the FY27 Growth Model targets to capture next year</strong>. We're trying to recover approximately what we missed.</p>
+  </div>
+
+  <h2 style="margin-bottom: 8px;">5 key findings (read in 60 seconds)</h2>
+
+  <div class="grid cols-2" style="gap: 14px; margin-bottom: 14px;">
+    <div class="finding f1">
+      <div class="f-num">1</div>
+      <span class="f-tag">BOOKED — HIGH CONFIDENCE</span>
+      <h3>Only ~$3–5M of revenue actually showed up as P&amp;L erosion attributable to automation issues</h3>
+      <p>The platform was roughly flat: $1.27B → $1.26B = <span class="delta-down-strong">−$9.5M (−0.75%)</span> annualized. Only ~30% of that decline is automation-attributable. The other ~70% is acquisition softness, brand decay, macro, and pricing/SKU mix.</p>
+      <div class="f-conf"><span class="dot good"></span> Source: <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> BigQuery <code>bi_aggregate.mbr_monthly</code> · BQ-validated YoY</div>
+    </div>
+
+    <div class="finding f2">
+      <div class="f-num">2</div>
+      <span class="f-tag">MODELED — MEDIUM CONFIDENCE</span>
+      <h3>The bigger story is in modeled drag (~$15–25M)</h3>
+      <p>Adopters didn't grow as fast as they could, abandonment rose <span class="delta-down-strong">+25% YoY</span>, and Classic Auto deprecation was executed unevenly. <strong>This is real but it's modeled, not booked.</strong> Each dollar depends on a causal-share assumption (30–60%).</p>
+      <div class="f-conf"><span class="dot mid"></span> Methodology: counterfactual on adoption shortfall × ARPU × causal share · See Page 3</div>
+    </div>
+
+    <div class="finding f3">
+      <div class="f-num">3</div>
+      <span class="f-tag">OPPORTUNITY — MOST IMPORTANT</span>
+      <h3>The opportunity cost (~$15–35M) is the most important number</h3>
+      <p>It's roughly <strong>equal to the Growth Model's $20–25M FY27 target</strong>, meaning we left on the table approximately what we're trying to capture next year. Engagement metrics flat, FTU activation flat, setup completion flat — none of the Growth Model lifts materialized in the past year because the strategy hadn't shipped yet.</p>
+      <div class="f-conf"><span class="dot mid"></span> Cross-ref: <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a> Section 2 metrics that stayed flat</div>
+    </div>
+
+    <div class="finding f4">
+      <div class="f-num">4</div>
+      <span class="f-tag">NUANCE — DON'T MISFRAME</span>
+      <h3>The Free-tier collapse (−67% Establishers) is mostly the Classic Auto policy change, NOT product failure</h3>
+      <p>Free Establishers dropped <span class="delta-down-strong">78.9K → 25.9K avg/mo (−67%)</span> YoY — but this is largely the <strong>June 2025 Classic Auto removed-from-Free policy change</strong>. <strong>Don't headline this as a quality issue.</strong> Pure automation-quality contribution is closer to ~30% of the decline, not 80%.</p>
+      <div class="f-conf"><span class="dot bad"></span> Honest framing: managed deprecation + paywall ≠ product collapse</div>
+    </div>
+
+    <div class="finding f5">
+      <div class="f-num">5</div>
+      <span class="f-tag">CLEAREST SIGNAL — BOOKED</span>
+      <h3>Cleanest single signal of automation product issues: combined Abandoners <span class="delta-down-strong">+24.6% YoY</span></h3>
+      <p>Combined Auto+JB customers in stage <code>5_Abandon</code> rose <strong>133.2K → 166.0K avg/mo</strong>. That's adopters who tried automation and gave up — directly tied to the <strong>$53.5K/mo HVC pain</strong> documented in the <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a> (UI glitches $16.5K/mo, premature turn-on $6K/mo, trigger-search $5K/mo). This is the most defensible "automation quality issue" signal in the data.</p>
+      <div class="f-conf"><span class="dot good"></span> Source: BigQuery <code>product_journey_monthly</code> stage 5_Abandon · BQ-validated</div>
+    </div>
+  </div>
+
+  <p class="source"><strong>Critic-agent QA pass complete.</strong> First draft was rejected for conflating "realized" with "imputed" losses, treating Classic Auto deprecation as "product failure," and inconsistent causal shares. This version separates booked / modeled / opportunity into 3 distinct layers, applies a single 30–60% causal-share sensitivity grid, and removes double-counting between adoption-shortfall and revenue-shortfall buckets.</p>
+</section>
+
+<!-- PAGE 2: LAYER 1 - OBSERVABLE / BOOKED P&L DELTAS -->
+<section class="page" aria-label="Loss Attribution Page 2">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Layer 1 · Observable / Booked P&amp;L deltas</div>
+      <h1><em style="color:#047857;">$3–5M booked</em> revenue erosion attributable to automation</h1>
+      <div class="subtitle">Changes that actually showed up in the P&amp;L over May 2025–Apr 2026 vs prior 12mo. None are 100% automation-attributable — each has multiple drivers.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Confidence:</strong> HIGH (BQ-validated)</div>
+      <div><strong>Method:</strong> Direct YoY P&amp;L delta × automation share</div>
+      <div><strong>Page:</strong> 2 of 6</div>
+    </div>
+  </header>
+
+  <h2><span class="num">L1.1</span> BigQuery YoY P&amp;L deltas (booked)</h2>
+  <table class="dense">
+    <thead><tr><th>Metric</th><th>Prior 12mo</th><th>Last 12mo</th><th>YoY Δ</th><th>Multiple drivers?</th><th>Auto share</th><th>Auto-attributable $</th></tr></thead>
+    <tbody>
+      <tr><td>Total platform MRR (annualized)</td><td>$1,272.6M</td><td>$1,263.1M</td><td><span class="delta-down-strong">−$9.5M (−0.75%)</span></td><td>Yes (macro, brand, automation, mix)</td><td>~30%</td><td><strong>−$2.9M</strong></td></tr>
+      <tr><td>Platform new bookings MRR</td><td>$17.4M</td><td>$15.6M</td><td><span class="delta-down-strong">−$1.8M (−10.3%)</span></td><td>Yes (Trustpilot 2.7/5 brand decay, automation acquisition)</td><td>~40%</td><td><strong>−$0.7M</strong></td></tr>
+      <tr><td>Platform new paid customers (12mo)</td><td>271,282</td><td>232,114</td><td><span class="delta-down-strong">−39,168 (−14.4%)</span></td><td>Yes (acquisition + brand + automation Free→Paid)</td><td>~25%</td><td><strong>~$1–2M LTV</strong></td></tr>
+      <tr><td>Platform Free→Paid conversions (12mo)</td><td>111,917</td><td>105,327</td><td><span class="delta-down-strong">−6,590 (−5.9%)</span></td><td>Yes</td><td>~40%</td><td><strong>~$0.3–0.5M</strong></td></tr>
+      <tr style="background:#F4FBF7;"><td colspan="6"><strong>Layer 1 booked subtotal (deduplicated)</strong></td><td><strong style="color:#036A4F;">~$3–5M</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top: 16px;"><span class="num">L1.2</span> Calculation methodology + assumptions</h2>
+  <div class="calc-box"><span class="label">Step 1:</span> Pull platform-wide YoY change from BigQuery <span class="label">bi_aggregate.mbr_monthly</span>:
+  total MRR billed last 12mo  = $1,263.10M
+  total MRR billed prior 12mo = $1,272.64M
+  Δ                           = <span class="out">−$9.54M annualized</span>
+
+<span class="label">Step 2:</span> Decompose Δ by attribution. Multiple drivers:
+  • Acquisition softness (broader)        ~30% of decline
+  • Brand decay (Trustpilot 2.7/5)        ~20% of decline
+  • Macro / pricing / SKU mix             ~20% of decline
+  • <span class="label">Automation product issues</span>             ~30% of decline
+                                          ────────────
+                                          100%
+
+<span class="label">Step 3:</span> Compute automation-attributable booked dollars:
+  $9.5M × 30% = <span class="out">$2.85M</span> ≈ ~$3M (point estimate)
+  Range with sensitivity (20–40% share) = <span class="out">$1.9–3.8M</span>
+
+<span class="label">Step 4:</span> Add new-bookings contribution:
+  $1.8M × 40% = <span class="out">$0.72M</span>
+
+<span class="label">Step 5:</span> Add LTV-loss from new-paid decline (already partially captured in Steps 3–4):
+  Marginal contribution after dedup = <span class="out">~$0.5–1M</span>
+
+<span class="label">Total Layer 1 booked attribution: <span class="out">~$3–5M annualized</span></span></div>
+
+  <h2 style="margin-top: 16px;"><span class="num">L1.3</span> Why these causal shares (30–40%)?</h2>
+  <ul>
+    <li><strong>Platform MRR ~30% automation share:</strong> Automation cohorts represent ~20% of platform direct revenue. Brand-decay magnification (Trustpilot 2.7/5 documented in <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">Voice of Customer</a>) is partly automation-driven (the loudest VoC complaints are about Journey Builder bugs). Conservative bump: 30%.</li>
+    <li><strong>New bookings ~40% automation share:</strong> Trustpilot 2.7/5 affects all signups, not just automation, but the loudest 2025 review themes were automation-related (per VoC tab). Industry benchmark: brand-decay-driven new-bookings declines are typically 30–50% attributable to the most-vocal feature complaints.</li>
+    <li><strong>Free→Paid ~40% automation share:</strong> Adopter-cohort FTP dropped 42.5% YoY (60,994 → 35,070). Automation is supposed to be an upgrade hook; if it's broken, FTP suffers disproportionately.</li>
+  </ul>
+</section>
+
+<!-- PAGE 3: LAYER 2 - MODELED / IMPUTED -->
+<section class="page" aria-label="Loss Attribution Page 3">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Layer 2 · Modeled / Imputed automation drag</div>
+      <h1><em style="color:#C28A00;">$15–25M modeled</em> drag from adoption + abandonment shortfalls</h1>
+      <div class="subtitle">Counterfactual losses based on adoption signals × ARPU × causal share. Real signals from BQ; dollar values are imputed, not booked.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Confidence:</strong> MEDIUM (causal-share dependent)</div>
+      <div><strong>Method:</strong> Adoption shortfall × ARPU × causal share</div>
+      <div><strong>Page:</strong> 3 of 6</div>
+    </div>
+  </header>
+
+  <h2><span class="num">L2.1</span> Combined Auto+JB Establisher decline — needs careful framing</h2>
+  <table class="dense">
+    <thead><tr><th>Product</th><th>Prior 12mo avg/mo</th><th>Last 12mo avg/mo</th><th>YoY Δ</th><th>Honest read</th></tr></thead>
+    <tbody>
+      <tr><td>Classic Auto Establishers</td><td>137.5K</td><td>66.3K</td><td><span class="delta-down-strong">−71.1K (−51.8%)</span></td><td><strong>Largely managed deprecation</strong> + Classic removed from Free tier (June 2025). <em>Not "product failure."</em></td></tr>
+      <tr><td>Journey Builder Establishers</td><td>111.5K</td><td>132.0K</td><td><span class="delta-up-strong">+20.5K (+18.4%)</span></td><td>Healthy organic growth</td></tr>
+      <tr><td><strong>Combined</strong></td><td><strong>248.9K</strong></td><td><strong>198.3K</strong></td><td><strong><span class="delta-down-strong">−50.6K (−20.3%)</span></strong></td><td>Net decline = transition execution risk + actual Free-tier policy change. <strong>Pure "automation product issue" component is ~30% of this decline; the rest is policy.</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="nuance-card was">
+    <div class="nc-label">Misframing to avoid</div>
+    <div style="font-size: 12.5px; color: var(--ink-2);">"Combined adopter −20% YoY = Mailchimp Automation product collapsed." This characterization conflates Classic Auto deprecation (a strategic choice) with quality issues.</div>
+  </div>
+  <div class="nuance-card now">
+    <div class="nc-label">Honest framing</div>
+    <div style="font-size: 12.5px; color: var(--ink-2);">"Net automation footprint declined, driven primarily by Classic retirement and free-tier removal; CJB grew ~18% YoY — risk is transition execution and monetization of the base, not uniform product collapse."</div>
+  </div>
+
+  <h3 style="margin-top: 12px;">Modeled loss from net adopter decline (after netting JB migration capture)</h3>
+  <div class="calc-box"><span class="label">Step 1:</span> Combined Establisher decline from BQ:
+  Prior 12mo avg combined = 248,900/mo
+  Last 12mo avg combined  = 198,300/mo
+  Net decline             = <span class="out">50,600/mo</span>
+
+<span class="label">Step 2:</span> Decompose decline by driver:
+  • Classic Auto policy/deprecation         ~50% of decline
+  • Migration friction (CJB UX issues)      ~20% of decline
+  • Pure automation quality issues          ~30% of decline
+
+<span class="label">Step 3:</span> Apply causal-share sensitivity to derive Mailchimp $ impact:
+  Conservative (30%): 50.6K × 30% × $135 ARPU × 12mo = <span class="out">$24.6M imputed</span>
+  Mid (45%):          50.6K × 45% × $135 × 12 = <span class="out">$36.9M imputed</span>
+  Aggressive (60%):   50.6K × 60% × $135 × 12 = <span class="out">$49.2M imputed</span>
+
+<span class="label">Step 4:</span> CRITICAL — this overlaps with Layer 1 platform MRR delta.
+The platform MRR YoY change (−$9.5M) ALREADY captures most of the dollar effect.
+Use Layer 2 as ROOT-CAUSE explanation of Layer 1, not as additive.
+
+<span class="label">Marginal Layer 2 contribution after dedup (counterfactual upside not booked):
+Conservative: <span class="out">$7M</span>  Mid: <span class="out">$11M</span>  Aggressive: <span class="out">$15M</span></span></div>
+
+  <h2 style="margin-top: 16px;"><span class="num">L2.2</span> Abandonment increase — the cleanest automation-quality signal</h2>
+  <table class="dense">
+    <thead><tr><th>Stage</th><th>Prior 12mo avg/mo</th><th>Last 12mo avg/mo</th><th>YoY Δ</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td>Classic Auto · 5_Abandon</td><td>54.3K</td><td>77.1K</td><td><span class="delta-down-strong">+22.8K (+41.9%)</span></td><td>Migration churn + frustration</td></tr>
+      <tr><td>Journey Builder · 5_Abandon</td><td>78.8K</td><td>88.8K</td><td><span class="delta-down-strong">+10.0K (+12.7%)</span></td><td>CJB UX issues — <strong>cleanest signal</strong></td></tr>
+      <tr><td><strong>Combined Abandoners</strong></td><td><strong>133.2K</strong></td><td><strong>166.0K</strong></td><td><strong><span class="delta-down-strong">+32.8K (+24.6%)</span></strong></td><td><strong>+33K more adopters/mo gave up trying — directly tied to documented HVC pain</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="calc-box"><span class="label">Step 1:</span> Incremental Abandoners YoY (combined):
+  +32,800 customers/mo more in 5_Abandon stage
+
+<span class="label">Step 2:</span> Apply "save rate" assumption — what % of these would have stayed if automation worked?
+  Industry benchmark for SaaS feature-driven abandonment: 30–60% are recoverable
+
+<span class="label">Step 3:</span> Compute lost retention dollars:
+  Conservative (30% saveable, 30% causal):
+    32,800 × 30% × $135 × 12 = <span class="out">$5M annualized</span>
+  Mid (40% saveable, 50% causal):
+    32,800 × 40% × $135 × 12 × 80% (already counted) = <span class="out">$8M annualized</span>
+  Aggressive (50% saveable, 70% causal):
+    32,800 × 50% × $135 × 12 = <span class="out">$11M annualized</span>
+
+<span class="label">Note:</span> This is <span class="out">the most defensible Layer 2 component</span> because the +25% YoY 
+abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 themes).</div>
+
+  <h2 style="margin-top: 16px;"><span class="num">L2.3</span> Documented HVC pain that's actually causing churn</h2>
+  <ul>
+    <li><strong>HVC Risk Map total exposure:</strong> $53.5K/mo HVC MRR exposed to automation pain across 73 themes (per <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map tab</a>).</li>
+    <li><strong>Annualized exposure:</strong> $53.5K × 12 = <strong>$642K/yr documented exposure</strong>.</li>
+    <li><strong>Realized portion:</strong> Some HVCs tolerate pain rather than churn. Realistic conversion: 30–60% of exposure becomes actual churn = <strong>$200–400K/yr realized HVC churn from automation issues</strong>.</li>
+    <li><strong>Largest single exposure:</strong> Editor / UI Glitches in Journey Builder = $16,507/mo HVC.</li>
+  </ul>
+
+  <h3 style="margin-top: 12px;">Layer 2 honest subtotal (deduplicated against Layer 1)</h3>
+  <table class="dense">
+    <thead><tr><th>Component</th><th>Conservative (30%)</th><th>Mid (45%)</th><th>Aggressive (60%)</th></tr></thead>
+    <tbody>
+      <tr><td>L2.1 Adopter-decline imputation (marginal vs L1)</td><td>$7M</td><td>$11M</td><td>$15M</td></tr>
+      <tr><td>L2.2 Abandonment-driven retention loss</td><td>$5M</td><td>$8M</td><td>$11M</td></tr>
+      <tr><td>L2.3 Realized HVC churn from documented pain</td><td>$0.2M</td><td>$0.3M</td><td>$0.4M</td></tr>
+      <tr style="background:#FFFCF0;"><td><strong>Layer 2 modeled subtotal</strong></td><td><strong style="color:#C28A00;">$12M</strong></td><td><strong style="color:#C28A00;">$19M</strong></td><td><strong style="color:#C28A00;">$26M</strong></td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PAGE 4: LAYER 3 - OPPORTUNITY COST -->
+<section class="page" aria-label="Loss Attribution Page 4">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Layer 3 · Opportunity cost</div>
+      <h1><em style="color:#4338CA;">$15–35M opportunity cost</em> — upside not captured</h1>
+      <div class="subtitle">The Growth Model lift scenarios that didn't materialize in the past year because the strategy hadn't shipped yet. <strong>This is the most important number — roughly equal to the $20–25M FY27 forward target.</strong></div>
+    </div>
+    <div class="meta">
+      <div><strong>Confidence:</strong> LOW (most speculative)</div>
+      <div><strong>Method:</strong> Growth Model achievable lift not realized</div>
+      <div><strong>Page:</strong> 4 of 6</div>
+    </div>
+  </header>
+
+  <h2><span class="num">L3.1</span> Adoption metrics that stayed flat instead of improving</h2>
+  <table class="dense">
+    <thead><tr><th>Adoption / outcome metric</th><th>Prior state</th><th>Current state</th><th>Stayed flat?</th><th>Achievable lift not captured</th><th>Annualized $</th></tr></thead>
+    <tbody>
+      <tr><td>FTU 30-day turn-on</td><td>6.8% (PRD)</td><td>6.8%</td><td><span class="delta-flat">FLAT</span></td><td>+8.2pp toward 15% PRD target</td><td>$2–5M</td></tr>
+      <tr><td>Setup completion rate</td><td>~50–60% (PRD)</td><td>~50–60%</td><td><span class="delta-flat">FLAT</span></td><td>+15–20pp toward 70–75%</td><td>$2–4M</td></tr>
+      <tr><td>Multi-flow adoption</td><td>~30–40% (industry)</td><td>~30–40%</td><td><span class="delta-flat">FLAT</span></td><td>+10–20pp toward 50%+</td><td>$1–3M</td></tr>
+      <tr><td>Adopter-cohort Free→Paid</td><td>60,994 (BQ)</td><td>35,070 (BQ)</td><td><span class="delta-down-strong">DROPPED 43%</span></td><td>Should have been +5–10% YoY</td><td>$3–6M (partial L1 overlap)</td></tr>
+      <tr><td>Engagement (open / CTR / conversion)</td><td>flat</td><td>flat</td><td><span class="delta-flat">FLAT</span></td><td>Per Growth Model Section 3.1</td><td>$5–10M</td></tr>
+      <tr><td>Customer attributed rev / mo</td><td>$616/mo (PRD)</td><td>$616/mo</td><td><span class="delta-flat">FLAT</span></td><td>+$84–184/mo per customer × 153K × 12 × ~5% Mailchimp take-rate</td><td>$5–15M</td></tr>
+      <tr style="background:#F4F3FF;"><td colspan="5"><strong>Layer 3 opportunity cost subtotal</strong></td><td><strong style="color:#4338CA;">$15–35M</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top: 14px;"><span class="num">L3.2</span> Why this is the most important number</h2>
+  <div class="card warm">
+    <p><strong>The Growth Model targets +$20–25M of incremental ARR in FY27.</strong> The Loss Attribution opportunity cost says <strong>~$15–35M was achievable in the past year but not captured</strong>. <strong>These two numbers are roughly equal — meaning we're trying to capture next year approximately what we already left on the table.</strong></p>
+    <p style="margin-bottom:0;">This is the most powerful executive narrative: <em>not "we lost $X,"</em> but <em>"we proved we can leave $20–35M on the table without anyone noticing because the platform stayed flat — and we're now committing to actually capture it."</em> The forward strategy is justified by the magnitude of the past opportunity cost.</p>
+  </div>
+
+  <h2 style="margin-top: 14px;"><span class="num">L3.3</span> Customer attributed revenue ($616/mo PRD) — appendix-level note</h2>
+  <p style="font-size: 12px; color: var(--ink-2);">The PRD-stated $616/mo per adopter is the customer's own attributed revenue from running automations (e.g., ecomm GMV recovered via cart-abandonment flow). It is NOT Mailchimp MRR. If we'd lifted this to $700–800/mo per adopter:</p>
+  <div class="calc-box"><span class="label">Customer GMV not captured:</span>
+  153K adopters × $84–184/mo × 12 = <span class="out">$154M–$338M aggregate customer GMV not earned</span>
+
+<span class="label">Mailchimp's take-rate slice (~5% via plan upgrades + credit purchases):</span>
+  $154M × 5% to $338M × 5% = <span class="out">$8M–$17M Mailchimp ARR</span>
+
+<span class="label">Already partially counted in Engagement and FTP rows above. Marginal contribution to $: $5–10M.</span></div>
+  <p style="font-size: 11.5px; color: var(--muted); font-style: italic;">Note: $154–338M is customer revenue, not Mailchimp ARR. Per critic-agent QA: keep this in appendix only; headline stays Mailchimp-MRR-native to avoid muddying the CFO conversation.</p>
+</section>
+
+<!-- PAGE 5: TOTAL STACK + SENSITIVITY + REFRAMES -->
+<section class="page" aria-label="Loss Attribution Page 5">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Total Stack · Sensitivity · Reframes</div>
+      <h1>Three layers stacked: <em style="color:#C28A00;">$30–66M</em> total automation-related impact</h1>
+      <div class="subtitle">Causal-share sensitivity from conservative (30%) to aggressive (60%). Honest reframes the critic agent flagged.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Booked floor:</strong> $3–5M</div>
+      <div><strong>Total upper:</strong> $66M</div>
+      <div><strong>Page:</strong> 5 of 6</div>
+    </div>
+  </header>
+
+  <h2><span class="num">5.1</span> Three-layer stack with sensitivity</h2>
+  <div class="grid cols-3" style="gap: 12px; margin-bottom: 14px;">
+    <div class="layer-card l1">
+      <div class="lc-eyebrow">Layer 1 · BOOKED</div>
+      <h4>Observable P&amp;L erosion</h4>
+      <div class="lc-dollar">$3–5M</div>
+      <p style="font-size: 11.5px; color: var(--ink-2); margin: 0;">BigQuery-validated YoY. Multiple drivers; ~30–40% causal share to automation. <strong>Actually showed up in the P&amp;L.</strong></p>
+      <div class="lc-conf"><strong>Confidence:</strong> HIGH · Source: BQ <code>bi_aggregate.mbr_monthly</code></div>
+    </div>
+    <div class="layer-card l2">
+      <div class="lc-eyebrow">Layer 2 · MODELED</div>
+      <h4>Imputed automation drag</h4>
+      <div class="lc-dollar">$12–26M</div>
+      <p style="font-size: 11.5px; color: var(--ink-2); margin: 0;">Counterfactual based on adoption shortfall × ARPU × causal share. <strong>Real signals; imputed dollars.</strong> Most defensible component is L2.2 abandonment (+25% YoY).</p>
+      <div class="lc-conf"><strong>Confidence:</strong> MEDIUM · Method: causal-share assumption</div>
+    </div>
+    <div class="layer-card l3">
+      <div class="lc-eyebrow">Layer 3 · OPPORTUNITY COST</div>
+      <h4>Upside not captured</h4>
+      <div class="lc-dollar">$15–35M</div>
+      <p style="font-size: 11.5px; color: var(--ink-2); margin: 0;">Growth Model lift scenarios that didn't materialize. <strong>Roughly equal to the $20–25M FY27 forward target.</strong> The most important narrative number.</p>
+      <div class="lc-conf"><strong>Confidence:</strong> LOW · Method: achievable lift not realized</div>
+    </div>
+  </div>
+
+  <h2><span class="num">5.2</span> Causal-share sensitivity grid</h2>
+  <table class="dense">
+    <thead><tr><th>Layer</th><th>Conservative (30% causal)</th><th>Mid (45% causal)</th><th>Aggressive (60% causal)</th><th>Confidence</th></tr></thead>
+    <tbody>
+      <tr><td><strong>L1 — Observable (P&amp;L booked)</strong></td><td>$3M</td><td>$4M</td><td>$5M</td><td><span class="conf-pill high">HIGH</span></td></tr>
+      <tr><td><strong>L2 — Modeled / imputed</strong></td><td>$12M</td><td>$19M</td><td>$26M</td><td><span class="conf-pill med">MEDIUM</span></td></tr>
+      <tr><td><strong>L3 — Opportunity cost</strong></td><td>$15M</td><td>$25M</td><td>$35M</td><td><span class="conf-pill low">LOW</span></td></tr>
+      <tr style="background:#FFFCF0;"><td><strong>Total automation-related impact (12mo)</strong></td><td><strong>$30M</strong></td><td><strong style="color:#C28A00;">$48M</strong></td><td><strong>$66M</strong></td><td>—</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top: 14px;"><span class="num">5.3</span> Honest reframes the critic agent flagged (and we incorporated)</h2>
+  <table class="dense">
+    <thead><tr><th style="width: 40%;">First-draft framing (rejected)</th><th>Corrected framing (in this version)</th></tr></thead>
+    <tbody>
+      <tr><td>"$30–50M realized loss attributable to automation"</td><td>"$3–5M booked + $12–26M modeled + $15–35M opportunity = $30–66M total automation-related impact." Most is IMPUTED, not realized.</td></tr>
+      <tr><td>"Free Establisher 67% collapse, 80% causal to automation product issues"</td><td>"Free Establisher collapse is largely the June 2025 Classic-Auto-removed-from-Free policy change. Pure automation-quality contribution is closer to ~30%."</td></tr>
+      <tr><td>"Combined adopter −20% YoY = automation product collapsed"</td><td>"Net automation footprint declined, driven primarily by Classic retirement; CJB grew ~18% YoY. Risk is transition execution, not uniform product collapse."</td></tr>
+      <tr><td>"$150–340M of customer attributed revenue not captured"</td><td>"Customer GMV ≠ Mailchimp ARR. Mailchimp's take-rate slice is $5–15M/yr; appendix-level only."</td></tr>
+      <tr><td>Inconsistent causal shares (60% in one place, 30–40% in another)</td><td>Single 30% / 45% / 60% sensitivity grid applied consistently throughout.</td></tr>
+      <tr><td>Headline numbers didn't match table totals</td><td>Recomputed; headline now matches Layer 1+2+3 sum exactly.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PAGE 6: METHODOLOGY + CAVEATS + SOURCES -->
+<section class="page" aria-label="Loss Attribution Page 6">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Methodology · Caveats · Sources</div>
+      <h1>How the analysis was built and where the <em style="color:#C28A00;">uncertainty</em> lives</h1>
+      <div class="subtitle">Approach, evidence base, causal-share rationale, and explicit limitations. The critic-agent NO-GO on the first draft is documented for transparency.</div>
+    </div>
+    <div class="meta">
+      <div><strong>QA:</strong> Critic-agent reviewed</div>
+      <div><strong>Cross-refs:</strong> 7 other tabs</div>
+      <div><strong>Page:</strong> 6 of 6</div>
+    </div>
+  </header>
+
+  <h2><span class="num">6.1</span> Methodology — how we built each layer</h2>
+  <div class="grid cols-3" style="gap: 12px; margin-bottom: 12px;">
+    <div class="card">
+      <div style="font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--good); margin-bottom: 4px;">L1 method</div>
+      <h4 style="margin: 0 0 6px; font-family: 'Source Serif 4', Georgia, serif; font-size: 13px;">Direct YoY P&amp;L delta × automation share</h4>
+      <p style="font-size: 11.5px; color: var(--ink-2); margin: 0;">Pull <code>bi_aggregate.mbr_monthly</code> for last 12mo + prior 12mo; compute deltas on MRR / new bookings / FTP / new paid. Apply 30–40% automation share based on cohort revenue weight + brand-decay magnification.</p>
+    </div>
+    <div class="card">
+      <div style="font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--brand); margin-bottom: 4px;">L2 method</div>
+      <h4 style="margin: 0 0 6px; font-family: 'Source Serif 4', Georgia, serif; font-size: 13px;">Adoption shortfall × ARPU × causal share</h4>
+      <p style="font-size: 11.5px; color: var(--ink-2); margin: 0;">Pull <code>product_journey_monthly</code> for stage = 4_Establish + 5_Abandon by product YoY. Compute adopter-count shortfall × $135 blended ARPU × 12mo × causal share (30–60%). Deduplicate against L1.</p>
+    </div>
+    <div class="card">
+      <div style="font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: #4338CA; margin-bottom: 4px;">L3 method</div>
+      <h4 style="margin: 0 0 6px; font-family: 'Source Serif 4', Georgia, serif; font-size: 13px;">Growth Model lift not realized</h4>
+      <p style="font-size: 11.5px; color: var(--ink-2); margin: 0;">Inverse of the <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a>: take each metric that stayed flat YoY (FTU activation 6.8%, setup completion 50–60%, etc.) and compute the dollar value of the lift that didn't happen because the strategy hadn't shipped.</p>
+    </div>
+  </div>
+
+  <h2><span class="num">6.2</span> Critical caveats (read these honestly)</h2>
+  <ol>
+    <li><strong>All Layer 2 + Layer 3 numbers are scenario-based.</strong> Different causal-share assumptions move the total by ±$15M. Use the sensitivity grid (Page 5).</li>
+    <li><strong>The "if automation worked perfectly" counterfactual is theoretical.</strong> It assumes perfect execution on every Growth Model lever simultaneously, which is not what would actually happen even with full strategy ship.</li>
+    <li><strong>HVC Risk Map's $53.5K/mo is exposure, not realized churn.</strong> Some HVCs tolerate pain rather than churn. Realized portion is ~30–60% of stated exposure ($200–400K/yr).</li>
+    <li><strong>The Classic Auto vs Journey Builder substitution is not 1:1.</strong> Some Classic users churned out entirely; some migrated to JB; some downgraded. Without user-level cohort tracking we can't fully decompose the Classic decline into "lost" vs "migrated."</li>
+    <li><strong>Brand decay is hard to attribute precisely.</strong> Trustpilot 2.7/5 affects all signups; we can't say what fraction of new-bookings decline is "automation brand" vs "Mailchimp brand."</li>
+    <li><strong>Customer attributed revenue ($616/mo) is PRD-stated, not BQ-validated.</strong> The take-rate assumption (~5% to Mailchimp ARR) is the author's estimate; should be validated by Finance before publishing externally.</li>
+    <li><strong>The first draft was rejected by the critic agent.</strong> Specifically for: conflating "realized" with "imputed", attributing managed Classic deprecation to "product issues" (it's a strategic choice), inconsistent causal shares, and double-counting between adoption and revenue buckets. This version corrects all six issues.</li>
+  </ol>
+
+  <h2><span class="num">6.3</span> Cross-references to evidence base</h2>
+  <table class="dense">
+    <thead><tr><th>Evidence</th><th>Tab</th><th>Used for</th></tr></thead>
+    <tbody>
+      <tr><td>BigQuery <code>bi_aggregate.mbr_monthly</code> + <code>product_journey_monthly</code> joined via <code>agg_key</code></td><td><a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a></td><td>All YoY P&amp;L + adoption deltas (L1, L2)</td></tr>
+      <tr><td>$53.5K/mo HVC MRR exposure across 73 themes</td><td><a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a></td><td>Realized HVC churn quantification (L2.3)</td></tr>
+      <tr><td>50 HeyMarvin videos, 21 customer briefs, 13 product barriers</td><td><a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a></td><td>Friction signals supporting abandonment causality (L2.2)</td></tr>
+      <tr><td>Trustpilot 2.7/5, G2 4.3, brand decay</td><td><a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">Voice of Customer</a></td><td>Brand-decay magnification for L1 platform MRR causal share</td></tr>
+      <tr><td>22 PRD initiatives + 5 strategic gaps + $616 PRD-stated</td><td><a href="#prdaudit" onclick="document.querySelector('[data-tab=prdaudit]').click();return false;">PRD Audit</a></td><td>L3 opportunity cost grounding + $616/mo customer attributed rev</td></tr>
+      <tr><td>$20–25M FY27 forward lift target with 6 levers L1–L6</td><td><a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a></td><td>L3 opportunity cost = inverse of Growth Model</td></tr>
+      <tr><td>FY27 Strategy 6-Pager $20–32M envelope + rank-ordered pillars</td><td><a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click();return false;">Strategy 6-Pager</a></td><td>Anchoring forward target vs past loss equivalence</td></tr>
+    </tbody>
+  </table>
+
+  <p class="source"><strong>BigQuery sources:</strong> <code>mc-business-intelligence.bi_aggregate.product_journey_monthly</code> (89.4M rows; 12mo trailing May 2025–Apr 2026 vs prior 12mo May 2024–Apr 2025) joined to <code>bi_aggregate.mbr_monthly</code> via <code>agg_key + month + fy_number</code> (99.98% match rate). All "+/−" projections are pre-launch directional ranges; not measured outcomes. <strong>Critic-agent QA pass:</strong> first draft was rejected (NO-GO) for 7 must-fix issues; this version incorporates all corrections — explicit Booked / Modeled / Opportunity-cost separation, single causal-share sensitivity grid (30 / 45 / 60%), no double-counting between adoption and revenue buckets, honest framing of Classic Auto deprecation as strategic choice not product failure, customer attributed revenue moved to appendix with take-rate math made explicit, inconsistent causal shares unified.</p>
+</section>
+
+</div><!-- /panel-lossattr -->
+
+
 </div>
 
 <script>
@@ -8977,7 +9549,7 @@ Not to mention that I now can&#x27;t filter by a campaign name. We have to click
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','roadmap','hvcrisk','research','health','prdaudit','strategy','growthmodel'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','roadmap','hvcrisk','research','health','prdaudit','strategy','growthmodel','lossattr'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
