@@ -9653,6 +9653,165 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
   #panel-canvas .src.klv { background: #F1EEFF; color: #3A1ACC; border-color: #E1D8FF; }
   #panel-canvas .src.sho { background: #E0F2EA; color: #00553F; border-color: #C9E8D6; }
   #panel-canvas .src.emg { background: #FCE7F3; color: #9D174D; border-color: #FBCFE8; }
+
+  /* Guiding-principles cards */
+  #panel-canvas .principle {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: #fff;
+    height: 100%;
+    position: relative;
+  }
+  #panel-canvas .principle.gpt { border-left: 4px solid #4338CA; background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  #panel-canvas .principle.add { border-left: 4px solid var(--brand); background: linear-gradient(180deg,#FFFCF0,#FFFFFF); }
+  #panel-canvas .principle .pn {
+    position: absolute; top: 12px; right: 16px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 36px; font-weight: 700; line-height: 1;
+    opacity: 0.18; color: var(--ink);
+  }
+  #panel-canvas .principle .ptag {
+    display: inline-block;
+    font-size: 9.5px; font-weight: 800; letter-spacing: .08em;
+    padding: 2px 6px; border-radius: 4px;
+    margin-bottom: 6px;
+  }
+  #panel-canvas .principle.gpt .ptag { background: #EEF0FF; color: #2A1FA8; }
+  #panel-canvas .principle.add .ptag { background: var(--chip); color: var(--chip-ink); }
+  #panel-canvas .principle h3 {
+    margin: 0 0 8px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    padding-right: 32px;
+    line-height: 1.25;
+  }
+  #panel-canvas .principle p { font-size: 12px; color: var(--ink-2); line-height: 1.45; margin: 0; }
+
+  /* Effort-allocation bars */
+  #panel-canvas .effort-bar {
+    display: grid; grid-template-columns: 200px 1fr 60px;
+    gap: 12px; align-items: center; padding: 8px 0;
+  }
+  #panel-canvas .effort-bar + .effort-bar { border-top: 1px solid var(--line); }
+  #panel-canvas .effort-bar .eb-name { font-size: 12.5px; font-weight: 700; color: var(--ink); }
+  #panel-canvas .effort-bar .eb-name .eb-sub { display: block; font-size: 10.5px; color: var(--muted); font-weight: 400; margin-top: 2px; font-style: italic; }
+  #panel-canvas .effort-bar .eb-track { height: 18px; background: #F1F2F4; border-radius: 99px; position: relative; overflow: hidden; }
+  #panel-canvas .effort-bar .eb-fill {
+    height: 100%; border-radius: 99px;
+    display: flex; align-items: center; padding: 0 10px;
+    color: white; font-size: 10.5px; font-weight: 700;
+  }
+  #panel-canvas .effort-bar .eb-fill.l-func { background: linear-gradient(90deg, var(--bad), #DC2626); }
+  #panel-canvas .effort-bar .eb-fill.l-cog { background: linear-gradient(90deg, var(--brand), #E2A800); }
+  #panel-canvas .effort-bar .eb-fill.l-out { background: linear-gradient(90deg, #4338CA, #6D28D9); }
+  #panel-canvas .effort-bar .eb-fill.l-emo { background: linear-gradient(90deg, var(--good), #059669); }
+  #panel-canvas .effort-bar .eb-pct { font-size: 14px; font-weight: 700; color: var(--ink); text-align: right; font-family: 'Source Serif 4', Georgia, serif; }
+
+  /* Roadmap swimlane table */
+  #panel-canvas .roadmap-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5px;
+    margin: 8px 0;
+    table-layout: fixed;
+  }
+  #panel-canvas .roadmap-table th, #panel-canvas .roadmap-table td {
+    border: 1px solid var(--line);
+    padding: 6px 8px;
+    vertical-align: top;
+    background: #fff;
+  }
+  #panel-canvas .roadmap-table th {
+    background: var(--ink);
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    font-size: 10.5px;
+    letter-spacing: .04em;
+    font-family: 'Inter', sans-serif;
+  }
+  #panel-canvas .roadmap-table th.q1 { background: #4F46E5; }
+  #panel-canvas .roadmap-table th.q2 { background: #7C3AED; }
+  #panel-canvas .roadmap-table th.q3 { background: #DB2777; }
+  #panel-canvas .roadmap-table th.q4 { background: var(--brand); }
+  #panel-canvas .roadmap-table th.q5 { background: var(--good); }
+  #panel-canvas .roadmap-table th.q6 { background: #0891B2; }
+  #panel-canvas .roadmap-table th .qrange {
+    display: block; font-size: 9px; font-weight: 400;
+    margin-top: 2px; opacity: 0.85;
+  }
+  #panel-canvas .roadmap-table .pillar-cell {
+    background: #FAFAFB;
+    font-weight: 700;
+    color: var(--ink);
+    width: 13%;
+    font-size: 10.5px;
+    line-height: 1.3;
+  }
+  #panel-canvas .roadmap-table .pillar-cell.r-p1 { border-left: 4px solid var(--bad); }
+  #panel-canvas .roadmap-table .pillar-cell.r-p2 { border-left: 4px solid var(--brand); }
+  #panel-canvas .roadmap-table .pillar-cell.r-p3 { border-left: 4px solid var(--good); }
+  #panel-canvas .roadmap-table .pillar-cell.r-p4 { border-left: 4px solid #4338CA; }
+  #panel-canvas .roadmap-table .pillar-cell.r-p5 { border-left: 4px solid var(--warn); }
+  #panel-canvas .roadmap-table .pillar-cell .pname {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 10.5px;
+    display: block;
+    margin-bottom: 2px;
+  }
+  #panel-canvas .roadmap-table .pillar-cell .pquote {
+    font-size: 9.5px;
+    color: var(--muted);
+    font-style: italic;
+    font-weight: 400;
+  }
+  #panel-canvas .roadmap-table .q-cell { font-size: 9.5px; line-height: 1.4; }
+  #panel-canvas .roadmap-table .q-cell .iid {
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 8.5px;
+    background: #ECEAE6;
+    color: var(--ink);
+    padding: 1px 3px;
+    border-radius: 2px;
+    margin-right: 2px;
+    font-weight: 600;
+  }
+  #panel-canvas .roadmap-table .q-cell .ship {
+    font-weight: 700; color: var(--good);
+  }
+  #panel-canvas .roadmap-table .q-cell .star {
+    font-size: 11px; color: var(--brand); font-weight: 700;
+  }
+  #panel-canvas .roadmap-table .q-cell .maint {
+    font-style: italic; color: var(--muted); font-size: 9px;
+  }
+  #panel-canvas .roadmap-table .cred-row td {
+    background: linear-gradient(180deg, #FFFCF0, #fff);
+    border-top: 2px solid var(--brand);
+    font-weight: 600;
+    font-size: 9.5px;
+  }
+  #panel-canvas .roadmap-table .cred-row .pillar-cell {
+    background: var(--brand);
+    color: white;
+    font-family: 'Source Serif 4', Georgia, serif;
+    border-left: 4px solid #6B4A00;
+  }
+  #panel-canvas .roadmap-table .cred-row td.cred-cell {
+    color: var(--ink);
+    text-align: left;
+    font-style: italic;
+  }
+  #panel-canvas .roadmap-table .cred-row td.cred-cell strong {
+    color: var(--brand);
+    font-style: normal;
+  }
+  @media (max-width: 1100px) {
+    #panel-canvas .roadmap-table { font-size: 8.5px; }
+    #panel-canvas .roadmap-table th { font-size: 9.5px; }
+    #panel-canvas .roadmap-table .pillar-cell { font-size: 9.5px; }
+  }
   #panel-canvas .init-row .init-name .desc {
     display: block; margin-top: 3px; color: var(--ink-2); font-size: 11px; line-height: 1.4;
   }
@@ -9685,7 +9844,7 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
       <div><strong>Pillars:</strong> 5 (customer-benefit framing)</div>
       <div><strong>Sub-themes:</strong> 23</div>
       <div><strong>Initiatives:</strong> 72</div>
-      <div><strong>Page:</strong> 1 of 7</div>
+      <div><strong>Page:</strong> 1 of 9</div>
     </div>
   </header>
 
@@ -9811,7 +9970,7 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
     <div class="meta">
       <div><strong>Pain $:</strong> $50.4K/mo (bug section)</div>
       <div><strong>FY27 $:</strong> $2–4M ARR</div>
-      <div><strong>Page:</strong> 2 of 7</div>
+      <div><strong>Page:</strong> 2 of 9</div>
     </div>
   </header>
 
@@ -9890,7 +10049,7 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
     <div class="meta">
       <div><strong>Pain $:</strong> $25K/mo HVC + 4 foundational gaps (F3, F4, F5)</div>
       <div><strong>FY27 $:</strong> $4–7M ARR</div>
-      <div><strong>Page:</strong> 3 of 7</div>
+      <div><strong>Page:</strong> 3 of 9</div>
     </div>
   </header>
 
@@ -9959,7 +10118,7 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
     <div class="meta">
       <div><strong>Pain $:</strong> $48K/mo HVC barrier themes</div>
       <div><strong>FY27 $:</strong> $5–8M ARR</div>
-      <div><strong>Page:</strong> 4 of 7</div>
+      <div><strong>Page:</strong> 4 of 9</div>
     </div>
   </header>
 
@@ -10059,7 +10218,7 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
     <div class="meta">
       <div><strong>Pain $:</strong> $30K/mo HVC + Roadmap D1, D2, D3, D5, D6, D11, D12 + 8 Klaviyo AI gaps</div>
       <div><strong>FY27 $:</strong> $6–10M ARR (largest single bet)</div>
-      <div><strong>Page:</strong> 5 of 7</div>
+      <div><strong>Page:</strong> 5 of 9</div>
     </div>
   </header>
 
@@ -10122,7 +10281,7 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
     <div class="meta">
       <div><strong>Pain $:</strong> $7K/mo HVC + Roadmap F1, D4, D7 + Attentive threat</div>
       <div><strong>FY27 $:</strong> $3–5M ARR</div>
-      <div><strong>Page:</strong> 6 of 7</div>
+      <div><strong>Page:</strong> 6 of 9</div>
     </div>
   </header>
 
@@ -10170,7 +10329,7 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
     <div class="meta">
       <div><strong>Initiatives:</strong> 67</div>
       <div><strong>Sources mapped:</strong> 6 evidence tabs · critic-verified</div>
-      <div><strong>Page:</strong> 7 of 7</div>
+      <div><strong>Page:</strong> 7 of 9</div>
     </div>
   </header>
 
@@ -10209,7 +10368,392 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
     <li><strong>Pricing &amp; SKU restructure</strong> beyond Free-tier policy + contact-tax reform. Broader pricing changes are corp Finance domain, not Automations PM.</li>
   </ul>
 
-  <p class="source"><strong>Evidence-base summary:</strong> 73 HVC Risk Map themes ($177.5K/mo HVC MRR) + 13 User Research barriers + 21 customer briefs + 5 UR bets + 7 VoC hate themes + 9 Roadmap foundational gaps + 12 Roadmap differentiated steals + 10 Product Health findings + Executive Brief Mailchimp capability inventory. <strong>62 tactical initiatives</strong> across <strong>22 sub-themes</strong> within <strong>5 strategic pillars</strong>. Sized to deliver <strong>$20-25M FY27 ARR target</strong> per Growth Model. <strong>Designed independently from prior PRD list</strong> per directive — overlaps are coincidence, gaps are intentional fixes. <strong>Critic-agent QA pass pending</strong> coverage verification.</p>
+  <p class="source"><strong>Evidence-base summary:</strong> 73 HVC Risk Map themes ($177.5K/mo HVC MRR) + 13 User Research barriers + 21 customer briefs + 5 UR bets + 7 VoC hate themes + 9 Roadmap foundational gaps + 12 Roadmap differentiated steals + 10 Product Health findings + Executive Brief Mailchimp capability inventory + 26 Klaviyo gaps + 16 Shopify gaps + 6 Emerging Threats startup gaps. <strong>72 tactical initiatives</strong> across <strong>23 sub-themes</strong> within <strong>5 customer-benefit pillars</strong>. Sized to deliver <strong>$20-25M FY27 ARR target</strong> per Growth Model. <strong>Designed independently from prior PRD list</strong> per directive — overlaps are coincidence, gaps are intentional fixes. <strong>Critic-agent QA pass complete</strong> — 7 must-fix coverage gaps incorporated; full Klaviyo + Shopify + Emerging Threats source-tagging deployed.</p>
+</section>
+
+<!-- PAGE 8: GUIDING PRINCIPLES FOR THE 18-MONTH ROADMAP -->
+<section class="page" aria-label="Initiative Canvas Page 8">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Guiding Principles · 18-month sequencing logic</div>
+      <h1>How to <em style="color:#C28A00;">orchestrate</em> 72 initiatives across 6 quarters without losing the plot</h1>
+      <div class="subtitle">A layered trust-recovery + confidence-acceleration framework. Customers face 4 simultaneous problems: reliability trust broken, cognitive trust weak, capability trust lagging competitors, confidence to act low. Frame internally as <strong>"rebuilding trust while reinventing the category"</strong> — not "bugs vs AI." All four trust layers run in parallel each quarter, with weighted emphasis.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Principles:</strong> 5 (4 from GPT + 1 added)</div>
+      <div><strong>Effort allocation:</strong> 35/30/25/10</div>
+      <div><strong>Page:</strong> 8 of 9</div>
+    </div>
+  </header>
+
+  <div class="card tinted" style="margin-bottom: 16px;">
+    <h2 style="margin-top:0;">The strategic insight to communicate to leadership</h2>
+    <p>Don't frame this as <em>"fix bugs vs build AI."</em> That framing dies on the first internal review and forces a false choice. The right framing is: <strong>"we are rebuilding customer trust AND reinventing the category, in parallel."</strong> Stabilization protects retention. Simplification drives adoption. Intelligence creates delight. Autonomy builds the moat. All four are part of <strong>one unified system</strong> — the customer experiences the product as <em>"this works reliably → this is easier than expected → this helps me make better decisions → this product is actively helping grow my business."</em> That progression is how trust compounds into confidence; confidence into usage; usage into revenue.</p>
+  </div>
+
+  <h2 style="margin-bottom: 8px;">5 guiding principles (4 from GPT framework + 1 critical addition)</h2>
+  <div class="grid cols-2" style="gap: 12px; margin-bottom: 14px;">
+    <div class="principle gpt">
+      <div class="pn">1</div>
+      <span class="ptag">FROM GPT · LAYERED ORCHESTRATION</span>
+      <h3>Layered, parallel orchestration — not sequential phases</h3>
+      <p>Run all 4 trust layers (Functional / Cognitive / Outcome / Emotional Partnership) every quarter with weighted emphasis. <strong>Don't wait 18 months to ship AI</strong> — competitors will reinvent the category. <strong>Don't only ship AI</strong> — operational trust collapses and AI demos won't translate to durable adoption. The error mode is treating these as phases instead of weights.</p>
+    </div>
+    <div class="principle gpt">
+      <div class="pn">2</div>
+      <span class="ptag">FROM GPT · TRUST FOUNDATION</span>
+      <h3>AI cannot compensate for broken operational trust</h3>
+      <p>Functional Trust gets the most early investment (35% of effort). Bugs, reliability, data correctness, sending failures get fixed first because <strong>AI experiences amplify customer anxiety on a broken foundation</strong>. Until I-1.1.1 (Editor refactor) and I-1.2.1 (Reporting correctness) ship, AI feels like lipstick on a pig — and the demo magic backfires when customers discover the underlying instability.</p>
+    </div>
+    <div class="principle gpt">
+      <div class="pn">3</div>
+      <span class="ptag">FROM GPT · COGNITIVE LEVERAGE</span>
+      <h3>Cognitive simplification is the highest-leverage AI bet</h3>
+      <p>Don't ship "AI chat bolted onto workflows." Ship AI that <strong>thinks on the customer's behalf</strong> — narrow choices, pre-configure flows, default intelligently, remove blank-canvas moments, progressively disclose complexity. Confidence comes from <em>"I know what to do next,"</em> not <em>"I have a chatbot."</em> This is where I-4.1.x AI Skill compounds: 7 surfaces &gt; Klaviyo's 1-surface; reduction of cognitive load is the primary product, not chat as a feature.</p>
+    </div>
+    <div class="principle gpt">
+      <div class="pn">4</div>
+      <span class="ptag">FROM GPT · UNIFIED SYSTEM</span>
+      <h3>Frame as "trust recovery + category reinvention" — one system</h3>
+      <p>Don't let leadership perceive this as "fixing bugs vs building AI." That framing is wrong and dies on the first internal review. The right narrative: <strong>stabilization protects retention; simplification drives adoption; intelligence creates delight; autonomy builds the moat.</strong> All four are part of one unified system. Communicate as: <em>"we are restoring trust AND reinventing the category, in parallel — stabilization is part of the AI strategy, not a precondition for it."</em></p>
+    </div>
+    <div class="principle add" style="grid-column: span 2;">
+      <div class="pn">5</div>
+      <span class="ptag">ADDED · DEPENDENCY + MOMENTUM</span>
+      <h3>Sequence by dependency chain + ship one credibility moment every quarter</h3>
+      <p><strong>Eventbus migration (I-2.3.1) is the critical path</strong> — it gates real-time triggers, Conversational Automations, WhatsApp send, and addresses root cause of $16,507/mo Editor latency. Without it, P3, P4, P5 fail downstream — every architectural decision in the roadmap assumes Eventbus ships in Q1-Q3 of FY27. <strong>Every quarter must also deliver ONE demonstrable proof point ("credibility moment")</strong> for sales / analysts / leadership: a feature shipping, an AI demo, a brand-decay reversal — momentum prevents the "stabilization quarter" perception from killing strategy buy-in. The 6 credibility moments are mapped on Page 9.</p>
+    </div>
+  </div>
+
+  <h2 style="margin-bottom: 8px;">Effort allocation across 4 trust layers</h2>
+  <div class="card">
+    <p style="font-size: 12px; color: var(--ink-2); margin-bottom: 8px;">Based on the GPT framework — what % of engineering + design + PM effort goes to each layer per quarter. Layer-to-pillar mapping shown below. <strong>Reliability creates trust. Simplicity creates confidence. Intelligence creates delight. Autonomy creates differentiation.</strong> If you skip the first two, the last two fail.</p>
+
+    <div class="effort-bar">
+      <div class="eb-name">Functional trust<span class="eb-sub">"Does it work?" — bugs, reliability, data, edge cases</span></div>
+      <div class="eb-track"><div class="eb-fill l-func" style="width: 35%;">35% — Layer 1</div></div>
+      <div class="eb-pct">35%</div>
+    </div>
+    <div class="effort-bar">
+      <div class="eb-name">Cognitive simplicity<span class="eb-sub">"Can I understand it?" — UX simplification, defaults, progressive disclosure</span></div>
+      <div class="eb-track"><div class="eb-fill l-cog" style="width: 30%;">30% — Layer 2</div></div>
+      <div class="eb-pct">30%</div>
+    </div>
+    <div class="effort-bar">
+      <div class="eb-name">Outcome trust + Intelligence<span class="eb-sub">"Will this improve my business?" — AI generation, optimization, recommendations</span></div>
+      <div class="eb-track"><div class="eb-fill l-out" style="width: 25%;">25% — Layer 3</div></div>
+      <div class="eb-pct">25%</div>
+    </div>
+    <div class="effort-bar">
+      <div class="eb-name">Emotional partnership + Autonomy<span class="eb-sub">"This product understands me" — conversational, agentic, cross-channel</span></div>
+      <div class="eb-track"><div class="eb-fill l-emo" style="width: 10%;">10% — Layer 4</div></div>
+      <div class="eb-pct">10%</div>
+    </div>
+
+    <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 11px; color: var(--ink-2);">
+      <strong>Layer-to-pillar mapping:</strong> Layer 1 (Functional) ≈ <strong>P1 + Eventbus subset of P2</strong>. Layer 2 (Cognitive) ≈ <strong>P3 + trigger UX of P2 + AI generation surfaces of P4</strong>. Layer 3 (Outcome) ≈ <strong>P4 (most) + predictive triggers of P2</strong>. Layer 4 (Emotional / Autonomous) ≈ <strong>P4 (D1, D3, D5) + P5 cross-channel</strong>. Note that pillars and layers don't 1:1-map — pillars are organized by execution dependency; layers are organized by customer experience.
+    </div>
+  </div>
+
+  <h2 style="margin-bottom: 8px; margin-top: 14px;">The customer experience progression we're trying to build</h2>
+  <div class="grid cols-4" style="gap: 8px;">
+    <div class="card" style="border-left: 4px solid var(--bad);"><div style="font-size:10px; font-weight:800; letter-spacing:.06em; color:var(--muted); text-transform:uppercase; margin-bottom:4px;">Phase 1 · 0–3mo</div><div style="font-family:'Source Serif 4', Georgia, serif; font-size:13px; font-weight:700;">"This works reliably."</div><div style="font-size:11px; color:var(--ink-2); margin-top:4px;">Functional trust restored — bugs fixed, data correct, sending reliable.</div></div>
+    <div class="card" style="border-left: 4px solid var(--brand);"><div style="font-size:10px; font-weight:800; letter-spacing:.06em; color:var(--muted); text-transform:uppercase; margin-bottom:4px;">Phase 2 · 3–9mo</div><div style="font-family:'Source Serif 4', Georgia, serif; font-size:13px; font-weight:700;">"This is easier than I expected."</div><div style="font-size:11px; color:var(--ink-2); margin-top:4px;">Cognitive simplicity — first automation live in 5 minutes; "I know what to do next."</div></div>
+    <div class="card" style="border-left: 4px solid #4338CA;"><div style="font-size:10px; font-weight:800; letter-spacing:.06em; color:var(--muted); text-transform:uppercase; margin-bottom:4px;">Phase 3 · 9–12mo</div><div style="font-family:'Source Serif 4', Georgia, serif; font-size:13px; font-weight:700;">"This is helping me make better decisions."</div><div style="font-size:11px; color:var(--ink-2); margin-top:4px;">Outcome trust — AI generation, predictive triggers, in-flow optimization, recommendations.</div></div>
+    <div class="card" style="border-left: 4px solid var(--good);"><div style="font-size:10px; font-weight:800; letter-spacing:.06em; color:var(--muted); text-transform:uppercase; margin-bottom:4px;">Phase 4 · 12–18mo</div><div style="font-family:'Source Serif 4', Georgia, serif; font-size:13px; font-weight:700;">"This product is actively helping grow my business."</div><div style="font-size:11px; color:var(--ink-2); margin-top:4px;">Emotional partnership — agentic per-user treatment, conversational journey editing, cross-channel orchestration. Customer feels they have a marketing partner, not software.</div></div>
+  </div>
+
+  <p class="source"><strong>Source:</strong> GPT-derived "Trust → Confidence Product Framework" (Layers 1-4 + 35/30/25/10 effort allocation + customer progression). One added principle (P5: dependency chain + credibility moments) for execution discipline. Framework adapted to Mailchimp Automation context using the 72 initiatives in this canvas.</p>
+</section>
+
+<!-- PAGE 9: 6-QUARTER SWIMLANE ROADMAP -->
+<section class="page" aria-label="Initiative Canvas Page 9">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">The 6-Quarter Swimlane Roadmap · 18 months · May '26 → Oct '27</div>
+      <h1>How <em style="color:#C28A00;">all 5 pillars run in parallel</em> across 6 quarters — with 1 credibility moment per quarter</h1>
+      <div class="subtitle">Each row is a pillar swimlane; each column is a quarter. Cells show the initiatives shipping that quarter (with IDs). Color-coded by pillar. Bottom row shows the customer-facing credibility moment that signals momentum to leadership, sales, and analysts. <strong>Star (★) = high-impact ship.</strong></div>
+    </div>
+    <div class="meta">
+      <div><strong>Quarters:</strong> 6 (May '26 → Oct '27)</div>
+      <div><strong>Pillars:</strong> 5 in parallel</div>
+      <div><strong>Page:</strong> 9 of 9</div>
+    </div>
+  </header>
+
+  <table class="roadmap-table">
+    <thead>
+      <tr>
+        <th style="width: 13%;">Pillar / customer benefit</th>
+        <th class="q1">Q1 FY26 Q4<span class="qrange">May–Jul '26</span></th>
+        <th class="q2">Q2 FY27 Q1<span class="qrange">Aug–Oct '26</span></th>
+        <th class="q3">Q3 FY27 Q2<span class="qrange">Nov '26–Jan '27</span></th>
+        <th class="q4">Q4 FY27 Q3<span class="qrange">Feb–Apr '27</span></th>
+        <th class="q5">Q5 FY27 Q4<span class="qrange">May–Jul '27</span></th>
+        <th class="q6">Q6 FY28 Q1<span class="qrange">Aug–Oct '27</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- P1 swimlane -->
+      <tr>
+        <td class="pillar-cell r-p1">
+          <span class="pname">P1: "Make my automations actually work"</span>
+          <span class="pquote">Internal: Quality &amp; Trust · 35% Layer 1 effort</span>
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-1.1.1</span>Editor refactor STARTS<br/>
+          <span class="iid">I-1.2.1</span>Reporting correctness<br/>
+          <span class="iid">I-1.1.3</span>Default view fix<br/>
+          <span class="iid">I-1.1.4</span>Re-entry persistence<br/>
+          <span class="iid">I-1.4.4</span>Live chat coverage<br/>
+          <span class="iid">I-1.4.3</span>Trustpilot program<br/>
+          <span class="iid">I-1.5.4</span>2FA continuity
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-1.5.1</span><span class="ship">Auto-migration tool ships</span><br/>
+          <span class="iid">I-1.2.2</span>Per-step KPIs in builder<br/>
+          <span class="iid">I-1.3.1</span>Frequency cap / suppression<br/>
+          <span class="iid">I-1.2.3</span>Aggregate reporting<br/>
+          <span class="iid">I-1.1.5</span>Pop-ups feeding flows<br/>
+          <span class="iid">I-1.5.2</span>Two-surface confusion fix<br/>
+          <span class="iid">I-1.5.3</span>CJB legacy editor consolidation
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-1.4.5</span>Compliance workflow + SLAs<br/>
+          <span class="iid">I-1.4.6</span>Deliverability + inbox<br/>
+          <span class="iid">I-1.2.4</span>Sharing / export reports<br/>
+          <span class="iid">I-1.2.5</span>Per-flow timing reports<br/>
+          <span class="iid">I-1.1.2</span>Cross-browser regression suite<br/>
+          <span class="iid">I-1.1.1</span><span class="ship">Editor refactor SHIPS</span>
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-1.4.1</span><span class="ship">Free-tier CJB reinstated</span><br/>
+          <span class="star">★</span> <span class="iid">I-1.4.2</span><span class="ship">Contact-tax billing reform</span>
+        </td>
+        <td class="q-cell">
+          <span class="maint">Maintenance — proactive deliverability monitoring + automation health alerts</span>
+        </td>
+        <td class="q-cell">
+          <span class="maint">Maintenance — operational excellence baseline maintained</span>
+        </td>
+      </tr>
+
+      <!-- P2 swimlane -->
+      <tr>
+        <td class="pillar-cell r-p2">
+          <span class="pname">P2: "Trigger on what my customers actually do"</span>
+          <span class="pquote">Internal: Data Activation · Eventbus = critical path</span>
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-2.3.1</span>Eventbus migration STARTS (critical path)<br/>
+          <span class="iid">I-2.1.1</span>12 new triggers PRDs finalized<br/>
+          <span class="iid">I-2.2.1</span>Event-property access design<br/>
+          <span class="iid">I-2.2.2</span>Adv Segmentation in CJB design
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-2.3.1</span>Eventbus shipping (parallel rollout)<br/>
+          <span class="iid">I-2.3.3</span>Sub-hour delays<br/>
+          <span class="iid">I-2.1.1</span>First 4 of 12 triggers ship
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-2.3.1</span><span class="ship">Eventbus complete</span><br/>
+          <span class="iid">I-2.3.2</span><span class="ship">Real-time triggers</span><br/>
+          <span class="iid">I-2.2.2</span><span class="ship">Adv Segmentation in CJB</span><br/>
+          <span class="iid">I-2.2.1</span><span class="ship">Event-property access</span><br/>
+          <span class="iid">I-2.1.4</span>Discount code + Segments-as-trigger<br/>
+          <span class="iid">I-2.1.1</span><span class="ship">12 new triggers complete</span><br/>
+          <span class="iid">I-2.2.5</span>Trigger splits NEW
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-2.1.3</span>Predictive triggers as flow entry<br/>
+          <span class="iid">I-2.1.2</span>Date-relative / recurring triggers<br/>
+          <span class="iid">I-2.1.5</span>Wix Bookings triggers<br/>
+          <span class="iid">I-2.1.6</span>Schedule + parallel triggers<br/>
+          <span class="iid">I-2.1.7</span>Webhooks-as-actions NEW<br/>
+          <span class="iid">I-2.2.4</span>Save-segment-in-moment<br/>
+          <span class="iid">I-2.2.3</span>Named/reusable filter conditions
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-2.4.1</span><span class="ship">Shopify-deep integration</span><br/>
+          <span class="iid">I-2.4.2</span>WooCommerce/Squarespace/BigCommerce/Wix parity<br/>
+          <span class="iid">I-2.4.3</span><span class="ship">Auto-build journey on store-connect</span>
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-2.4.4</span>App connector library NEW<br/>
+          <em style="color:var(--muted); font-size:9px;">Integration-action ecosystem expansion</em>
+        </td>
+      </tr>
+
+      <!-- P3 swimlane -->
+      <tr>
+        <td class="pillar-cell r-p3">
+          <span class="pname">P3: "From signup to live automation in 5 minutes"</span>
+          <span class="pquote">Internal: Activation Foundation · 30% Layer 2 effort</span>
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-3.2.1</span><span class="ship">"It's just an email" welcome ships ($74K)</span><br/>
+          <span class="iid">I-3.2.2</span>3-step activation flow<br/>
+          <span class="iid">I-3.1.1</span>Trigger modal redesign STARTS<br/>
+          <span class="iid">I-3.1.2</span>Content-completion gating
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-3.1.1</span><span class="ship">Trigger modal redesign SHIPS</span><br/>
+          <span class="iid">I-3.1.3</span>Trigger setup confusion fix<br/>
+          <span class="iid">I-3.1.4</span>Plain-English labels<br/>
+          <span class="iid">I-3.2.3</span>Time-to-first-send 7-10d target<br/>
+          <span class="iid">I-3.3.1</span>Edit panel + drag-reorder + rename<br/>
+          <span class="iid">I-3.3.2</span>Replicate journey + delete split paths
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-3.1.5</span>Time-delay UX consistency<br/>
+          <span class="iid">I-3.3.3</span>If/Else vs Split visual<br/>
+          <span class="iid">I-3.3.4</span>Email editing direct-edit<br/>
+          <span class="iid">I-3.3.5</span>Date picker fix<br/>
+          <span class="iid">I-3.4.1</span><span class="ship">Flow templates search</span><br/>
+          <span class="iid">I-3.4.2</span>Industry template gallery STARTS
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-3.4.2</span><span class="ship">Industry template gallery ships</span><br/>
+          <span class="iid">I-3.4.3</span>Better templates + Brand Kit applied<br/>
+          <span class="iid">I-3.4.4</span>ICP-focused homepage<br/>
+          <span class="iid">I-3.5.1</span>Direct-to-paid express path<br/>
+          <span class="iid">I-3.5.2</span>International localization<br/>
+          <span class="iid">I-3.5.3</span>Sandbox-tier eval + small-list reframe
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-3.7.1</span>Tag governance<br/>
+          <span class="iid">I-3.7.2</span>Power-feature discovery + changelog<br/>
+          <span class="iid">I-3.7.3</span>Industry benchmarking dashboard<br/>
+          <span class="iid">I-3.6.1</span>Vertical journey UIs STARTS
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-3.6.1</span><span class="ship">Vertical journey UIs ships</span><br/>
+          <span class="iid">I-3.6.2</span>Liquid templating + unlimited events<br/>
+          <span class="iid">I-3.6.3</span>Combined transactional + marketing
+        </td>
+      </tr>
+
+      <!-- P4 swimlane -->
+      <tr>
+        <td class="pillar-cell r-p4">
+          <span class="pname">P4: "Let AI do the building and optimizing"</span>
+          <span class="pquote">Internal: Agentic Marketing · 25% Layer 3 effort</span>
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-4.2.1</span>Single modernized builder design<br/>
+          <span class="iid">I-4.1.1</span>AI Skill M1 PRD finalize<br/>
+          <span class="iid">I-4.1.3</span>Brand Kit integration architecture
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-4.1.1</span><span class="ship">AI Skill M1 ships (onboarding — Marketing Agent equivalent)</span><br/>
+          <span class="iid">I-4.2.1</span>Single modernized builder build STARTS<br/>
+          <span class="iid">I-4.2.2</span>Notion-style editor design
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-4.1.2</span><span class="ship">AI Skill M2 ships (homepage + post-import)</span><br/>
+          <span class="iid">I-4.1.3</span><span class="ship">Brand Kit + generative copy in journeys</span><br/>
+          <span class="iid">I-4.2.1</span>Single modernized builder beta
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-4.1.2</span><span class="ship">AI Skill M3 (post-form + post-send + chat + ecomm-coach)</span><br/>
+          <span class="star">★</span> <span class="iid">I-4.2.1</span><span class="ship">Single modernized builder GA</span><br/>
+          <span class="iid">I-4.2.2</span>Notion-style editor ships<br/>
+          <span class="iid">I-4.2.3</span>In-flow image editing + multi-author
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-4.3.1</span><span class="ship">Conversational journey editing in Intuit Assist</span><br/>
+          <span class="iid">I-4.4.2</span>Per-profile Smart Send + A/B + Channel Affinity<br/>
+          <span class="iid">I-4.4.3</span>In-flow auto-monitors + uplift analysis<br/>
+          <span class="iid">I-4.1.4</span>Segments AI NEW<br/>
+          <span class="iid">I-4.1.5</span>AI product recs in flow NEW
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-4.3.2</span>Prompt-first journey builder<br/>
+          <span class="star">★</span> <span class="iid">I-4.4.1</span>Agentic per-user treatment selection (moonshot)
+        </td>
+      </tr>
+
+      <!-- P5 swimlane -->
+      <tr>
+        <td class="pillar-cell r-p5">
+          <span class="pname">P5: "Reach my customers wherever they are"</span>
+          <span class="pquote">Internal: Cross-Channel Reach · 10% Layer 4 effort</span>
+        </td>
+        <td class="q-cell">
+          <span class="maint">WhatsApp Public Beta dependency tracking · SMS depth gap analysis</span>
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-5.1.1</span>WhatsApp Public Beta integration prep
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-5.1.1</span><span class="ship">WhatsApp send action GA in CJB</span><br/>
+          <span class="iid">I-5.2.2</span>SMS quiet hours bypass + dynamic ecomm SMS
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-5.2.2</span><span class="ship">TCPA compliance fix on SMS abandoned cart</span><br/>
+          <span class="iid">I-5.2.1</span>Two-way conversational SMS STARTS<br/>
+          <span class="iid">I-5.3.1</span>Internal notifications from flow
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-5.2.1</span><span class="ship">Two-way conversational SMS ships</span><br/>
+          <span class="iid">I-5.1.3</span>Cross-channel orchestration<br/>
+          <span class="iid">I-5.1.1</span>In-app message send action
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-5.1.2</span>RCS send action<br/>
+          <span class="star">★</span> <span class="iid">I-5.1.1</span>Push notifications<br/>
+          <span class="star">★</span> <span class="iid">I-5.3.1</span>AMP interactive emails (Mailmodo leapfrog)
+        </td>
+      </tr>
+
+      <!-- Credibility moment row -->
+      <tr class="cred-row">
+        <td class="pillar-cell">
+          <span style="font-size: 11px;">★ Credibility moment</span>
+          <span style="display:block; font-size:9px; font-weight:400; opacity:0.85;">Demoable proof per quarter</span>
+        </td>
+        <td class="cred-cell">
+          <strong>"It's just an email" ships</strong> ($74K PRD-stated lift) — first user-facing proof platform responds to UX work. Reverses brand decay narrative.
+        </td>
+        <td class="cred-cell">
+          <strong>AI Skill M1 launches</strong> — Klaviyo Marketing-Agent parity demo. AI is finally inside the journey, not bolted on top.
+        </td>
+        <td class="cred-cell">
+          <strong>WhatsApp GA + Eventbus complete</strong> — omnichannel claim begins. Real-time triggers + sub-hour delays prove the platform is modern.
+        </td>
+        <td class="cred-cell">
+          <strong>★ Free-tier CJB reinstated + Contact-tax reform</strong> — brand decay reversal moment. Signals to entire category Mailchimp is back. Largest single PR moment.
+        </td>
+        <td class="cred-cell">
+          <strong>Single modernized builder GA + Conversational journey editing</strong> — "Mailchimp is back, and it's modern." Sales lead-gen narrative shifts.
+        </td>
+        <td class="cred-cell">
+          <strong>Agentic per-user treatment + Vertical UIs</strong> — category-leadership narrative. Mailchimp is the omnichannel automation platform with breadth competitors can't match.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top: 14px;">Top 3 risks to the roadmap</h2>
+  <div class="grid cols-3" style="gap: 10px;">
+    <div class="card" style="border-left: 4px solid var(--bad);">
+      <div style="font-size:10px; font-weight:800; letter-spacing:.06em; color:#9A1F00; text-transform:uppercase; margin-bottom:4px;">Risk #1 · Critical Path</div>
+      <h3 style="margin: 0 0 4px; font-family: 'Source Serif 4', Georgia, serif; font-size: 13px;">Eventbus migration delays cascade</h3>
+      <p style="font-size:11px; color:var(--ink-2); margin:0;">If I-2.3.1 slips past Q3, downstream initiatives that depend on it (real-time triggers, Conversational Automations, WhatsApp send, Editor latency fix) all slip too. <strong>Mitigation:</strong> dedicated platform team, weekly exec review, gate Q4 announcement of Free-tier reinstate on Eventbus completion.</p>
+    </div>
+    <div class="card" style="border-left: 4px solid var(--warn);">
+      <div style="font-size:10px; font-weight:800; letter-spacing:.06em; color:#8A4A00; text-transform:uppercase; margin-bottom:4px;">Risk #2 · External Dependency</div>
+      <h3 style="margin: 0 0 4px; font-family: 'Source Serif 4', Georgia, serif; font-size: 13px;">WhatsApp Public Beta delay</h3>
+      <p style="font-size:11px; color:var(--ink-2); margin:0;">P5 Q3 credibility moment depends on WhatsApp Public Beta GA (currently July 2026). If beta slips, P5 Q3 narrative slips by 1-2 quarters. <strong>Mitigation:</strong> have alternate Q3 announcement queued (could lead with Eventbus + AI Skill M2 + per-step KPIs as omnichannel readiness).</p>
+    </div>
+    <div class="card" style="border-left: 4px solid #4338CA;">
+      <div style="font-size:10px; font-weight:800; letter-spacing:.06em; color:#2A1FA8; text-transform:uppercase; margin-bottom:4px;">Risk #3 · Capacity</div>
+      <h3 style="margin: 0 0 4px; font-family: 'Source Serif 4', Georgia, serif; font-size: 13px;">Engineering capacity vs scope</h3>
+      <p style="font-size:11px; color:var(--ink-2); margin:0;">35/30/25/10% effort allocation across 72 initiatives requires re-org or hiring. "Automations team roadmap is already full" (per Conversational Automations Product Review). <strong>Mitigation:</strong> headcount plan in Q1; re-prioritize ruthlessly within each pillar; defer Q5-Q6 polish to FY28 if Q1-Q3 capacity is the binding constraint.</p>
+    </div>
+  </div>
+
+  <p class="source"><strong>Roadmap methodology:</strong> Sequencing logic derived from the 5 guiding principles on Page 8. Each initiative placed in a quarter based on (a) dependency chain (Eventbus first), (b) PRD readiness (approved PRDs ship Q1), (c) Roadmap-to-Win phasing (foundational gaps F1-F9 in Q1-Q4, differentiated steals D1-D12 staged Q2-Q6), (d) effort allocation (35/30/25/10% balance maintained per quarter), (e) credibility moment cadence (one demoable proof per quarter). All 72 initiatives mapped; 10 deliberately deferred (vertical UIs Q6 = months 16-18; agentic per-user Q6 moonshot). Print-ready: 7-page PDF via Print/PDF button in toolbar.</p>
 </section>
 
 </div><!-- /panel-canvas -->
