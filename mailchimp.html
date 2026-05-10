@@ -10773,10 +10773,24 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
     margin: 0;
   }
   #panel-memo .memo {
-    max-width: 760px;
+    max-width: 880px;
     margin: 0 auto;
     padding: 0 32px;
     color: var(--ink);
+  }
+  /* Keep narrative prose at narrower line length; only let composed components use full width */
+  #panel-memo .memo > p,
+  #panel-memo .lead,
+  #panel-memo ul.memo-list,
+  #panel-memo .pull-quote,
+  #panel-memo .impact-card,
+  #panel-memo .bridge-block,
+  #panel-memo .recap-block,
+  #panel-memo .memo-footer,
+  #panel-memo .vision-block {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
   }
   #panel-memo .memo-head {
     border-bottom: 1px solid var(--line);
@@ -10956,6 +10970,452 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
     #panel-memo { box-shadow: none; border: none; padding: 0; }
     #panel-memo .memo { max-width: none; padding: 0; }
   }
+
+  /* === Bridge / Vision === */
+  #panel-memo .bridge-block {
+    border-left: 3px solid var(--brand);
+    background: linear-gradient(90deg, #FFFCF0 0%, #FFFFFF 70%);
+    padding: 16px 22px;
+    margin: 32px 0 36px;
+    border-radius: 0 8px 8px 0;
+  }
+  #panel-memo .bridge-block p {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+    font-style: italic;
+  }
+  #panel-memo .bridge-block p strong { color: var(--brand); font-weight: 700; font-style: normal; }
+  #panel-memo .bridge-block p em { color: var(--ink); font-weight: 600; font-style: italic; }
+
+  #panel-memo .vision-block {
+    background: linear-gradient(180deg, #FAFAFA 0%, #FFFFFF 100%);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--brand);
+    padding: 28px 28px;
+    margin: 12px 0 28px;
+    border-radius: 0 0 12px 12px;
+  }
+  #panel-memo .vision-block p {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0;
+    font-weight: 400;
+  }
+  #panel-memo .vision-block p em { color: var(--brand); font-style: italic; font-weight: 500; }
+  #panel-memo .vision-block p strong { color: var(--ink); font-weight: 700; }
+
+  /* === Success looks like — 3-card grid === */
+  #panel-memo .success-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 22px 0 26px;
+  }
+  #panel-memo .success-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+    background: #FFFFFF;
+  }
+  #panel-memo .success-card .sc-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--brand);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  #panel-memo .success-card .sc-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  #panel-memo .success-card .sc-row {
+    display: grid;
+    grid-template-columns: 1fr 90px 24px 100px;
+    gap: 8px;
+    align-items: baseline;
+    padding: 7px 0;
+    border-bottom: 1px dotted #EEE;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+  }
+  #panel-memo .success-card .sc-row:last-child { border-bottom: 0; }
+  #panel-memo .success-card .sc-row .sc-metric { color: var(--ink-2); }
+  #panel-memo .success-card .sc-row .sc-from { color: var(--muted); text-align: right; font-feature-settings: "tnum"; font-size: 12.5px; }
+  #panel-memo .success-card .sc-row .sc-arrow { color: var(--brand); text-align: center; font-weight: 700; }
+  #panel-memo .success-card .sc-row .sc-to { color: var(--ink); font-weight: 700; text-align: right; font-feature-settings: "tnum"; font-size: 13px; }
+  #panel-memo .success-card .sc-row.hi { background: linear-gradient(90deg, #FFFCF0 0%, transparent 100%); border-radius: 4px; padding: 7px 8px; margin: 0 -8px; }
+  #panel-memo .success-card .sc-row.hi .sc-to { color: var(--brand); }
+  #panel-memo .success-card .sc-lever {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: #F8F8F9;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  #panel-memo .success-card .sc-lever strong { color: var(--brand); }
+
+  /* === How We Win — 4 quadrants === */
+  #panel-memo .hww-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 22px 0 18px;
+  }
+  #panel-memo .hww-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: #FFFFFF;
+    border-top-width: 3px;
+  }
+  #panel-memo .hww-card.stop { border-top-color: var(--bad); background: linear-gradient(180deg, #FFF5F2 0%, #FFFFFF 60%); }
+  #panel-memo .hww-card.continue { border-top-color: var(--muted); background: linear-gradient(180deg, #F8F8F9 0%, #FFFFFF 60%); }
+  #panel-memo .hww-card.change { border-top-color: var(--brand); background: linear-gradient(180deg, #FFFCF0 0%, #FFFFFF 60%); }
+  #panel-memo .hww-card.start { border-top-color: var(--good); background: linear-gradient(180deg, #F0FAF3 0%, #FFFFFF 60%); }
+  #panel-memo .hww-card .hww-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  #panel-memo .hww-card.stop .hww-label { color: var(--bad); }
+  #panel-memo .hww-card.continue .hww-label { color: var(--muted); }
+  #panel-memo .hww-card.change .hww-label { color: var(--brand); }
+  #panel-memo .hww-card.start .hww-label { color: var(--good); }
+  #panel-memo .hww-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  #panel-memo .hww-card ul li {
+    font-family: 'Inter', sans-serif;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    padding: 5px 0 5px 14px;
+    position: relative;
+    border-bottom: 1px dotted #EEE;
+  }
+  #panel-memo .hww-card ul li:last-child { border-bottom: 0; }
+  #panel-memo .hww-card ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  #panel-memo .hww-card.stop ul li::before { color: var(--bad); }
+  #panel-memo .hww-card.change ul li::before { color: var(--brand); }
+  #panel-memo .hww-card.start ul li::before { color: var(--good); }
+  #panel-memo .hww-card ul li strong { color: var(--ink); font-weight: 700; }
+
+  /* === Strategic pillars === */
+  #panel-memo .pillar-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 22px 0 26px;
+  }
+  #panel-memo .mpillar {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 20px;
+    background: #FFFFFF;
+    border-left: 4px solid var(--brand);
+  }
+  #panel-memo .mpillar.p1 { border-left-color: #C7322E; background: linear-gradient(90deg, #FFF7F5 0%, #FFFFFF 30%); }
+  #panel-memo .mpillar.p2 { border-left-color: #C97E12; background: linear-gradient(90deg, #FFFAEF 0%, #FFFFFF 30%); }
+  #panel-memo .mpillar.p3 { border-left-color: #166D3B; background: linear-gradient(90deg, #F2FAF4 0%, #FFFFFF 30%); }
+  #panel-memo .mpillar.p4 { border-left-color: #5B21B6; background: linear-gradient(90deg, #F8F4FF 0%, #FFFFFF 30%); }
+  #panel-memo .mpillar.p5 { border-left-color: #1F4E8C; background: linear-gradient(90deg, #F2F6FB 0%, #FFFFFF 30%); }
+  #panel-memo .mpillar .mp-head { margin-bottom: 10px; }
+  #panel-memo .mpillar .mp-num {
+    display: inline-block;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--ink);
+    color: #FFF;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  #panel-memo .mpillar.p1 .mp-num { background: #C7322E; }
+  #panel-memo .mpillar.p2 .mp-num { background: #C97E12; }
+  #panel-memo .mpillar.p3 .mp-num { background: #166D3B; }
+  #panel-memo .mpillar.p4 .mp-num { background: #5B21B6; }
+  #panel-memo .mpillar.p5 .mp-num { background: #1F4E8C; }
+  #panel-memo .mpillar .mp-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    display: inline;
+  }
+  #panel-memo .mpillar .mp-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+  #panel-memo .mpillar .mp-meta .mp-internal { font-style: italic; color: var(--muted); }
+  #panel-memo .mpillar .mp-meta .mp-horizon { color: var(--ink-2); font-weight: 600; }
+  #panel-memo .mpillar ul.mp-init {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+    border-top: 1px dotted #EEE;
+    padding-top: 10px;
+  }
+  #panel-memo .mpillar ul.mp-init li {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    padding: 5px 0 5px 16px;
+    position: relative;
+  }
+  #panel-memo .mpillar ul.mp-init li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    color: var(--brand);
+    font-size: 10px;
+  }
+  #panel-memo .mpillar ul.mp-init li strong { color: var(--ink); font-weight: 700; }
+
+  /* === Guiding principles === */
+  #panel-memo .principles-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 18px 0 22px;
+  }
+  #panel-memo .gp {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 14px;
+    padding: 14px 16px;
+    background: #FAFAFB;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  #panel-memo .gp-num {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--brand);
+    line-height: 1;
+    text-align: center;
+  }
+  #panel-memo .gp-body .gp-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  #panel-memo .gp-body p {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  #panel-memo .gp-body p strong { color: var(--ink); font-weight: 700; }
+  #panel-memo .gp-body p em { color: var(--brand); font-style: italic; }
+
+  #panel-memo .effort-alloc {
+    margin: 22px 0 6px;
+  }
+  #panel-memo .effort-alloc .ea-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  #panel-memo .effort-alloc .ea-bar {
+    display: flex;
+    height: 56px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  #panel-memo .effort-alloc .ea-seg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px;
+    text-align: center;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  #panel-memo .effort-alloc .ea-seg span { display: block; opacity: 0.85; }
+  #panel-memo .effort-alloc .ea-seg strong { display: block; font-size: 14px; font-weight: 800; margin-top: 2px; }
+  #panel-memo .effort-alloc .ea-1 { background: #FFE9CC; }
+  #panel-memo .effort-alloc .ea-2 { background: #FFEFA8; }
+  #panel-memo .effort-alloc .ea-3 { background: #DCEEF6; }
+  #panel-memo .effort-alloc .ea-4 { background: #E8E2F4; }
+
+  /* === 6Q Roadmap === */
+  #panel-memo .rmap {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    margin: 20px 0 26px;
+  }
+  #panel-memo .rmap-q {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 10px;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+  }
+  #panel-memo .rmap-q.star { border-color: var(--brand); background: linear-gradient(180deg, #FFFCF0 0%, #FFFFFF 100%); }
+  #panel-memo .rmap-qlbl {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--brand);
+    margin-bottom: 2px;
+  }
+  #panel-memo .rmap-qdate {
+    font-family: 'Inter', sans-serif;
+    font-size: 9.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-bottom: 8px;
+  }
+  #panel-memo .rmap-qcred {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  #panel-memo .rmap-qnote {
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px;
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+  @media (max-width: 880px) {
+    #panel-memo .rmap { grid-template-columns: 1fr 1fr; }
+    #panel-memo .hww-grid { grid-template-columns: 1fr; }
+  }
+
+  /* === Recap === */
+  #panel-memo .recap-block {
+    background: linear-gradient(180deg, #FAFAFB 0%, #FFFFFF 100%);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brand);
+    padding: 20px 24px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0 24px;
+  }
+  #panel-memo .recap-block p {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0 0 14px;
+  }
+  #panel-memo .recap-block p:last-child { margin-bottom: 0; }
+  #panel-memo .recap-block p strong { color: var(--brand); font-weight: 700; }
+
+  /* === From → To table === */
+  #panel-memo .ft-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 22px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  #panel-memo .ft-table thead th {
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: left;
+    color: var(--muted);
+    padding: 10px 14px;
+    background: #FAFAFB;
+    border-bottom: 1px solid var(--line);
+  }
+  #panel-memo .ft-table thead th.ft-th-from { color: var(--bad); }
+  #panel-memo .ft-table thead th.ft-th-to { color: var(--good); }
+  #panel-memo .ft-table thead th.ft-th-arrow { width: 24px; text-align: center; }
+  #panel-memo .ft-table thead th.ft-th-pillar { width: 90px; text-align: center; }
+  #panel-memo .ft-table tbody td {
+    padding: 14px;
+    vertical-align: top;
+    font-family: 'Inter', sans-serif;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    border-bottom: 1px solid var(--line);
+  }
+  #panel-memo .ft-table tbody tr:last-child td { border-bottom: 0; }
+  #panel-memo .ft-table tbody td:first-child { background: #FFF8F5; border-right: 1px solid var(--line); }
+  #panel-memo .ft-table tbody td:nth-child(3) { background: #F4FAF6; border-left: 1px solid var(--line); }
+  #panel-memo .ft-table tbody td strong { color: var(--ink); font-weight: 700; }
+  #panel-memo .ft-table tbody td em { color: var(--ink-2); font-style: italic; font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: .04em; margin-right: 4px; }
+  #panel-memo .ft-table tbody td.ft-arrow { background: #FFF; text-align: center; color: var(--brand); font-weight: 700; font-size: 18px; vertical-align: middle; padding: 0 6px; border-right: 0; border-left: 0; }
+  #panel-memo .ft-table tbody td.ft-pill { text-align: center; padding: 14px 8px; }
+  #panel-memo .ft-table .ftp {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #FFF;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin: 2px 2px;
+  }
+  #panel-memo .ft-table .ftp.p1 { background: #C7322E; }
+  #panel-memo .ft-table .ftp.p2 { background: #C97E12; }
+  #panel-memo .ft-table .ftp.p3 { background: #166D3B; }
+  #panel-memo .ft-table .ftp.p4 { background: #5B21B6; }
+  #panel-memo .ft-table .ftp.p5 { background: #1F4E8C; }
+
+  @media (max-width: 760px) {
+    #panel-memo .ft-table thead { display: none; }
+    #panel-memo .ft-table, #panel-memo .ft-table tbody, #panel-memo .ft-table tr, #panel-memo .ft-table td { display: block; width: 100%; }
+    #panel-memo .ft-table tbody td { border-right: 0 !important; border-left: 0 !important; }
+    #panel-memo .ft-table tbody td.ft-arrow { display: none; }
+  }
 </style>
 
 <article class="memo">
@@ -11087,13 +11547,387 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
 
   <p style="margin-top: 24px;">The customer-side metrics that erode the business case for adoption itself are also worsening: new platform bookings MRR is down <strong>−10.3% YoY</strong>; the gap between Mailchimp's brand sentiment (Trustpilot 2.7/5) and the brand sentiment of the emerging-threat cohort (G2 average 4.65/5) is widening, not narrowing; and operator forums increasingly cite Mailchimp as the <em>"starter tool you outgrow,"</em> not the <em>"automation platform you scale on."</em></p>
 
-  <p>This is the strategic situation as it stands today. The next memo will articulate the strategic question this complication forces, and the answer we are committing to.</p>
+  <!-- ========================================================================== -->
+  <!-- ============== BRIDGE (transition: problem → strategy) =================== -->
+  <!-- ========================================================================== -->
+
+  <div class="bridge-block">
+    <p>What follows is the strategy we are committing to in response. It runs on a single <strong>18-month arc</strong>, not three sequential eras: trust work, platform modernization, and AI breadth advance <em>in parallel every quarter</em>, with a dependency chain that determines the order each capability ships — and one user-visible credibility moment delivered every quarter so the brand narrative resets as the product does.</p>
+  </div>
+
+  <!-- ========================================================================== -->
+  <!-- ============== VISION ===================================================== -->
+  <!-- ========================================================================== -->
+
+  <h2 class="memo-h2">Vision</h2>
+
+  <div class="vision-block">
+    <p>Mailchimp Customer Journey Builder will become <em>the omnichannel marketing journey platform that builds, runs, and optimizes itself for the customer.</em> It will turn every Mailchimp marketer from a generalist who blames themselves for not <em>"getting deep enough"</em> into an operator who ships their first flow in a week, runs decision-grade reports they trust, and reaches every customer on the channel they prefer — with AI building flows alongside them and triggering on the moments their customers act, in real time. The platform earns the right to compound the customer's revenue, so the marketer focuses on growing their business — not assembling a flow.</p>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ========================================================================== -->
+  <!-- ============== SUCCESS LOOKS LIKE (3 metric cards) ======================== -->
+  <!-- ========================================================================== -->
+
+  <h2 class="memo-h2">Success looks like — current state to target state</h2>
+
+  <p>Across three layers — product adoption, customer outcome, and Mailchimp business — these are the metric movements the strategy is committed to. Definitions and methodology are in the <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model tab</a>.</p>
+
+  <div class="success-grid">
+    <div class="success-card">
+      <div class="sc-eyebrow">Layer 1</div>
+      <div class="sc-title">Product adoption — the funnel reopens</div>
+      <div class="sc-row"><div class="sc-metric">Discovery — entry-point click</div><div class="sc-from">30–40%</div><div class="sc-arrow">→</div><div class="sc-to">50%+</div></div>
+      <div class="sc-row"><div class="sc-metric">Initiating flow creation</div><div class="sc-from">14–15%</div><div class="sc-arrow">→</div><div class="sc-to">22–25%</div></div>
+      <div class="sc-row hi"><div class="sc-metric">True adoption — FTU sending in 30d</div><div class="sc-from">6.8%</div><div class="sc-arrow">→</div><div class="sc-to">15%+</div></div>
+      <div class="sc-row"><div class="sc-metric">Setup completion rate</div><div class="sc-from">50–60%</div><div class="sc-arrow">→</div><div class="sc-to">70–75%</div></div>
+      <div class="sc-row"><div class="sc-metric">Time to first send (median)</div><div class="sc-from">14–21d</div><div class="sc-arrow">→</div><div class="sc-to">7–10d</div></div>
+      <div class="sc-row"><div class="sc-metric">Multi-automation adoption (>1 flow)</div><div class="sc-from">30–40%</div><div class="sc-arrow">→</div><div class="sc-to">50%+</div></div>
+      <div class="sc-row"><div class="sc-metric">Setup abandonment rate</div><div class="sc-from">40–50%</div><div class="sc-arrow">→</div><div class="sc-to">25–30%</div></div>
+    </div>
+
+    <div class="success-card">
+      <div class="sc-eyebrow">Layer 2</div>
+      <div class="sc-title">Customer outcome — per active customer</div>
+      <div class="sc-row"><div class="sc-metric">Open rate (auto)</div><div class="sc-from">35–42%</div><div class="sc-arrow">→</div><div class="sc-to">42–48%</div></div>
+      <div class="sc-row"><div class="sc-metric">Click-through</div><div class="sc-from">5–7%</div><div class="sc-arrow">→</div><div class="sc-to">7–9%</div></div>
+      <div class="sc-row"><div class="sc-metric">Send frequency / adopter / mo</div><div class="sc-from">8–12</div><div class="sc-arrow">→</div><div class="sc-to">15–18</div></div>
+      <div class="sc-row"><div class="sc-metric">Engagement consistency (>1 send/wk)</div><div class="sc-from">~45%</div><div class="sc-arrow">→</div><div class="sc-to">60%</div></div>
+      <div class="sc-row"><div class="sc-metric">Audience fatigue index</div><div class="sc-from">~12%</div><div class="sc-arrow">→</div><div class="sc-to">7–8%</div></div>
+      <div class="sc-row"><div class="sc-metric">Targeting precision (% segmented)</div><div class="sc-from">~55%</div><div class="sc-arrow">→</div><div class="sc-to">75%+</div></div>
+      <div class="sc-row"><div class="sc-metric">Conversion rate / campaign</div><div class="sc-from">1.5–2.0%</div><div class="sc-arrow">→</div><div class="sc-to">2.5–3.0%</div></div>
+      <div class="sc-row"><div class="sc-metric">Revenue / campaign sent</div><div class="sc-from">$30–50</div><div class="sc-arrow">→</div><div class="sc-to">$50–80</div></div>
+      <div class="sc-row hi"><div class="sc-metric">Annual incremental rev / customer</div><div class="sc-from">~$7,400</div><div class="sc-arrow">→</div><div class="sc-to">$8,400–9,600</div></div>
+    </div>
+
+    <div class="success-card">
+      <div class="sc-eyebrow">Layer 3</div>
+      <div class="sc-title">Mailchimp business</div>
+      <div class="sc-row hi"><div class="sc-metric">Active automation adopters</div><div class="sc-from">153K</div><div class="sc-arrow">→</div><div class="sc-to">178K</div></div>
+      <div class="sc-row"><div class="sc-metric">Direct adopter MRR</div><div class="sc-from">$20.8M/mo</div><div class="sc-arrow">→</div><div class="sc-to">$24–29M/mo</div></div>
+      <div class="sc-row"><div class="sc-metric">Per-adopter attributed revenue</div><div class="sc-from">$616/mo</div><div class="sc-arrow">→</div><div class="sc-to">$700–800/mo</div></div>
+      <div class="sc-row"><div class="sc-metric">Causal automation lift (annualized)</div><div class="sc-from">$55–75M</div><div class="sc-arrow">→</div><div class="sc-to">$75–100M</div></div>
+      <div class="sc-row hi"><div class="sc-metric">FY27 incremental ARR commit</div><div class="sc-from">—</div><div class="sc-arrow">→</div><div class="sc-to">+$20–25M</div></div>
+      <div class="sc-row"><div class="sc-metric">ECU customer segment expansion</div><div class="sc-from">29.7%</div><div class="sc-arrow">→</div><div class="sc-to">40%</div></div>
+      <div class="sc-lever">Lever decomposition (Mid scenario sums to <strong>$21.4M</strong>): L1 $12.2M · L2 $2.1M · L3 $0.9M · L4 $1.3M · L5 $1.7M · L6 $3.2M.</div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ========================================================================== -->
+  <!-- ============== HOW WE WIN (Stop / Continue / Change / Start) ============= -->
+  <!-- ========================================================================== -->
+
+  <h2 class="memo-h2">How we win</h2>
+
+  <p>Four moves. Stop the work that no longer compounds. Continue the few moats that already do. Change the build order, the architecture, the AI surface, and the metrics we manage to. Start what we have not previously committed to — six credibility moments and an AI surface that thinks on the customer's behalf.</p>
+
+  <div class="hww-grid">
+    <div class="hww-card stop">
+      <div class="hww-label">Stop</div>
+      <ul>
+        <li>Treating CJB as a maintenance product</li>
+        <li>Adding feature breadth before fixing operational reliability</li>
+        <li>Charging Free customers for automation in a market where Shopify gives it away — reinstate basic CJB on Free</li>
+        <li>Building SMS depth in-house — partner with Postscript or Attentive instead</li>
+        <li>Chasing Customer.io's Liquid / SaaS-technical templating JTBD (explicitly out of scope)</li>
+        <li>Investing further in Fusion / QBO / L2C / Customer Hub from this product (per direction)</li>
+      </ul>
+    </div>
+
+    <div class="hww-card continue">
+      <div class="hww-label">Continue</div>
+      <ul>
+        <li>Investing in the 1.82M active-customer distribution moat</li>
+        <li>Building on Intuit Assist + Freddie AI shared infra — unique vs pure-play AI competitors</li>
+        <li>Cross-segment generalist positioning — every vertical, not one</li>
+        <li>Email as the anchor channel — our wedge into omnichannel</li>
+        <li>Deliverability and sender-reputation investment</li>
+      </ul>
+    </div>
+
+    <div class="hww-card change">
+      <div class="hww-label">Change</div>
+      <ul>
+        <li><strong>The build order:</strong> operational trust before AI breadth — 35% of effort to functional trust, per the layered framework</li>
+        <li><strong>The architecture:</strong> monolith → eventbus, batch → real-time, 1-hour minimum delay → sub-second</li>
+        <li><strong>The AI surface:</strong> from "AI chat bolted on" to AI that thinks on the customer's behalf</li>
+        <li><strong>The reporting:</strong> from views that disagree to decision-grade attribution</li>
+        <li><strong>The metrics we manage to:</strong> from feature ship-rate to the trust + activation + outcome triplet</li>
+      </ul>
+    </div>
+
+    <div class="hww-card start">
+      <div class="hww-label">Start</div>
+      <ul>
+        <li>Shipping one credibility moment every quarter — six in 18 months</li>
+        <li>AI-built flows from a website URL in 3 clicks — Klaviyo Marketing Agent parity, Q2 FY27 Q1</li>
+        <li>Native multi-channel inside the canvas — WhatsApp Q3, Push + In-app + AMP later</li>
+        <li>Conversational journey editing in Intuit Assist — Q5 FY27 Q4</li>
+        <li>Industry-vertical template galleries + ICP-driven onboarding paths</li>
+        <li>Agentic per-user treatment at SMB scale — Q6 FY28 Q1 moonshot</li>
+      </ul>
+    </div>
+  </div>
+
+  <p style="margin-top: 22px;"><strong>How this differs from competitors.</strong> Klaviyo wins on autonomous depth on core flow agent JTBDs; we win on AI surface breadth (7 surfaces vs 1) leveraged across roughly <strong>10× the install base</strong> and the shared infrastructure of Intuit Assist + Freddie AI. Shopify wins on Shopify-native ecommerce depth and a free-with-the-storefront wedge; we win on cross-platform reach (any commerce, any vertical) and AI generation alongside automation. Attentive wins on enterprise SMS conversion craft; we orchestrate omnichannel inside the journey at SMB scale on infrastructure they don't have. Customer.io's Liquid / SaaS-technical JTBD is one we explicitly cede; Auxia's enterprise orchestration depth is a category we re-enter at SMB scale in the Q6 moonshot.</p>
+
+  <p><strong>How this differs from our past.</strong> Where the prior 18 months optimized for feature ship-rate and treated AI as a chat surface bolted onto an aging workflow, the next 18 months sequence by trust dependency, treat AI as the cognitive substrate of every interaction, and ship one user-visible credibility moment every quarter — to reset the brand narrative externally and team confidence internally.</p>
+
+  <hr class="divider"/>
+
+  <!-- ========================================================================== -->
+  <!-- ============== STRATEGIC PILLARS + KEY INITIATIVES ======================= -->
+  <!-- ========================================================================== -->
+
+  <h2 class="memo-h2">Strategic pillars + key initiatives</h2>
+
+  <p>Five customer-benefit-named pillars. <strong>23 sub-themes. 72 initiatives.</strong> The full inventory is in the <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas tab</a>; the highest-leverage initiatives in each pillar are below.</p>
+
+  <div class="pillar-stack">
+
+    <div class="mpillar p1">
+      <div class="mp-head">
+        <div class="mp-num">P1</div>
+        <div class="mp-title">"Make my automations actually work"</div>
+        <div class="mp-meta"><span class="mp-internal">Quality &amp; Trust</span> · <span class="mp-horizon">0–3 months</span> · <span>5 sub-themes · 17 initiatives</span></div>
+      </div>
+      <ul class="mp-init">
+        <li><strong>Journey Builder front-end refactor</strong> — closes the single-largest HVC dollar driver ($16,507/mo)</li>
+        <li><strong>Reporting / stats correctness fix</strong> — restores decision-grade attribution ($6,218/mo)</li>
+        <li><strong>Reinstate basic CJB on Free plan</strong> — closes Shopify's "free with the storefront" wedge</li>
+        <li><strong>Contact-tax billing reform</strong> — addresses the HVC churn driver around inflated billable contacts</li>
+      </ul>
+    </div>
+
+    <div class="mpillar p2">
+      <div class="mp-head">
+        <div class="mp-num">P2</div>
+        <div class="mp-title">"Trigger on what my customers actually do"</div>
+        <div class="mp-meta"><span class="mp-internal">Data Activation</span> · <span class="mp-horizon">0–6 months</span> · <span>4 sub-themes · 16 initiatives</span></div>
+      </div>
+      <ul class="mp-init">
+        <li><strong>Monolith → Eventbus migration</strong> — gates real-time triggers, Conversational Automations, and WhatsApp send ($21,287/mo combined pain)</li>
+        <li><strong>12+ new domain-event triggers</strong> — Klaviyo trigger-catalog parity</li>
+        <li><strong>Event-property access in flow branches and emails</strong> ($10,000/mo)</li>
+        <li><strong>Sub-hour delays + real-time event-driven triggers</strong> — closes the 1-hour vs 5-minute conversion-window gap</li>
+      </ul>
+    </div>
+
+    <div class="mpillar p3">
+      <div class="mp-head">
+        <div class="mp-num">P3</div>
+        <div class="mp-title">"From signup to live automation in 5 minutes"</div>
+        <div class="mp-meta"><span class="mp-internal">Activation Foundation</span> · <span class="mp-horizon">3–9 months</span> · <span>7 sub-themes · 20 initiatives</span></div>
+      </div>
+      <ul class="mp-init">
+        <li><strong>"It's just an email" welcome flow — zero-step path</strong> (Q1 credibility moment; $74K PRD-stated lift)</li>
+        <li><strong>Trigger modal redesign</strong> — addresses the "wall of jargon" complaint ($16,000/mo cluster)</li>
+        <li><strong>Content-completion gating before "Turn On"</strong> ($11,384/mo)</li>
+        <li><strong>Industry template gallery + ICP-driven homepage</strong></li>
+      </ul>
+    </div>
+
+    <div class="mpillar p4">
+      <div class="mp-head">
+        <div class="mp-num">P4</div>
+        <div class="mp-title">"Let AI do the building and optimizing"</div>
+        <div class="mp-meta"><span class="mp-internal">Agentic Marketing</span> · <span class="mp-horizon">6–12 months</span> · <span>4 sub-themes · 13 initiatives</span></div>
+      </div>
+      <ul class="mp-init">
+        <li><strong>AI Skill M1 — autonomous setup agent</strong> (Q2 credibility moment; URL → scaffolded flows in ~3 clicks; Klaviyo Marketing Agent parity)</li>
+        <li><strong>Single modernized Automations builder</strong> (Q5 credibility moment; $17,772/mo migration pain)</li>
+        <li><strong>Conversational journey editing in Intuit Assist</strong> (Q5)</li>
+        <li><strong>Agentic per-user treatment + AI-driven performance</strong> (Q6 moonshot)</li>
+      </ul>
+    </div>
+
+    <div class="mpillar p5">
+      <div class="mp-head">
+        <div class="mp-num">P5</div>
+        <div class="mp-title">"Reach my customers wherever they are"</div>
+        <div class="mp-meta"><span class="mp-internal">Cross-Channel Reach</span> · <span class="mp-horizon">9–18 months</span> · <span>3 sub-themes · 6 initiatives</span></div>
+      </div>
+      <ul class="mp-init">
+        <li><strong>WhatsApp send action in CJB + Push notification + In-app message</strong> (Q3 credibility moment)</li>
+        <li><strong>Two-way conversational SMS in journey + WhatsApp 2-way</strong> (post-WhatsApp GA)</li>
+        <li><strong>AMP interactive emails + internal notifications</strong></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ========================================================================== -->
+  <!-- ============== GUIDING PRINCIPLES ======================================== -->
+  <!-- ========================================================================== -->
+
+  <h2 class="memo-h2">Guiding principles for roadmap sequencing</h2>
+
+  <p>Five principles govern how we sequence the 72 initiatives across six quarters. They reflect a hard-learned lesson from the past 18 months: the cost of getting trust wrong is not slower adoption — it is renewal-cycle attrition that becomes visible too late to recover.</p>
+
+  <div class="principles-stack">
+    <div class="gp">
+      <div class="gp-num">1</div>
+      <div class="gp-body"><div class="gp-title">Layered, parallel orchestration — not sequential phases</div><p>We do not wait two quarters to ship AI; we do not ship only AI while bugs persist. We run all four trust layers (Functional, Cognitive, Outcome, Emotional) every quarter with weighted emphasis. The error mode is treating these as phases instead of weights.</p></div>
+    </div>
+    <div class="gp">
+      <div class="gp-num">2</div>
+      <div class="gp-body"><div class="gp-title">AI cannot compensate for broken operational trust</div><p>Functional trust gets <strong>35% of effort</strong>. We fix bugs, reliability, data correctness, and sending fundamentals before — and alongside — every AI experience. AI experiences amplify customer anxiety on a broken foundation.</p></div>
+    </div>
+    <div class="gp">
+      <div class="gp-num">3</div>
+      <div class="gp-body"><div class="gp-title">Cognitive simplification is the highest-leverage AI bet</div><p>We do not ship AI chat bolted onto workflows. We ship AI that <em>thinks on the customer's behalf</em>. Confidence is "I know what to do next," not "I have a chatbot."</p></div>
+    </div>
+    <div class="gp">
+      <div class="gp-num">4</div>
+      <div class="gp-body"><div class="gp-title">Frame as "trust recovery + category reinvention" — one system</div><p>Stabilization protects retention; simplification drives adoption; intelligence creates delight; autonomy builds the moat. We communicate this as one program: stabilization is part of the AI strategy, not a precondition for it.</p></div>
+    </div>
+    <div class="gp">
+      <div class="gp-num">5</div>
+      <div class="gp-body"><div class="gp-title">Sequence by dependency chain + ship one credibility moment every quarter</div><p>The Eventbus migration gates real-time triggers, Conversational Automations, and WhatsApp send — three of the five pillars depend on it. The Journey Builder front-end refactor independently closes the single-largest HVC pain dollar driver ($16,507/mo). Six quarters, six credibility moments — each visible externally (PR, brand, operator forums) and internally (team confidence, recruiting).</p></div>
+    </div>
+  </div>
+
+  <div class="effort-alloc">
+    <div class="ea-title">Effort allocation across the four trust layers</div>
+    <div class="ea-bar">
+      <div class="ea-seg ea-1" style="flex: 35;"><span>Functional Trust</span><strong>35%</strong></div>
+      <div class="ea-seg ea-2" style="flex: 30;"><span>Cognitive Simplicity</span><strong>30%</strong></div>
+      <div class="ea-seg ea-3" style="flex: 25;"><span>Outcome Trust + Intelligence</span><strong>25%</strong></div>
+      <div class="ea-seg ea-4" style="flex: 10;"><span>Emotional Partnership + Autonomy</span><strong>10%</strong></div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ========================================================================== -->
+  <!-- ============== 6-QUARTER ROADMAP ========================================= -->
+  <!-- ========================================================================== -->
+
+  <h2 class="memo-h2">6-quarter roadmap — May 2026 → October 2027</h2>
+
+  <p>Each quarter ships one named credibility moment that maps to the layered trust framework. The full per-pillar swimlane detail is in the <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas tab</a>.</p>
+
+  <div class="rmap">
+    <div class="rmap-q">
+      <div class="rmap-qlbl">Q1</div>
+      <div class="rmap-qdate">May–Jul '26 · FY26 Q4</div>
+      <div class="rmap-qcred">"It's just an email" ships</div>
+      <div class="rmap-qnote">First user-facing UX proof. Reverses brand-decay narrative externally; resets team velocity internally. ($74K PRD-stated activation lift.)</div>
+    </div>
+    <div class="rmap-q">
+      <div class="rmap-qlbl">Q2</div>
+      <div class="rmap-qdate">Aug–Oct '26 · FY27 Q1</div>
+      <div class="rmap-qcred">AI Skill M1 launches</div>
+      <div class="rmap-qnote">Klaviyo Marketing Agent parity demo. URL → scaffolded flows in 3 clicks. First public AI proof point.</div>
+    </div>
+    <div class="rmap-q">
+      <div class="rmap-qlbl">Q3</div>
+      <div class="rmap-qdate">Nov '26–Jan '27 · FY27 Q2</div>
+      <div class="rmap-qcred">WhatsApp GA + Eventbus complete</div>
+      <div class="rmap-qnote">Omnichannel claim begins. Real-time triggers and sub-hour delays prove the platform is modern.</div>
+    </div>
+    <div class="rmap-q star">
+      <div class="rmap-qlbl">Q4 ★</div>
+      <div class="rmap-qdate">Feb–Apr '27 · FY27 Q3</div>
+      <div class="rmap-qcred">Free-tier CJB reinstated + Contact-tax reform</div>
+      <div class="rmap-qnote">Largest single PR moment of the program. Closes the "barely usable on Free" narrative; re-opens the Free-to-Paid acquisition funnel.</div>
+    </div>
+    <div class="rmap-q">
+      <div class="rmap-qlbl">Q5</div>
+      <div class="rmap-qdate">May–Jul '27 · FY27 Q4</div>
+      <div class="rmap-qcred">Single modernized builder GA + Conversational journey editing</div>
+      <div class="rmap-qnote">"Mailchimp is back, and it's modern." The modern builder ships; conversational editing in Intuit Assist live.</div>
+    </div>
+    <div class="rmap-q">
+      <div class="rmap-qlbl">Q6</div>
+      <div class="rmap-qdate">Aug–Oct '27 · FY28 Q1</div>
+      <div class="rmap-qcred">Agentic per-user treatment + Vertical UIs</div>
+      <div class="rmap-qnote">Positions for category leadership. Per-user message + channel + timing decisions in real time, served at SMB scale.</div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ========================================================================== -->
+  <!-- ============== EXECUTIVE RECAP =========================================== -->
+  <!-- ========================================================================== -->
+
+  <h2 class="memo-h2">Executive recap</h2>
+
+  <div class="recap-block">
+    <p>Mailchimp Customer Journey Builder is a <strong>$1.1B-of-customer-revenue product</strong> (the revenue flowing through Mailchimp automations annually, derived from PRD-stated $616/mo per adopter × 153K adopters) that has been <strong>quietly losing operational trust, activation funnel, and competitive narrative for 18 months</strong>. Cumulative impact over the past 12 months is roughly <strong>$30–55M</strong> — most of it modeled and counterfactual rather than booked, and the FY27 ARR commit (<strong>$20–25M</strong>) is sized to recover a meaningful slice of that drag, not all of it.</p>
+
+    <p>The strategy is structured as <strong>one 18-month arc with three workstreams running in parallel</strong> under a layered trust framework: <strong>Pillars 1–2</strong> fix and modernize the foundation (operational reliability + real-time triggers), <strong>Pillar 3</strong> re-opens the activation funnel, and <strong>Pillars 4–5</strong> reclaim the AI and channel narrative. Each quarter ships one credibility moment. Each principle keeps trust work and AI work running together, not in sequence. By <strong>Q6 FY28</strong>, Mailchimp Customer Journey Builder is the platform that builds, runs, and optimizes itself for the customer — and the marketer focuses on growing their business, not assembling a flow.</p>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- ========================================================================== -->
+  <!-- ============== CUSTOMER FROM → TO TABLE ================================= -->
+  <!-- ========================================================================== -->
+
+  <h2 class="memo-h2">Customer From → To — the six transformations that matter</h2>
+
+  <p>The strategy succeeds when the customer's lived experience changes in the following six ways. Each row pairs the functional and emotional cost today with the functional and emotional benefit at the end of the 18-month arc, and names the pillar that delivers it.</p>
+
+  <table class="ft-table">
+    <thead>
+      <tr>
+        <th class="ft-th-from">Today — functional + emotional cost</th>
+        <th class="ft-th-arrow"></th>
+        <th class="ft-th-to">FY28 — functional + emotional benefit</th>
+        <th class="ft-th-pillar">Pillar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>"I just haven't gotten deep enough into it yet."</strong> Welcome automation in draft for over a year. <em>Functional:</em> customer foregoes ~$84–184/mo in attributed revenue. <em>Emotional:</em> self-blame, guilt, declining trust in the category.</td>
+        <td class="ft-arrow">→</td>
+        <td><strong>"My flows are running themselves."</strong> First flow live in a week via the <em>"It's just an email"</em> zero-step path; AI suggests the next two flows. <em>Functional:</em> +$1,000–2,200 annual incremental revenue. <em>Emotional:</em> agency, confidence, pride.</td>
+        <td class="ft-pill"><span class="ftp p3">P3</span><span class="ftp p4">P4</span></td>
+      </tr>
+      <tr>
+        <td><strong>Builder breaks mid-flow.</strong> Replicate-flow errors. View-Email shows stale content. Single-largest HVC dollar driver — $16,507/mo of pain.</td>
+        <td class="ft-arrow">→</td>
+        <td><strong>Builder I trust to ship.</strong> Front-end refactored in Q1; single modernized builder GA in Q5. <em>Emotional:</em> the tool stops being the obstacle to the work.</td>
+        <td class="ft-pill"><span class="ftp p1">P1</span></td>
+      </tr>
+      <tr>
+        <td><strong>Numbers don't match across views.</strong> September 2025 attribution change broke historical comparability for an entire HVC cohort. $6,218/mo HVC pain. <em>Emotional:</em> distrust in the data → distrust in the platform.</td>
+        <td class="ft-arrow">→</td>
+        <td><strong>Decision-grade reports.</strong> Per-step KPIs visible inline. Reporting that finance and renewal teams can both quote. Renewal conversations focus on value, not on data disputes.</td>
+        <td class="ft-pill"><span class="ftp p1">P1</span></td>
+      </tr>
+      <tr>
+        <td><strong>1-hour minimum delay between trigger and send.</strong> Abandoned-cart automation runs after the conversion window has closed. Customers describe needing 5-minute lag to match their site analytics.</td>
+        <td class="ft-arrow">→</td>
+        <td><strong>Sub-second triggers + sub-hour delays.</strong> Eventbus migration complete in Q3. Mailchimp matches the cadence of every other tool in the customer's stack.</td>
+        <td class="ft-pill"><span class="ftp p2">P2</span></td>
+      </tr>
+      <tr>
+        <td><strong>Email + US-only SMS in the canvas.</strong> WhatsApp, Push, AMP, in-app live outside the journey when they exist at all. Operators perceive Mailchimp as <em>"fast to start, but I outgrow it."</em></td>
+        <td class="ft-arrow">→</td>
+        <td><strong>Multi-channel native inside one journey.</strong> Email + SMS + WhatsApp + Push + AMP + In-app. WhatsApp Q3, Push + In-app later, AMP Q6. <em>Emotional:</em> Mailchimp orchestrates the conversation — channels follow.</td>
+        <td class="ft-pill"><span class="ftp p5">P5</span></td>
+      </tr>
+      <tr>
+        <td><strong>Flow setup takes days of browsing, configuration, and support escalation</strong> to surface what should be a one-page picker. Klaviyo's Marketing Agent ships flows from a URL in 3 clicks; Mailchimp does not have an equivalent.</td>
+        <td class="ft-arrow">→</td>
+        <td><strong>AI builds with me.</strong> Flows scaffolded from a website URL in 3 clicks (AI Skill M1, Q2). Conversational journey editing in Intuit Assist (Q5). Agentic per-user treatment at SMB scale (Q6).</td>
+        <td class="ft-pill"><span class="ftp p4">P4</span></td>
+      </tr>
+    </tbody>
+  </table>
 
   <!-- Memo footer / sources -->
   <div class="memo-footer">
-    <strong>Sources cited inline:</strong> BigQuery <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 11px;">mc-business-intelligence.bi_aggregate.product_journey_monthly</code> + <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 11px;">mbr_monthly</code> joined via <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 11px;">agg_key</code> (Apr 2026 snapshot; trailing 12-month aggregations May 2025–Apr 2026). HVC Risk Map (73 themes, $177.5K/mo HVC MRR exposure across 18 months Slack VoC + 38 UX research entries). User Research (50 HeyMarvin videos, 21 customer briefs). Voice of Customer (Trustpilot 1,390 reviews; G2 12,698 reviews; Reddit + operator forums). Roadmap to Win (9 foundational gaps + 12 differentiated steals). Klaviyo competitive brief (26 named gaps). Shopify competitive brief (16 named gaps). Emerging Threats brief (6 startups). Customer outcome figures (Caden Lane, Hard Yakka, Corkcicle) sourced from Klaviyo published case studies via the Klaviyo brief. All YoY comparisons use <strong>last 12mo (May 2025–Apr 2026)</strong> vs <strong>prior 12mo (May 2024–Apr 2025)</strong>. Loss-attribution decomposition methodology documented in <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution tab</a>; growth-target reconciliation in <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model tab</a>; full initiative inventory in <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas tab</a>.
-    <br/><br/>
-    <em>This is Memo 1 of 2. Memo 2 will articulate the strategic question and recommended answer.</em>
+    <strong>Sources cited inline:</strong> BigQuery <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 11px;">mc-business-intelligence.bi_aggregate.product_journey_monthly</code> + <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 11px;">mbr_monthly</code> joined via <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 11px;">agg_key</code> (Apr 2026 snapshot; trailing 12-month aggregations May 2025–Apr 2026). HVC Risk Map (73 themes, $177.5K/mo HVC MRR exposure across 18 months Slack VoC + 38 UX research entries). User Research (50 HeyMarvin videos, 21 customer briefs). Voice of Customer (Trustpilot 1,390 reviews; G2 12,698 reviews; Reddit + operator forums). Roadmap to Win (9 foundational gaps + 12 differentiated steals). Klaviyo competitive brief (26 named gaps). Shopify competitive brief (16 named gaps). Emerging Threats brief (6 startups). Customer outcome figures (Caden Lane, Hard Yakka, Corkcicle) sourced from Klaviyo published case studies via the Klaviyo brief. All YoY comparisons use <strong>last 12mo (May 2025–Apr 2026)</strong> vs <strong>prior 12mo (May 2024–Apr 2025)</strong>. Loss-attribution decomposition methodology documented in <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution tab</a>; growth-target reconciliation in <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model tab</a>; full initiative inventory and per-pillar roadmap in <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas tab</a>.
   </div>
 
 </article>
