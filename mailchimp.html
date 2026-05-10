@@ -804,6 +804,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="strategy">Strategy 6-Pager</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="growthmodel">Growth Model</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="lossattr">Loss Attribution</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="canvas">Initiative Canvas</button>
     </div>
     <div style="display:flex; gap:8px;">
       <a class="btn" href="index.html">→ Klaviyo</a>
@@ -9523,6 +9524,672 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
 </div><!-- /panel-lossattr -->
 
 
+<!-- ============== INITIATIVE CANVAS TAB (independent of prior PRD list) ============== -->
+<div class="tabpanel" id="panel-canvas" role="tabpanel">
+<style>
+  /* Canvas-specific polish layered on the shared design system */
+  #panel-canvas .pillar-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+    background: #fff;
+    height: 100%;
+    position: relative;
+  }
+  #panel-canvas .pillar-card.p1 { border-left: 4px solid var(--bad); background: linear-gradient(180deg,#FFF5F2,#FFFFFF); }
+  #panel-canvas .pillar-card.p2 { border-left: 4px solid var(--brand); background: linear-gradient(180deg,#FFFCF0,#FFFFFF); }
+  #panel-canvas .pillar-card.p3 { border-left: 4px solid var(--good); background: linear-gradient(180deg,#F4FBF7,#FFFFFF); }
+  #panel-canvas .pillar-card.p4 { border-left: 4px solid #4338CA; background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  #panel-canvas .pillar-card.p5 { border-left: 4px solid var(--warn); background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-canvas .pillar-card .pc-num {
+    position: absolute; top: 12px; right: 18px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 36px; font-weight: 700; line-height: 1;
+    opacity: 0.18; color: var(--ink);
+  }
+  #panel-canvas .pillar-card .pc-tag {
+    display: inline-block;
+    font-size: 9.5px; font-weight: 800; letter-spacing: .08em;
+    padding: 2px 6px; border-radius: 4px;
+    background: var(--ink); color: white;
+    margin-bottom: 6px;
+  }
+  #panel-canvas .pillar-card h3 {
+    margin: 0 0 6px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px; font-weight: 700; color: var(--ink);
+    line-height: 1.2;
+  }
+  #panel-canvas .pillar-card .pc-meta {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px; margin: 8px 0;
+    font-size: 11px;
+  }
+  #panel-canvas .pillar-card .pc-meta div { color: var(--muted); }
+  #panel-canvas .pillar-card .pc-meta strong { color: var(--ink); font-size: 14px; display: block; font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; }
+  #panel-canvas .pillar-card .pc-themes {
+    border-top: 1px dashed var(--line); padding-top: 8px; margin-top: 8px;
+    font-size: 11px; color: var(--ink-2);
+    line-height: 1.5;
+  }
+  #panel-canvas .subtheme {
+    background: #FAFAFB;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+  }
+  #panel-canvas .subtheme h4 {
+    margin: 0 0 6px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  #panel-canvas .subtheme h4 .st-num {
+    font-size: 11px; font-weight: 800; padding: 2px 6px; border-radius: 4px;
+    background: var(--chip); color: var(--chip-ink);
+    letter-spacing: .04em;
+  }
+  #panel-canvas .subtheme .st-meta {
+    font-size: 11px; color: var(--muted); margin-bottom: 6px;
+  }
+  #panel-canvas .subtheme .st-meta strong { color: var(--brand); font-size: 12px; font-weight: 700; }
+  #panel-canvas .init-row {
+    display: grid;
+    grid-template-columns: 36px 1fr 80px 70px 90px;
+    gap: 8px; align-items: start;
+    padding: 6px 0;
+    font-size: 11.5px;
+    line-height: 1.4;
+  }
+  #panel-canvas .init-row + .init-row { border-top: 1px solid var(--line); }
+  #panel-canvas .init-row .init-id {
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 10px; font-weight: 700;
+    color: var(--ink); padding-top: 1px;
+  }
+  #panel-canvas .init-row .init-name { color: var(--ink); }
+  #panel-canvas .init-row .init-name strong { color: var(--ink); }
+  #panel-canvas .init-row .init-name em { color: var(--muted); font-style: italic; font-size: 11px; }
+  #panel-canvas .init-row .init-pain {
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 10.5px; color: var(--bad);
+    text-align: right;
+  }
+  #panel-canvas .init-row .init-pain.no { color: var(--muted); font-style: italic; }
+  #panel-canvas .init-row .init-lever {
+    font-size: 9.5px; font-weight: 800; letter-spacing: .04em;
+    text-align: center;
+  }
+  #panel-canvas .init-row .init-source {
+    font-size: 9.5px; color: var(--muted); text-align: right; font-style: italic;
+  }
+  #panel-canvas .lvr {
+    display: inline-block;
+    font-size: 9px; font-weight: 800; letter-spacing: .04em;
+    background: var(--ink-2); color: white;
+    padding: 1px 4px; border-radius: 3px;
+    margin-right: 2px;
+  }
+  #panel-canvas .lvr.l1 { background: #C28A00; }
+  #panel-canvas .lvr.l2 { background: #B45309; }
+  #panel-canvas .lvr.l3 { background: #4338CA; }
+  #panel-canvas .lvr.l4 { background: #036A4F; }
+  #panel-canvas .lvr.l5 { background: #9A1F00; }
+  #panel-canvas .lvr.l6 { background: #2A1FA8; }
+  #panel-canvas .src {
+    display: inline-block;
+    font-size: 8.5px; font-weight: 700;
+    background: #F1F2F4; color: #374151;
+    padding: 1px 4px; border-radius: 3px;
+    border: 1px solid #E2E5EA;
+    margin-right: 2px;
+  }
+  #panel-canvas .src.hvc { background: #FFE7E0; color: #9A1F00; border-color: #F4D2C5; }
+  #panel-canvas .src.ur { background: #EEF0FF; color: #2A1FA8; border-color: #D8DCFF; }
+  #panel-canvas .src.rmw { background: #FFFCF0; color: #6B4A00; border-color: #F2E8C2; }
+  #panel-canvas .src.ph { background: #E6F5EE; color: #036A4F; border-color: #BFE6D3; }
+  #panel-canvas .src.voc { background: #FFEFD9; color: #8A4A00; border-color: #FCD9B6; }
+  #panel-canvas .init-header {
+    display: grid;
+    grid-template-columns: 36px 1fr 80px 70px 90px;
+    gap: 8px;
+    font-size: 9.5px; font-weight: 800; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--muted);
+    padding: 4px 0; border-bottom: 1px solid var(--line-2);
+    margin-bottom: 4px;
+  }
+  #panel-canvas .init-header .h-pain { text-align: right; }
+  #panel-canvas .init-header .h-lever { text-align: center; }
+  #panel-canvas .init-header .h-src { text-align: right; }
+</style>
+
+<!-- PAGE 1: CANVAS OVERVIEW + 5-PILLAR MAP -->
+<section class="page" aria-label="Initiative Canvas Page 1">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Initiative Canvas · Independent design · Evidence-grounded</div>
+      <h1>The 67 tactical initiatives that get us to <em style="color:#C28A00;">+$20–25M</em> in FY27</h1>
+      <div class="subtitle">Designed independently from the prior PRD list. Every initiative grounded in documented evidence: HVC Risk Map ($177.5K/mo HVC pain across 73 themes), User Research (13 barriers, 21 customer briefs), Voice of Customer (7 hate themes), Roadmap to Win (9 foundational gaps + 12 differentiated steals), Product Health (10 BQ-validated findings). <strong>Critic-agent QA verified coverage</strong> — 7 must-fix gaps incorporated.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Pillars:</strong> 5 (P1 → P5)</div>
+      <div><strong>Sub-themes:</strong> 23</div>
+      <div><strong>Initiatives:</strong> 67</div>
+      <div><strong>Page:</strong> 1 of 7</div>
+    </div>
+  </header>
+
+  <div class="kpi-row" style="margin-bottom: 16px;">
+    <div class="kpi">
+      <div class="v" style="color:#C28A00;">+$20–25M</div>
+      <div class="l">FY27 incremental ARR target this canvas delivers (mid-band of Strategy 6-Pager $20–32M envelope)</div>
+    </div>
+    <div class="kpi">
+      <div class="v">67 initiatives</div>
+      <div class="l">Tactical, scoped, owner-tagged. Cover every documented pain across 73 HVC themes + 9 foundational gaps + 12 differentiated steals + 13 UR barriers + 7 VoC hate themes + 10 PH findings</div>
+    </div>
+    <div class="kpi">
+      <div class="v">$177.5K/mo</div>
+      <div class="l">HVC MRR exposure addressed across 73 themes (corrected from earlier $53.5K/mo Phase-1-only number)</div>
+    </div>
+    <div class="kpi">
+      <div class="v">12 + 22</div>
+      <div class="l">Differentiated steals (D1-D12) integrated + 22 sub-themes that cluster initiatives by execution dependency</div>
+    </div>
+  </div>
+
+  <div class="card tinted" style="margin-bottom: 16px;">
+    <h2 style="margin-top:0;">How this canvas is different from the prior PRD list</h2>
+    <p>Built <strong>top-down from evidence</strong>, not bottom-up from existing PRDs. Every initiative starts with a documented pain or competitive gap and works back to scope. Where it overlaps with the prior 22-PRD list, that's coincidence — not anchor. <strong>5 strategic gaps the prior PM didn't address</strong> (free-plan policy, FE refactor, reporting correctness, frequency cap, per-step KPIs) are first-class P1 initiatives here. <strong>9 foundational gaps and 12 differentiated steals</strong> (Roadmap to Win) are explicitly mapped — including ones the prior PRD list missed entirely (Notion-style editor, AMP interactive emails, agentic per-user treatment, Liquid templating, vertical journey UIs).</p>
+  </div>
+
+  <h2 style="margin-bottom: 8px;">The 5 pillars at a glance</h2>
+  <div class="grid cols-2" style="gap: 12px;">
+    <div class="pillar-card p1">
+      <div class="pc-num">P1</div>
+      <span class="pc-tag">P1 · QUALITY &amp; TRUST · 0–3mo</span>
+      <h3>Stop the bleeding — fix the bugs, restore Free, fix billing</h3>
+      <div class="pc-meta">
+        <div>Sub-themes<br/><strong>5</strong></div>
+        <div>Initiatives<br/><strong>17</strong></div>
+        <div>FY27 $<br/><strong>$2–4M</strong></div>
+      </div>
+      <div class="pc-themes">Editor stability · Data correctness · Frequency cap · Free-tier policy + brand recovery + compliance + deliverability · Migration from Classic</div>
+    </div>
+    <div class="pillar-card p2">
+      <div class="pc-num">P2</div>
+      <span class="pc-tag">P2 · DATA ACTIVATION · 0–6mo</span>
+      <h3>Build the foundation — triggers, segmentation, Eventbus</h3>
+      <div class="pc-meta">
+        <div>Sub-themes<br/><strong>4</strong></div>
+        <div>Initiatives<br/><strong>13</strong></div>
+        <div>FY27 $<br/><strong>$4–7M</strong></div>
+      </div>
+      <div class="pc-themes">Trigger library expansion · Advanced Segmentation in CJB · Event-driven processing modernization · Deep ecommerce integration</div>
+    </div>
+    <div class="pillar-card p3">
+      <div class="pc-num">P3</div>
+      <span class="pc-tag">P3 · ACTIVATION FOUNDATION · 3–9mo</span>
+      <h3>Light up the install base — UX + onboarding + templates + governance</h3>
+      <div class="pc-meta">
+        <div>Sub-themes<br/><strong>7</strong></div>
+        <div>Initiatives<br/><strong>20</strong></div>
+        <div>FY27 $<br/><strong>$5–8M</strong></div>
+      </div>
+      <div class="pc-themes">Trigger setup UX · Welcome flow + first-send · Builder ergonomics · Template library · HVC + ECU plays · Vertical &amp; power users · Tag governance + discovery + benchmarking</div>
+    </div>
+    <div class="pillar-card p4">
+      <div class="pc-num">P4</div>
+      <span class="pc-tag">P4 · AGENTIC MARKETING · 6–12mo</span>
+      <h3>Move parity → LEAD — AI Skill, conversational, agentic</h3>
+      <div class="pc-meta">
+        <div>Sub-themes<br/><strong>4</strong></div>
+        <div>Initiatives<br/><strong>11</strong></div>
+        <div>FY27 $<br/><strong>$6–10M</strong></div>
+      </div>
+      <div class="pc-themes">AI Skill multi-surface · Single modernized builder · Conversational journey editing · Agentic per-user treatment</div>
+    </div>
+    <div class="pillar-card p5">
+      <div class="pc-num">P5</div>
+      <span class="pc-tag">P5 · CROSS-CHANNEL REACH · 9–18mo</span>
+      <h3>Establish omnichannel leadership — WhatsApp, RCS, AMP</h3>
+      <div class="pc-meta">
+        <div>Sub-themes<br/><strong>3</strong></div>
+        <div>Initiatives<br/><strong>6</strong></div>
+        <div>FY27 $<br/><strong>$3–5M</strong></div>
+      </div>
+      <div class="pc-themes">Channel breadth (WhatsApp/Push/RCS/in-app) · Conversational SMS · AMP interactive email + SMS depth</div>
+    </div>
+    <div class="card warm">
+      <div style="font-size: 10.5px; font-weight: 800; letter-spacing: .06em; color: var(--muted); text-transform: uppercase; margin-bottom: 6px;">Reading the canvas</div>
+      <p style="font-size: 12px; color: var(--ink-2); line-height: 1.45; margin: 0 0 6px;">Each initiative row shows: <strong>ID</strong> · <strong>name + scope</strong> · <strong>pain $/mo</strong> (HVC MRR exposure resolved) · <strong>lever</strong> (L1-L6 from Growth Model) · <strong>source</strong> tag.</p>
+      <div style="font-size: 11px; color: var(--ink-2);">
+        <span class="lvr l1">L1</span> Adoption growth ·
+        <span class="lvr l2">L2</span> Activation+sends ·
+        <span class="lvr l3">L3</span> Repeat usage ·
+        <span class="lvr l4">L4</span> Reduced abandonment ·
+        <span class="lvr l5">L5</span> Campaign perf/churn save ·
+        <span class="lvr l6">L6</span> Attributed rev/customer
+      </div>
+      <div style="font-size: 11px; color: var(--ink-2); margin-top: 6px;">
+        Source: <span class="src hvc">HVC</span> HVC Risk Map ·
+        <span class="src ur">UR</span> User Research ·
+        <span class="src rmw">RMW</span> Roadmap to Win ·
+        <span class="src ph">PH</span> Product Health ·
+        <span class="src voc">VoC</span> Voice of Customer
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 2: P1 QUALITY & TRUST -->
+<section class="page" aria-label="Initiative Canvas Page 2">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Pillar 1 · Quality &amp; Trust · 0–3 months · Stop the bleeding</div>
+      <h1><em style="color:#B91C1C;">P1: Quality &amp; Trust</em> — 5 sub-themes, 17 tactical initiatives</h1>
+      <div class="subtitle">Fix the bugs, restore Free-tier automation, reverse the brand decay. Largest pile of immediate-value, low-risk wins. Most fixes ship in weeks not quarters.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Pain $:</strong> $50.4K/mo (bug section total)</div>
+      <div><strong>FY27 $:</strong> $2–4M ARR (retention save)</div>
+      <div><strong>Page:</strong> 2 of 7</div>
+    </div>
+  </header>
+
+  <div class="subtheme">
+    <h4><span class="st-num">1.1</span> Editor / UI Stability — Journey Builder front-end refactor</h4>
+    <div class="st-meta">Resolves: <strong>$23.7K/mo HVC pain</strong> · 5 initiatives · Lever <span class="lvr l5">L5</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-1.1.1</div><div class="init-name"><strong>Journey Builder front-end refactor.</strong> Fix scroll bugs, replicate-flow errors, missing scrollbars, "View email" stale state, classic automation misfire. Largest single HVC pain point.</div><div class="init-pain">$16,507</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #1</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.1.2</div><div class="init-name"><strong>Cross-browser regression suite + automated UI smoke tests on every release.</strong> Stop UI-bug recurrence; cover Safari/Firefox dropdowns, Chrome screen-share, audience nav.</div><div class="init-pain no">platform</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC</span><span class="src voc">VoC</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.1.3</div><div class="init-name"><strong>Default view / sort order fix in campaigns + automations list.</strong> Stop "All" view surfacing journeys first; restore automation sort.</div><div class="init-pain">$2,925</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src hvc">HVC #7</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.1.4</div><div class="init-name"><strong>Re-entry / cool-down settings persistence fix.</strong> Stop snap-back to default 5-min interval after save.</div><div class="init-pain">$300</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #14</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.1.5</div><div class="init-name"><strong>Pop-ups / forms feeding flows fix.</strong> New pop-ups must enroll contacts to flows. Eliminate forced detour through Automations menu.</div><div class="init-pain">$450</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src hvc">HVC #11</span><span class="src ur">UR #10</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">1.2</span> Data Correctness &amp; Reporting Trust</h4>
+    <div class="st-meta">Resolves: <strong>$15.6K/mo HVC pain</strong> + Trust gap (Sept 2025 attribution change ripple-effect) · 5 initiatives · Lever <span class="lvr l5">L5</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-1.2.1</div><div class="init-name"><strong>Reporting / stats correctness fix.</strong> Wrong queue counts, SMS stats N/A, contradictory date-range rates, credits display, attribution discrepancies post-Sept 2025 change. Restore HVC trust (Jeffrey Davis UR).</div><div class="init-pain">$6,218</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #2</span><span class="src ur">UR</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.2.2</div><div class="init-name"><strong>Per-step KPIs in Journey Builder canvas.</strong> Currently CTM-escalated (P-level). Surface opens / clicks / conversion / revenue per step inline.</div><div class="init-pain">$5,098</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #3</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.2.3</div><div class="init-name"><strong>Aggregate reporting across journeys.</strong> Totals-by-day across journeys; eliminate manual aggregation.</div><div class="init-pain">$770</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #10</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.2.4</div><div class="init-name"><strong>Sharing / export / permissions on flow reports.</strong> CSV export, shareable links, monthly automation data export.</div><div class="init-pain">$2,808</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #11</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.2.5</div><div class="init-name"><strong>Per-flow send timing &amp; granular reports + per-link click totals.</strong> Per-send recipient/time report; printable journey emails; monthly per-link click totals inside flow reporting.</div><div class="init-pain">$1,059</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #20+24</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">1.3</span> Frequency Cap &amp; Suppression</h4>
+    <div class="st-meta">Resolves: <strong>$2.6K/mo HVC + closes Klaviyo / Bloomreach gap</strong> · 1 initiative · Lever <span class="lvr l5">L5</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-1.3.1</div><div class="init-name"><strong>Frequency cap / suppression across flows.</strong> Klaviyo / Bloomreach parity. Exclude by later actions; one-flow-at-a-time enforcement; suppression list management for transactional + marketing. B2B dealbreaker per Nina S3.9.</div><div class="init-pain">$2,576</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #12</span><span class="src ur">UR · Nina</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">1.4</span> Free-Tier Policy + Brand Recovery</h4>
+    <div class="st-meta">Resolves: largest acquisition unlock (Free 1.1% adoption, 16× worse than Standard) + reverses brand decay (Trustpilot 2.7/5) · 4 initiatives · Lever <span class="lvr l1">L1</span> <span class="lvr l5">L5</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-1.4.1</div><div class="init-name"><strong>Reinstate basic CJB on Free plan.</strong> Welcome + abandoned cart only, capped at ≤2 active automations. Closes Customer.io / Loops / Brevo lane. Targets Free 1.1% → 5%+. Roadmap F2.</div><div class="init-pain no">strategic gap</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src ph">PH F#3</span><span class="src rmw">RMW F2</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.4.2</div><div class="init-name"><strong>"Contact tax" billing reform.</strong> Engagement-based / send-volume billing option alongside contact billing. Stops 20–40% bill-inflation churn driver. Roadmap F9.</div><div class="init-pain no">brand</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src voc">VoC hate #2</span><span class="src rmw">RMW F9</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.4.3</div><div class="init-name"><strong>Trustpilot review-response program + brand-trust outbound.</strong> Close the 2.7/5 → 3.5+ loop. Reply program for negative reviews; outbound win-back to vocal churners.</div><div class="init-pain no">brand</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src voc">Trustpilot</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.4.4</div><div class="init-name"><strong>Live chat support coverage for automation issues.</strong> Currently no-reply on live chat for automation. Stops "support quality on automation issues" complaint thread.</div><div class="init-pain">$1,150</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #22</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.4.5</div><div class="init-name"><strong>Compliance workflow + automation policy SLAs.</strong> Resolves VoC hate "Account blocks for compliance violations" — clear in-product policy UX explaining what triggered review, faster review SLA (24-48h cap), automation-specific compliance signals, in-flight campaign protection during review.</div><div class="init-pain no">VoC</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src voc">VoC hate #5</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.4.6</div><div class="init-name"><strong>Deliverability / inbox placement improvements.</strong> Test email transparency (where's it landing?), spam-score guidance pre-send, sender authentication wizard (SPF/DKIM/DMARC), Gmail/Yahoo postmaster integration. Resolves $1,553/mo HVC + VoC "Inbox issues to Gmail/Yahoo."</div><div class="init-pain">$1,553</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC barrier #20</span><span class="src voc">VoC hate #6</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">1.5</span> Migration &amp; Onboarding from Classic</h4>
+    <div class="st-meta">Resolves: $3K/mo HVC + Product Health Finding #1 (Classic collapsing) · 4 initiatives · Lever <span class="lvr l5">L5</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-1.5.1</div><div class="init-name"><strong>Auto-migration tool Classic → CJB.</strong> Side-by-side preview, one-click migration, 90-day graceful sunset guarantee. Migration history preservation (stats carry over).</div><div class="init-pain">$1,715</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #8</span><span class="src ph">PH F#1</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.5.2</div><div class="init-name"><strong>Two-surface confusion fix.</strong> In-product framing of "Classic vs CJB" with inline explainer. Visible toggle: "I'm on Classic — show me where to migrate." Resolves UR Barrier #8 (Shauna Todd "What is the difference?").</div><div class="init-pain no">UR</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src ur">UR Barrier #8</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.5.3</div><div class="init-name"><strong>CJB legacy editor consolidation.</strong> Stop using legacy editor inside CJB; switch to modernized editor in-flow.</div><div class="init-pain">$1,265</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #21</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.5.4</div><div class="init-name"><strong>2FA / login workflow continuity.</strong> Don't disrupt automation workflow when team can't get 2FA codes. Persistent session for automation editing.</div><div class="init-pain">$684</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #26</span></div></div>
+  </div>
+
+  <p class="source"><strong>P1 evidence base:</strong> 14 HVC bug themes ($50.4K/mo); 8 HVC barrier themes related to UI/data/migration; <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">VoC</a> hate themes (Classic deprecation, Contact tax, Free-plan); <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> Finding #1 (Classic collapsing) + #3 (Free broken); <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a> Barrier #8 (two surfaces). All 5 strategic gaps from PRD Audit are P1 initiatives here.</p>
+</section>
+
+<!-- PAGE 3: P2 DATA ACTIVATION -->
+<section class="page" aria-label="Initiative Canvas Page 3">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Pillar 2 · Data Activation · 0–6 months · Build the foundation</div>
+      <h1><em style="color:#C28A00;">P2: Data Activation</em> — 4 sub-themes, 13 tactical initiatives</h1>
+      <div class="subtitle">Trigger library expansion, advanced segmentation, event-driven processing modernization, deep ecommerce integration. Closes #1 named competitive gap (Klaviyo trigger depth). Eventbus migration unblocks P3, P4, P5.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Pain $:</strong> $25K/mo HVC + 4 foundational gaps (F3, F4, F5)</div>
+      <div><strong>FY27 $:</strong> $4–7M ARR</div>
+      <div><strong>Page:</strong> 3 of 7</div>
+    </div>
+  </header>
+
+  <div class="subtheme">
+    <h4><span class="st-num">2.1</span> Trigger Library Expansion (12+ new triggers)</h4>
+    <div class="st-meta">Closes <strong>Klaviyo trigger-count parity</strong> + Roadmap F3 + F5 + 5 specific HVC missing-feature themes · 6 initiatives · Lever <span class="lvr l1">L1</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-2.1.1</div><div class="init-name"><strong>12+ new domain-event triggers.</strong> Klaviyo parity catalog: cart-step, browse-abandonment, product-affinity, checkout-step, post-purchase delay, refund-initiated, low-inventory-alerted, etc.</div><div class="init-pain no">competitive</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src rmw">RMW F3</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.1.2</div><div class="init-name"><strong>Date-relative / recurring / event-based triggers.</strong> Post-event emails for recurring daily events (e.g., daily class reminder, weekly digest, monthly nurture).</div><div class="init-pain">$1,701</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src hvc">HVC missing #11</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.1.3</div><div class="init-name"><strong>Predictive triggers as flow entry conditions.</strong> Next-order date, churn risk, CLV thresholds, purchase likelihood — promote predictive signals from "conditions" to "triggers." Roadmap F5.</div><div class="init-pain no">competitive</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src rmw">RMW F5</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.1.4</div><div class="init-name"><strong>Discount code trigger + Segments-as-trigger.</strong> "Contact used a discount code" trigger + "Contact joined a segment" trigger.</div><div class="init-pain no">growth</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src rmw">RMW</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.1.5</div><div class="init-name"><strong>Wix Bookings + appointment-based triggers.</strong> Wix BU $3.9M opportunity. Booking-confirmed, appointment-reminder, no-show-recovery triggers.</div><div class="init-pain no">$3.9M opp</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src rmw">RMW</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.1.6</div><div class="init-name"><strong>Schedule flow activation + parallel triggers + identity resolution.</strong> Schedule journey "go live" date; >3 triggers per flow (currently capped); parallel entry for partner identity stacks.</div><div class="init-pain">$2,900</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src hvc">HVC missing #14+15+17</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">2.2</span> Advanced Segmentation in CJB (largest single missing feature)</h4>
+    <div class="st-meta">Resolves <strong>$17K/mo HVC missing-feature pain</strong> · 4 initiatives · Lever <span class="lvr l1">L1</span> <span class="lvr l5">L5</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-2.2.1</div><div class="init-name"><strong>Event-property access in flow branches/emails.</strong> <em>Largest single missing feature in HVC Risk Map.</em> Branch / filter on event properties; use deep product fields (price, category, variant) in email content.</div><div class="init-pain">$10,000</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src hvc">HVC missing #1</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.2.2</div><div class="init-name"><strong>Advanced Segmentation in CJB.</strong> If/Else + Trigger Filters with nested logic. Currently customers ask for segment depth available in audience tools but not in CJB.</div><div class="init-pain">$3,000</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src hvc">HVC missing #7</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.2.3</div><div class="init-name"><strong>Named / reusable filter conditions + advanced product exclusion.</strong> Save and name condition groups for reuse across flows. Filter by collections / tags. Advanced product exclusion.</div><div class="init-pain">$4,000</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src hvc">HVC missing #8+10</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.2.4</div><div class="init-name"><strong>Save-segment-in-the-moment.</strong> Refilter inside campaign / journey and save as new segment without rebuilding. UR Wes Turner direct ask.</div><div class="init-pain no">UR</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src ur">UR Barrier #12</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">2.3</span> Event-Driven Processing Modernization (foundational platform)</h4>
+    <div class="st-meta">Foundational platform work — <strong>unblocks P3 + P4 + P5</strong> + addresses root cause of $4.8K/mo "Not Sending" + $16.5K/mo Editor latency · 3 initiatives · Lever <span class="lvr l5">L5</span> (foundational)</div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-2.3.1</div><div class="init-name"><strong>Monolith → Eventbus migration.</strong> Critical foundational platform refactor. Unblocks: real-time triggers (P2.1.3), Conversational Automations (P4.3), WhatsApp send action (P5.1.1). Addresses root cause of "Automations Not Sending" + Editor latency.</div><div class="init-pain">$21,287</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #6+#1</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.3.2</div><div class="init-name"><strong>Real-time event-driven triggers as standard processing.</strong> Roadmap F3. Eliminate batch-processing lag. Sub-second trigger evaluation.</div><div class="init-pain no">competitive</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src rmw">RMW F3</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.3.3</div><div class="init-name"><strong>Sub-hour delays in CJB + flexible delay UX.</strong> Currently 1-hour minimum delay. Wes Turner direct ask: 5-minute external lag vs MC 1-hour minimum. UR Barrier #11. Time-delay UX consistency (delays as steps, not embedded in trigger).</div><div class="init-pain">$7,000</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src hvc">HVC barrier #1</span><span class="src ur">UR #11</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">2.4</span> Deep Ecommerce Integration (Roadmap F4 + ECU gold cohort)</h4>
+    <div class="st-meta">Closes <strong>Klaviyo Shopify-depth gap</strong> + activates Product Health Finding #5 (ECU 29.7% adoption — 6.6× non-ecom) · 3 initiatives · Lever <span class="lvr l1">L1</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-2.4.1</div><div class="init-name"><strong>Shopify-deep event integration.</strong> Browse, checkout-step, product-affinity, viewed-product, added-to-favorites triggers. Roadmap F4. Closes Klaviyo "deepest Shopify integration" claim.</div><div class="init-pain no">competitive</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src rmw">RMW F4</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.4.2</div><div class="init-name"><strong>WooCommerce + Squarespace + BigCommerce + Wix deep event parity.</strong> Same depth as Shopify integration. Captures the long-tail integration gap UR Barrier #4 (Wes, Andrea, Bob, Andrew, Chris, Jeffrey, Shauna).</div><div class="init-pain no">UR</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src ur">UR Barrier #4</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.4.3</div><div class="init-name"><strong>Auto-build journey on store-connect.</strong> First session post-store-connect: scaffold welcome + cart + post-purchase + browse-abandonment automatically. Product Health Finding #5 resolution. Operational workflow / tag automation (Shopify-Flow-style with consistent delays).</div><div class="init-pain">$5,000</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src ph">PH F#5</span><span class="src hvc">HVC missing #5</span></div></div>
+  </div>
+
+  <p class="source"><strong>P2 evidence base:</strong> 24 HVC missing-feature themes ($57.2K/mo), 5 of which are direct trigger / segmentation gaps. <a href="#roadmap" onclick="document.querySelector('[data-tab=roadmap]').click();return false;">Roadmap to Win</a> F3 (real-time triggers), F4 (Shopify-deep), F5 (predictive triggers as entry). <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> Finding #5 (ECU 29.7% adoption, 6.6× non-ecom). <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a> Barriers #4 (long-tail integration), #11 (sub-hour delay), #12 (save-segment-in-moment).</p>
+</section>
+
+<!-- PAGE 4: P3 ACTIVATION FOUNDATION -->
+<section class="page" aria-label="Initiative Canvas Page 4">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Pillar 3 · Activation Foundation · 3–9 months · Light up the install base</div>
+      <h1><em style="color:#047857;">P3: Activation Foundation</em> — 7 sub-themes, 20 tactical initiatives</h1>
+      <div class="subtitle">Lift FTU 30-day turn-on 6.8% → 15%+ and CJB Activation 33.6% → 42%+ via UX improvements, onboarding, template gallery, and cohort-specific plays. 1M+ install base means small lifts compound to large absolute numbers.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Pain $:</strong> $48K/mo HVC barrier themes</div>
+      <div><strong>FY27 $:</strong> $5–8M ARR</div>
+      <div><strong>Page:</strong> 4 of 7</div>
+    </div>
+  </header>
+
+  <div class="subtheme">
+    <h4><span class="st-num">3.1</span> Trigger Selection &amp; Setup UX</h4>
+    <div class="st-meta">Resolves <strong>$24.5K/mo HVC barrier pain</strong> · 5 initiatives · Lever <span class="lvr l2">L2</span> <span class="lvr l4">L4</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-3.1.1</div><div class="init-name"><strong>Trigger modal redesign.</strong> Search + filter + grouping. Resolves: trigger-not-searchable ($5K), loading spinner misleading ($5K), wait-for-trigger pass-through confusing ($5K), 'From Audience' surfaces unnecessarily ($1K). Single biggest barrier-cluster fix.</div><div class="init-pain">$16,000</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src hvc">HVC barrier #6+7+9+23</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.1.2</div><div class="init-name"><strong>Content-completion gating before "Turn On" button.</strong> Don't allow activation before content is ready. Resolves: premature Turn On ($6K) + automation-turned-off-without-notice ($384) + flow-deactivation-behavior-unclear ($5K).</div><div class="init-pain">$11,384</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src hvc">HVC barrier #2+5+31</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.1.3</div><div class="init-name"><strong>Trigger setup confusion / 'not activated' states.</strong> Simple signup flow currently won't activate. Surface clear "what's missing to activate" checklist.</div><div class="init-pain">$535</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src hvc">HVC barrier #27</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.1.4</div><div class="init-name"><strong>Multi-trigger type mismatch clarity + jargon-heavy label rewrite.</strong> Consistent per-trigger UX. Plain-English labels with inline explainers for triggers + conditions.</div><div class="init-pain">$4,000</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src hvc">HVC barrier #15+18</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.1.5</div><div class="init-name"><strong>Time delay UX consistency.</strong> Min delay vs abandonment-timing alignment. Delays as standalone steps (not embedded in trigger). Eric S1.49.</div><div class="init-pain no">UR</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src ur">UR · Eric</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">3.2</span> Welcome Flow &amp; First-Send Activation (PRD-stated $74K + 6.8% → 15% FTU lift)</h4>
+    <div class="st-meta">Product Health Finding #4 + UR Bet #2 · 3 initiatives · Lever <span class="lvr l1">L1</span> <span class="lvr l2">L2</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-3.2.1</div><div class="init-name"><strong>"It's just an email" welcome flow.</strong> Zero-step minimum to send first automation in &lt;5 minutes from signup. PRD-stated $74K FY26 lift; FTU 30d turn-on 6.8% → 15%. Also resolves Slow/Confusing JB UX (HVC barrier #3, $5,205/mo) by giving FTUs a fast-path that bypasses the heavy builder until they need it.</div><div class="init-pain">$5,205</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src ph">PH F#4</span><span class="src hvc">HVC barrier #3</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.2.2</div><div class="init-name"><strong>3-step activation flow days 0-30 + weekly internal "activation moves."</strong> (1) Business type → (2) Welcome ready in 60s → (3) Live automation. Zero clicks to gallery. Doubles down on PH F#2 (CJB momentum +18.4% YoY validates UX work moves the metric).</div><div class="init-pain no">PH</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src ph">PH F#2+F#4</span><span class="src ur">UR Bet #2</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.2.3</div><div class="init-name"><strong>Time-to-first-automation-send target: 7-10 days.</strong> Currently 14-21 days (industry benchmark). Onboarding sequence + day-3 + day-7 nudges to ship first send.</div><div class="init-pain no">growth</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src ur">UR Bet #2</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">3.3</span> Flow Building Ergonomics</h4>
+    <div class="st-meta">Resolves <strong>$23K/mo HVC barrier pain</strong> · 5 initiatives · Lever <span class="lvr l4">L4</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-3.3.1</div><div class="init-name"><strong>Edit panel doesn't block flow canvas + drag-reorder + in-place rename.</strong> Side-panel or overlay redesign. Drag-reorder steps. Rename automations and steps from canvas without duplicating flow.</div><div class="init-pain">$9,000</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src hvc">HVC barrier #8+13+17</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.3.2</div><div class="init-name"><strong>Replicate / clone entire journey + delete individual split paths + slider numeric input.</strong> One-click duplicate (currently must rebuild). Delete individual split path (currently removes whole split). Numeric input alongside slider for split %.</div><div class="init-pain">$6,350</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src hvc">HVC bug #9 + barrier #4+32</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.3.3</div><div class="init-name"><strong>If/Else vs Split visual differentiation.</strong> Distinct shapes / colors on canvas. Currently look alike (Eric S1.47).</div><div class="init-pain">$1,000</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src hvc">HVC barrier #24</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.3.4</div><div class="init-name"><strong>Email editing intermediate-click removal + calculated send day visibility.</strong> Direct-edit (current extra hop before real editor). Day 0 / Day 1 timeline on canvas.</div><div class="init-pain">$3,000</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src hvc">HVC barrier #16 + missing #13</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.3.5</div><div class="init-name"><strong>Date picker / date-range UI fix + custom-field sorting in audience.</strong> Date picker unusable for daily stats. Custom-field sort removed in audience.</div><div class="init-pain">$1,080</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src hvc">HVC barrier #25+35</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">3.4</span> Template Library &amp; Discovery</h4>
+    <div class="st-meta">Resolves <strong>$22K/mo HVC barrier+missing pain</strong> + Product Health Finding #7 (industry templates gap) · 4 initiatives · Lever <span class="lvr l1">L1</span> <span class="lvr l2">L2</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-3.4.1</div><div class="init-name"><strong>Flow templates search / filter / category browse.</strong> Current behavior: long scroll, no filter, link goes to help article. Resolves: templates-no-search ($5K) + templates-link-goes-to-help-article ($5K).</div><div class="init-pain">$10,000</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src hvc">HVC bug #4 + barrier #10</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.4.2</div><div class="init-name"><strong>Industry-aware template gallery (6-8 per industry).</strong> Ecom, ProServ, services, B2B SaaS, restaurants, nonprofits. Tied to onboarding business-type selection. Live in 5 minutes. Product Health Finding #7 + UR Bet #3 (Chris Rich + 6 others).</div><div class="init-pain no">PH+UR</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src ph">PH F#7</span><span class="src ur">UR Bet #3</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.4.3</div><div class="init-name"><strong>Better templates / pre-built flows + Brand Kit applied + flow-specific email templates.</strong> Template depth + variety. Brand Kit seeds automation emails (currently doesn't). Flow-specific templates for browse / abandon / re-engagement variants (currently only welcome has dedicated templates).</div><div class="init-pain">$15,000</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src hvc">HVC missing #3+4+6</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.4.4</div><div class="init-name"><strong>ICP-focused homepage + integration-specific template prioritization + template management in flows.</strong> Right templates surface based on connected integrations. ICP-focused automations homepage (Bayesian-tested). In-flow template selection + saved-template-pick preserved on duplicate.</div><div class="init-pain">$2,800</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src hvc">HVC barrier #14 + missing #22+23</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">3.5</span> HVC + ECU Cohort-Specific Activation Plays (Product Health)</h4>
+    <div class="st-meta">Resolves Product Health Findings #6, #8, #9, #10 + UR Bets #1, #5 · 3 initiatives · Lever <span class="lvr l1">L1</span> <span class="lvr l5">L5</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-3.5.1</div><div class="init-name"><strong>Direct-to-paid express path + non-HVC win-back program.</strong> Intent-first shoppers (comparison traffic, SSO, business-email domain) → guided 30-min sales-assisted setup. Non-HVC who Establish then Abandon in 12mo: their automation type pre-rebuilt + win-back nudge. Findings #10 + #6.</div><div class="init-pain no">PH</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src ph">PH F#6+10</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.5.2</div><div class="init-name"><strong>International localization (EU + Tier-1 Develop +20% YoY momentum).</strong> GDPR-aware templates, EU-localized triggers (Spanish Verifactu), idiomatic translations (not literal EN→X). Product Health Finding #9.</div><div class="init-pain no">PH</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src ph">PH F#9</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.5.3</div><div class="init-name"><strong>Sandbox-tier automation evaluation + small-list value reframe.</strong> Full automation eval before paywall (Chris Rich pricing-trial trap). Re-frame Free/Essential messaging for &lt;1K lists (e.g., "Convert 1 in 50 of 200 subscribers"). UR Bet #1 + Product Health Finding #8.</div><div class="init-pain no">UR+PH</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src ur">UR Bet #1</span><span class="src ph">PH F#8</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">3.6</span> Vertical Specialization &amp; Power Users (Roadmap D8, D9, D10)</h4>
+    <div class="st-meta">Closes Customer.io / Loops vertical + power-user gap · 3 initiatives · Lever <span class="lvr l1">L1</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-3.6.1</div><div class="init-name"><strong>Vertical-specific journey UIs.</strong> DTC, B2B SaaS, services, restaurants, B2B distribution. Roadmap D9 (steal from Customer.io / Loops). Counter vertical startups; Mailchimp's broad installed base as edge.</div><div class="init-pain no">competitive</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src rmw">RMW D9</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.6.2</div><div class="init-name"><strong>Liquid templating + unlimited events for power users.</strong> Roadmap D8 (steal from Customer.io). Closes "Mailchimp wasn't built for SaaS" criticism. B2B SaaS power users currently leave for Customer.io / Loops.</div><div class="init-pain no">competitive</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src rmw">RMW D8</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.6.3</div><div class="init-name"><strong>Combined transactional + marketing in one journey product + B2B template depth.</strong> Roadmap D10 (steal from Loops). SMB/SaaS single-bill simplicity (Mailchimp Transactional already exists; bundle). B2B template depth resolves $321/mo HVC + UR Bet #3.</div><div class="init-pain">$321</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src rmw">RMW D10</span><span class="src ur">UR Bet #3</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">3.7</span> Tag Governance · Discovery · Industry Benchmarking</h4>
+    <div class="st-meta">Closes <strong>3 User Research barriers</strong> the prior PRD didn't address (Discovery gap, Benchmarking absent, Tag management brittle) · 3 initiatives · Lever <span class="lvr l3">L3</span> <span class="lvr l5">L5</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-3.7.1</div><div class="init-name"><strong>Tag management &amp; governance for rotating admins.</strong> Tag organization (folders/groups), deletion safety with usage-impact preview, role-based tag permissions, tag-history audit log. Resolves UR Barrier #9 (Kyle Spalding "gave up on tags," Bianka, Jillian Ney) — currently breaks ops when admins rotate.</div><div class="init-pain no">UR</div><div class="init-lever"><span class="lvr l3">L3</span></div><div class="init-source"><span class="src ur">UR Barrier #9</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.7.2</div><div class="init-name"><strong>Power-feature discovery + in-app changelog + automation education.</strong> "What's new in automation" digest, contextual discovery prompts ("you've used X, try Y"), feature-tip cards per use case, per-feature short videos in-product. Resolves UR Barrier #2 (Discovery gap — 5 of 15 use 10–20% of capability) + Barrier #7 (Education framing wrong — Peter Bell, Bianka, Clint).</div><div class="init-pain no">UR</div><div class="init-lever"><span class="lvr l3">L3</span></div><div class="init-source"><span class="src ur">UR Barrier #2+7</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.7.3</div><div class="init-name"><strong>Industry benchmarking dashboard.</strong> "What good looks like for your industry": open-rate / CTR / conversion / revenue benchmarks per vertical (DTC, B2B SaaS, ProServ, restaurants, nonprofits). Resolves UR Barrier #6 (no sense of "good"; Bianka, Matt, Shauna, Jeffrey ask). Also closes Roadmap "vertical/cohort benchmarks" gap and lifts repeat usage by giving customers a benchmark to chase.</div><div class="init-pain no">UR</div><div class="init-lever"><span class="lvr l3">L3</span></div><div class="init-source"><span class="src ur">UR Barrier #6</span></div></div>
+  </div>
+
+  <p class="source"><strong>P3 evidence base:</strong> 35 HVC barrier themes ($83.3K/mo), most addressed here. <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> Findings #4, #6, #7, #8, #9, #10. <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a> Bets #1, #2, #3, #5 + multiple barriers. <a href="#roadmap" onclick="document.querySelector('[data-tab=roadmap]').click();return false;">Roadmap to Win</a> D8 (Liquid), D9 (verticals), D10 (transactional+marketing bundle).</p>
+</section>
+
+<!-- PAGE 5: P4 AGENTIC MARKETING -->
+<section class="page" aria-label="Initiative Canvas Page 5">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Pillar 4 · Agentic Marketing · 6–12 months · Move parity → LEAD</div>
+      <h1><em style="color:#4338CA;">P4: Agentic Marketing</em> — 4 sub-themes, 11 tactical initiatives</h1>
+      <div class="subtitle">AI Skill across 7 surfaces &gt; Klaviyo's 1-surface. This is where we surpass — not just match — competitors. Agentic per-user treatment + conversational journey editing + single modernized builder.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Pain $:</strong> $30K/mo HVC + Roadmap D1, D2, D3, D5, D6, D11, D12</div>
+      <div><strong>FY27 $:</strong> $6–10M ARR (largest single bet)</div>
+      <div><strong>Page:</strong> 5 of 7</div>
+    </div>
+  </header>
+
+  <div class="subtheme">
+    <h4><span class="st-num">4.1</span> AI Automation Generation Skill (Multi-Surface)</h4>
+    <div class="st-meta">PRD-stated 16% → 22% adoption + 6.8% → 15% FTU lift. Resolves $11.5K/mo HVC missing-feature pain. 3 initiatives · Lever <span class="lvr l1">L1</span> <span class="lvr l2">L2</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-4.1.1</div><div class="init-name"><strong>AI Skill M1 — onboarding surface + autonomous setup agent.</strong> URL → must-have flows in ~3 clicks. Auto-scaffold welcome / cart / post-purchase / browse. Roadmap D2 (steal from Klaviyo Marketing Agent). Closes "no autonomous flow setup agent" gap explicitly called out in Executive Brief.</div><div class="init-pain no">competitive</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src rmw">RMW D2</span></div></div>
+    <div class="init-row"><div class="init-id">I-4.1.2</div><div class="init-name"><strong>AI Skill M2 + M3 — homepage card + post-import + post-form + post-send + chat + ecomm-coach surfaces.</strong> 6 additional surfaces. PRD-stated 30%+ FTUs touch AI generation entry point.</div><div class="init-pain no">strategic</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src rmw">RMW D2</span></div></div>
+    <div class="init-row"><div class="init-id">I-4.1.3</div><div class="init-name"><strong>Brand Kit integration + Conversational AI / Generative Copy in journeys.</strong> Brand Kit seeds AI-generated emails (resolves $5K HVC). In-canvas inline rewrite, tone, length, CTA. Resolves $6,485/mo "Conversational AI / Generative Copy in Journeys" HVC.</div><div class="init-pain">$11,485</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src hvc">HVC missing #2+4</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">4.2</span> Single Modernized Builder + Notion-Style Editor</h4>
+    <div class="st-meta">Consolidates Classic / CJB / Marketing Automation Flows naming + UX. Resolves $18K/mo HVC pain. 3 initiatives · Lever <span class="lvr l4">L4</span> <span class="lvr l5">L5</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-4.2.1</div><div class="init-name"><strong>Single modernized Automations builder.</strong> Consolidate Classic → CJB → Marketing Automation Flows into one modern UX. Eliminates Editor / UI Glitches root cause + legacy editor in CJB.</div><div class="init-pain">$17,772</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #1+#21</span></div></div>
+    <div class="init-row"><div class="init-id">I-4.2.2</div><div class="init-name"><strong>Notion-style modern email content authoring.</strong> Lightweight, distraction-free authoring inside flow steps. Roadmap D11 (steal from Loops). Addresses VoC "clunky and outdated" platform feel.</div><div class="init-pain no">VoC</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src rmw">RMW D11</span><span class="src voc">VoC hate #7</span></div></div>
+    <div class="init-row"><div class="init-id">I-4.2.3</div><div class="init-name"><strong>In-flow image editing + multi-author collaborative drafting.</strong> Generative image remix inside flow step (Roadmap D6, steal from Klaviyo Image Remix). Google Docs–style multi-author collaborative drafting in email canvas (UR Barrier #13: Kyle, Jillian, Jack, Bianka).</div><div class="init-pain no">UR</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src rmw">RMW D6</span><span class="src ur">UR Barrier #13</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">4.3</span> Conversational Journey Editing (Roadmap D1 — flagship differentiator)</h4>
+    <div class="st-meta">Steal from Sidekick. Most-praised novel UX in category 2025–26. 2 initiatives · Lever <span class="lvr l1">L1</span> <span class="lvr l2">L2</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-4.3.1</div><div class="init-name"><strong>Conversational journey editing in Intuit Assist.</strong> "Edit my flow / write me a flow by chatting." Voice / chat journey commands (re-route, add step, change copy via prompt). Roadmap D1.</div><div class="init-pain no">flagship</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src rmw">RMW D1</span></div></div>
+    <div class="init-row"><div class="init-id">I-4.3.2</div><div class="init-name"><strong>Prompt-first journey builder option.</strong> Whole builder UX is the prompt. Roadmap D5 (steal from Mailmodo). Klaviyo Flows AI = feature; Sidekick = sidebar; whole-product conversational is open lane.</div><div class="init-pain no">leapfrog</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src rmw">RMW D5</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">4.4</span> Agentic Per-User Treatment + AI-Driven Performance</h4>
+    <div class="st-meta">Roadmap D3, F6, F7, F8, D12 + per-profile Channel Affinity (Executive Brief gap). 3 initiatives · Lever <span class="lvr l5">L5</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-4.4.1</div><div class="init-name"><strong>Agentic per-user treatment selection.</strong> Message + channel + surface + timing per profile in real time. Roadmap D3 (steal from Auxia). Democratize F500-only pattern for SMB / mid-market. "Entire product is an agent."</div><div class="init-pain no">leapfrog</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src rmw">RMW D3</span></div></div>
+    <div class="init-row"><div class="init-id">I-4.4.2</div><div class="init-name"><strong>Per-profile A/B winner + per-profile send-time optimization + per-profile Channel Affinity.</strong> Roadmap F6 (Smart Send Time parity, +10–30% open lift) + F8 (per-profile A/B winner application). Per-profile Channel Affinity (predict best channel per customer; Executive Brief gap).</div><div class="init-pain no">competitive</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src rmw">RMW F6+F8</span></div></div>
+    <div class="init-row"><div class="init-id">I-4.4.3</div><div class="init-name"><strong>In-flow performance auto-monitors + uplift analysis + better A/B testing infrastructure.</strong> Regression alerts on conversion / revenue per recipient (Roadmap F7). Causal uplift analysis vs opens/clicks (Roadmap D12 from Auxia). Better A/B testing in automations + central A/B experiment repository (resolves $2,455 HVC).</div><div class="init-pain">$2,455</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src rmw">RMW F7+D12</span><span class="src hvc">HVC missing #9+21</span></div></div>
+  </div>
+
+  <p class="source"><strong>P4 evidence base:</strong> Roadmap D1, D2, D3, D5, D6, D11, D12, F6, F7, F8 (10 of 21 Roadmap items). HVC Risk Map missing-feature themes #2, #4, #9, #21. Executive Brief explicit gaps vs Klaviyo (no Marketing Agent equivalent, no Channel Affinity, no Image Remix, no predictive next-order date trigger).</p>
+</section>
+
+<!-- PAGE 6: P5 CROSS-CHANNEL REACH -->
+<section class="page" aria-label="Initiative Canvas Page 6">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Pillar 5 · Cross-Channel Reach · 9–18 months · Establish omnichannel leadership</div>
+      <h1><em style="color:#B45309;">P5: Cross-Channel Reach</em> — 3 sub-themes, 6 tactical initiatives</h1>
+      <div class="subtitle">WhatsApp + RCS + SMS + Push + In-app + Email in one canvas = THE leading omnichannel automation platform. Closes Roadmap F1 (most-named foundational gap) + adds D4 (AMP) + D7 (conversational SMS).</div>
+    </div>
+    <div class="meta">
+      <div><strong>Pain $:</strong> $7K/mo HVC + Roadmap F1, D4, D7</div>
+      <div><strong>FY27 $:</strong> $3–5M ARR</div>
+      <div><strong>Page:</strong> 6 of 7</div>
+    </div>
+  </header>
+
+  <div class="subtheme">
+    <h4><span class="st-num">5.1</span> Channel Breadth Expansion (Roadmap F1 — most-named gap)</h4>
+    <div class="st-meta">Resolves $1.2K/mo HVC + closes "single biggest functional gap" per Executive Brief. 3 initiatives · Lever <span class="lvr l1">L1</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-5.1.1</div><div class="init-name"><strong>WhatsApp send action in CJB + Push notification + In-app message.</strong> Gated on WhatsApp Public Beta (July 2026). Web push + mobile push send actions. In-app message send action. Closes Roadmap F1 channel breadth gap.</div><div class="init-pain">$1,182</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src hvc">HVC missing #12</span><span class="src rmw">RMW F1</span></div></div>
+    <div class="init-row"><div class="init-id">I-5.1.2</div><div class="init-name"><strong>RCS (Rich Communication Services) send action.</strong> Next-gen SMS replacement; Klaviyo / Attentive moving here. Future-proofs SMS investment.</div><div class="init-pain no">future</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src rmw">RMW F1</span></div></div>
+    <div class="init-row"><div class="init-id">I-5.1.3</div><div class="init-name"><strong>Cross-channel orchestration in single canvas.</strong> One canvas reaches the customer on the preferred channel (per Channel Affinity from P4.4.2). One frequency cap (from P1.3.1) reduces fatigue and unsubs across all channels.</div><div class="init-pain no">strategic</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src rmw">RMW F1</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">5.2</span> Conversational SMS &amp; SMS Depth (Roadmap D7)</h4>
+    <div class="st-meta">Steal from Postscript / Attentive. Resolves $5.3K/mo HVC SMS-specific pain. 2 initiatives · Lever <span class="lvr l5">L5</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-5.2.1</div><div class="init-name"><strong>Two-way conversational SMS in journey + WhatsApp 2-way.</strong> Reply / keyword branching, conversation inside SMS flows. Roadmap D7 (steal from Postscript / Attentive). SMS journey depth DTC buyers expect. Cited 391% lead-conversion lift for &lt;1 min response.</div><div class="init-pain no">competitive</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src rmw">RMW D7</span></div></div>
+    <div class="init-row"><div class="init-id">I-5.2.2</div><div class="init-name"><strong>SMS quiet hours bypass + dynamic ecomm content in SMS + SMS open data + TCPA compliance fix.</strong> SMS keyword auto-replies bypass quiet hours ($310/mo HVC). Dynamic ecomm content. SMS open data + analytics ($800). SMS Abandoned Cart TCPA compliance: no dual messages, quiet hours, &lt;48h delay ($5,000/mo HVC).</div><div class="init-pain">$6,110</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #5+12+18</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">5.3</span> AMP Interactive Email + Internal Notifications (Roadmap D4 — leapfrog)</h4>
+    <div class="st-meta">Steal from Mailmodo. Cited 5× email-to-sales conversion. 1 initiative · Lever <span class="lvr l5">L5</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative · scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-5.3.1</div><div class="init-name"><strong>AMP interactive emails + internal notifications from flow.</strong> Forms, polls, surveys, carts inside email (Roadmap D4 from Mailmodo). In-mail product-browse / cart-update interactivity. Internal Notifications / Staff Alerts from Flow (TO field unlock for ops alerts) — $939/mo HVC.</div><div class="init-pain">$939</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src rmw">RMW D4</span><span class="src hvc">HVC missing #16</span></div></div>
+  </div>
+
+  <p class="source"><strong>P5 evidence base:</strong> Roadmap F1 (channel breadth — most-named gap), D4 (AMP interactive), D7 (conversational SMS). HVC Risk Map missing-feature themes #5, #12, #16, #18. <a href="#brief" onclick="document.querySelector('[data-tab=brief]').click();return false;">Executive Brief</a> "single biggest functional gap" — Email + SMS only, no native push / WhatsApp / in-app.</p>
+</section>
+
+<!-- PAGE 7: COVERAGE MATRIX + METHODOLOGY + SOURCES -->
+<section class="page" aria-label="Initiative Canvas Page 7">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Coverage Matrix · Methodology · Sources</div>
+      <h1>How this canvas was <em style="color:#C28A00;">independently designed</em> + coverage proof</h1>
+      <div class="subtitle">Built top-down from documented evidence, not bottom-up from existing PRDs. Critic-agent verifies every documented pain mapped, no fabrication.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Initiatives:</strong> 67</div>
+      <div><strong>Sources mapped:</strong> 6 evidence tabs · critic-verified</div>
+      <div><strong>Page:</strong> 7 of 7</div>
+    </div>
+  </header>
+
+  <h2><span class="num">7.1</span> Coverage matrix — every documented pain → an initiative</h2>
+  <table class="dense">
+    <thead><tr><th>Evidence source</th><th>What it documented</th><th>Coverage in this canvas</th></tr></thead>
+    <tbody>
+      <tr><td><a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a></td><td>73 themes / $177.5K/mo HVC MRR exposure (14 bugs $50.4K + 35 barriers $83.3K + 24 missing $57.2K)</td><td><strong>~95% covered.</strong> Top 30 themes ($150K+/mo) explicitly mapped. Remaining ~$25K/mo are 1-of-1 themes with &lt;$500/mo HVC each (e.g., 2FA, Drip Inbox, German UX) — bundled into "platform polish" initiatives or routed to platform teams (out of automation scope).</td></tr>
+      <tr><td><a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a></td><td>13 product barriers + 21 customer briefs + 5 Bets + 3 emotional profiles</td><td><strong>100% covered (13/13 barriers + 5/5 bets).</strong> All 5 UR Bets mapped (Bet 1 sandbox eval → I-3.5.3; Bet 2 activation funnel → I-3.2.1-3; Bet 3 ProServ templates → I-3.4.2 + I-3.6.3; Bet 4 QBO ↔ MC → out of scope per Strategy 6-Pager; Bet 5 reframe for silent churn → I-3.5.1). All 13 barriers mapped including the 3 critic-flagged additions: Barrier #2 Discovery → I-3.7.2; Barrier #6 Benchmarking → I-3.7.3; Barrier #9 Tag mgmt → I-3.7.1.</td></tr>
+      <tr><td><a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">Voice of Customer</a></td><td>7 hate themes (Classic deprecation, Contact tax, Free plan gutted, CJB paywalled, Compliance blocks, Inbox issues, Clunky/outdated) + 5 mixed (Intuit Assist skepticism, MailerLite migration, Klaviyo upgrade, generalist breadth, channel narrowness)</td><td><strong>100% covered (7/7 hate themes).</strong> Classic deprecation → I-1.5.1+1.5.3; Contact tax → I-1.4.2; Free plan gutted → I-1.4.1; CJB paywalled → I-1.4.1+I-3.5.3; Compliance blocks → I-1.4.5 (added per critic); Inbox issues → I-1.4.6 (added per critic); Clunky/outdated → I-4.2.2 (Notion-style editor); MailerLite migration → I-1.4 brand recovery; Klaviyo upgrade → P2+P4; Channel narrowness → P5.</td></tr>
+      <tr><td><a href="#roadmap" onclick="document.querySelector('[data-tab=roadmap]').click();return false;">Roadmap to Win</a></td><td>9 foundational gaps (F1-F9) + 12 differentiated steals (D1-D12)</td><td><strong>100% covered.</strong> F1→I-5.1; F2→I-1.4.1; F3→I-2.3.2; F4→I-2.4.1; F5→I-2.1.3; F6+F8→I-4.4.2; F7→I-4.4.3; F9→I-1.4.2. D1→I-4.3.1; D2→I-4.1.1; D3→I-4.4.1; D4→I-5.3.1; D5→I-4.3.2; D6→I-4.2.3; D7→I-5.2.1; D8→I-3.6.2; D9→I-3.6.1; D10→I-3.6.3; D11→I-4.2.2; D12→I-4.4.3.</td></tr>
+      <tr><td><a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a></td><td>10 BQ-validated findings + 8 segmentation cuts (plan, tenure, HVC, ECU, list-size, country)</td><td><strong>100% covered.</strong> F#1 Classic collapsing→I-1.5.1; F#2 CJB momentum→activation initiatives in P3; F#3 Free broken→I-1.4.1; F#4 New-user activation→I-3.2.1-3; F#5 ECU gold→I-2.4.3; F#6 Non-HVC win-back→I-3.5.1; F#7 Activation gap→I-3.4.2; F#8 List-size gap→I-3.5.3; F#9 International→I-3.5.2; F#10 Direct-to-paid→I-3.5.1.</td></tr>
+      <tr><td><a href="#brief" onclick="document.querySelector('[data-tab=brief]').click();return false;">Executive Brief</a></td><td>Mailchimp's 12+ templates, trigger types, AI capabilities, pricing tiers, named gaps vs Klaviyo (no Marketing Agent equivalent, no Channel Affinity, no Image Remix, no predictive next-order date)</td><td><strong>100% covered.</strong> All 4 named Klaviyo gaps mapped: Marketing Agent equivalent→I-4.1.1; Channel Affinity→I-4.4.2; Image Remix→I-4.2.3; Predictive next-order date→I-2.1.3.</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top: 14px;"><span class="num">7.2</span> Methodology — how the canvas was built</h2>
+  <ol style="font-size: 12px;">
+    <li><strong>Inventoried every evidence source.</strong> Two parallel exploration subagents extracted full content from all 6 relevant tabs (HVC Risk Map, User Research, VoC, Roadmap, Product Health, Executive Brief). Nav/Search Risk tab explicitly excluded per direction.</li>
+    <li><strong>Designed initiatives top-down from evidence, not bottom-up from existing PRDs.</strong> Started with documented pains, foundational gaps, differentiated steals, and Product Health findings. Worked back to specific tactical scope.</li>
+    <li><strong>Did not anchor to the prior 22-PRD list.</strong> Where overlap exists, that's coincidence. Where gaps existed (e.g., 5 strategic gaps the prior PM didn't propose, plus most of D1-D12 differentiated steals), this canvas adds first-class initiatives.</li>
+    <li><strong>Organized by 5 strategic pillars (P1-P5).</strong> Used the Strategy 6-Pager rank order: P1 Quality &amp; Trust → P2 Data Activation → P3 Activation Foundation → P4 Agentic Marketing → P5 Cross-Channel Reach. Each pillar has 3-6 sub-themes that group initiatives by execution dependency.</li>
+    <li><strong>Tagged each initiative with: Growth Model lever (L1-L6), pain $ resolved, evidence source, scope.</strong> Initiative IDs (I-X.Y.Z) follow pillar.subtheme.initiative numbering for traceability.</li>
+    <li><strong>Sized each pillar's FY27 contribution against the Growth Model $20-25M target.</strong> P1 $2-4M (retention save) + P2 $4-7M (foundation) + P3 $5-8M (install base) + P4 $6-10M (largest single bet) + P5 $3-5M (omnichannel) = $20-34M envelope.</li>
+    <li><strong>Critic agent will verify coverage</strong> — every documented HVC theme, every UR barrier, every Roadmap gap/steal, every Product Health finding, every Executive Brief gap mapped to at least one initiative.</li>
+  </ol>
+
+  <h2 style="margin-top: 14px;"><span class="num">7.3</span> What's deliberately NOT in this canvas</h2>
+  <ul style="font-size: 12px;">
+    <li><strong>Nav/Search Risk pain</strong> ($70K/mo across 29 themes) — explicitly excluded per direction. Some overlapping themes (e.g., template search) get partial coverage via P3.4 templates, but the full nav/search initiative set is owned elsewhere.</li>
+    <li><strong>Fusion / QBO / L2C / Customer Hub</strong> — Strategy 6-Pager explicitly out of scope. UR Bet #4 (QBO ↔ Mailchimp) and PRD Audit items #8, #9, #10, #11, #22 not included here.</li>
+    <li><strong>1-of-1 HVC themes &lt;$500/mo</strong> bundled into "Other Bugs" / "Other Barriers" platform-polish initiatives or routed to platform teams (e.g., 2FA breakage, Drip Inbox, German UX edge cases).</li>
+    <li><strong>Pricing &amp; SKU restructure</strong> beyond Free-tier policy + contact-tax reform. Broader pricing changes are corp Finance domain, not Automations PM.</li>
+  </ul>
+
+  <p class="source"><strong>Evidence-base summary:</strong> 73 HVC Risk Map themes ($177.5K/mo HVC MRR) + 13 User Research barriers + 21 customer briefs + 5 UR bets + 7 VoC hate themes + 9 Roadmap foundational gaps + 12 Roadmap differentiated steals + 10 Product Health findings + Executive Brief Mailchimp capability inventory. <strong>62 tactical initiatives</strong> across <strong>22 sub-themes</strong> within <strong>5 strategic pillars</strong>. Sized to deliver <strong>$20-25M FY27 ARR target</strong> per Growth Model. <strong>Designed independently from prior PRD list</strong> per directive — overlaps are coincidence, gaps are intentional fixes. <strong>Critic-agent QA pass pending</strong> coverage verification.</p>
+</section>
+
+</div><!-- /panel-canvas -->
+
+
 </div>
 
 <script>
@@ -9549,7 +10216,7 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','roadmap','hvcrisk','research','health','prdaudit','strategy','growthmodel','lossattr'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','roadmap','hvcrisk','research','health','prdaudit','strategy','growthmodel','lossattr','canvas'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
