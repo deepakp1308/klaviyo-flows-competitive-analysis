@@ -805,6 +805,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="growthmodel">Growth Model</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="lossattr">Loss Attribution</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="canvas">Initiative Canvas</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="memo">Strategy Memo</button>
     </div>
     <div style="display:flex; gap:8px;">
       <a class="btn" href="index.html">→ Klaviyo</a>
@@ -10759,6 +10760,347 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
 </div><!-- /panel-canvas -->
 
 
+<!-- ============== STRATEGY MEMO TAB (executive narrative — Purpose · Background · Complication) ============== -->
+<div class="tabpanel" id="panel-memo" role="tabpanel">
+<style>
+  /* Executive memo styling — single long-scroll, centered narrow column, Source Serif headlines, Inter body, brand accents */
+  #panel-memo {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 56px 0 64px;
+    margin: 0;
+  }
+  #panel-memo .memo {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 32px;
+    color: var(--ink);
+  }
+  #panel-memo .memo-head {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 22px;
+    margin-bottom: 28px;
+  }
+  #panel-memo .memo-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--brand);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  #panel-memo h1.memo-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin: 0 0 16px;
+    color: var(--ink);
+  }
+  #panel-memo h1.memo-title em { color: var(--brand); font-style: italic; }
+  #panel-memo .memo-meta {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    row-gap: 4px;
+    column-gap: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 18px;
+  }
+  #panel-memo .memo-meta dt { font-weight: 700; color: var(--ink-2); letter-spacing: .04em; text-transform: uppercase; font-size: 10.5px; padding-top: 1px; }
+  #panel-memo .memo-meta dd { margin: 0; color: var(--ink-2); }
+  #panel-memo h2.memo-h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 36px 0 14px;
+  }
+  #panel-memo h2.memo-h2:first-of-type { margin-top: 0; }
+  #panel-memo .lead {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0 0 26px;
+    font-weight: 400;
+  }
+  #panel-memo .lead em { color: var(--brand); font-style: italic; }
+  #panel-memo p {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin: 0 0 16px;
+  }
+  #panel-memo p strong { color: var(--ink); font-weight: 700; }
+  #panel-memo p em { color: var(--brand); font-style: italic; font-weight: 500; }
+  #panel-memo ul.memo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px;
+  }
+  #panel-memo ul.memo-list li {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin-bottom: 12px;
+    padding-left: 18px;
+    position: relative;
+  }
+  #panel-memo ul.memo-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 9px;
+    width: 6px; height: 6px;
+    background: var(--brand);
+    border-radius: 50%;
+  }
+  #panel-memo ul.memo-list li strong { color: var(--ink); font-weight: 700; }
+  #panel-memo .pull-quote {
+    border-left: 3px solid var(--brand);
+    background: linear-gradient(90deg, #FFFCF0 0%, #FFFFFF 60%);
+    padding: 14px 20px;
+    margin: 20px 0 24px;
+    border-radius: 0 8px 8px 0;
+  }
+  #panel-memo .pull-quote .pq-text {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--ink);
+    margin: 0 0 6px;
+    font-style: italic;
+  }
+  #panel-memo .pull-quote .pq-attr {
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px;
+    color: var(--muted);
+    font-style: normal;
+  }
+  #panel-memo .pull-quote .pq-attr strong { color: var(--ink-2); font-weight: 600; font-style: normal; }
+  #panel-memo .stat {
+    color: var(--brand);
+    font-weight: 700;
+    font-feature-settings: "tnum";
+  }
+  #panel-memo .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 22px 0 26px;
+    padding: 18px;
+    background: linear-gradient(180deg, #FAFAFB 0%, #FFFFFF 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  #panel-memo .stat-grid .sg-item { display: flex; flex-direction: column; }
+  #panel-memo .stat-grid .sg-num {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  #panel-memo .stat-grid .sg-num.bad { color: var(--bad); }
+  #panel-memo .stat-grid .sg-num.brand { color: var(--brand); }
+  #panel-memo .stat-grid .sg-label { font-family: 'Inter', sans-serif; font-size: 11.5px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+  #panel-memo .divider {
+    border: 0;
+    border-top: 1px dashed var(--line);
+    margin: 28px 0 22px;
+  }
+  #panel-memo .impact-card {
+    background: #FFF5F2;
+    border-left: 3px solid var(--bad);
+    padding: 14px 18px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  #panel-memo .impact-card .ic-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #9A1F00;
+    margin-bottom: 4px;
+  }
+  #panel-memo .impact-card p { font-size: 13.5px; line-height: 1.6; color: var(--ink-2); margin: 0; }
+  #panel-memo .impact-card p strong { color: var(--ink); }
+  #panel-memo .memo-footer {
+    margin-top: 40px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  #panel-memo .memo-footer a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+  @media (max-width: 720px) {
+    #panel-memo { padding: 32px 0 40px; }
+    #panel-memo .memo { padding: 0 20px; }
+    #panel-memo h1.memo-title { font-size: 26px; }
+    #panel-memo .stat-grid { grid-template-columns: 1fr; }
+  }
+  @media print {
+    #panel-memo { box-shadow: none; border: none; padding: 0; }
+    #panel-memo .memo { max-width: none; padding: 0; }
+  }
+</style>
+
+<article class="memo">
+
+  <!-- Memo header -->
+  <header class="memo-head">
+    <div class="memo-eyebrow">Strategy Memo · Mailchimp Automation · FY27</div>
+    <h1 class="memo-title">Mailchimp Customer Journey Builder &amp; Marketing Automation Flows: <em>FY27 strategy</em></h1>
+    <dl class="memo-meta">
+      <dt>To</dt><dd>Executive Committee</dd>
+      <dt>From</dt><dd>Product Lead, Mailchimp Automations</dd>
+      <dt>Date</dt><dd>May 2026</dd>
+      <dt>Re</dt><dd>FY27 strategy for Customer Journey Builder &amp; Marketing Automation Flows — Memo 1 of 2 (Purpose · Background · Complication)</dd>
+    </dl>
+  </header>
+
+  <!-- Purpose -->
+  <h2 class="memo-h2">Purpose</h2>
+  <p class="lead">This memo articulates the FY27 strategy to transform Mailchimp's automation product — Customer Journey Builder and Marketing Automation Flows — from a generalist starter tool into <em>the leading omnichannel marketing journey platform</em> for SMB and mid-market businesses. It captures the current state, the competitive complication, and quantifies the cost of inaction; the second memo will articulate the strategic question this forces and our recommended response.</p>
+
+  <hr class="divider"/>
+
+  <!-- Background -->
+  <h2 class="memo-h2">Background — what's true today</h2>
+
+  <p>Mailchimp Automation today serves <strong>1.82 million active customers</strong> across all plan tiers globally. Of these, only <span class="stat">153,000 customers — 8.4% of the active base</span> have an active automation today (BigQuery, April 2026). At a stated <strong>$616/month of attributed revenue per active adopter</strong>, this represents roughly <span class="stat">$1.1 billion</span> of customer revenue annually flowing through Mailchimp automations, of which Mailchimp itself captures approximately <span class="stat">$250 million annualized</span> in plan and credit revenue. By these measures, the product is both meaningfully successful and substantially under-monetized.</p>
+
+  <p>Beneath the surface, however, the operational and emotional health of the product is deteriorating. Across the past 18 months we have catalogued <strong>73 distinct pain themes</strong> from Voice of Customer signals — three Slack feedback channels and 38 internal UX research interviews — totaling <span class="stat">$177,500 / month of HVC MRR exposure</span>. Twenty-three themes carry $5K+/month exposure each, with three concentrated drivers: Editor and UI glitches in Journey Builder ($16,507/mo), reporting and stats correctness ($6,218/mo), and the inability to view per-step KPIs inline ($5,098/mo).</p>
+
+  <p>What customers <em>say</em> is more telling than the dollar exposure.</p>
+
+  <div class="pull-quote">
+    <p class="pq-text">"I just haven't gotten deep enough into it yet."</p>
+    <p class="pq-attr"><strong>Clint Bartley</strong> · UX research interview · welcome automation in <em>draft</em> for over a year</p>
+  </div>
+
+  <p>Five of fifteen interviewed customers explicitly described using <strong>only 10–20% of automation capability</strong> and blaming themselves for the gap. <strong>"Half my team is scared by the Outlook migration,"</strong> reported Bianka — a sophisticated B2B operator whose team has used Mailchimp for six years. Customers describe the editor as clunky, the reporting as untrustworthy after the September 2025 attribution change, and the trigger selection as a wall of jargon they cannot navigate without docs.</p>
+
+  <p>What customers value but cannot reliably accomplish today:</p>
+
+  <ul class="memo-list">
+    <li><strong>Recovered cart and post-purchase revenue.</strong> The 5-minute external lag they need to match their website analytics is blocked by Mailchimp's 1-hour minimum delay; their abandoned-cart automation runs after the conversion window has closed.</li>
+    <li><strong>Real-time triggering on the moments their customers actually take action.</strong> Standard SMB triggers exist; the granular event triggers Klaviyo offers (browse, checkout-step, product-affinity, predicted-next-order-date) do not.</li>
+    <li><strong>Reach customers on their preferred channel inside one journey.</strong> Email and US-only SMS are the only native channels in a journey today; push, WhatsApp, RCS, and in-app messaging live outside the canvas — when they exist at all.</li>
+    <li><strong>Confident, decision-grade reports.</strong> Per-step KPIs require a CTM escalation to surface; automation send and abandon counts conflict across views; the September 2025 attribution change broke historical comparability for an entire HVC cohort.</li>
+  </ul>
+
+  <p>The <strong>functional cost</strong> is measured in lost revenue (each customer foregoing $84–184/mo of incremental attributed revenue per active automation), lost time (rebuilding flows because clone is broken; reconfiguring tags after admin rotation), and lost trust (Sept 2025 attribution change). The <strong>emotional cost</strong> is harder to quantify but louder in the data: <em>self-blame</em> (Clint, Shannon, Andrea), <em>fear</em> (Bianka, Andrew), <em>guilt</em> (5 of 15 interviewed customers), <em>distrust</em> (Jeffrey Davis after Sept 2025), and a recurring brand sentiment captured in <strong>Trustpilot's 2.7/5 average across 1,390 reviews</strong>. Customers who used to be advocates now describe Mailchimp Automation as <em>"barely usable on Free since June 2025"</em> and <em>"increasingly expensive at scale."</em></p>
+
+  <hr class="divider"/>
+
+  <!-- Complication -->
+  <h2 class="memo-h2">Complication — what changed in the market</h2>
+
+  <p>While Mailchimp Automation has gotten harder for customers to use over the past 18 months, the competitive set has invested aggressively in exactly the dimensions where Mailchimp is weakest. The result is that operators no longer perceive Mailchimp's generalist breadth as a moat — they perceive it as a ceiling.</p>
+
+  <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 700; color: var(--ink); margin: 28px 0 10px;">Klaviyo</h3>
+
+  <p>Klaviyo has built what their customers describe as a <strong>real-time B2C CRM with automation as the activation layer</strong>. They ship <strong>five native channels</strong> (Email, SMS, WhatsApp, Push, In-app) inside one flow canvas, and <strong>ten-plus AI features inside the canvas itself</strong>: Marketing Agent (autonomous flow setup from a website URL in three clicks), Flows AI (natural-language to full flow structure), Segments AI, Smart Send Time per profile, Channel Affinity, Personalized A/B with per-profile winner application, AI auto-monitors that catch flow regressions, Image Remix for in-flow generative imagery, and AI product-recommendation blocks as drop-in dynamic content.</p>
+
+  <p>Their published customer outcomes give operators a clear narrative arc that Mailchimp does not yet have: <strong>Caden Lane reporting <span class="stat">24.2× year-over-year flow revenue</span> in Q1; Hard Yakka <span class="stat">+308% YoY BFCM flows revenue</span>; Corkcicle <span class="stat">+93% quarter-over-quarter</span>.</strong> The result is what Reddit and operator forums increasingly describe as a default migration path: <em>"DTC founders past ~$500K/yr move from Mailchimp to Klaviyo."</em> Klaviyo serves <strong>143,000+ brands</strong> and is the explicit upgrade destination cited in operator communities.</p>
+
+  <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 700; color: var(--ink); margin: 28px 0 10px;">Shopify</h3>
+
+  <p>Shopify has approached the category from the opposite direction. Marketing Automations and Shopify Flow are <strong>free on every paid Shopify plan from $29/month</strong>. Shopify Flow alone executed <span class="stat">562 million workflows during BFCM 2024</span> with <span class="stat">1 billion+ decisions per month</span> — a scale story Mailchimp has no equivalent for inside automation. More dangerous than the scale: <strong>Shopify Sidekick is a conversational journey editor that authors and modifies flows from natural-language chat</strong>, ungated to any specific tier and integrated with full store context (brand colors, products, past emails). Since Mailchimp deprecated free-tier automation in June 2025, the operator argument <em>"I'll just use what's already in Shopify"</em> has gotten dramatically stronger.</p>
+
+  <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 700; color: var(--ink); margin: 28px 0 10px;">Six emerging-threat startups</h3>
+
+  <p>Six bespoke marketing-automation startups are taking distinct slices of the market that used to be reflexively Mailchimp:</p>
+
+  <ul class="memo-list">
+    <li><strong>Customer.io</strong> ($100M ARR, 9,000+ brands) has effectively taken the SaaS lifecycle category from Mailchimp through unlimited event tracking and Liquid templating.</li>
+    <li><strong>Attentive</strong> ($864M raised, $500M+ ARR, 8,000+ brands) wins decisively in mid-market ecommerce with single-canvas SMS+Email+Push+RCS and a published <strong>15–30% conversion lift</strong> from their AI Marketer suite.</li>
+    <li><strong>Auxia</strong> ($23.5M Series A) brings agentic per-user treatment selection — message + channel + surface + timing per individual profile in real time — with <strong>84% LTV-lift</strong> case studies.</li>
+    <li><strong>Postscript</strong> ($137M raised, 8,500+ Shopify brands) ships <strong>65+ Shopify-native SMS triggers</strong> with a <strong>34× average ROI</strong> claim.</li>
+    <li><strong>Mailmodo</strong> (YC-backed) has whole-product prompt-first builder plus AMP interactive emails with <strong>5× email-to-sales conversion</strong>.</li>
+    <li><strong>Loops</strong> ($13M) is the default automation pick for early-stage YC SaaS founders — Linear, Perplexity, Clerk, Framer, Replicate — through Notion-style editor and combined transactional + marketing in one product.</li>
+  </ul>
+
+  <p>Aggregate G2 score across these six startups: <strong>4.65/5</strong>, versus Mailchimp at <strong>4.3/5</strong>. The strategic risk this composes is captured in one phrase the Emerging Threats analysis surfaced — <em>"death by a thousand verticalized cuts."</em> Each startup wins one slice of the market that used to be reflexively Mailchimp; Mailchimp's generalist breadth is increasingly perceived as <em>"fast to start, but I outgrow it"</em> rather than as a durable moat.</p>
+
+  <hr class="divider"/>
+
+  <!-- Quantified impact -->
+  <h2 class="memo-h2">What this competitive complication has cost us — last 12 months</h2>
+
+  <p>The combined cost of the past 12 months on Mailchimp's own metrics is meaningful but mostly invisible on the booked P&amp;L. The data tells a consistent story: <strong>the platform is not collapsing, but it is losing the trust and engagement that compound into long-term retention and pricing power.</strong></p>
+
+  <div class="stat-grid">
+    <div class="sg-item">
+      <div class="sg-num bad">−8.3% YoY</div>
+      <div class="sg-label">Total active customer base: 2.04M → 1.82M (−172K)</div>
+    </div>
+    <div class="sg-item">
+      <div class="sg-num bad">−20.3% YoY</div>
+      <div class="sg-label">Combined automation Establishers: 248.9K → 198.3K avg/mo (−50.6K)</div>
+    </div>
+    <div class="sg-item">
+      <div class="sg-num bad">−67% YoY</div>
+      <div class="sg-label">Free-tier Establishers: 78.9K → 25.9K avg/mo (driven primarily by June 2025 Free-plan deprecation; pure product-quality contribution ~30%)</div>
+    </div>
+    <div class="sg-item">
+      <div class="sg-num bad">+24.6% YoY</div>
+      <div class="sg-label">Combined Abandoners (5_Abandon): 133.2K → 166.0K avg/mo. <em>Cleanest signal of automation product issues</em> — adopters who tried it and gave up</div>
+    </div>
+    <div class="sg-item">
+      <div class="sg-num bad">−42.5% YoY</div>
+      <div class="sg-label">Adopter-cohort Free-to-Paid conversion: 60,994 → 35,070. Automation is supposed to be an upgrade hook; if it's broken, FTP suffers disproportionately</div>
+    </div>
+    <div class="sg-item">
+      <div class="sg-num bad">−$9.5M YoY</div>
+      <div class="sg-label">Platform MRR (annualized): $1,272.6M → $1,263.1M. Of this, ~$3–5M is automation-attributable on the booked P&amp;L</div>
+    </div>
+  </div>
+
+  <h2 class="memo-h2" style="margin-top: 32px;">Customer impact — what each customer foregoes</h2>
+
+  <div class="impact-card">
+    <div class="ic-label">Customer-side cost</div>
+    <p>Each adopter who would have improved with the strategy lifts forgoes roughly <strong>$84–184/mo of incremental attributed revenue</strong> (the gap between today's $616/mo per-adopter PRD baseline and the $700–800/mo target). On 153K adopters, this aggregates to <strong>$154–338M of customer-side revenue not captured in the past year</strong>. The functional impact is lost ecommerce sales and lost engagement; the emotional impact is the self-blame and guilt documented in interviews — <em>"we're not getting enough value out of this"</em> — which precedes silent churn.</p>
+  </div>
+
+  <h2 class="memo-h2">Mailchimp business impact</h2>
+
+  <div class="impact-card">
+    <div class="ic-label">Mailchimp business cost</div>
+    <p><strong>Combined automation-related impact over the past 12 months: ~$30–55M</strong>, decomposing into roughly $3–5M of booked P&amp;L erosion, $15–25M of modeled drag from adoption shortfall and abandonment increase, and $15–35M of opportunity cost on growth that was achievable but not captured. Most is imputed and counterfactual, but the directional signal is unambiguous. <strong>The opportunity cost — what we left on the table — is roughly equal to the FY27 Growth Model target ($20–25M) we are now committing to capture.</strong> We are trying to recover next year approximately what we missed last year.</p>
+  </div>
+
+  <p style="margin-top: 24px;">The customer-side metrics that erode the business case for adoption itself are also worsening: new platform bookings MRR is down <strong>−10.3% YoY</strong>; the gap between Mailchimp's brand sentiment (Trustpilot 2.7/5) and the brand sentiment of the emerging-threat cohort (G2 average 4.65/5) is widening, not narrowing; and operator forums increasingly cite Mailchimp as the <em>"starter tool you outgrow,"</em> not the <em>"automation platform you scale on."</em></p>
+
+  <p>This is the strategic situation as it stands today. The next memo will articulate the strategic question this complication forces, and the answer we are committing to.</p>
+
+  <!-- Memo footer / sources -->
+  <div class="memo-footer">
+    <strong>Sources cited inline:</strong> BigQuery <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 11px;">mc-business-intelligence.bi_aggregate.product_journey_monthly</code> + <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 11px;">mbr_monthly</code> joined via <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 11px;">agg_key</code> (Apr 2026 snapshot; trailing 12-month aggregations May 2025–Apr 2026). HVC Risk Map (73 themes, $177.5K/mo HVC MRR exposure across 18 months Slack VoC + 38 UX research entries). User Research (50 HeyMarvin videos, 21 customer briefs). Voice of Customer (Trustpilot 1,390 reviews; G2 12,698 reviews; Reddit + operator forums). Roadmap to Win (9 foundational gaps + 12 differentiated steals). Klaviyo competitive brief (26 named gaps). Shopify competitive brief (16 named gaps). Emerging Threats brief (6 startups). Customer outcome figures (Caden Lane, Hard Yakka, Corkcicle) sourced from Klaviyo published case studies via the Klaviyo brief. All YoY comparisons use <strong>last 12mo (May 2025–Apr 2026)</strong> vs <strong>prior 12mo (May 2024–Apr 2025)</strong>. Loss-attribution decomposition methodology documented in <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution tab</a>; growth-target reconciliation in <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model tab</a>; full initiative inventory in <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas tab</a>.
+    <br/><br/>
+    <em>This is Memo 1 of 2. Memo 2 will articulate the strategic question and recommended answer.</em>
+  </div>
+
+</article>
+
+</div><!-- /panel-memo -->
+
+
 </div>
 
 <script>
@@ -10785,7 +11127,7 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','roadmap','hvcrisk','research','health','prdaudit','strategy','growthmodel','lossattr','canvas'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','roadmap','hvcrisk','research','health','prdaudit','strategy','growthmodel','lossattr','canvas','memo'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
