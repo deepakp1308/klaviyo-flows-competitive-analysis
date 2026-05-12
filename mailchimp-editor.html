@@ -4522,20 +4522,1047 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 
 <!-- ============== STRATEGY MEMO TAB (executive narrative — Purpose · Background · Complication) ============== -->
 <div class="tabpanel" id="panel-memo" role="tabpanel">
-  <section class="page" aria-label="Strategy Memo placeholder">
-    <header class="page-head">
-      <div>
-        <div class="eyebrow">Mailchimp Email/SMS Unified Editor &amp; Builder</div>
-        <h1>Strategy Memo <em style="color:#C28A00;">— under construction</em></h1>
-        <div class="subtitle">This tab will mirror the 1-page structure of the corresponding tab in the Mailchimp Automations brief, applied to the unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist).</div>
+<style>
+  /* Executive memo styling — single long-scroll, centered narrow column, Source Serif headlines, Inter body, brand accents */
+  #panel-memo {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 56px 0 64px;
+    margin: 0;
+  }
+  #panel-memo .memo {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 32px;
+    color: var(--ink);
+  }
+  /* Keep narrative prose at narrower line length; only let composed components use full width */
+  #panel-memo .memo > p,
+  #panel-memo .lead,
+  #panel-memo ul.memo-list,
+  #panel-memo .pull-quote,
+  #panel-memo .impact-card,
+  #panel-memo .bridge-block,
+  #panel-memo .recap-block,
+  #panel-memo .memo-footer,
+  #panel-memo .vision-block {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  #panel-memo .memo-head {
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 22px;
+    margin-bottom: 28px;
+  }
+  #panel-memo .memo-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--brand);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  #panel-memo h1.memo-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 34px;
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.015em;
+    margin: 0 0 16px;
+    color: var(--ink);
+  }
+  #panel-memo h1.memo-title em { color: var(--brand); font-style: italic; }
+  #panel-memo .memo-meta {
+    display: grid;
+    grid-template-columns: 70px 1fr;
+    row-gap: 4px;
+    column-gap: 12px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: var(--muted);
+    margin-top: 18px;
+  }
+  #panel-memo .memo-meta dt { font-weight: 700; color: var(--ink-2); letter-spacing: .04em; text-transform: uppercase; font-size: 10.5px; padding-top: 1px; }
+  #panel-memo .memo-meta dd { margin: 0; color: var(--ink-2); }
+  #panel-memo h2.memo-h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    margin: 36px 0 14px;
+  }
+  #panel-memo h2.memo-h2:first-of-type { margin-top: 0; }
+  #panel-memo .lead {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0 0 26px;
+    font-weight: 400;
+  }
+  #panel-memo .lead em { color: var(--brand); font-style: italic; }
+  #panel-memo p {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--ink-2);
+    margin: 0 0 16px;
+  }
+  #panel-memo p strong { color: var(--ink); font-weight: 700; }
+  #panel-memo p em { color: var(--brand); font-style: italic; font-weight: 500; }
+  #panel-memo ul.memo-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 18px;
+  }
+  #panel-memo ul.memo-list li {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin-bottom: 12px;
+    padding-left: 18px;
+    position: relative;
+  }
+  #panel-memo ul.memo-list li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 9px;
+    width: 6px; height: 6px;
+    background: var(--brand);
+    border-radius: 50%;
+  }
+  #panel-memo ul.memo-list li strong { color: var(--ink); font-weight: 700; }
+  #panel-memo .pull-quote {
+    border-left: 3px solid var(--brand);
+    background: linear-gradient(90deg, #FFFCF0 0%, #FFFFFF 60%);
+    padding: 14px 20px;
+    margin: 20px 0 24px;
+    border-radius: 0 8px 8px 0;
+  }
+  #panel-memo .pull-quote .pq-text {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.45;
+    color: var(--ink);
+    margin: 0 0 6px;
+    font-style: italic;
+  }
+  #panel-memo .pull-quote .pq-attr {
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px;
+    color: var(--muted);
+    font-style: normal;
+  }
+  #panel-memo .pull-quote .pq-attr strong { color: var(--ink-2); font-weight: 600; font-style: normal; }
+  #panel-memo .stat {
+    color: var(--brand);
+    font-weight: 700;
+    font-feature-settings: "tnum";
+  }
+  #panel-memo .stat-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin: 22px 0 26px;
+    padding: 18px;
+    background: linear-gradient(180deg, #FAFAFB 0%, #FFFFFF 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  #panel-memo .stat-grid .sg-item { display: flex; flex-direction: column; }
+  #panel-memo .stat-grid .sg-num {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  #panel-memo .stat-grid .sg-num.bad { color: var(--bad); }
+  #panel-memo .stat-grid .sg-num.brand { color: var(--brand); }
+  #panel-memo .stat-grid .sg-label { font-family: 'Inter', sans-serif; font-size: 11.5px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+  #panel-memo .divider {
+    border: 0;
+    border-top: 1px dashed var(--line);
+    margin: 28px 0 22px;
+  }
+  #panel-memo .impact-card {
+    background: #FFF5F2;
+    border-left: 3px solid var(--bad);
+    padding: 14px 18px;
+    margin: 20px 0;
+    border-radius: 0 8px 8px 0;
+  }
+  #panel-memo .impact-card .ic-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px;
+    font-weight: 800;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: #9A1F00;
+    margin-bottom: 4px;
+  }
+  #panel-memo .impact-card p { font-size: 13.5px; line-height: 1.6; color: var(--ink-2); margin: 0; }
+  #panel-memo .impact-card p strong { color: var(--ink); }
+  #panel-memo .memo-footer {
+    margin-top: 40px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+  #panel-memo .memo-footer a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+  @media (max-width: 720px) {
+    #panel-memo { padding: 32px 0 40px; }
+    #panel-memo .memo { padding: 0 20px; }
+    #panel-memo h1.memo-title { font-size: 26px; }
+    #panel-memo .stat-grid { grid-template-columns: 1fr; }
+  }
+  @media print {
+    #panel-memo { box-shadow: none; border: none; padding: 0; }
+    #panel-memo .memo { max-width: none; padding: 0; }
+  }
+
+  /* === Bridge / Vision === */
+  #panel-memo .bridge-block {
+    border-left: 3px solid var(--brand);
+    background: linear-gradient(90deg, #FFFCF0 0%, #FFFFFF 70%);
+    padding: 16px 22px;
+    margin: 32px 0 36px;
+    border-radius: 0 8px 8px 0;
+  }
+  #panel-memo .bridge-block p {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--ink);
+    margin: 0;
+    font-style: italic;
+  }
+  #panel-memo .bridge-block p strong { color: var(--brand); font-weight: 700; font-style: normal; }
+  #panel-memo .bridge-block p em { color: var(--ink); font-weight: 600; font-style: italic; }
+
+  #panel-memo .vision-block {
+    background: linear-gradient(180deg, #FAFAFA 0%, #FFFFFF 100%);
+    border: 1px solid var(--line);
+    border-top: 3px solid var(--brand);
+    padding: 28px 28px;
+    margin: 12px 0 28px;
+    border-radius: 0 0 12px 12px;
+  }
+  #panel-memo .vision-block p {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: var(--ink);
+    margin: 0;
+    font-weight: 400;
+  }
+  #panel-memo .vision-block p em { color: var(--brand); font-style: italic; font-weight: 500; }
+  #panel-memo .vision-block p strong { color: var(--ink); font-weight: 700; }
+
+  /* === Success looks like — 3-card grid === */
+  #panel-memo .success-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 22px 0 26px;
+  }
+  #panel-memo .success-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 18px 20px;
+    background: #FFFFFF;
+  }
+  #panel-memo .success-card .sc-eyebrow {
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: .14em;
+    text-transform: uppercase;
+    color: var(--brand);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  #panel-memo .success-card .sc-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+  }
+  #panel-memo .success-card .sc-row {
+    display: grid;
+    grid-template-columns: 1fr 90px 24px 100px;
+    gap: 8px;
+    align-items: baseline;
+    padding: 7px 0;
+    border-bottom: 1px dotted #EEE;
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+  }
+  #panel-memo .success-card .sc-row:last-child { border-bottom: 0; }
+  #panel-memo .success-card .sc-row .sc-metric { color: var(--ink-2); }
+  #panel-memo .success-card .sc-row .sc-from { color: var(--muted); text-align: right; font-feature-settings: "tnum"; font-size: 12.5px; }
+  #panel-memo .success-card .sc-row .sc-arrow { color: var(--brand); text-align: center; font-weight: 700; }
+  #panel-memo .success-card .sc-row .sc-to { color: var(--ink); font-weight: 700; text-align: right; font-feature-settings: "tnum"; font-size: 13px; }
+  #panel-memo .success-card .sc-row.hi { background: linear-gradient(90deg, #FFFCF0 0%, transparent 100%); border-radius: 4px; padding: 7px 8px; margin: 0 -8px; }
+  #panel-memo .success-card .sc-row.hi .sc-to { color: var(--brand); }
+  #panel-memo .success-card .sc-lever {
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: #F8F8F9;
+    border-radius: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  #panel-memo .success-card .sc-lever strong { color: var(--brand); }
+
+  /* === How We Win — 4 quadrants === */
+  #panel-memo .hww-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 22px 0 18px;
+  }
+  #panel-memo .hww-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: #FFFFFF;
+    border-top-width: 3px;
+  }
+  #panel-memo .hww-card.stop { border-top-color: var(--bad); background: linear-gradient(180deg, #FFF5F2 0%, #FFFFFF 60%); }
+  #panel-memo .hww-card.continue { border-top-color: var(--muted); background: linear-gradient(180deg, #F8F8F9 0%, #FFFFFF 60%); }
+  #panel-memo .hww-card.change { border-top-color: var(--brand); background: linear-gradient(180deg, #FFFCF0 0%, #FFFFFF 60%); }
+  #panel-memo .hww-card.start { border-top-color: var(--good); background: linear-gradient(180deg, #F0FAF3 0%, #FFFFFF 60%); }
+  #panel-memo .hww-card .hww-label {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 800;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  #panel-memo .hww-card.stop .hww-label { color: var(--bad); }
+  #panel-memo .hww-card.continue .hww-label { color: var(--muted); }
+  #panel-memo .hww-card.change .hww-label { color: var(--brand); }
+  #panel-memo .hww-card.start .hww-label { color: var(--good); }
+  #panel-memo .hww-card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  #panel-memo .hww-card ul li {
+    font-family: 'Inter', sans-serif;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    padding: 5px 0 5px 14px;
+    position: relative;
+    border-bottom: 1px dotted #EEE;
+  }
+  #panel-memo .hww-card ul li:last-child { border-bottom: 0; }
+  #panel-memo .hww-card ul li::before {
+    content: '—';
+    position: absolute;
+    left: 0;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  #panel-memo .hww-card.stop ul li::before { color: var(--bad); }
+  #panel-memo .hww-card.change ul li::before { color: var(--brand); }
+  #panel-memo .hww-card.start ul li::before { color: var(--good); }
+  #panel-memo .hww-card ul li strong { color: var(--ink); font-weight: 700; }
+
+  /* === Strategic pillars === */
+  #panel-memo .pillar-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin: 22px 0 26px;
+  }
+  #panel-memo .mpillar {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 20px;
+    background: #FFFFFF;
+    border-left: 4px solid var(--brand);
+  }
+  #panel-memo .mpillar.p1 { border-left-color: #C7322E; background: linear-gradient(90deg, #FFF7F5 0%, #FFFFFF 30%); }
+  #panel-memo .mpillar.p2 { border-left-color: #C97E12; background: linear-gradient(90deg, #FFFAEF 0%, #FFFFFF 30%); }
+  #panel-memo .mpillar.p3 { border-left-color: #166D3B; background: linear-gradient(90deg, #F2FAF4 0%, #FFFFFF 30%); }
+  #panel-memo .mpillar.p4 { border-left-color: #5B21B6; background: linear-gradient(90deg, #F8F4FF 0%, #FFFFFF 30%); }
+  #panel-memo .mpillar.p5 { border-left-color: #1F4E8C; background: linear-gradient(90deg, #F2F6FB 0%, #FFFFFF 30%); }
+  #panel-memo .mpillar .mp-head { margin-bottom: 10px; }
+  #panel-memo .mpillar .mp-num {
+    display: inline-block;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 12px;
+    font-weight: 700;
+    background: var(--ink);
+    color: #FFF;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-right: 10px;
+    vertical-align: middle;
+  }
+  #panel-memo .mpillar.p1 .mp-num { background: #C7322E; }
+  #panel-memo .mpillar.p2 .mp-num { background: #C97E12; }
+  #panel-memo .mpillar.p3 .mp-num { background: #166D3B; }
+  #panel-memo .mpillar.p4 .mp-num { background: #5B21B6; }
+  #panel-memo .mpillar.p5 .mp-num { background: #1F4E8C; }
+  #panel-memo .mpillar .mp-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--ink);
+    display: inline;
+  }
+  #panel-memo .mpillar .mp-meta {
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px;
+    color: var(--muted);
+    margin-top: 5px;
+  }
+  #panel-memo .mpillar .mp-meta .mp-internal { font-style: italic; color: var(--muted); }
+  #panel-memo .mpillar .mp-meta .mp-horizon { color: var(--ink-2); font-weight: 600; }
+  #panel-memo .mpillar ul.mp-init {
+    list-style: none;
+    padding: 0;
+    margin: 10px 0 0;
+    border-top: 1px dotted #EEE;
+    padding-top: 10px;
+  }
+  #panel-memo .mpillar ul.mp-init li {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    padding: 5px 0 5px 16px;
+    position: relative;
+  }
+  #panel-memo .mpillar ul.mp-init li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    top: 5px;
+    color: var(--brand);
+    font-size: 10px;
+  }
+  #panel-memo .mpillar ul.mp-init li strong { color: var(--ink); font-weight: 700; }
+
+  /* === Guiding principles === */
+  #panel-memo .principles-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 18px 0 22px;
+  }
+  #panel-memo .gp {
+    display: grid;
+    grid-template-columns: 36px 1fr;
+    gap: 14px;
+    padding: 14px 16px;
+    background: #FAFAFB;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  #panel-memo .gp-num {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--brand);
+    line-height: 1;
+    text-align: center;
+  }
+  #panel-memo .gp-body .gp-title {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+  #panel-memo .gp-body p {
+    font-family: 'Inter', sans-serif;
+    font-size: 13px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    margin: 0;
+  }
+  #panel-memo .gp-body p strong { color: var(--ink); font-weight: 700; }
+  #panel-memo .gp-body p em { color: var(--brand); font-style: italic; }
+
+  #panel-memo .effort-alloc {
+    margin: 22px 0 6px;
+  }
+  #panel-memo .effort-alloc .ea-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  #panel-memo .effort-alloc .ea-bar {
+    display: flex;
+    height: 56px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  #panel-memo .effort-alloc .ea-seg {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 6px 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px;
+    text-align: center;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+  #panel-memo .effort-alloc .ea-seg span { display: block; opacity: 0.85; }
+  #panel-memo .effort-alloc .ea-seg strong { display: block; font-size: 14px; font-weight: 800; margin-top: 2px; }
+  #panel-memo .effort-alloc .ea-1 { background: #FFE9CC; }
+  #panel-memo .effort-alloc .ea-2 { background: #FFEFA8; }
+  #panel-memo .effort-alloc .ea-3 { background: #DCEEF6; }
+  #panel-memo .effort-alloc .ea-4 { background: #E8E2F4; }
+
+  /* === 6Q Roadmap === */
+  #panel-memo .rmap {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    margin: 20px 0 26px;
+  }
+  #panel-memo .rmap-q {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 10px;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+  }
+  #panel-memo .rmap-q.star { border-color: var(--brand); background: linear-gradient(180deg, #FFFCF0 0%, #FFFFFF 100%); }
+  #panel-memo .rmap-qlbl {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--brand);
+    margin-bottom: 2px;
+  }
+  #panel-memo .rmap-qdate {
+    font-family: 'Inter', sans-serif;
+    font-size: 9.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    margin-bottom: 8px;
+  }
+  #panel-memo .rmap-qcred {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.25;
+    margin-bottom: 6px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--line);
+  }
+  #panel-memo .rmap-qnote {
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px;
+    line-height: 1.45;
+    color: var(--ink-2);
+  }
+  @media (max-width: 880px) {
+    #panel-memo .rmap { grid-template-columns: 1fr 1fr; }
+    #panel-memo .hww-grid { grid-template-columns: 1fr; }
+  }
+
+  /* === Recap === */
+  #panel-memo .recap-block {
+    background: linear-gradient(180deg, #FAFAFB 0%, #FFFFFF 100%);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brand);
+    padding: 20px 24px;
+    border-radius: 0 8px 8px 0;
+    margin: 16px 0 24px;
+  }
+  #panel-memo .recap-block p {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14.5px;
+    line-height: 1.6;
+    color: var(--ink);
+    margin: 0 0 14px;
+  }
+  #panel-memo .recap-block p:last-child { margin-bottom: 0; }
+  #panel-memo .recap-block p strong { color: var(--brand); font-weight: 700; }
+
+  /* === From → To table === */
+  #panel-memo .ft-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0 22px;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  #panel-memo .ft-table thead th {
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px;
+    letter-spacing: .1em;
+    text-transform: uppercase;
+    font-weight: 700;
+    text-align: left;
+    color: var(--muted);
+    padding: 10px 14px;
+    background: #FAFAFB;
+    border-bottom: 1px solid var(--line);
+  }
+  #panel-memo .ft-table thead th.ft-th-from { color: var(--bad); }
+  #panel-memo .ft-table thead th.ft-th-to { color: var(--good); }
+  #panel-memo .ft-table thead th.ft-th-arrow { width: 24px; text-align: center; }
+  #panel-memo .ft-table thead th.ft-th-pillar { width: 90px; text-align: center; }
+  #panel-memo .ft-table tbody td {
+    padding: 14px;
+    vertical-align: top;
+    font-family: 'Inter', sans-serif;
+    font-size: 12.5px;
+    line-height: 1.55;
+    color: var(--ink-2);
+    border-bottom: 1px solid var(--line);
+  }
+  #panel-memo .ft-table tbody tr:last-child td { border-bottom: 0; }
+  #panel-memo .ft-table tbody td:first-child { background: #FFF8F5; border-right: 1px solid var(--line); }
+  #panel-memo .ft-table tbody td:nth-child(3) { background: #F4FAF6; border-left: 1px solid var(--line); }
+  #panel-memo .ft-table tbody td strong { color: var(--ink); font-weight: 700; }
+  #panel-memo .ft-table tbody td em { color: var(--ink-2); font-style: italic; font-weight: 600; font-size: 11.5px; text-transform: uppercase; letter-spacing: .04em; margin-right: 4px; }
+  #panel-memo .ft-table tbody td.ft-arrow { background: #FFF; text-align: center; color: var(--brand); font-weight: 700; font-size: 18px; vertical-align: middle; padding: 0 6px; border-right: 0; border-left: 0; }
+  #panel-memo .ft-table tbody td.ft-pill { text-align: center; padding: 14px 8px; }
+  #panel-memo .ft-table .ftp {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: #FFF;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin: 2px 2px;
+  }
+  #panel-memo .ft-table .ftp.p1 { background: #C7322E; }
+  #panel-memo .ft-table .ftp.p2 { background: #C97E12; }
+  #panel-memo .ft-table .ftp.p3 { background: #166D3B; }
+  #panel-memo .ft-table .ftp.p4 { background: #5B21B6; }
+  #panel-memo .ft-table .ftp.p5 { background: #1F4E8C; }
+
+  @media (max-width: 760px) {
+    #panel-memo .ft-table thead { display: none; }
+    #panel-memo .ft-table, #panel-memo .ft-table tbody, #panel-memo .ft-table tr, #panel-memo .ft-table td { display: block; width: 100%; }
+    #panel-memo .ft-table tbody td { border-right: 0 !important; border-left: 0 !important; }
+    #panel-memo .ft-table tbody td.ft-arrow { display: none; }
+  }
+</style>
+
+<article class="memo">
+
+  <header class="memo-head">
+    <div class="memo-eyebrow">Strategy Memo · Mailchimp Email/SMS Unified Editor · FY27</div>
+    <h1 class="memo-title">Mailchimp Unified Authoring: <em>FY27 strategy</em></h1>
+    <dl class="memo-meta">
+      <dt>To</dt><dd>Executive Committee</dd>
+      <dt>From</dt><dd>Product Lead, Mailchimp Authoring Surface</dd>
+      <dt>Date</dt><dd>May 2026</dd>
+      <dt>Re</dt><dd>FY27 strategy for New Email Builder + SMS composer + Brand Kit + Content Studio + AI Assist — synthesized from this brief&rsquo;s evidence tabs</dd>
+    </dl>
+  </header>
+
+  <h2 class="memo-h2">Purpose</h2>
+  <p class="lead">This memo states the FY27 commitment for Mailchimp&rsquo;s <em>unified authoring surface</em>: reverse a shrinking bulk-email footprint, close the Universal Content and AI parity gaps operators now associate with Klaviyo, and turn &ldquo;billing-unified&rdquo; email+SMS into a <strong>single canvas customers actually experience</strong> — while booking <strong>$25&ndash;30M incremental ARR</strong> as the authoring share of standalone growth.</p>
+
+  <hr class="divider"/>
+
+  <h2 class="memo-h2">Background — what the data says</h2>
+
+  <p>Product Health (BigQuery, trailing 12 mo through Apr 2026) anchors the story on <strong>bulk-email Established users averaging ~888.7K/mo</strong>, down <span class="stat">−9.4% YoY</span>. Top-of-funnel <strong>Explore</strong> is down <span class="stat">−19.2% YoY</span>. Churn (Abandon / Establish+Abandon) on that spine is <strong>40.0%</strong> and worsened <span class="stat">+2.1pp YoY</span>. This is not &ldquo;one bad quarter&rdquo; — it is structural compression on the broadest cohort that touches the builder every week.</p>
+
+  <p>In parallel, <strong>SMS composer Established</strong> users grew <span class="stat">+73.5% YoY</span> to ~6.7K/mo — but churn is <strong>52.9%</strong> (+3.0pp). <strong>Write with AI</strong> established cohort is flatter (−3.8% YoY) while <em>Explore collapsed −73.7% YoY</em>, Abandon <strong>doubled +101% YoY</strong>, and churn hit <strong>77%</strong> (+15.4pp) — a &ldquo;honeymoon ended&rdquo; pattern that policy, trust, and product must unwind together.</p>
+
+  <p>Internal HVC harvest (#hvc_feedback, escalations, summaries) shows repeated,cited MRR pain on <strong>New Builder</strong>, Classic coexistence <strong>Canva</strong> embeds, <strong>Brand Kit</strong> (fonts, governance), <strong>SMS/MMS/credits</strong>, and Assist — dollar exposure lives at the card level in this brief, not a single rolled statistic. External Voice of Customer reinforces the narrative that Mailchimp &ldquo;ships features&rdquo; but <strong>loses the editor conversation</strong> to Klaviyo and governed-creation tools (Stensul / enterprise narrative).</p>
+
+  <p>User Research (25 HeyMarvin-style briefs / 50-session synthesis) underscores the same jobs: <strong>speed to first send</strong>, <strong>reuse without rework</strong>, <strong>confidence on brand + mobile</strong>, and <strong>SMS fear</strong> (compliance, cost, duplication of work).</p>
+
+  <div class="pull-quote">
+    <p class="pq-text">&ldquo;We are trying to recover next year approximately what we failed to capture while the builder base was shrinking.&rdquo;</p>
+    <p class="pq-attr"><strong>Growth Model + Loss Attribution</strong> · mid scenario ~$26.3M FY27 vs ~$36&ndash;67M backward-looking editor-related stack (mostly imputed)</p>
+  </div>
+
+  <ul class="memo-list">
+    <li><strong>What customers need:</strong> one modern email builder path (no Classic/NEB Schrödinger migration), Universal Content that propagates across templates and touchpoints, AI that works globally and inside the canvas, and SMS that shares blocks + Brand Kit with email.</li>
+    <li><strong>What we have today:</strong> two builders, template-scoped saved content, geo-gated AI, and email/SMS authoring that is &ldquo;unified&rdquo; on pricing slides more than in the compose loop.</li>
+  </ul>
+
+  <hr class="divider"/>
+
+  <h2 class="memo-h2">Complication — competition and narrative</h2>
+
+  <p><strong>Klaviyo</strong> Spring 2026 made <strong>Universal Content-class primitives</strong> table stakes and continues to ship AI inside the authoring loop. Operators compare <em>block reuse, image+text tools, and cross-channel preview</em> side-by-side — not just automation depth. <strong>Stensul</strong> and similar &ldquo;governed creation&rdquo; tools eat Premium &amp; agency trust where HTML + brand lockups matter.</p>
+
+  <p><strong>Shopify</strong> and SMS-native players anchor <strong>free or bundled</strong> channel tools inside commerce — Mailchimp must win on cross-platform reach + Intuit Assist, not on pretending SMS is an add-on composer forever.</p>
+
+  <div class="stat-grid">
+    <div class="sg-item">
+      <div class="sg-num bad">−9.4% YoY</div>
+      <div class="sg-label">Bulk email Established (~888.7K/mo avg) — core authoring spine</div>
+    </div>
+    <div class="sg-item">
+      <div class="sg-num bad">−19.2% YoY</div>
+      <div class="sg-label">Bulk Explore — funnel compression (product + GTM + policy co-linear)</div>
+    </div>
+    <div class="sg-item">
+      <div class="sg-num bad">+2.1pp YoY</div>
+      <div class="sg-label">Bulk churn rate deterioration (40.0% trailing)</div>
+    </div>
+    <div class="sg-item">
+      <div class="sg-num bad">−73.7% YoY</div>
+      <div class="sg-label">Write with AI Explore collapse; churn +15.4pp (worst editor-family)</div>
+    </div>
+    <div class="sg-item">
+      <div class="sg-num brand">+73.5% YoY</div>
+      <div class="sg-label">SMS Established growth — offset by 52.9% churn (Attach story = retention + canvas)</div>
+    </div>
+    <div class="sg-item">
+      <div class="sg-num bad">~$9.5M</div>
+      <div class="sg-label">Platform annualized MRR YoY delta — ~$2&ndash;4M booked with authoring-surface causal share (Loss Attribution L1)</div>
+    </div>
+  </div>
+
+  <h2 class="memo-h2">Mailchimp business impact — backward and forward</h2>
+
+  <div class="impact-card">
+    <div class="ic-label">Backward 12 months (editor lens)</div>
+    <p><strong>Loss Attribution</strong> stacks roughly <strong>$2&ndash;4M booked</strong>, <strong>$12&ndash;28M modeled</strong>, and <strong>$22&ndash;35M opportunity</strong> (Growth Model inverse) — <strong>$36&ndash;67M sensitivity band</strong>, mostly counterfactual. The honest headline: <strong>the P&amp;L print is flat-to-down, but the builder funnel is not healthy.</strong></p>
+  </div>
+
+  <div class="impact-card" style="background:#F4FAF6;border-left-color:var(--good);">
+    <div class="ic-label" style="color:#036A4F;">Forward FY27 (authoring commit)</div>
+    <p><strong>Growth Model</strong> mid scenario lands <strong>~$26.3M</strong> inside the <strong>$25&ndash;30M</strong> anchor — bulk Established recovery (L1), activation (L2), SMS attach (L3), migration friction reduction (L4), churn save (L5), ARPU/outcome lift (L6). Finance still locks paid-slice ARPU (~$110 placeholder) and causal shares.</p>
+  </div>
+
+  <div class="bridge-block">
+    <p>What follows is not a list of UI tweaks — it is <strong>one coordinated program</strong>: ship <strong>B2 Universal Content first</strong> (parity + primitive for everything else), parallel <strong>B1 builder unification + Code Mode</strong> so Classic sunset is safe, drive <strong>B4 AI ungate + conversational editing</strong> on the legal track, and sequence <strong>B3 unified canvas</strong> so SMS revenue stops leaking to friction.</p>
+  </div>
+
+  <h2 class="memo-h2">Vision</h2>
+
+  <div class="vision-block">
+    <p>Mailchimp becomes the place where <em>every marketer authors once</em> — email and SMS pull from the same blocks, the same Brand Kit, and the same Assist — with <strong>governed quality</strong> for solo operators and <strong>power-user escape hatches</strong> (Code Mode, Liquid) without leaving New Email Builder. Customers stop rebuilding the same header in six templates and stop paying for Standard while AI is geofenced.</p>
+  </div>
+
+  <hr class="divider"/>
+
+  <h2 class="memo-h2">Success looks like — metrics tied to Growth Model</h2>
+
+  <p>Definitions and formulas: <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model tab</a>. Baselines: <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a>.</p>
+
+  <div class="success-grid">
+    <div class="success-card">
+      <div class="sc-eyebrow">Layer 1 · Adoption funnel</div>
+      <div class="sc-title">Bulk + AI + SMS funnel repair</div>
+      <div class="sc-row hi"><div class="sc-metric">Bulk Established (avg/mo)</div><div class="sc-from">888.7K</div><div class="sc-arrow">&rarr;</div><div class="sc-to">915&ndash;935K</div></div>
+      <div class="sc-row"><div class="sc-metric">Bulk Explore</div><div class="sc-from">−19.2% YoY</div><div class="sc-arrow">&rarr;</div><div class="sc-to">repair / stabilize</div></div>
+      <div class="sc-row"><div class="sc-metric">Bulk churn rate</div><div class="sc-from">40.0%</div><div class="sc-arrow">&rarr;</div><div class="sc-to">~37%</div></div>
+      <div class="sc-row"><div class="sc-metric">SMS activation rate</div><div class="sc-from">10.4%</div><div class="sc-arrow">&rarr;</div><div class="sc-to">~13&ndash;15%</div></div>
+      <div class="sc-row"><div class="sc-metric">Write with AI Explore</div><div class="sc-from">−73.7% YoY</div><div class="sc-arrow">&rarr;</div><div class="sc-to">stabilize + policy fix</div></div>
+    </div>
+
+    <div class="success-card">
+      <div class="sc-eyebrow">Layer 2 · Customer outcomes</div>
+      <div class="sc-title">Speed, brand, cross-channel quality</div>
+      <div class="sc-row"><div class="sc-metric">Time to first send (NEB)</div><div class="sc-from">14&ndash;21d</div><div class="sc-arrow">&rarr;</div><div class="sc-to">7&ndash;10d</div></div>
+      <div class="sc-row"><div class="sc-metric">Universal Content reuse</div><div class="sc-from">0 (not shipped)</div><div class="sc-arrow">&rarr;</div><div class="sc-to">majority of NEB sends</div></div>
+      <div class="sc-row"><div class="sc-metric">Email + SMS compose</div><div class="sc-from">two surfaces</div><div class="sc-arrow">&rarr;</div><div class="sc-to">shared blocks + preview</div></div>
+    </div>
+
+    <div class="success-card">
+      <div class="sc-eyebrow">Layer 3 · Mailchimp business</div>
+      <div class="sc-title">FY27 dollars + credibility</div>
+      <div class="sc-row hi"><div class="sc-metric">Authoring incremental ARR</div><div class="sc-from">&mdash;</div><div class="sc-arrow">&rarr;</div><div class="sc-to">+$25&ndash;30M</div></div>
+      <div class="sc-row"><div class="sc-metric">Growth Model mid check</div><div class="sc-from">&mdash;</div><div class="sc-arrow">&rarr;</div><div class="sc-to">~$26.3M</div></div>
+      <div class="sc-lever">Lever sketch (mid): L1 bulk recovery ~$10.5M · L2 activation ~$3.2M · L3 SMS ~$4.0M · L4 migration ~$1.5M · L5 churn save ~$3.8M · L6 ARPU ~$3.3M.</div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <h2 class="memo-h2">How we win</h2>
+
+  <p>Four moves, aligned to <a href="#roadmap" onclick="document.querySelector('[data-tab=roadmap]').click();return false;">Roadmap to Win</a> and <a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click();return false;">Strategy 6-Pager</a>.</p>
+
+  <div class="hww-grid">
+    <div class="hww-card stop">
+      <div class="hww-label">Stop</div>
+      <ul>
+        <li><strong>Shipping net-new editor chrome on two stacks</strong> — every bet must justify itself twice until Classic is retired.</li>
+        <li><strong>Template-scoped saved content as the long-term primitive</strong> — it loses to Klaviyo-style Universal blocks in every competitive bake-off.</li>
+        <li><strong>International Standard pricing with US-only AI</strong> — toxic to renewals; ship global parity or a paid global AI SKU.</li>
+      </ul>
+    </div>
+    <div class="hww-card continue">
+      <div class="hww-label">Continue</div>
+      <ul>
+        <li><strong>Deliverability + sending infrastructure investment</strong> — the editor promises quality; ops must keep the promise in inbox.</li>
+        <li><strong>Intuit Assist + Brand Kit as differentiators</strong> — only Mailchimp ties brand governance to Assist across taxes + marketing context.</li>
+        <li><strong>SMB-first simplicity</strong> — power features ship behind Code Mode, not parallel products.</li>
+      </ul>
+    </div>
+    <div class="hww-card change">
+      <div class="hww-label">Change</div>
+      <ul>
+        <li><strong>Build order:</strong> <strong>B2 Universal Content</strong> before full <strong>B3 unified canvas</strong> &mdash; reuse primitives unlock both.</li>
+        <li><strong>Migration posture:</strong> funded Classic sunset with <strong>NEB Code Mode</strong> parity <em>before</em> hard cutover comms.</li>
+        <li><strong>Metrics:</strong> manage to Establish + Explore + churn, not vanity AI demos — Growth Model L1 is the variance driver.</li>
+      </ul>
+    </div>
+    <div class="hww-card start">
+      <div class="hww-label">Start</div>
+      <ul>
+        <li><strong>B5 real-time collab + comments</strong> — visible &ldquo;Mailchimp is modern&rdquo; proof for teams (do not over-index solo-ICP).</li>
+        <li><strong>Phased B3:</strong> shared blocks &rarr; cross-channel preview &rarr; full canvas — honestdates beat hero slides.</li>
+        <li><strong>Quarterly credibility beats</strong> paired with HVC burn-down on top Slack themes.</li>
+      </ul>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <h2 class="memo-h2">Five strategic pillars — customer-benefit names</h2>
+
+  <p>Maps to Bets <strong>B1&ndash;B5</strong> in the Strategy tab. Initiative inventory expands in <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> when populated.</p>
+
+  <div class="pillar-stack">
+    <div class="mpillar p1">
+      <div class="mp-head">
+        <div class="mp-num">P1</div>
+        <div class="mp-title">&ldquo;One builder I can migrate to without fear&rdquo;</div>
+        <div class="mp-meta"><span class="mp-internal">Builder unification · Classic sunset</span> · <span class="mp-horizon">0&ndash;12 mo</span> · <span class="mp-horizon">Bet B1</span></div>
       </div>
-      <div class="meta">
-        <div><strong>Status:</strong> placeholder</div>
-        <div><strong>Planned:</strong> 1 long page</div>
+      <ul class="mp-init">
+        <li><strong>NEB Code Mode + Liquid / HTML parity</strong> for Premium + agency before migration waves.</li>
+        <li><strong>Funded migration + style preservation</strong> — highest churn risk if mishandled (see Strategy critic).</li>
+        <li><strong>HVC burn-down</strong> on New Builder / Classic breakpoints surfaced in <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">Tab 4</a>.</li>
+      </ul>
+    </div>
+    <div class="mpillar p2">
+      <div class="mp-head">
+        <div class="mp-num">P2</div>
+        <div class="mp-title">&ldquo;Edit once, send everywhere I need&rdquo;</div>
+        <div class="mp-meta"><span class="mp-internal">Universal Content</span> · <span class="mp-horizon">0&ndash;6 mo</span> · <span class="mp-horizon">Bet B2</span></div>
       </div>
-    </header>
-    <p style="color: var(--muted);">Content forthcoming. See the build plan in the active session.</p>
-  </section>
+      <ul class="mp-init">
+        <li><strong>Cross-template + cross-flow blocks</strong> with automatic migration from saved content.</li>
+        <li><strong>Klaviyo parity narrative reset</strong> — removes the &ldquo;Universal block&rdquo; migration trigger for DTC operators.</li>
+      </ul>
+    </div>
+    <div class="mpillar p3">
+      <div class="mp-head">
+        <div class="mp-num">P3</div>
+        <div class="mp-title">&ldquo;Email + SMS feel like one campaign, not two jobs&rdquo;</div>
+        <div class="mp-meta"><span class="mp-internal">Unified canvas</span> · <span class="mp-horizon">6&ndash;18 mo</span> · <span class="mp-horizon">Bet B3</span></div>
+      </div>
+      <ul class="mp-init">
+        <li><strong>Shared blocks, Brand Kit on SMS short links, cross-channel preview.</strong></li>
+        <li><strong>Retention focus:</strong> SMS Established growth + 53% churn — canvas without credit/MMS clarity does not monetize.</li>
+      </ul>
+    </div>
+    <div class="mpillar p4">
+      <div class="mp-head">
+        <div class="mp-num">P4</div>
+        <div class="mp-title">&ldquo;AI that ships campaigns, not a demo locked by geography&rdquo;</div>
+        <div class="mp-meta"><span class="mp-internal">Assist + Write with AI</span> · <span class="mp-horizon">3&ndash;12 mo</span> · <span class="mp-horizon">Bet B4</span></div>
+      </div>
+      <ul class="mp-init">
+        <li><strong>Global ungate or paid AI add-on</strong> with parity for international Standard.</li>
+        <li><strong>Conversational in-canvas edits</strong> — recover Explore funnel collapse on GenAI surfaces.</li>
+      </ul>
+    </div>
+    <div class="mpillar p5">
+      <div class="mp-head">
+        <div class="mp-num">P5</div>
+        <div class="mp-title">&ldquo;My team ships together — Mailchimp isn&rsquo;t dated&rdquo;</div>
+        <div class="mp-meta"><span class="mp-internal">Collab + governance</span> · <span class="mp-horizon">6&ndash;12 mo</span> · <span class="mp-horizon">Bet B5</span></div>
+      </div>
+      <ul class="mp-init">
+        <li><strong>Realtime co-edit + comments + resolve in context.</strong></li>
+        <li><strong>Accessibility + brand governance hooks</strong> so quality compounds for multi-user teams.</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2 class="memo-h2">Guiding principles for sequencing</h2>
+
+  <div class="principles-stack">
+    <div class="gp">
+      <div class="gp-num">1</div>
+      <div class="gp-body"><div class="gp-title">Trust before novelty</div><p>Broken NEB/Classic migrations and HVC-visible bugs <strong>cap L1</strong> in the Growth Model. Ship reliability and migration safety alongside AI.</p></div>
+    </div>
+    <div class="gp">
+      <div class="gp-num">2</div>
+      <div class="gp-body"><div class="gp-title">Primitives before polish</div><p><strong>Universal Content</strong> is the prerequisite for unified SMS/email &mdash; skipping it duplicates work and loses the competitive story.</p></div>
+    </div>
+    <div class="gp">
+      <div class="gp-num">3</div>
+      <div class="gp-body"><div class="gp-title">Segment narratives honestly</div><p>Explore decline mixes GTM + policy + product — segment before declaring &ldquo;NEB failed.&rdquo;</p></div>
+    </div>
+    <div class="gp">
+      <div class="gp-num">4</div>
+      <div class="gp-body"><div class="gp-title">Stack losses once</div><p>Do not add Automations + Editor backward totals into a single scare number — overlap is real (see Loss Attribution caveats).</p></div>
+    </div>
+    <div class="gp">
+      <div class="gp-num">5</div>
+      <div class="gp-body"><div class="gp-title">Finance-owned economics</div><p>Replace <strong>~$110</strong> placeholder ARPU with tier-true joins; publish quarterly ramp for FY27 partial-year capture.</p></div>
+    </div>
+  </div>
+
+  <div class="effort-alloc">
+    <div class="ea-title">Indicative engineering mix (Strategy tab staffing)</div>
+    <div class="ea-bar">
+      <div class="ea-seg ea-1" style="flex: 30;"><span>Editor platform / B1</span><strong>30%</strong></div>
+      <div class="ea-seg ea-2" style="flex: 25;"><span>AI / Assist / B4</span><strong>25%</strong></div>
+      <div class="ea-seg ea-3" style="flex: 15;"><span>Universal Content / B2</span><strong>15%</strong></div>
+      <div class="ea-seg ea-4" style="flex: 30;"><span>SMS + canvas / B3 + collab B5</span><strong>30%</strong></div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <h2 class="memo-h2">6-quarter credibility arc — May 2026 &rarr; Oct 2027</h2>
+
+  <p>Aligned to Strategy sequencing; dates are directional — adjust with Program Management.</p>
+
+  <div class="rmap">
+    <div class="rmap-q star">
+      <div class="rmap-qlbl">Q1 ★</div>
+      <div class="rmap-qdate">May&ndash;Jul &rsquo;26</div>
+      <div class="rmap-qcred">Universal Content MVP + migration plan</div>
+      <div class="rmap-qnote">Closes Klaviyo parity claim; creates primitive for unified canvas.</div>
+    </div>
+    <div class="rmap-q">
+      <div class="rmap-qlbl">Q2</div>
+      <div class="rmap-qdate">Aug&ndash;Oct &rsquo;26</div>
+      <div class="rmap-qcred">Code Mode + migration tooling hardening</div>
+      <div class="rmap-qnote">De-risks Classic sunset narrative; reduces Premium churn fear.</div>
+    </div>
+    <div class="rmap-q">
+      <div class="rmap-qlbl">Q3</div>
+      <div class="rmap-qdate">Nov &rsquo;26&ndash;Jan &rsquo;27</div>
+      <div class="rmap-qcred">Shared blocks + cross-channel preview</div>
+      <div class="rmap-qnote">First tangible &ldquo;one campaign&rdquo; experience for email+SMS.</div>
+    </div>
+    <div class="rmap-q">
+      <div class="rmap-qlbl">Q4</div>
+      <div class="rmap-qdate">Feb&ndash;Apr &rsquo;27</div>
+      <div class="rmap-qcred">AI ungate milestone + conversational edits GA</div>
+      <div class="rmap-qnote">Repairs international renewal + Write with AI funnel.</div>
+    </div>
+    <div class="rmap-q">
+      <div class="rmap-qlbl">Q5</div>
+      <div class="rmap-qdate">May&ndash;Jul &rsquo;27</div>
+      <div class="rmap-qcred">Classic sunset comms + peak migration wave</div>
+      <div class="rmap-qnote">Requires B1 parity proof; pair with HVC war room.</div>
+    </div>
+    <div class="rmap-q">
+      <div class="rmap-qlbl">Q6</div>
+      <div class="rmap-qdate">Aug&ndash;Oct &rsquo;27</div>
+      <div class="rmap-qcred">Unified canvas v1 + co-edit GA</div>
+      <div class="rmap-qnote">Credibility moment for teams + SMS monetization follow-through.</div>
+    </div>
+  </div>
+
+  <hr class="divider"/>
+
+  <h2 class="memo-h2">Executive recap</h2>
+
+  <div class="recap-block">
+    <p><strong>Mailchimp&rsquo;s authoring surface is losing the narrative while the bulk-email spine shrinks.</strong> BigQuery shows ~888.7K Established senders/mo (&minus;9.4% YoY) and an Explore funnel down &minus;19.2% YoY; GenAI and SMS lines prove we cannot win on a single headline metric — SMS grows but churns at 53%; Write with AI collapses explorers while churn spikes.</p>
+    <p>The FY27 program named in this brief — <strong>B1 builder unification, B2 Universal Content, B3 unified canvas, B4 global AI, B5 collab</strong> — is how we earn back <strong>$25&ndash;30M ARR</strong> (Growth Model mid ~$26.3M) and reverse the backward-looking <strong>$36&ndash;67M</strong> editor-related impact band (mostly imputed). Success requires sequencing discipline, honest segmentation on Explore, and Finance validation on ARPU and overlap with sister Automations bets.</p>
+  </div>
+
+  <hr class="divider"/>
+
+  <h2 class="memo-h2">Customer From &rarr; To</h2>
+
+  <p>Six transformations that map pillars to lived experience (research + HVC aligned).</p>
+
+  <table class="ft-table">
+    <thead>
+      <tr>
+        <th class="ft-th-from">Today — cost</th>
+        <th class="ft-th-arrow"></th>
+        <th class="ft-th-to">FY28 — benefit</th>
+        <th class="ft-th-pillar">Pillar</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Two builders, uncertain migration.</strong> <em>Functional:</em> rebuild campaigns when switching. <em>Emotional:</em> fear of breaking HTML + brand.</td>
+        <td class="ft-arrow">&rarr;</td>
+        <td><strong>One NEB with Code Mode.</strong> Classic retired safely; Premium keeps power without exile.</td>
+        <td class="ft-pill"><span class="ftp p1">P1</span></td>
+      </tr>
+      <tr>
+        <td><strong>Saved blocks trapped in templates.</strong> Klaviyo customers mock copy/paste tax.</td>
+        <td class="ft-arrow">&rarr;</td>
+        <td><strong>Universal Content</strong> edits propagate across emails + journeys.</td>
+        <td class="ft-pill"><span class="ftp p2">P2</span></td>
+      </tr>
+      <tr>
+        <td><strong>Email here, SMS in another composer.</strong> Duplicate proofreading; Brand Kit partial on SMS.</td>
+        <td class="ft-arrow">&rarr;</td>
+        <td><strong>Shared blocks + cross-channel preview</strong> — one authoring loop.</td>
+        <td class="ft-pill"><span class="ftp p3">P3</span></td>
+      </tr>
+      <tr>
+        <td><strong>AI paywall mismatch internationally.</strong> Explore collapses; churn worst-in-family on GenAI.</td>
+        <td class="ft-arrow">&rarr;</td>
+        <td><strong>Global Assist</strong> with conversational edits inside canvas.</td>
+        <td class="ft-pill"><span class="ftp p4">P4</span></td>
+      </tr>
+      <tr>
+        <td><strong>Screenshots + serial editing.</strong> Teams joke Mailchimp feels pre-Google-Docs.</td>
+        <td class="ft-arrow">&rarr;</td>
+        <td><strong>Co-edit + comments</strong> for modern team workflows.</td>
+        <td class="ft-pill"><span class="ftp p5">P5</span></td>
+      </tr>
+      <tr>
+        <td><strong>Trust erodes silently.</strong> Churn +2.1pp; operator considers Klaviyo &ldquo;grown-up builder.&rdquo;</td>
+        <td class="ft-arrow">&rarr;</td>
+        <td><strong>Measurable funnel recovery + cited HVC burn-down.</strong></td>
+        <td class="ft-pill"><span class="ftp p1">P1</span><span class="ftp p3">P3</span></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="memo-footer">
+    <strong>Sources:</strong> This memo synthesizes <a href="#brief" onclick="document.querySelector('[data-tab=brief]').click();return false;">Executive Brief</a>, <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">Voice of Customer</a>, <a href="#roadmap" onclick="document.querySelector('[data-tab=roadmap]').click();return false;">Roadmap to Win</a>, <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a>, <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a>, <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> (BigQuery editor-family cut), <a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click();return false;">Strategy 6-Pager</a>, <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a>, and <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a>. Trailing window May 2025&ndash;Apr 2026 vs prior 12 months unless noted.
+  </div>
+
+</article>
+
 </div><!-- /panel-memo -->
 
 
