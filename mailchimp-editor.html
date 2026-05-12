@@ -1874,78 +1874,58 @@
 <!-- ============================================ -->
 <!-- ============== HVC RISK MAP TAB ============ -->
 <!-- ============================================ -->
+<!-- ============================================ -->
+<!-- ============== HVC RISK MAP TAB ============ -->
+<!-- ============================================ -->
 <div class="tabpanel" id="panel-hvcrisk" role="tabpanel">
 
-  <!-- HVC Page 1 — SMS composer cluster: bugs + critical escalation -->
+  <!-- Page 1 of 4 · Email / New Builder / dual-builder / integrations -->
   <section class="page" aria-label="HVC Risk Page 1">
     <header class="page-head">
       <div>
-        <div class="eyebrow">HVC Risk Map · Slack VoC (editor family) — <strong>SMS composer depth-first</strong></div>
-        <h1>High-value customer pain on <em style="color:#B91C1C;">SMS authoring, compliance append, and post-send reporting</em></h1>
-        <div class="subtitle">Targeted Slack harvest across <strong>#hvc_feedback</strong>, <strong>#mc-hvc-escalations</strong>, and <strong>#mc-feedback-summary</strong> (Nov 2024 → May 2026) for keywords around <strong>marketing SMS/MMS</strong>, <strong>composer / opt-out / TCPA</strong>, <strong>SMS reporting</strong>, and <strong>credits / billing</strong>. This is a <strong>v1 thematic map</strong>, not a full MRR-exposure census like the Automations brief's 73-theme rollup — numbers on cards are <strong>named MRR from the cited VoC only</strong> (not deduped globally across Mailchimp).</div>
+        <div class="eyebrow">HVC Risk Map · Slack VoC — <strong>unified authoring surface</strong></div>
+        <h1>Email / New Builder pain: <em style="color:#B91C1C;">dual surfaces, trust in rendering, collaboration, escape hatches</em></h1>
+        <div class="subtitle">Expanded harvest (<strong>Nov 2024 → May 2026</strong>) across <strong>#hvc_feedback</strong>, <strong>#mc-hvc-escalations</strong>, <strong>#mc-feedback-summary</strong> for <strong>New Builder</strong>, <strong>legacy/classic</strong>, <strong>templates</strong>, <strong>Brand Kit</strong>, <strong>Content Studio</strong>, <strong>Creative Assistant</strong>, <strong>Canva</strong>, plus <strong>SMS composer / reporting / credits</strong> (pages 3–4). MRR figures on cards = <strong>cited VoC only</strong>. Cross-check: <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a> (25 HeyMarvin briefs).</div>
       </div>
       <div class="meta">
         <div><strong>Window:</strong> Nov 2024 → May 2026</div>
-        <div><strong>Channels:</strong> 3 Slack + Product Health cross-check</div>
-        <div><strong>Focus:</strong> SMS composer + reporting + credits</div>
-        <div><strong>Page:</strong> 1 of 3</div>
+        <div><strong>Pages:</strong> 1 of 4</div>
+        <div><strong>Channels:</strong> Slack + synthesis</div>
       </div>
     </header>
 
     <div class="kpi-row" style="margin-bottom: 18px;">
-      <div class="kpi"><div class="v">40+</div><div class="l">Slack messages indexed in <strong>composer-focused searches</strong> (SMS, MMS, opt-out, credits, reporting)</div></div>
-      <div class="kpi"><div class="v">$57K</div><div class="l">Single-account MRR named in <strong>#mc-hvc-escalations</strong> — duplicate opt-out language in live SMS send</div></div>
-      <div class="kpi"><div class="v">11</div><div class="l">Distinct themes below: <strong>5 bug</strong> + <strong>4 barrier</strong> + <strong>2 missing-feature</strong> clusters (composer adjacency)</div></div>
-      <div class="kpi"><div class="v">53%</div><div class="l">SMS Established-user <strong>churn</strong> (12mo trailing — see <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a>); VoC explains <em>why</em> operators stall mid-flight</div></div>
+      <div class="kpi"><div class="v">60+</div><div class="l">Slack-indexed messages across <strong>email + brand + content + SMS</strong> targeted searches</div></div>
+      <div class="kpi"><div class="v">22+</div><div class="l">Thematic clusters (bugs, barriers, missing) spanning <strong>full editor family</strong></div></div>
+      <div class="kpi"><div class="v">$57K</div><div class="l">Largest single <strong>SMS</strong> escalation (duplicate opt-out) — see page 3</div></div>
+      <div class="kpi"><div class="v">25</div><div class="l">UXR customer briefs on <strong>campaign builder</strong> (repo-linked)</div></div>
     </div>
 
-    <p style="margin-bottom: 14px; font-size: 12px; color: var(--muted);"><strong>Why "composer" first:</strong> Product Health shows SMS Established users growing fast (+73.5% YoY) but churn extremely high. Slack evidence clusters on <strong>(1)</strong> what operators paste into the SMS body (compliance duplication), <strong>(2)</strong> whether they can trust analytics after send, and <strong>(3)</strong> whether credits let them finish automated sends — all inseparable from the compose → send → measure loop.</p>
-
-    <h2><span class="num">A</span><span class="risk-pill bug">BUGS</span>Broken or misleading behavior in SMS and reporting (named HVC quotes)</h2>
-    <p style="margin-bottom: 12px;">Issues where the product misreports, misstates balance, or contradicts public guidance — operators lose trust in the same UI they use to compose.</p>
+    <h2><span class="num">A</span><span class="risk-pill bug">BUGS</span>Email &amp; New Builder — portability, rendering, collaboration, rigidity</h2>
 
     <div class="theme-card">
       <div class="theme-card-head">
         <div class="theme-card-title">
           <span class="theme-num">1</span>
-          <span class="risk-pill bug">BUG</span>
-          <span class="theme-name">SMS / journey reporting shows empty, zero, or N/A — "what's the point of reporting"</span>
+          <span class="risk-pill bug">BUG / GAP</span>
+          <span class="theme-name">No legacy → New Builder migration; bulk template updates impossible</span>
         </div>
         <div class="theme-card-stats">
-          <span class="theme-stat"><strong>3</strong> total (sample)</span>
-          <span class="theme-stat slack"><strong>3</strong> Slack</span>
-          <span class="theme-stat mrr"><strong>$2,196</strong>/mo cited MRR</span>
+          <span class="theme-stat"><strong>1</strong> VoC</span>
+          <span class="theme-stat slack"><strong>1</strong> Slack</span>
+          <span class="theme-stat mrr"><strong>$330</strong>/mo</span>
         </div>
       </div>
       <div class="theme-card-body">
         <ol class="voc-specifics">
           <li class="voc-item slack">
-            <div class="voc-text">"SMS reporting is showing 0% and N/A for stats, what is the point of reporting if it doesn't show data"</div>
+            <div class="voc-text">"It is really terrible that there is no way to migrate legacy builder templates to the new one… I have 181 email templates. I want to update them all in one go… I need to individually update them which will take days… develop a system where templates share content… similar to your brand kit but more substantial."</div>
             <div class="voc-meta">
               <span class="src-badge slack">SLACK VOC</span>
-              <strong>User 215343870</strong> · <strong>$810/mo MRR</strong> · Premium
-              <span class="csat-pill csat-poor">Poor</span>
-              · <span class="voc-date">2025-10-01</span>
-              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1759329465840369" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-            </div>
-          </li>
-          <li class="voc-item slack">
-            <div class="voc-text">"The SMS reports that I was looking for specifically were hard to find and didn't give me the insights that I was after. It feels like Mandrill -slightly tacked onto the system"</div>
-            <div class="voc-meta">
-              <span class="src-badge slack">SLACK VOC</span>
-              <strong>User 54729641</strong> · <strong>$576/mo MRR</strong>
-              <span class="csat-pill csat-average">Average</span>
-              · <span class="voc-date">2025-10-09</span>
-              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1760018454034169" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-            </div>
-          </li>
-          <li class="voc-item slack">
-            <div class="voc-text">Internal triage (nicole.robinson thread): "open rate is not something that we seem to have for SMS reporting, so it makes sense that on a combined chart it would be marked as n/a" — juxtaposed with marketing article that customers read as implying open rates exist; SEO follow-up filed.</div>
-            <div class="voc-meta">
-              <span class="src-badge slack">SLACK VOC</span>
-              <strong>Internal triage</strong> · CJM / SMS analytics
-              · <span class="voc-date">2026-02-10</span>
-              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770743214133339" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+              <strong>User 38950737</strong> · <strong>$330/mo MRR</strong>
+              <span class="csat-pill terrible">Terrible</span>
+              · <span class="voc-date">2026-01-15</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1768513903768159" target="_blank" rel="noopener">#hvc_feedback ↗</a>
             </div>
           </li>
         </ol>
@@ -1957,54 +1937,22 @@
         <div class="theme-card-title">
           <span class="theme-num">2</span>
           <span class="risk-pill bug">BUG</span>
-          <span class="theme-name">SMS credit balance / stall signals opaque — negative balance, "still short" after purchase</span>
+          <span class="theme-name">Support / product dead-ends on legacy → New conversion</span>
         </div>
         <div class="theme-card-stats">
-          <span class="theme-stat"><strong>4</strong> total</span>
-          <span class="theme-stat slack"><strong>4</strong> Slack</span>
-          <span class="theme-stat mrr"><strong>$2,490</strong>/mo cited</span>
+          <span class="theme-stat mrr"><strong>$504</strong>/mo</span>
         </div>
       </div>
       <div class="theme-card-body">
         <ol class="voc-specifics">
           <li class="voc-item slack">
-            <div class="voc-text">"My SMS credits went into the negative because of a Flow. I added more credits and the number of credits was still showing zero. After talking to support, they told me that I was in the negative, but I had no way of knowing that without talking to them."</div>
+            <div class="voc-text">"I have spoken with two different members of staff regarding converting an email built in the legacy builder into the new builder and the first person ended the chat on me and the second… disappeared after 30 minutes…"</div>
             <div class="voc-meta">
               <span class="src-badge slack">SLACK VOC</span>
-              <strong>User 152116526</strong> · <strong>$310/mo MRR</strong>
-              <span class="csat-pill csat-poor">Poor</span>
-              · <span class="voc-date">2025-09-24</span>
-              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1758725941688229" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-            </div>
-          </li>
-          <li class="voc-item slack">
-            <div class="voc-text">"Said I needed 500 extra credits to send my sms so I bought 1,000, then it said im still 17 credits short…" — perceives pricing tiers as inconsistent.</div>
-            <div class="voc-meta">
-              <span class="src-badge slack">SLACK VOC</span>
-              <strong>User 117215950</strong> · <strong>$780/mo MRR</strong>
-              <span class="csat-pill csat-poor">Poor</span>
-              · <span class="voc-date">2025-12-30</span>
-              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1767114330681869" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-            </div>
-          </li>
-          <li class="voc-item slack">
-            <div class="voc-text">"Manage Credits" reset date rendered with wrong locale interpretation (AU DD-MM-YYYY vs US MM-DD) — customer bought credits assuming wrong reset window.</div>
-            <div class="voc-meta">
-              <span class="src-badge slack">SLACK VOC</span>
-              <strong>User 238740590</strong> · <strong>$900/mo MRR</strong> · Premium
-              <span class="csat-pill csat-average">Average</span>
-              · <span class="voc-date">2025-07-16</span>
-              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1752719258199579" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-            </div>
-          </li>
-          <li class="voc-item slack">
-            <div class="voc-text">"If an SMS returns as undelivered, it should automatically be removed… instead of continuing to be listed and using our credits even though the system knows it is a bad number."</div>
-            <div class="voc-meta">
-              <span class="src-badge slack">SLACK VOC</span>
-              <strong>User 3407590</strong> · <strong>$1,102/mo MRR</strong>
+              <strong>User 109232478</strong> · <strong>$504/mo MRR</strong>
               <span class="csat-pill terrible">Terrible</span>
-              · <span class="voc-date">2026-02-06</span>
-              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770399133616899" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+              · <span class="voc-date">2026-03-25</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1774438111835139" target="_blank" rel="noopener">#hvc_feedback ↗</a>
             </div>
           </li>
         </ol>
@@ -2015,72 +1963,77 @@
       <div class="theme-card-head">
         <div class="theme-card-title">
           <span class="theme-num">3</span>
-          <span class="risk-pill bug">BUG / INCIDENT</span>
-          <span class="theme-name">Duplicate TCPA opt-out text in sent SMS — default-on append + pasted compliance copy</span>
+          <span class="risk-pill bug">BUG</span>
+          <span class="theme-name">Rendering diverges: forwarded mail, "read full message", mobile line-breaks</span>
         </div>
         <div class="theme-card-stats">
-          <span class="theme-stat"><strong>1</strong> escalation</span>
-          <span class="theme-stat slack"><strong>1</strong> Slack</span>
-          <span class="theme-stat mrr"><strong>$57,000</strong>/mo cited</span>
+          <span class="theme-stat mrr"><strong>$1,820</strong>/mo cited</span>
         </div>
       </div>
       <div class="theme-card-body">
         <ol class="voc-specifics">
           <li class="voc-item slack">
-            <div class="voc-text">C3 Festivals (Critical Accounts): Goal: prevent duplicate opt-out language when the marketer already manually included compliance text in the message body. "The checkbox currently defaults to ON… when an associate manually includes opt-out text… and forgets to uncheck the option, the opt-out language appears twice in the sent message — this happened during the Darker Waves live announcement this week." Workaround: remember to toggle OFF every compose — rated <strong>moderately painful</strong>, human-error-prone under time pressure. Product thread: global setting or infer toggle from prior campaign; eng note — opt-out toggle only in US/UK/CA today.</div>
+            <div class="voc-text">"The New Builder emails look totally different (and not good at all), when they are forwarded… images tend to become smaller when the email is sent."</div>
             <div class="voc-meta">
-              <span class="src-badge slack">HVC ESCALATION</span>
-              <strong>C3 Festivals</strong> · <strong>$57,000/mo MRR</strong> · UID 50561889
-              <span class="voc-date">2026-04-06</span>
-              · <a href="https://intuit-teams.slack.com/archives/C095FJ3SQF4/p1775483838286769" target="_blank" rel="noopener">#mc-hvc-escalations ↗</a>
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 50801453</strong> · <strong>$402/mo MRR</strong>
+              · <span class="voc-date">2026-04-22</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1776855846912589" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">"In the new builder, the layout can be perfect, but when viewing from your email when you click 'read full message' it completely messes with the formatting."</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 68241289</strong> · <strong>$410/mo MRR</strong>
+              <span class="csat-pill poor">Poor</span>
+              · <span class="voc-date">2026-02-24</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1771967531053409" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">"Ctrl+K to insert links doesn't work on Firefox or Chrome… styling rules are so rigid… keeps inserting line breaks in mobile that aren't there in desktop."</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 74427602</strong> · <strong>$949/mo MRR</strong>
+              <span class="csat-pill poor">Poor</span>
+              · <span class="voc-date">2026-02-13</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770996973378069" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">PRS: "light/dark mode… background images in the new builder… functionality does not allow currently."</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 1714325</strong> · <strong>$468/mo MRR</strong>
+              · <span class="voc-date">2026-02-15</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1771173388936109" target="_blank" rel="noopener">#hvc_feedback ↗</a>
             </div>
           </li>
         </ol>
       </div>
     </div>
 
-    <p class="source" style="margin-top: 14px;"><strong>Page 1 sources:</strong> Slack MCP search — <code>in:#hvc_feedback</code> queries for SMS/MMS, SMS reporting, SMS credits, opt-out; <code>in:#mc-hvc-escalations</code> (SMS/MMS/composer); <code>in:#mc-feedback-summary</code> (Gen-VoCalyzer SMS billing bucket). Product Health tab: SMS churn 53% Established.</p>
-  </section>
-
-  <!-- HVC Page 2 — Barriers, missing primitives, cross-channel -->
-  <section class="page" aria-label="HVC Risk Page 2">
-    <header class="page-head">
-      <div>
-        <div class="eyebrow">HVC Risk Map · Mailchimp Email/SMS Unified Editor (cont.)</div>
-        <h1>Barriers &amp; missing features: <em style="color:#9A3412;">credits UX</em>, <em style="color:#9A3412;">compliance copy tension</em>, <em style="color:#9A3412;">merge limits</em></h1>
-        <div class="subtitle">Composer experience is not only drag-and-drop blocks — it is <strong>character limits, append rules, credit math, and automation hand-offs</strong>. These quotes are the operational reality behind high SMS churn.</div>
-      </div>
-      <div class="meta">
-        <div><strong>Page:</strong> 2 of 3</div>
-        <div><strong>Continues:</strong> barriers → missing → roadmap echo</div>
-      </div>
-    </header>
-
-    <h2><span class="num">B</span><span class="risk-pill barrier">BARRIERS</span>Workflow friction that is "working as designed" but burns operators</h2>
-
     <div class="theme-card">
       <div class="theme-card-head">
         <div class="theme-card-title">
           <span class="theme-num">4</span>
-          <span class="risk-pill barrier">BARRIER</span>
-          <span class="theme-name">Automation + SMS credits — stalls silently, no "you need X credits" affordance</span>
+          <span class="risk-pill bug">BUG</span>
+          <span class="theme-name">Multi-author New Builder — save conflicts without clear "someone else is editing"</span>
         </div>
         <div class="theme-card-stats">
-          <span class="theme-stat"><strong>1</strong> detailed VoC</span>
-          <span class="theme-stat slack"><strong>1</strong> Slack</span>
-          <span class="theme-stat mrr"><strong>$630</strong>/mo cited</span>
+          <span class="theme-stat mrr"><strong>$340</strong>/mo</span>
         </div>
       </div>
       <div class="theme-card-body">
         <ol class="voc-specifics">
           <li class="voc-item slack">
-            <div class="voc-text">Multi-part feedback: (1) Hard to estimate credits per message ("is it 3-4?" segments). (2) Frequently run out mid-automation — <strong>no notification that an Automation has stalled</strong>. (3) Error UI lacks quick link to buy credits. (4) No "you require X credits to complete this flow" or visible queue depth — "guesswork". (5) Wants to pull forward next month's allocation instead of guessing remaining days.</div>
+            <div class="voc-text">"In the new builder, if someone is editing, I just get a message saying there is a problem with the saved version… no indication that someone else is currently editing… It would be great if A) two people could be working at the same time or B) the warning was clear."</div>
             <div class="voc-meta">
               <span class="src-badge slack">SLACK VOC</span>
-              <strong>User 125210082</strong> · <strong>$630/mo MRR</strong> · Standard · Journey builder context
-              <span class="csat-pill csat-average">Average</span>
-              · <span class="voc-date">2026-04-20</span>
-              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1776683858219409" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+              <strong>User 42434525</strong> · <strong>$340/mo MRR</strong>
+              · <span class="voc-date">2026-02-18</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1771425554330579" target="_blank" rel="noopener">#hvc_feedback ↗</a>
             </div>
           </li>
         </ol>
@@ -2091,33 +2044,22 @@
       <div class="theme-card-head">
         <div class="theme-card-title">
           <span class="theme-num">5</span>
-          <span class="risk-pill barrier">BARRIER</span>
-          <span class="theme-name">Forced compliance strings vs. "we run our own opt-out" — trust &amp; positioning</span>
+          <span class="risk-pill bug">BUG</span>
+          <span class="theme-name">Dual builders + custom code — order-of-blocks glitches, nav "templates moved"</span>
         </div>
         <div class="theme-card-stats">
-          <span class="theme-stat"><strong>2</strong> total</span>
-          <span class="theme-stat slack"><strong>2</strong> Slack</span>
-          <span class="theme-stat mrr"><strong>$1,630</strong>/mo cited</span>
+          <span class="theme-stat mrr"><strong>$410</strong>/mo</span>
         </div>
       </div>
       <div class="theme-card-body">
         <ol class="voc-specifics">
           <li class="voc-item slack">
-            <div class="voc-text">Customer verbatim (thread): "Extremely dissatisfied with being forced to use your legal disclaimers (email footer - unsubscribe) and for SMS (link in the SMS) when we have our own SMS opt-out system…"</div>
+            <div class="voc-text">"Each of the options poses challenges… custom-coded templates… editor often confuses order of blocks or won't let you move them without a refresh… two builders that are each missing features… new templates link in your navigation often vanishes… warning message that templates have moved."</div>
             <div class="voc-meta">
               <span class="src-badge slack">SLACK VOC</span>
-              <strong>HVC thread</strong> · CS follow-up · Wei Jia clarifies opt-in editable at SMS settings; opt-out TCPA requirement
-              · <span class="voc-date">2026-01-08</span>
-              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1767899599776809" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-            </div>
-          </li>
-          <li class="voc-item slack">
-            <div class="voc-text">PRS (FR): "stop imposing your GDPR terms on SMS and email footers… counterproductive… you lose customers (on the SMS side… us for example)… improvements… on reporting."</div>
-            <div class="voc-meta">
-              <span class="src-badge slack">SLACK VOC</span>
-              <strong>User 233017022</strong> · <strong>$815/mo MRR</strong> · Premium
-              · <span class="voc-date">2026-02-06</span>
-              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770370993154439" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+              <strong>User 48834465</strong> · <strong>$410/mo MRR</strong>
+              · <span class="voc-date">2025-12-08</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1765231520773259" target="_blank" rel="noopener">#hvc_feedback ↗</a>
             </div>
           </li>
         </ol>
@@ -2128,69 +2070,68 @@
       <div class="theme-card-head">
         <div class="theme-card-title">
           <span class="theme-num">6</span>
-          <span class="risk-pill barrier">BARRIER</span>
-          <span class="theme-name">SMS credit SKUs — can't buy exact need; rollover; perceived "forced waste"</span>
+          <span class="risk-pill bug">BUG</span>
+          <span class="theme-name">Template list / campaign wizard — New Builder templates not surfacing</span>
         </div>
         <div class="theme-card-stats">
-          <span class="theme-stat"><strong>3</strong> total</span>
-          <span class="theme-stat slack"><strong>3</strong> Slack</span>
-          <span class="theme-stat mrr"><strong>$1,197</strong>/mo cited</span>
+          <span class="theme-stat mrr"><strong>$1,950</strong>/mo</span>
         </div>
       </div>
       <div class="theme-card-body">
         <ol class="voc-specifics">
           <li class="voc-item slack">
-            <div class="voc-text">In-app on <code>/sms/bulk</code> composer path: "very disappointed that the pricing with SMS is so exorbitant… can't buy an exact number of credits… credits don't roll over… forcing me to buy credits that I most likely can't use."</div>
+            <div class="voc-text">"My campaign tab is not showing the templates built in the new builder, it's only showing the legacy templates that are custom coded. Where are my new templates?"</div>
             <div class="voc-meta">
               <span class="src-badge slack">SLACK VOC</span>
-              <strong>User 9437853</strong> · <strong>$605/mo MRR</strong>
-              · <span class="voc-date">2025-03-13</span>
-              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1741896848081399" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-            </div>
-          </li>
-          <li class="voc-item slack">
-            <div class="voc-text">"SMS billing needs a lot more transparency… see how many credits I am using per month… keep having to supplement… Credits also need to rollover."</div>
-            <div class="voc-meta">
-              <span class="src-badge slack">SLACK VOC</span>
-              <strong>User 152116526</strong> · <strong>$346/mo MRR</strong>
-              · <span class="voc-date">2024-12-10</span>
-              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1733849947275849" target="_blank" rel="noopener">#hvc_feedback ↗</a>
-            </div>
-          </li>
-          <li class="voc-item slack">
-            <div class="voc-text"><strong>Gen-VoCalyzer rollup (#mc-feedback-summary, Dec 2024):</strong> ~5% of sampled comments on <strong>SMS billing transparency</strong> (credit usage, rollover policies).</div>
-            <div class="voc-meta">
-              <span class="src-badge slack">SUMMARY BOT</span>
-              · <span class="voc-date">2024-12-16</span>
-              · <a href="https://intuit-teams.slack.com/archives/C06EVEZ4ZTQ/p1734368944485419" target="_blank" rel="noopener">#mc-feedback-summary ↗</a>
+              <strong>User 149472166</strong> · <strong>$1,950/mo MRR</strong>
+              <span class="csat-pill poor">Poor</span>
+              · <span class="voc-date">2026-02-05</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770320558793249" target="_blank" rel="noopener">#hvc_feedback ↗</a>
             </div>
           </li>
         </ol>
       </div>
     </div>
 
-    <h2 style="margin-top: 22px;"><span class="num">C</span><span class="risk-pill missing">MISSING</span>Capabilities competitors imply — and internal tickets already name</h2>
+    <p class="source"><strong>Page 1 sources:</strong> Slack <code>in:#hvc_feedback</code> — queries: <em>new builder</em> + triage threads; pattern-matched to email editor URLs. Internal: Kailyn O'Brien flag "buggy in the new email builder" (2025-12-10).</p>
+  </section>
+
+  <!-- Page 2 of 4 · Brand Kit, Content Studio, Creative Assistant, Canva -->
+  <section class="page" aria-label="HVC Risk Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">HVC Risk Map (cont.) · Brand + library + AI-assisted design</div>
+        <h1>Brand Kit, Content Studio, Creative Assistant, Canva — <em style="color:#9A3412;">consistency, latency, rediscovery</em></h1>
+        <div class="subtitle">Slack VoC clusters that sit <strong>between</strong> asset management and the composer — the same cohort UXR calls "third-party-tool-in-the-loop" when Mailchimp doesn't carry the full design burden.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 2 of 4</div>
+      </div>
+    </header>
+
+    <h2><span class="num">B</span><span class="risk-pill bug">BUGS / LIMITS</span>Brand Kit &amp; Creative Assistant</h2>
 
     <div class="theme-card">
       <div class="theme-card-head">
         <div class="theme-card-title">
           <span class="theme-num">7</span>
-          <span class="risk-pill missing">MISSING</span>
-          <span class="theme-name">SMS title / personalization depth (merge-tag ceiling)</span>
+          <span class="risk-pill bug">BUG / LIMIT</span>
+          <span class="theme-name">Brand fonts not usable in landing pages / forms; iPhone fallbacks</span>
         </div>
         <div class="theme-card-stats">
-          <span class="theme-stat"><strong>1</strong> ref</span>
-          <span class="theme-stat slack"><strong>1</strong> Slack</span>
+          <span class="theme-stat mrr"><strong>$655</strong>/mo</span>
         </div>
       </div>
       <div class="theme-card-body">
         <ol class="voc-specifics">
           <li class="voc-item slack">
-            <div class="voc-text">Alvin Rivera (triaging multilingual / merge asks): cites <strong>SMS-9736</strong> — "As a C1, I can add up to <strong>1 merge tag</strong> for Title" (backlog — SMS-specific). Constrains personalized composer output vs. email.</div>
+            <div class="voc-text">Brand Kit fonts (Asul, Readex Pro) uploaded but <strong>not selectable</strong> in LP/signup form builder; workaround HTML/CSS works desktop, <strong>not on iPhone</strong> (system fallback). Asks for font picker on form fields + CSS control + duplicate design snippets.</div>
             <div class="voc-meta">
               <span class="src-badge slack">SLACK VOC</span>
-              · <span class="voc-date">2025-06-20</span>
-              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1750425667526939" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+              <strong>User 47983473</strong> · <strong>$655/mo MRR</strong>
+              <span class="csat-pill poor">Poor</span>
+              · <span class="voc-date">2026-03-20</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1773996462740169" target="_blank" rel="noopener">#hvc_feedback ↗</a>
             </div>
           </li>
         </ol>
@@ -2201,86 +2142,382 @@
       <div class="theme-card-head">
         <div class="theme-card-title">
           <span class="theme-num">8</span>
-          <span class="risk-pill missing">MISSING</span>
-          <span class="theme-name">MMS-rich contact cards — internal readiness gap</span>
+          <span class="risk-pill bug">BUG</span>
+          <span class="theme-name">Brand Kit regression / stale kit / colors dropped (Feb 2026 incident thread)</span>
         </div>
         <div class="theme-card-stats">
-          <span class="theme-stat"><strong>1</strong> internal</span>
-          <span class="theme-stat slack"><strong>1</strong> Slack</span>
+          <span class="theme-stat"><strong>Thread</strong></span>
         </div>
       </div>
       <div class="theme-card-body">
         <ol class="voc-specifics">
           <li class="voc-item slack">
-            <div class="voc-text">Satish Sambandham: "Contact cards require c2 action to save the card, we haven't launched contact cards anywhere yet, there is work left as our poc we built for GED uses <strong>MMS attachments</strong>."</div>
+            <div class="voc-text">User logo present in Brand Kit but <strong>no colors listed</strong>; engineering: "send back the correct brand kit rather than an older one"; flag ramp 50% — some customers who patched manually may see diffs. Austin Milt confirmation (2026-03-20).</div>
             <div class="voc-meta">
-              <span class="src-badge slack">INTERNAL</span>
-              · <span class="voc-date">2025-07-09</span>
-              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1752093581157909" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+              <span class="src-badge slack">SLACK VOC</span>
+              · Internal triage + fix confirmation
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770823369001009" target="_blank" rel="noopener">#hvc_feedback ↗</a>
             </div>
           </li>
         </ol>
       </div>
     </div>
 
-    <p class="source"><strong>Page 2 sources:</strong> same Slack harvest as Page 1; Jira references surfaced in-thread (SMS-9736). Cross-link: Executive Brief surface-split theme (email vs SMS composers).</p>
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">9</span>
+          <span class="risk-pill barrier">BARRIER</span>
+          <span class="theme-name">Logo asset metadata / multi-brand kits</span>
+        </div>
+        <div class="theme-card-stats">
+          <span class="theme-stat mrr"><strong>$2,460</strong>/mo cited</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">"For logos in Brand Kit, NEED an option to 'view details' like in the regular content library… file name, size, etc."</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 64245969</strong> · <strong>$1,300/mo MRR</strong>
+              <span class="csat-pill poor">Poor</span>
+              · <span class="voc-date">2026-02-16</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1771265604633299" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">"Need to be able to create more than one brand kit… main brand and sub brands…" (Creative Assistant URL) — echoed by Premium user asking to match <strong>Canva-style multi-brand</strong>.</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 4955438</strong> · <strong>$410/mo</strong> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1756343039668339" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+              · <strong>User 168503626</strong> · <strong>$350/mo</strong> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1755134587649139" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">10</span>
+          <span class="risk-pill bug">BUG</span>
+          <span class="theme-name">Font upload / Creative Assistant mismatch</span>
+        </div>
+        <div class="theme-card-stats">
+          <span class="theme-stat mrr"><strong>$3,350</strong>/mo cited</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">Premium $3K MRR: font upload to Brand Kit <strong>blocked two weeks</strong> — "bug with the process of adding font packages" per chat advisors.</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 69754805</strong> · <strong>$3,000/mo MRR</strong>
+              <span class="csat-pill terrible">Terrible</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1759746324106999" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">"Uploaded… DIN 2014… when I attempt to use this font in the creative assistant the font is not recognized by the builder."</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 227972026</strong> · <strong>$350/mo MRR</strong> · Premium
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1737576237396789" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <h2 style="margin-top:18px;"><span class="num">C</span><span class="risk-pill barrier">BARRIERS</span>Creative Assistant "bring back" + Content Studio reliability</h2>
+
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">11</span>
+          <span class="risk-pill barrier">BARRIER</span>
+          <span class="theme-name">Creative Assistant perceived removal / shrink — banner workflows</span>
+        </div>
+        <div class="theme-card-stats">
+          <span class="theme-stat mrr"><strong>$2,650</strong>/mo</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">"Can you bring back the creative assistant feature? I used to be able to create really nice designs."</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 55613225</strong> · <strong>$1,325/mo MRR</strong> · Premium
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1778190066376969" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">"Please… bring back the Creative Assistant! … make banners within the tool."</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 16048835</strong> · <strong>$754/mo MRR</strong>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770238236931939" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">12</span>
+          <span class="risk-pill bug">BUG</span>
+          <span class="theme-name">Content Studio instability + forced New Builder narrative</span>
+        </div>
+        <div class="theme-card-stats">
+          <span class="theme-stat mrr"><strong>$621</strong>/mo</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">"Content studio not loading images. Email builder breaking… keep quitting out and re-loading… Stop forcing… over to the 'New Builder'? It's just as broken…"</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 129406142</strong> · <strong>$621/mo MRR</strong>
+              <span class="csat-pill terrible">Terrible</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1755606624125399" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">Folder IA: "rearrange the order of the folders… option to delete folders!"</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 52532</strong> · <strong>$361/mo MRR</strong>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770838746676669" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">13</span>
+          <span class="risk-pill bug">BUG</span>
+          <span class="theme-name">Canva ↔ Mailchimp — sync loss, latency, email sent without graphic</span>
+        </div>
+        <div class="theme-card-stats">
+          <span class="theme-stat mrr"><strong>$2,500</strong>/mo+ cited</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">"canva integration… sent an email without a synched graphic even though the graphic showed in the editor" + lag complaints.</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 117215950</strong> · <strong>$780/mo</strong>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1767114330681869" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">"started a campaign then clicked on canva. What i had disappeared…" · "most frustrating thing ever… making it impossible to get it into a freaking email"</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>184658326</strong> $494 · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1772737922105179" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+              · <strong>246464998</strong> $427 · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1764789730727139" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="source"><strong>Page 2 sources:</strong> Slack searches <em>brand kit</em>, <em>content studio</em>, <em>creative assistant</em>, <em>Canva</em>. Eng triage threads (Cromwel Pestano, Alison Seto Jira MVPS-815) cited in-channel for integration depth.</p>
   </section>
 
-  <!-- HVC Page 3 — Phased response + critic -->
+  <!-- Page 3 of 4 · SMS composer + reporting + credits (retained from v1) -->
   <section class="page" aria-label="HVC Risk Page 3">
     <header class="page-head">
       <div>
-        <div class="eyebrow">HVC Risk Map · Re-prioritized response (composer + reporting + credits)</div>
-        <h1>Phased plan: turn SMS growth into <em style="color:#036A4F;">retained</em> growth</h1>
-        <div class="subtitle">Sequenced by <strong>live-incident severity</strong>, then <strong>trust fixes</strong> (reporting/billing transparency), then <strong>composer depth</strong> (merge tags, MMS-adjacent cards). Aligns PM work already underway on SMS Reports PRD.</div>
+        <div class="eyebrow">HVC Risk Map (cont.) · SMS &amp; post-send analytics</div>
+        <h1>SMS composer: <em style="color:#B91C1C;">reporting trust</em>, <em style="color:#B91C1C;">credits</em>, <em style="color:#B91C1C;">compliance append</em></h1>
+        <div class="subtitle">Retained evidence from SMS-focused harvest; complements email/brand VoC above for one <strong>unified risk picture</strong>.</div>
       </div>
       <div class="meta">
-        <div><strong>Page:</strong> 3 of 3</div>
-        <div><strong>Next:</strong> expand to full NEB/Brand-Kit VoC census</div>
+        <div><strong>Page:</strong> 3 of 4</div>
       </div>
     </header>
 
-    <h2><span class="num">D</span>Three phases (0–12 months)</h2>
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">14</span>
+          <span class="risk-pill bug">BUG</span>
+          <span class="theme-name">SMS / journey reporting — empty, N/A, hard to find</span>
+        </div>
+        <div class="theme-card-stats">
+          <span class="theme-stat mrr"><strong>$1,386</strong>/mo</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">"SMS reporting is showing 0% and N/A for stats, what is the point of reporting if it doesn't show data"</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 215343870</strong> · <strong>$810/mo</strong>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1759329465840369" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">"SMS reports… hard to find… feels like Mandrill -slightly tacked onto the system"</div>
+            <div class="voc-meta">
+              <strong>User 54729641</strong> · <strong>$576/mo</strong>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1760018454034169" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">15</span>
+          <span class="risk-pill bug">BUG</span>
+          <span class="theme-name">SMS credits — negative balance hidden; purchase mismatch; undelivered burn</span>
+        </div>
+        <div class="theme-card-stats">
+          <span class="theme-stat mrr"><strong>$3,592</strong>/mo cited</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">Credits negative in Flow; UI still showed zero until support explained ($310).</div>
+            <div class="voc-meta">
+              <strong>152116526</strong> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1758725941688229" target="_blank" rel="noopener">↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">"If an SMS returns as undelivered… should automatically be removed… using our credits" ($1,102).</div>
+            <div class="voc-meta">
+              <strong>3407590</strong> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770399133616899" target="_blank" rel="noopener">↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">Automation stalled — no notification; no "X credits to clear queue" ($630).</div>
+            <div class="voc-meta">
+              <strong>125210082</strong> · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1776683858219409" target="_blank" rel="noopener">↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">16</span>
+          <span class="risk-pill bug">BUG / INCIDENT</span>
+          <span class="theme-name">Duplicate TCPA opt-out in sent SMS ($57K HVC)</span>
+        </div>
+        <div class="theme-card-stats">
+          <span class="theme-stat mrr"><strong>$57,000</strong>/mo</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">C3 Festivals — default-on append + pasted compliance → duplicate opt-out in live send (Darker Waves). P2 escalation; thread discusses global setting / infer prior campaign.</div>
+            <div class="voc-meta">
+              <strong>C3 Festivals</strong> · UID 50561889
+              · <a href="https://intuit-teams.slack.com/archives/C095FJ3SQF4/p1775483838286769" target="_blank" rel="noopener">#mc-hvc-escalations ↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">17</span>
+          <span class="risk-pill missing">MISSING</span>
+          <span class="theme-name">SMS merge depth · MMS POC</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">SMS-9736 — up to <strong>one merge tag</strong> for Title (backlog). Satish: contact cards / MMS attachments POC not fully launched.</div>
+            <div class="voc-meta">
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1750425667526939" target="_blank" rel="noopener">↗</a>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1752093581157909" target="_blank" rel="noopener">↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="source"><strong>Page 3 sources:</strong> prior SMS harvest + VoC summary bot (billing transparency).</p>
+  </section>
+
+  <!-- Page 4 of 4 · Unified phased response -->
+  <section class="page" aria-label="HVC Risk Page 4">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">HVC Risk Map · Re-prioritized plan (full authoring surface)</div>
+        <h1>Phased response: <em style="color:#036A4F;">email trust</em> + <em style="color:#036A4F;">brand/library reliability</em> + <em style="color:#036A4F;">SMS retention</em></h1>
+        <div class="subtitle">Single roadmap covering NEB, Brand Kit, Content Studio, Canva/Creative surfaces, and SMS — aligned with UXR bets (saved blocks, multi-author, direct manipulation, discovery).</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 4 of 4</div>
+      </div>
+    </header>
+
+    <h2><span class="num">D</span>Phased priorities (0–12 months)</h2>
     <table class="dense" style="margin-bottom: 16px;">
       <thead>
         <tr>
           <th style="width:22%">Phase</th>
-          <th style="width:38%">What ships</th>
-          <th style="width:40%">Grounding evidence</th>
+          <th style="width:38%">Ships</th>
+          <th style="width:40%">Evidence</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>P0 · 0–60d</strong><br><span style="color:var(--muted); font-size:11px;">Incidents &amp; deception risk</span></td>
-          <td><strong>Duplicate opt-out guardrails:</strong> detect STOP/HELP already in body; warn pre-send; optional account-level default; remember last campaign preference (per Connor/Satish thread). <strong>SMS analytics narrative fix:</strong> align Help Center / SEO copy with actual measurable metrics (open rate unavailable except RCS/WhatsApp betas per internal reply).</td>
-          <td>C3 $57K live-send incident; Nicole/Alina thread on SMS open rates vs marketing article; Jira REPORTING-9201 path for click metrics on combined charts.</td>
+          <td><strong>P0 · 0–60d</strong></td>
+          <td><strong>Brand Kit correctness</strong> (stale kit / colors); <strong>font upload &amp; CA parity</strong>; <strong>Canva sync failure modes</strong> (blank sends); <strong>SMS duplicate opt-out guardrails</strong>; honest SMS metrics copy.</td>
+          <td>Austin Milt fix thread; $3K font bug; Canva+$780 send; C3 $57K; SMS open-rate article triage.</td>
         </tr>
         <tr>
-          <td><strong>P1 · 60–180d</strong><br><span style="color:var(--muted); font-size:11px;">Trust &amp; stall recovery</span></td>
-          <td><strong>SMS reporting v2</strong> (PM: Taylor Mattson PRD Oct '25): discoverability, non-empty journey SMS stats, combined chart clarity. <strong>Credit UX:</strong> surfaced negative balance; "credits required to clear queue"; automation stall notifications; locale-safe reset dates; purchase CTA from error states.</td>
-          <td>VoC: 0%/N/A reporting ($810); Mandrill-tacked-on ($576); credits negative ($310); automation stall ($630); locale bug ($900); Deepak note Q2 roadmap emphasis high-usage email+SMS reporting.</td>
+          <td><strong>P1 · 60–180d</strong></td>
+          <td><strong>Rendering QA</strong> (forward, inbox web view, mobile wraps); <strong>multi-author presence / conflict clarity</strong>; <strong>legacy↔NEB migration path</strong> or bulk template update; <strong>Content Studio perf</strong>; <strong>SMS reporting v2</strong> + credit surfacing.</td>
+          <td>Forwarded-mail VoC; $949 Ctrl+K/mobile; $504 support fail; CS "breaking"; 0% SMS reports.</td>
         </tr>
         <tr>
-          <td><strong>P2 · 6–12mo</strong><br><span style="color:var(--muted); font-size:11px;">Composer parity</span></td>
-          <td>Raise SMS merge-tag ceiling (SMS-9736). Undelivered auto-suppression / credit policy review. Contact cards + MMS attachment path when GA-ready. Explore <strong>OTP vs marketing SMS</strong> separation in VoC (2FA SMS reliability $340) to avoid brand bleed.</td>
-          <td>Alvin triage SMS-9736; undelivered credit complaint $1102; Satish MMS POC; Qualtrics 2FA SMS failure (login channel).</td>
+          <td><strong>P2 · 6–12mo</strong></td>
+          <td><strong>Universal / shared content blocks</strong> (customer asks "like Brand Kit but substantial"); <strong>multi-brand kits</strong>; <strong>LP/form font parity</strong>; SMS merge lift + MMS GA; <strong>Creative Assistant rediscovery</strong>/in-product education.</td>
+          <td>$330 + UXR Bet 1; $410 multi-kit; $655 LP fonts; SMS-9736; $1,325 "bring back" CA.</td>
         </tr>
       </tbody>
     </table>
 
-    <h2><span class="num">E</span>Critic pass / method limits</h2>
+    <h2><span class="num">E</span>Method &amp; critic</h2>
     <ul style="font-size: 12px; line-height: 1.55; color: var(--text); margin-top: 8px;">
-      <li><strong>Selection bias:</strong> #hvc_feedback over-indexes on escalated and survey-instrumented accounts; not a random sample of SMS explorers.</li>
-      <li><strong>MRR sums:</strong> Theme headers aggregate cited MRR only for illustration; double-counts when the same user appears in multiple quotes (e.g., 152116526) are not netted.</li>
-      <li><strong>Scope seam:</strong> Several VoCs blend <em>Journey Builder</em> with SMS — correct for unified-editor strategy because compose is embedded in automated steps, but impure for "composer-only" purists.</li>
-      <li><strong>Cross-channel:</strong> Premium $1,025 feedback lists "can't trust SMS" due to profile update rules — Audience/Audience-org issue with <strong>composer consequences</strong>; track as dependency, not NEB code defect.</li>
-      <li><strong>Next pass:</strong> mirror Automations brief quantity — systematic export, theme taxonomy, total HVC $ exposure — after NEB/Classic/Brand-Kit keyword mining completes.</li>
+      <li><strong>ACCESSIBLE:</strong> Public GitHub repo with UXR briefs — <a href="https://github.com/deepakp1308/mailchimp-campaign-builder-research" target="_blank" rel="noopener">deepakp1308/mailchimp-campaign-builder-research</a> (duplicates themes here with verbatim timestamps).</li>
+      <li><strong>Slack bias:</strong> escalated + Qualtrics instrumented; MRR not globally deduped.</li>
+      <li><strong>Cross-product:</strong> some quotes tie to Landing Pages / Forms / Audiences — still <strong>authoring-chain</strong> risk for unified editor strategy.</li>
     </ul>
 
-    <p class="source" style="margin-top: 16px;"><strong>Page 3 sources:</strong> Internal Slack threads cited inline; Product Health SMS churn; optional cross-read <a href="mailchimp.html#hvcrisk" target="_blank" rel="noopener">Automations HVC Risk Map</a> for methodology comparison (different product filter).</p>
+    <p class="source"><strong>Page 4 sources:</strong> Slack MCP; <a href="mailchimp.html#hvcrisk" target="_blank" rel="noopener">Automations HVC Map</a> (different filter); <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research tab</a>.</p>
   </section>
 
 </div><!-- /panel-hvcrisk -->
+
 
 
 <!-- ================================================ -->
@@ -2308,22 +2545,176 @@
 <!-- ============================================ -->
 <!-- ============== USER RESEARCH TAB =========== -->
 <!-- ============================================ -->
+<!-- ============================================ -->
+<!-- ============== USER RESEARCH TAB =========== -->
+<!-- ============================================ -->
 <div class="tabpanel" id="panel-research" role="tabpanel">
-  <section class="page" aria-label="User Research placeholder">
+
+  <section class="page" aria-label="Research Page 1">
     <header class="page-head">
       <div>
-        <div class="eyebrow">Mailchimp Email/SMS Unified Editor &amp; Builder</div>
-        <h1>User Research <em style="color:#C28A00;">— under construction</em></h1>
-        <div class="subtitle">This tab will mirror the 3-page structure of the corresponding tab in the Mailchimp Automations brief, applied to the unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist).</div>
+        <div class="eyebrow">User Research · 50 HeyMarvin videos · Campaign Builder synthesis</div>
+        <h1>The Mailchimp campaign builder is <em style="color:#B45309;">universal</em> — and <em style="color:#B91C1C;">bifurcated</em></h1>
+        <div class="subtitle">Synthesized from <strong>25 customer briefs</strong> across <strong>50 transcribed HeyMarvin UX research videos (~25 hours)</strong>. Every theme below is backed by named customers + verbatim time-coded quotes in <a href="https://github.com/deepakp1308/mailchimp-campaign-builder-research" target="_blank" rel="noopener">deepakp1308/mailchimp-campaign-builder-research</a> (<code>briefs/synthesis.md</code> + per-customer <code>briefs/*.md</code>).</div>
       </div>
       <div class="meta">
-        <div><strong>Status:</strong> placeholder</div>
-        <div><strong>Planned:</strong> 3 pages</div>
+        <div><strong>Source:</strong> Hannah Graffeo + UXR panel</div>
+        <div><strong>Scope:</strong> Campaign creation / NEB / templates / assets</div>
+        <div><strong>Page:</strong> 1 of 3</div>
       </div>
     </header>
-    <p style="color: var(--muted);">Content forthcoming. See the build plan in the active session.</p>
+
+    <div class="kpi-row" style="margin-bottom: 16px;">
+      <div class="kpi"><div class="v">50</div><div class="l">Videos transcribed · <strong>25</strong> substantive briefs</div></div>
+      <div class="kpi"><div class="v">25</div><div class="l">Hours of audio · verbatim <code>[HH:MM:SS]</code> quotes</div></div>
+      <div class="kpi"><div class="v">5</div><div class="l">Distinct <strong>workflow shapes</strong> in the builder</div></div>
+      <div class="kpi"><div class="v">5+</div><div class="l">Customers with <strong>years-long</strong> feature discovery gaps</div></div>
+    </div>
+
+    <div class="card tinted" style="margin-bottom: 14px;">
+      <h2 style="margin-bottom: 6px;"><span class="num">JUDGE</span>Quality assessment</h2>
+      <div class="grid cols-2" style="gap: 12px;">
+        <div>
+          <strong style="font-size:12px; color:#036A4F;">STRENGTHS</strong>
+          <ul style="font-size:12px;">
+            <li><strong>Headline reframes the problem.</strong> "Bifurcated builder" explains happy-path simple senders vs everyone else — aligns with Slack dual-builder + Brand/Canva pain.</li>
+            <li><strong>Discovery is the largest lever</strong> — Jeff didn't find My Products for 3.5 years; Jack missed New Builder for years — matches high Write-with-AI/churn subtext in Product Health.</li>
+            <li><strong>Evidence chain is intact</strong> in repo markdown (YAML frontmatter + 8-section brief template).</li>
+          </ul>
+        </div>
+        <div>
+          <strong style="font-size:12px; color:#9A1F00;">GAPS</strong>
+          <ul style="font-size:12px;">
+            <li><strong>No MRR per finding</strong> — pair with <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a> for dollar exposure.</li>
+            <li><strong>Watch Party = internal voice</strong> — cite as product-team diagnosis, not customer quote.</li>
+            <li><strong>Competitor absence</strong> — Klaviyo rarely named; Bee.io / Canva / Adobe Express are the organic comparators.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h2><span class="num">1</span>Headline finding</h2>
+    <div class="card" style="margin-bottom: 14px;">
+      <p><strong>Friction piles into four places: layout flexibility, multi-author collaboration, asset/library management, and discoverability of what already shipped.</strong> Happy-path replicators (Kim, Courtney, Andrew, Nicholas) ship same-day. Everyone else pays tax.</p>
+      <div class="pull" style="margin-top: 10px;">
+        "The problem is you need to make our life easier. No more complicated."
+        <cite>— Andrea D'Ercole · <code>[00:35:18]</code> · most-quotable customer line in synthesis</cite>
+      </div>
+    </div>
+
+    <h2><span class="num">2</span>Who's using the campaign builder</h2>
+    <p style="margin-bottom: 8px;">Universal surface — all 25 substantive briefs touch the builder. Segment mix mirrors Automation research (DSB heavy US, ProServ split US/UK, internal dogfood + Watch Party).</p>
+    <table class="dense" style="margin-bottom: 14px;">
+      <thead><tr><th>Workflow shape</th><th>What it is</th><th>Examples</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Fast Monday-morning sender</strong></td><td>Replicate last week, swap, ship 30–90 min</td><td>Andrew, Andrea, Kim, Clint</td></tr>
+        <tr><td><strong>All-week ad-libber</strong></td><td>Living newsletter; multi-author — save conflicts dominate</td><td>Jack Hally (10–20 logins/day)</td></tr>
+        <tr><td><strong>Brand-first methodical</strong></td><td>Layout/padding before copy; Brand Kit; wants saved blocks</td><td>Wes Turner, Bob Gray</td></tr>
+        <tr><td><strong>Third-party in the loop</strong></td><td>Bee.io / Canva / Express because MC canvas can't</td><td>Andrea, Wes, Jack</td></tr>
+        <tr><td><strong>Low-frequency / discovery gap</strong></td><td>Monthly send; advanced features unseen for years</td><td>Shannon, Matt, Gilles</td></tr>
+      </tbody>
+    </table>
+    <p class="source">Primary synthesis: <a href="https://github.com/deepakp1308/mailchimp-campaign-builder-research/blob/main/briefs/synthesis.md" target="_blank" rel="noopener">briefs/synthesis.md</a>.</p>
   </section>
+
+  <section class="page" aria-label="Research Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">User Research (cont.) · Templates &amp; canvas mechanics</div>
+        <h1>Template IA mismatch · layout rigidity · collaboration · A/B architecture</h1>
+        <div class="subtitle">Sections 3–6 of the executive synthesis, tightened for this brief.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 2 of 3</div>
+      </div>
+    </header>
+
+    <h2><span class="num">3</span>Template gallery — failure modes</h2>
+    <ul style="margin-bottom: 12px; font-size: 12.5px;">
+      <li><strong>B2B / ProServ gap</strong> — Hannah to Chris Rich: <em>"many… not tailored towards your organization"</em> <code>[00:28:15]</code></li>
+      <li><strong>Over-designed / intimidating</strong> — Jillian Ney: <em>"feel more like e-commerce emails"</em> <code>[00:06:09]</code>; Wes ignores category IA, browses layout-only <code>[00:07:06]</code></li>
+      <li><strong>First build harder than ongoing edits</strong> — Nicholas H on starting from zero <code>[00:06:01]</code></li>
+    </ul>
+
+    <h2><span class="num">4</span>Canvas — layout, images, library, collaboration</h2>
+    <table class="dense" style="margin-bottom: 14px;">
+      <thead><tr><th>Cluster</th><th>Finding</th><th>Voice</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Layout</strong></td><td>Drag-drop restrictive vs Photoshop/Bee; asymmetric resize; 2-col = 3 steps (Kyle)</td><td>Andrea live demo <code>[00:11:41]</code> · Kyle <code>[00:22:25]</code></td></tr>
+        <tr><td><strong>Assets</strong></td><td>Duplicate uploads; resize prompt ×15–20 images; "hunting in the attic" (Peter)</td><td>Andrew <code>[00:12:38]</code> · <code>[00:25:31]</code> · Peter <code>[00:14:16]</code></td></tr>
+        <tr><td><strong>Discovery</strong></td><td>My Products / Woo invisible 3.5 yrs (Jeffrey)</td><td>Devin demo <code>[00:21:13]</code></td></tr>
+        <tr><td><strong>Multi-author</strong></td><td>Save conflicts — Jack, Kyle, Bianka team fear</td><td>Jack <code>[00:11:54]</code> · Kyle <code>[00:14:34]</code></td></tr>
+        <tr><td><strong>Brand tax</strong></td><td>Pill CTAs reshaped every send (Wes); link color stuck (Nicholas)</td><td>Wes <code>[00:14:10]</code> · Nicholas <code>[00:13:11]</code></td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">5</span>A/B testing &amp; pre-flight</h2>
+    <p style="font-size:12.5px;">Wes: multivariate path forces <strong>subject-line decision before content</strong> — he deleted a finished email and re-entered via MV path to test body content <code>[00:25:15]</code>–<code>[00:27:04]</code>. Kyle schedules 15 min out because Send feels scary <code>[00:27:55]</code>; Send enabled before schedule set <code>[00:26:30]</code>.</p>
+
+    <h2><span class="num">6</span>Internal Watch Party (non-customer)</h2>
+    <div class="card" style="background:#FFFAF0; border-color:#F5E2BD;">
+      <p style="font-size:12.5px; margin:0;"><strong>Hannah Graffeo</strong> diagnosis applied to Mailchimp: <em>"people will be doing one task and then they want to jump to another task and there's not a logical flow"</em> <code>[00:18:05]</code>. Use as <strong>internal validation</strong> of connective-flow gaps — not customer attribution.</p>
+    </div>
+  </section>
+
+  <section class="page" aria-label="Research Page 3">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">User Research (cont.) · Reporting, discovery, bets</div>
+        <h1>Post-send benchmarking · cross-cutting discovery · top 5 bets</h1>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 3 of 3</div>
+      </div>
+    </header>
+
+    <h2><span class="num">7</span>Reporting &amp; trust</h2>
+    <ul style="font-size:12.5px;">
+      <li>No vertical benchmarks — Matt <code>[00:30:39]</code></li>
+      <li>Jeffrey: Sept attribution methodology shift → trust event (confirmed internal change)</li>
+      <li>Bianka: wants email + SMS + all touches in <strong>one</strong> reporting view</li>
+    </ul>
+
+    <h2><span class="num">8</span>Discovery table (strongest cross-cut)</h2>
+    <table class="dense" style="margin-bottom: 14px;">
+      <thead><tr><th>Customer</th><th>Undiscovered</th><th>Duration</th></tr></thead>
+      <tbody>
+        <tr><td>Bianka Kiss</td><td>A/B testing</td><td>"A number of years"</td></tr>
+        <tr><td>Jack Hally</td><td>New Email Builder</td><td>4–6 years on inherited legacy template</td></tr>
+        <tr><td>Jeffrey Davis</td><td>My Products / Woo pull</td><td>3.5 years</td></tr>
+        <tr><td>Clint Bartley</td><td>Welcome automation (DRAFT)</td><td>1 year</td></tr>
+        <tr><td>Wes Turner</td><td>Saved blocks (pre-ship)</td><td>At time of call</td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">9</span>Top 5 bets (from synthesis)</h2>
+    <div class="card" style="margin-bottom:8px; background:#F4F3FF; border-color:#DCD7F8;"><strong>BET 1 · Saved blocks / section reuse</strong> — PM-confirmed in-flight during Wes session; Wes/Peter/Kyle all want recurring sections.</div>
+    <div class="card" style="margin-bottom:8px;"><strong>BET 2 · Discovery / activation for high-frequency users</strong> — changelog, weekly feature drip, DRAFT resurrect, proactive chatbot suggestions (Clint/Bianka patterns).</div>
+    <div class="card" style="margin-bottom:8px;"><strong>BET 3 · B2B / ProServ template gallery lane</strong> — skeleton layouts, information-dense, not mock e-commerce shells.</div>
+    <div class="card" style="margin-bottom:8px;"><strong>BET 4 · Real multi-author editing</strong> — presence, history, staging; Jack/Kyle/Bianka convergence.</div>
+    <div class="card" style="margin-bottom:8px;"><strong>BET 5 · Direct manipulation upgrades</strong> — free/asymmetric image resize, 1-click two-column, post-hoc A/B on sections, Brand-Kit-aware CTA defaults — closes Bee.io gap.</div>
+
+    <h2><span class="num">10</span>Caveats</h2>
+    <ul style="font-size:12px;">
+      <li>Self-selected research panel (Hannah-recruited) — not a random SME sample.</li>
+      <li>Whisper artifacts on a few transcripts (noted in repo).</li>
+      <li>No organic Klaviyo/ActiveCampaign naming — comparators are design tools + adjacent SaaS.</li>
+    </ul>
+
+    <div class="card warm">
+      <h2 style="margin-bottom: 6px;"><span class="num">XREF</span>Cross-tabs</h2>
+      <ul style="font-size:12px;">
+        <li><a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a> — Slack $ exposure on same themes (fonts, Canva, NEB, SMS).</li>
+        <li><a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> — bulk email YoY shrink, AI churn.</li>
+        <li><a href="#roadmap" onclick="document.querySelector('[data-tab=roadmap]').click();return false;">Roadmap to Win</a> — foundational gaps / steals.</li>
+      </ul>
+    </div>
+
+    <p class="source"><strong>Repos:</strong> <a href="https://github.com/deepakp1308/mailchimp-campaign-builder-research" target="_blank" rel="noopener">github.com/deepakp1308/mailchimp-campaign-builder-research</a> · Optional static site in <code>site/</code> if published to GitHub Pages.</p>
+  </section>
+
 </div><!-- /panel-research -->
+
 
 
 <!-- ============================================ -->
