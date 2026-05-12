@@ -10,7 +10,7 @@ Four parallel executive-grade briefs, each with the same two-tab structure (Exec
 Each brief covers what the product is, key capabilities, the full flow-relevant AI surface, customers, jobs-to-be-done, differentiation vs. competitors, pricing, and strategic implications — paired with a synthesized Voice of Customer view (G2, Trustpilot, Capterra, Reddit, vendor community, blogs, YouTube) showing what marketers love, hate, and where the wind is blowing.
 
 > **Live site (GitHub Pages):** [https://deepakp1308.github.io/klaviyo-flows-competitive-analysis/](https://deepakp1308.github.io/klaviyo-flows-competitive-analysis/)  
-> **Mailchimp Email/SMS unified editor brief** (12-tab): [https://deepakp1308.github.io/klaviyo-flows-competitive-analysis/mailchimp-editor.html](https://deepakp1308.github.io/klaviyo-flows-competitive-analysis/mailchimp-editor.html) — short path: […/editor/](https://deepakp1308.github.io/klaviyo-flows-competitive-analysis/editor/)  
+> **Mailchimp Email/SMS unified editor brief** (11-tab): [https://deepakp1308.github.io/klaviyo-flows-competitive-analysis/mailchimp-editor.html](https://deepakp1308.github.io/klaviyo-flows-competitive-analysis/mailchimp-editor.html) — short path: […/editor/](https://deepakp1308.github.io/klaviyo-flows-competitive-analysis/editor/)  
 > Use the toolbar links on each HTML page to jump between briefs.
 
 ## What's in the brief
