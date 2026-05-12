@@ -1873,9 +1873,6 @@
 <!-- ============================================ -->
 <!-- ============== HVC RISK MAP TAB ============ -->
 <!-- ============================================ -->
-<!-- ============================================ -->
-<!-- ============== HVC RISK MAP TAB ============ -->
-<!-- ============================================ -->
 <div class="tabpanel" id="panel-hvcrisk" role="tabpanel">
 
   <!-- Page 1 of 4 · Email / New Builder / dual-builder / integrations -->
@@ -2522,9 +2519,6 @@
 <!-- ============================================ -->
 <!-- ============== USER RESEARCH TAB =========== -->
 <!-- ============================================ -->
-<!-- ============================================ -->
-<!-- ============== USER RESEARCH TAB =========== -->
-<!-- ============================================ -->
 <div class="tabpanel" id="panel-research" role="tabpanel">
 
   <section class="page" aria-label="Research Page 1">
@@ -2705,7 +2699,7 @@
       <div>
         <div class="eyebrow">Product Health · BigQuery analysis · Year-over-Year</div>
         <h1>Mailchimp Editor: <em style="color:#9A1F00;">bulk email is shrinking</em>, <em style="color:#9A1F00;">Write with AI churn doubled</em>, <em style="color:#036A4F;">SMS is rapidly growing</em></h1>
-        <div class="subtitle">Trailing 12-month analysis (May 2025 → Apr 2026 vs prior year). Source: <code>mc-business-intelligence.bi_aggregate.product_journey_monthly</code> (89.7M rows, refreshed daily). Editor product family = <strong>bulk email</strong> + <strong>sms</strong> + <strong>genai content generation bulk</strong> + <strong>mc transactional</strong>. (genai smart drafts is functionally not adopted — 0 Established users in either window.) Numbers reproduced from MCP-direct BigQuery queries; same pipeline pattern as Automations brief.</div>
+        <div class="subtitle">Trailing 12-month analysis (May 2025 → Apr 2026 vs prior year). Source: <code>mc-business-intelligence.bi_aggregate.product_journey_monthly</code> (89.7M rows, refreshed daily). Editor product family = <strong>bulk email</strong> + <strong>sms</strong> + <strong>genai content generation bulk</strong> + <strong>mc transactional</strong>. (genai smart drafts is functionally not adopted — fewer than 5 Established users in either window; either tracking gap or not in product, see CRITIC pass on Page 3.) Numbers reproduced from MCP-direct BigQuery queries; same pipeline pattern as Automations brief.</div>
       </div>
       <div class="meta">
         <div><strong>Source:</strong> bi_aggregate.product_journey_monthly</div>
@@ -2825,7 +2819,7 @@
     <div class="grid cols-3" style="gap: 10px; margin-bottom: 14px;">
       <div class="card" style="background:#FFF5F2; border-color:#F4D2C5;">
         <strong style="font-size:12px; color:#9A1F00;">BULK EMAIL IS SHRINKING</strong>
-        <p style="font-size:12.5px; margin-top:4px;">Established <strong>-9.4% YoY</strong>, Explore <strong>-19.2%</strong>, churn <strong>+2.1pp worse</strong>. Free plan editor users <strong>-19.2%</strong>; new-tenure cohorts (&lt;12mo) <strong>-23%</strong>. Standard tier is the <em>only</em> growing plan (+9.1%).</p>
+        <p style="font-size:12.5px; margin-top:4px;">Established <strong>-9.4% YoY</strong>, Explore <strong>-19.2%</strong>, churn <strong>+2.1pp worse</strong>. Free plan editor users <strong>-19.2%</strong>; new-tenure cohorts (&lt;12mo) <strong>-23%</strong>. Standard is the largest growing tier (<strong>+9.1%</strong>); Premium also up <strong>+4.0%</strong> and Pro/other <strong>+14.1%</strong> off small bases &mdash; the loss concentrates in <strong>Free, Essentials, Legacy</strong>.</p>
       </div>
       <div class="card" style="background:#FFF5F2; border-color:#F4D2C5;">
         <strong style="font-size:12px; color:#9A1F00;">WRITE WITH AI HONEYMOON ENDED</strong>
@@ -3088,7 +3082,7 @@
 <!-- PAGE 1 -->
 <section class="pg" aria-label="Strategy Page 1">
   <div class="doctitle">Mailchimp Email/SMS Unified Editor &amp; Builder &mdash; FY27 Strategy</div>
-  <div class="docmeta">Mailchimp standalone &middot; 6-page executive read &middot; Prepared May 2026 &middot; Author: PM, Mailchimp Authoring Surface &middot; <strong>v1 SKELETON</strong> &mdash; financial walk + adoption baselines pending BigQuery editor-product cuts (Tab 7 dependency).</div>
+  <div class="docmeta">Mailchimp standalone &middot; 6-page executive read &middot; Prepared May 2026 &middot; Author: PM, Mailchimp Authoring Surface &middot; <strong>v1.1</strong> &mdash; reconciled to Tab 7 (Product Health), Tab 10 (Growth Model ~$26.3M mid), Tab 11 (Loss Attribution $36&ndash;67M).</div>
 
   <div class="skel-note"><strong>STATUS:</strong> Tab 7 (Product Health) and Tab 10 (Growth Model) are populated; Pages 2&ndash;4 still carry <em>directional</em> Strategy ranges that should be reconciled to the ~$26.3M mid scenario. Tab 4 (HVC) validates problem severity; Finance still owns ARPU + causal-share locks.</div>
 
@@ -3100,7 +3094,7 @@
 
   <h2>Customer problem (4 quantified gaps)</h2>
   <ul>
-    <li><strong>Two-builder bifurcation.</strong> NEB + Classic coexist; templates do not port; mid-migration users rebuild from scratch. <em>Sized loss</em>: TBD via BigQuery editor cut (Tab 7) &mdash; estimated 5&ndash;10K HVC accounts blocked from migrating, ~$2&ndash;4M ARR drag from churn-attributable-to-builder-friction. Voice of Customer: #1 hate theme.</li>
+    <li><strong>Two-builder bifurcation.</strong> NEB + Classic coexist; templates do not port; mid-migration users rebuild from scratch. <em>Sized loss</em>: bulk-email churn worsened <strong>+2.1pp YoY</strong> on the 888.7K spine (Tab 7); HVC harvest (Tab 4) shows recurring NEB / migration / Classic Code Mode pain at named-customer MRR levels. Estimated <strong>~$2&ndash;4M ARR drag</strong> from builder-friction-attributable churn (causal share applied to ~3% of bulk Established sitting in mid-migration risk). Voice of Customer: #1 hate theme.</li>
     <li><strong>Email + SMS surface split.</strong> "Unified" is a billing claim. No shared blocks, no cross-channel preview, no unified Brand Kit propagation across channels. <em>Sized loss</em>: ~30&ndash;50% of SMS-eligible Standard customers do not adopt SMS partly because authoring is a separate surface; opportunity cost ~$3&ndash;6M ARR.</li>
     <li><strong>Klaviyo Universal Content gap.</strong> Klaviyo Spring 2026 ships Universal Content blocks as default. Mailchimp saved-content remains template-scoped. The single most-asked-for editor primitive of 2026. <em>Sized loss</em>: Klaviyo migration accelerant; estimated $4&ndash;8M ARR drag in DTC mid-market over 12 months.</li>
     <li><strong>Write with AI geo-gate</strong>: US/UK/AU/CA-only beta on a globally-sold Standard plan. International Standard customers pay full price for an inaccessible feature. <em>Sized loss</em>: brand damage that is hard to dollarize but visible in international Trustpilot 1-stars and EMEA r/MailChimp threads; estimated ~10&ndash;20% of international Standard renewal risk = $2&ndash;4M ARR.</li>
@@ -3121,23 +3115,25 @@
 <!-- PAGE 2 -->
 <section class="pg" aria-label="Strategy Page 2">
   <div class="doctitle">Target state &mdash; today vs end of FY27</div>
-  <div class="docmeta">Mailchimp Email/SMS Unified Editor &amp; Builder &middot; Page 2 of 6 &middot; v1 skeleton</div>
+  <div class="docmeta">Mailchimp Email/SMS Unified Editor &amp; Builder &middot; Page 2 of 6 &middot; v1.1</div>
 
-  <div class="skel-note"><strong>Numbers in this table will be replaced with BigQuery-validated baselines once Tab 7 (Product Health) is populated.</strong> Today columns currently use Automations-brief Product Health proxies (132K Established CJB users, 33.6% activation, 40.2% churn) as a starting placeholder. Editor-product cut will likely show different absolute numbers; YoY directional movements should be similar.</div>
+  <div class="skel-note"><strong>Reconciled against Tab 7 (Product Health):</strong> Spine = <strong>bulk-email Established 888,706 / mo</strong> (the editor-family cohort in BigQuery; mixes NEB and Classic). NEB-only and Brand Kit attach rates are <em>not</em> directly observable in <code>product_journey_monthly</code> &mdash; rows tagged <strong>(modeled / Finance to confirm)</strong> require an instrumentation cut.</div>
 
   <h2>Today &rarr; FY28 (April 2027) target</h2>
   <table>
-    <thead><tr><th style="width: 32%;">Metric (avg/month)</th><th style="width: 26%;">Today (May '26)</th><th style="width: 26%;">Target (Apr '27)</th><th style="width: 16%;">&Delta;</th></tr></thead>
+    <thead><tr><th style="width: 32%;">Metric (avg/month)</th><th style="width: 26%;">Today (trailing 12mo)</th><th style="width: 26%;">Target (Apr '27)</th><th style="width: 16%;">&Delta;</th></tr></thead>
     <tbody>
-      <tr><td>NEB Established users</td><td>~140K (placeholder)</td><td>175&ndash;185K</td><td>+25&ndash;32%</td></tr>
-      <tr><td>NEB Activation rate (Explore&rarr;Establish)</td><td>~32% (placeholder)</td><td>42&ndash;48%</td><td>+10&ndash;16pp</td></tr>
-      <tr><td>NEB Churn rate</td><td>~40% (placeholder)</td><td>33&ndash;36%</td><td>&minus;4&ndash;7pp</td></tr>
-      <tr><td>Classic Established users</td><td>~70K (placeholder)</td><td>&lt;10K (sunset path)</td><td>&minus;85%+</td></tr>
-      <tr><td>Brand Kit attach rate (% of editor adopters)</td><td>~35% (placeholder)</td><td>65&ndash;75%</td><td>+30&ndash;40pp</td></tr>
-      <tr><td>Write with AI weekly active (US/UK/AU/CA today)</td><td>~8% of eligible (placeholder)</td><td>30&ndash;40% globally</td><td>+22&ndash;32pp + geo expansion</td></tr>
-      <tr><td>SMS adopters in editor (US/CA only today)</td><td>~12% of paid (placeholder)</td><td>20&ndash;25%; +UK/AU launch</td><td>+8&ndash;13pp + geo expansion</td></tr>
-      <tr><td>Universal Content blocks adopted (post-launch)</td><td>0 (not shipped)</td><td>50&ndash;70% of NEB adopters</td><td>net-new</td></tr>
-      <tr><td>Real-time co-edit sessions / week (post-launch)</td><td>0 (not shipped)</td><td>15&ndash;25K</td><td>net-new</td></tr>
+      <tr><td><strong>Bulk email Established users</strong> <em>(NEB + Classic, BQ truth)</em></td><td>888,706 <span style="color:#9A1F00;">(&minus;9.4% YoY)</span></td><td>915&ndash;935K</td><td>+27&ndash;47K (recovery)</td></tr>
+      <tr><td>Bulk Explore funnel <em>(top of funnel, BQ)</em></td><td>51,859 <span style="color:#9A1F00;">(&minus;19.2% YoY)</span></td><td>58&ndash;65K</td><td>repair compression</td></tr>
+      <tr><td>Bulk activation rate <em>(Establish / Explore+Try+Establish, BQ)</em></td><td>88.0% <span style="color:#036A4F;">(+1.3pp)</span></td><td>maintain 88&ndash;90%</td><td>hold</td></tr>
+      <tr><td>Bulk churn rate <em>(Abandon / Establish+Abandon, BQ)</em></td><td>40.0% <span style="color:#9A1F00;">(+2.1pp)</span></td><td>36.5&ndash;37.5%</td><td>&minus;2.5&ndash;3.5pp</td></tr>
+      <tr><td>SMS composer Established <em>(BQ)</em></td><td>6,673 <span style="color:#036A4F;">(+73.5% YoY)</span> &middot; churn 52.9%</td><td>11.5&ndash;14.5K &middot; churn 46&ndash;48%</td><td>attach + retention</td></tr>
+      <tr><td>Write with AI Established <em>(BQ)</em></td><td>31,438 <span style="color:#9A1F00;">(&minus;3.8%)</span> &middot; Explore <span style="color:#9A1F00;">&minus;73.7%</span></td><td>33&ndash;36K + Explore stabilized</td><td>policy + UX fix</td></tr>
+      <tr><td>Classic Established users <em>(modeled subset of bulk)</em></td><td>not directly observable in BQ; <em>Eng to instrument</em></td><td>&lt;10K (sunset path)</td><td>migration tooling</td></tr>
+      <tr><td>NEB Established users <em>(modeled subset of bulk)</em></td><td>not directly observable in BQ; <em>Eng to instrument</em></td><td>+25&ndash;32% YoY of NEB cohort</td><td>requires NEB-tag cut</td></tr>
+      <tr><td>Brand Kit attach rate <em>(modeled / Finance to confirm)</em></td><td>placeholder; <em>not in product_journey_monthly</em></td><td>65&ndash;75%</td><td>requires attach-event cut</td></tr>
+      <tr><td>Universal Content blocks adopted <em>(post-launch)</em></td><td>0 (not shipped)</td><td>50&ndash;70% of NEB adopters</td><td>net-new</td></tr>
+      <tr><td>Real-time co-edit sessions / week <em>(post-launch)</em></td><td>0 (not shipped)</td><td>15&ndash;25K</td><td>net-new</td></tr>
     </tbody>
   </table>
 
@@ -3158,7 +3154,7 @@
 <!-- PAGE 3 -->
 <section class="pg" aria-label="Strategy Page 3">
   <div class="doctitle">The strategy &mdash; 4 strategic shifts, 5 key bets</div>
-  <div class="docmeta">Mailchimp Email/SMS Unified Editor &amp; Builder &middot; Page 3 of 6 &middot; v1 skeleton</div>
+  <div class="docmeta">Mailchimp Email/SMS Unified Editor &amp; Builder &middot; Page 3 of 6 &middot; v1.1</div>
 
   <h2>4 strategic shifts</h2>
   <ol>
@@ -3188,9 +3184,9 @@
 <!-- PAGE 4 -->
 <section class="pg" aria-label="Strategy Page 4">
   <div class="doctitle">Financial walk &mdash; how $25&ndash;30M shows up</div>
-  <div class="docmeta">Mailchimp Email/SMS Unified Editor &amp; Builder &middot; Page 4 of 6 &middot; v1 skeleton</div>
+  <div class="docmeta">Mailchimp Email/SMS Unified Editor &amp; Builder &middot; Page 4 of 6 &middot; v1.1</div>
 
-  <div class="skel-note"><strong>Updated:</strong> Lever <em>structure</em> is committed; absolute $ and % now tie to Tab 10 (Growth Model) mid scenario (~$26.4M) and BigQuery baselines in Tab 7. Finance still to confirm paid-slice ARPU and causal shares.</div>
+  <div class="skel-note"><strong>Updated:</strong> Lever <em>structure</em> is committed; absolute $ and % now tie to Tab 10 (Growth Model) mid scenario (~$26.3M, worked: $26.2M) and BigQuery baselines in Tab 7. Finance still to confirm paid-slice ARPU and causal shares.</div>
 
   <h2>The financial walk</h2>
   <table>
@@ -3204,7 +3200,7 @@
       <tr><td><strong>L6 &middot; Attributed-revenue lift per customer</strong> (better authoring = better engagement = better LTV)</td><td>$2&ndash;3M</td><td>Improved deliverability via accessibility coach (F9); per-recipient dynamic content (F8); brand-consistent quality &gt; quantity sends.</td></tr>
     </tbody>
   </table>
-  <p style="font-size: 9pt; color: #555;">Mid-band sum: $25&ndash;37M. Anchored target $25&ndash;30M sits in the conservative band; upper-band $37M requires B3 (unified canvas) full ship + B7 (international SMS) piloting.</p>
+  <p style="font-size: 9pt; color: #555;">Lever low-to-high range: $25&ndash;37M (mid sum ~$31M of midpoints; conservative scenario lands ~$26M, see <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Tab 10</a>). Anchored target $25&ndash;30M; upper-band $37M assumes B3 (unified canvas) full ship + Roadmap F7 (international SMS) piloting.</p>
 
   <h2>Investment &middot; how the team is staffed against this</h2>
   <ul>
@@ -3219,13 +3215,13 @@
 <!-- PAGE 5 -->
 <section class="pg" aria-label="Strategy Page 5">
   <div class="doctitle">Risks &middot; alternatives considered &middot; assumptions</div>
-  <div class="docmeta">Mailchimp Email/SMS Unified Editor &amp; Builder &middot; Page 5 of 6 &middot; v1 skeleton</div>
+  <div class="docmeta">Mailchimp Email/SMS Unified Editor &amp; Builder &middot; Page 5 of 6 &middot; v1.1</div>
 
   <h2>Top 6 risks</h2>
   <table>
     <thead><tr><th style="width: 26%;">Risk</th><th>Likelihood &amp; impact</th><th style="width: 28%;">Mitigation</th></tr></thead>
     <tbody>
-      <tr><td><strong>R1 &middot; Classic users churn during migration</strong></td><td>Med likelihood / High impact. ~70K Classic Established users; even 10% churn = $1&ndash;2M ARR loss.</td><td>Fund migration; ship NEB Code Mode (F5) <em>before</em> sunset announce; 12mo grace period; 1:1 migration tool with style preservation.</td></tr>
+      <tr><td><strong>R1 &middot; Classic users churn during migration</strong></td><td>Med likelihood / High impact. Classic Established subset of bulk-email cohort (~70K assumed; <strong>not directly observable in BQ &mdash; Eng to instrument</strong>); even 10% churn = $1&ndash;2M ARR loss.</td><td>Fund migration; ship NEB Code Mode (F5) <em>before</em> sunset announce; 12mo grace period; 1:1 migration tool with style preservation.</td></tr>
       <tr><td><strong>R2 &middot; Klaviyo accelerates editor roadmap further</strong></td><td>High likelihood / Med impact. Klaviyo just shipped Universal Content; AI Subject Line; AI Image Edit. Likely to ship conversational editing next.</td><td>Ship B2 (Universal Content) within 2 quarters; ship B4 (conversational) before Klaviyo's Q4 launch window.</td></tr>
       <tr><td><strong>R3 &middot; Write with AI legal/policy gates remain stuck</strong></td><td>Med likelihood / High impact on the international story. Geo-gate is policy + Intuit legal review, not capability.</td><td>Run policy-track in parallel to product-track; ship paid AI add-on globally as a fallback if free-tier policy gate persists.</td></tr>
       <tr><td><strong>R4 &middot; B3 (unified canvas) eng scope blows up</strong></td><td>Med likelihood / High impact. Email and SMS composers built on different stacks historically; unification = real eng work.</td><td>Ship in phases: shared blocks first (Q3), cross-channel preview (Q4), full canvas unification (Q1 FY28). Don't promise it all at once.</td></tr>
@@ -3256,16 +3252,16 @@
 <!-- PAGE 6 -->
 <section class="pg" aria-label="Strategy Page 6">
   <div class="doctitle">Critic-review &mdash; what could be wrong about this strategy</div>
-  <div class="docmeta">Mailchimp Email/SMS Unified Editor &amp; Builder &middot; Page 6 of 6 &middot; v1 skeleton</div>
+  <div class="docmeta">Mailchimp Email/SMS Unified Editor &amp; Builder &middot; Page 6 of 6 &middot; v1.1</div>
 
   <p>An honest self-critique pass on the strategy above. Looking for hallucinations, weakly-grounded claims, missing context, and overconfident assertions.</p>
 
   <ol>
     <li><strong>Anchor &mdash; "$25&ndash;30M" vs modeled mid ~$26.3M.</strong> Tab 10 (Growth Model) now decomposes six levers with a worked mid scenario grounded in Tab 7 (888K bulk Establish, SMS/GenAI funnel, churn). Residual uncertainty: paid-slice ARPU (~$110 placeholder), causal shares, and FY27 ramp shape. <strong>Confidence: medium</strong> (was medium-low).</li>
     <li><strong>"~$11&ndash;22M annualized opportunity cost" on Page 1.</strong> Sum-of-four-gaps estimate; <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a> now adds the full 3-layer decomposition. Reconcile the four-gap shorthand with L3 opportunity ($22&ndash;35M) before an external CFO read.</li>
-    <li><strong>Page 2 persona / NEB cohort sizing</strong> may still use legacy proxy language; Tab 7 now anchors the model on <strong>888,706 bulk-email Established</strong> users/mo. Reconcile narrative headcount with that spine to avoid mixed metaphors.</li>
+    <li><strong>Page 2 cohort spine reconciled (v1.1):</strong> the Today &rarr; Target table is now anchored on Tab 7's <strong>888,706 bulk-email Established</strong> users/mo. Open dependency: NEB-only / Brand Kit attach are <em>not directly observable</em> in <code>product_journey_monthly</code> &mdash; Engineering needs to instrument NEB-tag and Brand-Kit-attach events before those rows can move from "modeled" to BQ truth.</li>
     <li><strong>"Klaviyo Universal Content drives $4&ndash;8M ARR drag" claim.</strong> Inferred from observed Reddit / Klaviyo Community migration sentiment + DTC mid-market churn pattern. Not supported by churn-attribution data we control. Could be 50% off in either direction.</li>
-    <li><strong>"Brand Kit attach rate ~35% today" placeholder.</strong> Total guess. Could be 15% (most users skip Brand Kit setup) or 60% (auto-extract has high attach). Will be measured in Tab 7.</li>
+    <li><strong>"Brand Kit attach rate ~35% today" placeholder.</strong> Not in <code>product_journey_monthly</code>; the v1.1 Page 2 table marks it <em>(modeled / Finance to confirm)</em>. Could be 15% (most users skip Brand Kit setup) or 60% (auto-extract has high attach). Requires attach-event instrumentation by Engineering.</li>
     <li><strong>SMS lift assumption ($5&ndash;8M from 12% &rarr; 20&ndash;25% adoption).</strong> Assumes ~$300/mo incremental ARPU from SMS-attached vs email-only customers. Validated against Mailchimp SMS pricing page for credit revenue, but not against actual Intuit SMS economics. <strong>Finance to confirm.</strong></li>
     <li><strong>"Real-time co-edit" is presumed to be a credibility moment.</strong> True for marketing teams of 2+ but Mailchimp's user base skews solo (1-person). The credibility moment is real with the press / analyst audience; the user-base impact is more modest than the narrative suggests. Should not over-rotate toward this bet's marketing value.</li>
     <li><strong>"Ungate Write with AI globally" treats this as a policy decision.</strong> It may be capability (LLM training-data licensing per region), legal (GDPR-style data residency), or commercial (cost per inference) constraints stacked. The mitigation "ship paid AI add-on globally as a fallback" is the responsible hedge but I have not validated which constraint actually binds.</li>
@@ -3678,13 +3674,13 @@
 <span class="op">+</span> <span class="lev">L6</span>: PaidCohort <span class="op">×</span> ΔARPU_lift <span class="op">×</span> 12 <span class="op">×</span> CausalShare</div>
 
   <h3 style="margin-top: 14px;">Worked example &mdash; Mid scenario (paid cohort 315K &rarr; ~338K exit run-rate)</h3>
-  <div class="formula-box"><span class="lev">L1</span> = 28K net paid-equivalent Establish lift <span class="op">×</span> $110 <span class="op">×</span> 12 <span class="op">×</span> 29% = <span class="out">$10.5M</span>
+  <div class="formula-box"><span class="lev">L1</span> = 28K net paid-equivalent Establish lift <span class="op">×</span> $110 <span class="op">×</span> 12 <span class="op">×</span> 28% = <span class="out">$10.4M</span>
 <span class="lev">L2</span> = 315K <span class="op">×</span> +3.5pp activation proxy <span class="op">×</span> $24/mo <span class="op">×</span> 12 = <span class="out">$3.2M</span>
 <span class="lev">L3</span> = +5.5K net SMS Establish <span class="op">×</span> $150 ARPU lift <span class="op">×</span> 12 <span class="op">×</span> 40% = <span class="out">$4.0M</span>
-<span class="lev">L4</span> = 0.9K net stable recovery from abandonment / migration UX <span class="op">×</span> $110 <span class="op">×</span> 12 = <span class="out">$1.5M</span>
-<span class="lev">L5</span> = 315K <span class="op">×</span> $110 <span class="op">×</span> 12 <span class="op">×</span> 0.00092 churn factor = <span class="out">$3.8M</span>
+<span class="lev">L4</span> = 1.14K net stable recovery from abandonment / migration UX <span class="op">×</span> $110 <span class="op">×</span> 12 = <span class="out">$1.5M</span>
+<span class="lev">L5</span> = 315K <span class="op">×</span> $110 <span class="op">×</span> 12 <span class="op">×</span> 0.0092 (0.92pp annual churn improvement) = <span class="out">$3.8M</span>
 <span class="lev">L6</span> = 315K <span class="op">×</span> $3.5/mo ARPU lift <span class="op">×</span> 12 <span class="op">×</span> 25% = <span class="out">$3.3M</span>
-<span class="total">Total ≈ $26.3M ✓ (within $25&ndash;30M anchor)</span></div>
+<span class="total">Total ≈ $26.2M ≈ ~$26.3M anchor used in narrative ✓ (within $25&ndash;30M band)</span></div>
 
   <h2 style="margin-top: 16px;"><span class="num">1.4</span> Sensitivity: what moves the outcome most</h2>
   <table class="dense">
@@ -4137,8 +4133,8 @@
       <div class="l"><strong>L1 Booked</strong> &mdash; P&amp;L erosion with a defensible <em>authoring-surface</em> causal share. <span class="conf-pill high">HIGH CONF</span></div>
     </div>
     <div class="kpi">
-      <div class="v" style="color:#C28A00;">$14&ndash;24M</div>
-      <div class="l"><strong>L2 Modeled</strong> &mdash; Establish/Explore shortfalls + satellite SKU churn (SMS, GenAI). <span class="conf-pill med">MED CONF</span></div>
+      <div class="v" style="color:#C28A00;">$12&ndash;28M</div>
+      <div class="l"><strong>L2 Modeled</strong> &mdash; Establish/Explore shortfalls + satellite SKU churn (SMS, GenAI); 30/45/60% causal grid (Page 5). <span class="conf-pill med">MED CONF</span></div>
     </div>
     <div class="kpi">
       <div class="v" style="color:#4338CA;">$22&ndash;35M</div>
@@ -4169,7 +4165,7 @@
     <div class="finding f2">
       <div class="f-num">2</div>
       <span class="f-tag">MODELED &mdash; MEDIUM CONFIDENCE</span>
-      <h3>Modeled drag (~$14&ndash;24M) comes from Establish + Explore compression, not a single &ldquo;abandon spike&rdquo;</h3>
+      <h3>Modeled drag ($12&ndash;28M sensitivity) comes from Establish + Explore compression, not a single &ldquo;abandon spike&rdquo;</h3>
       <p>Bulk-email <code>4_Establish</code> fell <span class="delta-down-strong">&minus;9.4% YoY</span>; <code>1_Explore</code> fell <span class="delta-down-strong">&minus;19.2% YoY</span>. SMS and Transactional Established moved in opposite directions (+73.5% / &minus;10.5%), so the honest editor story is <strong>multivariate</strong>. Dollar imputation uses ~$110 paid-slice ARPU (placeholder) &times; causal shares 25&ndash;40%.</p>
       <div class="f-conf"><span class="dot mid"></span> Method: shortfall &times; ARPU &times; causal &middot; see Page 3</div>
     </div>
@@ -4255,7 +4251,7 @@
   <header class="page-head">
     <div>
       <div class="eyebrow">Layer 2 &middot; Modeled / imputed editor drag</div>
-      <h1><em style="color:#C28A00;">$14&ndash;24M modeled</em> drag from Establish/Explore + satellite churn</h1>
+      <h1><em style="color:#C28A00;">$12&ndash;28M modeled</em> drag from Establish/Explore + satellite churn (30/45/60% causal grid)</h1>
       <div class="subtitle">Signals are BigQuery-real; dollars are counterfactual. Deduplicated against Layer 1 where overlap exists.</div>
     </div>
     <div class="meta">
@@ -4288,9 +4284,15 @@
   </div>
 
   <h3 style="margin-top: 12px;">Modeled loss from Establish shortfall (after dedup vs L1)</h3>
-  <div class="calc-box"><span class="label">Step 1:</span> Implied Establish shortfall ~91K users/mo vs flat YoY counterfactual.
+  <div class="calc-box"><span class="label">Step 1:</span> Implied Establish shortfall ~91K users/mo vs flat YoY counterfactual
+  (888,706 current vs 980,561 prior = 91,855 deficit, Tab 7).
 
-<span class="label">Step 2:</span> Paid-equivalent share ~35% &rarr; ~32K paid-equivalent gap.
+<span class="label">Step 2:</span> Apply paid-equivalent weight ~35% &rarr; ~32K MRR-bearing gap.
+  <span class="op"># 35% = "tier-relevant ARPU-attached" share — i.e. customers</span>
+  <span class="op"># whose churn cleanly maps to ~$110 blended ARPU. Lower than</span>
+  <span class="op"># the gross paid share (~64% of bulk Establish per Tab 7) because</span>
+  <span class="op"># Free→Paid + Essentials low-ARPU users dilute the dollar exposure.</span>
+  <span class="op"># Finance to lock the precise interpretation; sensitivity wide.</span>
 
 <span class="label">Step 3:</span> $110 ARPU &times; 12 &times; causal editor share on cohort (30&ndash;45%):
   Conservative 30% &rarr; <span class="out">~$12.7M</span> imputed (gross)
@@ -5303,7 +5305,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       <div class="sc-title">FY27 dollars + credibility</div>
       <div class="sc-row hi"><div class="sc-metric">Authoring incremental ARR</div><div class="sc-from">&mdash;</div><div class="sc-arrow">&rarr;</div><div class="sc-to">+$25&ndash;30M</div></div>
       <div class="sc-row"><div class="sc-metric">Growth Model mid check</div><div class="sc-from">&mdash;</div><div class="sc-arrow">&rarr;</div><div class="sc-to">~$26.3M</div></div>
-      <div class="sc-lever">Lever sketch (mid): L1 bulk recovery ~$10.5M · L2 activation ~$3.2M · L3 SMS ~$4.0M · L4 migration ~$1.5M · L5 churn save ~$3.8M · L6 ARPU ~$3.3M.</div>
+      <div class="sc-lever">Lever sketch (mid, ~$26.2M total): L1 bulk recovery ~$10.4M · L2 activation ~$3.2M · L3 SMS ~$4.0M · L4 migration ~$1.5M · L5 churn save ~$3.8M · L6 ARPU ~$3.3M.</div>
     </div>
   </div>
 
