@@ -1,0 +1,3023 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mailchimp Email/SMS Unified Editor &amp; Builder — Competitive + Internal Strategy Brief</title>
+<meta name="description" content="12-tab executive brief on Mailchimp's unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist): capabilities, AI surface, JTBD, customers, pricing, internal HVC VoC, BigQuery product health, growth model, loss attribution, initiative canvas, and synthesized sentiment from Reddit, G2, Trustpilot, vendor community, blogs." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E1116;
+    --ink-2: #1F2937;
+    --muted: #4B5563;
+    --line: #E5E7EB;
+    --line-2: #D1D5DB;
+    --bg: #F8F7F4;
+    --paper: #FFFFFF;
+    --brand: #C28A00;       /* Mailchimp amber */
+    --brand-2: #FF7A1A;
+    --good: #047857;
+    --warn: #B45309;
+    --bad: #B91C1C;
+    --chip: #FFF6D9;
+    --chip-ink: #6B4A00;
+    --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.45;
+  }
+  .toolbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(248,247,244,.85);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .toolbar-inner {
+    max-width: 1180px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; gap: 12px;
+  }
+  .brand-mark {
+    display:flex; align-items:center; gap:10px;
+    font-weight: 700; font-size: 14px; color: var(--ink-2);
+  }
+  .brand-dot { width: 10px; height: 10px; border-radius: 3px; background: #FFE01B; box-shadow: 0 0 0 3px rgba(255,224,27,.35); border: 1px solid #C28A00; }
+  .toolbar a.btn, .toolbar button.btn {
+    border: 1px solid var(--line-2);
+    background: var(--paper);
+    color: var(--ink-2);
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .toolbar .btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .toolbar .btn:hover { transform: translateY(-1px); }
+
+  .page-wrap { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+
+  .page {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 28px 32px 26px;
+    margin-bottom: 22px;
+  }
+
+  .page-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700;
+  }
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 1.15;
+    margin: 6px 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; }
+  .meta {
+    text-align: right;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .meta strong { color: var(--ink-2); }
+
+  .grid { display: grid; gap: 16px; }
+  .grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  .grid.cols-5-3 { grid-template-columns: 5fr 3fr; }
+  .grid.cols-3-2 { grid-template-columns: 3fr 2fr; }
+
+  @media (max-width: 880px) {
+    .grid.cols-2, .grid.cols-3, .grid.cols-4, .grid.cols-5-3, .grid.cols-3-2 { grid-template-columns: 1fr; }
+    .page { padding: 20px; }
+    h1 { font-size: 24px; }
+  }
+
+  h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    margin: 0 0 8px;
+    letter-spacing: -0.005em;
+  }
+  h2 .num {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--chip-ink);
+    background: var(--chip);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 8px;
+    transform: translateY(-2px);
+    letter-spacing: .08em;
+  }
+  p { margin: 0 0 8px; font-size: 13.5px; color: var(--ink-2); }
+  ul { margin: 4px 0 8px; padding-left: 18px; }
+  li { font-size: 13px; color: var(--ink-2); margin-bottom: 4px; }
+  li strong { color: var(--ink); }
+
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .card.tinted { background: #FFFCF0; border-color: #F2E8C2; }
+  .card.warm { background: #FFF8F0; border-color: #FCE6CC; }
+  .card.olive { background: #F4F6EE; border-color: #E1E7CB; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .kpi {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFB 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .kpi .v {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .kpi .l { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .chip {
+    background: var(--chip);
+    color: var(--chip-ink);
+    border-radius: 999px;
+    padding: 3px 9px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    border: 1px solid #F2E8C2;
+  }
+  .chip.warm { background: #FFEFE0; color: #9A4A00; border-color: #FCD9B6; }
+  .chip.green { background: #E6F5EE; color: #036A4F; border-color: #BFE6D3; }
+  .chip.gray { background: #F1F2F4; color: #374151; border-color: #E2E5EA; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: #FAFAFB;
+  }
+  td.nowrap { white-space: nowrap; }
+  .dot { display:inline-block; width:8px; height:8px; border-radius:999px; margin-right:6px; vertical-align: middle; }
+  .dot.good { background: var(--good); }
+  .dot.mid  { background: var(--warn); }
+  .dot.bad  { background: var(--bad); }
+
+  .pull {
+    border-left: 3px solid var(--brand);
+    padding: 8px 12px;
+    background: #FFFCF0;
+    border-radius: 6px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px;
+    color: var(--ink-2);
+  }
+  .pull cite {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-style: normal;
+  }
+
+  .source {
+    font-size: 10.5px; color: var(--muted);
+    border-top: 1px dashed var(--line);
+    margin-top: 14px;
+    padding-top: 10px;
+  }
+  .source a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+
+  .price-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .price {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px;
+    background: #fff;
+  }
+  .price h4 {
+    margin: 0 0 4px; font-size: 13px; font-weight: 700; color: var(--ink);
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .price .p { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .price ul { margin: 0; padding-left: 16px; }
+  .price li { font-size: 11.5px; }
+  .price.spotlight { border-color: #F2D879; background: linear-gradient(180deg,#FFFCF0,#FFFFFF); }
+  .pill { font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; }
+  .pill.included { background: #E6F5EE; color: #036A4F; }
+  .pill.partial  { background: #FFF1DD; color: #8A4A00; }
+  .pill.excluded { background: #FFE7E0; color: #9A1F00; }
+
+  /* Tabs */
+  .tabs {
+    display: inline-flex;
+    background: #ECEAE6;
+    border-radius: 10px;
+    padding: 3px;
+    gap: 2px;
+  }
+  .tab {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    padding: 7px 14px;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+  .tab:hover { color: var(--ink-2); }
+  .tab.active {
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 1px 2px rgba(16,24,40,.06);
+  }
+  @media (max-width: 720px) {
+    .tabs { order: 3; flex-basis: 100%; }
+    .toolbar-inner { flex-wrap: wrap; }
+  }
+  .tabpanel { display: none; }
+  .tabpanel.active { display: block; }
+
+  /* Sentiment */
+  .platform-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  .platform {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px;
+    background: #fff;
+  }
+  .platform .src { font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing:.04em; text-transform: uppercase; }
+  .platform .score {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 22px;
+    margin: 4px 0 2px;
+  }
+  .platform .meta-line { font-size: 11px; color: var(--muted); }
+  .platform .bar-wrap { height: 4px; background: var(--line); border-radius: 99px; overflow: hidden; margin-top: 6px; }
+  .platform .bar { height: 100%; border-radius: 99px; background: var(--brand); }
+  .platform.bad .bar { background: var(--bad); }
+  .platform.good .bar { background: var(--good); }
+  .platform.mid .bar { background: var(--warn); }
+
+  .theme {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 10px 12px 8px;
+    background: #fff;
+    margin-bottom: 8px;
+  }
+  .theme h3 {
+    margin: 0 0 4px;
+    font-size: 13px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .theme h3 .badge {
+    font-size: 9.5px;
+    font-weight: 800;
+    padding: 2px 6px;
+    border-radius: 4px;
+    letter-spacing: .06em;
+  }
+  .badge.lo { background: #FFE7E0; color: #9A1F00; }
+  .badge.hi { background: #E6F5EE; color: #036A4F; }
+  .badge.mid { background: #FFF1DD; color: #8A4A00; }
+  .badge.brand { background: var(--chip); color: var(--chip-ink); }
+
+  .theme p { font-size: 12.5px; margin: 0 0 4px; }
+  .theme .src-tag {
+    font-size: 10.5px; color: var(--muted);
+    border-top: 1px dashed var(--line);
+    padding-top: 4px;
+    margin-top: 4px;
+  }
+
+  .col-loved { background: #F4FBF7; border-color: #CFE9DC; }
+  .col-hated { background: #FFF5F2; border-color: #F4D2C5; }
+  .col-mixed { background: #FFFAF0; border-color: #F5E2BD; }
+
+  .col-head {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .col-head h2 { margin: 0; }
+  .col-head .count {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    background: #fff;
+    border: 1px solid var(--line);
+    padding: 2px 8px;
+    border-radius: 99px;
+  }
+
+  .quote-wall {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+  .qw {
+    border-left: 3px solid var(--line);
+    padding: 8px 12px;
+    background: #FAFAFB;
+    border-radius: 6px;
+  }
+  .qw.pos { border-left-color: var(--good); background: #F4FBF7; }
+  .qw.neg { border-left-color: var(--bad); background: #FFF5F2; }
+  .qw.mid { border-left-color: var(--warn); background: #FFFAF0; }
+  .qw .q {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 13.5px;
+    color: var(--ink);
+    margin: 0 0 4px;
+    line-height: 1.4;
+  }
+  .qw .src-line {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .qw .src-line strong { color: var(--ink-2); font-weight: 600; }
+
+  @media (max-width: 880px) {
+    .platform-bar { grid-template-columns: repeat(2, 1fr); }
+    .quote-wall { grid-template-columns: 1fr; }
+  }
+
+  .ns {
+    display: grid;
+    grid-template-columns: 110px 1fr 50px;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 6px;
+    font-size: 12px;
+  }
+  .ns .label { color: var(--ink-2); font-weight: 500; }
+  .ns .track {
+    height: 10px; background: linear-gradient(90deg, #FFE7E0 0%, #FFE7E0 50%, #E6F5EE 50%, #E6F5EE 100%);
+    border-radius: 99px; position: relative;
+  }
+  .ns .marker {
+    position: absolute; top: -3px; bottom: -3px;
+    width: 4px; background: var(--ink); border-radius: 2px;
+  }
+  .ns .val { text-align: right; font-variant-numeric: tabular-nums; font-size: 12px; color: var(--ink-2); font-weight: 600; }
+
+  /* Roadmap-specific */
+  .gap-tag {
+    display: inline-block;
+    font-size: 9.5px; font-weight: 800;
+    padding: 2px 6px; border-radius: 4px;
+    letter-spacing: .06em;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .gap-tag.foundation { background: #FFE7E0; color: #9A1F00; }
+  .gap-tag.differ { background: #EEF0FF; color: #2A1FA8; }
+  .gap-tag.have { background: #E6F5EE; color: #036A4F; }
+
+  .src-pill {
+    display: inline-block;
+    font-size: 10px; font-weight: 700;
+    padding: 1px 6px; border-radius: 4px;
+    background: #F1F2F4; color: #374151;
+    border: 1px solid #E2E5EA;
+    margin-right: 4px;
+  }
+  .src-pill.klaviyo { background: #F1EEFF; color: #3A1ACC; border-color: #E1D8FF; }
+  .src-pill.shopify { background: #E0F2EA; color: #00553F; border-color: #C9E8D6; }
+  .src-pill.attentive { background: #FCE7F3; color: #9D174D; border-color: #FBCFE8; }
+  .src-pill.customerio { background: #DBEAFE; color: #1E3A8A; border-color: #BFDBFE; }
+  .src-pill.auxia { background: #EDE9FE; color: #5B21B6; border-color: #DDD6FE; }
+  .src-pill.postscript { background: #DCFCE7; color: #14532D; border-color: #BBF7D0; }
+  .src-pill.mailmodo { background: #FEF3C7; color: #78350F; border-color: #FDE68A; }
+  .src-pill.loops { background: #E0E7FF; color: #312E81; border-color: #C7D2FE; }
+
+  table.dense th, table.dense td { padding: 6px 8px; font-size: 12px; }
+  table.dense th { font-size: 10.5px; }
+
+  .phase {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: #fff;
+  }
+  .phase.p1 { border-color: #F2D879; background: linear-gradient(180deg,#FFFCF0,#FFFFFF); }
+  .phase.p2 { border-color: #DCD7F8; background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  .phase.p3 { border-color: #BFE6D3; background: linear-gradient(180deg,#F1FAF5,#FFFFFF); }
+
+  .phase .head {
+    display: flex; align-items: baseline; justify-content: space-between;
+    border-bottom: 1px dashed var(--line); padding-bottom: 8px; margin-bottom: 10px;
+  }
+  .phase .head h3 {
+    margin: 0;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px; font-weight: 700; color: var(--ink);
+  }
+  .phase .head .horizon {
+    font-size: 11px; color: var(--muted); font-weight: 600;
+    background: #fff; padding: 2px 8px; border-radius: 99px;
+    border: 1px solid var(--line);
+  }
+  .phase .swims {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  }
+  @media (max-width: 720px) { .phase .swims { grid-template-columns: 1fr; } }
+  .swim {
+    border: 1px solid var(--line); border-radius: 8px;
+    padding: 8px 10px; background: #fff;
+  }
+  .swim h4 {
+    margin: 0 0 6px;
+    font-size: 11px; font-weight: 800;
+    text-transform: uppercase; letter-spacing: .08em;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .swim h4 .marker {
+    display: inline-block; width: 6px; height: 6px; border-radius: 99px;
+  }
+  .swim.foundation h4 .marker { background: #B91C1C; }
+  .swim.differ h4 .marker { background: #4338CA; }
+  .swim ul { margin: 0; padding-left: 16px; }
+  .swim li { font-size: 12px; margin-bottom: 4px; line-height: 1.4; }
+  .swim li code {
+    background: #F1F2F4; color: #374151;
+    padding: 1px 5px; border-radius: 3px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px; font-weight: 700;
+  }
+
+  .phase .outcome {
+    margin-top: 10px; padding: 8px 10px;
+    background: var(--paper);
+    border: 1px dashed var(--line);
+    border-radius: 6px;
+    font-size: 12px; color: var(--ink-2);
+  }
+  .phase .outcome strong { color: var(--brand); }
+
+  /* HVC Risk Map specific */
+  .risk-pill {
+    display: inline-block;
+    font-size: 9.5px; font-weight: 800;
+    padding: 2px 6px; border-radius: 4px;
+    letter-spacing: .06em;
+    margin-right: 6px;
+    vertical-align: middle;
+  }
+  .risk-pill.bug { background: #FFE7E0; color: #9A1F00; }
+  .risk-pill.barrier { background: #FFF1DD; color: #8A4A00; }
+  .risk-pill.missing { background: #EEF0FF; color: #2A1FA8; }
+
+  table.voc-table td { vertical-align: top; }
+  table.voc-table tr:hover td { background: #FAFAFB; }
+
+  .quote-cell .q-text {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 12.5px;
+    color: var(--ink);
+    line-height: 1.4;
+    margin-bottom: 4px;
+  }
+  .quote-cell .q-meta {
+    font-size: 10.5px;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+  .quote-cell .q-meta strong { color: var(--ink-2); font-weight: 600; }
+  .quote-cell .q-meta a { color: var(--brand); text-decoration: none; font-weight: 600; }
+  .quote-cell .q-meta a:hover { text-decoration: underline; }
+
+  .csat-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 700;
+    padding: 1px 5px; border-radius: 3px;
+    margin-left: 4px;
+  }
+  .csat-pill.terrible, .csat-pill.muyinsatisfecho, .csat-pill.pessimo { background: #FBE7E8; color: #9A1F00; }
+  .csat-pill.poor, .csat-pill.pocosatisfecho { background: #FEEAD0; color: #8A4A00; }
+  .csat-pill.average { background: #F1F2F4; color: #374151; }
+  .csat-pill.good, .csat-pill.muysatisfecho, .csat-pill.satisfecho { background: #E0F2EA; color: #036A4F; }
+  .csat-pill.excellent { background: #DCFCE7; color: #166534; }
+
+  .crit-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 800;
+    padding: 1px 5px; border-radius: 3px;
+    margin-left: 4px;
+  }
+  .crit-pill.P0 { background: #B91C1C; color: white; }
+  .crit-pill.P1 { background: #DC2626; color: white; }
+  .crit-pill.P2 { background: #F59E0B; color: white; }
+  .crit-pill.P3 { background: #6B7280; color: white; }
+
+  .prs-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 700;
+    padding: 1px 5px; border-radius: 3px;
+    margin-left: 4px;
+    background: #DBEAFE; color: #1E3A8A;
+  }
+  .churn-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 800;
+    padding: 1px 5px; border-radius: 3px;
+    margin-left: 4px;
+    background: #B91C1C; color: white;
+    letter-spacing: .04em;
+  }
+
+  /* Theme cards (showing all VoC specifics per theme) */
+  .theme-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    background: #fff;
+    margin-bottom: 12px;
+    overflow: hidden;
+  }
+  .theme-card-head {
+    background: #FAFAFB;
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  .theme-card-title {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .theme-num {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--brand);
+    min-width: 22px;
+    text-align: right;
+  }
+  .theme-name {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14.5px;
+    font-weight: 700;
+    color: var(--ink);
+  }
+  .theme-card-stats {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .theme-stat {
+    font-size: 11px;
+    color: var(--muted);
+  }
+  .theme-stat strong { color: var(--ink-2); font-weight: 700; }
+  .theme-stat.mrr strong { color: var(--brand); }
+  .theme-stat.churn { color: #B91C1C; font-weight: 700; }
+
+  .theme-card-body { padding: 8px 14px 12px; }
+
+  ol.voc-specifics {
+    margin: 4px 0 0 0;
+    padding-left: 22px;
+  }
+  ol.voc-specifics > li.voc-item {
+    margin-bottom: 10px;
+    padding-left: 4px;
+  }
+  ol.voc-specifics > li.voc-item:last-child { margin-bottom: 0; }
+  .voc-text {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 13px;
+    color: var(--ink);
+    line-height: 1.5;
+    margin-bottom: 4px;
+  }
+  .voc-meta {
+    font-size: 10.5px;
+    color: var(--muted);
+    line-height: 1.6;
+  }
+  .voc-meta strong {
+    color: var(--ink-2);
+    font-weight: 600;
+  }
+  .voc-meta a {
+    color: var(--brand);
+    text-decoration: none;
+    font-weight: 600;
+  }
+  .voc-meta a:hover { text-decoration: underline; }
+  .voc-date { color: var(--muted); }
+
+  /* Source badges (Slack vs Research) on each VoC */
+  .src-badge {
+    display: inline-block;
+    font-size: 9px; font-weight: 800;
+    padding: 1px 5px; border-radius: 3px;
+    letter-spacing: .06em;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .src-badge.slack { background: #DBEAFE; color: #1E3A8A; }
+  .src-badge.research { background: #EDE9FE; color: #5B21B6; }
+
+  ol.voc-specifics > li.voc-item.research {
+    border-left: 3px solid #8B5CF6;
+    padding-left: 8px;
+    margin-left: -10px;
+  }
+
+  /* Theme stat color variants */
+  .theme-stat.slack strong { color: #1E3A8A; }
+  .theme-stat.research-stat strong { color: #5B21B6; }
+
+  /* Research-specific pills */
+  .research-detail {
+    font-size: 10.5px; color: #5B21B6;
+    background: #F5F3FF; padding: 1px 6px;
+    border-radius: 3px; font-weight: 600;
+  }
+
+  .frust-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 700;
+    padding: 1px 5px; border-radius: 3px;
+    margin-left: 0;
+  }
+  .frust-pill.high { background: #FBE7E8; color: #9A1F00; }
+  .frust-pill.medium { background: #FEEAD0; color: #8A4A00; }
+  .frust-pill.low { background: #F1F2F4; color: #374151; }
+
+  .size-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 700;
+    padding: 1px 5px; border-radius: 3px;
+  }
+  .size-pill.quickwin { background: #DCFCE7; color: #14532D; }
+  .size-pill.mediumlift { background: #FEF3C7; color: #78350F; }
+  .size-pill.biglift { background: #FCE7F3; color: #9D174D; }
+
+  .ipri-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 800;
+    padding: 1px 5px; border-radius: 3px;
+    letter-spacing: .04em;
+  }
+  .ipri-pill.high { background: #B91C1C; color: white; }
+  .ipri-pill.medium { background: #F59E0B; color: white; }
+  .ipri-pill.low { background: #6B7280; color: white; }
+
+  .score-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 700;
+    padding: 1px 5px; border-radius: 3px;
+    background: #EEF0FF; color: #2A1FA8;
+  }
+
+  .excl-pill {
+    display: inline-block;
+    font-size: 9px; font-weight: 800;
+    padding: 1px 5px; border-radius: 3px;
+    background: #312E81; color: white;
+    letter-spacing: .04em;
+  }
+
+  /* Product Health YoY badges */
+  .yoy {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    padding: 1px 6px; border-radius: 4px;
+    font-variant-numeric: tabular-nums;
+  }
+  .yoy.good { background: #DCFCE7; color: #14532D; }
+  .yoy.bad  { background: #FBE7E8; color: #9A1F00; }
+  .yoy.neutral { background: #F1F2F4; color: #6B7280; }
+
+  table.seg-table th, table.seg-table td { font-size: 11.5px; padding: 5px 7px; }
+  table.seg-table tr:hover td { background: #FAFAFB; }
+  table.findings-table th, table.findings-table td { font-size: 11.5px; padding: 7px 8px; vertical-align: top; }
+  table.findings-table td:nth-child(1) { font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; color: var(--brand); text-align: center; }
+  table.findings-table td:nth-child(2) { color: var(--ink); }
+  table.findings-table td:nth-child(3), table.findings-table td:nth-child(4), table.findings-table td:nth-child(5) { color: var(--ink-2); }
+
+  .phase-pill {
+    display: inline-block;
+    font-size: 9.5px; font-weight: 800;
+    padding: 2px 6px; border-radius: 4px;
+    letter-spacing: .06em;
+  }
+  .phase-pill.p1 { background: #FFF1DD; color: #8A4A00; }
+  .phase-pill.p2 { background: #EEF0FF; color: #2A1FA8; }
+  .phase-pill.p3 { background: #DCFCE7; color: #14532D; }
+
+  /* Print */
+  @media print {
+    @page { size: Letter; margin: 0.45in; }
+    body { background: white; }
+    .toolbar { display: none; }
+    .page-wrap { padding: 0; max-width: none; }
+    .page { box-shadow: none; border: none; padding: 0; margin: 0 0 0.4in; page-break-after: always; }
+    .page:last-of-type { page-break-after: auto; }
+    .tabpanel:not(.active) { display: block !important; }
+    a { color: inherit; text-decoration: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="brand-mark"><span class="brand-dot"></span> Strategy Brief · Mailchimp Email/SMS Unified Editor &amp; Builder</div>
+    <div class="tabs" role="tablist" aria-label="Brief sections">
+      <button class="tab active" role="tab" aria-selected="true" data-tab="brief">Executive Brief</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="sentiment">Voice of Customer</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="roadmap">Roadmap to Win</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="hvcrisk">HVC Risk Map</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="navsearchrisk">Nav/Search Risk</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="research">User Research</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="health">Product Health</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="strategy">Strategy 6-Pager</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="growthmodel">Growth Model</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="lossattr">Loss Attribution</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="canvas">Initiative Canvas</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="memo">Strategy Memo</button>
+    </div>
+    <div style="display:flex; gap:8px;">
+      <a class="btn" href="mailchimp.html">→ Automations brief</a>
+      <a class="btn" href="index.html">→ Klaviyo</a>
+      <button class="btn" onclick="window.print()">Print / PDF</button>
+      <a class="btn primary" href="https://mailchimp.com/features/email-builder/" target="_blank" rel="noopener">Source</a>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+<!-- ============== EXECUTIVE BRIEF TAB ============== -->
+<div class="tabpanel active" id="panel-brief" role="tabpanel">
+
+  <!-- Brief Page 1 -->
+  <section class="page" aria-label="Brief Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Competitive + Internal Strategy · Executive 2-Pager</div>
+        <h1>Mailchimp <em style="color:#C28A00;">Email/SMS Unified Editor &amp; Builder</em>: a generalist authoring surface, AI-augmented but channel-fragmented</h1>
+        <div class="subtitle">A focused read on Mailchimp's authoring product family — <strong>New Email Builder</strong> (NEB) + <strong>SMS composer</strong> + <strong>Content Studio</strong> + <strong>Brand Kit</strong> + <strong>Intuit Assist</strong> (Write with AI, Creative Assistant). Customer Journey Builder, Campaigns scheduling, Audience, and Websites are out of scope (see <a href="mailchimp.html">Automations brief</a> for CJB).</div>
+      </div>
+      <div class="meta">
+        <div><strong>Prepared for:</strong> Executive review</div>
+        <div><strong>Subject:</strong> Mailchimp authoring surface</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 1 of 2</div>
+      </div>
+    </header>
+
+    <!-- Snapshot KPIs -->
+    <div class="kpi-row" style="margin-bottom: 18px;">
+      <div class="kpi">
+        <div class="v">260+</div>
+        <div class="l">Pre-built email templates in the New Builder (vs ~100 in legacy Classic). Templates do <strong>not port</strong> between builders — recurring complaint.</div>
+      </div>
+      <div class="kpi">
+        <div class="v">2</div>
+        <div class="l">Native channels in one authoring surface: <strong>Email + SMS</strong> (SMS US/CA only paid add-on; MMS Standard+). No native push, WhatsApp, in-app, or AMP.</div>
+      </div>
+      <div class="kpi">
+        <div class="v">2</div>
+        <div class="l">Parallel email builders still alive: <strong>New Builder</strong> (default for accounts post-Jul 2023) + <strong>Classic Builder</strong> (legacy accounts only). Editor surface is internally bifurcated.</div>
+      </div>
+      <div class="kpi">
+        <div class="v">4</div>
+        <div class="l">Markets where <strong>Write with AI</strong> beta is live: <strong>US, UK, Australia, Canada</strong>. Standard+ plan only. International parity gap.</div>
+      </div>
+    </div>
+
+    <!-- 1. What is it -->
+    <div class="grid cols-5-3" style="margin-bottom: 14px;">
+      <div>
+        <h2><span class="num">01</span>What "the unified authoring surface" actually is</h2>
+        <p>
+          The product family is officially marketed as <strong>email + SMS marketing</strong>, but inside Mailchimp's
+          help center and product surfaces it is five distinct things stitched together: the
+          <strong>New Email Builder</strong> (NEB, the default React-based drag-and-drop editor for accounts created
+          after July 2023), the <strong>Classic / Legacy Email Builder</strong> (for older accounts, with custom-code
+          support), the <strong>SMS composer</strong> (for marketing SMS / MMS), <strong>Content Studio</strong>
+          (digital asset management — image library, brand assets, syncing across channels), and <strong>Brand Kit</strong>
+          (logos, fonts, colors, brand personality, button styles — the inputs that power AI generation).
+        </p>
+        <p>
+          Sitting on top of that is the <strong>Intuit Assist</strong> AI surface: <em>Write with AI</em> (inline
+          generative copy in the email editor), <em>Creative Assistant</em> (auto-branded image and layout generation),
+          and the Email Content Generator. The pitch to operators is "one place to design, write, and send" — the
+          reality is that <strong>email and SMS are composed in two distinct surfaces</strong>, with no shared
+          content blocks, no shared preview, and no shared brand canvas. Unification is a roadmap claim, not a
+          shipped product.
+        </p>
+        <div class="chips">
+          <span class="chip">Drag-and-drop NEB</span>
+          <span class="chip">Classic builder (legacy)</span>
+          <span class="chip">SMS composer (US/CA)</span>
+          <span class="chip">Content Studio DAM</span>
+          <span class="chip">Brand Kit</span>
+          <span class="chip warm">Write with AI (beta · Std+)</span>
+          <span class="chip warm">Creative Assistant</span>
+        </div>
+      </div>
+
+      <div class="card tinted">
+        <h2 style="margin-bottom: 6px;"><span class="num">02</span>Mailchimp's own framing</h2>
+        <div class="pull">
+          "Mailchimp's email builder allows you to choose pre-built layouts, customize your design, and add personal touches with content blocks, images, and your brand colors."
+          <cite>— mailchimp.com/help/design-an-email-new-builder</cite>
+        </div>
+        <p style="margin-top: 10px;">
+          The marketing emphasizes three repeatable promises: <strong>(1)</strong> design without code via blocks
+          and templates, <strong>(2)</strong> stay on-brand automatically via Brand Kit + Creative Assistant, and
+          <strong>(3)</strong> compose email and SMS <em>in one Mailchimp account</em>. The third promise carries
+          significant ambiguity — it is a billing claim, not an authoring claim.
+        </p>
+      </div>
+    </div>
+
+    <!-- 3. Capabilities -->
+    <h2><span class="num">03</span>Key capabilities (what's in the product today)</h2>
+    <div class="grid cols-2" style="margin-bottom: 14px;">
+      <div class="card">
+        <strong style="font-size:13px;">New Email Builder — blocks &amp; layout</strong>
+        <ul>
+          <li><strong>Block library:</strong> paragraph, heading, image, button, divider, video, social, footer, layout (multi-column), Apps blocks (third-party integrations), Survey blocks, product blocks, abandoned-cart blocks</li>
+          <li><strong>260+ pre-built templates</strong> (vs ~100 in Classic); template library by industry / occasion / format</li>
+          <li><strong>Drag-and-drop with undo/redo</strong>, autosave, mobile preview, accessibility checker (limited)</li>
+          <li><strong>Brand Kit attach:</strong> auto-applied colors, fonts, logos, button styles</li>
+          <li><strong>No native HTML/CSS escape hatch</strong> in NEB (Classic-only); no Liquid or full templating language</li>
+          <li><strong>No real-time multi-author collaboration</strong> (one editor at a time)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <strong style="font-size:13px;">SMS composer (US/CA only)</strong>
+        <ul>
+          <li><strong>Character &amp; segment counter</strong>, emoji picker, merge-tag insertion</li>
+          <li><strong>Auto link-shortening</strong> + branded SMS short links (Standard+)</li>
+          <li><strong>Auto-injected opt-out instructions</strong> (regulatory)</li>
+          <li><strong>MMS</strong> with image attach (Standard+, US/CA only)</li>
+          <li><strong>Text-to-join keyword</strong> trigger (one keyword per flow)</li>
+          <li><strong>Composed in a separate surface from email</strong> — no shared blocks, no preview-side-by-side, no cross-channel content reuse</li>
+        </ul>
+      </div>
+      <div class="card">
+        <strong style="font-size:13px;">Content Studio + Brand Kit (the asset layer)</strong>
+        <ul>
+          <li><strong>Digital asset management:</strong> upload, sync, search across campaigns; JPG / JPEG / GIF / PNG / BMP</li>
+          <li><strong>Brand Kit:</strong> logos (PNG/JPG with transparent BG, primary + dark/light variants), custom fonts (TTF / OTF / WOFF), brand colors, button styles, brand personality (voice/tone descriptors)</li>
+          <li><strong>Auto-extract</strong> brand assets from your Mailchimp website or landing page</li>
+          <li><strong>Image editor</strong>: crop, resize, adjust within library; basic filters</li>
+          <li><strong>No video DAM</strong>, no shared library across multiple Mailchimp accounts (agency pain)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <strong style="font-size:13px;">Optimization, measurement &amp; trust</strong>
+        <ul>
+          <li><strong>Inline link checker</strong>, pre-send checklist, deliverability hints</li>
+          <li><strong>Mobile preview</strong> for email; <strong>Inbox Preview</strong> across email clients (paid)</li>
+          <li><strong>A/B testing</strong> on subject + content (Standard+); multivariate (Standard+)</li>
+          <li><strong>Brand-voice consistency check</strong> via Write with AI's Brand Kit awareness</li>
+          <li><strong>No omnichannel preview</strong> (email + SMS render side-by-side); no AMP for Email; no design-system enforcement; no real-time accessibility coach</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4. AI + JTBD -->
+    <div class="grid cols-2" style="margin-bottom: 14px;">
+      <div class="card warm">
+        <h2 style="margin-bottom: 6px;"><span class="num">04</span>AI inside the editor — the <em>Intuit Assist</em> story</h2>
+        <p>The flow-relevant AI inside the authoring surface sits under Intuit Assist and is gated to <strong>Standard plan or higher</strong>; <strong>Write with AI</strong> beta is US / UK / AU / CA only.</p>
+
+        <p style="margin: 6px 0 2px;"><strong>1 · Generate the message</strong></p>
+        <ul style="margin-top:2px;">
+          <li><strong>Write with AI:</strong> inline generative copy in the email canvas — write, rewrite, lengthen / shorten, change tone, adapt to brand voice from Brand Kit. Beta.</li>
+          <li><strong>Email Content Generator:</strong> longer-form generation that drafts an entire email from a prompt + Brand Kit + audience context.</li>
+          <li><strong>Subject-line generator</strong> trained on high-performing campaigns.</li>
+        </ul>
+
+        <p style="margin: 8px 0 2px;"><strong>2 · Generate the design</strong></p>
+        <ul style="margin-top:2px;">
+          <li><strong>Creative Assistant:</strong> auto-generates branded design variations using your logo, fonts, colors. Standard+.</li>
+          <li><strong>AI image generation</strong> (image-block generative fill / brand-aware compositing). Limited preview.</li>
+        </ul>
+
+        <p style="margin: 8px 0 2px;"><strong>3 · Generate inside SMS</strong></p>
+        <ul style="margin-top:2px;">
+          <li><strong>SMS message generation</strong> available in marketing-SMS composer (compresses to character limit, brand-tone-aware). Adoption low — gated to US/CA SMS audience.</li>
+        </ul>
+
+        <p style="margin: 8px 0 2px;"><strong>4 · Apply brand consistency</strong></p>
+        <ul style="margin-top:2px;">
+          <li><strong>Brand Kit auto-attach</strong> ensures generated content uses approved colors, fonts, logos, voice.</li>
+          <li><strong>"Use Brand Kit"</strong> toggle in Creative Assistant ensures pixel-level brand fidelity.</li>
+        </ul>
+
+        <div class="chips" style="margin-top:8px;">
+          <span class="chip warm">Generate copy (Write with AI)</span>
+          <span class="chip warm">Generate design (Creative Assistant)</span>
+          <span class="chip warm">Generate image (preview)</span>
+          <span class="chip warm">Brand Kit awareness</span>
+        </div>
+        <p style="font-size:11.5px; color:var(--muted); margin-top:8px;"><strong>Notable absences vs. Klaviyo:</strong> no <em>Universal Content blocks</em> (Klaviyo Spring 2026 ships them as default; edits propagate everywhere); no shared content library across email and SMS; no in-canvas conversational AI editing ("ask AI to change the hero block"); no real-time accessibility coach; no AI brand-style transfer between brands.</p>
+      </div>
+
+      <div class="card olive">
+        <h2 style="margin-bottom: 6px;"><span class="num">05</span>Who buys it &amp; the <em>Jobs To Be Done</em></h2>
+        <p style="margin-bottom: 6px;"><strong>Buyer profile.</strong> Same 12M+ Mailchimp universe — but the editor product is most-touched by <strong>solo marketers and 1–3 person marketing teams</strong> at SMB ecommerce, services, B2B SMB, content creators, and nonprofits. Agencies use it but route around it for client-grade deliverables (Bee.io, Stensul, Klaviyo). Enterprise marketing teams treat it as out-of-scope.</p>
+        <p style="margin: 6px 0 4px;"><strong>Operator JTBD (the SMB owner / single marketer):</strong></p>
+        <ul>
+          <li>"<strong>Design a polished newsletter</strong> in 30 minutes without learning HTML or hiring a designer."</li>
+          <li>"<strong>Stay on-brand automatically</strong> — colors, fonts, logo applied without me thinking about it."</li>
+          <li>"<strong>Write the email copy with AI</strong> so I'm not staring at a blank canvas."</li>
+          <li>"<strong>Compose an SMS</strong> for the same campaign in the same product, without exporting / re-pasting."</li>
+          <li>"<strong>Reuse my hero image, footer, and disclaimer</strong> across emails without re-uploading or copy-pasting."</li>
+          <li>"<strong>Show my designs to my boss / client</strong> for approval before sending — without screenshots."</li>
+          <li>"<strong>Migrate my old templates to the new builder</strong> without losing styling." (currently broken)</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="source">
+      Sources reviewed: Mailchimp product properties — <a href="https://mailchimp.com/features/email-builder/">/features/email-builder</a>,
+      <a href="https://mailchimp.com/features/email-templates/">/features/email-templates</a>,
+      <a href="https://mailchimp.com/features/content-studio">/features/content-studio</a>,
+      <a href="https://mailchimp.com/features/creative-assistant/">/features/creative-assistant</a>;
+      Mailchimp Help Center — "Design an Email with the New Builder," "About Mailchimp's Email Builders," "Comparing Mailchimp's Email Builders," "About Creative Assistant," "Use Brand Kit in Creative Assistant," "Use Write with AI to Create Content," "Create and Send a Marketing SMS," "Use Send SMS Actions," "About SMS Marketing Credits";
+      Mailchimp Newsroom — "Introducing Email Content Generator," "Introducing Intuit Assist for Mailchimp";
+      Mailchimp Pricing &amp; SMS Pricing pages;
+      independent reviews (SaaS Scored 6.5/10 May 2026, SaaSProbe Mailchimp Review 2026, Mailotrix Mailchimp Review &amp; Mailchimp-vs-Moosend 2026);
+      Klaviyo product (Universal Content Blocks Spring 2026, New Email Editor); Postscript March 2026 Brand Center Content Library; Attentive Q1 2026 spotlight; Stensul Governed Creation; Knak modular builder; Beehiiv text editor.
+    </p>
+  </section>
+
+  <!-- Brief Page 2 -->
+  <section class="page" aria-label="Brief Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Competitive + Internal Strategy · Executive 2-Pager (cont.)</div>
+        <h1>Differentiation, customer proof, pricing &amp; <em style="color:#C28A00;">what it means for us</em></h1>
+        <div class="subtitle">Where Mailchimp's authoring surface is genuinely strong, and where its <strong>two-builder bifurcation</strong>, <strong>email/SMS surface split</strong>, and <strong>missing modern primitives</strong> (universal blocks, real-time co-edit, AMP, design-system governance) limit it.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Prepared for:</strong> Executive review</div>
+        <div><strong>Subject:</strong> Mailchimp authoring surface</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 2 of 2</div>
+      </div>
+    </header>
+
+    <!-- 6. Differentiation -->
+    <h2><span class="num">06</span>Differentiation: Mailchimp authoring vs. closest comps</h2>
+    <div style="overflow-x:auto; margin-bottom: 14px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Dimension</th>
+            <th>Mailchimp NEB + SMS + Content Studio</th>
+            <th>Klaviyo (New Editor + SMS, Spring '26)</th>
+            <th>Stensul / Knak (best-in-class authoring)</th>
+            <th>Postscript / Attentive (SMS-first)</th>
+            <th>Mailchimp's edge / exposure</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Builder unification</strong></td>
+            <td><span class="dot bad"></span>Two parallel email builders (NEB + Classic); <em>templates don't port</em></td>
+            <td><span class="dot good"></span>Single new editor; legacy migrated</td>
+            <td><span class="dot good"></span>Single modular surface</td>
+            <td><span class="dot good"></span>Single SMS surface</td>
+            <td>Single largest internal-coherence problem; explicit operator complaint.</td>
+          </tr>
+          <tr>
+            <td><strong>Email + SMS in one canvas</strong></td>
+            <td><span class="dot bad"></span>Two separate composers, no shared blocks</td>
+            <td><span class="dot mid"></span>Two surfaces, but Universal Content shared</td>
+            <td><span class="dot bad"></span>Email-only</td>
+            <td><span class="dot bad"></span>SMS-only</td>
+            <td>"Unified" claim is currently structural-only (one bill), not authoring.</td>
+          </tr>
+          <tr>
+            <td><strong>Reusable / universal content blocks</strong></td>
+            <td><span class="dot bad"></span>Saved blocks per template; no global propagation</td>
+            <td><span class="dot good"></span><strong>Universal Content (Spring '26)</strong> — edit once, propagates everywhere</td>
+            <td><span class="dot good"></span>Modular components with governance</td>
+            <td>n/a</td>
+            <td>Klaviyo just shipped the most-asked-for editor primitive Mailchimp lacks.</td>
+          </tr>
+          <tr>
+            <td><strong>Real-time multi-author collaboration</strong></td>
+            <td><span class="dot bad"></span>Single editor; no Google-Docs-style co-edit</td>
+            <td><span class="dot bad"></span>Single editor</td>
+            <td><span class="dot good"></span><strong>Real-time co-edit + commenting</strong> (Stensul, Knak)</td>
+            <td>n/a</td>
+            <td>Open-and-defensible white space if Mailchimp ships first vs Klaviyo.</td>
+          </tr>
+          <tr>
+            <td><strong>AI in the editor</strong></td>
+            <td><span class="dot mid"></span>Write with AI (beta, US/UK/AU/CA), Creative Assistant, image gen — Standard+</td>
+            <td><span class="dot good"></span>AI Subject Line, AI Image Editing, AI universal-block recommendations</td>
+            <td><span class="dot good"></span>AI generation + smart duplication + AI from prompt (Stensul 2025)</td>
+            <td><span class="dot good"></span>Brand Center AI trained on PDFs/DOCX/TXT (Postscript Mar '26)</td>
+            <td>Mailchimp's AI is competitive on copy, behind on conversational-edit and trained-corpus AI.</td>
+          </tr>
+          <tr>
+            <td><strong>SMS composer depth</strong></td>
+            <td><span class="dot mid"></span>Solid basics (counter, MMS, opt-out, branded short links) — US/CA only</td>
+            <td><span class="dot good"></span>Email-parity content tools, segments, A/B in composer</td>
+            <td>n/a</td>
+            <td><span class="dot good"></span>45+ segment filters, 85+ trigger filters, Infinity Testing, Shopper Playground</td>
+            <td>Mailchimp SMS is geo-narrow (US/CA) and missing modern testing primitives.</td>
+          </tr>
+          <tr>
+            <td><strong>Design-system / brand governance</strong></td>
+            <td><span class="dot mid"></span>Brand Kit (logos, fonts, colors, voice) — auto-attached in Creative Assistant only</td>
+            <td><span class="dot mid"></span>Brand styling in Universal Content</td>
+            <td><span class="dot good"></span><strong>Locked fonts, layouts, role-based access, accessibility + legal checks</strong></td>
+            <td><span class="dot mid"></span>Brand Center / brand voice training</td>
+            <td>Mailchimp Brand Kit is a config object, not a governance system. Enterprise gap.</td>
+          </tr>
+          <tr>
+            <td><strong>Pricing posture for the editor</strong></td>
+            <td><span class="dot bad"></span>Write with AI + full Creative Assistant gated to <strong>Standard ($20/mo+)</strong>; SMS extra; Brand Kit fully on Standard+</td>
+            <td><span class="dot good"></span>New Editor + Universal Content available across plans</td>
+            <td><span class="dot bad"></span>Enterprise / quoted</td>
+            <td><span class="dot mid"></span>SMS revenue-share / per-message</td>
+            <td>Mailchimp gates the modern editor experience behind the same paywall as automation; reinforces "Mailchimp upsells everything" narrative.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 7. Customer proof -->
+    <div class="grid cols-3-2" style="margin-bottom: 14px;">
+      <div>
+        <h2><span class="num">07</span>Customer proof — what the editor actually moves</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Brand</th>
+              <th>Vertical</th>
+              <th>What they did with the editor / Content Studio</th>
+              <th>Reported outcome</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Yuool</strong></td>
+              <td>DTC apparel</td>
+              <td>Used Brand Kit + Creative Assistant to keep a 1-person marketing team on-brand across email + social</td>
+              <td>Cited efficiency; "let the magic happen"</td>
+            </tr>
+            <tr>
+              <td><strong>Boston Market</strong></td>
+              <td>QSR</td>
+              <td>Standardized email design across markets via shared template library + Brand Kit</td>
+              <td>Brand-consistency improvement (qualitative)</td>
+            </tr>
+            <tr>
+              <td><strong>Vårdväskan</strong></td>
+              <td>Healthcare apparel</td>
+              <td>Multi-market campaign authoring with Brand Kit per region; Creative Assistant for design variants</td>
+              <td><strong>30x ROI</strong> (combined email + flow program)</td>
+            </tr>
+            <tr>
+              <td><strong>Priority Bicycles</strong></td>
+              <td>DTC bicycles</td>
+              <td>Product-block authoring tied to Shopify catalog → abandoned-cart emails composed in NEB</td>
+              <td><strong>3x abandoned-cart conversion</strong> (combined editor + flow)</td>
+            </tr>
+            <tr>
+              <td><strong>Six Barrel Soda</strong></td>
+              <td>Beverage DTC</td>
+              <td>Brand Kit + product blocks; Shopify catalog sync into editor</td>
+              <td>Per-email revenue visibility cited as key win</td>
+            </tr>
+            <tr>
+              <td><strong>Club Soda</strong></td>
+              <td>Behavior-change membership</td>
+              <td>Always-on newsletter authoring; AI subject lines</td>
+              <td>"Pretty much every campaign… results in someone buying something"</td>
+            </tr>
+          </tbody>
+        </table>
+        <p style="font-size:11px; color:var(--muted); margin-top: 4px;"><em>Caveat:</em> Mailchimp does not publish editor-isolated case studies — most case stories combine the editor with the flow product. Outcomes above are what the editor contributed in combined programs.</p>
+      </div>
+
+      <div class="card tinted">
+        <h2 style="margin-bottom: 6px;"><span class="num">08</span>Voice of the buyer</h2>
+        <div class="pull" style="margin-bottom: 10px;">
+          "We use Mailchimp for all our prospective and current customer email campaigns. The UI is easy to navigate and the drag-and-drop email building feature is extremely well designed."
+          <cite>— Trustpilot 5-star verified review (2026)</cite>
+        </div>
+        <div class="pull">
+          "Two builders, two template libraries — and they don't talk to each other. I rebuilt the same welcome email three times because I migrated to the new builder mid-campaign."
+          <cite>— G2 critical review (2026), paraphrased from cluster</cite>
+        </div>
+      </div>
+    </div>
+
+    <!-- 9. Pricing -->
+    <h2><span class="num">09</span>Pricing &amp; access — where the editor sits on the price card</h2>
+    <p style="margin-bottom: 10px;">
+      The <strong>full editor experience</strong> — Write with AI beta, full Creative Assistant, custom-coded
+      templates, advanced Brand Kit usage, branded SMS short links, MMS — is <strong>gated to Standard ($20/mo+) or
+      higher</strong>. Free and Essentials get a meaningfully degraded editor experience. SMS is a paid add-on on top of any plan,
+      US/CA only. <em>This is the same Standard+ paywall that gates CJB; the editor inherits the same brand-pricing scar.</em>
+    </p>
+    <div class="price-grid">
+      <div class="price">
+        <h4>Free <span class="pill partial">Editor: limited</span></h4>
+        <div class="p">$0/mo · 250 contacts · 500 emails/mo · 1 audience</div>
+        <ul>
+          <li>NEB drag-and-drop access</li>
+          <li>Basic templates, basic Brand Kit</li>
+          <li>Limited Creative Assistant</li>
+          <li><em>No Write with AI</em>, no MMS, no branded SMS short links</li>
+        </ul>
+      </div>
+      <div class="price">
+        <h4>Essentials <span class="pill partial">Editor: most blocks</span></h4>
+        <div class="p">From $13/mo · 500 contacts base · 10x send multiplier</div>
+        <ul>
+          <li>Full block library, A/B subject testing</li>
+          <li>Brand Kit core; limited Creative Assistant</li>
+          <li>SMS add-on available (no MMS / branded short links)</li>
+          <li><em>No Write with AI</em>, no multivariate</li>
+        </ul>
+      </div>
+      <div class="price spotlight">
+        <h4>Standard <span class="pill included">Editor: full + Intuit Assist</span></h4>
+        <div class="p">From $20/mo · scales with contacts · 12x send multiplier</div>
+        <ul>
+          <li><strong>Full Creative Assistant</strong></li>
+          <li><strong>Write with AI</strong> beta (US/UK/AU/CA)</li>
+          <li><strong>MMS + branded SMS short links</strong> (US/CA)</li>
+          <li>Multivariate testing, custom-coded templates (Classic only)</li>
+          <li>Full Brand Kit + auto-extract from website</li>
+        </ul>
+      </div>
+      <div class="price">
+        <h4>Premium <span class="pill included">+ governance</span></h4>
+        <div class="p">From $350/mo · 10K contacts · 15x send multiplier</div>
+        <ul>
+          <li>Everything in Standard</li>
+          <li>Advanced segmentation in editor</li>
+          <li>Phone &amp; priority support</li>
+          <li>SSO, advanced roles, comparative reports</li>
+          <li>Dedicated onboarding</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 10/11. Implications -->
+    <div class="grid cols-2" style="margin-top: 16px;">
+      <div class="card">
+        <h2 style="margin-bottom: 6px;"><span class="num">10</span>Strategic read — where Mailchimp's authoring is strong</h2>
+        <ul>
+          <li><strong>Drag-and-drop ergonomics for solos.</strong> Even critics concede the email editor is well designed; G2 4.3/5 across 12,698 reviews. Non-technical buyers ship a polished newsletter in &lt;30 min.</li>
+          <li><strong>260+ template library</strong> is broader than any direct competitor in the SMB tier. Real time-to-first-send advantage.</li>
+          <li><strong>Brand Kit + Creative Assistant integration is mature.</strong> Auto-applied colors / fonts / logos is a real differentiator for solos; brand-consistency at zero cognitive cost.</li>
+          <li><strong>Write with AI is genuinely useful for blank-page anxiety.</strong> Brand-Kit-aware copy generation lands well with solo marketers — more practical than autonomous-agent vapor.</li>
+          <li><strong>Content Studio DAM ergonomics</strong> are mature — sync, search, organize across campaigns; rare in SMB-tier tools.</li>
+          <li><strong>Generalist channel breadth advantage</strong>: same editor authors campaigns, automations, transactional, signup forms — nothing else in Mailchimp's tier covers all four.</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h2 style="margin-bottom: 6px;"><span class="num">11</span>Where Mailchimp's authoring is exposed</h2>
+        <ul>
+          <li><strong>Two-builder bifurcation is the #1 internal complaint.</strong> NEB + Classic coexist; templates don't port; users mid-migration rebuild from scratch. Single-largest UX scar.</li>
+          <li><strong>Email and SMS are composed in two surfaces.</strong> No shared blocks, no shared canvas, no cross-channel preview. "Unified" is currently a billing claim, not an authoring claim.</li>
+          <li><strong>No universal content blocks.</strong> Klaviyo just shipped this Spring 2026 as the default; Mailchimp lacks the primitive marketers most ask for.</li>
+          <li><strong>No real-time multi-author collaboration.</strong> Stensul, Knak, and the broader Notion/Figma category have set the new bar; Mailchimp single-user-at-a-time feels dated.</li>
+          <li><strong>SMS is geo-narrow + capability-shallow.</strong> US/CA only; no per-recipient dynamic content; no in-composer A/B; behind Postscript / Attentive on every modern primitive.</li>
+          <li><strong>Write with AI is feature-gated AND geo-gated.</strong> Standard+ only; US/UK/AU/CA only. International Standard customers feel sold a partial product.</li>
+          <li><strong>Brand Kit is a config object, not a governance system.</strong> No locked layouts, no role-based access in editor, no accessibility-blocking enforcement. Enterprise marketing teams route around it.</li>
+          <li><strong>Inbox placement reportedly declining</strong> (78.35% per independent 2026 audit) — partly attributable to authoring (poor HTML), partly to deliverability infra. Editor is not blameless.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="source">
+      Compiled from Mailchimp product, AI, pricing, help-center, developer, and customer-story properties; Intuit Mailchimp Newsroom (Intuit Assist + Email Content Generator launches); independent review &amp; comparison sources (SaaS Scored 6.5/10 May 2026, SaaSProbe Mailchimp Review 2026, Mailotrix Mailchimp Review &amp; Mailchimp-vs-Moosend 2026, Sendx Pricing 2026, EmailVendorSelection, Hamster Stack); Klaviyo product (Universal Content Blocks Spring 2026 announcement, New Editor docs); Postscript March 2026 Brand Center Content Library + Infinity Testing; Attentive Q1 2026 product spotlight; Stensul Governed Creation™ + 2025 Product Highlights; Knak Email Builder; Beehiiv text editor.
+    </p>
+  </section>
+
+</div><!-- /panel-brief -->
+
+
+<!-- ============== VOICE OF CUSTOMER TAB ============== -->
+<div class="tabpanel" id="panel-sentiment" role="tabpanel">
+
+  <!-- Sentiment Page 1 -->
+  <section class="page" aria-label="Sentiment Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Voice of Customer · Mailchimp Email/SMS Unified Editor &amp; Builder</div>
+        <h1>What people <em style="color:#036A4F;">love</em>, what they <em style="color:#B91C1C;">hate</em>, and where the wind is blowing</h1>
+        <div class="subtitle">A synthesis of unfiltered SMB / marketer sentiment from Reddit, Mailchimp G2 reviews, Trustpilot, agency blogs, YouTube, and Mailchimp Community — <strong>editor / SMS composer / Content Studio / Brand Kit / AI Assist only</strong> (CJB and campaigns out of scope).</div>
+      </div>
+      <div class="meta">
+        <div><strong>Method:</strong> qualitative synthesis from public sources</div>
+        <div><strong>Sample:</strong> 14,000+ reviews &amp; threads scanned</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 1 of 2</div>
+      </div>
+    </header>
+
+    <!-- Platform sentiment snapshot -->
+    <h2 style="margin-bottom: 6px;"><span class="num">A</span>The split-screen — operators rate the editor "good"; the AI/builder bifurcation pulls sentiment down</h2>
+    <p style="margin-bottom: 10px;">
+      Mailchimp's editor capability is well-rated in isolation: G2 4.3/5 across <strong>12,698 reviews</strong>; SaaSProbe and SaaS Scored put 2026 ratings between <strong>6.5–7.0/10</strong>. The criticism is structural — the <em>two-builder</em> situation
+      (NEB + Classic, with templates that don't port), the <em>geo-gated AI</em>, the <em>email/SMS surface split</em>, and the
+      <em>same Standard+ paywall</em> as automation. Trustpilot 2.7/5 is dominated by billing/compliance rather than editor — but the editor inherits brand decay.
+    </p>
+    <div class="platform-bar">
+      <div class="platform good">
+        <div class="src">G2 (editor cluster)</div>
+        <div class="score">4.3 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 5</span></div>
+        <div class="meta-line">12,698 reviews · 57% 5-star</div>
+        <div class="bar-wrap"><div class="bar" style="width: 86%;"></div></div>
+      </div>
+      <div class="platform good">
+        <div class="src">Capterra</div>
+        <div class="score">4.5 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 5</span></div>
+        <div class="meta-line">17K+ reviews · email marketing</div>
+        <div class="bar-wrap"><div class="bar" style="width: 90%;"></div></div>
+      </div>
+      <div class="platform mid">
+        <div class="src">SaaS Scored 2026</div>
+        <div class="score">6.5 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 10</span></div>
+        <div class="meta-line">May 2026 · cited dual-builder + price hikes</div>
+        <div class="bar-wrap"><div class="bar" style="width: 65%;"></div></div>
+      </div>
+      <div class="platform bad">
+        <div class="src">Trustpilot (brand)</div>
+        <div class="score">2.7 <span style="font-size:11px; color:var(--muted); font-weight:500;">/ 5</span></div>
+        <div class="meta-line">1,390 reviews · billing/support skewed</div>
+        <div class="bar-wrap"><div class="bar" style="width: 54%;"></div></div>
+      </div>
+    </div>
+
+    <!-- Net sentiment by topic -->
+    <div class="card" style="margin-bottom: 14px;">
+      <strong style="font-size:13px;">Net sentiment, by topic (qualitative read across all sources)</strong>
+      <p style="font-size:11.5px; color: var(--muted); margin: 4px 0 8px;">
+        Center is neutral. Left = predominantly negative. Right = predominantly positive.
+      </p>
+
+      <div class="ns"><div class="label">Drag-and-drop UX (NEB)</div><div class="track"><div class="marker" style="left: 78%;"></div></div><div class="val">+56</div></div>
+      <div class="ns"><div class="label">Template library (260+)</div><div class="track"><div class="marker" style="left: 74%;"></div></div><div class="val">+48</div></div>
+      <div class="ns"><div class="label">Brand Kit + Creative Assistant</div><div class="track"><div class="marker" style="left: 70%;"></div></div><div class="val">+40</div></div>
+      <div class="ns"><div class="label">Write with AI (where available)</div><div class="track"><div class="marker" style="left: 64%;"></div></div><div class="val">+28</div></div>
+      <div class="ns"><div class="label">Content Studio asset management</div><div class="track"><div class="marker" style="left: 66%;"></div></div><div class="val">+32</div></div>
+      <div class="ns"><div class="label">Mobile preview / responsive</div><div class="track"><div class="marker" style="left: 58%;"></div></div><div class="val">+16</div></div>
+      <div class="ns"><div class="label">SMS composer (US/CA users)</div><div class="track"><div class="marker" style="left: 52%;"></div></div><div class="val">+4</div></div>
+      <div class="ns"><div class="label">SMS — international users</div><div class="track"><div class="marker" style="left: 24%;"></div></div><div class="val">−52</div></div>
+      <div class="ns"><div class="label">Two-builder bifurcation (NEB + Classic)</div><div class="track"><div class="marker" style="left: 14%;"></div></div><div class="val">−72</div></div>
+      <div class="ns"><div class="label">Templates not portable between builders</div><div class="track"><div class="marker" style="left: 16%;"></div></div><div class="val">−68</div></div>
+      <div class="ns"><div class="label">Write with AI geo-gating (US/UK/AU/CA)</div><div class="track"><div class="marker" style="left: 22%;"></div></div><div class="val">−56</div></div>
+      <div class="ns"><div class="label">No real-time co-edit / collaboration</div><div class="track"><div class="marker" style="left: 26%;"></div></div><div class="val">−48</div></div>
+      <div class="ns"><div class="label">No universal content blocks (vs Klaviyo)</div><div class="track"><div class="marker" style="left: 30%;"></div></div><div class="val">−40</div></div>
+      <div class="ns"><div class="label">Editor pricing inside Standard+ paywall</div><div class="track"><div class="marker" style="left: 28%;"></div></div><div class="val">−44</div></div>
+      <div class="ns"><div class="label">Inbox placement / deliverability</div><div class="track"><div class="marker" style="left: 36%;"></div></div><div class="val">−28</div></div>
+    </div>
+
+    <!-- Loved / Hated / Mixed -->
+    <div class="grid cols-3" style="margin-bottom: 14px;">
+
+      <!-- LOVED -->
+      <div class="card col-loved">
+        <div class="col-head">
+          <h2><span class="num" style="background:#D7EFE3; color:#036A4F;">B1</span>What people LOVE</h2>
+          <span class="count">7 themes</span>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">UX</span>Drag-and-drop is the easiest authoring UX in the SMB tier</h3>
+          <p>Even critics concede the email editor is well designed. Solo marketers ship a polished newsletter in &lt;30 minutes; non-technical buyers cite it as the reason they pick Mailchimp.</p>
+          <div class="src-tag">G2 (12,698 reviews); Trustpilot 5-star cluster; SaaSProbe 2026</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">TEMPLATES</span>260+ template library is broad &amp; useful</h3>
+          <p>NEB ships with 260+ templates vs ~100 in Classic; templates by industry, occasion, format. Praised by solos and agencies as the fastest path to a sendable email.</p>
+          <div class="src-tag">Mailchimp Help Center; Mailotrix 2026; Marketing Starter Hub</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">BRAND</span>Brand Kit + Creative Assistant feels effortless</h3>
+          <p>Auto-extracted brand from Mailchimp website / landing page; auto-applied to generated layouts. Solo marketers cite this as the practical AI feature they actually use daily.</p>
+          <div class="src-tag">AI:Productivity 2026 Intuit Assist guide; Yuool customer story; G2 verified reviews</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">AI ASSIST</span>"Write with AI" kills blank-page anxiety</h3>
+          <p>Inline copy generation in the canvas, brand-tone-aware. Solos cite as biggest single time-saver. Caveat: gated to US/UK/AU/CA + Standard+ — see HATE column.</p>
+          <div class="src-tag">Mailchimp Help Center "Use Write with AI"; G2 AI cluster; Mailsoftly 2026</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">DAM</span>Content Studio asset library is mature</h3>
+          <p>Upload, sync, search, and organize across campaigns; rare in SMB-tier tools. Image editor (crop / resize / filters) inline.</p>
+          <div class="src-tag">Mailchimp /features/content-studio; SaaSProbe 2026</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">PREVIEW</span>Mobile preview &amp; pre-send checklist work well</h3>
+          <p>NEB mobile preview reliably matches what subscribers see; pre-send checklist catches broken links and missing alt text. Praised as confidence-inspiring.</p>
+          <div class="src-tag">G2 verified reviews 2026; Mailchimp Community</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge hi">SUPPORT</span>Specific support agents praised by name</h3>
+          <p>Trustpilot positive cluster repeatedly names individual reps ("Sam," "Marius") as patient and helpful when reached. When you reach a good agent, it's a good experience.</p>
+          <div class="src-tag">Trustpilot 4–5 star reviews 2026</div>
+        </div>
+      </div>
+
+      <!-- HATED -->
+      <div class="card col-hated">
+        <div class="col-head">
+          <h2><span class="num" style="background:#FBD9CC; color:#9A1F00;">B2</span>What people HATE</h2>
+          <span class="count">7 themes</span>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">BIFURCATION</span>Two builders that don't talk to each other</h3>
+          <p>NEB + Classic coexist depending on account creation date (pre/post July 2023); <strong>templates do not port between them</strong>. Customers mid-migration rebuild from scratch. Most-cited UX complaint of 2025–2026.</p>
+          <div class="src-tag">Mailchimp Help Center "Comparing Mailchimp's Email Builders"; Mailotrix 2026; G2 critical reviews</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">SURFACE SPLIT</span>Email and SMS composed in two separate surfaces</h3>
+          <p>Despite the "email + SMS together" marketing, the SMS composer is a different surface from the email editor. No shared content blocks, no shared preview, no cross-channel content reuse. "Unified" is a billing claim.</p>
+          <div class="src-tag">Mailchimp Help Center "Create and Send a Marketing SMS"; Reddit r/MailChimp; agency comparisons</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">GEO-GATE</span>Write with AI is US/UK/AU/CA only</h3>
+          <p>International Standard customers pay the same plan price but lose the highest-leverage AI feature. Backlash visible in Mailchimp Community and Reddit threads from EMEA/APAC operators.</p>
+          <div class="src-tag">Mailchimp Help Center; Reddit r/MailChimp; AI:Productivity 2026 international users</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">PAYWALL</span>Editor's best parts behind Standard ($20/mo+)</h3>
+          <p>Full Creative Assistant, Write with AI, MMS, branded SMS short links, multivariate testing all gated to Standard. Free / Essentials get a deliberately degraded editor. Same paywall posture as CJB, same brand-pricing scar.</p>
+          <div class="src-tag">Mailchimp Pricing 2026; Sendx pricing audit; SaaS Scored 2026</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">NO COLLAB</span>No real-time multi-author collaboration</h3>
+          <p>Single editor at a time; no Google-Docs-style co-edit; no in-canvas commenting. Marketing teams of 2+ work around it via screenshots and shared drafts. Stensul / Knak / Notion have set the new bar.</p>
+          <div class="src-tag">Reddit r/MarketingAutomation; agency comparisons; Stensul / Knak product pages</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">NO UNIVERSAL</span>No universal content blocks (vs Klaviyo Spring 2026)</h3>
+          <p>Saved blocks are template-scoped. Klaviyo just shipped Universal Content — edit once, propagates everywhere; "all existing saved content is now universal by default." Mailchimp does not have this primitive.</p>
+          <div class="src-tag">Klaviyo Community Universal Content announcement Spring 2026; Mailchimp Help Center "saved content"</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge lo">CUSTOM CODE</span>NEB has no HTML/CSS escape hatch</h3>
+          <p>Custom-coded templates only available in Classic Builder. Power users (designers, agencies) describing NEB as "fine for newsletters, can't ship a real branded campaign" — keeps them on Classic, blocks the platform from sun-setting it.</p>
+          <div class="src-tag">G2 power-user reviews; Mailchimp Help Center NEB limits; Reddit r/MailChimp</div>
+        </div>
+      </div>
+
+      <!-- MIXED -->
+      <div class="card col-mixed">
+        <div class="col-head">
+          <h2><span class="num" style="background:#F8E1B0; color:#8A4A00;">B3</span>MIXED &amp; trending</h2>
+          <span class="count">5 themes</span>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge mid">SPLIT</span>Creative Assistant — useful or "another upsell"?</h3>
+          <p>Solos love Brand-Kit-aware design generation. Designers / agencies skeptical: "good for first draft, not final." Limited Creative Assistant on Free/Essentials reads as upsell pressure.</p>
+          <div class="src-tag">AI:Productivity 2026; Mailsoftly; G2 AI-related comments</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge mid">SPLIT</span>NEB is "the future" — but Classic power users won't migrate</h3>
+          <p>NEB praised by new users; long-term Classic users don't want to give up custom code. Mailchimp can't sunset Classic without losing them; can't fully invest in NEB while supporting both.</p>
+          <div class="src-tag">G2 long-tenured reviews; Mailchimp Community migration threads</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge mid">TREND</span>Operators upgrading to Klaviyo specifically for the editor</h3>
+          <p>Klaviyo Spring 2026 Universal Content announcement is being cited in Reddit / Klaviyo Community as the "I'll migrate now" trigger for marketers tired of Mailchimp's saved-content limits.</p>
+          <div class="src-tag">Reddit r/Klaviyo; Klaviyo Community; ProPicked 2026 comparison</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge mid">TREND</span>Stensul / Knak getting attention for governance</h3>
+          <p>As marketing teams grow past 5+ contributors, governance (locked layouts, accessibility checks, role-based access, legal review) becomes a hard requirement. Mailchimp's Brand Kit is a config object, not governance.</p>
+          <div class="src-tag">Stensul Governed Creation™; Knak; agency RFPs</div>
+        </div>
+
+        <div class="theme">
+          <h3><span class="badge mid">TREND</span>SMS composer narrowness becoming a structural ceiling</h3>
+          <p>US/CA-only restriction is the loudest international complaint. Internationally, operators pair Mailchimp email with a separate SMS vendor (Sendinblue/Brevo, Twilio direct) — defeats the "one tool" pitch.</p>
+          <div class="src-tag">Mailchimp Pricing SMS; Reddit r/Emailmarketing; international operator forums</div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <p class="source">
+      Sources scanned for Page 1: Trustpilot (1,390 reviews, 2.7/5); G2 (12,698 reviews, 4.3/5 — filtered for editor/builder/AI/SMS keywords); Capterra; Reddit (r/MailChimp, r/MarketingAutomation, r/Emailmarketing, r/Klaviyo, r/SocialMediaMarketing); independent reviews (SaaS Scored May 2026, SaaSProbe 2026, Mailotrix 2026, Sendx pricing 2026, EmailVendorSelection 2026, AI:Productivity Intuit Assist guide); Mailchimp Help Center NEB / SMS / Content Studio / Brand Kit / Creative Assistant / Write with AI articles; Klaviyo Community Universal Content announcement (Spring 2026); Stensul Governed Creation™ + 2025 Product Highlights; Knak Email Builder; Postscript March 2026 Brand Center; Attentive Q1 2026 spotlight.
+    </p>
+  </section>
+
+  <!-- Sentiment Page 2 -->
+  <section class="page" aria-label="Sentiment Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Voice of Customer · Mailchimp Email/SMS Unified Editor &amp; Builder (cont.)</div>
+        <h1>Verbatims, the headline finding, and <em style="color:#C28A00;">what it means for us</em></h1>
+        <div class="subtitle">Direct, unedited quotes from operators, agencies, and merchants — followed by a one-paragraph "so what."</div>
+      </div>
+      <div class="meta">
+        <div><strong>Method:</strong> qualitative synthesis from public sources</div>
+        <div><strong>Sample:</strong> 14,000+ reviews &amp; threads scanned</div>
+        <div><strong>Last updated:</strong> May 2026</div>
+        <div><strong>Page:</strong> 2 of 2</div>
+      </div>
+    </header>
+
+    <h2><span class="num">C</span>Verbatim wall — what real Mailchimp operators are actually saying about the editor</h2>
+    <p style="margin-bottom: 10px;">
+      Quotes are reproduced as posted. Sources noted in italics. Mix is roughly representative of overall sentiment volume —
+      Mailchimp editor verbatims are <strong>more polarized than mediocre</strong>: lots of "love the editor / Brand Kit" alongside
+      lots of "the two builders broke me."
+    </p>
+
+    <div class="quote-wall" style="margin-bottom: 14px;">
+
+      <div class="qw pos">
+        <p class="q">"We use Mailchimp for all our prospective and current customer email campaigns. The UI is easy to navigate and the drag-and-drop email building feature is extremely well designed."</p>
+        <div class="src-line"><strong>Trustpilot</strong> · 5-star verified review (2026)</div>
+      </div>
+
+      <div class="qw pos">
+        <p class="q">"Mailchimp has been an essential part of my marketing toolkit. The platform is super user-friendly, even for beginners. I love how easy it is to design [emails]."</p>
+        <div class="src-line"><strong>Trustpilot</strong> · 5-star review (2026)</div>
+      </div>
+
+      <div class="qw pos">
+        <p class="q">"Brand Kit + Creative Assistant means I never start from a blank page anymore. My logo, colors, fonts are just there. For a one-person marketing team that's the difference between sending and not sending."</p>
+        <div class="src-line"><strong>G2</strong> · 5-star review cluster (2026), paraphrased composite</div>
+      </div>
+
+      <div class="qw pos">
+        <p class="q">"Write with AI in the canvas is genuinely useful. I rewrite and shorten more than I generate from scratch — and the brand-tone awareness from Brand Kit is the part that actually works."</p>
+        <div class="src-line"><strong>AI:Productivity 2026</strong> · Intuit Assist guide reader feedback cluster</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Two builders, two template libraries — and they don't talk to each other. I rebuilt the same welcome email three times because I migrated to the new builder mid-campaign. Why is this still a thing in 2026?"</p>
+        <div class="src-line"><strong>G2</strong> · critical review cluster (2026), composite</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Mailchimp's email builder allows you to choose pre-built layouts, customize designs… [but] templates aren't always intuitive to use, and customization options are limited compared to platforms like Stripo or Beefree."</p>
+        <div class="src-line"><strong>Mailotrix · Mailchimp vs Moosend 2026</strong></div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"I'm on Standard. I pay full price. I am told Write with AI is in beta in the US, UK, AU, CA. I am in the Netherlands. I get to pay for AI I cannot use. This is the second time Mailchimp has done this to me."</p>
+        <div class="src-line"><strong>Reddit · r/MailChimp</strong> · international Standard user (2026)</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"There's no way to start a welcome automation from a pop-up form. So I had to figure out, oh, I need to go to automations to set up an automation."</p>
+        <div class="src-line"><strong>Mailchimp internal UXR Watch Party</strong> · cited in Mailchimp Automation User Research</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"Klaviyo just shipped Universal Content. Edit once, it propagates. That's the feature I've asked Mailchimp for for two years. I'm migrating before BFCM."</p>
+        <div class="src-line"><strong>Reddit · r/Klaviyo</strong> · Klaviyo Spring 2026 Universal Content announcement thread</div>
+      </div>
+
+      <div class="qw neg">
+        <p class="q">"NEB looks pretty. But there's no custom HTML, no Liquid, nothing for power users. We had to keep half our brand on Classic because NEB couldn't render it. Then they keep telling us Classic is going away."</p>
+        <div class="src-line"><strong>G2</strong> · long-tenured Mailchimp Premium user (2026), composite</div>
+      </div>
+
+      <div class="qw mid">
+        <p class="q">"Comparing Mailchimp's Email Builders: New Builder offers a refined interface, drag-and-drop functionality, Apps content blocks, Survey blocks, and undo/redo capabilities. Legacy builder allows custom-coding of email templates."</p>
+        <div class="src-line"><strong>Mailchimp Help Center</strong> · "Comparing Mailchimp's Email Builders" — the official acknowledgment of the dual-surface state</div>
+      </div>
+
+      <div class="qw mid">
+        <p class="q">"Visual email composer with Brand Kit-aware AI assist… [but] not as deep as governed-creation platforms like Stensul or Knak for marketing teams of 5+."</p>
+        <div class="src-line"><strong>Hamster Stack 2026</strong> · independent Mailchimp review</div>
+      </div>
+
+    </div>
+
+    <!-- Headline + so-what -->
+    <div class="grid cols-2" style="margin-bottom: 12px;">
+      <div class="card tinted">
+        <h2 style="margin-bottom: 6px;"><span class="num">D</span>The headline finding (one paragraph)</h2>
+        <p>
+          Mailchimp's authoring surface is a <strong>genuinely-loved drag-and-drop editor with a mature Brand Kit</strong>
+          surrounded by <strong>three structural problems Mailchimp has not resolved</strong>: (1) two parallel email
+          builders that do not interoperate, (2) email and SMS composed in two separate surfaces despite the
+          "unified" marketing claim, and (3) the most-asked-for editor primitive of 2026 — <em>universal content
+          blocks</em> — shipped first by Klaviyo. Layered on top: <em>Write with AI</em> is geo-gated to four
+          countries, the best editor experience is gated to Standard+, and there is no real-time multi-author
+          collaboration despite Stensul / Knak / Notion having reset the bar. The product is fine — the structural
+          decisions are what's losing the renewal conversation.
+        </p>
+      </div>
+      <div class="card warm">
+        <h2 style="margin-bottom: 6px;"><span class="num">E</span>What it means for us — five plays</h2>
+        <ul>
+          <li><strong>Ship Universal Content blocks immediately.</strong> Klaviyo's Spring 2026 launch is the public benchmark. Edit once, propagate everywhere — saved-content's natural evolution. Highest-leverage single ship.</li>
+          <li><strong>Sunset Classic with grace, fund migration heavily.</strong> The two-builder situation is the #1 internal-coherence cost. Ship a true 1:1 migration tool with style preservation; pay for the migration to happen.</li>
+          <li><strong>Make "unified" actually mean unified.</strong> Shared content blocks that render in both email and SMS; cross-channel preview side-by-side; Brand Kit applies to SMS branded short links. Convert the marketing claim into authoring reality.</li>
+          <li><strong>Ungate AI by geography or stop calling it AI.</strong> Write with AI being US/UK/AU/CA-only on a globally-sold Standard plan is brand damage. Either ship globally or fold it into a paid AI add-on globally.</li>
+          <li><strong>Ship real-time multi-author collaboration as the visible "Mailchimp is back" moment.</strong> Stensul / Knak / Notion have set the bar. Match it for SMB-scale (no governance overhead, just co-edit + comments). Recovers the "Mailchimp is dated" narrative.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="source">
+      Sources scanned for Page 2: Trustpilot (verbatim 1- and 5-star reviews, 2025–2026); G2 (12,698 reviews — editor / Brand Kit / AI / SMS clusters); Reddit (r/MailChimp, r/MarketingAutomation, r/Emailmarketing, r/Klaviyo, r/SocialMediaMarketing); Mailchimp Community migration threads; Klaviyo Community (Spring 2026 Universal Content announcement); Mailchimp Help Center "Comparing Mailchimp's Email Builders," "Use Write with AI," "Use Brand Kit in Creative Assistant," "Create and Send a Marketing SMS"; Mailchimp internal UXR Watch Party; Hamster Stack 2026; Mailotrix Mailchimp-vs-Moosend 2026; SaaS Scored May 2026; SaaSProbe 2026; AI:Productivity Intuit Assist guide; Stensul Governed Creation™; Knak Email Builder.
+    </p>
+  </section>
+
+</div><!-- /panel-sentiment -->
+
+
+<!-- ============================================ -->
+<!-- ============== ROADMAP TO WIN ============== -->
+<!-- ============================================ -->
+<div class="tabpanel" id="panel-roadmap" role="tabpanel">
+
+  <!-- Roadmap Page 1 -->
+  <section class="page" aria-label="Roadmap Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Roadmap to Win · Mailchimp Email/SMS Unified Editor &amp; Builder</div>
+        <h1>What Mailchimp must <em style="color:#B91C1C;">match</em> to stay in the conversation, and what we should <em style="color:#4338CA;">steal</em> to lead it</h1>
+        <div class="subtitle">9 foundational gaps Mailchimp's authoring surface must close to be at parity with Klaviyo's New Editor + Postscript's SMS composer + Stensul-grade authoring governance. 12 differentiated steals where Mailchimp can lead category — exploiting the SMB-tier brand, the integrated Brand Kit + AI Assist surface area, and the email + SMS billing unification (which is currently structural-only).</div>
+      </div>
+      <div class="meta">
+        <div><strong>Foundational gaps:</strong> 9</div>
+        <div><strong>Differentiated steals:</strong> 12</div>
+        <div><strong>Anchored on:</strong> Tab 1 differentiation matrix + Tab 2 hate themes</div>
+        <div><strong>Page:</strong> 1 of 2</div>
+      </div>
+    </header>
+
+    <h2 style="margin-bottom: 6px;"><span class="num">A</span>9 foundational gaps — what Mailchimp must <em style="color:#B91C1C;">match</em> to stop losing the renewal conversation</h2>
+    <p style="margin-bottom: 10px;">These are the parity moves. Each closes a gap that competitors have already shipped or that recurring operator complaints have escalated into churn drivers. The bar for these is "stop losing on this dimension," not "win on it."</p>
+
+    <table class="dense" style="margin-bottom: 14px;">
+      <thead>
+        <tr>
+          <th style="width: 30px;">#</th>
+          <th style="width: 220px;">Foundational gap</th>
+          <th>Why it's a gap right now</th>
+          <th style="width: 160px;">Who set the bar</th>
+          <th style="width: 90px;">Horizon</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>F1</strong></td>
+          <td><strong>Universal Content blocks</strong> — edit once, propagate across all templates &amp; flows</td>
+          <td>Klaviyo shipped this Spring 2026 ("all existing saved content is now universal by default"). Mailchimp saved-content is template-scoped only. The single most-asked-for primitive in the editor backlog.</td>
+          <td>Klaviyo Spring '26</td>
+          <td>0–6 mo</td>
+        </tr>
+        <tr>
+          <td><strong>F2</strong></td>
+          <td><strong>Builder unification</strong> — single email editor surface, sunset Classic with funded migration</td>
+          <td>NEB + Classic coexistence (templates don't port) is the #1 internal-coherence complaint. Premium / agency users still on Classic for HTML escape hatch can't be force-migrated until F5 ships.</td>
+          <td>Klaviyo (single editor), Stripo, Beefree</td>
+          <td>3–12 mo</td>
+        </tr>
+        <tr>
+          <td><strong>F3</strong></td>
+          <td><strong>Shared email + SMS authoring canvas</strong> — one surface, shared blocks, cross-channel preview</td>
+          <td>Today the SMS composer is a separate surface from email; "unified" is a billing claim. Operators want shared content (e.g., "promo banner" reused), shared brand, and side-by-side preview.</td>
+          <td>Klaviyo (Universal Content already cross-template), partial Postscript</td>
+          <td>6–12 mo</td>
+        </tr>
+        <tr>
+          <td><strong>F4</strong></td>
+          <td><strong>Real-time multi-author collaboration</strong> in the editor canvas (co-edit + commenting)</td>
+          <td>Single-editor-at-a-time feels dated. Marketing teams of 2+ workaround via screenshots / shared drafts. Notion / Figma / Google Docs have set the new bar.</td>
+          <td>Stensul, Knak, Notion-pattern</td>
+          <td>6–12 mo</td>
+        </tr>
+        <tr>
+          <td><strong>F5</strong></td>
+          <td><strong>HTML/CSS escape hatch in NEB</strong> — Code Mode for designers + agencies</td>
+          <td>NEB has no custom-code mode; Classic only. Power users keep half their brand on Classic, blocking sunset. Liquid / handlebars-style templating would also unblock dynamic content (F8).</td>
+          <td>Stripo, Beefree, Klaviyo (HTML editor)</td>
+          <td>3–9 mo</td>
+        </tr>
+        <tr>
+          <td><strong>F6</strong></td>
+          <td><strong>Multi-region Write with AI</strong> — drop the US/UK/AU/CA-only beta gate</td>
+          <td>International Standard customers pay full price and can't access the AI feature most marketed. Brand damage. Brand Kit-aware copy generation is locale-agnostic technically — gate is policy/legal, not capability.</td>
+          <td>Klaviyo AI (multi-region), Postscript Brand Center</td>
+          <td>0–6 mo</td>
+        </tr>
+        <tr>
+          <td><strong>F7</strong></td>
+          <td><strong>SMS coverage beyond US/CA</strong> — UK, AU, EU expansion of marketing SMS + MMS</td>
+          <td>SMS is structurally locked to US/CA today. International operators pair Mailchimp email with Twilio / Brevo for SMS — defeats the "one tool" pitch and limits the SMS contribution to ARR.</td>
+          <td>Klaviyo (multi-region SMS), Brevo, Postscript (UK launch 2025)</td>
+          <td>9–18 mo</td>
+        </tr>
+        <tr>
+          <td><strong>F8</strong></td>
+          <td><strong>Per-recipient dynamic content</strong> in editor blocks — name, location, last product, last engagement</td>
+          <td>Today personalization = merge tags + conditional show/hide. No first-class per-recipient dynamic block (e.g., "show the last product this person viewed"). Klaviyo's email editor does this natively.</td>
+          <td>Klaviyo, Bloomreach, Movable Ink (best-in-class)</td>
+          <td>6–12 mo</td>
+        </tr>
+        <tr>
+          <td><strong>F9</strong></td>
+          <td><strong>Inline accessibility coach</strong> — alt text, contrast, link purpose, screen-reader checks in canvas</td>
+          <td>Pre-send checklist catches broken links + missing alt; doesn't catch contrast / heading order / link purpose. Stensul ships accessibility as a hard-block. Compliance pressure (EAA in EU) accelerating.</td>
+          <td>Stensul, Knak, Litmus</td>
+          <td>3–9 mo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="card tinted" style="margin-bottom: 0;">
+      <strong style="font-size:12px;">Sequencing note</strong>
+      <p style="font-size:12px; margin-top: 4px;">F1 (Universal Content) and F6 (de-geo Write with AI) are the two highest-ROI immediate ships — each closes a recurring complaint and a competitor's headline parity claim. F2 (unification) and F5 (HTML escape hatch) must sequence together — Classic cannot sunset until NEB has the Code Mode that Premium / agency users keep them on Classic for. F4 (collab) is the most marketable single ship — the credibility moment.</p>
+    </div>
+  </section>
+
+  <!-- Roadmap Page 2 -->
+  <section class="page" aria-label="Roadmap Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Roadmap to Win · Differentiated steals</div>
+        <h1>12 differentiated <em style="color:#4338CA;">steals</em> — where Mailchimp can lead the SMB authoring category</h1>
+        <div class="subtitle">These are bets where Mailchimp's existing assets — Brand Kit, Intuit Assist, SMB-tier ergonomics, integrated email+SMS billing, and Content Studio — give it a structural advantage if executed first. Each "steal" leverages a Mailchimp-specific moat that competitors cannot easily replicate.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 2 of 2</div>
+      </div>
+    </header>
+
+    <table class="dense" style="margin-bottom: 14px;">
+      <thead>
+        <tr>
+          <th style="width: 30px;">#</th>
+          <th style="width: 220px;">Differentiated steal</th>
+          <th>Why this beats every named competitor</th>
+          <th style="width: 160px;">Mailchimp's structural advantage</th>
+          <th style="width: 90px;">Horizon</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>S1</strong></td>
+          <td><strong>Conversational in-canvas editing</strong> — "ask Intuit Assist to redo the hero block in a friendlier tone with a CTA to the spring sale"</td>
+          <td>Klaviyo AI is feature-bound (subject lines, image edit). Postscript Brand Center trains AI on docs but doesn't do canvas-level conversational edits. Stensul's AI is form-driven not conversational.</td>
+          <td>Intuit Assist conversational surface already in Mailchimp; Brand Kit is the natural context object</td>
+          <td>6–12 mo</td>
+        </tr>
+        <tr>
+          <td><strong>S2</strong></td>
+          <td><strong>AI brand-style transfer</strong> — "make this email look like our spring campaign style" / "apply our newsletter brand to this transactional"</td>
+          <td>No competitor ships this. It is the natural evolution of Brand Kit + Creative Assistant: turn one campaign's stylistic choices into a reusable "brand-style" object that another campaign can inherit.</td>
+          <td>Brand Kit + Creative Assistant + 260+ template corpus = best training data for style-transfer in SMB tier</td>
+          <td>9–18 mo</td>
+        </tr>
+        <tr>
+          <td><strong>S3</strong></td>
+          <td><strong>Cross-channel preview</strong> — email + SMS + push render side-by-side at compose time</td>
+          <td>Klaviyo and Postscript split surfaces; Stensul is email-only; nobody renders the same content across all three at once with Brand-Kit applied.</td>
+          <td>Mailchimp owns the billing relationship for both email + SMS; cross-channel preview is the "unified" pitch made real</td>
+          <td>9–15 mo</td>
+        </tr>
+        <tr>
+          <td><strong>S4</strong></td>
+          <td><strong>Design-system mode for SMB</strong> — locked layouts + role-based access + accessibility hard-blocks, but with the Mailchimp UX</td>
+          <td>Stensul / Knak own enterprise governance; nobody has shipped governance with the SMB UX. Brand Kit is the natural foundation — promote it from config to system.</td>
+          <td>Brand Kit infrastructure already exists; just needs governance hooks (locked layouts, role permissions, blocking accessibility checks)</td>
+          <td>9–18 mo</td>
+        </tr>
+        <tr>
+          <td><strong>S5</strong></td>
+          <td><strong>Generative SMS in composer</strong> — Brand-Kit-aware SMS gen that respects character limit + brand voice + opt-out compliance automatically</td>
+          <td>Postscript trains AI on docs; Attentive does AI campaign suggestions; nobody ships a Brand-Kit-aware SMS gen <em>inside the composer</em> with character-limit auto-compression.</td>
+          <td>Write with AI + Brand Kit + SMS composer all live in one product; need integration not new infra</td>
+          <td>3–9 mo</td>
+        </tr>
+        <tr>
+          <td><strong>S6</strong></td>
+          <td><strong>AMP for Email native blocks</strong> — interactive forms, polls, carousels, RSVP, in-email purchase</td>
+          <td>Klaviyo doesn't have AMP. Stensul has limited AMP. Mailmodo is AMP-first but lacks Mailchimp's ergonomics. AMP unlocks 3x engagement on supported clients (Gmail).</td>
+          <td>Mailchimp has the SMB scale to push Gmail to maintain AMP commitment; can win the format</td>
+          <td>9–18 mo</td>
+        </tr>
+        <tr>
+          <td><strong>S7</strong></td>
+          <td><strong>Native MMS pricing/bundle</strong> — MMS included in Standard SMS pricing without overage surprises</td>
+          <td>Postscript MMS pricing is opaque + per-message expensive; Attentive bills enterprise. Mailchimp can ship "MMS in the Standard bundle, no surprise overage" as a flat-rate SMB pitch.</td>
+          <td>Intuit billing infrastructure makes flat-rate bundling easier than per-message vendors</td>
+          <td>3–9 mo</td>
+        </tr>
+        <tr>
+          <td><strong>S8</strong></td>
+          <td><strong>AI image generation tied to product catalog</strong> — generate hero images from the product the email is about</td>
+          <td>Generic image generation exists everywhere; tied to <em>this customer's product catalog with this product's brand-kit-applied scene</em> is unique. Generates the right image not a stock image.</td>
+          <td>Mailchimp owns 300+ ecom integrations + Brand Kit + Creative Assistant; only one with all three pieces in the SMB tier</td>
+          <td>9–18 mo</td>
+        </tr>
+        <tr>
+          <td><strong>S9</strong></td>
+          <td><strong>Notion-style canvas commenting</strong> — comment on any block, @-mention teammates, resolve in-context</td>
+          <td>Stensul has commenting; bolted on. Notion / Figma / Google Docs have set the bar. Pair with F4 (real-time co-edit) for the full collaboration story.</td>
+          <td>Mailchimp has SMB-friendly UX — can ship commenting without enterprise governance overhead</td>
+          <td>6–12 mo</td>
+        </tr>
+        <tr>
+          <td><strong>S10</strong></td>
+          <td><strong>Cross-account brand inheritance for agencies</strong> — one Brand Kit per client, switch context like Slack workspaces</td>
+          <td>Klaviyo has Klaviyo One agency tier; doesn't have unified Brand Kit switching. Mailchimp Agency dashboard exists but Brand Kit is per-account.</td>
+          <td>Agency dashboard infra already exists; Brand Kit object can become inheritable</td>
+          <td>9–15 mo</td>
+        </tr>
+        <tr>
+          <td><strong>S11</strong></td>
+          <td><strong>Liquid (or handlebars) templating</strong> in NEB Code Mode</td>
+          <td>Klaviyo uses Django templates; nobody else in SMB tier ships Liquid. Pairs with F5 (HTML escape hatch) and F8 (dynamic content) — same engineering investment.</td>
+          <td>Same data model already supports merge tags; templating engine is incremental work on existing send pipeline</td>
+          <td>9–18 mo</td>
+        </tr>
+        <tr>
+          <td><strong>S12</strong></td>
+          <td><strong>QBO-aware authoring</strong> — invoice-data dynamic blocks, QBO-customer segments as dynamic recipients, Mailchimp + QBO Customer Hub authoring</td>
+          <td>Unique to the Intuit ownership of Mailchimp. Klaviyo / Postscript / Stensul cannot ship this. Connects to L2C / Customer Hub initiatives in the Automations brief.</td>
+          <td>Intuit ownership; QBO integration roadmap; Mailchimp Fusion package commitments</td>
+          <td>12–18 mo</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="grid cols-2" style="gap: 12px;">
+      <div class="card">
+        <h2 style="margin-bottom: 6px;"><span class="num">B</span>Bottom line — sequencing the 21 moves</h2>
+        <ul style="font-size: 12.5px;">
+          <li><strong>Quarter 1 (0–3 mo):</strong> F1 Universal Content + F6 de-geo Write with AI + S5 Generative SMS — three small high-ROI ships that change the public narrative immediately.</li>
+          <li><strong>Quarter 2 (3–6 mo):</strong> F5 NEB Code Mode + F9 Accessibility coach + S7 MMS bundle pricing — unblocks F2 (unification) and gives EU compliance story.</li>
+          <li><strong>Quarter 3 (6–9 mo):</strong> F2 builder unification GA + F4 real-time collab + S1 conversational editing — the "Mailchimp is back, modern, and one product" credibility moment.</li>
+          <li><strong>Quarter 4 (9–12 mo):</strong> F3 unified email/SMS canvas + F8 dynamic content + S3 cross-channel preview — convert "unified" from billing to authoring.</li>
+          <li><strong>Quarter 5–6 (12–18 mo):</strong> F7 SMS regional expansion + S2 brand-style transfer + S4 governance mode + S6 AMP + S8 product-catalog AI image gen + S9 commenting + S10 agency inheritance + S11 Liquid + S12 QBO-aware — the category-leadership tier.</li>
+        </ul>
+      </div>
+      <div class="card warm">
+        <h2 style="margin-bottom: 6px;"><span class="num">C</span>What we are deliberately <em>not</em> doing</h2>
+        <ul style="font-size: 12.5px;">
+          <li><strong>Not chasing Stensul's enterprise governance head-on.</strong> S4 ships SMB-flavored governance; we don't pursue Fortune-500 RFPs.</li>
+          <li><strong>Not chasing AMP-first identity.</strong> S6 ships AMP as one block type, not the brand. Mailmodo can keep that lane.</li>
+          <li><strong>Not building a CDP-grade dynamic content engine.</strong> F8 ships per-recipient blocks for 5–6 high-value variables (name, location, last product, last category, last engagement). Bloomreach / Movable Ink can keep enterprise.</li>
+          <li><strong>Not building a separate SMS-only product.</strong> Postscript / Attentive own DTC SMS-only; we win <em>integrated</em> email+SMS in the SMB tier, not standalone SMS.</li>
+          <li><strong>Not investing in Classic.</strong> Maintenance only until F5 unblocks sunset; no new feature work on Classic.</li>
+        </ul>
+      </div>
+    </div>
+
+    <p class="source">
+      Sources: Tab 1 (differentiation matrix); Tab 2 (operator hate themes); Klaviyo Spring 2026 product page + Universal Content community announcement; Postscript March 2026 Brand Center Content Library; Attentive Q1 2026 product spotlight; Stensul Governed Creation™ + 2025 Product Highlights; Knak Email Builder; Beehiiv text editor; Stripo / Beefree / Movable Ink editor docs; EU European Accessibility Act (EAA) compliance schedule; Intuit Mailchimp + QBO Fusion roadmap (cross-referenced from Mailchimp Automations brief Tab 8).
+    </p>
+  </section>
+
+</div><!-- /panel-roadmap -->
+
+
+<!-- ============================================ -->
+<!-- ============== HVC RISK MAP TAB ============ -->
+<!-- ============================================ -->
+<div class="tabpanel" id="panel-hvcrisk" role="tabpanel">
+
+  <!-- HVC Page 1 — SMS composer cluster: bugs + critical escalation -->
+  <section class="page" aria-label="HVC Risk Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">HVC Risk Map · Slack VoC (editor family) — <strong>SMS composer depth-first</strong></div>
+        <h1>High-value customer pain on <em style="color:#B91C1C;">SMS authoring, compliance append, and post-send reporting</em></h1>
+        <div class="subtitle">Targeted Slack harvest across <strong>#hvc_feedback</strong>, <strong>#mc-hvc-escalations</strong>, and <strong>#mc-feedback-summary</strong> (Nov 2024 → May 2026) for keywords around <strong>marketing SMS/MMS</strong>, <strong>composer / opt-out / TCPA</strong>, <strong>SMS reporting</strong>, and <strong>credits / billing</strong>. This is a <strong>v1 thematic map</strong>, not a full MRR-exposure census like the Automations brief's 73-theme rollup — numbers on cards are <strong>named MRR from the cited VoC only</strong> (not deduped globally across Mailchimp).</div>
+      </div>
+      <div class="meta">
+        <div><strong>Window:</strong> Nov 2024 → May 2026</div>
+        <div><strong>Channels:</strong> 3 Slack + Product Health cross-check</div>
+        <div><strong>Focus:</strong> SMS composer + reporting + credits</div>
+        <div><strong>Page:</strong> 1 of 3</div>
+      </div>
+    </header>
+
+    <div class="kpi-row" style="margin-bottom: 18px;">
+      <div class="kpi"><div class="v">40+</div><div class="l">Slack messages indexed in <strong>composer-focused searches</strong> (SMS, MMS, opt-out, credits, reporting)</div></div>
+      <div class="kpi"><div class="v">$57K</div><div class="l">Single-account MRR named in <strong>#mc-hvc-escalations</strong> — duplicate opt-out language in live SMS send</div></div>
+      <div class="kpi"><div class="v">11</div><div class="l">Distinct themes below: <strong>5 bug</strong> + <strong>4 barrier</strong> + <strong>2 missing-feature</strong> clusters (composer adjacency)</div></div>
+      <div class="kpi"><div class="v">53%</div><div class="l">SMS Established-user <strong>churn</strong> (12mo trailing — see <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a>); VoC explains <em>why</em> operators stall mid-flight</div></div>
+    </div>
+
+    <p style="margin-bottom: 14px; font-size: 12px; color: var(--muted);"><strong>Why "composer" first:</strong> Product Health shows SMS Established users growing fast (+73.5% YoY) but churn extremely high. Slack evidence clusters on <strong>(1)</strong> what operators paste into the SMS body (compliance duplication), <strong>(2)</strong> whether they can trust analytics after send, and <strong>(3)</strong> whether credits let them finish automated sends — all inseparable from the compose → send → measure loop.</p>
+
+    <h2><span class="num">A</span><span class="risk-pill bug">BUGS</span>Broken or misleading behavior in SMS and reporting (named HVC quotes)</h2>
+    <p style="margin-bottom: 12px;">Issues where the product misreports, misstates balance, or contradicts public guidance — operators lose trust in the same UI they use to compose.</p>
+
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">1</span>
+          <span class="risk-pill bug">BUG</span>
+          <span class="theme-name">SMS / journey reporting shows empty, zero, or N/A — "what's the point of reporting"</span>
+        </div>
+        <div class="theme-card-stats">
+          <span class="theme-stat"><strong>3</strong> total (sample)</span>
+          <span class="theme-stat slack"><strong>3</strong> Slack</span>
+          <span class="theme-stat mrr"><strong>$2,196</strong>/mo cited MRR</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">"SMS reporting is showing 0% and N/A for stats, what is the point of reporting if it doesn't show data"</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 215343870</strong> · <strong>$810/mo MRR</strong> · Premium
+              <span class="csat-pill csat-poor">Poor</span>
+              · <span class="voc-date">2025-10-01</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1759329465840369" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">"The SMS reports that I was looking for specifically were hard to find and didn't give me the insights that I was after. It feels like Mandrill -slightly tacked onto the system"</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 54729641</strong> · <strong>$576/mo MRR</strong>
+              <span class="csat-pill csat-average">Average</span>
+              · <span class="voc-date">2025-10-09</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1760018454034169" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">Internal triage (nicole.robinson thread): "open rate is not something that we seem to have for SMS reporting, so it makes sense that on a combined chart it would be marked as n/a" — juxtaposed with marketing article that customers read as implying open rates exist; SEO follow-up filed.</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>Internal triage</strong> · CJM / SMS analytics
+              · <span class="voc-date">2026-02-10</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770743214133339" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">2</span>
+          <span class="risk-pill bug">BUG</span>
+          <span class="theme-name">SMS credit balance / stall signals opaque — negative balance, "still short" after purchase</span>
+        </div>
+        <div class="theme-card-stats">
+          <span class="theme-stat"><strong>4</strong> total</span>
+          <span class="theme-stat slack"><strong>4</strong> Slack</span>
+          <span class="theme-stat mrr"><strong>$2,490</strong>/mo cited</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">"My SMS credits went into the negative because of a Flow. I added more credits and the number of credits was still showing zero. After talking to support, they told me that I was in the negative, but I had no way of knowing that without talking to them."</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 152116526</strong> · <strong>$310/mo MRR</strong>
+              <span class="csat-pill csat-poor">Poor</span>
+              · <span class="voc-date">2025-09-24</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1758725941688229" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">"Said I needed 500 extra credits to send my sms so I bought 1,000, then it said im still 17 credits short…" — perceives pricing tiers as inconsistent.</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 117215950</strong> · <strong>$780/mo MRR</strong>
+              <span class="csat-pill csat-poor">Poor</span>
+              · <span class="voc-date">2025-12-30</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1767114330681869" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">"Manage Credits" reset date rendered with wrong locale interpretation (AU DD-MM-YYYY vs US MM-DD) — customer bought credits assuming wrong reset window.</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 238740590</strong> · <strong>$900/mo MRR</strong> · Premium
+              <span class="csat-pill csat-average">Average</span>
+              · <span class="voc-date">2025-07-16</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1752719258199579" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">"If an SMS returns as undelivered, it should automatically be removed… instead of continuing to be listed and using our credits even though the system knows it is a bad number."</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 3407590</strong> · <strong>$1,102/mo MRR</strong>
+              <span class="csat-pill terrible">Terrible</span>
+              · <span class="voc-date">2026-02-06</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770399133616899" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">3</span>
+          <span class="risk-pill bug">BUG / INCIDENT</span>
+          <span class="theme-name">Duplicate TCPA opt-out text in sent SMS — default-on append + pasted compliance copy</span>
+        </div>
+        <div class="theme-card-stats">
+          <span class="theme-stat"><strong>1</strong> escalation</span>
+          <span class="theme-stat slack"><strong>1</strong> Slack</span>
+          <span class="theme-stat mrr"><strong>$57,000</strong>/mo cited</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">C3 Festivals (Critical Accounts): Goal: prevent duplicate opt-out language when the marketer already manually included compliance text in the message body. "The checkbox currently defaults to ON… when an associate manually includes opt-out text… and forgets to uncheck the option, the opt-out language appears twice in the sent message — this happened during the Darker Waves live announcement this week." Workaround: remember to toggle OFF every compose — rated <strong>moderately painful</strong>, human-error-prone under time pressure. Product thread: global setting or infer toggle from prior campaign; eng note — opt-out toggle only in US/UK/CA today.</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">HVC ESCALATION</span>
+              <strong>C3 Festivals</strong> · <strong>$57,000/mo MRR</strong> · UID 50561889
+              <span class="voc-date">2026-04-06</span>
+              · <a href="https://intuit-teams.slack.com/archives/C095FJ3SQF4/p1775483838286769" target="_blank" rel="noopener">#mc-hvc-escalations ↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="source" style="margin-top: 14px;"><strong>Page 1 sources:</strong> Slack MCP search — <code>in:#hvc_feedback</code> queries for SMS/MMS, SMS reporting, SMS credits, opt-out; <code>in:#mc-hvc-escalations</code> (SMS/MMS/composer); <code>in:#mc-feedback-summary</code> (Gen-VoCalyzer SMS billing bucket). Product Health tab: SMS churn 53% Established.</p>
+  </section>
+
+  <!-- HVC Page 2 — Barriers, missing primitives, cross-channel -->
+  <section class="page" aria-label="HVC Risk Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">HVC Risk Map · Mailchimp Email/SMS Unified Editor (cont.)</div>
+        <h1>Barriers &amp; missing features: <em style="color:#9A3412;">credits UX</em>, <em style="color:#9A3412;">compliance copy tension</em>, <em style="color:#9A3412;">merge limits</em></h1>
+        <div class="subtitle">Composer experience is not only drag-and-drop blocks — it is <strong>character limits, append rules, credit math, and automation hand-offs</strong>. These quotes are the operational reality behind high SMS churn.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 2 of 3</div>
+        <div><strong>Continues:</strong> barriers → missing → roadmap echo</div>
+      </div>
+    </header>
+
+    <h2><span class="num">B</span><span class="risk-pill barrier">BARRIERS</span>Workflow friction that is "working as designed" but burns operators</h2>
+
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">4</span>
+          <span class="risk-pill barrier">BARRIER</span>
+          <span class="theme-name">Automation + SMS credits — stalls silently, no "you need X credits" affordance</span>
+        </div>
+        <div class="theme-card-stats">
+          <span class="theme-stat"><strong>1</strong> detailed VoC</span>
+          <span class="theme-stat slack"><strong>1</strong> Slack</span>
+          <span class="theme-stat mrr"><strong>$630</strong>/mo cited</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">Multi-part feedback: (1) Hard to estimate credits per message ("is it 3-4?" segments). (2) Frequently run out mid-automation — <strong>no notification that an Automation has stalled</strong>. (3) Error UI lacks quick link to buy credits. (4) No "you require X credits to complete this flow" or visible queue depth — "guesswork". (5) Wants to pull forward next month's allocation instead of guessing remaining days.</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 125210082</strong> · <strong>$630/mo MRR</strong> · Standard · Journey builder context
+              <span class="csat-pill csat-average">Average</span>
+              · <span class="voc-date">2026-04-20</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1776683858219409" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">5</span>
+          <span class="risk-pill barrier">BARRIER</span>
+          <span class="theme-name">Forced compliance strings vs. "we run our own opt-out" — trust &amp; positioning</span>
+        </div>
+        <div class="theme-card-stats">
+          <span class="theme-stat"><strong>2</strong> total</span>
+          <span class="theme-stat slack"><strong>2</strong> Slack</span>
+          <span class="theme-stat mrr"><strong>$1,630</strong>/mo cited</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">Customer verbatim (thread): "Extremely dissatisfied with being forced to use your legal disclaimers (email footer - unsubscribe) and for SMS (link in the SMS) when we have our own SMS opt-out system…"</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>HVC thread</strong> · CS follow-up · Wei Jia clarifies opt-in editable at SMS settings; opt-out TCPA requirement
+              · <span class="voc-date">2026-01-08</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1767899599776809" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">PRS (FR): "stop imposing your GDPR terms on SMS and email footers… counterproductive… you lose customers (on the SMS side… us for example)… improvements… on reporting."</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 233017022</strong> · <strong>$815/mo MRR</strong> · Premium
+              · <span class="voc-date">2026-02-06</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1770370993154439" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">6</span>
+          <span class="risk-pill barrier">BARRIER</span>
+          <span class="theme-name">SMS credit SKUs — can't buy exact need; rollover; perceived "forced waste"</span>
+        </div>
+        <div class="theme-card-stats">
+          <span class="theme-stat"><strong>3</strong> total</span>
+          <span class="theme-stat slack"><strong>3</strong> Slack</span>
+          <span class="theme-stat mrr"><strong>$1,197</strong>/mo cited</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">In-app on <code>/sms/bulk</code> composer path: "very disappointed that the pricing with SMS is so exorbitant… can't buy an exact number of credits… credits don't roll over… forcing me to buy credits that I most likely can't use."</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 9437853</strong> · <strong>$605/mo MRR</strong>
+              · <span class="voc-date">2025-03-13</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1741896848081399" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text">"SMS billing needs a lot more transparency… see how many credits I am using per month… keep having to supplement… Credits also need to rollover."</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              <strong>User 152116526</strong> · <strong>$346/mo MRR</strong>
+              · <span class="voc-date">2024-12-10</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1733849947275849" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+          <li class="voc-item slack">
+            <div class="voc-text"><strong>Gen-VoCalyzer rollup (#mc-feedback-summary, Dec 2024):</strong> ~5% of sampled comments on <strong>SMS billing transparency</strong> (credit usage, rollover policies).</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SUMMARY BOT</span>
+              · <span class="voc-date">2024-12-16</span>
+              · <a href="https://intuit-teams.slack.com/archives/C06EVEZ4ZTQ/p1734368944485419" target="_blank" rel="noopener">#mc-feedback-summary ↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <h2 style="margin-top: 22px;"><span class="num">C</span><span class="risk-pill missing">MISSING</span>Capabilities competitors imply — and internal tickets already name</h2>
+
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">7</span>
+          <span class="risk-pill missing">MISSING</span>
+          <span class="theme-name">SMS title / personalization depth (merge-tag ceiling)</span>
+        </div>
+        <div class="theme-card-stats">
+          <span class="theme-stat"><strong>1</strong> ref</span>
+          <span class="theme-stat slack"><strong>1</strong> Slack</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">Alvin Rivera (triaging multilingual / merge asks): cites <strong>SMS-9736</strong> — "As a C1, I can add up to <strong>1 merge tag</strong> for Title" (backlog — SMS-specific). Constrains personalized composer output vs. email.</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">SLACK VOC</span>
+              · <span class="voc-date">2025-06-20</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1750425667526939" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <div class="theme-card">
+      <div class="theme-card-head">
+        <div class="theme-card-title">
+          <span class="theme-num">8</span>
+          <span class="risk-pill missing">MISSING</span>
+          <span class="theme-name">MMS-rich contact cards — internal readiness gap</span>
+        </div>
+        <div class="theme-card-stats">
+          <span class="theme-stat"><strong>1</strong> internal</span>
+          <span class="theme-stat slack"><strong>1</strong> Slack</span>
+        </div>
+      </div>
+      <div class="theme-card-body">
+        <ol class="voc-specifics">
+          <li class="voc-item slack">
+            <div class="voc-text">Satish Sambandham: "Contact cards require c2 action to save the card, we haven't launched contact cards anywhere yet, there is work left as our poc we built for GED uses <strong>MMS attachments</strong>."</div>
+            <div class="voc-meta">
+              <span class="src-badge slack">INTERNAL</span>
+              · <span class="voc-date">2025-07-09</span>
+              · <a href="https://intuit-teams.slack.com/archives/C051Y4H98VB/p1752093581157909" target="_blank" rel="noopener">#hvc_feedback ↗</a>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+
+    <p class="source"><strong>Page 2 sources:</strong> same Slack harvest as Page 1; Jira references surfaced in-thread (SMS-9736). Cross-link: Executive Brief surface-split theme (email vs SMS composers).</p>
+  </section>
+
+  <!-- HVC Page 3 — Phased response + critic -->
+  <section class="page" aria-label="HVC Risk Page 3">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">HVC Risk Map · Re-prioritized response (composer + reporting + credits)</div>
+        <h1>Phased plan: turn SMS growth into <em style="color:#036A4F;">retained</em> growth</h1>
+        <div class="subtitle">Sequenced by <strong>live-incident severity</strong>, then <strong>trust fixes</strong> (reporting/billing transparency), then <strong>composer depth</strong> (merge tags, MMS-adjacent cards). Aligns PM work already underway on SMS Reports PRD.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 3 of 3</div>
+        <div><strong>Next:</strong> expand to full NEB/Brand-Kit VoC census</div>
+      </div>
+    </header>
+
+    <h2><span class="num">D</span>Three phases (0–12 months)</h2>
+    <table class="dense" style="margin-bottom: 16px;">
+      <thead>
+        <tr>
+          <th style="width:22%">Phase</th>
+          <th style="width:38%">What ships</th>
+          <th style="width:40%">Grounding evidence</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>P0 · 0–60d</strong><br><span style="color:var(--muted); font-size:11px;">Incidents &amp; deception risk</span></td>
+          <td><strong>Duplicate opt-out guardrails:</strong> detect STOP/HELP already in body; warn pre-send; optional account-level default; remember last campaign preference (per Connor/Satish thread). <strong>SMS analytics narrative fix:</strong> align Help Center / SEO copy with actual measurable metrics (open rate unavailable except RCS/WhatsApp betas per internal reply).</td>
+          <td>C3 $57K live-send incident; Nicole/Alina thread on SMS open rates vs marketing article; Jira REPORTING-9201 path for click metrics on combined charts.</td>
+        </tr>
+        <tr>
+          <td><strong>P1 · 60–180d</strong><br><span style="color:var(--muted); font-size:11px;">Trust &amp; stall recovery</span></td>
+          <td><strong>SMS reporting v2</strong> (PM: Taylor Mattson PRD Oct '25): discoverability, non-empty journey SMS stats, combined chart clarity. <strong>Credit UX:</strong> surfaced negative balance; "credits required to clear queue"; automation stall notifications; locale-safe reset dates; purchase CTA from error states.</td>
+          <td>VoC: 0%/N/A reporting ($810); Mandrill-tacked-on ($576); credits negative ($310); automation stall ($630); locale bug ($900); Deepak note Q2 roadmap emphasis high-usage email+SMS reporting.</td>
+        </tr>
+        <tr>
+          <td><strong>P2 · 6–12mo</strong><br><span style="color:var(--muted); font-size:11px;">Composer parity</span></td>
+          <td>Raise SMS merge-tag ceiling (SMS-9736). Undelivered auto-suppression / credit policy review. Contact cards + MMS attachment path when GA-ready. Explore <strong>OTP vs marketing SMS</strong> separation in VoC (2FA SMS reliability $340) to avoid brand bleed.</td>
+          <td>Alvin triage SMS-9736; undelivered credit complaint $1102; Satish MMS POC; Qualtrics 2FA SMS failure (login channel).</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">E</span>Critic pass / method limits</h2>
+    <ul style="font-size: 12px; line-height: 1.55; color: var(--text); margin-top: 8px;">
+      <li><strong>Selection bias:</strong> #hvc_feedback over-indexes on escalated and survey-instrumented accounts; not a random sample of SMS explorers.</li>
+      <li><strong>MRR sums:</strong> Theme headers aggregate cited MRR only for illustration; double-counts when the same user appears in multiple quotes (e.g., 152116526) are not netted.</li>
+      <li><strong>Scope seam:</strong> Several VoCs blend <em>Journey Builder</em> with SMS — correct for unified-editor strategy because compose is embedded in automated steps, but impure for "composer-only" purists.</li>
+      <li><strong>Cross-channel:</strong> Premium $1,025 feedback lists "can't trust SMS" due to profile update rules — Audience/Audience-org issue with <strong>composer consequences</strong>; track as dependency, not NEB code defect.</li>
+      <li><strong>Next pass:</strong> mirror Automations brief quantity — systematic export, theme taxonomy, total HVC $ exposure — after NEB/Classic/Brand-Kit keyword mining completes.</li>
+    </ul>
+
+    <p class="source" style="margin-top: 16px;"><strong>Page 3 sources:</strong> Internal Slack threads cited inline; Product Health SMS churn; optional cross-read <a href="mailchimp.html#hvcrisk" target="_blank" rel="noopener">Automations HVC Risk Map</a> for methodology comparison (different product filter).</p>
+  </section>
+
+</div><!-- /panel-hvcrisk -->
+
+
+<!-- ================================================ -->
+<!-- =========== NAV/SEARCH RISK MAP TAB ============ -->
+<!-- ================================================ -->
+<div class="tabpanel" id="panel-navsearchrisk" role="tabpanel">
+  <section class="page" aria-label="Nav/Search Risk placeholder">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Mailchimp Email/SMS Unified Editor &amp; Builder</div>
+        <h1>Nav/Search Risk <em style="color:#C28A00;">— under construction</em></h1>
+        <div class="subtitle">This tab will mirror the 3-page structure of the corresponding tab in the Mailchimp Automations brief, applied to the unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist).</div>
+      </div>
+      <div class="meta">
+        <div><strong>Status:</strong> placeholder</div>
+        <div><strong>Planned:</strong> 3 pages</div>
+      </div>
+    </header>
+    <p style="color: var(--muted);">Content forthcoming. See the build plan in the active session.</p>
+  </section>
+</div><!-- /panel-navsearchrisk -->
+
+
+
+<!-- ============================================ -->
+<!-- ============== USER RESEARCH TAB =========== -->
+<!-- ============================================ -->
+<div class="tabpanel" id="panel-research" role="tabpanel">
+  <section class="page" aria-label="User Research placeholder">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Mailchimp Email/SMS Unified Editor &amp; Builder</div>
+        <h1>User Research <em style="color:#C28A00;">— under construction</em></h1>
+        <div class="subtitle">This tab will mirror the 3-page structure of the corresponding tab in the Mailchimp Automations brief, applied to the unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist).</div>
+      </div>
+      <div class="meta">
+        <div><strong>Status:</strong> placeholder</div>
+        <div><strong>Planned:</strong> 3 pages</div>
+      </div>
+    </header>
+    <p style="color: var(--muted);">Content forthcoming. See the build plan in the active session.</p>
+  </section>
+</div><!-- /panel-research -->
+
+
+<!-- ============================================ -->
+<!-- ============== PRODUCT HEALTH TAB ========== -->
+<!-- ============================================ -->
+<div class="tabpanel" id="panel-health" role="tabpanel">
+
+  <!-- Health Page 1 -->
+  <section class="page" aria-label="Product Health Page 1">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Product Health · BigQuery analysis · Year-over-Year</div>
+        <h1>Mailchimp Editor: <em style="color:#9A1F00;">bulk email is shrinking</em>, <em style="color:#9A1F00;">Write with AI churn doubled</em>, <em style="color:#036A4F;">SMS is rapidly growing</em></h1>
+        <div class="subtitle">Trailing 12-month analysis (May 2025 → Apr 2026 vs prior year). Source: <code>mc-business-intelligence.bi_aggregate.product_journey_monthly</code> (89.7M rows, refreshed daily). Editor product family = <strong>bulk email</strong> + <strong>sms</strong> + <strong>genai content generation bulk</strong> + <strong>mc transactional</strong>. (genai smart drafts is functionally not adopted — 0 Established users in either window.) Numbers reproduced from MCP-direct BigQuery queries; same pipeline pattern as Automations brief.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Source:</strong> bi_aggregate.product_journey_monthly</div>
+        <div><strong>Data freshness:</strong> May 2026 (3-day-old)</div>
+        <div><strong>Window:</strong> 12mo current vs 12mo prior</div>
+        <div><strong>Page:</strong> 1 of 3</div>
+      </div>
+    </header>
+
+    <h2 style="margin-bottom: 6px;"><span class="num">A</span>Headline KPIs across the editor product family (12mo vs prior 12mo)</h2>
+
+    <div class="kpi-row" style="margin-bottom: 14px;">
+      <div class="kpi">
+        <div class="v">888,706</div>
+        <div class="l"><strong>Bulk Email</strong> Established users (avg/month) <span class="yoy bad">-9.4%</span> YoY</div>
+      </div>
+      <div class="kpi">
+        <div class="v">31,438</div>
+        <div class="l"><strong>Write with AI</strong> Established users <span class="yoy bad">-3.8%</span> YoY · churn <span class="yoy bad">+15.4pp</span></div>
+      </div>
+      <div class="kpi">
+        <div class="v">6,673</div>
+        <div class="l"><strong>SMS composer</strong> Established users <span class="yoy good">+73.5%</span> YoY · but churn <span class="yoy bad">+3.0pp</span> (53%)</div>
+      </div>
+      <div class="kpi">
+        <div class="v">25,716</div>
+        <div class="l"><strong>Transactional</strong> Established users <span class="yoy bad">-10.5%</span> YoY · churn <span class="yoy bad">+5.8pp</span></div>
+      </div>
+    </div>
+
+    <h2 style="margin-bottom: 6px;"><span class="num">B</span>The editor product family — head to head</h2>
+    <table class="dense" style="margin-bottom: 14px;">
+      <thead>
+        <tr>
+          <th>Metric (avg/month over 12mo)</th>
+          <th>Bulk Email (current)</th>
+          <th>YoY</th>
+          <th>SMS (current)</th>
+          <th>YoY</th>
+          <th>Write with AI (current)</th>
+          <th>YoY</th>
+          <th>Transactional (current)</th>
+          <th>YoY</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><strong>Established users</strong> <em>(active value-realizing adopters)</em></td>
+          <td><strong>888,706</strong></td>
+          <td><span class="yoy bad">-9.4%</span></td>
+          <td><strong>6,673</strong></td>
+          <td><span class="yoy good">+73.5%</span></td>
+          <td><strong>31,438</strong></td>
+          <td><span class="yoy bad">-3.8%</span></td>
+          <td><strong>25,716</strong></td>
+          <td><span class="yoy bad">-10.5%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Abandon users</strong> <em>(was sticky, now lapsed)</em></td>
+          <td>593,503</td>
+          <td><span class="yoy bad">-0.9%</span></td>
+          <td>7,499</td>
+          <td><span class="yoy bad">+95.4%</span></td>
+          <td>106,188</td>
+          <td><span class="yoy bad">+101.2%</span></td>
+          <td>17,555</td>
+          <td><span class="yoy bad">+14.5%</span></td>
+        </tr>
+        <tr>
+          <td><strong>Explore users</strong> <em>(new top-of-funnel)</em></td>
+          <td>51,859</td>
+          <td><span class="yoy bad">-19.2%</span></td>
+          <td>55,257</td>
+          <td><span class="yoy good">+24.4%</span></td>
+          <td>20,521</td>
+          <td><span class="yoy bad">-73.7%</span></td>
+          <td>—*</td>
+          <td>—</td>
+        </tr>
+        <tr>
+          <td><strong>Active adoption rate</strong> <em>(Establish / total active funnel)</em></td>
+          <td><strong>55.4%</strong></td>
+          <td><span class="yoy bad">-1.3pp</span></td>
+          <td>9.3%</td>
+          <td><span class="yoy good">+2.2pp</span></td>
+          <td>18.6%</td>
+          <td><span class="yoy good">+0.6pp</span></td>
+          <td>59.4%*</td>
+          <td><span class="yoy bad">-5.8pp</span></td>
+        </tr>
+        <tr>
+          <td><strong>Activation rate</strong> <em>(Establish / Explore+Try+Establish)</em></td>
+          <td>88.0%</td>
+          <td><span class="yoy good">+1.3pp</span></td>
+          <td>10.4%</td>
+          <td><span class="yoy good">+2.8pp</span></td>
+          <td>50.1%</td>
+          <td><span class="yoy good">+12.1pp</span></td>
+          <td>82.4%*</td>
+          <td><span class="yoy bad">-3.3pp</span></td>
+        </tr>
+        <tr>
+          <td><strong>Churn rate</strong> <em>(Abandon / Establish+Abandon)</em></td>
+          <td>40.0%</td>
+          <td><span class="yoy bad">+2.1pp</span></td>
+          <td><strong>52.9%</strong></td>
+          <td><span class="yoy bad">+3.0pp</span></td>
+          <td><strong>77.2%</strong></td>
+          <td><span class="yoy bad">+15.4pp</span></td>
+          <td>40.6%</td>
+          <td><span class="yoy bad">+5.8pp</span></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px; color:var(--muted); margin-bottom: 14px;">* Transactional has effectively no Explore stage in the table (essentially all transactional users are either auto-set-up by integration or in 5_Abandon); activation rate is computed from Try+Establish only.</p>
+
+    <div class="grid cols-3" style="gap: 10px; margin-bottom: 14px;">
+      <div class="card" style="background:#FFF5F2; border-color:#F4D2C5;">
+        <strong style="font-size:12px; color:#9A1F00;">BULK EMAIL IS SHRINKING</strong>
+        <p style="font-size:12.5px; margin-top:4px;">Established <strong>-9.4% YoY</strong>, Explore <strong>-19.2%</strong>, churn <strong>+2.1pp worse</strong>. Free plan editor users <strong>-19.2%</strong>; new-tenure cohorts (&lt;12mo) <strong>-23%</strong>. Standard tier is the <em>only</em> growing plan (+9.1%).</p>
+      </div>
+      <div class="card" style="background:#FFF5F2; border-color:#F4D2C5;">
+        <strong style="font-size:12px; color:#9A1F00;">WRITE WITH AI HONEYMOON ENDED</strong>
+        <p style="font-size:12.5px; margin-top:4px;">Explorers <strong>-73.7% YoY</strong> (collapsed); Abandon <strong>+101%</strong> (doubled); churn <strong>62% → 77%</strong>. Established held flat <strong>-3.8%</strong> only because retained users stuck. The AI funnel is no longer feeding adoption.</p>
+      </div>
+      <div class="card" style="background:#F4FBF7; border-color:#CFE9DC;">
+        <strong style="font-size:12px; color:#036A4F;">SMS GROWING — BUT 53% CHURN</strong>
+        <p style="font-size:12.5px; margin-top:4px;">Established <strong>+73.5% YoY</strong> across every plan tier (Standard +86%, Essential +67%, Premium +96%). But Abandon also +95% YoY → <strong>53% churn rate</strong>. Adoption is real; <em>retention is broken</em>.</p>
+      </div>
+    </div>
+
+    <p class="source">
+      <strong>Source:</strong> <code>mc-business-intelligence.bi_aggregate.product_journey_monthly</code> · 89.7M rows · partitioned by month · clustered by product · refreshed daily (latest data: May 2026). <strong>Methodology:</strong> Stage 4_Establish = active value-realizing adopter; 5_Abandon = was sticky, now lapsed; 2_Explore + 3_Try = activation funnel; 1_Unexplored = eligible but not engaged. <strong>Editor product family scope:</strong> bulk email + sms + mc transactional + genai content generation bulk + genai smart drafts bulk (last is dropped from headline tables — functionally not adopted, &lt;5 Established users in either window).
+    </p>
+  </section>
+
+  <!-- Health Page 2 -->
+  <section class="page" aria-label="Product Health Page 2">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Product Health · Bulk Email deep-dive (the core of the editor surface)</div>
+        <h1>Bulk email is bleeding from the bottom of the funnel — Free plan, new tenure, every &lt;24mo cohort</h1>
+        <div class="subtitle">All segments shown for the bulk email product (the email composing + sending product behind NEB and Classic). Sorted to make the patterns obvious.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 2 of 3</div>
+        <div><strong>Sections:</strong> C · D · E · F</div>
+      </div>
+    </header>
+
+    <h2><span class="num">C</span>By plan tier — Standard is the only growing tier; Free collapsed -19%</h2>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:6px;"><strong>The editor's free-tier funnel is broken in the same way the Automations brief documented for CJB.</strong> Free Established users dropped from 386K to 312K in one year. Standard is the only plan growing — the higher-priced upsell is working but the bottom-of-funnel is leaking.</p>
+    <table class="dense seg-table" style="margin-bottom: 14px;">
+      <thead><tr>
+        <th>Plan tier</th>
+        <th>Established users (cur)</th>
+        <th>YoY</th>
+        <th>Abandon (cur)</th>
+        <th>YoY</th>
+        <th>Activation</th>
+        <th>Churn</th>
+        <th>Read</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><strong>Standard Monthly</strong></td><td>217,456</td><td><span class="yoy good">+9.1%</span></td><td>132,792</td><td><span class="yoy bad">+29.1%</span></td><td>85.7%</td><td>37.9%</td><td>Only growing tier; AI gating + Brand Kit unlocks here</td></tr>
+        <tr><td><strong>Free</strong></td><td>311,938</td><td><span class="yoy bad">-19.2%</span></td><td>261,493</td><td><span class="yoy bad">-11.9%</span></td><td>81.2%</td><td>45.6%</td><td>Bleeding; biggest single segment loss = ~74K Established users</td></tr>
+        <tr><td><strong>Essential Monthly</strong></td><td>233,859</td><td><span class="yoy bad">-7.4%</span></td><td>150,214</td><td><span class="yoy bad">+3.8%</span></td><td>96.5%</td><td>39.1%</td><td>Erosion; users dropping out before Standard upsell</td></tr>
+        <tr><td><strong>Legacy Monthly</strong></td><td>106,697</td><td><span class="yoy bad">-14.1%</span></td><td>40,876</td><td><span class="yoy bad">-10.5%</span></td><td>99.8%</td><td>27.7%</td><td>Old plans on slow sunset; lowest churn but shrinking population</td></tr>
+        <tr><td><strong>Premium Monthly</strong></td><td>11,671</td><td><span class="yoy good">+4.0%</span></td><td>2,129</td><td><span class="yoy bad">+9.9%</span></td><td>96.7%</td><td>15.4%</td><td>Stable; lowest churn segment in the editor; HVC concentration</td></tr>
+        <tr><td><strong>Pro/module/other</strong></td><td>2,928</td><td><span class="yoy good">+14.1%</span></td><td>2,943</td><td><span class="yoy good">+3.9%</span></td><td>78.3%</td><td>50.1%</td><td>Small but growing; Mailchimp Sites/agency-style accounts</td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">D</span>By account tenure — every cohort under 24 months is shrinking 17–23%</h2>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:6px;"><strong>The new-customer cohort is broken.</strong> 24+ tenure customers shrank only -6.5% (loyal long-tail still here). But every newer cohort dropped 17–23% YoY — meaning we are not retaining new acquisitions through to Established status. This is the early-warning indicator for next year's revenue.</p>
+    <table class="dense seg-table" style="margin-bottom: 14px;">
+      <thead><tr>
+        <th>Tenure bucket</th>
+        <th>Established (cur, total)</th>
+        <th>YoY</th>
+        <th>Abandon (cur, total)</th>
+        <th>YoY</th>
+        <th>Implied churn</th>
+        <th>Read</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><strong>24+ months</strong></td><td>706,304</td><td><span class="yoy bad">-6.5%</span></td><td>471,793</td><td><span class="yoy good">+0.0%</span></td><td>40.0%</td><td>The base; loyal but still shrinking</td></tr>
+        <tr><td><strong>&lt;24 months</strong></td><td>84,348</td><td><span class="yoy bad">-16.1%</span></td><td>76,418</td><td><span class="yoy bad">-2.0%</span></td><td>47.5%</td><td>2nd-year cohort eroding</td></tr>
+        <tr><td><strong>&lt;12 months</strong></td><td>44,759</td><td><span class="yoy bad">-22.8%</span></td><td>34,463</td><td><span class="yoy bad">-9.6%</span></td><td>43.5%</td><td>Year-1 cohort is the worst — biggest decline</td></tr>
+        <tr><td><strong>&lt;6 months</strong></td><td>26,349</td><td><span class="yoy bad">-20.9%</span></td><td>9,076</td><td><span class="yoy bad">-4.9%</span></td><td>25.6%</td><td>Acquisition cohort shrinking; activation eroding</td></tr>
+        <tr><td><strong>&lt;3 months</strong></td><td>20,800</td><td><span class="yoy bad">-19.3%</span></td><td>1,749</td><td><span class="yoy bad">-6.6%</span></td><td>7.8%</td><td>Newest acquisitions; less abandon (no time yet)</td></tr>
+        <tr><td><strong>&lt;1 month</strong></td><td>6,144</td><td><span class="yoy bad">-17.5%</span></td><td>7</td><td>n/a</td><td>0.1%</td><td>First-month adoption dropping</td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">E</span>HVC vs non-HVC — HVCs are stable; non-HVCs are leaving</h2>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:6px;">HVC users (high-value: list size &gt;25K, premium plans, etc.) make up only <strong>7.1%</strong> of editor Established users but are notably more stable. Non-HVCs are the source of the -9.4% headline decline.</p>
+    <table class="dense seg-table" style="margin-bottom: 14px;">
+      <thead><tr>
+        <th>Segment</th>
+        <th>Established (cur)</th>
+        <th>YoY</th>
+        <th>Share of total</th>
+        <th>Read</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><strong>HVC</strong> (high-value)</td><td>63,008</td><td><span class="yoy bad">-3.3%</span></td><td>7.1%</td><td>Loyal but slightly shrinking; Premium tier holding up best</td></tr>
+        <tr><td><strong>Non-HVC</strong></td><td>825,696</td><td><span class="yoy bad">-9.9%</span></td><td>92.9%</td><td>The 9.4% decline is almost entirely non-HVC; Free + Essential erosion</td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">F</span>Bulk email funnel arithmetic — where the loss is concentrated</h2>
+    <table class="dense" style="margin-bottom: 14px;">
+      <thead><tr><th>Stage</th><th>Cur 12mo</th><th>Pri 12mo</th><th>YoY</th><th>Implication</th></tr></thead>
+      <tbody>
+        <tr><td>1_Unexplored (eligible non-users)</td><td>293,828</td><td>341,605</td><td><span class="yoy good">-14.0%</span></td><td>Smaller pool of unexplored = TAM is contracting</td></tr>
+        <tr><td>2_Explore (new top-of-funnel)</td><td>51,859</td><td>64,209</td><td><span class="yoy bad">-19.2%</span></td><td>Top of funnel is the biggest leak</td></tr>
+        <tr><td>3_Try (mid-funnel, attempting)</td><td>69,810</td><td>86,059</td><td><span class="yoy bad">-18.9%</span></td><td>Try-stage shrinking same magnitude as Explore</td></tr>
+        <tr><td>4_Establish (sticky adopter)</td><td><strong>888,706</strong></td><td><strong>980,561</strong></td><td><span class="yoy bad">-9.4%</span></td><td>Net of Establish&rarr;Abandon transitions; 92K-user loss in absolute terms</td></tr>
+        <tr><td>5_Abandon (lapsed)</td><td>593,503</td><td>598,769</td><td><span class="yoy good">-0.9%</span></td><td>Abandon stable in absolute terms; the loss is in flow-through, not in retained-then-lost users</td></tr>
+        <tr><td><strong>Total active (Explore+Try+Establish+Abandon)</strong></td><td>1,603,878</td><td>1,729,598</td><td><span class="yoy bad">-7.3%</span></td><td>The whole editor footprint is contracting</td></tr>
+      </tbody>
+    </table>
+
+    <p class="source">All figures from the same BigQuery query as Page 1, decomposed by `package`, `account_tenure_months`, and `is_high_value` dimensions. Numbers are 12-month averages of monthly snapshots; "Established (cur, total)" sums HVC + non-HVC at the tenure level.</p>
+  </section>
+
+  <!-- Health Page 3 -->
+  <section class="page" aria-label="Product Health Page 3">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Product Health · SMS + Write with AI deep-dive · Cross-product story · Critic pass</div>
+        <h1>SMS is rapidly adopted but 53% churn; <em style="color:#9A1F00;">Write with AI explorers down 74%</em>; the AI honeymoon ended</h1>
+        <div class="subtitle">Detail tables for the two products with the most-dramatic YoY moves, plus cross-product insights and a self-critique pass on the synthesis.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 3 of 3</div>
+        <div><strong>Sections:</strong> G · H · I · CRITIC</div>
+      </div>
+    </header>
+
+    <h2><span class="num">G</span>SMS composer — adoption story by plan tier</h2>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:6px;">SMS adoption growing across <em>every</em> plan tier (+39% to +96% YoY). But churn is alarmingly high (53%) and getting worse. Standard tier is the largest by volume; Premium is fastest-growing.</p>
+    <table class="dense seg-table" style="margin-bottom: 14px;">
+      <thead><tr>
+        <th>Plan tier</th>
+        <th>Established (cur)</th>
+        <th>YoY</th>
+        <th>Abandon (cur)</th>
+        <th>Churn rate</th>
+        <th>Activation rate</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><strong>Standard Monthly</strong></td><td>3,561</td><td><span class="yoy good">+85.9%</span></td><td>3,529</td><td>49.8%</td><td>11.2%</td></tr>
+        <tr><td><strong>Essential Monthly</strong></td><td>1,236</td><td><span class="yoy good">+66.8%</span></td><td>1,325</td><td>51.7%</td><td>7.3%</td></tr>
+        <tr><td><strong>Legacy Monthly</strong></td><td>602</td><td><span class="yoy good">+62.7%</span></td><td>685</td><td>53.2%</td><td>10.2%</td></tr>
+        <tr><td><strong>Free</strong></td><td>521</td><td><span class="yoy good">+38.9%</span></td><td>1,286</td><td>71.2%</td><td>9.3%</td></tr>
+        <tr><td><strong>Pro/module/other</strong></td><td>480</td><td><span class="yoy good">+60.0%</span></td><td>392</td><td>44.9%</td><td>33.6%</td></tr>
+        <tr><td><strong>Premium Monthly</strong></td><td>261</td><td><span class="yoy good">+96.2%</span></td><td>251</td><td>49.0%</td><td>20.4%</td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">H</span>Write with AI — the funnel collapsed</h2>
+    <p style="font-size:12px; color:var(--muted); margin-bottom:6px;"><strong>The single most concerning finding in this brief.</strong> Explorers (new top-of-funnel users) dropped from 78K/mo to 21K/mo — a 74% collapse. Abandons doubled. Established held flat only because retained users stuck. By plan: Free (-15%) and Standard (-2%) both shrinking; only Essential and Premium growing slightly. The "AI in the editor" story is in trouble.</p>
+    <table class="dense seg-table" style="margin-bottom: 14px;">
+      <thead><tr>
+        <th>Plan tier</th>
+        <th>Established (cur)</th>
+        <th>YoY</th>
+        <th>Explore (cur)</th>
+        <th>Explore YoY</th>
+        <th>Abandon (cur)</th>
+        <th>Churn rate</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><strong>Standard Monthly</strong></td><td>17,886</td><td><span class="yoy bad">-2.3%</span></td><td>12,615</td><td><span class="yoy bad">-72.9%</span></td><td>61,654</td><td>77.5%</td></tr>
+        <tr><td><strong>Legacy Monthly</strong></td><td>8,763</td><td><span class="yoy bad">-4.4%</span></td><td>3,862</td><td><span class="yoy bad">-78.5%</span></td><td>26,315</td><td>75.0%</td></tr>
+        <tr><td><strong>Free</strong></td><td>2,677</td><td><span class="yoy bad">-15.5%</span></td><td>2,779</td><td><span class="yoy bad">-66.2%</span></td><td>9,069</td><td>77.2%</td></tr>
+        <tr><td><strong>Premium Monthly</strong></td><td>1,169</td><td><span class="yoy good">+4.6%</span></td><td>375</td><td><span class="yoy bad">-76.2%</span></td><td>2,893</td><td>71.2%</td></tr>
+        <tr><td><strong>Essential Monthly</strong></td><td>468</td><td><span class="yoy good">+14.7%</span></td><td>439</td><td><span class="yoy bad">-75.2%</span></td><td>4,938</td><td>91.3%</td></tr>
+        <tr><td><strong>Pro/module/other</strong></td><td>343</td><td><span class="yoy good">+15.1%</span></td><td>217</td><td><span class="yoy bad">-61.5%</span></td><td>723</td><td>67.8%</td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">I</span>Cross-product story — what these four products tell us together</h2>
+    <div class="grid cols-2" style="gap: 12px; margin-bottom: 14px;">
+      <div class="card">
+        <strong style="font-size:12px;">FINDINGS</strong>
+        <ul style="font-size: 12px; margin-top: 4px;">
+          <li><strong>Bulk email is shrinking but only at the bottom</strong>. HVC stable, Premium growing, Standard growing — but Free / Essential / Legacy bleeding. The pricing scar from CJB / brand decay is hitting the editor too.</li>
+          <li><strong>SMS adoption is real and broad-based</strong>. Every plan grew &gt;38% YoY. But 53% churn means we're losing more than half of trialists. Activation is working; <em>retention is broken</em>. The "unified email+SMS" story should focus on retention not adoption.</li>
+          <li><strong>Write with AI is in funnel collapse</strong>. Explorers down 74% across every plan tier; abandons doubled. The honeymoon ended. Likely root causes (hypotheses to validate in HVC Risk Map): geo-gating disappointment for international users; quality issues vs ChatGPT/Claude direct usage; users tried it once and didn't return.</li>
+          <li><strong>Transactional shrinking</strong> -10.5% YoY; Legacy tier worst (-18%). Likely platform substitution (SES/Postmark/SendGrid) for power users.</li>
+          <li><strong>The 24+ tenure cohort is the floor.</strong> 706K Established editor users have been there 2+ years and only -6.5% YoY. The strategy needs to hold this floor while rebuilding the new-customer funnel.</li>
+        </ul>
+      </div>
+      <div class="card warm">
+        <strong style="font-size:12px;">IMPLICATIONS FOR THE STRATEGY (Tab 9 update)</strong>
+        <ul style="font-size: 12px; margin-top: 4px;">
+          <li>The $25–30M ARR target now sits on a <em>declining</em> Established baseline; recovery is the first $10–15M before any new bets pay off.</li>
+          <li><strong>"Recover Free / Essential editor adoption"</strong> becomes a P1 strategic shift. Currently scoped under Roadmap to Win F1/F4/F5; needs to become a named bet.</li>
+          <li><strong>Write with AI re-launch</strong> is now urgent — funnel collapse means the current ungate + brand strategy has failed. Conversational editing (S1) needs a faster path; the current Beta is not landing.</li>
+          <li><strong>SMS is the highest-leverage growth lever</strong> — 73% adoption YoY across all tiers. Fixing SMS retention (ship S5 Generative SMS, S7 MMS bundle, F3 unified canvas) likely worth $5–8M FY27.</li>
+          <li><strong>The "AI in the editor" public narrative needs a reset</strong>: not "AI is helping marketers" but "AI we shipped didn't stick — here's the next take."</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card" style="background:#FFF5F2; border-color:#F4D2C5; margin-bottom: 14px;">
+      <h2 style="margin-bottom: 6px;"><span class="num">CRITIC</span>Self-critique pass — what could be wrong about this analysis?</h2>
+      <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">A separate review pass against the synthesis above. Looking for hallucinations, weakly-grounded claims, missing context, and overconfident assertions.</p>
+
+      <ul style="font-size:12.5px; margin-bottom: 6px;">
+        <li><strong>Definition risk — "bulk email" as the editor product</strong>: <code>bulk email</code> in `product_journey_monthly` likely tracks <em>sending</em> behavior (sent at least one campaign), not <em>composing</em> behavior in NEB specifically. Established users for "bulk email" includes Classic Builder users and possibly users who don't compose at all (they send via API). The headline -9.4% YoY is editor-relevant but is an upper bound on editor decline; some of the loss is probably API-only senders moving to Postmark/SES, not editor-related. <strong>Confidence: medium.</strong></li>
+        <li><strong>Hallucination check — "+9.1% Standard YoY"</strong>: 217,456 / 199,275 = 1.0913 = +9.13%. Verified accurate.</li>
+        <li><strong>Hallucination check — "Write with AI Explorers -73.7%"</strong>: 20,521 / 77,994 = 0.263 = -73.7%. Verified.</li>
+        <li><strong>Hallucination check — "SMS Established +73.5%"</strong>: 6,673 / 3,846 = 1.735 = +73.5%. Verified.</li>
+        <li><strong>Possible misread — "53% SMS churn rate"</strong>: 7,499 / (6,673 + 7,499) = 52.9%. Correct. But this is a <em>cross-sectional</em> rate (Abandon / total ever-active), not a monthly cohort churn. Actual churn velocity could be higher or lower depending on how Mailchimp's stage-transition definition handles SMS keyword opt-ins (which create transient "active" users).</li>
+        <li><strong>Missing dimension — country split</strong>: I did not pull `country_group` cuts. The Write with AI funnel collapse is plausibly geo-attributable (the geo-gate to US/UK/AU/CA in 2025 may have pulled international Explorers out of the funnel). This is an obvious next query before defending the synthesis.</li>
+        <li><strong>Missing dimension — ecomm_status</strong>: editor adoption probably differs sharply between ecom-connected and non-ecom accounts; not analyzed yet.</li>
+        <li><strong>Methodology gap vs Automations brief</strong>: the Automations brief used a 25-unit-test + 6-DQ + 5-regression-assertion pipeline. This Tab 7 was built from direct MCP queries with no automated assertions yet. Numbers are accurate but the "lineage proof" is informal.</li>
+        <li><strong>Smart Drafts product is functionally not adopted</strong>: zero Established users in either window. This is either a tracking issue (the product exists but isn't being attributed to this `product` value), or the product is genuinely not used. Worth confirming with the Engineering team before publishing.</li>
+        <li><strong>"AI honeymoon ended" is a narrative claim, not a measured one</strong>: I am inferring quality / dissatisfaction from the funnel collapse + churn doubling. The Funnel collapse could equally be: (a) Mailchimp stopped promoting the feature in-product; (b) quota / rate-limit changes pulled people out; (c) policy changes hid the feature. Need HVC Risk Map (Tab 4) and User Research (Tab 6) to validate the qualitative cause.</li>
+        <li><strong>What I'd recommend the PM do next</strong>: (a) pull country_group + ecomm_status cuts before the next exec read-out; (b) cross-check `bulk email` Established count against Mailchimp's internal "active senders" definition to confirm the editor-cut interpretation; (c) ask Engineering whether `genai smart drafts bulk` tracking is broken; (d) commission a 2-week qualitative deep-dive on Write with AI churn root cause; (e) update Strategy 6-Pager (Tab 9) with these baseline numbers — the $25–30M anchor likely now needs a $10–15M "recovery" sub-line before net-new lift.</li>
+      </ul>
+    </div>
+
+    <p class="source">
+      <strong>Source:</strong> Direct queries against <code>mc-business-intelligence.bi_aggregate.product_journey_monthly</code> via project-0-cursor-bigquery MCP (May 12, 2026). All figures are 12-month averages of monthly stage counts. <strong>Editor product family:</strong> bulk email + sms + genai content generation bulk + mc transactional. <strong>Excluded:</strong> genai smart drafts bulk (functionally not adopted), landing page (separate builder), signup form (separate builder), surveys (block-only authoring). <strong>Caveats:</strong> see CRITIC pass above. <strong>Pipeline:</strong> direct MCP queries; no formal unit-test / DQ-check / regression-assertion suite was run for this v1 (mirrors-but-does-not-match the Automations-brief pipeline rigor).
+    </p>
+  </section>
+
+</div><!-- /panel-health -->
+
+<!-- ============== STRATEGY 6-PAGER TAB (executive read: Arial 10, black/grey, tight) ============== -->
+<div class="tabpanel" id="panel-strategy" role="tabpanel">
+<style>
+  #panel-strategy { font-family: Arial, Helvetica, sans-serif; color: #000; font-size: 10pt; line-height: 1.3; }
+  #panel-strategy * { font-family: Arial, Helvetica, sans-serif !important; color: #000; }
+  #panel-strategy a { color: #000; text-decoration: underline; }
+  #panel-strategy .pg {
+    background: #fff; border: 1px solid #cfcfcf; box-shadow: none;
+    padding: 16pt 18pt; margin: 0 0 12pt 0; border-radius: 0;
+  }
+  #panel-strategy .doctitle {
+    font-size: 12pt; font-weight: bold; margin: 0 0 3pt 0; padding: 0; border: 0; background: none;
+  }
+  #panel-strategy .docmeta { font-size: 8.5pt; color: #555 !important; margin: 0 0 8pt 0; }
+  #panel-strategy .docmeta * { color: #555 !important; }
+  #panel-strategy h2, #panel-strategy h3 {
+    font-size: 10pt; font-weight: bold; margin: 8pt 0 2pt 0; padding: 0;
+    border: 0; background: none; letter-spacing: 0; line-height: 1.25;
+  }
+  #panel-strategy h2 .num { display: none; }
+  #panel-strategy p { font-size: 10pt; margin: 0 0 4pt 0; line-height: 1.3; }
+  #panel-strategy ul, #panel-strategy ol { margin: 1pt 0 6pt 0; padding-left: 16pt; }
+  #panel-strategy li { font-size: 10pt; margin: 0 0 1.5pt 0; line-height: 1.3; }
+  #panel-strategy strong { font-weight: bold; }
+  #panel-strategy em { font-style: italic; }
+  #panel-strategy table {
+    width: 100%; border: 1px solid #999; border-collapse: collapse;
+    font-size: 9pt; margin: 3pt 0 6pt 0;
+  }
+  #panel-strategy th, #panel-strategy td {
+    border: 1px solid #999; padding: 3pt 5pt; vertical-align: top; line-height: 1.25;
+    background: #fff; text-align: left;
+  }
+  #panel-strategy th { background: #ececec; font-weight: bold; font-size: 9pt; text-transform: none; letter-spacing: 0; color: #000; }
+  #panel-strategy tr:nth-child(even) td { background: #f7f7f7; }
+  #panel-strategy .source { font-size: 8.5pt; color: #555 !important; margin-top: 8pt; }
+  #panel-strategy .source * { color: #555 !important; }
+  #panel-strategy code { font-family: Arial, Helvetica, sans-serif !important; font-size: 9pt; background: #f0f0f0; padding: 0 2pt; }
+  #panel-strategy .skel-note { background: #fff8e6; border: 1px solid #f5d77b; padding: 6pt 8pt; font-size: 8.5pt; margin: 0 0 8pt 0; }
+  @media print {
+    #panel-strategy .pg { border: none; padding: 0; margin: 0 0 0.4in 0; page-break-after: always; }
+    #panel-strategy .pg:last-of-type { page-break-after: auto; }
+  }
+</style>
+
+<!-- PAGE 1 -->
+<section class="pg" aria-label="Strategy Page 1">
+  <div class="doctitle">Mailchimp Email/SMS Unified Editor &amp; Builder &mdash; FY27 Strategy</div>
+  <div class="docmeta">Mailchimp standalone &middot; 6-page executive read &middot; Prepared May 2026 &middot; Author: PM, Mailchimp Authoring Surface &middot; <strong>v1 SKELETON</strong> &mdash; financial walk + adoption baselines pending BigQuery editor-product cuts (Tab 7 dependency).</div>
+
+  <div class="skel-note"><strong>SKELETON STATUS:</strong> Page 1, 5, 6 (Strategy question, Risks, Critic) substantially complete. Pages 2&ndash;4 (Target state, Strategy, Financial walk) carry placeholder ranges keyed to the $25&ndash;30M ARR anchor and will tighten once Tab 7 (Product Health BigQuery editor cut) and Tab 4 (HVC Risk Map editor VoC) are populated. All numerical ranges in this skeleton are <em>directional</em> and explicitly bracketed.</div>
+
+  <h2>Strategy question</h2>
+  <p>What is the boldest way Mailchimp's Email/SMS Unified Editor &amp; Builder can deliver <strong>$25&ndash;30M of incremental ARR in FY27</strong> &mdash; the authoring-surface share of Mailchimp's standalone growth target &mdash; while reversing a structural narrative that <em>"Mailchimp ships features but loses the editor conversation to Klaviyo and Stensul"</em>?</p>
+
+  <h2>Financial anchor</h2>
+  <p>MC FY26 revenue baseline (planning scenario, Finance to confirm): $1.28&ndash;1.31B. A 5% FY27 lift = ~<strong>$65M incremental ARR</strong>. The authoring surface is targeted to drive <strong>~40&ndash;46% of that lift = $25&ndash;30M ARR</strong> &mdash; sized as the band between the Automations brief commit ($20&ndash;25M) and the corp Strategy 6-Pager envelope ($20&ndash;32M) for Automations, with editor-driven Free&rarr;Paid conversion + retention save layered on top. Every initiative below is bounded against this number.</p>
+
+  <h2>Customer problem (4 quantified gaps)</h2>
+  <ul>
+    <li><strong>Two-builder bifurcation.</strong> NEB + Classic coexist; templates do not port; mid-migration users rebuild from scratch. <em>Sized loss</em>: TBD via BigQuery editor cut (Tab 7) &mdash; estimated 5&ndash;10K HVC accounts blocked from migrating, ~$2&ndash;4M ARR drag from churn-attributable-to-builder-friction. Voice of Customer: #1 hate theme.</li>
+    <li><strong>Email + SMS surface split.</strong> "Unified" is a billing claim. No shared blocks, no cross-channel preview, no unified Brand Kit propagation across channels. <em>Sized loss</em>: ~30&ndash;50% of SMS-eligible Standard customers do not adopt SMS partly because authoring is a separate surface; opportunity cost ~$3&ndash;6M ARR.</li>
+    <li><strong>Klaviyo Universal Content gap.</strong> Klaviyo Spring 2026 ships Universal Content blocks as default. Mailchimp saved-content remains template-scoped. The single most-asked-for editor primitive of 2026. <em>Sized loss</em>: Klaviyo migration accelerant; estimated $4&ndash;8M ARR drag in DTC mid-market over 12 months.</li>
+    <li><strong>Write with AI geo-gate</strong>: US/UK/AU/CA-only beta on a globally-sold Standard plan. International Standard customers pay full price for an inaccessible feature. <em>Sized loss</em>: brand damage that is hard to dollarize but visible in international Trustpilot 1-stars and EMEA r/MailChimp threads; estimated ~10&ndash;20% of international Standard renewal risk = $2&ndash;4M ARR.</li>
+  </ul>
+  <p style="font-size: 9pt; color: #555;"><em>Sized-loss totals (placeholder, mid-band): ~$11&ndash;22M annualized opportunity cost across the four gaps before any new bets. The strategy below adds an additional $14&ndash;19M from net-new differentiated authoring bets to land in the $25&ndash;30M target range. Tab 11 (Loss Attribution) will validate or revise these ranges.</em></p>
+
+  <h2>What success looks like in 12 months</h2>
+  <ul>
+    <li>Single email builder GA; Classic on maintenance only; 80%+ of Classic accounts migrated.</li>
+    <li>Universal Content blocks shipped; saved-content automatically migrated to Universal.</li>
+    <li>Write with AI ungated globally (or repackaged as a paid AI add-on with global parity).</li>
+    <li>Email + SMS share at least 3 content primitives in the canvas (block, brand attach, preview).</li>
+    <li>Real-time multi-author co-edit + comments shipped (the credibility moment).</li>
+    <li>Editor adoption (NEB Established users) +20&ndash;30% YoY; activation rate +10&ndash;15pp YoY.</li>
+  </ul>
+</section>
+
+<!-- PAGE 2 -->
+<section class="pg" aria-label="Strategy Page 2">
+  <div class="doctitle">Target state &mdash; today vs end of FY27</div>
+  <div class="docmeta">Mailchimp Email/SMS Unified Editor &amp; Builder &middot; Page 2 of 6 &middot; v1 skeleton</div>
+
+  <div class="skel-note"><strong>Numbers in this table will be replaced with BigQuery-validated baselines once Tab 7 (Product Health) is populated.</strong> Today columns currently use Automations-brief Product Health proxies (132K Established CJB users, 33.6% activation, 40.2% churn) as a starting placeholder. Editor-product cut will likely show different absolute numbers; YoY directional movements should be similar.</div>
+
+  <h2>Today &rarr; FY28 (April 2027) target</h2>
+  <table>
+    <thead><tr><th style="width: 32%;">Metric (avg/month)</th><th style="width: 26%;">Today (May '26)</th><th style="width: 26%;">Target (Apr '27)</th><th style="width: 16%;">&Delta;</th></tr></thead>
+    <tbody>
+      <tr><td>NEB Established users</td><td>~140K (placeholder)</td><td>175&ndash;185K</td><td>+25&ndash;32%</td></tr>
+      <tr><td>NEB Activation rate (Explore&rarr;Establish)</td><td>~32% (placeholder)</td><td>42&ndash;48%</td><td>+10&ndash;16pp</td></tr>
+      <tr><td>NEB Churn rate</td><td>~40% (placeholder)</td><td>33&ndash;36%</td><td>&minus;4&ndash;7pp</td></tr>
+      <tr><td>Classic Established users</td><td>~70K (placeholder)</td><td>&lt;10K (sunset path)</td><td>&minus;85%+</td></tr>
+      <tr><td>Brand Kit attach rate (% of editor adopters)</td><td>~35% (placeholder)</td><td>65&ndash;75%</td><td>+30&ndash;40pp</td></tr>
+      <tr><td>Write with AI weekly active (US/UK/AU/CA today)</td><td>~8% of eligible (placeholder)</td><td>30&ndash;40% globally</td><td>+22&ndash;32pp + geo expansion</td></tr>
+      <tr><td>SMS adopters in editor (US/CA only today)</td><td>~12% of paid (placeholder)</td><td>20&ndash;25%; +UK/AU launch</td><td>+8&ndash;13pp + geo expansion</td></tr>
+      <tr><td>Universal Content blocks adopted (post-launch)</td><td>0 (not shipped)</td><td>50&ndash;70% of NEB adopters</td><td>net-new</td></tr>
+      <tr><td>Real-time co-edit sessions / week (post-launch)</td><td>0 (not shipped)</td><td>15&ndash;25K</td><td>net-new</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Customer experience &mdash; today vs target</h2>
+  <table>
+    <thead><tr><th style="width: 28%;">Lived experience</th><th style="width: 36%;">Today</th><th style="width: 36%;">FY28 target</th></tr></thead>
+    <tbody>
+      <tr><td>Starting a new email</td><td>Decide between NEB and Classic; pick template; rebuild from scratch if migrated wrong way</td><td>One editor; Brand Kit pre-applied; Universal Content pulls in standard header/footer</td></tr>
+      <tr><td>Composing copy</td><td>Stare at blank canvas (international users); Write with AI in 4 countries (US/UK/AU/CA)</td><td>Conversational AI editing globally; "rewrite this in our spring tone" works in any market</td></tr>
+      <tr><td>Email + SMS for same campaign</td><td>Compose email in NEB; switch to SMS composer; copy-paste; reformat; preview separately</td><td>One canvas; shared content blocks render in both; cross-channel preview side-by-side</td></tr>
+      <tr><td>Reusing content across emails</td><td>Save block per template; manually update each instance when it changes</td><td>Universal Content; edit once, propagates everywhere</td></tr>
+      <tr><td>Working with a teammate on the same email</td><td>One editor at a time; screenshots over Slack; merge by hand</td><td>Real-time co-edit; @-mention comments; resolve in canvas</td></tr>
+      <tr><td>Power-user / agency / Premium need</td><td>Drop to Classic for HTML; lose NEB block library</td><td>NEB Code Mode; Liquid templating; HTML escape hatch without leaving NEB</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PAGE 3 -->
+<section class="pg" aria-label="Strategy Page 3">
+  <div class="doctitle">The strategy &mdash; 4 strategic shifts, 5 key bets</div>
+  <div class="docmeta">Mailchimp Email/SMS Unified Editor &amp; Builder &middot; Page 3 of 6 &middot; v1 skeleton</div>
+
+  <h2>4 strategic shifts</h2>
+  <ol>
+    <li><strong>From "two builders coexist" to "one modern editor."</strong> Sunset Classic with funded migration. Ship NEB Code Mode + Liquid (Roadmap to Win F5/S11) so Premium / agency users can move. Investment: 30% of editor engineering.</li>
+    <li><strong>From "billing-unified" to "authoring-unified" email + SMS.</strong> Shared blocks, cross-channel preview, Brand Kit applies to SMS short links. Convert the marketing claim to product reality. Investment: 25%.</li>
+    <li><strong>From "saved content per template" to "Universal Content."</strong> Match Klaviyo Spring 2026 ship; auto-migrate existing saved blocks. Investment: 15%.</li>
+    <li><strong>From "AI as a US-first beta" to "AI as the always-on authoring partner."</strong> Ungate Write with AI globally; ship conversational editing (S1); ship brand-style transfer (S2). Investment: 30%.</li>
+  </ol>
+
+  <h2>5 key bets &mdash; what we are betting the year on</h2>
+  <table>
+    <thead><tr><th style="width: 24%;">Bet</th><th style="width: 38%;">What it is</th><th style="width: 24%;">Why it pays</th><th style="width: 14%;">FY27 $ band</th></tr></thead>
+    <tbody>
+      <tr><td><strong>B1 &middot; Builder Unification + Code Mode (NEB-only)</strong></td><td>Sunset Classic with funded migration; ship NEB Code Mode + Liquid templating; deprecate Classic with 12mo grace.</td><td>Ends the #1 internal-coherence cost; unblocks every other editor investment from being built twice.</td><td>$5&ndash;7M</td></tr>
+      <tr><td><strong>B2 &middot; Universal Content blocks</strong></td><td>Edit-once-propagate-everywhere blocks; auto-migrate existing saved content; cross-template + cross-flow.</td><td>Closes Klaviyo Spring 2026 parity; stops DTC mid-market migration cited in Tab 2.</td><td>$4&ndash;6M</td></tr>
+      <tr><td><strong>B3 &middot; Unified email+SMS authoring canvas</strong></td><td>Shared blocks, cross-channel preview, Brand Kit applies to SMS branded short links, side-by-side render at compose time.</td><td>Realizes the "unified" marketing promise; lifts SMS adoption from ~12% to 20&ndash;25% of paid; cross-channel attach = LTV expansion.</td><td>$6&ndash;9M</td></tr>
+      <tr><td><strong>B4 &middot; Conversational AI editing + global ungate</strong></td><td>Write with AI ungated to all markets; conversational in-canvas edits ("redo the hero in a friendlier tone"); brand-style transfer between campaigns.</td><td>Recovers international brand damage; closes the AI gap with Klaviyo; differentiates on Brand Kit-aware conversational edits (no comp ships this).</td><td>$4&ndash;6M</td></tr>
+      <tr><td><strong>B5 &middot; Real-time multi-author collab + commenting</strong></td><td>Google-Docs-style co-edit + @-mention comments + resolve-in-context. Single biggest visible "Mailchimp is back, modern" credibility moment.</td><td>Recovers "Mailchimp is dated" narrative; unlocks 2&ndash;5 person marketing teams (the fastest-growing tier).</td><td>$3&ndash;5M</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size: 9pt; color: #555;">Sum mid-band: ~$22&ndash;33M. Lands inside the $25&ndash;30M anchor with conservative ranges; upper-band assumes B3 (unified authoring canvas) ships before BFCM '26.</p>
+
+  <h2>Sequencing rationale</h2>
+  <p>B2 (Universal Content) ships first &mdash; it is the smallest engineering scope, closes a public competitor parity claim, and creates the data primitive (cross-template content) that B3 (unified canvas) reuses. B1 (Builder Unification) is the longest engineering project and requires B5's parallel work on Code Mode to be safe to sunset Classic. B4 (AI ungate + conversational) starts immediately on policy/legal track + Q3 product ship. B3 lands BFCM-adjacent for SMS revenue capture.</p>
+</section>
+
+<!-- PAGE 4 -->
+<section class="pg" aria-label="Strategy Page 4">
+  <div class="doctitle">Financial walk &mdash; how $25&ndash;30M shows up</div>
+  <div class="docmeta">Mailchimp Email/SMS Unified Editor &amp; Builder &middot; Page 4 of 6 &middot; v1 skeleton</div>
+
+  <div class="skel-note"><strong>SKELETON:</strong> Lever percentages and absolute $ here are placeholders pending Tab 10 (Growth Model) decomposition with BigQuery-validated editor adoption baselines. The $25&ndash;30M envelope and lever <em>structure</em> are committed.</div>
+
+  <h2>The financial walk</h2>
+  <table>
+    <thead><tr><th style="width: 28%;">Lever</th><th style="width: 16%;">Mid-band $</th><th>What drives it</th></tr></thead>
+    <tbody>
+      <tr><td><strong>L1 &middot; Editor adoption growth</strong> (NEB Established users +25&ndash;32% YoY)</td><td>$8&ndash;11M</td><td>Builder Unification (B1) removes the migration friction; Universal Content (B2) closes the Klaviyo migration trigger; Free-plan editor experience improvements compound the funnel.</td></tr>
+      <tr><td><strong>L2 &middot; Activation</strong> (Explore&rarr;Establish +10&ndash;15pp)</td><td>$3&ndash;5M</td><td>Conversational AI (B4) eliminates blank-page anxiety for non-adopters; new-user template ICP-fit improves time-to-first-send.</td></tr>
+      <tr><td><strong>L3 &middot; SMS attach growth</strong> (12% &rarr; 20&ndash;25% of paid)</td><td>$5&ndash;8M</td><td>Unified canvas (B3) makes SMS feel native; MMS bundle pricing (S7) removes overage anxiety; Generative SMS (S5) eliminates writing friction.</td></tr>
+      <tr><td><strong>L4 &middot; Plan-tier upgrades</strong> (Free&rarr;Essentials, Essentials&rarr;Standard)</td><td>$3&ndash;4M</td><td>NEB feature gating (multivariate, MMS, full Creative Assistant, Write with AI) drives organic upgrades when customers hit limits.</td></tr>
+      <tr><td><strong>L5 &middot; Retention save</strong> (editor-attributable churn -3&ndash;5pp)</td><td>$4&ndash;6M</td><td>Builder Unification (B1) removes the #1 churn driver; collab (B5) reduces "I outgrew Mailchimp" migration; Universal Content (B2) reduces "Klaviyo just shipped what I needed" migration.</td></tr>
+      <tr><td><strong>L6 &middot; Attributed-revenue lift per customer</strong> (better authoring = better engagement = better LTV)</td><td>$2&ndash;3M</td><td>Improved deliverability via accessibility coach (F9); per-recipient dynamic content (F8); brand-consistent quality &gt; quantity sends.</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size: 9pt; color: #555;">Mid-band sum: $25&ndash;37M. Anchored target $25&ndash;30M sits in the conservative band; upper-band $37M requires B3 (unified canvas) full ship + B7 (international SMS) piloting.</p>
+
+  <h2>Investment &middot; how the team is staffed against this</h2>
+  <ul>
+    <li><strong>Editor platform team</strong>: builder unification, NEB Code Mode, sunset Classic. 30% of editor engineering capacity.</li>
+    <li><strong>AI / Intuit Assist team</strong>: conversational editing, brand-style transfer, geo-ungate, Generative SMS. 25%.</li>
+    <li><strong>Universal Content team</strong>: blocks, migration, cross-template/cross-flow. 15%.</li>
+    <li><strong>SMS + cross-channel team</strong>: unified canvas, shared blocks, cross-channel preview, MMS bundling. 20%.</li>
+    <li><strong>Collab + governance team</strong>: real-time co-edit, commenting, accessibility coach, Brand Kit governance hooks. 10%.</li>
+  </ul>
+</section>
+
+<!-- PAGE 5 -->
+<section class="pg" aria-label="Strategy Page 5">
+  <div class="doctitle">Risks &middot; alternatives considered &middot; assumptions</div>
+  <div class="docmeta">Mailchimp Email/SMS Unified Editor &amp; Builder &middot; Page 5 of 6 &middot; v1 skeleton</div>
+
+  <h2>Top 6 risks</h2>
+  <table>
+    <thead><tr><th style="width: 26%;">Risk</th><th>Likelihood &amp; impact</th><th style="width: 28%;">Mitigation</th></tr></thead>
+    <tbody>
+      <tr><td><strong>R1 &middot; Classic users churn during migration</strong></td><td>Med likelihood / High impact. ~70K Classic Established users; even 10% churn = $1&ndash;2M ARR loss.</td><td>Fund migration; ship NEB Code Mode (F5) <em>before</em> sunset announce; 12mo grace period; 1:1 migration tool with style preservation.</td></tr>
+      <tr><td><strong>R2 &middot; Klaviyo accelerates editor roadmap further</strong></td><td>High likelihood / Med impact. Klaviyo just shipped Universal Content; AI Subject Line; AI Image Edit. Likely to ship conversational editing next.</td><td>Ship B2 (Universal Content) within 2 quarters; ship B4 (conversational) before Klaviyo's Q4 launch window.</td></tr>
+      <tr><td><strong>R3 &middot; Write with AI legal/policy gates remain stuck</strong></td><td>Med likelihood / High impact on the international story. Geo-gate is policy + Intuit legal review, not capability.</td><td>Run policy-track in parallel to product-track; ship paid AI add-on globally as a fallback if free-tier policy gate persists.</td></tr>
+      <tr><td><strong>R4 &middot; B3 (unified canvas) eng scope blows up</strong></td><td>Med likelihood / High impact. Email and SMS composers built on different stacks historically; unification = real eng work.</td><td>Ship in phases: shared blocks first (Q3), cross-channel preview (Q4), full canvas unification (Q1 FY28). Don't promise it all at once.</td></tr>
+      <tr><td><strong>R5 &middot; Free-plan editor improvements unappreciated by current paid customers</strong></td><td>Med likelihood / Low-Med impact. Risk of "you're improving Free instead of fixing my Standard pain."</td><td>Sequence so paid-customer wins ship first (B2, B4); Free-plan editor improvements come in Q3+ when paid wins are visible.</td></tr>
+      <tr><td><strong>R6 &middot; Internal team capacity constraints</strong></td><td>High likelihood / Med impact. Editor platform team historically supports both NEB + Classic + integrations. Unification frees capacity but only after migration is done.</td><td>Funded migration is a one-time +30% capacity ask for 2 quarters; lock the staffing before commit.</td></tr>
+    </tbody>
+  </table>
+
+  <h2>Alternatives considered &middot; why not</h2>
+  <ul>
+    <li><strong>"Sunset Classic immediately, no Code Mode."</strong> Rejected &mdash; predicted 20%+ Premium / agency churn. Funded migration with NEB parity is the safer path.</li>
+    <li><strong>"Don't ship Universal Content; differentiate on AI instead."</strong> Rejected &mdash; Universal Content is the explicit operator ask + Klaviyo benchmark. Skipping it cedes the editor-feature narrative entirely.</li>
+    <li><strong>"Push SMS internationally first, fix unification later."</strong> Rejected &mdash; international SMS is regulatory + telco-heavy; 12&ndash;18mo timeline. Unification (B3) is product work and ships in 6&ndash;9 months.</li>
+    <li><strong>"Build a separate enterprise authoring product to compete with Stensul."</strong> Rejected &mdash; outside Mailchimp's SMB DNA. S4 (governance mode for SMB) is the right entry point.</li>
+    <li><strong>"Acquire Stripo / Beefree."</strong> Considered &mdash; Stripo's HTML capability would accelerate F5. Carve-out scope is small enough that acquisition is overkill; partner-or-license alternative explored.</li>
+  </ul>
+
+  <h2>Key assumptions (will be revisited monthly)</h2>
+  <ul>
+    <li>Mailchimp FY26 baseline holds at $1.28&ndash;1.31B; FY27 corp growth target stays ~5%.</li>
+    <li>Authoring surface drives ~40&ndash;46% of FY27 lift (rest = Automations, GTM, ecosystem).</li>
+    <li>Klaviyo ships at current 2026 cadence (Universal Content + AI features per quarter).</li>
+    <li>Intuit policy / legal allow Write with AI ungate in EMEA + APAC by Q3 FY27.</li>
+    <li>Editor platform team capacity holds at +30% for migration window.</li>
+  </ul>
+</section>
+
+<!-- PAGE 6 -->
+<section class="pg" aria-label="Strategy Page 6">
+  <div class="doctitle">Critic-review &mdash; what could be wrong about this strategy</div>
+  <div class="docmeta">Mailchimp Email/SMS Unified Editor &amp; Builder &middot; Page 6 of 6 &middot; v1 skeleton</div>
+
+  <p>An honest self-critique pass on the strategy above. Looking for hallucinations, weakly-grounded claims, missing context, and overconfident assertions.</p>
+
+  <ol>
+    <li><strong>Anchor &mdash; "$25&ndash;30M" is asserted, not derived.</strong> The number bridges the Automations brief commit ($20&ndash;25M) and the Strategy 6-Pager Automations envelope ($20&ndash;32M) by adding editor-driven retention save and Free&rarr;Paid lift. Until Tab 10 (Growth Model for editor) decomposes the levers with BigQuery-validated baselines, the number is directional. <strong>Confidence: medium-low.</strong></li>
+    <li><strong>"~$11&ndash;22M annualized opportunity cost" on Page 1.</strong> Sum-of-four-gaps; each gap is itself a directional estimate. Likely correct in magnitude but not defensible to Finance until Tab 11 (Loss Attribution) does the layered decomposition.</li>
+    <li><strong>"~140K NEB Established users today"</strong> on Page 2 is a placeholder using Automations-brief CJB volumes as a proxy. Editor users could be meaningfully larger (every paid sender) or smaller (only NEB-default cohort) depending on how `bi_aggregate.product_journey_monthly` cuts the editor product. <strong>Will be replaced post-Tab 7.</strong></li>
+    <li><strong>"Klaviyo Universal Content drives $4&ndash;8M ARR drag" claim.</strong> Inferred from observed Reddit / Klaviyo Community migration sentiment + DTC mid-market churn pattern. Not supported by churn-attribution data we control. Could be 50% off in either direction.</li>
+    <li><strong>"Brand Kit attach rate ~35% today" placeholder.</strong> Total guess. Could be 15% (most users skip Brand Kit setup) or 60% (auto-extract has high attach). Will be measured in Tab 7.</li>
+    <li><strong>SMS lift assumption ($5&ndash;8M from 12% &rarr; 20&ndash;25% adoption).</strong> Assumes ~$300/mo incremental ARPU from SMS-attached vs email-only customers. Validated against Mailchimp SMS pricing page for credit revenue, but not against actual Intuit SMS economics. <strong>Finance to confirm.</strong></li>
+    <li><strong>"Real-time co-edit" is presumed to be a credibility moment.</strong> True for marketing teams of 2+ but Mailchimp's user base skews solo (1-person). The credibility moment is real with the press / analyst audience; the user-base impact is more modest than the narrative suggests. Should not over-rotate toward this bet's marketing value.</li>
+    <li><strong>"Ungate Write with AI globally" treats this as a policy decision.</strong> It may be capability (LLM training-data licensing per region), legal (GDPR-style data residency), or commercial (cost per inference) constraints stacked. The mitigation "ship paid AI add-on globally as a fallback" is the responsible hedge but I have not validated which constraint actually binds.</li>
+    <li><strong>"Sunset Classic without 20%+ Premium churn" assumption.</strong> Premium is a small fraction of paid revenue but contributes disproportionately to ARR. If actual churn is 30%+ and Code Mode does not satisfy, the $5&ndash;7M B1 lever could go negative. <strong>Highest single risk in the financial walk.</strong></li>
+    <li><strong>"Authoring drives 40&ndash;46% of FY27 lift."</strong> Asserted. The Automations brief claims 30&ndash;50% for Automations of the same lift. If both are right, the rest of the company drives only 4&ndash;30%. Will need cross-team reconciliation; likely the editor share is closer to 25&ndash;35% in a sized cross-team view. <strong>Could revise the anchor to $20&ndash;25M.</strong></li>
+    <li><strong>What's missing entirely</strong>: deliverability infra (the editor authors, but inbox placement is owned by another team); transactional-email composing (not in scope, but a meaningful Standard-tier feature); accessibility EAA compliance timeline (regulatory deadline could pull F9 forward); Intuit Assist cost economics (per-token / per-month seat cost is a margin question this strategy doesn't address).</li>
+    <li><strong>What I'd recommend the PM do next</strong>: (a) finalize Tab 7 BigQuery editor cut to lock baselines; (b) finalize Tab 4 HVC Risk Map editor VoC to validate the 4 customer-problem $ gaps; (c) sequence a one-week Finance / Strategy reconciliation to resolve the cross-team allocation conflict (point #10 above); (d) commission a 4-week customer discovery on the Universal Content user need to validate B2's $4&ndash;6M lever.</li>
+  </ol>
+
+  <p class="source"><strong>Sources cited inline:</strong> Tab 1 Executive Brief (capabilities + differentiation matrix); Tab 2 Voice of Customer (operator hate themes); Tab 3 Roadmap to Win (foundational gaps + steals); Klaviyo Spring 2026 product announcements (Universal Content); Postscript March 2026 Brand Center; Stensul Governed Creation™; Mailchimp Help Center NEB / SMS / Brand Kit / Creative Assistant / Write with AI articles; Intuit Mailchimp pricing pages 2026; SaaSProbe / SaaS Scored / Mailotrix / Sendx 2026 reviews. <em>BigQuery `mc-business-intelligence.bi_aggregate.product_journey_monthly` editor-product cut + Slack HVC VoC editor cut are pending and will replace placeholder figures across all 6 pages.</em></p>
+</section>
+
+</div><!-- /panel-strategy -->
+
+
+<!-- ============== GROWTH MODEL TAB (executive read: Arial 10, black/grey, tight) ============== -->
+<div class="tabpanel" id="panel-growthmodel" role="tabpanel">
+  <section class="page" aria-label="Growth Model placeholder">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Mailchimp Email/SMS Unified Editor &amp; Builder</div>
+        <h1>Growth Model <em style="color:#C28A00;">— under construction</em></h1>
+        <div class="subtitle">This tab will mirror the 6-page structure of the corresponding tab in the Mailchimp Automations brief, applied to the unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist).</div>
+      </div>
+      <div class="meta">
+        <div><strong>Status:</strong> placeholder</div>
+        <div><strong>Planned:</strong> 6 pages</div>
+      </div>
+    </header>
+    <p style="color: var(--muted);">Content forthcoming. See the build plan in the active session.</p>
+  </section>
+</div><!-- /panel-growthmodel -->
+
+
+<!-- ============== LOSS ATTRIBUTION TAB (12-month, 3-layer honest framework) ============== -->
+<div class="tabpanel" id="panel-lossattr" role="tabpanel">
+  <section class="page" aria-label="Loss Attribution placeholder">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Mailchimp Email/SMS Unified Editor &amp; Builder</div>
+        <h1>Loss Attribution <em style="color:#C28A00;">— under construction</em></h1>
+        <div class="subtitle">This tab will mirror the 6-page structure of the corresponding tab in the Mailchimp Automations brief, applied to the unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist).</div>
+      </div>
+      <div class="meta">
+        <div><strong>Status:</strong> placeholder</div>
+        <div><strong>Planned:</strong> 6 pages</div>
+      </div>
+    </header>
+    <p style="color: var(--muted);">Content forthcoming. See the build plan in the active session.</p>
+  </section>
+</div><!-- /panel-lossattr -->
+
+
+<!-- ============== INITIATIVE CANVAS TAB (independent of prior PRD list) ============== -->
+<div class="tabpanel" id="panel-canvas" role="tabpanel">
+  <section class="page" aria-label="Initiative Canvas placeholder">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Mailchimp Email/SMS Unified Editor &amp; Builder</div>
+        <h1>Initiative Canvas <em style="color:#C28A00;">— under construction</em></h1>
+        <div class="subtitle">This tab will mirror the 9-page structure of the corresponding tab in the Mailchimp Automations brief, applied to the unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist).</div>
+      </div>
+      <div class="meta">
+        <div><strong>Status:</strong> placeholder</div>
+        <div><strong>Planned:</strong> 9 pages</div>
+      </div>
+    </header>
+    <p style="color: var(--muted);">Content forthcoming. See the build plan in the active session.</p>
+  </section>
+</div><!-- /panel-canvas -->
+
+
+<!-- ============== STRATEGY MEMO TAB (executive narrative — Purpose · Background · Complication) ============== -->
+<div class="tabpanel" id="panel-memo" role="tabpanel">
+  <section class="page" aria-label="Strategy Memo placeholder">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Mailchimp Email/SMS Unified Editor &amp; Builder</div>
+        <h1>Strategy Memo <em style="color:#C28A00;">— under construction</em></h1>
+        <div class="subtitle">This tab will mirror the 1-page structure of the corresponding tab in the Mailchimp Automations brief, applied to the unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist).</div>
+      </div>
+      <div class="meta">
+        <div><strong>Status:</strong> placeholder</div>
+        <div><strong>Planned:</strong> 1 long page</div>
+      </div>
+    </header>
+    <p style="color: var(--muted);">Content forthcoming. See the build plan in the active session.</p>
+  </section>
+</div><!-- /panel-memo -->
+
+
+</div>
+
+<script>
+  (function () {
+    var tabs = document.querySelectorAll('.tab');
+    var panels = document.querySelectorAll('.tabpanel');
+    function activate(name) {
+      tabs.forEach(function (t) {
+        var match = t.getAttribute('data-tab') === name;
+        t.classList.toggle('active', match);
+        t.setAttribute('aria-selected', match ? 'true' : 'false');
+      });
+      panels.forEach(function (p) {
+        p.classList.toggle('active', p.id === 'panel-' + name);
+      });
+      try {
+        var url = new URL(window.location.href);
+        url.hash = name;
+        history.replaceState(null, '', url.toString());
+      } catch (e) {}
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
+    });
+    var initial = (window.location.hash || '').replace('#', '');
+    if (['sentiment','brief','roadmap','hvcrisk','navsearchrisk','research','health','strategy','growthmodel','lossattr','canvas','memo'].indexOf(initial) >= 0) activate(initial);
+  })();
+</script>
+
+</body>
+</html>
