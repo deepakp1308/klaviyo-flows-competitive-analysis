@@ -6317,385 +6317,498 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 
 <article class="memo">
 
+  <!-- Memo header -->
   <header class="memo-head">
-    <div class="memo-eyebrow">Strategy Memo · Mailchimp Email/SMS Unified Editor · FY27</div>
-    <h1 class="memo-title">Mailchimp Unified Authoring: <em>FY27 strategy</em></h1>
+    <div class="memo-eyebrow">Strategy Memo &middot; Mailchimp Email/SMS Unified Editor &middot; FY27</div>
+    <h1 class="memo-title">Mailchimp Unified Authoring Surface: <em>FY27 strategy</em></h1>
     <dl class="memo-meta">
       <dt>To</dt><dd>Executive Committee</dd>
       <dt>From</dt><dd>Product Lead, Mailchimp Authoring Surface</dd>
       <dt>Date</dt><dd>May 2026</dd>
-      <dt>Re</dt><dd>FY27 strategy for New Email Builder + SMS composer + Brand Kit + Content Studio + AI Assist — synthesized from this brief&rsquo;s evidence tabs</dd>
+      <dt>Re</dt><dd>FY27 strategy for the New Email Builder + SMS composer + Brand Kit + Content Studio + Intuit Assist &mdash; synthesized from this brief&rsquo;s 11 evidence tabs</dd>
     </dl>
   </header>
 
+  <!-- Purpose -->
   <h2 class="memo-h2">Purpose</h2>
-  <p class="lead">This memo states the FY27 commitment for Mailchimp&rsquo;s <em>unified authoring surface</em>: reverse a shrinking bulk-email footprint, close the Universal Content and AI parity gaps operators now associate with Klaviyo, and turn &ldquo;billing-unified&rdquo; email+SMS into a <strong>single canvas customers actually experience</strong> — while booking <strong>$25&ndash;30M incremental ARR</strong> as the authoring share of standalone growth.</p>
+  <p class="lead">This memo articulates the FY27 strategy to transform Mailchimp&rsquo;s authoring surface &mdash; New Email Builder, SMS composer, Brand Kit, Content Studio, and Intuit Assist &mdash; from a <em>bifurcated, eroding editor</em> into <em>the unified email+SMS authoring platform that customers trust to ship</em>. It captures today&rsquo;s situation, the competitive complication, the quantified customer + business impact, the vision and metrics for winning, the five strategic pillars and 65 tactical initiatives that deliver them, the reason to believe, the Uber hypothesis tied to revenue, and the 6-quarter roadmap. Target: <strong>+$25&ndash;30M incremental ARR in FY27</strong>, mid scenario ~$26.3M per the Growth Model.</p>
 
   <hr class="divider"/>
 
-  <h2 class="memo-h2">Background — what the data says</h2>
+  <!-- Background — Situation -->
+  <h2 class="memo-h2">Background &mdash; the situation today</h2>
 
-  <p>Product Health (BigQuery, trailing 12 mo through Apr 2026) anchors the story on <strong>bulk-email Established users averaging ~888.7K/mo</strong>, down <span class="stat">−9.4% YoY</span>. Top-of-funnel <strong>Explore</strong> is down <span class="stat">−19.2% YoY</span>. Churn (Abandon / Establish+Abandon) on that spine is <strong>40.0%</strong> and worsened <span class="stat">+2.1pp YoY</span>. This is not &ldquo;one bad quarter&rdquo; — it is structural compression on the broadest cohort that touches the builder every week.</p>
+  <p>Mailchimp&rsquo;s authoring surface is the most-touched product in the company. Per BigQuery (<code>bi_aggregate.product_journey_monthly</code>, trailing 12 months May 2025&ndash;Apr 2026), <strong>888,706 customers per month are Established users on bulk email</strong> &mdash; the spine of the editor footprint. Around it sits a satellite product family: <strong>SMS composer</strong> (6,673 Established users/mo), <strong>Write with AI</strong> (31,438), and <strong>Mailchimp Transactional</strong> (25,716). The Total Addressable footprint of editor surfaces hosts more than <span class="stat">1.6M monthly active users</span> across stages.</p>
 
-  <p>In parallel, <strong>SMS composer Established</strong> users grew <span class="stat">+73.5% YoY</span> to ~6.7K/mo — but churn is <strong>52.9%</strong> (+3.0pp). <strong>Write with AI</strong> established cohort is flatter (−3.8% YoY) while <em>Explore collapsed −73.7% YoY</em>, Abandon <strong>doubled +101% YoY</strong>, and churn hit <strong>77%</strong> (+15.4pp) — a &ldquo;honeymoon ended&rdquo; pattern that policy, trust, and product must unwind together.</p>
+  <p>The product itself ships real capability: a 260+-template New Email Builder; a Classic builder retained for power users with custom-coded templates; an SMS composer with branded short links + MMS in US/CA; <strong>Content Studio</strong> for digital asset management; <strong>Brand Kit</strong> for logos / fonts / colors / brand personality; and an <strong>Intuit Assist</strong> AI surface that includes Write with AI, Creative Assistant, and Email Content Generator. Mailchimp G2 sits at <strong>4.3/5 across 12,698 reviews</strong>; SaaSProbe and SaaS Scored put 2026 ratings at <strong>6.5&ndash;7.0/10</strong>.</p>
 
-  <p>Internal HVC harvest (#hvc_feedback, escalations, summaries) shows repeated,cited MRR pain on <strong>New Builder</strong>, Classic coexistence <strong>Canva</strong> embeds, <strong>Brand Kit</strong> (fonts, governance), <strong>SMS/MMS/credits</strong>, and Assist — dollar exposure lives at the card level in this brief, not a single rolled statistic. External Voice of Customer reinforces the narrative that Mailchimp &ldquo;ships features&rdquo; but <strong>loses the editor conversation</strong> to Klaviyo and governed-creation tools (Stensul / enterprise narrative).</p>
-
-  <p>User Research (25 HeyMarvin-style briefs / 50-session synthesis) underscores the same jobs: <strong>speed to first send</strong>, <strong>reuse without rework</strong>, <strong>confidence on brand + mobile</strong>, and <strong>SMS fear</strong> (compliance, cost, duplication of work).</p>
-
-  <div class="pull-quote">
-    <p class="pq-text">&ldquo;We are trying to recover next year approximately what we failed to capture while the builder base was shrinking.&rdquo;</p>
-    <p class="pq-attr"><strong>Growth Model + Loss Attribution</strong> · mid scenario ~$26.3M FY27 vs ~$36&ndash;67M backward-looking editor-related stack (mostly imputed)</p>
-  </div>
-
+  <p>What customers <em>love</em>:</p>
   <ul class="memo-list">
-    <li><strong>What customers need:</strong> one modern email builder path (no Classic/NEB Schrödinger migration), Universal Content that propagates across templates and touchpoints, AI that works globally and inside the canvas, and SMS that shares blocks + Brand Kit with email.</li>
-    <li><strong>What we have today:</strong> two builders, template-scoped saved content, geo-gated AI, and email/SMS authoring that is &ldquo;unified&rdquo; on pricing slides more than in the compose loop.</li>
+    <li><strong>Drag-and-drop ergonomics for solos.</strong> Net-sentiment +56 across public sources; cited in nearly every 5-star review as the reason they pick Mailchimp.</li>
+    <li><strong>Brand Kit + Creative Assistant.</strong> Solos cite this as the practical AI feature they use daily &mdash; auto-extracted brand applied automatically to designs.</li>
+    <li><strong>Write with AI for blank-page anxiety.</strong> Brand-tone-aware copy generation lands well with non-technical operators &mdash; <em>where it&rsquo;s available</em>.</li>
+    <li><strong>Content Studio asset management.</strong> Mature for the SMB tier (sync, search, organize across campaigns).</li>
   </ul>
 
   <hr class="divider"/>
 
-  <h2 class="memo-h2">Complication — competition and narrative</h2>
+  <!-- Background — Complication -->
+  <h2 class="memo-h2">Background &mdash; the complication</h2>
 
-  <p><strong>Klaviyo</strong> Spring 2026 made <strong>Universal Content-class primitives</strong> table stakes and continues to ship AI inside the authoring loop. Operators compare <em>block reuse, image+text tools, and cross-channel preview</em> side-by-side — not just automation depth. <strong>Stensul</strong> and similar &ldquo;governed creation&rdquo; tools eat Premium &amp; agency trust where HTML + brand lockups matter.</p>
-
-  <p><strong>Shopify</strong> and SMS-native players anchor <strong>free or bundled</strong> channel tools inside commerce — Mailchimp must win on cross-platform reach + Intuit Assist, not on pretending SMS is an add-on composer forever.</p>
+  <p>While Mailchimp&rsquo;s editor was praised in isolation, three structural shifts compounded over the past 18 months: <strong>(1)</strong> the bulk-email base started shrinking on every cohort under 24 months tenure, <strong>(2)</strong> Klaviyo shipped Universal Content as the default editor primitive in Spring 2026, and <strong>(3)</strong> the AI funnel that was supposed to widen the top of the editor collapsed. Each of these is documented in BigQuery and named-customer Voice of Customer data.</p>
 
   <div class="stat-grid">
     <div class="sg-item">
-      <div class="sg-num bad">−9.4% YoY</div>
-      <div class="sg-label">Bulk email Established (~888.7K/mo avg) — core authoring spine</div>
+      <div class="sg-num bad">&minus;9.4% YoY</div>
+      <div class="sg-label">Bulk email Established users (the editor spine): 980.6K &rarr; 888.7K avg/mo (&minus;92K). 24+ tenure cohort &minus;6.5%; <strong>every cohort under 24 months &minus;17 to &minus;23%.</strong></div>
     </div>
     <div class="sg-item">
-      <div class="sg-num bad">−19.2% YoY</div>
-      <div class="sg-label">Bulk Explore — funnel compression (product + GTM + policy co-linear)</div>
+      <div class="sg-num bad">&minus;19.2% YoY</div>
+      <div class="sg-label">Bulk email Explore users (top of funnel): 64.2K &rarr; 51.9K. New customer acquisition into the editor is the biggest single leak.</div>
+    </div>
+    <div class="sg-item">
+      <div class="sg-num bad">&minus;19.2% YoY</div>
+      <div class="sg-label">Free plan Established users: 386K &rarr; 312K (&minus;74K). Largest single segment loss in the brief; SMB customers acquired by Shopify storefront-bundled tools.</div>
     </div>
     <div class="sg-item">
       <div class="sg-num bad">+2.1pp YoY</div>
-      <div class="sg-label">Bulk churn rate deterioration (40.0% trailing)</div>
+      <div class="sg-label">Bulk churn rate: 38% &rarr; <strong>40.0%</strong>. Retention deterioration on the largest cohort while the cohort itself shrinks.</div>
     </div>
     <div class="sg-item">
-      <div class="sg-num bad">−73.7% YoY</div>
-      <div class="sg-label">Write with AI Explore collapse; churn +15.4pp (worst editor-family)</div>
+      <div class="sg-num bad">&minus;73.7% YoY</div>
+      <div class="sg-label">Write with AI Explore users: 78K &rarr; 21K. <strong>Honeymoon ended.</strong> Abandons doubled (+101%); churn 62% &rarr; <strong>77.2%</strong>; geo-gate to US/UK/AU/CA on a globally-priced Standard plan is the largest single contributor.</div>
     </div>
     <div class="sg-item">
       <div class="sg-num brand">+73.5% YoY</div>
-      <div class="sg-label">SMS Established growth — offset by 52.9% churn (Attach story = retention + canvas)</div>
-    </div>
-    <div class="sg-item">
-      <div class="sg-num bad">~$9.5M</div>
-      <div class="sg-label">Platform annualized MRR YoY delta — ~$2&ndash;4M booked with authoring-surface causal share (Loss Attribution L1)</div>
+      <div class="sg-label">SMS Established users: 3.8K &rarr; 6.7K (every plan tier +39 to +96%). <strong>But churn 53%</strong> (+3.0pp) and Abandon +95.4% &mdash; growth + leakage simultaneously.</div>
     </div>
   </div>
 
-  <h2 class="memo-h2">Mailchimp business impact — backward and forward</h2>
+  <p>Klaviyo&rsquo;s <strong>Universal Content</strong> (Spring 2026) is the most-cited migration trigger in <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">Voice of Customer</a> &mdash; <em>&ldquo;edit once, propagates everywhere&rdquo;</em> against Mailchimp&rsquo;s template-scoped saved-content. <strong>Stensul / Knak</strong> set the new bar for governance + real-time multi-author collaboration. <strong>Postscript / Attentive</strong> own SMS depth in DTC. Customers describe Mailchimp&rsquo;s editor as <em>&ldquo;clunky and outdated&rdquo;</em> not because of any single feature gap, but because the cumulative pattern (two builders, two surfaces, single-editor, geo-gated AI) has stopped feeling modern.</p>
+
+  <div class="pull-quote">
+    <p class="pq-text">&ldquo;Two builders, two template libraries &mdash; and they don&rsquo;t talk to each other. I rebuilt the same welcome email three times because I migrated to the new builder mid-campaign. Why is this still a thing in 2026?&rdquo;</p>
+    <p class="pq-attr"><strong>G2 critical review</strong> &middot; 2026 critical-review cluster, paraphrased composite (verbatim cluster pattern across 12,698 reviews)</p>
+  </div>
+
+  <hr class="divider"/>
+
+  <!-- Customer problems -->
+  <h2 class="memo-h2">Customer problems &mdash; what is true today (quant + qual)</h2>
+
+  <p>The customer-side cost decomposes into <strong>seven specific problems</strong>, each grounded in the named-customer evidence in this brief. Voice of Customer themes, HVC Risk Map cited MRR (~$95K/mo across 17 themes), and User Research (25 customer briefs across 50 HeyMarvin videos) tell a consistent story.</p>
+
+  <ul class="memo-list">
+    <li><strong>Two-builder bifurcation.</strong> NEB (post-Jul 2023) and Classic coexist; templates don&rsquo;t port; mid-migration users rebuild from scratch. Voice of Customer <strong>#1 hate theme</strong> (net-sentiment &minus;72). HVC Themes 1&ndash;2 cite <span class="stat">$834/mo</span> in named MRR ($330 + $504), including a customer with 181 templates explicitly asking for &ldquo;a system where templates share content&hellip; similar to your Brand Kit but more substantial.&rdquo; UR Workflow Shape #4: Andrea / Wes / Jack route around Mailchimp via Bee.io / Canva / Adobe Express because the canvas can&rsquo;t hold their work.</li>
+    <li><strong>Email + SMS composed in two surfaces.</strong> Despite the &ldquo;email + SMS together&rdquo; marketing, no shared content blocks, no shared preview, no Brand Kit propagation across channels. Voice of Customer #2 hate theme. UR Bianka direct ask: <em>&ldquo;email + SMS + all touches in one reporting view.&rdquo;</em> &ldquo;Unified&rdquo; is currently a billing claim.</li>
+    <li><strong>Klaviyo Universal Content gap.</strong> The single most-asked-for editor primitive of 2026; Klaviyo just shipped it as default. UR Bet #1 (saved blocks) &mdash; PM-confirmed in flight during Wes Turner session. VoC: <em>&ldquo;Klaviyo just shipped Universal Content. Edit once, propagates. That&rsquo;s the feature I&rsquo;ve asked Mailchimp for for two years. I&rsquo;m migrating before BFCM.&rdquo;</em> (Reddit r/Klaviyo, Spring &rsquo;26 announcement thread).</li>
+    <li><strong>Write with AI is geo-gated and quality-degraded.</strong> US/UK/AU/CA only on a globally-priced Standard plan. VoC #3, &minus;56 net-sentiment among international users. <em>&ldquo;I am told Write with AI is in beta in the US, UK, AU, CA. I am in the Netherlands. I get to pay for AI I cannot use.&rdquo;</em> (Reddit r/MailChimp). BigQuery: Explore funnel collapsed &minus;73.7% YoY; Abandon doubled; churn worst-in-family at 77.2%.</li>
+    <li><strong>Cited NEB rendering &amp; Brand Kit reliability bugs.</strong> HVC Themes 3 (rendering divergence forwarded mail / mobile / read-full-message), 4 (multi-author save conflicts), 5 (block-ordering glitches), 7&ndash;10 (Brand Kit fonts not selectable on landing pages, stale Brand Kit incident, multi-brand absent, font-upload + Creative Assistant mismatch), 12&ndash;13 (Content Studio instability, Canva sync silent failure). Cumulative cited MRR: <strong>$15K/mo</strong> on NEB + Brand Kit alone.</li>
+    <li><strong>SMS retention infrastructure missing.</strong> SMS reporting empty / N/A (Theme 14, $1,386/mo), credits transparency broken (Theme 15, $3,592/mo cited), and the largest single cited HVC in the brief: a <strong>$57K/mo TCPA incident</strong> (C3 Festivals, Theme 16) where a duplicate opt-out was sent in a live SMS campaign. SMS adoption is +73.5% YoY but cohort churns at 53% &mdash; the highest-growth product is bleeding the customers it acquires.</li>
+    <li><strong>Discovery + multi-author collaboration are years behind.</strong> UR Discovery table: Bianka didn&rsquo;t find A/B testing for &ldquo;a number of years&rdquo;; Jack missed New Builder for 4&ndash;6 years on inherited templates; Jeffrey didn&rsquo;t find My Products for 3.5 years; Clint&rsquo;s welcome automation sat in DRAFT for over a year. VoC #5: no real-time multi-author co-edit; teams workaround via screenshots and shared drafts. Stensul / Knak / Notion / Figma have set the new bar.</li>
+  </ul>
+
+  <hr class="divider"/>
+
+  <!-- Customer impact + Business impact -->
+  <h2 class="memo-h2">Customer impact &mdash; what each problem costs the customer</h2>
 
   <div class="impact-card">
-    <div class="ic-label">Backward 12 months (editor lens)</div>
-    <p><strong>Loss Attribution</strong> stacks roughly <strong>$2&ndash;4M booked</strong>, <strong>$12&ndash;28M modeled</strong>, and <strong>$22&ndash;35M opportunity</strong> (Growth Model inverse) — <strong>$36&ndash;67M sensitivity band</strong>, mostly counterfactual. The honest headline: <strong>the P&amp;L print is flat-to-down, but the builder funnel is not healthy.</strong></p>
+    <div class="ic-label">Customer-side cost</div>
+    <p>The functional cost is <strong>lost time</strong> (181-template HVC rebuilds; rebuilding the same welcome email three times because of mid-migration; Andrea&rsquo;s live demo of the &ldquo;hunting in the attic&rdquo; asset workflow), <strong>lost sends</strong> (TCPA incident at C3 Festivals; Canva sync silent failures; Brand Kit incident shipping un-branded sends), and <strong>lost confidence</strong> (UR&rsquo;s self-blame pattern: 5 of 15 customers describe using only 10&ndash;20% of editor capability). The emotional cost is louder than the functional one: <em>self-blame</em> (Clint, Shannon, Andrea), <em>fear</em> (Bianka&rsquo;s team on the Outlook migration), <em>distrust</em> after the Brand Kit incident, and a recurring brand sentiment captured in <strong>Trustpilot 2.7/5 across 1,390 reviews</strong>. International Standard customers feel actively cheated by the AI geo-gate. The lived-experience cost compounds into <strong>silent churn</strong> &mdash; the customer doesn&rsquo;t complain, they just stop sending.</p>
   </div>
 
-  <div class="impact-card" style="background:#F4FAF6;border-left-color:var(--good);">
-    <div class="ic-label" style="color:#036A4F;">Forward FY27 (authoring commit)</div>
-    <p><strong>Growth Model</strong> mid scenario lands <strong>~$26.3M</strong> inside the <strong>$25&ndash;30M</strong> anchor — bulk Established recovery (L1), activation (L2), SMS attach (L3), migration friction reduction (L4), churn save (L5), ARPU/outcome lift (L6). Finance still locks paid-slice ARPU (~$110 placeholder) and causal shares.</p>
+  <h2 class="memo-h2">Business impact &mdash; what these problems cost Mailchimp</h2>
+
+  <div class="impact-card">
+    <div class="ic-label">Mailchimp business cost (12 months trailing)</div>
+    <p>Per the <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution tab</a>, the editor-related impact stack: <strong>$2&ndash;4M booked</strong> P&amp;L erosion (~25&ndash;32% editor causal share on the &minus;$9.5M consolidated platform MRR YoY) + <strong>$12&ndash;28M modeled</strong> drag (bulk Establish shortfall + SMS/GenAI satellite churn, 30/45/60% causal grid) + <strong>$22&ndash;35M opportunity cost</strong> (Growth Model lifts not captured because strategy hadn&rsquo;t shipped) = <strong>$36&ndash;67M sensitivity band</strong> for the trailing 12 months. Most of this is imputed and counterfactual &mdash; the booked print is single-digit millions &mdash; but the directional signal is unambiguous: <em>the opportunity cost we left on the table is roughly equal to the FY27 commit we are now asking for</em>. The bulk-email base shrank by ~92K Established users in 12 months while Klaviyo Spring &rsquo;26 ate the editor narrative; Premium / agency churn risk on Classic sunset alone is sized at <strong>$1&ndash;2M ARR</strong> per Strategy R1.</p>
   </div>
 
+  <!-- Bridge → Vision -->
   <div class="bridge-block">
-    <p>What follows is not a list of UI tweaks — it is <strong>one coordinated program</strong>: ship <strong>B2 Universal Content first</strong> (parity + primitive for everything else), parallel <strong>B1 builder unification + Code Mode</strong> so Classic sunset is safe, drive <strong>B4 AI ungate + conversational editing</strong> on the legal track, and sequence <strong>B3 unified canvas</strong> so SMS revenue stops leaking to friction.</p>
+    <p>What follows is the strategy we are committing to in response. It runs on a single <strong>18-month arc</strong> with five pillars in parallel, sized to deliver the <strong>$25&ndash;30M FY27 anchor</strong> (Growth Model mid ~$26.3M) and reverse the backward-looking $36&ndash;67M editor-related impact band. Three orchestration moves &mdash; <em>Universal Content first, NEB Code Mode parallel, Write with AI funnel recovery starting Q1</em> &mdash; make every other initiative cheaper or possible.</p>
   </div>
 
   <h2 class="memo-h2">Vision</h2>
 
   <div class="vision-block">
-    <p>Mailchimp becomes the place where <em>every marketer authors once</em> — email and SMS pull from the same blocks, the same Brand Kit, and the same Assist — with <strong>governed quality</strong> for solo operators and <strong>power-user escape hatches</strong> (Code Mode, Liquid) without leaving New Email Builder. Customers stop rebuilding the same header in six templates and stop paying for Standard while AI is geofenced.</p>
+    <p>Mailchimp&rsquo;s authoring surface becomes <em>the unified email + SMS platform where every marketer authors once, ships everywhere, and trusts every send.</em> Solo operators ship a polished, on-brand campaign in <strong>under 10 minutes</strong>. Marketing teams of 2&ndash;5 collaborate live in canvas with comments and approval flow. International customers get the same AI capability as US customers. Universal Content propagates a single edit across every send, every flow, every channel. Brand Kit governs quality at zero cognitive cost. Intuit Assist builds, drafts, and optimizes alongside the customer &mdash; not bolted on as a separate surface. The marketer focuses on <strong>growing their business</strong>; the editor handles the assembly.</p>
   </div>
 
   <hr class="divider"/>
 
-  <h2 class="memo-h2">Success looks like — metrics tied to Growth Model</h2>
+  <!-- What winning looks like -->
+  <h2 class="memo-h2">What winning looks like &mdash; key metrics + front-to-improvement</h2>
 
-  <p>Definitions and formulas: <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model tab</a>. Baselines: <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a>.</p>
+  <p>Across three layers &mdash; <strong>product adoption</strong>, <strong>customer outcome</strong>, and <strong>Mailchimp business</strong> &mdash; these are the metric movements the strategy commits to by April 2027. Definitions and methodology are in the <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a> tab; baselines are BigQuery-validated in <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a>.</p>
 
   <div class="success-grid">
     <div class="success-card">
-      <div class="sc-eyebrow">Layer 1 · Adoption funnel</div>
-      <div class="sc-title">Bulk + AI + SMS funnel repair</div>
-      <div class="sc-row hi"><div class="sc-metric">Bulk Established (avg/mo)</div><div class="sc-from">888.7K</div><div class="sc-arrow">&rarr;</div><div class="sc-to">915&ndash;935K</div></div>
-      <div class="sc-row"><div class="sc-metric">Bulk Explore</div><div class="sc-from">−19.2% YoY</div><div class="sc-arrow">&rarr;</div><div class="sc-to">repair / stabilize</div></div>
-      <div class="sc-row"><div class="sc-metric">Bulk churn rate</div><div class="sc-from">40.0%</div><div class="sc-arrow">&rarr;</div><div class="sc-to">~37%</div></div>
-      <div class="sc-row"><div class="sc-metric">SMS activation rate</div><div class="sc-from">10.4%</div><div class="sc-arrow">&rarr;</div><div class="sc-to">~13&ndash;15%</div></div>
-      <div class="sc-row"><div class="sc-metric">Write with AI Explore</div><div class="sc-from">−73.7% YoY</div><div class="sc-arrow">&rarr;</div><div class="sc-to">stabilize + policy fix</div></div>
+      <div class="sc-eyebrow">Layer 1 &middot; Product adoption</div>
+      <div class="sc-title">The editor funnel reopens</div>
+      <div class="sc-row hi"><div class="sc-metric">Bulk Established users (avg/mo)</div><div class="sc-from">888,706</div><div class="sc-arrow">&rarr;</div><div class="sc-to">915&ndash;935K</div></div>
+      <div class="sc-row"><div class="sc-metric">Bulk Explore funnel</div><div class="sc-from">51,859 (&minus;19.2%)</div><div class="sc-arrow">&rarr;</div><div class="sc-to">58&ndash;65K</div></div>
+      <div class="sc-row"><div class="sc-metric">Bulk activation rate</div><div class="sc-from">88.0%</div><div class="sc-arrow">&rarr;</div><div class="sc-to">88&ndash;90% (hold)</div></div>
+      <div class="sc-row"><div class="sc-metric">Bulk churn rate</div><div class="sc-from">40.0% (+2.1pp)</div><div class="sc-arrow">&rarr;</div><div class="sc-to">36.5&ndash;37.5%</div></div>
+      <div class="sc-row"><div class="sc-metric">SMS composer Established</div><div class="sc-from">6,673 (53% churn)</div><div class="sc-arrow">&rarr;</div><div class="sc-to">11.5&ndash;14.5K (46&ndash;48% churn)</div></div>
+      <div class="sc-row"><div class="sc-metric">Write with AI Explore (recover)</div><div class="sc-from">20,521 (&minus;73.7%)</div><div class="sc-arrow">&rarr;</div><div class="sc-to">stabilize + global ungate</div></div>
+      <div class="sc-row"><div class="sc-metric">Universal Content adoption</div><div class="sc-from">0 (not shipped)</div><div class="sc-arrow">&rarr;</div><div class="sc-to">50&ndash;70% of NEB adopters</div></div>
     </div>
 
     <div class="success-card">
-      <div class="sc-eyebrow">Layer 2 · Customer outcomes</div>
-      <div class="sc-title">Speed, brand, cross-channel quality</div>
-      <div class="sc-row"><div class="sc-metric">Time to first send (NEB)</div><div class="sc-from">14&ndash;21d</div><div class="sc-arrow">&rarr;</div><div class="sc-to">7&ndash;10d</div></div>
-      <div class="sc-row"><div class="sc-metric">Universal Content reuse</div><div class="sc-from">0 (not shipped)</div><div class="sc-arrow">&rarr;</div><div class="sc-to">majority of NEB sends</div></div>
-      <div class="sc-row"><div class="sc-metric">Email + SMS compose</div><div class="sc-from">two surfaces</div><div class="sc-arrow">&rarr;</div><div class="sc-to">shared blocks + preview</div></div>
+      <div class="sc-eyebrow">Layer 2 &middot; Customer outcome</div>
+      <div class="sc-title">Customer-visible wins</div>
+      <div class="sc-row"><div class="sc-metric">Time to first send (new NEB user)</div><div class="sc-from">14&ndash;21d median</div><div class="sc-arrow">&rarr;</div><div class="sc-to">7&ndash;10d</div></div>
+      <div class="sc-row"><div class="sc-metric">Block reuse / NEB campaign</div><div class="sc-from">low (template-scoped)</div><div class="sc-arrow">&rarr;</div><div class="sc-to">+25&ndash;40% reuse</div></div>
+      <div class="sc-row"><div class="sc-metric">Email + SMS compose loop</div><div class="sc-from">two surfaces, copy-paste</div><div class="sc-arrow">&rarr;</div><div class="sc-to">shared blocks + cross-channel preview</div></div>
+      <div class="sc-row"><div class="sc-metric">SMS clicks-to-send</div><div class="sc-from">high cognitive load</div><div class="sc-arrow">&rarr;</div><div class="sc-to">&minus;30% clicks</div></div>
+      <div class="sc-row"><div class="sc-metric">Off-brand sends (no Kit / overrides)</div><div class="sc-from">elevated in VoC</div><div class="sc-arrow">&rarr;</div><div class="sc-to">&minus;20&ndash;30%</div></div>
+      <div class="sc-row"><div class="sc-metric">Mobile preview / forwarded-mail errors</div><div class="sc-from">top HVC theme</div><div class="sc-arrow">&rarr;</div><div class="sc-to">&minus;35% support tokens</div></div>
+      <div class="sc-row"><div class="sc-metric">SMS opt-out spike incidents</div><div class="sc-from">$57K TCPA precedent</div><div class="sc-arrow">&rarr;</div><div class="sc-to">&minus;25&ndash;40%</div></div>
+      <div class="sc-row hi"><div class="sc-metric">Multi-author teams shipping in MC</div><div class="sc-from">workaround via screenshots</div><div class="sc-arrow">&rarr;</div><div class="sc-to">live co-edit + comments</div></div>
     </div>
 
     <div class="success-card">
-      <div class="sc-eyebrow">Layer 3 · Mailchimp business</div>
+      <div class="sc-eyebrow">Layer 3 &middot; Mailchimp business</div>
       <div class="sc-title">FY27 dollars + credibility</div>
-      <div class="sc-row hi"><div class="sc-metric">Authoring incremental ARR</div><div class="sc-from">&mdash;</div><div class="sc-arrow">&rarr;</div><div class="sc-to">+$25&ndash;30M</div></div>
-      <div class="sc-row"><div class="sc-metric">Growth Model mid check</div><div class="sc-from">&mdash;</div><div class="sc-arrow">&rarr;</div><div class="sc-to">~$26.3M</div></div>
-      <div class="sc-lever">Lever sketch (mid, ~$26.2M total): L1 bulk recovery ~$10.4M · L2 activation ~$3.2M · L3 SMS ~$4.0M · L4 migration ~$1.5M · L5 churn save ~$3.8M · L6 ARPU ~$3.3M.</div>
+      <div class="sc-row hi"><div class="sc-metric">FY27 incremental ARR commit</div><div class="sc-from">&mdash;</div><div class="sc-arrow">&rarr;</div><div class="sc-to">+$25&ndash;30M</div></div>
+      <div class="sc-row hi"><div class="sc-metric">Growth Model mid scenario (worked)</div><div class="sc-from">&mdash;</div><div class="sc-arrow">&rarr;</div><div class="sc-to">~$26.2M (within band ✓)</div></div>
+      <div class="sc-row"><div class="sc-metric">Editor-related backward stack reversed</div><div class="sc-from">$22&ndash;35M opportunity cost</div><div class="sc-arrow">&rarr;</div><div class="sc-to">captured by FY27 forward commit</div></div>
+      <div class="sc-row"><div class="sc-metric">Premium / agency Classic churn</div><div class="sc-from">$1&ndash;2M risk (Strategy R1)</div><div class="sc-arrow">&rarr;</div><div class="sc-to">contained via NEB Code Mode + funded migration</div></div>
+      <div class="sc-row"><div class="sc-metric">Brand sentiment (qualitative)</div><div class="sc-from">&ldquo;ships features but loses editor narrative&rdquo;</div><div class="sc-arrow">&rarr;</div><div class="sc-to">&ldquo;Mailchimp is back, modern, and one product&rdquo;</div></div>
+      <div class="sc-lever">Lever sketch (mid, ~$26.2M total): L1 bulk recovery ~$10.4M &middot; L2 activation ~$3.2M &middot; L3 SMS ~$4.0M &middot; L4 migration ~$1.5M &middot; L5 churn save ~$3.8M &middot; L6 ARPU ~$3.3M.</div>
     </div>
   </div>
 
   <hr class="divider"/>
 
+  <!-- How we win -->
   <h2 class="memo-h2">How we win</h2>
 
-  <p>Four moves, aligned to <a href="#roadmap" onclick="document.querySelector('[data-tab=roadmap]').click();return false;">Roadmap to Win</a> and <a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click();return false;">Strategy 6-Pager</a>.</p>
+  <p>Four moves. Stop the work that no longer compounds. Continue the few advantages that actually do. Change the build order, the cohort metrics we manage to, and the AI surface posture. Start what we have not previously committed to &mdash; six credibility moments and an authoring surface that finally feels unified.</p>
 
   <div class="hww-grid">
     <div class="hww-card stop">
       <div class="hww-label">Stop</div>
       <ul>
-        <li><strong>Shipping net-new editor chrome on two stacks</strong> — every bet must justify itself twice until Classic is retired.</li>
-        <li><strong>Template-scoped saved content as the long-term primitive</strong> — it loses to Klaviyo-style Universal blocks in every competitive bake-off.</li>
-        <li><strong>International Standard pricing with US-only AI</strong> — toxic to renewals; ship global parity or a paid global AI SKU.</li>
+        <li><strong>Shipping editor features on two stacks.</strong> Every NEB feature has to justify itself twice until Classic is retired with NEB Code Mode parity.</li>
+        <li><strong>Treating template-scoped saved content as the long-term primitive.</strong> Klaviyo Universal Content is the new bar; saved blocks must migrate into Universal Content.</li>
+        <li><strong>Selling Standard tier internationally with US-only AI.</strong> Either ship Write with AI globally, or repackage as a paid AI add-on with global parity. The current posture is brand damage.</li>
+        <li><strong>Force-migrating Classic users without Code Mode.</strong> Strategy R1 sizes this as the highest single risk: $1&ndash;2M ARR loss if NEB Code Mode doesn&rsquo;t satisfy power users before sunset.</li>
+        <li><strong>Reporting on aggregate &ldquo;editor adoption.&rdquo;</strong> Multivariate metrics demand multivariate strategy &mdash; bulk shrinks while SMS grows; one number hides the truth.</li>
       </ul>
     </div>
+
     <div class="hww-card continue">
       <div class="hww-label">Continue</div>
       <ul>
-        <li><strong>Deliverability + sending infrastructure investment</strong> — the editor promises quality; ops must keep the promise in inbox.</li>
-        <li><strong>Intuit Assist + Brand Kit as differentiators</strong> — only Mailchimp ties brand governance to Assist across taxes + marketing context.</li>
-        <li><strong>SMB-first simplicity</strong> — power features ship behind Code Mode, not parallel products.</li>
+        <li><strong>Brand Kit + Intuit Assist as differentiators.</strong> Only Mailchimp ties brand governance to Assist across 12M+ customers and Intuit&rsquo;s shared infrastructure.</li>
+        <li><strong>Deliverability and sender-reputation investment.</strong> The editor authors; deliverability ships. Both have to keep working.</li>
+        <li><strong>SMB-first ergonomics.</strong> 260+ template library; drag-and-drop UX; non-technical-buyer first. Don&rsquo;t over-rotate to enterprise governance.</li>
+        <li><strong>Cross-segment generalist positioning.</strong> Every vertical, not one. Power features ship behind Code Mode &mdash; not parallel products.</li>
+        <li><strong>Email as the anchor channel.</strong> SMS attaches to email; both share Brand Kit + Assist. Email is the wedge into omnichannel.</li>
       </ul>
     </div>
+
     <div class="hww-card change">
       <div class="hww-label">Change</div>
       <ul>
-        <li><strong>Build order:</strong> <strong>B2 Universal Content</strong> before full <strong>B3 unified canvas</strong> &mdash; reuse primitives unlock both.</li>
-        <li><strong>Migration posture:</strong> funded Classic sunset with <strong>NEB Code Mode</strong> parity <em>before</em> hard cutover comms.</li>
-        <li><strong>Metrics:</strong> manage to Establish + Explore + churn, not vanity AI demos — Growth Model L1 is the variance driver.</li>
+        <li><strong>The build order.</strong> Universal Content first (closes Klaviyo parity AND becomes the data primitive for the unified canvas). NEB Code Mode parallel. Classic sunset comms only after both ship.</li>
+        <li><strong>The cohort metrics we manage to.</strong> Bulk Established + Explore + churn (where the L1 lever variance lives). Not vanity AI demos that don&rsquo;t move the cohort.</li>
+        <li><strong>The AI surface posture.</strong> From &ldquo;US-first beta bolted onto the editor&rdquo; to &ldquo;global, conversational, brand-aware partner inside the canvas.&rdquo;</li>
+        <li><strong>The migration posture.</strong> Funded Classic sunset with full NEB Code Mode parity, 12-month grace period, and 1:1 migration tool with style preservation. No surprises.</li>
+        <li><strong>The narrative externally.</strong> From &ldquo;Mailchimp ships features&rdquo; to &ldquo;Mailchimp customers ship campaigns faster, more confidently, and more on-brand than they did last year.&rdquo;</li>
       </ul>
     </div>
+
     <div class="hww-card start">
       <div class="hww-label">Start</div>
       <ul>
-        <li><strong>B5 real-time collab + comments</strong> — visible &ldquo;Mailchimp is modern&rdquo; proof for teams (do not over-index solo-ICP).</li>
-        <li><strong>Phased B3:</strong> shared blocks &rarr; cross-channel preview &rarr; full canvas — honestdates beat hero slides.</li>
-        <li><strong>Quarterly credibility beats</strong> paired with HVC burn-down on top Slack themes.</li>
+        <li><strong>Universal Content blocks</strong> &mdash; edit once, propagates everywhere across templates and journeys (Q2 credibility moment).</li>
+        <li><strong>NEB Code Mode + Liquid templating</strong> &mdash; HTML / Liquid escape hatch inside NEB so Premium and agency users can stay (Q3).</li>
+        <li><strong>Conversational journey editing in Intuit Assist</strong> &mdash; in-canvas Brand-Kit-aware AI edits; no competitor ships this combination (Q5).</li>
+        <li><strong>Real-time multi-author co-edit + comments</strong> &mdash; Notion / Google Docs pattern, finally in MC (Q5).</li>
+        <li><strong>Generative SMS in composer</strong> &mdash; Brand-Kit-aware, character-limit-compressing, opt-out-compliance-automatic (Q3).</li>
+        <li><strong>AI image gen tied to product catalog</strong> &mdash; the right image, not a stock image; uniquely Mailchimp&rsquo;s combination of Brand Kit + 300+ ecom integrations + Creative Assistant (Q5&ndash;Q6).</li>
       </ul>
     </div>
   </div>
 
   <hr class="divider"/>
 
-  <h2 class="memo-h2">Five strategic pillars — customer-benefit names</h2>
+  <!-- Strategic pillars + key initiatives -->
+  <h2 class="memo-h2">Strategic pillars + key initiatives</h2>
 
-  <p>Maps to Bets <strong>B1&ndash;B5</strong> in the Strategy tab. Initiative inventory expands in <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> when populated.</p>
+  <p>Five pillars, named by <strong>customer benefit</strong> (not internal jargon). Each pillar carries 11&ndash;16 tactical initiatives <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">in the Initiative Canvas</a> (65 total). The highest-leverage initiative inside each pillar is below, with the critical problem it solves, the functional benefit, and why it matters now.</p>
 
   <div class="pillar-stack">
+
     <div class="mpillar p1">
       <div class="mp-head">
         <div class="mp-num">P1</div>
-        <div class="mp-title">&ldquo;One builder I can migrate to without fear&rdquo;</div>
-        <div class="mp-meta"><span class="mp-internal">Builder unification · Classic sunset</span> · <span class="mp-horizon">0&ndash;12 mo</span> · <span class="mp-horizon">Bet B1</span></div>
+        <div class="mp-title">"The builder I trust to ship"</div>
+        <div class="mp-meta"><span class="mp-internal">Editor Quality &amp; Brand Trust</span> &middot; <span class="mp-horizon">0&ndash;3 months</span> &middot; <span>4 sub-themes &middot; 16 initiatives &middot; FY27 $3&ndash;5M (L5 retention save)</span></div>
       </div>
       <ul class="mp-init">
-        <li><strong>NEB Code Mode + Liquid / HTML parity</strong> for Premium + agency before migration waves.</li>
-        <li><strong>Funded migration + style preservation</strong> — highest churn risk if mishandled (see Strategy critic).</li>
-        <li><strong>HVC burn-down</strong> on New Builder / Classic breakpoints surfaced in <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">Tab 4</a>.</li>
+        <li><strong>NEB rendering parity fix (I-1.1.1).</strong> <em>Problem:</em> Customer&rsquo;s NEB email looks correct in editor, breaks in inbox (forwarded mail divergence, mobile line-breaks, image shrink). <em>Benefit:</em> Send looks like the editor preview. <em>Why now:</em> $1,820/mo cited HVC (named users at $402, $410, $949, $468) and the most fundamental promise the editor makes.</li>
+        <li><strong>Brand Kit data correctness fix + multi-brand + font upload parity (I-1.2.1, I-1.2.2, I-1.2.3).</strong> <em>Problem:</em> Stale Brand Kit incident dropped colors; uploaded brand fonts don&rsquo;t render in Creative Assistant; multi-brand teams rebuild per sub-brand. <em>Benefit:</em> Brand Kit is reliable everywhere it&rsquo;s applied. <em>Why now:</em> $6.5K/mo cited including a $3K Premium account and a $2,460 multi-brand cluster &mdash; and Brand Kit is the foundation Universal Content (P2) builds on.</li>
+        <li><strong>Canva &harr; Mailchimp sync reliability (I-1.3.1).</strong> <em>Problem:</em> Canva graphic shows in editor but is missing in sent email; Theme 13, $2,500/mo+ cited including a live email sent without the graphic. <em>Benefit:</em> Customer&rsquo;s third-party design work shows up in their sends. <em>Why now:</em> The silent-failure mode poisons trust in <em>both</em> products.</li>
+        <li><strong>Creative Assistant rediscovery + non-banner expansion (I-1.4.1, I-1.4.2).</strong> <em>Problem:</em> Customers explicitly ask &ldquo;Can you bring back the Creative Assistant?&rdquo; ($2,650/mo cited) &mdash; the feature still exists but discovery collapsed. <em>Benefit:</em> Customers find Creative Assistant again; banner / social workflows return to MC instead of Canva. <em>Why now:</em> Reduces the &ldquo;third-party in the loop&rdquo; workflow tax (UR Workflow Shape #4).</li>
       </ul>
     </div>
+
     <div class="mpillar p2">
       <div class="mp-head">
         <div class="mp-num">P2</div>
-        <div class="mp-title">&ldquo;Edit once, send everywhere I need&rdquo;</div>
-        <div class="mp-meta"><span class="mp-internal">Universal Content</span> · <span class="mp-horizon">0&ndash;6 mo</span> · <span class="mp-horizon">Bet B2</span></div>
+        <div class="mp-title">"Edit once, send everywhere"</div>
+        <div class="mp-meta"><span class="mp-internal">Universal Content + Migration</span> &middot; <span class="mp-horizon">0&ndash;9 months</span> &middot; <span>3 sub-themes &middot; 11 initiatives &middot; FY27 $4&ndash;7M (L1 + L4)</span></div>
       </div>
       <ul class="mp-init">
-        <li><strong>Cross-template + cross-flow blocks</strong> with automatic migration from saved content.</li>
-        <li><strong>Klaviyo parity narrative reset</strong> — removes the &ldquo;Universal block&rdquo; migration trigger for DTC operators.</li>
+        <li><strong>Universal Content block primitive (I-2.1.1).</strong> <em>Problem:</em> Klaviyo Spring &rsquo;26 made this the default editor primitive; Mailchimp&rsquo;s saved-content remains template-scoped. <em>Benefit:</em> Customer edits a header / footer / promo banner once; all sends update automatically. <em>Why now:</em> The single biggest competitive narrative shift the editor can make in FY27 + it becomes the data primitive that the unified email+SMS canvas (P5.1) reuses, so we don&rsquo;t build the same thing twice.</li>
+        <li><strong>Auto-migration of saved blocks &rarr; Universal Content (I-2.1.2).</strong> <em>Problem:</em> Customers have years of saved-content investment scattered per template. <em>Benefit:</em> Existing customers get Universal Content benefit immediately; doesn&rsquo;t feel like &ldquo;start over.&rdquo; <em>Why now:</em> Without auto-migration, adoption stalls and Klaviyo parity becomes a brochure feature.</li>
+        <li><strong>NEB Code Mode + Liquid templating (I-2.2.3, I-2.2.4).</strong> <em>Problem:</em> NEB has no HTML / Liquid escape hatch; Premium and agency users anchor on Classic specifically because of HTML control. <em>Benefit:</em> Power users get NEB without giving up control; safe to retire Classic. <em>Why now:</em> Strategy R1 sizes Classic-sunset-without-Code-Mode at $1&ndash;2M ARR loss &mdash; the highest single risk in the financial walk.</li>
+        <li><strong>Funded migration program + 12-month grace period (I-2.2.5).</strong> <em>Problem:</em> Migration friction and support dead-ends ($504/mo cited; customer: &ldquo;two staff members &hellip; first ended the chat on me, second disappeared after 30 minutes&rdquo;). <em>Benefit:</em> Migration becomes a positive event for HVCs &mdash; assisted, with style preservation, no surprises. <em>Why now:</em> Without funded migration, Premium / agency churn during sunset = $1&ndash;2M ARR loss; with it, sunset becomes safe to announce in Q5.</li>
       </ul>
     </div>
+
     <div class="mpillar p3">
       <div class="mp-head">
         <div class="mp-num">P3</div>
-        <div class="mp-title">&ldquo;Email + SMS feel like one campaign, not two jobs&rdquo;</div>
-        <div class="mp-meta"><span class="mp-internal">Unified canvas</span> · <span class="mp-horizon">6&ndash;18 mo</span> · <span class="mp-horizon">Bet B3</span></div>
+        <div class="mp-title">"From signup to first send in minutes"</div>
+        <div class="mp-meta"><span class="mp-internal">Activation Foundation</span> &middot; <span class="mp-horizon">3&ndash;9 months</span> &middot; <span>4 sub-themes &middot; 11 initiatives &middot; FY27 $4&ndash;6M (L1 + L2)</span></div>
       </div>
       <ul class="mp-init">
-        <li><strong>Shared blocks, Brand Kit on SMS short links, cross-channel preview.</strong></li>
-        <li><strong>Retention focus:</strong> SMS Established growth + 53% churn — canvas without credit/MMS clarity does not monetize.</li>
+        <li><strong>Day-0 onboarding sequence + Brand Kit auto-extract (I-3.1.1, I-3.1.2).</strong> <em>Problem:</em> Time-to-first-send is 14&ndash;21 days median; first-month adoption falling (&lt;1mo cohort &minus;17.5%). <em>Benefit:</em> First send out the door in &lt;7 days, on-brand from minute one. <em>Why now:</em> Repairs the &lt;12mo cohort (&minus;22.8% YoY) &mdash; the cohort that becomes next year&rsquo;s revenue.</li>
+        <li><strong>B2B / ProServ template gallery + industry-aware galleries (I-3.2.1, I-3.2.2).</strong> <em>Problem:</em> UR Bet #3: B2B / ProServ customers can&rsquo;t find a starting template; Jillian Ney quote: <em>&ldquo;feel more like e-commerce emails.&rdquo;</em> <em>Benefit:</em> Customer sees templates that match their business; activation accelerates across non-ecom verticals. <em>Why now:</em> Klaviyo has 60+ templates segmented by vertical &mdash; Mailchimp&rsquo;s breadth advantage is invisible to non-ecom customers.</li>
+        <li><strong>In-app changelog + contextual feature discovery + DRAFT-resurrect (I-3.3.1, I-3.3.2, I-3.3.3).</strong> <em>Problem:</em> UR Discovery table &mdash; 5 customers with years-long undiscovered features (Bianka A/B testing, Jack NEB 4&ndash;6 yrs, Jeffrey 3.5 yrs, Clint 1 yr DRAFT). <em>Benefit:</em> Capability utilization rises; reduces silent-churn from &ldquo;I&rsquo;m not getting enough value.&rdquo; <em>Why now:</em> Self-blame precedes silent churn; capability discovery is the cheapest retention save we have.</li>
+        <li><strong>Free-tier editor experience uplift (I-3.4.1).</strong> <em>Problem:</em> Free Established users dropped 386K &rarr; 312K (&minus;19.2% YoY) &mdash; the largest single segment loss; Shopify gives editor + automation free with storefront. <em>Benefit:</em> SMB customers get day-1 editor value before paywall; converts more Free &rarr; Paid as customers grow. <em>Why now:</em> Standard tier (the only growing tier at +9.1%) needs a Free-tier feeder funnel.</li>
       </ul>
     </div>
+
     <div class="mpillar p4">
       <div class="mp-head">
         <div class="mp-num">P4</div>
-        <div class="mp-title">&ldquo;AI that ships campaigns, not a demo locked by geography&rdquo;</div>
-        <div class="mp-meta"><span class="mp-internal">Assist + Write with AI</span> · <span class="mp-horizon">3&ndash;12 mo</span> · <span class="mp-horizon">Bet B4</span></div>
+        <div class="mp-title">"AI that ships campaigns, not a demo"</div>
+        <div class="mp-meta"><span class="mp-internal">Intuit Assist + Write with AI Recovery</span> &middot; <span class="mp-horizon">3&ndash;12 months</span> &middot; <span>4 sub-themes &middot; 12 initiatives &middot; FY27 $4&ndash;6M (L1 + L2 + L6)</span></div>
       </div>
       <ul class="mp-init">
-        <li><strong>Global ungate or paid AI add-on</strong> with parity for international Standard.</li>
-        <li><strong>Conversational in-canvas edits</strong> — recover Explore funnel collapse on GenAI surfaces.</li>
+        <li><strong>Write with AI global ungate (or paid AI add-on globally) (I-4.1.1).</strong> <em>Problem:</em> Geo-gate to US/UK/AU/CA on a globally-priced Standard plan; Explore funnel collapsed &minus;73.7% YoY; international customers feel cheated. <em>Benefit:</em> International Standard customers get the AI they pay for; reverses brand damage in EMEA / APAC. <em>Why now:</em> Worst single signal in the brief &mdash; every quarter delayed compounds the decline.</li>
+        <li><strong>Write with AI quality + brand-tone improvements + re-introduction campaign (I-4.1.2, I-4.1.3).</strong> <em>Problem:</em> 106K Abandon users on Write with AI &mdash; tried it, didn&rsquo;t come back. <em>Benefit:</em> Returning users get notably better output; reactivation pool the size of the Established cohort. <em>Why now:</em> Quality + outreach are independently necessary &mdash; one without the other doesn&rsquo;t move retention.</li>
+        <li><strong>Conversational journey editing in Intuit Assist (I-4.2.1).</strong> <em>Problem:</em> Klaviyo AI is feature-bound; Postscript trains on docs but doesn&rsquo;t do canvas-level edits; Stensul AI is form-driven. No competitor ships <strong>Brand-Kit-aware conversational</strong>. <em>Benefit:</em> Customer modifies emails by typing in plain English. <em>Why now:</em> Flagship demo capability that captures the &ldquo;Mailchimp is back, modern&rdquo; narrative in Q5.</li>
+        <li><strong>Generative SMS in composer + AI image gen tied to product catalog (I-4.3.1, I-4.4.1).</strong> <em>Problem:</em> SMS adoption is +73.5% but writing SMS is friction; AI imagery is generic across competitors. <em>Benefit:</em> SMS authoring stops feeling like a separate skill; ecom customers get the right image, not a stock image. <em>Why now:</em> Brand Kit + 300+ ecom integrations + Creative Assistant + Intuit Assist is a unique combination &mdash; no competitor has all four.</li>
       </ul>
     </div>
+
     <div class="mpillar p5">
       <div class="mp-head">
         <div class="mp-num">P5</div>
-        <div class="mp-title">&ldquo;My team ships together — Mailchimp isn&rsquo;t dated&rdquo;</div>
-        <div class="mp-meta"><span class="mp-internal">Collab + governance</span> · <span class="mp-horizon">6&ndash;12 mo</span> · <span class="mp-horizon">Bet B5</span></div>
+        <div class="mp-title">"Email + SMS feel like one campaign"</div>
+        <div class="mp-meta"><span class="mp-internal">Unified Canvas + Collab + SMS Retention</span> &middot; <span class="mp-horizon">6&ndash;18 months</span> &middot; <span>4 sub-themes &middot; 15 initiatives &middot; FY27 $5&ndash;8M (L3 + L5 + L6)</span></div>
       </div>
       <ul class="mp-init">
-        <li><strong>Realtime co-edit + comments + resolve in context.</strong></li>
-        <li><strong>Accessibility + brand governance hooks</strong> so quality compounds for multi-user teams.</li>
+        <li><strong>Shared blocks email+SMS + cross-channel preview (I-5.1.1, I-5.1.2).</strong> <em>Problem:</em> VoC #2: &ldquo;unified is a billing claim.&rdquo; Customers compose email, switch to SMS composer, copy-paste, reformat, preview separately. <em>Benefit:</em> Customer composes once; ships everywhere; cross-channel preview at compose time. <em>Why now:</em> Universal Content (P2.1) becomes the data primitive; build them in the right order, cost less.</li>
+        <li><strong>SMS TCPA guardrails + reporting v2 + credits transparency (I-5.2.3, I-5.2.1, I-5.2.2).</strong> <em>Problem:</em> $57K/mo cited TCPA incident (C3 Festivals duplicate opt-out); SMS reporting empty / N/A; negative credit balances hidden. <em>Benefit:</em> Customer cannot accidentally send TCPA-violating messages; SMS ROI is provable. <em>Why now:</em> SMS adoption is +73.5% but cohort churns at 53% &mdash; if we don&rsquo;t fix retention infra, we lose the customers we acquire.</li>
+        <li><strong>Real-time multi-author co-edit + block-level @-mention comments (I-5.3.1, I-5.3.2).</strong> <em>Problem:</em> VoC #5 + UR Bet #4 (Jack / Kyle / Bianka): single editor at a time; teams workaround via screenshots. <em>Benefit:</em> Marketing teams of 2&ndash;5 work together natively in MC. <em>Why now:</em> Recovers the &ldquo;Mailchimp is dated&rdquo; narrative; differentiator vs Klaviyo (single editor).</li>
+        <li><strong>Locked layouts + accessibility coach + cross-account brand inheritance (I-5.4.1, I-5.4.2, I-5.4.3).</strong> <em>Problem:</em> Brand Kit is a config object, not a governance system; agencies rebuild assets per client. <em>Benefit:</em> Multi-author teams + agencies can lock brand integrity at scale; SMB-flavored governance product. <em>Why now:</em> Open white space below Stensul/Knak enterprise; Mailchimp&rsquo;s SMB UX advantage applies.</li>
       </ul>
     </div>
+
   </div>
 
-  <h2 class="memo-h2">Guiding principles for sequencing</h2>
+  <hr class="divider"/>
+
+  <!-- Reason to believe -->
+  <h2 class="memo-h2">Reason to believe</h2>
+
+  <p>Five reasons this strategy will deliver the $25&ndash;30M FY27 commit, in order of strength.</p>
+
+  <ul class="memo-list">
+    <li><strong>The Growth Model arithmetic holds at conservative inputs.</strong> The mid scenario (~$26.2M worked) uses a 30% causal share on bulk Establish recovery, a $110 paid-slice ARPU placeholder (likely conservative), and a 0.92pp annual churn improvement &mdash; all defensible against BigQuery baselines. Sensitivity at &plusmn;25% per lever lands the band at $19.7&ndash;32.7M; the $25&ndash;30M anchor sits inside it.</li>
+    <li><strong>Three orchestration moves cut engineering cost.</strong> Universal Content (P2.1) ships first because it&rsquo;s also the data primitive for the unified email+SMS canvas (P5.1). NEB Code Mode (P2.2.3) ships before Classic sunset comms because doing it in the other order risks $1&ndash;2M ARR. Write with AI policy + product tracks run in parallel because policy clearance has unknown timing. None of these are speculative engineering bets &mdash; each unlocks downstream cost.</li>
+    <li><strong>The competitive playbook is proven, not invented.</strong> Klaviyo&rsquo;s Spring &rsquo;26 Universal Content launch is the public benchmark we follow. Stensul / Knak have proved governance + co-edit are real demand. Postscript / Attentive have validated SMS retention infrastructure as the bottleneck. We are <em>following well-trodden paths</em> with our structural advantages: Brand Kit + Intuit Assist + 300+ ecom integrations + 12M+ user distribution.</li>
+    <li><strong>HVC + Voice of Customer give us specific, named-customer targets.</strong> The Initiative Canvas&rsquo;s coverage matrix maps every cited HVC theme + every UR bet + every VoC hate theme to at least one initiative. We are not guessing what customers want; we are responding to <em>$95K/mo in cited MRR exposure</em> with specific scoped fixes, including the largest single escalation in the brief (the $57K SMS TCPA incident).</li>
+    <li><strong>The team is staffed against the bets.</strong> Strategy Page 4 staffing model: editor platform 30%, AI 25%, Universal Content 15%, SMS+canvas 20%, Collab 10% &mdash; matches the 35/30/25/10 trust-layer effort allocation in the Initiative Canvas. The capacity ask is +30% for the Classic-migration window for two quarters, identified as a risk (Strategy R6) with a clear mitigation (lock staffing before commit).</li>
+  </ul>
+
+  <hr class="divider"/>
+
+  <!-- Uber hypothesis -->
+  <h2 class="memo-h2">Uber hypothesis &mdash; and how it drives the success metrics</h2>
+
+  <div class="bridge-block">
+    <p><strong>If</strong> we ship a unified, AI-augmented authoring surface that customers <em>trust to render correctly</em>, that lets them <em>edit once and send everywhere</em>, and that <em>respects their brand globally</em> &mdash; <strong>then</strong> bulk Established users will recover from <strong>&minus;9.4% YoY to a flat-or-slightly-positive trajectory</strong> by April 2027, SMS retention will improve from <strong>53% churn to 46&ndash;48%</strong>, the Write with AI Explore funnel will stabilize, and the unified editor will deliver <strong>+$25&ndash;30M FY27 incremental ARR</strong> at the Growth Model mid scenario (~$26.2M worked).</p>
+  </div>
+
+  <p>The hypothesis decomposes cleanly into the six Growth Model levers, each tied to one or more pillar.</p>
+
+  <ul class="memo-list">
+    <li><strong>L1 Bulk recovery (~$10.4M):</strong> Universal Content (P2.1) closes the Klaviyo migration trigger; NEB Code Mode (P2.2.3) protects Premium / agency; Free-tier uplift (P3.4.1) reopens SMB acquisition. <em>Drives: bulk Established 888K &rarr; 915&ndash;935K.</em></li>
+    <li><strong>L2 Activation (~$3.2M):</strong> Day-0 onboarding (P3.1.1) + industry templates (P3.2) + Conversational Assist (P4.2.1). <em>Drives: time-to-first-send 14&ndash;21d &rarr; 7&ndash;10d; bulk Explore funnel repair.</em></li>
+    <li><strong>L3 SMS attach (~$4.0M):</strong> Unified canvas (P5.1) + Generative SMS in composer (P4.3.1) + MMS bundle pricing (P5.2.5). <em>Drives: SMS Established 6.7K &rarr; 11.5&ndash;14.5K.</em></li>
+    <li><strong>L4 Reduced abandonment (~$1.5M):</strong> NEB rendering bug fixes (P1.1) + Funded Classic migration (P2.2.5) + DRAFT-resurrect (P3.3.3). <em>Drives: bulk churn 40% &rarr; 36.5&ndash;37.5%.</em></li>
+    <li><strong>L5 Retention save (~$3.8M):</strong> P1 entire pillar (Quality &amp; Trust) + SMS reporting/credits/TCPA (P5.2) + Brand Kit reliability (P1.2). <em>Drives: editor-explained gross churn down ~0.92pp on the paid cohort.</em></li>
+    <li><strong>L6 ARPU + outcome lift (~$3.3M):</strong> Real-time collab (P5.3) + governance for SMB (P5.4) + multi-brand kits (P1.2.3) + AI image gen tied to product catalog (P4.4.1). <em>Drives: per-author revenue lift; agency / multi-brand expansion; Free &rarr; Standard upgrade path.</em></li>
+  </ul>
+
+  <p>Every metric in the &ldquo;What winning looks like&rdquo; cards above ties directly to one of these six levers. There is no orphan metric and no orphan initiative.</p>
+
+  <hr class="divider"/>
+
+  <!-- Roadmap principles -->
+  <h2 class="memo-h2">Roadmap key principles &mdash; trust, then confidence</h2>
+
+  <p>Customers face four simultaneous problems: <strong>editor reliability is broken</strong> (cited HVC + bulk churn +2.1pp), <strong>discovery is weak</strong> (UR Discovery table), <strong>the AI funnel collapsed</strong> (Health Write with AI), and <strong>the competitive narrative is lost</strong> (VoC + Klaviyo Spring &rsquo;26). Five principles govern how we sequence the 65 initiatives across 6 quarters.</p>
 
   <div class="principles-stack">
     <div class="gp">
       <div class="gp-num">1</div>
-      <div class="gp-body"><div class="gp-title">Trust before novelty</div><p>Broken NEB/Classic migrations and HVC-visible bugs <strong>cap L1</strong> in the Growth Model. Ship reliability and migration safety alongside AI.</p></div>
+      <div class="gp-body"><div class="gp-title">All 5 pillars run in parallel &mdash; not sequential phases</div><p>We do not wait nine months to ship Universal Content while Klaviyo&rsquo;s lead grows. We do not only ship Universal Content while cited HVC ($95K/mo) keeps eroding the base. The error mode is treating these as phases instead of weights.</p></div>
     </div>
     <div class="gp">
       <div class="gp-num">2</div>
-      <div class="gp-body"><div class="gp-title">Primitives before polish</div><p><strong>Universal Content</strong> is the prerequisite for unified SMS/email &mdash; skipping it duplicates work and loses the competitive story.</p></div>
+      <div class="gp-body"><div class="gp-title">AI cannot compensate for broken editor trust</div><p>Functional Trust gets <strong>35% of effort</strong>. Cited HVC bugs, Brand Kit reliability, Canva sync get fixed first &mdash; because AI experiences amplify customer anxiety on a broken foundation. The Health Write with AI collapse is not unrelated to the cited HVC bug exposure &mdash; both are surface symptoms of the same trust deficit.</p></div>
     </div>
     <div class="gp">
       <div class="gp-num">3</div>
-      <div class="gp-body"><div class="gp-title">Segment narratives honestly</div><p>Explore decline mixes GTM + policy + product — segment before declaring &ldquo;NEB failed.&rdquo;</p></div>
+      <div class="gp-body"><div class="gp-title">Primitives before polish &mdash; Universal Content unlocks the unified canvas</div><p>P2.1 Universal Content ships <em>before</em> P5.1 unified email+SMS canvas. Universal Content is the data primitive the unified canvas reuses. Building them in the wrong order means building the same primitive twice &mdash; engineering waste + competitive delay. Same logic for NEB Code Mode (P2.2.3) shipping <em>before</em> Classic sunset comms.</p></div>
     </div>
     <div class="gp">
       <div class="gp-num">4</div>
-      <div class="gp-body"><div class="gp-title">Stack losses once</div><p>Do not add Automations + Editor backward totals into a single scare number — overlap is real (see Loss Attribution caveats).</p></div>
+      <div class="gp-body"><div class="gp-title">Multivariate metrics demand multivariate strategy</div><p>Bulk shrinks while SMS grows; Write with AI Established holds while its Explore collapses; Free shrinks while Standard grows. <strong>Do not headline a single number.</strong> The strategy must address each cohort with its own intervention &mdash; bulk = Universal Content + Free recovery; SMS = retention infra + canvas; AI = funnel recovery; Standard = upgrade-path improvements.</p></div>
     </div>
     <div class="gp">
       <div class="gp-num">5</div>
-      <div class="gp-body"><div class="gp-title">Finance-owned economics</div><p>Replace <strong>~$110</strong> placeholder ARPU with tier-true joins; publish quarterly ramp for FY27 partial-year capture.</p></div>
+      <div class="gp-body"><div class="gp-title">Sequence by dependency chain + ship one credibility moment every quarter</div><p>Three critical-path items gate everything downstream: (a) <strong>Universal Content</strong> &mdash; gates P5.1 unified canvas; (b) <strong>NEB Code Mode</strong> &mdash; gates Classic sunset comms ($1&ndash;2M ARR risk); (c) <strong>Write with AI policy track</strong> &mdash; runs parallel to product because clearance timing is unknown. Six quarters, six credibility moments &mdash; each visible externally (PR, brand, operator forums) and internally (team confidence, recruiting).</p></div>
     </div>
   </div>
 
   <div class="effort-alloc">
-    <div class="ea-title">Indicative engineering mix (Strategy tab staffing)</div>
+    <div class="ea-title">Effort allocation across the four trust layers</div>
     <div class="ea-bar">
-      <div class="ea-seg ea-1" style="flex: 30;"><span>Editor platform / B1</span><strong>30%</strong></div>
-      <div class="ea-seg ea-2" style="flex: 25;"><span>AI / Assist / B4</span><strong>25%</strong></div>
-      <div class="ea-seg ea-3" style="flex: 15;"><span>Universal Content / B2</span><strong>15%</strong></div>
-      <div class="ea-seg ea-4" style="flex: 30;"><span>SMS + canvas / B3 + collab B5</span><strong>30%</strong></div>
+      <div class="ea-seg ea-1" style="flex: 35;"><span>Functional Trust</span><strong>35%</strong></div>
+      <div class="ea-seg ea-2" style="flex: 30;"><span>Cognitive Simplicity</span><strong>30%</strong></div>
+      <div class="ea-seg ea-3" style="flex: 25;"><span>Outcome Trust + Intelligence</span><strong>25%</strong></div>
+      <div class="ea-seg ea-4" style="flex: 10;"><span>Emotional Partnership + Autonomy</span><strong>10%</strong></div>
     </div>
   </div>
 
   <hr class="divider"/>
 
-  <h2 class="memo-h2">6-quarter credibility arc — May 2026 &rarr; Oct 2027</h2>
+  <!-- 6-quarter roadmap -->
+  <h2 class="memo-h2">6-quarter roadmap &mdash; May 2026 &rarr; October 2027</h2>
 
-  <p>Aligned to Strategy sequencing; dates are directional — adjust with Program Management.</p>
+  <p>Each quarter ships one named credibility moment that maps to the layered trust framework. The full per-pillar swimlane detail lives in the <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas tab</a> Page 9.</p>
 
   <div class="rmap">
-    <div class="rmap-q star">
-      <div class="rmap-qlbl">Q1 ★</div>
-      <div class="rmap-qdate">May&ndash;Jul &rsquo;26</div>
-      <div class="rmap-qcred">Universal Content MVP + migration plan</div>
-      <div class="rmap-qnote">Closes Klaviyo parity claim; creates primitive for unified canvas.</div>
-    </div>
     <div class="rmap-q">
-      <div class="rmap-qlbl">Q2</div>
-      <div class="rmap-qdate">Aug&ndash;Oct &rsquo;26</div>
-      <div class="rmap-qcred">Code Mode + migration tooling hardening</div>
-      <div class="rmap-qnote">De-risks Classic sunset narrative; reduces Premium churn fear.</div>
+      <div class="rmap-qlbl">Q1</div>
+      <div class="rmap-qdate">May&ndash;Jul &rsquo;26 &middot; FY26 Q4</div>
+      <div class="rmap-qcred">SMS TCPA $57K closed + Brand Kit incident closed</div>
+      <div class="rmap-qnote">Cited HVC burn-down begins; quietly removes the largest single brand-risk vector in the brief. NEB rendering parity STARTS.</div>
+    </div>
+    <div class="rmap-q star">
+      <div class="rmap-qlbl">Q2 ★</div>
+      <div class="rmap-qdate">Aug&ndash;Oct &rsquo;26 &middot; FY27 Q1</div>
+      <div class="rmap-qcred">Universal Content MVP ships</div>
+      <div class="rmap-qnote">Klaviyo Spring &rsquo;26 parity demo. Single biggest shift in editor narrative externally; first credibility moment that says &ldquo;Mailchimp is responding.&rdquo;</div>
     </div>
     <div class="rmap-q">
       <div class="rmap-qlbl">Q3</div>
-      <div class="rmap-qdate">Nov &rsquo;26&ndash;Jan &rsquo;27</div>
-      <div class="rmap-qcred">Shared blocks + cross-channel preview</div>
-      <div class="rmap-qnote">First tangible &ldquo;one campaign&rdquo; experience for email+SMS.</div>
+      <div class="rmap-qdate">Nov &rsquo;26&ndash;Jan &rsquo;27 &middot; FY27 Q2</div>
+      <div class="rmap-qcred">NEB Code Mode + Generative SMS in composer</div>
+      <div class="rmap-qnote">Power users see NEB they can stay on; SMS retention story begins (B-K-aware generation closes the &ldquo;writing SMS is friction&rdquo; gap).</div>
     </div>
-    <div class="rmap-q">
-      <div class="rmap-qlbl">Q4</div>
-      <div class="rmap-qdate">Feb&ndash;Apr &rsquo;27</div>
-      <div class="rmap-qcred">AI ungate milestone + conversational edits GA</div>
-      <div class="rmap-qnote">Repairs international renewal + Write with AI funnel.</div>
+    <div class="rmap-q star">
+      <div class="rmap-qlbl">Q4 ★</div>
+      <div class="rmap-qdate">Feb&ndash;Apr &rsquo;27 &middot; FY27 Q3</div>
+      <div class="rmap-qcred">Write with AI global ungate + Free-tier editor uplift</div>
+      <div class="rmap-qnote">Largest brand-decay reversal moment of the program. International Standard customers stop paying for an inaccessible feature; SMB acquisition funnel reopens.</div>
     </div>
     <div class="rmap-q">
       <div class="rmap-qlbl">Q5</div>
-      <div class="rmap-qdate">May&ndash;Jul &rsquo;27</div>
-      <div class="rmap-qcred">Classic sunset comms + peak migration wave</div>
-      <div class="rmap-qnote">Requires B1 parity proof; pair with HVC war room.</div>
+      <div class="rmap-qdate">May&ndash;Jul &rsquo;27 &middot; FY27 Q4</div>
+      <div class="rmap-qcred">Conversational journey editing + Real-time co-edit + Shared email+SMS blocks</div>
+      <div class="rmap-qnote">&ldquo;Mailchimp is back, modern, and one product.&rdquo; Press / analyst narrative shifts; multi-author teams have a reason to stay.</div>
     </div>
     <div class="rmap-q">
       <div class="rmap-qlbl">Q6</div>
-      <div class="rmap-qdate">Aug&ndash;Oct &rsquo;27</div>
-      <div class="rmap-qcred">Unified canvas v1 + co-edit GA</div>
-      <div class="rmap-qnote">Credibility moment for teams + SMS monetization follow-through.</div>
+      <div class="rmap-qdate">Aug&ndash;Oct &rsquo;27 &middot; FY28 Q1</div>
+      <div class="rmap-qcred">AI brand-style transfer + Prompt-first mode + Governance for SMB</div>
+      <div class="rmap-qnote">Category-leadership narrative. Mailchimp is the SMB authoring platform with AI breadth + collab + governance no competitor matches at this price point.</div>
     </div>
   </div>
 
   <hr class="divider"/>
 
+  <!-- Executive recap -->
   <h2 class="memo-h2">Executive recap</h2>
 
   <div class="recap-block">
-    <p><strong>Mailchimp&rsquo;s authoring surface is losing the narrative while the bulk-email spine shrinks.</strong> BigQuery shows ~888.7K Established senders/mo (&minus;9.4% YoY) and an Explore funnel down &minus;19.2% YoY; GenAI and SMS lines prove we cannot win on a single headline metric — SMS grows but churns at 53%; Write with AI collapses explorers while churn spikes.</p>
-    <p>The FY27 program named in this brief — <strong>B1 builder unification, B2 Universal Content, B3 unified canvas, B4 global AI, B5 collab</strong> — is how we earn back <strong>$25&ndash;30M ARR</strong> (Growth Model mid ~$26.3M) and reverse the backward-looking <strong>$36&ndash;67M</strong> editor-related impact band (mostly imputed). Success requires sequencing discipline, honest segmentation on Explore, and Finance validation on ARPU and overlap with sister Automations bets.</p>
+    <p>Mailchimp&rsquo;s <strong>authoring surface is the most-touched product in the company</strong> &mdash; 888,706 bulk-email Established users per month plus a fast-growing satellite of SMS, Write with AI, and Transactional. Per BigQuery, the spine has been <strong>quietly losing ground for 12 months</strong>: bulk Established &minus;9.4% YoY (~92K users), Explore &minus;19.2%, Free &minus;19.2%, Write with AI Explore collapsed &minus;73.7%. Cumulative editor-related impact backward (Loss Attribution): <strong>$36&ndash;67M sensitivity band</strong>, mostly imputed and counterfactual; the FY27 forward commit (<strong>$25&ndash;30M</strong>, mid scenario ~$26.2M) is sized to recover roughly what we left on the table.</p>
+
+    <p>The strategy is structured as <strong>one 18-month arc with five customer-benefit pillars running in parallel</strong> under a layered trust framework: <strong>P1</strong> restores editor reliability + Brand Kit trust; <strong>P2</strong> ships Universal Content + NEB Code Mode (the unlock for everything else); <strong>P3</strong> repairs the activation funnel and reopens Free-tier acquisition; <strong>P4</strong> rescues the Write with AI funnel + ships conversational + generative SMS; <strong>P5</strong> makes &ldquo;unified&rdquo; real with shared blocks, real-time collab, and SMS retention infrastructure. Each quarter ships one credibility moment. By <strong>Q6 FY28</strong>, Mailchimp&rsquo;s editor is the unified email + SMS authoring platform that customers trust to ship &mdash; and the marketer focuses on growing their business, not assembling a campaign.</p>
   </div>
 
   <hr class="divider"/>
 
-  <h2 class="memo-h2">Customer From &rarr; To</h2>
+  <!-- Customer From → To -->
+  <h2 class="memo-h2">Customer From &rarr; To &mdash; the six transformations that matter</h2>
 
-  <p>Six transformations that map pillars to lived experience (research + HVC aligned).</p>
+  <p>The strategy succeeds when the customer&rsquo;s lived experience changes in the following six ways. Each row pairs the functional and emotional cost today with the functional and emotional benefit at the end of the 18-month arc, and names the pillar that delivers it.</p>
 
   <table class="ft-table">
     <thead>
       <tr>
-        <th class="ft-th-from">Today — cost</th>
+        <th class="ft-th-from">Today &mdash; functional + emotional cost</th>
         <th class="ft-th-arrow"></th>
-        <th class="ft-th-to">FY28 — benefit</th>
+        <th class="ft-th-to">FY28 &mdash; functional + emotional benefit</th>
         <th class="ft-th-pillar">Pillar</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><strong>Two builders, uncertain migration.</strong> <em>Functional:</em> rebuild campaigns when switching. <em>Emotional:</em> fear of breaking HTML + brand.</td>
+        <td><strong>NEB email looks correct in the editor, breaks in the inbox.</strong> Forwarded mail looks &ldquo;not good at all.&rdquo; <em>Functional:</em> first impression destroyed for every recipient. <em>Emotional:</em> distrust in the most fundamental promise of the editor.</td>
         <td class="ft-arrow">&rarr;</td>
-        <td><strong>One NEB with Code Mode.</strong> Classic retired safely; Premium keeps power without exile.</td>
+        <td><strong>Send looks like the editor preview.</strong> Cross-browser regression suite catches issues pre-release. <em>Emotional:</em> the tool stops being the obstacle to the work.</td>
         <td class="ft-pill"><span class="ftp p1">P1</span></td>
       </tr>
       <tr>
-        <td><strong>Saved blocks trapped in templates.</strong> Klaviyo customers mock copy/paste tax.</td>
+        <td><strong>Two builders, two template libraries, no portability.</strong> &ldquo;I rebuilt the same welcome email three times because I migrated to the new builder mid-campaign.&rdquo; <em>Functional:</em> days of rebuilds. <em>Emotional:</em> &ldquo;Why is this still a thing in 2026?&rdquo;</td>
         <td class="ft-arrow">&rarr;</td>
-        <td><strong>Universal Content</strong> edits propagate across emails + journeys.</td>
+        <td><strong>One NEB with Code Mode + funded migration.</strong> Premium / agency keep HTML + Liquid power; bulk template migration moves 181 templates in minutes; 12-month grace period; style preserved.</td>
         <td class="ft-pill"><span class="ftp p2">P2</span></td>
       </tr>
       <tr>
-        <td><strong>Email here, SMS in another composer.</strong> Duplicate proofreading; Brand Kit partial on SMS.</td>
+        <td><strong>Saved blocks trapped in templates.</strong> Customer with 181 templates: &ldquo;I want to update them all in one go &hellip; I need to individually update them which will take days.&rdquo; <em>Functional:</em> manual rebuilds across templates. <em>Emotional:</em> Klaviyo customers mock copy/paste tax.</td>
         <td class="ft-arrow">&rarr;</td>
-        <td><strong>Shared blocks + cross-channel preview</strong> — one authoring loop.</td>
-        <td class="ft-pill"><span class="ftp p3">P3</span></td>
+        <td><strong>Universal Content edits propagate everywhere.</strong> Edit header / footer / promo banner once; all sends update. Brand Kit auto-applied at insertion. Audit + version history for governance.</td>
+        <td class="ft-pill"><span class="ftp p2">P2</span></td>
       </tr>
       <tr>
-        <td><strong>AI paywall mismatch internationally.</strong> Explore collapses; churn worst-in-family on GenAI.</td>
+        <td><strong>Email here, SMS in another composer.</strong> Compose email; switch composers; copy-paste; reformat; preview separately. <em>Functional:</em> duplicated authoring work. <em>Emotional:</em> &ldquo;unified is a billing claim.&rdquo;</td>
         <td class="ft-arrow">&rarr;</td>
-        <td><strong>Global Assist</strong> with conversational edits inside canvas.</td>
-        <td class="ft-pill"><span class="ftp p4">P4</span></td>
-      </tr>
-      <tr>
-        <td><strong>Screenshots + serial editing.</strong> Teams joke Mailchimp feels pre-Google-Docs.</td>
-        <td class="ft-arrow">&rarr;</td>
-        <td><strong>Co-edit + comments</strong> for modern team workflows.</td>
+        <td><strong>Shared blocks email + SMS + cross-channel preview.</strong> Compose once, ship everywhere. Brand Kit applied to SMS short links. Unified campaign object with consolidated reporting.</td>
         <td class="ft-pill"><span class="ftp p5">P5</span></td>
       </tr>
       <tr>
-        <td><strong>Trust erodes silently.</strong> Churn +2.1pp; operator considers Klaviyo &ldquo;grown-up builder.&rdquo;</td>
+        <td><strong>AI paywall mismatch internationally.</strong> &ldquo;I am in the Netherlands. I get to pay for AI I cannot use.&rdquo; <em>Functional:</em> Explore funnel collapsed &minus;73.7% YoY. <em>Emotional:</em> brand betrayal at renewal time.</td>
         <td class="ft-arrow">&rarr;</td>
-        <td><strong>Measurable funnel recovery + cited HVC burn-down.</strong></td>
-        <td class="ft-pill"><span class="ftp p1">P1</span><span class="ftp p3">P3</span></td>
+        <td><strong>Global Write with AI (or paid AI add-on) + conversational in-canvas edits.</strong> AI ships campaigns, not a demo. Brand-Kit-aware. Recovery campaign re-engages 106K Abandon users.</td>
+        <td class="ft-pill"><span class="ftp p4">P4</span></td>
+      </tr>
+      <tr>
+        <td><strong>Single editor at a time + screenshots over Slack.</strong> Marketing teams of 2&ndash;5 work around MC. <em>Functional:</em> save conflicts ($340/mo cited HVC). <em>Emotional:</em> &ldquo;Mailchimp feels pre-Google-Docs.&rdquo;</td>
+        <td class="ft-arrow">&rarr;</td>
+        <td><strong>Real-time co-edit + block-level @-mention comments.</strong> Approval workflow + version history. Locked layouts mode for governance. Cross-account brand inheritance for agencies.</td>
+        <td class="ft-pill"><span class="ftp p5">P5</span></td>
       </tr>
     </tbody>
   </table>
 
+  <!-- Memo footer / sources -->
   <div class="memo-footer">
-    <strong>Sources:</strong> This memo synthesizes <a href="#brief" onclick="document.querySelector('[data-tab=brief]').click();return false;">Executive Brief</a>, <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">Voice of Customer</a>, <a href="#roadmap" onclick="document.querySelector('[data-tab=roadmap]').click();return false;">Roadmap to Win</a>, <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a>, <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a>, <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> (BigQuery editor-family cut), <a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click();return false;">Strategy 6-Pager</a>, <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a>, and <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a>. Trailing window May 2025&ndash;Apr 2026 vs prior 12 months unless noted.
+    <strong>Sources cited inline:</strong> BigQuery <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 11px;">mc-business-intelligence.bi_aggregate.product_journey_monthly</code> (89.7M rows; trailing 12 months May 2025&ndash;Apr 2026 vs prior 12 months) per <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a>. <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a> (17 cited themes / ~$95K/mo cited including the $57K SMS TCPA incident). <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a> (50 HeyMarvin videos / 25 customer briefs / 5 bets / Discovery table / 5 Workflow Shapes). <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">Voice of Customer</a> (Trustpilot 1,390 reviews / G2 12,698 reviews / Reddit + operator forums / 7 hate themes). <a href="#brief" onclick="document.querySelector('[data-tab=brief]').click();return false;">Executive Brief</a> + <a href="#roadmap" onclick="document.querySelector('[data-tab=roadmap]').click();return false;">Roadmap to Win</a> (9 foundational gaps + 12 differentiated steals). <a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click();return false;">Strategy 6-Pager</a> (5 bets B1&ndash;B5 + 6 risks). <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a> (6 levers; mid scenario ~$26.2M; sensitivity $19.7&ndash;32.7M). <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a> (3-layer $36&ndash;67M backward stack). <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> (5 pillars / 19 sub-themes / 65 tactical initiatives + 6-quarter swimlane). All YoY comparisons use <strong>last 12mo (May 2025&ndash;Apr 2026)</strong> vs <strong>prior 12mo (May 2024&ndash;Apr 2025)</strong>. Klaviyo Spring 2026 Universal Content announcement; Postscript March 2026 Brand Center; Stensul Governed Creation; Knak Email Builder; Mailchimp Help Center NEB / SMS / Brand Kit / Creative Assistant / Write with AI articles.
   </div>
 
 </article>
