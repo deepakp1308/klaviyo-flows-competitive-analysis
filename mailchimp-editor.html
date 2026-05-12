@@ -3090,7 +3090,7 @@
   <div class="doctitle">Mailchimp Email/SMS Unified Editor &amp; Builder &mdash; FY27 Strategy</div>
   <div class="docmeta">Mailchimp standalone &middot; 6-page executive read &middot; Prepared May 2026 &middot; Author: PM, Mailchimp Authoring Surface &middot; <strong>v1 SKELETON</strong> &mdash; financial walk + adoption baselines pending BigQuery editor-product cuts (Tab 7 dependency).</div>
 
-  <div class="skel-note"><strong>SKELETON STATUS:</strong> Page 1, 5, 6 (Strategy question, Risks, Critic) substantially complete. Pages 2&ndash;4 (Target state, Strategy, Financial walk) carry placeholder ranges keyed to the $25&ndash;30M ARR anchor and will tighten once Tab 7 (Product Health BigQuery editor cut) and Tab 4 (HVC Risk Map editor VoC) are populated. All numerical ranges in this skeleton are <em>directional</em> and explicitly bracketed.</div>
+  <div class="skel-note"><strong>STATUS:</strong> Tab 7 (Product Health) and Tab 10 (Growth Model) are populated; Pages 2&ndash;4 still carry <em>directional</em> Strategy ranges that should be reconciled to the ~$26.3M mid scenario. Tab 4 (HVC) validates problem severity; Finance still owns ARPU + causal-share locks.</div>
 
   <h2>Strategy question</h2>
   <p>What is the boldest way Mailchimp's Email/SMS Unified Editor &amp; Builder can deliver <strong>$25&ndash;30M of incremental ARR in FY27</strong> &mdash; the authoring-surface share of Mailchimp's standalone growth target &mdash; while reversing a structural narrative that <em>"Mailchimp ships features but loses the editor conversation to Klaviyo and Stensul"</em>?</p>
@@ -3190,7 +3190,7 @@
   <div class="doctitle">Financial walk &mdash; how $25&ndash;30M shows up</div>
   <div class="docmeta">Mailchimp Email/SMS Unified Editor &amp; Builder &middot; Page 4 of 6 &middot; v1 skeleton</div>
 
-  <div class="skel-note"><strong>SKELETON:</strong> Lever percentages and absolute $ here are placeholders pending Tab 10 (Growth Model) decomposition with BigQuery-validated editor adoption baselines. The $25&ndash;30M envelope and lever <em>structure</em> are committed.</div>
+  <div class="skel-note"><strong>Updated:</strong> Lever <em>structure</em> is committed; absolute $ and % now tie to Tab 10 (Growth Model) mid scenario (~$26.4M) and BigQuery baselines in Tab 7. Finance still to confirm paid-slice ARPU and causal shares.</div>
 
   <h2>The financial walk</h2>
   <table>
@@ -3261,9 +3261,9 @@
   <p>An honest self-critique pass on the strategy above. Looking for hallucinations, weakly-grounded claims, missing context, and overconfident assertions.</p>
 
   <ol>
-    <li><strong>Anchor &mdash; "$25&ndash;30M" is asserted, not derived.</strong> The number bridges the Automations brief commit ($20&ndash;25M) and the Strategy 6-Pager Automations envelope ($20&ndash;32M) by adding editor-driven retention save and Free&rarr;Paid lift. Until Tab 10 (Growth Model for editor) decomposes the levers with BigQuery-validated baselines, the number is directional. <strong>Confidence: medium-low.</strong></li>
+    <li><strong>Anchor &mdash; "$25&ndash;30M" vs modeled mid ~$26.3M.</strong> Tab 10 (Growth Model) now decomposes six levers with a worked mid scenario grounded in Tab 7 (888K bulk Establish, SMS/GenAI funnel, churn). Residual uncertainty: paid-slice ARPU (~$110 placeholder), causal shares, and FY27 ramp shape. <strong>Confidence: medium</strong> (was medium-low).</li>
     <li><strong>"~$11&ndash;22M annualized opportunity cost" on Page 1.</strong> Sum-of-four-gaps; each gap is itself a directional estimate. Likely correct in magnitude but not defensible to Finance until Tab 11 (Loss Attribution) does the layered decomposition.</li>
-    <li><strong>"~140K NEB Established users today"</strong> on Page 2 is a placeholder using Automations-brief CJB volumes as a proxy. Editor users could be meaningfully larger (every paid sender) or smaller (only NEB-default cohort) depending on how `bi_aggregate.product_journey_monthly` cuts the editor product. <strong>Will be replaced post-Tab 7.</strong></li>
+    <li><strong>Page 2 persona / NEB cohort sizing</strong> may still use legacy proxy language; Tab 7 now anchors the model on <strong>888,706 bulk-email Established</strong> users/mo. Reconcile narrative headcount with that spine to avoid mixed metaphors.</li>
     <li><strong>"Klaviyo Universal Content drives $4&ndash;8M ARR drag" claim.</strong> Inferred from observed Reddit / Klaviyo Community migration sentiment + DTC mid-market churn pattern. Not supported by churn-attribution data we control. Could be 50% off in either direction.</li>
     <li><strong>"Brand Kit attach rate ~35% today" placeholder.</strong> Total guess. Could be 15% (most users skip Brand Kit setup) or 60% (auto-extract has high attach). Will be measured in Tab 7.</li>
     <li><strong>SMS lift assumption ($5&ndash;8M from 12% &rarr; 20&ndash;25% adoption).</strong> Assumes ~$300/mo incremental ARPU from SMS-attached vs email-only customers. Validated against Mailchimp SMS pricing page for credit revenue, but not against actual Intuit SMS economics. <strong>Finance to confirm.</strong></li>
@@ -3272,10 +3272,10 @@
     <li><strong>"Sunset Classic without 20%+ Premium churn" assumption.</strong> Premium is a small fraction of paid revenue but contributes disproportionately to ARR. If actual churn is 30%+ and Code Mode does not satisfy, the $5&ndash;7M B1 lever could go negative. <strong>Highest single risk in the financial walk.</strong></li>
     <li><strong>"Authoring drives 40&ndash;46% of FY27 lift."</strong> Asserted. The Automations brief claims 30&ndash;50% for Automations of the same lift. If both are right, the rest of the company drives only 4&ndash;30%. Will need cross-team reconciliation; likely the editor share is closer to 25&ndash;35% in a sized cross-team view. <strong>Could revise the anchor to $20&ndash;25M.</strong></li>
     <li><strong>What's missing entirely</strong>: deliverability infra (the editor authors, but inbox placement is owned by another team); transactional-email composing (not in scope, but a meaningful Standard-tier feature); accessibility EAA compliance timeline (regulatory deadline could pull F9 forward); Intuit Assist cost economics (per-token / per-month seat cost is a margin question this strategy doesn't address).</li>
-    <li><strong>What I'd recommend the PM do next</strong>: (a) finalize Tab 7 BigQuery editor cut to lock baselines; (b) finalize Tab 4 HVC Risk Map editor VoC to validate the 4 customer-problem $ gaps; (c) sequence a one-week Finance / Strategy reconciliation to resolve the cross-team allocation conflict (point #10 above); (d) commission a 4-week customer discovery on the Universal Content user need to validate B2's $4&ndash;6M lever.</li>
+    <li><strong>What I'd recommend the PM do next</strong>: (a) replace Growth Model $110 ARPU with Finance-joined tier truth; (b) finalize Tab 4 HVC Risk Map editor VoC to validate the 4 customer-problem $ gaps; (c) one-week Finance / Strategy reconciliation on cross-team FY27 allocation (point #10 above); (d) 4-week discovery on Universal Content to validate B2's $4&ndash;6M lever; (e) socialize Tab 10 mid scenario with FP&amp;A for quarterly ramp.</li>
   </ol>
 
-  <p class="source"><strong>Sources cited inline:</strong> Tab 1 Executive Brief (capabilities + differentiation matrix); Tab 2 Voice of Customer (operator hate themes); Tab 3 Roadmap to Win (foundational gaps + steals); Klaviyo Spring 2026 product announcements (Universal Content); Postscript March 2026 Brand Center; Stensul Governed Creation™; Mailchimp Help Center NEB / SMS / Brand Kit / Creative Assistant / Write with AI articles; Intuit Mailchimp pricing pages 2026; SaaSProbe / SaaS Scored / Mailotrix / Sendx 2026 reviews. <em>BigQuery `mc-business-intelligence.bi_aggregate.product_journey_monthly` editor-product cut + Slack HVC VoC editor cut are pending and will replace placeholder figures across all 6 pages.</em></p>
+  <p class="source"><strong>Sources cited inline:</strong> Tab 1 Executive Brief (capabilities + differentiation matrix); Tab 2 Voice of Customer (operator hate themes); Tab 3 Roadmap to Win (foundational gaps + steals); Tab 7 Product Health (BigQuery editor-family cut); Tab 10 Growth Model (lever decomposition); Klaviyo Spring 2026 product announcements (Universal Content); Postscript March 2026 Brand Center; Stensul Governed Creation™; Mailchimp Help Center NEB / SMS / Brand Kit / Creative Assistant / Write with AI articles; Intuit Mailchimp pricing pages 2026; SaaSProbe / SaaS Scored / Mailotrix / Sendx 2026 reviews.</p>
 </section>
 
 </div><!-- /panel-strategy -->
@@ -3283,20 +3283,693 @@
 
 <!-- ============== GROWTH MODEL TAB (executive read: Arial 10, black/grey, tight) ============== -->
 <div class="tabpanel" id="panel-growthmodel" role="tabpanel">
-  <section class="page" aria-label="Growth Model placeholder">
-    <header class="page-head">
-      <div>
-        <div class="eyebrow">Mailchimp Email/SMS Unified Editor &amp; Builder</div>
-        <h1>Growth Model <em style="color:#C28A00;">— under construction</em></h1>
-        <div class="subtitle">This tab will mirror the 6-page structure of the corresponding tab in the Mailchimp Automations brief, applied to the unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist).</div>
+<style>
+  #panel-growthmodel .lever {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: #fff;
+    position: relative;
+    height: 100%;
+  }
+  #panel-growthmodel .lever.high { border-color: #F2D879; background: linear-gradient(180deg,#FFFCF0,#FFFFFF); }
+  #panel-growthmodel .lever.medhigh { border-color: #FCD9B6; background: linear-gradient(180deg,#FFF8F0,#FFFFFF); }
+  #panel-growthmodel .lever.med { border-color: #DCD7F8; background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  #panel-growthmodel .lever.lowmed { border-color: #E1E7CB; background: linear-gradient(180deg,#F4F6EE,#FFFFFF); }
+  #panel-growthmodel .lever .lvl-num {
+    position: absolute; top: 14px; right: 16px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 32px; font-weight: 700; color: var(--ink);
+    line-height: 1;
+    opacity: 0.18;
+  }
+  #panel-growthmodel .lever .lvl-id {
+    display: inline-block;
+    font-size: 10px; font-weight: 800; letter-spacing: .08em;
+    background: var(--ink); color: white;
+    padding: 3px 7px; border-radius: 4px;
+    margin-right: 6px;
+  }
+  #panel-growthmodel .lever h3 {
+    margin: 0 0 6px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px; font-weight: 700; color: var(--ink);
+    line-height: 1.2;
+  }
+  #panel-growthmodel .lever .desc { font-size: 12px; color: var(--ink-2); line-height: 1.4; margin-bottom: 10px; }
+  #panel-growthmodel .lever .lvl-meta {
+    display: flex; align-items: center; justify-content: space-between;
+    border-top: 1px dashed var(--line); padding-top: 8px; margin-top: 8px;
+  }
+  #panel-growthmodel .lever .dollar {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px; font-weight: 700; color: var(--brand);
+  }
+  #panel-growthmodel .lever .sens {
+    font-size: 10px; font-weight: 800; letter-spacing: .08em;
+    padding: 3px 7px; border-radius: 4px;
+  }
+  #panel-growthmodel .sens.high { background: #FFE7E0; color: #9A1F00; }
+  #panel-growthmodel .sens.medhigh { background: #FFEFD9; color: #8A4A00; }
+  #panel-growthmodel .sens.med { background: #EEF0FF; color: #2A1FA8; }
+  #panel-growthmodel .sens.lowmed { background: #E6F5EE; color: #036A4F; }
+
+  #panel-growthmodel .formula-box {
+    background: #FAFAFB;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brand);
+    border-radius: 8px;
+    padding: 14px 16px;
+    margin: 10px 0;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 12px;
+    line-height: 1.6;
+    color: var(--ink);
+    white-space: pre;
+    overflow-x: auto;
+  }
+  #panel-growthmodel .formula-box .lev { color: var(--brand); font-weight: 700; }
+  #panel-growthmodel .formula-box .op { color: var(--muted); }
+  #panel-growthmodel .formula-box .out { color: var(--good); font-weight: 700; }
+  #panel-growthmodel .formula-box .total { display: block; padding-top: 6px; margin-top: 6px; border-top: 1px dashed var(--line-2); font-weight: 700; color: var(--ink); }
+
+  #panel-growthmodel .delta-up {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    padding: 2px 6px; border-radius: 4px;
+    background: #E6F5EE; color: #036A4F;
+    border: 1px solid #BFE6D3;
+  }
+  #panel-growthmodel .delta-down {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    padding: 2px 6px; border-radius: 4px;
+    background: #FFE7E0; color: #9A1F00;
+    border: 1px solid #F4D2C5;
+  }
+  #panel-growthmodel .delta-neutral {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    padding: 2px 6px; border-radius: 4px;
+    background: #F1F2F4; color: #374151;
+    border: 1px solid #E2E5EA;
+  }
+  #panel-growthmodel .delta-target {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    padding: 2px 6px; border-radius: 4px;
+    background: var(--chip); color: var(--chip-ink);
+    border: 1px solid #F2E8C2;
+  }
+
+  #panel-growthmodel .lever-tag {
+    display: inline-block;
+    font-size: 9.5px; font-weight: 800;
+    padding: 1px 5px; border-radius: 3px;
+    background: var(--ink-2); color: white;
+    margin-right: 3px;
+    letter-spacing: .04em;
+  }
+
+  #panel-growthmodel .cluster-bar {
+    display: grid; grid-template-columns: 160px 1fr 80px;
+    gap: 10px; align-items: center;
+    padding: 8px 0;
+  }
+  #panel-growthmodel .cluster-bar + .cluster-bar { border-top: 1px solid var(--line); }
+  #panel-growthmodel .cluster-bar .cb-name { font-size: 12.5px; font-weight: 600; color: var(--ink-2); }
+  #panel-growthmodel .cluster-bar .cb-track {
+    height: 14px; background: #F1F2F4; border-radius: 99px; overflow: hidden;
+    position: relative;
+  }
+  #panel-growthmodel .cluster-bar .cb-fill {
+    height: 100%; background: linear-gradient(90deg, var(--brand) 0%, #E2A800 100%);
+    border-radius: 99px;
+    display: flex; align-items: center; justify-content: flex-end;
+    padding-right: 8px;
+    color: white; font-size: 10px; font-weight: 700;
+  }
+  #panel-growthmodel .cluster-bar .cb-pct { font-size: 12px; font-weight: 700; color: var(--ink); text-align: right; font-variant-numeric: tabular-nums; }
+
+  #panel-growthmodel .chain-stage {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: #fff;
+    height: 100%;
+  }
+  #panel-growthmodel .chain-stage.s1 { border-color: #DCD7F8; background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  #panel-growthmodel .chain-stage.s2 { border-color: #FCD9B6; background: linear-gradient(180deg,#FFF8F0,#FFFFFF); }
+  #panel-growthmodel .chain-stage.s3 { border-color: #BFE6D3; background: linear-gradient(180deg,#F1FAF5,#FFFFFF); }
+  #panel-growthmodel .chain-stage .cs-eyebrow {
+    font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+    margin-bottom: 4px;
+  }
+  #panel-growthmodel .chain-stage h4 {
+    margin: 0 0 8px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px; font-weight: 700; color: var(--ink);
+  }
+  #panel-growthmodel .chain-stage ul { margin: 0; padding-left: 16px; }
+  #panel-growthmodel .chain-stage li { font-size: 12px; line-height: 1.4; margin-bottom: 3px; color: var(--ink-2); }
+  #panel-growthmodel .chain-stage .stage-cap {
+    border-top: 1px dashed var(--line); padding-top: 8px; margin-top: 10px;
+    font-size: 11px; color: var(--muted); font-style: italic;
+  }
+  #panel-growthmodel .chain-arrow-cell {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; color: var(--brand); font-weight: 700;
+    padding: 0 4px;
+  }
+  #panel-growthmodel .chain-grid {
+    display: grid;
+    grid-template-columns: 1fr 32px 1fr 32px 1fr;
+    gap: 0;
+    align-items: stretch;
+  }
+  @media (max-width: 880px) {
+    #panel-growthmodel .chain-grid { grid-template-columns: 1fr; gap: 8px; }
+    #panel-growthmodel .chain-arrow-cell { transform: rotate(90deg); padding: 6px 0; }
+  }
+
+  #panel-growthmodel .risk-card {
+    border-radius: 10px;
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    background: #fff;
+  }
+  #panel-growthmodel .risk-card.platform { border-left: 4px solid var(--bad); background: #FFF5F2; }
+  #panel-growthmodel .risk-card.commercial { border-left: 4px solid var(--warn); background: #FFFAF0; }
+  #panel-growthmodel .risk-card.upside { border-left: 4px solid #4338CA; background: #F4F3FF; }
+  #panel-growthmodel .risk-card .rc-title {
+    display: flex; align-items: center; gap: 8px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    margin-bottom: 4px;
+  }
+  #panel-growthmodel .risk-card .rc-tag {
+    font-size: 9.5px; font-weight: 800; letter-spacing: .06em;
+    padding: 2px 6px; border-radius: 4px;
+  }
+  #panel-growthmodel .risk-card.platform .rc-tag { background: #FFE7E0; color: #9A1F00; }
+  #panel-growthmodel .risk-card.commercial .rc-tag { background: #FFEFD9; color: #8A4A00; }
+  #panel-growthmodel .risk-card.upside .rc-tag { background: #EEF0FF; color: #2A1FA8; }
+  #panel-growthmodel .risk-card .rc-body { font-size: 12px; color: var(--ink-2); line-height: 1.45; }
+</style>
+
+<!-- PAGE 1 -->
+<section class="page" aria-label="Growth Model Page 1">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Growth Model &middot; Business Outcome &middot; Adoption &middot; Customer Outcome</div>
+      <h1>Mailchimp Email/SMS Unified Editor: how we get to <em style="color:#C28A00;">+$25&ndash;30M</em> in FY27</h1>
+      <div class="subtitle">A revenue-anchored model that decomposes the FY27 authoring-surface lift into 6 levers, traces it through 12 adoption metrics across the editor product family in BigQuery, and closes the loop into measurable customer outcomes.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Anchor:</strong> +$25&ndash;30M incremental ARR FY27</div>
+      <div><strong>Sub-band of:</strong> <a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click();return false;">Strategy 6-Pager</a> authoring share (~40&ndash;46% of ~$65M corp lift)</div>
+      <div><strong>Last updated:</strong> May 2026</div>
+      <div><strong>Page:</strong> 1 of 6</div>
+    </div>
+  </header>
+
+  <div class="kpi-row" style="margin-bottom: 18px;">
+    <div class="kpi">
+      <div class="v" style="color:#C28A00;">+$25&ndash;30M</div>
+      <div class="l">Authoring FY27 commit band &mdash; explicit bridge above Automations-only commit ($20&ndash;25M) via retention save + SMS attach + AI recovery on a shrinking bulk-email base</div>
+    </div>
+    <div class="kpi">
+      <div class="v">888K &rarr; 915&ndash;935K</div>
+      <div class="l">Bulk email <strong>Established</strong> users (avg/mo) today &rarr; modeled recovery by Apr '27 (+27&ndash;47K vs depressed FY26 baseline)</div>
+    </div>
+    <div class="kpi">
+      <div class="v">315K &rarr; 338&ndash;352K</div>
+      <div class="l">Modeled <strong>paid bulk-email authoring cohort</strong> (Finance slice; ~35&ndash;36% of Established) &rarr; mid/high scenario</div>
+    </div>
+    <div class="kpi">
+      <div class="v">6 / 12</div>
+      <div class="l">Revenue levers (L1&ndash;L6) &middot; Adoption metrics in 4 clusters (Discovery &middot; Activation &middot; Repeat &middot; Friction)</div>
+    </div>
+  </div>
+
+  <div class="card tinted" style="margin-bottom: 16px;">
+    <h2 style="margin-top:0;">The anchor: +$25&ndash;30M incremental ARR from the unified authoring surface in FY27</h2>
+    <p>This sits <strong>above</strong> the Automations brief&rsquo;s $20&ndash;25M floor by layering editor-attributable <strong>churn save</strong>, <strong>SMS attach</strong>, and <strong>plan-upgrade</strong> paths on a bulk-email cohort that is currently <strong>shrinking &minus;9.4% YoY</strong> on Established users. The Strategy tab&rsquo;s financial walk shows the same six lever <em>names</em>; this tab shows the <em>math + metric bridge</em>.</p>
+    <p style="margin-bottom:0;"><strong>Approach:</strong> top-down target &rarr; lever decomposition &rarr; explicit formulas &rarr; BigQuery baselines in <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a>. Causal shares and paid-slice ARPU are labeled modeling assumptions; sensitivity is shown on Page 3.</p>
+  </div>
+
+  <h2><span class="num">1.0</span> Definitions used throughout</h2>
+  <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">Aligned with <a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click();return false;">Strategy 6-Pager</a> and <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a>. No separate PRD Audit tab in this brief.</p>
+  <table class="dense">
+    <thead><tr><th style="width: 22%;">Term</th><th>Definition</th><th style="width: 28%;">Source</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ARPU ~$110 / mo</strong></td><td>Blended Mailchimp MRR per <em>paid</em> bulk-email Established user used in Section 1.3 (modeling placeholder until Finance publishes the exact join)</td><td>Strategy / Finance reconciliation; methodology mirrors Automations brief ($135/adopter for automation cohort)</td></tr>
+      <tr><td><strong>Paid authoring cohort ~315K</strong></td><td>~35&ndash;36% of 888,706 bulk-email Established users assumed MRR-bearing for revenue levers L2&ndash;L6 (freemium geometry)</td><td>Modeling assumption; validate against <code>mbr_monthly</code> &times; <code>product_journey_monthly</code></td></tr>
+      <tr><td><strong>Attributed revenue / campaign</strong></td><td>Customer&rsquo;s own sales influenced by better authoring (higher CTR, fewer broken mobile layouts, faster SMS compliance). Not Mailchimp MRR.</td><td>Industry engagement benchmarks + <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a> outcomes</td></tr>
+      <tr><td><strong>Gross monthly churn ~3.2%</strong></td><td>Platform-wide gross monthly revenue churn (annualizes ~32&ndash;38%); used only as context for L5 retention-save magnitude</td><td>Same convention as Automations Growth Model (BigQuery <code>bi_aggregate.mbr_monthly</code>)</td></tr>
+      <tr><td><strong>Bulk &ldquo;Established&rdquo;</strong></td><td>Stage <code>4_Establish</code> for bulk email product family in <code>product_journey_monthly</code> (avg ~888.7K users/mo; &minus;9.4% YoY)</td><td><a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> Tab 7</td></tr>
+      <tr><td><strong>Causal share 28&ndash;32%</strong></td><td>Conservative attribution on L1: only ~30% of within-cohort MRR lift treated as editor-caused (balance = macro + support + deliverability)</td><td>This model; Open Question #1 Page 6</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:18px;"><span class="num">1.1</span> Current state &rarr; Target state framework</h2>
+  <table class="dense">
+    <thead><tr><th style="width: 30%;">Metric</th><th>Today (Apr &rsquo;26 trail)</th><th>Target (Apr &rsquo;27)</th><th style="width: 18%;">&Delta;</th></tr></thead>
+    <tbody>
+      <tr><td>Bulk email Established users</td><td>888,706 / mo</td><td>915&ndash;935K / mo</td><td><span class="delta-up">+27&ndash;47K</span></td></tr>
+      <tr><td>Bulk Explore funnel (top)</td><td>51,859 / mo (&minus;19.2% YoY)</td><td>58&ndash;65K / mo</td><td><span class="delta-up">recover compression</span></td></tr>
+      <tr><td>Bulk churn (Abandon / Establish+Abandon)</td><td>40.0% (&minus;2.1pp vs prior YoY)</td><td>36.5&ndash;37.0%</td><td><span class="delta-up">&minus;3.0pp target</span></td></tr>
+      <tr><td>SMS composer Established</td><td>6,673 (&plus;73.5% YoY) &middot; churn 52.9%</td><td>11.5&ndash;14.5K</td><td><span class="delta-up">attach + retention</span></td></tr>
+      <tr><td>Write with AI Established</td><td>31,438 (&minus;3.8% YoY) &middot; churn 77.2%</td><td>33&ndash;36K <em>if</em> explorer funnel repaired</td><td><span class="delta-neutral">stabilize</span></td></tr>
+      <tr><td><strong>Editor-attributable incremental ARR</strong></td><td>FY26 leakage on bulk + AI churn</td><td><span class="delta-target"><strong>+$25&ndash;30M FY27</strong></span></td><td><span class="delta-target">Modeled mid <strong>~$26.3M</strong></span></td></tr>
+    </tbody>
+  </table>
+
+  <p class="source"><strong>Sources:</strong> BigQuery <code>mc-business-intelligence.bi_aggregate.product_journey_monthly</code> editor-product cut (trailing 12 mo May 2025&ndash;Apr 2026) as tabulated in <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a>. ARPU and paid-slice rows are explicit modeling assumptions pending Finance lock.</p>
+</section>
+
+<!-- PAGE 2: 6 Levers -->
+<section class="page" aria-label="Growth Model Page 2">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Section 1.2 &middot; Revenue Lever Decomposition</div>
+      <h1>The 6 levers that get us to <em style="color:#C28A00;">+$25&ndash;30M</em></h1>
+      <div class="subtitle">L1 is bulk-email Established <strong>recovery</strong> on a shrinking baseline. L3 and L2 capture SMS attach + AI activation. L4&ndash;L6 monetize retention and upgrade.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Mid sum:</strong> ~$26.3M</div>
+      <div><strong>Modeling envelope:</strong> $22&ndash;32M</div>
+      <div><strong>Page:</strong> 2 of 6</div>
+    </div>
+  </header>
+
+  <div class="grid cols-3" style="gap: 14px;">
+    <div class="lever high">
+      <div class="lvl-num">L1</div>
+      <div><span class="lvl-id">L1</span><span class="sens high">HIGH</span></div>
+      <h3>Adoption growth (bulk recover)</h3>
+      <div class="desc">Reverse a portion of the &minus;9.4% Established YoY decline: ~28K net paid-equivalent Establish lift &times; ~$110 ARPU &times; 12 &times; ~30% causal share. Builder unification + Universal Content reduce &ldquo;wrong builder&rdquo; churn-out and Klaviyo-triggered migration.</div>
+      <div class="lvl-meta">
+        <div class="dollar">$10&ndash;14M</div>
+        <div style="font-size:10.5px; color:var(--muted);">baseline recovery</div>
       </div>
-      <div class="meta">
-        <div><strong>Status:</strong> placeholder</div>
-        <div><strong>Planned:</strong> 6 pages</div>
+    </div>
+
+    <div class="lever medhigh">
+      <div class="lvl-num">L2</div>
+      <div><span class="lvl-id">L2</span><span class="sens medhigh">MED-HIGH</span></div>
+      <h3>Activation + first productive send</h3>
+      <div class="desc">Raise Explore&rarr;Establish conversion on bulk (Explore currently &minus;19.2% YoY) and improve SMS activation (10.4% activation rate today). Conversational Assist + template ICP fit cut time-to-first-send.</div>
+      <div class="lvl-meta">
+        <div class="dollar">$3&ndash;5M</div>
+        <div style="font-size:10.5px; color:var(--muted);">funnel + SMS</div>
       </div>
-    </header>
-    <p style="color: var(--muted);">Content forthcoming. See the build plan in the active session.</p>
-  </section>
+    </div>
+
+    <div class="lever med">
+      <div class="lvl-num">L3</div>
+      <div><span class="lvl-id">L3</span><span class="sens med">MED</span></div>
+      <h3>Repeat usage &amp; SMS attach</h3>
+      <div class="desc">Net +5&ndash;7K SMS Established users and higher cross-channel send intensity from unified canvas + shared blocks. High churn (52.9%) caps upside until MMS/credit UX fixes land.</div>
+      <div class="lvl-meta">
+        <div class="dollar">$4&ndash;7M</div>
+        <div style="font-size:10.5px; color:var(--muted);">credits &amp; attach</div>
+      </div>
+    </div>
+
+    <div class="lever med">
+      <div class="lvl-num">L4</div>
+      <div><span class="lvl-id">L4</span><span class="sens med">MED</span></div>
+      <h3>Reduced abandonment</h3>
+      <div class="desc">Classic&rarr;NEB migration + Brand Kit / Content Studio entry-points recover lapsed authors (bulk Abandon bucket ~593K users/mo today). Smaller dollars than L1 but de-risks HVC migrations.</div>
+      <div class="lvl-meta">
+        <div class="dollar">$1&ndash;2M</div>
+        <div style="font-size:10.5px; color:var(--muted);">gross&rarr;net recovery</div>
+      </div>
+    </div>
+
+    <div class="lever med">
+      <div class="lvl-num">L5</div>
+      <div><span class="lvl-id">L5</span><span class="sens med">MED</span></div>
+      <h3>Retention save (editor churn)</h3>
+      <div class="desc">Editor-explained gross churn down ~0.8&ndash;1.0pp on the modeled paid cohort from fewer broken layouts, SMS compliance surprises, and AI gated-state exits (Write with AI churn +15.4pp YoY worst-in-family).</div>
+      <div class="lvl-meta">
+        <div class="dollar">$3&ndash;6M</div>
+        <div style="font-size:10.5px; color:var(--muted);">MRR retained</div>
+      </div>
+    </div>
+
+    <div class="lever lowmed">
+      <div class="lvl-num">L6</div>
+      <div><span class="lvl-id">L6</span><span class="sens lowmed">LOW-MED</span></div>
+      <h3>ARPU + attributed lift / customer</h3>
+      <div class="desc">Standard-tier feature gates (MMS, multivariate, full Assist) convert Essentials&rarr;Standard when limits bind; modest per-user ARPU lift &times; cohort scales L6.</div>
+      <div class="lvl-meta">
+        <div class="dollar">$2&ndash;4M</div>
+        <div style="font-size:10.5px; color:var(--muted);">upgrade + outcomes</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid cols-2" style="margin-top: 14px; gap: 12px;">
+    <div class="card warm">
+      <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px;">
+        <div>
+          <div style="font-size:10.5px; font-weight:800; letter-spacing:.06em; color:var(--muted); text-transform:uppercase;">Total modeling envelope</div>
+          <div style="font-family:'Source Serif 4', Georgia, serif; font-size:24px; font-weight:700; color:var(--ink); margin-top:4px;">$22&ndash;32M</div>
+        </div>
+        <div style="font-size:11px; color:var(--ink-2); max-width: 260px; text-align:right;">Upper band requires unified canvas (B3) near BFCM &rsquo;26 + international SMS pilot; lower band if AI ungate slips.</div>
+      </div>
+    </div>
+    <div class="card tinted">
+      <div style="display:flex; align-items:baseline; justify-content:space-between; gap:10px;">
+        <div>
+          <div style="font-size:10.5px; font-weight:800; letter-spacing:.06em; color:var(--muted); text-transform:uppercase;">Authoring FY27 commit band</div>
+          <div style="font-family:'Source Serif 4', Georgia, serif; font-size:24px; font-weight:700; color:#C28A00; margin-top:4px;">$25&ndash;30M</div>
+        </div>
+        <div style="font-size:11px; color:var(--ink-2); max-width: 260px; text-align:right;">Defend against <a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click();return false;">Strategy 6-Pager</a> ranges; mid math on Page 3 lands <strong>inside</strong> the band.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 3: Math + sensitivity -->
+<section class="page" aria-label="Growth Model Page 3">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Section 1.3 &middot; 1.4 &middot; Math &amp; Sensitivity</div>
+      <h1>The math: <em style="color:#C28A00;">~$26.3M</em> from a worked Mid scenario</h1>
+      <div class="subtitle">Same decomposition pattern as the Automations brief; inputs swapped to bulk-email + SMS + GenAI cohorts in Tab 7.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Mid scenario:</strong> ~$26.3M</div>
+      <div><strong>Range:</strong> ~$20&ndash;31M</div>
+      <div><strong>Page:</strong> 3 of 6</div>
+    </div>
+  </header>
+
+  <h2><span class="num">1.3</span> The formulas</h2>
+  <div class="formula-box"><span class="out">Incremental ARR</span> <span class="op">≈</span>
+  <span class="lev">L1</span>: ΔPaidEstablish<sub>bulk</sub> <span class="op">×</span> ARPU <span class="op">×</span> 12 <span class="op">×</span> CausalShare
+<span class="op">+</span> <span class="lev">L2</span>: PaidCohort <span class="op">×</span> ΔActivation <span class="op">×</span> RevPerActivated <span class="op">×</span> 12
+<span class="op">+</span> <span class="lev">L3</span>: ΔSMSEstablish <span class="op">×</span> IncrementalSMS_ARPU <span class="op">×</span> 12 <span class="op">×</span> CausalShare
+<span class="op">+</span> <span class="lev">L4</span>: NetRecovered_from_Abandon <span class="op">×</span> ARPU <span class="op">×</span> 12
+<span class="op">+</span> <span class="lev">L5</span>: PaidCohort <span class="op">×</span> ARPU <span class="op">×</span> 12 <span class="op">×</span> ΔChurnFactor
+<span class="op">+</span> <span class="lev">L6</span>: PaidCohort <span class="op">×</span> ΔARPU_lift <span class="op">×</span> 12 <span class="op">×</span> CausalShare</div>
+
+  <h3 style="margin-top: 14px;">Worked example &mdash; Mid scenario (paid cohort 315K &rarr; ~338K exit run-rate)</h3>
+  <div class="formula-box"><span class="lev">L1</span> = 28K net paid-equivalent Establish lift <span class="op">×</span> $110 <span class="op">×</span> 12 <span class="op">×</span> 29% = <span class="out">$10.5M</span>
+<span class="lev">L2</span> = 315K <span class="op">×</span> +3.5pp activation proxy <span class="op">×</span> $24/mo <span class="op">×</span> 12 = <span class="out">$3.2M</span>
+<span class="lev">L3</span> = +5.5K net SMS Establish <span class="op">×</span> $150 ARPU lift <span class="op">×</span> 12 <span class="op">×</span> 40% = <span class="out">$4.0M</span>
+<span class="lev">L4</span> = 0.9K net stable recovery from abandonment / migration UX <span class="op">×</span> $110 <span class="op">×</span> 12 = <span class="out">$1.5M</span>
+<span class="lev">L5</span> = 315K <span class="op">×</span> $110 <span class="op">×</span> 12 <span class="op">×</span> 0.00092 churn factor = <span class="out">$3.8M</span>
+<span class="lev">L6</span> = 315K <span class="op">×</span> $3.5/mo ARPU lift <span class="op">×</span> 12 <span class="op">×</span> 25% = <span class="out">$3.3M</span>
+<span class="total">Total ≈ $26.3M ✓ (within $25&ndash;30M anchor)</span></div>
+
+  <h2 style="margin-top: 16px;"><span class="num">1.4</span> Sensitivity: what moves the outcome most</h2>
+  <table class="dense">
+    <thead><tr><th style="width: 35%;">Lever</th><th>Lever underperforms 25%</th><th>Lever overperforms 25%</th><th style="width: 22%;">Δ range</th></tr></thead>
+    <tbody>
+      <tr><td><span class="lever-tag">L1</span> Bulk Established recovery</td><td><span class="delta-down">-$2.6M</span></td><td><span class="delta-up">+$2.6M</span></td><td><strong>±$2.6M &larr; largest mover</strong></td></tr>
+      <tr><td><span class="lever-tag">L2</span> Activation + first send</td><td><span class="delta-down">-$0.8M</span></td><td><span class="delta-up">+$0.8M</span></td><td>±$0.8M</td></tr>
+      <tr><td><span class="lever-tag">L3</span> SMS attach + repeat</td><td><span class="delta-down">-$1.0M</span></td><td><span class="delta-up">+$1.0M</span></td><td>±$1.0M</td></tr>
+      <tr><td><span class="lever-tag">L4</span> Abandonment recovery</td><td><span class="delta-down">-$0.4M</span></td><td><span class="delta-up">+$0.4M</span></td><td>±$0.4M</td></tr>
+      <tr><td><span class="lever-tag">L5</span> Editor churn save</td><td><span class="delta-down">-$0.9M</span></td><td><span class="delta-up">+$0.9M</span></td><td>±$0.9M</td></tr>
+      <tr><td><span class="lever-tag">L6</span> ARPU / outcome lift</td><td><span class="delta-down">-$0.8M</span></td><td><span class="delta-up">+$0.8M</span></td><td>±$0.8M</td></tr>
+      <tr style="background:#FFFCF0;"><td><strong>Sum of all-lever Δ (each ±25%)</strong></td><td><strong>-$6.5M total</strong></td><td><strong>+$6.5M total</strong></td><td><strong>±$6.5M to mid</strong></td></tr>
+      <tr style="background:#FFFCF0;"><td><strong>Implied total ARR (Mid ~$26.3M ± combined Δ)</strong></td><td><span class="delta-down">~$19.8M downside stress</span></td><td><span class="delta-up">~$32.8M upside stress</span></td><td><strong>stress-test band</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="pull">
+    <strong>L1 is the highest-variance lever because the bulk Established line is already negative YoY.</strong> A miss on builder unification or Universal Content lands in HVC churn themes first (see <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a>).
+    <cite>Sensitivity analysis &middot; Mid scenario baseline ~$26.3M</cite>
+  </div>
+</section>
+
+<!-- PAGE 4: Adoption metrics -->
+<section class="page" aria-label="Growth Model Page 4">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Section 2 &middot; Product Adoption Metrics (working backward from $)</div>
+      <h1>12 adoption metrics across <em style="color:#C28A00;">4 clusters</em></h1>
+      <div class="subtitle">Baselines pulled from Tab 7 where available; targets are FY27 operational commitments tied to levers L1&ndash;L6.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Cluster roll-up:</strong> ~$24M &middot; ties to ~$26.3M via &sect;1.3</div>
+      <div><strong>Tabs:</strong> <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Health</a> &middot; <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC</a> &middot; <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">Research</a></div>
+      <div><strong>Page:</strong> 4 of 6</div>
+    </div>
+  </header>
+
+  <div class="card olive" style="margin-bottom: 14px;">
+    <div style="font-size: 11px; font-weight: 800; letter-spacing: .06em; color: var(--muted); text-transform: uppercase; margin-bottom: 4px;">Lever &rarr; Cluster bridge</div>
+    <div style="font-size: 12.5px; color: var(--ink-2); line-height: 1.5;"><span class="lever-tag">L1</span><span class="lever-tag">L4</span> &larr; Discovery + Friction · <span class="lever-tag">L2</span> &larr; Activation · <span class="lever-tag">L3</span> &larr; Repeat + cross-channel · <span class="lever-tag">L5</span> modeled via churn bridge (Section 1.3) with Friction proxies · <span class="lever-tag">L6</span> &larr; upgrade + outcome lift (overlaps Repeat).</div>
+  </div>
+
+  <div class="grid cols-2" style="gap: 14px;">
+    <div class="card">
+      <h3 style="margin: 0 0 8px; font-family: 'Source Serif 4', Georgia, serif; font-size: 14px;"><span class="badge brand" style="margin-right:6px;">2.1</span>Discovery &amp; Awareness</h3>
+      <table class="dense">
+        <thead><tr><th style="width: 36%;">Metric</th><th>Current &rarr; Target</th><th>&Delta;</th><th style="width: 18%;">Maps to / $</th></tr></thead>
+        <tbody>
+          <tr><td>Bulk Explore users / mo</td><td>51.9K (&minus;19% YoY) &rarr; 58&ndash;65K</td><td><span class="delta-up">repair funnel</span></td><td><span class="lever-tag">L1</span> $4.0M</td></tr>
+          <tr><td>NEB default / entry exposure</td><td>patchy Classic coexistence &rarr; 100% intentional entry</td><td><span class="delta-up">coverage</span></td><td><span class="lever-tag">L1</span><span class="lever-tag">L4</span> $1.5M</td></tr>
+          <tr><td>AI feature discoverability (Write with AI)</td><td>Explore &minus;73.7% YoY &rarr; stable explorers</td><td><span class="delta-neutral">stabilize</span></td><td><span class="lever-tag">L2</span> $1.0M</td></tr>
+        </tbody>
+      </table>
+      <div style="text-align:right; font-size:11px; color:var(--muted); margin-top:4px;">Cluster total: <strong style="color:var(--brand);">$6.5M</strong></div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin: 0 0 8px; font-family: 'Source Serif 4', Georgia, serif; font-size: 14px;"><span class="badge brand" style="margin-right:6px;">2.2</span>Activation</h3>
+      <table class="dense">
+        <thead><tr><th style="width: 36%;">Metric</th><th>Current &rarr; Target</th><th>&Delta;</th><th style="width: 18%;">Maps to / $</th></tr></thead>
+        <tbody>
+          <tr><td>Bulk activation rate (Establish / funnel)</td><td>55.4% (&minus;1.3pp YoY) &rarr; 57&ndash;59%</td><td><span class="delta-up">+2&ndash;4pp</span></td><td><span class="lever-tag">L2</span> $2.0M</td></tr>
+          <tr><td>SMS activation rate</td><td>10.4% &rarr; 13&ndash;15%</td><td><span class="delta-up">+3&ndash;5pp</span></td><td><span class="lever-tag">L2</span><span class="lever-tag">L3</span> $2.5M</td></tr>
+          <tr><td>Transactional Established trajectory</td><td>25.7K (&minus;10.5% YoY)</td><td><span class="delta-neutral">stabilize</span></td><td><span class="lever-tag">L6</span> $0.5M</td></tr>
+        </tbody>
+      </table>
+      <div style="text-align:right; font-size:11px; color:var(--muted); margin-top:4px;">Cluster total: <strong style="color:var(--brand);">$5.0M</strong></div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin: 0 0 8px; font-family: 'Source Serif 4', Georgia, serif; font-size: 14px;"><span class="badge brand" style="margin-right:6px;">2.3</span>Repeat Usage</h3>
+      <table class="dense">
+        <thead><tr><th style="width: 36%;">Metric</th><th>Current &rarr; Target</th><th>&Delta;</th><th style="width: 18%;">Maps to / $</th></tr></thead>
+        <tbody>
+          <tr><td>Universal Content block reuse rate</td><td>baseline &rarr; +25&ndash;40% MoM adjacency</td><td><span class="delta-up">reuse</span></td><td><span class="lever-tag">L3</span> $1.5M</td></tr>
+          <tr><td>SMS send frequency / Established</td><td>low repeat vs email &rarr; weekly+ util</td><td><span class="delta-up">habit</span></td><td><span class="lever-tag">L3</span> $2.5M</td></tr>
+          <tr><td>Brand Kit attach (governed styling)</td><td>unknown &rarr; 45&ndash;55% on new NEB camps</td><td><span class="delta-up">quality</span></td><td><span class="lever-tag">L6</span> $1.0M</td></tr>
+        </tbody>
+      </table>
+      <div style="text-align:right; font-size:11px; color:var(--muted); margin-top:4px;">Cluster total: <strong style="color:var(--brand);">$5.0M</strong></div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin: 0 0 8px; font-family: 'Source Serif 4', Georgia, serif; font-size: 14px;"><span class="badge brand" style="margin-right:6px;">2.4</span>Friction &amp; Drop-off</h3>
+      <table class="dense">
+        <thead><tr><th style="width: 36%;">Metric</th><th>Current &rarr; Target</th><th>&Delta;</th><th style="width: 18%;">Maps to / $</th></tr></thead>
+        <tbody>
+          <tr><td>Bulk churn (Abandon share)</td><td>40.0% &rarr; 37.0%</td><td><span class="delta-up">&minus;3.0pp</span></td><td><span class="lever-tag">L5</span> $2.5M</td></tr>
+          <tr><td>SMS churn</td><td>52.9% &rarr; 46&ndash;48%</td><td><span class="delta-up">&minus;5&ndash;7pp</span></td><td><span class="lever-tag">L5</span><span class="lever-tag">L3</span> $2.0M</td></tr>
+          <tr><td>Write with AI churn</td><td>77.2% &rarr; 68&ndash;70%</td><td><span class="delta-up">&minus;8&ndash;9pp</span></td><td><span class="lever-tag">L5</span> $1.5M</td></tr>
+          <tr><td>Classic Code Mode parity gap</td><td>HVC theme &rarr; closed per migration plan</td><td><span class="delta-neutral">qual</span></td><td><span class="lever-tag">L4</span> $1.5M</td></tr>
+        </tbody>
+      </table>
+      <div style="text-align:right; font-size:11px; color:var(--muted); margin-top:4px;">Cluster total: <strong style="color:var(--brand);">$7.5M</strong></div>
+    </div>
+  </div>
+
+  <h2 style="margin-top: 14px;"><span class="num">2.5</span> Adoption metrics rolled up to $ contribution</h2>
+  <div class="card">
+    <div class="cluster-bar">
+      <div class="cb-name">Friction &amp; Drop-off</div>
+      <div class="cb-track"><div class="cb-fill" style="width: 95%;">$7.5M</div></div>
+      <div class="cb-pct">~28%</div>
+    </div>
+    <div class="cluster-bar">
+      <div class="cb-name">Discovery &amp; Awareness</div>
+      <div class="cb-track"><div class="cb-fill" style="width: 82%;">$6.5M</div></div>
+      <div class="cb-pct">~24%</div>
+    </div>
+    <div class="cluster-bar">
+      <div class="cb-name">Activation</div>
+      <div class="cb-track"><div class="cb-fill" style="width: 66%;">$5.0M</div></div>
+      <div class="cb-pct">~19%</div>
+    </div>
+    <div class="cluster-bar">
+      <div class="cb-name">Repeat Usage</div>
+      <div class="cb-track"><div class="cb-fill" style="width: 66%;">$5.0M</div></div>
+      <div class="cb-pct">~19%</div>
+    </div>
+    <div style="border-top: 2px solid var(--ink); margin-top: 8px; padding-top: 8px; display: flex; justify-content: space-between; align-items: baseline;">
+      <strong>Total across 4 clusters</strong>
+      <strong style="font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; color: var(--brand);">$24.0M cluster allocation + lever cross-walk in &sect;1.3 &rarr; ~$26.3M mid ✓</strong>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 5: Customer outcomes -->
+<section class="page" aria-label="Growth Model Page 5">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Section 3 &middot; Customer Outcome Metrics</div>
+      <h1>What improves <em style="color:#C28A00;">for the customer</em> when the editor strategy lands</h1>
+      <div class="subtitle">Operator-visible outcomes that tie to retention (L5) and ARPU (L6), grounded in research themes on speed, brand consistency, SMS fear, and AI mistrust.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Artifacts:</strong> <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">25 HeyMarvin briefs</a></div>
+      <div><strong>Page:</strong> 5 of 6</div>
+    </div>
+  </header>
+
+  <div class="grid cols-3" style="gap: 14px;">
+    <div class="card">
+      <h3 style="margin: 0 0 8px; font-family: 'Source Serif 4', Georgia, serif; font-size: 14px;"><span class="badge brand" style="margin-right:6px;">3.1</span>Speed &amp; Throughput</h3>
+      <table class="dense">
+        <thead><tr><th>Metric</th><th>Today</th><th>FY27 target</th></tr></thead>
+        <tbody>
+          <tr><td>Time to first send (new NEB user)</td><td>14&ndash;21d median <em>(research est.)</em></td><td><strong>7&ndash;10d</strong></td></tr>
+          <tr><td>Template reuse / campaign</td><td>low cross-template reuse</td><td><strong>+25&ndash;40%</strong> block reuse</td></tr>
+          <tr><td>SMS send approval steps</td><td>high cognitive load</td><td><strong>&minus;30% clicks-to-send</strong> <span style="font-size:10px;color:var(--muted);">unified canvas</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card">
+      <h3 style="margin: 0 0 8px; font-family: 'Source Serif 4', Georgia, serif; font-size: 14px;"><span class="badge brand" style="margin-right:6px;">3.2</span>Brand &amp; Quality</h3>
+      <table class="dense">
+        <thead><tr><th>Metric</th><th>Today</th><th>FY27 target</th></tr></thead>
+        <tbody>
+          <tr><td>Off-brand sends (no Kit / overrides)</td><td>elevated in VoC</td><td><strong>&minus;20&ndash;30%</strong></td></tr>
+          <tr><td>Mobile preview errors</td><td>top HVC / Reddit theme</td><td><strong>&minus;35% support tokens</strong></td></tr>
+          <tr><td>Accessibility issues flagged pre-send</td><td>manual</td><td><strong>80%+ auto-flag</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card tinted">
+      <h3 style="margin: 0 0 8px; font-family: 'Source Serif 4', Georgia, serif; font-size: 14px;"><span class="badge brand" style="margin-right:6px;">3.3</span>Business outcomes</h3>
+      <table class="dense">
+        <thead><tr><th>Metric</th><th>Today</th><th>Target</th><th>&Delta;</th></tr></thead>
+        <tbody>
+          <tr><td>Email CTR (bulk)</td><td>2&ndash;3% bench</td><td><strong>3&ndash;4%</strong></td><td><span class="delta-up" style="font-size:10px;">+1pp</span></td></tr>
+          <tr><td>SMS opt-out spike incidents</td><td>HVC + VoC theme</td><td><strong>&minus;25&ndash;40%</strong></td><td><span class="delta-up" style="font-size:10px;">compliance UX</span></td></tr>
+          <tr><td>Revenue credited per active author</td><td>variable</td><td><strong>+6&ndash;10%</strong></td><td><span class="delta-up" style="font-size:10px;">L6 hook</span></td></tr>
+        </tbody>
+      </table>
+      <div style="font-size:10.5px; color:var(--muted); margin-top:6px; font-style:italic;">Ranges are directional; not post-period measured results.</div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 6: Causal chain + 60s + risks -->
+<section class="page" aria-label="Growth Model Page 6">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Section 4 &middot; Causal Chain</div>
+      <h1>From <em style="color:#C28A00;">what we ship</em> &rarr; <em style="color:#C28A00;">customer outcomes</em> &rarr; <em style="color:#C28A00;">Finance</em></h1>
+      <div class="subtitle">If Explore stays &minus;19% YoY on bulk while churn rises, the $25&ndash;30M band does not hold even when feature demos look good.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Lag:</strong> Adoption 30&ndash;90d &rarr; outcomes 60&ndash;180d</div>
+      <div><strong>Page:</strong> 6 of 6</div>
+    </div>
+  </header>
+
+  <div class="chain-grid">
+    <div class="chain-stage s1">
+      <div class="cs-eyebrow">Section 2 &middot; What we ship</div>
+      <h4>Product + adoption moves</h4>
+      <ul>
+        <li>Builder unification + Classic sunset path</li>
+        <li>Universal Content + shared blocks (email/SMS)</li>
+        <li>Unified canvas + MMS/credit clarity</li>
+        <li>Conversational Assist + AI ungate roadmap</li>
+        <li>Brand Kit / Creative Assistant governance</li>
+        <li>Explore funnel repair on bulk + GenAI</li>
+      </ul>
+      <div class="stage-cap">PM-owned KPIs &middot; see <a href="#roadmap" onclick="document.querySelector('[data-tab=roadmap]').click();return false;">Roadmap</a></div>
+    </div>
+    <div class="chain-arrow-cell">&rarr;</div>
+    <div class="chain-stage s2">
+      <div class="cs-eyebrow">Section 3 &middot; What customers experience</div>
+      <h4>Measurable operator outcomes</h4>
+      <ul>
+        <li>Faster time-to-send &amp; fewer rework loops</li>
+        <li>Consistent on-brand email + SMS pairings</li>
+        <li>Fewer SMS compliance / opt-out incidents</li>
+        <li>Higher CTR / lower "broken mobile" churn</li>
+        <li>Clearer upgrade path when limits bind</li>
+      </ul>
+      <div class="stage-cap">Validated qual in <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">Voice of Customer</a></div>
+    </div>
+    <div class="chain-arrow-cell">&rarr;</div>
+    <div class="chain-stage s3">
+      <div class="cs-eyebrow">Section 1 &middot; What Finance sees</div>
+      <h4>Mailchimp business outcomes</h4>
+      <ul>
+        <li>Bulk Established 888K &rarr; 915&ndash;935K</li>
+        <li>SMS Established +5&ndash;8K net (mid)</li>
+        <li>Direct MRR + upgrade path (L6)</li>
+        <li>Churn save on editor-explained exits (L5)</li>
+        <li><strong style="color:var(--brand);">TOTAL: +$25&ndash;30M ARR FY27</strong></li>
+      </ul>
+      <div class="stage-cap">Cross-check <a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click();return false;">Strategy 6-Pager</a> financial walk</div>
+    </div>
+  </div>
+
+  <div class="grid cols-2" style="margin-top: 16px; gap: 14px;">
+    <div>
+      <h2 style="margin-top:0;"><span class="num">5.0</span> Read this in 60 seconds</h2>
+      <ul>
+        <li><strong>Target:</strong> +$25&ndash;30M incremental ARR from the unified editor footprint in FY27.</li>
+        <li><strong>Biggest lever:</strong> L1 bulk Established recovery ($10&ndash;14M) &mdash; without it the base keeps shrinking (&minus;9.4% YoY today).</li>
+        <li><strong>Second wave:</strong> L3 SMS attach ($4&ndash;7M) but only if churn falls from 53% toward high-40s.</li>
+        <li><strong>Variance driver:</strong> AI Explore collapsed &minus;73.7% YoY; policy + product must unlock a new explorer funnel or L2/L6 underperform.</li>
+      </ul>
+    </div>
+    <div>
+      <h2 style="margin-top:0;"><span class="num">5.1</span> Stacked risk hierarchy</h2>
+      <div class="risk-card platform" style="margin-bottom: 8px;">
+        <div class="rc-title"><span class="rc-tag">PLATFORM-BLOCKING</span> Unified canvas / block graph slips</div>
+        <div class="rc-body">Delays L3 and erodes SMS narrative vs Klaviyo cross-channel parity.</div>
+      </div>
+      <div class="risk-card commercial" style="margin-bottom: 8px;">
+        <div class="rc-title"><span class="rc-tag">COMMERCIAL-DOWNSIDE</span> HVC editor themes persist</div>
+        <div class="rc-body">Slack-cited MRR on NEB, Brand Kit, SMS, and Canva breakage corrodes L5. See <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a>.</div>
+      </div>
+      <div class="risk-card upside">
+        <div class="rc-title"><span class="rc-tag">UPSIDE-COMPRESSION</span> Write with AI stays gated / mistrusted</div>
+        <div class="rc-body">Explore funnel stays collapsed; L6 ARPU lift misses; churn stays worst-in-family (~77%).</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid cols-2" style="margin-top: 14px; gap: 14px;">
+    <div class="card olive">
+      <h3 style="margin:0 0 6px; font-family: 'Source Serif 4', Georgia, serif; font-size: 14px;">Resolved for this version</h3>
+      <ol style="font-size: 12px; padding-left: 18px; margin: 0;">
+        <li><strong>Anchor band</strong> $25&ndash;30M stays the authoring commit; mid math ~$26.3M proves feasibility inside the band.</li>
+        <li><strong>Cohort definition:</strong> bulk Established in Tab 7 is the adoption spine; SMS / GenAI are satellite levers with explicit churn ceilings.</li>
+        <li><strong>No PRD Audit tab</strong> in this brief &mdash; evidence is Slack + BigQuery + public / research synthesis.</li>
+      </ol>
+    </div>
+    <div class="card warm">
+      <h3 style="margin:0 0 6px; font-family: 'Source Serif 4', Georgia, serif; font-size: 14px;">Open questions for leadership</h3>
+      <ol style="font-size: 12px; padding-left: 18px; margin: 0;">
+        <li><strong>Causal share on L1/L6:</strong> run 25% vs 35% scenarios in Finance model?</li>
+        <li><strong>Paid-slice ARPU:</strong> replace $110 placeholder with joined <code>mbr_monthly</code> truth by plan tier.</li>
+        <li><strong>Quarterly ramp:</strong> publish H1 vs H2 ARR phasing for migration-heavy L4/L5.</li>
+      </ol>
+    </div>
+  </div>
+
+  <p class="source"><strong>Sources reviewed:</strong> BigQuery <code>bi_aggregate.product_journey_monthly</code> editor-family cut (Tab 7 baselines). Slack HVC harvest (Tab 4). HeyMarvin / campaign-builder research repo (Tab 5). <a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click();return false;">Strategy 6-Pager</a> (<a href="#brief" onclick="document.querySelector('[data-tab=brief]').click();return false;">Executive Brief</a> + <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">VoC</a> for problem validation). All +/- projections are pre-launch directional ranges, not measured post-period outcomes.</p>
+</section>
+
 </div><!-- /panel-growthmodel -->
 
 
