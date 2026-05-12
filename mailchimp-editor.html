@@ -4505,20 +4505,1155 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 
 <!-- ============== INITIATIVE CANVAS TAB (independent of prior PRD list) ============== -->
 <div class="tabpanel" id="panel-canvas" role="tabpanel">
-  <section class="page" aria-label="Initiative Canvas placeholder">
-    <header class="page-head">
-      <div>
-        <div class="eyebrow">Mailchimp Email/SMS Unified Editor &amp; Builder</div>
-        <h1>Initiative Canvas <em style="color:#C28A00;">— under construction</em></h1>
-        <div class="subtitle">This tab will mirror the 9-page structure of the corresponding tab in the Mailchimp Automations brief, applied to the unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist).</div>
+<style>
+  /* Canvas-specific polish layered on the shared design system */
+  #panel-canvas .pillar-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+    background: #fff;
+    height: 100%;
+    position: relative;
+  }
+  #panel-canvas .pillar-card.p1 { border-left: 4px solid var(--bad); background: linear-gradient(180deg,#FFF5F2,#FFFFFF); }
+  #panel-canvas .pillar-card.p2 { border-left: 4px solid var(--brand); background: linear-gradient(180deg,#FFFCF0,#FFFFFF); }
+  #panel-canvas .pillar-card.p3 { border-left: 4px solid var(--good); background: linear-gradient(180deg,#F4FBF7,#FFFFFF); }
+  #panel-canvas .pillar-card.p4 { border-left: 4px solid #4338CA; background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  #panel-canvas .pillar-card.p5 { border-left: 4px solid var(--warn); background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-canvas .pillar-card .pc-num {
+    position: absolute; top: 12px; right: 18px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 36px; font-weight: 700; line-height: 1;
+    opacity: 0.18; color: var(--ink);
+  }
+  #panel-canvas .pillar-card .pc-tag {
+    display: inline-block;
+    font-size: 9.5px; font-weight: 800; letter-spacing: .08em;
+    padding: 2px 6px; border-radius: 4px;
+    background: var(--ink); color: white;
+    margin-bottom: 6px;
+  }
+  #panel-canvas .pillar-card h3 {
+    margin: 0 0 6px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px; font-weight: 700; color: var(--ink);
+    line-height: 1.2;
+  }
+  #panel-canvas .pillar-card .pc-meta {
+    display: grid; grid-template-columns: 1fr 1fr 1fr;
+    gap: 6px; margin: 8px 0;
+    font-size: 11px;
+  }
+  #panel-canvas .pillar-card .pc-meta div { color: var(--muted); }
+  #panel-canvas .pillar-card .pc-meta strong { color: var(--ink); font-size: 14px; display: block; font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; }
+  #panel-canvas .pillar-card .pc-themes {
+    border-top: 1px dashed var(--line); padding-top: 8px; margin-top: 8px;
+    font-size: 11px; color: var(--ink-2);
+    line-height: 1.5;
+  }
+  #panel-canvas .subtheme {
+    background: #FAFAFB;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    margin-bottom: 12px;
+  }
+  #panel-canvas .subtheme h4 {
+    margin: 0 0 6px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    display: flex; align-items: baseline; gap: 8px;
+  }
+  #panel-canvas .subtheme h4 .st-num {
+    font-size: 11px; font-weight: 800; padding: 2px 6px; border-radius: 4px;
+    background: var(--chip); color: var(--chip-ink);
+    letter-spacing: .04em;
+  }
+  #panel-canvas .subtheme .st-meta {
+    font-size: 11px; color: var(--muted); margin-bottom: 6px;
+  }
+  #panel-canvas .subtheme .st-meta strong { color: var(--brand); font-size: 12px; font-weight: 700; }
+  #panel-canvas .init-row {
+    display: grid;
+    grid-template-columns: 36px 1fr 80px 70px 90px;
+    gap: 8px; align-items: start;
+    padding: 6px 0;
+    font-size: 11.5px;
+    line-height: 1.4;
+  }
+  #panel-canvas .init-row + .init-row { border-top: 1px solid var(--line); }
+  #panel-canvas .init-row .init-id {
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 10px; font-weight: 700;
+    color: var(--ink); padding-top: 1px;
+  }
+  #panel-canvas .init-row .init-name { color: var(--ink); }
+  #panel-canvas .init-row .init-name strong { color: var(--ink); }
+  #panel-canvas .init-row .init-name em { color: var(--muted); font-style: italic; font-size: 11px; }
+  #panel-canvas .init-row .init-pain {
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 10.5px; color: var(--bad);
+    text-align: right;
+  }
+  #panel-canvas .init-row .init-pain.no { color: var(--muted); font-style: italic; }
+  #panel-canvas .init-row .init-lever {
+    font-size: 9.5px; font-weight: 800; letter-spacing: .04em;
+    text-align: center;
+  }
+  #panel-canvas .init-row .init-source {
+    font-size: 9.5px; color: var(--muted); text-align: right; font-style: italic;
+  }
+  #panel-canvas .lvr {
+    display: inline-block;
+    font-size: 9px; font-weight: 800; letter-spacing: .04em;
+    background: var(--ink-2); color: white;
+    padding: 1px 4px; border-radius: 3px;
+    margin-right: 2px;
+  }
+  #panel-canvas .lvr.l1 { background: #C28A00; }
+  #panel-canvas .lvr.l2 { background: #B45309; }
+  #panel-canvas .lvr.l3 { background: #4338CA; }
+  #panel-canvas .lvr.l4 { background: #036A4F; }
+  #panel-canvas .lvr.l5 { background: #9A1F00; }
+  #panel-canvas .lvr.l6 { background: #2A1FA8; }
+  #panel-canvas .src {
+    display: inline-block;
+    font-size: 8.5px; font-weight: 700;
+    background: #F1F2F4; color: #374151;
+    padding: 1px 4px; border-radius: 3px;
+    border: 1px solid #E2E5EA;
+    margin-right: 2px;
+  }
+  #panel-canvas .src.hvc { background: #FFE7E0; color: #9A1F00; border-color: #F4D2C5; }
+  #panel-canvas .src.ur { background: #EEF0FF; color: #2A1FA8; border-color: #D8DCFF; }
+  #panel-canvas .src.rmw { background: #FFFCF0; color: #6B4A00; border-color: #F2E8C2; }
+  #panel-canvas .src.ph { background: #E6F5EE; color: #036A4F; border-color: #BFE6D3; }
+  #panel-canvas .src.voc { background: #FFEFD9; color: #8A4A00; border-color: #FCD9B6; }
+  #panel-canvas .src.klv { background: #F1EEFF; color: #3A1ACC; border-color: #E1D8FF; }
+  #panel-canvas .src.sho { background: #E0F2EA; color: #00553F; border-color: #C9E8D6; }
+  #panel-canvas .src.emg { background: #FCE7F3; color: #9D174D; border-color: #FBCFE8; }
+
+  /* Guiding-principles cards */
+  #panel-canvas .principle {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    background: #fff;
+    height: 100%;
+    position: relative;
+  }
+  #panel-canvas .principle.gpt { border-left: 4px solid #4338CA; background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  #panel-canvas .principle.add { border-left: 4px solid var(--brand); background: linear-gradient(180deg,#FFFCF0,#FFFFFF); }
+  #panel-canvas .principle .pn {
+    position: absolute; top: 12px; right: 16px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 36px; font-weight: 700; line-height: 1;
+    opacity: 0.18; color: var(--ink);
+  }
+  #panel-canvas .principle .ptag {
+    display: inline-block;
+    font-size: 9.5px; font-weight: 800; letter-spacing: .08em;
+    padding: 2px 6px; border-radius: 4px;
+    margin-bottom: 6px;
+  }
+  #panel-canvas .principle.gpt .ptag { background: #EEF0FF; color: #2A1FA8; }
+  #panel-canvas .principle.add .ptag { background: var(--chip); color: var(--chip-ink); }
+  #panel-canvas .principle h3 {
+    margin: 0 0 8px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px; font-weight: 700; color: var(--ink);
+    padding-right: 32px;
+    line-height: 1.25;
+  }
+  #panel-canvas .principle p { font-size: 12px; color: var(--ink-2); line-height: 1.45; margin: 0; }
+
+  /* Effort-allocation bars */
+  #panel-canvas .effort-bar {
+    display: grid; grid-template-columns: 200px 1fr 60px;
+    gap: 12px; align-items: center; padding: 8px 0;
+  }
+  #panel-canvas .effort-bar + .effort-bar { border-top: 1px solid var(--line); }
+  #panel-canvas .effort-bar .eb-name { font-size: 12.5px; font-weight: 700; color: var(--ink); }
+  #panel-canvas .effort-bar .eb-name .eb-sub { display: block; font-size: 10.5px; color: var(--muted); font-weight: 400; margin-top: 2px; font-style: italic; }
+  #panel-canvas .effort-bar .eb-track { height: 18px; background: #F1F2F4; border-radius: 99px; position: relative; overflow: hidden; }
+  #panel-canvas .effort-bar .eb-fill {
+    height: 100%; border-radius: 99px;
+    display: flex; align-items: center; padding: 0 10px;
+    color: white; font-size: 10.5px; font-weight: 700;
+  }
+  #panel-canvas .effort-bar .eb-fill.l-func { background: linear-gradient(90deg, var(--bad), #DC2626); }
+  #panel-canvas .effort-bar .eb-fill.l-cog { background: linear-gradient(90deg, var(--brand), #E2A800); }
+  #panel-canvas .effort-bar .eb-fill.l-out { background: linear-gradient(90deg, #4338CA, #6D28D9); }
+  #panel-canvas .effort-bar .eb-fill.l-emo { background: linear-gradient(90deg, var(--good), #059669); }
+  #panel-canvas .effort-bar .eb-pct { font-size: 14px; font-weight: 700; color: var(--ink); text-align: right; font-family: 'Source Serif 4', Georgia, serif; }
+
+  /* Roadmap swimlane table */
+  #panel-canvas .roadmap-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 9.5px;
+    margin: 8px 0;
+    table-layout: fixed;
+  }
+  #panel-canvas .roadmap-table th, #panel-canvas .roadmap-table td {
+    border: 1px solid var(--line);
+    padding: 6px 8px;
+    vertical-align: top;
+    background: #fff;
+  }
+  #panel-canvas .roadmap-table th {
+    background: var(--ink);
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    font-size: 10.5px;
+    letter-spacing: .04em;
+    font-family: 'Inter', sans-serif;
+  }
+  #panel-canvas .roadmap-table th.q1 { background: #4F46E5; }
+  #panel-canvas .roadmap-table th.q2 { background: #7C3AED; }
+  #panel-canvas .roadmap-table th.q3 { background: #DB2777; }
+  #panel-canvas .roadmap-table th.q4 { background: var(--brand); }
+  #panel-canvas .roadmap-table th.q5 { background: var(--good); }
+  #panel-canvas .roadmap-table th.q6 { background: #0891B2; }
+  #panel-canvas .roadmap-table th .qrange {
+    display: block; font-size: 9px; font-weight: 400;
+    margin-top: 2px; opacity: 0.85;
+  }
+  #panel-canvas .roadmap-table .pillar-cell {
+    background: #FAFAFB;
+    font-weight: 700;
+    color: var(--ink);
+    width: 13%;
+    font-size: 10.5px;
+    line-height: 1.3;
+  }
+  #panel-canvas .roadmap-table .pillar-cell.r-p1 { border-left: 4px solid var(--bad); }
+  #panel-canvas .roadmap-table .pillar-cell.r-p2 { border-left: 4px solid var(--brand); }
+  #panel-canvas .roadmap-table .pillar-cell.r-p3 { border-left: 4px solid var(--good); }
+  #panel-canvas .roadmap-table .pillar-cell.r-p4 { border-left: 4px solid #4338CA; }
+  #panel-canvas .roadmap-table .pillar-cell.r-p5 { border-left: 4px solid var(--warn); }
+  #panel-canvas .roadmap-table .pillar-cell .pname {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 10.5px;
+    display: block;
+    margin-bottom: 2px;
+  }
+  #panel-canvas .roadmap-table .pillar-cell .pquote {
+    font-size: 9.5px;
+    color: var(--muted);
+    font-style: italic;
+    font-weight: 400;
+  }
+  #panel-canvas .roadmap-table .q-cell { font-size: 9.5px; line-height: 1.4; }
+  #panel-canvas .roadmap-table .q-cell .iid {
+    font-family: 'SF Mono', Menlo, monospace;
+    font-size: 8.5px;
+    background: #ECEAE6;
+    color: var(--ink);
+    padding: 1px 3px;
+    border-radius: 2px;
+    margin-right: 2px;
+    font-weight: 600;
+  }
+  #panel-canvas .roadmap-table .q-cell .ship {
+    font-weight: 700; color: var(--good);
+  }
+  #panel-canvas .roadmap-table .q-cell .star {
+    font-size: 11px; color: var(--brand); font-weight: 700;
+  }
+  #panel-canvas .roadmap-table .q-cell .maint {
+    font-style: italic; color: var(--muted); font-size: 9px;
+  }
+  #panel-canvas .roadmap-table .cred-row td {
+    background: linear-gradient(180deg, #FFFCF0, #fff);
+    border-top: 2px solid var(--brand);
+    font-weight: 600;
+    font-size: 9.5px;
+  }
+  #panel-canvas .roadmap-table .cred-row .pillar-cell {
+    background: var(--brand);
+    color: white;
+    font-family: 'Source Serif 4', Georgia, serif;
+    border-left: 4px solid #6B4A00;
+  }
+  #panel-canvas .roadmap-table .cred-row td.cred-cell {
+    color: var(--ink);
+    text-align: left;
+    font-style: italic;
+  }
+  #panel-canvas .roadmap-table .cred-row td.cred-cell strong {
+    color: var(--brand);
+    font-style: normal;
+  }
+  @media (max-width: 1100px) {
+    #panel-canvas .roadmap-table { font-size: 8.5px; }
+    #panel-canvas .roadmap-table th { font-size: 9.5px; }
+    #panel-canvas .roadmap-table .pillar-cell { font-size: 9.5px; }
+  }
+  #panel-canvas .init-row .init-name .desc {
+    display: block; margin-top: 3px; color: var(--ink-2); font-size: 11px; line-height: 1.4;
+  }
+  #panel-canvas .init-row .init-name .desc strong { color: var(--ink); font-weight: 700; }
+  #panel-canvas .init-row .init-name .prob { color: #9A1F00; font-weight: 600; }
+  #panel-canvas .init-row .init-name .ben { color: #036A4F; font-weight: 600; }
+  #panel-canvas .init-header {
+    display: grid;
+    grid-template-columns: 36px 1fr 80px 70px 90px;
+    gap: 8px;
+    font-size: 9.5px; font-weight: 800; letter-spacing: .06em;
+    text-transform: uppercase; color: var(--muted);
+    padding: 4px 0; border-bottom: 1px solid var(--line-2);
+    margin-bottom: 4px;
+  }
+  #panel-canvas .init-header .h-pain { text-align: right; }
+  #panel-canvas .init-header .h-lever { text-align: center; }
+  #panel-canvas .init-header .h-src { text-align: right; }
+</style>
+
+<!-- PAGE 1: CANVAS OVERVIEW + 5-PILLAR MAP -->
+<section class="page" aria-label="Initiative Canvas Page 1">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Initiative Canvas &middot; Editor + SMS &middot; Evidence-grounded</div>
+      <h1>The 65 tactical initiatives that get the editor to <em style="color:#C28A00;">+$25&ndash;30M</em> in FY27</h1>
+      <div class="subtitle">Designed top-down from this brief&rsquo;s evidence: <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">Voice of Customer</a> (7 hate themes), <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a> (17 cited themes across NEB, Brand Kit, Content Studio, Canva, SMS), <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a> (25 customer briefs / 50 videos / 5 bets), <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> (10 BQ findings on bulk/SMS/AI/transactional), <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a> (6 levers, ~$26.3M mid), <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a> ($36&ndash;67M backward stack). Every initiative shows: <strong>what it is &middot; critical problem &middot; functional benefit</strong>.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Pillars:</strong> 5 (customer-benefit framing)</div>
+      <div><strong>Sub-themes:</strong> 19</div>
+      <div><strong>Initiatives:</strong> 65</div>
+      <div><strong>Page:</strong> 1 of 9</div>
+    </div>
+  </header>
+
+  <div class="kpi-row" style="margin-bottom: 16px;">
+    <div class="kpi">
+      <div class="v" style="color:#C28A00;">+$25&ndash;30M</div>
+      <div class="l">FY27 incremental ARR target this canvas delivers (mid scenario ~$26.3M from <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a>)</div>
+    </div>
+    <div class="kpi">
+      <div class="v">65 initiatives</div>
+      <div class="l">Tactical, scoped, 3-part-described (IS / problem / benefit). Cover every cited HVC theme + every UR bet + every VoC hate theme</div>
+    </div>
+    <div class="kpi">
+      <div class="v">~$95K/mo</div>
+      <div class="l">Cited HVC MRR exposure addressed (sum of named-customer escalations across NEB, Brand Kit, Canva, Content Studio, SMS &mdash; including the $57K SMS TCPA incident)</div>
+    </div>
+    <div class="kpi">
+      <div class="v">5 customer pillars</div>
+      <div class="l">Renamed from internal jargon to customer-benefit framing. Each pillar = "what the customer gets" not "what the team builds"</div>
+    </div>
+  </div>
+
+  <div class="card tinted" style="margin-bottom: 16px;">
+    <h2 style="margin-top:0;">How this canvas delivers the goal most efficiently</h2>
+    <p>Built around <strong>three orchestration moves</strong> that each unlock multiple downstream initiatives:</p>
+    <ul style="margin: 0;">
+      <li><strong>Universal Content as a primitive</strong> (P2.1) ships first &mdash; it closes the Klaviyo Spring 2026 parity claim AND becomes the data primitive that the unified email+SMS canvas (P5.1) reuses, so we don&rsquo;t build the same thing twice.</li>
+      <li><strong>NEB Code Mode</strong> (P2.2) ships <em>before</em> any Classic sunset comms &mdash; protects ~$1&ndash;2M in Premium/agency churn risk identified in <a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click();return false;">Strategy R1</a>.</li>
+      <li><strong>Write with AI funnel recovery</strong> (P4.1) starts policy + product tracks in parallel &mdash; addresses the worst single signal in the brief (Explore &minus;73.7% YoY, churn 77.2%) before it compounds.</li>
+    </ul>
+    <p style="margin-bottom: 0;">Then <strong>Quality &amp; Trust</strong> (P1) burns down cited HVC tickets in weeks not quarters; <strong>Activation</strong> (P3) repairs the &minus;19.2% Explore funnel; <strong>Cross-channel + collab</strong> (P5) monetizes the SMS +73.5% growth before its 53% churn eats the gain.</p>
+  </div>
+
+  <h2 style="margin-bottom: 8px;">The 5 pillars at a glance</h2>
+  <div class="grid cols-2" style="gap: 12px;">
+    <div class="pillar-card p1">
+      <div class="pc-num">P1</div>
+      <span class="pc-tag">P1 &middot; 0&ndash;3mo &middot; CUSTOMER BENEFIT</span>
+      <h3>"The builder I trust to ship"</h3>
+      <div style="font-size:11px; color:var(--muted); font-style:italic; margin-top:-4px;">Internal name: Editor Quality &amp; Brand Trust</div>
+      <div class="pc-meta">
+        <div>Sub-themes<br/><strong>4</strong></div>
+        <div>Initiatives<br/><strong>16</strong></div>
+        <div>FY27 $<br/><strong>$3&ndash;5M</strong></div>
       </div>
-      <div class="meta">
-        <div><strong>Status:</strong> placeholder</div>
-        <div><strong>Planned:</strong> 9 pages</div>
+      <div class="pc-themes">NEB rendering &amp; UX bugs &middot; Brand Kit reliability + multi-brand &middot; Content Studio + Canva sync &middot; Creative Assistant rediscovery</div>
+    </div>
+    <div class="pillar-card p2">
+      <div class="pc-num">P2</div>
+      <span class="pc-tag">P2 &middot; 0&ndash;9mo &middot; CUSTOMER BENEFIT</span>
+      <h3>"Edit once, send everywhere"</h3>
+      <div style="font-size:11px; color:var(--muted); font-style:italic; margin-top:-4px;">Internal name: Universal Content + Migration</div>
+      <div class="pc-meta">
+        <div>Sub-themes<br/><strong>3</strong></div>
+        <div>Initiatives<br/><strong>11</strong></div>
+        <div>FY27 $<br/><strong>$4&ndash;7M</strong></div>
       </div>
-    </header>
-    <p style="color: var(--muted);">Content forthcoming. See the build plan in the active session.</p>
-  </section>
+      <div class="pc-themes">Universal Content blocks (Klaviyo parity) &middot; Builder migration + NEB Code Mode + Liquid &middot; Cross-template + cross-flow reuse</div>
+    </div>
+    <div class="pillar-card p3">
+      <div class="pc-num">P3</div>
+      <span class="pc-tag">P3 &middot; 3&ndash;9mo &middot; CUSTOMER BENEFIT</span>
+      <h3>"From signup to first send in minutes"</h3>
+      <div style="font-size:11px; color:var(--muted); font-style:italic; margin-top:-4px;">Internal name: Activation Foundation</div>
+      <div class="pc-meta">
+        <div>Sub-themes<br/><strong>4</strong></div>
+        <div>Initiatives<br/><strong>11</strong></div>
+        <div>FY27 $<br/><strong>$4&ndash;6M</strong></div>
+      </div>
+      <div class="pc-themes">New-user onboarding + first-send &middot; Template ICP fit (B2B / ProServ / non-ecom) &middot; Discovery &amp; feature surfacing &middot; Free-plan recovery</div>
+    </div>
+    <div class="pillar-card p4">
+      <div class="pc-num">P4</div>
+      <span class="pc-tag">P4 &middot; 3&ndash;12mo &middot; CUSTOMER BENEFIT</span>
+      <h3>"AI that ships campaigns, not a demo"</h3>
+      <div style="font-size:11px; color:var(--muted); font-style:italic; margin-top:-4px;">Internal name: Intuit Assist + Write with AI Recovery</div>
+      <div class="pc-meta">
+        <div>Sub-themes<br/><strong>4</strong></div>
+        <div>Initiatives<br/><strong>12</strong></div>
+        <div>FY27 $<br/><strong>$4&ndash;6M</strong></div>
+      </div>
+      <div class="pc-themes">Write with AI funnel recovery (Health critical) &middot; Conversational in-canvas editing &middot; Generative SMS in composer &middot; AI image gen tied to product catalog</div>
+    </div>
+    <div class="pillar-card p5">
+      <div class="pc-num">P5</div>
+      <span class="pc-tag">P5 &middot; 6&ndash;18mo &middot; CUSTOMER BENEFIT</span>
+      <h3>"Email + SMS feel like one campaign"</h3>
+      <div style="font-size:11px; color:var(--muted); font-style:italic; margin-top:-4px;">Internal name: Unified Canvas + Collab + SMS Retention</div>
+      <div class="pc-meta">
+        <div>Sub-themes<br/><strong>4</strong></div>
+        <div>Initiatives<br/><strong>15</strong></div>
+        <div>FY27 $<br/><strong>$5&ndash;8M</strong></div>
+      </div>
+      <div class="pc-themes">Unified email+SMS canvas (B3) &middot; SMS retention + composer depth &middot; Real-time multi-author collab &middot; Governance for SMB + accessibility</div>
+    </div>
+    <div class="card warm">
+      <div style="font-size: 10.5px; font-weight: 800; letter-spacing: .06em; color: var(--muted); text-transform: uppercase; margin-bottom: 6px;">Reading the canvas</div>
+      <p style="font-size: 12px; color: var(--ink-2); line-height: 1.45; margin: 0 0 6px;">Each initiative row shows: <strong>ID</strong> &middot; <strong>name + scope</strong> &middot; <strong>pain $/mo</strong> (cited HVC MRR) &middot; <strong>lever</strong> (L1&ndash;L6 from Growth Model) &middot; <strong>source</strong> tag.</p>
+      <div style="font-size: 11px; color: var(--ink-2);">
+        <span class="lvr l1">L1</span> Bulk recovery &middot;
+        <span class="lvr l2">L2</span> Activation+sends &middot;
+        <span class="lvr l3">L3</span> SMS attach+repeat &middot;
+        <span class="lvr l4">L4</span> Reduced abandonment &middot;
+        <span class="lvr l5">L5</span> Retention save &middot;
+        <span class="lvr l6">L6</span> ARPU/outcomes
+      </div>
+      <div style="font-size: 11px; color: var(--ink-2); margin-top: 6px;">
+        Source: <span class="src hvc">HVC</span> HVC Risk Map &middot;
+        <span class="src ur">UR</span> User Research &middot;
+        <span class="src rmw">RMW</span> Roadmap to Win &middot;
+        <span class="src ph">PH</span> Product Health &middot;
+        <span class="src voc">VoC</span> Voice of Customer &middot;
+        <span class="src klv">KLV</span> Klaviyo &middot;
+        <span class="src sho">SHO</span> Shopify / Stensul &middot;
+        <span class="src emg">EMG</span> Postscript / Beefree
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PAGE 2: P1 — "The builder I trust to ship" -->
+<section class="page" aria-label="Initiative Canvas Page 2">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Pillar 1 &middot; Customer benefit &middot; 0&ndash;3 months</div>
+      <h1>P1: <em style="color:#B91C1C;">"The builder I trust to ship"</em></h1>
+      <div class="subtitle">Internal name: Editor Quality &amp; Brand Trust. 4 sub-themes, 16 tactical initiatives. <strong>Highest velocity, lowest risk pile</strong> &mdash; most ship in weeks. Burns down cited HVC tickets, addresses bulk churn +2.1pp YoY, and removes the &ldquo;clunky/outdated&rdquo; brand-decay signal before any AI demo can land.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Pain $:</strong> ~$15K/mo cited (Themes 3&ndash;13 selected)</div>
+      <div><strong>FY27 $:</strong> $3&ndash;5M ARR (Growth Model L5)</div>
+      <div><strong>Page:</strong> 2 of 9</div>
+    </div>
+  </header>
+
+  <div class="subtheme">
+    <h4><span class="st-num">1.1</span> NEB rendering &amp; UX bugs</h4>
+    <div class="st-meta">Resolves: <strong>~$3.6K/mo cited</strong> + addresses bulk churn +2.1pp YoY &middot; 4 initiatives &middot; Lever <span class="lvr l5">L5</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-1.1.1</div><div class="init-name"><strong>NEB rendering parity fix.</strong> Fix forwarded-mail divergence, &ldquo;read full message&rdquo; reflow breakage, mobile line-break injection, image-shrink in send.<span class="desc"><span class="prob">Problem:</span> Customer&rsquo;s NEB email looks correct in editor, breaks in inbox &mdash; loses every recipient&rsquo;s first impression. Theme 3 in HVC, $1,820/mo cited across 4 named users including a $949/mo Premium account. <span class="ben">Benefit:</span> Customer&rsquo;s send looks the same as the editor; trust restored on the most fundamental promise.</span></div><div class="init-pain">$1,820</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #3</span><span class="src voc">VoC</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.1.2</div><div class="init-name"><strong>Multi-author save-conflict UX (precursor to P5 collab).</strong> Show explicit &ldquo;someone else is editing&rdquo; presence; non-blocking save; merge prompt instead of generic error.<span class="desc"><span class="prob">Problem:</span> Two team members edit same NEB email &rarr; one&rsquo;s work silently lost; no signal until save fails. Theme 4, $340/mo. <span class="ben">Benefit:</span> Teams stop losing work; lays the foundation for full P5 real-time collab without re-architecting later.</span></div><div class="init-pain">$340</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #4</span><span class="src ur">UR Bet #4</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.1.3</div><div class="init-name"><strong>Block-ordering &amp; refresh bugs in custom-coded templates + nav &ldquo;templates moved&rdquo; banner.</strong> Fix block reorder requiring page refresh, vanishing templates link, intermittent &ldquo;templates moved&rdquo; warning.<span class="desc"><span class="prob">Problem:</span> Customer can&rsquo;t move blocks without refresh; templates link disappears between sessions. Theme 5, $410/mo Premium. <span class="ben">Benefit:</span> Editor behaves predictably; no support tickets for &ldquo;where did my template go?&rdquo;</span></div><div class="init-pain">$410</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #5</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.1.4</div><div class="init-name"><strong>Template list / campaign wizard surfacing.</strong> Fix the bug where new-builder templates don&rsquo;t appear in the campaign creation tab.<span class="desc"><span class="prob">Problem:</span> Customer ($1,950/mo) builds a NEB template, opens campaign wizard, sees only legacy templates; their NEB work is invisible. Theme 6. <span class="ben">Benefit:</span> Customer can use the templates they built; activation accelerates; perceived broken-state goes away.</span></div><div class="init-pain">$1,950</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src hvc">HVC #6</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.1.5</div><div class="init-name"><strong>Cross-browser regression suite + automated UI smoke tests.</strong> Browser-matrix automated tests (Safari, Firefox, Chrome) on every CI build; regressions caught before release.<span class="desc"><span class="prob">Problem:</span> Ctrl+K link insertion broken on Firefox/Chrome (Theme 3 sub); customers find browser regressions in production. Cross-cuts every NEB bug. <span class="ben">Benefit:</span> Browser regressions caught pre-release; ship velocity goes up because team isn&rsquo;t firefighting browser bugs.</span></div><div class="init-pain no">platform</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC cross-cut</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.1.6</div><div class="init-name"><strong>Light/dark mode + background images in NEB.</strong> Implement light/dark variant rendering; allow background images on blocks (currently broken).<span class="desc"><span class="prob">Problem:</span> Customer ($468/mo) needs dark-mode rendering for brand consistency; can&rsquo;t use background images at all in NEB. Theme 3 sub. <span class="ben">Benefit:</span> Modern email design parity; brand consistency across email clients; closes a frequent power-user complaint.</span></div><div class="init-pain">$468</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #3 sub</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.1.7</div><div class="init-name"><strong>Inline link checker + pre-send delivery hints upgrade.</strong> Real-time link validation; spam-score guidance; SPF/DKIM/DMARC wizard; alt-text completeness check.<span class="desc"><span class="prob">Problem:</span> Pre-send checklist catches broken links + missing alt text but misses contrast, link purpose, deliverability red flags. <span class="ben">Benefit:</span> Customer sees deliverability issues before send; reduces inbox-placement complaints (Tab 1 mentions 78.35% inbox placement per 2026 audit).</span></div><div class="init-pain no">deliverability</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src voc">VoC</span><span class="src rmw">RMW F9</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">1.2</span> Brand Kit reliability &amp; multi-brand</h4>
+    <div class="st-meta">Resolves: <strong>~$6.5K/mo cited</strong> + closes Canva governance threat &middot; 4 initiatives &middot; Lever <span class="lvr l5">L5</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-1.2.1</div><div class="init-name"><strong>Brand Kit data correctness fix (incident closure).</strong> Stop serving stale Brand Kit; backfill missing colors; ramp the Austin Milt fix to 100%; add monitoring + alerting for Brand Kit data drift.<span class="desc"><span class="prob">Problem:</span> Theme 8: customer&rsquo;s logo present but no colors listed; engineering shipped a 50% ramped fix &mdash; some customers still see drift. <span class="ben">Benefit:</span> Brand Kit is reliable; customers stop manually patching colors; trust in the &ldquo;set it once&rdquo; promise restored.</span></div><div class="init-pain no">incident</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #8</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.2.2</div><div class="init-name"><strong>Font upload + Creative Assistant font-recognition parity.</strong> Fix two-week font-package upload bug; Creative Assistant must recognize uploaded custom fonts (Asul, Readex Pro, DIN 2014).<span class="desc"><span class="prob">Problem:</span> Theme 10, $3,350/mo cited including a $3K Premium account. Customer uploads brand font, Brand Kit accepts it, Creative Assistant doesn&rsquo;t use it &mdash; brand consistency breaks at the AI surface. <span class="ben">Benefit:</span> Customer&rsquo;s brand font flows through every AI-generated design; eliminates &ldquo;why doesn&rsquo;t the AI use my font?&rdquo; ticket pattern.</span></div><div class="init-pain">$3,350</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #10</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.2.3</div><div class="init-name"><strong>Logo asset metadata + multi-brand kits.</strong> Add &ldquo;view details&rdquo; on Brand Kit logos (file name, size, dimensions); allow multiple Brand Kits per account (main brand + sub-brands), Canva-style.<span class="desc"><span class="prob">Problem:</span> Theme 9, $2,460/mo cited (incl. $1,300 + $410 Premium). Multi-brand teams currently rebuild content per sub-brand because Brand Kit is single-instance. <span class="ben">Benefit:</span> Agencies + multi-brand customers manage all brands in one account; closes Canva multi-brand governance gap.</span></div><div class="init-pain">$2,460</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src hvc">HVC #9</span><span class="src rmw">RMW S10</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.2.4</div><div class="init-name"><strong>Brand fonts in landing pages + signup forms (iPhone fallback fix).</strong> Make uploaded fonts selectable in LP/form builder; fix iPhone system-font fallback so Brand Kit fonts render across devices.<span class="desc"><span class="prob">Problem:</span> Theme 7, $655/mo. Customer uploads Asul + Readex Pro to Brand Kit, fonts work in email, fall back on iPhone for landing pages &mdash; brand inconsistency at the conversion moment. <span class="ben">Benefit:</span> Brand Kit applies everywhere it should; customer&rsquo;s landing pages match their email design.</span></div><div class="init-pain">$655</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #7</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">1.3</span> Content Studio + Canva integration trust</h4>
+    <div class="st-meta">Resolves: <strong>~$3.1K/mo cited</strong> + reduces &ldquo;third-party in the loop&rdquo; workflow tax (UR Workflow Shape #4) &middot; 3 initiatives &middot; Lever <span class="lvr l5">L5</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-1.3.1</div><div class="init-name"><strong>Canva &harr; Mailchimp sync reliability.</strong> Fix the failure mode where Canva graphic shows in editor but is missing in sent email; add sync-status indicators; fix latency on canvas pulls.<span class="desc"><span class="prob">Problem:</span> Theme 13, $2,500/mo+ cited. Two named customers ($780, $494, $427) describing &ldquo;most frustrating thing ever&rdquo; &mdash; including a live email sent without the synced graphic. <span class="ben">Benefit:</span> Customer&rsquo;s Canva work shows up in their sends; eliminates the silent-failure mode that breaks customer trust in both products.</span></div><div class="init-pain">$2,500</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #13</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.3.2</div><div class="init-name"><strong>Content Studio stability + image loading.</strong> Fix image-not-loading bugs; eliminate the &ldquo;quit out and reload&rdquo; pattern; fix the forced-redirect loop into NEB.<span class="desc"><span class="prob">Problem:</span> Theme 12, $621/mo. Customer literally describes &ldquo;Content studio not loading images. Email builder breaking&hellip; keep quitting out and re-loading.&rdquo; <span class="ben">Benefit:</span> Customer&rsquo;s asset library works first time; reduces support escalations.</span></div><div class="init-pain">$621</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #12</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.3.3</div><div class="init-name"><strong>Folder management in Content Studio.</strong> Allow folder reordering, folder deletion, search-in-folder; restore IA fundamentals.<span class="desc"><span class="prob">Problem:</span> Theme 12 sub ($361/mo). Customer can&rsquo;t reorder or delete folders &mdash; basic IA missing. <span class="ben">Benefit:</span> Customer organizes assets the way they think; less time hunting for files.</span></div><div class="init-pain">$361</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src hvc">HVC #12 sub</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">1.4</span> Creative Assistant rediscovery + expansion</h4>
+    <div class="st-meta">Resolves: <strong>$2.65K/mo &ldquo;bring back&rdquo;</strong> &mdash; addresses perceived feature removal &middot; 2 initiatives &middot; Lever <span class="lvr l4">L4</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-1.4.1</div><div class="init-name"><strong>Creative Assistant entry-point restoration + in-product education.</strong> Restore prominent CA entry points; add contextual prompts (&ldquo;design a banner with Creative Assistant&rdquo;); 30-second in-product video for new users.<span class="desc"><span class="prob">Problem:</span> Theme 11, $2,650/mo cited (a $1,325 Premium and a $754 user). Customers explicitly ask &ldquo;Can you bring back the Creative Assistant?&rdquo; &mdash; the feature still exists but discovery collapsed. <span class="ben">Benefit:</span> Customers find Creative Assistant again; banner/social workflows return to MC instead of routing through Canva.</span></div><div class="init-pain">$2,650</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src hvc">HVC #11</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.4.2</div><div class="init-name"><strong>Creative Assistant for non-banner workflows.</strong> Expand CA to social variants, in-product imagery, signup-form heroes; multi-asset generation in one prompt.<span class="desc"><span class="prob">Problem:</span> Customers want CA for more than banners (Theme 11 secondary asks); currently has to use Canva or Adobe Express for adjacent assets. <span class="ben">Benefit:</span> Mailchimp keeps the design workflow in-product; reduces dependence on Canva &mdash; the same dependence that produces Theme 13 sync failures.</span></div><div class="init-pain no">expansion</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src hvc">HVC #11 secondary</span></div></div>
+  </div>
+
+  <p class="source"><strong>P1 evidence base:</strong> 7 HVC bug themes (NEB rendering, multi-author save, block ordering, template surfacing, Brand Kit incident, font upload, Canva sync) + 3 HVC barrier themes (multi-brand, folder mgmt, CA rediscovery). <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">VoC</a> hate themes #6 (no universal blocks &rarr; partial address via P2) and clunky/outdated narrative addressed via every fix shipped here. <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> bulk churn +2.1pp YoY is the L5 target this pillar moves.</p>
+</section>
+
+<!-- PAGE 3: P2 — "Edit once, send everywhere" -->
+<section class="page" aria-label="Initiative Canvas Page 3">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Pillar 2 &middot; Customer benefit &middot; 0&ndash;9 months</div>
+      <h1>P2: <em style="color:#C28A00;">"Edit once, send everywhere"</em></h1>
+      <div class="subtitle">Internal name: Universal Content + Migration. 3 sub-themes, 11 tactical initiatives. <strong>The single highest-leverage ship in the brief</strong> &mdash; closes the Klaviyo Spring 2026 parity narrative AND becomes the data primitive that the unified email+SMS canvas (P5.1) reuses. Sequencing: Universal Content first, NEB Code Mode parallel, Classic sunset comms only after both ship.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Pain $:</strong> $834/mo cited + ~70K Classic users at risk</div>
+      <div><strong>FY27 $:</strong> $4&ndash;7M ARR (Growth Model L1 + L4)</div>
+      <div><strong>Page:</strong> 3 of 9</div>
+    </div>
+  </header>
+
+  <div class="subtheme">
+    <h4><span class="st-num">2.1</span> Universal Content blocks (the headline ship)</h4>
+    <div class="st-meta">Closes <strong>VoC hate theme #6 + Klaviyo Spring 2026 parity claim</strong> + UR Bet #1 (saved blocks &mdash; PM-confirmed in-flight) &middot; 3 initiatives &middot; Lever <span class="lvr l1">L1</span> <span class="lvr l4">L4</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-2.1.1</div><div class="init-name"><strong>Universal Content block primitive.</strong> Edit-once-propagates-everywhere block type that lives at account level; insertable into any template, NEB campaign, or CJB email step; updates flow through to all instances on next send.<span class="desc"><span class="prob">Problem:</span> Klaviyo Spring 2026 made this the default editor primitive. Mailchimp&rsquo;s saved-content remains template-scoped; HVC #1 customer with 181 templates literally describes the missing capability: &ldquo;develop a system where templates share content&hellip; similar to your brand kit but more substantial.&rdquo; <span class="ben">Benefit:</span> Customer edits a header / footer / promo banner once; all sends update automatically; massive time-saving + brand consistency.</span></div><div class="init-pain">$330</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src voc">VoC #6</span><span class="src klv">KLV Spring &rsquo;26</span><span class="src ur">UR Bet #1</span><span class="src hvc">HVC #1</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.1.2</div><div class="init-name"><strong>Auto-migration of existing saved blocks &rarr; Universal Content.</strong> One-click migration tool with preview; bulk migrate template-scoped saved blocks to Universal Content; preserve usage metadata.<span class="desc"><span class="prob">Problem:</span> Customers have years of saved-content investment scattered per template; manual migration would be a non-starter. <span class="ben">Benefit:</span> Existing customers get Universal Content benefit immediately on day 1; doesn&rsquo;t feel like &ldquo;start over.&rdquo;</span></div><div class="init-pain no">migration</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src klv">KLV pattern</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.1.3</div><div class="init-name"><strong>Universal Content adoption funnel + in-product discovery.</strong> Changelog entry; contextual prompt &ldquo;turn this into Universal Content&rdquo;; weekly digest of edited blocks + downstream impact (&ldquo;you updated the header &mdash; this affects 12 templates&rdquo;).<span class="desc"><span class="prob">Problem:</span> Universal Content only delivers value if customers actually use it; without discovery, the feature ships and adoption stalls. <span class="ben">Benefit:</span> Adoption rate hits 50&ndash;70% of NEB adopters within 6 months (Strategy Page 2 target); compounds the L1 lever.</span></div><div class="init-pain no">adoption</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src ur">UR Bet #2 (discovery)</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">2.2</span> Builder migration &amp; sunset (Strategy B1)</h4>
+    <div class="st-meta">Resolves <strong>$834/mo cited HVC</strong> + ~70K Classic Established at-risk + protects ~$1&ndash;2M ARR per Strategy R1 &middot; 5 initiatives &middot; Lever <span class="lvr l4">L4</span> <span class="lvr l5">L5</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-2.2.1</div><div class="init-name"><strong>Bulk template migration tool (181-template pattern).</strong> Multi-select templates; preview side-by-side; bulk migrate to NEB; preserve content + style.<span class="desc"><span class="prob">Problem:</span> Theme 1, $330/mo cited. Customer with 181 templates: &ldquo;I want to update them all in one go &hellip; I need to individually update them which will take days.&rdquo; <span class="ben">Benefit:</span> Customer migrates years of template work in minutes not days; no &ldquo;rebuild from scratch&rdquo; tax.</span></div><div class="init-pain">$330</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src hvc">HVC #1</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.2.2</div><div class="init-name"><strong>1:1 migration tool with style preservation + support enablement.</strong> Single-template migration with style-fidelity guarantee; first-class support workflow (no chat dead-ends); migration-success monitoring.<span class="desc"><span class="prob">Problem:</span> Theme 2, $504/mo cited. Customer: &ldquo;two different members of staff regarding converting an email&hellip; first ended the chat on me and the second&hellip; disappeared after 30 minutes.&rdquo; <span class="ben">Benefit:</span> Migration becomes a reliable process; support has a real path forward; customer trust restored mid-migration.</span></div><div class="init-pain">$504</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src hvc">HVC #2</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.2.3</div><div class="init-name"><strong>NEB Code Mode + HTML/CSS escape hatch (PRECONDITION FOR SUNSET).</strong> Custom HTML / CSS authoring inside NEB; ship <em>before</em> any Classic sunset comms.<span class="desc"><span class="prob">Problem:</span> VoC #7: &ldquo;NEB looks pretty&hellip; no custom HTML, no Liquid, nothing for power users.&rdquo; Premium / agency users currently anchor on Classic specifically because of HTML escape hatch &mdash; force migration without Code Mode = $1&ndash;2M ARR loss per Strategy R1. <span class="ben">Benefit:</span> Power users get NEB without giving up control; safe to retire Classic; preserves the Premium ARR base.</span></div><div class="init-pain no">unlock</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src voc">VoC #7</span><span class="src rmw">RMW F5</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.2.4</div><div class="init-name"><strong>NEB Liquid templating for power users + dynamic content.</strong> Add Liquid (or Handlebars) templating in Code Mode; per-recipient dynamic blocks (name, location, last product, last engagement).<span class="desc"><span class="prob">Problem:</span> RMW F8 (per-recipient dynamic content) and S11 (Liquid) gaps vs Klaviyo. Today personalization = merge tags + conditional show/hide; nothing first-class. <span class="ben">Benefit:</span> Power users + agencies can build truly personalized campaigns inside NEB; closes the &ldquo;not for power users&rdquo; objection.</span></div><div class="init-pain no">power-user</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src rmw">RMW F8 + S11</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.2.5</div><div class="init-name"><strong>Funded migration program + 12-month grace period.</strong> 1:1 migration assistance for Premium / agency Classic users; 12mo grace period after Classic sunset announcement; in-product migration tracker.<span class="desc"><span class="prob">Problem:</span> Strategy R1: ~70K assumed Classic Established users (not directly observable in BQ &mdash; Eng to instrument); even 10% churn = $1&ndash;2M ARR loss. <span class="ben">Benefit:</span> Migration is a positive event for HVCs (assisted, no surprises); Classic sunset becomes safe to announce.</span></div><div class="init-pain no">structural</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src ph">PH NEB/Classic</span><span class="src voc">VoC</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">2.3</span> Cross-template + cross-flow content reuse</h4>
+    <div class="st-meta">Extends Universal Content into Customer Journey Builder + Brand Kit propagation + audit &middot; 3 initiatives &middot; Lever <span class="lvr l3">L3</span> <span class="lvr l5">L5</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-2.3.1</div><div class="init-name"><strong>Universal Content blocks render in Customer Journey Builder.</strong> Same Universal Content primitive available inside CJB email steps; cross-product reuse.<span class="desc"><span class="prob">Problem:</span> Today saved-content is template-scoped; CJB emails can&rsquo;t reuse them; double-maintenance across campaigns + automations. <span class="ben">Benefit:</span> Customer&rsquo;s automation emails inherit the same brand updates as campaigns; no drift between channels.</span></div><div class="init-pain no">cross-product</div><div class="init-lever"><span class="lvr l3">L3</span></div><div class="init-source"><span class="src ur">UR Bianka (one view)</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.3.2</div><div class="init-name"><strong>Brand Kit auto-applied to Universal blocks at insertion.</strong> When customer inserts a Universal block, Brand Kit colors / fonts / logos auto-apply; no manual restyling.<span class="desc"><span class="prob">Problem:</span> Without auto-apply, customers manually restyle each block insertion &mdash; defeats the &ldquo;edit once&rdquo; promise. <span class="ben">Benefit:</span> Brand consistency at zero effort; compounds Brand Kit value (P1.2) into every Universal Content adoption.</span></div><div class="init-pain no">consistency</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src voc">VoC Brand Kit</span></div></div>
+    <div class="init-row"><div class="init-id">I-2.3.3</div><div class="init-name"><strong>Universal Content audit + version history.</strong> Show &ldquo;used in N templates / N journeys&rdquo;; version history + rollback; impact preview before edit (&ldquo;this change affects 17 active sends&rdquo;).<span class="desc"><span class="prob">Problem:</span> Universal Content is powerful and dangerous &mdash; one wrong edit propagates to many sends. Without governance, customers will be afraid to use it. <span class="ben">Benefit:</span> Customer edits with confidence; audit trail for agencies / multi-author teams; reduces &ldquo;I broke production&rdquo; anxiety.</span></div><div class="init-pain no">governance</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src ur">UR Bet #4 (multi-author)</span></div></div>
+  </div>
+
+  <p class="source"><strong>P2 evidence base:</strong> <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">VoC</a> hate themes #1 (bifurcation), #6 (no universal blocks), #7 (no HTML escape). <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC</a> Themes 1, 2 (migration). <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">UR</a> Bet #1 (saved blocks) PM-confirmed in-flight. <a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click();return false;">Strategy</a> R1 (Classic churn risk). <a href="#roadmap" onclick="document.querySelector('[data-tab=roadmap]').click();return false;">RMW</a> F2 (builder unification), F5 (HTML escape), F8 (dynamic content), S11 (Liquid). Klaviyo Spring 2026 Universal Content announcement.</p>
+</section>
+
+<!-- PAGE 4: P3 — "From signup to first send in minutes" -->
+<section class="page" aria-label="Initiative Canvas Page 4">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Pillar 3 &middot; Customer benefit &middot; 3&ndash;9 months</div>
+      <h1>P3: <em style="color:#047857;">"From signup to first send in minutes"</em></h1>
+      <div class="subtitle">Internal name: Activation Foundation. 4 sub-themes, 11 tactical initiatives. Repairs the bulk Explore funnel (&minus;19.2% YoY) and the &lt;12mo cohort (&minus;22.8% YoY). Closes UR Bet #2 (discovery) and Bet #3 (B2B/ProServ template gap). Free-plan fixes are the largest single acquisition unlock.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Pain $:</strong> Health Free &minus;19.2% (74K Established lost); Explore &minus;19.2%</div>
+      <div><strong>FY27 $:</strong> $4&ndash;6M ARR (Growth Model L1 + L2)</div>
+      <div><strong>Page:</strong> 4 of 9</div>
+    </div>
+  </header>
+
+  <div class="subtheme">
+    <h4><span class="st-num">3.1</span> New-user onboarding &amp; first-send</h4>
+    <div class="st-meta">Repairs <strong>&lt;12mo cohort &minus;22.8% YoY</strong> + closes UR Discovery gap (5 customers with years-long discovery delays) &middot; 3 initiatives &middot; Lever <span class="lvr l2">L2</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-3.1.1</div><div class="init-name"><strong>Day-0 &rarr; Day-1 first-send onboarding sequence.</strong> In-app + email nudges that walk the user to their first send within 7&ndash;10 days (vs current 14&ndash;21d median per User Research).<span class="desc"><span class="prob">Problem:</span> First-month adoption falling (&lt;1mo cohort &minus;17.5%); UR Bet #2: 5 customers with years-long feature discovery gaps. Time-to-first-send is too far away &mdash; new customers never reach value moment. <span class="ben">Benefit:</span> Customer experiences value within their first week; activation funnel repair compounds with bulk Establish recovery in Growth Model L1.</span></div><div class="init-pain no">activation</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src ur">UR Bet #2</span><span class="src ph">PH &lt;1mo &minus;17.5%</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.1.2</div><div class="init-name"><strong>Brand Kit auto-extract on signup; first email pre-branded.</strong> On signup, prompt for website URL; auto-extract logo / colors / fonts into Brand Kit; first send template pre-applied with their brand.<span class="desc"><span class="prob">Problem:</span> Today customer signs up, gets generic templates, has to manually restyle &mdash; cognitive cost too high before value is proved. <span class="ben">Benefit:</span> Customer&rsquo;s first email looks on-brand; activation rate goes up; reinforces &ldquo;this product gets me&rdquo; on day 1.</span></div><div class="init-pain no">activation</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src voc">VoC Brand Kit love</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.1.3</div><div class="init-name"><strong>Industry-specific welcome flow templates pre-loaded by business type.</strong> Onboarding asks &ldquo;what kind of business?&rdquo;; pre-loads 3&ndash;5 templates tailored to that industry; one-click activate.<span class="desc"><span class="prob">Problem:</span> UR Workflow Shape #1 (fast Monday-morning sender) &mdash; customers want to ship same-day; generic templates slow them down. <span class="ben">Benefit:</span> First send out the door in &lt;30 min for industry-fit customers; matches the &ldquo;Andrew/Andrea/Kim/Clint&rdquo; happy-path UR pattern.</span></div><div class="init-pain no">activation</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src ur">UR Workflow #1</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">3.2</span> Template ICP fit (B2B / ProServ / non-ecom)</h4>
+    <div class="st-meta">Closes <strong>UR Bet #3 (B2B / ProServ skeleton template gap)</strong> &middot; 3 initiatives &middot; Lever <span class="lvr l2">L2</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-3.2.1</div><div class="init-name"><strong>B2B / ProServ template gallery &mdash; skeleton layouts.</strong> Information-dense templates (text-first, charts, structured layouts) instead of mock e-commerce shells.<span class="desc"><span class="prob">Problem:</span> UR Bet #3 + Hannah / Chris Rich quote: &ldquo;many&hellip; not tailored towards your organization.&rdquo; Jillian: &ldquo;feel more like e-commerce emails.&rdquo; B2B / ProServ customers can&rsquo;t find a starting template that matches their work. <span class="ben">Benefit:</span> Non-ecom customer activation matches ecom customer activation; opens a previously-underserved segment.</span></div><div class="init-pain no">B2B/ProServ</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src ur">UR Bet #3</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.2.2</div><div class="init-name"><strong>Industry-aware template gallery (6&ndash;8 per industry).</strong> Pre-built templates tailored to: ecom, ProServ, services, B2B SaaS, restaurants, nonprofits. Tied to onboarding business-type selection.<span class="desc"><span class="prob">Problem:</span> Single generic template gallery serves all industries badly. Klaviyo has 60+ templates segmented by vertical + lifecycle. <span class="ben">Benefit:</span> Customer sees templates that look like THEIR business; activation faster across all verticals.</span></div><div class="init-pain no">vertical</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src ur">UR Bet #3</span><span class="src klv">KLV 60+ templates</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.2.3</div><div class="init-name"><strong>Template categorization fix (browse by layout).</strong> Add layout-only browse mode; better filter / search; tag templates with use case + layout type.<span class="desc"><span class="prob">Problem:</span> UR Wes Turner ignores category IA, browses layout-only; current filter doesn&rsquo;t support that. <span class="ben">Benefit:</span> Customers find templates the way they actually browse; less hunting, faster activation.</span></div><div class="init-pain no">UX</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src ur">UR Wes</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">3.3</span> Discovery &amp; feature surfacing</h4>
+    <div class="st-meta">Closes <strong>UR Discovery table</strong> (5 customers with years-long undiscovered features) &middot; 3 initiatives &middot; Lever <span class="lvr l3">L3</span> <span class="lvr l4">L4</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-3.3.1</div><div class="init-name"><strong>In-app changelog + &ldquo;what&rsquo;s new&rdquo; weekly digest.</strong> Sidebar &ldquo;what&rsquo;s new in editor&rdquo; digest; per-feature 30-second videos in-product; weekly email summary tailored to customer&rsquo;s usage patterns.<span class="desc"><span class="prob">Problem:</span> UR Discovery table: Bianka didn&rsquo;t find A/B testing for &ldquo;a number of years&rdquo;; Jack on inherited template missed NEB for 4&ndash;6 years. Help docs unread; reactive nudges don&rsquo;t translate. <span class="ben">Benefit:</span> Customer discovers powerful features they didn&rsquo;t know existed; capability utilization rises; reduces silent-churn from &ldquo;I&rsquo;m not getting enough value.&rdquo;</span></div><div class="init-pain no">discovery</div><div class="init-lever"><span class="lvr l3">L3</span></div><div class="init-source"><span class="src ur">UR Discovery</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.3.2</div><div class="init-name"><strong>Contextual feature discovery prompts.</strong> &ldquo;You&rsquo;ve used X, try Y&rdquo; prompts; surface adjacent capabilities at the moment of intent (e.g., after sending a campaign, &ldquo;turn this into an automation?&rdquo;).<span class="desc"><span class="prob">Problem:</span> Mailchimp ships features that customers never find because there&rsquo;s no contextual hand-off from current behavior to next-best capability. <span class="ben">Benefit:</span> Capability utilization compounds; customer gets more value per session.</span></div><div class="init-pain no">discovery</div><div class="init-lever"><span class="lvr l3">L3</span></div><div class="init-source"><span class="src ur">UR Bet #2</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.3.3</div><div class="init-name"><strong>DRAFT-resurrect campaign + proactive chatbot suggestions.</strong> &ldquo;Your welcome flow has been in DRAFT for X days&rdquo; nudge with one-click activate. Proactive chatbot suggestions for low-frequency users (Clint / Bianka pattern).<span class="desc"><span class="prob">Problem:</span> UR Clint Bartley quote: &ldquo;I just haven&rsquo;t gotten deep enough into it yet&rdquo; &mdash; welcome automation in DRAFT for over a year. Self-blame, declining trust. <span class="ben">Benefit:</span> Customer&rsquo;s &ldquo;I&rsquo;ll do it later&rdquo; intentions actually execute; reduces silent churn from low-frequency users.</span></div><div class="init-pain no">recovery</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src ur">UR Clint</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">3.4</span> Free plan recovery</h4>
+    <div class="st-meta">Repairs <strong>Health Free &minus;19.2% YoY</strong> (largest single segment loss = ~74K Established users) &middot; 2 initiatives &middot; Lever <span class="lvr l1">L1</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-3.4.1</div><div class="init-name"><strong>Free-tier editor experience uplift.</strong> Add more block types to Free; basic Brand Kit; basic Creative Assistant. Match Shopify&rsquo;s &ldquo;automation bundled with storefront&rdquo; competitive wedge for SMB acquisition.<span class="desc"><span class="prob">Problem:</span> PH Free Established &minus;19.2% YoY (~74K users lost). Shopify gives editor + automation free with storefront; Mailchimp Free editor experience is deliberately degraded. SMB customers acquire elsewhere. <span class="ben">Benefit:</span> SMB customers get day-1 editor value before paywall; converts more Free &rarr; Paid as customers grow; reverses biggest single segment loss in the brief.</span></div><div class="init-pain no">acquisition</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src ph">PH Free &minus;19.2%</span><span class="src sho">SHO bundling</span></div></div>
+    <div class="init-row"><div class="init-id">I-3.4.2</div><div class="init-name"><strong>Free &rarr; Essentials upgrade path improvements.</strong> Clear value-tier visualization (&ldquo;you&rsquo;re using 80% of Free, here&rsquo;s what Essentials adds for the editor&rdquo;); contextual upgrade prompts at limit-hit moments.<span class="desc"><span class="prob">Problem:</span> Free customers don&rsquo;t convert because the upgrade story is opaque; they hit limits and bounce. <span class="ben">Benefit:</span> Free &rarr; Paid conversion rate goes up; Standard tier (the one growing +9.1%) gets a feeder funnel.</span></div><div class="init-pain no">conversion</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src ph">PH Standard +9.1%</span></div></div>
+  </div>
+
+  <p class="source"><strong>P3 evidence base:</strong> <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a>: Free &minus;19.2% (largest segment loss), &lt;12mo cohort &minus;22.8%, &lt;1mo &minus;17.5%, Standard +9.1% (only growing tier needs Free feeder). <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a>: Bets #2 (discovery), #3 (B2B / ProServ templates), #5 (direct manipulation upgrades). Discovery table (Bianka A/B years, Jack NEB 4&ndash;6 yrs, Jeffrey 3.5 yrs, Clint 1 yr DRAFT). Workflow Shape #1 (fast Monday-morning) + #5 (low-frequency / discovery gap).</p>
+</section>
+
+<!-- PAGE 5: P4 — "AI that ships campaigns, not a demo" -->
+<section class="page" aria-label="Initiative Canvas Page 5">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Pillar 4 &middot; Customer benefit &middot; 3&ndash;12 months</div>
+      <h1>P4: <em style="color:#4338CA;">"AI that ships campaigns, not a demo"</em></h1>
+      <div class="subtitle">Internal name: Intuit Assist + Write with AI Recovery. 4 sub-themes, 12 tactical initiatives. <strong>Crisis pillar &mdash; Write with AI Explore funnel collapsed &minus;73.7% YoY and churn worst-in-family at 77.2%.</strong> Run policy track (geo-ungate) + product track (quality + brand-aware + conversational) in parallel. Closes Strategy Bet B4. Differentiator: Brand-Kit-aware conversational editing (no comp ships this combination).</div>
+    </div>
+    <div class="meta">
+      <div><strong>Pain $:</strong> Health Write with AI Explore &minus;73.7%, churn 77.2% (+15.4pp)</div>
+      <div><strong>FY27 $:</strong> $4&ndash;6M ARR (Growth Model L2 + L6 + recovery)</div>
+      <div><strong>Page:</strong> 5 of 9</div>
+    </div>
+  </header>
+
+  <div class="subtheme">
+    <h4><span class="st-num">4.1</span> Write with AI funnel recovery (CRITICAL)</h4>
+    <div class="st-meta">Addresses the <strong>worst signal in the brief</strong>: Explore &minus;73.7% YoY, Abandon +101%, churn 77.2% (+15.4pp) &middot; 4 initiatives &middot; Lever <span class="lvr l1">L1</span> <span class="lvr l4">L4</span> <span class="lvr l5">L5</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-4.1.1</div><div class="init-name"><strong>Write with AI global ungate (or paid AI add-on with global parity).</strong> Run policy + legal track in parallel to product track; two-path delivery: (a) global free-tier ungate if policy clears, (b) paid AI add-on globally as fallback. Either ships in FY27.<span class="desc"><span class="prob">Problem:</span> VoC #3 + Reddit Netherlands quote: &ldquo;I am told Write with AI is in beta in the US, UK, AU, CA. I am in the Netherlands. I get to pay for AI I cannot use.&rdquo; PH Write with AI Explore &minus;73.7% YoY (collapse) &mdash; geo-gate is a major contributor. <span class="ben">Benefit:</span> International Standard customers get the AI they pay for; reverses brand damage in EMEA / APAC; reopens Explore funnel.</span></div><div class="init-pain no">brand</div><div class="init-lever"><span class="lvr l1">L1</span></div><div class="init-source"><span class="src voc">VoC #3</span><span class="src ph">PH Explore &minus;73.7%</span></div></div>
+    <div class="init-row"><div class="init-id">I-4.1.2</div><div class="init-name"><strong>Write with AI quality + brand-tone improvements.</strong> Address output quality vs ChatGPT / Claude direct usage; deeper Brand Kit integration (voice, tone, audience-aware); user-feedback loop into model fine-tuning.<span class="desc"><span class="prob">Problem:</span> Health critic Page 3: &ldquo;AI honeymoon ended&rdquo; &mdash; quality issues plausibly contribute to the funnel collapse. Customers tried it, didn&rsquo;t come back. <span class="ben">Benefit:</span> Returning users get notably better output; word-of-mouth recovers; lifts L5 retention save on the AI cohort.</span></div><div class="init-pain no">quality</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src ph">PH critic</span></div></div>
+    <div class="init-row"><div class="init-id">I-4.1.3</div><div class="init-name"><strong>In-product Write with AI re-introduction campaign.</strong> Post-quality-fix: targeted in-app + email re-engagement to abandoned AI users; before/after demo of the new output quality.<span class="desc"><span class="prob">Problem:</span> 106K Abandon users on Write with AI (PH) &mdash; an enormous reactivation pool. Without active outreach, they assume nothing changed. <span class="ben">Benefit:</span> Abandon &rarr; Establish recovery on the AI cohort; lifts L4 reduced abandonment lever.</span></div><div class="init-pain no">recovery</div><div class="init-lever"><span class="lvr l4">L4</span></div><div class="init-source"><span class="src ph">PH AI Abandon 106K</span></div></div>
+    <div class="init-row"><div class="init-id">I-4.1.4</div><div class="init-name"><strong>Write with AI Explore funnel re-instrumentation.</strong> In-canvas discovery (&ldquo;try Write with AI on this paragraph&rdquo;); contextual prompts at blank-page moments; entry points on every email/SMS compose surface.<span class="desc"><span class="prob">Problem:</span> Explore &minus;73.7% YoY suggests not just policy but also discovery has failed; in-canvas surfacing is weak. <span class="ben">Benefit:</span> New users encounter AI assistance at the moment of need; rebuilds the Explore funnel.</span></div><div class="init-pain no">funnel</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src ph">PH Explore funnel</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">4.2</span> Conversational in-canvas editing</h4>
+    <div class="st-meta">Strategy <strong>B4 differentiator</strong> &mdash; no competitor ships Brand-Kit-aware conversational edits &middot; 3 initiatives &middot; Lever <span class="lvr l2">L2</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-4.2.1</div><div class="init-name"><strong>Conversational journey editing in Intuit Assist sidebar.</strong> &ldquo;Redo the hero in a friendlier tone with a CTA to the spring sale&rdquo;; voice + chat email-and-SMS commands; built into Intuit Assist sidebar with Brand Kit context.<span class="desc"><span class="prob">Problem:</span> Klaviyo AI is feature-bound (subject lines, image edit). Postscript trains AI on docs but doesn&rsquo;t do canvas-level conversational edits. Stensul&rsquo;s AI is form-driven. No comp ships Brand-Kit-aware conversational. <span class="ben">Benefit:</span> Customer modifies emails by typing in plain English; flagship demo capability; captures the &ldquo;Mailchimp is back, modern&rdquo; narrative.</span></div><div class="init-pain no">flagship</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src rmw">RMW S1</span></div></div>
+    <div class="init-row"><div class="init-id">I-4.2.2</div><div class="init-name"><strong>AI brand-style transfer between campaigns.</strong> &ldquo;Make this email look like our spring campaign style&rdquo;; turn one campaign&rsquo;s stylistic choices into a reusable brand-style object that another campaign can inherit.<span class="desc"><span class="prob">Problem:</span> No competitor ships this. Natural evolution of Brand Kit + Creative Assistant. <span class="ben">Benefit:</span> Customer&rsquo;s campaign series feels intentionally connected without manual restyling; differentiator vs Klaviyo / Postscript.</span></div><div class="init-pain no">leapfrog</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src rmw">RMW S2</span></div></div>
+    <div class="init-row"><div class="init-id">I-4.2.3</div><div class="init-name"><strong>Prompt-first email mode (toggle).</strong> Optional &ldquo;prompt mode&rdquo; where the email builder UX itself is conversational &mdash; describe entire email in plain English, builder generates structure + copy + design.<span class="desc"><span class="prob">Problem:</span> Mailmodo&rsquo;s prompt-first whole-product UX is winning younger SMB. Mailchimp&rsquo;s visual canvas is great for some users, intimidating for others. <span class="ben">Benefit:</span> Customer who doesn&rsquo;t think visually can build emails in seconds via prose; opens a new persona segment.</span></div><div class="init-pain no">leapfrog</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src emg">EMG Mailmodo</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">4.3</span> Generative SMS in composer</h4>
+    <div class="st-meta">Activates <strong>SMS +73.5% adoption</strong> with retention infrastructure (current 53% churn) &middot; 2 initiatives &middot; Lever <span class="lvr l3">L3</span> <span class="lvr l2">L2</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-4.3.1</div><div class="init-name"><strong>Brand-Kit-aware generative SMS in composer.</strong> Character-limit-compressing, brand-tone-aware, opt-out-compliance-automatic SMS generation. Write with AI + Brand Kit + SMS composer all live in one product &mdash; need integration not new infra.<span class="desc"><span class="prob">Problem:</span> RMW S5: Postscript trains AI on docs; Attentive does AI campaign suggestions; nobody ships Brand-Kit-aware SMS gen <em>inside the composer</em> with character-limit auto-compression. <span class="ben">Benefit:</span> SMS adoption keeps growing (PH +73.5%); on-brand output reduces re-write cycles; eliminates blank-page anxiety on SMS.</span></div><div class="init-pain no">SMS adopt</div><div class="init-lever"><span class="lvr l3">L3</span></div><div class="init-source"><span class="src rmw">RMW S5</span><span class="src ph">PH SMS +73.5%</span></div></div>
+    <div class="init-row"><div class="init-id">I-4.3.2</div><div class="init-name"><strong>SMS variant generation + A/B in composer.</strong> Generate multiple SMS variants from one prompt; in-composer A/B with character-limit + Brand Kit awareness.<span class="desc"><span class="prob">Problem:</span> SMS composer today has no A/B in composer; manual variant creation slows iteration. <span class="ben">Benefit:</span> Customer ships better-performing SMS without leaving the composer; iteration cycle compresses.</span></div><div class="init-pain no">SMS optimize</div><div class="init-lever"><span class="lvr l2">L2</span></div><div class="init-source"><span class="src rmw">RMW</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">4.4</span> AI image generation tied to product catalog</h4>
+    <div class="st-meta">Differentiator combining <strong>Brand Kit + 300+ ecom integrations + Creative Assistant</strong> &mdash; no comp has all three &middot; 3 initiatives &middot; Lever <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-4.4.1</div><div class="init-name"><strong>AI image generation tied to product catalog.</strong> Generate hero images from the product the email is about; brand-kit-applied scene; Brand Kit + ecom integration + Creative Assistant in one workflow.<span class="desc"><span class="prob">Problem:</span> RMW S8. Generic image generation exists everywhere; tied to <em>this customer&rsquo;s product catalog with this product&rsquo;s brand-kit-applied scene</em> is unique to Mailchimp&rsquo;s asset combination. <span class="ben">Benefit:</span> Right image not stock image; ecom customer lift on conversion; no other SMB tool can match.</span></div><div class="init-pain no">leapfrog</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src rmw">RMW S8</span></div></div>
+    <div class="init-row"><div class="init-id">I-4.4.2</div><div class="init-name"><strong>Image Remix in flow email steps (Klaviyo parity).</strong> Drag-in dynamic image blocks that auto-vary; iterate hero images via prompt inside flow / campaign.<span class="desc"><span class="prob">Problem:</span> Klaviyo Image Remix lets customers iterate hero images via prompt; Mailchimp lacks this entirely. <span class="ben">Benefit:</span> Customer iterates designs in seconds; closes a named Klaviyo gap.</span></div><div class="init-pain no">competitive</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src klv">KLV Image Remix</span></div></div>
+    <div class="init-row"><div class="init-id">I-4.4.3</div><div class="init-name"><strong>Per-recipient dynamic image (last product viewed, etc.).</strong> Image blocks that personalize per recipient (last product viewed, last category, predicted next product).<span class="desc"><span class="prob">Problem:</span> RMW F8 dynamic content gap; Klaviyo + Bloomreach + Movable Ink set the bar. <span class="ben">Benefit:</span> Customer&rsquo;s automation emails personalize at the image level; conversion lift on browse / cart / post-purchase flows.</span></div><div class="init-pain no">personalize</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src rmw">RMW F8</span><span class="src klv">KLV product recs</span></div></div>
+  </div>
+
+  <p class="source"><strong>P4 evidence base:</strong> <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> Write with AI: Established &minus;3.8%, Explore &minus;73.7% YoY, Abandon +101%, churn 77.2% (+15.4pp). <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">VoC</a> #3 (geo-gate). <a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click";return false;">Strategy</a> Bet B4 + R3 (policy uncertainty). <a href="#roadmap" onclick="document.querySelector('[data-tab=roadmap]').click();return false;">RMW</a> S1 (conversational), S2 (brand-style transfer), S5 (Generative SMS), S8 (product-catalog AI image), F8 (per-recipient dynamic). Klaviyo Image Remix, Mailmodo prompt-first.</p>
+</section>
+
+<!-- PAGE 6: P5 — "Email + SMS feel like one campaign" -->
+<section class="page" aria-label="Initiative Canvas Page 6">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Pillar 5 &middot; Customer benefit &middot; 6&ndash;18 months</div>
+      <h1>P5: <em style="color:#B45309;">"Email + SMS feel like one campaign"</em></h1>
+      <div class="subtitle">Internal name: Unified Canvas + Collab + SMS Retention. 4 sub-themes, 15 tactical initiatives. Strategy Bet B3 (unified canvas) + B5 (collab). Monetizes the SMS +73.5% growth before the 53% churn eats it. Closes VoC #2 (&ldquo;unified is a billing claim&rdquo;) and VoC #5 (no real-time collab). Includes the $57K SMS TCPA incident fix &mdash; the largest single cited HVC in the brief.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Pain $:</strong> $62.5K/mo cited (incl. $57K SMS TCPA) + Health SMS 53% churn</div>
+      <div><strong>FY27 $:</strong> $5&ndash;8M ARR (Growth Model L3 + L5 + L6)</div>
+      <div><strong>Page:</strong> 6 of 9</div>
+    </div>
+  </header>
+
+  <div class="subtheme">
+    <h4><span class="st-num">5.1</span> Unified email + SMS canvas (Strategy B3)</h4>
+    <div class="st-meta">Closes <strong>VoC #2 (biggest &ldquo;unified is a billing claim&rdquo; complaint)</strong> + reuses Universal Content primitive (P2.1) &middot; 4 initiatives &middot; Lever <span class="lvr l3">L3</span> <span class="lvr l5">L5</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-5.1.1</div><div class="init-name"><strong>Shared content blocks render in both email + SMS.</strong> Universal Content primitive (P2.1) extends to SMS; same block edited once renders correctly in both channels with content-type-aware rendering (full HTML in email, compressed text in SMS).<span class="desc"><span class="prob">Problem:</span> VoC #2 + UR Bianka (one campaign view): &ldquo;Despite the &lsquo;email + SMS together&rsquo; marketing, the SMS composer is a different surface from the email editor. No shared content blocks, no shared preview, no cross-channel content reuse. &lsquo;Unified&rsquo; is a billing claim.&rdquo; <span class="ben">Benefit:</span> Customer composes once, ships everywhere; eliminates duplicated authoring work; fulfills the unified marketing promise.</span></div><div class="init-pain no">unified</div><div class="init-lever"><span class="lvr l3">L3</span></div><div class="init-source"><span class="src voc">VoC #2</span><span class="src ur">UR Bianka</span></div></div>
+    <div class="init-row"><div class="init-id">I-5.1.2</div><div class="init-name"><strong>Cross-channel preview side-by-side at compose time.</strong> Real-time email + SMS preview in one canvas; see how copy reads in both formats simultaneously.<span class="desc"><span class="prob">Problem:</span> Today customer composes email, switches to SMS composer, copy-pastes, reformats, previews separately. <span class="ben">Benefit:</span> Customer iterates on cross-channel campaigns in one motion; faster ship time; fewer mistakes between channels.</span></div><div class="init-pain no">UX</div><div class="init-lever"><span class="lvr l3">L3</span></div><div class="init-source"><span class="src rmw">RMW S3</span></div></div>
+    <div class="init-row"><div class="init-id">I-5.1.3</div><div class="init-name"><strong>Brand Kit applied to SMS branded short links + sender ID.</strong> Brand Kit colors / logo applied to branded SMS short links (Standard+); sender ID consistent with brand.<span class="desc"><span class="prob">Problem:</span> Today branded short links exist but don&rsquo;t inherit Brand Kit; sender ID is separate config. <span class="ben">Benefit:</span> SMS sends are visibly branded; customer&rsquo;s SMS feels like an extension of their email design; trust + click-through go up.</span></div><div class="init-pain no">brand</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src voc">VoC unified</span></div></div>
+    <div class="init-row"><div class="init-id">I-5.1.4</div><div class="init-name"><strong>Unified &ldquo;campaign&rdquo; object (email step + SMS step in one campaign).</strong> One logical campaign owns both email + SMS sends; reporting consolidates; audience selection unified.<span class="desc"><span class="prob">Problem:</span> Today email and SMS are separate objects with separate audience selection + reporting; cross-channel attribution is impossible. <span class="ben">Benefit:</span> Customer sees unified campaign performance; cross-channel attribution finally works; LTV story holds together.</span></div><div class="init-pain no">attribution</div><div class="init-lever"><span class="lvr l3">L3</span></div><div class="init-source"><span class="src ur">UR Bianka</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">5.2</span> SMS retention + composer depth</h4>
+    <div class="st-meta">Resolves <strong>$62.5K/mo cited HVC (incl. $57K TCPA)</strong> + addresses Health SMS 53% churn &middot; 5 initiatives &middot; Lever <span class="lvr l3">L3</span> <span class="lvr l4">L4</span> <span class="lvr l5">L5</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-5.2.1</div><div class="init-name"><strong>SMS reporting v2 (in-app analytics + per-message data).</strong> Fix empty / N/A stats; in-app SMS reporting (currently &ldquo;hard to find&hellip; feels tacked on&rdquo;); per-message delivery + opt-out + click data.<span class="desc"><span class="prob">Problem:</span> Theme 14, $1,386/mo cited. Customer: &ldquo;SMS reporting is showing 0% and N/A for stats, what is the point of reporting if it doesn&rsquo;t show data.&rdquo; Drives churn on the highest-growth product. <span class="ben">Benefit:</span> Customer can prove SMS ROI; renewal conversation easier; SMS retention improves directly.</span></div><div class="init-pain">$1,386</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #14</span></div></div>
+    <div class="init-row"><div class="init-id">I-5.2.2</div><div class="init-name"><strong>SMS credits transparency + auto-refund undelivered + queue alerts.</strong> Surface negative balances in UI (not just via support); auto-refund undelivered SMS credits; in-app alert when automation stalls due to credit shortage.<span class="desc"><span class="prob">Problem:</span> Theme 15, $3,592/mo cited across 3 customers. Negative credit balances hidden; undelivered SMS still burn credits; automations stall silently. <span class="ben">Benefit:</span> Customer trusts the credit system; automations don&rsquo;t silently break; reduces &ldquo;Mailchimp ripped me off&rdquo; brand damage.</span></div><div class="init-pain">$3,592</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #15</span></div></div>
+    <div class="init-row"><div class="init-id">I-5.2.3</div><div class="init-name"><strong>SMS compliance &amp; TCPA guardrails ($57K incident fix).</strong> Duplicate opt-out prevention; in-product policy explainer; global setting for compliance append; infer prior campaign for compliance text.<span class="desc"><span class="prob">Problem:</span> Theme 16, $57,000/mo (largest single SMS escalation). C3 Festivals incident: default-on append + pasted compliance &rarr; duplicate opt-out in live send (Darker Waves). P2 escalation. <span class="ben">Benefit:</span> Customer cannot accidentally send TCPA-violating messages; eliminates the largest single brand-risk vector in the SMS product.</span></div><div class="init-pain">$57,000</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src hvc">HVC #16</span></div></div>
+    <div class="init-row"><div class="init-id">I-5.2.4</div><div class="init-name"><strong>SMS merge tag depth + MMS POC GA.</strong> Lift the &ldquo;up to one merge tag for Title&rdquo; cap; MMS POC (contact cards / image attachments) launched.<span class="desc"><span class="prob">Problem:</span> Theme 17. SMS-9736 backlog: only one merge tag for Title. MMS POC not fully launched. SMS feels less personalized than email. <span class="ben">Benefit:</span> SMS message-personalization parity with email; MMS unlocks higher engagement; closes a basic-feature gap.</span></div><div class="init-pain no">depth</div><div class="init-lever"><span class="lvr l3">L3</span></div><div class="init-source"><span class="src hvc">HVC #17</span></div></div>
+    <div class="init-row"><div class="init-id">I-5.2.5</div><div class="init-name"><strong>MMS bundle pricing (no overage surprises).</strong> MMS included in Standard SMS pricing; flat-rate SMB pitch vs Postscript&rsquo;s opaque per-message MMS economics.<span class="desc"><span class="prob">Problem:</span> RMW S7 + Strategy B3 lever. Postscript MMS pricing is opaque + per-message expensive; Attentive bills enterprise. <span class="ben">Benefit:</span> Customer adopts MMS without overage anxiety; SMS attach rate (Strategy target 12% &rarr; 20&ndash;25%) accelerates; SMS retention improves because customers aren&rsquo;t surprised by bills.</span></div><div class="init-pain no">attach</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src rmw">RMW S7</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">5.3</span> Real-time multi-author collab + commenting (Strategy B5)</h4>
+    <div class="st-meta">Closes <strong>VoC #5 + UR Bet #4</strong> (Jack / Kyle / Bianka) + extends HVC #4 (save conflicts) into a productized capability &middot; 3 initiatives &middot; Lever <span class="lvr l5">L5</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-5.3.1</div><div class="init-name"><strong>Real-time multi-author co-edit in NEB canvas.</strong> Google-Docs-style live cursors; presence indicators; non-blocking concurrent edit.<span class="desc"><span class="prob">Problem:</span> VoC #5 + UR Bet #4 (Jack / Kyle / Bianka): single editor at a time; teams workaround via screenshots + shared drafts; competitor parity gap (Stensul, Knak ship this). HVC #4 save conflicts are the bug-level expression of the same gap. <span class="ben">Benefit:</span> Marketing teams of 2+ work together natively in MC; recovers &ldquo;Mailchimp is dated&rdquo; narrative; differentiator vs Klaviyo (single editor).</span></div><div class="init-pain no">strategic</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src voc">VoC #5</span><span class="src ur">UR Bet #4</span></div></div>
+    <div class="init-row"><div class="init-id">I-5.3.2</div><div class="init-name"><strong>Notion-style block-level @-mention comments + resolve-in-context.</strong> Comment on any block; @-mention teammates; resolve in context.<span class="desc"><span class="prob">Problem:</span> RMW S9: Stensul has commenting bolted on. Notion / Figma / Google Docs have set the bar. Mailchimp has nothing. <span class="ben">Benefit:</span> Approval cycles happen inside MC; reduces email + Slack ping-pong about email design; team velocity up.</span></div><div class="init-pain no">strategic</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src rmw">RMW S9</span></div></div>
+    <div class="init-row"><div class="init-id">I-5.3.3</div><div class="init-name"><strong>Email approval workflow + version history.</strong> Multi-step approval (designer &rarr; copywriter &rarr; manager); full version history with rollback; audit trail.<span class="desc"><span class="prob">Problem:</span> Marketing teams of 2+ need approval flow; today this happens outside MC. Premium / agency need audit trail for governance. <span class="ben">Benefit:</span> Premium customer&rsquo;s governance needs met in-product; agencies retain clients longer; opens enterprise-adjacent SMB segment.</span></div><div class="init-pain no">governance</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src rmw">RMW S4</span></div></div>
+  </div>
+
+  <div class="subtheme">
+    <h4><span class="st-num">5.4</span> Governance for SMB + accessibility</h4>
+    <div class="st-meta">Differentiated steal vs Stensul/Knak (SMB-flavored governance) + EU EAA accessibility compliance accelerator &middot; 3 initiatives &middot; Lever <span class="lvr l5">L5</span> <span class="lvr l6">L6</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-5.4.1</div><div class="init-name"><strong>Locked layouts mode for Brand Kit (governance hooks).</strong> Promote Brand Kit from config object to system: locked layouts, role-based access, blocking accessibility checks on send.<span class="desc"><span class="prob">Problem:</span> RMW S4: Stensul / Knak own enterprise governance; nobody has shipped governance with the SMB UX. Brand Kit infrastructure already exists; needs governance hooks. <span class="ben">Benefit:</span> Multi-author teams + agencies can lock brand integrity at scale; SMB-flavored governance product opens new segment.</span></div><div class="init-pain no">governance</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src rmw">RMW S4</span></div></div>
+    <div class="init-row"><div class="init-id">I-5.4.2</div><div class="init-name"><strong>Inline accessibility coach (alt text, contrast, link purpose).</strong> Real-time accessibility checks in canvas; pre-send blocking on critical violations; coach mode for education.<span class="desc"><span class="prob">Problem:</span> RMW F9 + EU EAA accessibility compliance schedule. Pre-send checklist catches missing alt + broken links; doesn&rsquo;t catch contrast / heading order / link purpose. <span class="ben">Benefit:</span> Customer&rsquo;s sends are accessible; deliverability improves (modern inbox providers reward accessible HTML); regulatory readiness for EAA.</span></div><div class="init-pain no">compliance</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src rmw">RMW F9</span></div></div>
+    <div class="init-row"><div class="init-id">I-5.4.3</div><div class="init-name"><strong>Cross-account brand inheritance for agencies.</strong> One Brand Kit per client; switch context like Slack workspaces; shared Universal Content library across agency clients.<span class="desc"><span class="prob">Problem:</span> RMW S10. Mailchimp Agency dashboard exists but Brand Kit is per-account; agencies rebuild assets per client. <span class="ben">Benefit:</span> Agency efficiency goes up; agency churn goes down; competitive vs Klaviyo One agency tier.</span></div><div class="init-pain no">agency</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src rmw">RMW S10</span></div></div>
+  </div>
+
+  <p class="source"><strong>P5 evidence base:</strong> <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">VoC</a> #2 (surface split) + #5 (no collab). <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC</a> Themes 4 (multi-author save), 14 (SMS reporting), 15 (SMS credits), 16 (TCPA $57K), 17 (SMS depth). <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">UR</a> Bet #4 (multi-author) + Bianka (one campaign view). <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> SMS Establish +73.5% / churn 52.9%. <a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click();return false;">Strategy</a> Bets B3 + B5. <a href="#roadmap" onclick="document.querySelector('[data-tab=roadmap]').click();return false;">RMW</a> S3, S4, S7, S9, S10, F9.</p>
+</section>
+
+<!-- PAGE 7: COVERAGE MATRIX + METHODOLOGY -->
+<section class="page" aria-label="Initiative Canvas Page 7">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Coverage Matrix &middot; Methodology &middot; Sources</div>
+      <h1>How this canvas was <em style="color:#C28A00;">independently designed</em> + coverage proof</h1>
+      <div class="subtitle">Built top-down from documented evidence. Every cited HVC theme, every UR bet, every VoC hate theme, every Product Health finding, and every Growth Model lever maps to at least one initiative.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Initiatives:</strong> 65</div>
+      <div><strong>Sources mapped:</strong> 6 evidence tabs + Growth Model + Loss Attribution</div>
+      <div><strong>Page:</strong> 7 of 9</div>
+    </div>
+  </header>
+
+  <h2><span class="num">7.1</span> Coverage matrix &mdash; every documented signal &rarr; an initiative</h2>
+  <table class="dense">
+    <thead><tr><th>Evidence source</th><th>What it documented</th><th>Coverage in this canvas</th></tr></thead>
+    <tbody>
+      <tr><td><a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">Voice of Customer</a></td><td>7 hate themes (bifurcation, surface split, AI geo-gate, paywall, no collab, no universal blocks, no custom code) + 5 mixed (CA upsell, NEB transition, Klaviyo migration, Stensul governance, SMS narrowness)</td><td><strong>100% of hate themes covered (7/7).</strong> Bifurcation &rarr; P2.2; Surface split &rarr; P5.1; AI geo-gate &rarr; I-4.1.1; Paywall &rarr; partially via P3.4 Free uplift; No collab &rarr; P5.3; No universal blocks &rarr; P2.1; No custom code &rarr; I-2.2.3 NEB Code Mode.</td></tr>
+      <tr><td><a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a></td><td>17 cited themes across NEB rendering, multi-author, custom code, templates, Brand Kit, Content Studio, Canva, SMS reporting, SMS credits, TCPA incident, SMS depth ($57K largest single)</td><td><strong>~95% covered.</strong> Themes 1-2 (migration) &rarr; P2.2; Theme 3 (rendering) &rarr; I-1.1.1; Theme 4 (multi-author) &rarr; I-1.1.2 + P5.3; Theme 5 (block ordering) &rarr; I-1.1.3; Theme 6 (templates) &rarr; I-1.1.4; Theme 7 (LP fonts) &rarr; I-1.2.4; Theme 8 (Brand Kit incident) &rarr; I-1.2.1; Theme 9 (multi-brand) &rarr; I-1.2.3; Theme 10 (font upload) &rarr; I-1.2.2; Theme 11 (CA rediscovery) &rarr; P1.4; Theme 12 (Content Studio) &rarr; I-1.3.2 + I-1.3.3; Theme 13 (Canva) &rarr; I-1.3.1; Theme 14 (SMS reporting) &rarr; I-5.2.1; Theme 15 (SMS credits) &rarr; I-5.2.2; Theme 16 (TCPA $57K) &rarr; I-5.2.3; Theme 17 (SMS depth) &rarr; I-5.2.4.</td></tr>
+      <tr><td><a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a></td><td>5 Bets + Discovery table (5 multi-year gaps) + 5 Workflow Shapes + 25 customer briefs / 50 videos</td><td><strong>100% of bets covered (5/5).</strong> Bet #1 saved blocks &rarr; P2.1; Bet #2 discovery &rarr; P3.3; Bet #3 B2B/ProServ templates &rarr; P3.2; Bet #4 multi-author &rarr; I-1.1.2 + P5.3; Bet #5 direct manipulation &rarr; addressed across P1 bug fixes. Discovery table customers &rarr; I-3.3.1-3.</td></tr>
+      <tr><td><a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a></td><td>Bulk Established &minus;9.4% / Explore &minus;19.2% / churn +2.1pp; Free &minus;19.2%; &lt;12mo &minus;22.8%; SMS +73.5% / churn 52.9%; Write with AI Established &minus;3.8% / Explore &minus;73.7% / churn 77.2% (+15.4pp); Transactional &minus;10.5%</td><td><strong>100% covered.</strong> Bulk Establish &rarr; P2 + P3 net of L1 lever. Bulk churn +2.1pp &rarr; P1 (entire pillar). Explore &minus;19.2% &rarr; P3.1 + P3.4. Free &minus;19.2% &rarr; P3.4. &lt;12mo &minus;22.8% &rarr; P3.1. SMS growth &rarr; P5.2 retention + P4.3 generative SMS. Write with AI collapse &rarr; P4.1 (entire sub-pillar). Transactional out of scope (deferred per Strategy &mdash; not in B1&ndash;B5).</td></tr>
+      <tr><td><a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a></td><td>6 levers L1&ndash;L6, mid scenario ~$26.3M, sensitivity $19.7&ndash;32.7M, 12 adoption metrics across 4 clusters</td><td><strong>All 6 levers actively pursued.</strong> L1 (bulk recovery) &rarr; P2 + P3.4. L2 (activation) &rarr; P3.1 + P4.2. L3 (SMS attach + repeat) &rarr; P5.1 + P5.2 + P4.3. L4 (reduced abandonment) &rarr; P2.2 + P4.1.3 + I-3.3.3. L5 (retention save) &rarr; P1 (entire) + P5.2 + P5.4.2. L6 (ARPU + outcomes) &rarr; P5.3 + P5.4 + P4.4.</td></tr>
+      <tr><td><a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a></td><td>L1 booked $2&ndash;4M + L2 modeled $12&ndash;28M + L3 opportunity $22&ndash;35M = $36&ndash;67M sensitivity band</td><td><strong>L3 opportunity is what this canvas captures.</strong> The $22&ndash;35M opportunity-cost band is the inverse of Growth Model lifts not captured in trailing 12 months. Initiatives in this canvas (P1&ndash;P5) collectively deliver the +$25&ndash;30M Growth Model anchor &mdash; recovering the bulk of L3 over FY27.</td></tr>
+      <tr><td><a href="#brief" onclick="document.querySelector('[data-tab=brief]').click();return false;">Executive Brief</a> + <a href="#roadmap" onclick="document.querySelector('[data-tab=roadmap]').click();return false;">Roadmap to Win</a></td><td>9 foundational gaps (F1-F9) + 12 differentiated steals (S1-S12)</td><td><strong>~90% covered.</strong> F1 Universal Content &rarr; I-2.1.1; F2 builder unification &rarr; P2.2; F3 unified canvas &rarr; P5.1; F4 multi-author collab &rarr; P5.3; F5 NEB Code Mode &rarr; I-2.2.3; F6 multi-region AI &rarr; I-4.1.1; F7 SMS coverage &rarr; deferred to FY28 (regulatory long-tail per Strategy R3); F8 dynamic content &rarr; I-2.2.4 + I-4.4.3; F9 accessibility &rarr; I-5.4.2. S1-S12 mapped across all 5 pillars.</td></tr>
+      <tr><td><a href="#strategy" onclick="document.querySelector('[data-tab=strategy]').click();return false;">Strategy 6-Pager</a></td><td>5 bets B1&ndash;B5 + 4 strategic shifts + 6 risks + R1 Classic churn = highest-single-risk in financial walk</td><td><strong>100% bets executed.</strong> B1 builder unification &rarr; P2.2 (Code Mode prereq). B2 Universal Content &rarr; P2.1. B3 unified canvas &rarr; P5.1. B4 conversational AI + global ungate &rarr; P4.1 + P4.2. B5 collab &rarr; P5.3. R1 Classic churn risk &rarr; I-2.2.5 funded migration program.</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top: 14px;"><span class="num">7.2</span> Methodology &mdash; how the canvas was built</h2>
+  <ol style="font-size: 12px;">
+    <li><strong>Inventoried every evidence tab.</strong> Read VoC (7 hate themes), HVC Risk Map (17 cited themes with named-customer MRR), User Research (5 bets + 25 briefs + Discovery table + Workflow Shapes), Product Health (BQ baselines + critic), Growth Model (6 levers + mid scenario), Loss Attribution (3-layer stack).</li>
+    <li><strong>Designed initiatives top-down from evidence.</strong> Each initiative has a documented pain or competitive gap as its origin. No initiative is invented; each maps to at least one source tag in the canvas.</li>
+    <li><strong>Organized by 5 customer-benefit pillars (P1-P5).</strong> Pillar names are what the customer gets, not what the team builds. Internal team names retained in italics for reference.</li>
+    <li><strong>Sequenced by leverage + dependency.</strong> Three orchestration moves (Universal Content first, NEB Code Mode parallel, Write with AI funnel recovery starts immediately) make every other initiative cheaper or possible.</li>
+    <li><strong>Tagged each initiative with: Growth Model lever (L1-L6), pain $ resolved, evidence source, scope.</strong> Initiative IDs (I-X.Y.Z) follow pillar.subtheme.initiative numbering for traceability.</li>
+    <li><strong>Sized each pillar&rsquo;s FY27 contribution against the Growth Model $25&ndash;30M target.</strong> P1 $3&ndash;5M (retention save) + P2 $4&ndash;7M (Universal Content + migration) + P3 $4&ndash;6M (activation) + P4 $4&ndash;6M (AI recovery + differentiation) + P5 $5&ndash;8M (cross-channel + collab) = $20&ndash;32M envelope; landing inside the $25&ndash;30M anchor at conservative ranges.</li>
+  </ol>
+
+  <h2 style="margin-top: 14px;"><span class="num">7.3</span> What&rsquo;s deliberately NOT in this canvas</h2>
+  <ul style="font-size: 12px;">
+    <li><strong>SMS international expansion (RMW F7).</strong> Regulatory + telco-heavy 12&ndash;18mo timeline; deferred to FY28. Strategy Page 5 alternative explicitly rejected &ldquo;push SMS internationally first.&rdquo;</li>
+    <li><strong>Transactional product investment.</strong> Health shows Transactional &minus;10.5% YoY, but Strategy explicitly scopes editor as bulk + SMS + AI Assist; transactional is a Standard-tier feature that lives in the platform team backlog.</li>
+    <li><strong>Acquiring Stripo / Beefree.</strong> Considered in Strategy Page 5; partner-or-license alternative explored; carve-out scope too small to justify acquisition.</li>
+    <li><strong>Building a separate enterprise authoring product to compete with Stensul head-on.</strong> Strategy Page 5: outside Mailchimp&rsquo;s SMB DNA; I-5.4.1 (locked layouts for SMB) is the right entry point.</li>
+    <li><strong>Pricing &amp; SKU restructure beyond Free-tier policy.</strong> Broader pricing changes are corp Finance domain, not editor PM.</li>
+  </ul>
+
+  <p class="source"><strong>Evidence-base summary:</strong> 7 VoC hate themes + 17 HVC cited themes (~$95K/mo cited) + 25 UR briefs / 5 bets / Discovery table / Workflow Shapes + 10 Product Health findings + 6 Growth Model levers + 3-layer Loss Attribution stack + 9 RMW foundational gaps + 12 RMW differentiated steals + 5 Strategy bets. <strong>65 tactical initiatives</strong> across <strong>19 sub-themes</strong> within <strong>5 customer-benefit pillars</strong>. Sized to deliver <strong>$25&ndash;30M FY27 ARR target</strong> per Growth Model. <strong>Designed top-down from evidence</strong> &mdash; not bottom-up from existing PRDs.</p>
+</section>
+
+<!-- PAGE 8: GUIDING PRINCIPLES + EFFORT ALLOCATION -->
+<section class="page" aria-label="Initiative Canvas Page 8">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Guiding Principles &middot; 18-month sequencing logic</div>
+      <h1>How to <em style="color:#C28A00;">orchestrate</em> 65 initiatives across 6 quarters without losing the plot</h1>
+      <div class="subtitle">A layered trust-recovery + competitive-narrative-recovery framework. Customers face four simultaneous problems: editor reliability broken (Tab 4 cited), discovery weak (UR), AI funnel collapsed (Health Write with AI), competitive narrative lost (VoC + Klaviyo Spring &rsquo;26). Frame internally as <strong>&ldquo;rebuilding trust while reinventing the editor&rdquo;</strong> &mdash; not &ldquo;bugs vs AI vs Universal Content.&rdquo; All four trust layers run in parallel each quarter, with weighted emphasis.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Principles:</strong> 5</div>
+      <div><strong>Effort allocation:</strong> 35/30/25/10</div>
+      <div><strong>Page:</strong> 8 of 9</div>
+    </div>
+  </header>
+
+  <div class="card tinted" style="margin-bottom: 16px;">
+    <h2 style="margin-top:0;">The strategic insight to communicate to leadership</h2>
+    <p>Don&rsquo;t frame this as <em>&ldquo;fix bugs vs ship Universal Content vs rescue AI.&rdquo;</em> That framing forces a false choice and dies on the first internal review. The right framing is: <strong>&ldquo;we are restoring editor trust AND reinventing the authoring surface, in parallel.&rdquo;</strong> Bug fixes (P1) protect retention. Universal Content (P2) closes the headline competitive gap. Activation (P3) re-opens the &minus;19.2% Explore funnel. AI recovery (P4) addresses the worst single signal in the brief. Cross-channel + collab (P5) makes &ldquo;unified&rdquo; real. All five are part of <strong>one unified system</strong> &mdash; the customer experiences the product as <em>&ldquo;this works reliably &rarr; my work compounds &rarr; new customers ramp faster &rarr; AI helps me ship &rarr; my team works in here together.&rdquo;</em></p>
+  </div>
+
+  <h2 style="margin-bottom: 8px;">5 guiding principles</h2>
+  <div class="grid cols-2" style="gap: 12px; margin-bottom: 14px;">
+    <div class="principle gpt">
+      <div class="pn">1</div>
+      <span class="ptag">LAYERED ORCHESTRATION</span>
+      <h3>All 5 pillars run in parallel &mdash; not sequential phases</h3>
+      <p>Run all 5 pillars every quarter with weighted emphasis. <strong>Don&rsquo;t wait 9 months to ship Universal Content</strong> &mdash; Klaviyo&rsquo;s Spring &rsquo;26 lead grows. <strong>Don&rsquo;t only ship Universal Content</strong> &mdash; the cited HVC ($95K/mo) keeps eroding the base. The error mode is treating these as phases instead of weights.</p>
+    </div>
+    <div class="principle gpt">
+      <div class="pn">2</div>
+      <span class="ptag">TRUST FOUNDATION</span>
+      <h3>AI cannot compensate for broken editor trust</h3>
+      <p>P1 Quality &amp; Trust gets 35% of effort early because <strong>AI experiences amplify customer anxiety on a broken foundation</strong>. Until I-1.1.1 (NEB rendering) and I-1.2.1 (Brand Kit incident) close, AI demos backfire when customers discover the underlying instability. The Health Write with AI collapse (Explore &minus;73.7%) is not unrelated to the cited HVC bug exposure &mdash; both are surface symptoms of the same trust deficit.</p>
+    </div>
+    <div class="principle gpt">
+      <div class="pn">3</div>
+      <span class="ptag">PRIMITIVES BEFORE POLISH</span>
+      <h3>Universal Content is the prerequisite for the unified canvas</h3>
+      <p><strong>P2.1 Universal Content ships before P5.1 unified email+SMS canvas.</strong> The Universal Content primitive is the data structure the unified canvas reuses. Building them in the wrong order means building the same primitive twice (once template-scoped, once cross-channel) &mdash; engineering waste + competitive delay. The same logic applies to NEB Code Mode (I-2.2.3) shipping <em>before</em> Classic sunset comms.</p>
+    </div>
+    <div class="principle gpt">
+      <div class="pn">4</div>
+      <span class="ptag">SEGMENT NARRATIVES HONESTLY</span>
+      <h3>Multivariate metrics demand multivariate strategy</h3>
+      <p>Bulk shrinks while SMS grows; Write with AI Established holds while its Explore collapses; Free shrinks while Standard grows; HVC stable while non-HVC churns. <strong>Do not headline a single number.</strong> The strategy must address each cohort with its own intervention &mdash; bulk = Universal Content + Free recovery; SMS = retention infra + canvas; AI = funnel recovery; Standard = upgrade-path improvements. The Loss Attribution Pages 1+5 critic-style reframes apply directly here.</p>
+    </div>
+    <div class="principle add" style="grid-column: span 2;">
+      <div class="pn">5</div>
+      <span class="ptag">DEPENDENCY + MOMENTUM</span>
+      <h3>Sequence by dependency chain + ship one credibility moment every quarter</h3>
+      <p><strong>Three critical-path items</strong> gate everything downstream: <strong>(a) Universal Content (I-2.1.1)</strong> &mdash; gates P5.1 unified canvas; <strong>(b) NEB Code Mode (I-2.2.3)</strong> &mdash; gates Classic sunset comms (Strategy R1: $1&ndash;2M ARR risk); <strong>(c) Write with AI policy track (I-4.1.1)</strong> &mdash; runs in parallel with product track because policy clearance has unknown timing per Strategy R3. <strong>Every quarter must also deliver ONE demonstrable proof point</strong> for sales / analysts / leadership: a feature shipping, an AI demo, a brand-decay reversal &mdash; momentum prevents the &ldquo;stabilization quarter&rdquo; perception from killing strategy buy-in. The 6 credibility moments are mapped on Page 9.</p>
+    </div>
+  </div>
+
+  <h2 style="margin-bottom: 8px;">Effort allocation across 4 trust layers</h2>
+  <div class="card">
+    <p style="font-size: 12px; color: var(--ink-2); margin-bottom: 8px;">What % of editor engineering + design + PM effort goes to each layer per quarter. Layer-to-pillar mapping shown below. <strong>Reliability creates trust. Simplicity creates confidence. Intelligence creates delight. Autonomy creates differentiation.</strong> If you skip the first two, the last two fail.</p>
+
+    <div class="effort-bar">
+      <div class="eb-name">Functional trust<span class="eb-sub">&ldquo;Does it work?&rdquo; &mdash; cited HVC bugs, Brand Kit reliability, Canva sync, edge cases</span></div>
+      <div class="eb-track"><div class="eb-fill l-func" style="width: 35%;">35% &mdash; Layer 1</div></div>
+      <div class="eb-pct">35%</div>
+    </div>
+    <div class="effort-bar">
+      <div class="eb-name">Cognitive simplicity<span class="eb-sub">&ldquo;Can I understand it?&rdquo; &mdash; activation, discovery, template ICP fit, prompt-first authoring</span></div>
+      <div class="eb-track"><div class="eb-fill l-cog" style="width: 30%;">30% &mdash; Layer 2</div></div>
+      <div class="eb-pct">30%</div>
+    </div>
+    <div class="effort-bar">
+      <div class="eb-name">Outcome trust + Intelligence<span class="eb-sub">&ldquo;Will this improve my business?&rdquo; &mdash; AI generation, brand-style transfer, product-catalog imagery, dynamic content</span></div>
+      <div class="eb-track"><div class="eb-fill l-out" style="width: 25%;">25% &mdash; Layer 3</div></div>
+      <div class="eb-pct">25%</div>
+    </div>
+    <div class="effort-bar">
+      <div class="eb-name">Emotional partnership + Autonomy<span class="eb-sub">&ldquo;This product understands my team&rdquo; &mdash; conversational, multi-author collab, governance, accessibility</span></div>
+      <div class="eb-track"><div class="eb-fill l-emo" style="width: 10%;">10% &mdash; Layer 4</div></div>
+      <div class="eb-pct">10%</div>
+    </div>
+
+    <div style="margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 11px; color: var(--ink-2);">
+      <strong>Layer-to-pillar mapping:</strong> Layer 1 (Functional) &asymp; <strong>P1 (entire) + P5.2 SMS reliability</strong>. Layer 2 (Cognitive) &asymp; <strong>P3 (entire) + P2.1 Universal Content discovery + P4.2.3 prompt-first</strong>. Layer 3 (Outcome) &asymp; <strong>P4 (most) + P2.2.4 dynamic content</strong>. Layer 4 (Emotional / Autonomous) &asymp; <strong>P5.3 collab + P5.4 governance + P4.2.1 conversational</strong>. Pillars and layers don&rsquo;t 1:1-map &mdash; pillars are organized by execution dependency; layers are organized by customer experience.
+    </div>
+  </div>
+
+  <h2 style="margin-bottom: 8px; margin-top: 14px;">The customer experience progression we&rsquo;re trying to build</h2>
+  <div class="grid cols-4" style="gap: 8px;">
+    <div class="card" style="border-left: 4px solid var(--bad);"><div style="font-size:10px; font-weight:800; letter-spacing:.06em; color:var(--muted); text-transform:uppercase; margin-bottom:4px;">Phase 1 &middot; 0&ndash;3mo</div><div style="font-family:'Source Serif 4', Georgia, serif; font-size:13px; font-weight:700;">"This works reliably."</div><div style="font-size:11px; color:var(--ink-2); margin-top:4px;">Functional trust restored &mdash; NEB renders correctly, Brand Kit data is reliable, Canva sync doesn&rsquo;t silently fail.</div></div>
+    <div class="card" style="border-left: 4px solid var(--brand);"><div style="font-size:10px; font-weight:800; letter-spacing:.06em; color:var(--muted); text-transform:uppercase; margin-bottom:4px;">Phase 2 &middot; 3&ndash;9mo</div><div style="font-family:'Source Serif 4', Georgia, serif; font-size:13px; font-weight:700;">"My work compounds."</div><div style="font-size:11px; color:var(--ink-2); margin-top:4px;">Universal Content ships; edit once, propagates; first send in &lt;7 days; new customers ramp faster than they did last year.</div></div>
+    <div class="card" style="border-left: 4px solid #4338CA;"><div style="font-size:10px; font-weight:800; letter-spacing:.06em; color:var(--muted); text-transform:uppercase; margin-bottom:4px;">Phase 3 &middot; 9&ndash;12mo</div><div style="font-family:'Source Serif 4', Georgia, serif; font-size:13px; font-weight:700;">"AI helps me ship better campaigns."</div><div style="font-size:11px; color:var(--ink-2); margin-top:4px;">Write with AI is global + better; conversational editing in canvas; AI image generation tied to product catalog; SMS generation in composer.</div></div>
+    <div class="card" style="border-left: 4px solid var(--good);"><div style="font-size:10px; font-weight:800; letter-spacing:.06em; color:var(--muted); text-transform:uppercase; margin-bottom:4px;">Phase 4 &middot; 12&ndash;18mo</div><div style="font-family:'Source Serif 4', Georgia, serif; font-size:13px; font-weight:700;">"My team ships email + SMS together."</div><div style="font-size:11px; color:var(--ink-2); margin-top:4px;">Unified email+SMS canvas; real-time multi-author collab + comments; SMS retention infra holds the +73.5% growth; agencies + multi-brand teams have governance.</div></div>
+  </div>
+
+  <p class="source"><strong>Source:</strong> Trust-layered framework adapted from Automations brief Initiative Canvas Page 8 (GPT-derived); Mailchimp-editor-specific weights and pillar assignments per the evidence in this brief. The 35/30/25/10 effort allocation matches the Strategy Page 4 staffing model (Editor platform 30% + AI 25% + UC 15% + SMS+canvas 20% + Collab 10% &approx; the 4-layer split shown above when pillar work is mapped to its primary layer).</p>
+</section>
+
+<!-- PAGE 9: 6-QUARTER SWIMLANE ROADMAP -->
+<section class="page" aria-label="Initiative Canvas Page 9">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">The 6-Quarter Swimlane Roadmap &middot; 18 months &middot; May &rsquo;26 &rarr; Oct &rsquo;27</div>
+      <h1>How <em style="color:#C28A00;">all 5 pillars run in parallel</em> across 6 quarters &mdash; with 1 credibility moment per quarter</h1>
+      <div class="subtitle">Each row is a pillar swimlane; each column is a quarter. Cells show initiatives shipping that quarter (with IDs). Color-coded by pillar. Bottom row shows the customer-facing credibility moment that signals momentum to leadership, sales, and analysts. <strong>Star (★) = high-impact ship.</strong></div>
+    </div>
+    <div class="meta">
+      <div><strong>Quarters:</strong> 6 (May &rsquo;26 &rarr; Oct &rsquo;27)</div>
+      <div><strong>Pillars:</strong> 5 in parallel</div>
+      <div><strong>Page:</strong> 9 of 9</div>
+    </div>
+  </header>
+
+  <table class="roadmap-table">
+    <thead>
+      <tr>
+        <th style="width: 13%;">Pillar / customer benefit</th>
+        <th class="q1">Q1 FY26 Q4<span class="qrange">May&ndash;Jul &rsquo;26</span></th>
+        <th class="q2">Q2 FY27 Q1<span class="qrange">Aug&ndash;Oct &rsquo;26</span></th>
+        <th class="q3">Q3 FY27 Q2<span class="qrange">Nov &rsquo;26&ndash;Jan &rsquo;27</span></th>
+        <th class="q4">Q4 FY27 Q3<span class="qrange">Feb&ndash;Apr &rsquo;27</span></th>
+        <th class="q5">Q5 FY27 Q4<span class="qrange">May&ndash;Jul &rsquo;27</span></th>
+        <th class="q6">Q6 FY28 Q1<span class="qrange">Aug&ndash;Oct &rsquo;27</span></th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- P1 swimlane -->
+      <tr>
+        <td class="pillar-cell r-p1">
+          <span class="pname">P1: "The builder I trust to ship"</span>
+          <span class="pquote">Internal: Editor Quality &amp; Brand Trust &middot; 35% Layer 1 effort</span>
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-1.1.1</span>NEB rendering parity STARTS<br/>
+          <span class="iid">I-1.2.1</span>Brand Kit data correctness<br/>
+          <span class="iid">I-1.3.1</span>Canva sync reliability<br/>
+          <span class="iid">I-1.1.4</span>Template list surfacing<br/>
+          <span class="iid">I-1.4.1</span>Creative Assistant rediscovery
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-1.1.1</span><span class="ship">NEB rendering parity SHIPS</span><br/>
+          <span class="iid">I-1.2.2</span><span class="ship">Font upload + CA parity ships</span><br/>
+          <span class="iid">I-1.1.3</span>Block ordering bugs<br/>
+          <span class="iid">I-1.3.2</span>Content Studio stability<br/>
+          <span class="iid">I-1.1.2</span>Multi-author save UX<br/>
+          <span class="iid">I-1.2.4</span>Brand fonts in LP / forms
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-1.2.3</span><span class="ship">Multi-brand kits ships</span><br/>
+          <span class="iid">I-1.1.5</span>Cross-browser regression suite<br/>
+          <span class="iid">I-1.1.6</span>Light/dark mode + bg images<br/>
+          <span class="iid">I-1.3.3</span>Folder management<br/>
+          <span class="iid">I-1.4.2</span>CA non-banner expansion<br/>
+          <span class="iid">I-1.1.7</span>Inline link checker upgrade
+        </td>
+        <td class="q-cell">
+          <span class="maint">Maintenance &mdash; cited HVC burn-down baseline; weekly bug-bash cadence</span>
+        </td>
+        <td class="q-cell">
+          <span class="maint">Maintenance &mdash; proactive deliverability monitoring + Brand Kit health alerts</span>
+        </td>
+        <td class="q-cell">
+          <span class="maint">Maintenance &mdash; operational excellence baseline maintained</span>
+        </td>
+      </tr>
+
+      <!-- P2 swimlane -->
+      <tr>
+        <td class="pillar-cell r-p2">
+          <span class="pname">P2: "Edit once, send everywhere"</span>
+          <span class="pquote">Internal: Universal Content + Migration &middot; CRITICAL PATH</span>
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-2.1.1</span>Universal Content STARTS (critical path)<br/>
+          <span class="iid">I-2.2.3</span>NEB Code Mode design + scope<br/>
+          <span class="iid">I-2.2.1</span>Bulk template migration tool design
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-2.1.1</span><span class="ship">Universal Content MVP ships (Klaviyo parity)</span><br/>
+          <span class="iid">I-2.1.2</span>Auto-migration of saved blocks<br/>
+          <span class="iid">I-2.2.1</span>Bulk template migration tool ships<br/>
+          <span class="iid">I-2.2.2</span>1:1 migration tool + support workflow
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-2.1.3</span>Universal Content adoption funnel + discovery<br/>
+          <span class="iid">I-2.2.3</span><span class="ship">NEB Code Mode ships (Classic sunset PRECONDITION)</span><br/>
+          <span class="iid">I-2.3.2</span>Brand Kit auto-applied to Universal blocks
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-2.2.4</span>NEB Liquid templating + dynamic content<br/>
+          <span class="iid">I-2.3.1</span>Universal Content in CJB (cross-product)<br/>
+          <span class="iid">I-2.3.3</span>Universal Content audit + version history
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-2.2.5</span><span class="ship">Funded migration program kicks off + Classic sunset comms</span>
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-2.2.5</span>Classic sunset migration peak (12mo grace ongoing)
+        </td>
+      </tr>
+
+      <!-- P3 swimlane -->
+      <tr>
+        <td class="pillar-cell r-p3">
+          <span class="pname">P3: "From signup to first send in minutes"</span>
+          <span class="pquote">Internal: Activation Foundation &middot; 30% Layer 2 effort</span>
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-3.1.2</span>Brand Kit auto-extract on signup<br/>
+          <span class="iid">I-3.3.3</span>DRAFT-resurrect campaign
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-3.1.1</span><span class="ship">Day-0 onboarding sequence (7&ndash;10d first-send target)</span><br/>
+          <span class="iid">I-3.1.3</span>Industry welcome flow templates<br/>
+          <span class="iid">I-3.3.1</span>In-app changelog + weekly digest
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-3.2.1</span><span class="ship">B2B / ProServ template gallery</span><br/>
+          <span class="iid">I-3.2.3</span>Template categorization fix<br/>
+          <span class="iid">I-3.3.2</span>Contextual feature discovery prompts
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-3.2.2</span><span class="ship">Industry-aware template gallery (6&ndash;8 per industry)</span><br/>
+          <span class="iid">I-3.4.2</span>Free &rarr; Essentials upgrade path
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-3.4.1</span><span class="ship">Free-tier editor experience uplift</span>
+        </td>
+        <td class="q-cell">
+          <span class="maint">Activation telemetry baseline + monthly cohort review</span>
+        </td>
+      </tr>
+
+      <!-- P4 swimlane -->
+      <tr>
+        <td class="pillar-cell r-p4">
+          <span class="pname">P4: "AI that ships campaigns, not a demo"</span>
+          <span class="pquote">Internal: Intuit Assist + Write with AI Recovery &middot; 25% Layer 3 effort</span>
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-4.1.1</span>Write with AI policy track STARTS (parallel to product)<br/>
+          <span class="iid">I-4.1.2</span>Write with AI quality + brand-tone fixes<br/>
+          <span class="iid">I-4.1.4</span>In-canvas AI discovery re-instrumentation
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-4.1.2</span><span class="ship">Write with AI quality fixes ship</span><br/>
+          <span class="iid">I-4.1.3</span>Write with AI re-introduction campaign<br/>
+          <span class="iid">I-4.3.1</span>Generative SMS in composer design
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-4.3.1</span><span class="ship">Generative SMS in composer ships</span><br/>
+          <span class="iid">I-4.4.2</span>Image Remix in flow steps
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-4.1.1</span><span class="ship">Write with AI global ungate (or paid AI add-on globally)</span><br/>
+          <span class="iid">I-4.3.2</span>SMS variant + A/B in composer
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-4.2.1</span><span class="ship">Conversational journey editing in Intuit Assist</span><br/>
+          <span class="iid">I-4.4.1</span>AI image gen tied to product catalog<br/>
+          <span class="iid">I-4.4.3</span>Per-recipient dynamic image
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-4.2.2</span>AI brand-style transfer<br/>
+          <span class="star">★</span> <span class="iid">I-4.2.3</span>Prompt-first email mode (toggle)
+        </td>
+      </tr>
+
+      <!-- P5 swimlane -->
+      <tr>
+        <td class="pillar-cell r-p5">
+          <span class="pname">P5: "Email + SMS feel like one campaign"</span>
+          <span class="pquote">Internal: Unified Canvas + Collab + SMS Retention &middot; 10% Layer 4 effort early; ramps in Q3+</span>
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-5.2.3</span><span class="ship">SMS TCPA guardrails ship ($57K incident closed)</span><br/>
+          <span class="iid">I-5.2.2</span>SMS credits transparency
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-5.2.1</span>SMS reporting v2<br/>
+          <span class="iid">I-5.2.4</span>SMS merge depth + MMS POC
+        </td>
+        <td class="q-cell">
+          <span class="iid">I-5.1.1</span>Shared blocks email+SMS STARTS<br/>
+          <span class="iid">I-5.2.5</span>MMS bundle pricing<br/>
+          <span class="iid">I-5.4.2</span>Inline accessibility coach
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-5.1.1</span><span class="ship">Shared blocks email+SMS ships</span><br/>
+          <span class="iid">I-5.1.2</span>Cross-channel preview side-by-side<br/>
+          <span class="iid">I-5.1.3</span>Brand Kit on SMS short links
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-5.3.1</span><span class="ship">Real-time multi-author co-edit ships</span><br/>
+          <span class="iid">I-5.3.2</span>Block-level @-mention comments<br/>
+          <span class="iid">I-5.1.4</span>Unified campaign object
+        </td>
+        <td class="q-cell">
+          <span class="star">★</span> <span class="iid">I-5.4.1</span>Locked layouts mode (governance for SMB)<br/>
+          <span class="iid">I-5.3.3</span>Approval workflow + version history<br/>
+          <span class="iid">I-5.4.3</span>Cross-account brand inheritance for agencies
+        </td>
+      </tr>
+
+      <!-- Credibility moment row -->
+      <tr class="cred-row">
+        <td class="pillar-cell">
+          <span style="font-size: 11px;">★ Credibility moment</span>
+          <span style="display:block; font-size:9px; font-weight:400; opacity:0.85;">Demoable proof per quarter</span>
+        </td>
+        <td class="cred-cell">
+          <strong>SMS TCPA $57K incident closed + Brand Kit incident closed</strong> &mdash; cited HVC burn-down begins; quietly removes the largest single brand-risk vector in the brief.
+        </td>
+        <td class="cred-cell">
+          <strong>Universal Content MVP ships</strong> &mdash; Klaviyo Spring &rsquo;26 parity demo. Single biggest shift in editor narrative. Reverses the &ldquo;Mailchimp ships features but loses the editor conversation&rdquo; story.
+        </td>
+        <td class="cred-cell">
+          <strong>NEB Code Mode + Generative SMS in composer</strong> &mdash; power users see NEB they can stay on; SMS retention story begins.
+        </td>
+        <td class="cred-cell">
+          <strong>★ Write with AI global ungate (or paid AI add-on globally) + Free-tier editor uplift</strong> &mdash; biggest brand-decay reversal moment of the program. International Standard customers stop paying for an inaccessible feature; SMB acquisition funnel reopens.
+        </td>
+        <td class="cred-cell">
+          <strong>Conversational journey editing + Real-time co-edit + Shared email+SMS blocks</strong> &mdash; &ldquo;Mailchimp is back, modern, and one product.&rdquo; Press / analyst narrative shifts.
+        </td>
+        <td class="cred-cell">
+          <strong>AI brand-style transfer + Prompt-first mode + Governance for SMB</strong> &mdash; category-leadership narrative. Mailchimp is the SMB authoring platform with AI breadth + collab + governance no competitor matches.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top: 14px;">Top 3 risks to the roadmap</h2>
+  <div class="grid cols-3" style="gap: 10px;">
+    <div class="card" style="border-left: 4px solid var(--bad);">
+      <div style="font-size:10px; font-weight:800; letter-spacing:.06em; color:#9A1F00; text-transform:uppercase; margin-bottom:4px;">Risk #1 &middot; Critical Path</div>
+      <h3 style="margin: 0 0 4px; font-family: 'Source Serif 4', Georgia, serif; font-size: 13px;">Universal Content scope balloons</h3>
+      <p style="font-size:11px; color:var(--ink-2); margin:0;">If I-2.1.1 slips past Q2, the Klaviyo parity claim stays open and P5.1 unified canvas shifts right. <strong>Mitigation:</strong> ship MVP (template-scoped propagation only) Q2, expand to CJB + per-channel rendering Q3-Q4. Don&rsquo;t big-bang.</p>
+    </div>
+    <div class="card" style="border-left: 4px solid var(--warn);">
+      <div style="font-size:10px; font-weight:800; letter-spacing:.06em; color:#8A4A00; text-transform:uppercase; margin-bottom:4px;">Risk #2 &middot; Policy Dependency</div>
+      <h3 style="margin: 0 0 4px; font-family: 'Source Serif 4', Georgia, serif; font-size: 13px;">Write with AI legal/policy gates remain stuck</h3>
+      <p style="font-size:11px; color:var(--ink-2); margin:0;">Strategy R3: Q4 credibility moment (I-4.1.1) depends on Intuit policy + legal clearance for international Standard. <strong>Mitigation:</strong> run product track for paid global AI add-on as fallback; launch whichever clears first; have Q4 narrative queued for either path.</p>
+    </div>
+    <div class="card" style="border-left: 4px solid #4338CA;">
+      <div style="font-size:10px; font-weight:800; letter-spacing:.06em; color:#2A1FA8; text-transform:uppercase; margin-bottom:4px;">Risk #3 &middot; Capacity</div>
+      <h3 style="margin: 0 0 4px; font-family: 'Source Serif 4', Georgia, serif; font-size: 13px;">Editor team capacity vs scope</h3>
+      <p style="font-size:11px; color:var(--ink-2); margin:0;">65 initiatives across 18 months requires +30% editor team capacity for the Classic-migration window (per Strategy R6). Without headcount lock, P5 collab + P4 advanced AI slip from FY27 into FY28. <strong>Mitigation:</strong> headcount plan in Q1; defer P5.4 governance to FY28 H2 if Q1-Q3 capacity is the binding constraint.</p>
+    </div>
+  </div>
+
+  <p class="source"><strong>Roadmap methodology:</strong> Sequencing logic from Page 8 principles. Each initiative placed in a quarter based on (a) dependency chain (Universal Content first; NEB Code Mode before Classic sunset; Write with AI policy track parallel to product), (b) credibility moment cadence (one demoable proof per quarter), (c) effort allocation (35/30/25/10 maintained per quarter), (d) HVC burn-down sequencing (cited $ resolved fastest first), (e) Growth Model lever timing (L1 bulk recovery + L5 retention save load Q1-Q3; L3 SMS attach + L6 ARPU/governance load Q4-Q6). All 65 initiatives mapped; ~5 deliberately deferred to Q6 (cross-account agency inheritance; prompt-first mode; AI brand-style transfer).</p>
+</section>
+
 </div><!-- /panel-canvas -->
 
 
