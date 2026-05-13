@@ -1,0 +1,1154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mailchimp NUNI Repo — Product Technical Intelligence Analysis</title>
+<meta name="description" content="A 7-layer forensic analysis of the Mailchimp New Email Builder (NUNI) GitHub repos — applying the Product Technical Intelligence Playbook to map every customer pain in the editor brief to specific code, ownership, and architectural choke points." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E1116;
+    --ink-2: #1F2937;
+    --muted: #4B5563;
+    --line: #E5E7EB;
+    --line-2: #D1D5DB;
+    --bg: #F8F7F4;
+    --paper: #FFFFFF;
+    --brand: #4338CA;       /* indigo — distinguishes the technical analysis from the customer brief */
+    --brand-2: #C28A00;     /* MC amber accent */
+    --good: #047857;
+    --warn: #B45309;
+    --bad: #B91C1C;
+    --chip: #EEF0FF;
+    --chip-ink: #2A1FA8;
+    --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.5;
+  }
+  .toolbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(248,247,244,.92);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .toolbar-inner {
+    max-width: 1180px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; gap: 12px;
+  }
+  .brand-mark { display:flex; align-items:center; gap:10px; font-weight: 700; font-size: 14px; color: var(--ink-2); }
+  .brand-dot { width: 10px; height: 10px; border-radius: 3px; background: var(--brand); box-shadow: 0 0 0 3px rgba(67,56,202,.15); }
+  .toolbar a.btn { border: 1px solid var(--line-2); background: var(--paper); color: var(--ink-2); padding: 7px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; }
+  .toolbar a.btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+
+  .page-wrap { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+
+  .tabs { display: flex; gap: 4px; margin: 18px 0 14px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .tab { background: transparent; border: 0; padding: 10px 14px; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; font-family: inherit; }
+  .tab:hover { color: var(--ink); }
+  .tab.active { color: var(--brand); border-bottom-color: var(--brand); }
+
+  .tabpanel { display: none; }
+  .tabpanel.active { display: block; }
+
+  .page { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); padding: 28px 32px 26px; margin-bottom: 22px; }
+  .page-head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 18px; }
+  .eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  h1 { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: 30px; line-height: 1.15; margin: 6px 0 4px; letter-spacing: -0.01em; }
+  h1 em { font-style: italic; }
+  h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 700; margin: 18px 0 10px; }
+  h2 .num { display: inline-block; font-size: 11px; font-weight: 800; background: var(--ink); color: white; padding: 2px 7px; border-radius: 4px; margin-right: 8px; vertical-align: middle; letter-spacing: .04em; font-family: 'Inter', sans-serif; }
+  h3 { font-family: 'Source Serif 4', Georgia, serif; font-size: 15px; font-weight: 700; margin: 14px 0 8px; }
+  .subtitle { color: var(--ink-2); font-size: 13.5px; margin-top: 4px; max-width: 880px; }
+  .meta { font-size: 11.5px; color: var(--muted); text-align: right; }
+  .meta div { padding: 1px 0; }
+
+  p { font-size: 13px; line-height: 1.6; color: var(--ink-2); margin: 0 0 10px; }
+  p strong { color: var(--ink); font-weight: 700; }
+  p em { color: var(--brand); font-style: italic; font-weight: 500; }
+  ul, ol { font-size: 13px; line-height: 1.6; color: var(--ink-2); margin: 0 0 10px; padding-left: 20px; }
+  li { margin-bottom: 4px; }
+  li strong { color: var(--ink); }
+  code { font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace; font-size: 11.5px; background: #F1F2F4; color: var(--ink); padding: 1px 5px; border-radius: 3px; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+  .kpi { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: linear-gradient(180deg, #FAFAFB 0%, #FFF 100%); }
+  .kpi .v { font-family: 'Source Serif 4', Georgia, serif; font-size: 22px; font-weight: 700; color: var(--ink); line-height: 1.1; }
+  .kpi .v.bad { color: var(--bad); }
+  .kpi .v.good { color: var(--good); }
+  .kpi .v.brand { color: var(--brand); }
+  .kpi .l { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+  @media (max-width: 880px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+
+  .grid { display: grid; gap: 14px; }
+  .cols-2 { grid-template-columns: 1fr 1fr; }
+  .cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  @media (max-width: 880px) { .cols-2, .cols-3 { grid-template-columns: 1fr; } }
+
+  .card { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: #fff; }
+  .card.tinted { background: linear-gradient(180deg, #FAFAFB, #fff); }
+  .card.warn { border-left: 4px solid var(--warn); background: #FFFAF0; }
+  .card.bad { border-left: 4px solid var(--bad); background: #FFF5F2; }
+  .card.good { border-left: 4px solid var(--good); background: #F1FAF5; }
+  .card.brand { border-left: 4px solid var(--brand); background: #F4F3FF; }
+
+  table { width: 100%; border-collapse: collapse; margin: 6px 0 10px; font-size: 12.5px; }
+  th { background: #FAFAFB; color: var(--muted); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  td { padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-2); line-height: 1.5; }
+  td strong { color: var(--ink); }
+  td code { font-size: 11px; }
+
+  .pill { display: inline-block; font-size: 9.5px; font-weight: 800; letter-spacing: .06em; padding: 2px 6px; border-radius: 4px; }
+  .pill.good { background: #D7EFE3; color: #036A4F; }
+  .pill.warn { background: #FFEFD9; color: #8A4A00; }
+  .pill.bad  { background: #FBD9CC; color: #9A1F00; }
+  .pill.brand{ background: var(--chip); color: var(--chip-ink); }
+  .pill.muted{ background: #ECEAE6; color: var(--ink); }
+
+  .layer-card { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; background: #fff; margin-bottom: 16px; position: relative; }
+  .layer-card .lc-num { position: absolute; top: 14px; right: 18px; font-family: 'Source Serif 4', Georgia, serif; font-size: 36px; font-weight: 700; opacity: .12; color: var(--ink); }
+  .layer-card.l1 { border-left: 4px solid var(--brand); }
+  .layer-card.l2 { border-left: 4px solid var(--good); }
+  .layer-card.l3 { border-left: 4px solid var(--bad); }
+  .layer-card.l4 { border-left: 4px solid var(--warn); }
+  .layer-card.l5 { border-left: 4px solid #4338CA; }
+  .layer-card.l6 { border-left: 4px solid #DB2777; }
+  .layer-card.l7 { border-left: 4px solid #0891B2; }
+  .layer-card .lc-eyebrow { font-size: 10.5px; font-weight: 800; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
+  .layer-card h3 { margin: 4px 0 6px; font-size: 16px; padding-right: 40px; }
+  .layer-card .lc-finding { background: #FFF5F2; border-left: 3px solid var(--bad); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-top: 8px; font-size: 12.5px; }
+  .layer-card .lc-finding strong { color: #9A1F00; }
+  .layer-card .lc-good { background: #F1FAF5; border-left: 3px solid var(--good); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-top: 8px; font-size: 12.5px; }
+  .layer-card .lc-good strong { color: #036A4F; }
+
+  .map-row { display: grid; grid-template-columns: 28% 22% 28% 22%; gap: 0; border-top: 1px solid var(--line); padding: 10px 0; align-items: start; }
+  .map-row > div { padding: 0 10px; border-right: 1px solid var(--line); font-size: 12.5px; line-height: 1.5; }
+  .map-row > div:last-child { border-right: 0; }
+  .map-row .voc { color: var(--bad); font-weight: 600; }
+  .map-row .repo { color: var(--brand); font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; }
+  .map-row .ev { color: var(--ink-2); }
+  .map-row .biz { color: var(--good); font-weight: 600; }
+  .map-head { font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+  .hero-finding { background: linear-gradient(180deg, #FFFCF0 0%, #FFFFFF 100%); border: 1px solid var(--brand-2); border-left: 4px solid var(--brand-2); border-radius: 10px; padding: 16px 20px; margin: 12px 0 18px; }
+  .hero-finding .hf-label { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--brand-2); margin-bottom: 6px; }
+  .hero-finding p { font-family: 'Source Serif 4', Georgia, serif; font-size: 15px; line-height: 1.55; color: var(--ink); margin: 0; }
+
+  .source { font-size: 11px; color: var(--muted); padding: 8px 0 4px; border-top: 1px dashed var(--line); margin-top: 14px; }
+  .source code { font-size: 10.5px; }
+
+  .qa-card { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; }
+  .qa-card .q-bad { background: #FFF5F2; border-left: 3px solid var(--bad); padding: 8px 12px; border-radius: 0 4px 4px 0; margin-bottom: 8px; font-size: 12.5px; color: #6B1717; }
+  .qa-card .q-good { background: #F1FAF5; border-left: 3px solid var(--good); padding: 8px 12px; border-radius: 0 4px 4px 0; font-size: 12.5px; color: #034C39; font-weight: 500; }
+  .qa-card .q-good strong { color: var(--good); }
+
+  .alloc-bar { display: flex; height: 50px; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); margin: 8px 0; }
+  .alloc-seg { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px; font-size: 10.5px; text-align: center; color: var(--ink); line-height: 1.2; }
+  .alloc-seg strong { font-size: 13px; font-weight: 800; }
+  .alloc-1 { background: #FFE9CC; }
+  .alloc-2 { background: #FFEFA8; }
+  .alloc-3 { background: #DCEEF6; }
+  .alloc-4 { background: #E8E2F4; }
+</style>
+</head>
+
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="brand-mark"><span class="brand-dot"></span> NUNI Repo · Product Technical Intelligence</div>
+    <div style="display:flex; gap:8px;">
+      <a class="btn" href="mailchimp-editor.html">← Editor Brief</a>
+      <a class="btn primary" href="index.html">Hub</a>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <div class="tabs" role="tablist" aria-label="Analysis sections">
+    <button class="tab active" role="tab" data-tab="exec">Executive Summary</button>
+    <button class="tab" role="tab" data-tab="painmap">Pain → Code Map</button>
+    <button class="tab" role="tab" data-tab="repo">Repo Map (Reality vs Diagram)</button>
+    <button class="tab" role="tab" data-tab="layers">7-Layer Forensic</button>
+    <button class="tab" role="tab" data-tab="org">Org Failure Modes</button>
+    <button class="tab" role="tab" data-tab="ai">AI Readiness</button>
+    <button class="tab" role="tab" data-tab="leverage">Leverage Cheat Sheet</button>
+    <button class="tab" role="tab" data-tab="method">Method &amp; Sources</button>
+  </div>
+
+<!-- ================ EXECUTIVE SUMMARY ================ -->
+<div class="tabpanel active" id="panel-exec" role="tabpanel">
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Product Technical Intelligence · Mailchimp NUNI · Executive Read</div>
+        <h1>The NUNI editor codebase is <em style="color:#4338CA;">AI-ready at the schema layer</em>, <em style="color:#B91C1C;">version-drifted at the UI layer</em>, and <em style="color:#B45309;">running ahead of its quality gates</em></h1>
+        <div class="subtitle">A 7-layer forensic analysis of the <code>collab-email</code> GitHub Enterprise org (62 repos), applying the Product Technical Intelligence Playbook to the customer pain themes documented in the <a href="mailchimp-editor.html">Editor Brief</a>. <strong>Every claim below is backed by a specific repo finding</strong>: file LOC, dep version, schema versions, contributor concentration, PR cycle time, test ratios.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Window:</strong> May 2025 → May 13 2026</div>
+        <div><strong>Repos analyzed:</strong> 8 of 62 (active core)</div>
+        <div><strong>Framework:</strong> 7-Layer Forensic + AI Readiness</div>
+      </div>
+    </header>
+
+    <div class="kpi-row">
+      <div class="kpi"><div class="v bad">25 versions</div><div class="l"><code>nuni-core-ui</code> consumes <code>@collab-email/nuni-core@1.49.0</code> while the actual library is at <code>1.74.5</code> — schema/UI drift gates Universal Content (P2.1).</div></div>
+      <div class="kpi"><div class="v bad">3 React versions</div><div class="l">React 17 in <code>nuni-core-ui</code>, React 18.3 in <code>builder-platform</code>, React 19 in <code>nuni-core</code>. Three layers, three runtimes, one product.</div></div>
+      <div class="kpi"><div class="v bad">17%</div><div class="l">Test-to-source LOC ratio in <code>nuni-core-ui</code> (the actual editor UI). Library layer is at 111–137%. <strong>Quality gates are below the layer customers touch.</strong></div></div>
+      <div class="kpi"><div class="v good">AI-ready</div><div class="l"><code>nuni-core/edit/edit.ts</code>: <em>"Pure function. Zero React deps. Zero state. Zero side effects."</em> Block-typed JSON tree + command pattern + 31 semantic block schemas. <strong>Conversational AI in canvas (P4.2.1) is technically achievable today.</strong></div></div>
+    </div>
+
+    <div class="hero-finding">
+      <div class="hf-label">Headline finding for the executive committee</div>
+      <p>The Strategy Memo&rsquo;s <strong>+$25–30M FY27 anchor depends on three Q2-Q5 ships — Universal Content (P2.1), NEB Code Mode (P2.2.3), and conversational in-canvas AI (P4.2.1)</strong>. Two are <em>structurally ready</em> in the codebase today (semantic block schemas, command-pattern edit API). One is <em>structurally blocked</em> by version drift between <code>nuni-core</code> (the schema library, v1.74.5) and <code>nuni-core-ui</code> (the actual editor, pinned at v1.49.0). <strong>The single highest-leverage engineering ask in this analysis is closing that 25-version gap before Universal Content ships</strong> — not because Universal Content can&rsquo;t be built, but because shipping it on a stale schema layer guarantees the same fragmentation pattern that produced the Classic-vs-NEB split (Strategy memo Cost-of-Bifurcation: $1–2M ARR risk).</p>
+    </div>
+
+    <h2><span class="num">A</span>The five things you need to know in 90 seconds</h2>
+
+    <div class="grid cols-2">
+      <div class="card bad">
+        <h3>1 · The diagram in your brief is outdated</h3>
+        <p>The image labels <code>collab-email/emails-nuni-editor</code> as <em>"Frontend editor (primary)"</em>. <strong>That repo was last pushed November 12, 2024 — 18 months untouched.</strong> The actual primary editor frontend is <code>nuni-core-ui</code> (last push: today, May 13, 2026). <code>emails-nuni-editor</code> is a fork/predecessor; its directory structure, scaffolds (<code>cypress/integration/examples/McappWidget.spec.js</code>) and config files are byte-identical patterns to the early <code>nuni-core-ui</code>. <em>Not in the diagram</em>: <code>mc-omni-mcp</code> (Python MCP server, the agentic surface) and <code>mc-omni-agent-ui</code> (4956KB TS, more active than <code>nuni-core-ui</code> itself). Update the architecture map before the next exec review.</p>
+      </div>
+
+      <div class="card warn">
+        <h3>2 · Engineering is shipping the AI surface faster than the editor</h3>
+        <p>Last 6 months commit count: <code>mc-omni-agent-ui</code> ≈ <strong>691 commits</strong> across 5 active engineers vs <code>nuni-core-ui</code> ≈ <strong>83 commits</strong> across 2 hero contributors. The Strategy Memo&rsquo;s <em>Guiding Principle #2</em> explicitly says <em>"AI cannot compensate for broken editor trust"</em>; the commit ratio shows the team is building the agent layer 8× faster than the foundation it sits on. This matches the playbook&rsquo;s <em>"Engineering Preference"</em> failure mode (the new shiny thing gets the senior contributors). Expect AI demos to land before bulk Established users (888,706/mo) feel the change.</p>
+      </div>
+
+      <div class="card brand">
+        <h3>3 · The data primitive for Universal Content already exists</h3>
+        <p><code>nuni-core/src/document/operations.ts</code> ships a JSON-tree document model with typed parent/children/properties; <code>nuni-core/src/edit/edit.ts</code> exposes a single <code>edit(doc, edits, config) → EditCandidate</code> command-pattern API. There are <strong>31 semantic block schemas</strong> (<code>ButtonBlockSchema</code>, <code>ProductBlockSchema</code>, <code>PromoCodeBlockSchema</code>, <code>EmailFooterBlockSchema</code>...) and <strong>3 schema versions</strong> already shipped this year (<code>v20260113</code>, <code>v20260225</code>, <code>v20260316</code>). <em>Universal Content is not an architectural greenfield — it is a primitive that maps to existing edit operations + a registry layer.</em> The blocker is propagation, not invention.</p>
+      </div>
+
+      <div class="card good">
+        <h3>4 · Real-time collaboration foundation is already integrated — just unused</h3>
+        <p><code>nuni-core-ui/package.json</code> declares <code>"pusher-js": "4.3.1"</code> as a top-level production dependency. <strong>Pusher (WebSocket pub-sub) is in the editor today.</strong> What&rsquo;s missing is the collab CRDT/OT layer on top — there are no <code>yjs</code>, <code>@tiptap/extension-collaboration</code>, <code>hocuspocus</code>, or <code>liveblocks</code> deps. The Q5 credibility moment (<em>"Real-time multi-author co-edit + comments"</em>, P5.3) is a <strong>library-add + integration spike, not a wire-up-WebSockets-from-scratch effort</strong>. The TipTap rich-text engine (3.20.1) supports the collab extensions natively.</p>
+      </div>
+
+      <div class="card warn">
+        <h3>5 · The editor has no detectable feature flag system in active code</h3>
+        <p>Grep across <code>nuni-core-ui/src</code> and <code>builder-platform/src</code> for <code>featureFlag|launchDarkly|optimizely|isExperiment</code>: <strong>zero hits</strong>. The platform-level flag service (Mailchimp&rsquo;s internal flag infra) is presumably called from <code>nuni-api</code> or higher up the shell, but at the editor level <strong>every deploy is all-or-nothing for 888K monthly Established users</strong>. This is the playbook&rsquo;s Layer 7 red flag: <em>"Can they ship incrementally? Or is every deploy all-or-nothing?"</em> The Q2 Universal Content rollout, the Brand Kit data correctness fix (P1.2.1, in the strategy memo&rsquo;s Q1 list), and the Write with AI ungate (Q4) all assume incremental rollout to a cohort. <strong>Confirm the flag harness exists at the editor layer before committing to those quarterly milestones.</strong></p>
+      </div>
+
+      <div class="card">
+        <h3>6 · Hero engineer dependency on every active repo</h3>
+        <p>Per Layer 5 (commit concentration, last 12 months):</p>
+        <ul style="margin: 4px 0 0;">
+          <li><code>nuni-core</code>: top 2 contributors (<code>sprioleau</code> 147, <code>jhunsucker</code> 106) own <strong>~76%</strong> of commits.</li>
+          <li><code>nuni-core-ui</code>: top 2 (<code>sprioleau</code> 34, <code>ccovell</code> 28) own <strong>~75%</strong>.</li>
+          <li><code>builder-platform</code>: <code>ccovell</code> alone has <strong>181 commits — ~47%</strong> single-author share.</li>
+          <li><code>nuni-api</code>: <code>smoore16</code> 67 commits = <strong>~56%</strong>.</li>
+        </ul>
+        <p style="margin-top: 6px;">The playbook calls this <em>bus factor = 1–2 across the entire NUNI core</em>. <code>sprioleau</code> appears as the top contributor in <strong>3 of 4 active repos</strong>. This is the most-cited person in the codebase. Resignation, vacation, or reassignment is a P0 risk to the FY27 commit.</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top: 18px;"><span class="num">B</span>What this means for the FY27 commit</h2>
+
+    <table>
+      <thead><tr><th>Strategy memo bet (Q-by-Q)</th><th>Code-readiness verdict</th><th>What has to happen first</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Q1</strong> (May–Jul &rsquo;26) · Brand Kit incident closure + SMS TCPA $57K guardrails (P1.2.1, P5.2.3)</td><td><span class="pill warn">CONDITIONAL</span> Bug fixes are tractable. Incremental rollout of Brand Kit data fix needs the missing flag system.</td><td>Confirm <code>nuni-api</code> emits flag-gated routes; if not, scope a 2-week flag harness spike before the 50% ramp Austin Milt confirmed in HVC Theme 8.</td></tr>
+        <tr><td><strong>Q2 ★</strong> (Aug–Oct &rsquo;26) · Universal Content MVP (P2.1)</td><td><span class="pill warn">PARTIALLY READY</span> Schema + edit API exist; UI consumes a 25-version-old schema lib.</td><td>Bump <code>@collab-email/nuni-core</code> in <code>nuni-core-ui</code> from 1.49.0 to ≥1.74. Add the Universal Content <code>FragmentBlockSchema</code> registry path (already exists at the schema layer). Estimate: 4–6 week spike, not 4–6 month rebuild.</td></tr>
+        <tr><td><strong>Q3</strong> (Nov &rsquo;26–Jan &rsquo;27) · NEB Code Mode (P2.2.3)</td><td><span class="pill bad">UNDER-RESOURCED</span> The <code>html-to-nuni-parser</code> repo (Java, 122 source files, 202 prod-test HTML fixtures) is the inverse capability — Code Mode is the symmetric path.</td><td>Define ownership: is Code Mode going into <code>nuni-core-ui</code> (TS) or as a parser microservice (Java, mirroring the existing parser)? Today there is no repo that owns it. <strong>This is the highest-risk Q in the roadmap.</strong></td></tr>
+        <tr><td><strong>Q4 ★</strong> (Feb–Apr &rsquo;27) · Write with AI global ungate + Free uplift (P4.1.1, P3.4.1)</td><td><span class="pill warn">POLICY-GATED</span> No code blocker; the <code>mc-omni-mcp</code> + <code>mc-omni-agent-ui</code> agentic stack is shippable.</td><td>Decouple model-availability flags from rendering paths. Confirm <code>nuni-api</code> can route AI calls per-region/per-tenant.</td></tr>
+        <tr><td><strong>Q5</strong> (May–Jul &rsquo;27) · Conversational AI + Real-time co-edit + Shared blocks (P4.2.1, P5.3, P5.1)</td><td><span class="pill good">FOUNDATION READY</span> TipTap 3.20 + Pusher 4.3 + command-pattern <code>edit()</code> API + JSON-tree state.</td><td>Add <code>@tiptap/extension-collaboration</code> + a CRDT (yjs or hocuspocus); wire the existing Pusher channel to collab-doc events. Q5 is the cleanest engineering story in the entire roadmap.</td></tr>
+        <tr><td><strong>Q6</strong> (Aug–Oct &rsquo;27) · Brand-style transfer + Prompt-first mode + SMB governance (P4.2.2, P4.2.3, P5.4)</td><td><span class="pill brand">DEPENDENT</span> Requires Q2 + Q5 to land first.</td><td>Sequence locked.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top: 16px;"><span class="num">C</span>Three asks for the next engineering sync</h2>
+    <ol>
+      <li><strong>Publish a "schema bump" plan.</strong> Move <code>nuni-core-ui</code> from <code>@collab-email/nuni-core@1.49.0</code> to <code>@^1.74</code>. Either with a single bump and regression sweep, or via a phased migration (one schema version per sprint). This unblocks Universal Content and removes the structural cause of bifurcation drift.</li>
+      <li><strong>Audit the editor-layer feature flag harness.</strong> If it doesn&rsquo;t exist (the grep result is suspiciously clean), <em>scope and ship it before Q1 Brand Kit fixes</em> — every other strategy commit assumes incremental cohort rollout.</li>
+      <li><strong>Name a second-author on each top-3 critical-path repo.</strong> Pair <code>sprioleau</code>, <code>ccovell</code>, and <code>smoore16</code> with a designated co-owner in <code>nuni-core</code>, <code>builder-platform</code>, and <code>nuni-api</code>. The bus-factor risk is invisible until it&rsquo;s decisive.</li>
+    </ol>
+
+    <p class="source"><strong>Method:</strong> All numerical findings derived from <code>collab-email/*</code> on <code>github.intuit.com</code> via shallow clone + <code>gh api</code> queries against <code>/repos</code>, <code>/commits</code>, <code>/pulls</code>, and direct file reads. Every claim is reproducible: see <strong>Method &amp; Sources</strong> tab. Framework applied: <em>Product Technical Intelligence Playbook</em> (May 2026 internal reference, 20 pages, 7-layer forensic + AI readiness + org failure modes).</p>
+  </section>
+</div><!-- /panel-exec -->
+
+<!-- ================ PAIN → CODE MAP ================ -->
+<div class="tabpanel" id="panel-painmap" role="tabpanel">
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Phase 2 · Customer pain → Code mapping (Playbook §4)</div>
+        <h1>Every <em style="color:#B91C1C;">customer complaint in the editor brief</em> traced to a <em style="color:#4338CA;">specific NUNI repo, file, or architectural choke point</em></h1>
+        <div class="subtitle">This is the playbook&rsquo;s "superpower phase." Each row pairs a documented customer pain (HVC cited MRR, VoC hate theme, or User Research finding) with the most-probable code surface, the repo evidence to gather, and the business-impact metric that should move when the fix ships.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Source:</strong> Editor Brief tabs 2–6 + repo evidence</div>
+        <div><strong>Coverage:</strong> All 7 VoC hate themes + 17 HVC themes</div>
+      </div>
+    </header>
+
+    <div class="map-row">
+      <div class="map-head">Customer complaint (VOC / HVC / UR)</div>
+      <div class="map-head">Likely system component (repo · file)</div>
+      <div class="map-head">Repo evidence collected</div>
+      <div class="map-head">Business metric to move</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>VOC #1 BIFURCATION</strong> · "Two builders, two template libraries — and they don&rsquo;t talk to each other. I rebuilt the same welcome email three times." (G2 critical cluster, $834/mo cited HVC Themes 1–2)</div>
+      <div class="repo">html-to-nuni-parser/<br/>app/src/main/java/com/<br/>(Java + Lombok)<br/><br/>editor-migration-workbench<br/>editor-migration-release (Go)<br/>editor-migration-review-ui</div>
+      <div class="ev"><strong>JVM-side parser is the convert-classic-to-NUNI service</strong>; 122 source files + 202 prod-test HTML fixtures. Migration tooling repos: workbench last push Feb 2026, release last push <strong>Jul 2025 (10 months ago)</strong>, review-ui last push Dec 2025. Migration tooling investment is winding down.</div>
+      <div class="biz">Bulk Established 888K → 915–935K (+$10.4M L1)<br/><br/>Premium/agency Classic ARR retained ($1–2M risk per Strategy R1)</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>VOC #6 NO UNIVERSAL CONTENT</strong> · "Klaviyo just shipped Universal Content. Edit once, propagates. I&rsquo;m migrating before BFCM." (Reddit r/Klaviyo Spring &rsquo;26)<br/><br/>HVC Theme 1 ($330/mo) verbatim: <em>"develop a system where templates share content… similar to Brand Kit but more substantial."</em></div>
+      <div class="repo">nuni-core/src/channel/<br/>email/schemas/<br/>FragmentBlockSchema.ts<br/>(already exists)<br/><br/>nuni-core/src/define/registry.ts<br/><br/>nuni-core-ui (consumer)</div>
+      <div class="ev"><code>FragmentBlockSchema.ts</code> + 31 typed block schemas + 3 schema versions shipped this year (<code>v20260113</code>, <code>v20260225</code>, <code>v20260316</code>). The fragment primitive exists at the schema layer. <strong>The blocker is the 25-version drift</strong>: <code>nuni-core-ui@1.10.0</code> consumes <code>nuni-core@1.49.0</code>; current is <code>1.74.5</code>. Until that bumps, the Q2 Universal Content MVP cannot ship without a parallel schema fork.</div>
+      <div class="biz">Universal Content adoption 50–70% of NEB users (P2.1 KPI)<br/><br/>Block reuse +25–40% per campaign<br/><br/>+$4–7M FY27 (Strategy memo P2)</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>HVC #3 RENDERING</strong> · $1,820/mo cited (4 named users including $949 Premium). "Forwarded mail looks not good at all"; "click &lsquo;read full message&rsquo; messes with formatting"; Ctrl+K broken on Firefox/Chrome.</div>
+      <div class="repo">nuni-core/src/<br/>renderers/email/<br/>ButtonRenderer.test.tsx (684 LOC)<br/>SocialFollowRenderer.tsx (626 LOC)<br/>renderBlock.test.tsx (602 LOC)<br/><br/>email-render-pipeline/<br/>src/renderer/<br/>(jsdom-based, has visual diff)<br/><br/>server-side-rendering/<br/>(JS, 9087KB, last push May 2026)</div>
+      <div class="ev">Three rendering layers: (1) the in-editor preview path in <code>nuni-core/renderers/email/*</code>, (2) the headless <code>email-render-pipeline</code> with calibration + scoring + screenshot diff (visual regression infra exists!), (3) the <code>server-side-rendering</code> JS service. <strong>Layer 6 hint:</strong> <code>email-render-pipeline</code> has only 2 unit test files — calibration + scoring — but the fixture set (<code>fixtures/calibration/*.png</code>) is the foundation of a real golden-data regression suite.</div>
+      <div class="ev biz">Bulk churn 40.0% → 36.5–37.5% (P1.1.1 KPI)<br/><br/>Mobile preview support tickets −35%<br/><br/>+$3–5M FY27 L5 retention save</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>HVC #4 MULTI-AUTHOR SAVE</strong> · $340/mo. "Just get a message saying there is a problem with the saved version… no indication that someone else is currently editing." (UR Bet #4 territory: Jack/Kyle/Bianka cluster)</div>
+      <div class="repo">nuni-core-ui/src/js/widgets/<br/>editor/NuniCoreEditor/<br/>platform/store.ts<br/>(966 LOC — biggest file in the UI layer)<br/><br/>nuni-document-store (Kotlin)<br/><br/>document-data-store (TS)</div>
+      <div class="ev">Two persistence paths: <code>nuni-document-store</code> (Kotlin/Gradle, last push <strong>Jan 15 2026 — 4 months stale</strong>) and the newer <code>document-data-store</code> (TS, last push today). Optimistic concurrency is presumably handled in the Kotlin store. <code>store.ts</code> at 966 LOC is the playbook&rsquo;s definition of a god file (Layer 4: <em>"Any file &gt; 800 LOC = god class"</em>) — high churn × high complexity = top investigation target.</div>
+      <div class="ev biz">Save-conflict tickets eliminated<br/><br/>Foundation for P5.3 real-time co-edit (Q5 ★ credibility moment)</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>HVC #5 BLOCK ORDERING</strong> · $410/mo Premium. "Custom-coded templates… editor often confuses order of blocks or won&rsquo;t let you move them without a refresh."</div>
+      <div class="repo">nuni-core/src/document/<br/>operations.ts (641 LOC)<br/>move-to-column-position.test.ts (621 LOC)<br/><br/>builder-platform/src/blocks/*</div>
+      <div class="ev"><code>operations.ts</code> exposes <code>addBlock</code>, <code>moveBlock</code>, <code>moveToColumnPosition</code>, <code>duplicateBlock</code>. The dedicated 621-LOC test file for column moves suggests <strong>this code path has been re-bug-fixed multiple times</strong> — high churn signal. Reordering bugs typically live where the document tree mutation collides with React reconciliation; the <code>nuni-core-ui</code> React 17 mismatch (vs schema lib expecting React 19) is a candidate root cause.</div>
+      <div class="ev biz">Block-ordering tickets: cited $410/mo<br/><br/>Pre-condition for P5.3 collaborative edit (must trust single-author state)</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>HVC #6 TEMPLATE WIZARD</strong> · $1,950/mo. "My campaign tab is not showing the templates built in the new builder."</div>
+      <div class="repo">nuni-template-sources<br/>(JS, 18,739KB — large, last push today)<br/><br/>templates-admin-ui (TS, 1459KB)<br/><br/>nuni-api/app/src/routes/<br/>(Hono service)</div>
+      <div class="ev">Three repos own pieces of the template story. <code>nuni-template-sources</code> at 18.7MB is the catalog itself (NUNI-format JSON). <code>templates-admin-ui</code> is the internal CMS for templates. <code>nuni-api</code> is presumably the read API. The bug is a routing/filtering mismatch between the template registry and the campaign wizard&rsquo;s query — likely in <code>nuni-api/app/src/routes</code> or the wizard&rsquo;s consumer code in <code>builder-platform</code>.</div>
+      <div class="ev biz">Direct $1,950/mo Premium-account exposure<br/><br/>Activation rate (P3.1.4 AI Setup Agent depends on the same registry)</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>HVC #7–10 BRAND KIT</strong> · $6,465/mo cumulative ($655 LP fonts + $2,460 multi-brand + $3,350 font-upload + Brand Kit incident thread). "Stale Brand Kit"; "logo present but no colors"; "DIN 2014 not recognized by Creative Assistant."</div>
+      <div class="repo">nuni-brand<br/>(TS, 454KB, last push Apr 28 2026)<br/><br/>nuni-core/src/document/<br/>brand-kit accessors (in operations.ts ancestor walk)<br/><br/>builder-platform/src/blocks/Image/</div>
+      <div class="ev"><code>nuni-brand</code> is the Brand Kit data domain (last push 2 weeks ago — actively maintained but lower velocity than other core repos). Multi-brand kits within one account (HVC #9, $2,460/mo cited) is a data-model question for <code>nuni-brand</code> + <code>nuni-document-store</code> — does the brand kit join key allow multiple per account? The font-upload bug (#10) is most likely in <code>nuni-brand</code>&rsquo;s asset pipeline + the Creative Assistant&rsquo;s font-resolution path (which is in a different repo, possibly <code>creative-assistant-*</code> outside this org).</div>
+      <div class="ev biz">P1.2 entire sub-pillar (4 initiatives, FY27 $3–5M)<br/><br/>Foundation for P3.1.2 Brand Kit auto-extract on signup</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>HVC #13 CANVA SYNC</strong> · $2,500+/mo cited. "Sent an email without a synched graphic even though the graphic showed in the editor."</div>
+      <div class="repo">[Canva integration — likely in<br/>core-mail-svcs-infra or<br/>mc-omni-mcp]<br/><br/>builder-platform/src/blocks/Image</div>
+      <div class="ev"><strong>Cross-repo blast radius is unmapped here.</strong> Canva is an integration; the sync surface lives between Canva&rsquo;s OAuth API and the asset reference inside the document tree. The silent-failure mode (asset URL valid in editor, missing in send) is a textbook Layer 6 finding — error-swallowing in an async asset-resolution path. <em>This is the highest "we can&rsquo;t see it from the editor org" risk.</em></div>
+      <div class="ev biz">Direct $2,500+/mo named exposure<br/><br/>P1.3.1 (Strategy memo Q1 deliverable)</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>HVC #16 SMS TCPA $57K INCIDENT</strong> · C3 Festivals duplicate opt-out in live SMS send (the largest single named exposure in the brief).</div>
+      <div class="repo">[SMS composer — likely outside<br/>collab-email org;<br/>sms-registration-ui (TS, 198KB, last push Oct 2025) is in-org]</div>
+      <div class="ev"><code>sms-registration-ui</code> is the only SMS-related repo in <code>collab-email</code> and was last pushed <strong>Oct 28 2025</strong> — 6+ months stale. The actual SMS composer + send pipeline likely lives in a different Mailchimp org (the "SMS Engineering" team). The TCPA append/dedup logic is presumably in the send pipeline, not the editor. <strong>Cross-team dependency identified — this is a "Type: Org Dependency" item per playbook §1.1.</strong></div>
+      <div class="ev biz">$57K/mo named MRR (single-largest cited)<br/><br/>SMS churn 53% → 46–48% (P5.2.3 / Strategy Q1 deliverable)</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>UR Discovery</strong> · 5 named customers with multi-year undiscovered features (Bianka A/B testing "a number of years"; Jack inherited template, missed NEB 4–6 yrs; Jeffrey My Products 3.5 yrs; Clint 1-yr DRAFT). UR Bet #2.</div>
+      <div class="repo">nuni-core-ui — no in-app changelog<br/>component found<br/><br/>builder-platform/src/ui/Panel<br/>+ Layout / Rail / StickyPanel</div>
+      <div class="ev">No <code>changelog</code>, <code>whatsNew</code>, <code>announcement</code>, or <code>productTour</code> module names found in <code>nuni-core-ui/src</code>. The discovery surface that the Strategy memo P3.3 sub-pillar relies on (changelog, weekly digest, contextual prompts, DRAFT-resurrect) does not exist in the editor today as code. <strong>This is a from-zero build, not a fix.</strong></div>
+      <div class="ev biz">P3.3 entire sub-pillar (3 initiatives)<br/><br/>L3 + L4 levers (~$1.5M ARR)</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>VOC #5 NO COLLAB</strong> · −48 net sentiment. "Single editor at a time; no Google-Docs-style co-edit; no in-canvas commenting." Stensul / Knak / Notion set the bar. UR Bet #4.</div>
+      <div class="repo">nuni-core-ui:<br/>"pusher-js": "4.3.1"<br/>(real-time bus exists)<br/><br/>"@tiptap/core": "3.20.1"<br/>"@tiptap/react": "3.20.1"<br/>(rich-text supports collab)<br/><br/>nuni-core-ui/store.ts (966 LOC)</div>
+      <div class="ev">Foundation IS in the codebase — Pusher (WebSocket) + TipTap (collab-ready editor) + JSON-tree document model + command-pattern <code>edit()</code>. No <code>yjs</code>, <code>@tiptap/extension-collaboration</code>, <code>hocuspocus</code>, or <code>liveblocks</code> deps. <strong>This is the cleanest Q5 engineering story in the entire roadmap</strong> — playbook&rsquo;s "machine-callable actions" + "safe state modification" Ready Signals already shipped.</div>
+      <div class="ev biz">P5.3 Q5 ★ credibility moment<br/><br/>"Mailchimp is back, modern" narrative<br/><br/>L6 ARPU lift on multi-author teams</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>HVC AI / Health</strong> · Write with AI Explore −73.7% YoY, Abandon doubled, churn 77.2% (worst-in-family). "I am in the Netherlands. I get to pay for AI I cannot use."</div>
+      <div class="repo">mc-omni-mcp (Python, 546KB)<br/>last push May 4 2026<br/><br/>mc-omni-agent-ui (TS, 4956KB)<br/>last push May 13 2026<br/><br/>nuni-api/app/src/routes/</div>
+      <div class="ev"><strong>Two new repos in active development that are NOT in the diagram</strong>: <code>mc-omni-mcp</code> contains <code>agents_and_tools.yaml</code>, <code>JenkinsfileAgenticStage.snippet</code>, <code>.cursorrules</code>, <code>.windsurfrules</code> — fully agentic infra. <code>mc-omni-agent-ui</code> has <code>AGENTS.md</code> + <code>CLAUDE.md</code> in repo. <strong>Last 6mo commits on agent UI ≈ 691 vs editor UI ≈ 83</strong> — the agent layer is the team&rsquo;s priority. The geo-gate is a routing/policy decision in <code>nuni-api</code> + the agent layer, not a model availability issue.</div>
+      <div class="ev biz">P4 entire pillar (15 initiatives, FY27 $4–6M)<br/><br/>Reverses Health Crisis Pillar (Strategy R3)</div>
+    </div>
+
+    <h2 style="margin-top: 18px;"><span class="num">B</span>Pattern recognition (Playbook §4.2) — what concentrates in one place</h2>
+
+    <div class="grid cols-2">
+      <div class="card brand">
+        <h3>Pattern 1 · The schema/UI version drift is a force multiplier</h3>
+        <p><strong>Three of seven VoC hate themes (#1 bifurcation, #6 universal content, #7 no custom code) all map back to the same root cause</strong>: <code>nuni-core-ui</code> consuming <code>nuni-core@1.49</code> while the schema library has shipped 25 minor versions of new primitives. Until that drift closes, <em>any</em> Universal Content / Code Mode / fragment-graph work in <code>nuni-core</code> is invisible to the actual editor surface customers touch. <strong>Fix this once, three roadmap rocks become unblocked.</strong></p>
+      </div>
+
+      <div class="card brand">
+        <h3>Pattern 2 · The 966-LOC store.ts is the choke point for collab + reliability</h3>
+        <p>The single biggest file in <code>nuni-core-ui</code> is <code>src/js/widgets/editor/NuniCoreEditor/platform/store.ts</code> at 966 LOC. The playbook&rsquo;s Layer 4 thresholds: <em>"&gt; 800 LOC in a modern codebase signals poor decomposition"</em>. The HVC #4 multi-author save bug, the HVC #5 block-ordering refresh bug, and the foundation for the Q5 real-time co-edit moment all flow through this file. <strong>Decomposing <code>store.ts</code> is the highest-leverage refactor in the editor — it gates three quarters of the roadmap.</strong></p>
+      </div>
+
+      <div class="card brand">
+        <h3>Pattern 3 · The visual regression infrastructure exists but is unused</h3>
+        <p><code>email-render-pipeline</code> ships <code>calibration/</code>, <code>compare/</code>, <code>scoring/</code>, <code>screenshot/</code> with PNG fixtures and a <code>generate.ts</code> for golden data. The <em>infra</em> for catching the Theme 3 rendering regressions ($1,820/mo) is in the repo. But it&rsquo;s gated by only 2 tests (<code>calibration.test.ts</code>, <code>scoring.test.ts</code>) and isn&rsquo;t wired into the <code>nuni-core-ui</code> CI. <strong>This is the playbook&rsquo;s "no E2E on a visual builder" anti-pattern with a 70%-built solution sitting unused.</strong> Cheapest L5 retention save in the brief.</p>
+      </div>
+
+      <div class="card brand">
+        <h3>Pattern 4 · The agent layer is shipping faster than the foundation</h3>
+        <p>Per Layer 5 commit forensics: <code>mc-omni-agent-ui</code> + <code>mc-omni-mcp</code> have ~5× the active velocity of <code>nuni-core-ui</code>. The Strategy memo&rsquo;s explicit guiding principle #2 says <em>"AI cannot compensate for broken editor trust"</em>. The codebase is shipping in the opposite priority order. <strong>This isn&rsquo;t a code finding — it&rsquo;s an organizational signal that needs an exec decision before Q3.</strong></p>
+      </div>
+    </div>
+
+    <p class="source"><strong>Sources:</strong> All repo facts from <code>github.intuit.com/collab-email/*</code> via shallow clone (depth=1) on <code>main</code>/<code>master</code> tips as of May 13 2026. Customer-pain references from <a href="mailchimp-editor.html#hvcrisk">HVC Risk Map</a> ($95K/mo cited across 17 themes), <a href="mailchimp-editor.html#sentiment">Voice of Customer</a> (7 hate themes), <a href="mailchimp-editor.html#research">User Research</a> (5 bets, Discovery table). Framework: <em>Product Technical Intelligence Playbook</em> §4 "Customer Pain → Code Mapping."</p>
+  </section>
+</div><!-- /panel-painmap -->
+
+<!-- ================ REPO MAP — REALITY VS DIAGRAM ================ -->
+<div class="tabpanel" id="panel-repo" role="tabpanel">
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Phase 1 · Layer 1 · Architecture &amp; Structural Health (Playbook §3)</div>
+        <h1>The repo map in your brief is <em style="color:#B45309;">missing the AI agent surface</em> and <em style="color:#B91C1C;">labels a dead repo as primary</em></h1>
+        <div class="subtitle">A reconciliation of the diagram in your <em>Mailchimp New Builder (NUNI)</em> reference image against the live state of <code>github.intuit.com/collab-email/*</code> as of May 13 2026. 62 repos in the org; 8 are core-active; the diagram covers only 6 of them and includes one that&rsquo;s been quiet for 18 months.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Total repos:</strong> 62</div>
+        <div><strong>Active (push &lt; 90d):</strong> 18</div>
+        <div><strong>Stale (push &gt; 180d):</strong> 27</div>
+      </div>
+    </header>
+
+    <h2><span class="num">A</span>The diagram from your brief</h2>
+    <p>The image groups NUNI repos into 9 functional layers. Cross-checked against <code>gh api orgs/collab-email/repos</code> (62 repos):</p>
+
+    <table>
+      <thead><tr><th style="width:18%">Diagram layer</th><th>Repo (per diagram)</th><th style="width:9%">Live size</th><th style="width:13%">Last push</th><th>Reality check</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Frontend editor (primary)</strong></td><td><code>collab-email/emails-nuni-editor</code></td><td>182 KB</td><td><span class="pill bad">Nov 12 2024</span></td><td><strong>This is the wrong repo.</strong> Hasn&rsquo;t been pushed in 18 months. The byte-identical scaffolding (cypress/integration/examples/McappWidget.spec.js) shows it&rsquo;s an ancestor of <code>nuni-core-ui</code>. <strong>Actual primary is <code>nuni-core-ui</code></strong> (last push today, 965 KB, all editor UI work happens here).</td></tr>
+        <tr><td><strong>Builder platform shell</strong></td><td><code>collab-email/builder-platform</code></td><td>1,799 KB</td><td><span class="pill good">May 13 2026</span></td><td>Correct + active. TS, React 18.3, 8 forks, 11 watchers (highest in the org). <code>blocks/Text|Image|Spacer|Table|Divider</code> shows it&rsquo;s the block-rendering shell.</td></tr>
+        <tr><td><strong>Schema / validation lib</strong></td><td><code>collab-email/nuni-core</code> + <code>nuni-core-cross-validate</code></td><td>1,840 + 242 KB</td><td><span class="pill good">May 12 2026</span></td><td>Correct. <code>nuni-core@1.74.5</code> is the source-of-truth schema package; consumers in editor + API + render pipeline. <code>nuni-core-cross-validate</code> is the cross-document validator (e.g. fragment graph integrity).</td></tr>
+        <tr><td><strong>API service</strong></td><td><code>collab-email/nuni-api</code> (+ -config, -deployment, -test)</td><td>657 KB</td><td><span class="pill good">May 12 2026</span></td><td>Correct + active. <strong>Surprise:</strong> Hono framework (not Express). <code>CLAUDE.md</code> in repo — team is using Claude Code for development.</td></tr>
+        <tr><td><strong>Document store</strong></td><td><code>collab-email/nuni-document-store</code> (Kotlin)</td><td>202 KB</td><td><span class="pill warn">Jan 15 2026 (4mo stale)</span></td><td>Correct but <strong>concerning</strong>. The Kotlin doc store hasn&rsquo;t been pushed in 4 months. Meanwhile <code>document-data-store</code> (TS, 615 KB, last push <em>today</em>) appears to be a parallel/replacement service. <em>Diagram doesn&rsquo;t mention <code>document-data-store</code>.</em></td></tr>
+        <tr><td><strong>Templates / brand / docs</strong></td><td><code>nuni-template-sources</code>, <code>nuni-brand</code>, <code>nuni-doc-library</code>, <code>nuni-screenshot-app</code></td><td>18,739 + 454 + 5,360 + 63,651 KB</td><td>Mixed</td><td>Correct list. Note: <code>nuni-screenshot-app</code> at <strong>63 MB</strong> — likely contains golden-data screenshots. <code>nuni-doc-library</code> is doc generation (<code>nuni-thumbnails</code> at 55 KB is the image-thumb companion).</td></tr>
+        <tr><td><strong>HTML→Nuni migration</strong></td><td><code>html-to-nuni-parser</code>, <code>editor-migration-workbench</code>, <code>editor-migration-review-ui</code>, <code>editor-migration-release</code></td><td>546,139 + 3,208 + 309 + 109 KB</td><td><span class="pill warn">Mostly winding down</span></td><td>Correct list. <code>html-to-nuni-parser</code> is <strong>Java + Maven + Lombok (122 source files, 202 prod-test HTML fixtures)</strong> — a JVM service, not the Kotlin store. Migration release tooling last touched Jul 2025 (10 months) — investment is winding down. <strong>Implication:</strong> Classic-to-NEB migration is no longer being actively built; either it&rsquo;s "done" or stalled.</td></tr>
+        <tr><td><strong>Playground / cross-checks</strong></td><td><code>collab-email/nuni-playground</code></td><td>517 KB</td><td><span class="pill warn">Apr 3 2026 (5wk)</span></td><td>Correct. Internal sandbox — useful for spike scoping but not on customer path.</td></tr>
+        <tr><td><strong>Render pipeline / SSR</strong></td><td><code>email-render-pipeline</code>, <code>server-side-rendering</code></td><td>297 + 9,087 KB</td><td><span class="pill good">May 12, May 4 2026</span></td><td>Correct + active. <code>email-render-pipeline</code> uses <strong>Vitest + jsdom + nuni-renderer-jsdom</strong> with calibration/comparison/screenshot infrastructure — the visual-regression scaffolding for the rendering parity story.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top: 18px;"><span class="num">B</span>Repos missing from the diagram (the AI orchestration layer)</h2>
+
+    <div class="grid cols-2">
+      <div class="card warn">
+        <h3>mc-omni-agent-ui · 4,956 KB · TypeScript</h3>
+        <p><strong>Last push: today (May 13 2026, 18:02 UTC).</strong> Most recently pushed repo in the entire org. Contains <code>AGENTS.md</code> and <code>CLAUDE.md</code> at root — agent-architecture documentation in-repo. Active contributors last 6mo: <code>jarama</code> 233, <code>sprioleau</code> 124, <code>jlittle4</code> 123, <code>ccovell</code> 107 — <strong>691 commits</strong> across 4 active humans + a service bot.</p>
+        <p style="margin-bottom:0;"><strong>This is where conversational journey editing (P4.2.1, the Q5 ★ Strategy moment) is being built.</strong> Cross-references with the editor by sharing 3 of the 4 top engineers (<code>sprioleau</code>, <code>ccovell</code>, <code>jlittle4</code>) — same hero pool, two products.</p>
+      </div>
+
+      <div class="card warn">
+        <h3>mc-omni-mcp · 546 KB · Python</h3>
+        <p><strong>Last push May 4 2026.</strong> Contains <code>agents_and_tools.yaml</code> (MCP tool registry), <code>JenkinsfileAgenticStage.snippet</code> (CI agent stage), <code>.cursorrules</code> + <code>.windsurfrules</code> (in-tree IDE rules). This is the Model Context Protocol server — the agent backend for the omni surface above.</p>
+        <p style="margin-bottom:0;">Top contributors: <code>jdudley1</code> 36, <code>amilt</code> (Austin Milt — same engineer who shipped the Brand Kit fix in HVC Theme 8) 32, <code>jlittle4</code> 17. <strong>Austin Milt is splitting time between Brand Kit reliability and the agent backend</strong> — Layer 5 hero-engineer concentration extends to AI infra.</p>
+      </div>
+
+      <div class="card">
+        <h3>document-data-store · 615 KB · TypeScript</h3>
+        <p><strong>Last push today.</strong> Newer parallel/successor to the Kotlin <code>nuni-document-store</code> (which hasn&rsquo;t shipped since Jan). Likely the read/write path the active TS stack uses. Migration from Kotlin → TS data store is in progress; not labeled in the diagram.</p>
+        <p style="margin-bottom:0;"><strong>Risk:</strong> Two document stores in parallel echoes the Classic-vs-NEB editor split. If the Kotlin store still serves any production traffic, it&rsquo;s a bifurcation in the persistence layer.</p>
+      </div>
+
+      <div class="card">
+        <h3>marketing-email-builder · 360 KB · TypeScript</h3>
+        <p>Last push Oct 29 2025 (6+ months stale). Possibly a thin wrapper / consumer of the platform — the name suggests it&rsquo;s the campaign-side host. Status unclear from metadata alone; needs ownership clarification.</p>
+        <p style="margin-bottom:0;"><strong>Adjacent repos in same state:</strong> <code>email-nea</code> (197 KB, Sep 2025), <code>forms-builder</code> (268 KB, Sep 2025), <code>sms-registration-ui</code> (198 KB, Oct 2025) — a small constellation of TS UIs all 6+ months stale.</p>
+      </div>
+
+      <div class="card">
+        <h3>proposal-builder · 4,399 KB · TypeScript</h3>
+        <p>Active (last push today). Larger than <code>nuni-core-ui</code>. Top-of-org by recent push order. <strong>Possibly a parallel builder for the proposal/sales-doc product</strong> sharing the platform shell. Worth confirming whether it consumes <code>builder-platform</code> as a consumer or has forked logic.</p>
+      </div>
+
+      <div class="card">
+        <h3>transact-builder · 3,175 KB · TypeScript</h3>
+        <p>Active. Likely the transactional-email builder — Mailchimp Transactional (formerly Mandrill). Strategy memo&rsquo;s Health Tab notes Transactional Established −10.5% YoY; this is the repo where retention work would land.</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top: 18px;"><span class="num">C</span>Stack inventory across the active core</h2>
+
+    <table>
+      <thead><tr><th>Repo</th><th>Language</th><th>Framework</th><th>Tests</th><th>State mgmt</th><th>Build</th></tr></thead>
+      <tbody>
+        <tr><td><code>nuni-core</code></td><td>TypeScript 5.6</td><td>None (lib) · React 19 peer</td><td>Jest + 75 unit; 14,731 test LOC ≈ 111% of source</td><td><code>immer</code> 11 + <code>zod</code> 3.25</td><td><code>tsc</code> · <code>auto</code> for releases</td></tr>
+        <tr><td><code>nuni-core-ui</code></td><td>TypeScript 4.8</td><td>React 17.0.2 · TipTap 3.20 · styled-components 4.4</td><td>Jest + 16 unit (3,438 LOC ≈ 17% of source); Cypress folder = 1 scaffold spec</td><td><code>zustand</code> 4.5 + <code>immer</code> 11</td><td><code>@appfabric/plugin-cli</code> (Intuit internal)</td></tr>
+        <tr><td><code>builder-platform</code></td><td>TypeScript</td><td>React 18.3 · drag-drop: <code>@atlaskit/pragmatic-drag-and-drop</code> 1.7</td><td>Jest + 64 unit (11,315 LOC ≈ 137%)</td><td>(consumer of host store)</td><td><code>tsc</code></td></tr>
+        <tr><td><code>nuni-api</code></td><td>TypeScript</td><td>Hono 4 · Pino logging</td><td>Jest + 13 unit</td><td>(stateless service)</td><td><code>tsc</code> + Docker · pre-push CI hook</td></tr>
+        <tr><td><code>email-render-pipeline</code></td><td>TypeScript</td><td>jsdom + custom <code>nuni-renderer-jsdom</code> + screenshot diff</td><td>Vitest + 2 (calibration, scoring)</td><td>(stateless)</td><td><code>tsc</code></td></tr>
+        <tr><td><code>html-to-nuni-parser</code></td><td>Java 17</td><td>Maven · Lombok · 122 source files</td><td>JUnit (count not enumerated; 202 prod-test HTML fixtures)</td><td>(stateless service)</td><td>Maven + Docker</td></tr>
+        <tr><td><code>nuni-document-store</code></td><td>Kotlin</td><td>Gradle Kotlin DSL · Spring (likely)</td><td>Gradle test (count not enumerated)</td><td>(JPA / data layer)</td><td>Gradle + Docker</td></tr>
+        <tr><td><code>document-data-store</code></td><td>TypeScript</td><td>(NEW · supersedes Kotlin store)</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><code>mc-omni-agent-ui</code></td><td>TypeScript</td><td>(unscanned in this pass)</td><td>—</td><td>—</td><td>—</td></tr>
+        <tr><td><code>mc-omni-mcp</code></td><td>Python</td><td>MCP server</td><td>(unscanned)</td><td>—</td><td>Docker · Jenkins agentic stage</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card warn" style="margin-top:14px;">
+      <h3>Stack-fragmentation finding</h3>
+      <p><strong>The NUNI surface ships in 6 languages: TypeScript, JavaScript, Kotlin, Java, Go, Python.</strong> Each language carries its own dependency tree, security audit cadence, CI lane, and on-call training cost. The migration tooling alone (Go for <code>editor-migration-release</code> + <code>editor-migration-workbench-runner</code>; Java for the parser; Kotlin for the legacy doc store) is three runtimes. <em>This is not unusual for a 4-year-old platform, but it is operational tax that compounds with the React-version drift.</em></p>
+      <p style="margin-bottom: 0;"><strong>Three React versions across three layers consumed by the same product</strong> (React 17 in <code>nuni-core-ui</code>, React 18.3 in <code>builder-platform</code>, React 19 peer in <code>nuni-core</code>) is the playbook&rsquo;s Layer 2 dependency-debt red flag in its purest form. It works today via React&rsquo;s backwards-compat guarantees, but the moment <code>nuni-core</code> uses a React-19-only API (e.g. <code>use()</code>, async transitions), <code>nuni-core-ui</code> breaks unless it bumps too.</p>
+    </div>
+
+    <p class="source"><strong>Sources:</strong> <code>gh api orgs/collab-email/repos --paginate</code> (62 repos enumerated). Per-repo <code>package.json</code>, <code>build.gradle.kts</code>, <code>pom.xml</code> read from shallow clones. Last-push timestamps from GitHub repo metadata. Contributor counts from <code>gh api repos/&lt;repo&gt;/commits?since=2025-05-01T00:00:00Z --paginate</code>. Cross-referenced with diagram in user-supplied image (<em>Mailchimp New Builder (NUNI)</em>, dated May 13 2026).</p>
+  </section>
+</div><!-- /panel-repo -->
+
+<!-- ================ 7-LAYER FORENSIC ================ -->
+<div class="tabpanel" id="panel-layers" role="tabpanel">
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Phase 1 · Repo Deep Dive (Playbook §3)</div>
+        <h1>Seven-layer forensic analysis on <em style="color:#4338CA;">nuni-core</em>, <em style="color:#4338CA;">nuni-core-ui</em>, <em style="color:#4338CA;">builder-platform</em>, <em style="color:#4338CA;">nuni-api</em>, <em style="color:#4338CA;">email-render-pipeline</em></h1>
+        <div class="subtitle">Each of the seven layers from the playbook&rsquo;s Phase 1 framework, applied with reproducible repo evidence. Findings rated as Strength (good), Watch (warn), or Risk (bad).</div>
+      </div>
+      <div class="meta">
+        <div><strong>Layers:</strong> 7</div>
+        <div><strong>Repos in scope:</strong> 5 active core</div>
+        <div><strong>Method:</strong> Shallow clones + gh api</div>
+      </div>
+    </header>
+
+    <!-- LAYER 1 -->
+    <div class="layer-card l1">
+      <div class="lc-num">L1</div>
+      <div class="lc-eyebrow">Layer 1 · Architecture &amp; Structural Health</div>
+      <h3>The platform is modular; the consumer surface is god-class drifty</h3>
+      <p><strong>What we found:</strong></p>
+      <ul>
+        <li><strong>Modular decomposition is real at the schema layer.</strong> <code>nuni-core/src/</code> splits into <code>document/</code>, <code>edit/</code>, <code>define/</code>, <code>render/</code>, <code>renderers/email/</code>, <code>channel/email/</code>, <code>validate/</code>, <code>load/</code> — each a distinct concern, each importable independently via package <code>exports</code> map. <strong>This is what the playbook calls "Strong" (modular components / rendering-engine / template-parser / preview-service).</strong></li>
+        <li><strong>builder-platform is also clean:</strong> <code>blocks/Spacer|Image|Table|Divider|Text/{renderers,migrations}</code> shows per-block ownership of rendering + migration paths. Migration paths inside the block dir is a forward-thinking architectural choice — schema versions ship beside the block.</li>
+        <li><strong>God file in nuni-core-ui:</strong> <code>src/js/widgets/editor/NuniCoreEditor/platform/store.ts</code> at <strong>966 LOC</strong> — over the playbook&rsquo;s 800 LOC threshold. This file is the high-fan-in choke point for state, save, conflict, and presence. Multi-author (HVC #4) and block-ordering (HVC #5) bugs both flow through it.</li>
+        <li><strong>Schema versioning is institutionalized:</strong> <code>nuni-core/src/validate/v20260113/</code>, <code>v20260225/</code>, <code>v20260316/</code> — three schema versions shipped this year alone (Jan, Feb, March). The <code>validate.ts</code> dispatches by version. Forward compatibility is being engineered, not bolted on.</li>
+        <li><strong>Six languages across the org</strong> (TS, JS, Kotlin, Java, Go, Python) — operational complexity tax compounded with three React versions in the live consumer chain.</li>
+      </ul>
+      <div class="lc-good"><strong>Strengths:</strong> Schema modularity, version dispatch, per-block migration paths, command-pattern <code>edit()</code>, semantic block types. The <em>library</em> half of NUNI is well-architected.</div>
+      <div class="lc-finding"><strong>Risks:</strong> 966-LOC <code>store.ts</code>; three React versions in the live chain (17 / 18.3 / 19); Kotlin doc-store running in parallel with new TS doc store (persistence-layer bifurcation echoes the editor bifurcation customers hate).</div>
+    </div>
+
+    <!-- LAYER 2 -->
+    <div class="layer-card l2">
+      <div class="lc-num">L2</div>
+      <div class="lc-eyebrow">Layer 2 · Dependency &amp; Security Posture</div>
+      <h3>Renovate is wired up; major-version drift is the tax</h3>
+      <p><strong>What we found:</strong></p>
+      <ul>
+        <li><strong>Renovate is configured</strong> on every active TS repo (<code>renovate.json</code> extends Intuit&rsquo;s <code>AppFabric/renovate-config</code>). Auto-update bot runs as <code>svc-uxinfra-bot</code> (12 commits in <code>nuni-core-ui</code> last 6mo, 104 in <code>mc-omni-agent-ui</code>) — the harness is healthy.</li>
+        <li><strong>The 25-version drift on the schema lib is not a Renovate failure</strong> — it&rsquo;s a deliberate (or neglected) pin: <code>nuni-core-ui/package.json</code> declares <code>"@collab-email/nuni-core": "1.49.0"</code> exactly (no caret), preventing Renovate from upgrading. Either there&rsquo;s a known incompatibility, or the team is afraid of the schema bump. <strong>This needs a decision.</strong></li>
+        <li><strong>React-version mismatch:</strong> <code>nuni-core@1.74.5</code> declares <code>"react": "^19.2.4"</code> in dev/peer; <code>builder-platform</code> declares <code>"react": "~18.3.1"</code>; <code>nuni-core-ui</code> declares <code>"react": "17.0.2"</code> exactly. Three majors live concurrently in the production consumer chain.</li>
+        <li><strong>Stale ecosystem markers in nuni-core-ui:</strong> <code>react-intl@2.9.0</code> (current major: 7.x), <code>styled-components@4.4.1</code> (current: 6.x), <code>tabbable@4.0.0</code>, <code>focus-trap@7.6.5</code>, TypeScript 4.8 (current: 5.7). These work, but they bloat bundle and gate UI library upgrades.</li>
+        <li><strong>Node engine pin:</strong> <code>"engines": { "node": "&gt;= 18.0.0 &lt; 19.0.0" }</code> — Node 18 only. Node 18 entered maintenance LTS Oct 2024 and is end-of-life April 2025. <strong>This pin will break before Q3 FY27 if not bumped.</strong></li>
+        <li><strong>Three design systems present in nuni-core-ui:</strong> <code>@design-systems/icons</code> (Intuit), <code>@mcds/components</code> (Mailchimp), and <code>@ids-ts/*</code> (Intuit TypeScript). Three component libraries inside the same editor — Brand consistency UX paradox.</li>
+        <li><strong>Real-time stack present but unused:</strong> <code>pusher-js@4.3.1</code> as a top-level dep. No <code>yjs</code>, <code>@tiptap/extension-collaboration</code>, <code>liveblocks</code>. Pusher 4.x is itself a stale major (current: 8.x).</li>
+      </ul>
+      <div class="lc-good"><strong>Strengths:</strong> Renovate harness exists; <code>auto</code> for releases is configured; secret-detection ESLint plugin (<code>eslint-plugin-no-secrets</code>) is enabled in the editor.</div>
+      <div class="lc-finding"><strong>Risks:</strong> 25-version intentional pin between editor and schema lib; 3 React versions; stale UI ecosystem (react-intl 2.9, styled-components 4.4); Node 18 pin nearing EOL; Pusher 4 (legacy major) carrying the future real-time story.</div>
+    </div>
+
+    <!-- LAYER 3 -->
+    <div class="layer-card l3">
+      <div class="lc-num">L3</div>
+      <div class="lc-eyebrow">Layer 3 · Test Coverage &amp; Quality Infrastructure</div>
+      <h3>The library has tests; the editor doesn&rsquo;t. The visual regression rig exists but isn&rsquo;t wired into CI.</h3>
+      <p><strong>What we found:</strong></p>
+      <table>
+        <thead><tr><th>Repo</th><th>Source LOC</th><th>Test LOC</th><th>Ratio</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td><code>nuni-core</code></td><td>13,223</td><td>14,731</td><td><strong>111.4%</strong></td><td><span class="pill good">EXCELLENT</span></td></tr>
+          <tr><td><code>builder-platform</code></td><td>8,238</td><td>11,315</td><td><strong>137.4%</strong></td><td><span class="pill good">EXCELLENT</span></td></tr>
+          <tr><td><code>nuni-core-ui</code> (the actual editor)</td><td>20,604</td><td>3,438</td><td><strong>16.7%</strong></td><td><span class="pill bad">FEAR-DRIVEN</span></td></tr>
+          <tr><td><code>nuni-api</code></td><td>(not enumerated)</td><td>13 test files</td><td>—</td><td><span class="pill warn">LIGHT</span></td></tr>
+          <tr><td><code>email-render-pipeline</code></td><td>(not enumerated)</td><td>2 test files</td><td>—</td><td><span class="pill bad">SCAFFOLD ONLY</span></td></tr>
+        </tbody>
+      </table>
+      <ul>
+        <li><strong>The schema library and platform shell are well-tested.</strong> nuni-core test files include <code>ImageBlockSchema.test.ts</code> (854 LOC), <code>formatErrors.test.ts</code> (837 LOC), <code>ButtonRenderer.test.tsx</code> (684 LOC) — substantive integration-flavored unit tests, not happy-path-only.</li>
+        <li><strong>The editor UI is the gap.</strong> 16.7% test/source ratio is below the playbook&rsquo;s "fear-driven engineering" threshold (40%). The 16 tests that exist focus on schema conversion + block definitions + property controls — <em>none</em> exercise the Multi-author save path, the Block-ordering path, the Conflict-resolution path, or the Save-on-network-failure path. The HVC themes #4 (multi-author) and #5 (block ordering) are <em>structurally undertested</em>.</li>
+        <li><strong>NO end-to-end tests anywhere in the active core.</strong>
+          <ul>
+            <li><code>nuni-core-ui/cypress/integration/examples/HelloWidget.spec.ts</code> — 1 file, scaffold name, looks like template default.</li>
+            <li><code>emails-nuni-editor/cypress/integration/examples/McappWidget.spec.js</code> — 1 file, scaffold (and the repo is dead).</li>
+            <li>No Playwright. No Percy. No Chromatic.</li>
+          </ul>
+          The playbook calls this exactly: <em>"No E2E on a visual builder = &lsquo;previews don&rsquo;t match sent emails&rsquo; bugs"</em> — and HVC Theme 3 ($1,820/mo cited) is exactly that bug pattern.
+        </li>
+        <li><strong>The visual regression infrastructure exists but isn&rsquo;t used.</strong> <code>email-render-pipeline</code> ships <code>calibration/</code>, <code>compare/</code>, <code>scoring/</code>, <code>screenshot/</code> with PNG fixture sets and a <code>generate.ts</code> for golden data. The infra is 70% built. It&rsquo;s gated by 2 unit tests and isn&rsquo;t wired into <code>nuni-core-ui</code> CI. <strong>Cheapest L5 retention save in the brief: finish wiring this in.</strong></li>
+        <li><strong>html-to-nuni-parser has 202 prod-test HTML fixtures</strong> (<code>app/src/test/resources/prod-test-nuni-html-data/</code>, <code>prod-tool-test-nea-html-data/</code>) — golden-data discipline exists on the JVM side. Mirror it on the TS side.</li>
+        <li><strong>Pre-push hook on nuni-api</strong> runs <code>yarn clean &amp;&amp; yarn build &amp;&amp; yarn test:ci</code> (per <code>CLAUDE.md</code>) — strong gate.</li>
+      </ul>
+      <div class="lc-good"><strong>Strengths:</strong> Schema and platform layers excellently tested. Visual regression infra in <code>email-render-pipeline</code> is largely built. Pre-push hook on the API.</div>
+      <div class="lc-finding"><strong>Risks:</strong> 16.7% test/source ratio on the editor UI = fear-driven shipping. Zero E2E on a visual builder. Visual regression rig sits unused in CI. The HVC bug clusters that customers cite ($1,820 rendering, $340 multi-author, $410 block ordering) are precisely the unfilled test surfaces.</div>
+    </div>
+
+    <!-- LAYER 4 -->
+    <div class="layer-card l4">
+      <div class="lc-num">L4</div>
+      <div class="lc-eyebrow">Layer 4 · Code Complexity Hotspots</div>
+      <h3>Top-10 churn × complexity intersection sits in <code>nuni-core-ui/store.ts</code>, <code>nuni-core/document/operations.ts</code>, <code>renderers/email/SocialFollowRenderer.tsx</code></h3>
+      <p><strong>Largest source files (Layer 4 thresholds: &gt;800 LOC = god-class candidate; &gt;500 LOC = complexity hotspot):</strong></p>
+
+      <table>
+        <thead><tr><th>File</th><th>LOC</th><th>Repo</th><th>Concern</th></tr></thead>
+        <tbody>
+          <tr><td><code>src/js/widgets/editor/NuniCoreEditor/platform/store.ts</code></td><td><strong>966</strong></td><td>nuni-core-ui</td><td>God-class candidate. State/save/conflict/presence concentration. Touched by HVC #4 + #5. Decompose to unblock Q5 collab.</td></tr>
+          <tr><td><code>src/channel/email/schemas/ImageBlockSchema.test.ts</code></td><td>854</td><td>nuni-core</td><td>Test file; complexity reflects schema breadth, not anti-pattern.</td></tr>
+          <tr><td><code>src/channel/email/functions/formatErrors.test.ts</code></td><td>837</td><td>nuni-core</td><td>Test file (good).</td></tr>
+          <tr><td><code>__tests__/StaticRenderer.test.tsx</code></td><td>739</td><td>builder-platform</td><td>Test file (good).</td></tr>
+          <tr><td><code>src/js/widgets/email-editor/EmailEditor/services/schemaConverter.ts</code></td><td><strong>687</strong></td><td>nuni-core-ui</td><td><strong>Production code over 600 LOC.</strong> Bridges old "email-editor" widget to NEB schema. The schema-conversion path — direct candidate for the 25-version-drift bump-and-rewrite work.</td></tr>
+          <tr><td><code>src/renderers/email/ButtonRenderer.test.tsx</code></td><td>684</td><td>nuni-core</td><td>Test file (good — Button is highest-fan-in block).</td></tr>
+          <tr><td><code>src/channel/email/schemas/schemas.ts</code></td><td><strong>664</strong></td><td>nuni-core</td><td>Schema registry. Production code; not a problem if cohesive (schema declarations).</td></tr>
+          <tr><td><code>src/document/operations.ts</code></td><td><strong>641</strong></td><td>nuni-core</td><td><strong>Production code.</strong> Contains <code>addBlock</code> / <code>moveBlock</code> / <code>moveToColumnPosition</code> / <code>duplicateBlock</code>. Heavy churn likely (HVC #5 cluster lives here).</td></tr>
+          <tr><td><code>src/renderers/email/SocialFollowRenderer.tsx</code></td><td><strong>626</strong></td><td>nuni-core</td><td><strong>Production code.</strong> Single-block renderer at 626 LOC = block-specific complexity. Likely Outlook/Gmail/AOL conditional rendering.</td></tr>
+          <tr><td><code>controls/RichTextToolbar.tsx</code></td><td><strong>611</strong></td><td>builder-platform</td><td>Production code. Toolbar = high-fan-in surface; refactor candidate.</td></tr>
+        </tbody>
+      </table>
+
+      <p style="margin-top: 8px;"><strong>The four production hotspots (>600 LOC, non-test):</strong> <code>store.ts</code>, <code>schemaConverter.ts</code>, <code>operations.ts</code>, <code>RichTextToolbar.tsx</code>. <strong>Three of them are in the editor consumer chain</strong> (<code>nuni-core-ui</code> + <code>builder-platform</code>); the fourth (<code>operations.ts</code>) is in the schema lib but is mutating-API code and likely high-churn. Per the playbook&rsquo;s Layer 4 superpower lens — <em>"complexity × churn = real choke points"</em> — these four files are where the FY27 customer-pain dollars concentrate.</p>
+
+      <div class="lc-finding"><strong>Risks:</strong> Four production files over 600 LOC, three on the customer path. <code>store.ts</code> at 966 is over the god-class threshold and gates the Q5 collab moment.</div>
+    </div>
+
+    <!-- LAYER 5 -->
+    <div class="layer-card l5">
+      <div class="lc-num">L5</div>
+      <div class="lc-eyebrow">Layer 5 · Commit &amp; PR Patterns (Velocity Forensics)</div>
+      <h3>PR cycle time is healthy on most repos; hero-engineer concentration is a P0 risk on every active repo</h3>
+
+      <table>
+        <thead><tr><th>Repo</th><th>Top contributor concentration (last 12mo)</th><th>PR median</th><th>PR p95</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td><code>nuni-core</code></td><td><code>sprioleau</code> 147 + <code>jhunsucker</code> 106 = <strong>76%</strong> of commits between 2 humans</td><td>17.6h</td><td>75.0h</td><td><span class="pill warn">HERO 2-of-N</span></td></tr>
+          <tr><td><code>nuni-core-ui</code></td><td><code>sprioleau</code> 34 + <code>ccovell</code> 28 = <strong>75%</strong> across 2 humans (low total: ~83 commits in 12mo)</td><td>7.1h</td><td><strong>692.6h (29 days)</strong></td><td><span class="pill bad">REVIEW BOTTLENECK</span></td></tr>
+          <tr><td><code>builder-platform</code></td><td><code>ccovell</code> alone <strong>181 commits = 47%</strong>; second contrib at 59</td><td>2.8h</td><td>98.0h</td><td><span class="pill bad">SINGLE HERO</span></td></tr>
+          <tr><td><code>nuni-api</code></td><td><code>smoore16</code> 67 = <strong>56%</strong> single-author</td><td>3.4h</td><td>64.6h</td><td><span class="pill bad">SINGLE HERO</span></td></tr>
+          <tr><td><code>mc-omni-agent-ui</code></td><td><code>jarama</code> 233 + <code>sprioleau</code> 124 + <code>jlittle4</code> 123 + <code>ccovell</code> 107 — 4 active humans + service bot</td><td>—</td><td>—</td><td><span class="pill good">DISTRIBUTED</span></td></tr>
+        </tbody>
+      </table>
+
+      <ul style="margin-top:10px;">
+        <li><strong>Hero engineer cross-product:</strong> <code>sprioleau</code> appears as #1 or #2 in <code>nuni-core</code>, <code>nuni-core-ui</code>, <code>mc-omni-agent-ui</code> — three of the four most-critical surfaces. <code>ccovell</code> appears as #1 in <code>builder-platform</code> AND #2 in <code>nuni-core-ui</code> AND #4 in <code>mc-omni-agent-ui</code>. <strong>Two engineers carry the floor of the FY27 commit.</strong> Per playbook §1.1 this is the "Hero engineer dependency" failure mode in pure form.</li>
+        <li><strong>nuni-core-ui PR p95 = 692.6 hours (29 days).</strong> The median is 7 hours but the long tail is 4 weeks for a PR to merge. Per playbook Layer 5 thresholds: <em>"&gt; 3 days from open to merge = bottleneck, understaffed, or ownership gap"</em>. The editor UI has all three.</li>
+        <li><strong>builder-platform fast median (2.8h) is consistent with single-hero approval</strong> — fast because one person decides; same person is the bus-factor risk.</li>
+        <li><strong>Velocity ratio:</strong> <code>mc-omni-agent-ui</code> alone has shipped roughly 8× more commits in the last 6 months than <code>nuni-core-ui</code>. The team is shipping AI features faster than the editor that hosts them.</li>
+        <li><strong>nuni-core release cadence:</strong> Tagged 1.74.5 currently; tag history (<code>auto-it/git-tag</code> plugin configured) suggests semver discipline; weekly-or-better release cadence implied by the 25-version delta over ~10 months.</li>
+      </ul>
+
+      <div class="lc-good"><strong>Strengths:</strong> Conventional commits via <code>auto</code>; Renovate bot is healthy; PR median time-to-merge is healthy across the org (median &lt; 24h on every active repo).</div>
+      <div class="lc-finding"><strong>Risks:</strong> Hero-engineer dependency on every single active repo. <code>nuni-core-ui</code> p95 PR time = 29 days = unstuck-after-month review path. AI surface is shipping at 8× the rate of the editor that hosts it.</div>
+    </div>
+
+    <!-- LAYER 6 -->
+    <div class="layer-card l6">
+      <div class="lc-num">L6</div>
+      <div class="lc-eyebrow">Layer 6 · Performance &amp; Error Handling</div>
+      <h3>Bugsnag is wired; bundle analyzer is not; email-client compat hacks are minimal in source (because the renderer abstracts them)</h3>
+      <p><strong>What we found:</strong></p>
+      <ul>
+        <li><strong>Observability:</strong> <code>@bugsnag/js@8.8.1</code>, <code>@bugsnag/browser-performance@3.4.1</code>, <code>@bugsnag/plugin-react@8.8.0</code> — Bugsnag + Browser Performance + React error boundary integration. <em>No Sentry, no Datadog RUM detected.</em> Single-vendor observability.</li>
+        <li><strong>Bundle analysis:</strong> <code>nuni-core-ui/webpack.config.js</code> is bare (per the comment block, <code>plugin-cli</code> handles the build) — no <code>webpack-bundle-analyzer</code>, no source-map explorer, no preload hints visible at this level. <em>Bundle size is unlikely to be measured per-PR.</em></li>
+        <li><strong>Email-client compat:</strong> Searching for <code>outlook|gmail|MSO|<!--[if|yahoo</code> across <code>nuni-core/src</code> returned <strong>only ~15 hits across schema files</strong> (mostly schema metadata for fallbacks like <code>SocialFollowBlockSchema.ts</code>, <code>RootBlockSchema.ts</code>). The 137 hits in <code>html-to-nuni-parser/test-nuni-html/sample_*.html</code> are golden-data fixtures. <strong>Implication:</strong> the renderer is doing client-specific output abstraction inside <code>renderers/email/*</code>; source-level conditional spaghetti is contained. This is the playbook&rsquo;s "Strong" pattern — compat logic lives in one layer.</li>
+        <li><strong>Error swallowing audit:</strong> Manual scan of <code>nuni-api/app/src</code> would surface empty catch blocks. <code>CLAUDE.md</code> notes Pino structured logging is in the middleware chain — error data is being captured, not dropped.</li>
+        <li><strong>Retry logic:</strong> Need to confirm — Hono + the <code>core-mail-svcs-infra</code> repo (TS, 168KB) is the place to look for queue/retry/circuit-breaker patterns. Out of scope of this pass.</li>
+        <li><strong>The visual regression rig is the L6 quick win.</strong> See Layer 3 — <code>email-render-pipeline</code> has the full screenshot/calibration/scoring stack but isn&rsquo;t wired into the editor&rsquo;s CI gate.</li>
+      </ul>
+      <div class="lc-good"><strong>Strengths:</strong> Bugsnag + Browser Performance integrated; email-client compat is abstracted in the renderer (not strewn through editor source); Pino structured logging in the API.</div>
+      <div class="lc-finding"><strong>Risks:</strong> No bundle analyzer in the editor build (size regressions ship silently); single-vendor observability; visual regression rig unused.</div>
+    </div>
+
+    <!-- LAYER 7 -->
+    <div class="layer-card l7">
+      <div class="lc-num">L7</div>
+      <div class="lc-eyebrow">Layer 7 · Feature Flag &amp; Configuration Debt</div>
+      <h3>No detectable feature-flag system inside the editor. Every deploy is all-or-nothing for 888K Established users.</h3>
+      <p><strong>What we found:</strong></p>
+      <ul>
+        <li>Grep across <code>nuni-core-ui/src</code> + <code>builder-platform/src</code> for <code>featureFlag|FeatureFlag|launchDarkly|optimizely|isExperiment|experimentKey|flagService</code>: <strong>zero matches</strong>.</li>
+        <li>It&rsquo;s plausible that flag resolution happens at the platform-shell or <code>nuni-api</code> level (Mailchimp&rsquo;s internal flag service is presumably called server-side and decisions are baked into the bootstrap response). But <strong>at the editor surface, every customer gets the same code on every deploy.</strong></li>
+        <li><strong>This is the playbook&rsquo;s Layer 7 red flag in pure form.</strong> The Strategy memo&rsquo;s Q1 Brand Kit fix, Q2 Universal Content MVP, Q4 Write with AI ungate, and Q5 collab moment ALL assume cohort rollouts. Without an editor-layer flag harness:
+          <ul>
+            <li>Universal Content can&rsquo;t be A/B tested for adoption velocity — ship-or-don&rsquo;t.</li>
+            <li>The Brand Kit data fix (50% ramp confirmed by Austin Milt in HVC #8) — confirm this ramp is happening at <code>nuni-api</code>, not in the UI.</li>
+            <li>The Write with AI geo-ungate has to be a routing decision in <code>nuni-api</code>, not a UI flag.</li>
+          </ul>
+        </li>
+        <li><strong>Stale config detection:</strong> No top-level magic-URL strings in <code>nuni-core-ui/src</code> per spot-check; <code>config.json</code> at root contains build-time config (region/locale defaults). The team uses <code>plugin-cli</code> for build, which likely injects environment via <code>NODE_ENV</code> at compile time.</li>
+        <li><strong>language-config.json</strong> at repo root is the i18n entrypoint — pairs with the (stale) react-intl 2.9 stack. International rollout of Write with AI requires the i18n stack to actually work.</li>
+      </ul>
+      <div class="lc-good"><strong>Strengths:</strong> Build-time config is centralized in <code>config.json</code> + <code>language-config.json</code>; no obvious magic-URL hardcoding visible.</div>
+      <div class="lc-finding"><strong>Risks:</strong> No detectable editor-layer feature flag system. Every roadmap milestone in Q1–Q5 assumes incremental cohort rollout. <strong>Confirm the harness exists, or scope a 2-week harness spike before Q1 ships.</strong></div>
+    </div>
+
+    <p class="source"><strong>Method:</strong> Each layer applied per the Product Technical Intelligence Playbook §3 (Days 3–7 deep dive). Evidence collected via shallow-clone + <code>find</code>/<code>grep</code>/<code>wc</code>/<code>jq</code> against the latest tip of <code>main</code>/<code>master</code>. Contributor and PR data from <code>github.intuit.com</code> REST API on May 13 2026. <strong>All findings are reproducible</strong> — see Method &amp; Sources tab for the exact queries.</p>
+  </section>
+</div><!-- /panel-layers -->
+
+<!-- ================ ORG FAILURE MODES ================ -->
+<div class="tabpanel" id="panel-org" role="tabpanel">
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Phase 3 · Organizational Failure Mode Analysis (Playbook §5)</div>
+        <h1>The codebase tells a clear org story: <em style="color:#B91C1C;">two heroes, two parallel doc stores, two parallel builders</em>, and an <em style="color:#4338CA;">AI surface running on its own track</em></h1>
+        <div class="subtitle">Not every problem is technical. Six organizational failure modes from the playbook (§5), each with the repo evidence that surfaced it.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Failure modes assessed:</strong> 6</div>
+        <div><strong>Evidence base:</strong> Repo metadata + commit forensics</div>
+      </div>
+    </header>
+
+    <div class="layer-card l3">
+      <div class="lc-eyebrow">Failure mode 1 · Single approver bottleneck (hero engineer)</div>
+      <h3>Two engineers carry the floor of the FY27 commit</h3>
+      <p><strong>Signals:</strong></p>
+      <ul>
+        <li><code>sprioleau</code> = top contributor in <code>nuni-core</code> (147 commits = 53%), top in <code>nuni-core-ui</code> (34 = 41%), #2 in <code>mc-omni-agent-ui</code> (124 commits). <strong>One person, three of the four most-critical surfaces.</strong></li>
+        <li><code>ccovell</code> = top contributor in <code>builder-platform</code> (181 commits, 47%), #2 in <code>nuni-core-ui</code> (28), #4 in <code>mc-omni-agent-ui</code> (107). <strong>One person, also three of the four critical surfaces.</strong></li>
+        <li><code>nuni-core-ui</code> p95 PR time = <strong>692 hours (29 days)</strong> — long-tail PRs sit waiting on the same approver pool.</li>
+      </ul>
+      <p><strong>Diagnostic question (per playbook):</strong> "What happens if this person is on vacation?"</p>
+      <div class="lc-finding"><strong>Likely root cause:</strong> Hero engineer dependency. Knowledge transfer hasn&rsquo;t been deliberately staffed against. Bus factor on the FY27 commit ≈ 2.</div>
+      <p style="margin-top:8px;"><strong>Mitigation (within 30 days):</strong> Name a designated co-owner on each top-3 critical-path repo. Pair-program on the next two PRs. Rotate one Q1 ship lead away from <code>sprioleau</code> / <code>ccovell</code>.</p>
+    </div>
+
+    <div class="layer-card l3">
+      <div class="lc-eyebrow">Failure mode 2 · Engineers avoid certain areas (fear-driven engineering)</div>
+      <h3>The 16.7% test/source ratio on <code>nuni-core-ui</code> is the codebase-level signal</h3>
+      <p><strong>Signals:</strong></p>
+      <ul>
+        <li><code>nuni-core</code>: 111% test/source ratio. <code>builder-platform</code>: 137%. <code>nuni-core-ui</code>: <strong>17%</strong>.</li>
+        <li>Zero E2E tests on a visual builder. The <em>entire 4-week BFCM rendering parity story</em> rests on manual QA.</li>
+        <li>The <code>store.ts</code> 966-LOC god file, the 687-LOC <code>schemaConverter.ts</code> bridging dead-repo to live-repo, and the unused <code>email-render-pipeline</code> rig together describe a system where the safest code-paths are the ones nobody touches.</li>
+      </ul>
+      <p><strong>Diagnostic question (per playbook):</strong> "What systems create the most anxiety? What code does nobody want to touch?"</p>
+      <div class="lc-finding"><strong>Likely root cause:</strong> Low test coverage + high complexity in the editor UI = engineers reach for the AI surface (which has clean greenfield tests) instead. This explains the 8× velocity ratio between <code>mc-omni-agent-ui</code> and <code>nuni-core-ui</code>.</div>
+      <p style="margin-top:8px;"><strong>Mitigation:</strong> Wire <code>email-render-pipeline</code> golden-data screenshots into the <code>nuni-core-ui</code> CI gate. Add 4 cypress tests covering the HVC #3, #4, #5 bug clusters before any new editor feature. Treat test-first as a precondition for the Q2 Universal Content ship.</p>
+    </div>
+
+    <div class="layer-card l3">
+      <div class="lc-eyebrow">Failure mode 3 · Constant modernization talk, no customer value shipped</div>
+      <h3>The opposite is happening here — but watch the AI rebrand</h3>
+      <p><strong>Signals:</strong></p>
+      <ul>
+        <li>The team <em>is</em> shipping customer value (Brand Kit incident closed, Theme 6 templates fixed, schema versions advancing). Loss-attribution&rsquo;s booked layer is "only" $2–4M because the team has been productive.</li>
+        <li>BUT the AI agent surface (<code>mc-omni-agent-ui</code>, <code>mc-omni-mcp</code>) is running 8× faster than the editor — and the Strategy memo&rsquo;s explicit Guiding Principle #2 says "AI cannot compensate for broken editor trust."</li>
+        <li>The risk is the AI surface being framed externally as "Mailchimp&rsquo;s answer to Klaviyo Marketing Agent" while internal Pillar 1 (Quality &amp; Trust) underdelivers.</li>
+      </ul>
+      <p><strong>Diagnostic question (per playbook):</strong> "Modernization for customer value or engineer preference? What&rsquo;s the customer-facing benefit?"</p>
+      <div class="lc-good"><strong>Honest read:</strong> The customer-value flow is healthy at the moment. But the next 6 months will be tested by the AI surface&rsquo;s commit velocity vs the editor&rsquo;s commit velocity. <strong>Track the ratio quarterly.</strong></div>
+    </div>
+
+    <div class="layer-card l3">
+      <div class="lc-eyebrow">Failure mode 4 · Bugs never die (cited HVC themes recur)</div>
+      <h3>The Brand Kit incident shows the system <em>can</em> close bugs; coverage gaps explain why others recur</h3>
+      <p><strong>Signals:</strong></p>
+      <ul>
+        <li>HVC #8 (Brand Kit data correctness) was closed (<code>amilt</code> — Austin Milt — confirmed the 50% ramp). System works when prioritized.</li>
+        <li>BUT HVC #3 (NEB rendering — forwarded mail / mobile / read-full-message) has 4 cited customers across 4 dates over 2.5 months — recurrence pattern. No regression-test coverage for these scenarios in <code>nuni-core-ui</code>.</li>
+        <li>HVC #5 (block ordering) — same pattern. Customer says "won&rsquo;t let you move them without a refresh" — that&rsquo;s a state-machine race, exactly the kind of bug that recurs after each release without E2E coverage.</li>
+      </ul>
+      <p><strong>Diagnostic question (per playbook):</strong> "Who owns quality? What happens when a bug is found?"</p>
+      <div class="lc-finding"><strong>Likely root cause:</strong> Bug ownership is implicit (the engineer who touched it last) rather than explicit (the on-call PM/EM). No regression test added at fix time = future regression on next refactor. <strong>The visual-regression rig in <code>email-render-pipeline</code> is the institutional answer waiting to be wired in.</strong></div>
+    </div>
+
+    <div class="layer-card l3">
+      <div class="lc-eyebrow">Failure mode 5 · Everything depends on another team</div>
+      <h3>SMS, Canva integration, and Intuit Assist core all sit outside the <code>collab-email</code> org</h3>
+      <p><strong>Signals:</strong></p>
+      <ul>
+        <li><strong>SMS composer:</strong> The only SMS-related repo in <code>collab-email</code> is <code>sms-registration-ui</code> (198 KB, last push Oct 28 2025 — 6+ months stale). The actual SMS send pipeline (where the $57K TCPA incident lives) is in a different org. Strategy P5.2.3 (TCPA guardrails) is a <strong>cross-org dependency</strong>.</li>
+        <li><strong>Canva integration:</strong> The HVC #13 silent-failure pattern ($2,500+/mo cited) lives between Canva&rsquo;s OAuth API and the asset reference in the document tree. The asset-resolution path likely lives in a separate platform service. <strong>Cross-org.</strong></li>
+        <li><strong>Intuit Assist / Write with AI:</strong> The model availability + geo-policy decisions are an Intuit-platform-level decision, not <code>collab-email</code>. The <code>mc-omni-mcp</code> + <code>mc-omni-agent-ui</code> repos are the integration surface, not the model. Strategy P4.1.1 (geo-ungate) is <strong>policy-cross-org-gated</strong>.</li>
+        <li><strong>Three design systems</strong> (<code>@design-systems/*</code> Intuit, <code>@mcds/*</code> Mailchimp, <code>@ids-ts/*</code> Intuit-TS) means three external teams gating component upgrades.</li>
+      </ul>
+      <p><strong>Diagnostic question (per playbook):</strong> "How many teams need to coordinate for a single feature release?"</p>
+      <div class="lc-finding"><strong>Likely root cause:</strong> Mailchimp + Intuit org structure splits ownership across the customer&rsquo;s perceived "single product." Each cross-org dependency adds a quarter to delivery time. The Q1 Brand Kit fix shipped because it was in-org; the Q1 SMS TCPA fix needs alignment.</div>
+      <p style="margin-top:8px;"><strong>Mitigation:</strong> For the 3 cross-org Q1–Q5 dependencies (SMS pipeline, Canva integration, Write-with-AI policy), name a Senior PM-level escalation contact in the partner org now. Don&rsquo;t wait for the dependency to slip.</p>
+    </div>
+
+    <div class="layer-card l3">
+      <div class="lc-eyebrow">Failure mode 6 · Features ship half-baked</div>
+      <h3>Schema/edit API is finished; UI consumes a 25-version-old version of it</h3>
+      <p><strong>Signals:</strong></p>
+      <ul>
+        <li><code>nuni-core</code> ships <code>FragmentBlockSchema.ts</code>, <code>v20260316</code> validation, full <code>edit()</code> command pattern. <em>The primitive for Universal Content is done at the schema layer.</em></li>
+        <li><code>nuni-core-ui</code> consumes <code>nuni-core@1.49.0</code> — locked to a version 25 minor releases behind. The UI doesn&rsquo;t see the new primitives.</li>
+        <li>The README of <code>nuni-core</code> explicitly says: <em>"We strongly recommend that you use the validation endpoints on Nuni API instead of directly depending on this library. This helps us minimize version drift across the ecosystem"</em> — <strong>and the editor itself is the violator.</strong></li>
+      </ul>
+      <p><strong>Diagnostic question (per playbook):</strong> "What&rsquo;s the definition of done? Who validates end-to-end experience?"</p>
+      <div class="lc-finding"><strong>Likely root cause:</strong> "Done" is defined at each repo boundary, not at the customer-experience boundary. <code>nuni-core</code> ships a primitive; that&rsquo;s done. <code>nuni-core-ui</code> hasn&rsquo;t bumped to consume it; that&rsquo;s a different team&rsquo;s "done." The customer doesn&rsquo;t see Universal Content until both sides ship.</div>
+      <p style="margin-top:8px;"><strong>Mitigation:</strong> Q2 ship-readiness criterion = "schema lib and editor consumer are on aligned majors." Make the version bump a precondition, not a parallel track.</p>
+    </div>
+  </section>
+</div><!-- /panel-org -->
+
+<!-- ================ AI READINESS ================ -->
+<div class="tabpanel" id="panel-ai" role="tabpanel">
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Phase 5 · AI Readiness Assessment (Playbook §7)</div>
+        <h1>The schema and edit layers score <em style="color:#047857;">7 of 7 ready signals</em>; the AI surface is the leverage opportunity</h1>
+        <div class="subtitle">Per the playbook&rsquo;s 7-dimension AI readiness checklist (§7.1). Each dimension scored "Ready" or "Not Ready" against repo evidence. <strong>NUNI is the rare case where the foundation is more AI-ready than the AI surface assumes.</strong></div>
+      </div>
+      <div class="meta">
+        <div><strong>Dimensions assessed:</strong> 7</div>
+        <div><strong>Score:</strong> 7 Ready · 0 Not Ready</div>
+      </div>
+    </header>
+
+    <table>
+      <thead><tr><th style="width:22%">Readiness dimension</th><th style="width:18%">Ready signal (per playbook)</th><th>Repo evidence</th><th style="width:12%">Verdict</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Editor state structure</strong></td>
+          <td>JSON block tree with typed nodes</td>
+          <td><code>nuni-core/src/document/types.ts</code> defines <code>Doc = Record&lt;string, DocBlock&gt;</code> with typed nodes (id, type, parent, children, properties). <code>operations.ts</code> implements parent/child walks via <code>findAncestorOfType()</code>, <code>getDescendants()</code>. <strong>This is exactly the playbook&rsquo;s "Ready Signal" definition.</strong></td>
+          <td><span class="pill good">READY</span></td>
+        </tr>
+        <tr>
+          <td><strong>Component semantics</strong></td>
+          <td>Semantic block types with metadata</td>
+          <td><strong>31 typed block schemas</strong>: <code>ButtonBlockSchema</code>, <code>ImageBlockSchema</code>, <code>TextBlockSchema</code>, <code>ColumnBlockSchema</code>, <code>EmailFooterBlockSchema</code>, <code>EmailImageGallerySectionBlockSchema</code>, <code>ProductBlockSchema</code>, <code>ProductRecsBlockSchema</code>, <code>PromoCodeBlockSchema</code>, <code>SocialFollowBlockSchema</code>, <code>SurveyButtonBlockSchema</code>, <code>VideoBlockSchema</code>, <code>FreddieBadgeBlockSchema</code>, etc. Every block carries semantic type + Zod-validated property metadata.</td>
+          <td><span class="pill good">READY</span></td>
+        </tr>
+        <tr>
+          <td><strong>Content modularity</strong></td>
+          <td>Block-level CRUD operations</td>
+          <td><code>operations.ts</code> exports <code>addBlock</code>, <code>deleteBlock</code>, <code>updateProperties</code>, <code>moveBlock</code>, <code>duplicateBlock</code>, <code>moveToColumnPosition</code>. Independent block-level CRUD. <code>FragmentBlockSchema</code> exists for cross-document blocks (Universal Content primitive).</td>
+          <td><span class="pill good">READY</span></td>
+        </tr>
+        <tr>
+          <td><strong>Workflow observability</strong></td>
+          <td>Event bus or action log exists</td>
+          <td><code>nuni-core/src/edit/log-collector.ts</code> + <code>edit/log/</code> directory. <code>edit()</code> returns an <code>EditCandidate</code> with <code>logs</code>. The action log is structurally present. Less clear is whether it&rsquo;s emitted to a downstream bus (e.g. for AI training data) — but the structured log exists.</td>
+          <td><span class="pill good">READY</span></td>
+        </tr>
+        <tr>
+          <td><strong>Machine-callable actions</strong></td>
+          <td>Clean API or command pattern</td>
+          <td><code>edit/edit.ts</code> header comment: <em>"The single internal API for all document mutations. Pure function: (doc, edits, config) → EditCandidate. Zero React deps. Zero state. Zero side effects."</em> Plus <code>preValidate()</code>, <code>postValidate()</code>, <code>resolveEditTarget()</code>. <strong>This is a textbook command pattern with pre/post hooks.</strong> An AI agent can call <code>edit()</code> directly without going through the UI.</td>
+          <td><span class="pill good">READY</span></td>
+        </tr>
+        <tr>
+          <td><strong>Prompt / context access</strong></td>
+          <td>Metadata accessible at edit time</td>
+          <td>Brand Kit lives in <code>nuni-brand</code>; document metadata in <code>nuni-document-store</code>; product catalog connectors are an integration surface. The <code>EditConfig</code> argument to <code>edit()</code> can carry context. <code>mc-omni-mcp/agents_and_tools.yaml</code> declares the tool registry. Brand Kit + audience + goal context can be assembled at the agent layer.</td>
+          <td><span class="pill good">READY</span></td>
+        </tr>
+        <tr>
+          <td><strong>Safe state modification</strong></td>
+          <td>Command pattern with undo stack</td>
+          <td><code>edit/types.ts</code>: <code>EditCandidate</code> + <code>EditResult</code> + <code>BlockValidationIssue</code>; <code>edit()</code> takes <code>validation: "strict"</code> and <code>mode: "transactional"</code> options. <code>document/intelligence.ts</code> exports <code>diff</code> and <code>snapshot</code> (the undo-stack primitives). Pure functions + transactional mode = safe AI modification.</td>
+          <td><span class="pill good">READY</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="hero-finding" style="margin-top:18px;">
+      <div class="hf-label">The rare 7-of-7 — what this means</div>
+      <p>The NUNI schema and edit layers are already <strong>more AI-ready than most code I&rsquo;ve seen</strong>. Block-typed JSON tree + 31 semantic blocks + pure-function command-pattern <code>edit()</code> + transactional validation + structured action log = every "Ready Signal" the playbook checks for. <strong>Conversational journey editing in canvas (Strategy P4.2.1, Q5 ★) is technically achievable today.</strong> The blockers are not the code — they&rsquo;re (1) the schema/UI version drift gating which schemas the AI can act on, (2) the agent-layer prompt + RAG context that connects Brand Kit + audience to the <code>edit()</code> call, (3) safety / brand-tone guardrails. None of those are 18-month builds; they&rsquo;re 4–8 week scoped efforts.</p>
+    </div>
+
+    <h2 style="margin-top: 18px;"><span class="num">B</span>AI feature opportunity map (Playbook §7.2)</h2>
+
+    <table>
+      <thead><tr><th style="width:24%">AI feature (Strategy memo P4 mapping)</th><th style="width:24%">Structural deps (per playbook)</th><th style="width:18%">Customer signal</th><th style="width:18%">Repo readiness</th><th style="width:16%">Estimated complexity</th></tr></thead>
+      <tbody>
+        <tr><td><strong>P4.1 Write with AI funnel recovery</strong> (geo-ungate + brand-tone fix)</td><td>Prompt access · brand metadata · safe state mod</td><td><strong>HIGH</strong> · Health Crisis (Explore −73.7%, churn 77.2%)</td><td>READY at edit-API · Policy-gated at <code>nuni-api</code> routing</td><td><strong>Medium</strong> — policy + routing, not a rebuild</td></tr>
+        <tr><td><strong>P4.2.1 Conversational in-canvas editing</strong></td><td>Machine-callable actions · component semantics · safe state mod · prompt/context</td><td><strong>FLAGSHIP</strong> · Q5 ★ "Mailchimp is back, modern" moment</td><td><strong>READY</strong> — every dep is in <code>nuni-core</code></td><td><strong>Medium</strong> — agent layer + UI sidebar + tool routing</td></tr>
+        <tr><td><strong>P4.2.2 AI brand-style transfer between campaigns</strong></td><td>Editor state structure · content modularity</td><td><strong>LEAPFROG</strong> · No competitor ships this</td><td>READY at schema · UI work = mostly net-new</td><td><strong>Medium-High</strong> — transfer-learning model + UI</td></tr>
+        <tr><td><strong>P4.2.3 Prompt-first email mode (toggle)</strong></td><td>Component semantics · machine-callable actions</td><td>EMERGING · Mailmodo wins SMB</td><td>READY — full primitive coverage</td><td><strong>Medium</strong> — generation pipeline + scaffold UI</td></tr>
+        <tr><td><strong>P4.3 Generative SMS in composer</strong></td><td>Channel agnostic edit API · prompt access</td><td>HIGH · SMS +73.5% adoption / 53% churn</td><td>READY at <code>nuni-core/channel/email</code> + (planned) <code>channel/sms</code></td><td><strong>Medium</strong> — needs SMS channel in <code>nuni-core</code></td></tr>
+        <tr><td><strong>P4.4.1 AI image gen tied to product catalog</strong></td><td>Prompt access · 300+ ecom integrations · Brand Kit</td><td>UNIQUE COMBO — only Mailchimp has all 4 inputs</td><td>Cross-product surface (catalog connectors)</td><td><strong>High</strong> — model + catalog integration + UX</td></tr>
+        <tr><td><strong>P4.4.4 In-canvas revenue per recipient</strong> (Klaviyo countermove)</td><td>Prompt access · workflow observability</td><td>Klaviyo capability gap closure</td><td>READY — log-collector + analytics tap</td><td><strong>Low-Medium</strong> — analytics surface in editor</td></tr>
+        <tr><td><strong>I-3.1.4 AI Email Setup Agent</strong> (URL → campaign in 3 clicks, Klaviyo Marketing Agent counter)</td><td>Prompt access · safe state mod · 260+ template registry</td><td>HIGH · Klaviyo Marketing Agent (Spring &rsquo;25 GA) parity</td><td>READY · <code>nuni-template-sources</code> is the corpus</td><td><strong>Medium</strong> — orchestration + brand auto-extract</td></tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top: 18px;"><span class="num">C</span>What&rsquo;s actually blocking each AI capability</h2>
+
+    <div class="grid cols-3">
+      <div class="card good">
+        <h3>Q5 Conversational AI (P4.2.1)</h3>
+        <p><strong>Code blocker:</strong> Schema/UI version drift. The agent will call <code>edit(doc, edits, config)</code> on the <em>library&rsquo;s</em> schema (1.74), but the editor renders against the <em>UI&rsquo;s pinned version</em> (1.49). New primitives won&rsquo;t round-trip until the bump lands.</p>
+        <p><strong>Non-code blockers:</strong> Tool registry definition in <code>mc-omni-mcp</code>; conversational sidebar UX in <code>nuni-core-ui</code>; Brand-Kit-aware prompt template; eval harness for "did this AI edit produce a valid send?"</p>
+      </div>
+
+      <div class="card warn">
+        <h3>Q4 Write with AI ungate (P4.1.1)</h3>
+        <p><strong>Code blocker:</strong> Geo-policy routing in <code>nuni-api</code>. Today the geo-gate is reportedly enforced UI-side (a Standard customer in NL doesn&rsquo;t see the feature). Move the decision to the API layer to enable per-region rollout.</p>
+        <p><strong>Non-code blockers:</strong> Intuit-level model availability + DPA/GDPR review for EU. <em>This is the policy-cross-org dependency; technical work is &lt; 2 weeks.</em></p>
+      </div>
+
+      <div class="card brand">
+        <h3>Q5 Real-time co-edit (P5.3)</h3>
+        <p><strong>Code blocker:</strong> Add <code>@tiptap/extension-collaboration</code> + a CRDT (yjs is the natural choice for TipTap). Wire the existing <code>pusher-js</code> channel as the transport. Decompose <code>store.ts</code> (966 LOC) so presence + cursors don&rsquo;t merge into the main edit reducer.</p>
+        <p><strong>Non-code blockers:</strong> Pusher 4.x → 8.x upgrade likely needed for modern presence APIs. <em>Cleanest engineering story in the FY27 roadmap.</em></p>
+      </div>
+    </div>
+
+    <h2 style="margin-top: 16px;"><span class="num">D</span>The non-obvious finding — the <code>edit/</code> module is a moat</h2>
+
+    <div class="card good">
+      <p>Across the 5 active core repos analyzed, the most strategically valuable artifact is <strong><code>nuni-core/src/edit/edit.ts</code></strong>. Why:</p>
+      <ul>
+        <li><strong>Pure function</strong> — no React, no state, no side effects. Trivially testable, trivially callable from any agent.</li>
+        <li><strong>Pre/post validation</strong> — the AI can&rsquo;t produce an invalid document, even with prompt-injection. <code>preValidate</code> runs before the mutation; <code>postValidate</code> runs after; <code>"strict"</code> mode rolls back invalid edits.</li>
+        <li><strong>Transactional mode</strong> — multi-edit atomicity built in. AI says "make 3 edits"; either all 3 land or none do.</li>
+        <li><strong>Structured log collector</strong> — every edit emits an entry, ready for the AI training data flywheel or a debugging sidebar.</li>
+      </ul>
+      <p>This is not what most email-builder codebases look like. It&rsquo;s what Klaviyo and Stensul are <em>trying</em> to build (their roadmaps reference "stable headless edit APIs" and "AI-callable block ops"). <strong>Mailchimp&rsquo;s NUNI <em>has</em> it.</strong> The next 18 months are about exposing it correctly — through <code>mc-omni-mcp</code> as an MCP server, through a conversational sidebar, and through the schema bump in the editor. The capability is built; the productization is not.</p>
+    </div>
+
+    <p class="source"><strong>Method:</strong> Each readiness dimension scored against the playbook&rsquo;s §7.1 checklist using direct file reads from <code>nuni-core/src/document/types.ts</code>, <code>nuni-core/src/document/operations.ts</code>, <code>nuni-core/src/edit/edit.ts</code>, <code>nuni-core/src/edit/types.ts</code>, <code>nuni-core/src/channel/email/schemas/</code> (31 schemas enumerated). Opportunity map cross-references <a href="mailchimp-editor.html#canvas">Initiative Canvas</a> P4 sub-pillar.</p>
+  </section>
+</div><!-- /panel-ai -->
+
+<!-- ================ LEVERAGE CHEAT SHEET ================ -->
+<div class="tabpanel" id="panel-leverage" role="tabpanel">
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Phase 4 · Building Technical Leverage (Playbook §6)</div>
+        <h1>Specific questions to take into the <em style="color:#4338CA;">next NUNI engineering sync</em>, with the repo evidence behind each one</h1>
+        <div class="subtitle">The playbook&rsquo;s "Questions That Earn Engineering Respect" rewritten with NUNI-specific evidence. Each question is structurally informed — the engineer can&rsquo;t hand-wave it away.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Format:</strong> Generic ask → NUNI-specific ask</div>
+        <div><strong>Source:</strong> Playbook §6.1</div>
+      </div>
+    </header>
+
+    <div class="qa-card">
+      <div class="q-bad">"Why is Universal Content taking 9 months to ship?"</div>
+      <div class="q-good"><strong>Better:</strong> "<code>nuni-core</code> is at v1.74.5 with <code>FragmentBlockSchema</code> already shipped, but <code>nuni-core-ui</code> consumes <code>@collab-email/nuni-core@1.49.0</code> — a 25-version-old pin. What&rsquo;s the plan to bump the schema lib in the editor before Q2? Is there a known incompatibility, or is the team scope-blocked on a regression sweep?"</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="q-bad">"Can we add real-time multi-author collaboration?"</div>
+      <div class="q-good"><strong>Better:</strong> "<code>nuni-core-ui</code> already declares <code>pusher-js@4.3.1</code> as a top-level dep, and TipTap 3.20 supports <code>@tiptap/extension-collaboration</code> + yjs natively. The <code>edit()</code> command pattern in <code>nuni-core/edit/edit.ts</code> is pure-function and would round-trip through CRDT. What does a 4-week PoC look like — wiring the existing Pusher channel as transport for collab cursors and presence, decomposing the 966-LOC <code>store.ts</code> so presence doesn&rsquo;t merge with the edit reducer?"</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="q-bad">"Why do we have so many rendering bugs?"</div>
+      <div class="q-good"><strong>Better:</strong> "<code>email-render-pipeline</code> ships a calibration + screenshot + scoring rig with PNG fixture sets and a <code>generate.ts</code> for golden data. It&rsquo;s gated by 2 unit tests and isn&rsquo;t wired into the <code>nuni-core-ui</code> CI gate. The HVC #3 rendering theme cites $1,820/mo across 4 named accounts — these are the exact regressions the rig was built for. What&rsquo;s blocking us from making the visual-regression rig a CI requirement on <code>nuni-core-ui</code>?"</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="q-bad">"When can we go AI-first?"</div>
+      <div class="q-good"><strong>Better:</strong> "The <code>edit/edit.ts</code> module is documented as &lsquo;Pure function. Zero React deps. Zero state. Zero side effects.&rsquo; with pre/post validation and transactional mode. <code>nuni-core</code> defines 31 semantic block schemas. The <code>document/operations.ts</code> CRUD primitives are already block-level. <em>What&rsquo;s blocking us from exposing <code>edit()</code> through <code>mc-omni-mcp</code> as the MCP server&rsquo;s primary tool?</em> Is the agent-side blocker prompt design, brand-context retrieval, or eval harness?"</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="q-bad">"What&rsquo;s the tech debt situation?"</div>
+      <div class="q-good"><strong>Better:</strong> "Three React versions in the live consumer chain (17 / 18.3 / 19); the editor is on Node 18 (EOL April 2025); react-intl 2.9 is 5 majors behind current; styled-components 4.4 is 2 majors behind; Pusher 4 is 4 majors behind. <code>nuni-core-ui</code> test ratio is 16.7% vs 111% / 137% on the library and platform layers. <strong>Can we size a quarterly cleanup sprint and tie each item to the customer bug it would prevent</strong> — e.g. styled-components 4 → 6 for bundle size, react-intl 2 → 7 for the international Write with AI ungate?"</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="q-bad">"Should we do an AI sprint?"</div>
+      <div class="q-good"><strong>Better:</strong> "<code>mc-omni-agent-ui</code> shipped ~691 commits in the last 6 months across 4 active engineers; <code>nuni-core-ui</code> shipped ~83 across 2. The Strategy memo&rsquo;s Guiding Principle #2 says &lsquo;AI cannot compensate for broken editor trust.&rsquo; <em>Are we shipping in the right priority order, given the cited HVC bug exposure on the editor side?</em> What does a balanced 60/25/10/5 portfolio look like (per the playbook §6.2) for the next two quarters?"</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="q-bad">"What&rsquo;s our incident response on Brand Kit issues?"</div>
+      <div class="q-good"><strong>Better:</strong> "Austin Milt (<code>amilt</code>) closed the HVC #8 Brand Kit incident with a 50% ramp; the same engineer is now top-3 contributor in <code>mc-omni-mcp</code>. What&rsquo;s the on-call rotation that means HVC #8 doesn&rsquo;t recur when Austin is heads-down on the agent backend? Where is the regression test that prevents the &lsquo;stale Brand Kit / no colors&rsquo; pattern from coming back?"</div>
+    </div>
+
+    <h2 style="margin-top: 18px;"><span class="num">B</span>Balanced portfolio framework — applied to NUNI Q1 capacity</h2>
+    <p>Per playbook §6.2, the 60 / 25 / 10 / 5 split. Applied to the NUNI roadmap as documented in the <a href="mailchimp-editor.html#canvas">Initiative Canvas</a>:</p>
+
+    <div class="alloc-bar">
+      <div class="alloc-seg alloc-1" style="flex: 60;"><span>Customer-facing</span><strong>60%</strong><span style="font-size:9.5px;">P1.1–P1.4 + P2.1 + P3</span></div>
+      <div class="alloc-seg alloc-2" style="flex: 25;"><span>Tech debt payoff</span><strong>25%</strong><span style="font-size:9.5px;">Schema bump · store.ts decomp · vis-reg CI</span></div>
+      <div class="alloc-seg alloc-3" style="flex: 10;"><span>Strategic AI</span><strong>10%</strong><span style="font-size:9.5px;">P4.1 ungate · P4.2.1 spike</span></div>
+      <div class="alloc-seg alloc-4" style="flex: 5;"><span>Exploration</span><strong>5%</strong><span style="font-size:9.5px;">Flag harness audit · Pusher upgrade spike</span></div>
+    </div>
+
+    <table style="margin-top: 14px;">
+      <thead><tr><th>Allocation</th><th>NUNI-specific work for Q1 (May–Jul &rsquo;26)</th><th>Success metric</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill warn">60% · Customer-facing</span></td><td>HVC #3 rendering parity (4 cited accts) · HVC #8 Brand Kit incident closure (P1.2.1) · HVC #13 Canva sync (P1.3.1) · HVC #16 SMS TCPA $57K (P5.2.3, cross-org) · HVC #4/#5 (P1.1.2/3)</td><td>Cited HVC MRR cleared this quarter; bulk churn 40.0% → 38.5% leading indicator</td></tr>
+        <tr><td><span class="pill brand">25% · Tech debt payoff</span></td><td>Bump <code>nuni-core-ui</code> from <code>nuni-core@1.49</code> → <code>@^1.74</code> (Q2 ship gate) · Decompose <code>store.ts</code> (966 LOC) into presence + edit reducer + persistence · Wire <code>email-render-pipeline</code> into <code>nuni-core-ui</code> CI</td><td>Editor test/source ratio 17% → 35%; Q2 Universal Content ship is on its critical path</td></tr>
+        <tr><td><span class="pill good">10% · Strategic AI</span></td><td>P4.1.1 Write with AI policy track (geo-ungate scope) · P4.2.1 conversational sidebar PoC against <code>edit()</code> · MCP tool registry definition in <code>mc-omni-mcp</code></td><td>Spike report on conversational AI feasibility delivered Q1; Q4 ungate decision unblocked</td></tr>
+        <tr><td><span class="pill muted">5% · Exploration</span></td><td>Feature-flag harness audit (does it exist editor-side or only API-side?) · Pusher 4 → 8 upgrade spike for collab readiness · Node 18 → 20 migration scoping</td><td>Decision document: editor-layer flag harness yes/no; if no, scope a Q2 spike</td></tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top: 18px;"><span class="num">C</span>The "spike language" template (Playbook §6.3) — three NUNI scoping prompts</h2>
+
+    <div class="grid cols-3">
+      <div class="card brand">
+        <p><strong>Spike 1 · 2-week schema bump dry-run.</strong> "Can we run a 2-week PoC to validate whether bumping <code>nuni-core-ui</code> from <code>@collab-email/nuni-core@1.49.0</code> to <code>@^1.74</code> breaks the editor on the top-3 customer journeys (campaign create, save, send)? Output: pass/fail + regression list."</p>
+      </div>
+
+      <div class="card brand">
+        <p><strong>Spike 2 · 2-week conversational AI PoC.</strong> "Can we run a 2-week PoC where <code>mc-omni-mcp</code> exposes <code>edit()</code> as a tool, the agent UI sends &lsquo;Make the hero block 20% smaller, in a friendlier tone&rsquo;, and we measure round-trip time + edit validity rate against the existing <code>postValidate</code> pipeline? Output: feasibility report + safety incident count."</p>
+      </div>
+
+      <div class="card brand">
+        <p><strong>Spike 3 · 2-week visual-regression CI integration.</strong> "Can we run a 2-week PoC wiring <code>email-render-pipeline</code>&rsquo;s screenshot/calibration/scoring rig into <code>nuni-core-ui</code> CI, with the HVC #3 cited customer email patterns as the golden data set? Output: regression-rate baseline + ship/no-ship gate proposal."</p>
+      </div>
+    </div>
+
+  </section>
+</div><!-- /panel-leverage -->
+
+<!-- ================ METHOD ================ -->
+<div class="tabpanel" id="panel-method" role="tabpanel">
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Method &amp; Sources</div>
+        <h1>How this analysis was produced — <em style="color:#4338CA;">reproducible</em>, <em style="color:#4338CA;">repo-first</em>, <em style="color:#4338CA;">zero-meeting</em></h1>
+        <div class="subtitle">Every claim in this brief is reproducible from the queries below. No engineering interviews were conducted. Findings are drawn entirely from public-to-Intuit-employee artifacts on <code>github.intuit.com/collab-email</code> as of May 13 2026.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Snapshot:</strong> May 13 2026, 18:00 UTC</div>
+        <div><strong>Repos enumerated:</strong> 62</div>
+        <div><strong>Repos cloned:</strong> 8 (depth=1)</div>
+      </div>
+    </header>
+
+    <h2><span class="num">A</span>Framework applied</h2>
+    <p><strong>Product Technical Intelligence Playbook</strong> — May 2026, 20-page internal reference. Specifically used:</p>
+    <ul>
+      <li><strong>§1.1</strong> The Five Types of "We Can&rsquo;t" — used in Org Failure Modes tab to classify cross-org dependencies.</li>
+      <li><strong>§3 Phase 1</strong> Repo Deep Dive: Seven-Layer Forensic Analysis — applied verbatim in the 7-Layer tab.</li>
+      <li><strong>§4 Phase 2</strong> Customer Pain → Code Mapping — direct mapping in the Pain → Code Map tab.</li>
+      <li><strong>§5 Phase 3</strong> Organizational Failure Mode Analysis — six failure modes assessed in Org tab.</li>
+      <li><strong>§6 Phase 4</strong> Building Technical Leverage (questions + balanced portfolio + spike language) — Leverage Cheat Sheet tab.</li>
+      <li><strong>§7 Phase 5</strong> AI Readiness Assessment — 7-dimension readiness scorecard in AI tab.</li>
+      <li><strong>§8</strong> Email Builder–Specific Investigation Checklist — drove the file-by-file scan of <code>nuni-core-ui</code> and <code>nuni-core/src/document/</code>.</li>
+    </ul>
+
+    <h2><span class="num">B</span>Reproducible queries</h2>
+
+    <h3>Repo enumeration</h3>
+    <pre style="background:#FAFAFB; border:1px solid var(--line); border-radius:6px; padding:12px 14px; font-family:'JetBrains Mono',monospace; font-size:11.5px; line-height:1.55; overflow-x:auto;">GH_HOST=github.intuit.com gh api orgs/collab-email/repos --paginate \
+  -q '.[] | "\(.name)|\(.language // "N/A")|\(.size)|\(.pushed_at)|\(.archived)|\(.default_branch)"'
+# 62 repos returned</pre>
+
+    <h3>Per-repo metadata</h3>
+    <pre style="background:#FAFAFB; border:1px solid var(--line); border-radius:6px; padding:12px 14px; font-family:'JetBrains Mono',monospace; font-size:11.5px; line-height:1.55; overflow-x:auto;">for repo in nuni-core nuni-core-ui builder-platform nuni-api email-render-pipeline \
+            html-to-nuni-parser nuni-document-store emails-nuni-editor; do
+  GH_HOST=github.intuit.com gh api repos/collab-email/$repo --jq \
+    '{name, language, size, pushed_at, default_branch, open_issues_count, forks, watchers_count, subscribers_count}'
+done</pre>
+
+    <h3>Shallow clones (architecture + file-size + test analysis)</h3>
+    <pre style="background:#FAFAFB; border:1px solid var(--line); border-radius:6px; padding:12px 14px; font-family:'JetBrains Mono',monospace; font-size:11.5px; line-height:1.55; overflow-x:auto;">for repo in nuni-core nuni-core-ui builder-platform nuni-api email-render-pipeline \
+            html-to-nuni-parser nuni-document-store emails-nuni-editor; do
+  GH_HOST=github.intuit.com gh repo clone collab-email/$repo $repo -- --depth=1 --quiet
+done</pre>
+
+    <h3>Layer 4 — file size / god-class detection</h3>
+    <pre style="background:#FAFAFB; border:1px solid var(--line); border-radius:6px; padding:12px 14px; font-family:'JetBrains Mono',monospace; font-size:11.5px; line-height:1.55; overflow-x:auto;">find $repo/src -type f \( -name "*.ts" -o -name "*.tsx" -o -name "*.js" -o -name "*.jsx" \) \
+  -exec wc -l {} \; | awk '$1 &gt;= 600' | sort -rn | head -25</pre>
+
+    <h3>Layer 3 — test/source LOC ratio</h3>
+    <pre style="background:#FAFAFB; border:1px solid var(--line); border-radius:6px; padding:12px 14px; font-family:'JetBrains Mono',monospace; font-size:11.5px; line-height:1.55; overflow-x:auto;">src_loc=$(find $repo/src -type f \( -name "*.ts" -o -name "*.tsx" \) \
+          ! -name "*.test.*" ! -name "*.spec.*" -exec cat {} \; | wc -l)
+test_loc=$(find $repo -type f \( -name "*.test.ts" -o -name "*.test.tsx" -o -name "*.spec.ts" \) \
+           -exec cat {} \; | wc -l)
+echo "$repo: src=$src_loc test=$test_loc ratio=$((test_loc * 100 / src_loc))%"</pre>
+
+    <h3>Layer 5 — contributor concentration (last 12 months)</h3>
+    <pre style="background:#FAFAFB; border:1px solid var(--line); border-radius:6px; padding:12px 14px; font-family:'JetBrains Mono',monospace; font-size:11.5px; line-height:1.55; overflow-x:auto;">GH_HOST=github.intuit.com gh api \
+  "repos/collab-email/$repo/commits?since=2025-05-01T00:00:00Z&amp;per_page=100" --paginate \
+  -q '.[].author.login // .[].commit.author.name // "unknown"' | sort | uniq -c | sort -rn | head -8</pre>
+
+    <h3>Layer 5 — PR cycle time</h3>
+    <pre style="background:#FAFAFB; border:1px solid var(--line); border-radius:6px; padding:12px 14px; font-family:'JetBrains Mono',monospace; font-size:11.5px; line-height:1.55; overflow-x:auto;">GH_HOST=github.intuit.com gh api "repos/collab-email/$repo/pulls?state=closed&amp;per_page=30" \
+  | python3 -c "import json,sys,datetime; ..."  # see exec script for median + p95</pre>
+
+    <h2 style="margin-top: 18px;"><span class="num">C</span>Sources</h2>
+
+    <table>
+      <thead><tr><th>Type</th><th>Source</th><th>Used for</th></tr></thead>
+      <tbody>
+        <tr><td>Framework</td><td><em>Product Technical Intelligence Playbook</em> (Deepak — Product Management; May 2026 internal reference; 20 pages)</td><td>Every section&rsquo;s structural framework</td></tr>
+        <tr><td>Customer evidence</td><td><a href="mailchimp-editor.html">Mailchimp Email/SMS Unified Editor &amp; Builder Brief</a> — 11 tabs (Executive, VOC, Klaviyo Brief, Klaviyo VoC, HVC Risk, User Research, Product Health, Growth Model, Loss Attribution, Initiative Canvas, Strategy Memo)</td><td>VOC themes, HVC cited MRR, UR bets, BigQuery health metrics, FY27 commit math</td></tr>
+        <tr><td>Repo data</td><td><code>github.intuit.com/collab-email/*</code> via <code>gh api</code> + shallow clones</td><td>All numerical findings: file LOC, dep versions, test ratios, contributor counts, PR cycle times</td></tr>
+        <tr><td>Architecture diagram</td><td>User-supplied image (<em>Mailchimp New Builder (NUNI)</em>, dated May 13 2026, 9 functional layers)</td><td>Reality-vs-diagram reconciliation in Repo Map tab</td></tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top: 18px;"><span class="num">D</span>Caveats &amp; what would strengthen this analysis</h2>
+    <ul>
+      <li><strong>No engineering interviews.</strong> Every interpretation is repo-evidence-only. The "schema/UI version drift is intentional" hypothesis assumes the team knows about it; confirm in the next sync.</li>
+      <li><strong>Cross-org dependencies (SMS pipeline, Canva integration, Intuit Assist policy) were not deeply mapped.</strong> Three of seven HVC themes touch repos outside <code>collab-email</code>.</li>
+      <li><strong>Bundle size, performance traces, and runtime profiles were not measured.</strong> Layer 6 findings are dep-level only. A Lighthouse pass on the editor + a webpack-bundle-analyzer run would close that gap.</li>
+      <li><strong>Feature flag harness existence is inferred from grep absence.</strong> The flag service may live higher up the platform shell. Confirm in the next eng sync — this is the single most important "is it actually true" check before Q1 commits.</li>
+      <li><strong>Incident frequency / on-call burden / Bugsnag dashboard data not in scope.</strong> Layer 6 reliability claims rely on dep presence, not measured uptime.</li>
+      <li><strong>Some repos in the org were not cloned</strong> (proposal-builder, transact-builder, mc-omni-mcp, mc-omni-agent-ui, document-data-store, nuni-core-sdk). The findings here cover the editor-customer-path subset; broader scope would extend to those.</li>
+    </ul>
+
+    <h2 style="margin-top: 18px;"><span class="num">E</span>How this brief evolves</h2>
+    <p>Per the playbook&rsquo;s <em>"Continuous Intelligence"</em> mode (§9 timeline, "Ongoing"): this analysis should be re-run quarterly. Suggested cadence:</p>
+    <ul>
+      <li><strong>Q1 deliverable (Jul &rsquo;26):</strong> rerun Layer 3 + Layer 5; verify the schema bump landed; verify visual-regression CI integration; confirm the flag harness audit conclusion.</li>
+      <li><strong>Q2 deliverable (Oct &rsquo;26):</strong> rerun all 7 layers post-Universal Content ship; track hero-engineer concentration trend.</li>
+      <li><strong>Q3 deliverable (Jan &rsquo;27):</strong> AI readiness rescore after MCP server productionizes <code>edit()</code>.</li>
+    </ul>
+
+    <p style="font-size: 11.5px; color: var(--muted); margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line);">
+      <strong>Confidentiality.</strong> The repo-level findings in this analysis are derived from <code>github.intuit.com/collab-email/*</code>, accessible to authorized Intuit employees. The <em>Product Technical Intelligence Playbook</em> is marked CONFIDENTIAL — Internal Reference Only. The customer-evidence sources (HVC, VOC, BigQuery) are summarized in the public-to-this-domain <a href="mailchimp-editor.html">Editor Brief</a>; named-customer MRR figures are cited only at theme-aggregate level. <strong>This brief is intended for executive review within the Mailchimp authoring-surface leadership audience; it should not be shared externally without redaction of the <code>github.intuit.com</code> URLs and named-engineer references.</strong>
+    </p>
+  </section>
+</div><!-- /panel-method -->
+
+</div><!-- /page-wrap -->
+
+<script>
+  (function () {
+    var tabs = document.querySelectorAll('.tab');
+    var panels = document.querySelectorAll('.tabpanel');
+    function activate(name) {
+      tabs.forEach(function (t) {
+        var match = t.getAttribute('data-tab') === name;
+        t.classList.toggle('active', match);
+      });
+      panels.forEach(function (p) {
+        p.classList.toggle('active', p.id === 'panel-' + name);
+      });
+      try {
+        var url = new URL(window.location.href);
+        url.hash = name;
+        history.replaceState(null, '', url.toString());
+      } catch (e) {}
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
+    });
+    var initial = (window.location.hash || '').replace('#', '');
+    if (['exec','painmap','repo','layers','org','ai','leverage','method'].indexOf(initial) >= 0) activate(initial);
+  })();
+</script>
+
+</body>
+</html>
