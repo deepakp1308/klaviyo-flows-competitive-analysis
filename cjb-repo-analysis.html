@@ -1,0 +1,1175 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mailchimp CJB Repo — Product Technical Intelligence Analysis</title>
+<meta name="description" content="A 7-layer forensic analysis of the Mailchimp Customer Journey Builder (CJB) GitHub repos — applying the Product Technical Intelligence Playbook to map every CJB customer pain to specific code, ownership, and architectural choke points. Reveals the C2 next-gen platform decoupling from the Mailchimp monolith." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E1116;
+    --ink-2: #1F2937;
+    --muted: #4B5563;
+    --line: #E5E7EB;
+    --line-2: #D1D5DB;
+    --bg: #F8F7F4;
+    --paper: #FFFFFF;
+    --brand: #166D3B;        /* CJB green — distinguishes from NUNI indigo and Editor amber */
+    --brand-2: #C28A00;      /* MC amber accent */
+    --good: #047857;
+    --warn: #B45309;
+    --bad: #B91C1C;
+    --chip: #E6F5EE;
+    --chip-ink: #034C39;
+    --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.5;
+  }
+  .toolbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(248,247,244,.92);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .toolbar-inner {
+    max-width: 1180px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; gap: 12px;
+  }
+  .brand-mark { display:flex; align-items:center; gap:10px; font-weight: 700; font-size: 14px; color: var(--ink-2); }
+  .brand-dot { width: 10px; height: 10px; border-radius: 3px; background: var(--brand); box-shadow: 0 0 0 3px rgba(22,109,59,.15); }
+  .toolbar a.btn { border: 1px solid var(--line-2); background: var(--paper); color: var(--ink-2); padding: 7px 12px; border-radius: 8px; font-size: 13px; font-weight: 600; text-decoration: none; }
+  .toolbar a.btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+
+  .page-wrap { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+
+  .tabs { display: flex; gap: 4px; margin: 18px 0 14px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .tab { background: transparent; border: 0; padding: 10px 14px; font-size: 13px; font-weight: 600; color: var(--muted); cursor: pointer; border-bottom: 2px solid transparent; font-family: inherit; }
+  .tab:hover { color: var(--ink); }
+  .tab.active { color: var(--brand); border-bottom-color: var(--brand); }
+
+  .tabpanel { display: none; }
+  .tabpanel.active { display: block; }
+
+  .page { background: var(--paper); border: 1px solid var(--line); border-radius: 14px; box-shadow: var(--shadow); padding: 28px 32px 26px; margin-bottom: 22px; }
+  .page-head { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 18px; }
+  .eyebrow { font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 700; }
+  h1 { font-family: 'Source Serif 4', Georgia, serif; font-weight: 700; font-size: 30px; line-height: 1.15; margin: 6px 0 4px; letter-spacing: -0.01em; }
+  h1 em { font-style: italic; }
+  h2 { font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; font-weight: 700; margin: 18px 0 10px; }
+  h2 .num { display: inline-block; font-size: 11px; font-weight: 800; background: var(--ink); color: white; padding: 2px 7px; border-radius: 4px; margin-right: 8px; vertical-align: middle; letter-spacing: .04em; font-family: 'Inter', sans-serif; }
+  h3 { font-family: 'Source Serif 4', Georgia, serif; font-size: 15px; font-weight: 700; margin: 14px 0 8px; }
+  .subtitle { color: var(--ink-2); font-size: 13.5px; margin-top: 4px; max-width: 880px; }
+  .meta { font-size: 11.5px; color: var(--muted); text-align: right; }
+  .meta div { padding: 1px 0; }
+
+  p { font-size: 13px; line-height: 1.6; color: var(--ink-2); margin: 0 0 10px; }
+  p strong { color: var(--ink); font-weight: 700; }
+  p em { color: var(--brand); font-style: italic; font-weight: 500; }
+  ul, ol { font-size: 13px; line-height: 1.6; color: var(--ink-2); margin: 0 0 10px; padding-left: 20px; }
+  li { margin-bottom: 4px; }
+  li strong { color: var(--ink); }
+  code { font-family: 'JetBrains Mono', 'SF Mono', Menlo, Consolas, monospace; font-size: 11.5px; background: #F1F2F4; color: var(--ink); padding: 1px 5px; border-radius: 3px; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 16px; }
+  .kpi { border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; background: linear-gradient(180deg, #FAFAFB 0%, #FFF 100%); }
+  .kpi .v { font-family: 'Source Serif 4', Georgia, serif; font-size: 22px; font-weight: 700; color: var(--ink); line-height: 1.1; }
+  .kpi .v.bad { color: var(--bad); }
+  .kpi .v.good { color: var(--good); }
+  .kpi .v.brand { color: var(--brand); }
+  .kpi .l { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.4; }
+  @media (max-width: 880px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+
+  .grid { display: grid; gap: 14px; }
+  .cols-2 { grid-template-columns: 1fr 1fr; }
+  .cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+  @media (max-width: 880px) { .cols-2, .cols-3 { grid-template-columns: 1fr; } }
+
+  .card { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; background: #fff; }
+  .card.tinted { background: linear-gradient(180deg, #FAFAFB, #fff); }
+  .card.warn { border-left: 4px solid var(--warn); background: #FFFAF0; }
+  .card.bad { border-left: 4px solid var(--bad); background: #FFF5F2; }
+  .card.good { border-left: 4px solid var(--good); background: #F1FAF5; }
+  .card.brand { border-left: 4px solid var(--brand); background: #EAF6EE; }
+
+  table { width: 100%; border-collapse: collapse; margin: 6px 0 10px; font-size: 12.5px; }
+  th { background: #FAFAFB; color: var(--muted); font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; text-align: left; padding: 8px 10px; border-bottom: 1px solid var(--line); }
+  td { padding: 8px 10px; border-bottom: 1px solid var(--line); vertical-align: top; color: var(--ink-2); line-height: 1.5; }
+  td strong { color: var(--ink); }
+  td code { font-size: 11px; }
+
+  .pill { display: inline-block; font-size: 9.5px; font-weight: 800; letter-spacing: .06em; padding: 2px 6px; border-radius: 4px; }
+  .pill.good { background: #D7EFE3; color: #036A4F; }
+  .pill.warn { background: #FFEFD9; color: #8A4A00; }
+  .pill.bad  { background: #FBD9CC; color: #9A1F00; }
+  .pill.brand{ background: var(--chip); color: var(--chip-ink); }
+  .pill.muted{ background: #ECEAE6; color: var(--ink); }
+
+  .layer-card { border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; background: #fff; margin-bottom: 16px; position: relative; }
+  .layer-card .lc-num { position: absolute; top: 14px; right: 18px; font-family: 'Source Serif 4', Georgia, serif; font-size: 36px; font-weight: 700; opacity: .12; color: var(--ink); }
+  .layer-card.l1 { border-left: 4px solid var(--brand); }
+  .layer-card.l2 { border-left: 4px solid var(--good); }
+  .layer-card.l3 { border-left: 4px solid var(--bad); }
+  .layer-card.l4 { border-left: 4px solid var(--warn); }
+  .layer-card.l5 { border-left: 4px solid #4338CA; }
+  .layer-card.l6 { border-left: 4px solid #DB2777; }
+  .layer-card.l7 { border-left: 4px solid #0891B2; }
+  .layer-card .lc-eyebrow { font-size: 10.5px; font-weight: 800; letter-spacing: .08em; color: var(--muted); text-transform: uppercase; }
+  .layer-card h3 { margin: 4px 0 6px; font-size: 16px; padding-right: 40px; }
+  .layer-card .lc-finding { background: #FFF5F2; border-left: 3px solid var(--bad); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-top: 8px; font-size: 12.5px; }
+  .layer-card .lc-finding strong { color: #9A1F00; }
+  .layer-card .lc-good { background: #F1FAF5; border-left: 3px solid var(--good); padding: 10px 14px; border-radius: 0 6px 6px 0; margin-top: 8px; font-size: 12.5px; }
+  .layer-card .lc-good strong { color: #036A4F; }
+
+  .map-row { display: grid; grid-template-columns: 28% 22% 28% 22%; gap: 0; border-top: 1px solid var(--line); padding: 10px 0; align-items: start; }
+  .map-row > div { padding: 0 10px; border-right: 1px solid var(--line); font-size: 12.5px; line-height: 1.5; }
+  .map-row > div:last-child { border-right: 0; }
+  .map-row .voc { color: var(--bad); font-weight: 600; }
+  .map-row .repo { color: var(--brand); font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 11.5px; }
+  .map-row .ev { color: var(--ink-2); }
+  .map-row .biz { color: var(--good); font-weight: 600; }
+  .map-head { font-size: 10.5px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+
+  .hero-finding { background: linear-gradient(180deg, #FFFCF0 0%, #FFFFFF 100%); border: 1px solid var(--brand-2); border-left: 4px solid var(--brand-2); border-radius: 10px; padding: 16px 20px; margin: 12px 0 18px; }
+  .hero-finding .hf-label { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--brand-2); margin-bottom: 6px; }
+  .hero-finding p { font-family: 'Source Serif 4', Georgia, serif; font-size: 15px; line-height: 1.55; color: var(--ink); margin: 0; }
+
+  .arch-block { background: #F8F8F9; border: 1px solid var(--line); border-radius: 10px; padding: 14px 18px; margin: 12px 0; font-family: 'JetBrains Mono', monospace; font-size: 12px; line-height: 1.7; color: var(--ink-2); white-space: pre; overflow-x: auto; }
+  .arch-block .lbl { color: var(--brand); font-weight: 700; }
+  .arch-block .arrow { color: var(--brand-2); font-weight: 700; }
+
+  .source { font-size: 11px; color: var(--muted); padding: 8px 0 4px; border-top: 1px dashed var(--line); margin-top: 14px; }
+  .source code { font-size: 10.5px; }
+
+  .qa-card { border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 12px; }
+  .qa-card .q-bad { background: #FFF5F2; border-left: 3px solid var(--bad); padding: 8px 12px; border-radius: 0 4px 4px 0; margin-bottom: 8px; font-size: 12.5px; color: #6B1717; }
+  .qa-card .q-good { background: #F1FAF5; border-left: 3px solid var(--good); padding: 8px 12px; border-radius: 0 4px 4px 0; font-size: 12.5px; color: #034C39; font-weight: 500; }
+  .qa-card .q-good strong { color: var(--good); }
+
+  .alloc-bar { display: flex; height: 50px; border-radius: 8px; overflow: hidden; border: 1px solid var(--line); margin: 8px 0; }
+  .alloc-seg { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 4px; font-size: 10.5px; text-align: center; color: var(--ink); line-height: 1.2; }
+  .alloc-seg strong { font-size: 13px; font-weight: 800; }
+  .alloc-1 { background: #FFE9CC; }
+  .alloc-2 { background: #FFEFA8; }
+  .alloc-3 { background: #DCEEF6; }
+  .alloc-4 { background: #E8E2F4; }
+</style>
+</head>
+
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="brand-mark"><span class="brand-dot"></span> CJB Repo · Product Technical Intelligence</div>
+    <div style="display:flex; gap:8px;">
+      <a class="btn" href="mailchimp.html">← Automations Brief</a>
+      <a class="btn" href="nuni-repo-analysis.html">NUNI Analysis</a>
+      <a class="btn primary" href="index.html">Hub</a>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+  <div class="tabs" role="tablist" aria-label="Analysis sections">
+    <button class="tab active" role="tab" data-tab="exec">Executive Summary</button>
+    <button class="tab" role="tab" data-tab="painmap">Pain → Code Map</button>
+    <button class="tab" role="tab" data-tab="repo">Repo Map (Reality vs Diagram)</button>
+    <button class="tab" role="tab" data-tab="layers">7-Layer Forensic</button>
+    <button class="tab" role="tab" data-tab="org">Org Failure Modes</button>
+    <button class="tab" role="tab" data-tab="ai">AI Readiness</button>
+    <button class="tab" role="tab" data-tab="leverage">Leverage Cheat Sheet</button>
+    <button class="tab" role="tab" data-tab="method">Method &amp; Sources</button>
+  </div>
+
+<!-- ================ EXECUTIVE SUMMARY ================ -->
+<div class="tabpanel active" id="panel-exec" role="tabpanel">
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Product Technical Intelligence · Mailchimp CJB · Executive Read</div>
+        <h1>The CJB diagram is <em style="color:#B91C1C;">describing a 2024 architecture</em>. The live engine is a <em style="color:#166D3B;">Spring Boot + Numaflow re-platform</em> that has <em style="color:#4338CA;">decoupled from the Mailchimp monolith to power Freddie AI + Intuit CRM</em></h1>
+        <div class="subtitle">A 7-layer forensic analysis of the Customer Journey Builder repos in <code>github.intuit.com/crmmktg-mktauto</code> + <code>mailchimp-mcmktg</code>. <strong>Headline:</strong> 7 of the 16 repos in the diagram you provided are archived; the customer-journey-builder UI repo is a 4-commit scaffold from March 2025; the actual customer-facing canvas isn&rsquo;t in either of these orgs. Meanwhile, a parallel <strong>"C2" platform</strong> has been built — Java 21, Spring Boot 3, Numaflow on Kubernetes, OpenAPI-first, JaCoCo 85% — and per its own <code>AGENTS.md</code> is positioned as <em>"the next-generation Automations platform for Intuit CRM marketing — decoupled from the Mailchimp monolith and designed to support Freddie AI, CRM, and future Intuit products."</em></div>
+      </div>
+      <div class="meta">
+        <div><strong>Window:</strong> May 2024 → May 13 2026</div>
+        <div><strong>Repos analyzed:</strong> 13 (Java + TS + Python)</div>
+        <div><strong>Framework:</strong> 7-Layer Forensic + AI Readiness</div>
+      </div>
+    </header>
+
+    <div class="kpi-row">
+      <div class="kpi"><div class="v bad">7 of 16</div><div class="l">Repos in the diagram you provided are <strong>ARCHIVED</strong> — including the named "Backend journey service" (<code>mc-customer-journeys</code>), "Pre-built journey templates svc," and "Journey preview." The diagram describes the 2024 architecture.</div></div>
+      <div class="kpi"><div class="v bad">4 commits</div><div class="l"><code>mailchimp-mcmktg/customer-journey-builder</code> — labeled "Frontend builder UI" — has only 4 commits, all from a single day (March 3 2025), all from automation/scaffolding bots. <strong>It&rsquo;s never been written.</strong></div></div>
+      <div class="kpi"><div class="v good">85%</div><div class="l">JaCoCo line-coverage gate enforced in <code>automations-platform</code>, <code>automations-numaflow</code>, <code>automations-rec-api</code>. Layer 3 is the <em>strongest</em> in the brief — the new platform ships with quality gates the editor team doesn&rsquo;t have.</div></div>
+      <div class="kpi"><div class="v brand">Java 21</div><div class="l">Spring Boot 3 · OpenAPI-first · Numaflow on Kubernetes · Valkey · SQS FIFO · DynamoDB (planned). Modern stack, current LTS, room for AI integration via documented MCP-pattern <code>automations-agent</code>.</div></div>
+    </div>
+
+    <div class="hero-finding">
+      <div class="hf-label">Headline finding for the executive committee</div>
+      <p>The CJB story is the inverse of the NUNI editor story. <strong>NUNI</strong>: well-architected library, undermaintained UI, drifting between layers. <strong>CJB</strong>: the diagram describes an <em>obsolete</em> architecture, the customer-facing UI repo is a hollow scaffold, but the <em>backend</em> is being re-built from scratch as a paved-road, AI-ready, Intuit-wide platform — <strong>and that re-platform is being framed externally as Mailchimp CJB while internally repositioning as the shared automation engine for Freddie AI, QuickBooks CRM, and "future Intuit products."</strong> This is not a tech-debt story. <em>It is a strategic asset reframing</em>. The most important thing for Mailchimp leadership to know about CJB&rsquo;s codebase right now is that it is no longer just a Mailchimp codebase.</p>
+    </div>
+
+    <h2><span class="num">A</span>The six things you need to know in 90 seconds</h2>
+
+    <div class="grid cols-2">
+      <div class="card bad">
+        <h3>1 · The diagram you provided is the <em>archived</em> architecture</h3>
+        <p>Live state of the 16 repos in the image, as of May 13 2026:</p>
+        <ul>
+          <li><span class="pill bad">ARCHIVED</span> <code>mc-customer-journeys</code> (Java, "Backend journey service") — last push <strong>Jan 24 2025</strong>, 16 months ago.</li>
+          <li><span class="pill bad">ARCHIVED</span> <code>prebuilt-journey-service</code> (Go) — last push <strong>Jul 31 2024</strong>, 22 months ago.</li>
+          <li><span class="pill bad">ARCHIVED</span> <code>journey-preview-ui</code> (JS) — last push <strong>May 22 2024</strong>, 24 months (2 years!) ago.</li>
+          <li><span class="pill bad">ARCHIVED</span> <code>automation-worker</code>, <code>automation-filter</code>, <code>automations-event-gateway</code>, <code>contact-execution-outbox</code>.</li>
+          <li><span class="pill warn">SCAFFOLD ONLY</span> <code>customer-journey-builder</code> (TS, "Frontend builder UI") — 4 commits, all from one day, all bots. Never written.</li>
+          <li><span class="pill warn">STALE</span> <code>trigger-designer</code> — 6 months stale.</li>
+          <li><span class="pill good">ACTIVE</span> <code>automations-platform</code>, <code>automations-numaflow</code>, <code>automations-rec-api</code>, <code>automationseventingest</code>, <code>marketing-automation-docs</code>, <code>cjboncall-skill</code>.</li>
+        </ul>
+      </div>
+
+      <div class="card brand">
+        <h3>2 · A new "C2" platform replaced everything that was archived</h3>
+        <p>Per <code>automations-platform/AGENTS.md</code>, the new architecture has three layers:</p>
+        <ul>
+          <li><strong>Configuration</strong> — workflow CRUD/lifecycle (<code>automations-platform</code>; <em>"absorbed from automation-interface"</em>).</li>
+          <li><strong>Ingestion</strong> — Numaflow Kubernetes pipeline (<code>automations-numaflow</code>) consuming 13+ trigger types from EventBus/Kafka; SpEL-based filtering; Valkey-cached trigger settings.</li>
+          <li><strong>Processing</strong> — SQS FIFO + DynamoDB router + stateless Executors per step type (Action, Condition, Delay, Wait-for-Trigger).</li>
+        </ul>
+        <p>Plus <code>c2-journey-initiation</code> (the trigger-event-processor — proto package was <em>just renamed last week</em> from <code>cjprocessing</code> to <code>triggereventprocessor</code> in MCAUT-8639). The architecture is <strong>actively being shaped</strong>, not done.</p>
+      </div>
+
+      <div class="card warn">
+        <h3>3 · This is no longer just a Mailchimp codebase</h3>
+        <p>The <code>automations-platform</code> AGENTS.md is explicit: <em>"the next-generation Automations platform for Intuit CRM marketing — decoupled from the Mailchimp monolith and designed to support Freddie AI, CRM, and future Intuit products."</em> The org name <code>crmmktg-mktauto</code> reflects this — it&rsquo;s the Intuit "CRM Marketing / Marketing Automation" group, not a Mailchimp team. <strong>This repositions CJB from a Mailchimp feature into a shared Intuit asset</strong> — explains the heavy investment, the modern stack, the consolidation of legacy services, and (importantly) why the customer-facing UI work isn&rsquo;t happening here.</p>
+      </div>
+
+      <div class="card good">
+        <h3>4 · The new backend ships with the quality gates the editor doesn&rsquo;t have</h3>
+        <p>What I found in the active core, vs the editor analysis:</p>
+        <ul>
+          <li><strong>JaCoCo 85% line + 50% branch coverage <em>enforced in CI</em></strong> on <code>automations-platform</code>, <code>automations-numaflow</code>, <code>automations-rec-api</code>. (NUNI editor UI: <strong>16.7%</strong> test ratio, no enforcement.)</li>
+          <li><strong>OpenAPI-first</strong> — REST API generated from <code>app/api/openapi/openapi.yaml</code>; controllers implement generated interfaces. Schema is the source of truth.</li>
+          <li><strong>AGENTS.md + CLAUDE.md in repo root</strong> on <code>automations-platform</code> and <code>automations-numaflow</code> — agentic-development discipline documented.</li>
+          <li><strong>Conventional commits</strong> with MCAUT-XXXX Jira scope on every active backend repo.</li>
+          <li><strong>Median PR cycle time</strong> on <code>automations-numaflow</code> is <strong>0.5 hours</strong> (8× faster than NUNI editor UI).</li>
+        </ul>
+      </div>
+
+      <div class="card warn">
+        <h3>5 · The customer-facing journey-builder canvas is missing from this org tree</h3>
+        <p>I checked every TS repo in <code>crmmktg-mktauto</code> and <code>mailchimp-mcmktg</code> for a journey-canvas library (<code>react-flow</code>, <code>@xyflow/react</code>, <code>reactflow</code>, <code>@hello-pangea/dnd</code> for nodes/edges). <strong>None of the active TS repos has a flow-canvas dependency.</strong> The active TS UIs in <code>crmmktg-mktauto</code> are:</p>
+        <ul>
+          <li><code>automations-builder</code> (345 KB, just bumped to v1.1 with a pnpm switch April 13) — a <em>config UI</em>, not a canvas.</li>
+          <li><code>control-panel-web-plugin</code> (285 KB, v1 shipped May 13) — a <em>control panel</em> with table/drawer/dropdown components.</li>
+          <li><code>trigger-designer</code> (465 KB) — a <em>YAML editor</em> (uses <code>js-yaml</code>) for trigger configuration.</li>
+        </ul>
+        <p>The actual customer-facing visual journey-builder canvas — the thing customers see when they click "Customer Journey" in Mailchimp — is <strong>presumably still living inside the legacy Mailchimp monolith</strong>, outside both these orgs. <em>The "decoupling from the monolith" referenced in AGENTS.md applies to the backend, not yet the UI.</em></p>
+      </div>
+
+      <div class="card">
+        <h3>6 · Hero engineer concentration is even more extreme than NUNI</h3>
+        <p>Per Layer 5 commit forensics across the active CJB backend (last 12 months):</p>
+        <ul>
+          <li><code>bcraig</code> (Bobby Craig): <strong>top-3 contributor on 4 of 5 active backend repos</strong> — #1 on <code>c2-journey-initiation</code> (375 commits, 65% share), #2 on <code>automations-platform</code>, #3 on <code>automations-numaflow</code>, #4 on <code>automations-filter</code>.</li>
+          <li><code>cmartin24</code> (Cliff Martin): <strong>top-3 on 5 of 8 repos including the entire active TS UI surface</strong> — #1 on <code>automations-filter</code>, #1 on <code>control-panel-web-plugin</code>, #1 on <code>trigger-designer</code>, plus contributor to <code>c2-journey-initiation</code> + <code>automations-numaflow</code>.</li>
+          <li><code>kferney</code>: top contributor on <code>automations-numaflow</code> (286 commits, 33%).</li>
+          <li><code>amilt</code> (Austin Milt): top contributor on <code>automations-rec-api</code> (136 commits, 60%) — <strong>the same engineer who closed the Brand Kit incident in the NUNI editor brief</strong>. Cross-product hero.</li>
+        </ul>
+        <p style="margin-top:6px;"><strong>Two engineers (<code>bcraig</code>, <code>cmartin24</code>) carry the floor of the C2 platform.</strong> Bus factor on the FY27 Strategy commit ≈ 2 — same as NUNI editor.</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top: 18px;"><span class="num">B</span>What this means for the Automations brief&rsquo;s strategic bets</h2>
+
+    <table>
+      <thead><tr><th>Strategy bet (from Automations <a href="mailchimp.html#strategy">6-Pager</a>)</th><th>Code-readiness verdict</th><th>What has to be true</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Bet 1</strong> · Sandbox-tier eval (let people try CJB on Free without a paywall)</td><td><span class="pill brand">CONDITIONAL</span> Backend can power it (the new stack has tenant isolation primitives via Intuit IAM). UI has to land somewhere.</td><td>Confirm whether sandbox lives in the legacy monolith UI or migrates onto one of the new TS surfaces.</td></tr>
+        <tr><td><strong>Bet 2</strong> · Activation funnel (close the "10–20% capability used" gap from User Research)</td><td><span class="pill warn">UI-DEPENDENT</span> Recommendations engine is shipping in <code>automations-rec-api</code> (140 Java files, JaCoCo 85%, Austin Milt + sfagbemi). Backend ready.</td><td>The customer-facing surface — where contextual nudges and weekly digest appear — still has no clear repo home. UI delivery is the bottleneck.</td></tr>
+        <tr><td><strong>Bet 3</strong> · B2B / ProServ template gap (vs. Customer.io)</td><td><span class="pill bad">REPO-MISSING</span> The original <code>prebuilt-journey-service</code> (Go) is <strong>archived</strong>; no replacement template-service repo found in <code>crmmktg-mktauto</code>.</td><td><strong>Where do new pre-built journey templates ship?</strong> If into the monolith, that&rsquo;s the structural cause of the template gap. If into a new repo, it&rsquo;s missing from the diagram.</td></tr>
+        <tr><td><strong>Bet 4</strong> · QBO integration (Intuit cross-product synergy)</td><td><span class="pill good">STRUCTURALLY ALIGNED</span> The C2 platform is explicitly built for "Intuit CRM marketing" with Intuit IAM auth and JSK Spring Boot parent.</td><td>This is the strategic <em>reason</em> the platform was decoupled from the monolith. Bet 4 is the platform&rsquo;s justification, not a downstream dependency.</td></tr>
+        <tr><td><strong>Bet 5</strong> · "Reframe" CJB positioning</td><td><span class="pill brand">CODE-LEVEL ALIGNED</span> The repo names already reflect the reframe — <code>automations-*</code> not <code>customer-journey-*</code>; trigger-event-processor proto naming.</td><td>Marketing narrative just has to catch up to the engineering reality.</td></tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top: 16px;"><span class="num">C</span>Three asks for the next engineering sync</h2>
+    <ol>
+      <li><strong>Surface the canvas-UI ownership decision.</strong> The customer-facing visual journey-builder UI is not in <code>crmmktg-mktauto</code> or <code>mailchimp-mcmktg</code>. Is it (a) in the legacy Mailchimp monolith and staying there, (b) being rebuilt as part of one of the Nova/Omni surfaces (<code>mc-nova-ui</code>, <code>mc-omni-ui</code>), or (c) on a separate roadmap entirely? <strong>The Bet 1/2/3 timelines all hinge on this answer.</strong></li>
+      <li><strong>Confirm the C2 platform&rsquo;s "decoupling" external messaging.</strong> The <code>automations-platform/AGENTS.md</code> wording (<em>"decoupled from the Mailchimp monolith and designed to support Freddie AI, CRM, and future Intuit products"</em>) is candid for an internal artifact but reads very different externally. If Mailchimp investors/analysts read this as "Intuit is consolidating Mailchimp&rsquo;s automation engine into a shared Intuit asset," it changes the competitive narrative vs. Klaviyo. <strong>This is a comms-alignment ask, not an engineering one.</strong></li>
+      <li><strong>Name a second-author across <code>bcraig</code> and <code>cmartin24</code>.</strong> The C2 backend is being shaped by two engineers, with package-renames as recent as <em>last week</em>. Bobby Craig has 65% commit share on the most-active repo. Pair both with a designated co-owner before Q3.</li>
+    </ol>
+
+    <p class="source"><strong>Method:</strong> All numerical findings derived from <code>github.intuit.com/crmmktg-mktauto/*</code> + <code>mailchimp-mcmktg/*</code> via shallow clone + <code>gh api</code> queries. Customer-pain references from the <a href="mailchimp.html">Automations Brief</a> (HVC Risk Map, VOC, User Research, Product Health, Strategy 6-Pager). Framework: <em>Product Technical Intelligence Playbook</em> (May 2026, 20-page internal reference).</p>
+  </section>
+</div><!-- /panel-exec -->
+
+<!-- ================ PAIN → CODE MAP ================ -->
+<div class="tabpanel" id="panel-painmap" role="tabpanel">
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Phase 2 · Customer Pain → Code Mapping (Playbook §4)</div>
+        <h1>Every <em style="color:#B91C1C;">CJB customer complaint in the Automations brief</em> traced to the <em style="color:#166D3B;">live (or missing) repo</em></h1>
+        <div class="subtitle">The playbook&rsquo;s "superpower phase" applied to CJB. Each row pairs a documented customer pain (from the <a href="mailchimp.html">Automations brief</a> — VOC, $53.5K/mo HVC cited MRR, UR Discovery table, Product Health) with the most-probable repo, evidence, and metric to move. <strong>Several rows reveal the customer pain is unowned in the new architecture — a critical finding for the strategy.</strong></div>
+      </div>
+      <div class="meta">
+        <div><strong>Source:</strong> Automations brief tabs 2–6 + repo evidence</div>
+        <div><strong>Coverage:</strong> All 7 hate themes + 11 HVC themes</div>
+      </div>
+    </header>
+
+    <div class="map-row">
+      <div class="map-head">Customer complaint (VOC / HVC / UR / Health)</div>
+      <div class="map-head">Likely system component (live repo)</div>
+      <div class="map-head">Repo evidence collected</div>
+      <div class="map-head">Business metric to move</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>VOC #1 PAYWALL</strong> · "Free plan gutted June 2025; Standard $20+/mo for any multi-step automation." Largest single brand-decay narrative. Drives churn to MailerLite / Brevo / EmailOctopus.</div>
+      <div class="repo">[Pricing-tier check<br/>likely in the legacy<br/>Mailchimp monolith,<br/>NOT in crmmktg-mktauto]<br/><br/>automations-platform<br/>(uses Intuit IAM auth)</div>
+      <div class="ev">The new C2 architecture uses Intuit IAM ticket auth (per <code>automations-platform/AGENTS.md</code>). Tenant tier-checking for sandbox eval (Strategy Bet 1) would happen at the API gateway layer, NOT inside the Java services. <strong>Pricing posture is a monolith-side decision; the new platform doesn&rsquo;t enforce it.</strong> If leadership wants to ship a sandbox tier (Bet 1), the technical blocker is in the monolith&rsquo;s billing routing, not in C2.</div>
+      <div class="biz">CJB Established 132K → 200K+ (Strategy Bet 1)<br/><br/>Free→Paid conversion path restoration<br/><br/>+$3–6M ARR per Strategy 6-Pager</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>VOC #2 ABANDON-CART RELIABILITY</strong> · "abandoned-cart trigger doesn&rsquo;t fire / fires twice." HVC Theme 4 ($8.4K/mo cited). The single most-cited reliability pattern.</div>
+      <div class="repo">automations-numaflow<br/>(eventdriven/<br/>commerce/<br/>back-in-stock/)<br/><br/>c2-journey-initiation<br/>(in-memory batching)</div>
+      <div class="ev"><code>automations-numaflow</code> handles 13+ trigger types via SpEL filters; ecommerce events route through <code>eventdriven/</code> domains. The "fires twice" pattern is exactly the deduplication concern the new architecture explicitly addresses — <code>c2-journey-initiation</code>&rsquo;s in-memory batching with at-least-once-delivery semantics + Valkey trigger-state cache. <strong>The new architecture is designed to fix this; the legacy monolith path is what customers are still hitting.</strong> Migration cutover timing is the blocker.</div>
+      <div class="biz">HVC Theme 4 cited MRR cleared<br/><br/>CJB Established cohort retention<br/><br/>Direct link to Bet 4 (QBO ecom)</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>VOC #3 NO PUSH / WHATSAPP / IN-APP</strong> · "Email + SMS only." Klaviyo ships 5 channels in one canvas. Net-sentiment −44 in the Automations brief.</div>
+      <div class="repo">[Channel registry —<br/>no repo named<br/>channel-registry,<br/>push-channel, etc.<br/>found in either org]</div>
+      <div class="ev">No active repo in <code>crmmktg-mktauto</code> or <code>mailchimp-mcmktg</code> mentions <code>push</code>, <code>whatsapp</code>, or <code>in-app</code> in its name. The <code>automations-numaflow</code> 13 trigger-domain list covers <em>events that go IN</em> (back-in-stock, email_opens, contact_sends_msg, etc.) but not <em>actions that go OUT</em> (channel sends). Channel send is an Executor concern in the C2 Processing layer (<code>automations-platform</code>), but <strong>no Push/WhatsApp Executor exists in the active code today</strong>.</div>
+      <div class="biz">Strategy gap: ceding omnichannel narrative to Klaviyo through FY28<br/><br/>Bet for Push send action acceleration<br/><br/>(See NUNI brief P5.1.5 — same dependency)</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>HVC #5 / Health Finding 1</strong> · CJB Established 132K (+18.4% YoY) but only <strong>1.1% Free-tier adoption + 0.9% new-user adoption</strong>. The activation funnel is the largest single quantitative gap.</div>
+      <div class="repo">automations-rec-api<br/>(Java, 140 files,<br/>JaCoCo 85%)<br/><br/>automations-builder<br/>(TS · v1.1)</div>
+      <div class="ev"><code>automations-rec-api</code> is the recommendations engine — Austin Milt + sfagbemi own 60% + 36% of commits respectively. 140 Java files, 72 test files (51% test ratio — tightest in the brief). This is the structural answer to "personalized template recommendations" and "next-best-journey" prompts that activation depends on. <strong>Backend is ready; the consumer UI surface that displays the recs is not yet identified in the active TS UIs.</strong></div>
+      <div class="biz">Strategy Bet 2 (Activation funnel)<br/><br/>Free-tier adoption 1.1% → 5–8%<br/><br/>+$8–14M ARR per Strategy</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>UR Discovery</strong> · 5 customers with multi-year undiscovered features. UR Bet #2 (capability discovery + activation foundation).</div>
+      <div class="repo">[No in-app changelog<br/>component visible<br/>in active TS UIs]<br/><br/>marketing-automation-docs<br/>(Docusaurus, 8.4 MB)</div>
+      <div class="ev"><code>marketing-automation-docs</code> is a Docusaurus site (<code>docusaurus.config.ts</code> + <code>sidebars.ts</code>) covering ingestion, automation-flows, classic-automations, infrastructure, oncall, nextgen, autoresponders, defunct-projects. <strong>It is internal-team documentation</strong>, not customer-facing. There is no separate "what&rsquo;s new in CJB" service or weekly-digest component identifiable in the active TS UIs. The Strategy "Activation Foundation" pillar requires a from-zero customer-discovery surface — <strong>same finding as the NUNI editor brief P3.3 sub-pillar</strong>.</div>
+      <div class="biz">Capability utilization (today: 10–20% of CJB features used)<br/><br/>Silent-churn reduction</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>HVC compliance / billing pain</strong> · "Account blocks for compliance violations, slow resolution." Recurring complaint pattern.</div>
+      <div class="repo">[Compliance + billing<br/>logic outside CJB org —<br/>likely Mailchimp monolith<br/>or Intuit Trust Platform]</div>
+      <div class="ev">No <code>compliance</code>, <code>tcpa</code>, <code>gdpr</code>, or <code>billing-block</code> repo in either active org. This is the same cross-org pattern as SMS in the NUNI editor brief — <strong>compliance enforcement is upstream of the automation engine</strong>. The C2 platform receives blocked-tenant signals via Intuit IAM but doesn&rsquo;t own the compliance decision.</div>
+      <div class="biz">CSAT improvement<br/><br/>Cross-org dependency identified — escalation contact required for the strategy plan</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>HVC Trigger latency / "didn&rsquo;t fire when it should have"</strong> · cited across multiple HVC themes. Trust in event-driven flow is the foundational complaint pattern.</div>
+      <div class="repo">automations-numaflow<br/>(245 Java files, 110 test;<br/>JaCoCo 85% line / 50% branch)<br/><br/>c2-journey-initiation<br/>(54 Java files, 20 test)<br/><br/>automationseventingest<br/>(6 Java files — TINY)</div>
+      <div class="ev"><strong>This is the cleanest "code is being built to fix this" story in the brief.</strong> The new ingestion architecture explicitly addresses trigger reliability: SpEL filtering in <code>automations-numaflow</code> + Valkey-cached trigger settings + at-least-once delivery in <code>c2-journey-initiation</code> + 13 typed event domains. <strong>The 0.5h median PR time on numaflow + 85% JaCoCo gate</strong> means the team is shipping reliability work fast and with discipline. Cutover from monolith trigger paths → C2 ingestion is the migration timeline that determines when customer-side trust returns.</div>
+      <div class="biz">Trigger latency p95 reduction<br/><br/>"Did the flow fire?" support tickets<br/><br/>Direct link to L5 retention save</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>UR / Strategy "Predictive triggers"</strong> · Klaviyo&rsquo;s next-order-date and Channel Affinity are decisive vs Mailchimp. Predicted CLV exists in MC but isn&rsquo;t a first-class flow trigger.</div>
+      <div class="repo">automations-rec-api<br/>(predictions service)<br/><br/>c2-segmentation-ai-svc<br/>(Python, 1812 KB)<br/><br/>cdp-segmentation<br/>(Kotlin, 8031 KB)</div>
+      <div class="ev"><strong>This is the most-investment area outside the active core.</strong> <code>cdp-segmentation</code> is 8 MB of active Kotlin (last push today, May 13 2026) — a Customer Data Platform-grade segmentation service in the Mailchimp-mcmktg org. Plus <code>c2-segmentation-ai-svc</code> (Python AI/ML) and <code>cdp-segmentation-deployment</code> (4.1 MB of deploy infra). <strong>The CDP-grade data foundation Klaviyo has natively is being built in parallel with C2.</strong> Not in the diagram you provided.</div>
+      <div class="biz">Strategy Bet 4 (QBO integration) data foundation<br/><br/>Predictive trigger productization (parity with Klaviyo)<br/><br/>+$5–8M ARR upside</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>VOC AI / Intuit Assist</strong> · "AI-generated journeys" is gated to Standard+ US-first. International users feel sold a partial product. (Same pattern as Editor brief Write with AI.)</div>
+      <div class="repo">automations-agent<br/>(Python, 175 KB,<br/>1 commit — scaffold)<br/><br/>lil-kelly-agent<br/>(Python, 373 KB)<br/><br/>autobots-claude-tools<br/>(153 KB)</div>
+      <div class="ev"><strong>Three AI-agent repos exist but are early-stage:</strong> <code>automations-agent</code> has <code>agents_and_tools.yaml</code> (MCP-style tool registry), <code>JenkinsfileAgenticStage.snippet</code>, <code>.cursorrules</code>, <code>.windsurfrules</code> — all the agentic-CI scaffolding — but only 1 svcdoaadmin commit (initial scaffold, never written into). <code>lil-kelly-agent</code> is more mature (373 KB, last push Apr 13 2026). <code>autobots-claude-tools</code> (May 11) is most-recently-pushed but small. <strong>The agentic surface for CJB AI features is being staked out but not yet shipped at customer scale.</strong></div>
+      <div class="biz">Strategy Bet 5 (positioning reframe — "AI ships journeys, not a demo")<br/><br/>L6 ARPU lift</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>VOC "Contact tax" billing</strong> · charging for unsubscribed/cleaned/duplicate contacts inflates real cost 20–40%. Cited in Automations VOC brief as ongoing reputational damage.</div>
+      <div class="repo">[Billing/contact-counting<br/>outside CJB org —<br/>Mailchimp monolith<br/>or Intuit billing platform]</div>
+      <div class="ev">Cross-org dependency. The C2 platform&rsquo;s tenant model uses Intuit IAM tickets for auth, but contact-counting for billing is a billing-platform decision. <strong>Same pattern as compliance + pricing-tier — the C2 platform is downstream of these monolith decisions.</strong></div>
+      <div class="biz">Brand sentiment recovery<br/><br/>Counter-positioning vs Klaviyo Feb &rsquo;25 active-profile billing damage</div>
+    </div>
+
+    <div class="map-row">
+      <div class="voc"><strong>UR "Classic Automation deprecation" pain</strong> · June 2025 retirement of Classic Automations on Free was the loudest single anti-Mailchimp narrative of 2025–26.</div>
+      <div class="repo">marketing-automation-docs/<br/>docs/classic-automations/<br/><br/>marketing-automation-docs/<br/>docs/defunct-projects/</div>
+      <div class="ev">Docs site has <strong>both a <code>classic-automations/</code> doc folder AND a <code>defunct-projects/</code> folder</strong>. The defunct-projects directory is a self-aware archive of retired services. The Classic Automations product is documented as a transition path, not a current capability. <strong>Internal codebase is honest about the deprecation; external customer experience hasn&rsquo;t recovered from it.</strong></div>
+      <div class="biz">Free-tier reactivation (Strategy Bet 1)<br/><br/>SMB acquisition funnel reopening</div>
+    </div>
+
+    <h2 style="margin-top: 18px;"><span class="num">B</span>Pattern recognition (Playbook §4.2) — what concentrates in one place</h2>
+
+    <div class="grid cols-2">
+      <div class="card brand">
+        <h3>Pattern 1 · The customer-facing UI is the missing dimension</h3>
+        <p><strong>Five of eleven mapped customer pains</strong> ($53.5K/mo aggregate cited) point to a customer-facing UI surface (canvas, sandbox, in-app changelog, AI sidebar, weekly digest). <strong>None of those surfaces is identifiable in the active TS UIs of <code>crmmktg-mktauto</code> or <code>mailchimp-mcmktg</code>.</strong> The C2 platform&rsquo;s decoupling story is real, but it&rsquo;s a <em>backend</em> decoupling. The customer-facing UI is either still in the legacy monolith (most likely) or being absorbed into one of the broader Nova/Omni surfaces (<code>mc-nova-ui</code>, <code>mc-omni-ui</code>) that aren&rsquo;t in the diagram. <strong>Strategy bets 1, 2, 3 all hinge on this ownership being clarified.</strong></p>
+      </div>
+
+      <div class="card brand">
+        <h3>Pattern 2 · The new platform is built to fix the bottom three customer pains</h3>
+        <p>Trigger reliability (Pain #2 — abandoned-cart fires twice), event-driven flow trust (Pain #7 — "didn&rsquo;t fire when it should"), and predictive trigger depth (Pain #8 — vs Klaviyo) all map directly to the C2 architecture pieces being actively built. <code>automations-numaflow</code> + <code>c2-journey-initiation</code> + <code>automations-rec-api</code> + <code>cdp-segmentation</code> are <em>specifically the four services</em> that solve those four customer pains. <strong>The platform&rsquo;s business case is clear from a code-evidence read alone.</strong></p>
+      </div>
+
+      <div class="card brand">
+        <h3>Pattern 3 · Channel breadth is unowned in the new architecture</h3>
+        <p>VOC&rsquo;s loudest functional gap (no Push, no WhatsApp, no in-app) maps to <em>zero</em> active repos in the analyzed orgs. The <code>automations-numaflow</code> 13-domain trigger list is rich on <em>inbound</em> events but the C2 Processing-layer Executors that own <em>outbound channel sends</em> have no visible Push/WhatsApp/In-app implementation. <strong>This is a strategic ownership gap, not a tech-debt gap</strong> — until a team is named for non-Email/SMS channels, the omnichannel competitive narrative cannot be reversed.</p>
+      </div>
+
+      <div class="card brand">
+        <h3>Pattern 4 · Cross-org dependencies blunt three more customer pains</h3>
+        <p>Pricing/paywall, contact-tax billing, compliance enforcement — three of the loudest VOC themes — all live <em>outside</em> <code>crmmktg-mktauto</code>. They&rsquo;re Mailchimp monolith + Intuit billing-platform decisions. <strong>The C2 re-platform cannot fix the customer-facing pricing/compliance narrative on its own</strong>. Per playbook §1.1 these are "Org Dependency" / "Process Hard" types, requiring escalation contacts in partner orgs.</p>
+      </div>
+    </div>
+
+    <p class="source"><strong>Sources:</strong> All repo facts from <code>github.intuit.com/crmmktg-mktauto/*</code> + <code>mailchimp-mcmktg/*</code> via shallow clone (depth=1) on <code>master</code>/<code>main</code> tips as of May 13 2026. Customer-pain references from <a href="mailchimp.html#hvcrisk">HVC Risk Map</a> ($53.5K/mo cited), <a href="mailchimp.html#sentiment">Voice of Customer</a>, <a href="mailchimp.html#research">User Research</a>, <a href="mailchimp.html#health">Product Health</a>. Framework: <em>Product Technical Intelligence Playbook</em> §4.</p>
+  </section>
+</div><!-- /panel-painmap -->
+
+<!-- ================ REPO MAP — REALITY VS DIAGRAM ================ -->
+<div class="tabpanel" id="panel-repo" role="tabpanel">
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Phase 1 · Layer 1 · Architecture &amp; Structural Health (Playbook §3)</div>
+        <h1>The diagram is a snapshot of <em style="color:#B91C1C;">2024 CJB</em>. The 2026 reality is a <em style="color:#166D3B;">three-layer C2 platform</em> + <em style="color:#4338CA;">parallel CDP segmentation build</em></h1>
+        <div class="subtitle">A line-by-line reconciliation of the 16 repos in the image you provided against the live state of <code>github.intuit.com/crmmktg-mktauto</code> + <code>mailchimp-mcmktg</code> as of May 13 2026. Plus an inventory of the active repos that aren&rsquo;t in the diagram.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Diagram repos:</strong> 16</div>
+        <div><strong>Archived:</strong> 7</div>
+        <div><strong>Active replacements:</strong> 9+</div>
+      </div>
+    </header>
+
+    <h2><span class="num">A</span>The diagram you provided — line-by-line reconciliation</h2>
+
+    <table>
+      <thead><tr><th style="width:18%">Diagram layer</th><th style="width:32%">Repo (per diagram)</th><th style="width:9%">Live state</th><th style="width:13%">Last push</th><th>Reality check</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Frontend builder UI</strong></td><td><code>mailchimp-mcmktg/customer-journey-builder</code> (TypeScript)</td><td><span class="pill warn">SCAFFOLD</span></td><td><span class="pill warn">Mar 3 2025</span></td><td><strong>Repo has 4 commits, all from one day, all from automation bots</strong> (<code>svc-uxinfra-bot</code>, <code>svcdoaadmin</code>). Never written into. Generated by Mobile Paved Road (Intuit&rsquo;s scaffolding) and abandoned. The actual customer-facing visual journey-builder canvas is not in either active org.</td></tr>
+        <tr><td><strong>Backend journey service</strong></td><td><code>crmmktg-mktauto/mc-customer-journeys</code> (Java)</td><td><span class="pill bad">ARCHIVED</span></td><td><span class="pill bad">Jan 24 2025 (16mo)</span></td><td>Archived. Replaced by the C2 architecture: <code>c2-journey-initiation</code> + <code>automations-platform</code> + <code>automations-numaflow</code>. The diagram is describing a service that no longer exists.</td></tr>
+        <tr><td><strong>Pre-built journey templates svc</strong></td><td><code>crmmktg-mktauto/prebuilt-journey-service</code> (Go)</td><td><span class="pill bad">ARCHIVED</span></td><td><span class="pill bad">Jul 31 2024 (22mo)</span></td><td>Archived 22 months ago. <strong>No clear replacement repo found</strong> in either active org. Strategy Bet 3 (B2B / ProServ template gap) is structurally orphaned — there&rsquo;s no service repo that owns "where new pre-built journey templates live."</td></tr>
+        <tr><td><strong>Journey preview</strong></td><td><code>crmmktg-mktauto/journey-preview-ui</code> (JavaScript)</td><td><span class="pill bad">ARCHIVED</span></td><td><span class="pill bad">May 22 2024 (24mo)</span></td><td>Archived 2 years ago. The preview surface is presumably either in the legacy monolith UI or absorbed into one of the new TS UIs (<code>automations-builder</code> / <code>control-panel-web-plugin</code>) — but neither has a "preview" sub-widget visible in the cloned source.</td></tr>
+        <tr><td><strong>Trigger designer</strong></td><td><code>crmmktg-mktauto/trigger-designer</code> (TypeScript)</td><td><span class="pill warn">STALE</span></td><td><span class="pill warn">Nov 21 2025</span></td><td>Active but stale (6+ months without a push). Uses <code>js-yaml</code> — it&rsquo;s a YAML editor for trigger configuration, not a full visual designer. Pairs with <code>automations-numaflow/transformer-config.yml</code>. Top contributor: <code>cmartin24</code> (4 commits — quiet repo).</td></tr>
+        <tr><td><strong>Shared automations runtime</strong></td><td colspan="2"><code>automations-platform</code>, <code>automations-numaflow</code>, <code>automation-worker</code>, <code>automation-workflows</code>, <code>automation-filter</code>, <code>automations-event-gateway</code>, <code>contact-execution-outbox</code>, <code>automationseventingest</code>, <code>automations-rec-api</code></td><td>Mixed (see below)</td></tr>
+        <tr><td colspan="5" style="background:#FFFCF0;">
+          <strong>Per-repo state of the "Shared automations runtime" group:</strong>
+          <ul style="margin:6px 0 0;">
+            <li><span class="pill good">ACTIVE</span> <code>automations-platform</code> (Java, 825 KB, push <strong>today</strong>) — the new core "Configuration + Processing" layer per AGENTS.md. <strong>Currently a paved-road starter</strong>: <code>DocumentServiceImpl</code> uses <code>ConcurrentHashMap</code> in-memory; will be replaced with DynamoDB.</li>
+            <li><span class="pill good">ACTIVE</span> <code>automations-numaflow</code> (Java, 2129 KB, push <strong>today</strong>) — the Numaflow K8s-pipeline ingestion layer; 245 Java files, 110 test files, 13+ event domains.</li>
+            <li><span class="pill bad">ARCHIVED</span> <code>automation-worker</code> (Java) — last push Aug 4 2025.</li>
+            <li><span class="pill warn">ZOMBIE</span> <code>automation-workflows</code> (Java, 128 KB, push Oct 24 2024 — 19 months stale, but not yet archived).</li>
+            <li><span class="pill bad">ARCHIVED</span> <code>automation-filter</code> — singular form. Replaced by <code>automations-filter</code> (plural form, Java, 590 KB, push May 1 2026, ACTIVE — note rename from <code>automation-filter</code> to <code>automations-filter</code> reflecting the platform-level naming convention).</li>
+            <li><span class="pill bad">ARCHIVED</span> <code>automations-event-gateway</code> (May 21 2025).</li>
+            <li><span class="pill bad">ARCHIVED</span> <code>contact-execution-outbox</code> (TypeScript! — Dec 7 2025).</li>
+            <li><span class="pill good">ACTIVE</span> <code>automationseventingest</code> (Java, only <strong>29 KB</strong>, 6 Java files, push May 4 2026) — small specialized event-ingest worker; created by <code>aajanaku</code> (only contributor, 2 commits).</li>
+            <li><span class="pill good">ACTIVE</span> <code>automations-rec-api</code> (Java, 673 KB, push Feb 12 2026) — recommendations/predictions engine, owned by <code>amilt</code> (Austin Milt) + <code>sfagbemi</code>.</li>
+          </ul>
+        </td></tr>
+        <tr><td><strong>On-call / docs</strong></td><td><code>marketing-automation-docs</code>, <code>cjboncall-skill</code></td><td><span class="pill good">ACTIVE</span></td><td>May 11, Apr 13 2026</td><td>Both active. <code>marketing-automation-docs</code> is a <strong>Docusaurus 8.4 MB site with .claude/skills/cjboncall sub-skill</strong> — agentic on-call automation. <code>cjboncall-skill</code> is a Shell-based on-call helper. Internal-team facing.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card bad" style="margin-top:14px;">
+      <h3>Diagram coverage scorecard</h3>
+      <ul>
+        <li><strong>Of 16 repos in the diagram:</strong> 7 archived, 1 scaffold-only, 2 stale (<code>trigger-designer</code>, <code>automation-workflows</code>), 6 active.</li>
+        <li><strong>Of those 6 active</strong>: only 4 are central to the new architecture (<code>automations-platform</code>, <code>automations-numaflow</code>, <code>automations-rec-api</code>, <code>automationseventingest</code>); the other 2 are docs/on-call helpers.</li>
+        <li><strong>The diagram&rsquo;s #1 (Frontend builder UI) is a hollow scaffold; #2 (Backend journey service) is archived; #3 (Pre-built templates) is archived. The three named primary services in the diagram are all retired.</strong></li>
+      </ul>
+    </div>
+
+    <h2 style="margin-top: 18px;"><span class="num">B</span>The repos that ARE in the new architecture but missing from your diagram</h2>
+
+    <div class="grid cols-2">
+      <div class="card brand">
+        <h3>c2-journey-initiation · Java · 1,482 KB</h3>
+        <p><strong>The new "Backend journey service" replacement.</strong> Last push May 7 2026. Per its README: <em>"high-performance Spring Boot microservice that processes automation trigger events from Kafka topics and efficiently batches them for downstream processing via Google Cloud Tasks. Async processing architecture with in-memory batching, while maintaining at-least-once delivery guarantees."</em></p>
+        <p>Stack: <strong>Java 21 + Amazon Corretto + Maven 3.8 + Kafka + Valkey + Rancher Desktop</strong> for local. Top contributor: <code>bcraig</code> (Bobby Craig) at 375 commits = 65% share. The proto package was renamed last week (May 7) from <code>cjprocessing</code> to <code>triggereventprocessor</code> in MCAUT-8639 — actively being shaped.</p>
+      </div>
+
+      <div class="card brand">
+        <h3>cdp-segmentation · Kotlin · 8,031 KB</h3>
+        <p><strong>The CDP-grade segmentation build that closes the Klaviyo data-foundation gap.</strong> Last push <strong>today</strong>. 8 MB of active Kotlin code. In <code>mailchimp-mcmktg</code>, not <code>crmmktg-mktauto</code> — sits next to <code>cdp-segmentation-deployment</code> (4.1 MB), <code>cdp-segment-cloudstack</code>, and <code>cdp-segment-cloudstack-deployment</code>. <strong>This is the Bloomreach / Klaviyo CDP-grade response that the Automations brief Loss Attribution called the structural ceiling.</strong></p>
+        <p>Adjacent: <code>c2-segmentation-ai-svc</code> (Python, 1,812 KB, today) + <code>c2-segmentation-ai-svc-deployment</code>. The "C2" prefix is the consistent naming for the new platform generation.</p>
+      </div>
+
+      <div class="card brand">
+        <h3>mc-nova-* family · TypeScript · 5,777 KB</h3>
+        <p><strong>The "Nova" Mailchimp surface — possibly where the customer-facing journey UI is migrating.</strong> <code>mc-nova-core</code> (5.8 MB TS), <code>mc-nova-ui</code> (977 KB TS), <code>mc-nova-svc</code> (Python), <code>mc-nova-docs</code> (MDX), <code>nova-core</code>, <code>nova-editor-sdk</code>, <code>nova-editor-ui</code>. All in <code>mailchimp-mcmktg</code>. Active March–April 2026. <strong>None in the diagram.</strong></p>
+        <p>The naming pattern (<em>Nova</em>) suggests a new Mailchimp-side product surface that consumes C2 backend services. Worth confirming whether the journey-canvas UI lives here.</p>
+      </div>
+
+      <div class="card brand">
+        <h3>automations-agent + lil-kelly-agent + autobots-claude-tools · Python</h3>
+        <p><strong>The agentic AI surface for CJB.</strong> Three Python repos with progressively more activity:</p>
+        <ul>
+          <li><code>automations-agent</code> (175 KB) — has <code>agents_and_tools.yaml</code>, <code>JenkinsfileAgenticStage.snippet</code>, <code>.cursorrules</code>, <code>.windsurfrules</code>. <strong>Only 1 commit (initial scaffold)</strong> — staked out, not yet built.</li>
+          <li><code>lil-kelly-agent</code> (373 KB, last push Apr 13 2026) — more developed; the name suggests an internal codename ("Lil Kelly").</li>
+          <li><code>autobots-claude-tools</code> (153 KB, last push May 11 2026) — most recent, smallest. Pattern matches NUNI&rsquo;s <code>mc-omni-mcp</code>: an MCP-style tool registry surface.</li>
+        </ul>
+      </div>
+
+      <div class="card brand">
+        <h3>automations-builder + control-panel-web-plugin · TS · 345/285 KB</h3>
+        <p><strong>The active TS UIs that DO exist in <code>crmmktg-mktauto</code>.</strong> <em>Neither is the journey-canvas builder.</em></p>
+        <ul>
+          <li><code>automations-builder</code> — 1.1.0 just released (Apr 13). Yena Ku (<code>yku01</code>) made the pnpm switch last month. No <code>react-flow</code>, <code>xyflow</code>, or DnD libraries — this is a config UI, not a flowchart canvas.</li>
+          <li><code>control-panel-web-plugin</code> — v1 UI shipped May 13 (today!) by Cliff Martin. Uses <code>@hello-pangea/dnd</code> + <code>@ids-ts/table</code> + <code>@ids-ts/drawer</code> — looks like an admin/observability control panel, not a customer-facing journey designer.</li>
+        </ul>
+      </div>
+
+      <div class="card brand">
+        <h3>marketing-automation-docs · Docusaurus · 8,385 KB</h3>
+        <p><strong>The internal docs site.</strong> Has <code>.claude/skills/cjboncall/</code> — a Claude Code skill for on-call. Doc folder structure: <code>ingestion/</code>, <code>defunct-projects/</code>, <code>rss/</code>, <code>observability/</code>, <code>integrations/</code>, <code>getting-started/</code>, <code>automation-flows/</code>, <code>classic-automations/</code>, <code>infrastructure/</code>, <code>oncall/</code>, <code>nextgen/</code>, <code>autoresponders/</code>. <strong>The fact that there&rsquo;s a <code>defunct-projects/</code> directory is itself a self-aware org-health signal</strong> — the team archives openly.</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top: 18px;"><span class="num">C</span>The C2 architecture — what AGENTS.md actually documents</h2>
+
+    <div class="arch-block"><span class="lbl">[Mailchimp monolith / EventBus / Kafka]</span>
+        <span class="arrow">↓</span>
+<span class="lbl">automations-numaflow</span> — Ingestion layer (Java 21 + Spring Boot + Numaflow gRPC vertex)
+  • 13+ event-driven domain handlers (back-in-stock, contact CDC,
+    email activity, custom events, messaging, payments, pixel,
+    reviews, segmentation, monolith-relay, internal loopback,
+    scheduled/cron, synthetic testing)
+  • SpEL-based filtering (transformer-config.yml)
+  • Trigger matching against Valkey (Redis-compatible) cache
+  • Publishes AutomationTriggerEvents → c2-journey-initiation
+        <span class="arrow">↓</span>
+<span class="lbl">c2-journey-initiation</span> — Initiation layer (Java 21 + Kafka + Valkey)
+  • Consumes Kafka trigger topics
+  • In-memory batching, at-least-once delivery
+  • Publishes batched events → Google Cloud Tasks downstream
+  • Recently refactored: cjprocessing → triggereventprocessor
+        <span class="arrow">↓</span>
+<span class="lbl">automations-platform</span> — Processing layer (Java 21 + Spring Boot 3.3.7)
+  • DAG Service (workflow CRUD/lifecycle) — absorbed automation-interface
+  • Router (SQS FIFO + DynamoDB — currently in-memory ConcurrentHashMap)
+  • Stateless Executors per step type:
+    Action · Condition · Delay · Wait-for-Trigger
+        <span class="arrow">↓</span>
+<span class="lbl">automations-rec-api</span> + <span class="lbl">automations-filter</span> + <span class="lbl">automationseventingest</span>
+  • Recommendations / predictions surface (rec-api: 140 Java files)
+  • Pre-execution filtering (filter: 59 Java files)
+  • Tiny event-ingest specialty worker (29 KB, 6 Java files)
+
+[Auth: Intuit IAM via JSK Spring Boot starter parent]</div>
+
+    <p style="font-size:12px; color:var(--muted); font-style:italic;">Architecture per <code>automations-platform/AGENTS.md</code> + <code>automations-numaflow/AGENTS.md</code> + <code>c2-journey-initiation/README.md</code>. Cross-references the unpublished Jira architecture proposal MCAUT-8247.</p>
+
+    <p class="source"><strong>Sources:</strong> <code>gh api repos/&lt;repo&gt;</code> on each named diagram repo (16 lookups). <code>gh api search/repositories?q=org:&lt;org&gt;+pushed:&gt;2025-12-01</code> for active-replacement discovery (50+ repos enumerated across both orgs). Direct <code>git log</code> + commit-message reads for naming-rename evidence (MCAUT-8639 proto package rename, MCAUT-8290 pnpm switch, MCAUT-8335 control-panel v1 UI). Per-repo <code>AGENTS.md</code> + <code>README.md</code> + <code>package.json</code> + <code>pom.xml</code> reads from shallow clones.</p>
+  </section>
+</div><!-- /panel-repo -->
+
+<!-- ================ 7-LAYER FORENSIC ================ -->
+<div class="tabpanel" id="panel-layers" role="tabpanel">
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Phase 1 · Repo Deep Dive (Playbook §3)</div>
+        <h1>Seven-layer forensic analysis on <em style="color:#166D3B;">automations-platform</em>, <em style="color:#166D3B;">automations-numaflow</em>, <em style="color:#166D3B;">c2-journey-initiation</em>, <em style="color:#166D3B;">automations-rec-api</em>, <em style="color:#166D3B;">automations-filter</em></h1>
+        <div class="subtitle">Each of the seven layers from the playbook&rsquo;s Phase 1 framework, applied to the active CJB backend core. Comparison column included where it provides useful contrast with the NUNI editor brief.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Layers:</strong> 7</div>
+        <div><strong>Repos in scope:</strong> 5 active backend core + 3 TS UIs</div>
+      </div>
+    </header>
+
+    <!-- LAYER 1 -->
+    <div class="layer-card l1">
+      <div class="lc-num">L1</div>
+      <div class="lc-eyebrow">Layer 1 · Architecture &amp; Structural Health</div>
+      <h3>Three-layer Spring Boot + Numaflow architecture, OpenAPI-first, paved-road parent. Every active service has the same skeleton.</h3>
+      <p><strong>What we found:</strong></p>
+      <ul>
+        <li><strong>Consistent paved-road structure</strong> across all 5 active Java services. Each has <code>app/api/openapi/</code>, <code>app/component/src/</code>, <code>app/integration/src/</code> + <code>pom.xml</code> + <code>Jenkinsfile</code> + <code>Jenkinsfile.pci</code> + <code>KubernetesPods.yaml</code> + <code>msaas-config.yaml</code> + <code>local-keystore</code>. This is Intuit&rsquo;s "Java Skeleton" (JSK) Spring Boot starter parent. <strong>Operational commonality</strong>: any engineer can move between services without re-learning structure.</li>
+        <li><strong>OpenAPI-first development.</strong> REST APIs are generated from <code>app/api/openapi/openapi.yaml</code>. Controllers implement generated <code>*Api</code> interfaces and delegate to a service layer. Schema is the source of truth, not the controllers. <strong>This is the playbook&rsquo;s "Strong" pattern</strong> — versioning + contract testing become tractable.</li>
+        <li><strong>Microservices boundaries match the documented architecture.</strong> Three layers: Configuration (<code>automations-platform</code>), Ingestion (<code>automations-numaflow</code>), Processing (Executors inside <code>automations-platform</code>). Plus <code>c2-journey-initiation</code> (the trigger-event-processor between ingestion and processing), <code>automations-rec-api</code> (recommendations), <code>automations-filter</code> (pre-execution filter), <code>automationseventingest</code> (specialized event-ingest worker).</li>
+        <li><strong>God-file detection:</strong> 245 Java files in <code>automations-numaflow</code> with the largest cluster being the <code>eventdriven/</code> directory (one subdirectory per of 13+ trigger types). No single file dominates; modularity is real. <strong>Nothing crosses the playbook&rsquo;s 800-LOC threshold.</strong></li>
+        <li><strong>Async coordination architecture is documented:</strong> Numaflow gRPC vertex pipeline + Kafka topics (EventBus) + Valkey cache + SQS FIFO + Google Cloud Tasks. This is a real distributed-system architecture, not a monolith pretending to be microservices.</li>
+        <li><strong>The "starter app" caveat:</strong> Per <code>automations-platform/AGENTS.md</code>, the service <em>"is currently a paved-road starter (MSaaS reference app) — the platform components will be built here."</em> <code>DocumentServiceImpl</code> uses <code>ConcurrentHashMap</code> in-memory; <strong>DynamoDB is the target but not yet wired</strong>. <em>The Configuration layer is in early bring-up state.</em></li>
+        <li><strong>TS UIs use a simpler shape:</strong> <code>automations-builder</code>, <code>control-panel-web-plugin</code>, <code>trigger-designer</code>, and the abandoned <code>customer-journey-builder</code> all use Intuit&rsquo;s <code>@appfabric/web-shell-core</code> + <code>plugin-cli</code> structure (the TS equivalent of JSK). Same paved-road consistency on the frontend.</li>
+      </ul>
+      <div class="lc-good"><strong>Strengths:</strong> JSK paved-road consistency, OpenAPI-first, 13 typed trigger domains, no god-class files, documented async architecture in AGENTS.md.</div>
+      <div class="lc-finding"><strong>Risks:</strong> <code>automations-platform</code> Configuration layer is still a starter — DynamoDB persistence not yet wired. Cutover from monolith to C2 ingestion has migration timing risk. <strong>The Configuration layer&rsquo;s in-memory <code>ConcurrentHashMap</code> would be a disaster in production scale.</strong></div>
+    </div>
+
+    <!-- LAYER 2 -->
+    <div class="layer-card l2">
+      <div class="lc-num">L2</div>
+      <div class="lc-eyebrow">Layer 2 · Dependency &amp; Security Posture</div>
+      <h3>Java 21 + Spring Boot 3 + Renovate. Modern, current, and disciplined.</h3>
+      <p><strong>What we found:</strong></p>
+      <ul>
+        <li><strong>Java 21 (Amazon Corretto)</strong> across all 5 active backend services. Current LTS. No legacy Java 8/11/17 carryover detectable.</li>
+        <li><strong>Spring Boot 3.x via Intuit&rsquo;s <code>jsk-spring-boot-starter-parent</code></strong> — pinned through the parent, version-bumps coordinated centrally. <code>automations-platform</code> uses <code>springdoc-openapi-starter-webmvc-ui 2.8.16</code> (current); the others on 2.8.5 (1 patch behind). <strong>Drift is minor and bounded.</strong></li>
+        <li><strong>Renovate is configured</strong> (every active repo has a <code>renovate.json</code> extending Intuit&rsquo;s base configs).</li>
+        <li><strong>TS UI deps mirror NUNI editor</strong> (and not in a good way): <code>react@17.0.2</code>, <code>styled-components@4.4.1</code>, <code>prop-types@15.8.1</code>, <code>@design-systems/icons</code> + <code>@ids-ts/*</code> + <code>@appfabric/*</code>. <strong>Same React 17 stale stack as <code>nuni-core-ui</code>.</strong> The Intuit web-plugin paved-road is itself anchored to React 17 — a tech-debt floor that affects every Mailchimp + Intuit TS UI.</li>
+        <li><strong>Modern infra deps:</strong> Numaflow on Kubernetes (gRPC vertex), Apache Kafka, Valkey 8.0 (Redis-compatible), AWS SQS FIFO, AWS DynamoDB (planned), Google Cloud Tasks. <strong>This is a multi-cloud, modern stack</strong> — Mailchimp historically AWS-monolith; Google Cloud Tasks integration suggests Intuit cross-cloud strategy.</li>
+        <li><strong>Auth via Intuit IAM ticket</strong> through the JSK framework (per <code>automations-platform/AGENTS.md</code>: <em>"Real Intuit IAM ticket authentication via JSK framework. Not available locally."</em>).</li>
+        <li><strong>Local-dev tooling:</strong> Podman compose, Rancher Desktop, LocalStack for AWS local emulation, <code>docker-compose-kafka.yml</code> for Kafka, valkey container. Local dev is well-documented and reproducible.</li>
+      </ul>
+      <div class="lc-good"><strong>Strengths:</strong> Java 21 current LTS · Spring Boot 3 · Renovate harness · OpenAPI-first contract testing · multi-cloud aware (AWS + GCP).</div>
+      <div class="lc-finding"><strong>Risks:</strong> All TS UIs are React 17 + styled-components 4 (same Intuit paved-road floor as the editor) — <strong>any modernization decision compounds across both teams</strong>. The customer-journey-builder scaffold is the oldest version of <code>@appfabric/web-shell-core</code> (9.10.1 vs 9.98.0 on active repos) — proves the scaffold has been frozen since March 2025.</div>
+    </div>
+
+    <!-- LAYER 3 -->
+    <div class="layer-card l3">
+      <div class="lc-num">L3</div>
+      <div class="lc-eyebrow">Layer 3 · Test Coverage &amp; Quality Infrastructure</div>
+      <h3>JaCoCo 85% line coverage <em>enforced in CI</em> on the new platform. The strongest quality posture in the brief.</h3>
+
+      <table>
+        <thead><tr><th>Repo</th><th>Java files</th><th>Test files</th><th>Test ratio</th><th>JaCoCo gate</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td><code>automations-platform</code></td><td>121</td><td>33</td><td>27.3%</td><td><strong>85% line / 50% branch</strong></td><td><span class="pill warn">GATE STRONG, FILES LIGHT</span></td></tr>
+          <tr><td><code>automations-numaflow</code></td><td>245</td><td><strong>110</strong></td><td>44.9%</td><td><strong>85% line / 50% branch</strong></td><td><span class="pill good">EXCELLENT</span></td></tr>
+          <tr><td><code>c2-journey-initiation</code></td><td>54</td><td>20</td><td>37.0%</td><td>75% line / 50% branch</td><td><span class="pill good">STRONG</span></td></tr>
+          <tr><td><code>automations-rec-api</code></td><td>140</td><td><strong>72</strong></td><td><strong>51.4%</strong></td><td><strong>85% line / 50% branch</strong></td><td><span class="pill good">EXCELLENT</span></td></tr>
+          <tr><td><code>automations-filter</code></td><td>59</td><td>24</td><td>40.7%</td><td>5% / 5% (<strong>scaffold default</strong>)</td><td><span class="pill bad">GATE NEVER TIGHTENED</span></td></tr>
+          <tr><td><code>automationseventingest</code></td><td>6</td><td>2</td><td>33.3%</td><td>(default)</td><td><span class="pill warn">TINY REPO</span></td></tr>
+        </tbody>
+      </table>
+
+      <ul style="margin-top:10px;">
+        <li><strong>The 85% JaCoCo line-coverage gate is a real, enforced CI check</strong> on three of five active services. <code>automations-platform/AGENTS.md</code> states it explicitly: <em>"JaCoCo enforces 85% line coverage minimum."</em> This is <strong>5× stronger than the NUNI editor UI&rsquo;s 16.7% test/source ratio</strong> with no enforcement. <em>Quality discipline on the new CJB backend is real.</em></li>
+        <li><strong>Test file counts are healthy:</strong> <code>automations-numaflow</code> has 110 test files for 245 source files (44.9% file ratio); <code>automations-rec-api</code> has 72 for 140 (51.4%). Either category dominates the editor side.</li>
+        <li><strong>Layer 3 hole:</strong> <code>automations-filter</code> has the 5%/5% scaffold default JaCoCo gate — never tightened to match the platform standard. This is the playbook&rsquo;s "configuration debt" (Layer 7 anti-pattern surfacing in Layer 3): the gate exists, was never raised, every PR passes. <strong>Tighten the <code>automations-filter</code> JaCoCo gate to match the 85% standard.</strong></li>
+        <li><strong>Integration tests + perf tests:</strong> Each service has <code>app/integration/</code> + <code>perf-tests/</code> directories. <code>automations-platform/AGENTS.md</code> notes: <em>"Gatling performance tests (currently broken upstream — see pom.xml)"</em> — known issue, documented honestly.</li>
+        <li><strong>OpenAPI lint + validation in Make targets:</strong> <code>make openapi-validate</code>, <code>make openapi-lint</code>, <code>make openapi-view</code>. Spec quality is a CI concern. Strong contract-driven discipline.</li>
+        <li><strong>Synthetic event producer:</strong> <code>synthetic-event-producer</code> + <code>synthetic-event-producer-deployment</code> exist as live repos — <strong>load-testing infra is in production</strong>. Numaflow has a <code>testing/</code> trigger domain dedicated to synthetic test events.</li>
+        <li><strong>TS UIs:</strong> Each TS repo has a <code>cypress/</code> directory and <code>jest.config.js</code>. Cypress is configured but not yet exercised at scale (the new TS UIs were just released v1).</li>
+      </ul>
+      <div class="lc-good"><strong>Strengths:</strong> 85% JaCoCo gate enforced on 3 of 5 services · OpenAPI lint + validate in CI · synthetic event producer in production · integration test directories on every service.</div>
+      <div class="lc-finding"><strong>Risks:</strong> <code>automations-filter</code> JaCoCo gate at scaffold default 5% — tighten. Gatling perf tests broken (acknowledged in AGENTS.md). TS UIs have Cypress configured but virtually empty.</div>
+    </div>
+
+    <!-- LAYER 4 -->
+    <div class="layer-card l4">
+      <div class="lc-num">L4</div>
+      <div class="lc-eyebrow">Layer 4 · Code Complexity Hotspots</div>
+      <h3>No god-class files. Complexity is distributed across the 13-domain handler topology.</h3>
+      <ul>
+        <li><strong>No source file in the active backend core crosses 800 LOC.</strong> The largest source files are within the <code>eventdriven/</code> domain handlers in <code>automations-numaflow</code> (one sub-directory per trigger type — back-in-stock, contact-state-change, custom events, email activity, loopback, monolith-relay, messaging, payments-invoices, pixel, reviews, segmentation, scheduled-event, testing). Each domain has its own constants/handlers/transformers, keeping files small.</li>
+        <li><strong>The 245 Java files in <code>automations-numaflow</code> are a topology, not a god-class:</strong> 13 trigger-type domains × roughly 4–6 files each (handler, transformer, config, optional repository) + shared services (<code>TriggerMatcher</code>, <code>EventFilter</code>, <code>TriggerEventEnricher</code>, <code>ValkeyService</code>) + <code>util/</code> SpEL helpers. Decomposition is healthy.</li>
+        <li><strong>Recent refactor evidence (Layer 4 churn × complexity):</strong> The <code>cjprocessing → triggereventprocessor</code> proto package rename in <code>c2-journey-initiation</code> (MCAUT-8639, May 7 2026) by <code>bcraig</code> shows the team is renaming for clarity even at the proto level. Healthy churn pattern.</li>
+        <li><strong>Lombok is used everywhere</strong> (<code>lombok.config</code> in every Java service) — reduces boilerplate but introduces a build-time dependency. Standard Intuit/Mailchimp pattern.</li>
+        <li><strong>OpenAPI generation hides "complexity" in generated code:</strong> Generated <code>*Api</code> interfaces and POJOs land in <code>target/generated-sources/</code>. Hand-written code is thinner because the spec generates the boilerplate. <strong>This is a Layer 4 win that the playbook would call "Strong"</strong> — controllers are pure delegation; testing surfaces are clean.</li>
+      </ul>
+      <div class="lc-good"><strong>Strengths:</strong> No god files; 13-domain decomposition is the dominant complexity unit; OpenAPI generation thins controllers; recent renames show active hygiene.</div>
+    </div>
+
+    <!-- LAYER 5 -->
+    <div class="layer-card l5">
+      <div class="lc-num">L5</div>
+      <div class="lc-eyebrow">Layer 5 · Commit &amp; PR Patterns (Velocity Forensics)</div>
+      <h3>Backend velocity is the strongest in the brief — and dependent on 2 engineers.</h3>
+
+      <table>
+        <thead><tr><th>Repo</th><th>Top contributors (last 12mo)</th><th>PR median</th><th>PR p95</th><th>Verdict</th></tr></thead>
+        <tbody>
+          <tr><td><code>c2-journey-initiation</code></td><td><strong>bcraig 375 (65%)</strong> · cmartin24 146 · kferney 21</td><td>1.5h</td><td>18.0h</td><td><span class="pill bad">SINGLE HERO (65%)</span></td></tr>
+          <tr><td><code>automations-platform</code></td><td>jmoriarty 128 · bcraig 100 · jbrown47 30</td><td>0.8h</td><td>67.8h</td><td><span class="pill good">DISTRIBUTED 3-of-N</span></td></tr>
+          <tr><td><code>automations-numaflow</code></td><td>kferney 286 (33%) · bcraig 219 (25%) · cmartin24 85 · yku01 37</td><td><strong>0.5h</strong></td><td>24.5h</td><td><span class="pill good">DISTRIBUTED 4-of-N</span></td></tr>
+          <tr><td><code>automations-rec-api</code></td><td><strong>amilt 136 (60%)</strong> · sfagbemi 81 (36%)</td><td>—</td><td>—</td><td><span class="pill bad">2-PERSON REPO</span></td></tr>
+          <tr><td><code>automations-filter</code></td><td>cmartin24 106 (49%) · kferney 71 · bcraig 25 · mreich 14</td><td>—</td><td>—</td><td><span class="pill warn">SINGLE LEAD</span></td></tr>
+          <tr><td><code>automations-builder</code> (TS)</td><td>yku01 3 · svc-uxinfra-bot 3 · svcdoaadmin 1</td><td>1.3h</td><td>1.3h</td><td><span class="pill warn">SINGLE-AUTHOR</span></td></tr>
+          <tr><td><code>control-panel-web-plugin</code> (TS)</td><td>cmartin24 3 · svc-uxinfra-bot 3 · svcdoaadmin 1</td><td>0.7h</td><td>0.7h</td><td><span class="pill warn">SINGLE-AUTHOR</span></td></tr>
+          <tr><td><code>trigger-designer</code> (TS)</td><td>cmartin24 4 · svc-uxinfra-bot 3 · svcdoaadmin 1</td><td>—</td><td>—</td><td><span class="pill warn">SINGLE-AUTHOR</span></td></tr>
+        </tbody>
+      </table>
+
+      <ul style="margin-top:10px;">
+        <li><strong>Backend velocity is dramatically faster than the NUNI editor side.</strong> <code>automations-numaflow</code> median PR cycle = 0.5 hours (vs NUNI editor UI median 7.1h with 692h p95). This team ships fast and merges fast.</li>
+        <li><strong>Hero engineer concentration on the backend:</strong>
+          <ul>
+            <li><code>bcraig</code> (Bobby Craig): top-3 on 4 of 5 active backend repos. <strong>Single most important engineer in the CJB code.</strong></li>
+            <li><code>cmartin24</code> (Cliff Martin): top-3 on 5 of 8 repos including <em>all three active TS UIs</em>. <strong>Owns the entire active TS UI surface and is in the top of three backend repos.</strong></li>
+            <li><code>kferney</code>: top contributor on <code>automations-numaflow</code>.</li>
+            <li><code>amilt</code> (Austin Milt): owns <code>automations-rec-api</code> at 60% commit share. <strong>Same engineer who closed the NUNI editor brand-kit incident</strong> — cross-product hero on two of Mailchimp&rsquo;s most strategic surfaces.</li>
+            <li><code>jmoriarty</code>: top on <code>automations-platform</code> — leads the C2 Configuration/Processing layer.</li>
+          </ul>
+        </li>
+        <li><strong>Service bots are healthy:</strong> <code>svc-sbseg-ci</code> appears as #2 contributor on every backend repo (200–240 commits — automated CHANGELOG updates and conventional-commits versioning). The CI/release harness is mature.</li>
+        <li><strong>TS UIs are net-new and single-author:</strong> Each active TS repo has 3–4 commits from the lead human + 3 from the bot. They&rsquo;ve just been bootstrapped; the development concentration is consistent with v1 launches.</li>
+        <li><strong>Conventional commits with MCAUT-XXXX scope</strong> on every active backend repo. <code>feat(MCAUT-8639): rename cjprocessing proto to triggereventprocessor</code> is the most-recent commit type. Discipline is consistent.</li>
+      </ul>
+      <div class="lc-good"><strong>Strengths:</strong> Backend velocity (0.5h numaflow median), conventional commits with MCAUT scope, distributed 3–4-of-N on the largest services, mature CI/release bots.</div>
+      <div class="lc-finding"><strong>Risks:</strong> <code>bcraig</code> at 65% on <code>c2-journey-initiation</code>; <code>cmartin24</code> owns all three active TS UIs single-handedly; <code>amilt</code> at 60% on <code>rec-api</code> while also owning Brand Kit on the editor side. <strong>Bus factor 1–2 across the entire active core</strong>, same as NUNI editor.</div>
+    </div>
+
+    <!-- LAYER 6 -->
+    <div class="layer-card l6">
+      <div class="lc-num">L6</div>
+      <div class="lc-eyebrow">Layer 6 · Performance &amp; Error Handling</div>
+      <h3>Async-first design with documented at-least-once semantics. Performance gates are real but Gatling is broken.</h3>
+      <ul>
+        <li><strong>At-least-once delivery is documented and architected,</strong> not bolted on. <code>c2-journey-initiation/README</code>: <em>"async processing architecture with in-memory batching, while maintaining at-least-once delivery guarantees."</em> Numaflow vertex pipeline + Kafka + Valkey + SQS FIFO chain is built for this guarantee.</li>
+        <li><strong>SpEL-based filtering with explicit helpers:</strong> <code>automations-numaflow</code>&rsquo;s <code>util/</code> directory provides custom SpEL helpers (<code>#flatten</code>, <code>#inList</code>, <code>#containsAny</code>) so filter expressions stay readable. <strong>This is an L6 win</strong> — error-prone string-comparison patterns are abstracted into helpers.</li>
+        <li><strong>Circuit breaker / retry patterns:</strong> Need to confirm — Numaflow vertices typically inherit retry semantics from the platform; explicit Resilience4j or Polly-style circuit-breaker code wasn&rsquo;t scanned. Worth a follow-up.</li>
+        <li><strong>Health endpoints documented:</strong> Each service exposes <code>/health</code> and <code>/health/full</code> with self-signed certs locally. <code>:8490/health</code> is the management port. <strong>Operational maturity is real.</strong></li>
+        <li><strong>Performance tests:</strong> Each service has a <code>perf-tests/</code> directory. AGENTS.md notes Gatling tests are <em>"currently broken upstream — see pom.xml"</em>. <strong>Known issue, openly documented</strong> — but performance gates are not actually enforced today.</li>
+        <li><strong>Synthetic event producer:</strong> <code>synthetic-event-producer</code> repo + <code>testing/</code> trigger domain in numaflow + <code>test-payloads/</code> directory + <code>run-integration-tests.sh</code> in <code>automations-numaflow</code>. Load-testable end-to-end.</li>
+        <li><strong>Observability surface:</strong> <code>marketing-automation-docs/docs/observability/</code> directory exists. The team has a documented observability practice (separate from this analysis to dive into).</li>
+        <li><strong>Error swallowing:</strong> Spot-checks of <code>service/</code> and <code>repository/</code> files in <code>automations-numaflow</code> don&rsquo;t show empty catch blocks — Lombok&rsquo;s <code>@Slf4j</code> + structured Pino-equivalent logging via Spring is standard.</li>
+      </ul>
+      <div class="lc-good"><strong>Strengths:</strong> At-least-once architected from the start, SpEL helper abstraction, health endpoints standardized, synthetic event producer in production, documented observability folder.</div>
+      <div class="lc-finding"><strong>Risks:</strong> Gatling perf tests broken (acknowledged in AGENTS.md, not yet re-fixed). Circuit breaker patterns not verified in this scan. <strong>Performance regressions can ship without a performance gate catching them.</strong></div>
+    </div>
+
+    <!-- LAYER 7 -->
+    <div class="layer-card l7">
+      <div class="lc-num">L7</div>
+      <div class="lc-eyebrow">Layer 7 · Feature Flag &amp; Configuration Debt</div>
+      <h3>Configuration is centralized in YAML and Make targets. Feature flags presumably ride at the API gateway layer.</h3>
+      <ul>
+        <li><strong>Centralized configuration:</strong> <code>automations-numaflow</code>&rsquo;s <code>app/src/main/resources/transformer-config.yml</code> is the central trigger-type configuration file. Topics, JSONPath mappings, SpEL filter expressions, and matching criteria all live in one place. <strong>This is the playbook&rsquo;s "Strong" pattern</strong> — flag-controlled code paths don&rsquo;t accumulate because the config IS the routing.</li>
+        <li><strong>Test config mirrors prod:</strong> <code>app/src/test/resources/transformer-config.yml</code> must mirror production per AGENTS.md. Drift is caught at the test layer.</li>
+        <li><strong>Make targets are the dev-flag harness:</strong> <code>make dev-build-image</code>, <code>make dev-start</code>, <code>make dev-run</code>, <code>make dev-kill</code>, <code>make dev-shell</code>, <code>make test-unit</code>, <code>make test-coverage</code>, <code>make test-perf</code>, <code>make openapi-validate</code>, <code>make openapi-lint</code>, <code>make openapi-view</code>, <code>make dev-generate</code>, <code>make dev-generate-force</code>. Every state transition is a make target. <strong>"It works on my machine" is structurally prevented</strong> by Podman compose + LocalStack + standardized health checks.</li>
+        <li><strong>Feature flag scan:</strong> No <code>featureFlag</code>, <code>launchDarkly</code>, <code>optimizely</code> imports in the active Java services. <strong>Same finding as NUNI editor</strong> — flags presumably live at the API gateway / Intuit IAM layer, not in the service code. Worth confirming for incremental rollout of trigger-type cutover from monolith → C2.</li>
+        <li><strong>Profile-based config:</strong> Spring profiles (<code>local</code>, <code>e2e</code>, <code>prd</code>) split auth + dependency wiring. <code>application-local.yml</code> is the local dev override. Standard pattern.</li>
+        <li><strong>Stale flags:</strong> No flag-lifecycle process visible in source. The <code>defunct-projects/</code> directory in marketing-automation-docs is the org-level proxy for "flag cleanup" — services get archived rather than flag-toggled into death.</li>
+      </ul>
+      <div class="lc-good"><strong>Strengths:</strong> YAML-centralized trigger config (no flag-controlled code path explosion); Make targets standardize dev workflows; <code>defunct-projects/</code> doc folder shows mature retirement discipline.</div>
+      <div class="lc-finding"><strong>Risks:</strong> Same as NUNI editor — no editor-layer feature flag harness visible in service code. Cutover from legacy monolith trigger paths to C2 ingestion needs flag-gated rollout strategy; confirm the harness lives at the gateway.</div>
+    </div>
+
+    <p class="source"><strong>Method:</strong> Each layer applied per <em>Product Technical Intelligence Playbook</em> §3 (Days 3–7 deep dive). Evidence collected via shallow-clone + <code>find</code>/<code>grep</code>/<code>wc</code>/<code>jq</code> against the latest tip of <code>master</code>/<code>main</code>. JaCoCo thresholds extracted from each <code>app/pom.xml</code>. Contributor and PR data from <code>github.intuit.com</code> REST API on May 13 2026.</p>
+  </section>
+</div><!-- /panel-layers -->
+
+<!-- ================ ORG FAILURE MODES ================ -->
+<div class="tabpanel" id="panel-org" role="tabpanel">
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Phase 3 · Organizational Failure Mode Analysis (Playbook §5)</div>
+        <h1>The codebase tells a clear org story: <em style="color:#166D3B;">a disciplined backend team in re-platform mode</em>, <em style="color:#B91C1C;">a missing customer-facing UI owner</em>, and <em style="color:#4338CA;">a strategic identity shift from Mailchimp feature to Intuit platform</em></h1>
+        <div class="subtitle">Six failure modes from the playbook §5, applied to CJB with repo evidence.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Failure modes assessed:</strong> 6</div>
+      </div>
+    </header>
+
+    <div class="layer-card l3">
+      <div class="lc-eyebrow">Failure mode 1 · Single approver bottleneck (hero engineer)</div>
+      <h3>Two engineers (Bobby Craig + Cliff Martin) carry the C2 platform; Austin Milt is cross-product</h3>
+      <ul>
+        <li><code>bcraig</code> top contributor on 4 of 5 active backend repos including 65% commit share on <code>c2-journey-initiation</code>.</li>
+        <li><code>cmartin24</code> sole non-bot human author on 3 of 3 active TS UIs <em>and</em> top contributor on <code>automations-filter</code> (Java).</li>
+        <li><code>amilt</code> at 60% on <code>automations-rec-api</code> while also being the engineer who closed the Brand Kit incident in the editor brief — cross-product hero.</li>
+      </ul>
+      <div class="lc-finding"><strong>Likely root cause:</strong> Knowledge is concentrated by design — these are the technical leads who shaped the C2 architecture proposal (MCAUT-8247). The risk is not that they can&rsquo;t deliver; the risk is reassignment, vacation, or attrition during the FY27 commit window. <strong>Bus factor on C2 ≈ 2.</strong></div>
+    </div>
+
+    <div class="layer-card l3">
+      <div class="lc-eyebrow">Failure mode 2 · Engineers avoid certain areas (fear-driven engineering)</div>
+      <h3>The opposite is happening here — but the legacy monolith path is the unowned area</h3>
+      <ul>
+        <li>The new C2 backend has <strong>JaCoCo 85% gates, OpenAPI-first, AGENTS.md, conventional commits, 0.5h median PR cycle</strong> — engineering discipline is high.</li>
+        <li>BUT: the legacy Mailchimp monolith CJB UI (where customers actually click "Customer Journey") is not in <code>crmmktg-mktauto</code> or <code>mailchimp-mcmktg</code>. <strong>Whoever still owns the monolith CJB code is shipping on a different cadence and standard.</strong></li>
+        <li>Migration from monolith → C2 is the ownership gray zone — if neither team owns the cutover, the customer pain continues until cutover lands.</li>
+      </ul>
+      <div class="lc-finding"><strong>Likely root cause:</strong> The org has invested heavily in the new platform; the unsexy legacy migration glue is the work that doesn&rsquo;t attract senior engineers. <strong>Confirm cutover ownership is named, with a single accountable PM and EM.</strong></div>
+    </div>
+
+    <div class="layer-card l3">
+      <div class="lc-eyebrow">Failure mode 3 · Constant modernization talk, no customer value shipped</div>
+      <h3>Customer value is being shipped — but the AI Surface is leading the editor surface, again</h3>
+      <ul>
+        <li>The C2 platform is shipping real customer value (trigger reliability via Numaflow + Valkey, JaCoCo-gated services, OpenAPI-first contracts).</li>
+        <li>BUT: the Strategy 6-Pager bets are customer-facing (sandbox tier, activation funnel, B2B templates, QBO integration, positioning reframe) — and the customer-facing UI surface has no clear repo home in the active code.</li>
+        <li>Three Python AI agent repos exist (<code>automations-agent</code>, <code>lil-kelly-agent</code>, <code>autobots-claude-tools</code>) but only <code>lil-kelly-agent</code> shows real development. <strong>The agentic future is staked out, not shipped.</strong></li>
+      </ul>
+      <div class="lc-good"><strong>Honest read:</strong> This is the playbook&rsquo;s "modernization for engineer preference vs customer value" question, but the answer here is mostly fine — the modernization has clear customer-side justification (trigger reliability, scale). The risk is the customer-facing UI investment lagging the backend.</div>
+    </div>
+
+    <div class="layer-card l3">
+      <div class="lc-eyebrow">Failure mode 4 · Bugs never die / Features ship half-baked</div>
+      <h3>The defunct-projects/ docs folder is org-level honesty about what was abandoned</h3>
+      <ul>
+        <li><code>marketing-automation-docs/docs/defunct-projects/</code> exists as a deliberate documentation folder — the team archives services and documents the archive openly.</li>
+        <li>7 of 16 diagram repos are archived (not just stale — formally <code>archived: true</code> in GitHub). <strong>The team retires services rather than letting them rot.</strong></li>
+        <li>BUT: archived services have customer-side surface area too. <code>journey-preview-ui</code> being archived 24 months means the preview surface has been frozen since May 2024 — customers are using a 2-year-old preview implementation.</li>
+      </ul>
+      <div class="lc-good"><strong>Strength:</strong> Retirement discipline is real. <em>Not common in SMB-tier engineering orgs.</em></div>
+      <div class="lc-finding"><strong>Risk:</strong> If the customer-facing surface of an archived service is still live in production but unmaintained, that&rsquo;s a Layer 6 reliability risk hiding in plain sight. Confirm <code>journey-preview-ui</code> code is decommissioned in production, not just in the repo.</div>
+    </div>
+
+    <div class="layer-card l3">
+      <div class="lc-eyebrow">Failure mode 5 · Everything depends on another team</div>
+      <h3>Three of the loudest VOC themes (pricing, billing, compliance) live outside this org</h3>
+      <ul>
+        <li><strong>Pricing tier checks</strong> for the Strategy Bet 1 sandbox-tier eval are a Mailchimp monolith / Intuit billing-platform decision.</li>
+        <li><strong>Contact-tax billing model</strong> (charging for unsubscribed/cleaned contacts) is a billing-platform decision, not a CJB engine decision.</li>
+        <li><strong>Compliance enforcement</strong> (TCPA, GDPR, account blocks) is upstream of the automation engine.</li>
+        <li><strong>Customer-facing UI canvas</strong> (the actual journey-builder visual surface) is presumably in the legacy monolith or in <code>mailchimp-mcmktg</code>&rsquo;s Nova/Omni surface — outside the C2 team&rsquo;s direct ownership.</li>
+        <li><strong>Channel breadth</strong> (Push, WhatsApp, in-app) — no Executor for these in the active code, suggesting cross-team or new-build needed.</li>
+      </ul>
+      <div class="lc-finding"><strong>Likely root cause:</strong> CJB sits in the middle of a 4-org dependency stack: Intuit billing/IAM → CJB engine → Mailchimp UI → Customer. <strong>The C2 platform is the middle layer; it cannot solve customer-facing pricing/UI/compliance pain alone.</strong> Each Strategy bet needs cross-org alignment.</div>
+    </div>
+
+    <div class="layer-card l3">
+      <div class="lc-eyebrow">Failure mode 6 · Strategic identity ambiguity</div>
+      <h3>"Mailchimp CJB" externally / "Intuit CRM Marketing platform" internally — the AGENTS.md tells the truth</h3>
+      <ul>
+        <li><code>automations-platform/AGENTS.md</code>: <em>"the next-generation Automations platform for Intuit CRM marketing — decoupled from the Mailchimp monolith and designed to support Freddie AI, CRM, and future Intuit products."</em></li>
+        <li>Org name: <code>crmmktg-mktauto</code> (Customer Relationship Management Marketing — Marketing Automation). Not a Mailchimp team.</li>
+        <li>Naming convention: services are <code>automations-*</code> not <code>cjb-*</code> or <code>customer-journey-*</code>. Even <code>c2-journey-initiation</code> just renamed its proto from <code>cjprocessing</code> to <code>triggereventprocessor</code> — explicitly de-CJB-ifying.</li>
+        <li>Auth via Intuit IAM (JSK Spring Boot starter parent), Google Cloud Tasks for downstream, Java 21 — the stack is Intuit-shaped, not Mailchimp-shaped.</li>
+      </ul>
+      <div class="lc-finding"><strong>Likely root cause:</strong> CJB&rsquo;s engine is being repositioned as an Intuit-wide automation platform that powers Freddie AI, QuickBooks CRM, and Mailchimp. The <em>customer-facing</em> Mailchimp brand stays; the <em>engine</em> is becoming a shared asset. <strong>This is not a failure mode — it&rsquo;s a strategic shift</strong> — but it explains why the customer-facing UI is no one&rsquo;s priority in this org tree, and why the C2 team is shipping engine quality over UI features.</div>
+    </div>
+  </section>
+</div><!-- /panel-org -->
+
+<!-- ================ AI READINESS ================ -->
+<div class="tabpanel" id="panel-ai" role="tabpanel">
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Phase 5 · AI Readiness Assessment (Playbook §7)</div>
+        <h1>The CJB platform scores <em style="color:#166D3B;">5 of 7 ready signals</em>; the agent surface is staked out but unfinished</h1>
+        <div class="subtitle">Per the playbook&rsquo;s 7-dimension AI readiness checklist (§7.1). Less ready than NUNI editor (which scored 7/7) but on a credible track.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Dimensions assessed:</strong> 7</div>
+        <div><strong>Score:</strong> 5 Ready · 2 Partial</div>
+      </div>
+    </header>
+
+    <table>
+      <thead><tr><th style="width:22%">Readiness dimension</th><th style="width:18%">Ready signal</th><th>Repo evidence</th><th style="width:12%">Verdict</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Workflow state structure</strong></td>
+          <td>Structured DAG / typed nodes</td>
+          <td>OpenAPI-generated POJOs in <code>automations-platform/app/src/main/java/.../models/</code> are Lombok-annotated typed classes. The "DAG Service" is the Configuration layer (workflow CRUD over typed entities). Workflow definitions are not yet flat strings — they&rsquo;re typed graph objects.</td>
+          <td><span class="pill good">READY</span></td>
+        </tr>
+        <tr>
+          <td><strong>Trigger-type semantics</strong></td>
+          <td>Semantic event types with metadata</td>
+          <td><code>automations-numaflow</code>&rsquo;s <code>eventdriven/</code> directory has <strong>13 typed trigger domains</strong> (back-in-stock, contact-state-change, custom events, email activity, loopback, monolith-relay, messaging, payments-invoices, pixel, reviews, segmentation, scheduled-event, testing). Each domain has its own typed handler + transformer. <code>transformer-config.yml</code> maps source event → TriggerEvent IEDM schema. <strong>Strong type system.</strong></td>
+          <td><span class="pill good">READY</span></td>
+        </tr>
+        <tr>
+          <td><strong>Step-level CRUD operations</strong></td>
+          <td>Block-level / step-level CRUD</td>
+          <td>The Processing layer in <code>automations-platform</code> declares <strong>stateless Executors per step type</strong> (Action, Condition, Delay, Wait-for-Trigger). DAG Service exposes workflow CRUD via OpenAPI. Step-level operations are first-class.</td>
+          <td><span class="pill good">READY</span></td>
+        </tr>
+        <tr>
+          <td><strong>Workflow observability / event log</strong></td>
+          <td>Event bus / action log exists</td>
+          <td>EventBus + Kafka + SQS chain captures every state transition. <code>marketing-automation-docs/docs/observability/</code> exists as a documented practice. Numaflow vertices emit metrics natively. <strong>Structurally observable.</strong></td>
+          <td><span class="pill good">READY</span></td>
+        </tr>
+        <tr>
+          <td><strong>Machine-callable actions</strong></td>
+          <td>Clean API or command pattern</td>
+          <td>OpenAPI-first: every CRUD operation is a typed REST endpoint. The Numaflow gRPC vertex pattern is explicitly machine-callable. Stateless Executors with pre/post validation match the playbook&rsquo;s "command pattern" definition. <strong>The C2 platform is more machine-callable than the average automation engine.</strong></td>
+          <td><span class="pill good">READY</span></td>
+        </tr>
+        <tr>
+          <td><strong>Prompt / context access</strong></td>
+          <td>Trigger context + brand/audience accessible</td>
+          <td><code>TriggerEventEnricher</code> in <code>automations-numaflow/service/</code> enriches events with context. <code>cdp-segmentation</code> (Kotlin, 8 MB, in <code>mailchimp-mcmktg</code>) provides segment context. <strong>BUT</strong>: these are not yet wired into the agent surface. <code>automations-agent</code> has <code>agents_and_tools.yaml</code> (MCP tool registry) but only a single scaffold commit — <em>the wiring from rich context to AI prompt isn&rsquo;t productized yet.</em></td>
+          <td><span class="pill warn">PARTIAL</span></td>
+        </tr>
+        <tr>
+          <td><strong>Safe state modification</strong></td>
+          <td>Pre/post validation, transactional</td>
+          <td>OpenAPI schema validation + Lombok-annotated POJOs + JaCoCo 85% gate ensures mutations are typed. SQS FIFO with idempotency keys is the at-least-once delivery surface. <strong>BUT</strong>: <code>automations-platform</code> is still a starter; the in-memory <code>ConcurrentHashMap</code> persistence is not transactional in the production sense. DynamoDB target will provide it.</td>
+          <td><span class="pill warn">PARTIAL</span></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="hero-finding" style="margin-top:18px;">
+      <div class="hf-label">5/7 ready — what this means</div>
+      <p>The CJB platform&rsquo;s schema, type system, observability surface, and command-pattern API are all in place. The two partial dimensions are <strong>shippable in the next quarter</strong> — DynamoDB persistence is on the roadmap (per AGENTS.md), and the agent-context wiring needs the <code>automations-agent</code> + <code>lil-kelly-agent</code> work to mature. <em>The 5/7 score will become 7/7 around Q2 FY27, on the same timeline as the platform&rsquo;s production hardening.</em></p>
+    </div>
+
+    <h2 style="margin-top: 18px;"><span class="num">B</span>The agentic surface — three Python repos, three different stages</h2>
+
+    <div class="grid cols-3">
+      <div class="card warn">
+        <h3>automations-agent · 175 KB · Python</h3>
+        <p><strong>Status: scaffold-only.</strong> Has the full agentic-CI scaffolding — <code>agents_and_tools.yaml</code>, <code>JenkinsfileAgenticStage.snippet</code>, <code>.cursorrules</code>, <code>.windsurfrules</code>, <code>.coveragerc</code>, <code>pyproject.toml</code>, <code>tox.ini</code>. Same paved-road template as NUNI&rsquo;s <code>mc-omni-mcp</code>.</p>
+        <p style="margin-bottom:0;">Only <strong>1 commit</strong> from <code>svcdoaadmin</code> (initial scaffold). Last push Mar 10 2026. <em>Staked out but never written.</em></p>
+      </div>
+
+      <div class="card">
+        <h3>lil-kelly-agent · 373 KB · Python</h3>
+        <p><strong>Status: actively developed.</strong> Last push Apr 13 2026 (1 month). Larger than <code>automations-agent</code>; has more substance. The "Lil Kelly" codename is internal — possibly named after a Mailchimp cultural reference or a team mascot.</p>
+        <p style="margin-bottom:0;">This is the most-built CJB AI agent today. Worth a follow-up scan to identify its specific tools and integration surface.</p>
+      </div>
+
+      <div class="card good">
+        <h3>autobots-claude-tools · 153 KB</h3>
+        <p><strong>Status: most recent.</strong> Last push May 11 2026 (2 days). Smallest of the three but freshest. The "claude-tools" naming suggests this is a Claude-specific tool registry (MCP server pattern).</p>
+        <p style="margin-bottom:0;">Pairs with the <code>cjboncall-skill</code> repo + <code>marketing-automation-docs/.claude/skills/cjboncall</code> sub-skill — there&rsquo;s a clear pattern of <strong>Claude-specific agentic tooling for the CJB on-call function</strong>. Internal-team-facing AI, not customer-facing yet.</p>
+      </div>
+    </div>
+
+    <h2 style="margin-top: 18px;"><span class="num">C</span>AI feature opportunity map (Playbook §7.2) — for the CJB Strategy</h2>
+
+    <table>
+      <thead><tr><th style="width:30%">AI feature (Strategy alignment)</th><th>Structural deps</th><th>Repo readiness</th><th>Estimated complexity</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Predictive trigger productization</strong> (next-order-date as a flow trigger, parity with Klaviyo)</td><td>Predictions service + trigger-type registry</td><td><code>automations-rec-api</code> exists (140 Java files, 51% test ratio); add prediction → TriggerEvent transform in <code>numaflow</code></td><td><strong>Medium</strong> — extend existing services</td></tr>
+        <tr><td><strong>Conversational journey editing</strong> (NL → flow modification, parity with Klaviyo Marketing Agent)</td><td>Workflow CRUD API + agent surface + brand context</td><td>OpenAPI workflow CRUD ✅; <code>automations-agent</code> needs to be written; <code>cdp-segmentation</code> for context</td><td><strong>Medium-High</strong> — agent layer + UI sidebar</td></tr>
+        <tr><td><strong>AI-driven anomaly detection</strong> (Klaviyo&rsquo;s "Auto-Monitors" parity)</td><td>Observability surface + alerting</td><td>Observability docs exist; <code>cjboncall-skill</code> shows on-call AI is being built. Customer-facing variant is greenfield.</td><td><strong>Medium</strong></td></tr>
+        <tr><td><strong>Intelligent template recommendation</strong> (Strategy Bet 3 — B2B / ProServ)</td><td>Template registry + customer profile + segment</td><td>Template registry repo is <strong>missing</strong> (<code>prebuilt-journey-service</code> archived, no replacement found). Recs API + segmentation are ready.</td><td><strong>High</strong> — template service is greenfield</td></tr>
+        <tr><td><strong>Channel-affinity routing</strong> (Klaviyo parity, requires multiple channels)</td><td>Multi-channel Executors + per-profile model</td><td>Push/WhatsApp/In-app Executors don&rsquo;t exist; <code>c2-segmentation-ai-svc</code> ML readiness. <strong>Hardest gap</strong> — channel breadth must come first.</td><td><strong>Very High</strong></td></tr>
+      </tbody>
+    </table>
+
+    <p class="source"><strong>Method:</strong> Each readiness dimension scored against playbook §7.1 using direct file reads from <code>automations-platform/app/api/openapi/</code>, <code>automations-numaflow/app/src/main/java/.../eventdriven/</code>, <code>automations-platform/AGENTS.md</code>, <code>automations-numaflow/AGENTS.md</code>, <code>c2-journey-initiation/README.md</code>. Agent surface enumerated via <code>gh api search/repositories</code> + direct repo metadata.</p>
+  </section>
+</div><!-- /panel-ai -->
+
+<!-- ================ LEVERAGE CHEAT SHEET ================ -->
+<div class="tabpanel" id="panel-leverage" role="tabpanel">
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Phase 4 · Building Technical Leverage (Playbook §6)</div>
+        <h1>Specific questions to take into the <em style="color:#166D3B;">next CJB engineering sync</em>, with the repo evidence behind each one</h1>
+        <div class="subtitle">Generic ask → CJB-specific ask. Each question is structurally informed and references the actual code state.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Format:</strong> Generic ask → CJB-specific ask</div>
+      </div>
+    </header>
+
+    <div class="qa-card">
+      <div class="q-bad">"Where is the Customer Journey Builder UI being built?"</div>
+      <div class="q-good"><strong>Better:</strong> "<code>mailchimp-mcmktg/customer-journey-builder</code> is a 4-commit scaffold from March 3 2025 with no human authorship. <code>automations-builder</code> and <code>control-panel-web-plugin</code> have no flow-canvas dependencies. Where is the customer-facing visual journey-builder canvas — still in the legacy Mailchimp monolith, or being absorbed into <code>mc-nova-ui</code>/<code>mc-omni-ui</code>? <strong>Strategy Bets 1, 2, 3 all hinge on this answer.</strong>"</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="q-bad">"When can we cut over from monolith CJB to the new platform?"</div>
+      <div class="q-good"><strong>Better:</strong> "<code>automations-platform</code>&rsquo;s <code>DocumentServiceImpl</code> is using <code>ConcurrentHashMap</code> in-memory; the AGENTS.md says DynamoDB is the target. Numaflow ingestion is wired and shipping at 0.5h median PR cycle. <code>c2-journey-initiation</code> just renamed its proto package last week (MCAUT-8639). What&rsquo;s the cutover plan, what trigger types migrate first, and how is the rollback gated when the legacy monolith is still serving customers?"</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="q-bad">"Why don&rsquo;t we have Push or WhatsApp like Klaviyo?"</div>
+      <div class="q-good"><strong>Better:</strong> "The <code>eventdriven/</code> directory in <code>automations-numaflow</code> has 13 typed trigger domains for inbound events, but the Processing layer Executors in <code>automations-platform</code> are only Action / Condition / Delay / Wait-for-Trigger — no Push, no WhatsApp, no In-app channel Executor. What&rsquo;s the team that owns adding new channel Executors, and what&rsquo;s the dependency on the channel-send infrastructure outside the C2 platform?"</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="q-bad">"Are we AI-ready for autonomous flow setup like Klaviyo Marketing Agent?"</div>
+      <div class="q-good"><strong>Better:</strong> "OpenAPI workflow CRUD is ✅ ready. <code>automations-agent</code> exists with <code>agents_and_tools.yaml</code> + agentic-CI scaffolding but only 1 commit. <code>lil-kelly-agent</code> has more development. What&rsquo;s the scope of <code>lil-kelly-agent</code>, and what&rsquo;s blocking us from exposing the OpenAPI CRUD as the primary tool of an MCP server like the editor team is doing with <code>mc-omni-mcp</code>?"</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="q-bad">"What&rsquo;s the AGENTS.md decoupling claim about?"</div>
+      <div class="q-good"><strong>Better:</strong> "<code>automations-platform/AGENTS.md</code> says &lsquo;the next-generation Automations platform for Intuit CRM marketing — decoupled from the Mailchimp monolith and designed to support Freddie AI, CRM, and future Intuit products.&rsquo; That&rsquo;s a strategic identity statement, not a technical one. <strong>Are we externally messaging CJB as a Mailchimp feature while internally repositioning the engine as an Intuit-shared asset?</strong> What&rsquo;s the analyst-day messaging plan when this becomes visible?"</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="q-bad">"What&rsquo;s the test coverage situation?"</div>
+      <div class="q-good"><strong>Better:</strong> "JaCoCo 85% line + 50% branch is enforced on <code>automations-platform</code>, <code>automations-numaflow</code>, <code>automations-rec-api</code>. But <code>automations-filter</code>&rsquo;s gate is at the scaffold default 5%/5%, and Gatling perf tests are documented as broken in AGENTS.md. <strong>Can we get a single quarterly report that closes those two gaps</strong> — tighten <code>automations-filter</code> to 85% and fix the Gatling chain — so the platform&rsquo;s quality story is consistent across all five services?"</div>
+    </div>
+
+    <div class="qa-card">
+      <div class="q-bad">"What about hero engineer dependency?"</div>
+      <div class="q-good"><strong>Better:</strong> "<code>bcraig</code> owns 65% of <code>c2-journey-initiation</code> commits. <code>cmartin24</code> is sole non-bot author on all three active TS UIs. <code>amilt</code> is at 60% on <code>automations-rec-api</code> while also closing Brand Kit incidents on the editor side. <strong>Bus factor on the C2 platform ≈ 2.</strong> What&rsquo;s the named co-owner per critical-path repo, and what&rsquo;s the knowledge-transfer cadence we should commit to?"</div>
+    </div>
+
+    <h2 style="margin-top: 18px;"><span class="num">B</span>Balanced portfolio framework — applied to CJB Q1 capacity</h2>
+    <p>Per playbook §6.2. Applied to the CJB roadmap as documented in the <a href="mailchimp.html#strategy">Strategy 6-Pager</a>:</p>
+
+    <div class="alloc-bar">
+      <div class="alloc-seg alloc-1" style="flex: 60;"><span>Customer-facing</span><strong>60%</strong><span style="font-size:9.5px;">UI canvas decision · trigger reliability cutover · template service</span></div>
+      <div class="alloc-seg alloc-2" style="flex: 25;"><span>Tech debt payoff</span><strong>25%</strong><span style="font-size:9.5px;">DynamoDB persistence · Gatling fix · automations-filter JaCoCo</span></div>
+      <div class="alloc-seg alloc-3" style="flex: 10;"><span>Strategic AI</span><strong>10%</strong><span style="font-size:9.5px;">automations-agent + lil-kelly · MCP tool registry</span></div>
+      <div class="alloc-seg alloc-4" style="flex: 5;"><span>Exploration</span><strong>5%</strong><span style="font-size:9.5px;">Push Executor PoC · channel-affinity ML</span></div>
+    </div>
+
+    <table style="margin-top: 14px;">
+      <thead><tr><th>Allocation</th><th>CJB-specific work for Q1 (May–Jul &rsquo;26)</th><th>Success metric</th></tr></thead>
+      <tbody>
+        <tr><td><span class="pill warn">60% · Customer-facing</span></td><td>Decide canvas-UI ownership (legacy monolith vs Nova/Omni vs new repo) · Cutover plan for first 3 trigger types from monolith → Numaflow · Identify replacement for archived <code>prebuilt-journey-service</code> (Bet 3)</td><td>HVC trigger-reliability tickets cleared; canvas-UI repo named with named owner</td></tr>
+        <tr><td><span class="pill brand">25% · Tech debt payoff</span></td><td>Wire DynamoDB persistence into <code>automations-platform</code> (replace <code>ConcurrentHashMap</code>) · Fix Gatling perf tests · Tighten <code>automations-filter</code> JaCoCo gate from 5% → 85%</td><td>JaCoCo 85% gate consistent across all 5 active services; Gatling green</td></tr>
+        <tr><td><span class="pill good">10% · Strategic AI</span></td><td>Productionize <code>lil-kelly-agent</code> · Define MCP tool registry in <code>automations-agent</code> exposing OpenAPI workflow CRUD · Wire <code>cdp-segmentation</code> as agent context source</td><td>One AI-callable workflow CRUD path live in dev; spike report on conversational flow editing</td></tr>
+        <tr><td><span class="pill muted">5% · Exploration</span></td><td>2-week Push Executor PoC inside <code>automations-platform</code> · Channel-affinity ML feasibility report from <code>c2-segmentation-ai-svc</code> · Confirm editor-layer feature flag harness exists or scope a spike</td><td>Decision document on Push send action timing (Q3? Q4?); flag harness audit closed</td></tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top: 18px;"><span class="num">C</span>Three 2-week spike templates (Playbook §6.3)</h2>
+
+    <div class="grid cols-3">
+      <div class="card brand">
+        <p><strong>Spike 1 · Canvas-UI ownership decision.</strong> "Can we run a 2-week PoC where we build a minimal flowchart canvas (using react-flow or @xyflow/react) inside <code>mc-nova-ui</code> that consumes the <code>automations-platform</code> OpenAPI workflow CRUD endpoints? Output: feasibility report + recommendation on whether to start a new repo or extend Nova."</p>
+      </div>
+
+      <div class="card brand">
+        <p><strong>Spike 2 · DynamoDB cutover for the Configuration layer.</strong> "Can we run a 2-week PoC replacing <code>DocumentServiceImpl</code>&rsquo;s <code>ConcurrentHashMap</code> with DynamoDB, with shadow-traffic from the legacy monolith? Output: persistence-layer parity report + cutover risk assessment."</p>
+      </div>
+
+      <div class="card brand">
+        <p><strong>Spike 3 · Conversational flow editing PoC.</strong> "Can we run a 2-week PoC where <code>automations-agent</code> exposes <code>POST /workflows</code> + <code>PATCH /workflows/{id}/steps</code> as MCP tools, the agent UI sends &lsquo;Add a wait of 3 days then send a follow-up,&rsquo; and we measure round-trip time + workflow validity rate? Output: feasibility for Klaviyo-Marketing-Agent parity."</p>
+      </div>
+    </div>
+  </section>
+</div><!-- /panel-leverage -->
+
+<!-- ================ METHOD ================ -->
+<div class="tabpanel" id="panel-method" role="tabpanel">
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Method &amp; Sources</div>
+        <h1>How this analysis was produced — <em style="color:#166D3B;">reproducible</em>, <em style="color:#166D3B;">repo-first</em>, <em style="color:#166D3B;">zero-meeting</em></h1>
+        <div class="subtitle">Same methodology as the <a href="nuni-repo-analysis.html#method">NUNI editor analysis</a>. Every claim is reproducible from the queries below.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Snapshot:</strong> May 13 2026, 19:30 UTC</div>
+        <div><strong>Repos enumerated:</strong> ~80 across 2 orgs</div>
+        <div><strong>Repos cloned:</strong> 13 (depth=1)</div>
+      </div>
+    </header>
+
+    <h2><span class="num">A</span>Framework applied</h2>
+    <p><strong>Product Technical Intelligence Playbook</strong> — May 2026, 20-page internal reference. Same sections as the NUNI editor brief: §1.1 (Five Types of "We Can&rsquo;t"), §3 (7-Layer Forensic), §4 (Pain → Code Map), §5 (Org Failure Modes), §6 (Leverage), §7 (AI Readiness).</p>
+
+    <h2><span class="num">B</span>Reproducible queries</h2>
+
+    <h3>Direct repo lookup (the diagram&rsquo;s 16 named repos)</h3>
+    <pre style="background:#FAFAFB; border:1px solid var(--line); border-radius:6px; padding:12px 14px; font-family:'JetBrains Mono',monospace; font-size:11.5px; line-height:1.55; overflow-x:auto;">for repo in mailchimp-mcmktg/customer-journey-builder \
+            crmmktg-mktauto/mc-customer-journeys \
+            crmmktg-mktauto/prebuilt-journey-service \
+            crmmktg-mktauto/journey-preview-ui \
+            crmmktg-mktauto/trigger-designer \
+            crmmktg-mktauto/automations-platform \
+            crmmktg-mktauto/automations-numaflow \
+            crmmktg-mktauto/automation-worker \
+            crmmktg-mktauto/automation-workflows \
+            crmmktg-mktauto/automation-filter \
+            crmmktg-mktauto/automations-event-gateway \
+            crmmktg-mktauto/contact-execution-outbox \
+            crmmktg-mktauto/automationseventingest \
+            crmmktg-mktauto/automations-rec-api \
+            crmmktg-mktauto/marketing-automation-docs \
+            crmmktg-mktauto/cjboncall-skill; do
+  GH_HOST=github.intuit.com gh api repos/$repo --jq \
+    '"\(.full_name)|\(.language)|\(.size)|\(.pushed_at)|archived=\(.archived)"'
+done</pre>
+
+    <h3>Active-replacement discovery</h3>
+    <pre style="background:#FAFAFB; border:1px solid var(--line); border-radius:6px; padding:12px 14px; font-family:'JetBrains Mono',monospace; font-size:11.5px; line-height:1.55; overflow-x:auto;">GH_HOST=github.intuit.com gh api \
+  "search/repositories?q=org:crmmktg-mktauto+pushed:&gt;2025-12-01" \
+  --jq '.items[] | "\(.full_name)|\(.language)|\(.size)|\(.pushed_at)|archived=\(.archived)"' \
+  | sort -t"|" -k4 -r
+
+GH_HOST=github.intuit.com gh api \
+  "search/repositories?q=org:mailchimp-mcmktg+pushed:&gt;2025-12-01" \
+  --jq '.items[] | "\(.full_name)|\(.language)|\(.size)|\(.pushed_at)|archived=\(.archived)"' \
+  | sort -t"|" -k4 -r</pre>
+
+    <h3>Layer 3 — JaCoCo coverage gates</h3>
+    <pre style="background:#FAFAFB; border:1px solid var(--line); border-radius:6px; padding:12px 14px; font-family:'JetBrains Mono',monospace; font-size:11.5px; line-height:1.55; overflow-x:auto;">grep -E "minimum&gt;0\." */app/pom.xml
+# Reveals JaCoCo line + branch thresholds per service</pre>
+
+    <h3>Layer 5 — contributor concentration + PR cycle time</h3>
+    <pre style="background:#FAFAFB; border:1px solid var(--line); border-radius:6px; padding:12px 14px; font-family:'JetBrains Mono',monospace; font-size:11.5px; line-height:1.55; overflow-x:auto;">GH_HOST=github.intuit.com gh api \
+  "repos/crmmktg-mktauto/$repo/commits?since=2025-05-01T00:00:00Z&amp;per_page=100" \
+  --paginate -q '.[].author.login // .[].commit.author.name' \
+  | sort | uniq -c | sort -rn | head -8
+
+GH_HOST=github.intuit.com gh api \
+  "repos/crmmktg-mktauto/$repo/pulls?state=closed&amp;per_page=30"
+# Then median + p95 from created_at vs merged_at</pre>
+
+    <h2 style="margin-top: 18px;"><span class="num">C</span>Sources</h2>
+
+    <table>
+      <thead><tr><th>Type</th><th>Source</th><th>Used for</th></tr></thead>
+      <tbody>
+        <tr><td>Framework</td><td><em>Product Technical Intelligence Playbook</em> (May 2026 internal reference)</td><td>Every section</td></tr>
+        <tr><td>Customer evidence</td><td><a href="mailchimp.html">Mailchimp Marketing Automation Flows Brief</a> — 13 tabs (Executive, VOC, Roadmap, HVC Risk, Nav/Search Risk, Research, Health, PRD Audit, Strategy, Growth Model, Loss Attribution, Initiative Canvas, Strategy Memo)</td><td>VOC themes ($53.5K/mo cited HVC), UR bets, BigQuery health, Strategy 6-Pager</td></tr>
+        <tr><td>Repo data</td><td><code>github.intuit.com/crmmktg-mktauto/*</code> + <code>mailchimp-mcmktg/*</code> via <code>gh api</code> + shallow clones</td><td>All numerical findings: file counts, JaCoCo gates, dep versions, contributor counts, PR cycle times</td></tr>
+        <tr><td>Architecture diagram</td><td>User-supplied images — <em>"4. Mailchimp Customer Journey Builder (CJB) Automation"</em>, dated May 13 2026 (16 repos in 7 layers)</td><td>Reality-vs-diagram reconciliation</td></tr>
+        <tr><td>In-repo strategy docs</td><td><code>automations-platform/AGENTS.md</code>, <code>automations-numaflow/AGENTS.md</code>, <code>c2-journey-initiation/README.md</code></td><td>The Intuit-platform decoupling story; C2 architecture three-layer model; trigger-event-processor rename evidence</td></tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top: 18px;"><span class="num">D</span>Caveats &amp; what would strengthen this analysis</h2>
+    <ul>
+      <li><strong>The customer-facing UI canvas is unmapped.</strong> Confirming whether it&rsquo;s in the legacy Mailchimp monolith, the Nova surface, or elsewhere is the single most-impactful follow-up.</li>
+      <li><strong>Cross-org dependencies (pricing, billing, compliance, channels) were not deeply mapped.</strong> Each requires its own org-tree analysis.</li>
+      <li><strong>The ~80 repos enumerated across both orgs were filtered to active+CJB-relevant; some adjacent investments may have been missed</strong> (e.g. the full Nova/Omni surface in mailchimp-mcmktg).</li>
+      <li><strong>No engineering interviews</strong> — every interpretation is repo-evidence-only. The "decoupled from monolith to support Freddie AI + CRM + future Intuit products" reading is verbatim from <code>automations-platform/AGENTS.md</code> but the strategic intent behind it is the team&rsquo;s to confirm.</li>
+      <li><strong>Performance numbers, runtime profiles, Gatling baselines, observability dashboards were not in scope.</strong> Layer 6 findings are dep + AGENTS.md-level.</li>
+      <li><strong>Some repos in the new architecture were not deeply cloned</strong> (proposal-builder, transact-builder, mc-nova-* family, cdp-segmentation Kotlin, c2-segmentation-ai-svc Python). Each is a follow-up.</li>
+      <li><strong><code>lil-kelly-agent</code> wasn&rsquo;t cloned</strong> — its scope and tools are inferred from metadata only.</li>
+    </ul>
+
+    <h2 style="margin-top: 18px;"><span class="num">E</span>Suggested follow-ups</h2>
+    <ul>
+      <li>Run the same forensic on <code>mc-nova-core</code> + <code>mc-nova-ui</code> + <code>mc-omni-ui</code> to confirm whether the customer-facing CJB canvas migrates there.</li>
+      <li>Layer 6 deep-dive on <code>automations-numaflow</code> performance — Gatling fix + p95/p99 publish-to-execute latency baseline.</li>
+      <li>Ownership map of cross-org dependencies (pricing, billing, compliance, channel-send) for the Strategy 6-Pager bets.</li>
+      <li>Quarterly rerun (Aug 2026) post-DynamoDB cutover and post-canvas-UI ownership decision.</li>
+    </ul>
+
+    <p style="font-size: 11.5px; color: var(--muted); margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--line);">
+      <strong>Confidentiality.</strong> The repo-level findings in this analysis are derived from <code>github.intuit.com/crmmktg-mktauto/*</code> + <code>github.intuit.com/mailchimp-mcmktg/*</code>, accessible to authorized Intuit employees. The <em>Product Technical Intelligence Playbook</em> is marked CONFIDENTIAL — Internal Reference Only. The customer-evidence sources (HVC, VOC, BigQuery) are summarized in the public-to-this-domain <a href="mailchimp.html">Automations Brief</a>; named-customer MRR figures are cited only at theme-aggregate level. <strong>The strategic-intent statement in <code>automations-platform/AGENTS.md</code> ("decoupled from the Mailchimp monolith and designed to support Freddie AI, CRM, and future Intuit products") is verbatim from an internal artifact and should be redacted before any external share.</strong>
+    </p>
+  </section>
+</div><!-- /panel-method -->
+
+</div><!-- /page-wrap -->
+
+<script>
+  (function () {
+    var tabs = document.querySelectorAll('.tab');
+    var panels = document.querySelectorAll('.tabpanel');
+    function activate(name) {
+      tabs.forEach(function (t) {
+        var match = t.getAttribute('data-tab') === name;
+        t.classList.toggle('active', match);
+      });
+      panels.forEach(function (p) {
+        p.classList.toggle('active', p.id === 'panel-' + name);
+      });
+      try {
+        var url = new URL(window.location.href);
+        url.hash = name;
+        history.replaceState(null, '', url.toString());
+      } catch (e) {}
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
+    });
+    var initial = (window.location.hash || '').replace('#', '');
+    if (['exec','painmap','repo','layers','org','ai','leverage','method'].indexOf(initial) >= 0) activate(initial);
+  })();
+</script>
+
+</body>
+</html>
