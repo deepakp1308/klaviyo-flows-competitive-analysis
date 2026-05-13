@@ -1618,6 +1618,58 @@
     </p>
   </section>
 
+  <!-- Builder Hierarchy + JTBD reframe added v1.2 -->
+  <section class="page" aria-label="Sentiment Page 3">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Voice of Customer (cont.) &middot; Builder Hierarchy + JTBD reframe</div>
+        <h1>The 7 hate themes mapped to the <em style="color:#4338CA;">Builder Hierarchy of Needs</em> + the <em style="color:#4338CA;">7-Phase JTBD Creation Journey</em></h1>
+        <div class="subtitle">Same Voice of Customer data, two new analytical lenses adopted from the <em>Nuni Builder Strategy &amp; Roadmap</em> (Ose Amiegheme, Erin McCue, JB Lovell, Ashley Wiesner). The <strong>Builder Hierarchy</strong> tells us at which maturity level each complaint sits; the <strong>JTBD Creation Journey</strong> tells us at which step of the customer&rsquo;s workflow the friction occurs. Both views together explain why customers describe Mailchimp&rsquo;s editor as &ldquo;clunky and outdated&rdquo; even when individual features are competent.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Lens A:</strong> 6-Level Maslow Hierarchy</div>
+        <div><strong>Lens B:</strong> 7-Phase JTBD Journey</div>
+        <div><strong>Page:</strong> 3 of 3</div>
+      </div>
+    </header>
+
+    <h2><span class="num">F</span>Lens A &middot; Where each hate theme sits on the Builder Hierarchy</h2>
+    <p style="font-size:12.5px; color: var(--ink-2); margin-bottom: 10px;">Five of the seven hate themes concentrate at <strong>Levels 3&ndash;4 (Efficient Workflow + Brand-Native &amp; Reusable)</strong> &mdash; exactly where the Nuni PM team scored Mailchimp 2 vs Klaviyo 3 vs Canva 5 (Efficient Workflow) and Mailchimp 1 vs Klaviyo 3 vs Canva 5 (Brand-Native). The structural diagnosis is consistent with the qualitative diagnosis.</p>
+    <table class="dense" style="margin-bottom: 18px;">
+      <thead><tr><th style="width: 26%;">Builder Level</th><th style="width: 32%;">Hate themes that live here</th><th>Mailchimp&rsquo;s position vs Klaviyo</th></tr></thead>
+      <tbody>
+        <tr><td><strong>L1 Reliable &amp; Performant</strong></td><td>(implicit) &mdash; cited HVC bugs covered in <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a></td><td>Score: 4 (per Nuni PM). Mailchimp at parity; Klaviyo 5; Canva 5. <strong>Builder SLOs (P1.5) close this gap.</strong></td></tr>
+        <tr><td><strong>L2 Mobile &amp; Rendering</strong></td><td>(implicit) &mdash; rendering divergence in HVC Theme 3</td><td>Score: 4. Klaviyo 5; Canva 4. P1.1.1 NEB rendering parity addresses.</td></tr>
+        <tr><td><strong>L3 Efficient Workflow</strong></td><td><strong>#1 BIFURCATION</strong> (NEB + Classic, templates don&rsquo;t port) &middot; <strong>#7 NO CUSTOM CODE</strong> (NEB has no HTML/CSS escape hatch)</td><td>Score: 2 vs Klaviyo 3 vs Canva 5. <strong>Largest single gap.</strong> P2.2 Code Mode + funded migration close it.</td></tr>
+        <tr><td><strong>L4 Brand-Native &amp; Reusable</strong></td><td><strong>#6 NO UNIVERSAL CONTENT</strong> (vs Klaviyo Spring &rsquo;26) &middot; <strong>#4 PAYWALL</strong> (Brand Kit + AI gated to Standard)</td><td>Score: 1 vs Klaviyo 3 vs Canva 5. <strong>Second largest gap.</strong> P2.1 Universal Content + I-1.2.3 multi-brand close it.</td></tr>
+        <tr><td><strong>L5 Intelligent &amp; AI-Powered</strong></td><td><strong>#3 GEO-GATE</strong> (Write with AI US/UK/AU/CA only)</td><td>Score: 2 vs Klaviyo 2 vs Canva 3. Surprising parity. P4 entire pillar advances.</td></tr>
+        <tr><td><strong>L6 Omnichannel &amp; Extensible</strong></td><td><strong>#2 SURFACE SPLIT</strong> (email + SMS in two surfaces) &middot; <strong>#5 NO COLLAB</strong> (no real-time multi-author co-edit)</td><td>Score: 0 vs Klaviyo 3. <strong>Largest absolute gap (we have nothing).</strong> P5 entire pillar (incl. accelerated Push I-5.1.5) builds this.</td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">G</span>Lens B &middot; Where each hate theme breaks the JTBD Creation Journey</h2>
+    <p style="font-size:12.5px; color: var(--ink-2); margin-bottom: 10px;">Three of the seven hate themes break <strong>Phases 1&ndash;2 (Choose structure + Establish brand)</strong>, two break <strong>Phases 3&ndash;4 (the Compose Loop)</strong>, and two are cross-cutting platform issues. Customers describe &ldquo;clunky&rdquo; because they hit friction <em>at the start</em> of the workflow before they even reach content authoring.</p>
+    <table class="dense" style="margin-bottom: 14px;">
+      <thead><tr><th style="width: 28%;">JTBD Phase</th><th style="width: 36%;">Hate themes that break this phase</th><th>What customer is trying to do</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1. Choose structure</strong></td><td><strong>#1 BIFURCATION</strong> (NEB + Classic; templates don&rsquo;t port) &middot; partial #6 (no universal blocks for cross-template start)</td><td>Pick a starting point + lay out the campaign. Bifurcation forces users to decide between two builders before they can even start.</td></tr>
+        <tr><td><strong>2. Establish brand &amp; style</strong></td><td><strong>#4 PAYWALL</strong> (Brand Kit gated) &middot; <strong>#3 GEO-GATE</strong> (AI brand-aware gen unavailable internationally)</td><td>Apply Brand Kit so the rest of the workflow is on-brand. International users on Standard pay for AI they can&rsquo;t use.</td></tr>
+        <tr><td><strong>3. Add &amp; place content (Compose)</strong></td><td><strong>#7 NO CUSTOM CODE</strong> (Premium / agency anchor on Classic for HTML)</td><td>Drag in blocks; customize beyond standard NEB. Power users escape to Classic.</td></tr>
+        <tr><td><strong>4. Refine &amp; polish (Compose)</strong></td><td>Implicit &mdash; cited NEB rendering bugs (HVC Theme 3); Brand Kit reliability (HVC Themes 8, 10)</td><td>Edit copy, fine-tune spacing, fix mobile. Trust in the editor erodes when the preview lies.</td></tr>
+        <tr><td><strong>5. Personalize &amp; tailor</strong></td><td><strong>#3 GEO-GATE</strong> (no AI to personalize abroad) &middot; partial #4 (advanced Brand Kit gated)</td><td>Convert generic content to recipient-specific.</td></tr>
+        <tr><td><strong>6. Preview &amp; QA loop</strong></td><td><strong>#2 SURFACE SPLIT</strong> (no cross-channel preview) &middot; <strong>#5 NO COLLAB</strong> (no live review with team)</td><td>Validate output across devices + channels; get sign-off.</td></tr>
+        <tr><td><strong>7. Learn &amp; reuse</strong></td><td><strong>#6 NO UNIVERSAL CONTENT</strong> (saved blocks template-scoped) &middot; <strong>#1 BIFURCATION</strong> (work doesn&rsquo;t survive migration)</td><td>Save successful patterns for next campaign. The two largest hate themes both compound here &mdash; reuse is broken.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card warm" style="margin-bottom: 14px;">
+      <strong style="font-size:12px;">Synthesis &mdash; the &ldquo;clunky and outdated&rdquo; verdict, decoded</strong>
+      <p style="font-size:12.5px; margin-top: 4px;">When customers say &ldquo;clunky,&rdquo; they aren&rsquo;t complaining about a single missing feature. The Builder Hierarchy lens shows we are <strong>3&ndash;4 levels behind</strong> on the maturity ladder where customers expect us to be. The JTBD lens shows the friction <strong>concentrates at the start (Phases 1&ndash;2) and the end (Phase 7)</strong> &mdash; which means the customer encounters friction <em>before</em> they get to content (deflating motivation) and <em>after</em> they finish (preventing reuse). The middle of the workflow (Phases 3&ndash;4 Compose) feels OK because individual features are competent &mdash; but the bookends are broken. P1.5 Builder SLOs + P2 Universal Content + P5 Unified Canvas explicitly fix the bookends.</p>
+    </div>
+
+    <p class="source"><strong>Reframe sources:</strong> Builder Hierarchy of Needs + 7-Phase JTBD Creation Journey adopted from <em>Nuni Builder Strategy &amp; Roadmap</em> (Ose Amiegheme, Erin McCue, JB Lovell, Ashley Wiesner; Jan 2026; reviewed by Eric Anderson). Original Voice of Customer data from G2 (12,698 reviews, 4.3/5), Trustpilot (1,390 reviews, 2.7/5), Capterra (4.5/5), SaaS Scored 6.5/10, Reddit (r/MailChimp, r/MarketingAutomation, r/Klaviyo), Mailchimp Help Center, Mailchimp Community migration threads, Klaviyo Spring 2026 Universal Content announcement.</p>
+  </section>
+
 </div><!-- /panel-sentiment -->
 
 
@@ -2432,6 +2484,58 @@
     </p>
   </section>
 
+  <!-- Builder Hierarchy + JTBD reframe added v1.2 -->
+  <section class="page" aria-label="Klaviyo VoC Page 3">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Klaviyo Voice of Customer (cont.) &middot; Builder Hierarchy + JTBD reframe</div>
+        <h1>Klaviyo loved/hated themes mapped to the <em style="color:#4338CA;">Builder Hierarchy</em> + <em style="color:#4338CA;">JTBD Journey</em></h1>
+        <div class="subtitle">Same Klaviyo VoC data through the two-lens framework. Side-by-side with Mailchimp&rsquo;s reframe (previous tab Page 3): for every level / phase, see exactly where Klaviyo is ahead and where they are exposed.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Lens A:</strong> 6-Level Maslow Hierarchy</div>
+        <div><strong>Lens B:</strong> 7-Phase JTBD Journey</div>
+        <div><strong>Page:</strong> 3 of 3</div>
+      </div>
+    </header>
+
+    <h2><span class="num">F</span>Lens A &middot; Klaviyo loved + hated themes by Builder Hierarchy level</h2>
+    <p style="font-size:12.5px; color: var(--ink-2); margin-bottom: 10px;">Klaviyo&rsquo;s loved themes concentrate at <strong>Levels 4&ndash;5</strong> (Brand-Native + AI-Powered) and at <strong>Level 6</strong> (Omnichannel &mdash; their five-channel canvas). Their hated themes are mostly <strong>commercial / positioning</strong> (active-profile billing, pricing complexity, DTC bias) rather than technical &mdash; which is why Mailchimp&rsquo;s counter-positioning lever in P3.4.3 (engagement-based pricing) targets a Klaviyo wound that no product feature can heal.</p>
+    <table class="dense" style="margin-bottom: 18px;">
+      <thead><tr><th style="width: 22%;">Builder Level</th><th style="width: 36%;">Klaviyo loved themes</th><th style="width: 22%;">Klaviyo hated themes</th><th>Mailchimp implication</th></tr></thead>
+      <tbody>
+        <tr><td><strong>L1 Reliable</strong></td><td>Real-time CRM + sub-second triggers (+68 net sent.)</td><td>&mdash;</td><td>Out of editor scope (platform team owns)</td></tr>
+        <tr><td><strong>L2 Mobile / Rendering</strong></td><td>(implicit; positively cited in stability reviews)</td><td>&mdash;</td><td>Mailchimp at parity per Nuni scoring (both 4)</td></tr>
+        <tr><td><strong>L3 Efficient Workflow</strong></td><td>In-builder revenue per recipient (+56) &middot; Inline analytics</td><td>Higher learning curve / less SMB-friendly (&minus;40)</td><td><strong>I-4.4.4 closes the revenue inline gap; SMB-friendliness is a Mailchimp edge.</strong></td></tr>
+        <tr><td><strong>L4 Brand-Native &amp; Reusable</strong></td><td><strong>Universal Content blocks (Spring &rsquo;26 default; +76 net sent. &mdash; biggest single positive)</strong> &middot; Branded templates</td><td>No multi-brand kits within one account (&minus;40)</td><td><strong>P2.1 closes the Universal Content gap (Q2 ship). P1.2.3 multi-brand closes the Klaviyo gap first.</strong></td></tr>
+        <tr><td><strong>L5 Intelligent &amp; AI-Powered</strong></td><td>Marketing Agent (+60) &middot; Flows AI + Segments AI (+52) &middot; Image Remix + AI product recs (+40) &middot; Smart Send Time per profile (+44)</td><td>AI features quality varies (mixed)</td><td><strong>I-3.1.4 AI Email Setup Agent + I-4.4.5 per-profile Smart Send + I-4.4.6 Watchdog close named gaps. Brand-Kit-aware conversational (P4.2.1) is the open white space.</strong></td></tr>
+        <tr><td><strong>L6 Omnichannel &amp; Extensible</strong></td><td>5-channel canvas (Email+SMS+Push+WhatsApp+In-app) &middot; SMS depth + 2-way conversational (+44) &middot; Shopify integration depth (+68)</td><td>No real-time multi-author co-edit (&minus;36) &middot; Push/WhatsApp/In-app rollouts uneven across markets (mixed)</td><td><strong>P5.1 unified canvas + I-5.1.5 accelerated Push closes part. P5.3 real-time co-edit beats Klaviyo first.</strong></td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">G</span>Lens B &middot; Klaviyo strengths + weaknesses by JTBD phase</h2>
+    <p style="font-size:12.5px; color: var(--ink-2); margin-bottom: 10px;">Klaviyo&rsquo;s strengths concentrate in <strong>Phases 1, 2, 5, 7</strong> (Choose structure / Establish brand / Personalize / Learn + reuse) thanks to Marketing Agent + Universal Content + per-profile AI + revenue analytics. They are <strong>at parity</strong> with Mailchimp on Phases 3&ndash;4 (Compose) and <strong>weaker</strong> on Phase 6 (multi-author / co-edit absent in both).</p>
+    <table class="dense" style="margin-bottom: 14px;">
+      <thead><tr><th style="width: 22%;">JTBD Phase</th><th style="width: 32%;">Klaviyo strengths</th><th style="width: 22%;">Klaviyo gaps</th><th>Mailchimp position</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1. Choose structure</strong></td><td>Marketing Agent (URL &rarr; flows in 3 clicks) &middot; 60+ vertical-segmented templates</td><td>DTC-bias on templates (B2B/non-ecom underserved)</td><td>I-3.1.4 AI Setup Agent + P3.2 B2B/ProServ templates beat Klaviyo here.</td></tr>
+        <tr><td><strong>2. Establish brand &amp; style</strong></td><td>Brand Styling auto-applied to Universal Content; Branded templates</td><td>No multi-brand within one account</td><td>I-1.2.3 multi-brand kits = open white space we ship first.</td></tr>
+        <tr><td><strong>3. Add &amp; place content</strong></td><td>Drag-and-drop solid; per Nuni PM scoring Klaviyo Compose Loop = 3 (good, not great)</td><td>Higher learning curve than Mailchimp on this phase</td><td>Both at &ldquo;OK&rdquo;; Canva is the actual leader here (Nuni scoring 5).</td></tr>
+        <tr><td><strong>4. Refine &amp; polish</strong></td><td>Image Remix in canvas; AI product recs; in-canvas analytics</td><td>SMB friction; less polished for non-technical users</td><td>I-4.4.1&ndash;3 AI image gen + dynamic image close ours; P4.4 trio of new initiatives closes Klaviyo&rsquo;s narrow lead.</td></tr>
+        <tr><td><strong>5. Personalize &amp; tailor</strong></td><td>Predictive triggers as flow entry &middot; Segments AI &middot; Per-profile Smart Send + Personalized A/B</td><td>(international rollout uneven for some predictive features)</td><td>I-4.4.5 per-profile Smart Send + Personalized A/B close the editor-side gap.</td></tr>
+        <tr><td><strong>6. Preview &amp; QA loop</strong></td><td>AI auto-monitors flow regressions; cross-channel preview at compose time</td><td>No real-time multi-author review</td><td>I-4.4.6 Watchdog + I-5.1.2 cross-channel preview + I-5.4.2 accessibility coach close. P5.3 co-edit wins us this phase outright.</td></tr>
+        <tr><td><strong>7. Learn &amp; reuse</strong></td><td><strong>Universal Content (Spring &rsquo;26 default)</strong> &mdash; Klaviyo&rsquo;s largest single advantage on this phase</td><td>(commercial: active-profile billing punishes high-LTV reusers)</td><td>P2.1 Universal Content (Q2 ★) closes the gap; pair with P3.4.3 engagement-based pricing for the &ldquo;reuse without billing penalty&rdquo; counter-position.</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card warm" style="margin-bottom: 14px;">
+      <strong style="font-size:12px;">Synthesis &mdash; what the framework reveals about Klaviyo</strong>
+      <p style="font-size:12.5px; margin-top: 4px;">Klaviyo wins decisively on <strong>Levels 4&ndash;6 of the Builder Hierarchy</strong> (Brand-Native + AI + Omnichannel) and on <strong>Phases 1, 2, 5, 7 of the JTBD Journey</strong> (start of workflow + personalization + reuse). They are at parity (or behind on SMB friction) on the Compose Loop (Phases 3&ndash;4). And they are exposed on multi-brand kits, real-time co-edit, B2B fit, and the Feb &rsquo;25 active-profile billing &mdash; all of which Mailchimp&rsquo;s strategy attacks first. <strong>The reframe confirms our six countermove initiatives target the right gaps.</strong></p>
+    </div>
+
+    <p class="source"><strong>Reframe sources:</strong> Builder Hierarchy + 7-Phase JTBD adopted from <em>Nuni Builder Strategy &amp; Roadmap</em> (Ose Amiegheme, Erin McCue, JB Lovell, Ashley Wiesner). Klaviyo VoC data from G2 Klaviyo profile (~1,500 reviews, 4.6/5), Capterra (4.6/5), TrustRadius (8.4/10), Trustpilot (~600 reviews, 3.6/5), Reddit r/Klaviyo (incl. Feb 2025 active-profile billing threads), Klaviyo Community Spring 2026 Universal Content + Spring 2025 Marketing Agent announcements, agency RFP narratives, Mailchimp vs Klaviyo 2026 comparisons (Mailotrix, SaaSProbe, Hamster Stack, ProPicked).</p>
+  </section>
+
 </div><!-- /panel-klvivoc -->
 
 
@@ -3081,6 +3185,56 @@
     <p class="source"><strong>Page 4 sources:</strong> Slack MCP; <a href="mailchimp.html#hvcrisk" target="_blank" rel="noopener">Automations HVC Map</a> (different filter); <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research tab</a>.</p>
   </section>
 
+  <!-- Builder Hierarchy + JTBD reframe added v1.2 -->
+  <section class="page" aria-label="HVC Risk Page 5">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">HVC Risk Map (cont.) &middot; Builder Hierarchy + JTBD reframe</div>
+        <h1>17 cited HVC themes mapped to the <em style="color:#4338CA;">Builder Hierarchy</em> + <em style="color:#4338CA;">JTBD Journey</em></h1>
+        <div class="subtitle">Same Slack-cited HVC themes (~$95K/mo cited MRR), reframed through the two analytical lenses adopted from the <em>Nuni Builder Strategy &amp; Roadmap</em>. The reframe answers two new questions per theme: <strong>at what Builder maturity level does this complaint sit?</strong> and <strong>at what step of the customer&rsquo;s workflow does the friction occur?</strong></div>
+      </div>
+      <div class="meta">
+        <div><strong>Lens A:</strong> 6-Level Maslow Hierarchy</div>
+        <div><strong>Lens B:</strong> 7-Phase JTBD Journey</div>
+        <div><strong>Page:</strong> 5 of 5</div>
+      </div>
+    </header>
+
+    <h2><span class="num">F</span>Lens A &middot; Cited HVC themes by Builder Hierarchy level</h2>
+    <table class="dense" style="margin-bottom: 18px;">
+      <thead><tr><th style="width: 22%;">Builder Level</th><th>Cited HVC themes (with $/mo)</th><th style="width: 18%;">Total cited $/mo</th></tr></thead>
+      <tbody>
+        <tr><td><strong>L1 Reliable</strong></td><td>Theme 6 Template list / wizard surfacing ($1,950) &middot; Theme 8 Brand Kit incident (thread) &middot; Theme 12 Content Studio instability ($621) &middot; Theme 13 Canva sync ($2,500+) &middot; Theme 16 SMS TCPA $57K incident</td><td><strong>~$62.6K/mo</strong> (incl. $57K incident)</td></tr>
+        <tr><td><strong>L2 Mobile / Rendering</strong></td><td>Theme 3 NEB rendering divergence ($1,820) &middot; Theme 5 dual-builder block ordering ($410)</td><td>~$2.2K/mo</td></tr>
+        <tr><td><strong>L3 Efficient Workflow</strong></td><td>Theme 1 No bulk template migration ($330) &middot; Theme 2 Support dead-ends on migration ($504) &middot; Theme 5 dual-builder confusion ($410) &middot; Theme 11 CA rediscovery ($2,650) &middot; Theme 14 SMS reporting hard to find ($1,386)</td><td>~$5.3K/mo</td></tr>
+        <tr><td><strong>L4 Brand-Native &amp; Reusable</strong></td><td>Theme 7 Brand fonts in LP/forms ($655) &middot; Theme 9 Logo metadata + multi-brand ($2,460) &middot; Theme 10 Font upload + CA mismatch ($3,350) &middot; Theme 11 CA rediscovery (also L3) ($2,650 partial)</td><td>~$9.1K/mo</td></tr>
+        <tr><td><strong>L5 Intelligent &amp; AI-Powered</strong></td><td>(no direct HVC theme; Write with AI Explore funnel collapse is in Product Health, not cited HVC)</td><td>&mdash;</td></tr>
+        <tr><td><strong>L6 Omnichannel &amp; Extensible</strong></td><td>Theme 4 Multi-author save conflicts ($340) &middot; Theme 14 SMS reporting (also L3) &middot; Theme 15 SMS credits transparency ($3,592) &middot; Theme 16 SMS TCPA ($57,000) &middot; Theme 17 SMS depth (no $)</td><td><strong>~$60.9K/mo</strong> (the $57K TCPA dominates)</td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">G</span>Lens B &middot; Cited HVC themes by JTBD phase</h2>
+    <table class="dense" style="margin-bottom: 14px;">
+      <thead><tr><th style="width: 22%;">JTBD Phase</th><th>Cited HVC themes that break this phase</th><th style="width: 18%;">Total cited $/mo</th></tr></thead>
+      <tbody>
+        <tr><td><strong>1. Choose structure</strong></td><td>Theme 1 No bulk template migration ($330) &middot; Theme 6 Template list / wizard surfacing ($1,950)</td><td>~$2.3K/mo</td></tr>
+        <tr><td><strong>2. Establish brand &amp; style</strong></td><td>Theme 7 LP/form fonts ($655) &middot; Theme 8 Brand Kit incident &middot; Theme 9 Multi-brand ($2,460) &middot; Theme 10 Font upload ($3,350) &middot; Theme 11 CA rediscovery ($2,650)</td><td><strong>~$9.1K/mo</strong></td></tr>
+        <tr><td><strong>3. Add &amp; place content</strong></td><td>Theme 12 Content Studio image loading ($621) &middot; Theme 13 Canva sync ($2,500+)</td><td>~$3.1K/mo</td></tr>
+        <tr><td><strong>4. Refine &amp; polish</strong></td><td>Theme 3 NEB rendering ($1,820) &middot; Theme 4 Multi-author save ($340) &middot; Theme 5 Block ordering ($410) &middot; Theme 11 CA non-banner workflows</td><td>~$2.6K/mo</td></tr>
+        <tr><td><strong>5. Personalize &amp; tailor</strong></td><td>Theme 17 SMS merge tag depth (no $)</td><td>&mdash;</td></tr>
+        <tr><td><strong>6. Preview &amp; QA loop</strong></td><td>Theme 14 SMS reporting empty/N/A ($1,386) &middot; Theme 15 SMS credits hidden ($3,592) &middot; <strong>Theme 16 SMS TCPA $57K incident</strong></td><td><strong>~$62K/mo</strong> (the TCPA incident dominates)</td></tr>
+        <tr><td><strong>7. Learn &amp; reuse</strong></td><td>Theme 1 No bulk migration (saves don&rsquo;t survive); Theme 2 Support dead-ends on migration ($504); Theme 4 Multi-author conflicts (sessions lost)</td><td>~$1.2K/mo</td></tr>
+      </tbody>
+    </table>
+
+    <div class="card warm" style="margin-bottom: 14px;">
+      <strong style="font-size:12px;">Synthesis &mdash; what the framework reveals about cited HVC pain</strong>
+      <p style="font-size:12.5px; margin-top: 4px;">Two surprises emerge: <strong>(a)</strong> the $57K SMS TCPA incident dominates the dollar exposure on Level 6 (Omnichannel) and Phase 6 (QA loop) &mdash; not on the Compose Loop where Voice of Customer complains loudest. <strong>(b)</strong> Phase 2 (Establish brand &amp; style) carries <strong>$9.1K/mo across 5 cited themes</strong> &mdash; this is the most concentrated dollar pain in any JTBD phase outside the TCPA incident, and it directly justifies why P1.2 Brand Kit reliability (4 initiatives) gets the heaviest P1 investment. The Builder Hierarchy lens also confirms <strong>L1 Reliable carries the most cited dollars</strong> &mdash; which validates P1.5 Builder SLOs as the operational quality gate.</p>
+    </div>
+
+    <p class="source"><strong>Reframe sources:</strong> Builder Hierarchy + 7-Phase JTBD adopted from <em>Nuni Builder Strategy &amp; Roadmap</em> (Ose Amiegheme, Erin McCue, JB Lovell, Ashley Wiesner). Original HVC data from Slack <code>#hvc_feedback</code>, <code>#mc-hvc-escalations</code>, <code>#mc-feedback-summary</code> (Nov 2024 &rarr; May 2026); 17 cited themes / ~$95K/mo cited MRR.</p>
+  </section>
+
 </div><!-- /panel-hvcrisk -->
 
 
@@ -3251,6 +3405,67 @@
     </div>
 
     <p class="source"><strong>Repos:</strong> <a href="https://github.com/deepakp1308/mailchimp-campaign-builder-research" target="_blank" rel="noopener">github.com/deepakp1308/mailchimp-campaign-builder-research</a> · Optional static site in <code>site/</code> if published to GitHub Pages.</p>
+  </section>
+
+  <!-- Builder Hierarchy + JTBD reframe added v1.2 -->
+  <section class="page" aria-label="Research Page 4">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">User Research (cont.) &middot; Builder Hierarchy + JTBD reframe</div>
+        <h1>5 UR Bets + Discovery table + Workflow Shapes mapped to <em style="color:#4338CA;">Builder Hierarchy</em> + <em style="color:#4338CA;">JTBD Journey</em></h1>
+        <div class="subtitle">Same User Research data (25 customer briefs across 50 HeyMarvin videos), reframed through the two analytical lenses from the <em>Nuni Builder Strategy &amp; Roadmap</em>. The reframe converts qualitative research patterns into structural maturity gaps + workflow-step friction.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Lens A:</strong> 6-Level Maslow Hierarchy</div>
+        <div><strong>Lens B:</strong> 7-Phase JTBD Journey</div>
+        <div><strong>Page:</strong> 4 of 4</div>
+      </div>
+    </header>
+
+    <h2><span class="num">F</span>Lens A &middot; UR Bets + Discovery patterns by Builder Hierarchy level</h2>
+    <table class="dense" style="margin-bottom: 18px;">
+      <thead><tr><th style="width: 22%;">Builder Level</th><th style="width: 36%;">UR pattern that surfaces here</th><th>Initiative response</th></tr></thead>
+      <tbody>
+        <tr><td><strong>L1 Reliable</strong></td><td>Discovery table: customers don&rsquo;t trust the system (e.g. Bianka&rsquo;s team &ldquo;scared by the migration&rdquo;); Andrea live demo of asset workflow breakdown</td><td><strong>P1.5 Builder SLOs</strong> as published quality contract</td></tr>
+        <tr><td><strong>L2 Mobile / Rendering</strong></td><td>Workflow Shape #1 (fast Monday-morning sender): customers ship before validating mobile</td><td>I-1.1.6 Light/dark mode + bg images; I-1.1.7 Pre-send checks upgrade</td></tr>
+        <tr><td><strong>L3 Efficient Workflow</strong></td><td>UR Bet #5 Direct manipulation upgrades (asymmetric resize, 1-click 2-column, post-hoc A/B); Workflow Shape #4 &ldquo;Third-party in the loop&rdquo; (Andrea/Wes/Jack route around MC via Bee.io / Canva); Andrea quote &ldquo;you need to make our life easier. No more complicated.&rdquo;</td><td>P1.1 NEB UX bug fixes + P3.1 onboarding + P3.3 discovery</td></tr>
+        <tr><td><strong>L4 Brand-Native &amp; Reusable</strong></td><td><strong>UR Bet #1 Saved blocks / section reuse</strong> (PM-confirmed in flight) &mdash; the most cited bet, mentioned by Wes / Peter / Kyle / Bob; Workflow Shape #3 (Brand-first methodical: Wes / Bob, &ldquo;wants saved blocks&rdquo;)</td><td><strong>P2.1 Universal Content (Q2 &#9733;)</strong>; I-1.2.3 multi-brand kits; I-2.3.2 Brand Kit auto-applied</td></tr>
+        <tr><td><strong>L5 Intelligent &amp; AI-Powered</strong></td><td>(no direct UR bet on AI; Discovery table shows discovery gap is a learning issue, not an AI issue)</td><td>I-3.1.4 AI Email Setup Agent + P4 entire pillar address</td></tr>
+        <tr><td><strong>L6 Omnichannel &amp; Extensible</strong></td><td><strong>UR Bet #4 Real multi-author editing</strong> (Jack / Kyle / Bianka convergence &mdash; the second most cited bet); Bianka direct ask: &ldquo;email + SMS + all touches in one reporting view&rdquo;; Workflow Shape #2 (All-week ad-libber: Jack 10&ndash;20 logins/day, save conflicts dominate)</td><td><strong>P5.3 Real-time co-edit (Q5 &#9733;)</strong> + P5.1 unified canvas + P5.4 governance</td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">G</span>Lens B &middot; Discovery table by JTBD phase &mdash; where customers got stuck</h2>
+    <p style="font-size:12.5px; color: var(--ink-2); margin-bottom: 10px;">The Discovery table from User Research lists 5 customers with multi-year undiscovered features. Mapping to JTBD phases shows the discovery gap is heavily concentrated in <strong>Phases 1&ndash;2 (Choose structure + Establish brand)</strong> and <strong>Phase 7 (Learn &amp; reuse)</strong>. Customers find the &ldquo;new&rdquo; thing they need too late because the workflow never surfaces it at the moment of need.</p>
+    <table class="dense" style="margin-bottom: 18px;">
+      <thead><tr><th style="width: 16%;">Customer</th><th style="width: 22%;">What they didn&rsquo;t discover</th><th style="width: 12%;">Duration</th><th style="width: 18%;">JTBD Phase blocked</th><th>Initiative</th></tr></thead>
+      <tbody>
+        <tr><td>Bianka Kiss</td><td>A/B testing</td><td>Years</td><td>Phase 6 (QA loop)</td><td>I-3.3.2 contextual feature discovery prompts</td></tr>
+        <tr><td>Jack Hally</td><td>New Email Builder</td><td>4&ndash;6 yrs on inherited legacy template</td><td>Phase 1 (Choose structure)</td><td>I-3.3.1 in-app changelog + weekly digest</td></tr>
+        <tr><td>Jeffrey Davis</td><td>My Products / Woo product pull</td><td>3.5 years</td><td>Phase 3 (Add + place content)</td><td>I-3.3.2 contextual feature discovery + I-3.4.1 Free uplift</td></tr>
+        <tr><td>Clint Bartley</td><td>Welcome automation (in DRAFT)</td><td>1 year</td><td>Phase 7 (Learn + reuse) &mdash; first send never happened</td><td>I-3.3.3 DRAFT-resurrect campaign</td></tr>
+        <tr><td>Wes Turner</td><td>Saved blocks (pre-ship)</td><td>At time of call</td><td>Phase 7 (Learn + reuse)</td><td>P2.1 Universal Content + I-2.1.3 adoption funnel</td></tr>
+      </tbody>
+    </table>
+
+    <h2><span class="num">H</span>Lens B applied to the 5 Workflow Shapes &mdash; where each persona feels friction</h2>
+    <table class="dense" style="margin-bottom: 14px;">
+      <thead><tr><th style="width: 22%;">Workflow Shape</th><th style="width: 28%;">Examples</th><th>Phase where friction lives</th></tr></thead>
+      <tbody>
+        <tr><td><strong>#1 Fast Monday-morning sender</strong></td><td>Andrew, Andrea, Kim, Clint</td><td>Phase 1 (Choose structure: replicate last week) &middot; Phase 6 (QA loop: ship without thorough preview)</td></tr>
+        <tr><td><strong>#2 All-week ad-libber</strong></td><td>Jack Hally (10&ndash;20 logins/day)</td><td>Phase 4 (Refine + polish: save conflicts) &middot; Phase 6 (multi-user QA breakdown) &mdash; <strong>UR Bet #4 territory</strong></td></tr>
+        <tr><td><strong>#3 Brand-first methodical</strong></td><td>Wes Turner, Bob Gray</td><td>Phase 2 (Establish brand &amp; style: layout/padding before copy) &middot; Phase 7 (wants saved blocks) &mdash; <strong>UR Bet #1 territory</strong></td></tr>
+        <tr><td><strong>#4 Third-party in the loop</strong></td><td>Andrea (Bee.io), Wes (Canva), Jack (Express)</td><td>Phase 3 (Add + place content: MC canvas can&rsquo;t hold their work) &mdash; <strong>P1.3.1 Canva sync + I-1.4.2 CA non-banner expansion fix</strong></td></tr>
+        <tr><td><strong>#5 Low-frequency / discovery gap</strong></td><td>Shannon, Matt, Gilles</td><td>Phase 1 (Choose structure: don&rsquo;t know what&rsquo;s available) &middot; Phase 7 (Learn + reuse: capability never compounds) &mdash; <strong>P3.3 entire sub-pillar fixes</strong></td></tr>
+      </tbody>
+    </table>
+
+    <div class="card warm" style="margin-bottom: 14px;">
+      <strong style="font-size:12px;">Synthesis &mdash; what the framework reveals about UR data</strong>
+      <p style="font-size:12.5px; margin-top: 4px;">Three observations: <strong>(a)</strong> UR Bets #1 (saved blocks) and #4 (real multi-author) are not just &ldquo;features customers want&rdquo; &mdash; they map directly to <strong>Builder Hierarchy Levels 4 and 6</strong>, which are exactly where Mailchimp scored 1 and 0 vs Klaviyo 3. The qualitative research independently arrived at the same maturity gaps. <strong>(b)</strong> The Discovery table shows the gap is in <strong>Phases 1&ndash;2 and Phase 7</strong> &mdash; bookend phases &mdash; matching the Mailchimp VoC reframe pattern (clunky-and-outdated is felt at the start and the end of the workflow). <strong>(c)</strong> Workflow Shape #4 &ldquo;Third-party in the loop&rdquo; reveals that customers literally route around Mailchimp at Phase 3 (Add + place content) &mdash; reinforcing P1.3 Canva sync + P1.4 Creative Assistant rediscovery as urgent.</p>
+    </div>
+
+    <p class="source"><strong>Reframe sources:</strong> Builder Hierarchy + 7-Phase JTBD adopted from <em>Nuni Builder Strategy &amp; Roadmap</em> (Ose Amiegheme, Erin McCue, JB Lovell, Ashley Wiesner). Original UR data from Hannah Graffeo + UXR panel; 50 HeyMarvin videos / 25 customer briefs / 5 UR bets / Discovery table / 5 Workflow Shapes; full evidence in <a href="https://github.com/deepakp1308/mailchimp-campaign-builder-research" target="_blank" rel="noopener">deepakp1308/mailchimp-campaign-builder-research</a> (briefs/synthesis.md + per-customer briefs/*.md).</p>
   </section>
 
 </div><!-- /panel-research -->
@@ -5144,13 +5359,13 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
   <header class="page-head">
     <div>
       <div class="eyebrow">Initiative Canvas &middot; Editor + SMS &middot; Evidence-grounded</div>
-      <h1>The 71 tactical initiatives that get the editor to <em style="color:#C28A00;">+$25&ndash;30M</em> in FY27 &mdash; including 6 <em style="color:#4338CA;">Klaviyo countermoves</em></h1>
+      <h1>The 74 tactical initiatives that get the editor to <em style="color:#C28A00;">+$25&ndash;30M</em> in FY27 &mdash; 6 <em style="color:#4338CA;">Klaviyo countermoves</em> + 3 <em style="color:#4338CA;">Builder SLO contracts (Nuni PM framework)</em></h1>
       <div class="subtitle">Designed top-down from this brief&rsquo;s evidence: <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">Voice of Customer</a> (7 hate themes), <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a> (17 cited themes across NEB, Brand Kit, Content Studio, Canva, SMS), <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a> (25 customer briefs / 50 videos / 5 bets), <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> (10 BQ findings on bulk/SMS/AI/transactional), <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a> (6 levers, ~$26.3M mid), <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a> ($36&ndash;67M backward stack), <a href="#klviedi" onclick="document.querySelector('[data-tab=klviedi]').click();return false;">Klaviyo Brief</a> (10 differentiation dimensions), <a href="#klvivoc" onclick="document.querySelector('[data-tab=klvivoc]').click();return false;">Klaviyo VoC</a> (5 plays for Mailchimp). Every initiative shows: <strong>what it is &middot; critical problem &middot; functional benefit</strong>.</div>
     </div>
     <div class="meta">
-      <div><strong>Pillars:</strong> 5 (customer-benefit framing) &middot; <strong>v1.1</strong></div>
-      <div><strong>Sub-themes:</strong> 19</div>
-      <div><strong>Initiatives:</strong> 71 (incl. 6 Klaviyo countermoves)</div>
+      <div><strong>Pillars:</strong> 5 (customer-benefit framing) &middot; <strong>v1.2</strong></div>
+      <div><strong>Sub-themes:</strong> 20</div>
+      <div><strong>Initiatives:</strong> 74 (incl. 6 Klaviyo countermoves + 3 Builder SLOs)</div>
       <div><strong>Page:</strong> 1 of 9</div>
     </div>
   </header>
@@ -5161,7 +5376,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       <div class="l">FY27 incremental ARR target this canvas delivers (mid scenario ~$26.3M from <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a>)</div>
     </div>
     <div class="kpi">
-      <div class="v">71 initiatives</div>
+      <div class="v">74 initiatives</div>
       <div class="l">Tactical, scoped, 3-part-described (IS / problem / benefit). Cover every cited HVC theme + every UR bet + every VoC hate theme</div>
     </div>
     <div class="kpi">
@@ -5186,8 +5401,8 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
   </div>
 
   <div class="card" style="background:#F4F3FF; border-color:#DCD7F8; margin-bottom: 16px;">
-    <h2 style="margin-top:0; color:#4338CA;">Klaviyo countermoves added (v1.1 of canvas)</h2>
-    <p>After publishing the <a href="#klviedi" onclick="document.querySelector('[data-tab=klviedi]').click();return false;">Klaviyo Brief</a> and <a href="#klvivoc" onclick="document.querySelector('[data-tab=klvivoc]').click();return false;">Klaviyo VoC</a> tabs, the canvas was extended with <strong>6 new initiatives</strong> targeting Klaviyo&rsquo;s structural advantages where Mailchimp had no equivalent &mdash; AI Email Setup Agent (Marketing-Agent equivalent), in-canvas revenue per recipient, per-profile Smart Send + Personalized A/B, AI Performance Watchdog, accelerated Push notification send action, and an engagement-based pricing position counter to the Feb 2025 active-profile billing change. <strong>Nothing was removed</strong> &mdash; every existing initiative still maps to a documented HVC / UR / VoC signal. Klaviyo&rsquo;s <em>exposures</em> (DTC bias, no co-edit, no multi-brand kits within one account, no Brand-Kit-aware conversational) were already covered by P3.2 / P5.3 / P1.2.3 / P4.2.1 respectively &mdash; the memo sharpens the counter-positioning narrative around them.</p>
+    <h2 style="margin-top:0; color:#4338CA;">Klaviyo countermoves (v1.1) + Builder SLOs (v1.2) added</h2>
+    <p>After publishing the <a href="#klviedi" onclick="document.querySelector('[data-tab=klviedi]').click();return false;">Klaviyo Brief</a> and <a href="#klvivoc" onclick="document.querySelector('[data-tab=klvivoc]').click();return false;">Klaviyo VoC</a> tabs, the canvas was extended with <strong>6 Klaviyo countermove initiatives</strong> (v1.1) + <strong>3 Builder SLO initiatives</strong> (v1.2 &mdash; new sub-pillar P1.5, adopted from the Nuni Builder Strategy &amp; Roadmap by Ose Amiegheme, Erin McCue, JB Lovell, Ashley Wiesner). <strong>Nothing was removed</strong> &mdash; every existing initiative still maps to a documented HVC / UR / VoC signal. Klaviyo&rsquo;s <em>exposures</em> (DTC bias, no co-edit, no multi-brand kits within one account, no Brand-Kit-aware conversational) were already covered by P3.2 / P5.3 / P1.2.3 / P4.2.1 respectively. The Builder SLOs (uptime 99.9%, crash-free 99.5%, P95 load &lt; 500ms, P95 interaction &lt; 300ms, render fidelity &ge; 99%, mobile &ge; 95%, WCAG AA on critical flows) become the <em>operational quality gate</em> that pairs with the cited HVC bug-fix work in P1.1&ndash;P1.4.</p>
   </div>
 
   <h2 style="margin-bottom: 8px;">The 5 pillars at a glance</h2>
@@ -5198,11 +5413,11 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       <h3>"The builder I trust to ship"</h3>
       <div style="font-size:11px; color:var(--muted); font-style:italic; margin-top:-4px;">Internal name: Editor Quality &amp; Brand Trust</div>
       <div class="pc-meta">
-        <div>Sub-themes<br/><strong>4</strong></div>
-        <div>Initiatives<br/><strong>16</strong></div>
+        <div>Sub-themes<br/><strong>5</strong></div>
+        <div>Initiatives<br/><strong>19</strong></div>
         <div>FY27 $<br/><strong>$3&ndash;5M</strong></div>
       </div>
-      <div class="pc-themes">NEB rendering &amp; UX bugs &middot; Brand Kit reliability + multi-brand &middot; Content Studio + Canva sync &middot; Creative Assistant rediscovery</div>
+      <div class="pc-themes">NEB rendering &amp; UX bugs &middot; Brand Kit reliability + multi-brand &middot; Content Studio + Canva sync &middot; Creative Assistant rediscovery &middot; <em style="color:#4338CA;">Builder SLOs operating contract (Nuni PM)</em></div>
     </div>
     <div class="pillar-card p2">
       <div class="pc-num">P2</div>
@@ -5283,7 +5498,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
     <div>
       <div class="eyebrow">Pillar 1 &middot; Customer benefit &middot; 0&ndash;3 months</div>
       <h1>P1: <em style="color:#B91C1C;">"The builder I trust to ship"</em></h1>
-      <div class="subtitle">Internal name: Editor Quality &amp; Brand Trust. 4 sub-themes, 16 tactical initiatives. <strong>Highest velocity, lowest risk pile</strong> &mdash; most ship in weeks. Burns down cited HVC tickets, addresses bulk churn +2.1pp YoY, and removes the &ldquo;clunky/outdated&rdquo; brand-decay signal before any AI demo can land.</div>
+      <div class="subtitle">Internal name: Editor Quality &amp; Brand Trust. <strong>5 sub-themes, 19 tactical initiatives</strong> (incl. <em style="color:#4338CA;">3 Builder SLO operating-contract initiatives in new sub-theme 1.5</em>). <strong>Highest velocity, lowest risk pile</strong> &mdash; most ship in weeks. Burns down cited HVC tickets, addresses bulk churn +2.1pp YoY, and removes the &ldquo;clunky/outdated&rdquo; brand-decay signal before any AI demo can land.</div>
     </div>
     <div class="meta">
       <div><strong>Pain $:</strong> ~$15K/mo cited (Themes 3&ndash;13 selected)</div>
@@ -5340,7 +5555,18 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
     <div class="init-row"><div class="init-id">I-1.4.2</div><div class="init-name"><strong>Creative Assistant for non-banner workflows.</strong> Expand CA to social variants, in-product imagery, signup-form heroes; multi-asset generation in one prompt.<span class="desc"><span class="prob">Problem:</span> Customers want CA for more than banners (Theme 11 secondary asks); currently has to use Canva or Adobe Express for adjacent assets. <span class="ben">Benefit:</span> Mailchimp keeps the design workflow in-product; reduces dependence on Canva &mdash; the same dependence that produces Theme 13 sync failures.</span></div><div class="init-pain no">expansion</div><div class="init-lever"><span class="lvr l6">L6</span></div><div class="init-source"><span class="src hvc">HVC #11 secondary</span></div></div>
   </div>
 
-  <p class="source"><strong>P1 evidence base:</strong> 7 HVC bug themes (NEB rendering, multi-author save, block ordering, template surfacing, Brand Kit incident, font upload, Canva sync) + 3 HVC barrier themes (multi-brand, folder mgmt, CA rediscovery). <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">VoC</a> hate themes #6 (no universal blocks &rarr; partial address via P2) and clunky/outdated narrative addressed via every fix shipped here. <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> bulk churn +2.1pp YoY is the L5 target this pillar moves.</p>
+  <div class="subtheme">
+    <h4><span class="st-num">1.5</span> Builder SLOs as Operating Contract <span style="background:#F1EEFF; color:#3A1ACC; font-size:10px; padding:2px 6px; border-radius:3px; margin-left:6px; font-weight:800; letter-spacing:.04em;">NUNI PM TEAM FRAMEWORK</span></h4>
+    <div class="st-meta">Adopted from <em>Nuni Builder Strategy &amp; Roadmap</em> (Ose Amiegheme, Erin McCue, JB Lovell, Ashley Wiesner). <strong>What customers can reasonably expect when they open NEB.</strong> Pairs with the cited HVC bug-fix work (P1.1&ndash;P1.4) by establishing <em>the operational quality gate</em> for all editor releases. &middot; 3 initiatives &middot; Lever <span class="lvr l5">L5</span></div>
+    <div class="init-header">
+      <div>ID</div><div>Initiative &middot; scope</div><div class="h-pain">Pain $/mo</div><div class="h-lever">Lever</div><div class="h-src">Source</div>
+    </div>
+    <div class="init-row"><div class="init-id">I-1.5.1</div><div class="init-name"><strong>Builder SLO operating contract.</strong> Publish the SLOs that customers can trust when they open NEB: <strong>uptime &ge; 99.9% monthly</strong>; <strong>crash-free sessions &ge; 99.5%</strong>; <strong>save/publish reliability &ge; 99.99%</strong>; <strong>initial load P95 &lt; 500ms</strong>; <strong>interaction latency P95 &lt; 300ms</strong>; <strong>rendering fidelity &ge; 99%</strong> across supported clients; <strong>mobile readiness &ge; 95%</strong>; <strong>accessibility WCAG AA on 100% of critical flows + 95% overall</strong>; <strong>device support</strong>: last 2 versions of Chrome / Edge / Safari / Firefox + iOS / Android; <strong>network</strong>: full fidelity at &ge; 5 Mbps, degraded but usable down to 1 Mbps with clear in-product messaging.<span class="desc"><span class="prob">Problem:</span> Cited HVC bugs (NEB rendering, multi-author save, Brand Kit incident, Canva sync) reveal there is no operating contract for editor quality &mdash; bugs ship to production and get found by customers. <span class="ben">Benefit:</span> Customers know what to expect; engineering knows what to maintain; CSO has a published bar to point at; major NEB changes do not roll out broadly until they are SLO-neutral or better for target cohorts.</span></div><div class="init-pain no">contract</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src">NUNI PM</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.5.2</div><div class="init-name"><strong>Builder SLO instrumentation + monitoring + dashboard.</strong> Each SLI is measurable in production; build a shared &ldquo;Builder Quality&rdquo; dashboard sliced by browser / device / cohort / market; weekly burn-rate review; SLO breach alerts auto-route to a named owner. Pair with the I-1.1.5 cross-browser regression suite to catch issues pre-release.<span class="desc"><span class="prob">Problem:</span> Without instrumentation, SLOs are aspirational. Today we discover regressions when customers report them &mdash; lagging indicator. <span class="ben">Benefit:</span> Proactive detection of slow drifts (not just one-off incidents); engineering can prevent customer-facing degradation; PM sees where SLOs are at risk before publishing changes.</span></div><div class="init-pain no">instrumentation</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src">NUNI PM</span></div></div>
+    <div class="init-row"><div class="init-id">I-1.5.3</div><div class="init-name"><strong>Builder SLO error budgets + escalation + CSO alignment + roadmap policy.</strong> Track error budgets for the most critical SLOs (save/publish, crash-free, render fidelity); when a budget is burned or an SLO is breached, named incident owner + clear escalation path + simple CSO/CS brief on what to tell customers; roadmap policy: <strong>if we are consistently missing a core SLO for our target ICPs, pause new complexity and redirect capacity to underlying quality work</strong>; do not route more customers into NEB from other flows unless we can meet or beat these SLOs for them.<span class="desc"><span class="prob">Problem:</span> Without error budgets and a roadmap policy, SLOs are decorative &mdash; teams ship features even while the floor is slipping. <span class="ben">Benefit:</span> Quality compounds because the team has explicit permission (and obligation) to defer feature work when the foundation is at risk; CSO communications are pre-aligned; agency / mid-market customers have a quality contract they can point at.</span></div><div class="init-pain no">policy</div><div class="init-lever"><span class="lvr l5">L5</span></div><div class="init-source"><span class="src">NUNI PM</span></div></div>
+  </div>
+
+  <p class="source"><strong>P1 evidence base:</strong> 7 HVC bug themes (NEB rendering, multi-author save, block ordering, template surfacing, Brand Kit incident, font upload, Canva sync) + 3 HVC barrier themes (multi-brand, folder mgmt, CA rediscovery). <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">VoC</a> hate themes #6 (no universal blocks &rarr; partial address via P2) and clunky/outdated narrative addressed via every fix shipped here. <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> bulk churn +2.1pp YoY is the L5 target this pillar moves. <em style="color:#4338CA;">P1.5 Builder SLOs adopted from Nuni Builder Strategy &amp; Roadmap (Ose Amiegheme, Erin McCue, JB Lovell, Ashley Wiesner; reviewed by Eric Anderson) &mdash; the operational quality gate that pairs with the cited HVC bug-fix work.</em></p>
 </section>
 
 <!-- PAGE 3: P2 — "Edit once, send everywhere" -->
@@ -5599,8 +5825,8 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       <div class="subtitle">Built top-down from documented evidence. Every cited HVC theme, every UR bet, every VoC hate theme, every Product Health finding, and every Growth Model lever maps to at least one initiative.</div>
     </div>
     <div class="meta">
-      <div><strong>Initiatives:</strong> 71 (incl. 6 Klaviyo countermoves)</div>
-      <div><strong>Sources mapped:</strong> 6 evidence tabs + Growth Model + Loss Attribution + Klaviyo Brief + Klaviyo VoC</div>
+      <div><strong>Initiatives:</strong> 74 (incl. 6 Klaviyo countermoves + 3 Builder SLOs)</div>
+      <div><strong>Sources mapped:</strong> 6 evidence tabs + Growth Model + Loss Attribution + Klaviyo Brief + Klaviyo VoC + Nuni PM framework</div>
       <div><strong>Page:</strong> 7 of 9</div>
     </div>
   </header>
@@ -5641,7 +5867,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
     <li><strong>Pricing &amp; SKU restructure beyond Free-tier policy.</strong> Broader pricing changes are corp Finance domain, not editor PM.</li>
   </ul>
 
-  <p class="source"><strong>Evidence-base summary:</strong> 7 VoC hate themes + 17 HVC cited themes (~$95K/mo cited) + 25 UR briefs / 5 bets / Discovery table / Workflow Shapes + 10 Product Health findings + 6 Growth Model levers + 3-layer Loss Attribution stack + 9 RMW foundational gaps + 12 RMW differentiated steals + 5 Strategy bets + Klaviyo Brief (10 differentiation dimensions) + Klaviyo VoC (17 net-sentiment topics + Feb &rsquo;25 billing damage). <strong>71 tactical initiatives</strong> (incl. 6 Klaviyo countermoves added in v1.1) across <strong>19 sub-themes</strong> within <strong>5 customer-benefit pillars</strong>. Sized to deliver <strong>$25&ndash;30M FY27 ARR target</strong> per Growth Model. <strong>Designed top-down from evidence</strong> &mdash; not bottom-up from existing PRDs.</p>
+  <p class="source"><strong>Evidence-base summary:</strong> 7 VoC hate themes + 17 HVC cited themes (~$95K/mo cited) + 25 UR briefs / 5 bets / Discovery table / Workflow Shapes + 10 Product Health findings + 6 Growth Model levers + 3-layer Loss Attribution stack + 9 RMW foundational gaps + 12 RMW differentiated steals + 5 Strategy bets + Klaviyo Brief (10 differentiation dimensions) + Klaviyo VoC (17 net-sentiment topics + Feb &rsquo;25 billing damage). <strong>74 tactical initiatives</strong> (incl. 6 Klaviyo countermoves added in v1.1 + 3 Builder SLOs added in v1.2) across <strong>20 sub-themes</strong> within <strong>5 customer-benefit pillars</strong>. Sized to deliver <strong>$25&ndash;30M FY27 ARR target</strong> per Growth Model. <strong>Designed top-down from evidence</strong> &mdash; not bottom-up from existing PRDs.</p>
 </section>
 
 <!-- PAGE 8: GUIDING PRINCIPLES + EFFORT ALLOCATION -->
@@ -5649,7 +5875,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
   <header class="page-head">
     <div>
       <div class="eyebrow">Guiding Principles &middot; 18-month sequencing logic</div>
-      <h1>How to <em style="color:#C28A00;">orchestrate</em> 71 initiatives across 6 quarters without losing the plot</h1>
+      <h1>How to <em style="color:#C28A00;">orchestrate</em> 74 initiatives across 6 quarters without losing the plot</h1>
       <div class="subtitle">A layered trust-recovery + competitive-narrative-recovery framework. Customers face four simultaneous problems: editor reliability broken (Tab 4 cited), discovery weak (UR), AI funnel collapsed (Health Write with AI), competitive narrative lost (VoC + Klaviyo Spring &rsquo;26). Frame internally as <strong>&ldquo;rebuilding trust while reinventing the editor&rdquo;</strong> &mdash; not &ldquo;bugs vs AI vs Universal Content.&rdquo; All four trust layers run in parallel each quarter, with weighted emphasis.</div>
     </div>
     <div class="meta">
@@ -5778,7 +6004,8 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
           <span class="iid">I-1.2.1</span>Brand Kit data correctness<br/>
           <span class="iid">I-1.3.1</span>Canva sync reliability<br/>
           <span class="iid">I-1.1.4</span>Template list surfacing<br/>
-          <span class="iid">I-1.4.1</span>Creative Assistant rediscovery
+          <span class="iid">I-1.4.1</span>Creative Assistant rediscovery<br/>
+          <span class="star">★</span> <span class="iid">I-1.5.1</span><span class="ship">Builder SLO operating contract published (Nuni PM framework)</span>
         </td>
         <td class="q-cell">
           <span class="iid">I-1.1.1</span><span class="ship">NEB rendering parity SHIPS</span><br/>
@@ -5786,7 +6013,9 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
           <span class="iid">I-1.1.3</span>Block ordering bugs<br/>
           <span class="iid">I-1.3.2</span>Content Studio stability<br/>
           <span class="iid">I-1.1.2</span>Multi-author save UX<br/>
-          <span class="iid">I-1.2.4</span>Brand fonts in LP / forms
+          <span class="iid">I-1.2.4</span>Brand fonts in LP / forms<br/>
+          <span class="iid">I-1.5.2</span><span class="ship">Builder SLO instrumentation + dashboard ships</span><br/>
+          <span class="iid">I-1.5.3</span>Builder SLO error budgets + escalation + roadmap policy
         </td>
         <td class="q-cell">
           <span class="iid">I-1.2.3</span><span class="ship">Multi-brand kits ships</span><br/>
@@ -5958,7 +6187,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
           <span style="display:block; font-size:9px; font-weight:400; opacity:0.85;">Demoable proof per quarter</span>
         </td>
         <td class="cred-cell">
-          <strong>SMS TCPA $57K incident closed + Brand Kit incident closed</strong> &mdash; cited HVC burn-down begins; quietly removes the largest single brand-risk vector in the brief.
+          <strong>SMS TCPA $57K incident closed + Brand Kit incident closed + Builder SLO operating contract published</strong> &mdash; cited HVC burn-down begins; quietly removes the largest single brand-risk vector in the brief; <em style="color:#4338CA;">first published quality contract for the editor (Nuni PM framework)</em>.
         </td>
         <td class="cred-cell">
           <strong>Universal Content MVP ships</strong> &mdash; Klaviyo Spring &rsquo;26 parity demo. Single biggest shift in editor narrative. Reverses the &ldquo;Mailchimp ships features but loses the editor conversation&rdquo; story.
@@ -5998,7 +6227,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
     </div>
   </div>
 
-  <p class="source"><strong>Roadmap methodology:</strong> Sequencing logic from Page 8 principles. Each initiative placed in a quarter based on (a) dependency chain (Universal Content first; NEB Code Mode before Classic sunset; Write with AI policy track parallel to product), (b) credibility moment cadence (one demoable proof per quarter), (c) effort allocation (35/30/25/10 maintained per quarter), (d) HVC burn-down sequencing (cited $ resolved fastest first), (e) Growth Model lever timing (L1 bulk recovery + L5 retention save load Q1-Q3; L3 SMS attach + L6 ARPU/governance load Q4-Q6), (f) <em style="color:#4338CA;">Klaviyo countermove sequencing</em> (AI Email Setup Agent Q3, engagement-based pricing Q4 paired with Free uplift, in-canvas revenue Q4 paired with global AI ungate, per-profile Smart Send + Watchdog + Push Q5 paired with co-edit + conversational). All 71 initiatives mapped (incl. 6 Klaviyo countermoves added in v1.1); ~5 deliberately deferred to Q6 (cross-account agency inheritance; prompt-first mode; AI brand-style transfer).</p>
+  <p class="source"><strong>Roadmap methodology:</strong> Sequencing logic from Page 8 principles. Each initiative placed in a quarter based on (a) dependency chain (Universal Content first; NEB Code Mode before Classic sunset; Write with AI policy track parallel to product), (b) credibility moment cadence (one demoable proof per quarter), (c) effort allocation (35/30/25/10 maintained per quarter), (d) HVC burn-down sequencing (cited $ resolved fastest first), (e) Growth Model lever timing (L1 bulk recovery + L5 retention save load Q1-Q3; L3 SMS attach + L6 ARPU/governance load Q4-Q6), (f) <em style="color:#4338CA;">Klaviyo countermove sequencing</em> (AI Email Setup Agent Q3, engagement-based pricing Q4 paired with Free uplift, in-canvas revenue Q4 paired with global AI ungate, per-profile Smart Send + Watchdog + Push Q5 paired with co-edit + conversational). All 74 initiatives mapped (incl. 6 Klaviyo countermoves in v1.1 + 3 Builder SLOs in v1.2); ~5 deliberately deferred to Q6 (cross-account agency inheritance; prompt-first mode; AI brand-style transfer). <em style="color:#4338CA;">Builder SLOs (P1.5) added as the operational quality gate &mdash; per the Nuni PM team framework, no major NEB change ships broadly until SLO-neutral or better for target cohorts; if we miss a core SLO for target ICPs we pause new complexity and redirect capacity to underlying quality work.</em></p>
 </section>
 
 </div><!-- /panel-canvas -->
@@ -6884,6 +7113,65 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 
   <hr class="divider"/>
 
+  <!-- Framing layer added v1.2 -- Builder Hierarchy + 7-phase JTBD adopted from Nuni Builder PM team -->
+  <h2 class="memo-h2">Framing layer &mdash; Builder Hierarchy of Needs + 7-Phase JTBD Creation Journey</h2>
+
+  <p>Adopted from the Nuni Builder Strategy &amp; Roadmap document (Ose Amiegheme, Erin McCue, JB Lovell, Ashley Wiesner; reviewed by Eric Anderson). Two complementary frameworks bridge our 5 pillars + 74 initiatives to a single mental model the team can sequence against:</p>
+
+  <ul class="memo-list">
+    <li><strong>Builder Hierarchy of Needs (vertical &mdash; how mature is our solution at each level?).</strong> Six Maslow-style levels: <em>Reliable &amp; Performant &middot; Mobile &amp; Rendering &middot; Efficient Workflow &middot; Brand-Native &amp; Reusable &middot; Intelligent &amp; AI-Powered &middot; Omnichannel &amp; Extensible</em>. Levels 1&ndash;3 are non-negotiable table stakes; Level 4 is &ldquo;great&rdquo; territory; Levels 5&ndash;6 are world-class.</li>
+    <li><strong>7-Phase JTBD Creation Journey (horizontal &mdash; what is the marketer doing step by step?).</strong> <em>Choose structure &middot; Establish brand &amp; style &middot; Add &amp; place content &middot; Refine &amp; polish &middot; Personalize &amp; tailor &middot; Preview &amp; QA loop &middot; Learn &amp; reuse</em>. Phases 3&ndash;4 form the Compose Loop; Phase 6 forms the QA Loop.</li>
+  </ul>
+
+  <p><strong>How we are using these frameworks.</strong> The Builder Hierarchy tells us <em>where we sit vs Klaviyo / Canva</em> (per the Nuni team&rsquo;s scoring: Nuni 2 vs Klaviyo 3 vs Canva 5 on Efficient Workflow; Nuni 1 vs Klaviyo 3 vs Canva 5 on Brand-Native). The JTBD Journey tells us <em>where in the customer&rsquo;s flow each initiative shows up</em> &mdash; so we can audit coverage and identify gaps. Together they answer two distinct questions: <strong>are we building maturity in the right order?</strong> and <strong>are we covering the actual customer workflow?</strong></p>
+
+  <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 700; color: var(--ink); margin: 28px 0 10px;">Mapping our 5 pillars to the 6 levels</h3>
+
+  <table class="ft-table" style="margin-bottom: 16px;">
+    <thead>
+      <tr>
+        <th style="text-align: left; padding: 10px 14px; background: #FAFAFB; color: var(--muted); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid var(--line);">Builder Hierarchy Level</th>
+        <th style="text-align: left; padding: 10px 14px; background: #FAFAFB; color: var(--muted); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid var(--line);">Pillars that own this level</th>
+        <th style="text-align: left; padding: 10px 14px; background: #FAFAFB; color: var(--muted); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid var(--line);">Headline initiatives</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:14px;border-bottom:1px solid var(--line);"><strong>Level 1 &mdash; Reliable &amp; Performant</strong><br/><em style="color:var(--muted); font-size:11.5px;">Builder loads, doesn&rsquo;t crash, save/publish work</em></td><td style="padding:14px;border-bottom:1px solid var(--line);"><span class="ftp p1">P1</span> Quality &amp; Trust (foundation)</td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:12.5px;">P1.1 NEB rendering bugs &middot; P1.2 Brand Kit reliability &middot; P1.3 Canva sync &middot; <strong>P1.5 Builder SLO operating contract (NEW)</strong></td></tr>
+      <tr><td style="padding:14px;border-bottom:1px solid var(--line);"><strong>Level 2 &mdash; Mobile &amp; Rendering Output</strong><br/><em style="color:var(--muted); font-size:11.5px;">Cross-client fidelity, mobile sane by default, pre-send checks</em></td><td style="padding:14px;border-bottom:1px solid var(--line);"><span class="ftp p1">P1</span> Quality &amp; Trust</td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:12.5px;">I-1.1.1 NEB rendering parity &middot; I-1.1.6 Light/dark mode + bg images &middot; I-1.1.7 Inline link checker upgrade &middot; I-5.4.2 Inline accessibility coach</td></tr>
+      <tr><td style="padding:14px;border-bottom:1px solid var(--line);"><strong>Level 3 &mdash; Efficient Workflow</strong><br/><em style="color:var(--muted); font-size:11.5px;">Compose loop and QA loop respect the user&rsquo;s time</em></td><td style="padding:14px;border-bottom:1px solid var(--line);"><span class="ftp p2">P2</span> + <span class="ftp p3">P3</span> + bits of <span class="ftp p1">P1</span></td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:12.5px;">P2.2 Builder migration + Code Mode &middot; P3.1 Onboarding &middot; P3.2 Template ICP fit &middot; P3.3 Discovery &middot; I-1.1.2 Multi-author save UX &middot; I-1.1.3 Block ordering bugs</td></tr>
+      <tr><td style="padding:14px;border-bottom:1px solid var(--line);"><strong>Level 4 &mdash; Brand-Native &amp; Reusable</strong><br/><em style="color:var(--muted); font-size:11.5px;">Brand is a primitive; reuse is operational; styles are durable</em></td><td style="padding:14px;border-bottom:1px solid var(--line);"><span class="ftp p2">P2</span> Universal Content &middot; <span class="ftp p1">P1</span> Brand Kit reliability &middot; <span class="ftp p5">P5</span> governance</td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:12.5px;">I-2.1.1 Universal Content primitive &middot; I-2.1.2 Auto-migration of saved blocks &middot; I-2.3.2 Brand Kit auto-applied &middot; I-1.2.3 Multi-brand kits &middot; I-5.4.1 Locked layouts</td></tr>
+      <tr><td style="padding:14px;border-bottom:1px solid var(--line);"><strong>Level 5 &mdash; Intelligent &amp; AI-Powered</strong><br/><em style="color:var(--muted); font-size:11.5px;">AI inside every authoring step (not chat bolted on top)</em></td><td style="padding:14px;border-bottom:1px solid var(--line);"><span class="ftp p4">P4</span> AI (entire pillar) + bits of <span class="ftp p3">P3</span></td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:12.5px;">P4.1 Write with AI funnel recovery &middot; P4.2 Conversational + brand-style transfer + prompt-first &middot; P4.3 Generative SMS &middot; P4.4 AI image + revenue + Smart Send + Watchdog &middot; I-3.1.4 AI Email Setup Agent</td></tr>
+      <tr><td style="padding:14px;border-bottom:0;"><strong>Level 6 &mdash; Omnichannel &amp; Extensible</strong><br/><em style="color:var(--muted); font-size:11.5px;">One canvas across email + SMS + push; collab + governance</em></td><td style="padding:14px;border-bottom:0;"><span class="ftp p5">P5</span> Unified Canvas + Collab + SMS Retention</td><td style="padding:14px;border-bottom:0; font-size:12.5px;">P5.1 Unified canvas (incl. Push acceleration I-5.1.5) &middot; P5.3 Real-time co-edit + comments &middot; P5.4 Governance + accessibility + agency inheritance</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 17px; font-weight: 700; color: var(--ink); margin: 28px 0 10px;">Mapping the 74 initiatives to the 7 JTBD phases</h3>
+
+  <p>For each phase, we count the initiatives that show up in the customer&rsquo;s workflow at that step. <strong>Phases 3&ndash;4 (Compose loop)</strong> get the heaviest investment because the Nuni team&rsquo;s analysis shows that&rsquo;s where Mailchimp&rsquo;s click-tax is highest (Nuni Level 3 score: 2 vs Canva 5).</p>
+
+  <table class="ft-table" style="margin-bottom: 16px;">
+    <thead>
+      <tr>
+        <th style="text-align: left; padding: 10px 14px; background: #FAFAFB; color: var(--muted); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid var(--line);">JTBD Phase</th>
+        <th style="text-align: left; padding: 10px 14px; background: #FAFAFB; color: var(--muted); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid var(--line);">What the customer is doing</th>
+        <th style="text-align: left; padding: 10px 14px; background: #FAFAFB; color: var(--muted); font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase; border-bottom: 1px solid var(--line);">Initiatives in our brief</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:14px;border-bottom:1px solid var(--line);"><strong>1. Choose structure</strong></td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:12.5px;">Pick template or start from scratch; campaign skeleton</td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:11.5px;"><strong>~10 initiatives</strong>: I-3.1.1 Day-0 onboarding &middot; I-3.1.3 Industry templates &middot; I-3.1.4 AI Setup Agent &middot; I-3.2.1&ndash;3 ICP templates &middot; I-3.4.1 Free uplift &middot; I-3.4.3 Engagement pricing &middot; I-1.1.4 Template surfacing fix &middot; I-2.1.1 Universal Content (starts here)</td></tr>
+      <tr><td style="padding:14px;border-bottom:1px solid var(--line);"><strong>2. Establish brand &amp; style</strong></td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:12.5px;">Apply Brand Kit, set colors / fonts / logos</td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:11.5px;"><strong>~9 initiatives</strong>: I-1.2.1 Brand Kit data correctness &middot; I-1.2.2 Font upload + CA parity &middot; I-1.2.3 Multi-brand kits &middot; I-1.2.4 LP/form fonts &middot; I-1.4.1 Creative Assistant &middot; I-3.1.2 Brand Kit auto-extract on signup &middot; I-2.3.2 Brand Kit auto-applied &middot; I-5.4.1 Locked layouts &middot; I-5.4.3 Agency inheritance</td></tr>
+      <tr><td style="padding:14px;border-bottom:1px solid var(--line);"><strong>3. Add &amp; place content</strong> <em>(Compose loop)</em></td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:12.5px;">Drag in blocks, place at exact position, copy/paste</td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:11.5px;"><strong>~12 initiatives (heaviest)</strong>: I-1.3.1 Canva sync &middot; I-1.3.2 Content Studio stability &middot; I-1.3.3 Folder mgmt &middot; I-2.1.1 Universal Content insertion &middot; I-2.1.2 Saved blocks migration &middot; I-2.3.1 Universal Content in CJB &middot; I-1.4.2 CA non-banner workflows &middot; <strong>P1.5 Builder SLOs (placement reliability)</strong></td></tr>
+      <tr><td style="padding:14px;border-bottom:1px solid var(--line);"><strong>4. Refine &amp; polish</strong> <em>(Compose loop)</em></td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:12.5px;">Edit copy, adjust imagery, fine-tune spacing &amp; alignment</td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:11.5px;"><strong>~14 initiatives (heaviest)</strong>: I-1.1.1&ndash;3 NEB rendering + ordering &middot; I-1.1.6&ndash;7 Mode + link checker &middot; I-2.2.3&ndash;4 Code Mode + Liquid &middot; I-4.2.1 Conversational AI &middot; I-4.2.2 Brand-style transfer &middot; I-4.2.3 Prompt-first &middot; I-4.4.1&ndash;3 AI image gen + dynamic image</td></tr>
+      <tr><td style="padding:14px;border-bottom:1px solid var(--line);"><strong>5. Personalize &amp; tailor</strong></td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:12.5px;">Convert generic content to specific recipient context</td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:11.5px;"><strong>~8 initiatives</strong>: I-2.2.4 Liquid templating &middot; I-4.1.1&ndash;4 Write with AI recovery &middot; I-4.3.1 Generative SMS &middot; I-4.3.2 SMS variant + A/B &middot; I-4.4.5 Per-profile Smart Send + A/B</td></tr>
+      <tr><td style="padding:14px;border-bottom:1px solid var(--line);"><strong>6. Preview &amp; QA loop</strong></td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:12.5px;">Validate output, fix in place, send with confidence</td><td style="padding:14px;border-bottom:1px solid var(--line); font-size:11.5px;"><strong>~10 initiatives</strong>: I-1.1.5 Cross-browser regression &middot; I-1.1.7 Pre-send checks &middot; I-5.1.2 Cross-channel preview &middot; I-5.4.2 Accessibility coach &middot; I-4.4.4 In-canvas revenue &middot; I-4.4.6 AI Performance Watchdog &middot; I-5.2.1&ndash;3 SMS reporting + credits + TCPA &middot; <strong>P1.5 Builder SLOs (preview fidelity)</strong></td></tr>
+      <tr><td style="padding:14px;border-bottom:0;"><strong>7. Learn &amp; reuse</strong></td><td style="padding:14px;border-bottom:0; font-size:12.5px;">Save successful patterns; speed up the next campaign</td><td style="padding:14px;border-bottom:0; font-size:11.5px;"><strong>~11 initiatives</strong>: I-2.1.3 Universal Content adoption funnel &middot; I-2.3.3 Audit + version history &middot; I-3.3.1 Changelog + weekly digest &middot; I-3.3.2 Contextual feature discovery &middot; I-3.3.3 DRAFT-resurrect &middot; I-5.3.3 Approval workflow + version history &middot; I-5.3.1&ndash;2 Real-time co-edit + comments</td></tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:13px; color:var(--ink-2);"><strong>Strategic implication of the framework overlay.</strong> Two of three things surface that would otherwise be invisible: <strong>(a)</strong> Compose Loop (Phases 3&ndash;4) carries 26 of our 74 initiatives &mdash; the right concentration given Nuni&rsquo;s Level 3 score of 2 vs Canva&rsquo;s 5; <strong>(b)</strong> Phases 5&ndash;6 (Personalize + QA) get heavy AI investment from P4 &mdash; correctly mapping AI to where it actually reduces effort, not as a separate destination; <strong>(c)</strong> the framework exposes that Phase 7 (Learn + reuse) compounds across pillars (Universal Content + co-edit + discovery) &mdash; we should communicate the &ldquo;reuse engine&rdquo; story externally as a single narrative.</p>
+
+  <hr class="divider"/>
+
   <!-- Counter-Klaviyo positioning (added v1.1 after Klaviyo Brief + VoC tabs) -->
   <h2 class="memo-h2">Counter-Klaviyo positioning &mdash; five plays we ship simultaneously</h2>
 
@@ -7175,7 +7463,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 
   <!-- Memo footer / sources -->
   <div class="memo-footer">
-    <strong>Sources cited inline:</strong> BigQuery <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 11px;">mc-business-intelligence.bi_aggregate.product_journey_monthly</code> (89.7M rows; trailing 12 months May 2025&ndash;Apr 2026 vs prior 12 months) per <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a>. <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a> (17 cited themes / ~$95K/mo cited including the $57K SMS TCPA incident). <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a> (50 HeyMarvin videos / 25 customer briefs / 5 bets / Discovery table / 5 Workflow Shapes). <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">Voice of Customer</a> (Trustpilot 1,390 reviews / G2 12,698 reviews / Reddit + operator forums / 7 hate themes). <a href="#brief" onclick="document.querySelector('[data-tab=brief]').click();return false;">Executive Brief</a> + <span style="color:#374151;">Roadmap to Win</span> (9 foundational gaps + 12 differentiated steals). <span style="color:#374151;">Strategy 6-Pager</span> (5 bets B1&ndash;B5 + 6 risks). <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a> (6 levers; mid scenario ~$26.2M; sensitivity $19.7&ndash;32.7M). <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a> (3-layer $36&ndash;67M backward stack). <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> (v1.1: 5 pillars / 19 sub-themes / <strong>71 tactical initiatives</strong> incl. 6 Klaviyo countermoves + 6-quarter swimlane). <a href="#klviedi" onclick="document.querySelector('[data-tab=klviedi]').click();return false;">Klaviyo Brief</a> (10 differentiation dimensions, 4 capability cards, customer proof). <a href="#klvivoc" onclick="document.querySelector('[data-tab=klvivoc]').click();return false;">Klaviyo VoC</a> (17 net-sentiment topics, 7+7+5 themes, 5 plays for Mailchimp). All YoY comparisons use <strong>last 12mo (May 2025&ndash;Apr 2026)</strong> vs <strong>prior 12mo (May 2024&ndash;Apr 2025)</strong>. Klaviyo Spring 2026 Universal Content announcement; Postscript March 2026 Brand Center; Stensul Governed Creation; Knak Email Builder; Mailchimp Help Center NEB / SMS / Brand Kit / Creative Assistant / Write with AI articles.
+    <strong>Sources cited inline:</strong> BigQuery <code style="font-family: 'SF Mono', Menlo, monospace; font-size: 11px;">mc-business-intelligence.bi_aggregate.product_journey_monthly</code> (89.7M rows; trailing 12 months May 2025&ndash;Apr 2026 vs prior 12 months) per <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a>. <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a> (17 cited themes / ~$95K/mo cited including the $57K SMS TCPA incident). <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a> (50 HeyMarvin videos / 25 customer briefs / 5 bets / Discovery table / 5 Workflow Shapes). <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">Voice of Customer</a> (Trustpilot 1,390 reviews / G2 12,698 reviews / Reddit + operator forums / 7 hate themes). <a href="#brief" onclick="document.querySelector('[data-tab=brief]').click();return false;">Executive Brief</a> + <span style="color:#374151;">Roadmap to Win</span> (9 foundational gaps + 12 differentiated steals). <span style="color:#374151;">Strategy 6-Pager</span> (5 bets B1&ndash;B5 + 6 risks). <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a> (6 levers; mid scenario ~$26.2M; sensitivity $19.7&ndash;32.7M). <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a> (3-layer $36&ndash;67M backward stack). <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> (v1.2: 5 pillars / 20 sub-themes / <strong>74 tactical initiatives</strong> incl. 6 Klaviyo countermoves + 3 Builder SLOs + 6-quarter swimlane). <a href="#klviedi" onclick="document.querySelector('[data-tab=klviedi]').click();return false;">Klaviyo Brief</a> + <a href="#klvivoc" onclick="document.querySelector('[data-tab=klvivoc]').click();return false;">Klaviyo VoC</a> (10 differentiation dimensions, 17 net-sentiment topics, 5 plays). <strong>Frameworks adopted from Nuni Builder Strategy &amp; Roadmap</strong> (Ose Amiegheme, Erin McCue, JB Lovell, Ashley Wiesner; reviewed by Eric Anderson): Builder Hierarchy of Needs (6 Maslow levels) + 7-Phase JTBD Creation Journey + Builder SLOs as operating contract. All YoY comparisons use <strong>last 12mo (May 2025&ndash;Apr 2026)</strong> vs <strong>prior 12mo (May 2024&ndash;Apr 2025)</strong>. Klaviyo Spring 2026 Universal Content announcement; Postscript March 2026 Brand Center; Stensul Governed Creation; Knak Email Builder; Mailchimp Help Center NEB / SMS / Brand Kit / Creative Assistant / Write with AI articles.
   </div>
 
 </article>
