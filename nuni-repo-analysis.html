@@ -469,129 +469,154 @@
   <section class="page">
     <header class="page-head">
       <div>
-        <div class="eyebrow">Phase 2 · Customer pain → Code mapping (Playbook §4)</div>
-        <h1>Every <em style="color:#B91C1C;">customer complaint in the editor brief</em> traced to a <em style="color:#4338CA;">specific NUNI repo, file, or architectural choke point</em></h1>
-        <div class="subtitle">This is the playbook&rsquo;s "superpower phase." Each row pairs a documented customer pain (HVC cited MRR, VoC hate theme, or User Research finding) with the most-probable code surface, the repo evidence to gather, and the business-impact metric that should move when the fix ships.</div>
+        <div class="eyebrow">Phase 2 · Customer Pain → Code Mapping (Playbook §4) · Plain-English rewrite</div>
+        <h1>Every <em style="color:#B91C1C;">customer complaint in the editor brief</em> &mdash; with the <em style="color:#B45309;">architectural root cause</em> and the <em style="color:#047857;">solution</em>, in plain English</h1>
+        <div class="subtitle">Same evidence as the playbook&rsquo;s "superpower phase," rewritten for product + executive readers. Each row pairs a documented customer complaint with three things: <strong>(1) why this is happening</strong> given the way the system is built today, <strong>(2) what we should do about it</strong>, and <strong>(3) the business metric</strong> that should move when the fix ships.</div>
       </div>
       <div class="meta">
         <div><strong>Source:</strong> Editor Brief tabs 2–6 + repo evidence</div>
-        <div><strong>Coverage:</strong> All 7 VoC hate themes + 17 HVC themes</div>
+        <div><strong>Coverage:</strong> 12 customer-pain rows · 4 root-cause patterns</div>
       </div>
     </header>
 
-    <div class="map-row">
-      <div class="map-head">Customer complaint (VOC / HVC / UR)</div>
-      <div class="map-head">Likely system component (repo · file)</div>
-      <div class="map-head">Repo evidence collected</div>
-      <div class="map-head">Business metric to move</div>
-    </div>
+    <h2><span class="num">A</span>The customer pains, in plain English</h2>
 
-    <div class="map-row">
-      <div class="voc"><strong>VOC #1 BIFURCATION</strong> · "Two builders, two template libraries — and they don&rsquo;t talk to each other. I rebuilt the same welcome email three times." (G2 critical cluster, $834/mo cited HVC Themes 1–2)</div>
-      <div class="repo">html-to-nuni-parser/<br/>app/src/main/java/com/<br/>(Java + Lombok)<br/><br/>editor-migration-workbench<br/>editor-migration-release (Go)<br/>editor-migration-review-ui</div>
-      <div class="ev"><strong>JVM-side parser is the convert-classic-to-NUNI service</strong>; 122 source files + 202 prod-test HTML fixtures. Migration tooling repos: workbench last push Feb 2026, release last push <strong>Jul 2025 (10 months ago)</strong>, review-ui last push Dec 2025. Migration tooling investment is winding down.</div>
-      <div class="biz">Bulk Established 888K → 915–935K (+$10.4M L1)<br/><br/>Premium/agency Classic ARR retained ($1–2M risk per Strategy R1)</div>
-    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:18%">Customer complaint</th>
+          <th style="width:32%; color:#B45309;">Why this happens (architectural root cause)</th>
+          <th style="width:32%; color:#047857;">The solution (what we should do)</th>
+          <th style="width:18%">Business metric to move</th>
+        </tr>
+      </thead>
+      <tbody>
 
-    <div class="map-row">
-      <div class="voc"><strong>VOC #6 NO UNIVERSAL CONTENT</strong> · "Klaviyo just shipped Universal Content. Edit once, propagates. I&rsquo;m migrating before BFCM." (Reddit r/Klaviyo Spring &rsquo;26)<br/><br/>HVC Theme 1 ($330/mo) verbatim: <em>"develop a system where templates share content… similar to Brand Kit but more substantial."</em></div>
-      <div class="repo">nuni-core/src/channel/<br/>email/schemas/<br/>FragmentBlockSchema.ts<br/>(already exists)<br/><br/>nuni-core/src/define/registry.ts<br/><br/>nuni-core-ui (consumer)</div>
-      <div class="ev"><code>FragmentBlockSchema.ts</code> + 31 typed block schemas + 3 schema versions shipped this year (<code>v20260113</code>, <code>v20260225</code>, <code>v20260316</code>). The fragment primitive exists at the schema layer. <strong>The blocker is the 25-version drift</strong>: <code>nuni-core-ui@1.10.0</code> consumes <code>nuni-core@1.49.0</code>; current is <code>1.74.5</code>. Until that bumps, the Q2 Universal Content MVP cannot ship without a parallel schema fork.</div>
-      <div class="biz">Universal Content adoption 50–70% of NEB users (P2.1 KPI)<br/><br/>Block reuse +25–40% per campaign<br/><br/>+$4–7M FY27 (Strategy memo P2)</div>
-    </div>
+        <tr>
+          <td><strong style="color:#B91C1C;">VOC #1 · Bifurcation</strong><br/><em style="color:var(--muted);">"Two builders that don&rsquo;t talk to each other &mdash; I rebuilt the same welcome email three times."</em><br/><br/><span style="color:var(--muted); font-size:11px;">G2 cluster · HVC Themes 1&ndash;2 · $834/mo cited</span></td>
+          <td>Templates customers built in the old <strong>Classic Builder</strong> over the years <strong>can&rsquo;t move automatically</strong> to the New Builder. The Java conversion service (<code>html-to-nuni-parser</code>) that was supposed to be the bridge has been quiet for 10+ months &mdash; the migration tooling was wound down before the bridge was complete. So mid-migration users rebuild from scratch.</td>
+          <td><strong>Restart the migration tooling investment.</strong> Build a "1-click migrate ALL my templates" tool using the <strong>202 production HTML test fixtures already in the parser repo</strong> as the regression suite. Pair with funded migration assistance for Premium accounts (12-month grace period). Until this ships, every Classic-to-NEB migration produces churn.</td>
+          <td>Bulk Established 888K &rarr; 915&ndash;935K (+$10.4M L1)<br/><br/>Premium/agency Classic ARR retained ($1&ndash;2M risk per Strategy R1)</td>
+        </tr>
 
-    <div class="map-row">
-      <div class="voc"><strong>HVC #3 RENDERING</strong> · $1,820/mo cited (4 named users including $949 Premium). "Forwarded mail looks not good at all"; "click &lsquo;read full message&rsquo; messes with formatting"; Ctrl+K broken on Firefox/Chrome.</div>
-      <div class="repo">nuni-core/src/<br/>renderers/email/<br/>ButtonRenderer.test.tsx (684 LOC)<br/>SocialFollowRenderer.tsx (626 LOC)<br/>renderBlock.test.tsx (602 LOC)<br/><br/>email-render-pipeline/<br/>src/renderer/<br/>(jsdom-based, has visual diff)<br/><br/>server-side-rendering/<br/>(JS, 9087KB, last push May 2026)</div>
-      <div class="ev">Three rendering layers: (1) the in-editor preview path in <code>nuni-core/renderers/email/*</code>, (2) the headless <code>email-render-pipeline</code> with calibration + scoring + screenshot diff (visual regression infra exists!), (3) the <code>server-side-rendering</code> JS service. <strong>Layer 6 hint:</strong> <code>email-render-pipeline</code> has only 2 unit test files — calibration + scoring — but the fixture set (<code>fixtures/calibration/*.png</code>) is the foundation of a real golden-data regression suite.</div>
-      <div class="ev biz">Bulk churn 40.0% → 36.5–37.5% (P1.1.1 KPI)<br/><br/>Mobile preview support tickets −35%<br/><br/>+$3–5M FY27 L5 retention save</div>
-    </div>
+        <tr>
+          <td><strong style="color:#B91C1C;">VOC #6 · No Universal Content</strong><br/><em style="color:var(--muted);">"Klaviyo just shipped Universal Content. Edit once, propagates. I&rsquo;m migrating before BFCM."</em><br/><br/><span style="color:var(--muted); font-size:11px;">Reddit r/Klaviyo Spring &rsquo;26 · HVC Theme 1 · $330/mo cited</span></td>
+          <td>The "edit once, propagates everywhere" capability <strong>has actually been built</strong> in Mailchimp&rsquo;s schema library &mdash; it&rsquo;s called <code>FragmentBlockSchema</code> and lives in <code>nuni-core@1.74</code>. But the editor UI is consuming an old version of that library (<code>@1.49</code>, <strong>25 versions behind</strong>). <em>It&rsquo;s like the kitchen made a new dish but never sent it to the dining room.</em></td>
+          <td><strong>Ship a "schema bump"</strong> &mdash; upgrade the editor UI&rsquo;s consumed library version from 1.49 to 1.74. This is <strong>4&ndash;6 weeks of regression testing</strong>, no new feature code, just integration. <strong>Highest-leverage Q1 action in the brief</strong> &mdash; closes Universal Content + 2 other customer hate themes simultaneously.</td>
+          <td>Universal Content adoption 50&ndash;70% of NEB users<br/><br/>Block reuse +25&ndash;40% per campaign<br/><br/>+$4&ndash;7M FY27 (Strategy P2)</td>
+        </tr>
 
-    <div class="map-row">
-      <div class="voc"><strong>HVC #4 MULTI-AUTHOR SAVE</strong> · $340/mo. "Just get a message saying there is a problem with the saved version… no indication that someone else is currently editing." (UR Bet #4 territory: Jack/Kyle/Bianka cluster)</div>
-      <div class="repo">nuni-core-ui/src/js/widgets/<br/>editor/NuniCoreEditor/<br/>platform/store.ts<br/>(966 LOC — biggest file in the UI layer)<br/><br/>nuni-document-store (Kotlin)<br/><br/>document-data-store (TS)</div>
-      <div class="ev">Two persistence paths: <code>nuni-document-store</code> (Kotlin/Gradle, last push <strong>Jan 15 2026 — 4 months stale</strong>) and the newer <code>document-data-store</code> (TS, last push today). Optimistic concurrency is presumably handled in the Kotlin store. <code>store.ts</code> at 966 LOC is the playbook&rsquo;s definition of a god file (Layer 4: <em>"Any file &gt; 800 LOC = god class"</em>) — high churn × high complexity = top investigation target.</div>
-      <div class="ev biz">Save-conflict tickets eliminated<br/><br/>Foundation for P5.3 real-time co-edit (Q5 ★ credibility moment)</div>
-    </div>
+        <tr>
+          <td><strong style="color:#B91C1C;">HVC #3 · Rendering bugs</strong><br/><em style="color:var(--muted);">"Forwarded mail looks not good at all"; mobile line-breaks; Ctrl+K broken on Firefox/Chrome.</em><br/><br/><span style="color:var(--muted); font-size:11px;">$1,820/mo cited (4 named users incl. $949 Premium)</span></td>
+          <td>When a code change breaks how an email renders in Gmail / Outlook / mobile, <strong>nothing automated catches it</strong> &mdash; the team finds out from support tickets. Mailchimp <em>does</em> have a screenshot-comparison tool already built (<code>email-render-pipeline</code>) with golden-data PNG fixtures, but only 2 tests use it and it&rsquo;s <strong>not wired into the editor&rsquo;s pre-merge CI gate</strong>. Every release has a chance to ship a regression.</td>
+          <td><strong>Wire the existing screenshot-diff tool into the editor&rsquo;s CI pipeline.</strong> Every PR runs it; broken rendering blocks the merge. <strong>The infrastructure is 70% built &mdash; this is a 1&ndash;2 week integration job, not a build.</strong> Cheapest retention save in the brief.</td>
+          <td>Bulk churn 40.0% &rarr; 36.5&ndash;37.5%<br/><br/>Mobile preview tickets &minus;35%<br/><br/>+$3&ndash;5M FY27 L5 retention save</td>
+        </tr>
 
-    <div class="map-row">
-      <div class="voc"><strong>HVC #5 BLOCK ORDERING</strong> · $410/mo Premium. "Custom-coded templates… editor often confuses order of blocks or won&rsquo;t let you move them without a refresh."</div>
-      <div class="repo">nuni-core/src/document/<br/>operations.ts (641 LOC)<br/>move-to-column-position.test.ts (621 LOC)<br/><br/>builder-platform/src/blocks/*</div>
-      <div class="ev"><code>operations.ts</code> exposes <code>addBlock</code>, <code>moveBlock</code>, <code>moveToColumnPosition</code>, <code>duplicateBlock</code>. The dedicated 621-LOC test file for column moves suggests <strong>this code path has been re-bug-fixed multiple times</strong> — high churn signal. Reordering bugs typically live where the document tree mutation collides with React reconciliation; the <code>nuni-core-ui</code> React 17 mismatch (vs schema lib expecting React 19) is a candidate root cause.</div>
-      <div class="ev biz">Block-ordering tickets: cited $410/mo<br/><br/>Pre-condition for P5.3 collaborative edit (must trust single-author state)</div>
-    </div>
+        <tr>
+          <td><strong style="color:#B91C1C;">HVC #4 · Multi-author save conflicts</strong><br/><em style="color:var(--muted);">"Just get a message saying there is a problem with the saved version &hellip; no indication that someone else is currently editing."</em><br/><br/><span style="color:var(--muted); font-size:11px;">UR Bet #4 · Jack/Kyle/Bianka cluster · $340/mo cited</span></td>
+          <td>When two team members edit the same email, <strong>one&rsquo;s changes get silently overwritten</strong>. The editor doesn&rsquo;t track <em>who</em> has the document open &mdash; only <em>what</em> the document looks like. The state-management code (<code>store.ts</code>, a single <strong>966-line file</strong>) tangles save logic, conflict detection, and rendering state together. Adding multi-user awareness requires breaking up that file first.</td>
+          <td><strong>Decompose <code>store.ts</code> into three smaller files</strong>: state, save/persistence, presence. Then add presence-awareness using the <strong><code>pusher-js</code> dependency that&rsquo;s already in <code>package.json</code> but unused</strong>. After that, real-time co-edit (the Q5 strategy moment) becomes a follow-on, not a rebuild.</td>
+          <td>Save-conflict tickets eliminated<br/><br/>Foundation for P5.3 real-time co-edit (Q5 &#9733; credibility moment)</td>
+        </tr>
 
-    <div class="map-row">
-      <div class="voc"><strong>HVC #6 TEMPLATE WIZARD</strong> · $1,950/mo. "My campaign tab is not showing the templates built in the new builder."</div>
-      <div class="repo">nuni-template-sources<br/>(JS, 18,739KB — large, last push today)<br/><br/>templates-admin-ui (TS, 1459KB)<br/><br/>nuni-api/app/src/routes/<br/>(Hono service)</div>
-      <div class="ev">Three repos own pieces of the template story. <code>nuni-template-sources</code> at 18.7MB is the catalog itself (NUNI-format JSON). <code>templates-admin-ui</code> is the internal CMS for templates. <code>nuni-api</code> is presumably the read API. The bug is a routing/filtering mismatch between the template registry and the campaign wizard&rsquo;s query — likely in <code>nuni-api/app/src/routes</code> or the wizard&rsquo;s consumer code in <code>builder-platform</code>.</div>
-      <div class="ev biz">Direct $1,950/mo Premium-account exposure<br/><br/>Activation rate (P3.1.4 AI Setup Agent depends on the same registry)</div>
-    </div>
+        <tr>
+          <td><strong style="color:#B91C1C;">HVC #5 · Block-ordering bugs</strong><br/><em style="color:var(--muted);">"Editor often confuses order of blocks or won&rsquo;t let you move them without a refresh."</em><br/><br/><span style="color:var(--muted); font-size:11px;">$410/mo Premium</span></td>
+          <td>The block-mutation code (<code>operations.ts</code> in the schema library) does the right thing &mdash; but the editor UI consumes an <strong>older version of the library while running on React 17</strong>, while the library itself expects React 19. Timing mismatches between what the library says ("the block is now at position 2") and what the UI renders cause race conditions that look like bugs to the customer.</td>
+          <td><strong>Same root cause as Row 2 &mdash; the schema bump fixes it.</strong> Until the editor consumes the current library, every block-mutation bug has version drift as a contributing factor. After the bump, run integration tests focused on block-reordering scenarios specifically.</td>
+          <td>Block-ordering tickets cleared ($410/mo)<br/><br/>Pre-condition for P5.3 collaborative edit (must trust single-author state first)</td>
+        </tr>
 
-    <div class="map-row">
-      <div class="voc"><strong>HVC #7–10 BRAND KIT</strong> · $6,465/mo cumulative ($655 LP fonts + $2,460 multi-brand + $3,350 font-upload + Brand Kit incident thread). "Stale Brand Kit"; "logo present but no colors"; "DIN 2014 not recognized by Creative Assistant."</div>
-      <div class="repo">nuni-brand<br/>(TS, 454KB, last push Apr 28 2026)<br/><br/>nuni-core/src/document/<br/>brand-kit accessors (in operations.ts ancestor walk)<br/><br/>builder-platform/src/blocks/Image/</div>
-      <div class="ev"><code>nuni-brand</code> is the Brand Kit data domain (last push 2 weeks ago — actively maintained but lower velocity than other core repos). Multi-brand kits within one account (HVC #9, $2,460/mo cited) is a data-model question for <code>nuni-brand</code> + <code>nuni-document-store</code> — does the brand kit join key allow multiple per account? The font-upload bug (#10) is most likely in <code>nuni-brand</code>&rsquo;s asset pipeline + the Creative Assistant&rsquo;s font-resolution path (which is in a different repo, possibly <code>creative-assistant-*</code> outside this org).</div>
-      <div class="ev biz">P1.2 entire sub-pillar (4 initiatives, FY27 $3–5M)<br/><br/>Foundation for P3.1.2 Brand Kit auto-extract on signup</div>
-    </div>
+        <tr>
+          <td><strong style="color:#B91C1C;">HVC #6 · Templates don&rsquo;t appear in wizard</strong><br/><em style="color:var(--muted);">"My campaign tab is not showing the templates built in the new builder."</em><br/><br/><span style="color:var(--muted); font-size:11px;">$1,950/mo cited (Premium account)</span></td>
+          <td>Templates are stored in one place (<code>nuni-template-sources</code> catalog), served by another (<code>nuni-api</code>), and read by a third (the campaign wizard&rsquo;s filter logic in the editor UI). When the wizard&rsquo;s query parameters <strong>don&rsquo;t match what the API expects</strong>, new templates get filtered out invisibly. The customer thinks their templates didn&rsquo;t save.</td>
+          <td><strong>Audit the contract between the API&rsquo;s template-listing endpoint and the campaign wizard&rsquo;s consumer code.</strong> Add an integration test that creates a New Builder template and verifies it appears in the wizard within 30 seconds. <strong>1&ndash;2 week fix.</strong></td>
+          <td>Direct $1,950/mo Premium-account exposure cleared<br/><br/>Activation rate (P3.1.4 AI Setup Agent depends on the same registry)</td>
+        </tr>
 
-    <div class="map-row">
-      <div class="voc"><strong>HVC #13 CANVA SYNC</strong> · $2,500+/mo cited. "Sent an email without a synched graphic even though the graphic showed in the editor."</div>
-      <div class="repo">[Canva integration — likely in<br/>core-mail-svcs-infra or<br/>mc-omni-mcp]<br/><br/>builder-platform/src/blocks/Image</div>
-      <div class="ev"><strong>Cross-repo blast radius is unmapped here.</strong> Canva is an integration; the sync surface lives between Canva&rsquo;s OAuth API and the asset reference inside the document tree. The silent-failure mode (asset URL valid in editor, missing in send) is a textbook Layer 6 finding — error-swallowing in an async asset-resolution path. <em>This is the highest "we can&rsquo;t see it from the editor org" risk.</em></div>
-      <div class="ev biz">Direct $2,500+/mo named exposure<br/><br/>P1.3.1 (Strategy memo Q1 deliverable)</div>
-    </div>
+        <tr>
+          <td><strong style="color:#B91C1C;">HVC #7&ndash;10 · Brand Kit reliability</strong><br/><em style="color:var(--muted);">Stale colors; logo present but no colors; "DIN 2014 not recognized by Creative Assistant"; no multi-brand kits.</em><br/><br/><span style="color:var(--muted); font-size:11px;">$6,465/mo cumulative</span></td>
+          <td>Customers spend hours setting up Brand Kit (logo, colors, fonts) and expect it to flow through every email, landing page, form, and AI design suggestion automatically. But Brand Kit data lives in <code>nuni-brand</code>, while consumers (editor, landing pages, Creative Assistant, signup forms) <strong>each fetch and cache it separately</strong>. When data updates, not all consumers see the update. Multi-brand isn&rsquo;t supported because the data model assumes one kit per account.</td>
+          <td><strong>Treat Brand Kit as a contract, not a data store.</strong> Define one source-of-truth in <code>nuni-brand</code>; make every consumer read from it on every request (no caching divergence). <strong>Add a multi-brand data model</strong> &mdash; one account &rarr; multiple kits with one default. <strong>4&ndash;6 weeks of platform work; closes 4 cited HVC themes.</strong></td>
+          <td>P1.2 sub-pillar (4 initiatives, FY27 $3&ndash;5M)<br/><br/>Brand Kit auto-extract on signup unblocked</td>
+        </tr>
 
-    <div class="map-row">
-      <div class="voc"><strong>HVC #16 SMS TCPA $57K INCIDENT</strong> · C3 Festivals duplicate opt-out in live SMS send (the largest single named exposure in the brief).</div>
-      <div class="repo">[SMS composer — likely outside<br/>collab-email org;<br/>sms-registration-ui (TS, 198KB, last push Oct 2025) is in-org]</div>
-      <div class="ev"><code>sms-registration-ui</code> is the only SMS-related repo in <code>collab-email</code> and was last pushed <strong>Oct 28 2025</strong> — 6+ months stale. The actual SMS composer + send pipeline likely lives in a different Mailchimp org (the "SMS Engineering" team). The TCPA append/dedup logic is presumably in the send pipeline, not the editor. <strong>Cross-team dependency identified — this is a "Type: Org Dependency" item per playbook §1.1.</strong></div>
-      <div class="ev biz">$57K/mo named MRR (single-largest cited)<br/><br/>SMS churn 53% → 46–48% (P5.2.3 / Strategy Q1 deliverable)</div>
-    </div>
+        <tr>
+          <td><strong style="color:#B91C1C;">HVC #13 · Canva sync silent failure</strong><br/><em style="color:var(--muted);">"Sent an email without the synced graphic even though the graphic showed in the editor."</em><br/><br/><span style="color:var(--muted); font-size:11px;">$2,500+/mo cited</span></td>
+          <td>When a customer drags a Canva design into a Mailchimp email, the editor stores a <strong>reference (URL)</strong> to Canva&rsquo;s content &mdash; not the image itself. At send-time, Mailchimp tries to fetch the image from Canva. <strong>If Canva says "no" for any reason</strong> (deleted, permissions changed, server hiccup), the email ships without the image. There&rsquo;s no error handling for "Canva said yes a minute ago but says no now."</td>
+          <td>Two fixes: <strong>(1) cache Canva content in Mailchimp&rsquo;s CDN at drag-time</strong> so the send is decoupled from Canva availability; <strong>(2) show "image not synced" warning</strong> before send if the cached version differs from Canva&rsquo;s current. <em>Cross-team work &mdash; the Canva integration likely lives in a different team&rsquo;s repo, so this needs escalation contacts.</em></td>
+          <td>Direct $2,500+/mo named exposure<br/><br/>P1.3.1 (Strategy memo Q1 deliverable)</td>
+        </tr>
 
-    <div class="map-row">
-      <div class="voc"><strong>UR Discovery</strong> · 5 named customers with multi-year undiscovered features (Bianka A/B testing "a number of years"; Jack inherited template, missed NEB 4–6 yrs; Jeffrey My Products 3.5 yrs; Clint 1-yr DRAFT). UR Bet #2.</div>
-      <div class="repo">nuni-core-ui — no in-app changelog<br/>component found<br/><br/>builder-platform/src/ui/Panel<br/>+ Layout / Rail / StickyPanel</div>
-      <div class="ev">No <code>changelog</code>, <code>whatsNew</code>, <code>announcement</code>, or <code>productTour</code> module names found in <code>nuni-core-ui/src</code>. The discovery surface that the Strategy memo P3.3 sub-pillar relies on (changelog, weekly digest, contextual prompts, DRAFT-resurrect) does not exist in the editor today as code. <strong>This is a from-zero build, not a fix.</strong></div>
-      <div class="ev biz">P3.3 entire sub-pillar (3 initiatives)<br/><br/>L3 + L4 levers (~$1.5M ARR)</div>
-    </div>
+        <tr>
+          <td><strong style="color:#B91C1C;">HVC #16 · SMS TCPA $57K incident</strong><br/><em style="color:var(--muted);">C3 Festivals duplicate opt-out shipped in live SMS campaign &mdash; legal exposure.</em><br/><br/><span style="color:var(--muted); font-size:11px;">Largest single named exposure in the brief</span></td>
+          <td>The SMS engine <strong>auto-appended a compliance footer</strong> to every message AND the customer&rsquo;s template <strong>already included one</strong>. So recipients got <em>two</em> opt-out instructions &mdash; technically a TCPA violation. The send pipeline has <strong>no validation step</strong> that checks "this message already has compliance text, skip auto-append."</td>
+          <td><strong>Add a pre-send compliance-check Executor</strong>: scan the SMS body for existing opt-out language; if present, skip the auto-append. <strong>Simple boolean check, not a complex feature.</strong> <em>Cross-team &mdash; SMS pipeline isn&rsquo;t in the editor org tree, requires escalation to the partner team owning the send pipeline.</em></td>
+          <td>$57K/mo named MRR risk eliminated<br/><br/>SMS churn 53% &rarr; 46&ndash;48%</td>
+        </tr>
 
-    <div class="map-row">
-      <div class="voc"><strong>VOC #5 NO COLLAB</strong> · −48 net sentiment. "Single editor at a time; no Google-Docs-style co-edit; no in-canvas commenting." Stensul / Knak / Notion set the bar. UR Bet #4.</div>
-      <div class="repo">nuni-core-ui:<br/>"pusher-js": "4.3.1"<br/>(real-time bus exists)<br/><br/>"@tiptap/core": "3.20.1"<br/>"@tiptap/react": "3.20.1"<br/>(rich-text supports collab)<br/><br/>nuni-core-ui/store.ts (966 LOC)</div>
-      <div class="ev">Foundation IS in the codebase — Pusher (WebSocket) + TipTap (collab-ready editor) + JSON-tree document model + command-pattern <code>edit()</code>. No <code>yjs</code>, <code>@tiptap/extension-collaboration</code>, <code>hocuspocus</code>, or <code>liveblocks</code> deps. <strong>This is the cleanest Q5 engineering story in the entire roadmap</strong> — playbook&rsquo;s "machine-callable actions" + "safe state modification" Ready Signals already shipped.</div>
-      <div class="ev biz">P5.3 Q5 ★ credibility moment<br/><br/>"Mailchimp is back, modern" narrative<br/><br/>L6 ARPU lift on multi-author teams</div>
-    </div>
+        <tr>
+          <td><strong style="color:#B91C1C;">UR Discovery · Multi-year undiscovered features</strong><br/><em style="color:var(--muted);">5 named customers used 10&ndash;20% of editor features for years (Bianka, Jack, Jeffrey, Clint, Wes).</em><br/><br/><span style="color:var(--muted); font-size:11px;">UR Bet #2</span></td>
+          <td>There&rsquo;s <strong>no surface in the editor</strong> that tells customers about new features at the moment they&rsquo;d care. Bianka didn&rsquo;t know A/B testing existed for years; Jack used a 4&ndash;6 year old template because he didn&rsquo;t realize the New Builder was a thing; Clint left a welcome automation in DRAFT for over a year. The help docs that document the features go unread.</td>
+          <td><strong>Build an in-product discovery surface inside the editor</strong>: weekly product-update sidebar; contextual prompts ("you&rsquo;ve used X, try Y"); "draft resurrect" nudges for incomplete journeys. <strong>From-zero build in <code>nuni-core-ui</code> &mdash; 4&ndash;6 weeks.</strong> Closes the silent-churn pattern of "I&rsquo;m not getting enough value."</td>
+          <td>Capability utilization 10&ndash;20% &rarr; 35&ndash;50%<br/><br/>L3 + L4 levers (~$1.5M ARR)</td>
+        </tr>
 
-    <div class="map-row">
-      <div class="voc"><strong>HVC AI / Health</strong> · Write with AI Explore −73.7% YoY, Abandon doubled, churn 77.2% (worst-in-family). "I am in the Netherlands. I get to pay for AI I cannot use."</div>
-      <div class="repo">mc-omni-mcp (Python, 546KB)<br/>last push May 4 2026<br/><br/>mc-omni-agent-ui (TS, 4956KB)<br/>last push May 13 2026<br/><br/>nuni-api/app/src/routes/</div>
-      <div class="ev"><strong>Two new repos in active development that are NOT in the diagram</strong>: <code>mc-omni-mcp</code> contains <code>agents_and_tools.yaml</code>, <code>JenkinsfileAgenticStage.snippet</code>, <code>.cursorrules</code>, <code>.windsurfrules</code> — fully agentic infra. <code>mc-omni-agent-ui</code> has <code>AGENTS.md</code> + <code>CLAUDE.md</code> in repo. <strong>Last 6mo commits on agent UI ≈ 691 vs editor UI ≈ 83</strong> — the agent layer is the team&rsquo;s priority. The geo-gate is a routing/policy decision in <code>nuni-api</code> + the agent layer, not a model availability issue.</div>
-      <div class="ev biz">P4 entire pillar (15 initiatives, FY27 $4–6M)<br/><br/>Reverses Health Crisis Pillar (Strategy R3)</div>
-    </div>
+        <tr>
+          <td><strong style="color:#B91C1C;">VOC #5 · No real-time collaboration</strong><br/><em style="color:var(--muted);">"Single editor at a time; no Google-Docs-style co-edit; teams workaround via screenshots."</em><br/><br/><span style="color:var(--muted); font-size:11px;">&minus;48 net sentiment · UR Bet #4</span></td>
+          <td>Modern marketing teams of 2&ndash;5 expect Google-Docs-style co-editing. Mailchimp doesn&rsquo;t support it because: <strong>(a)</strong> no real-time sync engine is wired in (though <code>pusher-js</code> is in deps, unused); <strong>(b)</strong> the rich-text editor (TipTap) supports collab as an opt-in extension that&rsquo;s not added; <strong>(c)</strong> the state god file (<code>store.ts</code>, 966 LOC) doesn&rsquo;t model multiple users.</td>
+          <td><strong>This is a 4-week PoC, not a rewrite.</strong> Add <code>@tiptap/extension-collaboration</code> + a CRDT (yjs is the natural choice) + wire Pusher (already in deps) as the transport + decompose <code>store.ts</code> (Row 4 dependency). Real-time co-edit becomes the <strong>Q5 &#9733; "Mailchimp is back, modern" credibility moment.</strong></td>
+          <td>Q5 credibility moment<br/><br/>L6 ARPU lift on multi-author teams</td>
+        </tr>
 
-    <h2 style="margin-top: 18px;"><span class="num">B</span>Pattern recognition (Playbook §4.2) — what concentrates in one place</h2>
+        <tr>
+          <td><strong style="color:#B91C1C;">HVC AI / Health · Write with AI geo-gate</strong><br/><em style="color:var(--muted);">"I am in the Netherlands. I get to pay for AI I cannot use."</em><br/><br/><span style="color:var(--muted); font-size:11px;">Explore &minus;73.7% YoY · churn 77.2% (worst in family)</span></td>
+          <td>Write with AI is gated to US/UK/AU/CA only &mdash; but the Standard plan is sold globally. International customers <strong>pay the same price and can&rsquo;t use the headline AI feature</strong>. The geo-gate is enforced <strong>UI-side, not API-side</strong>, so even if the model is technically available, the UI won&rsquo;t show it.</td>
+          <td><strong>Move the geo-gate decision from the UI to the API gateway</strong> (<code>nuni-api</code>). Then run a parallel policy track to either <strong>(a)</strong> ungate Write with AI globally, or <strong>(b)</strong> repackage as a paid AI add-on globally. <strong>Technical work &lt; 2 weeks; policy/legal work 1&ndash;2 quarters.</strong></td>
+          <td>P4 entire pillar (15 initiatives, FY27 $4&ndash;6M)<br/><br/>Reverses Health Crisis Pillar (Strategy R3)</td>
+        </tr>
 
-    <div class="grid cols-2">
+      </tbody>
+    </table>
+
+    <h2 style="margin-top: 18px;"><span class="num">B</span>Pattern recognition &mdash; what concentrates in one place (and what to do about it)</h2>
+    <p>Once you map every customer pain to the code that causes it, four patterns emerge. Each is a leverage point: <strong>fix one structural issue and multiple customer complaints clear simultaneously</strong>. Each pattern below is structured the same way: why it&rsquo;s a problem &middot; why it keeps happening &middot; the solution.</p>
+
+    <div class="grid cols-2" style="gap: 14px;">
+
       <div class="card brand">
-        <h3>Pattern 1 · The schema/UI version drift is a force multiplier</h3>
-        <p><strong>Three of seven VoC hate themes (#1 bifurcation, #6 universal content, #7 no custom code) all map back to the same root cause</strong>: <code>nuni-core-ui</code> consuming <code>nuni-core@1.49</code> while the schema library has shipped 25 minor versions of new primitives. Until that drift closes, <em>any</em> Universal Content / Code Mode / fragment-graph work in <code>nuni-core</code> is invisible to the actual editor surface customers touch. <strong>Fix this once, three roadmap rocks become unblocked.</strong></p>
+        <h3>Pattern 1 &middot; The schema-vs-UI version drift is a force multiplier</h3>
+        <p><strong style="color:var(--bad);">Why this is a problem.</strong> The editor is built in two halves that talk through a versioned contract. The "library" half (<code>nuni-core</code>) is where new features get built first &mdash; it&rsquo;s currently at version <strong>1.74</strong>. The "editor UI" half that customers see is consuming version <strong>1.49</strong>, which is <strong>25 versions behind</strong>. <em>It&rsquo;s like a restaurant where the kitchen has a new menu but the waiters are still working from a printed copy from five months ago.</em> Three of the seven customer hate themes (the two-builder split, no Universal Content, no HTML escape hatch) all happen because new capabilities exist in the kitchen but never reach the customer&rsquo;s table.</p>
+        <p><strong style="color:var(--warn);">Why it keeps happening.</strong> Bumping the version requires a regression sweep &mdash; testing every editor screen against the new library to make sure nothing breaks. It&rsquo;s not glamorous work, no new feature ships from it, so it gets deprioritized. <strong>But every quarter, the gap grows and the regression sweep gets harder.</strong></p>
+        <p><strong style="color:var(--good);">The solution.</strong> Schedule a <strong>4&ndash;6 week "schema bump"</strong> as a single Q1 commit &mdash; one engineer, zero new features, just close the gap. Once it lands, <strong>three customer hate themes become solvable simultaneously</strong>, and Q2 Universal Content (the Strategy Memo&rsquo;s biggest competitive ship) is automatically unblocked. <em>Highest-leverage Q1 action in the entire brief.</em></p>
       </div>
 
       <div class="card brand">
-        <h3>Pattern 2 · The 966-LOC store.ts is the choke point for collab + reliability</h3>
-        <p>The single biggest file in <code>nuni-core-ui</code> is <code>src/js/widgets/editor/NuniCoreEditor/platform/store.ts</code> at 966 LOC. The playbook&rsquo;s Layer 4 thresholds: <em>"&gt; 800 LOC in a modern codebase signals poor decomposition"</em>. The HVC #4 multi-author save bug, the HVC #5 block-ordering refresh bug, and the foundation for the Q5 real-time co-edit moment all flow through this file. <strong>Decomposing <code>store.ts</code> is the highest-leverage refactor in the editor — it gates three quarters of the roadmap.</strong></p>
+        <h3>Pattern 2 &middot; The 966-line <code>store.ts</code> is the choke point for collab + reliability</h3>
+        <p><strong style="color:var(--bad);">Why this is a problem.</strong> The editor has <strong>one giant 966-line code file</strong> (<code>store.ts</code>) that handles everything: tracking what the document looks like, saving it, managing undo/redo, and (eventually) tracking who else is editing. <em>When one file does too many things, every change risks breaking something else</em> &mdash; engineers get scared to touch it, bugs accumulate, and any new feature that needs to interact with state has to wedge itself in.</p>
+        <p><strong style="color:var(--warn);">Why this is the bottleneck.</strong> Three customer pains all live in this one file:</p>
+        <ul style="margin: 4px 0 8px;">
+          <li><strong>The multi-author save bug</strong> ($340/mo) &mdash; save and conflict detection are tangled together.</li>
+          <li><strong>The block-ordering refresh bug</strong> ($410/mo Premium) &mdash; state mutation timing collides with rendering.</li>
+          <li><strong>The Q5 real-time co-edit moment</strong> &mdash; adding presence (who&rsquo;s editing) requires modeling users in a file that today only models documents.</li>
+        </ul>
+        <p><strong style="color:var(--good);">The solution.</strong> Split <code>store.ts</code> into <strong>three smaller files with single responsibilities</strong>: one for document state, one for save/persistence, one for presence. <strong>This 2&ndash;3 week refactor unblocks two cited bugs and the entire Q5 collaboration roadmap</strong> &mdash; three quarters of strategy depend on this single file getting decomposed.</p>
       </div>
 
       <div class="card brand">
-        <h3>Pattern 3 · The visual regression infrastructure exists but is unused</h3>
-        <p><code>email-render-pipeline</code> ships <code>calibration/</code>, <code>compare/</code>, <code>scoring/</code>, <code>screenshot/</code> with PNG fixtures and a <code>generate.ts</code> for golden data. The <em>infra</em> for catching the Theme 3 rendering regressions ($1,820/mo) is in the repo. But it&rsquo;s gated by only 2 tests (<code>calibration.test.ts</code>, <code>scoring.test.ts</code>) and isn&rsquo;t wired into the <code>nuni-core-ui</code> CI. <strong>This is the playbook&rsquo;s "no E2E on a visual builder" anti-pattern with a 70%-built solution sitting unused.</strong> Cheapest L5 retention save in the brief.</p>
+        <h3>Pattern 3 &middot; The screenshot-regression rig is built but unwired</h3>
+        <p><strong style="color:var(--bad);">Why this is a problem.</strong> Mailchimp&rsquo;s #3 cited customer complaint is <em>"the email looked right in the editor, but the recipient saw something broken"</em> &mdash; particularly forwarded mail, mobile preview, and Outlook web view. <strong>$1,820/mo of named-customer pain on this single theme.</strong> The standard way to catch these regressions is <strong>automated screenshot tests</strong>: snapshot the email rendered today, compare it to a known-good version, fail the build if they differ.</p>
+        <p><strong style="color:var(--warn);">The twist.</strong> Mailchimp <em>already has</em> this infrastructure built in a repo called <code>email-render-pipeline</code> &mdash; calibration, screenshot diff, scoring, golden-data PNG fixtures. <strong>It&rsquo;s all there. It&rsquo;s just not connected to the editor&rsquo;s test pipeline.</strong> Today only 2 tests use it. So when an engineer changes the renderer, the screenshot tool isn&rsquo;t checking; the regression ships; the customer files a ticket. Classic "infrastructure-without-an-owner" pattern &mdash; the team that built the visual-regression rig is presumably different from the team shipping editor changes; nobody owns wiring them together.</p>
+        <p><strong style="color:var(--good);">The solution.</strong> <strong>Wire the existing screenshot-diff tool into the editor&rsquo;s CI pipeline.</strong> Every PR runs it; broken rendering blocks the merge. <strong>This is a 1&ndash;2 week integration job using infrastructure that&rsquo;s 70% complete.</strong> Once wired, it closes the entire Theme 3 customer-pain pattern. <em>Cheapest retention save in the brief.</em></p>
       </div>
 
       <div class="card brand">
-        <h3>Pattern 4 · The agent layer is shipping faster than the foundation</h3>
-        <p>Per Layer 5 commit forensics: <code>mc-omni-agent-ui</code> + <code>mc-omni-mcp</code> have ~5× the active velocity of <code>nuni-core-ui</code>. The Strategy memo&rsquo;s explicit guiding principle #2 says <em>"AI cannot compensate for broken editor trust"</em>. The codebase is shipping in the opposite priority order. <strong>This isn&rsquo;t a code finding — it&rsquo;s an organizational signal that needs an exec decision before Q3.</strong></p>
+        <h3>Pattern 4 &middot; The AI surface is shipping faster than the foundation it sits on</h3>
+        <p><strong style="color:var(--bad);">Why this is a problem.</strong> Looking at code-change activity over the last 6 months, the AI agent layer (<code>mc-omni-agent-ui</code> + <code>mc-omni-mcp</code>) has had <strong>~5&times; the activity of the actual editor UI</strong> (<code>nuni-core-ui</code>). <em>The team is investing more engineering energy in AI features bolted on top of the editor than in fixing the editor itself.</em></p>
+        <p><strong style="color:var(--warn);">Why this matters &mdash; and why it keeps happening.</strong> The Strategy Memo has an explicit guiding principle: <em>"AI cannot compensate for broken editor trust."</em> The brief documents $95K/mo in customer pain on the editor side, and the team&rsquo;s commit pattern ships AI demos faster than foundation fixes. <strong>Risk: a customer tries the new conversational AI, asks it to do something, the underlying editor breaks because of an existing rendering bug, and the customer concludes "AI is broken" &mdash; when it was actually the foundation underneath.</strong> Why does it persist? New AI work attracts senior engineers; bug-fixing the existing editor doesn&rsquo;t.</p>
+        <p><strong style="color:var(--good);">The solution.</strong> This isn&rsquo;t a code question &mdash; <strong>it&rsquo;s a leadership question.</strong> Before Q3, the exec team should decide what % of capacity goes to fixing the editor foundation (target: <strong>&ge; 60%</strong>) vs. building new AI features (target: <strong>&le; 25%</strong>) for the rest of FY27. <em>The codebase shows the priority; the leadership decision aligns it.</em></p>
       </div>
+
     </div>
 
     <p class="source"><strong>Sources:</strong> All repo facts from <code>github.intuit.com/collab-email/*</code> via shallow clone (depth=1) on <code>main</code>/<code>master</code> tips as of May 13 2026. Customer-pain references from <a href="mailchimp-editor.html#hvcrisk">HVC Risk Map</a> ($95K/mo cited across 17 themes), <a href="mailchimp-editor.html#sentiment">Voice of Customer</a> (7 hate themes), <a href="mailchimp-editor.html#research">User Research</a> (5 bets, Discovery table). Framework: <em>Product Technical Intelligence Playbook</em> §4 "Customer Pain → Code Mapping."</p>
