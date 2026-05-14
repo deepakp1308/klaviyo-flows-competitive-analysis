@@ -184,6 +184,7 @@
     <button class="tab" role="tab" data-tab="layers">7-Layer Forensic</button>
     <button class="tab" role="tab" data-tab="org">Org Failure Modes</button>
     <button class="tab" role="tab" data-tab="ai">AI Readiness</button>
+    <button class="tab" role="tab" data-tab="arch">Arch Review · SWOT</button>
     <button class="tab" role="tab" data-tab="leverage">Leverage Cheat Sheet</button>
     <button class="tab" role="tab" data-tab="method">Method &amp; Sources</button>
   </div>
@@ -928,6 +929,165 @@
   </section>
 </div><!-- /panel-ai -->
 
+<!-- ================ ARCH REVIEW · SWOT ================ -->
+<div class="tabpanel" id="panel-arch" role="tabpanel">
+  <!-- ============ PAGE 1 — SWOT + QUALITY SCORECARD ============ -->
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Architecture Review · 2-page Executive · NUNI / New Email Builder</div>
+        <h1>The NUNI architecture is a story of <em style="color:#047857;">two halves</em>: a <em style="color:#047857;">strategic-moat schema/edit library</em> bolted to a <em style="color:#B91C1C;">version-drifted, undertested customer-facing UI</em></h1>
+        <div class="subtitle">A 2-page architectural assessment for executive read. Page 1: SWOT + quality-attributes scorecard. Page 2: Implications + final recommendation, tied to the customer problem in the <a href="mailchimp-editor.html">Editor Brief</a> and the FY27 +$25–30M ARR commit in the Strategy Memo.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 1 of 2</div>
+        <div><strong>Frameworks:</strong> SWOT + ISO/IEC 25010 quality attributes</div>
+        <div><strong>Aggregate score:</strong> 3.0 / 5</div>
+      </div>
+    </header>
+
+    <h2><span class="num">A</span>SWOT analysis — the architecture in one view</h2>
+
+    <div class="grid cols-2" style="gap: 14px; margin-bottom: 16px;">
+      <div class="card good">
+        <h3 style="color: #036A4F;">Strengths · what to <em style="color:#047857;">build on</em></h3>
+        <ul style="margin: 0;">
+          <li><strong>Schema/edit library is a strategic moat.</strong> <code>nuni-core/edit/edit.ts</code> is a pure-function command-pattern API — <em>"Pure function. Zero React deps. Zero state. Zero side effects."</em> Klaviyo and Stensul are still trying to build this.</li>
+          <li><strong>AI readiness 7/7 on the playbook checklist.</strong> Block-typed JSON tree, 31 semantic block schemas, transactional edit with pre/post validation, structured action log.</li>
+          <li><strong>Real-time collab building blocks already in the deps.</strong> <code>pusher-js@4.3.1</code> + TipTap 3.20 (collab-ready) + command-pattern <code>edit()</code>. CRDT add is a 4-week PoC, not a rebuild.</li>
+          <li><strong>Visual regression infrastructure 70% built.</strong> <code>email-render-pipeline</code> ships calibration + screenshot diff + scoring + golden-data PNG fixtures. Just unused in CI.</li>
+          <li><strong>Schema versioning institutionalized.</strong> 3 schema versions shipped this year (<code>v20260113</code>, <code>v20260225</code>, <code>v20260316</code>); per-block migration paths in <code>builder-platform/src/blocks/*/migrations/</code>. Forward-compat is engineered.</li>
+          <li><strong>Library/platform test discipline excellent.</strong> 111% test/source on <code>nuni-core</code>, 137% on <code>builder-platform</code>. Substantive integration-flavored tests.</li>
+        </ul>
+      </div>
+
+      <div class="card bad">
+        <h3 style="color: #9A1F00;">Weaknesses · what is <em style="color:#B91C1C;">in our way</em></h3>
+        <ul style="margin: 0;">
+          <li><strong>25-version schema/UI drift.</strong> <code>nuni-core@1.74.5</code> vs <code>nuni-core-ui</code> consumes <code>1.49.0</code>. The single architectural defect that gates Q2 Universal Content + Q5 unified canvas.</li>
+          <li><strong>Three React versions in the live consumer chain.</strong> 17 / 18.3 / 19. Works today via backwards-compat; breaks on the first React-19-only API in <code>nuni-core</code>.</li>
+          <li><strong>Editor UI test ratio 16.7%</strong> vs library 111% / platform 137%. Fear-driven engineering on the customer-facing layer; HVC #4 multi-author + #5 block-ordering bugs are structurally undertested.</li>
+          <li><strong>966-LOC <code>store.ts</code> god file.</strong> High-fan-in choke point for state, save, conflict, and presence. Gates Q5 collab story.</li>
+          <li><strong>Stale UI ecosystem.</strong> <code>react-intl@2.9</code> (current 7.x), <code>styled-components@4.4</code> (6.x), Node 18 EOL April 2025, <code>pusher-js@4</code> (current 8.x). The i18n stack alone gates the international Write with AI ungate.</li>
+          <li><strong>No editor-layer feature flag harness detectable.</strong> Every Q1–Q5 strategy commit assumes incremental rollout; the harness probably lives at the API gateway, not the editor.</li>
+          <li><strong>Six languages in the org + three design systems</strong> in the editor (Intuit + MC + IDS-TS) = operational complexity tax that compounds with every dependency.</li>
+        </ul>
+      </div>
+
+      <div class="card brand">
+        <h3 style="color: #2A1FA8;">Opportunities · what we should <em style="color:#4338CA;">go after</em></h3>
+        <ul style="margin: 0;">
+          <li><strong>One schema bump unlocks three quarters of roadmap.</strong> Bumping <code>nuni-core-ui</code> to <code>nuni-core@^1.74</code> simultaneously enables Q2 Universal Content, Q5 unified email+SMS canvas, and Q6 fragment-graph governance.</li>
+          <li><strong>Expose <code>edit()</code> as an MCP tool registry.</strong> Makes Mailchimp&rsquo;s editor more AI-callable than Klaviyo&rsquo;s. First-mover on conversational journey editing — Q5 ★ "Mailchimp is back" credibility moment becomes a 4–8 week effort.</li>
+          <li><strong>Decompose <code>store.ts</code> as the highest-leverage refactor.</strong> Unlocks HVC #4 multi-author save + HVC #5 block-ordering + Q5 real-time collab simultaneously.</li>
+          <li><strong>Wire <code>email-render-pipeline</code> into <code>nuni-core-ui</code> CI.</strong> Cheapest L5 retention save in the brief — closes HVC #3 ($1,820/mo cited) regression pattern with infrastructure already 70% built.</li>
+          <li><strong>Q5 real-time collab ships in a 4-week PoC, not a 6-month rebuild.</strong> Pusher present, TipTap collab-extension-ready, command-pattern <code>edit()</code> in place. Cleanest engineering story in the FY27 roadmap.</li>
+        </ul>
+      </div>
+
+      <div class="card warn">
+        <h3 style="color: #8A4A00;">Threats · what could <em style="color:#B45309;">hurt us</em></h3>
+        <ul style="margin: 0;">
+          <li><strong>Hero-engineer bus factor of 2.</strong> <code>sprioleau</code> + <code>ccovell</code> carry top-3 commit share on 3 of 4 critical surfaces. FY27 commit dependent on continuity.</li>
+          <li><strong>AI surface shipping ~8× faster than the editor it sits on.</strong> <code>mc-omni-agent-ui</code> ≈ 691 commits/6mo vs <code>nuni-core-ui</code> ≈ 83. Strategy Memo&rsquo;s "AI cannot compensate for broken editor trust" is being violated structurally.</li>
+          <li><strong>Three React versions = forced-migration latency bomb.</strong> When <code>nuni-core</code> uses any React-19-only API (e.g. <code>use()</code>, async transitions), the editor breaks unless it bumps too.</li>
+          <li><strong>Klaviyo&rsquo;s parity launches accelerate the timing risk.</strong> Spring 2026 Universal Content is already public; every quarter delayed compounds the migration narrative in <a href="mailchimp-editor.html#sentiment">VoC</a>.</li>
+          <li><strong>Node 18 EOL'd April 2025;</strong> <code>nuni-core-ui/package.json</code> still pins <code>"node": "&gt;= 18.0.0 &lt; 19.0.0"</code>. Will break under future security patches.</li>
+        </ul>
+      </div>
+    </div>
+
+    <h2 style="margin-top: 18px;"><span class="num">B</span>Architecture quality attributes scorecard (ISO/IEC 25010 lens)</h2>
+    <p>10 standard architecture quality attributes scored 1–5 against repo evidence. Aggregate <strong>3.0/5</strong> hides the bimodal split: library/platform layers score 4–5; the customer-facing editor UI scores 1–3.</p>
+
+    <table>
+      <thead><tr><th style="width:22%">Attribute</th><th style="width:9%">Score</th><th style="width:38%">Visualization</th><th>Repo evidence</th></tr></thead>
+      <tbody>
+        <tr><td><strong>Modularity</strong></td><td>4 / 5</td><td><div style="background: linear-gradient(90deg, var(--good) 80%, #F1F2F4 80%); height: 16px; border-radius: 4px;"></div></td><td><code>nuni-core</code> splits into <code>document/</code>, <code>edit/</code>, <code>render/</code>, <code>renderers/</code>, <code>channel/</code>, <code>validate/</code>; <code>builder-platform</code> per-block <code>renderers/migrations/</code>.</td></tr>
+        <tr><td><strong>AI readiness</strong></td><td>5 / 5</td><td><div style="background: linear-gradient(90deg, var(--good) 100%, #F1F2F4 100%); height: 16px; border-radius: 4px;"></div></td><td>7/7 playbook signals. Pure-function <code>edit()</code> + 31 semantic blocks + transactional validation + structured action log.</td></tr>
+        <tr><td><strong>Time-to-market for new blocks</strong></td><td>4 / 5</td><td><div style="background: linear-gradient(90deg, var(--good) 80%, #F1F2F4 80%); height: 16px; border-radius: 4px;"></div></td><td>Block schema + per-block migration pattern is established; new schema versions ship every ~6 weeks.</td></tr>
+        <tr><td><strong>Testability</strong></td><td>3 / 5</td><td><div style="background: linear-gradient(90deg, var(--warn) 60%, #F1F2F4 60%); height: 16px; border-radius: 4px;"></div></td><td>Library/platform 111–137%; editor UI 16.7%. Bimodal — score reflects the gap.</td></tr>
+        <tr><td><strong>Observability</strong></td><td>3 / 5</td><td><div style="background: linear-gradient(90deg, var(--warn) 60%, #F1F2F4 60%); height: 16px; border-radius: 4px;"></div></td><td><code>@bugsnag/js</code> + <code>@bugsnag/browser-performance</code> + <code>@bugsnag/plugin-react</code> integrated. Single-vendor; no Datadog RUM.</td></tr>
+        <tr><td><strong>Security posture</strong></td><td>3 / 5</td><td><div style="background: linear-gradient(90deg, var(--warn) 60%, #F1F2F4 60%); height: 16px; border-radius: 4px;"></div></td><td>Renovate active; <code>eslint-plugin-no-secrets</code> enabled; Node 18 EOL near; 3 design systems = 3 supply-chain surfaces.</td></tr>
+        <tr><td><strong>Reliability gates</strong></td><td>2 / 5</td><td><div style="background: linear-gradient(90deg, var(--bad) 40%, #F1F2F4 40%); height: 16px; border-radius: 4px;"></div></td><td>No E2E on a visual builder; vis-reg rig built but unwired; 16.7% test ratio on the customer surface.</td></tr>
+        <tr><td><strong>Maintainability</strong></td><td>2 / 5</td><td><div style="background: linear-gradient(90deg, var(--bad) 40%, #F1F2F4 40%); height: 16px; border-radius: 4px;"></div></td><td>3 React versions; 25-version schema drift; god-class <code>store.ts</code>; 3 design systems.</td></tr>
+        <tr><td><strong>Dependency currency</strong></td><td>2 / 5</td><td><div style="background: linear-gradient(90deg, var(--bad) 40%, #F1F2F4 40%); height: 16px; border-radius: 4px;"></div></td><td>react-intl 5 majors behind; styled-components 2 majors behind; Pusher 4 majors behind; Node 18 EOL.</td></tr>
+        <tr><td><strong>Cost / op complexity</strong></td><td>2 / 5</td><td><div style="background: linear-gradient(90deg, var(--bad) 40%, #F1F2F4 40%); height: 16px; border-radius: 4px;"></div></td><td>6 languages in the org (TS, JS, Kotlin, Java, Go, Python); migration tooling alone is 3 runtimes.</td></tr>
+        <tr style="background:#FFFCF0;"><td><strong>Aggregate</strong></td><td><strong>3.0 / 5</strong></td><td colspan="2"><strong>Library/edit-API layer scores 4–5 (strategic asset). Customer-facing UI layer scores 1–3 (consumer-side debt). The gap is the architectural defect.</strong></td></tr>
+      </tbody>
+    </table>
+
+    <p class="source"><strong>Method:</strong> SWOT framework + ISO/IEC 25010 software-quality attributes scored against the same repo evidence used in the <a href="#layers">7-Layer Forensic</a> and <a href="#ai">AI Readiness</a> tabs. Each score is reproducible from the queries in <a href="#method">Method &amp; Sources</a>.</p>
+  </section>
+
+  <!-- ============ PAGE 2 — IMPLICATIONS + RECOMMENDATIONS ============ -->
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Architecture Review · 2-page Executive (cont.) · NUNI / New Email Builder</div>
+        <h1>Implications &amp; <em style="color:#C28A00;">final recommendation</em> &mdash; tied to the customer problem and where the product is heading</h1>
+        <div class="subtitle">Page 2: business + customer implications of the SWOT and the recommended actions for the next 1–2 quarters.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 2 of 2</div>
+        <div><strong>Anchor:</strong> Strategy Memo +$25–30M FY27 ARR</div>
+      </div>
+    </header>
+
+    <h2><span class="num">C</span>Customer problem context (one paragraph)</h2>
+    <div class="card tinted">
+      <p style="margin: 0;">The <a href="mailchimp-editor.html">Editor Brief</a> documents <strong>$95K/mo in cited HVC MRR across 17 themes</strong>, <strong>7 VoC hate themes</strong>, <strong>bulk-email Established users &minus;9.4% YoY</strong>, and <strong>Write with AI Explore funnel collapsed &minus;73.7% YoY</strong>. The customer pain decomposes into three categories: <em>trust</em> (NEB rendering bugs, multi-author save conflicts, Brand Kit reliability), <em>competitiveness</em> (Klaviyo Spring &rsquo;26 Universal Content, no real-time co-edit, geo-gated AI), and <em>unification</em> (NEB+Classic split, email+SMS surface split). The Strategy Memo commits the editor to <strong>+$25–30M FY27 ARR</strong> via 5 customer-benefit pillars over 6 quarters; mid scenario worked at <strong>~$26.2M</strong>. <strong>Every Q1–Q5 commitment in the strategy is achievable on the foundation that exists today; timing is at risk because the consumer surface is undermaintained relative to the library.</strong></p>
+    </div>
+
+    <h2 style="margin-top: 18px;"><span class="num">D</span>Strategic implications</h2>
+    <ol>
+      <li><strong>The library is more strategic than the UI.</strong> <code>nuni-core</code>&rsquo;s pure-function <code>edit()</code> is a moat; <code>nuni-core-ui</code> is the bottleneck. The 25-version drift is the architectural symbol of this — engineering investment is concentrated where it should be (the schema), but customer experience lives where it shouldn&rsquo;t (the consumer surface).</li>
+      <li><strong>The AI moat shrinks if we don&rsquo;t expose it.</strong> The 7/7 playbook readiness is a competitive advantage in May 2026. By Q4 FY27, Klaviyo or Stensul will close it. <em>The window to convert architectural readiness into customer-facing AI features is 12–18 months.</em></li>
+      <li><strong>Q5 real-time collab is the cleanest engineering story in the entire FY27 roadmap and the most important brand-narrative shift.</strong> Pusher present, TipTap collab-ready, command-pattern in place. Shipping it on time turns "Mailchimp is dated" into "Mailchimp is back, modern."</li>
+      <li><strong>One architectural defect causes three customer pains.</strong> Bifurcation (VoC #1), no Universal Content (#6), and no HTML escape (#7) all map to <code>nuni-core-ui</code> not consuming current schema lib. <em>One fix → three story closures.</em></li>
+      <li><strong>The hero-engineer dependency converts every roadmap commitment into a continuity bet.</strong> Two engineers carry the floor of FY27. Mitigation must precede commitment, not follow it.</li>
+    </ol>
+
+    <h2 style="margin-top: 18px;"><span class="num">E</span>Final recommendation — five ordered actions</h2>
+
+    <div class="grid cols-2" style="gap: 12px;">
+      <div class="card brand">
+        <h3 style="margin-top: 0;">1 · Q1 — Bump <code>nuni-core-ui</code> to <code>nuni-core@^1.74</code></h3>
+        <p style="margin: 0;"><strong>Single highest-leverage action in the brief.</strong> Unblocks Universal Content (Q2), shared blocks (Q5), and removes the structural cause of 3 of 7 VoC hate themes. Estimate: 4–6 week spike + regression sweep. <em>Cost: low. Strategic value: highest.</em></p>
+      </div>
+
+      <div class="card brand">
+        <h3 style="margin-top: 0;">2 · Q1 — Wire visual-regression rig into <code>nuni-core-ui</code> CI</h3>
+        <p style="margin: 0;">Cheapest L5 retention save. <code>email-render-pipeline</code>&rsquo;s calibration + screenshot diff + scoring infrastructure is 70% built. Closes HVC #3 ($1,820/mo cited) regression pattern. <em>Estimate: 2-week spike + ramp.</em></p>
+      </div>
+
+      <div class="card brand">
+        <h3 style="margin-top: 0;">3 · Q2 — Decompose <code>store.ts</code> (966 LOC)</h3>
+        <p style="margin: 0;">Critical-path refactor. Unblocks HVC #4 multi-author save fix + HVC #5 block-ordering fix + Q5 real-time collab moment. Decompose into presence + edit reducer + persistence; lay foundation for CRDT integration.</p>
+      </div>
+
+      <div class="card brand">
+        <h3 style="margin-top: 0;">4 · Q2 — 2-week conversational AI PoC against <code>edit()</code></h3>
+        <p style="margin: 0;">Validates Strategy Memo Q5 ★ credibility moment. Expose <code>edit(doc, edits, config)</code> via <code>mc-omni-mcp</code> as an MCP tool; agent UI sends "make the hero block 20% smaller in a friendlier tone." Output: feasibility report + safety incident count.</p>
+      </div>
+
+      <div class="card brand" style="grid-column: 1 / -1;">
+        <h3 style="margin-top: 0;">5 · Q1+ ongoing — Name designated co-owners on all top-3 critical-path repos</h3>
+        <p style="margin: 0;">Bus-factor mitigation. Pair <code>sprioleau</code>, <code>ccovell</code>, <code>jhunsucker</code>, and <code>smoore16</code> with a designated co-owner on the next two PRs. Rotate one Q1 ship lead away from the hero pool. <em>Cost: zero. Insurance value: highest non-technical lever in the brief.</em></p>
+      </div>
+    </div>
+
+    <h2 style="margin-top: 18px;"><span class="num">F</span>Closing — the one-line read</h2>
+
+    <div class="hero-finding">
+      <div class="hf-label">For the executive committee</div>
+      <p>The NUNI architecture is a story of two halves. <strong>The schema and edit-API layer is among the best automation/editor primitives in the SMB tier</strong> — modular, AI-ready, command-pattern, version-disciplined. <strong>The customer-facing UI layer is on stale React, undertested, version-drifted, hero-dependent.</strong> The FY27 +$25–30M commit is achievable because the foundation is right; the timing is at risk because the consumer surface is undermaintained. <strong>The single most important architectural action for Mailchimp leadership is closing the 25-version schema drift</strong> — every other Q1–Q5 strategy bet either depends on it directly or is made cheaper by it. Everything else flows from there.</p>
+    </div>
+
+    <p class="source"><strong>Cross-references:</strong> <a href="#exec">Executive Summary</a> for the 6 headline findings · <a href="#painmap">Pain → Code Map</a> for HVC theme → repo traceability · <a href="#layers">7-Layer Forensic</a> for evidence detail · <a href="#ai">AI Readiness</a> for the 7/7 scorecard · <a href="#leverage">Leverage Cheat Sheet</a> for engineering-sync questions · <a href="#method">Method &amp; Sources</a> for reproducibility.</p>
+  </section>
+</div><!-- /panel-arch -->
+
 <!-- ================ LEVERAGE CHEAT SHEET ================ -->
 <div class="tabpanel" id="panel-leverage" role="tabpanel">
   <section class="page">
@@ -1146,7 +1306,7 @@ echo "$repo: src=$src_loc test=$test_loc ratio=$((test_loc * 100 / src_loc))%"</
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['exec','painmap','repo','layers','org','ai','leverage','method'].indexOf(initial) >= 0) activate(initial);
+    if (['exec','painmap','repo','layers','org','ai','arch','leverage','method'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
