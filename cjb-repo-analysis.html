@@ -184,6 +184,7 @@
 
   <div class="tabs" role="tablist" aria-label="Analysis sections">
     <button class="tab active" role="tab" data-tab="exec">Executive Summary</button>
+    <button class="tab" role="tab" data-tab="howit">Architecture · How It Works</button>
     <button class="tab" role="tab" data-tab="painmap">Pain → Code Map</button>
     <button class="tab" role="tab" data-tab="repo">Repo Map (Reality vs Diagram)</button>
     <button class="tab" role="tab" data-tab="layers">7-Layer Forensic</button>
@@ -314,6 +315,231 @@
     <p class="source"><strong>Method:</strong> All numerical findings derived from <code>github.intuit.com/crmmktg-mktauto/*</code> + <code>mailchimp-mcmktg/*</code> via shallow clone + <code>gh api</code> queries. Customer-pain references from the <a href="mailchimp.html">Automations Brief</a> (HVC Risk Map, VOC, User Research, Product Health, Strategy 6-Pager). Framework: <em>Product Technical Intelligence Playbook</em> (May 2026, 20-page internal reference).</p>
   </section>
 </div><!-- /panel-exec -->
+
+<!-- ================ ARCHITECTURE · HOW IT WORKS ================ -->
+<div class="tabpanel" id="panel-howit" role="tabpanel">
+  <!-- ============ PAGE 1 — ARCHITECTURE DIAGRAM + HOW IT WORKS ============ -->
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Architecture · How It Works · CJB / C2 Platform</div>
+        <h1>How the CJB / C2 architecture is wired — an <em style="color:#166D3B;">event-driven, three-layer platform</em> with the <em style="color:#B91C1C;">customer-facing canvas living elsewhere</em></h1>
+        <div class="subtitle">A two-page architectural walkthrough for executive read. Page 1: system diagram + how it works in 13 steps (split into <em>setup</em> and <em>execution</em> flows — CJB has both, unlike the editor). Page 2: customer (C1) workflow mapped step-by-step to specific repos.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 1 of 2</div>
+        <div><strong>Lens:</strong> Event-driven 3-layer platform + 4 satellite groups</div>
+        <div><strong>Snapshot:</strong> May 13 2026</div>
+      </div>
+    </header>
+
+    <h2><span class="num">A</span>The architecture in one diagram</h2>
+
+    <pre style="background:#FAFAFB; border:1px solid var(--line); border-radius:8px; padding:16px 18px; margin: 0 0 14px; font-family:'JetBrains Mono','SF Mono',Menlo,Consolas,monospace; font-size:11px; line-height:1.55; color:var(--ink); white-space:pre; overflow-x:auto;">  CUSTOMER (browser · Mailchimp.com / Customer Journeys)
+    │
+    │  <span style="color:var(--bad);font-weight:700;">⚠ The customer-facing visual journey-builder canvas IS NOT</span>
+    │  <span style="color:var(--bad);font-weight:700;">  in crmmktg-mktauto or mailchimp-mcmktg.</span>
+    │     customer-journey-builder repo is a 4-commit scaffold from
+    │     March 2025; the actual UI is presumably still in the
+    │     legacy Mailchimp monolith.
+    ▼
+  [LEGACY MAILCHIMP MONOLITH UI · OUTSIDE this org tree]
+    │
+    │  creates / edits journey config (HTTPS REST)
+    ▼
+  ┌─[1] CONFIGURATION LAYER  (workflow CRUD + Processing Executors)
+  │     <span style="color:var(--brand);font-weight:700;">automations-platform</span>  ·  Java 21 · Spring Boot 3 · 825 KB · today
+  │     ├─ <span style="color:var(--good);font-weight:700;">DAG Service</span>  ── workflow CRUD/lifecycle
+  │     ├─ OpenAPI-first (REST API generated from openapi.yaml)
+  │     ├─ <span style="color:var(--good);font-weight:700;">Stateless Executors</span>:
+  │     │     Action · Condition · Delay · Wait-for-Trigger
+  │     └─ <span style="color:var(--bad);">⚠ DocumentService = ConcurrentHashMap (in-memory)</span>
+  │        → DynamoDB target, not yet wired (per AGENTS.md)
+  │
+  │     Auth: Intuit IAM ticket via JSK Spring Boot starter parent
+  │     <span style="color:var(--good);font-weight:700;">JaCoCo: 85% line / 50% branch (ENFORCED in CI)</span>
+  │
+  │   writes config; reads cached trigger settings from Valkey
+  ▼
+  ┌── Valkey (Redis-compatible) ── trigger-settings cache
+  │
+  │
+  ┌─[2] INGESTION LAYER  (event-driven · Kubernetes-native)
+  │     <span style="color:var(--brand);font-weight:700;">automations-numaflow</span>  ·  Java · Numaflow gRPC vertex · 2.13 MB · today
+  │     ├─ Consumes 13+ Kafka EventBus topics:
+  │     │     back-in-stock · contact-state-change · custom-events ·
+  │     │     email-activity · loopback · monolith-relay · messaging ·
+  │     │     payments-invoices · pixel · reviews · segmentation ·
+  │     │     scheduled-event · testing
+  │     ├─ <span style="color:var(--good);">SpEL filter expressions</span>  (#flatten · #inList · #containsAny)
+  │     ├─ Trigger matching against Valkey (Redis-comp)
+  │     └─ Publishes <em>AutomationTriggerEvents</em> downstream
+  │
+  ▼
+  ┌─[3] INITIATION LAYER
+  │     <span style="color:var(--brand);font-weight:700;">c2-journey-initiation</span>  ·  Java · Kafka + Valkey · 1.48 MB · 6d
+  │     ├─ Consumes Kafka trigger topics
+  │     ├─ <span style="color:var(--good);">In-memory batching · at-least-once delivery</span>
+  │     └─ Publishes batched events to Google Cloud Tasks
+  │
+  ▼
+  ┌─[4] PROCESSING  (Executors run · per step · stateless)
+  │     SQS FIFO + GCP Tasks  →  automations-platform Executors
+  │     ├─ <strong>Action</strong>  ── send email/SMS/webhook
+  │     │              ─→ [Mailchimp send pipeline · OUTSIDE this org]
+  │     ├─ <strong>Condition</strong>  ── if/else split (up to 5 conditions)
+  │     ├─ <strong>Delay</strong>  ── wait X time
+  │     └─ <strong>Wait-for-Trigger</strong>  ── pause until next event
+
+  ─── ADJACENT (parallel · supporting services) ───────────────────────
+       <span style="color:var(--brand);">automations-rec-api</span>  (Java · 673 KB · 3 mo) ── recommendations
+       <span style="color:var(--brand);">automations-filter</span>  (Java · 590 KB · today) ── pre-execution
+       <span style="color:var(--brand);">automationseventingest</span>  (Java · 29 KB · today) ── tiny worker
+
+  ─── DATA FOUNDATION (in mailchimp-mcmktg org) ──────────────────────
+       <span style="color:var(--brand);">cdp-segmentation</span>  (Kotlin · 8 MB · today) ── CDP-grade segments
+       <span style="color:var(--brand);">c2-segmentation-ai-svc</span>  (Python · 1.8 MB · today) ── AI segments
+       <span style="color:var(--brand);">audience-event-trigger</span>  (Kotlin · 1.2 MB · 3 mo)
+
+  ─── AI SURFACE (parallel · NOT in your repo diagram) ───────────────
+       <span style="color:var(--brand);">automations-agent</span>  (Python · 175 KB · scaffold only)
+       <span style="color:var(--brand);">lil-kelly-agent</span>  (Python · 373 KB · most-built)
+       <span style="color:var(--brand);">autobots-claude-tools</span>  (Python · 153 KB · most recent)
+       <span style="color:var(--brand);">cjboncall-skill</span>  (Shell · on-call automation)
+
+  ─── INTERNAL UIs (NOT customer-facing) ─────────────────────────────
+       <span style="color:var(--brand);">automations-builder</span>  (TS · 345 KB · v1.1) ── config UI
+       <span style="color:var(--brand);">control-panel-web-plugin</span>  (TS · 285 KB · v1 today) ── admin/obs
+       <span style="color:var(--brand);">trigger-designer</span>  (TS · 465 KB · YAML editor)
+       <span style="color:var(--brand);">marketing-automation-docs</span>  (Docusaurus · 8.4 MB · today)</pre>
+
+    <h2 style="margin-top: 18px;"><span class="num">B</span>How it works — split into SETUP and EXECUTION flows</h2>
+
+    <p>CJB has two distinct operational flows. <strong>Setup</strong> is what the customer does once when configuring a journey. <strong>Execution</strong> is what happens — potentially millions of times per day per customer — when contacts trigger that journey by their behavior.</p>
+
+    <h3 style="color: var(--brand);">SETUP — customer configures a journey (5 steps)</h3>
+    <ol>
+      <li><strong>Customer navigates to "Customer Journeys"</strong> in Mailchimp.com → routed to the visual journey builder. <strong>Critical note</strong>: this canvas lives in the legacy Mailchimp monolith, not in <code>crmmktg-mktauto</code>. The <code>customer-journey-builder</code> repo in <code>mailchimp-mcmktg</code> is a 4-commit scaffold from March 2025 — never written into. <em>The canvas-UI ownership question is the single biggest non-technical risk in this brief.</em></li>
+      <li><strong>Customer drags a "Starting Point" (trigger) onto the canvas</strong> — for example, "When contact signs up." The monolith UI's selection of trigger types maps to one of the 13 typed Kafka topic schemas defined in <code>automations-numaflow/transformer-config.yml</code>.</li>
+      <li><strong>Customer adds steps</strong> — Action (send email), Condition (if/else split, up to 5 conditions), Delay (wait X time), or Wait-for-Trigger (pause until next event). Each step is typed to one of the 4 stateless Executors in <code>automations-platform</code>.</li>
+      <li><strong>Customer saves the journey</strong> — the workflow DAG is sent (via REST) to <code>automations-platform</code>'s DAG Service. <strong>In production today, the persistence layer is <code>ConcurrentHashMap</code></strong> (in-memory) per AGENTS.md — DynamoDB is the target but not yet wired. <em>The new platform is not yet at production scale; the legacy monolith still owns most of the persistence.</em></li>
+      <li><strong>Trigger settings are written to Valkey</strong> (Redis-compatible cache) — the runtime lookup table that the ingestion layer reads during execution.</li>
+    </ol>
+
+    <h3 style="color: var(--brand); margin-top: 14px;">EXECUTION — when a contact triggers the journey (8 steps)</h3>
+    <ol start="6">
+      <li><strong>Contact signs up on the customer's Shopify store</strong> (or any other event source). Shopify webhook → Mailchimp's EventBus → a Kafka topic (e.g. <code>contact_state_change</code>).</li>
+      <li><strong><code>automations-numaflow</code> consumes the Kafka event</strong> in its corresponding <code>eventdriven/</code> domain handler. It runs an <strong>SpEL filter expression</strong> against the event to determine whether it might match an active trigger.</li>
+      <li><strong>If the filter passes</strong>, <code>automations-numaflow</code> looks up active trigger settings in Valkey, evaluates the SpEL <code>triggerMatching.expression</code>, and — if matched — publishes an <code>AutomationTriggerEvent</code> to a downstream Kafka topic.</li>
+      <li><strong><code>c2-journey-initiation</code> consumes the trigger event</strong> and batches it in memory with <strong>at-least-once delivery semantics</strong>. It publishes batched events to <strong>Google Cloud Tasks</strong>, which routes via <strong>AWS SQS FIFO</strong> to the Processing layer.</li>
+      <li><strong>The Processing layer in <code>automations-platform</code></strong> picks up the batched event and runs the <strong>Executor</strong> for the journey's first step:
+        <ul style="margin-top:4px;">
+          <li><code>Action</code> — sends the email/SMS/webhook (calls Mailchimp send pipeline, outside this org)</li>
+          <li><code>Condition</code> — evaluates the if/else split (potentially calling <code>cdp-segmentation</code> for segment data)</li>
+          <li><code>Delay</code> — schedules a wake-up event after X time and releases the contact from active processing</li>
+          <li><code>Wait-for-Trigger</code> — pauses the contact until another matching event arrives</li>
+        </ul>
+      </li>
+      <li><strong>Action steps that send email/SMS</strong> call out to the Mailchimp send pipeline (outside this org tree) — the same pipeline NUNI's editor outputs land in. <em>The two products converge at the send pipeline.</em></li>
+      <li><strong>Adjacent services contribute during execution</strong>: <code>automations-rec-api</code> provides predictions/recommendations; <code>automations-filter</code> applies pre-execution filtering; <code>automationseventingest</code> is the tiny specialty event-ingest worker.</li>
+      <li><strong>Reporting</strong> — each Executor emits events for analytics; data flows to the Mailchimp data warehouse (outside this org). <strong>AI surface</strong> (not yet customer-facing): <code>automations-agent</code> + <code>lil-kelly-agent</code> + <code>autobots-claude-tools</code> are scaffolded; OpenAPI workflow CRUD is ready to be exposed as MCP tools — the foundation for autonomous flow setup parity with Klaviyo Marketing Agent.</li>
+    </ol>
+
+    <p class="source"><strong>Architecture lens:</strong> Event-driven 3-layer platform (Configuration / Ingestion / Processing) per <code>automations-platform/AGENTS.md</code> and <code>automations-numaflow/AGENTS.md</code>. Setup and execution flows are intentionally separated because CJB scale is determined by execution, not by setup. Per-repo evidence consistent with the <a href="#layers">7-Layer Forensic</a> tab and <a href="#repo">Repo Map</a>.</p>
+  </section>
+
+  <!-- ============ PAGE 2 — USER (C1) WORKFLOW MAPPING ============ -->
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Architecture · How It Works (cont.) · CJB / C2 Platform</div>
+        <h1>The customer (C1) workflow mapped to repos — <em style="color:#166D3B;">setup phase + execution phase</em></h1>
+        <div class="subtitle">Page 2: every step the customer takes — and every code path that runs when their contacts trigger the journey — mapped to specific repos and architectural components.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 2 of 2</div>
+        <div><strong>Persona:</strong> SMB marketer on Shopify · setting up a welcome series</div>
+      </div>
+    </header>
+
+    <h2><span class="num">C</span>SETUP phase — customer creates the journey (one-time)</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:5%">#</th>
+          <th style="width:22%">What the customer does</th>
+          <th style="width:44%">What happens in code</th>
+          <th style="width:29%">Repos involved</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>1</strong></td><td>Click <em>"Customer Journeys"</em> in Mailchimp</td><td>Mailchimp shell routes to the journey builder. <strong>The canvas itself lives in the legacy Mailchimp monolith</strong> — not in <code>crmmktg-mktauto</code>.</td><td><em>(legacy MC monolith UI)</em></td></tr>
+        <tr><td><strong>2</strong></td><td>Pick a journey template (e.g. "Welcome series")</td><td>Template loaded from monolith template store. <strong>The new architecture has no replacement repo for the archived <code>prebuilt-journey-service</code></strong> — Strategy Bet 3 (B2B/ProServ template gap) is structurally homeless.</td><td><em>(legacy MC monolith)</em></td></tr>
+        <tr><td><strong>3</strong></td><td>Drag a Starting Point: <em>"When contact signs up"</em></td><td>Trigger config maps to one of 13 Kafka topic schemas in <code>automations-numaflow/transformer-config.yml</code>. The monolith UI POSTs the trigger config to <code>automations-platform</code>'s DAG Service via REST.</td><td>(monolith UI) → <code>automations-platform</code></td></tr>
+        <tr><td><strong>4</strong></td><td>Add an Action step: <em>"Send welcome email"</em></td><td>Step typed to <code>Executor.Action</code>. Email content references the editor's document model (NUNI) — <em>this is where the editor and journey product converge</em>.</td><td><code>automations-platform</code> · (NUNI editor for content)</td></tr>
+        <tr><td><strong>5</strong></td><td>Add a Delay step: <em>"Wait 3 days"</em></td><td>Step typed to <code>Executor.Delay</code>. Delay duration validated against business rules (max delay, etc.).</td><td><code>automations-platform/Executors/Delay/</code></td></tr>
+        <tr><td><strong>6</strong></td><td>Add a Condition step: <em>"If purchased: send thank-you. Else: send reminder."</em></td><td>Step typed to <code>Executor.Condition</code> (up to 5 conditions). Condition evaluation can reference <code>cdp-segmentation</code> for segment data.</td><td><code>automations-platform</code> · <code>cdp-segmentation</code></td></tr>
+        <tr><td><strong>7</strong></td><td>Save journey</td><td>Workflow DAG persisted; trigger settings written to Valkey. <strong>Persistence is in-memory <code>ConcurrentHashMap</code> today; DynamoDB is the target.</strong></td><td><code>automations-platform</code> · Valkey</td></tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top: 18px;"><span class="num">D</span>EXECUTION phase — when a contact triggers the journey (potentially thousands/sec)</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:5%">#</th>
+          <th style="width:22%">Event in the world</th>
+          <th style="width:44%">Code path</th>
+          <th style="width:29%">Repos involved</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>1</strong></td><td>Customer's contact signs up on Shopify</td><td>Shopify webhook fires → Mailchimp EventBus consumes → publishes to Kafka topic <code>contact_state_change</code>.</td><td>(Mailchimp EventBus → Kafka)</td></tr>
+        <tr><td><strong>2</strong></td><td>Kafka event arrives at the platform</td><td><code>automations-numaflow</code> Numaflow vertex consumes the topic in <code>eventdriven/contactstatechange/</code> handler; runs SpEL filter expression to drop irrelevant events fast.</td><td><code>automations-numaflow/eventdriven/</code></td></tr>
+        <tr><td><strong>3</strong></td><td>Filter passes; trigger lookup runs</td><td>Looks up active trigger settings in Valkey; evaluates <code>triggerMatching.expression</code>; if matched, publishes <code>AutomationTriggerEvent</code> downstream.</td><td><code>automations-numaflow/service/</code> · Valkey</td></tr>
+        <tr><td><strong>4</strong></td><td>TriggerEvent reaches initiation layer</td><td><code>c2-journey-initiation</code> consumes; batches in memory; <strong>at-least-once delivery</strong> semantics; publishes to Google Cloud Tasks.</td><td><code>c2-journey-initiation</code></td></tr>
+        <tr><td><strong>5</strong></td><td>Batch published to processing layer</td><td>GCP Tasks routes to AWS SQS FIFO; FIFO ordering ensures step-by-step execution per contact.</td><td>(Google Cloud Tasks · AWS SQS FIFO)</td></tr>
+        <tr><td><strong>6</strong></td><td>Step 1 runs: Action (send welcome email)</td><td><code>Executor.Action</code> picks up the message; calls Mailchimp send pipeline with the rendered email content.</td><td><code>automations-platform/Executors/Action/</code> → [send pipeline]</td></tr>
+        <tr><td><strong>7</strong></td><td>Step 2 runs: Delay (wait 3 days)</td><td><code>Executor.Delay</code> schedules a wake-up event 3 days out; releases the contact from active processing memory.</td><td><code>automations-platform/Executors/Delay/</code></td></tr>
+        <tr><td><strong>8</strong></td><td>3 days later, wake-up fires</td><td>Wake-up event flows back through the pipeline; next step runs.</td><td><code>automations-platform</code> · Valkey · GCP Tasks</td></tr>
+        <tr><td><strong>9</strong></td><td>Step 3 runs: Condition (purchased?)</td><td><code>Executor.Condition</code> evaluates condition; if it depends on segment data, calls <code>cdp-segmentation</code> or queries the contact profile via <code>automations-rec-api</code>.</td><td><code>automations-platform</code> · <code>cdp-segmentation</code> · <code>automations-rec-api</code></td></tr>
+        <tr><td><strong>10</strong></td><td>Reporting</td><td>Each step emits events for analytics; data flows to the Mailchimp data warehouse (outside this org).</td><td>(data warehouse outside org)</td></tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top: 18px;"><span class="num">E</span>What this architecture <em>promises</em> the customer</h2>
+
+    <div class="grid cols-2" style="gap: 14px;">
+      <div class="card good">
+        <h3 style="color: #036A4F;">The contract that works (or will work after cutover)</h3>
+        <ul style="margin: 0;">
+          <li><strong>"My trigger fires when it should"</strong> — the new ingestion architecture (SpEL filters + Valkey + at-least-once delivery + SQS FIFO) is structurally designed for trigger reliability.</li>
+          <li><strong>"My emails go in the right order"</strong> — SQS FIFO ordering ensures Step 1 runs before Step 2 per contact.</li>
+          <li><strong>"My condition splits work"</strong> — typed Executor pattern with up to 5 conditions per Condition step; evaluation against segment data via <code>cdp-segmentation</code>.</li>
+          <li><strong>"The platform scales to my traffic spikes"</strong> — Numaflow Kubernetes vertex pipeline is horizontally scalable by design; in-memory batching in <code>c2-journey-initiation</code> absorbs bursts.</li>
+        </ul>
+      </div>
+      <div class="card bad">
+        <h3 style="color: #9A1F00;">The contract that&rsquo;s leaking (or hasn&rsquo;t cut over yet)</h3>
+        <ul style="margin: 0;">
+          <li><strong>"My abandoned-cart trigger doesn&rsquo;t fire twice"</strong> — leaks while customers are still on the legacy monolith trigger paths; fix is shipping but cutover timing determines when customers feel it (HVC #4, $8.4K/mo cited).</li>
+          <li><strong>"My journey persists reliably"</strong> — leaks because <code>automations-platform</code>'s DAG Service is still <code>ConcurrentHashMap</code> (in-memory). Cannot be production at scale until DynamoDB lands.</li>
+          <li><strong>"I get B2B/ProServ templates"</strong> — leaks because the template service repo (<code>prebuilt-journey-service</code>) is archived with no replacement found (Strategy Bet 3 structurally homeless).</li>
+          <li><strong>"I get push and WhatsApp like Klaviyo"</strong> — leaks because no Push/WhatsApp/In-app Executor exists in the active code (channel breadth is structurally blocked).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hero-finding" style="margin-top: 16px;">
+      <div class="hf-label">The architectural read for leadership</div>
+      <p>The CJB architecture is a <strong>genuinely-modern, paved-road, AI-ready event-driven platform</strong> — Spring Boot 3 + Numaflow on Kubernetes + OpenAPI-first + 85% JaCoCo gates + Valkey-cached triggers + at-least-once delivery. The strategic value of the architecture is <em>quality posture</em>; the customer doesn&rsquo;t see it directly, but trigger reliability and journey execution at scale will. Two non-technical questions precede every Q1–Q5 strategy bet: <strong>(1) where does the customer-facing visual canvas live</strong> (because the named repo is a hollow scaffold and it&rsquo;s presumably still in the monolith), and <strong>(2) what is the external messaging plan for the "decoupled from the Mailchimp monolith" repositioning</strong> (because the AGENTS.md statement is candid for an internal artifact but reframes the CJB-vs-Klaviyo narrative externally). <em>Code answers are ready; business answers are not.</em></p>
+    </div>
+
+    <p class="source"><strong>Cross-references:</strong> See <a href="#painmap">Pain → Code Map</a> for HVC theme → repo traceability · <a href="#repo">Repo Map</a> for archived-vs-active reconciliation · <a href="#layers">7-Layer Forensic</a> for layer-by-layer evidence · <a href="#ai">AI Readiness</a> for the 5/7 scorecard · <a href="#arch">Arch Review · SWOT</a> for the strategic SWOT.</p>
+  </section>
+</div><!-- /panel-howit -->
 
 <!-- ================ PAIN → CODE MAP ================ -->
 <div class="tabpanel" id="panel-painmap" role="tabpanel">
@@ -1333,7 +1559,7 @@ GH_HOST=github.intuit.com gh api \
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['exec','painmap','repo','layers','org','ai','arch','leverage','method'].indexOf(initial) >= 0) activate(initial);
+    if (['exec','howit','painmap','repo','layers','org','ai','arch','leverage','method'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 

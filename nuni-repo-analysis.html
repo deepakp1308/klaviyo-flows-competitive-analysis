@@ -179,6 +179,7 @@
 
   <div class="tabs" role="tablist" aria-label="Analysis sections">
     <button class="tab active" role="tab" data-tab="exec">Executive Summary</button>
+    <button class="tab" role="tab" data-tab="howit">Architecture · How It Works</button>
     <button class="tab" role="tab" data-tab="painmap">Pain → Code Map</button>
     <button class="tab" role="tab" data-tab="repo">Repo Map (Reality vs Diagram)</button>
     <button class="tab" role="tab" data-tab="layers">7-Layer Forensic</button>
@@ -282,6 +283,186 @@
     <p class="source"><strong>Method:</strong> All numerical findings derived from <code>collab-email/*</code> on <code>github.intuit.com</code> via shallow clone + <code>gh api</code> queries against <code>/repos</code>, <code>/commits</code>, <code>/pulls</code>, and direct file reads. Every claim is reproducible: see <strong>Method &amp; Sources</strong> tab. Framework applied: <em>Product Technical Intelligence Playbook</em> (May 2026 internal reference, 20 pages, 7-layer forensic + AI readiness + org failure modes).</p>
   </section>
 </div><!-- /panel-exec -->
+
+<!-- ================ ARCHITECTURE · HOW IT WORKS ================ -->
+<div class="tabpanel" id="panel-howit" role="tabpanel">
+  <!-- ============ PAGE 1 — ARCHITECTURE DIAGRAM + HOW IT WORKS ============ -->
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Architecture · How It Works · NUNI / New Email Builder</div>
+        <h1>How the NUNI architecture is wired — from the <em style="color:#4338CA;">browser the customer touches</em> down to the <em style="color:#4338CA;">send pipeline that delivers the email</em></h1>
+        <div class="subtitle">A two-page architectural walkthrough for executive read. Page 1: system diagram + how it works in 10 steps. Page 2: customer (C1) workflow mapped step-by-step to specific repos.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 1 of 2</div>
+        <div><strong>Lens:</strong> Layered architecture (5 layers + 3 satellites)</div>
+        <div><strong>Snapshot:</strong> May 13 2026</div>
+      </div>
+    </header>
+
+    <h2><span class="num">A</span>The architecture in one diagram</h2>
+
+    <pre style="background:#FAFAFB; border:1px solid var(--line); border-radius:8px; padding:16px 18px; margin: 0 0 14px; font-family:'JetBrains Mono','SF Mono',Menlo,Consolas,monospace; font-size:11px; line-height:1.55; color:var(--ink); white-space:pre; overflow-x:auto;">  CUSTOMER (browser · Mailchimp.com / new email builder)
+    │
+    │  HTTPS · React 17 SPA · loaded via Mailchimp shell
+    ▼
+  ┌─[1] PRESENTATION  (the editor UI)
+  │     <span style="color:var(--brand);font-weight:700;">nuni-core-ui</span>  ·  TS · React 17 · 965 KB · push: today
+  │     ├─ <span style="color:var(--bad);">store.ts (966 LOC)</span>  ◄── god file: state · save · presence
+  │     ├─ TipTap 3.20  ── rich-text editor
+  │     ├─ Atlassian Pragmatic DnD 1.7  ── block drag-drop
+  │     ├─ Zustand 4.5 + Immer 11  ── state management
+  │     ├─ <span style="color:var(--brand);">pusher-js 4.3</span>  ── WebSocket bus (PRESENT but UNUSED)
+  │     └─ Bugsnag + browser-perf  ── observability
+  │
+  │     <span style="color:var(--brand);font-weight:700;">builder-platform</span>  ·  TS · React 18.3 · 1.8 MB · push: today
+  │     └─ blocks/ Spacer · Image · Table · Divider · Text
+  │        (each with renderers/ + migrations/)
+  │
+  │   uses (peer dep)
+  ▼
+  ┌─[2] SCHEMA + EDIT  (the strategic moat — AI readiness 7/7)
+  │     <span style="color:var(--brand);font-weight:700;">nuni-core</span>  ·  TS lib · 1.84 MB · @1.74.5 · push: today
+  │     ├─ <span style="color:var(--good);font-weight:700;">edit/edit.ts</span>  ◄── PURE FUNCTION command pattern
+  │     │     "(doc, edits, config) → EditCandidate"
+  │     │     Zero React deps · zero state · transactional
+  │     ├─ document/operations.ts  (addBlock · moveBlock · …)
+  │     ├─ 31 typed BlockSchemas
+  │     │     (Button · Image · Text · Product · Promo · Footer …)
+  │     ├─ validate/v20260113 · v20260225 · v20260316
+  │     └─ renderers/email/  ── per-block HTML output
+  │
+  │     <span style="color:var(--bad);font-weight:700;">⚠ DRIFT</span>: nuni-core-ui imports @1.49.0 (25 versions behind 1.74)
+  │            (gates Q2 Universal Content + 3 of 7 VoC hate themes)
+  │
+  │   HTTPS · REST/GraphQL
+  ▼
+  ┌─[3] API
+  │     <span style="color:var(--brand);font-weight:700;">nuni-api</span>  ·  TS · Hono (NOT Express) · 657 KB · push: today
+  │     ├─ Pino structured logging
+  │     ├─ Intuit IAM ticket auth via JSK
+  │     └─ Pre-push hook: build + test:ci
+  │
+  ▼
+  ┌─[4] PERSISTENCE  (in-flight migration: Kotlin → TS)
+  │     <span style="color:var(--brand);">nuni-document-store</span>  ·  Kotlin · 202 KB · stale 4 mo
+  │              ─── OR ─── (parallel today)
+  │     <span style="color:var(--brand);">document-data-store</span>  ·  TS · 615 KB · push: today  ── NEW
+  │
+  ─── ASSET LAYER (loaded on demand) ─────────────────────────────────
+       <span style="color:var(--brand);">nuni-template-sources</span>  (JS · 18 MB JSON catalog)
+       <span style="color:var(--brand);">nuni-brand</span>  (TS · Brand Kit data)
+       <span style="color:var(--brand);">nuni-thumbnails</span>  (JS · preview images)
+
+  ─── RENDER PIPELINE (on send) ──────────────────────────────────────
+       <span style="color:var(--brand);">email-render-pipeline</span>  (TS · Vitest + jsdom · push: today)
+         ▸ calibration · scoring · screenshot diff · golden-data PNGs
+         <span style="color:var(--bad);">▸ NOT YET wired into nuni-core-ui CI gate</span>  (the unrealized win)
+       <span style="color:var(--brand);">server-side-rendering</span>  (JS · 9 MB · push: today)
+         ─→ [Mailchimp send pipeline · OUTSIDE this org]
+
+  ─── AI SURFACE (parallel · NOT in your repo diagram) ───────────────
+       <span style="color:var(--brand);">mc-omni-agent-ui</span>  (TS · 4.9 MB · push: today)
+              ↕  MCP protocol
+       <span style="color:var(--brand);">mc-omni-mcp</span>  (Python · 546 KB · push 9 days ago)
+         ▸ agents_and_tools.yaml ◄── MCP tool registry
+         ▸ <span style="color:var(--good);font-weight:700;">exposes nuni-core/edit/edit() AS A TOOL</span>
+         ▸ AI-generated edits → preValidate → mutation → postValidate
+
+  ─── MIGRATION (Classic → NEB · winding down) ──────────────────────
+       <span style="color:var(--brand);">html-to-nuni-parser</span>  (Java · Maven · Lombok · 122 src files)
+       <span style="color:var(--brand);">editor-migration-workbench</span>  (HTML)
+       <span style="color:var(--brand);">editor-migration-release</span>  (Go · stale 10 mo)</pre>
+
+    <h2 style="margin-top: 18px;"><span class="num">B</span>How it works — 10 steps</h2>
+
+    <ol>
+      <li><strong>Customer signs in to Mailchimp</strong> and clicks "Create campaign." The Mailchimp shell (which lives in the legacy monolith, not in NUNI) routes the customer to the New Email Builder.</li>
+      <li><strong>The browser loads <code>nuni-core-ui</code></strong> — a React 17 SPA. <strong>TipTap</strong> handles rich-text editing; <strong>Atlassian Pragmatic DnD</strong> handles block drag-and-drop; <strong>Zustand + Immer</strong> manage state. <code>pusher-js</code> is in the dependency list but currently unused (the unused real-time foundation that Q5 collab will activate).</li>
+      <li><strong><code>nuni-core-ui</code> imports <code>nuni-core@1.49.0</code></strong>, the schema/edit library that defines what blocks exist (31 typed schemas) and how to mutate documents (<code>edit()</code> pure function, <code>operations.ts</code> CRUD primitives). This is the architectural moat — and the version drift bites: the library is at v1.74.5; the UI consumes v1.49.0. <strong>Closing this drift is the single highest-leverage Q1 action.</strong></li>
+      <li><strong>When the user drags a block onto the canvas</strong>, the DnD library captures the drop, calls <code>nuni-core/edit/edit({type: 'addBlock', ...})</code>, which returns an <code>EditCandidate</code>. The candidate runs <code>preValidate</code> → mutation → <code>postValidate</code>; if valid, the new doc replaces the old in the Zustand store; React re-renders via <code>builder-platform</code>'s per-block renderers.</li>
+      <li><strong>State, save, conflict detection, and (future) presence</strong> all flow through the <strong>966-LOC <code>store.ts</code></strong> in <code>nuni-core-ui</code>. This is the playbook's "god file" and the architectural choke point that gates Q5 real-time collaboration.</li>
+      <li><strong>Saves go through <code>nuni-api</code></strong> — a <strong>Hono</strong> service (not Express), authenticated via Intuit IAM. The API writes to either <code>nuni-document-store</code> (Kotlin, currently stale 4 months) or <code>document-data-store</code> (TypeScript, the new replacement, pushed today). Persistence is mid-migration from Kotlin to TS.</li>
+      <li><strong>Asset data is loaded on demand</strong> — <code>nuni-brand</code> for Brand Kit (colors, fonts, logos); <code>nuni-template-sources</code> for the 18 MB template catalog; <code>nuni-thumbnails</code> for preview images.</li>
+      <li><strong>Preview is generated client-side</strong> via <code>nuni-core/renderers/email/</code>. The deeper visual-regression check uses <code>email-render-pipeline</code> (jsdom + golden-data PNGs + scoring) but isn't yet wired into the <code>nuni-core-ui</code> CI gate — this is the "70%-built rig sitting unused" finding.</li>
+      <li><strong>On send</strong>, the document is rendered server-side through <code>server-side-rendering</code> to final HTML, then handed off to the Mailchimp send pipeline (outside this org tree).</li>
+      <li><strong>AI surface</strong> (parallel, not in your repo diagram): <code>mc-omni-agent-ui</code> (TS) talks to <code>mc-omni-mcp</code> (Python MCP server), which <strong>exposes <code>nuni-core/edit/edit()</code> as an MCP tool</strong>. AI agents make valid edits without going through the UI — and because <code>edit()</code> runs the same <code>preValidate</code>/<code>postValidate</code>, AI-generated mutations cannot corrupt the document state. <em>This is the rare case where AI safety is provided by the architecture, not by guardrails bolted on.</em></li>
+    </ol>
+
+    <p class="source"><strong>Architecture lens:</strong> 5-layer model (Presentation, Schema+Edit, API, Persistence, Render Pipeline) + 3 satellites (Asset Layer, AI Surface, Migration). Per-repo evidence from shallow clones + <code>gh api</code> as of May 13 2026; consistent with the <a href="#layers">7-Layer Forensic</a> tab and <a href="#repo">Repo Map</a>.</p>
+  </section>
+
+  <!-- ============ PAGE 2 — USER (C1) WORKFLOW MAPPING ============ -->
+  <section class="page">
+    <header class="page-head">
+      <div>
+        <div class="eyebrow">Architecture · How It Works (cont.) · NUNI / New Email Builder</div>
+        <h1>The customer (C1) workflow mapped to repos — <em style="color:#4338CA;">what happens in code on every click</em></h1>
+        <div class="subtitle">Page 2: every step the customer takes during a typical email-creation session, mapped to the repo and architectural component that handles it. Reads top-to-bottom as a step-by-step trace.</div>
+      </div>
+      <div class="meta">
+        <div><strong>Page:</strong> 2 of 2</div>
+        <div><strong>Persona:</strong> SMB marketer creating + sending a campaign</div>
+      </div>
+    </header>
+
+    <h2><span class="num">C</span>The customer&rsquo;s session — step by step</h2>
+
+    <table>
+      <thead>
+        <tr>
+          <th style="width:5%">#</th>
+          <th style="width:22%">What the customer does</th>
+          <th style="width:44%">What happens in code</th>
+          <th style="width:29%">Repos involved</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><strong>1</strong></td><td>Click <em>"Create campaign"</em> in Mailchimp</td><td>Mailchimp shell routes the browser to the New Email Builder URL. Authentication is already established via the broader Mailchimp session.</td><td><em>(legacy MC monolith routing)</em></td></tr>
+        <tr><td><strong>2</strong></td><td>Pick a template from the gallery</td><td>Gallery view fetches templates via <code>nuni-api</code>, which reads from the <code>nuni-template-sources</code> JSON catalog and applies the user&rsquo;s plan/segment filter.</td><td><code>nuni-api</code> · <code>nuni-template-sources</code></td></tr>
+        <tr><td><strong>3</strong></td><td>Editor opens with the template loaded</td><td><code>nuni-core-ui</code> hydrates the document tree from the API response; <code>builder-platform</code> renders each typed block via its per-block renderer; <code>nuni-core</code> schemas validate the document on hydrate.</td><td><code>nuni-core-ui</code> · <code>builder-platform</code> · <code>nuni-core</code></td></tr>
+        <tr><td><strong>4</strong></td><td>Drag a Text block onto the canvas</td><td>DnD event captured by Atlassian Pragmatic DnD → calls <code>nuni-core/edit/edit({type:'addBlock', ...})</code> → <code>preValidate</code> → mutation → <code>postValidate</code> → new doc replaces old in Zustand store → React re-renders.</td><td><code>nuni-core-ui</code> · <code>nuni-core/edit/</code> · <code>builder-platform/blocks/Text/</code></td></tr>
+        <tr><td><strong>5</strong></td><td>Edit text in the block</td><td>TipTap captures keystrokes → debounced save trigger → <code>edit({type:'updateProperties'})</code> → typed validation against <code>TextBlockSchema</code> → state mutation.</td><td><code>nuni-core-ui</code> (TipTap) · <code>nuni-core</code> (schema)</td></tr>
+        <tr><td><strong>6</strong></td><td>Apply Brand Kit</td><td><code>nuni-brand</code> serves the customer&rsquo;s brand colors, fonts, and logo via <code>nuni-api</code>; the per-block renderers in <code>builder-platform</code> apply brand tokens.</td><td><code>nuni-brand</code> · <code>builder-platform/blocks/*/renderers/</code></td></tr>
+        <tr><td><strong>7</strong></td><td>Mobile preview</td><td>Client-side render via <code>nuni-core/renderers/email/</code>; preview is rendered into an iframe inside the editor.</td><td><code>nuni-core/renderers/email/</code></td></tr>
+        <tr><td><strong>8</strong></td><td>Save</td><td><code>nuni-api</code> POST → currently writes to <strong>both</strong> <code>nuni-document-store</code> (Kotlin, legacy) and <code>document-data-store</code> (TS, new) during the migration; eventually only TS.</td><td><code>nuni-api</code> · <code>document-data-store</code> · <code>nuni-document-store</code></td></tr>
+        <tr><td><strong>9</strong></td><td>Click <em>"Send"</em></td><td>Final document validated via <code>nuni-core-cross-validate</code>; <code>server-side-rendering</code> produces final HTML; document handed off to the Mailchimp send pipeline.</td><td><code>nuni-core-cross-validate</code> · <code>server-side-rendering</code> → [send pipeline]</td></tr>
+        <tr style="background:#FFFCF0;"><td><strong>10</strong></td><td>(AI) Type "make the hero block friendlier"</td><td><code>mc-omni-agent-ui</code> sends prompt → <code>mc-omni-mcp</code> resolves intent → calls <code>edit()</code> as MCP tool → <code>preValidate</code> + <code>postValidate</code> guarantee a valid edit lands; UI re-renders.</td><td><code>mc-omni-agent-ui</code> · <code>mc-omni-mcp</code> · <code>nuni-core/edit/</code></td></tr>
+      </tbody>
+    </table>
+
+    <h2 style="margin-top: 18px;"><span class="num">D</span>What this architecture <em>promises</em> the customer</h2>
+
+    <div class="grid cols-2" style="gap: 14px;">
+      <div class="card good">
+        <h3 style="color: #036A4F;">The contract that works</h3>
+        <ul style="margin: 0;">
+          <li><strong>Drag a block, see it render correctly</strong> — typed schemas + per-block renderers ensure the editor preview matches the rendered output (when the renderers are right; HVC #3 is where they're not).</li>
+          <li><strong>"Edit once, propagates" (when Universal Content ships)</strong> — the schema layer already supports <code>FragmentBlockSchema</code>; the missing piece is the UI consuming the new schema version.</li>
+          <li><strong>AI cannot corrupt the document</strong> — every AI edit goes through the same <code>preValidate</code>/<code>postValidate</code> as a human edit. The architecture provides safety; humans don't have to.</li>
+          <li><strong>Brand Kit is one source of truth</strong> — <code>nuni-brand</code> data flows through every renderer that consumes it.</li>
+        </ul>
+      </div>
+      <div class="card bad">
+        <h3 style="color: #9A1F00;">The contract that&rsquo;s leaking</h3>
+        <ul style="margin: 0;">
+          <li><strong>"Edit looks like send"</strong> — leaks because <code>email-render-pipeline</code>'s visual-regression rig isn't wired into <code>nuni-core-ui</code> CI. HVC #3 ($1,820/mo cited).</li>
+          <li><strong>"Multiple people can edit safely"</strong> — leaks because the 966-LOC <code>store.ts</code> doesn't model presence; HVC #4 ($340/mo cited).</li>
+          <li><strong>"My templates are portable"</strong> — leaks because <code>nuni-core-ui</code> consumes a 25-version-old schema; bifurcation pain (VoC #1).</li>
+          <li><strong>"Pay for AI, get AI"</strong> — leaks because Write with AI is geo-gated at the <code>nuni-api</code> routing layer (Standard customers in EMEA get nothing).</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="hero-finding" style="margin-top: 16px;">
+      <div class="hf-label">The architectural read for leadership</div>
+      <p>The NUNI architecture is genuinely well-designed at the <strong>schema + edit</strong> layer — pure-function command pattern, typed block schemas, validated mutations. That layer is a strategic moat. The <strong>customer-facing UI layer</strong> consumes a 25-version-old version of that moat, leaks five customer contracts because of it, and has a 966-LOC god file that gates the Q5 collab story. <em>Every customer pain in the Editor Brief traces back to the gap between layer 2 (excellent) and layer 1 (drifted).</em> Closing the drift, decomposing the god file, and wiring the visual-regression rig are the three architectural moves that make every roadmap commitment cheaper.</p>
+    </div>
+
+    <p class="source"><strong>Cross-references:</strong> See <a href="#painmap">Pain → Code Map</a> for HVC theme → repo traceability · <a href="#layers">7-Layer Forensic</a> for layer-by-layer evidence · <a href="#ai">AI Readiness</a> for the 7/7 scorecard · <a href="#arch">Arch Review · SWOT</a> for strengths/weaknesses/threats/opportunities.</p>
+  </section>
+</div><!-- /panel-howit -->
 
 <!-- ================ PAIN → CODE MAP ================ -->
 <div class="tabpanel" id="panel-painmap" role="tabpanel">
@@ -1306,7 +1487,7 @@ echo "$repo: src=$src_loc test=$test_loc ratio=$((test_loc * 100 / src_loc))%"</
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['exec','painmap','repo','layers','org','ai','arch','leverage','method'].indexOf(initial) >= 0) activate(initial);
+    if (['exec','howit','painmap','repo','layers','org','ai','arch','leverage','method'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
