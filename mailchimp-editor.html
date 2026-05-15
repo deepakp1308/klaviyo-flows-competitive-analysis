@@ -5169,68 +5169,80 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       <div class="subtitle">Paid-Nuni cohort (proxy: paid users who signed up after Nuni was made default for new accounts on Jul-1, 2023). Trailing 12 months <strong>May 2025&ndash;Apr 2026 (T0)</strong> vs prior 12 months <strong>May 2024&ndash;Apr 2025 (T-1)</strong>. Source: BigQuery <code>mc-business-intelligence.mailchimp.users_signup_data</code>, <code>users_first_sends</code>, <code>users_packages</code>, <code>users_plan_updates</code> + <code>qualtrics.survey_responses</code> (Nuni Feedback Badge, <code>SV_9SwJVJm2BNRqXfo</code>).</div>
     </div>
     <div class="meta">
-      <strong>v1.0</strong><br/>
-      4 pages &middot; QA-validated<br/>
-      <strong>Conservative editor-attributable ARR exposure: ~$13&ndash;20M/yr</strong><br/>
-      <strong>Target-state ARR swing: ~$32M/yr (recover loss + $15M)</strong>
+      <strong>v1.1</strong> &middot; 4 pages &middot; QA-validated<br/>
+      <strong>Editor-PM owned target swing: ~$22M/yr</strong><br/>
+      <strong>+ Cross-functional (Mktg+Pricing): ~$10M/yr</strong><br/>
+      <strong>Combined: ~$32M ARR swing target</strong>
     </div>
   </div>
 
-  <h2><span class="num">1.1</span>The headline rewrite</h2>
+  <h2><span class="num">1.1</span>The headline &mdash; what the editor PM owns vs. what they don&rsquo;t</h2>
   <div class="pull" style="margin-bottom:16px;">
-    Per-user behavior is <strong>flat-to-modestly-improving</strong> YoY (CSAT up +15pp Net, churn rate down -1.4pp, time-to-send -1 day, repeat usage flat at ~83%). The damage is <strong>volume</strong>: paid signups <strong>&minus;27% YoY</strong> + free&rarr;paid conversion <strong>&minus;12.3% relative</strong> = far fewer at-bats for the editor to convert and retain.
-    <cite>BigQuery YoY audit on Nuni-cohort paid users, May 2026.</cite>
+    <strong>Editor-owned leading indicators are mixed:</strong> bulk builder adoption is up (+1.9pp to 92.7%), SMS adoption growing (+1.5pp to 6.1%), but <strong>bulk builder activation degraded &minus;2.4pp to 60.6%</strong> &mdash; more paid users touch the builder, fewer become habitual senders. Bulk Abandon volume up <strong>+10.4% YoY</strong> (295K &rarr; 326K/mo). Quality side is <strong>flat-to-better</strong> (CSAT +15pp Net, churn &minus;1.4pp, repeat-rate flat). Cross-functional volume drivers (paid signups &minus;27%, free&rarr;paid &minus;12% rel.) are <strong>Marketing/Pricing dependencies</strong>, not editor-PM levers.
+    <cite>BigQuery YoY audit on paid-tier active users, May 2026 (<code>bi_aggregate.product_journey_monthly</code> + <code>users_first_sends</code> + <code>users_packages</code> + <code>qualtrics.survey_responses</code>).</cite>
   </div>
 
-  <h2><span class="num">1.2</span>QA-validated YoY metrics &mdash; the eleven that matter</h2>
-  <div class="grid cols-4" style="margin-bottom:12px;">
-    <div class="audit-kpi down">
-      <div class="ak-label">Paid signups (Nuni cohort, 10mo)</div>
-      <div class="ak-now">258,385</div>
-      <div class="ak-then">vs T-1: 353,733</div>
-      <div class="ak-yoy">&minus;27.0% YoY</div>
+  <h2><span class="num">1.2</span>Editor-owned leading indicators (adoption / activation / 30-day repeat)</h2>
+  <p style="font-size:12.5px; color:var(--muted); margin-bottom:8px;">These are the metrics the <strong>editor PM owns</strong> &mdash; product decisions move them directly. Source: <code>bi_aggregate.product_journey_monthly</code> for paid users (excluding free / payg / pre paid / pro/module tiers).</p>
+  <div class="grid cols-4" style="margin-bottom:14px;">
+    <div class="audit-kpi up">
+      <div class="ak-label">Bulk builder <strong>adoption</strong> (% paid users touched)</div>
+      <div class="ak-now">92.7%</div>
+      <div class="ak-then">vs T-1: 90.8%</div>
+      <div class="ak-yoy">+1.9pp YoY</div>
     </div>
     <div class="audit-kpi down">
-      <div class="ak-label">Fast paid converters (paid in &le;30d)</div>
-      <div class="ak-now">42,116</div>
-      <div class="ak-then">vs T-1: 60,271</div>
-      <div class="ak-yoy">&minus;30.1% YoY</div>
-    </div>
-    <div class="audit-kpi down">
-      <div class="ak-label">Free &rarr; paid 90d (all signups)</div>
-      <div class="ak-now">12.64%</div>
-      <div class="ak-then">vs T-1: 14.41%</div>
-      <div class="ak-yoy">&minus;1.77pp (&minus;12.3% rel.)</div>
-    </div>
-    <div class="audit-kpi flat">
-      <div class="ak-label">Sent first email in 90d (rate)</div>
-      <div class="ak-now">48.4%</div>
-      <div class="ak-then">vs T-1: 49.4%</div>
-      <div class="ak-yoy">&minus;1.0pp</div>
-    </div>
-    <div class="audit-kpi flat">
-      <div class="ak-label">Abandoned (no send in 90d)</div>
-      <div class="ak-now">51.6%</div>
-      <div class="ak-then">vs T-1: 50.6%</div>
-      <div class="ak-yoy">+1.0pp (worse)</div>
+      <div class="ak-label">Bulk builder <strong>activation</strong> (% touched &rarr; Established)</div>
+      <div class="ak-now">60.6%</div>
+      <div class="ak-then">vs T-1: 63.0%</div>
+      <div class="ak-yoy">&minus;2.4pp (worse)</div>
     </div>
     <div class="audit-kpi up">
-      <div class="ak-label">Median days to first send</div>
-      <div class="ak-now">5 days</div>
-      <div class="ak-then">vs T-1: 6 days</div>
-      <div class="ak-yoy">&minus;1 day (better)</div>
+      <div class="ak-label">SMS builder <strong>adoption</strong> (% paid users touched)</div>
+      <div class="ak-now">6.1%</div>
+      <div class="ak-then">vs T-1: 4.6%</div>
+      <div class="ak-yoy">+1.5pp YoY</div>
+    </div>
+    <div class="audit-kpi up">
+      <div class="ak-label">SMS builder <strong>activation</strong> (% touched &rarr; Established)</div>
+      <div class="ak-now">9.1%</div>
+      <div class="ak-then">vs T-1: 6.8%</div>
+      <div class="ak-yoy">+2.3pp YoY</div>
     </div>
     <div class="audit-kpi flat">
-      <div class="ak-label">30-day repeat send rate</div>
+      <div class="ak-label">30-day <strong>repeat send rate</strong> (per first-sender)</div>
       <div class="ak-now">83.2%</div>
       <div class="ak-then">vs T-1: 83.7%</div>
       <div class="ak-yoy">&minus;0.5pp (flat)</div>
     </div>
     <div class="audit-kpi down">
-      <div class="ak-label">30-day repeat senders (volume)</div>
+      <div class="ak-label">30-day repeat senders (<strong>volume</strong>)</div>
       <div class="ak-now">104,116</div>
       <div class="ak-then">vs T-1: 146,159</div>
       <div class="ak-yoy">&minus;28.8% YoY</div>
+    </div>
+    <div class="audit-kpi down">
+      <div class="ak-label">Bulk <strong>Abandon</strong> volume / mo</div>
+      <div class="ak-now">325,869</div>
+      <div class="ak-then">vs T-1: 295,054</div>
+      <div class="ak-yoy">+10.4% (worse)</div>
+    </div>
+    <div class="audit-kpi flat">
+      <div class="ak-label">GenAI Content Gen Bulk <strong>adoption</strong></div>
+      <div class="ak-now">14.8%</div>
+      <div class="ak-then">vs T-1: 15.5%</div>
+      <div class="ak-yoy">&minus;0.7pp</div>
+    </div>
+  </div>
+
+  <h2><span class="num">1.3</span>Quality / retention metrics (editor-influenced, multi-owner)</h2>
+  <p style="font-size:12.5px; color:var(--muted); margin-bottom:8px;">Editor PM influences these but does not solely own them &mdash; partner with Onboarding / Pricing / Support.</p>
+  <div class="grid cols-4" style="margin-bottom:14px;">
+    <div class="audit-kpi up">
+      <div class="ak-label">Median days to first send</div>
+      <div class="ak-now">5 days</div>
+      <div class="ak-then">vs T-1: 6 days</div>
+      <div class="ak-yoy">&minus;1 day (better)</div>
     </div>
     <div class="audit-kpi up">
       <div class="ak-label">90-day churn rate (true)</div>
@@ -5256,33 +5268,84 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       <div class="ak-then">vs T-1: 2.24</div>
       <div class="ak-yoy">+0.25 / Net CSAT +15.2pp</div>
     </div>
+    <div class="audit-kpi flat">
+      <div class="ak-label">Sent first email in 90d (paid Nuni signup cohort)</div>
+      <div class="ak-now">48.4%</div>
+      <div class="ak-then">vs T-1: 49.4%</div>
+      <div class="ak-yoy">&minus;1.0pp</div>
+    </div>
+    <div class="audit-kpi flat">
+      <div class="ak-label">Abandoned in 90d (paid Nuni signup cohort)</div>
+      <div class="ak-now">51.6%</div>
+      <div class="ak-then">vs T-1: 50.6%</div>
+      <div class="ak-yoy">+1.0pp (worse)</div>
+    </div>
+    <div class="audit-kpi flat" style="border-left-color: var(--muted); background:#F1F2F4;">
+      <div class="ak-label">Klaviyo bake-off win rate (estimate)</div>
+      <div class="ak-now">&lt;10%</div>
+      <div class="ak-then">vs T-1: &lt;10%</div>
+      <div class="ak-yoy">Flat &middot; instrumentation gap</div>
+    </div>
   </div>
 
-  <h2><span class="num">1.3</span>Why this matters &mdash; volume vs. behavior</h2>
-  <div class="grid cols-2">
-    <div class="card">
-      <div class="eyebrow" style="color: var(--bad);">Volume problem (acquisition + funnel)</div>
-      <h3 style="margin:6px 0 4px; font-size:15px;">The pool feeding the editor is shrinking</h3>
+  <h2><span class="num">1.4</span>Cross-functional dependencies (NOT editor-PM owned, tracked for context)</h2>
+  <p style="font-size:12.5px; color:var(--muted); margin-bottom:8px;">Top-of-funnel acquisition + free&rarr;paid pricing-funnel are owned by Marketing + Pricing. Editor PM cannot move these directly. Tracked for context because they shape the pool feeding adoption.</p>
+  <div class="grid cols-3" style="margin-bottom:12px;">
+    <div class="audit-kpi down" style="opacity: 0.85;">
+      <div class="ak-label">Paid signups (Nuni cohort, 10mo) &mdash; <em>Marketing-owned</em></div>
+      <div class="ak-now">258,385</div>
+      <div class="ak-then">vs T-1: 353,733</div>
+      <div class="ak-yoy">&minus;27.0% YoY</div>
+    </div>
+    <div class="audit-kpi down" style="opacity: 0.85;">
+      <div class="ak-label">Free &rarr; paid 90d &mdash; <em>Pricing-owned</em></div>
+      <div class="ak-now">12.64%</div>
+      <div class="ak-then">vs T-1: 14.41%</div>
+      <div class="ak-yoy">&minus;1.77pp (&minus;12.3% rel.)</div>
+    </div>
+    <div class="audit-kpi down" style="opacity: 0.85;">
+      <div class="ak-label">Fast paid converters (&le;30d) &mdash; <em>Marketing+Pricing</em></div>
+      <div class="ak-now">42,116</div>
+      <div class="ak-then">vs T-1: 60,271</div>
+      <div class="ak-yoy">&minus;30.1% YoY</div>
+    </div>
+  </div>
+
+  <h2><span class="num">1.5</span>Why this matters &mdash; activation is the bleeding edge</h2>
+  <div class="grid cols-3">
+    <div class="card" style="background:#FFF5F2; border-color:#FCD9CC;">
+      <div class="eyebrow" style="color: var(--bad);">Activation degradation (editor-owned)</div>
+      <h3 style="margin:6px 0 4px; font-size:15px;">More users touch the builder, fewer become habitual</h3>
       <ul>
-        <li><strong>&minus;27% paid signups</strong> in the Nuni cohort YoY (95K fewer over 10 months).</li>
-        <li><strong>&minus;12.3% relative drop in free&rarr;paid 90d</strong> (14.4% &rarr; 12.6%) on a pool of ~2M signups = ~38K fewer paid conversions.</li>
-        <li><strong>Bulk Established &minus;9.4% YoY</strong> (cross-link to <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a>).</li>
-        <li><strong>Klaviyo customer growth +27% YoY</strong> (143K brands) &mdash; the at-bats are leaving for a competitor (cross-link to <a href="#klviedi" onclick="document.querySelector('[data-tab=klviedi]').click();return false;">Klaviyo Brief</a>).</li>
+        <li><strong>Bulk activation 63.0% &rarr; 60.6%</strong> (&minus;2.4pp YoY).</li>
+        <li><strong>Bulk Abandon volume +10.4%</strong> (295K &rarr; 326K/mo).</li>
+        <li>Pattern: adoption is HEALTHY (+1.9pp), <strong>activation is BREAKING</strong>.</li>
+        <li>Implication: the editor onboards but doesn&rsquo;t convert into the habitual loop.</li>
+      </ul>
+    </div>
+    <div class="card warm">
+      <div class="eyebrow" style="color: var(--warn);">SMS upside (editor-owned, undertapped)</div>
+      <h3 style="margin:6px 0 4px; font-size:15px;">SMS adoption + activation both improving but TINY</h3>
+      <ul>
+        <li><strong>SMS adoption 4.6% &rarr; 6.1%</strong> (+1.5pp).</li>
+        <li><strong>SMS activation 6.8% &rarr; 9.1%</strong> (+2.3pp).</li>
+        <li>Only ~62K paid users / mo even touch SMS &mdash; vs ~941K touching bulk.</li>
+        <li>Biggest single editor-PM lever for unified-builder ARR.</li>
       </ul>
     </div>
     <div class="card olive">
-      <div class="eyebrow" style="color: var(--good);">Behavior side (per-user) &mdash; not bleeding</div>
-      <h3 style="margin:6px 0 4px; font-size:15px;">The customers we keep are slightly better off</h3>
+      <div class="eyebrow" style="color: var(--good);">Quality side (editor-influenced) &mdash; not bleeding</div>
+      <h3 style="margin:6px 0 4px; font-size:15px;">The customers who become habitual are slightly better off</h3>
       <ul>
-        <li><strong>30-day repeat send rate flat at 83%</strong> &mdash; the engagement loop is intact.</li>
-        <li><strong>Net CSAT +15pp YoY</strong> on the Nuni Feedback Badge (still &minus;29 net, gap to neutral remains).</li>
+        <li><strong>30-day repeat send rate flat at 83%</strong> &mdash; loop is intact.</li>
+        <li><strong>Net CSAT +15pp YoY</strong> (still &minus;29 net &mdash; gap to neutral remains).</li>
         <li><strong>True 90-day churn improved &minus;1.4pp</strong>, downgrades &minus;1.7pp, time-to-send &minus;1 day.</li>
-        <li>Implication: <strong>fix the funnel; the engine works once you're inside.</strong></li>
+        <li>Implication: <strong>fix activation; the rest is moving the right way.</strong></li>
       </ul>
     </div>
   </div>
 
-  <p class="source"><strong>Cohort definition:</strong> &ldquo;Paid Nuni cohort&rdquo; = users with <code>signup_date &ge; 2023-07-01</code> AND who appear in <code>users_packages</code> with at least one <code>package_id NOT LIKE 'free%'</code> within the trailing 12-month windows. T0 = signed Jul-2023 to <strong>Feb 2026</strong> (90-day observation window applied consistently to both cohorts). All YoY comparisons are like-for-like (10-month observation per cohort to ensure all users had &ge;90 days to convert and send).</p>
+  <p class="source"><strong>Definitions &amp; cohort:</strong> <strong>Adoption</strong> = stages 2_Explore + 3_Try + 4_Establish + 5_Abandon &divide; total paid users (1+2+3+4+5). <strong>Activation</strong> = 4_Establish &divide; (2+3+4+5) = % of users who touched the builder that became habitual senders. Source: <code>bi_aggregate.product_journey_monthly</code> trailing 12 months, <code>package NOT LIKE 'free%'</code> AND NOT IN ('payg','pre paid','pro/module/other','unknown'). Funnel cohort (90-day first-send) uses Nuni paid signup proxy (signed &ge; Jul-1-2023 with paid package). All YoY comparisons are like-for-like (10-month observation window for funnel; 12-month average for stage-state).</p>
 </section>
 
 <!-- ============ PAGE 2: QA / QC FINDINGS ============ -->
@@ -5528,19 +5591,21 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 <section class="page">
   <div class="page-head">
     <div>
-      <div class="eyebrow">Page 4 &middot; Target-state model</div>
-      <h1>Recover ~$17M loss + deliver $15M additional swing = ~$32M ARR by FY27</h1>
-      <div class="subtitle">Per-metric target values that, taken together, close the editor-attributable loss <strong>and</strong> deliver an extra $15M ARR. Each target is sized to be <strong>credible-but-stretched</strong> &mdash; visibly beyond T-1 baseline, but anchored to industry benchmarks where they exist (Klaviyo activation cadence, editor-led platform conversion). Causal shares match Page 3.</div>
+      <div class="eyebrow">Page 4 &middot; Target-state model (editor-PM owned)</div>
+      <h1>Editor-PM commit ~$22M; Mktg+Pricing partners deliver ~$10M; combined ~$32M ARR swing</h1>
+      <div class="subtitle">Per-metric target values that, taken together, close the editor-attributable loss (~$17M) <strong>and</strong> deliver an extra $15M ARR. <strong>Restructured to separate editor-PM owned levers (leading indicators + quality) from cross-functional dependencies (acquisition + pricing funnel).</strong> Editor-PM commits to its own ~$22M; partners commit to the remaining ~$10M. Each target is <strong>credible-but-stretched</strong> &mdash; anchored to industry benchmarks where they exist (Klaviyo activation cadence, omnichannel attach rates).</div>
     </div>
     <div class="meta">
       <strong>Loss to recover: ~$17M (midpoint $13&ndash;20M)</strong><br/>
       <strong>Additional swing: $15M</strong><br/>
-      <strong>Target gross ARR swing: ~$32M/yr</strong><br/>
-      9 levers &middot; 4 sensitivity scenarios
+      <strong>Editor-PM owned: ~$22M</strong> (7 levers)<br/>
+      <strong>Cross-functional: ~$10M</strong> (2 partner levers)<br/>
+      <strong>Combined: ~$32M ARR / yr</strong>
     </div>
   </div>
 
-  <h2><span class="num">4.1</span>Per-metric target scorecard (the nine levers)</h2>
+  <h2><span class="num">4.1</span>Per-metric target scorecard &mdash; editor-PM owned (the seven levers)</h2>
+  <p style="font-size:12.5px; color:var(--muted); margin-bottom:8px;"><strong>Leading indicators (L1&ndash;L4)</strong> = adoption + activation + 30-day repeat &mdash; the metrics editor PM moves directly. <strong>Quality / retention (L5&ndash;L8)</strong> = customer outcomes editor PM influences with partners. <strong>Competition (L9)</strong> = bake-off win rate driven by deliverables.</p>
   <table class="target-tbl" style="margin-bottom:14px;">
     <thead>
       <tr>
@@ -5555,227 +5620,290 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       </tr>
     </thead>
     <tbody>
+      <tr style="background:#F4FBF7;"><td colspan="8" style="font-weight:700; color:#036A4F; padding:6px 10px; font-size:11px; letter-spacing:.06em; text-transform:uppercase;">Leading indicators &mdash; editor-PM owned (the metrics product moves directly)</td></tr>
       <tr>
-        <td><strong>L1. Paid signups (Nuni cohort, 12mo)</strong></td>
-        <td>424K (annualized)</td>
-        <td class="t-now">310K</td>
-        <td class="t-tgt">445K (+5% over T-1)</td>
-        <td>Reverse free&rarr;paid drop, brand-native templates, AI Email Setup, Klaviyo win-backs.</td>
-        <td>15%</td>
-        <td class="t-dollar">$10.9M</td>
-        <td>34%</td>
+        <td><strong>L1. Bulk builder adoption</strong> (% paid users touched)</td>
+        <td>90.8%</td>
+        <td class="t-now">92.7%</td>
+        <td class="t-tgt">98%</td>
+        <td>Brand-native templates, Universal Content starter blocks, AI Email Setup Agent, NEB Code Mode, in-app onboarding nudges.</td>
+        <td>50%</td>
+        <td class="t-dollar">$4.4M</td>
+        <td>14%</td>
       </tr>
       <tr>
-        <td><strong>L2. Free &rarr; paid conv (90d)</strong></td>
-        <td>14.41%</td>
-        <td class="t-now">12.64%</td>
-        <td class="t-tgt">16.0%</td>
-        <td>AI Email Setup Agent (1-step), Smart Drafts, brand-kit auto-applied, faster activation.</td>
-        <td>20%</td>
-        <td class="t-dollar">$7.3M</td>
-        <td>23%</td>
+        <td><strong>L2. SMS builder adoption</strong> (% paid users touched)</td>
+        <td>4.6%</td>
+        <td class="t-now">6.1%</td>
+        <td class="t-tgt">20%</td>
+        <td>SMS in-canvas (P5), unified compose, SMS quick-start templates, conversational + generative SMS (P4), SMS attach in checkout.</td>
+        <td>50%</td>
+        <td class="t-dollar">$5.1M</td>
+        <td>16%</td>
       </tr>
       <tr>
-        <td><strong>L3. Sent first email (90d)</strong></td>
-        <td>49.4%</td>
-        <td class="t-now">48.4%</td>
-        <td class="t-tgt">62%</td>
-        <td>Reduce abandonment via AI Setup, Brand Kit auto-applied, regression suite for reliability, Universal Content reuse.</td>
-        <td>25%</td>
-        <td class="t-dollar">$4.7M</td>
-        <td>15%</td>
+        <td><strong>L3. Bulk builder activation</strong> (% touched &rarr; Established)</td>
+        <td>63.0%</td>
+        <td class="t-now">60.6%</td>
+        <td class="t-tgt">75%</td>
+        <td>Reduce abandonment via P1 reliability + P1.5 SLOs + AI Setup Agent + Brand Kit auto-applied + Universal Content reuse + cross-browser regression suite.</td>
+        <td>50%</td>
+        <td class="t-dollar">$1.9M</td>
+        <td>6%</td>
       </tr>
       <tr>
-        <td><strong>L4. Median time-to-first-send</strong></td>
-        <td>6 days</td>
-        <td class="t-now">5 days</td>
-        <td class="t-tgt">2 days</td>
-        <td>AI Setup Agent + Smart Drafts + Brand Kit + Universal Content starter blocks.</td>
-        <td>n/a</td>
-        <td class="t-dollar">(in L1&ndash;L3)</td>
-        <td>&mdash;</td>
+        <td><strong>L4. SMS builder activation</strong> (% touched &rarr; Established)</td>
+        <td>6.8%</td>
+        <td class="t-now">9.1%</td>
+        <td class="t-tgt">25%</td>
+        <td>Email-to-SMS template porting, conversational SMS, send-time intelligence, omnichannel reporting in-canvas.</td>
+        <td>50%</td>
+        <td class="t-dollar">$1.2M</td>
+        <td>4%</td>
       </tr>
       <tr>
         <td><strong>L5. 30-day repeat send rate</strong></td>
         <td>83.7%</td>
         <td class="t-now">83.2%</td>
-        <td class="t-tgt">90%</td>
-        <td>Smart Send Time, AI Performance Watchdog, Universal Content for fast iteration, omnichannel triggers.</td>
+        <td class="t-tgt">92%</td>
+        <td>Smart Send Time, AI Performance Watchdog, Universal Content for fast iteration, omnichannel triggers, in-canvas revenue.</td>
         <td>35%</td>
-        <td class="t-dollar">$1.3M</td>
-        <td>4%</td>
+        <td class="t-dollar">$2.1M</td>
+        <td>7%</td>
       </tr>
+      <tr style="background:#FFFCF0;"><td colspan="8" style="font-weight:700; color:#8A4A00; padding:6px 10px; font-size:11px; letter-spacing:.06em; text-transform:uppercase;">Quality / retention &mdash; editor-influenced (multi-owner with onboarding / pricing / support)</td></tr>
       <tr>
         <td><strong>L6. 90-day churn (true)</strong></td>
         <td>33.5%</td>
         <td class="t-now">32.1%</td>
-        <td class="t-tgt">24%</td>
-        <td>Better activation + Builder SLOs (P1.5) + Klaviyo countermoves + sticky onboarding.</td>
-        <td>35%</td>
-        <td class="t-dollar">$1.3M</td>
-        <td>4%</td>
+        <td class="t-tgt">22%</td>
+        <td>Better activation (L3) + Builder SLOs (P1.5) + cited HVC bug-fix + Klaviyo countermoves + sticky onboarding flows.</td>
+        <td>40%</td>
+        <td class="t-dollar">$1.7M</td>
+        <td>5%</td>
       </tr>
       <tr>
         <td><strong>L7. 90-day downgrade</strong></td>
         <td>21.8%</td>
         <td class="t-now">20.1%</td>
-        <td class="t-tgt">15%</td>
-        <td>Repeat-usage habit, omnichannel value-add (SMS attach), AI add-on attach.</td>
-        <td>30%</td>
-        <td class="t-dollar">$0.3M</td>
+        <td class="t-tgt">13%</td>
+        <td>Repeat-usage habit (L5), omnichannel value-add (SMS attach, L2/L4), AI add-on attach, in-canvas revenue surfacing.</td>
+        <td>35%</td>
+        <td class="t-dollar">$0.4M</td>
         <td>1%</td>
       </tr>
       <tr>
         <td><strong>L8. 90-day upgrade</strong></td>
         <td>5.83%</td>
         <td class="t-now">6.09%</td>
-        <td class="t-tgt">10%</td>
-        <td>AI Email Setup paid uplift, SMS attach, in-canvas revenue, premium templates.</td>
-        <td>30%</td>
-        <td class="t-dollar">$0.3M</td>
-        <td>1%</td>
+        <td class="t-tgt">12%</td>
+        <td>AI Email Setup paid uplift, SMS attach, in-canvas revenue, premium templates, Brand-Kit-aware AI add-on.</td>
+        <td>35%</td>
+        <td class="t-dollar">$0.5M</td>
+        <td>2%</td>
       </tr>
       <tr>
         <td><strong>L9. Net CSAT (Nuni Badge)</strong></td>
         <td>&minus;44.5</td>
         <td class="t-now">&minus;29.3</td>
-        <td class="t-tgt">+25 (positive)</td>
-        <td>SLOs (P1.5), parity polish, AI Assistant, Universal Content, 6 Klaviyo gap closures.</td>
+        <td class="t-tgt">+30 (positive)</td>
+        <td>Builder SLOs (P1.5), parity polish, AI Assistant, Universal Content, 6 Klaviyo gap closures, render fidelity guarantees.</td>
         <td>30%</td>
-        <td class="t-dollar">$5.2M</td>
-        <td>16%</td>
+        <td class="t-dollar">$5.7M</td>
+        <td>18%</td>
       </tr>
+      <tr style="background:#F4F3FF;"><td colspan="8" style="font-weight:700; color:#2A1FA8; padding:6px 10px; font-size:11px; letter-spacing:.06em; text-transform:uppercase;">Competition &mdash; deliverable-driven (Editor PM + Sales Eng partnership)</td></tr>
       <tr>
         <td><strong>L10. Klaviyo bake-off win rate</strong></td>
         <td>&lt;10% (estimate)</td>
         <td class="t-now">&lt;10%</td>
-        <td class="t-tgt">30%</td>
-        <td>All P1&ndash;P5 deliverables landing; explicit ammunition for sales (Builder SLOs + Universal Content + Brand-Kit-native AI).</td>
+        <td class="t-tgt">35%</td>
+        <td>All P1&ndash;P5 deliverables landing; explicit ammunition for sales (Builder SLOs + Universal Content + Brand-Kit-native AI + multi-brand kits + real-time co-edit).</td>
+        <td>40%</td>
+        <td class="t-dollar">$6.0M</td>
+        <td>19%</td>
+      </tr>
+      <tr style="background:#FFFCF0; font-weight:700;">
+        <td colspan="6"><strong>EDITOR-PM OWNED SUBTOTAL</strong> (L1&ndash;L10 above, leading + quality + competition)</td>
+        <td class="t-dollar">$29.0M</td>
+        <td>91%</td>
+      </tr>
+      <tr style="background:#F1F2F4;"><td colspan="8" style="font-weight:700; color:#374151; padding:6px 10px; font-size:11px; letter-spacing:.06em; text-transform:uppercase;">Cross-functional dependencies &mdash; Marketing + Pricing partner-owned (NOT editor-PM commit)</td></tr>
+      <tr style="opacity:0.85;">
+        <td><strong>X1. Paid signups</strong> (Marketing-owned)</td>
+        <td>424K (annualized)</td>
+        <td class="t-now">310K</td>
+        <td class="t-tgt">390K (recover)</td>
+        <td>Top-of-funnel marketing, Klaviyo win-backs, retention of free-tier funnel. Editor PM supports via brand-native templates + AI Setup, not driver.</td>
         <td>n/a</td>
         <td class="t-dollar">$5.0M</td>
         <td>16%</td>
       </tr>
-      <tr style="background:#FFFCF0; font-weight:700;">
-        <td><strong>TOTAL</strong></td>
-        <td>&mdash;</td>
-        <td>&mdash;</td>
-        <td>&mdash;</td>
-        <td><strong>If all targets hit</strong></td>
-        <td>&mdash;</td>
-        <td class="t-dollar">$36.3M</td>
-        <td>~115% of $32M</td>
+      <tr style="opacity:0.85;">
+        <td><strong>X2. Free &rarr; paid 90d</strong> (Pricing-owned)</td>
+        <td>14.41%</td>
+        <td class="t-now">12.64%</td>
+        <td class="t-tgt">15.5% (recover + push)</td>
+        <td>Engagement-based pricing (P3.4.3), trial mechanics, paywall design, free-tier UX. Editor PM contributes via faster activation (L3).</td>
+        <td>n/a</td>
+        <td class="t-dollar">$5.0M</td>
+        <td>16%</td>
+      </tr>
+      <tr style="background:#F1F2F4; font-weight:700;">
+        <td colspan="6"><strong>CROSS-FUNCTIONAL SUBTOTAL</strong> (X1+X2, partner commitments)</td>
+        <td class="t-dollar">$10.0M</td>
+        <td>31%</td>
+      </tr>
+      <tr style="background:#FFE9C2; font-weight:700;">
+        <td colspan="6"><strong>COMBINED TOTAL</strong> (editor-PM owned + cross-functional)</td>
+        <td class="t-dollar">$39.0M</td>
+        <td>~122% of $32M</td>
       </tr>
     </tbody>
   </table>
 
-  <p style="font-size:12px; color:var(--muted); margin-bottom:14px;"><strong>Why total exceeds $32M:</strong> deliberate ~15% headroom so that the plan still clears the goal even if 1-2 levers underperform. Sensitivity in 4.3 below.</p>
+  <p style="font-size:12px; color:var(--muted); margin-bottom:14px;"><strong>Why combined exceeds $32M:</strong> deliberate ~22% headroom so the plan still clears the goal even if 2&ndash;3 levers underperform. The editor-PM commit alone (~$29M) is enough to recover the $17M loss + deliver ~$12M of the $15M swing &mdash; the remaining $3M is the cross-functional contribution. Sensitivity in 4.3 below.</p>
 
   <h2><span class="num">4.2</span>Lever calculations (full math)</h2>
+  <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">Editor-PM owned levers shown in detail. ARPU sources: <code>bi_aggregate.mbr_monthly</code> (Standard at-booking $45.35/mo, steady-state $91.44/mo, SMS add-on est. $20/mo). Volume base: 1,015,648 paid active users / mo (T0 average from <code>product_journey_monthly</code>).</p>
   <div class="grid cols-2" style="margin-bottom:14px;">
     <div class="impact-card l1">
-      <div class="ic-eye">L1 &middot; Signups recovery + growth</div>
-      <h4>310K &rarr; 445K (+135K paid signups/yr)</h4>
+      <div class="ic-eye">L1 &middot; Bulk builder adoption (LEADING INDICATOR)</div>
+      <h4>92.7% &rarr; 98% (+5.3pp on 1.02M paid users)</h4>
       <div class="calc">
-        <span class="lbl">target_signups_yr</span>   = T-1 (424K) &times; 1.05 = 445K
-        <br/><span class="lbl">delta</span>           = 445K &minus; 310K = 135K
-        <br/><span class="lbl">arr_per_signup</span>  = $540/yr (at-booking)
-        <br/><span class="lbl">editor_share</span>    = 15%
-        <br/><span class="out">impact</span> = 135K &times; $540 &times; 15% = <span class="out">$10.9M/yr</span>
+        <span class="lbl">incremental_adopters</span>  = 5.3pp &times; 1.02M = 54K more users / mo touching
+        <br/><span class="lbl">conversion_to_active</span> = ~15% become net-new active senders
+        <br/><span class="lbl">arpu_steadystate</span>     = $91.44/mo &times; 12 = $1,097/yr
+        <br/><span class="lbl">editor_share</span>         = 50% (this IS the editor PM&rsquo;s job)
+        <br/><span class="out">impact</span> = 54K &times; 15% &times; $1,097 &times; 50% = <span class="out">$4.4M/yr</span>
       </div>
     </div>
     <div class="impact-card l1">
-      <div class="ic-eye">L2 &middot; Free &rarr; paid recovery + push</div>
-      <h4>12.64% &rarr; 16.0% (+3.36pp on ~2M)</h4>
+      <div class="ic-eye">L2 &middot; SMS builder adoption (LEADING INDICATOR &middot; biggest editor lever)</div>
+      <h4>6.1% &rarr; 20% (+13.9pp on 1.02M paid users)</h4>
       <div class="calc">
-        <span class="lbl">incremental_paid</span> = 3.36pp &times; ~2M = +67K paid/yr
-        <br/><span class="lbl">arr_per_paid</span> = $540/yr
-        <br/><span class="lbl">editor_share</span> = 20%
-        <br/><span class="out">impact</span> = 67K &times; $540 &times; 20% = <span class="out">$7.3M/yr</span>
+        <span class="lbl">incremental_adopters</span>  = 13.9pp &times; 1.02M = 141K more users / mo touching SMS
+        <br/><span class="lbl">attach_rate</span>          = ~30% pay for SMS add-on
+        <br/><span class="lbl">arpu_sms_addon</span>       = $20/mo &times; 12 = $240/yr
+        <br/><span class="lbl">editor_share</span>         = 50%
+        <br/><span class="out">impact</span> = 141K &times; 30% &times; $240 &times; 50% = <span class="out">$5.1M/yr</span>
       </div>
     </div>
     <div class="impact-card l1">
-      <div class="ic-eye">L3 &middot; Activation (first-send 90d)</div>
-      <h4>48.4% &rarr; 62% (+13.6pp)</h4>
+      <div class="ic-eye">L3 &middot; Bulk builder activation (LEADING INDICATOR &middot; reverse the &minus;2.4pp YoY)</div>
+      <h4>60.6% &rarr; 75% (+14.4pp of those who touched)</h4>
       <div class="calc">
-        <span class="lbl">incremental_first_senders</span> = 13.6pp &times; 258K paid signups (10mo) &times; 12/10 = ~42K/yr
-        <br/><span class="lbl">arr_per_activated</span>     = $540/yr (retained at year 1)
-        <br/><span class="lbl">editor_share</span>          = 25%
-        <br/><span class="out">impact</span> = 42K &times; $540 &times; 25% &times; ~85% retention factor = <span class="out">$4.7M/yr</span>
+        <span class="lbl">incremental_established</span>  = 14.4pp &times; 941K touched/mo = 135K incremental Established
+        <br/><span class="lbl">prevented_churn</span>        = 25% would have abandoned in 12mo
+        <br/><span class="lbl">arpu</span>                   = $91.44/mo &times; 12 = $1,097/yr
+        <br/><span class="lbl">editor_share</span>           = 50%
+        <br/><span class="out">impact</span> = 135K &times; 25% &times; $1,097 &times; 50% = <span class="out">$1.9M/yr</span> (conservative)
       </div>
     </div>
-    <div class="impact-card l2">
-      <div class="ic-eye">L5 &middot; Repeat-usage rate</div>
-      <h4>83.2% &rarr; 90% (+6.8pp)</h4>
+    <div class="impact-card l1">
+      <div class="ic-eye">L4 &middot; SMS builder activation (LEADING INDICATOR)</div>
+      <h4>9.1% &rarr; 25% (+15.9pp of SMS-touched)</h4>
       <div class="calc">
-        <span class="lbl">delta_repeaters</span> = 6.8pp &times; 125K T0 senders = 8.5K
+        <span class="lbl">incremental_sms_established</span>  = 15.9pp &times; 62K touched SMS/mo = 9.9K
+        <br/><span class="lbl">arpu_sms_attach</span>            = $240/yr
+        <br/><span class="lbl">editor_share</span>               = 50%
+        <br/><span class="out">impact</span> = 9.9K &times; $240 &times; 50% = <span class="out">$1.2M/yr</span>
+      </div>
+    </div>
+    <div class="impact-card l1">
+      <div class="ic-eye">L5 &middot; 30-day repeat send rate (LEADING INDICATOR)</div>
+      <h4>83.2% &rarr; 92% (+8.8pp)</h4>
+      <div class="calc">
+        <span class="lbl">delta_repeaters</span> = 8.8pp &times; 125K T0 senders = 11K incremental
         <br/><span class="lbl">retention_uplift</span> = +6mo @ $91.44/mo = $549 LTV
         <br/><span class="lbl">editor_share</span>    = 35%
-        <br/><span class="out">impact (3-yr LTV)</span> = 8.5K &times; $549 &times; 35% = $1.6M LTV ~ <span class="out">$1.3M/yr ARR</span>
+        <br/><span class="out">impact (3-yr LTV)</span> = 11K &times; $549 &times; 35% = $2.1M LTV ~ <span class="out">$2.1M/yr ARR</span>
       </div>
     </div>
     <div class="impact-card l2">
-      <div class="ic-eye">L6 &middot; 90-day churn reduction</div>
-      <h4>32.1% &rarr; 24% (&minus;8.1pp)</h4>
+      <div class="ic-eye">L6 &middot; 90-day churn reduction (QUALITY)</div>
+      <h4>32.1% &rarr; 22% (&minus;10.1pp)</h4>
       <div class="calc">
-        <span class="lbl">churn_users_saved</span> = 8.1pp &times; 50K fast paid converters/yr = 4.0K
-        <br/><span class="lbl">arr_per_saved</span>  = $1,092/yr (steady-state)
-        <br/><span class="lbl">editor_share</span>   = 35%
-        <br/><span class="out">impact</span> = 4.0K &times; $1,092 &times; 35% = <span class="out">$1.5M/yr</span> (~$1.3M conservative)
+        <span class="lbl">churn_users_saved</span> = 10.1pp &times; 50K fast paid converters/yr = 5.0K
+        <br/><span class="lbl">arpu</span>           = $1,097/yr (steady-state)
+        <br/><span class="lbl">editor_share</span>   = 40%
+        <br/><span class="out">impact</span> = 5.0K &times; $1,097 &times; 40% = <span class="out">$2.2M/yr</span> (~$1.7M conservative)
       </div>
     </div>
     <div class="impact-card l2">
-      <div class="ic-eye">L9 &middot; CSAT &rarr; positive zone</div>
-      <h4>Net CSAT &minus;29 &rarr; +25 (54pp swing)</h4>
+      <div class="ic-eye">L9 &middot; CSAT &rarr; positive zone (QUALITY &middot; biggest single $)</div>
+      <h4>Net CSAT &minus;29 &rarr; +30 (59pp swing)</h4>
       <div class="calc">
-        <span class="lbl">churn_reduction</span> = 5.4pp (1pp / 10pp NPS)
+        <span class="lbl">churn_reduction</span> = 5.9pp (1pp / 10pp NPS academic benchmark)
         <br/><span class="lbl">active_users</span> = 320K Standard
-        <br/><span class="lbl">opportunity</span>  = 320K &times; 5.4% &times; $1,092 = $18.9M
+        <br/><span class="lbl">opportunity</span>  = 320K &times; 5.9% &times; $1,097 = $20.7M
         <br/><span class="lbl">editor_share</span>  = 30%
-        <br/><span class="out">impact</span> = <span class="out">$5.7M/yr</span> (~$5.2M conservative cap)
+        <br/><span class="out">impact</span> = <span class="out">$6.2M/yr</span> (~$5.7M conservative cap)
       </div>
     </div>
-    <div class="impact-card l1">
-      <div class="ic-eye">L10 &middot; Klaviyo bake-off wins</div>
-      <h4>Win 30% of bake-offs (was &lt;10%)</h4>
+    <div class="impact-card l2" style="background: linear-gradient(180deg,#F4F3FF,#FFFFFF); border-left-color: #4338CA;">
+      <div class="ic-eye">L10 &middot; Klaviyo bake-off wins (COMPETITION)</div>
+      <h4>Win 35% of bake-offs (was &lt;10%)</h4>
       <div class="calc">
         <span class="lbl">bake_offs_won_incremental</span> = ~5K accounts/yr (mid-market)
-        <br/><span class="lbl">arr_per_account</span>      = ~$3K/yr (mid-market avg)
-        <br/><span class="lbl">editor_share</span>         = 35% (P1&ndash;P5 deliverables ARE the pitch)
-        <br/><span class="out">impact</span> = 5K &times; $3K &times; 35% = <span class="out">$5.0M/yr</span>
+        <br/><span class="lbl">arpu_per_account</span>      = ~$3.4K/yr (mid-market avg)
+        <br/><span class="lbl">editor_share</span>          = 40% (P1&ndash;P5 deliverables ARE the pitch)
+        <br/><span class="out">impact</span> = 5K &times; $3.4K &times; 40% = <span class="out">$6.0M/yr</span>
       </div>
     </div>
     <div class="impact-card l2" style="background: linear-gradient(180deg,#FFFCF0,#FFF8E0); border-left-color: var(--brand);">
-      <div class="ic-eye">L7 + L8 &middot; Tier movement</div>
-      <h4>Downgrades 20% &rarr; 15%; upgrades 6% &rarr; 10%</h4>
+      <div class="ic-eye">L7 + L8 &middot; Tier movement (QUALITY, smaller direct $ but high signal)</div>
+      <h4>Downgrades 20.1% &rarr; 13%; upgrades 6.09% &rarr; 12%</h4>
       <div class="calc">
-        <span class="lbl">L7</span>: 5.1pp &times; 50K &times; $400/yr (downgrade ARPU delta) &times; 30% = <span class="out">$0.3M</span>
-        <br/><span class="lbl">L8</span>: 3.91pp &times; 50K &times; $300/yr (upgrade ARPU delta) &times; 30% = <span class="out">$0.3M</span>
+        <span class="lbl">L7</span>: 7.1pp &times; 50K &times; $400/yr (downgrade ARPU delta) &times; 35% = <span class="out">$0.4M</span>
+        <br/><span class="lbl">L8</span>: 5.91pp &times; 50K &times; $300/yr (upgrade ARPU delta) &times; 35% = <span class="out">$0.5M</span>
       </div>
-      <p style="font-size:11.5px; color:var(--muted); margin:4px 0 0;">Smaller direct $ but high signal-to-product-quality ratio.</p>
+    </div>
+    <div class="impact-card l1" style="background: linear-gradient(180deg,#F1F2F4,#FFFFFF); border-left-color:#374151; opacity:0.85;">
+      <div class="ic-eye">X1 &middot; Paid signups (CROSS-FUNCTIONAL &middot; Marketing-owned)</div>
+      <h4>310K &rarr; 390K (+80K paid signups, recover ~70% of YoY drop)</h4>
+      <div class="calc">
+        <span class="lbl">delta</span>           = 390K &minus; 310K = 80K
+        <br/><span class="lbl">arr_per_signup</span>  = $540/yr (at-booking)
+        <br/><span class="lbl">editor_share</span>    = ~12% (editor a small contributor; marketing owns)
+        <br/><span class="out">impact</span> = 80K &times; $540 &times; 12% = <span class="out">$5.0M/yr</span>
+      </div>
+      <p style="font-size:11.5px; color:var(--muted); margin:4px 0 0;"><strong>NOT an editor-PM commit.</strong> Tracked because adoption (L1/L2) builds on this pool.</p>
+    </div>
+    <div class="impact-card l1" style="background: linear-gradient(180deg,#F1F2F4,#FFFFFF); border-left-color:#374151; opacity:0.85;">
+      <div class="ic-eye">X2 &middot; Free &rarr; paid 90d (CROSS-FUNCTIONAL &middot; Pricing-owned)</div>
+      <h4>12.64% &rarr; 15.5% (+2.86pp on ~2M signups)</h4>
+      <div class="calc">
+        <span class="lbl">incremental_paid</span> = 2.86pp &times; ~2M = +57K paid/yr
+        <br/><span class="lbl">arr_per_paid</span>  = $540/yr
+        <br/><span class="lbl">editor_share</span>  = ~16% (editor contributes via faster activation; pricing owns)
+        <br/><span class="out">impact</span> = 57K &times; $540 &times; 16% = <span class="out">$5.0M/yr</span>
+      </div>
+      <p style="font-size:11.5px; color:var(--muted); margin:4px 0 0;"><strong>NOT an editor-PM commit.</strong> Pricing owns paywall, trial mechanics, engagement-based pricing.</p>
     </div>
   </div>
 
-  <h2><span class="num">4.3</span>Sensitivity &mdash; what hits if not all targets land</h2>
+  <h2><span class="num">4.3</span>Sensitivity &mdash; what hits if not all targets land (editor-PM owned only)</h2>
   <div class="grid cols-4" style="margin-bottom:14px;">
     <div class="scenario-card s50">
-      <div class="sc-eye">50% of targets hit</div>
-      <div class="sc-dollar">~$18M</div>
-      <div class="sc-label">Recovers loss only ($17M). $15M swing not delivered.</div>
+      <div class="sc-eye">50% of editor targets hit</div>
+      <div class="sc-dollar">~$15M</div>
+      <div class="sc-label">Recovers loss only ($13&ndash;20M band). Combined with cross-functional ($10M): <strong>~$25M</strong>. Goal short by $7M.</div>
     </div>
     <div class="scenario-card s75">
-      <div class="sc-eye">75% of targets hit</div>
-      <div class="sc-dollar">~$27M</div>
-      <div class="sc-label">Recovers loss + ~$10M swing (67% of goal).</div>
+      <div class="sc-eye">75% of editor targets hit</div>
+      <div class="sc-dollar">~$22M</div>
+      <div class="sc-label">Recovers loss + ~$5M swing. Combined with cross-functional: <strong>~$32M</strong>. <strong>Goal cleared.</strong></div>
     </div>
     <div class="scenario-card s100">
-      <div class="sc-eye">100% of targets hit</div>
-      <div class="sc-dollar">~$36M</div>
-      <div class="sc-label"><strong>Goal cleared with 15% headroom.</strong></div>
+      <div class="sc-eye">100% of editor targets hit</div>
+      <div class="sc-dollar">~$29M</div>
+      <div class="sc-label">Editor PM alone covers 91% of $32M. Combined with cross-functional: <strong>~$39M (122%)</strong>. <strong>Goal exceeded.</strong></div>
     </div>
     <div class="scenario-card s125">
-      <div class="sc-eye">125% (over-perform on 1-2)</div>
-      <div class="sc-dollar">~$45M</div>
-      <div class="sc-label">Plausible if Klaviyo bake-offs over-index or signups recover faster.</div>
+      <div class="sc-eye">125% (over-perform on 1&ndash;2)</div>
+      <div class="sc-dollar">~$36M</div>
+      <div class="sc-label">Plausible if SMS adoption (L2) over-indexes or Klaviyo bake-offs accelerate. Combined: <strong>~$46M</strong>.</div>
     </div>
   </div>
 
@@ -5791,66 +5919,87 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
     </thead>
     <tbody>
       <tr>
-        <td><strong>L1. Signups</strong></td>
-        <td>Marketing + Editor PM jointly</td>
-        <td>P3.1 (free-tier reopen), P3.4 (engagement-based pricing), brand-native templates (P2)</td>
+        <td><strong>L1. Bulk adoption</strong></td>
+        <td>Editor PM</td>
+        <td>P2 (Universal Content + NEB Code Mode), P4.4.4 (AI Setup Agent), brand-native templates, in-app onboarding (P3)</td>
         <td>Q3 FY27</td>
       </tr>
       <tr>
-        <td><strong>L2. Free&rarr;paid</strong></td>
+        <td><strong>L2. SMS adoption</strong></td>
         <td>Editor PM</td>
-        <td>P4.4.4 (AI Email Setup Agent), P3.1 (free-tier funnel), P2 (Universal Content)</td>
-        <td>Q3 FY27</td>
-      </tr>
-      <tr>
-        <td><strong>L3. First-send 90d</strong></td>
-        <td>Editor PM</td>
-        <td>P1 (reliability), P1.5 (SLOs), P4.4.4 (AI Setup Agent), P3 (activation funnel)</td>
+        <td>P5 (SMS in-canvas + unified compose), P4.4.5 (conversational + generative SMS), SMS quick-start templates</td>
         <td>Q4 FY27</td>
       </tr>
       <tr>
-        <td><strong>L5. Repeat-usage</strong></td>
+        <td><strong>L3. Bulk activation</strong></td>
+        <td>Editor PM</td>
+        <td>P1 (reliability), P1.5 (SLOs), P4.4.4 (AI Setup Agent), Brand Kit auto-applied (P2), Universal Content (P2)</td>
+        <td>Q4 FY27</td>
+      </tr>
+      <tr>
+        <td><strong>L4. SMS activation</strong></td>
+        <td>Editor PM</td>
+        <td>Email-to-SMS template porting (P5), conversational SMS (P4.4.5), in-canvas reporting (P5), send-time intelligence (P4.4.5)</td>
+        <td>Q5 FY28</td>
+      </tr>
+      <tr>
+        <td><strong>L5. 30-day repeat</strong></td>
         <td>Editor PM + Lifecycle</td>
-        <td>P5.1.5 (Push acceleration), P4.4.5 (Smart Send Time), P5 (omnichannel)</td>
+        <td>P5.1.5 (Push acceleration), P4.4.5 (Smart Send Time), P4.4.6 (AI Performance Watchdog), P5 (omnichannel)</td>
         <td>Q5 FY28</td>
       </tr>
       <tr>
         <td><strong>L6. 90-day churn</strong></td>
         <td>Editor PM + Onboarding</td>
-        <td>P1.5 (Builder SLOs), P1 (cited HVC bug-fix), P3 (activation)</td>
+        <td>P1.5 (Builder SLOs), P1 (cited HVC bug-fix), L3 activation flow-through</td>
         <td>Q4 FY27</td>
       </tr>
       <tr>
-        <td><strong>L7-L8. Tier movement</strong></td>
+        <td><strong>L7&ndash;L8. Tier movement</strong></td>
         <td>Pricing + Editor PM</td>
-        <td>P3.4.3 (engagement-based pricing), P4 (AI add-on attach)</td>
+        <td>P3.4.3 (engagement-based pricing), P4 (AI add-on attach), P5 (SMS attach), in-canvas revenue surfacing</td>
         <td>Q4 FY27</td>
       </tr>
       <tr>
         <td><strong>L9. CSAT</strong></td>
         <td>Editor PM</td>
-        <td>P1.5 (SLOs), P1 (parity), P4 (AI Assistant), P2 (Universal Content)</td>
+        <td>P1.5 (SLOs), P1 (parity), P4 (AI Assistant), P2 (Universal Content), all 6 Klaviyo gap closures</td>
         <td>Q5 FY28</td>
       </tr>
       <tr>
         <td><strong>L10. Klaviyo bake-offs</strong></td>
         <td>Editor PM + Sales Eng</td>
-        <td>All 6 Klaviyo countermoves (P3.1.4, P3.4.3, P4.4.4&ndash;6, P5.1.5)</td>
+        <td>All 6 Klaviyo countermoves (P3.1.4, P3.4.3, P4.4.4&ndash;6, P5.1.5) + Builder SLOs (P1.5)</td>
         <td>Q6 FY28</td>
+      </tr>
+      <tr style="background:#F1F2F4; opacity:0.85;">
+        <td><strong>X1. Paid signups</strong></td>
+        <td><strong>Marketing-owned</strong></td>
+        <td>Top-of-funnel marketing, free-tier reopen (P3.1), Klaviyo win-backs &mdash; editor supports via brand-native templates (P2)</td>
+        <td>Q3 FY27</td>
+      </tr>
+      <tr style="background:#F1F2F4; opacity:0.85;">
+        <td><strong>X2. Free&rarr;paid</strong></td>
+        <td><strong>Pricing-owned</strong></td>
+        <td>Engagement-based pricing (P3.4.3), trial mechanics, paywall &mdash; editor supports via faster activation (L3)</td>
+        <td>Q3 FY27</td>
       </tr>
     </tbody>
   </table>
 
   <h2><span class="num">4.5</span>How to read this</h2>
   <ul>
-    <li><strong>Volume targets dominate</strong> &mdash; L1 + L2 + L3 + L10 = ~75% of the $32M swing. The strategy must fix the funnel, not just polish per-user behavior.</li>
-    <li><strong>Targets are stretch but credible</strong> &mdash; L2 (16% free&rarr;paid) and L3 (62% activation) are above T-1 baseline but anchored to industry benchmarks for editor-led platforms (Klaviyo, Customer.io).</li>
-    <li><strong>Editor causal share is conservative</strong> &mdash; 15&ndash;35% per lever; doubling the share roughly doubles the impact (cross-check: Loss Attribution L2 high-band ~$28M aligns with 25%/50% causal-share scenario).</li>
-    <li><strong>Headroom is built-in</strong> &mdash; if all targets hit, we deliver $36M, not $32M. Allows for 1&ndash;2 levers underperforming without missing goal.</li>
-    <li><strong>Pacing matters</strong> &mdash; L1 + L2 + L3 must move by Q3-Q4 FY27 for the $17M loss recovery to land in-year. L5 + L9 + L10 land in Q5-Q6 FY28 and feed the additional $15M swing.</li>
+    <li><strong>Editor-PM owned ~$29M of the $32M swing</strong> &mdash; product can hit goal almost on its own. Cross-functional adds ~$10M of headroom.</li>
+    <li><strong>Leading indicators dominate the editor commit</strong> &mdash; L1 (bulk adoption) + L2 (SMS adoption) + L3 (bulk activation) + L4 (SMS activation) + L5 (30-day repeat) = $14.7M (51% of editor commit). These move first.</li>
+    <li><strong>L2 (SMS adoption) is the single biggest editor-PM lever</strong> at $5.1M/yr &mdash; SMS adoption at 6.1% has massive headroom vs bulk at 92.7%. P5 (SMS in-canvas) is the right pillar to over-invest in.</li>
+    <li><strong>L3 (bulk activation) is the bleeding edge</strong> &mdash; only metric that DEGRADED YoY (&minus;2.4pp). Reversing it requires P1 reliability + P1.5 SLOs + AI Setup Agent &mdash; all already in plan, just need execution discipline.</li>
+    <li><strong>Targets are stretch but credible</strong> &mdash; L2 (20% SMS adoption) is below Klaviyo benchmark for omnichannel platforms (~30%); L9 (Net CSAT +30) is below Klaviyo&rsquo;s ~+45 net.</li>
+    <li><strong>Editor causal share is conservative</strong> &mdash; 30&ndash;50% per lever; doubling shares roughly doubles impact (cross-check: matches Loss Attribution L2 high-band $26&ndash;28M).</li>
+    <li><strong>Headroom is built-in</strong> &mdash; if all editor targets hit, we deliver $29M alone (covers 91% of $32M). Combined with cross-functional ($10M) = $39M. Allows for 2&ndash;3 levers underperforming.</li>
+    <li><strong>Pacing matters</strong> &mdash; L1 + L3 + L6 must move by Q3-Q4 FY27 for the loss recovery to land in-year. L2 + L4 + L5 + L9 + L10 land in Q5-Q6 FY28 and feed the additional swing.</li>
   </ul>
 
-  <p class="source"><strong>Methodology:</strong> Per-lever calc shown in 4.2 above. ARPU sources: <code>bi_aggregate.mbr_monthly</code> (at-booking $45.35/mo, steady-state $91.44/mo). Volume sources: BQ YoY queries on Nuni cohort (Page 1). Causal shares: editor-attributable % per lever, conservative; doubled in high-band sensitivity. Cross-references: <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a> (lever decomposition mirror), <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a> (3-layer backward stack), <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> (initiative IDs), <a href="#memo" onclick="document.querySelector('[data-tab=memo]').click();return false;">Strategy Memo</a> (narrative).</p>
+  <p class="source"><strong>Methodology:</strong> Per-lever calc shown in 4.2. ARPU sources: <code>bi_aggregate.mbr_monthly</code> (at-booking $45.35/mo, steady-state $91.44/mo, SMS add-on est. $20/mo). Volume base: 1,015,648 paid active users / mo from <code>product_journey_monthly</code> (T0 average). Adoption / activation YoY: <code>product_journey_monthly</code> for products in (bulk email, sms, genai content generation bulk, genai smart drafts bulk). Causal shares: editor-attributable % per lever, conservative; doubled in high-band sensitivity. Cross-references: <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a>, <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a>, <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a>, <a href="#memo" onclick="document.querySelector('[data-tab=memo]').click();return false;">Strategy Memo</a>.</p>
 </section>
 
 </div><!-- /panel-nuniaudit -->
