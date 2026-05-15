@@ -5169,10 +5169,10 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       <div class="subtitle">Paid-Nuni cohort (proxy: paid users who signed up after Nuni was made default for new accounts on Jul-1, 2023). Trailing 12 months <strong>May 2025&ndash;Apr 2026 (T0)</strong> vs prior 12 months <strong>May 2024&ndash;Apr 2025 (T-1)</strong>. Source: BigQuery <code>mc-business-intelligence.mailchimp.users_signup_data</code>, <code>users_first_sends</code>, <code>users_packages</code>, <code>users_plan_updates</code> + <code>qualtrics.survey_responses</code> (Nuni Feedback Badge, <code>SV_9SwJVJm2BNRqXfo</code>).</div>
     </div>
     <div class="meta">
-      <strong>v1.1</strong> &middot; 4 pages &middot; QA-validated<br/>
-      <strong>Editor-PM owned target swing: ~$22M/yr</strong><br/>
-      <strong>+ Cross-functional (Mktg+Pricing): ~$10M/yr</strong><br/>
-      <strong>Combined: ~$32M ARR swing target</strong>
+      <strong>v1.2</strong> &middot; 4 pages &middot; QA-validated<br/>
+      <strong>Editor-PM target ARR swing: $20&ndash;24M/yr</strong><br/>
+      Of which: loss recovery ~$13&ndash;20M + additional swing ~$0&ndash;7M<br/>
+      Cross-functional (Mktg+Pricing) partners <em>tracked for context</em>, not in editor commit
     </div>
   </div>
 
@@ -5592,20 +5592,19 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
   <div class="page-head">
     <div>
       <div class="eyebrow">Page 4 &middot; Target-state model (editor-PM owned)</div>
-      <h1>Editor-PM commit ~$22M; Mktg+Pricing partners deliver ~$10M; combined ~$32M ARR swing</h1>
-      <div class="subtitle">Per-metric target values that, taken together, close the editor-attributable loss (~$17M) <strong>and</strong> deliver an extra $15M ARR. <strong>Restructured to separate editor-PM owned levers (leading indicators + quality) from cross-functional dependencies (acquisition + pricing funnel).</strong> Editor-PM commits to its own ~$22M; partners commit to the remaining ~$10M. Each target is <strong>credible-but-stretched</strong> &mdash; anchored to industry benchmarks where they exist (Klaviyo activation cadence, omnichannel attach rates).</div>
+      <h1>Editor-PM commitment: $20&ndash;24M ARR swing by FY27 &mdash; recover most of the loss + modest upside</h1>
+      <div class="subtitle">Per-metric target values that, taken together, recover most of the editor-attributable loss (~$13&ndash;20M) and contribute a meaningful additional swing (~$0&ndash;7M). <strong>Editor-PM owned levers only</strong> &mdash; cross-functional dependencies (paid signup volume, free&rarr;paid pricing funnel) are tracked for context but not part of this commitment. SMS adoption removed from the math (still tracked as a leading indicator on Page 1) since it depends on go-to-market motion. Each target is <strong>credible-but-stretched</strong> &mdash; anchored to industry benchmarks where they exist.</div>
     </div>
     <div class="meta">
-      <strong>Loss to recover: ~$17M (midpoint $13&ndash;20M)</strong><br/>
-      <strong>Additional swing: $15M</strong><br/>
-      <strong>Editor-PM owned: ~$22M</strong> (7 levers)<br/>
-      <strong>Cross-functional: ~$10M</strong> (2 partner levers)<br/>
-      <strong>Combined: ~$32M ARR / yr</strong>
+      <strong>Loss to recover: ~$13&ndash;20M</strong><br/>
+      <strong>Additional swing: ~$0&ndash;7M</strong><br/>
+      <strong>Editor-PM target: $20&ndash;24M ARR / yr</strong><br/>
+      9 levers &middot; 4 sensitivity scenarios
     </div>
   </div>
 
-  <h2><span class="num">4.1</span>Per-metric target scorecard &mdash; editor-PM owned (the seven levers)</h2>
-  <p style="font-size:12.5px; color:var(--muted); margin-bottom:8px;"><strong>Leading indicators (L1&ndash;L4)</strong> = adoption + activation + 30-day repeat &mdash; the metrics editor PM moves directly. <strong>Quality / retention (L5&ndash;L8)</strong> = customer outcomes editor PM influences with partners. <strong>Competition (L9)</strong> = bake-off win rate driven by deliverables.</p>
+  <h2><span class="num">4.1</span>Per-metric target scorecard &mdash; editor-PM owned (the nine levers)</h2>
+  <p style="font-size:12.5px; color:var(--muted); margin-bottom:8px;"><strong>Leading indicators (L1&ndash;L4)</strong> = bulk adoption + bulk/SMS activation + 30-day repeat &mdash; the metrics editor PM moves directly. <strong>Quality / retention (L5&ndash;L8)</strong> = customer outcomes editor PM influences with partners. <strong>Competition (L9)</strong> = bake-off win rate driven by deliverables. SMS <em>adoption</em> intentionally excluded (depends on GTM motion); SMS <em>activation</em> retained (editor product moves it).</p>
   <table class="target-tbl" style="margin-bottom:14px;">
     <thead>
       <tr>
@@ -5616,7 +5615,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
         <th style="width:24%;">Mechanism</th>
         <th style="width:11%;">Causal share</th>
         <th style="width:9%;">Marginal $/yr</th>
-        <th style="width:9%;">% of $32M</th>
+        <th style="width:9%;">% of $24M</th>
       </tr>
     </thead>
     <tbody>
@@ -5629,71 +5628,61 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
         <td>Brand-native templates, Universal Content starter blocks, AI Email Setup Agent, NEB Code Mode, in-app onboarding nudges.</td>
         <td>50%</td>
         <td class="t-dollar">$4.4M</td>
-        <td>14%</td>
+        <td>18%</td>
       </tr>
       <tr>
-        <td><strong>L2. SMS builder adoption</strong> (% paid users touched)</td>
-        <td>4.6%</td>
-        <td class="t-now">6.1%</td>
-        <td class="t-tgt">20%</td>
-        <td>SMS in-canvas (P5), unified compose, SMS quick-start templates, conversational + generative SMS (P4), SMS attach in checkout.</td>
-        <td>50%</td>
-        <td class="t-dollar">$5.1M</td>
-        <td>16%</td>
-      </tr>
-      <tr>
-        <td><strong>L3. Bulk builder activation</strong> (% touched &rarr; Established)</td>
+        <td><strong>L2. Bulk builder activation</strong> (% touched &rarr; Established)</td>
         <td>63.0%</td>
         <td class="t-now">60.6%</td>
         <td class="t-tgt">75%</td>
         <td>Reduce abandonment via P1 reliability + P1.5 SLOs + AI Setup Agent + Brand Kit auto-applied + Universal Content reuse + cross-browser regression suite.</td>
         <td>50%</td>
         <td class="t-dollar">$1.9M</td>
-        <td>6%</td>
+        <td>8%</td>
       </tr>
       <tr>
-        <td><strong>L4. SMS builder activation</strong> (% touched &rarr; Established)</td>
+        <td><strong>L3. SMS builder activation</strong> (% touched &rarr; Established)</td>
         <td>6.8%</td>
         <td class="t-now">9.1%</td>
         <td class="t-tgt">25%</td>
         <td>Email-to-SMS template porting, conversational SMS, send-time intelligence, omnichannel reporting in-canvas.</td>
         <td>50%</td>
         <td class="t-dollar">$1.2M</td>
-        <td>4%</td>
+        <td>5%</td>
       </tr>
       <tr>
-        <td><strong>L5. 30-day repeat send rate</strong></td>
+        <td><strong>L4. 30-day repeat send rate</strong></td>
         <td>83.7%</td>
         <td class="t-now">83.2%</td>
         <td class="t-tgt">92%</td>
         <td>Smart Send Time, AI Performance Watchdog, Universal Content for fast iteration, omnichannel triggers, in-canvas revenue.</td>
         <td>35%</td>
         <td class="t-dollar">$2.1M</td>
-        <td>7%</td>
+        <td>9%</td>
       </tr>
       <tr style="background:#FFFCF0;"><td colspan="8" style="font-weight:700; color:#8A4A00; padding:6px 10px; font-size:11px; letter-spacing:.06em; text-transform:uppercase;">Quality / retention &mdash; editor-influenced (multi-owner with onboarding / pricing / support)</td></tr>
       <tr>
-        <td><strong>L6. 90-day churn (true)</strong></td>
+        <td><strong>L5. 90-day churn (true)</strong></td>
         <td>33.5%</td>
         <td class="t-now">32.1%</td>
         <td class="t-tgt">22%</td>
-        <td>Better activation (L3) + Builder SLOs (P1.5) + cited HVC bug-fix + Klaviyo countermoves + sticky onboarding flows.</td>
+        <td>Better activation (L2) + Builder SLOs (P1.5) + cited HVC bug-fix + Klaviyo countermoves + sticky onboarding flows.</td>
         <td>40%</td>
         <td class="t-dollar">$1.7M</td>
-        <td>5%</td>
+        <td>7%</td>
       </tr>
       <tr>
-        <td><strong>L7. 90-day downgrade</strong></td>
+        <td><strong>L6. 90-day downgrade</strong></td>
         <td>21.8%</td>
         <td class="t-now">20.1%</td>
         <td class="t-tgt">13%</td>
-        <td>Repeat-usage habit (L5), omnichannel value-add (SMS attach, L2/L4), AI add-on attach, in-canvas revenue surfacing.</td>
+        <td>Repeat-usage habit (L4), omnichannel value-add (SMS activation L3), AI add-on attach, in-canvas revenue surfacing.</td>
         <td>35%</td>
         <td class="t-dollar">$0.4M</td>
-        <td>1%</td>
+        <td>2%</td>
       </tr>
       <tr>
-        <td><strong>L8. 90-day upgrade</strong></td>
+        <td><strong>L7. 90-day upgrade</strong></td>
         <td>5.83%</td>
         <td class="t-now">6.09%</td>
         <td class="t-tgt">12%</td>
@@ -5703,69 +5692,38 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
         <td>2%</td>
       </tr>
       <tr>
-        <td><strong>L9. Net CSAT (Nuni Badge)</strong></td>
+        <td><strong>L8. Net CSAT (Nuni Badge)</strong></td>
         <td>&minus;44.5</td>
         <td class="t-now">&minus;29.3</td>
         <td class="t-tgt">+30 (positive)</td>
         <td>Builder SLOs (P1.5), parity polish, AI Assistant, Universal Content, 6 Klaviyo gap closures, render fidelity guarantees.</td>
         <td>30%</td>
         <td class="t-dollar">$5.7M</td>
-        <td>18%</td>
+        <td>24%</td>
       </tr>
       <tr style="background:#F4F3FF;"><td colspan="8" style="font-weight:700; color:#2A1FA8; padding:6px 10px; font-size:11px; letter-spacing:.06em; text-transform:uppercase;">Competition &mdash; deliverable-driven (Editor PM + Sales Eng partnership)</td></tr>
       <tr>
-        <td><strong>L10. Klaviyo bake-off win rate</strong></td>
+        <td><strong>L9. Klaviyo bake-off win rate</strong></td>
         <td>&lt;10% (estimate)</td>
         <td class="t-now">&lt;10%</td>
         <td class="t-tgt">35%</td>
         <td>All P1&ndash;P5 deliverables landing; explicit ammunition for sales (Builder SLOs + Universal Content + Brand-Kit-native AI + multi-brand kits + real-time co-edit).</td>
         <td>40%</td>
         <td class="t-dollar">$6.0M</td>
-        <td>19%</td>
-      </tr>
-      <tr style="background:#FFFCF0; font-weight:700;">
-        <td colspan="6"><strong>EDITOR-PM OWNED SUBTOTAL</strong> (L1&ndash;L10 above, leading + quality + competition)</td>
-        <td class="t-dollar">$29.0M</td>
-        <td>91%</td>
-      </tr>
-      <tr style="background:#F1F2F4;"><td colspan="8" style="font-weight:700; color:#374151; padding:6px 10px; font-size:11px; letter-spacing:.06em; text-transform:uppercase;">Cross-functional dependencies &mdash; Marketing + Pricing partner-owned (NOT editor-PM commit)</td></tr>
-      <tr style="opacity:0.85;">
-        <td><strong>X1. Paid signups</strong> (Marketing-owned)</td>
-        <td>424K (annualized)</td>
-        <td class="t-now">310K</td>
-        <td class="t-tgt">390K (recover)</td>
-        <td>Top-of-funnel marketing, Klaviyo win-backs, retention of free-tier funnel. Editor PM supports via brand-native templates + AI Setup, not driver.</td>
-        <td>n/a</td>
-        <td class="t-dollar">$5.0M</td>
-        <td>16%</td>
-      </tr>
-      <tr style="opacity:0.85;">
-        <td><strong>X2. Free &rarr; paid 90d</strong> (Pricing-owned)</td>
-        <td>14.41%</td>
-        <td class="t-now">12.64%</td>
-        <td class="t-tgt">15.5% (recover + push)</td>
-        <td>Engagement-based pricing (P3.4.3), trial mechanics, paywall design, free-tier UX. Editor PM contributes via faster activation (L3).</td>
-        <td>n/a</td>
-        <td class="t-dollar">$5.0M</td>
-        <td>16%</td>
-      </tr>
-      <tr style="background:#F1F2F4; font-weight:700;">
-        <td colspan="6"><strong>CROSS-FUNCTIONAL SUBTOTAL</strong> (X1+X2, partner commitments)</td>
-        <td class="t-dollar">$10.0M</td>
-        <td>31%</td>
+        <td>25%</td>
       </tr>
       <tr style="background:#FFE9C2; font-weight:700;">
-        <td colspan="6"><strong>COMBINED TOTAL</strong> (editor-PM owned + cross-functional)</td>
-        <td class="t-dollar">$39.0M</td>
-        <td>~122% of $32M</td>
+        <td colspan="6"><strong>EDITOR-PM OWNED TOTAL</strong> (L1&ndash;L9, all editor-owned levers)</td>
+        <td class="t-dollar">$23.9M</td>
+        <td>~100%</td>
       </tr>
     </tbody>
   </table>
 
-  <p style="font-size:12px; color:var(--muted); margin-bottom:14px;"><strong>Why combined exceeds $32M:</strong> deliberate ~22% headroom so the plan still clears the goal even if 2&ndash;3 levers underperform. The editor-PM commit alone (~$29M) is enough to recover the $17M loss + deliver ~$12M of the $15M swing &mdash; the remaining $3M is the cross-functional contribution. Sensitivity in 4.3 below.</p>
+  <p style="font-size:12px; color:var(--muted); margin-bottom:14px;"><strong>Why $20&ndash;24M is the right band:</strong> recovers most of the editor-attributable loss ($13&ndash;20M) and delivers a modest additional swing ($0&ndash;7M). 100% target hit lands at $23.9M (top of the band); 50&ndash;75% hit covers loss recovery only. <strong>SMS adoption removed from the math</strong> &mdash; depends on GTM motion (sales pitch, free-trial mechanics) more than editor product. SMS <em>activation</em> (L3) is retained because that&rsquo;s editor-owned (template porting, conversational SMS, in-canvas reporting). <strong>Cross-functional dependencies</strong> (paid signups, free&rarr;paid) are tracked on Page 1 &sect;1.4 for context but not part of editor commit. Sensitivity in 4.3 below.</p>
 
   <h2><span class="num">4.2</span>Lever calculations (full math)</h2>
-  <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">Editor-PM owned levers shown in detail. ARPU sources: <code>bi_aggregate.mbr_monthly</code> (Standard at-booking $45.35/mo, steady-state $91.44/mo, SMS add-on est. $20/mo). Volume base: 1,015,648 paid active users / mo (T0 average from <code>product_journey_monthly</code>).</p>
+  <p style="font-size:12px; color:var(--muted); margin-bottom:8px;">Editor-PM owned levers only. ARPU sources: <code>bi_aggregate.mbr_monthly</code> (Standard at-booking $45.35/mo, steady-state $91.44/mo, SMS add-on est. $20/mo). Volume base: 1,015,648 paid active users / mo (T0 average from <code>product_journey_monthly</code>). SMS adoption excluded (GTM-driven); X1/X2 (paid signups, free&rarr;paid) excluded (Marketing/Pricing owned).</p>
   <div class="grid cols-2" style="margin-bottom:14px;">
     <div class="impact-card l1">
       <div class="ic-eye">L1 &middot; Bulk builder adoption (LEADING INDICATOR)</div>
@@ -5779,18 +5737,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       </div>
     </div>
     <div class="impact-card l1">
-      <div class="ic-eye">L2 &middot; SMS builder adoption (LEADING INDICATOR &middot; biggest editor lever)</div>
-      <h4>6.1% &rarr; 20% (+13.9pp on 1.02M paid users)</h4>
-      <div class="calc">
-        <span class="lbl">incremental_adopters</span>  = 13.9pp &times; 1.02M = 141K more users / mo touching SMS
-        <br/><span class="lbl">attach_rate</span>          = ~30% pay for SMS add-on
-        <br/><span class="lbl">arpu_sms_addon</span>       = $20/mo &times; 12 = $240/yr
-        <br/><span class="lbl">editor_share</span>         = 50%
-        <br/><span class="out">impact</span> = 141K &times; 30% &times; $240 &times; 50% = <span class="out">$5.1M/yr</span>
-      </div>
-    </div>
-    <div class="impact-card l1">
-      <div class="ic-eye">L3 &middot; Bulk builder activation (LEADING INDICATOR &middot; reverse the &minus;2.4pp YoY)</div>
+      <div class="ic-eye">L2 &middot; Bulk builder activation (LEADING INDICATOR &middot; reverse the &minus;2.4pp YoY)</div>
       <h4>60.6% &rarr; 75% (+14.4pp of those who touched)</h4>
       <div class="calc">
         <span class="lbl">incremental_established</span>  = 14.4pp &times; 941K touched/mo = 135K incremental Established
@@ -5801,7 +5748,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       </div>
     </div>
     <div class="impact-card l1">
-      <div class="ic-eye">L4 &middot; SMS builder activation (LEADING INDICATOR)</div>
+      <div class="ic-eye">L3 &middot; SMS builder activation (LEADING INDICATOR)</div>
       <h4>9.1% &rarr; 25% (+15.9pp of SMS-touched)</h4>
       <div class="calc">
         <span class="lbl">incremental_sms_established</span>  = 15.9pp &times; 62K touched SMS/mo = 9.9K
@@ -5811,7 +5758,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       </div>
     </div>
     <div class="impact-card l1">
-      <div class="ic-eye">L5 &middot; 30-day repeat send rate (LEADING INDICATOR)</div>
+      <div class="ic-eye">L4 &middot; 30-day repeat send rate (LEADING INDICATOR)</div>
       <h4>83.2% &rarr; 92% (+8.8pp)</h4>
       <div class="calc">
         <span class="lbl">delta_repeaters</span> = 8.8pp &times; 125K T0 senders = 11K incremental
@@ -5821,7 +5768,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       </div>
     </div>
     <div class="impact-card l2">
-      <div class="ic-eye">L6 &middot; 90-day churn reduction (QUALITY)</div>
+      <div class="ic-eye">L5 &middot; 90-day churn reduction (QUALITY)</div>
       <h4>32.1% &rarr; 22% (&minus;10.1pp)</h4>
       <div class="calc">
         <span class="lbl">churn_users_saved</span> = 10.1pp &times; 50K fast paid converters/yr = 5.0K
@@ -5830,8 +5777,16 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
         <br/><span class="out">impact</span> = 5.0K &times; $1,097 &times; 40% = <span class="out">$2.2M/yr</span> (~$1.7M conservative)
       </div>
     </div>
+    <div class="impact-card l2" style="background: linear-gradient(180deg,#FFFCF0,#FFF8E0); border-left-color: var(--brand);">
+      <div class="ic-eye">L6 + L7 &middot; Tier movement (QUALITY, smaller direct $ but high signal)</div>
+      <h4>Downgrades 20.1% &rarr; 13%; upgrades 6.09% &rarr; 12%</h4>
+      <div class="calc">
+        <span class="lbl">L6</span>: 7.1pp &times; 50K &times; $400/yr (downgrade ARPU delta) &times; 35% = <span class="out">$0.4M</span>
+        <br/><span class="lbl">L7</span>: 5.91pp &times; 50K &times; $300/yr (upgrade ARPU delta) &times; 35% = <span class="out">$0.5M</span>
+      </div>
+    </div>
     <div class="impact-card l2">
-      <div class="ic-eye">L9 &middot; CSAT &rarr; positive zone (QUALITY &middot; biggest single $)</div>
+      <div class="ic-eye">L8 &middot; CSAT &rarr; positive zone (QUALITY &middot; biggest single $)</div>
       <h4>Net CSAT &minus;29 &rarr; +30 (59pp swing)</h4>
       <div class="calc">
         <span class="lbl">churn_reduction</span> = 5.9pp (1pp / 10pp NPS academic benchmark)
@@ -5842,7 +5797,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       </div>
     </div>
     <div class="impact-card l2" style="background: linear-gradient(180deg,#F4F3FF,#FFFFFF); border-left-color: #4338CA;">
-      <div class="ic-eye">L10 &middot; Klaviyo bake-off wins (COMPETITION)</div>
+      <div class="ic-eye">L9 &middot; Klaviyo bake-off wins (COMPETITION)</div>
       <h4>Win 35% of bake-offs (was &lt;10%)</h4>
       <div class="calc">
         <span class="lbl">bake_offs_won_incremental</span> = ~5K accounts/yr (mid-market)
@@ -5851,59 +5806,31 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
         <br/><span class="out">impact</span> = 5K &times; $3.4K &times; 40% = <span class="out">$6.0M/yr</span>
       </div>
     </div>
-    <div class="impact-card l2" style="background: linear-gradient(180deg,#FFFCF0,#FFF8E0); border-left-color: var(--brand);">
-      <div class="ic-eye">L7 + L8 &middot; Tier movement (QUALITY, smaller direct $ but high signal)</div>
-      <h4>Downgrades 20.1% &rarr; 13%; upgrades 6.09% &rarr; 12%</h4>
-      <div class="calc">
-        <span class="lbl">L7</span>: 7.1pp &times; 50K &times; $400/yr (downgrade ARPU delta) &times; 35% = <span class="out">$0.4M</span>
-        <br/><span class="lbl">L8</span>: 5.91pp &times; 50K &times; $300/yr (upgrade ARPU delta) &times; 35% = <span class="out">$0.5M</span>
-      </div>
-    </div>
-    <div class="impact-card l1" style="background: linear-gradient(180deg,#F1F2F4,#FFFFFF); border-left-color:#374151; opacity:0.85;">
-      <div class="ic-eye">X1 &middot; Paid signups (CROSS-FUNCTIONAL &middot; Marketing-owned)</div>
-      <h4>310K &rarr; 390K (+80K paid signups, recover ~70% of YoY drop)</h4>
-      <div class="calc">
-        <span class="lbl">delta</span>           = 390K &minus; 310K = 80K
-        <br/><span class="lbl">arr_per_signup</span>  = $540/yr (at-booking)
-        <br/><span class="lbl">editor_share</span>    = ~12% (editor a small contributor; marketing owns)
-        <br/><span class="out">impact</span> = 80K &times; $540 &times; 12% = <span class="out">$5.0M/yr</span>
-      </div>
-      <p style="font-size:11.5px; color:var(--muted); margin:4px 0 0;"><strong>NOT an editor-PM commit.</strong> Tracked because adoption (L1/L2) builds on this pool.</p>
-    </div>
-    <div class="impact-card l1" style="background: linear-gradient(180deg,#F1F2F4,#FFFFFF); border-left-color:#374151; opacity:0.85;">
-      <div class="ic-eye">X2 &middot; Free &rarr; paid 90d (CROSS-FUNCTIONAL &middot; Pricing-owned)</div>
-      <h4>12.64% &rarr; 15.5% (+2.86pp on ~2M signups)</h4>
-      <div class="calc">
-        <span class="lbl">incremental_paid</span> = 2.86pp &times; ~2M = +57K paid/yr
-        <br/><span class="lbl">arr_per_paid</span>  = $540/yr
-        <br/><span class="lbl">editor_share</span>  = ~16% (editor contributes via faster activation; pricing owns)
-        <br/><span class="out">impact</span> = 57K &times; $540 &times; 16% = <span class="out">$5.0M/yr</span>
-      </div>
-      <p style="font-size:11.5px; color:var(--muted); margin:4px 0 0;"><strong>NOT an editor-PM commit.</strong> Pricing owns paywall, trial mechanics, engagement-based pricing.</p>
-    </div>
   </div>
 
-  <h2><span class="num">4.3</span>Sensitivity &mdash; what hits if not all targets land (editor-PM owned only)</h2>
+  <p style="font-size:12px; color:var(--muted); margin-bottom:14px;"><strong>Excluded from the math:</strong> SMS builder <em>adoption</em> (depends on GTM motion &mdash; sales pitch, free trial, paywall mechanics &mdash; rather than editor product directly); paid signups (Marketing-owned); free&rarr;paid 90d (Pricing-owned). All three are tracked on Page 1 as observation metrics; their movement may indirectly help editor PM (more pool to work with) but is not an editor commitment.</p>
+
+  <h2><span class="num">4.3</span>Sensitivity &mdash; what hits if not all targets land</h2>
   <div class="grid cols-4" style="margin-bottom:14px;">
     <div class="scenario-card s50">
       <div class="sc-eye">50% of editor targets hit</div>
-      <div class="sc-dollar">~$15M</div>
-      <div class="sc-label">Recovers loss only ($13&ndash;20M band). Combined with cross-functional ($10M): <strong>~$25M</strong>. Goal short by $7M.</div>
+      <div class="sc-dollar">~$12M</div>
+      <div class="sc-label">Below the loss-recovery floor ($13&ndash;20M). Goal missed.</div>
     </div>
     <div class="scenario-card s75">
       <div class="sc-eye">75% of editor targets hit</div>
-      <div class="sc-dollar">~$22M</div>
-      <div class="sc-label">Recovers loss + ~$5M swing. Combined with cross-functional: <strong>~$32M</strong>. <strong>Goal cleared.</strong></div>
+      <div class="sc-dollar">~$18M</div>
+      <div class="sc-label">Recovers loss midpoint. Within the $20&ndash;24M target band&rsquo;s lower edge.</div>
     </div>
     <div class="scenario-card s100">
       <div class="sc-eye">100% of editor targets hit</div>
-      <div class="sc-dollar">~$29M</div>
-      <div class="sc-label">Editor PM alone covers 91% of $32M. Combined with cross-functional: <strong>~$39M (122%)</strong>. <strong>Goal exceeded.</strong></div>
+      <div class="sc-dollar">~$24M</div>
+      <div class="sc-label"><strong>Top of the $20&ndash;24M target band cleared.</strong> Recovers loss + delivers ~$4&ndash;7M additional swing.</div>
     </div>
     <div class="scenario-card s125">
       <div class="sc-eye">125% (over-perform on 1&ndash;2)</div>
-      <div class="sc-dollar">~$36M</div>
-      <div class="sc-label">Plausible if SMS adoption (L2) over-indexes or Klaviyo bake-offs accelerate. Combined: <strong>~$46M</strong>.</div>
+      <div class="sc-dollar">~$30M</div>
+      <div class="sc-label">Plausible if Klaviyo bake-offs accelerate or CSAT moves faster than benchmark.</div>
     </div>
   </div>
 
@@ -5925,78 +5852,78 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
         <td>Q3 FY27</td>
       </tr>
       <tr>
-        <td><strong>L2. SMS adoption</strong></td>
-        <td>Editor PM</td>
-        <td>P5 (SMS in-canvas + unified compose), P4.4.5 (conversational + generative SMS), SMS quick-start templates</td>
-        <td>Q4 FY27</td>
-      </tr>
-      <tr>
-        <td><strong>L3. Bulk activation</strong></td>
+        <td><strong>L2. Bulk activation</strong></td>
         <td>Editor PM</td>
         <td>P1 (reliability), P1.5 (SLOs), P4.4.4 (AI Setup Agent), Brand Kit auto-applied (P2), Universal Content (P2)</td>
         <td>Q4 FY27</td>
       </tr>
       <tr>
-        <td><strong>L4. SMS activation</strong></td>
+        <td><strong>L3. SMS activation</strong></td>
         <td>Editor PM</td>
         <td>Email-to-SMS template porting (P5), conversational SMS (P4.4.5), in-canvas reporting (P5), send-time intelligence (P4.4.5)</td>
         <td>Q5 FY28</td>
       </tr>
       <tr>
-        <td><strong>L5. 30-day repeat</strong></td>
+        <td><strong>L4. 30-day repeat</strong></td>
         <td>Editor PM + Lifecycle</td>
         <td>P5.1.5 (Push acceleration), P4.4.5 (Smart Send Time), P4.4.6 (AI Performance Watchdog), P5 (omnichannel)</td>
         <td>Q5 FY28</td>
       </tr>
       <tr>
-        <td><strong>L6. 90-day churn</strong></td>
+        <td><strong>L5. 90-day churn</strong></td>
         <td>Editor PM + Onboarding</td>
-        <td>P1.5 (Builder SLOs), P1 (cited HVC bug-fix), L3 activation flow-through</td>
+        <td>P1.5 (Builder SLOs), P1 (cited HVC bug-fix), L2 activation flow-through</td>
         <td>Q4 FY27</td>
       </tr>
       <tr>
-        <td><strong>L7&ndash;L8. Tier movement</strong></td>
+        <td><strong>L6&ndash;L7. Tier movement</strong></td>
         <td>Pricing + Editor PM</td>
         <td>P3.4.3 (engagement-based pricing), P4 (AI add-on attach), P5 (SMS attach), in-canvas revenue surfacing</td>
         <td>Q4 FY27</td>
       </tr>
       <tr>
-        <td><strong>L9. CSAT</strong></td>
+        <td><strong>L8. CSAT</strong></td>
         <td>Editor PM</td>
         <td>P1.5 (SLOs), P1 (parity), P4 (AI Assistant), P2 (Universal Content), all 6 Klaviyo gap closures</td>
         <td>Q5 FY28</td>
       </tr>
       <tr>
-        <td><strong>L10. Klaviyo bake-offs</strong></td>
+        <td><strong>L9. Klaviyo bake-offs</strong></td>
         <td>Editor PM + Sales Eng</td>
         <td>All 6 Klaviyo countermoves (P3.1.4, P3.4.3, P4.4.4&ndash;6, P5.1.5) + Builder SLOs (P1.5)</td>
         <td>Q6 FY28</td>
       </tr>
       <tr style="background:#F1F2F4; opacity:0.85;">
-        <td><strong>X1. Paid signups</strong></td>
-        <td><strong>Marketing-owned</strong></td>
-        <td>Top-of-funnel marketing, free-tier reopen (P3.1), Klaviyo win-backs &mdash; editor supports via brand-native templates (P2)</td>
-        <td>Q3 FY27</td>
+        <td><strong>(Excluded)</strong> SMS adoption</td>
+        <td><strong>GTM-driven</strong></td>
+        <td>Sales pitch, free-trial mechanics, paywall, marketing &mdash; editor supports via in-canvas SMS surfacing (P5)</td>
+        <td>n/a</td>
       </tr>
       <tr style="background:#F1F2F4; opacity:0.85;">
-        <td><strong>X2. Free&rarr;paid</strong></td>
+        <td><strong>(Excluded)</strong> Paid signups</td>
+        <td><strong>Marketing-owned</strong></td>
+        <td>Top-of-funnel marketing, free-tier reopen (P3.1), Klaviyo win-backs</td>
+        <td>n/a</td>
+      </tr>
+      <tr style="background:#F1F2F4; opacity:0.85;">
+        <td><strong>(Excluded)</strong> Free&rarr;paid 90d</td>
         <td><strong>Pricing-owned</strong></td>
-        <td>Engagement-based pricing (P3.4.3), trial mechanics, paywall &mdash; editor supports via faster activation (L3)</td>
-        <td>Q3 FY27</td>
+        <td>Engagement-based pricing (P3.4.3), trial mechanics, paywall</td>
+        <td>n/a</td>
       </tr>
     </tbody>
   </table>
 
   <h2><span class="num">4.5</span>How to read this</h2>
   <ul>
-    <li><strong>Editor-PM owned ~$29M of the $32M swing</strong> &mdash; product can hit goal almost on its own. Cross-functional adds ~$10M of headroom.</li>
-    <li><strong>Leading indicators dominate the editor commit</strong> &mdash; L1 (bulk adoption) + L2 (SMS adoption) + L3 (bulk activation) + L4 (SMS activation) + L5 (30-day repeat) = $14.7M (51% of editor commit). These move first.</li>
-    <li><strong>L2 (SMS adoption) is the single biggest editor-PM lever</strong> at $5.1M/yr &mdash; SMS adoption at 6.1% has massive headroom vs bulk at 92.7%. P5 (SMS in-canvas) is the right pillar to over-invest in.</li>
-    <li><strong>L3 (bulk activation) is the bleeding edge</strong> &mdash; only metric that DEGRADED YoY (&minus;2.4pp). Reversing it requires P1 reliability + P1.5 SLOs + AI Setup Agent &mdash; all already in plan, just need execution discipline.</li>
-    <li><strong>Targets are stretch but credible</strong> &mdash; L2 (20% SMS adoption) is below Klaviyo benchmark for omnichannel platforms (~30%); L9 (Net CSAT +30) is below Klaviyo&rsquo;s ~+45 net.</li>
+    <li><strong>Editor-PM target: $20&ndash;24M ARR swing</strong> &mdash; recovers most of the editor-attributable loss ($13&ndash;20M) with a modest additional swing ($0&ndash;7M). 100% target hit lands at the top of the band ($23.9M).</li>
+    <li><strong>Leading indicators carry ~40% of the commit</strong> &mdash; L1 (bulk adoption) + L2 (bulk activation) + L3 (SMS activation) + L4 (30-day repeat) = $9.6M (40% of $23.9M). These are the metrics editor PM moves directly and that should show progress first.</li>
+    <li><strong>L8 (CSAT) and L9 (Klaviyo bake-offs) carry ~50%</strong> &mdash; $5.7M + $6.0M = $11.7M (49% of $23.9M). Both depend on landing the full P1&ndash;P5 deliverable stack with quality.</li>
+    <li><strong>L2 (bulk activation) is the bleeding edge</strong> &mdash; only metric that DEGRADED YoY (&minus;2.4pp). Reversing it requires P1 reliability + P1.5 SLOs + AI Setup Agent &mdash; all already in plan, just need execution discipline.</li>
+    <li><strong>Targets are stretch but credible</strong> &mdash; L8 (Net CSAT +30) is below Klaviyo&rsquo;s ~+45 net; L9 (35% bake-off win) is well below Klaviyo&rsquo;s likely ~70% incumbent advantage.</li>
     <li><strong>Editor causal share is conservative</strong> &mdash; 30&ndash;50% per lever; doubling shares roughly doubles impact (cross-check: matches Loss Attribution L2 high-band $26&ndash;28M).</li>
-    <li><strong>Headroom is built-in</strong> &mdash; if all editor targets hit, we deliver $29M alone (covers 91% of $32M). Combined with cross-functional ($10M) = $39M. Allows for 2&ndash;3 levers underperforming.</li>
-    <li><strong>Pacing matters</strong> &mdash; L1 + L3 + L6 must move by Q3-Q4 FY27 for the loss recovery to land in-year. L2 + L4 + L5 + L9 + L10 land in Q5-Q6 FY28 and feed the additional swing.</li>
+    <li><strong>Why $20&ndash;24M not $32M</strong> &mdash; we removed levers the editor PM doesn&rsquo;t directly own (paid signups, free&rarr;paid, SMS adoption). The $32M target was achievable only by counting cross-functional contributions; the editor-PM honest commit is the $20&ndash;24M shown here.</li>
+    <li><strong>Pacing matters</strong> &mdash; L1 + L2 + L5 must move by Q3-Q4 FY27 for the loss recovery to land in-year. L3 + L4 + L8 + L9 land in Q5-Q6 FY28 and feed the additional swing.</li>
   </ul>
 
   <p class="source"><strong>Methodology:</strong> Per-lever calc shown in 4.2. ARPU sources: <code>bi_aggregate.mbr_monthly</code> (at-booking $45.35/mo, steady-state $91.44/mo, SMS add-on est. $20/mo). Volume base: 1,015,648 paid active users / mo from <code>product_journey_monthly</code> (T0 average). Adoption / activation YoY: <code>product_journey_monthly</code> for products in (bulk email, sms, genai content generation bulk, genai smart drafts bulk). Causal shares: editor-attributable % per lever, conservative; doubled in high-band sensitivity. Cross-references: <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a>, <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a>, <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a>, <a href="#memo" onclick="document.querySelector('[data-tab=memo]').click();return false;">Strategy Memo</a>.</p>
