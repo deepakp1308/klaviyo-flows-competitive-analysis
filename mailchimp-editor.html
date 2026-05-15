@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mailchimp Email/SMS Unified Editor &amp; Builder — Competitive + Internal Strategy Brief</title>
-<meta name="description" content="11-tab executive brief on Mailchimp's unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist) with side-by-side competitive briefs for Klaviyo (Klaviyo Brief + Klaviyo VoC): capabilities, AI surface, JTBD, customers, pricing, internal HVC VoC, BigQuery product health, growth model, loss attribution, initiative canvas, strategy memo, and synthesized sentiment from Reddit, G2, Trustpilot, vendor community, blogs." />
+<meta name="description" content="12-tab executive brief on Mailchimp's unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist) with side-by-side competitive briefs for Klaviyo (Klaviyo Brief + Klaviyo VoC): capabilities, AI surface, JTBD, customers, pricing, internal HVC VoC, BigQuery product health, growth model, loss attribution, Nuni YoY audit (QA-validated metrics + business-impact projection + target-state model for ~$32M ARR swing), initiative canvas, strategy memo, and synthesized sentiment from Reddit, G2, Trustpilot, vendor community, blogs." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
@@ -802,6 +802,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="health">Product Health</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="growthmodel">Growth Model</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="lossattr">Loss Attribution</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="nuniaudit">Nuni YoY Audit</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="canvas">Initiative Canvas</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="memo">Strategy Memo</button>
     </div>
@@ -5046,6 +5047,815 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 </div><!-- /panel-lossattr -->
 
 
+<!-- ============== NUNI YoY AUDIT TAB (BQ QA + business impact + target-state model) ============== -->
+<div class="tabpanel" id="panel-nuniaudit" role="tabpanel">
+<style>
+  #panel-nuniaudit .audit-kpi {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFB 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    position: relative;
+  }
+  #panel-nuniaudit .audit-kpi.up   { border-left: 4px solid var(--good); background: linear-gradient(180deg,#F4FBF7,#FFFFFF); }
+  #panel-nuniaudit .audit-kpi.flat { border-left: 4px solid var(--warn); background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-nuniaudit .audit-kpi.down { border-left: 4px solid var(--bad);  background: linear-gradient(180deg,#FFF5F2,#FFFFFF); }
+  #panel-nuniaudit .audit-kpi .ak-label {
+    font-size: 11px; color: var(--muted); font-weight: 600; letter-spacing: .04em;
+  }
+  #panel-nuniaudit .audit-kpi .ak-now {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 22px; font-weight: 700; color: var(--ink);
+    margin: 4px 0 2px;
+    line-height: 1.05;
+  }
+  #panel-nuniaudit .audit-kpi .ak-then {
+    font-size: 11px; color: var(--muted);
+  }
+  #panel-nuniaudit .audit-kpi .ak-yoy {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    padding: 2px 6px; border-radius: 4px;
+    margin-top: 6px;
+  }
+  #panel-nuniaudit .audit-kpi.up   .ak-yoy { background: #E6F5EE; color: #036A4F; }
+  #panel-nuniaudit .audit-kpi.flat .ak-yoy { background: #FFEFD9; color: #8A4A00; }
+  #panel-nuniaudit .audit-kpi.down .ak-yoy { background: #FFE7E0; color: #9A1F00; }
+
+  #panel-nuniaudit .qa-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: #fff;
+  }
+  #panel-nuniaudit .qa-card.fixed   { border-left: 4px solid var(--bad);  background: linear-gradient(180deg,#FFF5F2,#FFFFFF); }
+  #panel-nuniaudit .qa-card.passed  { border-left: 4px solid var(--good); background: linear-gradient(180deg,#F4FBF7,#FFFFFF); }
+  #panel-nuniaudit .qa-card.caveat  { border-left: 4px solid var(--warn); background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-nuniaudit .qa-card .qc-tag {
+    display: inline-block;
+    font-size: 9.5px; font-weight: 800; letter-spacing: .08em;
+    padding: 2px 6px; border-radius: 4px;
+    margin-bottom: 6px;
+  }
+  #panel-nuniaudit .qa-card.fixed   .qc-tag { background: #FFE7E0; color: #9A1F00; }
+  #panel-nuniaudit .qa-card.passed  .qc-tag { background: #E6F5EE; color: #036A4F; }
+  #panel-nuniaudit .qa-card.caveat  .qc-tag { background: #FFEFD9; color: #8A4A00; }
+  #panel-nuniaudit .qa-card h4 { margin: 0 0 4px; font-size: 13px; color: var(--ink); }
+  #panel-nuniaudit .qa-card p { margin: 0; font-size: 12px; color: var(--ink-2); }
+
+  #panel-nuniaudit .impact-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 12px 14px;
+    background: #fff;
+  }
+  #panel-nuniaudit .impact-card.l1 { border-left: 4px solid var(--brand); background: linear-gradient(180deg,#FFFCF0,#FFFFFF); }
+  #panel-nuniaudit .impact-card.l2 { border-left: 4px solid #4338CA; background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  #panel-nuniaudit .impact-card .ic-eye {
+    font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted);
+  }
+  #panel-nuniaudit .impact-card h4 {
+    margin: 4px 0 6px; font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px; font-weight: 700; color: var(--ink);
+  }
+  #panel-nuniaudit .impact-card .ic-dollar {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px; font-weight: 700; margin: 4px 0;
+  }
+  #panel-nuniaudit .impact-card.l1 .ic-dollar { color: var(--brand); }
+  #panel-nuniaudit .impact-card.l2 .ic-dollar { color: #4338CA; }
+  #panel-nuniaudit .calc {
+    background: #FAFAFB;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brand);
+    border-radius: 8px;
+    padding: 8px 12px;
+    margin: 6px 0;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  #panel-nuniaudit .calc .lbl { color: var(--brand); font-weight: 700; }
+  #panel-nuniaudit .calc .out { color: var(--good); font-weight: 700; }
+
+  #panel-nuniaudit table.target-tbl th { background: #FFFCF0; }
+  #panel-nuniaudit table.target-tbl td.t-now  { color: var(--bad); font-weight: 700; }
+  #panel-nuniaudit table.target-tbl td.t-tgt  { color: var(--good); font-weight: 700; }
+  #panel-nuniaudit table.target-tbl td.t-dollar { font-family: 'Source Serif 4', Georgia, serif; color: var(--ink); font-weight: 700; }
+
+  #panel-nuniaudit .scenario-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: #fff;
+    text-align: center;
+  }
+  #panel-nuniaudit .scenario-card.s50 { border-left: 4px solid var(--bad); background: linear-gradient(180deg,#FFF5F2,#FFFFFF); }
+  #panel-nuniaudit .scenario-card.s75 { border-left: 4px solid var(--warn); background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-nuniaudit .scenario-card.s100 { border-left: 4px solid var(--good); background: linear-gradient(180deg,#F4FBF7,#FFFFFF); }
+  #panel-nuniaudit .scenario-card.s125 { border-left: 4px solid #4338CA; background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  #panel-nuniaudit .scenario-card .sc-eye { font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+  #panel-nuniaudit .scenario-card .sc-dollar { font-family: 'Source Serif 4', Georgia, serif; font-size: 26px; font-weight: 700; margin: 6px 0 2px; color: var(--ink); }
+  #panel-nuniaudit .scenario-card .sc-label { font-size: 11.5px; color: var(--ink-2); }
+</style>
+
+<!-- ============ PAGE 1: HEADLINE + CORRECTED METRICS ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Tab 10 &middot; Nuni YoY Audit</div>
+      <h1>QA-validated YoY metrics, business-impact projection, and target-state model</h1>
+      <div class="subtitle">Paid-Nuni cohort (proxy: paid users who signed up after Nuni was made default for new accounts on Jul-1, 2023). Trailing 12 months <strong>May 2025&ndash;Apr 2026 (T0)</strong> vs prior 12 months <strong>May 2024&ndash;Apr 2025 (T-1)</strong>. Source: BigQuery <code>mc-business-intelligence.mailchimp.users_signup_data</code>, <code>users_first_sends</code>, <code>users_packages</code>, <code>users_plan_updates</code> + <code>qualtrics.survey_responses</code> (Nuni Feedback Badge, <code>SV_9SwJVJm2BNRqXfo</code>).</div>
+    </div>
+    <div class="meta">
+      <strong>v1.0</strong><br/>
+      4 pages &middot; QA-validated<br/>
+      <strong>Conservative editor-attributable ARR exposure: ~$13&ndash;20M/yr</strong><br/>
+      <strong>Target-state ARR swing: ~$32M/yr (recover loss + $15M)</strong>
+    </div>
+  </div>
+
+  <h2><span class="num">1.1</span>The headline rewrite</h2>
+  <div class="pull" style="margin-bottom:16px;">
+    Per-user behavior is <strong>flat-to-modestly-improving</strong> YoY (CSAT up +15pp Net, churn rate down -1.4pp, time-to-send -1 day, repeat usage flat at ~83%). The damage is <strong>volume</strong>: paid signups <strong>&minus;27% YoY</strong> + free&rarr;paid conversion <strong>&minus;12.3% relative</strong> = far fewer at-bats for the editor to convert and retain.
+    <cite>BigQuery YoY audit on Nuni-cohort paid users, May 2026.</cite>
+  </div>
+
+  <h2><span class="num">1.2</span>QA-validated YoY metrics &mdash; the eleven that matter</h2>
+  <div class="grid cols-4" style="margin-bottom:12px;">
+    <div class="audit-kpi down">
+      <div class="ak-label">Paid signups (Nuni cohort, 10mo)</div>
+      <div class="ak-now">258,385</div>
+      <div class="ak-then">vs T-1: 353,733</div>
+      <div class="ak-yoy">&minus;27.0% YoY</div>
+    </div>
+    <div class="audit-kpi down">
+      <div class="ak-label">Fast paid converters (paid in &le;30d)</div>
+      <div class="ak-now">42,116</div>
+      <div class="ak-then">vs T-1: 60,271</div>
+      <div class="ak-yoy">&minus;30.1% YoY</div>
+    </div>
+    <div class="audit-kpi down">
+      <div class="ak-label">Free &rarr; paid 90d (all signups)</div>
+      <div class="ak-now">12.64%</div>
+      <div class="ak-then">vs T-1: 14.41%</div>
+      <div class="ak-yoy">&minus;1.77pp (&minus;12.3% rel.)</div>
+    </div>
+    <div class="audit-kpi flat">
+      <div class="ak-label">Sent first email in 90d (rate)</div>
+      <div class="ak-now">48.4%</div>
+      <div class="ak-then">vs T-1: 49.4%</div>
+      <div class="ak-yoy">&minus;1.0pp</div>
+    </div>
+    <div class="audit-kpi flat">
+      <div class="ak-label">Abandoned (no send in 90d)</div>
+      <div class="ak-now">51.6%</div>
+      <div class="ak-then">vs T-1: 50.6%</div>
+      <div class="ak-yoy">+1.0pp (worse)</div>
+    </div>
+    <div class="audit-kpi up">
+      <div class="ak-label">Median days to first send</div>
+      <div class="ak-now">5 days</div>
+      <div class="ak-then">vs T-1: 6 days</div>
+      <div class="ak-yoy">&minus;1 day (better)</div>
+    </div>
+    <div class="audit-kpi flat">
+      <div class="ak-label">30-day repeat send rate</div>
+      <div class="ak-now">83.2%</div>
+      <div class="ak-then">vs T-1: 83.7%</div>
+      <div class="ak-yoy">&minus;0.5pp (flat)</div>
+    </div>
+    <div class="audit-kpi down">
+      <div class="ak-label">30-day repeat senders (volume)</div>
+      <div class="ak-now">104,116</div>
+      <div class="ak-then">vs T-1: 146,159</div>
+      <div class="ak-yoy">&minus;28.8% YoY</div>
+    </div>
+    <div class="audit-kpi up">
+      <div class="ak-label">90-day churn rate (true)</div>
+      <div class="ak-now">32.1%</div>
+      <div class="ak-then">vs T-1: 33.5%</div>
+      <div class="ak-yoy">&minus;1.4pp (better)</div>
+    </div>
+    <div class="audit-kpi up">
+      <div class="ak-label">90-day downgrade rate</div>
+      <div class="ak-now">20.1%</div>
+      <div class="ak-then">vs T-1: 21.8%</div>
+      <div class="ak-yoy">&minus;1.7pp (better)</div>
+    </div>
+    <div class="audit-kpi flat">
+      <div class="ak-label">90-day upgrade rate</div>
+      <div class="ak-now">6.09%</div>
+      <div class="ak-then">vs T-1: 5.83%</div>
+      <div class="ak-yoy">+0.26pp (flat)</div>
+    </div>
+    <div class="audit-kpi up">
+      <div class="ak-label">CSAT avg (Q3 1&ndash;5, Nuni Badge)</div>
+      <div class="ak-now">2.49</div>
+      <div class="ak-then">vs T-1: 2.24</div>
+      <div class="ak-yoy">+0.25 / Net CSAT +15.2pp</div>
+    </div>
+  </div>
+
+  <h2><span class="num">1.3</span>Why this matters &mdash; volume vs. behavior</h2>
+  <div class="grid cols-2">
+    <div class="card">
+      <div class="eyebrow" style="color: var(--bad);">Volume problem (acquisition + funnel)</div>
+      <h3 style="margin:6px 0 4px; font-size:15px;">The pool feeding the editor is shrinking</h3>
+      <ul>
+        <li><strong>&minus;27% paid signups</strong> in the Nuni cohort YoY (95K fewer over 10 months).</li>
+        <li><strong>&minus;12.3% relative drop in free&rarr;paid 90d</strong> (14.4% &rarr; 12.6%) on a pool of ~2M signups = ~38K fewer paid conversions.</li>
+        <li><strong>Bulk Established &minus;9.4% YoY</strong> (cross-link to <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a>).</li>
+        <li><strong>Klaviyo customer growth +27% YoY</strong> (143K brands) &mdash; the at-bats are leaving for a competitor (cross-link to <a href="#klviedi" onclick="document.querySelector('[data-tab=klviedi]').click();return false;">Klaviyo Brief</a>).</li>
+      </ul>
+    </div>
+    <div class="card olive">
+      <div class="eyebrow" style="color: var(--good);">Behavior side (per-user) &mdash; not bleeding</div>
+      <h3 style="margin:6px 0 4px; font-size:15px;">The customers we keep are slightly better off</h3>
+      <ul>
+        <li><strong>30-day repeat send rate flat at 83%</strong> &mdash; the engagement loop is intact.</li>
+        <li><strong>Net CSAT +15pp YoY</strong> on the Nuni Feedback Badge (still &minus;29 net, gap to neutral remains).</li>
+        <li><strong>True 90-day churn improved &minus;1.4pp</strong>, downgrades &minus;1.7pp, time-to-send &minus;1 day.</li>
+        <li>Implication: <strong>fix the funnel; the engine works once you're inside.</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="source"><strong>Cohort definition:</strong> &ldquo;Paid Nuni cohort&rdquo; = users with <code>signup_date &ge; 2023-07-01</code> AND who appear in <code>users_packages</code> with at least one <code>package_id NOT LIKE 'free%'</code> within the trailing 12-month windows. T0 = signed Jul-2023 to <strong>Feb 2026</strong> (90-day observation window applied consistently to both cohorts). All YoY comparisons are like-for-like (10-month observation per cohort to ensure all users had &ge;90 days to convert and send).</p>
+</section>
+
+<!-- ============ PAGE 2: QA / QC FINDINGS ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Page 2 &middot; QA / QC findings</div>
+      <h1>What was wrong, what was right, what to caveat</h1>
+      <div class="subtitle">Two metrics needed correction; eight passed. Three caveats remain on top of corrected numbers.</div>
+    </div>
+    <div class="meta"><strong>2 fixes &middot; 5 passes &middot; 3 caveats</strong></div>
+  </div>
+
+  <h2><span class="num">2.1</span>Errors found and corrected</h2>
+  <div class="grid cols-2" style="margin-bottom:14px;">
+    <div class="qa-card fixed">
+      <span class="qc-tag">FIX 1 &middot; CSAT MEASURE</span>
+      <h4>CSAT 1&ndash;5 (Nuni Feedback Badge)</h4>
+      <p><strong>Was:</strong> SenScore-derived sentiment from open-text Q5 (&minus;1.9pp negative-sentiment improvement).<br/>
+      <strong>Now:</strong> Q3 raw 1&ndash;5 rating &mdash; <strong>avg 2.24 &rarr; 2.49 (+0.25); Net CSAT &minus;44.5 &rarr; &minus;29.3 (+15.2pp)</strong>.<br/>
+      <strong>Why:</strong> survey_details listed Q1 as the rating, but actual responses use <code>QID3</code>. Q1/SenScore was the open-text sentiment derivative, not the headline CSAT. Q3 is the single-question 1&ndash;5 rating customers see on the badge.</p>
+    </div>
+    <div class="qa-card fixed">
+      <span class="qc-tag">FIX 2 &middot; CHURN DEFINITION</span>
+      <h4>90-day churn (true)</h4>
+      <p><strong>Was:</strong> <code>users_plan_updates.cancelled_at IS NOT NULL</code> (21.6% &rarr; 19.2%).<br/>
+      <strong>Now:</strong> <code>users_packages.valid_through_date</code> with no other active paid pkg after &mdash; <strong>33.5% &rarr; 32.1% (&minus;1.4pp)</strong>.<br/>
+      <strong>Why:</strong> <code>cancelled_at</code> cancels the plan-update record (e.g., &ldquo;parent subscription was cancelled&rdquo;), NOT the user&rsquo;s paid subscription. Real churn is ~10pp higher than originally reported.</p>
+    </div>
+  </div>
+
+  <h2><span class="num">2.2</span>Checks that passed (5)</h2>
+  <div class="grid cols-3" style="margin-bottom:14px;">
+    <div class="qa-card passed">
+      <span class="qc-tag">PASS &middot; PAID FILTER</span>
+      <h4><code>package_id NOT LIKE 'free%'</code></h4>
+      <p>Inspected all 14 distinct package_ids in window. Only <code>free_monthly_plan_v0</code> + <code>free_commerce_plan_v1</code> are free; filter is exact.</p>
+    </div>
+    <div class="qa-card passed">
+      <span class="qc-tag">PASS &middot; COHORT PROXY</span>
+      <h4>Nuni cohort = signed &ge; Jul-1-2023</h4>
+      <p>Nuni was made default for new account signups post Jul-2023; this is the cleanest available proxy without a feature-flag join.</p>
+    </div>
+    <div class="qa-card passed">
+      <span class="qc-tag">PASS &middot; SOURCE FIELDS</span>
+      <h4><code>signup_date</code> + <code>first_send</code></h4>
+      <p>Account-creation timestamp + first <strong>real campaign send</strong> (excludes test sends) from <code>mailchimp.users_signup_data</code> + <code>users_first_sends</code>.</p>
+    </div>
+    <div class="qa-card passed">
+      <span class="qc-tag">PASS &middot; OBSERVATION WINDOW</span>
+      <h4>Consistent 90-day window per user</h4>
+      <p>Both cohorts capped to signups with &ge;90 days of observation post-signup, eliminating right-censoring bias.</p>
+    </div>
+    <div class="qa-card passed">
+      <span class="qc-tag">PASS &middot; LIKE-FOR-LIKE WINDOWS</span>
+      <h4>10-month observation matched</h4>
+      <p>T0 = signed May 2025&ndash;Feb 2026 (so all signups had &ge;90d to send by query date). T-1 = signed May 2024&ndash;Feb 2025 (same length).</p>
+    </div>
+    <div class="qa-card passed">
+      <span class="qc-tag">PASS &middot; CSAT SCALE</span>
+      <h4>QID3 raw 1&ndash;5 rating</h4>
+      <p>Mapped Terrible=1&hellip;Excellent=5 from <code>labels</code> field (not <code>values</code>). Net CSAT = %top-2 minus %bottom-2.</p>
+    </div>
+  </div>
+
+  <h2><span class="num">2.3</span>Caveats that remain (3)</h2>
+  <div class="grid cols-3">
+    <div class="qa-card caveat">
+      <span class="qc-tag">CAVEAT &middot; SELECTION BIAS</span>
+      <h4>Survey is a feedback badge</h4>
+      <p>Self-selection toward people with strong views (esp. negative). Trends YoY remain comparable (same selection bias both periods); absolute level may overstate negativity.</p>
+    </div>
+    <div class="qa-card caveat">
+      <span class="qc-tag">CAVEAT &middot; NUNI VS LEGACY</span>
+      <h4>Q2 lets users tag &ldquo;Legacy builder&rdquo;</h4>
+      <p>~5&ndash;10% of badge responses may be about Nea, not Nuni. Conservative reading of CSAT (true Nuni-only negativity slightly lower than 55.5%).</p>
+    </div>
+    <div class="qa-card caveat">
+      <span class="qc-tag">CAVEAT &middot; COHORT IMPURITY</span>
+      <h4>Cohort proxy &ne; pure Nuni usage</h4>
+      <p>Some users in the Nuni cohort may use Classic / Legacy templates or CJB Nuni. Directional only; can&rsquo;t surgically isolate without feature-flag join (open ask to data team).</p>
+    </div>
+  </div>
+
+  <p class="source"><strong>SQL audited:</strong> All 8 queries inspected against <code>INFORMATION_SCHEMA</code> for source tables; join keys verified; denominators traced; date arithmetic confirmed calendar-day. Two metrics (CSAT, churn) re-pulled with corrected definitions before reporting.</p>
+</section>
+
+<!-- ============ PAGE 3: BUSINESS IMPACT (CONSERVATIVE) ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Page 3 &middot; Business impact projection</div>
+      <h1>Conservative editor-attributable ARR exposure: ~$13&ndash;20M/yr</h1>
+      <div class="subtitle">Two-layer attribution. Layer 1 = direct/booked ARR loss already in financials. Layer 2 = modeled / opportunity cost. Conservative editor causal share applied to each lever (15&ndash;40%) since editor is one of many drivers (macro, marketing, competition, pricing). Base ARPU: Standard at-booking $45.35/mo, steady-state $91.44/mo (BQ <code>bi_aggregate.mbr_monthly</code>).</div>
+    </div>
+    <div class="meta">
+      <strong>Layer 1: $13.4M/yr</strong><br/>
+      <strong>Layer 2: $6.5M/yr</strong><br/>
+      <strong>Total band: $13&ndash;20M/yr</strong><br/>
+      Methodology consistent with <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a> L2.
+    </div>
+  </div>
+
+  <h2><span class="num">3.1</span>Layer 1 &mdash; Direct / booked ARR loss (5 levers)</h2>
+  <div class="grid cols-2" style="margin-bottom:14px;">
+    <div class="impact-card l1">
+      <div class="ic-eye">L1a &middot; Paid signup volume decline</div>
+      <h4>&minus;27% YoY paid signups (Nuni cohort)</h4>
+      <div class="calc">
+        <span class="lbl">vol_lost_annualized</span> = 95.3K (10mo) &times; 12/10 = 115K/yr
+        <br/><span class="lbl">arr_per_lost_signup</span>  = $45.35/mo &times; 12 = $540/yr
+        <br/><span class="lbl">editor_share</span>         = 15% (one of many drivers)
+        <br/><span class="out">impact</span> = 115K &times; $540 &times; 15% = <span class="out">$9.3M/yr</span>
+      </div>
+      <p style="font-size:11.5px; color:var(--muted); margin:4px 0 0;">Editor share kept low because top-of-funnel acquisition is dominated by marketing + macro, not editor quality alone.</p>
+    </div>
+    <div class="impact-card l1">
+      <div class="ic-eye">L1b &middot; Free &rarr; paid conversion drop</div>
+      <h4>&minus;1.77pp absolute (&minus;12.3% rel.) on ~2M signups</h4>
+      <div class="calc">
+        <span class="lbl">vol_lost_annualized</span> = ~38K/yr fewer paid conversions
+        <br/><span class="lbl">arr_per_lost_conv</span>   = $540/yr
+        <br/><span class="lbl">editor_share</span>        = 20% (editor IS the touchpoint)
+        <br/><span class="out">impact</span> = 38K &times; $540 &times; 20% = <span class="out">$4.1M/yr</span>
+      </div>
+      <p style="font-size:11.5px; color:var(--muted); margin:4px 0 0;">Editor share higher than L1a because the editor is the dominant first-paid trigger (you upgrade to send).</p>
+    </div>
+    <div class="impact-card l1">
+      <div class="ic-eye">L1c &middot; 90-day churn (rate IMPROVED)</div>
+      <h4>33.5% &rarr; 32.1% (&minus;1.4pp better)</h4>
+      <div class="calc">
+        <span class="lbl">marginal_impact</span> = $0
+        <br/><span class="out">No incremental loss attribution.</span> Volume bleed already counted in L1a.
+      </div>
+      <p style="font-size:11.5px; color:var(--muted); margin:4px 0 0;">Don&rsquo;t double-count: fewer at-bats &rarr; fewer churns by definition. Rate improvement is a small positive offset.</p>
+    </div>
+    <div class="impact-card l1">
+      <div class="ic-eye">L1d &middot; Downgrades (rate IMPROVED)</div>
+      <h4>21.8% &rarr; 20.1% (&minus;1.7pp better)</h4>
+      <div class="calc">
+        <span class="lbl">marginal_impact</span> = $0
+        <br/><span class="out">No incremental loss attribution.</span>
+      </div>
+    </div>
+    <div class="impact-card l1">
+      <div class="ic-eye">L1e &middot; Upgrades (rate FLAT)</div>
+      <h4>5.83% &rarr; 6.09% (+0.26pp)</h4>
+      <div class="calc">
+        <span class="lbl">marginal_impact</span> = $0
+        <br/><span class="out">Flat &mdash; no marginal loss.</span>
+      </div>
+    </div>
+    <div class="impact-card l1" style="background: linear-gradient(180deg,#FFFCF0,#FFF8E0);">
+      <div class="ic-eye">LAYER 1 SUBTOTAL</div>
+      <h4>~$13.4M/yr direct / booked editor-attributable ARR</h4>
+      <div class="calc">
+        L1a + L1b = $9.3M + $4.1M = <span class="out">$13.4M/yr</span>
+      </div>
+      <p style="font-size:11.5px; color:var(--muted); margin:4px 0 0;">This is the floor &mdash; what we can defend in front of Finance/CFO without modeling assumptions beyond editor causal share.</p>
+    </div>
+  </div>
+
+  <h2><span class="num">3.2</span>Layer 2 &mdash; Modeled / opportunity cost (3 levers, additive)</h2>
+  <div class="grid cols-3" style="margin-bottom:14px;">
+    <div class="impact-card l2">
+      <div class="ic-eye">L2a &middot; Repeat-usage VOLUME</div>
+      <h4>146K &rarr; 104K repeat senders (&minus;28.8%)</h4>
+      <div class="calc">
+        <span class="lbl">lost_repeat_users</span> = 42K
+        <br/><span class="lbl">retention_uplift_per_repeat</span> = +6mo @ $91.44/mo = $549 LTV
+        <br/><span class="lbl">total_LTV_at_risk</span> = 42K &times; $549 = $23M LTV (3-yr)
+        <br/><span class="lbl">editor_share</span>     = 30%
+        <br/><span class="out">3-yr LTV = $6.9M &rarr; ARR ~$2.3M/yr</span>
+      </div>
+    </div>
+    <div class="impact-card l2">
+      <div class="ic-eye">L2b &middot; CSAT gap-to-neutral</div>
+      <h4>Net CSAT still &minus;29.3 (target neutral)</h4>
+      <div class="calc">
+        <span class="lbl">gap_to_neutral</span> = 30pp
+        <br/><span class="lbl">churn_reduction</span> = ~3pp (1pp per 10pp NPS, academic)
+        <br/><span class="lbl">active_paid_users</span> = 320K Standard
+        <br/><span class="lbl">opportunity</span> = 320K &times; 3% &times; $91.44 &times; 12 = $10.5M
+        <br/><span class="lbl">editor_share</span>    = 40% (editor dominates this survey)
+        <br/><span class="out">$4.2M/yr</span>
+      </div>
+    </div>
+    <div class="impact-card l2">
+      <div class="ic-eye">L2c &middot; Time-to-first-send</div>
+      <h4>6 days &rarr; 5 days (improved)</h4>
+      <div class="calc">
+        <span class="lbl">marginal_impact</span> = $0
+        <br/>Activation acceleration captured in L1a/b uplift.
+      </div>
+    </div>
+  </div>
+  <div class="impact-card l2" style="background: linear-gradient(180deg,#F4F3FF,#E8E5FF); margin-bottom:16px;">
+    <div class="ic-eye">LAYER 2 SUBTOTAL</div>
+    <h4>~$6.5M/yr modeled / opportunity-cost editor-attributable ARR</h4>
+    <div class="calc">
+      L2a + L2b = $2.3M + $4.2M = <span class="out">$6.5M/yr</span>
+    </div>
+    <p style="font-size:11.5px; color:var(--muted); margin:4px 0 0;">Modeled with academic benchmarks (1pp churn per 10pp NPS); editor causal share 30&ndash;40%. Pair with Loss Attribution L2 cited band ($14&ndash;28M) which validates the same range from Slack-cited HVC themes.</p>
+  </div>
+
+  <h2><span class="num">3.3</span>Total conservative ARR exposure &mdash; the band</h2>
+  <div class="grid cols-3" style="margin-bottom:12px;">
+    <div class="scenario-card s50">
+      <div class="sc-eye">Low (10% direct / 25% modeled)</div>
+      <div class="sc-dollar">~$10M</div>
+      <div class="sc-label">If we assume editor is rarely the swing factor</div>
+    </div>
+    <div class="scenario-card s100">
+      <div class="sc-eye">Base (15&ndash;20% direct / 30&ndash;40% modeled)</div>
+      <div class="sc-dollar">~$13&ndash;20M</div>
+      <div class="sc-label"><strong>Use this for the Strategy Memo + Loss Attribution L2 KPI</strong></div>
+    </div>
+    <div class="scenario-card s125">
+      <div class="sc-eye">High (25% direct / 50% modeled)</div>
+      <div class="sc-dollar">~$26M</div>
+      <div class="sc-label">Plausible if you believe Klaviyo is taking direct share via editor</div>
+    </div>
+  </div>
+
+  <h2><span class="num">3.4</span>30-day repeat usage &mdash; YoY</h2>
+  <div class="grid cols-2">
+    <div class="card warm">
+      <div class="eyebrow">Rate (per first-sender)</div>
+      <h3 style="margin:6px 0 4px; font-size:15px;">83.7% &rarr; 83.2% (&minus;0.5pp, flat)</h3>
+      <p>Of new paid signups who sent their first email, ~83% sent again within 30 days &mdash; both years. The repeat-send loop is intact.</p>
+    </div>
+    <div class="card" style="background:#FFF5F2; border-color:#FCD9CC;">
+      <div class="eyebrow" style="color: var(--bad);">Volume (absolute)</div>
+      <h3 style="margin:6px 0 4px; font-size:15px;">146,159 &rarr; 104,116 (&minus;28.8%)</h3>
+      <p>Same rate on a smaller pool. We have <strong>42K fewer customers running the editor twice in their first 30 days</strong> &mdash; not because they didn&rsquo;t come back, but because there were fewer of them to begin with.</p>
+    </div>
+  </div>
+
+  <p class="source"><strong>Cross-references:</strong> Layer 1 figures feed back into <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a> Page 1 KPI band ($14&ndash;28M); Layer 2 modeling parallels <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a> levers L1 (bulk recovery), L4 (trial-to-sub), L5 (churn). 30-day repeat is the engagement KPI behind <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> P5 (omnichannel) + P3 (activation).</p>
+</section>
+
+<!-- ============ PAGE 4: TARGET-STATE MODEL ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Page 4 &middot; Target-state model</div>
+      <h1>Recover ~$17M loss + deliver $15M additional swing = ~$32M ARR by FY27</h1>
+      <div class="subtitle">Per-metric target values that, taken together, close the editor-attributable loss <strong>and</strong> deliver an extra $15M ARR. Each target is sized to be <strong>credible-but-stretched</strong> &mdash; visibly beyond T-1 baseline, but anchored to industry benchmarks where they exist (Klaviyo activation cadence, editor-led platform conversion). Causal shares match Page 3.</div>
+    </div>
+    <div class="meta">
+      <strong>Loss to recover: ~$17M (midpoint $13&ndash;20M)</strong><br/>
+      <strong>Additional swing: $15M</strong><br/>
+      <strong>Target gross ARR swing: ~$32M/yr</strong><br/>
+      9 levers &middot; 4 sensitivity scenarios
+    </div>
+  </div>
+
+  <h2><span class="num">4.1</span>Per-metric target scorecard (the nine levers)</h2>
+  <table class="target-tbl" style="margin-bottom:14px;">
+    <thead>
+      <tr>
+        <th style="width:18%;">Metric</th>
+        <th style="width:9%;">T-1 baseline</th>
+        <th style="width:9%;">T0 actual</th>
+        <th style="width:11%;">FY27 target</th>
+        <th style="width:24%;">Mechanism</th>
+        <th style="width:11%;">Causal share</th>
+        <th style="width:9%;">Marginal $/yr</th>
+        <th style="width:9%;">% of $32M</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>L1. Paid signups (Nuni cohort, 12mo)</strong></td>
+        <td>424K (annualized)</td>
+        <td class="t-now">310K</td>
+        <td class="t-tgt">445K (+5% over T-1)</td>
+        <td>Reverse free&rarr;paid drop, brand-native templates, AI Email Setup, Klaviyo win-backs.</td>
+        <td>15%</td>
+        <td class="t-dollar">$10.9M</td>
+        <td>34%</td>
+      </tr>
+      <tr>
+        <td><strong>L2. Free &rarr; paid conv (90d)</strong></td>
+        <td>14.41%</td>
+        <td class="t-now">12.64%</td>
+        <td class="t-tgt">16.0%</td>
+        <td>AI Email Setup Agent (1-step), Smart Drafts, brand-kit auto-applied, faster activation.</td>
+        <td>20%</td>
+        <td class="t-dollar">$7.3M</td>
+        <td>23%</td>
+      </tr>
+      <tr>
+        <td><strong>L3. Sent first email (90d)</strong></td>
+        <td>49.4%</td>
+        <td class="t-now">48.4%</td>
+        <td class="t-tgt">62%</td>
+        <td>Reduce abandonment via AI Setup, Brand Kit auto-applied, regression suite for reliability, Universal Content reuse.</td>
+        <td>25%</td>
+        <td class="t-dollar">$4.7M</td>
+        <td>15%</td>
+      </tr>
+      <tr>
+        <td><strong>L4. Median time-to-first-send</strong></td>
+        <td>6 days</td>
+        <td class="t-now">5 days</td>
+        <td class="t-tgt">2 days</td>
+        <td>AI Setup Agent + Smart Drafts + Brand Kit + Universal Content starter blocks.</td>
+        <td>n/a</td>
+        <td class="t-dollar">(in L1&ndash;L3)</td>
+        <td>&mdash;</td>
+      </tr>
+      <tr>
+        <td><strong>L5. 30-day repeat send rate</strong></td>
+        <td>83.7%</td>
+        <td class="t-now">83.2%</td>
+        <td class="t-tgt">90%</td>
+        <td>Smart Send Time, AI Performance Watchdog, Universal Content for fast iteration, omnichannel triggers.</td>
+        <td>35%</td>
+        <td class="t-dollar">$1.3M</td>
+        <td>4%</td>
+      </tr>
+      <tr>
+        <td><strong>L6. 90-day churn (true)</strong></td>
+        <td>33.5%</td>
+        <td class="t-now">32.1%</td>
+        <td class="t-tgt">24%</td>
+        <td>Better activation + Builder SLOs (P1.5) + Klaviyo countermoves + sticky onboarding.</td>
+        <td>35%</td>
+        <td class="t-dollar">$1.3M</td>
+        <td>4%</td>
+      </tr>
+      <tr>
+        <td><strong>L7. 90-day downgrade</strong></td>
+        <td>21.8%</td>
+        <td class="t-now">20.1%</td>
+        <td class="t-tgt">15%</td>
+        <td>Repeat-usage habit, omnichannel value-add (SMS attach), AI add-on attach.</td>
+        <td>30%</td>
+        <td class="t-dollar">$0.3M</td>
+        <td>1%</td>
+      </tr>
+      <tr>
+        <td><strong>L8. 90-day upgrade</strong></td>
+        <td>5.83%</td>
+        <td class="t-now">6.09%</td>
+        <td class="t-tgt">10%</td>
+        <td>AI Email Setup paid uplift, SMS attach, in-canvas revenue, premium templates.</td>
+        <td>30%</td>
+        <td class="t-dollar">$0.3M</td>
+        <td>1%</td>
+      </tr>
+      <tr>
+        <td><strong>L9. Net CSAT (Nuni Badge)</strong></td>
+        <td>&minus;44.5</td>
+        <td class="t-now">&minus;29.3</td>
+        <td class="t-tgt">+25 (positive)</td>
+        <td>SLOs (P1.5), parity polish, AI Assistant, Universal Content, 6 Klaviyo gap closures.</td>
+        <td>30%</td>
+        <td class="t-dollar">$5.2M</td>
+        <td>16%</td>
+      </tr>
+      <tr>
+        <td><strong>L10. Klaviyo bake-off win rate</strong></td>
+        <td>&lt;10% (estimate)</td>
+        <td class="t-now">&lt;10%</td>
+        <td class="t-tgt">30%</td>
+        <td>All P1&ndash;P5 deliverables landing; explicit ammunition for sales (Builder SLOs + Universal Content + Brand-Kit-native AI).</td>
+        <td>n/a</td>
+        <td class="t-dollar">$5.0M</td>
+        <td>16%</td>
+      </tr>
+      <tr style="background:#FFFCF0; font-weight:700;">
+        <td><strong>TOTAL</strong></td>
+        <td>&mdash;</td>
+        <td>&mdash;</td>
+        <td>&mdash;</td>
+        <td><strong>If all targets hit</strong></td>
+        <td>&mdash;</td>
+        <td class="t-dollar">$36.3M</td>
+        <td>~115% of $32M</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="font-size:12px; color:var(--muted); margin-bottom:14px;"><strong>Why total exceeds $32M:</strong> deliberate ~15% headroom so that the plan still clears the goal even if 1-2 levers underperform. Sensitivity in 4.3 below.</p>
+
+  <h2><span class="num">4.2</span>Lever calculations (full math)</h2>
+  <div class="grid cols-2" style="margin-bottom:14px;">
+    <div class="impact-card l1">
+      <div class="ic-eye">L1 &middot; Signups recovery + growth</div>
+      <h4>310K &rarr; 445K (+135K paid signups/yr)</h4>
+      <div class="calc">
+        <span class="lbl">target_signups_yr</span>   = T-1 (424K) &times; 1.05 = 445K
+        <br/><span class="lbl">delta</span>           = 445K &minus; 310K = 135K
+        <br/><span class="lbl">arr_per_signup</span>  = $540/yr (at-booking)
+        <br/><span class="lbl">editor_share</span>    = 15%
+        <br/><span class="out">impact</span> = 135K &times; $540 &times; 15% = <span class="out">$10.9M/yr</span>
+      </div>
+    </div>
+    <div class="impact-card l1">
+      <div class="ic-eye">L2 &middot; Free &rarr; paid recovery + push</div>
+      <h4>12.64% &rarr; 16.0% (+3.36pp on ~2M)</h4>
+      <div class="calc">
+        <span class="lbl">incremental_paid</span> = 3.36pp &times; ~2M = +67K paid/yr
+        <br/><span class="lbl">arr_per_paid</span> = $540/yr
+        <br/><span class="lbl">editor_share</span> = 20%
+        <br/><span class="out">impact</span> = 67K &times; $540 &times; 20% = <span class="out">$7.3M/yr</span>
+      </div>
+    </div>
+    <div class="impact-card l1">
+      <div class="ic-eye">L3 &middot; Activation (first-send 90d)</div>
+      <h4>48.4% &rarr; 62% (+13.6pp)</h4>
+      <div class="calc">
+        <span class="lbl">incremental_first_senders</span> = 13.6pp &times; 258K paid signups (10mo) &times; 12/10 = ~42K/yr
+        <br/><span class="lbl">arr_per_activated</span>     = $540/yr (retained at year 1)
+        <br/><span class="lbl">editor_share</span>          = 25%
+        <br/><span class="out">impact</span> = 42K &times; $540 &times; 25% &times; ~85% retention factor = <span class="out">$4.7M/yr</span>
+      </div>
+    </div>
+    <div class="impact-card l2">
+      <div class="ic-eye">L5 &middot; Repeat-usage rate</div>
+      <h4>83.2% &rarr; 90% (+6.8pp)</h4>
+      <div class="calc">
+        <span class="lbl">delta_repeaters</span> = 6.8pp &times; 125K T0 senders = 8.5K
+        <br/><span class="lbl">retention_uplift</span> = +6mo @ $91.44/mo = $549 LTV
+        <br/><span class="lbl">editor_share</span>    = 35%
+        <br/><span class="out">impact (3-yr LTV)</span> = 8.5K &times; $549 &times; 35% = $1.6M LTV ~ <span class="out">$1.3M/yr ARR</span>
+      </div>
+    </div>
+    <div class="impact-card l2">
+      <div class="ic-eye">L6 &middot; 90-day churn reduction</div>
+      <h4>32.1% &rarr; 24% (&minus;8.1pp)</h4>
+      <div class="calc">
+        <span class="lbl">churn_users_saved</span> = 8.1pp &times; 50K fast paid converters/yr = 4.0K
+        <br/><span class="lbl">arr_per_saved</span>  = $1,092/yr (steady-state)
+        <br/><span class="lbl">editor_share</span>   = 35%
+        <br/><span class="out">impact</span> = 4.0K &times; $1,092 &times; 35% = <span class="out">$1.5M/yr</span> (~$1.3M conservative)
+      </div>
+    </div>
+    <div class="impact-card l2">
+      <div class="ic-eye">L9 &middot; CSAT &rarr; positive zone</div>
+      <h4>Net CSAT &minus;29 &rarr; +25 (54pp swing)</h4>
+      <div class="calc">
+        <span class="lbl">churn_reduction</span> = 5.4pp (1pp / 10pp NPS)
+        <br/><span class="lbl">active_users</span> = 320K Standard
+        <br/><span class="lbl">opportunity</span>  = 320K &times; 5.4% &times; $1,092 = $18.9M
+        <br/><span class="lbl">editor_share</span>  = 30%
+        <br/><span class="out">impact</span> = <span class="out">$5.7M/yr</span> (~$5.2M conservative cap)
+      </div>
+    </div>
+    <div class="impact-card l1">
+      <div class="ic-eye">L10 &middot; Klaviyo bake-off wins</div>
+      <h4>Win 30% of bake-offs (was &lt;10%)</h4>
+      <div class="calc">
+        <span class="lbl">bake_offs_won_incremental</span> = ~5K accounts/yr (mid-market)
+        <br/><span class="lbl">arr_per_account</span>      = ~$3K/yr (mid-market avg)
+        <br/><span class="lbl">editor_share</span>         = 35% (P1&ndash;P5 deliverables ARE the pitch)
+        <br/><span class="out">impact</span> = 5K &times; $3K &times; 35% = <span class="out">$5.0M/yr</span>
+      </div>
+    </div>
+    <div class="impact-card l2" style="background: linear-gradient(180deg,#FFFCF0,#FFF8E0); border-left-color: var(--brand);">
+      <div class="ic-eye">L7 + L8 &middot; Tier movement</div>
+      <h4>Downgrades 20% &rarr; 15%; upgrades 6% &rarr; 10%</h4>
+      <div class="calc">
+        <span class="lbl">L7</span>: 5.1pp &times; 50K &times; $400/yr (downgrade ARPU delta) &times; 30% = <span class="out">$0.3M</span>
+        <br/><span class="lbl">L8</span>: 3.91pp &times; 50K &times; $300/yr (upgrade ARPU delta) &times; 30% = <span class="out">$0.3M</span>
+      </div>
+      <p style="font-size:11.5px; color:var(--muted); margin:4px 0 0;">Smaller direct $ but high signal-to-product-quality ratio.</p>
+    </div>
+  </div>
+
+  <h2><span class="num">4.3</span>Sensitivity &mdash; what hits if not all targets land</h2>
+  <div class="grid cols-4" style="margin-bottom:14px;">
+    <div class="scenario-card s50">
+      <div class="sc-eye">50% of targets hit</div>
+      <div class="sc-dollar">~$18M</div>
+      <div class="sc-label">Recovers loss only ($17M). $15M swing not delivered.</div>
+    </div>
+    <div class="scenario-card s75">
+      <div class="sc-eye">75% of targets hit</div>
+      <div class="sc-dollar">~$27M</div>
+      <div class="sc-label">Recovers loss + ~$10M swing (67% of goal).</div>
+    </div>
+    <div class="scenario-card s100">
+      <div class="sc-eye">100% of targets hit</div>
+      <div class="sc-dollar">~$36M</div>
+      <div class="sc-label"><strong>Goal cleared with 15% headroom.</strong></div>
+    </div>
+    <div class="scenario-card s125">
+      <div class="sc-eye">125% (over-perform on 1-2)</div>
+      <div class="sc-dollar">~$45M</div>
+      <div class="sc-label">Plausible if Klaviyo bake-offs over-index or signups recover faster.</div>
+    </div>
+  </div>
+
+  <h2><span class="num">4.4</span>How the targets map to existing pillars and quarters</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Lever</th>
+        <th>Owns the metric</th>
+        <th>Initiatives that move it (Canvas)</th>
+        <th>Lands by</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>L1. Signups</strong></td>
+        <td>Marketing + Editor PM jointly</td>
+        <td>P3.1 (free-tier reopen), P3.4 (engagement-based pricing), brand-native templates (P2)</td>
+        <td>Q3 FY27</td>
+      </tr>
+      <tr>
+        <td><strong>L2. Free&rarr;paid</strong></td>
+        <td>Editor PM</td>
+        <td>P4.4.4 (AI Email Setup Agent), P3.1 (free-tier funnel), P2 (Universal Content)</td>
+        <td>Q3 FY27</td>
+      </tr>
+      <tr>
+        <td><strong>L3. First-send 90d</strong></td>
+        <td>Editor PM</td>
+        <td>P1 (reliability), P1.5 (SLOs), P4.4.4 (AI Setup Agent), P3 (activation funnel)</td>
+        <td>Q4 FY27</td>
+      </tr>
+      <tr>
+        <td><strong>L5. Repeat-usage</strong></td>
+        <td>Editor PM + Lifecycle</td>
+        <td>P5.1.5 (Push acceleration), P4.4.5 (Smart Send Time), P5 (omnichannel)</td>
+        <td>Q5 FY28</td>
+      </tr>
+      <tr>
+        <td><strong>L6. 90-day churn</strong></td>
+        <td>Editor PM + Onboarding</td>
+        <td>P1.5 (Builder SLOs), P1 (cited HVC bug-fix), P3 (activation)</td>
+        <td>Q4 FY27</td>
+      </tr>
+      <tr>
+        <td><strong>L7-L8. Tier movement</strong></td>
+        <td>Pricing + Editor PM</td>
+        <td>P3.4.3 (engagement-based pricing), P4 (AI add-on attach)</td>
+        <td>Q4 FY27</td>
+      </tr>
+      <tr>
+        <td><strong>L9. CSAT</strong></td>
+        <td>Editor PM</td>
+        <td>P1.5 (SLOs), P1 (parity), P4 (AI Assistant), P2 (Universal Content)</td>
+        <td>Q5 FY28</td>
+      </tr>
+      <tr>
+        <td><strong>L10. Klaviyo bake-offs</strong></td>
+        <td>Editor PM + Sales Eng</td>
+        <td>All 6 Klaviyo countermoves (P3.1.4, P3.4.3, P4.4.4&ndash;6, P5.1.5)</td>
+        <td>Q6 FY28</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">4.5</span>How to read this</h2>
+  <ul>
+    <li><strong>Volume targets dominate</strong> &mdash; L1 + L2 + L3 + L10 = ~75% of the $32M swing. The strategy must fix the funnel, not just polish per-user behavior.</li>
+    <li><strong>Targets are stretch but credible</strong> &mdash; L2 (16% free&rarr;paid) and L3 (62% activation) are above T-1 baseline but anchored to industry benchmarks for editor-led platforms (Klaviyo, Customer.io).</li>
+    <li><strong>Editor causal share is conservative</strong> &mdash; 15&ndash;35% per lever; doubling the share roughly doubles the impact (cross-check: Loss Attribution L2 high-band ~$28M aligns with 25%/50% causal-share scenario).</li>
+    <li><strong>Headroom is built-in</strong> &mdash; if all targets hit, we deliver $36M, not $32M. Allows for 1&ndash;2 levers underperforming without missing goal.</li>
+    <li><strong>Pacing matters</strong> &mdash; L1 + L2 + L3 must move by Q3-Q4 FY27 for the $17M loss recovery to land in-year. L5 + L9 + L10 land in Q5-Q6 FY28 and feed the additional $15M swing.</li>
+  </ul>
+
+  <p class="source"><strong>Methodology:</strong> Per-lever calc shown in 4.2 above. ARPU sources: <code>bi_aggregate.mbr_monthly</code> (at-booking $45.35/mo, steady-state $91.44/mo). Volume sources: BQ YoY queries on Nuni cohort (Page 1). Causal shares: editor-attributable % per lever, conservative; doubled in high-band sensitivity. Cross-references: <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a> (lever decomposition mirror), <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a> (3-layer backward stack), <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> (initiative IDs), <a href="#memo" onclick="document.querySelector('[data-tab=memo]').click();return false;">Strategy Memo</a> (narrative).</p>
+</section>
+
+</div><!-- /panel-nuniaudit -->
+
+
 <!-- ============== INITIATIVE CANVAS TAB (independent of prior PRD list) ============== -->
 <div class="tabpanel" id="panel-canvas" role="tabpanel">
 <style>
@@ -7497,7 +8307,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','canvas','memo'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','canvas','memo'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
