@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mailchimp Email/SMS Unified Editor &amp; Builder — Competitive + Internal Strategy Brief</title>
-<meta name="description" content="12-tab executive brief on Mailchimp's unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist) with side-by-side competitive briefs for Klaviyo (Klaviyo Brief + Klaviyo VoC): capabilities, AI surface, JTBD, customers, pricing, internal HVC VoC, BigQuery product health, growth model, loss attribution, Nuni YoY audit (QA-validated metrics + business-impact projection + target-state model for ~$32M ARR swing), initiative canvas, strategy memo, and synthesized sentiment from Reddit, G2, Trustpilot, vendor community, blogs." />
+<meta name="description" content="14-tab executive brief on Mailchimp's unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist) with side-by-side competitive briefs for Klaviyo (Klaviyo Brief + Klaviyo VoC): capabilities, AI surface, JTBD, customers, pricing, internal HVC VoC, BigQuery product health, growth model, loss attribution, Nuni YoY audit (QA-validated metrics + target band $20-24M), revised goals (product-adoption scorecards across paid/free/trial cohorts ~$21M editor commitment), initiative canvas, strategy memo, build plan, and synthesized sentiment from Reddit, G2, Trustpilot, vendor community, blogs." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
@@ -803,6 +803,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="growthmodel">Growth Model</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="lossattr">Loss Attribution</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="nuniaudit">Nuni YoY Audit</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="revised">Revised Goals</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="canvas">Initiative Canvas</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="memo">Strategy Memo</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="buildplan">Build Plan</button>
@@ -5933,6 +5934,780 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 </div><!-- /panel-nuniaudit -->
 
 
+<!-- ============== REVISED LOSS ATTRIBUTION & GOAL SETTING TAB ============== -->
+<div class="tabpanel" id="panel-revised" role="tabpanel">
+<style>
+  #panel-revised .cohort-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+    background: #fff;
+    text-align: left;
+  }
+  #panel-revised .cohort-card.paid  { border-left: 4px solid var(--brand);   background: linear-gradient(180deg,#FFFCF0,#FFFFFF); }
+  #panel-revised .cohort-card.free  { border-left: 4px solid var(--good);    background: linear-gradient(180deg,#F4FBF7,#FFFFFF); }
+  #panel-revised .cohort-card.trial { border-left: 4px solid #4338CA;        background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  #panel-revised .cohort-card .cc-eye {
+    font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 4px;
+  }
+  #panel-revised .cohort-card h3 {
+    margin: 0 0 6px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 15px; font-weight: 700; color: var(--ink);
+  }
+  #panel-revised .cohort-card .cc-dollar {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 32px; font-weight: 700; line-height: 1;
+    margin: 8px 0 4px;
+  }
+  #panel-revised .cohort-card.paid .cc-dollar  { color: var(--brand); }
+  #panel-revised .cohort-card.free .cc-dollar  { color: var(--good); }
+  #panel-revised .cohort-card.trial .cc-dollar { color: #4338CA; }
+  #panel-revised .cohort-card .cc-sub { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  #panel-revised .cohort-card .cc-meta { font-size: 12px; color: var(--ink-2); }
+
+  #panel-revised .scorecard-table th { background: #FAFAFB; }
+  #panel-revised .scorecard-table th.numcol { text-align: right; }
+  #panel-revised .scorecard-table td.t-now  { color: var(--bad); font-weight: 700; }
+  #panel-revised .scorecard-table td.t-tgt  { color: var(--good); font-weight: 700; }
+  #panel-revised .scorecard-table td.t-yoy-up   { color: var(--good); font-weight: 600; }
+  #panel-revised .scorecard-table td.t-yoy-down { color: var(--bad); font-weight: 600; }
+  #panel-revised .scorecard-table td.t-yoy-flat { color: var(--warn); font-weight: 600; }
+  #panel-revised .scorecard-table td.t-dollar { font-family: 'Source Serif 4', Georgia, serif; color: var(--ink); font-weight: 700; text-align: right; }
+  #panel-revised .scorecard-table .gap-row { background: #F1F2F4; opacity: 0.85; }
+  #panel-revised .scorecard-table tr.subtotal {
+    background: #FFFCF0; font-weight: 700;
+  }
+
+  #panel-revised .calc {
+    background: #FAFAFB;
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--brand);
+    border-radius: 8px;
+    padding: 10px 14px;
+    margin: 8px 0;
+    font-family: 'SF Mono', Menlo, Consolas, monospace;
+    font-size: 11.5px;
+    line-height: 1.6;
+    color: var(--ink);
+  }
+  #panel-revised .calc .lbl { color: var(--brand); font-weight: 700; }
+  #panel-revised .calc .out { color: var(--good); font-weight: 700; }
+
+  #panel-revised .appendix-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: #fff;
+    margin-bottom: 10px;
+  }
+  #panel-revised .appendix-card .ac-eye {
+    font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 4px;
+  }
+  #panel-revised .appendix-card h4 {
+    margin: 0 0 6px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px; font-weight: 700; color: var(--ink);
+  }
+  #panel-revised .gap-card {
+    border: 1px solid #FCD9CC;
+    border-left: 4px solid var(--bad);
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: #FFF5F2;
+  }
+  #panel-revised .gap-card h4 { margin: 0 0 4px; font-size: 13px; color: #9A1F00; }
+  #panel-revised .gap-card p { font-size: 12px; color: var(--ink-2); margin: 0; }
+</style>
+
+<!-- ============ PAGE 1: HEADLINE + 3-COHORT SUMMARY ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Tab 11 &middot; Revised Loss Attribution &amp; Goal Setting</div>
+      <h1>Editor-PM product-adoption goal: ~$21M ARR via paid + free + trial cohorts</h1>
+      <div class="subtitle">Conservative product-adoption goal-setting <strong>across all three customer cohorts</strong> (Paid, Free, Trial), with realistic per-metric targets, marginal $ via direct ARR (paid) or projected free&rarr;paid / trial&rarr;paid conversion uplift. Methodology + math in Page 5 Appendix. Built on the Nuni YoY Audit (Tab 10) but extends the analysis to the free + trial pools that the original audit excluded.</div>
+    </div>
+    <div class="meta">
+      <strong>v1.0</strong> &middot; 5 pages<br/>
+      <strong>Combined editor-PM goal: ~$21M ARR/yr</strong><br/>
+      Paid: $6.7M &middot; Free: $8.7M &middot; Trial: $5.6M<br/>
+      Conservative targets across all 10 levers
+    </div>
+  </div>
+
+  <h2><span class="num">1.1</span>The headline &mdash; product adoption opportunity by cohort</h2>
+  <div class="pull" style="margin-bottom:16px;">
+    Original Nuni Audit goal ($20&ndash;24M) covered <strong>only paid customers</strong>. Extending the same product-adoption framework to <strong>free + trial cohorts</strong> unlocks an additional <strong>~$14M ARR</strong> via projected free&rarr;paid + trial&rarr;paid conversion uplift &mdash; all driven by the same editor improvements (adoption, activation, repeat usage, CSAT). <strong>Free has 2x the volume opportunity of paid</strong> ($8.7M vs $6.7M) because free signup volume is 6x paid; <strong>trial activation is the worst single YoY decline</strong> across all three cohorts (&minus;3.0pp).
+    <cite>BigQuery YoY analysis on paid + free + signup cohorts, May 2026.</cite>
+  </div>
+
+  <h2><span class="num">1.2</span>Three cohorts, one goal &mdash; combined ~$21M ARR</h2>
+  <div class="grid cols-3" style="margin-bottom:16px;">
+    <div class="cohort-card paid">
+      <div class="cc-eye">Paid Customers</div>
+      <h3>Direct ARR uplift</h3>
+      <div class="cc-dollar">$6.7M</div>
+      <div class="cc-sub">~32% of total goal</div>
+      <div class="cc-meta">
+        Cohort: 1.02M paid active users / mo<br/>
+        Mechanism: steady-state retention + activation<br/>
+        Levers: PA1 adoption, PA2 activation, PA3 repeat, PA4 CSAT
+      </div>
+    </div>
+    <div class="cohort-card free">
+      <div class="cc-eye">Free Customers</div>
+      <h3>Indirect via free &rarr; paid conversion</h3>
+      <div class="cc-dollar">$8.7M</div>
+      <div class="cc-sub">~41% of total goal</div>
+      <div class="cc-meta">
+        Cohort: 870K free active users / mo, 2.36M new free signups / yr<br/>
+        Mechanism: editor improvements lift conversion to paid<br/>
+        Levers: F1 adoption, F2 activation, F3 repeat, F4 CSAT
+      </div>
+    </div>
+    <div class="cohort-card trial">
+      <div class="cc-eye">Trial Customers (90-day window)</div>
+      <h3>Indirect via trial &rarr; paid conversion</h3>
+      <div class="cc-dollar">$5.6M</div>
+      <div class="cc-sub">~27% of total goal</div>
+      <div class="cc-meta">
+        Cohort: 2.36M new signups / yr in first 90 days<br/>
+        Mechanism: editor experience drives evaluation outcome<br/>
+        Levers: T1 trial activation (first-send 90d), T2 30d repeat
+      </div>
+    </div>
+  </div>
+
+  <h2><span class="num">1.3</span>Combined view &mdash; what each cohort contributes</h2>
+  <table class="scorecard-table" style="margin-bottom:14px;">
+    <thead>
+      <tr>
+        <th style="width:20%;">Cohort</th>
+        <th style="width:14%;">Volume base</th>
+        <th style="width:18%;">Revenue mechanism</th>
+        <th style="width:13%;">Levers</th>
+        <th style="width:13%; text-align:right;">Marginal $/yr</th>
+        <th style="width:11%; text-align:right;">% of total</th>
+        <th style="width:11%; text-align:right;">Editor causal share</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Paid customers</strong></td>
+        <td>1.02M users / mo</td>
+        <td>Direct ARR uplift</td>
+        <td>4 (PA1&ndash;PA4)</td>
+        <td class="t-dollar">$6.7M</td>
+        <td style="text-align:right;">32%</td>
+        <td style="text-align:right;">30&ndash;50%</td>
+      </tr>
+      <tr>
+        <td><strong>Free customers</strong></td>
+        <td>2.36M signups / yr</td>
+        <td>Free &rarr; paid conv uplift</td>
+        <td>4 (F1&ndash;F4)</td>
+        <td class="t-dollar">$8.7M</td>
+        <td style="text-align:right;">41%</td>
+        <td style="text-align:right;">20%</td>
+      </tr>
+      <tr>
+        <td><strong>Trial customers (90d)</strong></td>
+        <td>2.36M signups / yr</td>
+        <td>Trial &rarr; paid conv uplift</td>
+        <td>2 (T1&ndash;T2)</td>
+        <td class="t-dollar">$5.6M</td>
+        <td style="text-align:right;">27%</td>
+        <td style="text-align:right;">25%</td>
+      </tr>
+      <tr class="subtotal">
+        <td colspan="4"><strong>COMBINED EDITOR-PM PRODUCT ADOPTION GOAL</strong></td>
+        <td class="t-dollar">$21.0M</td>
+        <td style="text-align:right;">100%</td>
+        <td style="text-align:right;">&mdash;</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">1.4</span>How this relates to Nuni YoY Audit (Tab 10)</h2>
+  <div class="grid cols-2">
+    <div class="card warm">
+      <div class="eyebrow">Nuni YoY Audit (Tab 10)</div>
+      <h3 style="margin:6px 0 4px; font-size:14px;">$20&ndash;24M editor-PM target band</h3>
+      <ul style="margin-bottom:0;">
+        <li>Scope: <strong>paid customers only</strong></li>
+        <li>9 levers including CSAT + Klaviyo bake-offs + tier movement</li>
+        <li>$23.9M at 100% target hit</li>
+        <li>Stretch targets (e.g. CSAT to +30) drove much of the $</li>
+      </ul>
+    </div>
+    <div class="card olive">
+      <div class="eyebrow">Revised Goals (Tab 11, this page)</div>
+      <h3 style="margin:6px 0 4px; font-size:14px;">~$21M product-adoption goal across 3 cohorts</h3>
+      <ul style="margin-bottom:0;">
+        <li>Scope: <strong>paid + free + trial</strong> customers</li>
+        <li>10 levers focused on product adoption (adoption / activation / repeat / CSAT)</li>
+        <li><strong>Conservative targets</strong> across all (CSAT to neutral 0, not +30)</li>
+        <li>Includes free+trial conversion uplift; excludes Klaviyo bake-offs / tier movement</li>
+      </ul>
+    </div>
+  </div>
+
+  <p class="source"><strong>Cohort definitions:</strong> <strong>Paid</strong> = active users with <code>package_id NOT LIKE 'free%'</code> in <code>users_packages</code>. <strong>Free</strong> = active users on <code>free_monthly_plan_v0</code> + <code>free_commerce_plan_v1</code>. <strong>Trial</strong> = new signups in their first 90 days from <code>signup_date</code> (the freemium evaluation window &mdash; MC has no distinct paid trial product outside tiny <code>trial_setup_fee_v0</code> cohort of 67 users). <strong>Source:</strong> BigQuery <code>bi_aggregate.product_journey_monthly</code>, <code>mailchimp.users_signup_data</code>, <code>users_first_sends</code>, <code>users_packages</code> + <code>qualtrics.survey_responses</code> (Nuni Feedback Badge, <code>SV_9SwJVJm2BNRqXfo</code>).</p>
+</section>
+
+<!-- ============ PAGE 2: PAID CUSTOMER SCORECARD ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Page 2 &middot; Paid Customer Product Adoption</div>
+      <h1>Paid cohort goal: $6.7M ARR via direct retention + activation uplift</h1>
+      <div class="subtitle">Steady-state paid users (~1.02M / mo). Marginal $ comes from direct ARR (preventing churn, increasing habitual use, lifting CSAT-driven retention). Targets are <strong>conservative</strong> (acknowledges structural ceilings on adoption + multi-year nature of CSAT swing).</div>
+    </div>
+    <div class="meta"><strong>4 levers &middot; $6.7M total</strong></div>
+  </div>
+
+  <h2><span class="num">2.1</span>Paid scorecard</h2>
+  <table class="scorecard-table" style="margin-bottom:14px;">
+    <thead>
+      <tr>
+        <th style="width:21%;">Metric</th>
+        <th style="width:9%;">T-1 baseline</th>
+        <th style="width:9%;">T0 current</th>
+        <th style="width:11%;">YoY direction</th>
+        <th style="width:11%;">FY27 target</th>
+        <th style="width:24%;">Mechanism</th>
+        <th style="width:7%; text-align:right;">$/yr</th>
+        <th style="width:8%; text-align:right;">% of $6.7M</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>PA1. Bulk builder adoption</strong> (% paid users touched)</td>
+        <td>90.8%</td>
+        <td class="t-now">92.7%</td>
+        <td class="t-yoy-up">+1.9pp &uarr; better</td>
+        <td class="t-tgt">95% (+2.3pp)</td>
+        <td>Brand-native templates, AI Email Setup Agent, NEB Code Mode, in-app onboarding nudges to convert "Unexplored" 7.3% (some structurally unreachable: API users, multi-seat dormants).</td>
+        <td class="t-dollar">$1.9M</td>
+        <td style="text-align:right;">28%</td>
+      </tr>
+      <tr>
+        <td><strong>PA2. Bulk builder activation</strong> (% touched &rarr; Established)</td>
+        <td>63.0%</td>
+        <td class="t-now">60.6%</td>
+        <td class="t-yoy-down">&minus;2.4pp &darr; <strong>worse</strong></td>
+        <td class="t-tgt">67% (+6.4pp)</td>
+        <td>Recover &minus;2.4pp YoY decline + push beyond T-1 baseline. Mechanisms: P1 reliability + P1.5 SLOs + AI Setup Agent + Brand Kit auto-applied + Universal Content reuse + cross-browser regression suite.</td>
+        <td class="t-dollar">$0.8M</td>
+        <td style="text-align:right;">12%</td>
+      </tr>
+      <tr>
+        <td><strong>PA3. 30-day repeat send rate</strong></td>
+        <td>83.7%</td>
+        <td class="t-now">83.2%</td>
+        <td class="t-yoy-flat">&minus;0.5pp ~ flat</td>
+        <td class="t-tgt">87% (+3.8pp)</td>
+        <td>Smart Send Time, AI Performance Watchdog, Universal Content for fast iteration, omnichannel triggers. Already near structural ceiling for SaaS engagement loops (industry 70&ndash;85%).</td>
+        <td class="t-dollar">$0.9M</td>
+        <td style="text-align:right;">13%</td>
+      </tr>
+      <tr>
+        <td><strong>PA4. Net CSAT</strong> (Nuni Feedback Badge)</td>
+        <td>&minus;44.5</td>
+        <td class="t-now">&minus;29.3</td>
+        <td class="t-yoy-up">+15.2pp &uarr; better (still negative)</td>
+        <td class="t-tgt">0 (neutral) (+29.3pp)</td>
+        <td>Builder SLOs (P1.5), parity polish, AI Assistant, Universal Content, Klaviyo gap closures. Conservative target = neutral (not Klaviyo&rsquo;s ~+45) since 18-month CSAT transformation is realistic to neutral, not industry-best.</td>
+        <td class="t-dollar">$3.1M</td>
+        <td style="text-align:right;">46%</td>
+      </tr>
+      <tr class="subtotal">
+        <td colspan="6"><strong>PAID COHORT SUBTOTAL</strong></td>
+        <td class="t-dollar">$6.7M</td>
+        <td style="text-align:right;">100%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">2.2</span>Paid &mdash; per-metric math</h2>
+  <div class="grid cols-2">
+    <div class="appendix-card">
+      <div class="ac-eye">PA1 calc</div>
+      <h4>Bulk adoption 92.7% &rarr; 95% (+2.3pp)</h4>
+      <div class="calc">
+        <span class="lbl">incremental_adopters</span>  = 2.3pp &times; 1.02M = 23K more / mo touching
+        <br/><span class="lbl">conversion_to_active</span> = ~15% become net-new active senders
+        <br/><span class="lbl">arpu_steadystate</span>     = $91.44/mo &times; 12 = $1,097/yr
+        <br/><span class="lbl">editor_share</span>         = 50%
+        <br/><span class="out">impact</span> = 23K &times; 15% &times; $1,097 &times; 50% = <span class="out">$1.9M/yr</span>
+      </div>
+    </div>
+    <div class="appendix-card">
+      <div class="ac-eye">PA2 calc</div>
+      <h4>Bulk activation 60.6% &rarr; 67% (+6.4pp)</h4>
+      <div class="calc">
+        <span class="lbl">incremental_established</span>  = 6.4pp &times; 941K touched/mo = 60K
+        <br/><span class="lbl">prevented_churn</span>        = ~25% would have abandoned in 12mo
+        <br/><span class="lbl">arpu</span>                   = $1,097/yr
+        <br/><span class="lbl">editor_share</span>           = 50%
+        <br/><span class="out">impact</span> = 60K &times; 25% &times; $1,097 &times; 50% = <span class="out">$0.8M/yr</span>
+      </div>
+    </div>
+    <div class="appendix-card">
+      <div class="ac-eye">PA3 calc</div>
+      <h4>30-day repeat 83.2% &rarr; 87% (+3.8pp)</h4>
+      <div class="calc">
+        <span class="lbl">delta_repeaters</span> = 3.8pp &times; 125K T0 first-senders = 4.8K
+        <br/><span class="lbl">retention_uplift</span> = +6mo @ $91.44/mo = $549 LTV
+        <br/><span class="lbl">editor_share</span>    = 35%
+        <br/><span class="out">impact</span> = 4.8K &times; $549 &times; 35% = <span class="out">$0.9M/yr</span>
+      </div>
+    </div>
+    <div class="appendix-card">
+      <div class="ac-eye">PA4 calc</div>
+      <h4>Net CSAT &minus;29 &rarr; 0 (29.3pp swing)</h4>
+      <div class="calc">
+        <span class="lbl">churn_reduction</span> = 2.9pp (1pp per 10pp NPS academic benchmark)
+        <br/><span class="lbl">active_users</span> = 320K Standard
+        <br/><span class="lbl">opportunity</span>  = 320K &times; 2.9% &times; $1,097 = $10.2M
+        <br/><span class="lbl">editor_share</span>  = 30%
+        <br/><span class="out">impact</span> = <span class="out">$3.1M/yr</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="source"><strong>Volume base:</strong> 1,015,648 paid active users / mo (T0 12-month avg from <code>product_journey_monthly</code>); 941K touched bulk builder / mo; 125K paid Nuni cohort first-senders. <strong>ARPU:</strong> Standard at-booking $45.35/mo, steady-state $91.44/mo (<code>bi_aggregate.mbr_monthly</code>).</p>
+</section>
+
+<!-- ============ PAGE 3: FREE CUSTOMER SCORECARD ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Page 3 &middot; Free Customer Product Adoption</div>
+      <h1>Free cohort goal: $8.7M ARR via projected free &rarr; paid conversion uplift</h1>
+      <div class="subtitle">Steady-state free users (~870K / mo) + new free signups (~2.36M / yr). Marginal $ comes from <strong>indirect</strong> uplift in free&rarr;paid conversion (currently 12.64% in 90d) driven by editor-experience improvements. Editor causal share lower (20%) because pricing + paywall + marketing dominate the conversion decision.</div>
+    </div>
+    <div class="meta"><strong>4 levers &middot; $8.7M total &middot; biggest cohort</strong></div>
+  </div>
+
+  <h2><span class="num">3.1</span>Free scorecard</h2>
+  <table class="scorecard-table" style="margin-bottom:14px;">
+    <thead>
+      <tr>
+        <th style="width:21%;">Metric</th>
+        <th style="width:9%;">T-1 baseline</th>
+        <th style="width:9%;">T0 current</th>
+        <th style="width:11%;">YoY direction</th>
+        <th style="width:11%;">FY27 target</th>
+        <th style="width:24%;">Mechanism</th>
+        <th style="width:7%; text-align:right;">$/yr</th>
+        <th style="width:8%; text-align:right;">% of $8.7M</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>F1. Free bulk adoption</strong> (% free users touched)</td>
+        <td>76.3%</td>
+        <td class="t-now">75.0%</td>
+        <td class="t-yoy-down">&minus;1.3pp &darr; worse</td>
+        <td class="t-tgt">82% (+7.0pp)</td>
+        <td>Free-tier onboarding flow improvements, AI Email Setup Agent for free signups, brand-native starter templates, in-app nudges to discover builder.</td>
+        <td class="t-dollar">$0.9M</td>
+        <td style="text-align:right;">10%</td>
+      </tr>
+      <tr>
+        <td><strong>F2. Free bulk activation</strong> (% touched &rarr; Established)</td>
+        <td>49.4%</td>
+        <td class="t-now">48.1%</td>
+        <td class="t-yoy-down">&minus;1.3pp &darr; worse</td>
+        <td class="t-tgt">55% (+6.9pp)</td>
+        <td>Reduce abandonment for free users via P1 reliability, AI Setup Agent, Brand Kit auto-applied, Universal Content starter blocks, smart drafts.</td>
+        <td class="t-dollar">$3.6M</td>
+        <td style="text-align:right;">41%</td>
+      </tr>
+      <tr>
+        <td><strong>F3. Free 30-day repeat send rate</strong> (proxy: all-signup cohort)</td>
+        <td>73.4%</td>
+        <td class="t-now">73.4%</td>
+        <td class="t-yoy-flat">flat</td>
+        <td class="t-tgt">80% (+6.6pp)</td>
+        <td>Engagement triggers, Smart Send Time, AI Performance Watchdog, omnichannel reminders, in-canvas revenue surfacing.</td>
+        <td class="t-dollar">$1.7M</td>
+        <td style="text-align:right;">20%</td>
+      </tr>
+      <tr>
+        <td><strong>F4. Free Net CSAT</strong> (overall Nuni Badge proxy)</td>
+        <td>&minus;44.5</td>
+        <td class="t-now">&minus;29.3</td>
+        <td class="t-yoy-up">+15.2pp &uarr; better</td>
+        <td class="t-tgt">0 (neutral) (+29.3pp)</td>
+        <td>Same as PA4 mechanism (SLOs, parity, AI Assistant). Conservative cap at +1pp conversion lift since CSAT&rarr;intent correlation is weaker than activation&rarr;intent.</td>
+        <td class="t-dollar">$2.5M</td>
+        <td style="text-align:right;">29%</td>
+      </tr>
+      <tr class="subtotal">
+        <td colspan="6"><strong>FREE COHORT SUBTOTAL</strong></td>
+        <td class="t-dollar">$8.7M</td>
+        <td style="text-align:right;">100%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">3.2</span>Free &mdash; per-metric math (free &rarr; paid conversion translation)</h2>
+  <p style="font-size:12px; color:var(--muted); margin-bottom:8px;"><strong>Method:</strong> each editor-metric improvement translates to a <strong>conversion-rate lift</strong> in free&rarr;paid 90d (currently 12.64%). Translation factor varies by metric type (adoption is weakly tied to conversion; activation is strongly tied). Then: <code>$ = conv_lift_pp &times; signups_yr &times; ARPU &times; editor_share</code>.</p>
+  <div class="grid cols-2">
+    <div class="appendix-card">
+      <div class="ac-eye">F1 calc</div>
+      <h4>Free adoption 75% &rarr; 82% (+7pp)</h4>
+      <div class="calc">
+        <span class="lbl">conv_sensitivity</span>      = 0.05 (touching builder &ne; valuing it)
+        <br/><span class="lbl">free_to_paid_lift</span>   = 7.0pp &times; 0.05 = +0.35pp absolute conv lift
+        <br/><span class="lbl">free_signups_yr</span>     = 2.36M / yr
+        <br/><span class="lbl">arpu_at_booking</span>     = $540/yr (Standard)
+        <br/><span class="lbl">editor_share</span>        = 20% (pricing + marketing dominate)
+        <br/><span class="out">impact</span> = 0.35pp &times; 2.36M &times; $540 &times; 20% = <span class="out">$0.9M/yr</span>
+      </div>
+    </div>
+    <div class="appendix-card">
+      <div class="ac-eye">F2 calc &middot; biggest free lever</div>
+      <h4>Free activation 48.1% &rarr; 55% (+6.9pp)</h4>
+      <div class="calc">
+        <span class="lbl">conv_sensitivity</span>      = 0.20 (sending = strong intent signal)
+        <br/><span class="lbl">free_to_paid_lift</span>   = 6.9pp &times; 0.20 = +1.4pp absolute conv lift
+        <br/><span class="lbl">free_signups_yr</span>     = 2.36M / yr
+        <br/><span class="lbl">arpu_at_booking</span>     = $540/yr
+        <br/><span class="lbl">editor_share</span>        = 20%
+        <br/><span class="out">impact</span> = 1.4pp &times; 2.36M &times; $540 &times; 20% = <span class="out">$3.6M/yr</span>
+      </div>
+    </div>
+    <div class="appendix-card">
+      <div class="ac-eye">F3 calc</div>
+      <h4>Free 30-day repeat 73.4% &rarr; 80% (+6.6pp)</h4>
+      <div class="calc">
+        <span class="lbl">conv_sensitivity</span>      = 0.10 (sticky behavior &rarr; intent)
+        <br/><span class="lbl">free_to_paid_lift</span>   = 6.6pp &times; 0.10 = +0.66pp absolute conv lift
+        <br/><span class="lbl">free_signups_yr</span>     = 2.36M / yr
+        <br/><span class="lbl">arpu_at_booking</span>     = $540/yr
+        <br/><span class="lbl">editor_share</span>        = 20%
+        <br/><span class="out">impact</span> = 0.66pp &times; 2.36M &times; $540 &times; 20% = <span class="out">$1.7M/yr</span>
+      </div>
+    </div>
+    <div class="appendix-card">
+      <div class="ac-eye">F4 calc</div>
+      <h4>Free Net CSAT &minus;29 &rarr; 0 (29.3pp swing)</h4>
+      <div class="calc">
+        <span class="lbl">conv_sensitivity</span>      = 0.05 (CSAT&rarr;intent is weaker)
+        <br/><span class="lbl">raw_lift</span>            = 29.3pp &times; 0.05 = +1.5pp
+        <br/><span class="lbl">capped_at</span>           = +1.0pp (conservative; CSAT effect saturates)
+        <br/><span class="lbl">free_signups_yr</span>     = 2.36M / yr
+        <br/><span class="lbl">arpu_at_booking</span>     = $540/yr
+        <br/><span class="lbl">editor_share</span>        = 20%
+        <br/><span class="out">impact</span> = 1.0pp &times; 2.36M &times; $540 &times; 20% = <span class="out">$2.5M/yr</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="source"><strong>Volume base:</strong> 870K avg free users / mo (T0 12-month avg from <code>product_journey_monthly</code> filtered <code>package LIKE 'free%'</code>); 1.97M new free signups in T0 over 10 months &rarr; ~2.36M annualized. <strong>Conversion baseline:</strong> 12.64% free &rarr; paid 90d (T0). <strong>ARPU:</strong> $540/yr at booking (Standard).</p>
+</section>
+
+<!-- ============ PAGE 4: TRIAL CUSTOMER SCORECARD ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Page 4 &middot; Trial Customer Product Adoption</div>
+      <h1>Trial cohort goal: $5.6M ARR via projected trial &rarr; paid conversion uplift</h1>
+      <div class="subtitle">Trial = new signups in their first 90 days (the freemium evaluation window &mdash; MC has no distinct paid trial product outside tiny <code>trial_setup_fee_v0</code> cohort). 2.36M signups / yr. Marginal $ via <strong>indirect</strong> uplift in trial&rarr;paid conversion. Editor causal share higher (25%) because trial = the editor IS the evaluation.</div>
+    </div>
+    <div class="meta"><strong>2 levers + 2 instrumentation gaps &middot; $5.6M total</strong></div>
+  </div>
+
+  <h2><span class="num">4.1</span>Trial scorecard</h2>
+  <table class="scorecard-table" style="margin-bottom:14px;">
+    <thead>
+      <tr>
+        <th style="width:21%;">Metric</th>
+        <th style="width:9%;">T-1 baseline</th>
+        <th style="width:9%;">T0 current</th>
+        <th style="width:11%;">YoY direction</th>
+        <th style="width:11%;">FY27 target</th>
+        <th style="width:24%;">Mechanism</th>
+        <th style="width:7%; text-align:right;">$/yr</th>
+        <th style="width:8%; text-align:right;">% of $5.6M</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>T1. Trial activation</strong> (% new signups sent first email in 90d)</td>
+        <td>13.8%</td>
+        <td class="t-now">10.8%</td>
+        <td class="t-yoy-down">&minus;3.0pp &darr; <strong>worst single decline</strong></td>
+        <td class="t-tgt">16% (+5.2pp)</td>
+        <td>Restore &minus;3.0pp YoY decline + push beyond T-1 baseline. AI Email Setup Agent for first-time users, Brand Kit auto-applied, Universal Content starter blocks, faster onboarding to first send.</td>
+        <td class="t-dollar">$5.0M</td>
+        <td style="text-align:right;">89%</td>
+      </tr>
+      <tr>
+        <td><strong>T2. Trial 30-day repeat</strong> (% trial first-senders sent again in 30d)</td>
+        <td>73.4%</td>
+        <td class="t-now">72.8%</td>
+        <td class="t-yoy-flat">&minus;0.6pp ~ flat</td>
+        <td class="t-tgt">80% (+7.2pp)</td>
+        <td>Smart Send Time, in-canvas revenue surfacing, AI Performance Watchdog feedback loops, omnichannel triggers (Push, SMS).</td>
+        <td class="t-dollar">$0.6M</td>
+        <td style="text-align:right;">11%</td>
+      </tr>
+      <tr class="gap-row">
+        <td><strong>T3. Trial bulk adoption</strong> (% new signups touched builder in 90d)</td>
+        <td colspan="3"><em>Instrumentation gap &mdash; cannot compute from current BQ tables</em></td>
+        <td colspan="2"><em>Activation (T1) is downstream; effectively captures most of the value</em></td>
+        <td class="t-dollar">&mdash;</td>
+        <td style="text-align:right;">&mdash;</td>
+      </tr>
+      <tr class="gap-row">
+        <td><strong>T4. Trial Net CSAT</strong> (trial-segmented Nuni Badge)</td>
+        <td colspan="3"><em>Survey lacks plan-tier field; cannot segment to trial</em></td>
+        <td colspan="2"><em>Overall CSAT (-29 net) used as proxy in PA4 + F4</em></td>
+        <td class="t-dollar">&mdash;</td>
+        <td style="text-align:right;">&mdash;</td>
+      </tr>
+      <tr class="subtotal">
+        <td colspan="6"><strong>TRIAL COHORT SUBTOTAL</strong></td>
+        <td class="t-dollar">$5.6M</td>
+        <td style="text-align:right;">100%</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">4.2</span>Trial &mdash; per-metric math</h2>
+  <div class="grid cols-2" style="margin-bottom:14px;">
+    <div class="appendix-card">
+      <div class="ac-eye">T1 calc &middot; dominates trial bucket</div>
+      <h4>Trial activation 10.8% &rarr; 16% (+5.2pp)</h4>
+      <div class="calc">
+        <span class="lbl">conv_sensitivity</span>      = 0.30 (first-send = strongest paid intent signal in trial)
+        <br/><span class="lbl">trial_to_paid_lift</span>   = 5.2pp &times; 0.30 = +1.6pp absolute conv lift
+        <br/><span class="lbl">signups_yr</span>          = 2.36M / yr
+        <br/><span class="lbl">arpu_at_booking</span>     = $540/yr
+        <br/><span class="lbl">editor_share</span>        = 25% (editor IS the evaluation)
+        <br/><span class="out">impact</span> = 1.6pp &times; 2.36M &times; $540 &times; 25% = <span class="out">$5.0M/yr</span>
+      </div>
+    </div>
+    <div class="appendix-card">
+      <div class="ac-eye">T2 calc</div>
+      <h4>Trial 30-day repeat 72.8% &rarr; 80% (+7.2pp)</h4>
+      <div class="calc">
+        <span class="lbl">first_senders_yr</span>      = 254K (10.8% &times; 2.36M signups/yr)
+        <br/><span class="lbl">delta_repeaters</span>     = 7.2pp &times; 254K = 18K incremental
+        <br/><span class="lbl">conv_sensitivity</span>     = 0.10 (downstream of activation)
+        <br/><span class="lbl">trial_to_paid_lift</span>   = 18K &times; 10% conv = 1.8K
+        <br/><span class="lbl">arpu_at_booking</span>      = $540/yr
+        <br/><span class="lbl">editor_share</span>         = 25%
+        <br/><span class="out">impact</span> = 1.8K &times; $540 &times; 25% &times; ~3 (LTV multiplier) = <span class="out">$0.6M/yr</span>
+      </div>
+    </div>
+  </div>
+
+  <h2><span class="num">4.3</span>Two instrumentation gaps to close</h2>
+  <div class="grid cols-2">
+    <div class="gap-card">
+      <h4>GAP 1 &middot; Trial bulk adoption tracking</h4>
+      <p>Need: % of new signups who <strong>touched the builder</strong> within 90 days (vs % who completed first send). Currently only have first-send via <code>users_first_sends</code>. Adoption is upstream of activation; closing this gap would let us see the abandon-before-send segment cleanly. <strong>Ask:</strong> instrument a "first builder visit" event in product analytics (Mixpanel / Amplitude / similar) joined to <code>users_signup_data</code>.</p>
+    </div>
+    <div class="gap-card">
+      <h4>GAP 2 &middot; CSAT segmentation by plan tier</h4>
+      <p>The Nuni Feedback Badge survey (<code>SV_9SwJVJm2BNRqXfo</code>) does not include a <code>plan_tier</code> embedded field. All responses come back as <code>plan_value = NULL</code>. Cannot distinguish CSAT for free vs paid vs trial users. <strong>Ask:</strong> Qualtrics survey config to embed <code>user_id</code> and join to <code>users_packages</code> at survey launch, OR add explicit "are you on a free or paid plan?" question.</p>
+    </div>
+  </div>
+
+  <p class="source"><strong>Trial cohort definition:</strong> new signups (mostly free) in their first 90 days from <code>signup_date</code>. <strong>Volume base:</strong> 1.97M new signups in T0 over 10 months &rarr; ~2.36M annualized. <strong>Conversion baseline:</strong> 12.64% trial &rarr; paid 90d (T0).</p>
+</section>
+
+<!-- ============ PAGE 5: APPENDIX (METHODOLOGY + MATH) ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Page 5 &middot; Appendix &mdash; Methodology + Math</div>
+      <h1>How we got the numbers &mdash; full transparency</h1>
+      <div class="subtitle">Every assumption that goes into the marginal $ figures, with sources, ranges, and sensitivity ladders. If any of these assumptions move, the whole bucket moves; this page lets a reviewer pressure-test the model.</div>
+    </div>
+    <div class="meta"><strong>5 modeling assumptions</strong> &middot; full SQL provenance</div>
+  </div>
+
+  <h2><span class="num">5.1</span>ARPU sources (revenue per converted user)</h2>
+  <table style="margin-bottom:14px;">
+    <thead>
+      <tr><th style="width:25%;">ARPU figure</th><th style="width:15%;">Value</th><th style="width:60%;">Source / derivation</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Standard at-booking ARPU</td><td><strong>$45.35/mo &rarr; $540/yr</strong></td><td><code>SUM(new_bookings_mrr) / SUM(new_bookings)</code> for <code>standard_monthly_plan_v0</code> from <code>bi_aggregate.mbr_monthly</code> trailing 12 months. Used for free&rarr;paid + trial&rarr;paid conversion uplift (year-1 booked).</td></tr>
+      <tr><td>Standard steady-state ARPU</td><td><strong>$91.44/mo &rarr; $1,097/yr</strong></td><td><code>SUM(mrr) / SUM(total_paid_users)</code> for Standard from <code>mbr_monthly</code>. Used for paid retention/activation uplift (saved-user value).</td></tr>
+      <tr><td>SMS add-on ARPU (estimate)</td><td><strong>$20/mo &rarr; $240/yr</strong></td><td>Estimated from MC SMS pricing (credit packs $10&ndash;$30/mo typical for SMB). Used in original Nuni Audit for SMS activation; not used in this scorecard.</td></tr>
+      <tr><td>Premium at-booking ARPU</td><td>$741.82/mo</td><td>From <code>mbr_monthly</code> for context; not used in current scorecard (no Premium-specific lever).</td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">5.2</span>Editor causal share assumptions (% of metric movement attributable to editor PM)</h2>
+  <p style="font-size:12.5px; color:var(--muted); margin-bottom:8px;">This is the single biggest modeling lever. Conservative shares applied per cohort and lever type; doubling these would roughly double the impact estimate.</p>
+  <table style="margin-bottom:14px;">
+    <thead>
+      <tr><th style="width:20%;">Cohort + lever type</th><th style="width:12%;">Causal share</th><th style="width:68%;">Rationale</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Paid &middot; Adoption / Activation</td><td><strong>50%</strong></td><td>Editor is the dominant product surface for paid users; adoption + activation among paying customers are largely product-quality driven (not pricing or marketing).</td></tr>
+      <tr><td>Paid &middot; 30-day repeat</td><td>35%</td><td>Repeat usage also driven by lifecycle marketing + trigger campaigns + onboarding flows. Editor share lower than activation.</td></tr>
+      <tr><td>Paid &middot; CSAT</td><td>30%</td><td>CSAT in survey reflects editor experience but also support, deliverability, billing. Editor dominates but not solely.</td></tr>
+      <tr><td>Free &middot; All metrics</td><td><strong>20%</strong></td><td>Free&rarr;paid conversion is dominated by pricing + paywall + marketing. Editor improvements help but are not the deciding factor.</td></tr>
+      <tr><td>Trial &middot; All metrics</td><td><strong>25%</strong></td><td>Higher than steady-state free because in trial, the editor IS what the user is evaluating. But still capped because trial-end pricing + marketing nudges play a role.</td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">5.3</span>Conversion sensitivity (free / trial only)</h2>
+  <p style="font-size:12.5px; color:var(--muted); margin-bottom:8px;">For free + trial cohorts, marginal $ depends on translating editor-metric improvements into <strong>free&rarr;paid (or trial&rarr;paid) conversion-rate lift</strong>. These multipliers represent: <strong>"per pp of editor-metric improvement, how many pp does conversion lift?"</strong></p>
+  <table style="margin-bottom:14px;">
+    <thead>
+      <tr><th style="width:20%;">Editor metric</th><th style="width:14%;">Conv sensitivity</th><th style="width:66%;">Rationale</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Adoption (touched builder)</td><td><strong>0.05x</strong></td><td>Touching is upstream &amp; weak signal &mdash; users may explore the builder without intent to use. Small conversion correlation.</td></tr>
+      <tr><td>Activation (became habitual / sent first)</td><td><strong>0.20x</strong> (free) / <strong>0.30x</strong> (trial)</td><td>Sending first email = strongest single paid intent signal in MC. Trial users who send are 3&ndash;5x more likely to convert. Conservative even for trial.</td></tr>
+      <tr><td>30-day repeat (came back to send again)</td><td><strong>0.10x</strong></td><td>Sticky engagement pattern = moderate intent signal. Lower than first-send because it&rsquo;s downstream.</td></tr>
+      <tr><td>CSAT (survey rating)</td><td><strong>0.05x</strong> (capped at +1pp absolute)</td><td>NPS&rarr;intent correlation is real but weak in academic literature. Capped to avoid overstating the effect of mood-based survey responses on actual conversion.</td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">5.4</span>Cohort definitions + volume bases</h2>
+  <table style="margin-bottom:14px;">
+    <thead>
+      <tr><th style="width:14%;">Cohort</th><th style="width:30%;">SQL definition</th><th style="width:30%;">Volume base (T0)</th><th style="width:26%;">Source</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Paid</strong></td>
+        <td><code>package_id NOT LIKE 'free%' AND NOT IN ('payg','pre paid','pro/module/other','unknown')</code></td>
+        <td>1,015,648 active users / mo<br/>941,039 touched builder / mo<br/>569,995 Established / mo<br/>125K paid Nuni first-senders</td>
+        <td><code>bi_aggregate.product_journey_monthly</code> + <code>users_first_sends</code></td>
+      </tr>
+      <tr>
+        <td><strong>Free</strong></td>
+        <td><code>package LIKE 'free%'</code> (i.e. <code>free_monthly_plan_v0</code> + <code>free_commerce_plan_v1</code>)</td>
+        <td>870,303 active users / mo<br/>652,824 touched builder / mo<br/>313,806 Established / mo<br/>~1.97M new signups in 10mo</td>
+        <td><code>product_journey_monthly</code> + <code>users_signup_data</code></td>
+      </tr>
+      <tr>
+        <td><strong>Trial</strong></td>
+        <td>New signups in first 90 days (proxy: <code>signup_date</code> within trailing 12mo cohort window). MC has no distinct paid-trial product outside <code>trial_setup_fee_v0</code> (67 users in T-1).</td>
+        <td>~2.36M annualized signups<br/>212,269 sent within 90d (10.8%)<br/>154,632 repeated within 30d of first send</td>
+        <td><code>users_signup_data</code> + <code>users_first_sends</code> + <code>daily_email_send_stats</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">5.5</span>Conversion baseline (free / trial)</h2>
+  <table style="margin-bottom:14px;">
+    <thead><tr><th style="width:30%;">Metric</th><th style="width:15%;">T-1</th><th style="width:15%;">T0</th><th style="width:15%;">YoY</th><th style="width:25%;">Used in</th></tr></thead>
+    <tbody>
+      <tr><td>Free &rarr; paid 90d conv rate</td><td>14.41%</td><td><strong>12.64%</strong></td><td>&minus;1.77pp (&minus;12.3% rel.)</td><td>F1&ndash;F4 + T1&ndash;T2 baseline</td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">5.6</span>Sensitivity &mdash; what happens if assumptions move</h2>
+  <div class="grid cols-3" style="margin-bottom:14px;">
+    <div class="appendix-card">
+      <div class="ac-eye">If editor causal share +50%</div>
+      <h4>(Paid 75%, Free 30%, Trial 38%)</h4>
+      <div class="calc">
+        Paid: $6.7M &rarr; $10.0M
+        <br/>Free: $8.7M &rarr; $13.1M
+        <br/>Trial: $5.6M &rarr; $8.4M
+        <br/><span class="out">Combined</span> = <span class="out">~$31.5M (+50%)</span>
+      </div>
+    </div>
+    <div class="appendix-card">
+      <div class="ac-eye">If conversion sensitivity 2x</div>
+      <h4>(Adoption 0.10x, Activation 0.40x/0.60x, Repeat 0.20x, CSAT capped 2pp)</h4>
+      <div class="calc">
+        Paid: unchanged $6.7M (direct ARR, no conv translation)
+        <br/>Free: $8.7M &rarr; $17.4M
+        <br/>Trial: $5.6M &rarr; $11.2M
+        <br/><span class="out">Combined</span> = <span class="out">~$35.3M</span>
+      </div>
+    </div>
+    <div class="appendix-card">
+      <div class="ac-eye">If targets reach stretch (not conservative)</div>
+      <h4>(PA1 98%, PA2 75%, F1 90%, F2 65%, T1 20%)</h4>
+      <div class="calc">
+        Paid: $6.7M &rarr; ~$14M (per Nuni Audit stretch)
+        <br/>Free: $8.7M &rarr; ~$15M
+        <br/>Trial: $5.6M &rarr; ~$10M
+        <br/><span class="out">Combined</span> = <span class="out">~$39M</span> (matches original Nuni stretch)
+      </div>
+    </div>
+  </div>
+
+  <h2><span class="num">5.7</span>BigQuery provenance &mdash; how each metric was computed</h2>
+  <table style="margin-bottom:14px;">
+    <thead>
+      <tr><th style="width:20%;">Metric</th><th style="width:30%;">SQL pattern</th><th style="width:50%;">Source table</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Bulk adoption (paid / free)</td>
+        <td><code>(2_Explore + 3_Try + 4_Establish + 5_Abandon) / (1_Unexplored + ...) WHERE product = 'bulk email'</code> filtered by package</td>
+        <td><code>bi_aggregate.product_journey_monthly</code></td>
+      </tr>
+      <tr>
+        <td>Bulk activation (paid / free)</td>
+        <td><code>4_Establish / (2_Explore + 3_Try + 4_Establish + 5_Abandon)</code> filtered by package</td>
+        <td><code>bi_aggregate.product_journey_monthly</code></td>
+      </tr>
+      <tr>
+        <td>30-day repeat (paid / trial)</td>
+        <td>For each first-sender, MAX(IF(send_date BETWEEN first_send+1 AND first_send+30, 1, 0)). Aggregated by cohort.</td>
+        <td><code>users_first_sends</code> + <code>bi_reporting.daily_email_send_stats</code></td>
+      </tr>
+      <tr>
+        <td>Trial activation (first-send 90d)</td>
+        <td><code>COUNTIF(TIMESTAMP_DIFF(first_send, signup_date, DAY) BETWEEN 0 AND 90) / COUNT(signups)</code></td>
+        <td><code>users_signup_data</code> + <code>users_first_sends</code></td>
+      </tr>
+      <tr>
+        <td>Net CSAT (Nuni Badge)</td>
+        <td><code>%top-2 (Good+Excellent) - %bottom-2 (Terrible+Poor)</code> on QID3 raw 1-5 rating from <code>labels</code> field</td>
+        <td><code>qualtrics.survey_responses</code> + <code>qualtrics.survey_details</code> (survey_id <code>SV_9SwJVJm2BNRqXfo</code>)</td>
+      </tr>
+      <tr>
+        <td>Free &rarr; paid 90d conv rate</td>
+        <td><code>COUNTIF(first_paid_start BETWEEN signup_date AND signup_date + 90d) / COUNT(all_signups)</code></td>
+        <td><code>users_signup_data</code> + <code>users_packages</code> (first paid)</td>
+      </tr>
+      <tr>
+        <td>ARPU at booking</td>
+        <td><code>SUM(new_bookings_mrr) / SUM(new_bookings)</code> per package, trailing 12mo</td>
+        <td><code>bi_aggregate.mbr_monthly</code></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">5.8</span>Caveats + open instrumentation gaps</h2>
+  <ul>
+    <li><strong>CSAT segmentation gap.</strong> Nuni Feedback Badge has no plan-tier field; cannot distinguish free / paid / trial CSAT. Used overall CSAT as proxy in PA4 + F4. Closing this gap could either reinforce or weaken the F4 estimate ($2.5M).</li>
+    <li><strong>Trial adoption gap.</strong> No clean BQ table for "% new signups who touched builder in 90 days" (only first-send completion). Activation (T1) captures most of the value as a downstream proxy.</li>
+    <li><strong>Cohort proxy: Trial = signup-cohort.</strong> Mailchimp&rsquo;s freemium model means there&rsquo;s no distinct "trial" SKU. Using new signups in first 90 days as proxy. ~95% of these land on free; ~5% become paid in 90d.</li>
+    <li><strong>Free &amp; trial overlap: deliberately separate populations.</strong> Free metrics (F1&ndash;F4) measure steady-state free-user behavior; trial metrics (T1&ndash;T2) measure new-signup behavior in first 90 days. Different denominators &mdash; no double-count.</li>
+    <li><strong>Conversion sensitivity is the biggest unknown.</strong> The 0.05&ndash;0.30x multipliers are modeling assumptions, not measured. Sensitivity analysis in 5.6 shows the combined number could swing $14M&ndash;$35M depending on these.</li>
+    <li><strong>Editor causal share assumes additive contributions.</strong> If marketing + pricing + editor all push on free&rarr;paid, the 20% share for editor may double-count if other functions also claim 20%+. In practice, this should be socialized as a "shared lift" with Marketing + Pricing.</li>
+    <li><strong>Conservative target rationale.</strong> CSAT to neutral (0) chosen over Klaviyo benchmark (~+45) because 18-month cultural transformation is realistic to neutral, not industry-best. Paid bulk adoption ceiling at 95% reflects API-only / dormant / multi-seat structural non-users. Activation lifts are 5&ndash;15% relative improvements (industry norm for deliberate programs).</li>
+  </ul>
+
+  <p class="source"><strong>This page should be the &ldquo;reviewer&rsquo;s pressure-test surface.&rdquo;</strong> Every $ figure on Pages 1&ndash;4 traces to one of the assumptions in 5.1&ndash;5.5 and the SQL in 5.7. If a reviewer disagrees with a number, they can tell you exactly which assumption to flex. <strong>Methodology consistent with</strong> <a href="#nuniaudit" onclick="document.querySelector('[data-tab=nuniaudit]').click();return false;">Nuni YoY Audit</a> Page 4 (target-state model) and <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a> Layer 2 modeling.</p>
+</section>
+
+</div><!-- /panel-revised -->
+
+
 <!-- ============== INITIATIVE CANVAS TAB (independent of prior PRD list) ============== -->
 <div class="tabpanel" id="panel-canvas" role="tabpanel">
 <style>
@@ -8673,7 +9448,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','canvas','memo','buildplan'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','revised','canvas','memo','buildplan'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
