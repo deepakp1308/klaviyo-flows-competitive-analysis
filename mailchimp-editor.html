@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mailchimp Email/SMS Unified Editor &amp; Builder — Competitive + Internal Strategy Brief</title>
-<meta name="description" content="14-tab executive brief on Mailchimp's unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist) with side-by-side competitive briefs for Klaviyo (Klaviyo Brief + Klaviyo VoC): capabilities, AI surface, JTBD, customers, pricing, internal HVC VoC, BigQuery product health, growth model, loss attribution, Nuni YoY audit (QA-validated metrics + target band $20-24M), revised goals (product-adoption scorecards across paid/free/trial cohorts ~$21M editor commitment), initiative canvas, strategy memo, build plan, and synthesized sentiment from Reddit, G2, Trustpilot, vendor community, blogs." />
+<meta name="description" content="15-tab executive brief on Mailchimp's unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist) with side-by-side competitive briefs for Klaviyo (Klaviyo Brief + Klaviyo VoC): capabilities, AI surface, JTBD, customers, pricing, internal HVC VoC, BigQuery product health, growth model, loss attribution, Nuni YoY audit (QA-validated metrics + target band $20-24M), revised goals (product-adoption scorecards across paid/free/trial cohorts ~$21M editor commitment), NEA->NUNI migration briefing (3-phase parity-gated playbook for $566M paid NEA ARR + $281M HVC concentration), initiative canvas, strategy memo, build plan, and synthesized sentiment from Reddit, G2, Trustpilot, vendor community, blogs." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
@@ -804,6 +804,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="lossattr">Loss Attribution</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="nuniaudit">Nuni YoY Audit</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="revised">Revised Goals</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="migration">NEA→NUNI Migration</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="canvas">Initiative Canvas</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="memo">Strategy Memo</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="buildplan">Build Plan</button>
@@ -6813,6 +6814,890 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 </div><!-- /panel-revised -->
 
 
+<!-- ============== NEA → NUNI MIGRATION BRIEFING TAB ============== -->
+<div class="tabpanel" id="panel-migration" role="tabpanel">
+<style>
+  #panel-migration .mig-kpi {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFB 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    border-left: 4px solid var(--brand);
+  }
+  #panel-migration .mig-kpi.bad  { border-left-color: var(--bad);  background: linear-gradient(180deg,#FFF5F2,#FFFFFF); }
+  #panel-migration .mig-kpi.warn { border-left-color: var(--warn); background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-migration .mig-kpi.good { border-left-color: var(--good); background: linear-gradient(180deg,#F4FBF7,#FFFFFF); }
+  #panel-migration .mig-kpi .mk-v {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 26px; font-weight: 700; line-height: 1; color: var(--ink);
+    margin-bottom: 4px;
+  }
+  #panel-migration .mig-kpi.bad .mk-v  { color: var(--bad); }
+  #panel-migration .mig-kpi.warn .mk-v { color: var(--warn); }
+  #panel-migration .mig-kpi.good .mk-v { color: var(--good); }
+  #panel-migration .mig-kpi .mk-l { font-size: 11px; color: var(--muted); line-height: 1.35; }
+
+  #panel-migration .takeaway-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: #fff;
+    border-left: 4px solid var(--ink);
+    margin-bottom: 10px;
+  }
+  #panel-migration .takeaway-card .tk-num {
+    display: inline-block;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 22px; font-weight: 700; color: var(--brand); margin-right: 8px;
+    vertical-align: middle;
+  }
+  #panel-migration .takeaway-card h3 {
+    margin: 0 0 4px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14.5px; font-weight: 700; color: var(--ink);
+    display: inline; vertical-align: middle;
+  }
+  #panel-migration .takeaway-card p { font-size: 12.5px; color: var(--ink-2); margin: 4px 0 0; }
+
+  #panel-migration .phase-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+    background: #fff;
+    margin-bottom: 14px;
+  }
+  #panel-migration .phase-card.p1 { border-left: 5px solid var(--good); background: linear-gradient(180deg,#F4FBF7,#FFFFFF); }
+  #panel-migration .phase-card.p2 { border-left: 5px solid var(--warn); background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-migration .phase-card.p3 { border-left: 5px solid var(--bad);  background: linear-gradient(180deg,#FFF5F2,#FFFFFF); }
+  #panel-migration .phase-card .ph-eye {
+    font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 4px;
+  }
+  #panel-migration .phase-card h3 {
+    margin: 0 0 8px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px; font-weight: 700; color: var(--ink);
+  }
+  #panel-migration .phase-card .ph-meta {
+    font-size: 11.5px; color: var(--ink-2);
+    background: rgba(0,0,0,0.03);
+    padding: 6px 10px; border-radius: 6px;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+  #panel-migration .phase-card .ph-section {
+    margin-top: 10px; padding-top: 8px;
+    border-top: 1px dashed var(--line);
+  }
+  #panel-migration .phase-card .ph-section-eye {
+    font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--brand); margin-bottom: 4px;
+  }
+
+  #panel-migration .complication-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: #fff;
+    border-left: 4px solid var(--bad);
+    background: linear-gradient(180deg,#FFF5F2,#FFFFFF);
+    margin-bottom: 12px;
+  }
+  #panel-migration .complication-card.c2 { border-left-color: var(--brand); background: linear-gradient(180deg,#FFFCF0,#FFFFFF); }
+  #panel-migration .complication-card.c3 { border-left-color: #4338CA; background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  #panel-migration .complication-card.c4 { border-left-color: var(--warn); background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-migration .complication-card .cc-eye {
+    font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 4px;
+  }
+  #panel-migration .complication-card h3 {
+    margin: 0 0 6px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 15px; font-weight: 700; color: var(--ink);
+  }
+
+  #panel-migration .issue-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: #fff;
+    margin-bottom: 8px;
+  }
+  #panel-migration .issue-card.crit { border-left: 4px solid var(--bad);   background: linear-gradient(180deg,#FFF5F2,#FFFFFF); }
+  #panel-migration .issue-card.high { border-left: 4px solid var(--warn);  background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-migration .issue-card.plat { border-left: 4px solid #4338CA;      background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  #panel-migration .issue-card .ic-num {
+    display: inline-block;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px; font-weight: 700; color: var(--brand); margin-right: 6px; vertical-align: middle;
+  }
+  #panel-migration .issue-card h4 {
+    margin: 0; display: inline; vertical-align: middle;
+    font-family: 'Source Serif 4', Georgia, serif; font-size: 13.5px; font-weight: 700; color: var(--ink);
+  }
+  #panel-migration .issue-card .ic-tag {
+    display: inline-block;
+    font-size: 9.5px; font-weight: 800; letter-spacing: .06em;
+    padding: 2px 6px; border-radius: 4px;
+    margin-left: 6px;
+    background: var(--chip); color: var(--chip-ink);
+    vertical-align: middle;
+  }
+  #panel-migration .issue-card.crit .ic-tag { background: #FFE7E0; color: #9A1F00; }
+  #panel-migration .issue-card.high .ic-tag { background: #FFEFD9; color: #8A4A00; }
+  #panel-migration .issue-card.plat .ic-tag { background: #EEF0FF; color: #2A1FA8; }
+  #panel-migration .issue-card .ic-jtbd {
+    font-size: 11.5px; color: var(--muted); margin-top: 4px;
+    border-left: 2px solid var(--line); padding-left: 8px;
+    font-style: italic;
+  }
+  #panel-migration .issue-card .ic-fix {
+    font-size: 12px; color: var(--ink-2); margin-top: 6px;
+  }
+  #panel-migration .issue-card .ic-fix strong { color: var(--good); }
+
+  #panel-migration .voc-quote {
+    background: #FAFAFB;
+    border-left: 3px solid var(--brand);
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 6px 0 4px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 12.5px; font-style: italic;
+    color: var(--ink-2);
+  }
+  #panel-migration .voc-quote cite {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px; color: var(--muted);
+    font-style: normal; margin-top: 4px;
+  }
+
+  #panel-migration table.mig-table th { background: #FAFAFB; font-size: 11px; }
+  #panel-migration table.mig-table td.num { text-align: right; }
+  #panel-migration table.mig-table .hilite { background: #FFFCF0; font-weight: 700; }
+
+  #panel-migration .view-toggle-note {
+    font-size: 11px; color: var(--muted);
+    background: #F1F2F4;
+    border: 1px dashed var(--line-2);
+    border-radius: 6px;
+    padding: 6px 10px;
+    margin-bottom: 10px;
+  }
+</style>
+
+<!-- ============ PAGE 1: EXECUTIVE SUMMARY ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Tab 12 &middot; NEA &rarr; NUNI Migration Briefing</div>
+      <h1>Where we are, what it has cost, and how to finish &mdash; without losing $281M HVC ARR</h1>
+      <div class="subtitle">Author: <strong>R&amp;A PM team</strong> &middot; Last updated <strong>May 11, 2026</strong> &middot; Data window: May 2024 &ndash; May 2026 (24 months) &middot; Pipeline date 2026-05-11. Original at <a href="https://deepakp1308.github.io/mailchimp-email-editor-analysis/" target="_blank" rel="noopener">deepakp1308.github.io/mailchimp-email-editor-analysis</a>. Brings the migration story (NEA legacy &rarr; NUNI new editor) into the same brief alongside the Nuni YoY Audit (Tab 10) and Revised Goals (Tab 11).</div>
+    </div>
+    <div class="meta">
+      <strong>v1.0</strong> &middot; 5 pages<br/>
+      <strong>Paid NEA ARR remaining: $566M</strong><br/>
+      <strong>HVC NEA concentration: $281M (38,145 accounts)</strong><br/>
+      Editor-cited churn floor: $1.32M &middot; adj. $3.96M
+    </div>
+  </div>
+
+  <div class="view-toggle-note"><strong>Reading note:</strong> the brief is presented in the <strong>Paid-only view</strong> (recommended for revenue decisions). Free + Paid lens is included where it tells a different story (e.g. migration trend on Free is +3&times; while Paid declines).</div>
+
+  <h2><span class="num">1.1</span>Headline pull &mdash; the migration has stalled exactly where the money is</h2>
+  <div class="pull" style="margin-bottom:16px;">
+    Among paid customers, NUNI leads at <strong>58.1% adoption</strong>, but the migration has stalled exactly where the money is. The remaining paid NEA base is <strong>$566M ARR</strong>, with <strong>$281M ARR concentrated in 38,145 HVC accounts</strong>. CSAT did <em>not</em> improve with migration &mdash; CES dropped 0.10 points, paid-customer badge sentiment is <strong>94.7% negative</strong> (worse than Free), and <strong>225K users have already tried NUNI and reverted to NEA</strong>. We need a phased, parity-gated migration &mdash; not a forced flip &mdash; to land this without losing the HVC top of the funnel.
+    <cite>R&amp;A PM team brief, May 2026.</cite>
+  </div>
+
+  <h2><span class="num">1.2</span>Top metrics &mdash; paid customers (917,145 users, $1.16B ARR)</h2>
+  <div class="grid cols-4" style="margin-bottom:16px;">
+    <div class="mig-kpi good">
+      <div class="mk-v">58.1%</div>
+      <div class="mk-l">Paid NUNI adoption (532,884 of 917,145)</div>
+    </div>
+    <div class="mig-kpi warn">
+      <div class="mk-v">41.9%</div>
+      <div class="mk-l">Paid users still on NEA (384,261)</div>
+    </div>
+    <div class="mig-kpi bad">
+      <div class="mk-v">$566M</div>
+      <div class="mk-l">Remaining paid NEA ARR ($47.16M MRR &times; 12)</div>
+    </div>
+    <div class="mig-kpi bad">
+      <div class="mk-v">$281M</div>
+      <div class="mk-l">HVC ARR concentration on NEA (38,145 users)</div>
+    </div>
+    <div class="mig-kpi bad">
+      <div class="mk-v">3.90 / 4.00</div>
+      <div class="mk-l">CES on NUNI vs NEA &mdash; migration <em>worsened</em> effort</div>
+    </div>
+    <div class="mig-kpi bad">
+      <div class="mk-v">94.7%</div>
+      <div class="mk-l">Paid badge feedback negative or very-negative</div>
+    </div>
+    <div class="mig-kpi bad">
+      <div class="mk-v">225,784</div>
+      <div class="mk-l">Reverters across all users (8&ndash;10% of editor-flippers)</div>
+    </div>
+    <div class="mig-kpi warn">
+      <div class="mk-v">$1.32M</div>
+      <div class="mk-l">ARR already lost to editor-cited churn (24mo, conservative floor)</div>
+    </div>
+  </div>
+
+  <h2><span class="num">1.3</span>Five things a senior exec must take away</h2>
+  <div class="takeaway-card">
+    <span class="tk-num">1</span><h3>The HVC funnel is closed.</h3>
+    <p>Monthly first-time HVC migrations dropped <strong>91%</strong> &mdash; from <strong>10,930 in May 2024</strong> to <strong>898 in April 2026</strong>. The remaining 38,145 HVC users are self-selecting as NEA-permanent. Free + Paid&lt;$299 absorbs 98% of new migration volume; HVC is essentially flat-lining.</p>
+  </div>
+  <div class="takeaway-card">
+    <span class="tk-num">2</span><h3>CSAT got worse, not better.</h3>
+    <p>Independent CES survey of 8,201 responses shows NUNI is <strong>0.10 points lower</strong> on customer effort (3.90 vs 4.00). Bottom-box "hard to use" share inflated <strong>52% relative</strong> (6.8% &rarr; 10.4%). Paid customers are more negative on NUNI than Free (94.7% vs 89.4% badge sentiment). Sentiment-tagged badge feedback over 24 months is 93% negative, with no QoQ improvement.</p>
+  </div>
+  <div class="takeaway-card">
+    <span class="tk-num">3</span><h3>$281M ARR is concentrated in 38K HVC accounts &mdash; 56% on grandfathered Legacy Monthly plan.</h3>
+    <p>These are 7&ndash;10-year-tenured power users with <strong>3&times; more lifetime campaign history</strong> and <strong>14&times; more RSS-driven workflows</strong> than NUNI HVCs. A forced migration without parity is a direct churn lever on this revenue. The Legacy Monthly slice alone is $150M ARR.</p>
+  </div>
+  <div class="takeaway-card">
+    <span class="tk-num">4</span><h3>Editor-cited churn already cost us $1.32M ARR &mdash; that&rsquo;s the conservative floor.</h3>
+    <p>Adjusted for hidden signal (churn cited under "Other" / "Performance" / "Difficult to use"), the realistic upper bound is <strong>$3.96M ARR</strong> lost in 24 months. <strong>Velocity doubled after the late-2024 default-flip</strong> (48 &rarr; 94 editor-cited churners / month).</p>
+  </div>
+  <div class="takeaway-card">
+    <span class="tk-num">5</span><h3>The fix is sequencing, not speed.</h3>
+    <p>A 3-phase, parity-gated playbook can mitigate <strong>$60M ARR (Phase 1) + $122M ARR (Phase 2) = $182M ARR</strong> (32% of paid NEA base) in 9 months at low risk, then preserve the remaining <strong>$281M HVC ARR via hybrid co-availability</strong> for 18 months. <strong>Forcing without sequencing risks $23&ndash;28M ARR in HVC churn.</strong></p>
+  </div>
+
+  <h2 style="margin-top:18px;"><span class="num">1.4</span>Decision asks (one-slide)</h2>
+  <div class="grid cols-3">
+    <div class="card warm">
+      <div class="eyebrow" style="color: var(--brand);">Ask 1</div>
+      <h3 style="margin:6px 0 4px; font-size:14px;">Approve the 3-phase plan</h3>
+      <p style="margin:0; font-size:12px;">Phase 1 default-flip on Free + low-paid by month 3. Phase 2 nudge on paid power-users + non-Legacy HVC by month 9 (parity-gated). Phase 3 hybrid + concierge for Legacy/HVC through month 18.</p>
+    </div>
+    <div class="card olive">
+      <div class="eyebrow" style="color: var(--good);">Ask 2</div>
+      <h3 style="margin:6px 0 4px; font-size:14px;">Fund Q1 the top-5 parity gaps</h3>
+      <p style="margin:0; font-size:12px;">Save/version reliability, image controls, brand kit/font palette restoration, preview-test reliability, AI Creative Assistant restoration. Without these, Phase 2 cannot start without bleeding HVC MRR.</p>
+    </div>
+    <div class="card" style="background:#F4F3FF; border-color:#DCD7F8;">
+      <div class="eyebrow" style="color: #4338CA;">Ask 3</div>
+      <h3 style="margin:6px 0 4px; font-size:14px;">Accept hybrid carry cost for HVC</h3>
+      <p style="margin:0; font-size:12px;">Maintain NEA codebase availability for 38K HVC + 92K Legacy plan customers for 18 more months. Carry cost is bounded; protected ARR is $281M. Forcing instead loses up to $28M ARR.</p>
+    </div>
+  </div>
+
+  <p class="source"><strong>Free + Paid lens:</strong> NUNI leads at 62.5% adoption (1.97M of 3.16M editor users); 1.19M still on NEA. Same $566M paid NEA ARR + $281M HVC concentration applies (HVC are paid by definition). The Free + Paid view inflates NUNI adoption because the late-2024 default-flip delivered a 3&times; spike on Free (85K migrators/mo vs 27K baseline) while paid migration kept declining. <strong>Source:</strong> <code>bi_marketing.lcm_marketing_account_base</code> (pipeline 2026-05-11) + <code>bi_activities.users_activities</code> (24-mo preference events) + <code>bi_aggregate.mbr_monthly</code> + <code>qualtrics.survey_responses</code> (Exit Survey 308,704; CES 8,201; Nuni Badge 4,557 categorized) + Slack <code>#hvc_feedback</code>, <code>#mc-hvc-escalations</code>, <code>#mc-reporting-analytics-feedback</code> (1,551 editor-related VOCs).</p>
+</section>
+
+<!-- ============ PAGE 2: SITUATION + COMPLICATIONS ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Page 2 &middot; Situation + 4 Complications</div>
+      <h1>Where the migration is today &mdash; and four things that change the calculus</h1>
+      <div class="subtitle">Editor share by tier, 24-month migration trend, and the four complications: HVC inversion, CSAT got worse, 225K reverters, editor-cited churn accelerating.</div>
+    </div>
+    <div class="meta"><strong>4 complications</strong> + tier + trend tables</div>
+  </div>
+
+  <h2><span class="num">2.1</span>Editor share by paid tier &mdash; adoption inverts at HVC</h2>
+  <table class="mig-table" style="margin-bottom:14px;">
+    <thead>
+      <tr>
+        <th>Tier</th>
+        <th class="num">NEA users</th>
+        <th class="num">NUNI users</th>
+        <th class="num">NEA share</th>
+        <th class="num">NEA ARR</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Paid &lt;$299</td><td class="num">346,116</td><td class="num">497,920</td><td class="num">41.0%</td><td class="num">$285M</td></tr>
+      <tr class="hilite"><td>HVC ($299+ MRR)</td><td class="num">38,145</td><td class="num">34,964</td><td class="num">52.2%</td><td class="num">$281M</td></tr>
+      <tr style="font-weight:700; background:#FAFAFB;"><td>Total paid</td><td class="num">384,261</td><td class="num">532,884</td><td class="num">41.9%</td><td class="num">$566M</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12.5px; color:var(--muted); margin-bottom:14px;"><strong>NEA leads in every paid bucket above $299/mo.</strong> NEA share rises monotonically: 36.6% at &lt;$50 &rarr; <strong>58.0% at $5K+</strong>. The HVC inversion is structural, not a temporary lag.</p>
+
+  <h2><span class="num">2.2</span>24-month migration trend &mdash; HVC funnel collapsed 91%</h2>
+  <table class="mig-table" style="margin-bottom:14px;">
+    <thead>
+      <tr>
+        <th>Period</th>
+        <th class="num">Paid &lt;$299 / mo</th>
+        <th class="num">HVC / mo</th>
+        <th class="num">Paid total / mo</th>
+        <th>Read-out</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>2024 Q3 avg</td><td class="num">23,649</td><td class="num">3,053</td><td class="num">26,702</td><td>Steady-state baseline</td></tr>
+      <tr><td>2025 Q1 avg</td><td class="num">18,647</td><td class="num">1,765</td><td class="num">20,412</td><td>HVC drops 42% YoY</td></tr>
+      <tr><td>2025 Q2 avg</td><td class="num">17,488</td><td class="num">1,499</td><td class="num">18,987</td><td>Free default-flip rolled out &mdash; paid migration kept declining</td></tr>
+      <tr><td>2025 Q4 avg</td><td class="num">22,565</td><td class="num">1,352</td><td class="num">23,917</td><td>Paid rebounded slightly; HVC kept declining</td></tr>
+      <tr><td>2026 Q1 avg</td><td class="num">19,106</td><td class="num">1,031</td><td class="num">20,137</td><td>HVC at 91% decline vs 2024 baseline</td></tr>
+      <tr class="hilite"><td>April 2026</td><td class="num">16,959</td><td class="num">898</td><td class="num">17,857</td><td><strong>HVC paid funnel essentially closed</strong></td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12.5px; color:var(--muted); margin-bottom:18px;">What progress we have on the paid base is heavily weighted to lower-tier (Standard Monthly, Essentials Monthly). The mature paid base &mdash; especially HVC + Legacy plan in mature markets (US, UK, Australia, Netherlands, Switzerland) &mdash; has not moved.</p>
+
+  <h2><span class="num">2.3</span>Four complications that change the calculus</h2>
+
+  <div class="complication-card">
+    <div class="cc-eye">C1 &middot; Structural inversion</div>
+    <h3>The HVC inversion is structural &mdash; NEA stickiness rises with MRR</h3>
+    <p style="margin:0 0 6px; font-size:12.5px;">NEA share by paid MRR bucket: 36.6% at &lt;$50 &rarr; 48% at $50&ndash;100 &rarr; 53% at $299&ndash;500 &rarr; 54% at $1K&ndash;2.5K &rarr; <strong>58% at $5K+</strong>. Clean monotonic rise.</p>
+    <p style="margin:0; font-size:12.5px;"><strong>Why this matters:</strong> HVC NEA stayers are a fundamentally different cohort. Median tenure 10 years (vs 7 for NUNI HVC). Median list size 37,273. They send 698K emails per quarter on average &mdash; <strong>27% more than NUNI HVC</strong>. They use RSS-driven campaigns at <strong>14&times;</strong> the rate of NUNI HVC, plaintext at 4&times;, classic Automations at 2.4&times;. Publishers, agencies, code-savvy power users with entrenched workflows. <strong>They will not move on a default flip.</strong></p>
+  </div>
+
+  <div class="complication-card c2">
+    <div class="cc-eye">C2 &middot; CSAT regression</div>
+    <h3>Customer satisfaction <em>got worse</em>, not better &mdash; two independent sources confirm</h3>
+    <table class="mig-table" style="margin: 6px 0;">
+      <thead>
+        <tr><th>CES &mdash; Edit an Email survey (8,201 responses)</th><th class="num">Mean CES</th><th class="num">Top-2-box</th><th class="num">Bottom-2-box</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>NEA (Old)</td><td class="num">4.00</td><td class="num">78.3%</td><td class="num">6.8%</td></tr>
+        <tr class="hilite"><td>NUNI (New)</td><td class="num">3.90</td><td class="num">73.9%</td><td class="num">10.4%</td></tr>
+      </tbody>
+    </table>
+    <p style="margin:6px 0; font-size:12.5px;"><strong>NUNI is 0.10 pts worse on CES, top-box drops 4.4pp, bottom-box "hard to use" inflates 52% relative.</strong></p>
+    <p style="margin:0; font-size:12.5px;"><strong>Nuni Feedback Badge sentiment &mdash; paid (2,810 categorized):</strong> 35.7% Very Negative + 59.0% Negative = <strong>94.7% negative</strong>. Free + Paid combined: 93.3% negative for <strong>8 consecutive quarters</strong>, no improvement trend. Paid sentiment is <strong>5.3pp worse than Free</strong> &mdash; the migration hurt the highest-value users most.</p>
+  </div>
+
+  <div class="complication-card c3">
+    <div class="cc-eye">C3 &middot; Reverters</div>
+    <h3>225,784 customers tried NUNI and went back to NEA</h3>
+    <table class="mig-table" style="margin: 6px 0;">
+      <thead>
+        <tr><th>Migration outcome</th><th class="num">Users</th><th>Read-out</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Net new (NUNI only)</td><td class="num">2,868,026</td><td>Mostly default-flipped new signups</td></tr>
+        <tr><td>NEA only (true stayer)</td><td class="num">833,981</td><td>Hold-outs who never even sampled NUNI</td></tr>
+        <tr><td>Sampled both same day</td><td class="num">572,446</td><td>Confused / exploring</td></tr>
+        <tr class="hilite"><td><strong>Reverter (tried NUNI &rarr; back to NEA)</strong></td><td class="num"><strong>225,784</strong></td><td><strong>More reverters than completed migrators</strong></td></tr>
+        <tr><td>Migrator (NEA &rarr; settled on NUNI)</td><td class="num">218,723</td><td>Successful migrations from existing users</td></tr>
+      </tbody>
+    </table>
+    <p style="margin:0; font-size:12.5px;"><strong>The reverter rate is 8&ndash;10% across the 24-month window.</strong> Applied to the $281M HVC ARR base, that implies <strong>$23M&ndash;$28M ARR at risk</strong> if forced migration is imposed without parity.</p>
+  </div>
+
+  <div class="complication-card c4">
+    <div class="cc-eye">C4 &middot; Editor-cited churn (accelerating)</div>
+    <h3>Editor-cited churn is already real and the velocity doubled post default-flip</h3>
+    <div class="grid cols-4" style="margin: 8px 0;">
+      <div class="mig-kpi warn">
+        <div class="mk-v">2,021</div>
+        <div class="mk-l">Editor-cited churners (structured signal, 24mo)</div>
+      </div>
+      <div class="mig-kpi warn">
+        <div class="mk-v">~6,000</div>
+        <div class="mk-l">Adjusted estimate w/ 3&times; hidden multiplier</div>
+      </div>
+      <div class="mig-kpi warn">
+        <div class="mk-v">$110K/mo</div>
+        <div class="mk-l">Total monthly MRR-at-churn for cohort</div>
+      </div>
+      <div class="mig-kpi bad">
+        <div class="mk-v">$1.32M</div>
+        <div class="mk-l">ARR loss floor (adj. $3.96M)</div>
+      </div>
+    </div>
+    <p style="margin:0; font-size:12.5px;"><strong>Pre-default-flip avg: 48 editor-cited churners/mo</strong> (May&ndash;Oct 2024). <strong>Post-flip avg: ~94/mo</strong> (Nov 2024 onwards). 2.0&times; velocity increase &mdash; early-warning signal that further forced migration without parity will accelerate the bleed.</p>
+    <p style="margin:8px 0 0; font-size:12.5px;"><strong>How the $1.32M floor was computed:</strong> 2,021 churners cited "Design tools" in Exit Survey QID3 follow-up (May 2024 &ndash; May 2026). 1,629 had a paid order in 60d before churn &rarr; total MRR-at-churn $110,408 (avg $67.78, median $20). Annualized: $110,408 &times; 12 = <strong>$1.32M ARR loss</strong>. 0.13% of the $85.0M total churned MRR over the same window &mdash; conservative explicit floor.</p>
+  </div>
+
+  <p class="source"><strong>The key question this brief answers:</strong> How do we close the remaining $566M ARR of paid NEA base &mdash; with $281M ARR concentrated in 38K HVC accounts &mdash; without losing customers we cannot afford to lose, and without sustaining a 90%+ negative satisfaction profile that signals "this product is getting worse, not better"? Sub-questions: (1) which cohorts can move <em>safely</em> right now, and which need product investment first? (2) what feature gaps are non-negotiable to close before HVC moves? (3) bounded carry cost of NEA codebase vs ARR lost if we force? (4) early-warning metric to know if Phase 2 should pause or proceed?</p>
+</section>
+
+<!-- ============ PAGE 3: 3-PHASE PLAYBOOK ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Page 3 &middot; Recommendation</div>
+      <h1>A 3-phase, parity-gated migration playbook &mdash; sequenced by risk &times; revenue</h1>
+      <div class="subtitle">The remaining 1.19M NEA users do not all carry the same risk. Sequenced by behavioral risk &times; revenue exposure &times; technical complexity, three phases minimize churn while making forward progress. <strong>Each phase has a parity prerequisite</strong> &mdash; moving the next cohort before the prior phase&rsquo;s gaps are closed bleeds money.</div>
+    </div>
+    <div class="meta">
+      <strong>P1: $60M ARR mitigated</strong> (months 0&ndash;3, low risk)<br/>
+      <strong>P2: $182M cumulative</strong> (months 3&ndash;9)<br/>
+      <strong>P3: $281M protected</strong> via hybrid (months 9&ndash;18)
+    </div>
+  </div>
+
+  <h2><span class="num">3.1</span>Cumulative ARR mitigation by phase</h2>
+  <div class="grid cols-3" style="margin-bottom:14px;">
+    <div class="mig-kpi good">
+      <div class="mk-v">$60M / $566M</div>
+      <div class="mk-l">After Phase 1 (11%)</div>
+    </div>
+    <div class="mig-kpi warn">
+      <div class="mk-v">$182M / $566M</div>
+      <div class="mk-l">After Phase 2 (32%)</div>
+    </div>
+    <div class="mig-kpi" style="border-left-color: #4338CA; background: linear-gradient(180deg,#F4F3FF,#FFFFFF);">
+      <div class="mk-v" style="color:#4338CA;">$566M / $566M</div>
+      <div class="mk-l">After Phase 3 hybrid (100%)</div>
+    </div>
+  </div>
+
+  <h2><span class="num">3.2</span>Phase 1 &mdash; Default-flip the low-risk cohort</h2>
+  <div class="phase-card p1">
+    <div class="ph-eye">Months 0&ndash;3 &middot; Low risk</div>
+    <h3>~250K paid users + 800K Free &rarr; ~1.16M users total &middot; $60M ARR mitigated</h3>
+    <span class="ph-meta"><strong>Cohort:</strong> Free Plan NEA (800,756) + Paid &lt;$299 NEA not on Legacy Monthly (~254K of 346K) + non-Legacy Essentials Monthly NEA without code/RSS power-user signal. Excludes anyone whose 90d send history shows plaintext, RSS, parent automations, custom-HTML, or A/B variate parents.</span>
+    <div class="ph-section">
+      <div class="ph-section-eye">Prerequisites (defect-tier &mdash; fixable in weeks)</div>
+      <p style="margin:0; font-size:12.5px;">(1) Text editing reliability &mdash; cursor, paste behavior, line spacing. (2) Preview-test reliability &mdash; preview must equal sent rendering. (3) Mobile preview accuracy. None require structural NUNI changes; defect-fix tier.</p>
+    </div>
+    <div class="ph-section">
+      <div class="ph-section-eye">Mechanism</div>
+      <p style="margin:0; font-size:12.5px;">Default-flip on next campaign create, with one-click "stay on classic" escape hatch for 30 days. After 30 days, NEA still available via deep link, not in main flow. 60-day full rollback option.</p>
+    </div>
+    <div class="ph-section">
+      <div class="ph-section-eye">Why it&rsquo;s safe</div>
+      <p style="margin:0; font-size:12.5px;">Median tenure on the cohort that already migrated to NUNI Free is 12 months &mdash; short workflows, small content libraries, lowest concentration of power-user features. CES delta in this segment is the smallest. They already auto-default to NUNI on new signups.</p>
+    </div>
+  </div>
+
+  <h2><span class="num">3.3</span>Phase 2 &mdash; Concierge nudge for medium-risk paid</h2>
+  <div class="phase-card p2">
+    <div class="ph-eye">Months 3&ndash;9 &middot; Medium risk</div>
+    <h3>~150K paid users &middot; $122M ARR mitigated (cumulative $182M)</h3>
+    <span class="ph-meta"><strong>Cohort:</strong> Paid &lt;$299 NEA users with power-user signal (RSS, plaintext, automations, code-edit) + non-Legacy HVC NEA on Standard Monthly (9,615 users / $54M ARR) and Premium Monthly (5,385 users / $68M ARR). ~150K users / ~$122M ARR exposure.</span>
+    <div class="ph-section">
+      <div class="ph-section-eye">Prerequisites (structural parity &mdash; must ship before Phase 2 begins)</div>
+      <ol style="margin:4px 0; padding-left:20px; font-size:12.5px;">
+        <li>Drag/drop precision parity (image side-by-side sizing, pixel positioning).</li>
+        <li>Save / version-history reliability &mdash; no more "my work has been deleted" reports.</li>
+        <li>Brand kit, font palette, color palette restored to NEA-equivalent breadth.</li>
+        <li>Mobile editor parity.</li>
+        <li>A/B variate workflow that supports HVC NEA&rsquo;s 28-children-per-parent pattern.</li>
+        <li>Preview-test reliability hardening.</li>
+      </ol>
+    </div>
+    <div class="ph-section">
+      <div class="ph-section-eye">Mechanism</div>
+      <p style="margin:0; font-size:12.5px;">Account-by-account nudge in-product + email; CSM-led for HVC. 60-day fully-rollback-able trial. Auto-port templates and brand assets. For paid HVC, attach a named CSM contact for the first migrated campaign. Maintain dual-availability for at least 90 days post-flip.</p>
+    </div>
+    <div class="ph-section">
+      <div class="ph-section-eye">Cumulative coverage</div>
+      <p style="margin:0; font-size:12.5px;">Phases 1+2 close <strong>~98% of remaining NEA users</strong> and <strong>~32% of paid NEA ARR ($182M of $566M)</strong>. Critically, this leaves the highest-ARPU, highest-tenure cohort intact for Phase 3 &mdash; <strong>the right order, not the wrong order</strong>.</p>
+    </div>
+  </div>
+
+  <h2><span class="num">3.4</span>Phase 3 &mdash; Hybrid + concierge for HVC and Legacy plan</h2>
+  <div class="phase-card p3">
+    <div class="ph-eye">Months 9&ndash;18 &middot; High risk</div>
+    <h3>~38K HVC + 92K Legacy &middot; $281M ARR addressed via hybrid co-availability</h3>
+    <span class="ph-meta"><strong>Cohort (3 sub-tracks):</strong> 3a HVC NEA stayers on Standard / Premium plans (already nudged in P2 but did not convert). 3b Legacy Monthly NEA users (91,746 users / $20.16M MRR = $242M ARR total, with 21,376 of them HVC at $150M ARR). 3c Code/HTML-heavy HVC accounts and agencies regardless of plan.</span>
+    <div class="ph-section">
+      <div class="ph-section-eye">Prerequisites (platform-tier investment)</div>
+      <ol style="margin:4px 0; padding-left:20px; font-size:12.5px;">
+        <li>Native HTML / code-edit mode in NUNI.</li>
+        <li>RSS-driven campaign full feature parity (top NEA HVC behavioral signature &mdash; 14&times; usage).</li>
+        <li>Native countdown / GIF / animation content blocks.</li>
+        <li>Native arbitrary sections (un-blocks the $9,700-MRR P2 escalation pattern).</li>
+        <li>AI Creative Assistant restored at parity or better.</li>
+        <li>Migration tooling for journeys / automations created in NEA &rarr; NUNI with content preservation.</li>
+      </ol>
+    </div>
+    <div class="ph-section">
+      <div class="ph-section-eye">Mechanism (3 tracks)</div>
+      <p style="margin:0; font-size:12.5px;"><strong>Track A (3a HVC Standard/Premium):</strong> Engineer-paired migration sprint per account. Replicate top 10 templates 1:1 and have customer review before flip. CSM acceptance gate. ~12-week per-account engagement.<br/>
+      <strong>Track B (3b Legacy plan):</strong> Hybrid offer &mdash; keep NEA available indefinitely or until customer affirmatively migrates. Pair with Legacy plan modernization conversation. Do not force.<br/>
+      <strong>Track C (3c code-heavy):</strong> NUNI HTML mode launch + agency-specific onboarding. Offer template-conversion service.</p>
+    </div>
+    <div class="ph-section">
+      <div class="ph-section-eye">Risk acceptance</div>
+      <p style="margin:0; font-size:12.5px;">Even with the hybrid track, plan for <strong>$23&ndash;28M ARR at risk</strong> in this cohort if forcing is required (8&ndash;10% historical revert rate &times; $281M ARR base). Hybrid mitigates almost all of this &mdash; at the cost of carrying NEA codebase 18+ more months. <strong>For 2.6% of users covering ~50% of paid MRR, that carry cost is bounded; the protected ARR is not.</strong></p>
+    </div>
+  </div>
+
+  <h2><span class="num">3.5</span>Top 5 features to ship in Q1 to unlock Phase 1+2 cleanly</h2>
+  <ol style="font-size:13px;">
+    <li><strong>Save / version-history reliability fix</strong> &mdash; eliminates "my work has been deleted" defect class (357 negative responses on Defects topic).</li>
+    <li><strong>Image side-by-side sizing, pixel positioning, resize-too-large warning</strong> &mdash; highest-volume Qualtrics topic (770 negative on Images). Tied to a $9,376 MRR Slack P0 escalation.</li>
+    <li><strong>Brand kit and font/color palette restoration</strong> to NEA breadth &mdash; closes "saved templates lost" / "fonts gone" stayer theme.</li>
+    <li><strong>Test-send and preview-rendering reliability</strong> &mdash; 370 negatives on Preview &amp; Test.</li>
+    <li><strong>AI Creative Assistant feature restoration</strong> &mdash; highest very-negative ratio (1.45&times;) of any topic.</li>
+  </ol>
+
+  <h2><span class="num">3.6</span>Early-warning metric &mdash; the gate to Phase 2</h2>
+  <div class="card warm" style="margin-bottom:14px;">
+    <h3 style="margin:0 0 4px; font-size:14px;">Phase-1 reverter rate &gt; 12% = pause Phase 2</h3>
+    <p style="margin:0; font-size:12.5px;">Track the percentage of Phase 1 cohort that flips back to NEA after the default-flip. Above ~12% is a signal that the Phase 1 prerequisites haven&rsquo;t actually shipped. Use this as the gate to start Phase 2 &mdash; <strong>not calendar time alone</strong>. The 24-month historical revert rate is 8&ndash;10%; sustained above 12% means we&rsquo;re losing the cohort and Phase 2 should pause.</p>
+  </div>
+
+  <h2><span class="num">3.7</span>Decision asks &mdash; full table</h2>
+  <table class="mig-table">
+    <thead>
+      <tr><th>Ask</th><th>Owner</th><th>Why now</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Approve the 3-phase migration playbook</td><td>VP Email</td><td>Without explicit phasing, default is "keep nudging" &mdash; which produced 91% YoY decline in HVC migration and a 2&times; rise in editor-cited churn velocity</td></tr>
+      <tr><td>Fund the Q1 Top-5 parity gaps</td><td>Eng leadership</td><td>Phase 2 cannot start without these shipped. Each delay quarter compounds the $281M HVC ARR exposure</td></tr>
+      <tr><td>Accept hybrid carry cost for 18 more months on NEA codebase</td><td>CTO + CFO</td><td>Carry cost is bounded; protects $281M ARR from reverter-rate churn. The alternative loses up to $28M ARR</td></tr>
+      <tr><td>Ratify the Phase-1 reverter-rate gate (12% threshold)</td><td>VP Email + CSM leadership</td><td>Prevents Phase 2 from starting on top of unfixed defects. Avoids repeating the late-2024 default-flip outcome</td></tr>
+      <tr><td>Sponsor Legacy Monthly plan modernization conversation in parallel with Phase 3b</td><td>Pricing + CSM</td><td>21,376 HVC accounts on Legacy plan = $150M ARR. Migrating off NEA is also the moment to migrate onto modern pricing</td></tr>
+    </tbody>
+  </table>
+
+  <p class="source"><strong>Answer-by date proposed:</strong> end of FY27 Q1, so Phase 1 prerequisites can ship in Q2 and the playbook can begin executing in early Q3. <strong>Cross-references:</strong> the migration phases inform initiative sequencing in <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> P1 (reliability + SLOs) + P2 (Universal Content + brand kit) + P3 (activation + free-tier reopen). The Phase-3 hybrid carry decision pairs with <a href="#memo" onclick="document.querySelector('[data-tab=memo]').click();return false;">Strategy Memo</a> R1 risk (Classic Established cohort).</p>
+</section>
+
+<!-- ============ PAGE 4: ISSUES & SOLUTIONS ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Page 4 &middot; Issues &amp; Solutions Detail</div>
+      <h1>16 issues organized by migration phase &mdash; severity = cost of <em>not</em> shipping it</h1>
+      <div class="subtitle">Every parity gap and defect named in the recommendation, with: customer JTBD, how it blocks them, the solution, and verbatim VOC where strongest. Ship-blockers for Phase 1 are Q1 commitments; Phase 2 are Q2; Phase 3 are H2 platform investments.</div>
+    </div>
+    <div class="meta"><strong>16 issues</strong> &middot; 4 Phase 1 + 6 Phase 2 + 4 Phase 3 + 2 cross-cutting</div>
+  </div>
+
+  <h2><span class="num">4.1</span>Phase 1 prerequisites &mdash; defect tier (ship Q1, ship-blockers for default-flip)</h2>
+
+  <div class="issue-card crit">
+    <span class="ic-num">01</span><h4>Save / version-history reliability</h4><span class="ic-tag">CRITICAL &middot; PHASE 1 &middot; 357 negative VOCs</span>
+    <p style="margin:6px 0 0; font-size:12px;"><strong>Issue:</strong> Customers report email work has been deleted, reverted to old versions, template columns and sections missing after save. No way to access previous saved versions. Multi-user edits silently overwrite. Largest single defect class.</p>
+    <div class="ic-jtbd">"I want to draft an email campaign over multiple sessions, with my team, and trust that my work is saved and recoverable if anything goes wrong."</div>
+    <div class="voc-quote">"My work has been deleted, it's gone back to an old version of this email, my template columns and sections are missing, I can't edit it properly. This is really poor."<cite>Qualtrics badge</cite></div>
+    <p class="ic-fix"><strong>Fix:</strong> True version history with auto-save (every 30s) + restore points. Persistent auto-save indicator. "Restore previous version" UI. Conflict resolution / queue when multiple users edit. <strong>Success state:</strong> Browser crash = no lost work. Team collaboration works without overwrites.</p>
+  </div>
+
+  <div class="issue-card crit">
+    <span class="ic-num">02</span><h4>Preview-test reliability</h4><span class="ic-tag">CRITICAL &middot; PHASE 1 &middot; 370 negative VOCs</span>
+    <p style="margin:6px 0 0; font-size:12px;"><strong>Issue:</strong> Test sends fail to arrive. In-editor preview doesn&rsquo;t match rendered email when sent. Mobile preview doesn&rsquo;t match Gmail mobile rendering. Confidence-killer for pre-send QA.</p>
+    <div class="ic-jtbd">"Before I send to my list, I want to confidently verify the email looks correct on desktop, mobile, and across major email clients."</div>
+    <div class="voc-quote">"The 'Send test' email function in the email campaign builder is NOT functioning for me. I have attempted to send test emails to multiple emails and none have come through. Previously this function was working fine."<cite>Qualtrics badge</cite></div>
+    <p class="ic-fix"><strong>Fix:</strong> Fix test-send delivery reliability. Render in-editor preview using same engine that renders sent email. Mobile preview powered by actual Gmail/iOS/Outlook signals. Inbox preview parity. <strong>Success:</strong> Test sends arrive in &lt;30s. Pre-send QA in 2 min, not 20.</p>
+  </div>
+
+  <div class="issue-card crit">
+    <span class="ic-num">03</span><h4>Text editing reliability &mdash; cursor, paste, line spacing</h4><span class="ic-tag">CRITICAL &middot; PHASE 1 &middot; 1,010 negative VOCs</span>
+    <p style="margin:6px 0 0; font-size:12px;"><strong>Issue:</strong> Highest-volume complaint topic. Cursor jumps mid-typing, pasted text loses formatting or pastes with wrong formatting, line spacing inconsistent, fonts revert silently. Long-form newsletter writers find it unusable.</p>
+    <div class="ic-jtbd">"I want to write or paste my email copy and have it stay exactly how I formatted it &mdash; typing should feel like a normal text editor."</div>
+    <div class="voc-quote">"I have used the legacy builder for years. The new builder doesn't match the formatting when I paste my very simple Arial 12 plain text. Even if I clear formatting, it pastes wrong."<cite>Qualtrics badge</cite></div>
+    <p class="ic-fix"><strong>Fix:</strong> Fix cursor positioning bugs. "Paste as plain text" default + smart-paste options. Preserve line spacing across paste / save / reload. Stable font inheritance from brand kit. <strong>Success:</strong> Pastes from Google Docs render identically. Cursor stable. Customer thinks about message, not the editor.</p>
+  </div>
+
+  <div class="issue-card crit">
+    <span class="ic-num">04</span><h4>Mobile preview accuracy</h4><span class="ic-tag">CRITICAL &middot; PHASE 1 &middot; 354 negative VOCs</span>
+    <p style="margin:6px 0 0; font-size:12px;"><strong>Issue:</strong> NUNI mobile preview doesn&rsquo;t match Gmail mobile, iOS Mail, or Outlook mobile. Customers without dev support can&rsquo;t optimize for mobile. Images appear too large in mobile view.</p>
+    <div class="voc-quote">"Would be really useful to have more mobile optimisation options for emails without the need for coding. Images appear too large in mobile view of our campaigns and we don't have a developer."<cite>Qualtrics badge</cite></div>
+    <p class="ic-fix"><strong>Fix:</strong> Mobile preview powered by actual Gmail/iOS/Outlook rendering signals. Mobile-specific CSS controls (image % sizing, column stacking). "Preview as Gmail mobile" button. Auto-fit images for mobile.</p>
+  </div>
+
+  <h2 style="margin-top:18px;"><span class="num">4.2</span>Phase 2 prerequisites &mdash; structural parity (ship months 3&ndash;9, unlock $122M ARR cohort)</h2>
+
+  <div class="issue-card high">
+    <span class="ic-num">05</span><h4>Image controls &amp; side-by-side sizing</h4><span class="ic-tag">HIGH &middot; PHASE 2 &middot; 770 VOCs &middot; $9,376 P0</span>
+    <p style="margin:6px 0 0; font-size:12px;"><strong>Issue:</strong> Lost the "image too large" warning NEA had. Cannot make side-by-side images same size without manual pixel math. Image rotation produces unexpected crops. Replicating NEA &rarr; NUNI adds white gaps not visible in preview but appearing in sent email &mdash; <strong>$9,376 MRR P0 escalation</strong>.</p>
+    <div class="voc-quote">"How can I make side-by-side images be the same size? That was easy in the legacy builder, but I can't find that in the new editor."<cite>Qualtrics badge</cite></div>
+    <p class="ic-fix"><strong>Fix:</strong> Side-by-side equal-size auto-fit (default ON). Restore "image too large" warning at upload. Pixel-level positioning controls. Fix NEA&rarr;NUNI replication white-gap defect.</p>
+  </div>
+
+  <div class="issue-card high">
+    <span class="ic-num">06</span><h4>Brand kit / font palette / color palette restoration</h4><span class="ic-tag">HIGH &middot; PHASE 2 &middot; 131 v.neg Templates + 91 v.neg Fonts</span>
+    <p style="margin:6px 0 0; font-size:12px;"><strong>Issue:</strong> NUNI restricts to smaller font palette than NEA. Brand fonts (Poppins, Merriweather Sans, DIN 2014) not recognized. Colors limited to whatever was used in template. NEA saved templates not available in NUNI &mdash; years of saved work stranded.</p>
+    <div class="voc-quote">"The font we've been using (Merriweather Sans) for YEARS is no longer available on the Classic Builder. But switching to the New Builder, NONE of our saved templates are available anymore. We have SOOOOO many templates we've worked so hard on perfecting."<cite>Qualtrics badge</cite></div>
+    <p class="ic-fix"><strong>Fix:</strong> Restore full color palette persistence. Brand-kit font upload that loads in editor. NEA &rarr; NUNI template auto-port tool. Full font picker (web-safe + Google fonts + custom uploads). Brand-kit-as-source-of-truth.</p>
+  </div>
+
+  <div class="issue-card high">
+    <span class="ic-num">07</span><h4>Drag/drop precision &amp; layout positioning</h4><span class="ic-tag">HIGH &middot; PHASE 2 &middot; 224 neg Layouts + 314 neg Sections</span>
+    <p style="margin:6px 0 0; font-size:12px;"><strong>Issue:</strong> Pixel-level positioning is "wonky." Dragging a text box requires "NASA-level precision." Templates jump around during drag. Buttons that were centered suddenly align left without permission.</p>
+    <div class="voc-quote">"Regarding the new drag/drop template &mdash; very wonky. Dragging a text box to another column requires NASA-level precision as the template and other text fields jump around. Not nearly as simple as the legacy template."<cite>Qualtrics badge</cite></div>
+    <p class="ic-fix"><strong>Fix:</strong> Snap-to-grid + alignment guides. Pixel-precise drag with clear drop targets. Lock element position once placed. Undo for accidental moves.</p>
+  </div>
+
+  <div class="issue-card high">
+    <span class="ic-num">08</span><h4>A/B variate workflow for power users</h4><span class="ic-tag">HIGH &middot; PHASE 2 &middot; HVC NEA pattern: 28 children/parent</span>
+    <p style="margin:6px 0 0; font-size:12px;"><strong>Issue:</strong> HVC NEA users create 28 children per parent variate campaign on average. NUNI&rsquo;s A/B workflow doesn&rsquo;t support this volume cleanly. Reaching content of a sent multivariate-test campaign takes 5&ndash;6 clicks vs 1 for a simple campaign.</p>
+    <div class="voc-quote">"Make it as easy to get to the content of previously-sent multivariate-test campaigns as it is to get to the content of previously sent straightforward campaigns. It is a one-click to access content of a [Sent] simple campaign, while for multivariate-test campaigns it is a 5 to 6 click process."<cite>Qualtrics badge</cite></div>
+    <p class="ic-fix"><strong>Fix:</strong> Native multivariate UI supporting 30+ children. One-click access to variate content (parity with simple). Variate results dashboard with winner + lift across all dimensions. Bulk paste for subject/preview variants.</p>
+  </div>
+
+  <div class="issue-card high">
+    <span class="ic-num">09</span><h4>AI Creative Assistant restoration</h4><span class="ic-tag">HIGH &middot; PHASE 2 &middot; Highest very-neg ratio (1.45&times;)</span>
+    <p style="margin:6px 0 0; font-size:12px;"><strong>Issue:</strong> Premium AI Creative Assistant feature (banner generator, photo creative AI) was visibly removed/degraded in NUNI transition. <strong>Highest very-negative ratio (1.45&times;) of any topic.</strong> Direct churn-threat language tied to this loss.</p>
+    <div class="voc-quote">"Please bring back the AI creative photo feature? It was SO good and really set you apart from other email providers. And now it's gone. So sad about this and am thinking about moving providers."<cite>Qualtrics badge &middot; churn risk</cite></div>
+    <p class="ic-fix"><strong>Fix:</strong> Restore Creative Assistant banner generator at parity. Add modern AI: text-to-image, brand-kit-aware generation, on-brand photo augmentation. Surface in NUNI editor as primary content-block type. Tier-gated: free for HVC, included in Standard+ plans.</p>
+  </div>
+
+  <div class="issue-card high">
+    <span class="ic-num">10</span><h4>Mobile editor parity (edit on the go)</h4><span class="ic-tag">HIGH &middot; PHASE 2</span>
+    <p style="margin:6px 0 0; font-size:12px;"><strong>Issue:</strong> NUNI editor unusable on mobile. Switch desktop-mobile popup can&rsquo;t be closed on Safari Desktop. Solo founders + SMB owners who work from mobile can&rsquo;t do quick edits.</p>
+    <p class="ic-fix"><strong>Fix:</strong> Mobile-responsive editor (iPad + phone). Fix Safari popup-blocker bug. Mobile-specific edit UI for quick actions. Native iOS/Android approval flow for review-only roles.</p>
+  </div>
+
+  <h2 style="margin-top:18px;"><span class="num">4.3</span>Phase 3 prerequisites &mdash; platform-tier investment (ship months 9&ndash;18, unlock $281M HVC ARR cohort)</h2>
+
+  <div class="issue-card plat">
+    <span class="ic-num">11</span><h4>Native HTML / code-edit mode in NUNI</h4><span class="ic-tag">PLATFORM &middot; PHASE 3 &middot; 75 neg + 65 v.neg HTML</span>
+    <p style="margin:6px 0 0; font-size:12px;"><strong>Issue:</strong> NUNI has no proper HTML / code-edit mode. Ctrl+K to insert links doesn&rsquo;t work in Firefox or Chrome. Users who need to paste HTML or edit code have to use Classic. <strong>#1 blocker for the agency segment.</strong></p>
+    <div class="voc-quote">"I absolutely HATE that in the new builder Ctrl+K to insert links doesn't work on Firefox or Chrome. It's maddening! And I hate how the styling rules are so rigid now."<cite>Qualtrics badge</cite></div>
+    <p class="ic-fix"><strong>Fix:</strong> Native HTML view (toggle WYSIWYG &harr; code). CSS injection support. Ctrl+K + keyboard shortcuts working in Firefox/Chrome. "Less restrictive styling" mode with override. Custom merge tag support beyond standard.</p>
+  </div>
+
+  <div class="issue-card plat">
+    <span class="ic-num">12</span><h4>RSS-driven campaign full feature parity</h4><span class="ic-tag">PLATFORM &middot; PHASE 3 &middot; 14&times; HVC NEA usage vs NUNI</span>
+    <p style="margin:6px 0 0; font-size:12px;"><strong>Issue:</strong> NEA HVC users use RSS-driven campaigns at 14&times; the rate of NUNI HVC (130K events vs 9.2K in 90 days). RSS workflow in NUNI incomplete or buggy for advanced cases. <strong>Publishers, podcasters, content sites have no migration path.</strong></p>
+    <p class="ic-fix"><strong>Fix:</strong> Native RSS-driven campaign in NUNI with full parity. RSS preview &mdash; see what next campaign will contain. Multi-feed merge support. Custom RSS-to-content-block mapping. Auto-thumbnail extraction.</p>
+  </div>
+
+  <div class="issue-card plat">
+    <span class="ic-num">13</span><h4>Native countdown / GIF / animation content blocks</h4><span class="ic-tag">PLATFORM &middot; PHASE 3 &middot; $7,150 P0 + 600K-recipient threat</span>
+    <p style="margin:6px 0 0; font-size:12px;"><strong>Issue:</strong> GIFs don&rsquo;t fill space, render inconsistently. No native countdown clock (<strong>$7,150 MRR P0 escalation</strong>). Customers threatening to move 600K recipients elsewhere over GIF support.</p>
+    <div class="voc-quote">"FIX HOW GIFS WORK IN THE NEW BUILDER!!! I despise that we have to use the Classic builder to get GIFs to work, fill the whole space. I'm about ready to take our 600k recipients elsewhere if you guys don't improve this."<cite>Slack #hvc_feedback &middot; GIF/600k threat</cite></div>
+    <p class="ic-fix"><strong>Fix:</strong> Native countdown clock content block (timezone-aware). GIF block that handles fill, sizing, fallback for Outlook. Lottie / animated SVG support. Animation library with on-brand templates.</p>
+  </div>
+
+  <div class="issue-card plat">
+    <span class="ic-num">14</span><h4>Arbitrary sections (beyond Header / Body / Footer)</h4><span class="ic-tag">PLATFORM &middot; PHASE 3 &middot; $9,700 P2 escalation</span>
+    <p style="margin:6px 0 0; font-size:12px;"><strong>Issue:</strong> NUNI restricts emails to three section types. Customers want arbitrary sections with their own backgrounds, padding, content. <strong>$9,700 MRR P2 escalation pattern</strong> &mdash; most-named layout restriction.</p>
+    <div class="voc-quote">"Customer would like the ability in NUNI to add new sections. Right now they are limited to Header, Body, Footer. They want to add a background image to a particular section and have text overlayed on top (as well as a CTA)."<cite>Slack #mc-hvc-escalations &middot; P2 &middot; $9,700 MRR</cite></div>
+    <p class="ic-fix"><strong>Fix:</strong> Allow arbitrary section creation. Per-section background image, padding, alignment. Section templates (hero, promo, testimonial, divider). Section-level styling that doesn&rsquo;t bleed into siblings.</p>
+  </div>
+
+  <h2 style="margin-top:18px;"><span class="num">4.4</span>Cross-cutting (applies across all phases)</h2>
+
+  <div class="issue-card high">
+    <span class="ic-num">15</span><h4>NEA &rarr; NUNI template / journey migration tooling</h4><span class="ic-tag">CROSS-CUTTING &middot; ALL PHASES</span>
+    <p style="margin:6px 0 0; font-size:12px;"><strong>Issue:</strong> Content created in NEA (campaigns, journeys, automations) cannot be auto-migrated to NUNI. Customers manually rebuild every campaign, journey email, saved template. <strong>The single biggest practical reason long-tenured customers won&rsquo;t move.</strong></p>
+    <div class="voc-quote">"I wish there was an option to switch between builders in already existing content. We have a lot of content, such as journeys, that are made with the old/classic builder, and we would like to update it to a new design that has been made with the new builder. Right now that's not possible."<cite>Qualtrics badge</cite></div>
+    <p class="ic-fix"><strong>Fix:</strong> Bulk template migration tool (preserve fidelity). Journey/automation content migration that preserves email content per step. Side-by-side compare. Rollback if migration loses fidelity. Run-by-account pre-migration audit report.</p>
+  </div>
+
+  <div class="issue-card crit">
+    <span class="ic-num">16</span><h4>Forced-migration / "no way back" UX</h4><span class="ic-tag">CRITICAL &middot; ALL PHASES &middot; 369 New-vs-Legacy VOCs</span>
+    <p style="margin:6px 0 0; font-size:12px;"><strong>Issue:</strong> When customers were default-flipped to NUNI, the option to go back was hidden or removed. Customers feel trapped. <strong>369 explicit New-vs-Legacy complaints with the highest concentration of "I&rsquo;m shopping providers" mentions.</strong></p>
+    <div class="voc-quote">"I want the older version of Mailchimp, legacy builder, back! I went on Google to get directions on how to change the default settings and it is not an option to change it anymore."<cite>Qualtrics badge</cite></div>
+    <p class="ic-fix"><strong>Fix:</strong> Always-available "switch back to classic" option for 60 days post-flip. Per-campaign editor choice (don&rsquo;t force a global flip). Clear in-product communication about default changes (not silent). Hybrid mode for accounts that have explicitly opted to stay on NEA. Reverter dashboard for support team.</p>
+  </div>
+
+  <p class="source"><strong>Reading this section as a roadmap input:</strong> The 16 issues are organized by the migration phase that depends on them. Each Phase 1 issue is a Q1 ship-blocker; Phase 2 issues are Q2 commitments; Phase 3 issues are H2 platform investments. Cross-cutting items (15 + 16) should be in flight from day one because they affect every customer touched by any phase. <strong>Total estimated eng investment:</strong> a focused 3-quarter program for ~6&ndash;8 engineers across editor + brand kit + migration tooling teams. <strong>Cross-references:</strong> these issues seed initiatives in <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> P1.5 (Builder SLOs), P1 (cited HVC bug-fix), P2 (Universal Content + brand kit), P4 (AI Assistant), P5 (omnichannel + collaboration).</p>
+</section>
+
+<!-- ============ PAGE 5: APPENDIX ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Page 5 &middot; Appendix</div>
+      <h1>Methodology, data quality, geo / plan / ICP, churn deep-dive, HVC profile</h1>
+      <div class="subtitle">Detailed breakdowns supporting the narrative. Tables show Paid-only first; Free + Paid added where it tells a different story.</div>
+    </div>
+    <div class="meta"><strong>12 sub-sections</strong> &middot; SQL provenance + caveats</div>
+  </div>
+
+  <h2><span class="num">A.1</span>Methodology &amp; data sources</h2>
+  <ul style="font-size:12.5px; margin-bottom:14px;">
+    <li><code>bi_marketing.lcm_marketing_account_base</code> (pipeline 2026-05-11) &mdash; <code>last_email_editor_used</code>, plan, MRR, country, ecomm level, partner flag, tenure</li>
+    <li><code>bi_activities.users_activities</code> &mdash; NEA + NUNI <code>campaign_editor_preference update</code> events (24mo)</li>
+    <li><code>bi_activities.email_campaign_send_activities</code> + <code>bi_product.sent_email_activities</code> &mdash; campaign feature adoption, send volume</li>
+    <li><code>bi_aggregate.mbr_monthly</code> &mdash; gross churn users + amount by package, 24mo</li>
+    <li><code>mailchimp.users_packages</code> &mdash; historical plan / package at time of churn</li>
+    <li><code>mailchimp.orders</code> &mdash; last paid amount in 60-day window pre-churn</li>
+    <li><code>qualtrics.survey_responses</code> &mdash; Exit Survey (308,704 responses), CES Edit-an-Email (8,201), Nuni Feedback Badge (4,557 categorized)</li>
+    <li>Slack: <code>#hvc_feedback</code> (1,381 editor VOCs), <code>#mc-hvc-escalations</code> (8), <code>#mc-reporting-analytics-feedback</code> (162). Total 1,551 editor-related VOCs after dedup.</li>
+  </ul>
+
+  <h2><span class="num">A.2</span>Key definitions</h2>
+  <table class="mig-table" style="margin-bottom:14px;">
+    <thead><tr><th style="width:24%;">Term</th><th>Definition</th></tr></thead>
+    <tbody>
+      <tr><td><strong>NEA</strong></td><td>Legacy / classic email editor</td></tr>
+      <tr><td><strong>NUNI</strong></td><td>New email editor</td></tr>
+      <tr><td><strong>HVC</strong></td><td>High-value customer ($299+ MRR)</td></tr>
+      <tr><td><strong>ARR</strong></td><td>Monthly MRR &times; 12</td></tr>
+      <tr><td><strong>Paid customer</strong></td><td>MRR &gt; 0 in current snapshot (936,992 paid users; 917,145 with editor signal)</td></tr>
+      <tr><td><strong>Free customer</strong></td><td>MRR is null or 0 in current snapshot</td></tr>
+      <tr><td><strong>Editor-cited churn</strong></td><td>Customers who completed Exit Survey within 24mo and selected "Design tools" in QID3 under primary reason "Features not advanced enough or missing features"</td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">A.3</span>Data quality cross-checks</h2>
+  <table class="mig-table" style="margin-bottom:14px;">
+    <thead><tr><th>Check</th><th class="num">Value</th><th>Result</th></tr></thead>
+    <tbody>
+      <tr><td>Total external accounts (most recent pipeline)</td><td class="num">4,431,032</td><td>Matches table row count</td></tr>
+      <tr><td>External accounts with editor signal</td><td class="num">3,158,305</td><td>71.3% &mdash; matches share calc denominator</td></tr>
+      <tr><td>External accounts without editor signal</td><td class="num">1,272,727</td><td>Excluded from share (never created an email)</td></tr>
+      <tr><td>Total paid (MRR &gt; 0) external</td><td class="num">936,992</td><td>OK</td></tr>
+      <tr><td>Paid with editor signal (primary denominator)</td><td class="num">917,145</td><td>97.9% of paid base</td></tr>
+      <tr><td>Total paid MRR (all paid)</td><td class="num">$97,350,939</td><td>Reconciles to $1.17B ARR</td></tr>
+      <tr><td>Paid MRR with editor signal (headline)</td><td class="num">$96,693,562</td><td>$1.16B ARR</td></tr>
+      <tr><td>Paid NEA MRR sum</td><td class="num">$47,162,000</td><td>$566M ARR ✓</td></tr>
+      <tr><td>Paid NUNI MRR sum</td><td class="num">$49,532,000</td><td>$595M ARR ✓</td></tr>
+      <tr><td>HVC NEA MRR (sum across $299+ buckets)</td><td class="num">$23,386,790</td><td>$281M ARR ✓</td></tr>
+      <tr><td>HVC NUNI MRR (sum across $299+ buckets)</td><td class="num">$20,947,702</td><td>$251M ARR ✓</td></tr>
+      <tr><td>Editor-cited churners (distinct user_ids)</td><td class="num">2,009 of 2,021 responses</td><td>12 users responded twice; deduped on user_id</td></tr>
+      <tr><td>Editor-cited cohort with billing record (60d pre-churn)</td><td class="num">1,629 (81%)</td><td>Used for $110K MRR-at-churn calculation</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px; color:var(--muted); margin-bottom:14px;"><strong>Known caveats:</strong> Editor-cited churn is the conservative explicit floor from QID3 = "Design tools." Actual editor-attributable churn likely 2&ndash;5&times; higher (signal hidden in "Other"/"Difficult to use"/"Performance" primary-reason paths). CES survey doesn&rsquo;t tag responses with plan tier. ~1.27M accounts have no editor signal. ARR estimates assume no winback / future expansion. May 2026 partial month (11 days) shown for completeness; not used in trend averages.</p>
+
+  <h2><span class="num">A.4</span>Top countries &mdash; paid customers with editor signal</h2>
+  <table class="mig-table" style="margin-bottom:14px;">
+    <thead>
+      <tr><th>Country</th><th class="num">NEA users</th><th class="num">NUNI users</th><th class="num">NEA share</th><th class="num">NEA MRR</th><th class="num">NUNI MRR</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>USA</td><td class="num">178,718</td><td class="num">261,425</td><td class="num">40.6%</td><td class="num">$22.27M</td><td class="num">$25.12M</td></tr>
+      <tr><td>United Kingdom</td><td class="num">38,282</td><td class="num">56,640</td><td class="num">40.3%</td><td class="num">$4.75M</td><td class="num">$5.47M</td></tr>
+      <tr><td>Canada</td><td class="num">23,362</td><td class="num">31,211</td><td class="num">42.8%</td><td class="num">$2.45M</td><td class="num">$2.51M</td></tr>
+      <tr><td>Australia</td><td class="num">20,664</td><td class="num">29,062</td><td class="num">41.6%</td><td class="num">$2.40M</td><td class="num">$2.58M</td></tr>
+      <tr><td>Netherlands</td><td class="num">13,652</td><td class="num">14,124</td><td class="num">49.2%</td><td class="num">$1.48M</td><td class="num">$1.19M</td></tr>
+      <tr><td>Spain</td><td class="num">10,071</td><td class="num">10,628</td><td class="num">48.7%</td><td class="num">$1.27M</td><td class="num">$0.97M</td></tr>
+      <tr><td>Italy</td><td class="num">9,792</td><td class="num">10,457</td><td class="num">48.4%</td><td class="num">$1.15M</td><td class="num">$0.92M</td></tr>
+      <tr><td>Germany</td><td class="num">7,495</td><td class="num">8,216</td><td class="num">47.7%</td><td class="num">$0.84M</td><td class="num">$0.75M</td></tr>
+      <tr class="hilite"><td>France</td><td class="num">7,365</td><td class="num">7,322</td><td class="num">50.1%</td><td class="num">$0.98M</td><td class="num">$0.73M</td></tr>
+      <tr class="hilite"><td>Switzerland</td><td class="num">6,777</td><td class="num">6,509</td><td class="num">51.0%</td><td class="num">$0.75M</td><td class="num">$0.53M</td></tr>
+      <tr class="hilite"><td>Austria</td><td class="num">2,476</td><td class="num">2,240</td><td class="num">52.5%</td><td class="num">$0.26M</td><td class="num">$0.17M</td></tr>
+      <tr><td>India (emerging)</td><td class="num">1,582</td><td class="num">4,216</td><td class="num">27.3%</td><td class="num">$0.19M</td><td class="num">$0.27M</td></tr>
+      <tr><td>Brazil (emerging)</td><td class="num">2,404</td><td class="num">5,243</td><td class="num">31.4%</td><td class="num">$0.26M</td><td class="num">$0.40M</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px; color:var(--muted); margin-bottom:14px;"><strong>France, Switzerland, Austria are NEA-majority by users.</strong> Netherlands, Spain, France, Switzerland have NEA leading on MRR even when NUNI leads on user count &mdash; their NEA accounts are higher-MRR. Emerging markets (India, Saudi Arabia, Nigeria) are 90%+ NUNI by adoption.</p>
+
+  <h2><span class="num">A.5</span>By marketing plan &mdash; paid only</h2>
+  <table class="mig-table" style="margin-bottom:14px;">
+    <thead>
+      <tr><th>Plan</th><th class="num">NEA users</th><th class="num">NUNI users</th><th class="num">NEA share</th><th class="num">NEA MRR</th><th class="num">NEA ARR</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Essentials Monthly</td><td class="num">183,149</td><td class="num">207,633</td><td class="num">46.9%</td><td class="num">$9.13M</td><td class="num">$110M</td></tr>
+      <tr><td>Standard Monthly</td><td class="num">103,450</td><td class="num">275,226</td><td class="num">27.3%</td><td class="num">$12.08M</td><td class="num">$145M</td></tr>
+      <tr class="hilite"><td><strong>Legacy Monthly</strong></td><td class="num"><strong>91,746</strong></td><td class="num">40,943</td><td class="num"><strong>69.1%</strong></td><td class="num"><strong>$20.16M</strong></td><td class="num"><strong>$242M</strong></td></tr>
+      <tr><td>Premium Monthly</td><td class="num">5,552</td><td class="num">8,101</td><td class="num">40.7%</td><td class="num">$5.73M</td><td class="num">$69M</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px; color:var(--muted); margin-bottom:14px;"><strong>Legacy Monthly is the single biggest NEA pocket</strong> &mdash; 69.1% NEA share and $242M ARR all on the legacy editor. <strong>21,376 of these are HVC ($150M ARR slice)</strong>.</p>
+
+  <h2><span class="num">A.6</span>Migrator vs stayer profile (paid, by MRR bucket)</h2>
+  <table class="mig-table" style="margin-bottom:14px;">
+    <thead>
+      <tr><th>Bucket</th><th>Editor</th><th class="num">Users</th><th class="num">MRR</th><th class="num">ARR</th><th class="num">Median tenure</th><th class="num">Median list size</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>&lt;$50</td><td>NEA</td><td class="num">182,247</td><td class="num">$4.85M</td><td class="num">$58M</td><td class="num">75 mo</td><td class="num">692</td></tr>
+      <tr><td>&lt;$50</td><td>NUNI</td><td class="num">315,323</td><td class="num">$7.83M</td><td class="num">$94M</td><td class="num">26 mo</td><td class="num">457</td></tr>
+      <tr><td>$50&ndash;100</td><td>NEA</td><td class="num">72,336</td><td class="num">$5.05M</td><td class="num">$61M</td><td class="num">101 mo</td><td class="num">2,896</td></tr>
+      <tr><td>$50&ndash;100</td><td>NUNI</td><td class="num">79,668</td><td class="num">$5.41M</td><td class="num">$65M</td><td class="num">43 mo</td><td class="num">2,509</td></tr>
+      <tr><td>$100&ndash;299</td><td>NEA</td><td class="num">91,533</td><td class="num">$13.86M</td><td class="num">$166M</td><td class="num">108 mo</td><td class="num">8,062</td></tr>
+      <tr><td>$100&ndash;299</td><td>NUNI</td><td class="num">102,929</td><td class="num">$15.36M</td><td class="num">$184M</td><td class="num">51 mo</td><td class="num">7,021</td></tr>
+      <tr class="hilite"><td>HVC $299&ndash;1k</td><td>NEA</td><td class="num">33,475</td><td class="num">$15.06M</td><td class="num">$181M</td><td class="num">118 mo</td><td class="num">33,343</td></tr>
+      <tr><td>HVC $299&ndash;1k</td><td>NUNI</td><td class="num">31,075</td><td class="num">$14.23M</td><td class="num">$171M</td><td class="num">83 mo</td><td class="num">31,152</td></tr>
+      <tr class="hilite"><td>HVC $1k+</td><td>NEA</td><td class="num">4,670</td><td class="num">$8.32M</td><td class="num">$100M</td><td class="num">119 mo</td><td class="num">177,059</td></tr>
+      <tr><td>HVC $1k+</td><td>NUNI</td><td class="num">3,889</td><td class="num">$6.72M</td><td class="num">$81M</td><td class="num">92 mo</td><td class="num">162,372</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:12px; color:var(--muted); margin-bottom:14px;"><strong>Across every paid bucket, NEA stayers are 2&ndash;3&times; longer-tenured with similar or larger lists.</strong> The HVC $1k+ NEA cohort (4,670 users, $100M ARR) is the most concentrated risk in the entire base.</p>
+
+  <h2><span class="num">A.7</span>Editor-cited churn deep dive</h2>
+  <table class="mig-table" style="margin-bottom:14px;">
+    <thead>
+      <tr><th>Lens</th><th class="num">Editor-cited</th><th class="num">Denominator</th><th class="num">Share</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>% of all Exit Survey respondents</td><td class="num">2,021</td><td class="num">308,704</td><td class="num">0.65%</td></tr>
+      <tr><td>% of all gross churners (paid &rarr; non-paid, 24mo)</td><td class="num">2,021</td><td class="num">980,698</td><td class="num">0.21%</td></tr>
+      <tr><td>% of total churned MRR</td><td class="num">$110,408</td><td class="num">$84.96M</td><td class="num">0.13%</td></tr>
+    </tbody>
+  </table>
+
+  <table class="mig-table" style="margin-bottom:14px;">
+    <thead><tr><th>Metric</th><th class="num">Conservative floor</th><th class="num">Adj. upper bound (3&times; multiplier)</th></tr></thead>
+    <tbody>
+      <tr><td>Editor-cited churners (24mo)</td><td class="num">2,021</td><td class="num">~6,000</td></tr>
+      <tr><td>Total MRR-at-churn captured</td><td class="num">$110,408</td><td class="num">~$330,000</td></tr>
+      <tr class="hilite"><td><strong>ARR loss</strong></td><td class="num"><strong>$1.32M</strong></td><td class="num"><strong>~$3.96M</strong></td></tr>
+      <tr><td>Average MRR per churner</td><td class="num">$67.78</td><td class="num">~$55</td></tr>
+      <tr><td>Median MRR</td><td class="num">$20</td><td class="num">~$20</td></tr>
+    </tbody>
+  </table>
+
+  <table class="mig-table" style="margin-bottom:14px;">
+    <thead><tr><th>Velocity period</th><th class="num">Editor-cited churners / month</th><th>Read-out</th></tr></thead>
+    <tbody>
+      <tr><td>Pre-default-flip (May&ndash;Oct 2024)</td><td class="num">48 / mo</td><td>Baseline rate</td></tr>
+      <tr class="hilite"><td><strong>Post-default-flip (Nov 2024 onward)</strong></td><td class="num"><strong>94 / mo</strong></td><td><strong>2.0&times; velocity increase</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">A.8</span>HVC NEA stayer characteristics &mdash; the $281M ARR cohort</h2>
+  <div class="grid cols-4" style="margin-bottom:14px;">
+    <div class="mig-kpi bad">
+      <div class="mk-v">38,145</div>
+      <div class="mk-l">HVC users on NEA</div>
+    </div>
+    <div class="mig-kpi bad">
+      <div class="mk-v">$281M</div>
+      <div class="mk-l">Annualized ARR ($23.4M MRR &times; 12)</div>
+    </div>
+    <div class="mig-kpi warn">
+      <div class="mk-v">56%</div>
+      <div class="mk-l">On grandfathered Legacy Monthly plan</div>
+    </div>
+    <div class="mig-kpi warn">
+      <div class="mk-v">118 mo</div>
+      <div class="mk-l">Median tenure (~10 years)</div>
+    </div>
+  </div>
+  <table class="mig-table" style="margin-bottom:14px;">
+    <thead><tr><th>Slice (HVC NEA stayers)</th><th class="num">Users</th><th class="num">Monthly MRR</th><th class="num">Annualized ARR</th></tr></thead>
+    <tbody>
+      <tr><td>USA</td><td class="num">18,141</td><td class="num">$11.5M</td><td class="num">$138M</td></tr>
+      <tr><td>United Kingdom</td><td class="num">3,918</td><td class="num">$2.4M</td><td class="num">$28M</td></tr>
+      <tr><td>Australia</td><td class="num">1,871</td><td class="num">$1.07M</td><td class="num">$13M</td></tr>
+      <tr><td>Canada</td><td class="num">1,771</td><td class="num">$1.05M</td><td class="num">$13M</td></tr>
+      <tr><td>Netherlands</td><td class="num">1,126</td><td class="num">$602K</td><td class="num">$7.2M</td></tr>
+      <tr class="hilite"><td><strong>Legacy Monthly plan (cross-cut)</strong></td><td class="num"><strong>21,376</strong></td><td class="num"><strong>$12.5M</strong></td><td class="num"><strong>$150M</strong></td></tr>
+      <tr><td>Standard Monthly plan</td><td class="num">9,615</td><td class="num">$4.5M</td><td class="num">$54M</td></tr>
+      <tr><td>Premium Monthly plan</td><td class="num">5,385</td><td class="num">$5.7M</td><td class="num">$68M</td></tr>
+      <tr><td>Non-ecommerce ICP</td><td class="num">21,272</td><td class="num">$12.7M</td><td class="num">$152M</td></tr>
+      <tr><td>Ecommerce ICP</td><td class="num">12,046</td><td class="num">$7.7M</td><td class="num">$92M</td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">A.9</span>Phase mitigation calculator</h2>
+  <table class="mig-table" style="margin-bottom:14px;">
+    <thead>
+      <tr><th>Phase</th><th>Window</th><th>Users in cohort</th><th class="num">Monthly MRR mitigated</th><th class="num">Annualized ARR mitigated</th><th class="num">Cumulative ARR coverage</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Phase 1</strong></td><td>Months 0&ndash;3</td><td>~250K paid + 800K Free</td><td class="num">$5.0M</td><td class="num">$60M</td><td class="num">11%</td></tr>
+      <tr><td><strong>Phase 2</strong></td><td>Months 3&ndash;9</td><td>~150K paid</td><td class="num">$10.2M</td><td class="num">$122M</td><td class="num">32%</td></tr>
+      <tr><td><strong>Phase 3 (hybrid)</strong></td><td>Months 9&ndash;18</td><td>~38K HVC + 92K Legacy</td><td class="num">$23.4M (preserved)</td><td class="num">$281M</td><td class="num">100%</td></tr>
+      <tr class="hilite"><td><strong>Total addressable</strong></td><td>&mdash;</td><td>&mdash;</td><td class="num"><strong>$47.16M</strong></td><td class="num"><strong>$566M</strong></td><td class="num"><strong>100%</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">A.10</span>Slack VOC summary</h2>
+  <table class="mig-table" style="margin-bottom:14px;">
+    <thead>
+      <tr><th>Channel</th><th class="num">Total scanned</th><th class="num">Editor-related VOCs</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>#hvc_feedback</code></td><td class="num">5,423</td><td class="num">1,381</td></tr>
+      <tr><td><code>#mc-hvc-escalations</code></td><td class="num">136</td><td class="num">8</td></tr>
+      <tr><td><code>#mc-reporting-analytics-feedback</code></td><td class="num">2,317</td><td class="num">162</td></tr>
+      <tr style="font-weight:700; background:#FAFAFB;"><td>Total</td><td class="num">7,876</td><td class="num">1,551</td></tr>
+    </tbody>
+  </table>
+
+  <p class="source"><strong>Generated 2026-05-11 by R&amp;A PM team.</strong> Data window: May 2024 &ndash; May 2026. Pipeline date 2026-05-11. Original at <a href="https://deepakp1308.github.io/mailchimp-email-editor-analysis/" target="_blank" rel="noopener">deepakp1308.github.io/mailchimp-email-editor-analysis</a>. SQL queries available on request. Cross-references: <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a> (Slack-cited MRR exposure on NEB / SMS / Brand Kit), <a href="#nuniaudit" onclick="document.querySelector('[data-tab=nuniaudit]').click();return false;">Nuni YoY Audit</a> (paid Nuni cohort YoY funnel), <a href="#revised" onclick="document.querySelector('[data-tab=revised]').click();return false;">Revised Goals</a> (3-cohort product-adoption scorecards), <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> (74 initiatives), <a href="#memo" onclick="document.querySelector('[data-tab=memo]').click();return false;">Strategy Memo</a>.</p>
+</section>
+
+</div><!-- /panel-migration -->
+
+
 <!-- ============== INITIATIVE CANVAS TAB (independent of prior PRD list) ============== -->
 <div class="tabpanel" id="panel-canvas" role="tabpanel">
 <style>
@@ -9553,7 +10438,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','revised','canvas','memo','buildplan'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','revised','migration','canvas','memo','buildplan'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
