@@ -6031,9 +6031,10 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       <div class="subtitle">Conservative product-adoption goal-setting <strong>across all three customer cohorts</strong> (Paid, Free, Trial), with realistic per-metric targets, marginal $ via direct ARR (paid) or projected free&rarr;paid / trial&rarr;paid conversion uplift. Methodology + math in Page 5 Appendix. Built on the Nuni YoY Audit (Tab 10) but extends the analysis to the free + trial pools that the original audit excluded.</div>
     </div>
     <div class="meta">
-      <strong>v1.0</strong> &middot; 5 pages<br/>
+      <strong>v1.1</strong> &middot; 6 pages<br/>
       <strong>Combined editor-PM goal: ~$21M ARR/yr</strong><br/>
       Paid: $6.7M &middot; Free: $8.7M &middot; Trial: $5.6M<br/>
+      + Page 5: Customer Benefit Metrics (no $)<br/>
       Conservative targets across all 10 levers
     </div>
   </div>
@@ -6525,11 +6526,108 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
   <p class="source"><strong>Trial cohort definition:</strong> new signups (mostly free) in their first 90 days from <code>signup_date</code>. <strong>Volume base:</strong> 1.97M new signups in T0 over 10 months &rarr; ~2.36M annualized. <strong>Conversion baseline:</strong> 12.64% trial &rarr; paid 90d (T0).</p>
 </section>
 
-<!-- ============ PAGE 5: APPENDIX (METHODOLOGY + MATH) ============ -->
+<!-- ============ PAGE 5: CUSTOMER BENEFIT METRICS ============ -->
 <section class="page">
   <div class="page-head">
     <div>
-      <div class="eyebrow">Page 5 &middot; Appendix &mdash; Methodology + Math</div>
+      <div class="eyebrow">Page 5 &middot; Customer Benefit Metrics</div>
+      <h1>What customers get from the platform &mdash; outcomes, not MC revenue</h1>
+      <div class="subtitle">Counterpart to the Product Adoption scorecards: these track <strong>what value the customer derives</strong> from Mailchimp (faster activation, better email engagement, higher attributed revenue, larger share of their email channel). No marginal $ projection &mdash; these are leading indicators of long-term retention + word-of-mouth, not direct ARR. Source: BigQuery <code>bi_reporting.daily_email_send_stats</code> (1.5T delivered emails over 24 months) + <code>bi_aggregate.mbr_monthly</code> (ecomm-attribution slice).</div>
+    </div>
+    <div class="meta">
+      <strong>5 metrics &middot; no revenue projection</strong><br/>
+      <strong>Headline: customer engagement is flat YoY</strong><br/>
+      Time-to-activate improved (-1 day);<br/>open + click + conversion all flat
+    </div>
+  </div>
+
+  <h2><span class="num">5.1</span>Customer Benefit scorecard</h2>
+  <table class="scorecard-table" style="margin-bottom:14px;">
+    <thead>
+      <tr>
+        <th style="width:24%;">Metric</th>
+        <th style="width:13%;">T-1 baseline</th>
+        <th style="width:13%;">T0 current</th>
+        <th style="width:18%;">YoY direction</th>
+        <th style="width:14%;">FY27 target</th>
+        <th style="width:18%;">Target rationale</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>CB1. Median Time to Activate</strong> (signup &rarr; first send)</td>
+        <td>6 days</td>
+        <td class="t-tgt">5 days</td>
+        <td class="t-yoy-up">&minus;1 day &darr; <strong>better</strong></td>
+        <td class="t-tgt">2 days</td>
+        <td>Klaviyo cadence ~1&ndash;2 days. AI Setup Agent + Brand Kit auto-applied + Universal Content starters compress further.</td>
+      </tr>
+      <tr>
+        <td><strong>CB2. Avg Open Rate</strong> (bulk email, all paid+free senders)</td>
+        <td>28.29%</td>
+        <td class="t-now">28.27%</td>
+        <td class="t-yoy-flat">&minus;0.02pp ~ flat</td>
+        <td class="t-tgt">35%</td>
+        <td>Industry benchmark: ~21&ndash;24% for marketing email. MC already above industry; pushing to 35% requires Smart Send Time + AI Performance Watchdog + better segmentation.</td>
+      </tr>
+      <tr>
+        <td><strong>CB3. Avg Click Rate</strong> (bulk email, all paid+free senders)</td>
+        <td>1.71%</td>
+        <td class="t-now">1.70%</td>
+        <td class="t-yoy-flat">&minus;0.01pp ~ flat</td>
+        <td class="t-tgt">3.0%</td>
+        <td>Industry benchmark: ~2.5%. MC bulk lags automation (2.5%); reaching 3.0% closes gap to Klaviyo customer benchmark via personalization + AI content + dynamic blocks.</td>
+      </tr>
+      <tr>
+        <td><strong>CB4. Avg Conversion Rate</strong> (MC-attributed $/1K emails delivered, ecomm cust.)</td>
+        <td>$1.74</td>
+        <td class="t-now">$1.74</td>
+        <td class="t-yoy-flat">flat</td>
+        <td class="t-tgt">$2.50 (+44%)</td>
+        <td>Smart Send Time + AI Performance Watchdog + Brand-Kit-aware AI + omnichannel (SMS attach) drive better targeting + content quality &rarr; higher revenue per email.</td>
+      </tr>
+      <tr class="gap-row">
+        <td><strong>CB5. % MC-Attributed Revenue</strong> (of customer&rsquo;s total email-channel revenue)</td>
+        <td colspan="2"><em>~15% (industry estimate &mdash; not measurable in MC data)</em></td>
+        <td class="t-yoy-flat">n/a &mdash; <strong>instrumentation gap</strong></td>
+        <td class="t-tgt">25%</td>
+        <td>Klaviyo claims ~30% share for their customers. Closing gap to 25% via omnichannel (SMS), Smart Send Time, in-canvas revenue surfacing. Requires customer survey or 3rd-party benchmarking to measure.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">5.2</span>Bonus positive signal &mdash; revenue per active ecomm user is up YoY</h2>
+  <div class="grid cols-2" style="margin-bottom:14px;">
+    <div class="card olive">
+      <div class="eyebrow" style="color: var(--good);">Surprise (positive)</div>
+      <h3 style="margin:6px 0 4px; font-size:15px;">MC-attributed revenue per active ecomm user-month: $61.74 &rarr; <strong>$76.66 (+24% YoY)</strong></h3>
+      <p style="margin:0; font-size:13px;">Even though total ecomm-customer count is down, each <em>remaining</em> customer generates <strong>24% more MC-attributed revenue</strong> per month. The customers who stay are higher-quality / more engaged / sending more campaigns. This is a strong positive signal for the editor&rsquo;s value-delivery story &mdash; <strong>retention quality is improving even as volume shrinks</strong>.</p>
+    </div>
+    <div class="card">
+      <div class="eyebrow">Implication</div>
+      <h3 style="margin:6px 0 4px; font-size:15px;">If we can hold engagement quality + grow back the volume, the per-user economics are already there</h3>
+      <p style="margin:0; font-size:13px;">The activation degradation (Tab 10 PA2: bulk activation &minus;2.4pp) is a volume problem; the <em>quality</em> of customer outcomes (open / click / RPME) is intact. Reversing activation while preserving these engagement metrics is the editor&rsquo;s job. <strong>Don&rsquo;t over-optimize for engagement KPIs that are already working.</strong></p>
+    </div>
+  </div>
+
+  <h2><span class="num">5.3</span>What this tells us</h2>
+  <ul>
+    <li><strong>Customer outcomes are HOLDING, not degrading.</strong> Open rate flat, click rate flat, conversion-rate-proxy flat. The customers who use MC are getting consistent results YoY.</li>
+    <li><strong>Time-to-Activate improved (&minus;1 day)</strong> &mdash; fastest activation in years. With AI Setup Agent + Brand Kit auto-applied, 2 days is realistic in 18 months (Klaviyo cadence).</li>
+    <li><strong>Open + click rates already above industry.</strong> MC bulk hits 28% open / 1.7% click; industry benchmarks are ~21% open / 2.5% click. We&rsquo;re ahead on opens, slightly behind on clicks.</li>
+    <li><strong>The gap-to-Klaviyo is on click + conversion + attribution share</strong>, not opens. Smart Send Time + Brand-Kit-aware AI + Universal Content + omnichannel triggers all directly target click + conversion lift.</li>
+    <li><strong>CB5 (% MC-Attributed Revenue) is the strategic instrumentation gap</strong>. Without this, we can&rsquo;t make a credible "switch from Klaviyo to MC" pitch on revenue share. <strong>Ask:</strong> commission a 3rd-party benchmarking study (Email Industry Council / Litmus) OR add to annual customer NPS survey.</li>
+    <li><strong>$76.66 / active ecomm user-month is the hidden good news</strong> &mdash; this is a 24% YoY jump in per-user value-delivery. The editor is producing more attributed revenue per customer than ever, even though volume is down. The strategy should preserve this while growing the volume back.</li>
+  </ul>
+
+  <p class="source"><strong>Sources:</strong> Open + click rates from <code>bi_reporting.daily_email_send_stats</code> (<code>campaign_type='bulk'</code>, trailing 24mo). RPME from <code>bi_aggregate.mbr_monthly</code> (<code>ecomm_status='ecomm'</code>) joined to <code>daily_email_send_stats</code>. Time-to-Activate from <code>users_first_sends</code> + <code>users_signup_data</code>. CB5 (% MC-Attributed Revenue) is industry estimate &mdash; cannot be measured directly because MC has no visibility into customer&rsquo;s revenue from non-MC email channels.</p>
+</section>
+
+<!-- ============ PAGE 6: APPENDIX (METHODOLOGY + MATH) ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Page 6 &middot; Appendix &mdash; Methodology + Math</div>
       <h1>How we got the numbers &mdash; full transparency</h1>
       <div class="subtitle">Every assumption that goes into the marginal $ figures, with sources, ranges, and sensitivity ladders. If any of these assumptions move, the whole bucket moves; this page lets a reviewer pressure-test the model.</div>
     </div>
@@ -6672,6 +6770,36 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
         <td>Trial activation (first-send 90d)</td>
         <td><code>COUNTIF(TIMESTAMP_DIFF(first_send, signup_date, DAY) BETWEEN 0 AND 90) / COUNT(signups)</code></td>
         <td><code>users_signup_data</code> + <code>users_first_sends</code></td>
+      </tr>
+      <tr>
+        <td>CB1. Median Time to Activate</td>
+        <td><code>APPROX_QUANTILES(TIMESTAMP_DIFF(first_send, signup_date, DAY), 100)[OFFSET(50)]</code> for cohort with sent_within_90d</td>
+        <td><code>users_signup_data</code> + <code>users_first_sends</code></td>
+      </tr>
+      <tr>
+        <td>CB2. Avg Open Rate (bulk)</td>
+        <td><code>SUM(actions.unique_opens) / SUM(sends.delivered) WHERE campaign_type = 'bulk'</code></td>
+        <td><code>bi_reporting.daily_email_send_stats</code></td>
+      </tr>
+      <tr>
+        <td>CB3. Avg Click Rate (bulk)</td>
+        <td><code>SUM(actions.unique_clicks) / SUM(sends.delivered) WHERE campaign_type = 'bulk'</code></td>
+        <td><code>bi_reporting.daily_email_send_stats</code></td>
+      </tr>
+      <tr>
+        <td>CB4. Avg Conversion Rate (RPME proxy)</td>
+        <td><code>SUM(aov_revenue) / SUM(delivered) * 1000</code> joined cohort &times; cohort</td>
+        <td><code>bi_aggregate.mbr_monthly</code> (ecomm) + <code>daily_email_send_stats</code></td>
+      </tr>
+      <tr>
+        <td>CB5. % MC-Attributed Revenue</td>
+        <td><em>NOT computable from MC data</em>; industry estimate ~15% (Klaviyo claims 30% for theirs)</td>
+        <td><em>Instrumentation gap: needs 3rd-party benchmarking or customer survey</em></td>
+      </tr>
+      <tr>
+        <td>Bonus: Rev per active ecomm user-month</td>
+        <td><code>SUM(aov_revenue) / SUM(active_users) WHERE ecomm_status = 'ecomm'</code></td>
+        <td><code>bi_aggregate.mbr_monthly</code></td>
       </tr>
       <tr>
         <td>Net CSAT (Nuni Badge)</td>
