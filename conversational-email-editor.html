@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Conversational Email Editor — Build Plan</title>
+<meta name="description" content="Skills, tools, and context required to ship a Brand-Kit-aware conversational email + SMS editor. Sequenced into 3 phases vs Klaviyo, Canva, Shopify." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink:#0E1116; --ink-2:#1F2937; --muted:#4B5563;
+    --line:#E5E7EB; --line-2:#D1D5DB;
+    --bg:#F8F7F4; --paper:#FFFFFF;
+    --brand:#5A2BFF; --brand-2:#FF7A1A;
+    --good:#047857; --warn:#B45309; --bad:#B91C1C;
+    --chip:#F1EEFF; --chip-ink:#3A1ACC;
+    --shadow:0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:'Inter',-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;line-height:1.45}
+  .toolbar{position:sticky;top:0;z-index:10;background:rgba(248,247,244,.85);backdrop-filter:saturate(140%) blur(8px);border-bottom:1px solid var(--line)}
+  .toolbar-inner{max-width:1180px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:10px 20px;gap:12px}
+  .brand-mark{display:flex;align-items:center;gap:10px;font-weight:700;font-size:14px;color:var(--ink-2)}
+  .brand-dot{width:10px;height:10px;border-radius:3px;background:var(--brand);box-shadow:0 0 0 3px rgba(90,43,255,.15)}
+  .toolbar a.btn,.toolbar button.btn{border:1px solid var(--line-2);background:var(--paper);color:var(--ink-2);padding:7px 12px;border-radius:8px;font-size:13px;font-weight:600;text-decoration:none;cursor:pointer}
+  .toolbar .btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .page-wrap{max-width:1180px;margin:0 auto;padding:24px 20px 64px}
+  .page{background:var(--paper);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);padding:28px 32px 26px;margin-bottom:22px}
+  .page-head{display:grid;grid-template-columns:1fr auto;align-items:end;gap:16px;border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:18px}
+  .eyebrow{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:700}
+  h1{font-family:'Source Serif 4',Georgia,serif;font-weight:700;font-size:30px;line-height:1.15;margin:6px 0 4px;letter-spacing:-0.01em}
+  .subtitle{color:var(--muted);font-size:14px;max-width:780px}
+  .meta{text-align:right;font-size:12px;color:var(--muted)}
+  .meta strong{color:var(--ink-2)}
+  h2{font-family:'Source Serif 4',Georgia,serif;font-size:18px;margin:0 0 10px;letter-spacing:-.005em}
+  h2 .num{display:inline-block;font-family:'Inter',sans-serif;font-size:10px;font-weight:800;color:var(--brand);background:var(--chip);padding:2px 6px;border-radius:4px;margin-right:8px;transform:translateY(-2px);letter-spacing:.08em}
+  h3{font-family:'Source Serif 4',Georgia,serif;font-size:14px;margin:0 0 6px}
+  p{margin:0 0 8px;font-size:13.5px;color:var(--ink-2)}
+  ul{margin:4px 0 8px;padding-left:18px}
+  li{font-size:13px;color:var(--ink-2);margin-bottom:4px}
+  li strong{color:var(--ink)}
+  .grid{display:grid;gap:16px}
+  .grid.cols-2{grid-template-columns:1fr 1fr}
+  .grid.cols-3{grid-template-columns:repeat(3,1fr)}
+  .grid.cols-4{grid-template-columns:repeat(4,1fr)}
+  @media (max-width:880px){.grid.cols-2,.grid.cols-3,.grid.cols-4{grid-template-columns:1fr}.page{padding:20px}h1{font-size:24px}}
+  .kpi{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px 14px}
+  .kpi .v{font-family:'Source Serif 4',Georgia,serif;font-weight:700;font-size:22px;line-height:1;color:var(--ink)}
+  .kpi .l{font-size:11px;color:var(--muted);margin-top:6px;line-height:1.3}
+  .card{background:var(--paper);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+  .card.tinted{background:#FBFAFF;border-color:#ECE6FF}
+  .card.warm{background:#FFF8F0;border-color:#FCE6CC}
+  .card.olive{background:#F4F6EE;border-color:#E1E7CB}
+  .card.green{background:#F4FBF7;border-color:#CFE9DC}
+  .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+  .chip{background:var(--chip);color:var(--chip-ink);border-radius:999px;padding:3px 9px;font-size:11px;font-weight:600;border:1px solid #E1D8FF}
+  .chip.warm{background:#FFEFE0;color:#9A4A00;border-color:#FCD9B6}
+  .chip.green{background:#E6F5EE;color:#036A4F;border-color:#BFE6D3}
+  .chip.gray{background:#F1F2F4;color:#374151;border-color:#E2E5EA}
+  table{width:100%;border-collapse:collapse;font-size:12.5px}
+  th,td{text-align:left;padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);background:#FAFAFB}
+  td.b{font-weight:600;color:var(--ink)}
+  td.tag{white-space:nowrap}
+  .pull{border-left:3px solid var(--brand);padding:10px 14px;background:#FBFAFF;border-radius:6px;font-family:'Source Serif 4',Georgia,serif;font-size:14px;color:var(--ink-2)}
+  .pull.warm{border-left-color:var(--brand-2);background:#FFF8F0}
+  .pull.good{border-left-color:var(--good);background:#F4FBF7}
+  .source{font-size:10.5px;color:var(--muted);border-top:1px dashed var(--line);margin-top:14px;padding-top:10px}
+  .phase-head{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .phase-pill{font-size:10px;font-weight:800;padding:3px 8px;border-radius:4px;letter-spacing:.08em;text-transform:uppercase}
+  .phase-pill.p1{background:var(--chip);color:var(--chip-ink)}
+  .phase-pill.p2{background:#E6F5EE;color:#036A4F}
+  .phase-pill.p3{background:#FFEFE0;color:#9A4A00}
+  .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--muted);margin-top:6px}
+  .legend b{color:var(--ink-2)}
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-inner">
+      <a class="brand-mark" href="./index.html" style="text-decoration:none;color:inherit">
+        <span class="brand-dot"></span>
+        <span>Editor Strategy &middot; Build Plan</span>
+      </a>
+      <div style="display:flex;gap:8px">
+        <a class="btn" href="./mailchimp-editor.html#canvas">&larr; Initiative Canvas</a>
+        <a class="btn" href="./index.html">All briefs</a>
+        <button class="btn primary" onclick="window.print()">Print / PDF</button>
+      </div>
+    </div>
+  </div>
+
+  <main class="page-wrap">
+
+    <section class="page">
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">P4.2.1 flagship wedge &middot; Initiative Canvas</div>
+          <h1>Conversational Email Editor &mdash; Build Plan</h1>
+          <p class="subtitle">Skills, tools, and context required to ship a Brand-Kit-aware conversational email + SMS editor inside Mailchimp's Intuit Assist surface. Sequenced into three phases against Klaviyo Marketing Agent, Canva Magic Studio, and Shopify Email.</p>
+        </div>
+        <div class="meta">
+          <div><strong>12</strong> skills &middot; <strong>18</strong> tools &middot; <strong>14</strong> context sources</div>
+          <div>3 phases &middot; 18 months</div>
+        </div>
+      </div>
+
+      <div class="grid cols-4">
+        <div class="kpi"><div class="v">12</div><div class="l">Skills (agent capabilities)</div></div>
+        <div class="kpi"><div class="v">18</div><div class="l">Tools (system actions)</div></div>
+        <div class="kpi"><div class="v">14</div><div class="l">Context sources</div></div>
+        <div class="kpi"><div class="v">3</div><div class="l">Phases &middot; 18-month sequence</div></div>
+      </div>
+
+      <div style="margin-top:16px" class="pull">
+        <strong>Strategic anchor &mdash; why this is Mailchimp's wedge.</strong> Klaviyo's AI is feature-bound (subject lines, Image Remix). Postscript trains AI on PDFs but doesn't do canvas-level edits. Stensul is form-driven. Canva is design-only, not campaign-aware. Shopify Email has no AI authoring of substance.
+        <cite style="display:block;font-family:'Inter',sans-serif;font-size:11.5px;color:var(--muted);margin-top:8px;font-style:normal">The unique combination Mailchimp can ship first: <strong>Brand Kit + Intuit Assist + 260+ templates + 300+ ecom integrations + 12M+ user distribution + conversational UX.</strong> No competitor has all five inputs.</cite>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Section 1 &middot; Skills</div>
+          <h1 style="font-size:24px">What the agent can do</h1>
+          <p class="subtitle">A skill is a discrete cognitive ability the agent invokes in conversation. Each skill maps to a customer job-to-be-done.</p>
+          <div class="legend"><span><b>T</b> = saves time</span><span><b>E</b> = expert guidance</span><span><b>R</b> = risk reduction</span></div>
+        </div>
+        <div class="meta"><strong>12</strong> skills</div>
+      </div>
+
+      <table>
+        <thead><tr><th style="width:20%">Skill</th><th>What it is</th><th style="width:25%">Customer pain solved</th><th style="width:18%">Benefit</th><th style="width:6%">Type</th></tr></thead>
+        <tbody>
+          <tr><td class="b">Campaign Scaffolder</td><td>URL or intent &rarr; full email + SMS campaign with Brand Kit applied.</td><td>Blank-page paralysis on day-1; "more powerful but slower to first value" vs Klaviyo Marketing Agent.</td><td>First send live in &lt;30 min vs 14&ndash;21d median.</td><td><span class="chip">T+E</span></td></tr>
+          <tr><td class="b">Brand-Voice Copywriter</td><td>Generates / rewrites copy in customer's documented tone, audience, personality.</td><td>Generic AI-sounding copy; rewrite tax after every generation.</td><td>Solo marketers ship faster + sound like themselves.</td><td><span class="chip">T+E</span></td></tr>
+          <tr><td class="b">Block-Level Surgical Editor</td><td>"Redo the hero in a friendlier tone with a CTA to spring sale."</td><td>Re-clicking through builders for small changes; can't target blocks conversationally.</td><td>Iteration speed up 3&ndash;5&times;; non-designers steer copy + layout.</td><td><span class="chip">T</span></td></tr>
+          <tr><td class="b">Layout Architect</td><td>Picks block structure based on intent + ICP (promo, newsletter, win-back, abandoned cart).</td><td>B2B / nonprofit / restaurants forced into ecom-shaped templates (UR Bet #3).</td><td>Right structure first time; opens 4 underserved verticals.</td><td><span class="chip">E</span></td></tr>
+          <tr><td class="b">Visual Generator (Brand-aware)</td><td>Hero / product / lifestyle imagery with Brand Kit colors, fonts, and product catalog context.</td><td>Stock-image dependence; off-brand visuals; expensive Canva round-trips.</td><td>Right image, not stock image; ecom conversion lift.</td><td><span class="chip">T+E</span></td></tr>
+          <tr><td class="b">Cross-Channel Adapter</td><td>Compresses email content into SMS / push / in-app variants &mdash; same intent, channel-correct format.</td><td>Two-surface composition; copy-paste between email + SMS; brand drift.</td><td>One ask, multi-channel send; SMS attach rate up.</td><td><span class="chip">T</span></td></tr>
+          <tr><td class="b">Personalization Director</td><td>Picks dynamic blocks per recipient (last product, lifecycle stage, geo, predicted next).</td><td>One-size-fits-all sends; LTV leakage on browse / cart / post-purchase.</td><td>Per-recipient lift on conversion (Klaviyo Image Remix parity).</td><td><span class="chip">E</span></td></tr>
+          <tr><td class="b">Performance Critic</td><td>Pre-send audit: subject line, send time, deliverability hints, predicted open / CTR vs baseline.</td><td>Customers ship mediocre campaigns and learn by trial-and-error.</td><td>Results lift before send; replaces a marketing consultant.</td><td><span class="chip">E</span></td></tr>
+          <tr><td class="b">Compliance &amp; Accessibility Coach</td><td>Real-time TCPA / CAN-SPAM / GDPR / WCAG AA review; blocks on critical violations.</td><td>$57K TCPA incident cited in HVC; EU EAA exposure; missing alt-text / contrast.</td><td>Eliminates the largest single brand-risk vector in SMS.</td><td><span class="chip warm">R+E</span></td></tr>
+          <tr><td class="b">Brand-Style Transferer</td><td>"Make this look like our spring campaign" &mdash; extracts style from one, applies to another.</td><td>Style drift across campaign series; manual restyling for brand consistency.</td><td>Series feels intentionally connected; no Klaviyo equivalent.</td><td><span class="chip">T+E</span></td></tr>
+          <tr><td class="b">Migration Translator</td><td>Converts Classic / pasted HTML / competitor exports into NEB blocks with style preservation.</td><td>181-template migration tax; "rebuilt the same email three times" (G2).</td><td>Days &rarr; minutes; protects $1&ndash;2M Classic ARR (Strategy R1).</td><td><span class="chip">T</span></td></tr>
+          <tr><td class="b">A/B Strategist</td><td>Generates meaningful variants; per-profile winners; explains hypotheses.</td><td>Weak variants; one-global-winner waste; lift-killing tests.</td><td>Per-profile A/B parity (Klaviyo Personalized A/B).</td><td><span class="chip">E</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="page">
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Section 2 &middot; Tools</div>
+          <h1 style="font-size:24px">System actions the agent can call</h1>
+          <p class="subtitle">Tools are the concrete API / system surfaces the agent invokes. Skills compose tools; one skill typically calls 3&ndash;6 tools. Grouped by surface area for engineering ownership.</p>
+        </div>
+        <div class="meta"><strong>18</strong> tools</div>
+      </div>
+
+      <h3 style="margin-top:8px">Brand &amp; content</h3>
+      <table>
+        <thead><tr><th style="width:18%">Tool</th><th style="width:32%">What it does</th><th>Customer problem it unblocks</th><th style="width:24%">Benefit</th></tr></thead>
+        <tbody>
+          <tr><td class="b">BrandKitReader</td><td>Pulls logos, colors, fonts, voice, button styles into agent context every turn.</td><td>Brand inconsistency across AI generations; "why doesn't the AI use my font?"</td><td>Brand Kit flows through every output (closes HVC #10).</td></tr>
+          <tr><td class="b">UniversalContentCRUD</td><td>Read / write / version Universal Content blocks (P2.1 primitive).</td><td>Saved-content scattered per template; no global propagation.</td><td>Edit-once-propagates-everywhere primitive (Klaviyo parity).</td></tr>
+          <tr><td class="b">BlockMutator</td><td>Insert / update / delete / reorder blocks in NEB canvas with optimistic UI.</td><td>Manual click-drag for every change.</td><td>Conversational edits land in canvas immediately.</td></tr>
+          <tr><td class="b">ImageGenerator</td><td>Text-to-image with Brand Kit conditioning + product-catalog grounding.</td><td>Stock-image dependence; Canva round-trips.</td><td>Brand-correct hero images in seconds (Image Remix parity).</td></tr>
+          <tr><td class="b">ProductCatalogLookup</td><td>Reads Shopify / WooCommerce / BigCommerce / Square / 300+ ecom integrations.</td><td>Generic content disconnected from what's in stock / on sale.</td><td>Right product per email; conversion lift.</td></tr>
+          <tr><td class="b">ContentStudioSearch</td><td>Semantic search over the customer's DAM (assets, brand files, past campaigns).</td><td>Customers re-upload assets they already have.</td><td>Asset reuse goes up; closes Content Studio IA gap.</td></tr>
+          <tr><td class="b">TemplateLibrarySearch</td><td>Vector search over 260+ templates filtered by industry + intent + layout.</td><td>DTC bias; B2B / nonprofit underserved (UR Bet #3).</td><td>Industry-fit starting point; activation accelerates.</td></tr>
+          <tr><td class="b">BrandExtractor (URL)</td><td>Crawls a URL, extracts logo / colors / fonts / voice into Brand Kit on signup or refresh.</td><td>Cold-start cost on signup; manual restyling.</td><td>First email pre-branded on day-0 (closes &lt;12mo cohort gap).</td></tr>
+        </tbody>
+      </table>
+
+      <h3 style="margin-top:18px">Channel, governance &amp; performance</h3>
+      <table>
+        <thead><tr><th style="width:18%">Tool</th><th style="width:32%">What it does</th><th>Customer problem it unblocks</th><th style="width:24%">Benefit</th></tr></thead>
+        <tbody>
+          <tr><td class="b">SMSCompressor</td><td>Renders email block into SMS: char-limit-aware, opt-out compliant, branded short links.</td><td>Two-surface composition; manual SMS rewrite per email.</td><td>One ask &rarr; multi-channel; SMS depth + Brand Kit applied.</td></tr>
+          <tr><td class="b">InboxPreview</td><td>Renders email across Gmail / Outlook / Apple Mail / iOS / Android with light + dark mode.</td><td>Forwarded-mail divergence; "looks correct in editor, breaks in inbox."</td><td>Closes HVC #3 ($1,820/mo cited rendering bugs).</td></tr>
+          <tr><td class="b">AccessibilityLinter</td><td>Real-time WCAG AA: alt text, contrast, link purpose, heading order.</td><td>Pre-send checklist misses contrast + link purpose; EAA exposure.</td><td>Regulatory readiness; deliverability lift.</td></tr>
+          <tr><td class="b">ComplianceChecker</td><td>Geo-aware TCPA / CAN-SPAM / GDPR / CASL ruleset applied per send.</td><td>$57K TCPA incident; default-on append + duplicate opt-outs.</td><td>Largest single brand-risk vector eliminated.</td></tr>
+          <tr><td class="b">SendTimeOptimizer</td><td>Per-recipient send-time prediction from engagement history (Smart Send parity).</td><td>Store-level send-time only; one-size-fits-all timing.</td><td>+10&ndash;30% open lift cited in Klaviyo case studies.</td></tr>
+          <tr><td class="b">ABTestProposer</td><td>Generates and ranks variants; proposes per-profile winners with hypothesis explanations.</td><td>Manual variant creation; one-global-winner waste.</td><td>Per-profile A/B parity (Klaviyo Personalized A/B).</td></tr>
+          <tr><td class="b">PerformanceReporter</td><td>Inline revenue / opens / CTR / unsub per block + per recipient (Klaviyo in-builder revenue parity).</td><td>Renewal stuck on "opens" instead of "$ shipped."</td><td>Decision-grade reporting at the block level.</td></tr>
+          <tr><td class="b">CJBStepWriter</td><td>Writes / edits Customer Journey Builder steps from conversation ("add a 3-day delay then SMS").</td><td>Cross-product friction: campaign editor and CJB don't share AI.</td><td>Campaign + automation authored in one conversation.</td></tr>
+          <tr><td class="b">ApprovalRouter</td><td>Routes to designer &rarr; copywriter &rarr; manager with @-mention comments + version snapshots.</td><td>Approval cycles happen outside Mailchimp (Slack screenshots).</td><td>Premium / agency governance need met in-product.</td></tr>
+          <tr><td class="b">DocsRetriever</td><td>Vector search over help center + product docs + community threads for "how do I&hellip;" answers.</td><td>Customers ask procedural questions; LLM hallucinates without grounding.</td><td>Grounded answers; replaces support tickets for setup.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="page">
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Section 3 &middot; Context</div>
+          <h1 style="font-size:24px">Knowledge the agent needs at every turn</h1>
+          <p class="subtitle">Context is the persistent + per-session data the agent reasons over. The differentiator vs every competitor is the breadth of Mailchimp-owned context &mdash; Brand Kit + audience + campaign history + product catalog + 12M+ customer flywheel. Generic LLMs don't have this.</p>
+        </div>
+        <div class="meta"><strong>14</strong> context sources</div>
+      </div>
+
+      <table>
+        <thead><tr><th style="width:20%">Context source</th><th>What it contains</th><th style="width:28%">Why the agent needs it</th><th style="width:22%">Customer benefit</th></tr></thead>
+        <tbody>
+          <tr><td class="b">Brand Kit</td><td>Logos, colors, fonts, voice, audience descriptors, button styles, multi-brand sub-kits.</td><td>Every generated copy + image + layout must respect brand.</td><td>Brand consistency at zero effort; closes HVC #9 multi-brand.</td></tr>
+          <tr><td class="b">Universal Content library</td><td>Edit-once-propagates blocks (P2.1); usage metadata per block.</td><td>Agent prefers reusing existing UC blocks vs regenerating.</td><td>Brand drift goes to zero; edits compound across sends.</td></tr>
+          <tr><td class="b">Past campaigns + performance</td><td>12 months of opens / CTR / revenue / unsub per campaign per segment.</td><td>Critic + A/B Strategist reason against the customer's own baselines.</td><td>Recommendations are personal, not generic.</td></tr>
+          <tr><td class="b">Audience profiles + segments</td><td>Subscriber attributes, lifecycle stage, predicted CLV, last-engagement.</td><td>Personalization Director picks dynamic blocks per recipient.</td><td>Per-recipient relevance (LTV protection).</td></tr>
+          <tr><td class="b">Product catalog</td><td>Live SKU / price / inventory / category from 300+ ecom integrations.</td><td>Right product surfaced per email; out-of-stock excluded.</td><td>Ecom conversion lift no SMB tool can match.</td></tr>
+          <tr><td class="b">Industry / vertical templates</td><td>260+ Mailchimp templates tagged by industry + intent + layout type.</td><td>Layout Architect grounds choices in proven structures.</td><td>B2B / ProServ / nonprofits get fit-for-purpose starts.</td></tr>
+          <tr><td class="b">Compliance ruleset (geo-aware)</td><td>TCPA, CAN-SPAM, GDPR, CASL, EAA &mdash; country-specific opt-out + accessibility law.</td><td>Compliance Coach blocks on real violations, not false positives.</td><td>Risk reduction (avoids $57K-class incidents).</td></tr>
+          <tr><td class="b">Per-recipient engagement history</td><td>Time-of-day open patterns, channel preference, click history.</td><td>Send-Time Optimizer + Channel Affinity decisions.</td><td>Smart Send parity; +10&ndash;30% open lift.</td></tr>
+          <tr><td class="b">Sender reputation + deliverability</td><td>SPF / DKIM / DMARC status, bounce rate, inbox placement by ESP.</td><td>Performance Critic warns before sending into spam.</td><td>Inbox placement protected (78.35% audit issue addressed).</td></tr>
+          <tr><td class="b">Cross-channel campaign object</td><td>Unified email + SMS + push step container (P5.1).</td><td>Cross-Channel Adapter writes into one object, not two surfaces.</td><td>"Unified" becomes authoring-real, not billing-claim.</td></tr>
+          <tr><td class="b">Live editor session state</td><td>Who else is editing, lock state, pending changes, version history.</td><td>Real-time collaboration; conflict-free agent edits.</td><td>Multi-author co-edit (P5.3 &mdash; Klaviyo doesn't have this).</td></tr>
+          <tr><td class="b">Customer lifecycle stage</td><td>New (&lt;1mo) / activating (&lt;12mo) / Established / Abandon &mdash; and tier (Free / Standard / Premium).</td><td>Agent calibrates: hand-hold new users, defer to power users.</td><td>Right level of help per customer (UR Workflow Shapes).</td></tr>
+          <tr><td class="b">Vertical conventions</td><td>Best-practice patterns per industry: ecom (cart abandon), B2B (nurture), nonprofit (donation).</td><td>Layout Architect + Critic apply industry-correct heuristics.</td><td>Expertise embedded; replaces a marketing consultant.</td></tr>
+          <tr><td class="b">Help-center + product docs</td><td>Indexed help articles, community threads, video transcripts.</td><td>Docs Retriever grounds procedural answers.</td><td>Setup questions answered in-product, not support tickets.</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="page">
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Section 4 &middot; Phased sequencing</div>
+          <h1 style="font-size:24px">18 months across 3 phases</h1>
+          <p class="subtitle">Sequenced for fastest credible PMF (Phase 1) &rarr; unique-in-market differentiation (Phase 2) &rarr; best-in-class moat (Phase 3). Each phase ships one demonstrable credibility moment. Aligned with Initiative Canvas P4 (AI), P2 (Universal Content), P5 (Unified canvas + collab).</p>
+        </div>
+      </div>
+
+      <div class="grid cols-3">
+        <div class="card tinted">
+          <div class="phase-head"><span class="phase-pill p1">Phase 1</span><strong>0&ndash;6 mo &middot; PMF + parity</strong></div>
+          <p style="font-size:12.5px;color:var(--muted)">Goal: ship "AI that ships campaigns, not a demo" &mdash; match Klaviyo Marketing Agent + Image Remix. Beat Canva on copy. Beat Shopify on depth.</p>
+          <h3>Skills</h3>
+          <ul>
+            <li>Campaign Scaffolder</li>
+            <li>Brand-Voice Copywriter</li>
+            <li>Block-Level Surgical Editor</li>
+            <li>Visual Generator (Brand-aware)</li>
+            <li>Layout Architect</li>
+            <li>Performance Critic (basic)</li>
+          </ul>
+          <h3>Tools</h3>
+          <ul>
+            <li>BrandKitReader &middot; BrandExtractor</li>
+            <li>BlockMutator &middot; UniversalContentCRUD</li>
+            <li>ImageGenerator &middot; ProductCatalogLookup</li>
+            <li>TemplateLibrarySearch &middot; ContentStudioSearch</li>
+            <li>InboxPreview &middot; ABTestProposer</li>
+          </ul>
+          <h3>Context</h3>
+          <ul>
+            <li>Brand Kit &middot; Universal Content library</li>
+            <li>Industry templates &middot; Product catalog</li>
+            <li>Past campaigns + performance</li>
+            <li>Customer lifecycle stage</li>
+          </ul>
+          <div style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)">
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--brand);margin-bottom:4px">Credibility moment</div>
+            <p style="font-size:12.5px">URL &rarr; on-brand campaign in &lt;3 clicks &middot; matches Klaviyo Marketing Agent &middot; beats it on Brand Kit fidelity.</p>
+          </div>
+        </div>
+
+        <div class="card green">
+          <div class="phase-head"><span class="phase-pill p2">Phase 2</span><strong>6&ndash;12 mo &middot; The wedge</strong></div>
+          <p style="font-size:12.5px;color:var(--muted)">Goal: ship the unique-in-market combination (P4.2.1). Brand-Kit-aware conversational journey editing that Klaviyo, Canva, and Shopify cannot match.</p>
+          <h3>Skills (added)</h3>
+          <ul>
+            <li>Cross-Channel Adapter</li>
+            <li>Personalization Director</li>
+            <li>Brand-Style Transferer</li>
+            <li>Compliance &amp; Accessibility Coach</li>
+            <li>Migration Translator</li>
+            <li>A/B Strategist (per-profile)</li>
+          </ul>
+          <h3>Tools (added)</h3>
+          <ul>
+            <li>SMSCompressor &middot; ComplianceChecker</li>
+            <li>AccessibilityLinter &middot; SendTimeOptimizer</li>
+            <li>PerformanceReporter &middot; CJBStepWriter</li>
+          </ul>
+          <h3>Context (added)</h3>
+          <ul>
+            <li>Per-recipient engagement history</li>
+            <li>Cross-channel campaign object</li>
+            <li>Compliance ruleset (geo-aware)</li>
+            <li>Sender reputation + deliverability</li>
+            <li>Vertical conventions</li>
+          </ul>
+          <div style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)">
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--good);margin-bottom:4px">Credibility moment</div>
+            <p style="font-size:12.5px">"Redo the hero in a friendlier tone with a CTA to spring sale, and write the SMS variant" &mdash; flagship demo. No competitor can ship this combination.</p>
+          </div>
+        </div>
+
+        <div class="card warm">
+          <div class="phase-head"><span class="phase-pill p3">Phase 3</span><strong>12&ndash;18 mo &middot; Best-in-class</strong></div>
+          <p style="font-size:12.5px;color:var(--muted)">Goal: lock in the moat. Multi-brand, multi-author, autonomous monitoring, procedural agency. Beat Klaviyo on team workflows; beat Stensul on SMB UX.</p>
+          <h3>Skills (added)</h3>
+          <ul>
+            <li>Performance Watchdog (autonomous)</li>
+            <li>Co-edit + Comment skill</li>
+            <li>Multi-brand context routing</li>
+            <li>Liquid / Code-mode skill</li>
+            <li>Procedural Help skill</li>
+          </ul>
+          <h3>Tools (added)</h3>
+          <ul>
+            <li>ApprovalRouter</li>
+            <li>DocsRetriever</li>
+            <li>VersionSnapshot &middot; Multi-brand switcher</li>
+          </ul>
+          <h3>Context (added)</h3>
+          <ul>
+            <li>Live editor session state (presence)</li>
+            <li>Multi-brand kits per account</li>
+            <li>Help-center + product docs (RAG)</li>
+          </ul>
+          <div style="margin-top:8px;padding-top:8px;border-top:1px dashed var(--line)">
+            <div style="font-size:11px;text-transform:uppercase;letter-spacing:.08em;font-weight:700;color:var(--brand-2);margin-bottom:4px">Credibility moment</div>
+            <p style="font-size:12.5px">Two marketers + the agent co-edit one campaign across 3 client brands; agent monitors send performance and flags regressions before customer notices.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="page">
+      <div class="page-head">
+        <div>
+          <div class="eyebrow">Section 5 &middot; Phase 1 head-to-head</div>
+          <h1 style="font-size:24px">How Phase 1 wins vs Klaviyo, Canva, Shopify</h1>
+          <p class="subtitle">PMF is decided by what ships in the first 6 months. The Phase 1 stack is sized to credibly out-execute each competitor on a different axis &mdash; without depending on Phase 2 or 3 features.</p>
+        </div>
+      </div>
+
+      <table>
+        <thead><tr><th style="width:18%">Dimension</th><th>Klaviyo Marketing Agent</th><th>Canva Magic Studio</th><th>Shopify Email</th><th style="width:28%;color:var(--brand)">Mailchimp Phase 1 advantage</th></tr></thead>
+        <tbody>
+          <tr><td class="b">URL &rarr; campaign</td><td>Yes &mdash; 3 clicks to flow.</td><td>No &mdash; design tool, not campaign.</td><td>Limited &mdash; storefront-bundled.</td><td><strong>Match:</strong> Campaign Scaffolder + Brand Kit + 260+ templates &middot; beat on brand fidelity.</td></tr>
+          <tr><td class="b">Brand-aware copy</td><td>Subject-line AI only.</td><td>Generic copy AI; not brand-trained.</td><td>None of substance.</td><td><strong>Win:</strong> Brand-Voice Copywriter trained on Brand Kit voice + audience.</td></tr>
+          <tr><td class="b">Brand-aware imagery</td><td>Image Remix (hero variations).</td><td>Best-in-class design AI but not campaign-aware.</td><td>Stock library only.</td><td><strong>Match Klaviyo + go further:</strong> Brand Kit + product catalog grounding.</td></tr>
+          <tr><td class="b">Block-level conversational edit</td><td>No &mdash; feature-bound AI.</td><td>Design-only edits, not copy + structure.</td><td>No.</td><td><strong>Win uniquely:</strong> Block-Level Surgical Editor (P4.2.1 wedge starts here).</td></tr>
+          <tr><td class="b">Industry fit</td><td>DTC-biased templates.</td><td>Generic &mdash; not vertical.</td><td>Ecom only.</td><td><strong>Win:</strong> Layout Architect + B2B / ProServ / nonprofit templates (P3.2).</td></tr>
+          <tr><td class="b">Pre-send critique</td><td>AI auto-monitors (post-send).</td><td>None.</td><td>None.</td><td><strong>Match:</strong> Performance Critic against the customer's own baseline data.</td></tr>
+          <tr><td class="b">Distribution + pricing</td><td>Higher tier; Feb '25 billing damage.</td><td>Design-tool pricing.</td><td>Bundled but limited.</td><td><strong>Win:</strong> 12M+ users + engagement-based pricing counter (I-3.4.3).</td></tr>
+        </tbody>
+      </table>
+
+      <div style="margin-top:18px" class="pull good">
+        <strong>The Phase 1 promise to leadership.</strong> By month 6, a Mailchimp customer pastes their website URL and gets a complete, on-brand, multi-block email campaign with hero imagery, copy, layout, and a critic-reviewed pre-send check &mdash; in under 3 minutes.
+        <cite style="display:block;font-family:'Inter',sans-serif;font-size:11.5px;color:var(--muted);margin-top:8px;font-style:normal">That single demo neutralizes Klaviyo Marketing Agent, leapfrogs Canva on campaign-awareness, and makes Shopify Email feel like a stub. <strong>Phase 2 then ships the wedge no one else can match.</strong></cite>
+      </div>
+
+      <div class="source">
+        <strong>Source mapping &middot;</strong> Initiative Canvas P4.2.1 (Conversational journey editing) &middot; P4.2.2 (Brand-style transfer) &middot; P4.2.3 (Prompt-first email mode) &middot; P4.4.1&ndash;4.4.6 (AI image gen + Klaviyo-counter trio) &middot; P3.1.4 (AI Email Setup Agent) &middot; P5.1 (Unified canvas) &middot; P2.1 (Universal Content primitive) &middot; Strategy Bet B4 (conversational AI + global ungate) &middot; VoC #3 (geo-gate) &middot; Klaviyo Brief (Marketing Agent, Image Remix, Smart Send, Personalized A/B, AI auto-monitors).
+      </div>
+    </section>
+
+  </main>
+</body>
+</html>
