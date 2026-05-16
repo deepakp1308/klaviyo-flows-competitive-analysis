@@ -1,0 +1,2293 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Freddie Deepak's Phase 1 &mdash; Playable Prototype</title>
+<meta name="description" content="Playable storyboard prototype of Freddie Deepak's Phase 1 — extending the Freddie / AI Email Generator with 10 new AI / AI 2.0 features (Image Manipulation, Dream Lab, Conversational Design Editing, Magic Layers, Brand Voice 2.0, Memory, Connectors, Sticker/GIF, Web Research, MCP Bridge). All 10 features fully clickable end-to-end across Email + SMS + WhatsApp. 96 baseline components reused, 1 new C-ID (C-97), 20 variants registered." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ========================================================================
+     TOP CHROME — sticky · always visible
+     ======================================================================== -->
+<header class="chrome" role="banner">
+  <div class="chrome-inner">
+    <div class="brand-mark">
+      <span class="brand-dot"></span>
+      Freddie Deepak's Phase 1
+      <span class="brand-mark-sub">· playable prototype</span>
+    </div>
+    <div class="counter" aria-live="polite">
+      <span class="counter-label">Loading…</span>
+      <div class="channel-tabs" role="tablist" aria-label="Channel">
+        <button data-channel="email" class="active" role="tab" aria-selected="true">Email</button>
+        <button data-channel="sms" role="tab" aria-selected="false">SMS</button>
+        <button data-channel="whatsapp" role="tab" aria-selected="false">WhatsApp</button>
+      </div>
+    </div>
+    <nav class="nav" aria-label="Storyboard navigation">
+      <button data-nav="prev" aria-label="Previous scene">&larr; Prev</button>
+      <button data-nav="next" class="primary" aria-label="Next scene">Next &rarr;</button>
+      <a class="btn" href="../freddie-deepak-phase1.html" data-nav="exit">Exit to spec</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ========================================================================
+     SCENE STAGE — all scenes live here as <section data-scene>
+     The router (app.js) toggles hidden on hashchange.
+     ======================================================================== -->
+<main class="stage" id="stage">
+
+<!-- ===========================================================
+     S-MENU · Feature menu (entry point, scene 0)
+     =========================================================== -->
+<section class="scene" data-scene="s-menu" data-title="Feature menu" aria-label="Feature menu" hidden>
+  <div class="menu-hero">
+    <div>
+      <div class="scene-eyebrow" style="border-bottom:none; padding-bottom:0; margin-bottom:14px;">
+        <span class="scene-eyebrow-num">Phase 1</span> ·
+        <span class="scene-eyebrow-title">10 AI / AI 2.0 features · cross-channel</span>
+        <span class="scene-eyebrow-cid"><a href="../freddie-deepak-phase1.html">see the design spec &rarr;</a></span>
+      </div>
+      <h1>What changes when Freddie ships Phase 1.</h1>
+      <p class="lead">
+        Ten features extend the existing Freddie / AI Email Generator surface to close the Canva gap.
+        Pick a feature to walk through it, or walk all ten end to end. Every scene uses only baseline
+        components &mdash; 96 reused, 1 new <code>C-97</code>, 20 variants registered.
+      </p>
+      <button class="walk-all" data-jump-to="s-flowintro" data-cid="C-53">
+        Walk all 10 features &rarr;
+      </button>
+    </div>
+    <div class="hero-art" aria-hidden="true">✦</div>
+  </div>
+
+  <div class="menu-grid" id="feature-menu" role="list"></div>
+</section>
+<script>
+  // Populate feature menu from data.js
+  document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('feature-menu');
+    if (!grid || !window.FDPX_DATA) return;
+    grid.innerHTML = window.FDPX_DATA.features.map(f => `
+      <a class="menu-tile" data-jump-to="s${f.num}-intro" role="listitem">
+        <span class="tile-num">FEAT ${f.num}</span>
+        <span class="tile-layer">${f.layer}</span>
+        <span class="tile-name">${f.name}</span>
+        <span class="tile-meta">${f.surface} · ${f.sceneCount} scenes</span>
+      </a>
+    `).join('');
+  });
+</script>
+
+<!-- ===========================================================
+     S-FLOWINTRO · Framing before feature 01
+     =========================================================== -->
+<section class="scene" data-scene="s-flowintro" data-title="The flow" data-step="0" data-of="0" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">PHASE 1 · GUIDED WALKTHROUGH</div>
+    <h2>The 7-step JTBD, with 10 new AI features layered in</h2>
+    <p>
+      The existing Freddie flow is: <strong>Plan &rarr; Strategize &rarr; Design &rarr; Refine &rarr; Send</strong>.
+      Phase 1 deepens each step. You'll see live-context connectors feed the Plan, Brand Voice 2.0 shape the strategy,
+      AI Image Manipulation and Dream Lab transform the Design step, Conversational Editing carry refinement, and
+      MCP Bridge expose the whole thing to ChatGPT / Claude / Cursor.
+    </p>
+    <p>
+      Press <strong>Next</strong> to step through. Use <strong>&larr; / &rarr;</strong> on your keyboard.
+      Click the lit hotspot in each scene to advance via the same path a real user would take.
+    </p>
+    <button class="start-btn" data-advance-to="s01-intro" data-cid="C-53">Begin · Feature 01 &rarr;</button>
+  </div>
+</section>
+
+<!-- ===========================================================
+     FEATURE 01 — AI Image Manipulation Suite
+     6 scenes + intro + outro
+     =========================================================== -->
+
+<section class="scene" data-scene="s01-intro" data-title="Image Manipulation" data-feature="01" data-step="0" data-of="6" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 01 · AI · DESIGN STEP</div>
+    <h2>AI Image Manipulation Suite</h2>
+    <p>
+      Edit images directly inside the email. <strong>Brush-replace</strong> a region,
+      <strong>extract</strong> a subject from its background, <strong>extend the frame</strong> in any direction,
+      or apply <strong>themed text and shape effects</strong>. The new <code>C-97</code> popover is anchored to the
+      selected image element &mdash; the only genuinely new shape this whole phase introduces.
+    </p>
+    <button class="start-btn" data-advance-to="s01-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+
+<section class="scene" data-scene="s01-1" data-title="Editor with hero · ready to select" data-feature="01" data-step="1" data-of="6" data-channel="email" data-channel-variants="whatsapp" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 01</span> ·
+    <span class="scene-eyebrow-step">Scene 1 of 6</span> ·
+    <span class="scene-eyebrow-title">Editor with hero · ready to select</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f01">C-61 canvas</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Design editor · post-generation</div>
+      <div class="mcds-editor">
+        <div class="chat-side">
+          <div class="mcds-chat-bubble assistant">
+            <div class="ab-header"><span class="mcds-snowflake">✦</span>Email is ready <span class="mcds-tag ready">Ready</span></div>
+            <p style="font-size:12px; margin:0;">Built a welcome email with social-proof hero. Click any element on the canvas to edit it.</p>
+            <div class="mcds-feedback-row"><span>📋 Copy</span><span>👍</span><span>👎</span><span>↺</span></div>
+          </div>
+          <div class="mcds-chip-row">
+            <span class="mcds-chip">Add a CTA</span>
+            <span class="mcds-chip">Change theme</span>
+            <span class="mcds-chip">Check accessibility</span>
+          </div>
+        </div>
+        <div class="canvas-side">
+          <div class="canvas-hero advance-hotspot" data-advance-to="s01-2" data-cid="C-61" role="button" tabindex="0" aria-label="Click the hero image to begin editing it"></div>
+          <div class="canvas-line long"></div>
+          <div class="canvas-line short"></div>
+          <div class="canvas-line long"></div>
+          <div class="canvas-line cta"></div>
+        </div>
+      </div>
+    </div>
+    <div class="scene-annotation" style="top: 220px; right: 24px;">
+      <span class="annotation-arrow">&larr;</span>
+      Click the <strong>hero image</strong> to enable inline editing.
+    </div>
+  </div>
+  <div class="scene-caption">
+    The baseline editor surface. Canvas (<code>C-61</code>) is unchanged; the new behaviour is the selection state that activates when you click an image.
+  </div>
+</section>
+
+<section class="scene" data-scene="s01-2" data-title="Image selected · selection state active" data-feature="01" data-step="2" data-of="6" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 01</span> ·
+    <span class="scene-eyebrow-step">Scene 2 of 6</span> ·
+    <span class="scene-eyebrow-title">Image selected · selection state active</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f01">C-61 selection state</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Hero image now in selected state</div>
+      <div class="mcds-editor">
+        <div class="chat-side">
+          <div class="mcds-chat-bubble assistant">
+            <div class="ab-header"><span class="mcds-snowflake">✦</span>Image selected</div>
+            <p style="font-size:12px; margin:0;">A selection ring is now around the hero. Choose an action from the popover.</p>
+          </div>
+        </div>
+        <div class="canvas-side">
+          <div class="canvas-hero selected" data-cid="C-61"></div>
+          <div class="image-popover advance-hotspot" data-advance-to="s01-3" data-cid="C-97" style="top: 110px; left: 32px;" role="button" tabindex="0" aria-label="Open image manipulation popover">
+            <div class="mcds-label" style="margin-bottom: 4px;">&rarr; Click to open image actions <span class="mcds-tag new">NEW C-97</span></div>
+          </div>
+          <div class="canvas-line long" style="margin-top: 80px;"></div>
+          <div class="canvas-line short"></div>
+        </div>
+      </div>
+    </div>
+    <div class="scene-annotation" style="top: 280px; left: 360px;">
+      <span class="annotation-arrow">&larr;</span>
+      Click to <strong>open the image manipulation popover (C-97)</strong>.
+    </div>
+  </div>
+  <div class="scene-caption">
+    Selection enables a new in-canvas affordance. The popover is the only genuinely new shape in the whole spec &mdash; anchored to an in-canvas element, not the editor chrome.
+  </div>
+</section>
+
+<!-- W2 HERO SCENE — lifted verbatim from spec freddie-deepak-phase1.html lines 1481-1556 -->
+<section class="scene" data-scene="s01-3" data-title="C-97 popover open · 4 actions" data-feature="01" data-step="3" data-of="6" data-channel="email" data-channel-variants="whatsapp" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 01</span> ·
+    <span class="scene-eyebrow-step">Scene 3 of 6 · hero W2</span> ·
+    <span class="scene-eyebrow-title">C-97 popover open · 4 actions</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f01">C-97 (NEW) · C-43/v.preview-diff · C-70/v.refine-chips</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Design editor · image popover open · staged preview-diff in chat</div>
+      <div class="mcds-editor">
+        <div class="chat-side">
+          <div class="mcds-chat-bubble user">
+            <strong>You:</strong> "Make the hero more professional, B2B SaaS audience"
+          </div>
+          <div class="mcds-chat-bubble assistant">
+            <div class="ab-header"><span class="mcds-snowflake">✦</span>Hero restyle staged <span class="mcds-tag ready">Ready</span></div>
+            <div class="preview-diff" data-cid="C-43/v.preview-diff">
+              <div class="thumb"></div>
+              <span class="arrow">&rarr;</span>
+              <div class="thumb" style="background: linear-gradient(135deg, #2c3e50, #017E89);"></div>
+              <span style="font-size:11px; color: var(--color-text-secondary); margin-left: 6px;">Hero restyled</span>
+            </div>
+            <div style="display:flex; gap:8px; font-size:11px; color: var(--color-text-secondary); align-items: center;">
+              <button class="mcds-cta advance-hotspot" data-advance-to="s01-5" data-cid="C-53" style="font-size:11px; padding: 4px 10px;">✓ Accept</button>
+              <button class="mcds-cta-secondary" style="font-size:11px; padding: 4px 10px;">↺ Regenerate</button>
+              <span>👍 👎</span>
+            </div>
+          </div>
+          <div class="mcds-chip-row" data-cid="C-70/v.refine-chips">
+            <span class="mcds-chip">Swap hero</span>
+            <span class="mcds-chip">Make professional</span>
+            <span class="mcds-chip">Shorten copy</span>
+            <span class="mcds-chip">Add urgency</span>
+          </div>
+        </div>
+        <div class="canvas-side">
+          <div class="canvas-hero selected" data-cid="C-61"></div>
+          <div class="image-popover" data-cid="C-97" style="top: 116px; left: 28px;">
+            <div class="mcds-label" style="margin-bottom: 6px;">✦ Edit image with AI <span class="mcds-tag new">C-97 · NEW</span></div>
+            <div class="pop-row advance-hotspot" data-advance-to="s01-4" role="button" tabindex="0">🖌 Brush replace</div>
+            <div class="pop-row">✂ Subject extract</div>
+            <div class="pop-row">↔ Frame extend</div>
+            <div class="pop-row">✨ Themed effects</div>
+            <div style="border-top: 1px solid var(--color-border-default); margin-top: 6px; padding-top: 6px;">
+              <div class="pop-row" style="color: var(--color-text-tertiary); font-size:11px;">Open in Dream Lab &rarr;</div>
+            </div>
+          </div>
+          <div class="canvas-line long" style="margin-top: 200px;"></div>
+          <div class="canvas-line short"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">
+    <strong>W2 hero scene.</strong> The popover (<code>C-97</code>) anchors to the selected element; chat shows the staged preview-diff (<code>C-43/v.preview-diff</code>); follow-up chips (<code>C-70/v.refine-chips</code>) carry conversational refinement intents. Click <strong>🖌 Brush replace</strong> in the popover &mdash; or <strong>✓ Accept</strong> the chat-staged change.
+  </div>
+</section>
+
+<section class="scene" data-scene="s01-4" data-title="Brush replace · processing" data-feature="01" data-step="4" data-of="6" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 01</span> ·
+    <span class="scene-eyebrow-step">Scene 4 of 6</span> ·
+    <span class="scene-eyebrow-title">Brush replace · processing</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f01">C-42 spinner · C-97 processing state</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Image regenerating · ~3 sec</div>
+      <div class="mcds-editor">
+        <div class="chat-side">
+          <div class="mcds-chat-bubble assistant">
+            <div class="ab-header"><span class="mcds-snowflake">✦</span>Brush replacing… <span class="mcds-spinner"></span></div>
+            <p style="font-size:12px; margin: 4px 0 0;">Regenerating the painted region with brand-aware imagery.</p>
+          </div>
+        </div>
+        <div class="canvas-side">
+          <div class="canvas-hero selected" style="background: linear-gradient(135deg, #4472c4 0%, #017E89 100%); position: relative;" data-cid="C-61">
+            <div style="position:absolute; inset:0; background: repeating-linear-gradient(45deg, rgba(255,255,255,.1) 0 8px, transparent 8px 16px);"></div>
+            <div style="position:absolute; inset:0; display:flex; align-items:center; justify-content:center; color:white; font-weight:600;">
+              <span class="mcds-spinner" style="border-color: rgba(255,255,255,.3); border-top-color: white;"></span>
+            </div>
+          </div>
+          <div class="canvas-line long" style="margin-top: 14px;"></div>
+          <div class="canvas-line short"></div>
+        </div>
+      </div>
+      <div style="margin-top: 16px; text-align: right;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s01-5" data-cid="C-53">Continue when ready &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">
+    The popover stays open during processing; the canvas image dims with the spinner overlay. Result will replace the original in place.
+  </div>
+</section>
+
+<section class="scene" data-scene="s01-5" data-title="Result staged · accept or regenerate" data-feature="01" data-step="5" data-of="6" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 01</span> ·
+    <span class="scene-eyebrow-step">Scene 5 of 6</span> ·
+    <span class="scene-eyebrow-title">Result staged · accept or regenerate</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f01">C-44 feedback row · staged-change state</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">New image staged · awaiting Accept</div>
+      <div class="mcds-editor">
+        <div class="chat-side">
+          <div class="mcds-chat-bubble assistant">
+            <div class="ab-header"><span class="mcds-snowflake">✦</span>Brush replace complete</div>
+            <p style="font-size:12px; margin:0;">Brush-replaced the hero region with a more polished result. Accept to commit, or regenerate.</p>
+            <div style="display:flex; gap:8px; margin-top:8px;">
+              <button class="mcds-cta advance-hotspot" data-advance-to="s01-6" data-cid="C-53" style="font-size:11px; padding: 5px 12px;">✓ Accept</button>
+              <button class="mcds-cta-secondary" style="font-size:11px; padding: 5px 12px;">↺ Regenerate</button>
+            </div>
+            <div class="mcds-feedback-row" data-cid="C-44">
+              <span>📋 Copy</span><span>👍</span><span>👎</span><span>↺</span>
+            </div>
+          </div>
+        </div>
+        <div class="canvas-side">
+          <div class="canvas-hero" style="background: linear-gradient(135deg, #2c3e50 0%, #017E89 100%); border: 2px dashed #017E89;" data-cid="C-61"></div>
+          <p style="font-size:11px; color: var(--color-text-tertiary); margin: 6px 0 0;">Staged · not yet committed</p>
+          <div class="canvas-line long" style="margin-top: 10px;"></div>
+          <div class="canvas-line short"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">
+    A staged change is shown in dashed-border state on the canvas. <code>C-44</code> feedback row supports thumb-up/down for AI quality learning.
+  </div>
+</section>
+
+<section class="scene" data-scene="s01-6" data-title="Accepted · canvas updated" data-feature="01" data-step="6" data-of="6" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 01</span> ·
+    <span class="scene-eyebrow-step">Scene 6 of 6</span> ·
+    <span class="scene-eyebrow-title">Accepted · canvas updated</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f01">C-61 committed state</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Edit committed · canvas now reflects the change</div>
+      <div class="mcds-editor">
+        <div class="chat-side">
+          <div class="mcds-chat-bubble assistant">
+            <div class="ab-header"><span class="mcds-snowflake">✦</span>Hero updated <span class="mcds-tag ready">Done</span></div>
+            <p style="font-size:12px; margin:0;">The change is committed. The popover is available again for the next edit.</p>
+          </div>
+          <div class="mcds-chip-row">
+            <span class="mcds-chip">Add a CTA</span>
+            <span class="mcds-chip">Change theme</span>
+            <span class="mcds-chip">Optimize for mobile</span>
+          </div>
+        </div>
+        <div class="canvas-side">
+          <div class="canvas-hero" style="background: linear-gradient(135deg, #2c3e50 0%, #017E89 100%);" data-cid="C-61"></div>
+          <div class="canvas-line long" style="margin-top: 14px;"></div>
+          <div class="canvas-line short"></div>
+        </div>
+      </div>
+      <div style="margin-top: 16px; text-align: right;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s01-outro" data-cid="C-53">Feature complete &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">
+    No round-trip to Canva. The hero was edited inline in three clicks. The popover stays available for the next image edit.
+  </div>
+</section>
+
+<section class="scene" data-scene="s01-outro" data-title="Feature 01 complete" data-feature="01" data-step="6" data-of="6" hidden>
+  <div class="outro-card">
+    <span class="check">✓</span>
+    <div class="feature-tag">FEATURE 01 · COMPLETE</div>
+    <h2>AI Image Manipulation Suite</h2>
+    <p>
+      You selected the hero, opened the new <code>C-97</code> popover, brush-replaced a region,
+      staged the result via <code>C-43/v.preview-diff</code>, and accepted. <strong>Zero round-trips to Canva.</strong>
+      One new C-ID introduced; everything else reuses existing primitives.
+    </p>
+    <button class="next-btn" data-advance-to="s02-intro" data-cid="C-53">Next · Dream Lab &rarr;</button>
+  </div>
+</section>
+
+<!-- ===========================================================
+     FEATURE 02 — Dream Lab (placeholder block, expanded later)
+     =========================================================== -->
+<section class="scene" data-scene="s02-intro" data-title="Dream Lab" data-feature="02" data-step="0" data-of="5" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 02 · AI · DESIGN STEP</div>
+    <h2>Dream Lab</h2>
+    <p>
+      Generate high-fidelity branded imagery from a prompt + your own style reference + aspect ratio.
+      Lives as the new "Image" tab in the manual mode left rail.
+    </p>
+    <button class="start-btn" data-advance-to="s02-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+
+<section class="scene" data-scene="s02-1" data-title="Manual rail · Image tab" data-feature="02" data-step="1" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 02</span> ·
+    <span class="scene-eyebrow-step">Scene 1 of 5</span> ·
+    <span class="scene-eyebrow-title">Manual rail · Image tab</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f02">C-71/v.image-tab</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Manual mode · 5-tab left rail (Blocks · Sections · Styles · Image · Stickers)</div>
+      <div class="mcds-manual-rail">
+        <div class="mcds-rail-tabs" data-cid="C-71/v.image-tab">
+          <div class="mcds-rail-tab"><span class="glyph">📦</span>Blocks</div>
+          <div class="mcds-rail-tab"><span class="glyph">▦</span>Sections</div>
+          <div class="mcds-rail-tab"><span class="glyph">🎨</span>Styles</div>
+          <div class="mcds-rail-tab advance-hotspot" data-advance-to="s02-2" role="button" tabindex="0"><span class="glyph">✨</span>Image<span class="new-pill">NEW</span></div>
+          <div class="mcds-rail-tab"><span class="glyph">🎭</span>Stickers<span class="new-pill">NEW</span></div>
+        </div>
+        <div class="mcds-rail-panel">
+          <div class="rp-title">Blocks</div>
+          <div class="rp-sub">Drag to add content</div>
+          <div class="rp-tile-grid">
+            <div class="rp-tile">Heading</div><div class="rp-tile">Text</div>
+            <div class="rp-tile">Image</div><div class="rp-tile">Button</div>
+            <div class="rp-tile">Divider</div><div class="rp-tile">Video</div>
+          </div>
+        </div>
+        <div class="canvas-side" style="background: var(--color-bg-tertiary); border-radius: 8px; padding: 18px;">
+          <div class="canvas-hero" style="background: linear-gradient(135deg, #2c3e50, #017E89);"></div>
+          <div class="canvas-line long" style="margin-top:10px;"></div>
+          <div class="canvas-line short"></div>
+        </div>
+      </div>
+    </div>
+    <div class="scene-annotation" style="top: 220px; left: 88px;">
+      <span class="annotation-arrow">&larr;</span>
+      Click the <strong>Image</strong> tab — the new 4th entry alongside Blocks, Sections, Styles.
+    </div>
+  </div>
+  <div class="scene-caption">
+    Manual rail extends from 3 tabs to 5 (Image + Stickers). Both are variants of <code>C-71</code> &mdash; no new shape.
+  </div>
+</section>
+
+<section class="scene" data-scene="s02-2" data-title="Dream Lab · prompt + style ref" data-feature="02" data-step="2" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 02</span> ·
+    <span class="scene-eyebrow-step">Scene 2 of 5</span> ·
+    <span class="scene-eyebrow-title">Dream Lab · prompt + style ref + aspect ratio</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f02">C-19 · C-20 · C-58/v.aspect · C-25</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Image tab open · Dream Lab panel</div>
+      <div class="mcds-manual-rail">
+        <div class="mcds-rail-tabs">
+          <div class="mcds-rail-tab"><span class="glyph">📦</span>Blocks</div>
+          <div class="mcds-rail-tab"><span class="glyph">▦</span>Sections</div>
+          <div class="mcds-rail-tab"><span class="glyph">🎨</span>Styles</div>
+          <div class="mcds-rail-tab active"><span class="glyph">✨</span>Image</div>
+          <div class="mcds-rail-tab"><span class="glyph">🎭</span>Stickers</div>
+        </div>
+        <div class="mcds-rail-panel" style="grid-column: span 2;">
+          <div class="rp-title">Dream Lab <span class="mcds-tag new">NEW</span></div>
+          <div class="rp-sub">Generate high-fidelity branded imagery</div>
+          <div style="background: var(--color-bg-primary); border:1px solid var(--color-border-default); border-radius:8px; padding: 10px; margin-bottom: 10px;" data-cid="C-19">
+            <div style="font-size: 12px; color: var(--color-text-primary);">A confident professional holding a coffee cup, soft window light</div>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom: 10px;">
+            <span class="mcds-chip" data-cid="C-20">+ Style reference <strong>brand-shoot-2024.jpg</strong> ✕</span>
+          </div>
+          <div style="font-size:11px; color: var(--color-text-tertiary); margin: 8px 0 4px; text-transform: uppercase; letter-spacing: .06em; font-weight: 700;">Aspect ratio</div>
+          <div style="display: inline-flex; gap: 2px; background: var(--color-bg-tertiary); padding: 2px; border-radius: 9999px; font-size:11px;" data-cid="C-58/v.aspect">
+            <span style="padding: 4px 10px; border-radius: 9999px;">1:1</span>
+            <span style="padding: 4px 10px; border-radius: 9999px; background: var(--color-bg-primary); font-weight: 600;">4:5</span>
+            <span style="padding: 4px 10px; border-radius: 9999px;">16:9</span>
+            <span style="padding: 4px 10px; border-radius: 9999px;">9:16</span>
+          </div>
+          <div class="mcds-chip-row" data-cid="C-25">
+            <span class="mcds-chip">↳ Editorial</span>
+            <span class="mcds-chip">↳ Product</span>
+            <span class="mcds-chip">↳ Lifestyle</span>
+            <span class="mcds-chip">↳ Illustration</span>
+          </div>
+          <button class="mcds-cta advance-hotspot" data-advance-to="s02-3" data-cid="C-53" style="margin-top: 14px;">✦ Generate image</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">
+    Prompt + style reference + aspect ratio (a 4-option variant of <code>C-58 viewport radio</code>) + style preset chips. Click <strong>Generate image</strong>.
+  </div>
+</section>
+
+<section class="scene" data-scene="s02-3" data-title="Dream Lab · generating" data-feature="02" data-step="3" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 02</span> · <span class="scene-eyebrow-step">Scene 3 of 5</span> · <span class="scene-eyebrow-title">Generating image · ~8 sec</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f02">C-42 spinner</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">4 candidates rendering</div>
+      <div style="text-align: center; padding: 60px 0;">
+        <span class="mcds-spinner" style="width: 32px; height: 32px;"></span>
+        <p style="margin: 20px 0 4px; font-size: 14px;">Generating 4 candidates from your prompt and brand style…</p>
+        <p style="font-size: 12px; color: var(--color-text-tertiary); margin: 0;">Using <strong>Bright Light Co.</strong> brand palette · Editorial preset · 4:5 aspect</p>
+      </div>
+      <div style="text-align: right;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s02-4" data-cid="C-53">Continue &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">
+    The same <code>C-42</code> snowflake spinner used elsewhere. Brand context is shown so the user knows what inputs the model is using.
+  </div>
+</section>
+
+<section class="scene" data-scene="s02-4" data-title="4 candidate thumbnails" data-feature="02" data-step="4" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 02</span> · <span class="scene-eyebrow-step">Scene 4 of 5</span> · <span class="scene-eyebrow-title">4 candidate thumbnails · pick one</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f02">C-52 visual style picker</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">4 generated candidates · select one to drop into the canvas</div>
+      <div class="mcds-result-grid" data-cid="C-52">
+        <div class="mcds-result-thumb advance-hotspot" data-advance-to="s02-5" role="button" tabindex="0"></div>
+        <div class="mcds-result-thumb"></div>
+        <div class="mcds-result-thumb"></div>
+        <div class="mcds-result-thumb"></div>
+      </div>
+      <div class="mcds-feedback-row" data-cid="C-44" style="margin-top: 16px;">
+        <span>📋 Copy prompt</span><span>👍</span><span>👎</span><span>↺ Regenerate all</span>
+      </div>
+    </div>
+    <div class="scene-annotation" style="top: 160px; left: 60px;">
+      <span class="annotation-arrow">&larr;</span>
+      <strong>Click the first candidate</strong> to drop it into the canvas.
+    </div>
+  </div>
+  <div class="scene-caption">
+    <code>C-52</code> visual style picker pattern reused. Click outside the picker to dismiss or pick a result to commit.
+  </div>
+</section>
+
+<section class="scene" data-scene="s02-5" data-title="Image dropped into canvas" data-feature="02" data-step="5" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 02</span> · <span class="scene-eyebrow-step">Scene 5 of 5</span> · <span class="scene-eyebrow-title">Image inserted as new C-61 block</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f02">C-61 new block</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Selected image now lives in the canvas as a regular image block</div>
+      <div class="mcds-manual-rail">
+        <div class="mcds-rail-tabs">
+          <div class="mcds-rail-tab"><span class="glyph">📦</span>Blocks</div>
+          <div class="mcds-rail-tab"><span class="glyph">▦</span>Sections</div>
+          <div class="mcds-rail-tab"><span class="glyph">🎨</span>Styles</div>
+          <div class="mcds-rail-tab active"><span class="glyph">✨</span>Image</div>
+          <div class="mcds-rail-tab"><span class="glyph">🎭</span>Stickers</div>
+        </div>
+        <div class="mcds-rail-panel">
+          <div class="rp-title">Recent generations</div>
+          <div class="rp-sub">Saved to Brand Kit</div>
+          <div class="rp-tile-grid">
+            <div class="rp-tile" style="background: linear-gradient(135deg, #c5d2e2, #017E89); height: 60px;"></div>
+            <div class="rp-tile" style="background: #FFE7E0; height: 60px;"></div>
+            <div class="rp-tile" style="background: #E6F5EE; height: 60px;"></div>
+            <div class="rp-tile" style="background: #FFFBE6; height: 60px;"></div>
+          </div>
+        </div>
+        <div class="canvas-side" style="background: var(--color-bg-tertiary); border-radius: 8px; padding: 18px;">
+          <div class="canvas-hero" style="background: linear-gradient(135deg, #c5d2e2, #017E89);" data-cid="C-61"></div>
+          <div class="canvas-line long" style="margin-top: 10px;"></div>
+          <div class="canvas-line short"></div>
+        </div>
+      </div>
+      <div style="margin-top: 16px; text-align: right;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s02-outro" data-cid="C-53">Feature complete &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">
+    Generated image becomes a regular <code>C-61</code> canvas image block; C-97 image manipulation applies to it for further edits. Recent generations persist in Brand Kit.
+  </div>
+</section>
+
+<section class="scene" data-scene="s02-outro" data-title="Feature 02 complete" data-feature="02" data-step="5" data-of="5" hidden>
+  <div class="outro-card">
+    <span class="check">✓</span>
+    <div class="feature-tag">FEATURE 02 · COMPLETE</div>
+    <h2>Dream Lab</h2>
+    <p>You generated 4 candidates from a prompt + style reference + aspect ratio, picked one, and dropped it into the canvas. <strong>Zero new C-IDs.</strong> Two variants: <code>C-71/v.image-tab</code> + <code>C-58/v.aspect</code>.</p>
+    <button class="next-btn" data-advance-to="s03-intro" data-cid="C-53">Next · Conversational Editing &rarr;</button>
+  </div>
+</section>
+
+<!-- ===========================================================
+     FEATURE 03 — Conversational Design Editing (4 scenes)
+     =========================================================== -->
+<section class="scene" data-scene="s03-intro" data-title="Conversational Design Editing" data-feature="03" data-step="0" data-of="4" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 03 · AI 2.0 · DESIGN STEP</div>
+    <h2>Conversational Design Editing</h2>
+    <p>Drive the whole builder from plain English. <em>"Make the hero more professional. Shorten the body by 30%. Add urgency to the CTA."</em> The existing chat composer (<code>C-54</code>) becomes the primary edit channel; the new <code>C-43/v.preview-diff</code> variant shows before/after thumbnails before commits.</p>
+    <button class="start-btn" data-advance-to="s03-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+
+<section class="scene" data-scene="s03-1" data-title="Chat composer · refine chips visible" data-feature="03" data-step="1" data-of="4" data-channel="email" data-channel-variants="sms" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 03</span> · <span class="scene-eyebrow-step">Scene 1 of 4</span> · <span class="scene-eyebrow-title">Chat composer · refine chips visible</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f03">C-54 · C-70/v.refine-chips</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Post-generation · chat composer ready</div>
+      <div class="mcds-editor">
+        <div class="chat-side">
+          <div class="mcds-chat-bubble assistant">
+            <div class="ab-header"><span class="mcds-snowflake">✦</span>Email ready · refine via chat</div>
+            <p style="font-size:12px;margin:0;">Type a change, or pick a refine chip below.</p>
+          </div>
+          <div style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: var(--border-radius-lv5); padding: 10px 14px;" data-cid="C-54">
+            <div style="font-size:12px; color: var(--color-text-tertiary);">Make the hero more professional, B2B SaaS audience</div>
+          </div>
+          <div class="mcds-chip-row" data-cid="C-70/v.refine-chips">
+            <span class="mcds-chip advance-hotspot" data-advance-to="s03-2" role="button" tabindex="0">Make professional</span>
+            <span class="mcds-chip">Swap hero</span>
+            <span class="mcds-chip">Shorten copy</span>
+            <span class="mcds-chip">Add urgency</span>
+          </div>
+        </div>
+        <div class="canvas-side">
+          <div class="canvas-hero" style="background: linear-gradient(135deg, #FFE7E0, #DB334D);"></div>
+          <div class="canvas-line long" style="margin-top: 10px;"></div>
+          <div class="canvas-line short"></div>
+        </div>
+      </div>
+    </div>
+    <div class="scene-annotation" style="top: 280px; left: 28px;">
+      <span class="annotation-arrow">↘</span>
+      Click <strong>Make professional</strong> — or type into the composer.
+    </div>
+  </div>
+  <div class="scene-caption">Refine chips (<code>C-70/v.refine-chips</code>) seed common intents. The chat composer accepts free-form text as well.</div>
+</section>
+
+<section class="scene" data-scene="s03-2" data-title="AI proposes · preview-diff staged" data-feature="03" data-step="2" data-of="4" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 03</span> · <span class="scene-eyebrow-step">Scene 2 of 4</span> · <span class="scene-eyebrow-title">AI proposes · preview-diff staged</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f03">C-43/v.preview-diff</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Staged change visible · canvas un-touched until Accept</div>
+      <div class="mcds-editor">
+        <div class="chat-side">
+          <div class="mcds-chat-bubble user"><strong>You:</strong> Make professional</div>
+          <div class="mcds-chat-bubble assistant">
+            <div class="ab-header"><span class="mcds-snowflake">✦</span>Hero restyled <span class="mcds-tag ready">Ready</span></div>
+            <div class="preview-diff" data-cid="C-43/v.preview-diff">
+              <div class="thumb" style="background: linear-gradient(135deg, #FFE7E0, #DB334D);"></div>
+              <span class="arrow">&rarr;</span>
+              <div class="thumb" style="background: linear-gradient(135deg, #2c3e50, #017E89);"></div>
+            </div>
+            <p style="font-size:12px;margin:6px 0 0;">Switched to a steel-blue palette and tightened the headline. Canvas un-touched until Accept.</p>
+            <div style="display:flex; gap:8px; margin-top: 8px;">
+              <button class="mcds-cta advance-hotspot" data-advance-to="s03-3" data-cid="C-53" style="font-size:11px; padding: 5px 12px;">✓ Accept</button>
+              <button class="mcds-cta-secondary" style="font-size:11px; padding: 5px 12px;">↺ Regenerate</button>
+            </div>
+          </div>
+        </div>
+        <div class="canvas-side">
+          <div class="canvas-hero" style="background: linear-gradient(135deg, #FFE7E0, #DB334D); opacity: .7;"></div>
+          <p style="font-size:11px;color:var(--color-text-tertiary);margin:6px 0;">Original · pending replacement</p>
+          <div class="canvas-line long"></div>
+          <div class="canvas-line short"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption"><code>C-43/v.preview-diff</code> embeds before/after thumbnails inside the assistant message. Canvas dims to signal "staged, not committed."</div>
+</section>
+
+<section class="scene" data-scene="s03-3" data-title="Accept · canvas updated" data-feature="03" data-step="3" data-of="4" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 03</span> · <span class="scene-eyebrow-step">Scene 3 of 4</span> · <span class="scene-eyebrow-title">Accept · canvas updated</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f03">C-61 commit · C-44 feedback</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Commit applied · ready for next intent</div>
+      <div class="mcds-editor">
+        <div class="chat-side">
+          <div class="mcds-chat-bubble assistant">
+            <div class="ab-header"><span class="mcds-snowflake">✦</span>Updated <span class="mcds-tag ready">Done</span></div>
+            <p style="font-size:12px;margin:0;">Canvas now reflects the change. What's next?</p>
+            <div class="mcds-feedback-row" data-cid="C-44"><span>📋</span><span>👍</span><span>👎</span><span>↺</span></div>
+          </div>
+          <div style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: var(--border-radius-lv5); padding: 10px 14px;">
+            <div style="font-size:12px; color: var(--color-text-tertiary);">Ask anything…</div>
+          </div>
+          <div class="mcds-chip-row">
+            <span class="mcds-chip">Add urgency</span>
+            <span class="mcds-chip advance-hotspot" data-advance-to="s03-4" role="button" tabindex="0">Shorten copy</span>
+            <span class="mcds-chip">Optimize mobile</span>
+          </div>
+        </div>
+        <div class="canvas-side">
+          <div class="canvas-hero" style="background: linear-gradient(135deg, #2c3e50, #017E89);"></div>
+          <div class="canvas-line long" style="margin-top: 10px;"></div>
+          <div class="canvas-line short"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">After Accept the staged change becomes the canvas state. Chat stays open for the next refinement. Click <strong>Shorten copy</strong> to demo chained refinement.</div>
+</section>
+
+<section class="scene" data-scene="s03-4" data-title="Chained refinement · second intent" data-feature="03" data-step="4" data-of="4" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 03</span> · <span class="scene-eyebrow-step">Scene 4 of 4</span> · <span class="scene-eyebrow-title">Chained refinement · second intent</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f03">C-54 sustained chat</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Body copy shortened · second commit applied</div>
+      <div class="mcds-editor">
+        <div class="chat-side">
+          <div class="mcds-chat-bubble user"><strong>You:</strong> Shorten copy</div>
+          <div class="mcds-chat-bubble assistant">
+            <div class="ab-header"><span class="mcds-snowflake">✦</span>Body shortened by 32% <span class="mcds-tag ready">Done</span></div>
+            <p style="font-size:12px;margin:0;">Removed two paragraphs, kept the social proof. Canvas updated.</p>
+          </div>
+        </div>
+        <div class="canvas-side">
+          <div class="canvas-hero" style="background: linear-gradient(135deg, #2c3e50, #017E89);"></div>
+          <div class="canvas-line long" style="margin-top: 10px;"></div>
+          <div class="canvas-line cta"></div>
+        </div>
+      </div>
+      <div style="margin-top: 16px; text-align: right;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s03-outro" data-cid="C-53">Feature complete &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Refinement intents can chain. Each turn is a staged → commit cycle. The chat thread becomes the campaign's edit history.</div>
+</section>
+
+<section class="scene" data-scene="s03-outro" data-title="Feature 03 complete" data-feature="03" data-step="4" data-of="4" hidden>
+  <div class="outro-card">
+    <span class="check">✓</span>
+    <div class="feature-tag">FEATURE 03 · COMPLETE</div>
+    <h2>Conversational Design Editing</h2>
+    <p>You drove two refinements through chat — restyle hero, then shorten copy. Each shown as preview-diff (<code>C-43/v.preview-diff</code>) before commit. The chat thread is now the campaign's edit history.</p>
+    <button class="next-btn" data-advance-to="s04-intro" data-cid="C-53">Next · Magic Layers &rarr;</button>
+  </div>
+</section>
+
+<!-- ===========================================================
+     FEATURE 04 — Magic Layers (4 scenes)
+     =========================================================== -->
+<section class="scene" data-scene="s04-intro" data-title="Magic Layers" data-feature="04" data-step="0" data-of="4" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 04 · AI 2.0 · COMPOSER ATTACH</div>
+    <h2>Magic Layers</h2>
+    <p>Drop a flat file (JPG, PDF, HTML) onto the composer's <code>+ attach</code> button. AI detects sections and reconstructs them as editable layered blocks. The cleanest feature in the spec — zero new C-IDs.</p>
+    <button class="start-btn" data-advance-to="s04-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+
+<section class="scene" data-scene="s04-1" data-title="Composer · attach button ready" data-feature="04" data-step="1" data-of="4" data-channel="email" data-channel-variants="whatsapp" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 04</span> · <span class="scene-eyebrow-step">Scene 1 of 4</span> · <span class="scene-eyebrow-title">Composer · attach button ready</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f04">C-20 attach</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Email tab composer · drop a flat file to reconstruct</div>
+      <h4 class="mcds-h1">Generate emails with Mailchimp AI</h4>
+      <p class="mcds-sub">Or drop a flat artifact to reconstruct as editable layers.</p>
+      <div class="mcds-composer">
+        <div class="mcds-composer-input">Describe the email — or drop a flat file (JPG, PDF, HTML)…</div>
+        <div class="mcds-composer-actions">
+          <div style="display:flex; gap:6px;">
+            <button class="mcds-icon-btn advance-hotspot" data-advance-to="s04-2" data-cid="C-20" aria-label="Open attach">+</button>
+            <button class="mcds-icon-btn">⫯⫯⫯</button>
+            <button class="mcds-icon-btn">🎤</button>
+          </div>
+          <button class="mcds-cta">✦ Generate</button>
+        </div>
+      </div>
+      <p style="font-size: 11px; color: var(--color-text-tertiary); margin-top: 14px;">Tip: paste a competitor email screenshot, a PDF brief, or an old HTML template.</p>
+    </div>
+    <div class="scene-annotation" style="top: 260px; left: 56px;">
+      <span class="annotation-arrow">↑</span>
+      Click the <strong>+ attach</strong> button to simulate dropping <code>competitor-promo.jpg</code>.
+    </div>
+  </div>
+  <div class="scene-caption">Existing <code>C-20</code> attach button accepts new file types (jpg/pdf/html) in addition to existing ones. No new shape needed.</div>
+</section>
+
+<section class="scene" data-scene="s04-2" data-title="Ingestion banner · reconstructing layers" data-feature="04" data-step="2" data-of="4" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 04</span> · <span class="scene-eyebrow-step">Scene 2 of 4</span> · <span class="scene-eyebrow-title">Ingestion banner · reconstructing layers</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f04">C-23/v.ingestion-progress</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">competitor-promo.jpg · reconstruction in progress</div>
+      <div style="background: var(--color-accent-blue-light); border-radius: var(--border-radius-lv3); padding: 14px 18px;" data-cid="C-23/v.ingestion-progress">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
+          <span class="mcds-snowflake">✦</span>
+          <strong>Reconstructing layers from competitor-promo.jpg</strong>
+          <span class="mcds-spinner" style="margin-left: auto;"></span>
+        </div>
+        <div class="mcds-progress"><div class="mcds-progress-fill" style="width: 72%;"></div></div>
+        <p style="font-size: 12px; margin: 6px 0 0; color: var(--color-text-secondary);">
+          3 sections detected: <strong>✓ Header · ✓ Hero · ⌛ Body · ⋯ Footer</strong> (next)
+        </p>
+      </div>
+      <div style="margin-top: 20px; text-align: right;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s04-3" data-cid="C-53">Continue when ready &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">The brand-context banner (<code>C-23</code>) gains a progress + per-section status state. No new shape, just new content states.</div>
+</section>
+
+<section class="scene" data-scene="s04-3" data-title="Reconstruction complete · 7 blocks" data-feature="04" data-step="3" data-of="4" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 04</span> · <span class="scene-eyebrow-step">Scene 3 of 4</span> · <span class="scene-eyebrow-title">Reconstruction complete · 7 editable blocks</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f04">C-43 · C-53/v.open-as-editable</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Magic Layers assistant message</div>
+      <div class="mcds-chat-bubble assistant">
+        <div class="ab-header"><span class="mcds-snowflake">✦</span>Magic Layers · 7 editable blocks <span class="mcds-tag ready">Ready</span></div>
+        <p style="font-size:12.5px;margin:0 0 8px;">
+          Reconstructed from <strong>competitor-promo.jpg</strong>. Detected: 1 Header · 1 Hero · 2 Body · 1 Coupon · 1 Product Grid · 1 Footer.
+          Brand Kit applied — your logo replaced theirs, colors normalized to your teal/cream palette.
+        </p>
+        <button class="mcds-cta advance-hotspot" data-advance-to="s04-4" data-cid="C-53/v.open-as-editable">Open as editable email &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">AI prose response (<code>C-43</code>) summarizes the detected sections. The new <code>C-53/v.open-as-editable</code> variant routes to manual mode with pre-populated blocks.</div>
+</section>
+
+<section class="scene" data-scene="s04-4" data-title="Manual mode · pre-populated with reconstructed blocks" data-feature="04" data-step="4" data-of="4" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 04</span> · <span class="scene-eyebrow-step">Scene 4 of 4</span> · <span class="scene-eyebrow-title">Manual mode · pre-populated</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f04">C-72 blocks · C-61 pre-populated canvas</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Manual mode opens · 7 blocks dropped into canvas</div>
+      <div class="mcds-manual-rail">
+        <div class="mcds-rail-tabs">
+          <div class="mcds-rail-tab active"><span class="glyph">📦</span>Blocks</div>
+          <div class="mcds-rail-tab"><span class="glyph">▦</span>Sections</div>
+          <div class="mcds-rail-tab"><span class="glyph">🎨</span>Styles</div>
+          <div class="mcds-rail-tab"><span class="glyph">✨</span>Image</div>
+          <div class="mcds-rail-tab"><span class="glyph">🎭</span>Stickers</div>
+        </div>
+        <div class="mcds-rail-panel">
+          <div class="rp-title">Blocks · drag to add</div>
+          <div class="rp-sub" style="color: #036A4F;">✓ 7 reconstructed</div>
+          <div class="rp-tile-grid">
+            <div class="rp-tile">Heading</div><div class="rp-tile">Text</div>
+            <div class="rp-tile">Image</div><div class="rp-tile">Button</div>
+            <div class="rp-tile">Coupon</div><div class="rp-tile">Footer</div>
+          </div>
+        </div>
+        <div class="canvas-side" style="background: var(--color-bg-tertiary); border-radius: 8px; padding: 18px;" data-cid="C-61">
+          <div class="canvas-line short" style="background: #4C555B; height: 14px; width: 60%;"></div>
+          <div class="canvas-hero" style="background: linear-gradient(135deg, #c5d2e2, #017E89); margin-top: 10px; height: 80px;"></div>
+          <div class="canvas-line long" style="margin-top: 8px;"></div>
+          <div class="canvas-line short"></div>
+          <div class="canvas-line cta" style="margin-top: 8px;"></div>
+        </div>
+      </div>
+      <div style="margin-top: 16px; text-align: right;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s04-outro" data-cid="C-53">Feature complete &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Reconstructed blocks land in the canvas (<code>C-61</code>) and can be edited by C-72, C-97, conversational editing (feature 03), or any other Phase 1 feature.</div>
+</section>
+
+<section class="scene" data-scene="s04-outro" data-title="Feature 04 complete" data-feature="04" data-step="4" data-of="4" hidden>
+  <div class="outro-card">
+    <span class="check">✓</span>
+    <div class="feature-tag">FEATURE 04 · COMPLETE</div>
+    <h2>Magic Layers</h2>
+    <p>You dropped a flat artifact and got 7 editable blocks with your brand applied. <strong>Zero new C-IDs.</strong> Two variants: <code>C-23/v.ingestion-progress</code> + <code>C-53/v.open-as-editable</code>.</p>
+    <button class="next-btn" data-advance-to="s05-intro" data-cid="C-53">Next · Brand Voice 2.0 &rarr;</button>
+  </div>
+</section>
+
+<!-- ===========================================================
+     FEATURE 05 — Brand Voice 2.0 + Brand Intelligence (5 scenes)
+     =========================================================== -->
+<section class="scene" data-scene="s05-intro" data-title="Brand Voice 2.0 + Brand Intelligence" data-feature="05" data-step="0" data-of="5" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 05 · AI / AI 2.0 · BRAND KIT</div>
+    <h2>Brand Voice 2.0 + Brand Intelligence</h2>
+    <p>Save named brand-voice profiles (Default · Holiday · Launch). Auto-detect tone, voice, do's and don'ts from your URL. When the brand changes, a broadcast banner offers one-click "update all old templates."</p>
+    <button class="start-btn" data-advance-to="s05-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+
+<section class="scene" data-scene="s05-1" data-title="Brand Kit · Brand Voice tab" data-feature="05" data-step="1" data-of="5" data-channel="email" data-channel-variants="sms" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 05</span> · <span class="scene-eyebrow-step">Scene 1 of 5</span> · <span class="scene-eyebrow-title">Brand Kit · Brand Voice tab</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f05">C-81 · C-82</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Brand Kit modal · open</div>
+      <div class="mcds-brandkit">
+        <div class="bk-nav" data-cid="C-82">
+          <div class="bk-item">My Business</div>
+          <div class="bk-item">Logos</div>
+          <div class="bk-item">Colors</div>
+          <div class="bk-item">Fonts</div>
+          <div class="bk-item">Buttons</div>
+          <div class="bk-item advance-hotspot" data-advance-to="s05-2" role="button" tabindex="0">Brand Voice <span class="mcds-tag new">2.0</span></div>
+          <div class="bk-item">Social Links</div>
+        </div>
+        <div class="bk-body">
+          <h5>Pick the section you want to edit</h5>
+          <p style="font-size:13px;color:var(--color-text-secondary);">The new Brand Voice 2.0 tab adds profile management + Brand Intelligence auto-detection.</p>
+        </div>
+      </div>
+    </div>
+    <div class="scene-annotation" style="top: 240px; left: 60px;">
+      <span class="annotation-arrow">&larr;</span>
+      Click <strong>Brand Voice</strong> in the left nav.
+    </div>
+  </div>
+  <div class="scene-caption">Brand Kit modal (<code>C-81</code>) with its 7-tab left nav (<code>C-82</code>) unchanged. Brand Voice gains the new "2.0" tag.</div>
+</section>
+
+<!-- W3 HERO SCENE — Brand Voice 2.0 profile picker + Brand Intelligence + broadcast banner -->
+<section class="scene" data-scene="s05-2" data-title="Brand Voice 2.0 · profile picker active" data-feature="05" data-step="2" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 05</span> · <span class="scene-eyebrow-step">Scene 2 of 5 · hero W3</span> · <span class="scene-eyebrow-title">Profile picker · Brand Intelligence · broadcast</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f05">C-89 · C-89/v.profile-picker · C-23/v.brand-update-broadcast</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Brand Kit · Brand Voice 2.0 section</div>
+      <div class="mcds-brandkit">
+        <div class="bk-nav">
+          <div class="bk-item">My Business</div>
+          <div class="bk-item">Logos</div>
+          <div class="bk-item">Colors</div>
+          <div class="bk-item">Fonts</div>
+          <div class="bk-item">Buttons</div>
+          <div class="bk-item active">Brand Voice <span class="mcds-tag new">2.0</span></div>
+          <div class="bk-item">Social Links</div>
+        </div>
+        <div class="bk-body">
+          <h5>Brand Voice 2.0 <span class="mcds-cid-callout">C-89/v.profile-picker</span></h5>
+          <p style="font-size:12.5px; color: var(--color-text-secondary); margin: 0 0 12px;">Save and switch between brand-voice profiles. AI generations will use the active profile by default.</p>
+
+          <div class="bk-profile-row">
+            <span style="font-size: 10px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; color: var(--color-text-tertiary);">Active profile</span>
+            <label><span class="bk-profile-radio checked"></span> Default</label>
+            <label><span class="bk-profile-radio"></span> Holiday</label>
+            <label><span class="bk-profile-radio"></span> Launch</label>
+            <label style="color: var(--color-text-tertiary);">+ New profile</label>
+          </div>
+
+          <div class="bk-field-row">
+            <div>
+              <div class="bk-field">Personality</div>
+              <div class="bk-field-value">Warm, confident, direct</div>
+            </div>
+            <div>
+              <div class="bk-field">Formality (0–100)</div>
+              <div class="bk-field-value">50 · conversational</div>
+            </div>
+          </div>
+          <div class="bk-field-row">
+            <div>
+              <div class="bk-field">CTA style</div>
+              <div class="bk-field-value">Action verbs first · "Get yours" not "Click here"</div>
+            </div>
+            <div>
+              <div class="bk-field">Headline style</div>
+              <div class="bk-field-value">Sentence case, no exclamation marks</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 12px; padding: 10px 14px; background: var(--color-bg-secondary); border-radius: var(--border-radius-lv3); border: 1px solid var(--color-border-default);">
+            <div class="mcds-label" style="display:flex; justify-content:space-between; align-items:center;">
+              <span>Brand Intelligence <span class="mcds-cid-callout">C-89 auto-extract</span></span>
+              <a href="#" style="color: var(--color-accent-blue); text-decoration: none; font-size: 11px; font-weight: 500; text-transform: none; letter-spacing: 0;">Re-scan website &rarr;</a>
+            </div>
+            <p style="font-size:12px; margin: 6px 0 0;">Auto-detected from your URL last week: <strong>Tone</strong> warm + confident · <strong>Voice</strong> first-person plural · <strong>Avoid</strong> jargon, em-dashes · <strong>Length</strong> 8–18 words avg</p>
+          </div>
+
+          <div class="bk-broadcast" data-cid="C-23/v.brand-update-broadcast">
+            <span><strong>12 drafts use your previous voice profile.</strong> <span style="color: var(--color-text-secondary);">Update them in one pass?</span></span>
+            <button class="mcds-cta advance-hotspot" data-advance-to="s05-3" data-cid="C-53">Update all 12</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption"><strong>W3 hero scene.</strong> Profile picker (<code>C-89/v.profile-picker</code>), Brand Intelligence auto-detect card, and the cross-campaign broadcast banner (<code>C-23/v.brand-update-broadcast</code>). Click <strong>Update all 12</strong> to demo the broadcast.</div>
+</section>
+
+<section class="scene" data-scene="s05-3" data-title="Broadcast applied · 12 drafts updated" data-feature="05" data-step="3" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 05</span> · <span class="scene-eyebrow-step">Scene 3 of 5</span> · <span class="scene-eyebrow-title">Broadcast applied · 12 drafts updated</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f05">brand-version state</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Confirmation toast · 12 drafts now use the latest brand</div>
+      <div style="text-align: center; padding: 40px 20px;">
+        <div style="display:inline-flex; align-items:center; gap:10px; background: #E6F5EE; color: #036A4F; padding: 12px 18px; border-radius: var(--border-radius-lv6); font-weight: 600;">
+          <span style="font-size: 18px;">✓</span> 12 drafts updated to <strong>Default</strong> profile
+        </div>
+        <p style="font-size: 13px; color: var(--color-text-secondary); max-width: 480px; margin: 20px auto;">
+          All previously-versioned drafts now reflect your latest brand voice. Banner dismissed; drafts list refreshes in your conversation history.
+        </p>
+        <button class="mcds-cta advance-hotspot" data-advance-to="s05-4" data-cid="C-53">Continue &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">The broadcast applies in one pass. Each draft gets re-rendered with the active profile; <code>brandVersion</code> field on each draft is bumped to current.</div>
+</section>
+
+<section class="scene" data-scene="s05-4" data-title="Conversation list · drafts refreshed" data-feature="05" data-step="4" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 05</span> · <span class="scene-eyebrow-step">Scene 4 of 5</span> · <span class="scene-eyebrow-title">Conversation list · drafts refreshed</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f05">C-11 · brandVersion bump</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Sidebar · drafts now show updated timestamps</div>
+      <div class="mcds-shell">
+        <div class="mcds-sidebar">
+          <div class="freddie-mono">F</div>
+          <button class="new-btn">+ New</button>
+          <div class="mcds-sidebar-group">Today · brand-updated</div>
+          <div class="mcds-sidebar-item">Welcome Series v3 <span class="count">·just now</span></div>
+          <div class="mcds-sidebar-item">Q3 launch announce <span class="count">·just now</span></div>
+          <div class="mcds-sidebar-item">Post-purchase nudge <span class="count">·just now</span></div>
+          <div class="mcds-sidebar-group">Yesterday</div>
+          <div class="mcds-sidebar-item">Sale promo · auto · 2pm</div>
+          <div class="mcds-sidebar-item">Re-engagement test</div>
+        </div>
+        <div class="mcds-main">
+          <h4 class="mcds-h1" style="font-size: 22px;">12 drafts updated</h4>
+          <p style="font-size: 13px; color: var(--color-text-secondary);">Every draft now reflects your <strong>Default</strong> Brand Voice 2.0 profile.
+            Click any draft in the sidebar to preview the change.</p>
+          <button class="mcds-cta advance-hotspot" data-advance-to="s05-outro" data-cid="C-53">Feature complete &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">The conversation list (<code>C-11</code>) shows the updated drafts at the top of "Today" with refreshed timestamps. No invented UI — existing list pattern carrying new content.</div>
+</section>
+
+<section class="scene" data-scene="s05-outro" data-title="Feature 05 complete" data-feature="05" data-step="5" data-of="5" hidden>
+  <div class="outro-card">
+    <span class="check">✓</span>
+    <div class="feature-tag">FEATURE 05 · COMPLETE</div>
+    <h2>Brand Voice 2.0 + Brand Intelligence</h2>
+    <p>You activated a named profile, saw the Brand Intelligence auto-detect card, and broadcast the new brand to 12 drafts. <strong>Two variants registered.</strong> Zero new C-IDs.</p>
+    <button class="next-btn" data-advance-to="s06-intro" data-cid="C-53">Next · Mailchimp Memory &rarr;</button>
+  </div>
+</section>
+
+<!-- ===========================================================
+     FEATURE 06 — Mailchimp Memory (5 scenes)
+     =========================================================== -->
+<section class="scene" data-scene="s06-intro" data-title="Mailchimp Memory" data-feature="06" data-step="0" data-of="5" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 06 · AI 2.0 · SIDEBAR</div>
+    <h2>Mailchimp Memory · Living Memory</h2>
+    <p>AI remembers what works for your team across campaigns. A new "Things I remember" entry in the sidebar opens a drawer of facts; memory chips surface in the composer to seed future generations.</p>
+    <button class="start-btn" data-advance-to="s06-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+
+<section class="scene" data-scene="s06-1" data-title="Sidebar · Things I remember entry" data-feature="06" data-step="1" data-of="5" data-channel="email" data-channel-variants="sms" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 06</span> · <span class="scene-eyebrow-step">Scene 1 of 5</span> · <span class="scene-eyebrow-title">Sidebar · Things I remember entry</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f06">C-9 · C-11/v.memory-entry</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Sidebar · new entry below conversation list</div>
+      <div class="mcds-shell">
+        <div class="mcds-sidebar">
+          <div class="freddie-mono">F</div>
+          <button class="new-btn">+ New</button>
+          <div class="mcds-sidebar-group">Today</div>
+          <div class="mcds-sidebar-item">Welcome email for SS '26</div>
+          <div class="mcds-sidebar-item">Flash sale draft v3</div>
+          <div class="mcds-sidebar-group">Yesterday</div>
+          <div class="mcds-sidebar-item">Welcome-series experiment</div>
+          <div class="mcds-sidebar-item advance-hotspot" data-advance-to="s06-2" data-cid="C-11/v.memory-entry" role="button" tabindex="0" style="margin-top: 12px; border-top: 1px solid var(--color-border-default); padding-top: 12px;">
+            <span style="font-size: 14px;">🧠</span> Things I remember <span class="count">12 facts</span> <span class="badge-new">NEW</span>
+          </div>
+          <div class="mcds-sidebar-footer">⚙ Prototype settings · 🎨 Brand &amp; business context</div>
+        </div>
+        <div class="mcds-main">
+          <h4 class="mcds-h1" style="font-size: 22px;">A new entry in the sidebar</h4>
+          <p style="font-size: 13px; color: var(--color-text-secondary);">Persistent memory across all your campaigns. AI learns your team's preferences and surfaces them as suggestions.</p>
+        </div>
+      </div>
+    </div>
+    <div class="scene-annotation" style="top: 280px; left: 60px;">
+      <span class="annotation-arrow">&larr;</span>
+      Click <strong>Things I remember</strong> to open the memory drawer.
+    </div>
+  </div>
+  <div class="scene-caption">Sidebar (<code>C-9</code>) gets a new persistent entry (<code>C-11/v.memory-entry</code>) with a count badge and NEW pill. Same list-item molecule as Today/Yesterday conversations.</div>
+</section>
+
+<section class="scene" data-scene="s06-2" data-title="Memory drawer · 6 categories" data-feature="06" data-step="2" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 06</span> · <span class="scene-eyebrow-step">Scene 2 of 5</span> · <span class="scene-eyebrow-title">Memory drawer · 6 categories</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f06">C-82/v.memory-drawer</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Things I remember · drawer open</div>
+      <div class="mcds-brandkit" data-cid="C-82/v.memory-drawer">
+        <div class="bk-nav">
+          <div class="bk-item">Brand voice</div>
+          <div class="bk-item">Audience</div>
+          <div class="bk-item active">Style</div>
+          <div class="bk-item">Cadence</div>
+          <div class="bk-item">Performance</div>
+          <div class="bk-item">Inventory</div>
+          <div class="bk-item" style="border-top: 1px solid var(--color-border-default); margin-top: 6px; padding-top: 8px; color: var(--color-text-tertiary);">+ Add memory</div>
+        </div>
+        <div class="bk-body">
+          <h5>Style · 4 memories</h5>
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div style="display:flex; gap:10px; padding: 10px 12px; background: var(--color-bg-secondary); border-radius: var(--border-radius-lv3); border: 1px solid var(--color-border-default);">
+              <span style="font-size: 16px;">🧠</span>
+              <div style="flex: 1;">
+                <p style="font-size: 13px; margin: 0; font-weight: 600;">Customers respond best to social-proof framing</p>
+                <p style="font-size: 11px; color: var(--color-text-tertiary); margin: 4px 0 0;">Saved May 8 · used in 6 campaigns · 👍 4 times</p>
+              </div>
+              <div style="display: flex; gap: 8px; color: var(--color-text-tertiary); font-size: 12px;"><span>✎</span><span>✕</span></div>
+            </div>
+            <div style="display:flex; gap:10px; padding: 10px 12px; background: var(--color-bg-secondary); border-radius: var(--border-radius-lv3); border: 1px solid var(--color-border-default);">
+              <span style="font-size: 16px;">🧠</span>
+              <div style="flex: 1;">
+                <p style="font-size: 13px; margin: 0; font-weight: 600;">Hero CTAs work best in active voice</p>
+                <p style="font-size: 11px; color: var(--color-text-tertiary); margin: 4px 0 0;">Saved Apr 22 · used in 11 campaigns</p>
+              </div>
+              <div style="display: flex; gap: 8px; color: var(--color-text-tertiary); font-size: 12px;"><span>✎</span><span>✕</span></div>
+            </div>
+            <div style="display:flex; gap:10px; padding: 10px 12px; background: var(--color-bg-secondary); border-radius: var(--border-radius-lv3); border: 1px solid var(--color-border-default);">
+              <span style="font-size: 16px;">🧠</span>
+              <div style="flex: 1;">
+                <p style="font-size: 13px; margin: 0; font-weight: 600;">Avoid red on hero CTAs (brand mismatch)</p>
+                <p style="font-size: 11px; color: var(--color-text-tertiary); margin: 4px 0 0;">Auto-learned · brand kit conflict</p>
+              </div>
+              <div style="display: flex; gap: 8px; color: var(--color-text-tertiary); font-size: 12px;"><span>✎</span><span>✕</span></div>
+            </div>
+            <div style="display:flex; gap:10px; padding: 10px 12px; background: var(--color-bg-secondary); border-radius: var(--border-radius-lv3); border: 1px solid var(--color-border-default);">
+              <span style="font-size: 16px;">🧠</span>
+              <div style="flex: 1;">
+                <p style="font-size: 13px; margin: 0; font-weight: 600;">Product photos &gt; illustrations for ecom</p>
+                <p style="font-size: 11px; color: var(--color-text-tertiary); margin: 4px 0 0;">Saved Mar 14 · used in 8 campaigns</p>
+              </div>
+              <div style="display: flex; gap: 8px; color: var(--color-text-tertiary); font-size: 12px;"><span>✎</span><span>✕</span></div>
+            </div>
+          </div>
+          <button class="mcds-cta advance-hotspot" data-advance-to="s06-3" data-cid="C-53" style="margin-top: 16px;">See memories in the composer &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Memory drawer reuses the Brand Kit modal nav pattern (<code>C-82</code>) with 6 memory categories. Each memory is editable, deletable, or trainable through feedback.</div>
+</section>
+
+<!-- W1 HERO SCENE — Plan composer with brand banner + connectors + memory chips -->
+<section class="scene" data-scene="s06-3" data-title="Composer · memory chips + connector banner" data-feature="06" data-step="3" data-of="5" data-channel="email" data-channel-variants="sms,whatsapp" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 06</span> · <span class="scene-eyebrow-step">Scene 3 of 5 · hero W1</span> · <span class="scene-eyebrow-title">Composer · memory chips + connector banner</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f06">C-25/v.memory · C-23/v.live-context-banner</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Email tab composer · extended for Phase 1 (memory chips + live context)</div>
+      <h4 class="mcds-h1">Generate emails with Mailchimp AI</h4>
+      <p class="mcds-sub">Turn ideas into ready-to-send campaigns.</p>
+
+      <div class="mcds-composer">
+        <div class="mcds-composer-input">Describe the email you want…</div>
+        <div class="mcds-composer-actions">
+          <div style="display:flex; gap:6px;">
+            <button class="mcds-icon-btn">+</button>
+            <button class="mcds-icon-btn">⫯⫯⫯</button>
+            <button class="mcds-icon-btn">🎤</button>
+          </div>
+          <button class="mcds-cta">✦ Generate</button>
+        </div>
+      </div>
+
+      <div class="mcds-brand-banner" data-cid="C-23/v.live-context-banner">
+        <span><strong>Pulling from</strong> your Brand Kit · Slack <code>#marketing-launches</code> · Notion "Q3 launch brief" </span>
+        <button class="mcds-cta-secondary" style="font-size: 11px; padding: 4px 10px;">Manage sources</button>
+      </div>
+
+      <div class="mcds-chip-row">
+        <span class="mcds-chip">↳ Create a welcome email for new subscribers</span>
+        <span class="mcds-chip">↳ Design a flash sale promotion email</span>
+        <span class="mcds-chip">↳ Build a monthly newsletter</span>
+      </div>
+      <div class="mcds-chip-row" data-cid="C-25/v.memory">
+        <span class="mcds-chip memory advance-hotspot" data-advance-to="s06-4" role="button" tabindex="0">🧠 Use last week's launch tone</span>
+        <span class="mcds-chip memory">🧠 Customers respond best to social-proof framing</span>
+        <span class="mcds-chip memory">🧠 Continue the "Spring Refresh" series</span>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption"><strong>W1 hero scene.</strong> Below the standard quick-prompts, memory chips (<code>C-25/v.memory</code>) and a live-context banner (<code>C-23/v.live-context-banner</code>) seed every generation with team-learned context. Click a memory chip.</div>
+</section>
+
+<section class="scene" data-scene="s06-4" data-title="Memory chip selected · prompt seeded" data-feature="06" data-step="4" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 06</span> · <span class="scene-eyebrow-step">Scene 4 of 5</span> · <span class="scene-eyebrow-title">Memory chip applied · ready to generate</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f06">C-25/v.memory active state</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Memory included in the prompt</div>
+      <div class="mcds-composer">
+        <div class="mcds-composer-input" style="color: var(--color-text-primary);">
+          Create a welcome email for new subscribers <span class="mcds-chip memory" style="display: inline-flex; vertical-align: middle; margin-left: 4px; font-size: 11px;">🧠 Use last week's launch tone</span>
+        </div>
+        <div class="mcds-composer-actions">
+          <div style="display:flex; gap:6px;">
+            <button class="mcds-icon-btn">+</button>
+            <button class="mcds-icon-btn">⫯⫯⫯</button>
+            <button class="mcds-icon-btn">🎤</button>
+          </div>
+          <button class="mcds-cta advance-hotspot" data-advance-to="s06-5" data-cid="C-53">✦ Generate</button>
+        </div>
+      </div>
+      <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 14px;">
+        The memory is now part of the prompt. AI will use last week's confident-but-warm tone for the new welcome email.
+      </p>
+    </div>
+  </div>
+  <div class="scene-caption">Memory chips become first-class parts of the prompt. Multiple can be combined, removed, or edited inline.</div>
+</section>
+
+<section class="scene" data-scene="s06-5" data-title="Strategy panel · Drawing on 12 memories" data-feature="06" data-step="5" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 06</span> · <span class="scene-eyebrow-step">Scene 5 of 5</span> · <span class="scene-eyebrow-title">Strategy panel · Drawing on 12 memories</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f06">C-45 header + memory count chip</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Strategy panel · post-generation</div>
+      <div class="mcds-strategy" data-cid="C-45">
+        <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
+          <span class="mcds-snowflake">✦</span>
+          <strong>Email strategy</strong>
+          <span class="mcds-tag ready">Ready</span>
+          <span class="mcds-chip memory" style="margin-left: auto; font-size: 10.5px; padding: 3px 8px;">🧠 Drawing on 12 memories</span>
+        </div>
+        <h5 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 20px; margin: 0 0 12px;">Welcome to the community</h5>
+        <div class="sp-row"><span class="sp-label">Goal</span><span class="sp-value">Retention: Customer loyalty</span></div>
+        <div class="sp-row"><span class="sp-label">Recipients</span><span class="sp-value">New email subscribers (2,150)</span></div>
+        <div class="sp-row"><span class="sp-label">Focus metric</span><span class="sp-value">Revenue</span></div>
+        <div class="sp-row"><span class="sp-label">Brand voice</span><span class="sp-value">Default · confident, not pushy</span></div>
+      </div>
+      <div style="margin-top: 16px; text-align: right;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s06-outro" data-cid="C-53">Feature complete &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Strategy panel header (<code>C-45</code>) gains a memory-count chip so the user sees what context the AI drew on.</div>
+</section>
+
+<section class="scene" data-scene="s06-outro" data-title="Feature 06 complete" data-feature="06" data-step="5" data-of="5" hidden>
+  <div class="outro-card">
+    <span class="check">✓</span>
+    <div class="feature-tag">FEATURE 06 · COMPLETE</div>
+    <h2>Mailchimp Memory</h2>
+    <p>You opened the memory drawer, saw memory chips surface in the composer, applied one, and saw the strategy panel reflect the memories used. <strong>Three variants registered.</strong> No new shapes.</p>
+    <button class="next-btn" data-advance-to="s07-intro" data-cid="C-53">Next · Live-Context Connectors &rarr;</button>
+  </div>
+</section>
+
+<!-- ===========================================================
+     FEATURE 07 — Live-Context Connectors (5 scenes)
+     =========================================================== -->
+<section class="scene" data-scene="s07-intro" data-title="Live-Context Connectors" data-feature="07" data-step="0" data-of="5" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 07 · AI 2.0 · SETTINGS</div>
+    <h2>Live-Context Connectors</h2>
+    <p>Connect Slack, Drive, Notion, Zoom, Calendar. AI pulls live context — the latest launch brief in Notion, this week's marketing standup in Slack — directly into every campaign prompt.</p>
+    <button class="start-btn" data-advance-to="s07-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+
+<section class="scene" data-scene="s07-1" data-title="Settings popover · Connectors section" data-feature="07" data-step="1" data-of="5" data-channel="email" data-channel-variants="sms" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 07</span> · <span class="scene-eyebrow-step">Scene 1 of 5</span> · <span class="scene-eyebrow-title">Settings popover · Connectors section</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f07">C-91/v.connector-section</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Prototype settings · expanded with Connectors section</div>
+      <div class="mcds-settings" data-cid="C-91/v.connector-section">
+        <div class="ss-section">
+          <div class="ss-section-title">Experiences</div>
+          <div class="ss-row"><span class="ss-label">SMS AI</span><span class="mcds-toggle on"></span></div>
+          <div class="ss-row"><span class="ss-label">WhatsApp AI</span><span class="mcds-toggle on"></span></div>
+          <div class="ss-row"><span class="ss-label">Campaign AI</span><span class="mcds-toggle on"></span></div>
+        </div>
+        <div class="ss-section">
+          <div class="ss-section-title">Live-Context Connectors <span class="mcds-tag new">NEW</span></div>
+          <div class="ss-row"><span class="ss-label"><span class="mcds-connector-logo slack">S</span>Slack <span style="color:var(--color-text-tertiary); font-size:11px;">·2m ago</span></span><span class="mcds-toggle on"></span></div>
+          <div class="ss-row"><span class="ss-label"><span class="mcds-connector-logo drive">G</span>Drive <span style="color:var(--color-text-tertiary); font-size:11px;">·11m ago</span></span><span class="mcds-toggle on"></span></div>
+          <div class="ss-row"><span class="ss-label"><span class="mcds-connector-logo notion">N</span>Notion <span style="color:var(--color-text-tertiary); font-size:11px;">·3m ago</span></span><span class="mcds-toggle on"></span></div>
+          <div class="ss-row advance-hotspot" data-advance-to="s07-2" data-cid="C-92/v.connector-toggle" role="button" tabindex="0"><span class="ss-label"><span class="mcds-connector-logo zoom">Z</span>Zoom <span style="color:var(--color-text-tertiary); font-size:11px;">·not connected</span></span><button class="mcds-cta-secondary" style="font-size:11px; padding: 3px 9px;">Connect</button></div>
+          <div class="ss-row"><span class="ss-label"><span class="mcds-connector-logo calendar">C</span>Calendar <span style="color:var(--color-text-tertiary); font-size:11px;">·not connected</span></span><button class="mcds-cta-secondary" style="font-size:11px; padding: 3px 9px;">Connect</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="scene-annotation" style="top: 280px; right: 20px;">
+      <span class="annotation-arrow">&rarr;</span>
+      Click <strong>Connect</strong> on Zoom to start the OAuth flow.
+    </div>
+  </div>
+  <div class="scene-caption">Settings popover (<code>C-91</code>) gains a Connectors section. Each row is a variant of the existing experience toggle (<code>C-92/v.connector-toggle</code>) with a service logo + last-sync timestamp.</div>
+</section>
+
+<section class="scene" data-scene="s07-2" data-title="OAuth · external auth" data-feature="07" data-step="2" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 07</span> · <span class="scene-eyebrow-step">Scene 2 of 5</span> · <span class="scene-eyebrow-title">OAuth · external auth</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f07">connector-OAuth state</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">OAuth redirect · simulated</div>
+      <div style="text-align: center; padding: 50px 20px;">
+        <div style="display: inline-block; padding: 24px 36px; background: white; border: 1px solid var(--color-border-default); border-radius: var(--border-radius-lv4); box-shadow: var(--elevation-lv2);">
+          <span class="mcds-connector-logo zoom" style="width: 32px; height: 32px; font-size: 16px; line-height: 32px; margin-bottom: 12px;">Z</span>
+          <h5 style="font-family: 'Source Serif 4', Georgia, serif; font-size: 18px; margin: 8px 0;">Connect Zoom to Mailchimp?</h5>
+          <p style="font-size: 12.5px; color: var(--color-text-secondary); margin: 0 0 16px; max-width: 320px;">
+            Read meeting transcripts to inform campaign briefs. No write access. You can revoke anytime.
+          </p>
+          <div style="display: flex; gap: 8px; justify-content: center;">
+            <button class="mcds-cta-secondary">Cancel</button>
+            <button class="mcds-cta advance-hotspot" data-advance-to="s07-3" data-cid="C-53">Allow</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">OAuth runs externally. Permissions scoped to read-only with explicit revocation language.</div>
+</section>
+
+<section class="scene" data-scene="s07-3" data-title="Connector syncing" data-feature="07" data-step="3" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 07</span> · <span class="scene-eyebrow-step">Scene 3 of 5</span> · <span class="scene-eyebrow-title">Connector syncing</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f07">C-92 sync state</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Zoom · indexing recent meetings</div>
+      <div class="mcds-settings">
+        <div class="ss-section">
+          <div class="ss-section-title">Live-Context Connectors</div>
+          <div class="ss-row"><span class="ss-label"><span class="mcds-connector-logo slack">S</span>Slack</span><span class="mcds-toggle on"></span></div>
+          <div class="ss-row"><span class="ss-label"><span class="mcds-connector-logo drive">G</span>Drive</span><span class="mcds-toggle on"></span></div>
+          <div class="ss-row"><span class="ss-label"><span class="mcds-connector-logo notion">N</span>Notion</span><span class="mcds-toggle on"></span></div>
+          <div class="ss-row" style="background: var(--color-accent-blue-light); margin: 0 -10px; padding: 6px 10px; border-radius: var(--border-radius-lv2);">
+            <span class="ss-label"><span class="mcds-connector-logo zoom">Z</span>Zoom <span class="mcds-spinner" style="margin-left: 6px;"></span><span style="color:var(--color-accent-blue); font-size:11px; font-weight: 600;">indexing 12 meetings…</span></span>
+            <span class="mcds-toggle on"></span>
+          </div>
+          <div class="ss-row"><span class="ss-label"><span class="mcds-connector-logo calendar">C</span>Calendar</span><button class="mcds-cta-secondary" style="font-size:11px; padding: 3px 9px;">Connect</button></div>
+        </div>
+      </div>
+      <div style="margin-top: 16px; text-align: right;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s07-4" data-cid="C-53">Continue when ready &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Per-connector syncing state shown inline with the same <code>C-42</code> spinner used elsewhere.</div>
+</section>
+
+<section class="scene" data-scene="s07-4" data-title="Composer · live context active" data-feature="07" data-step="4" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 07</span> · <span class="scene-eyebrow-step">Scene 4 of 5</span> · <span class="scene-eyebrow-title">Composer · live context active</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f07">C-23/v.live-context-banner</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Live-context banner now shows 4 sources</div>
+      <h4 class="mcds-h1">Generate emails with Mailchimp AI</h4>
+      <p class="mcds-sub">Live context from all your connected sources is included in every prompt.</p>
+      <div class="mcds-composer">
+        <div class="mcds-composer-input">Describe the email you want…</div>
+        <div class="mcds-composer-actions">
+          <div style="display:flex; gap:6px;">
+            <button class="mcds-icon-btn">+</button>
+            <button class="mcds-icon-btn">⫯⫯⫯</button>
+            <button class="mcds-icon-btn">🎤</button>
+          </div>
+          <button class="mcds-cta">✦ Generate</button>
+        </div>
+      </div>
+      <div class="mcds-brand-banner" data-cid="C-23/v.live-context-banner">
+        <span><strong>Pulling from</strong> your Brand Kit · <span class="mcds-connector-logo slack" style="margin-right: 2px;">S</span>Slack <code>#marketing-launches</code> · <span class="mcds-connector-logo notion" style="margin-right: 2px;">N</span>"Q3 launch brief" · <span class="mcds-connector-logo zoom" style="margin-right: 2px;">Z</span>Last Mon standup</span>
+        <button class="mcds-cta-secondary" style="font-size: 11px; padding: 4px 10px;">Manage</button>
+      </div>
+      <div style="margin-top: 16px; text-align: right;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s07-outro" data-cid="C-53">Feature complete &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">The brand-context banner extends to show every active source. Each source is clickable to inspect the excerpt being used.</div>
+</section>
+
+<section class="scene" data-scene="s07-outro" data-title="Feature 07 complete" data-feature="07" data-step="5" data-of="5" hidden>
+  <div class="outro-card">
+    <span class="check">✓</span>
+    <div class="feature-tag">FEATURE 07 · COMPLETE</div>
+    <h2>Live-Context Connectors</h2>
+    <p>You connected Zoom, watched it index, and saw the banner reflect 4 live sources. <strong>Two variants registered.</strong></p>
+    <button class="next-btn" data-advance-to="s08-intro" data-cid="C-53">Next · AI Sticker / GIF &rarr;</button>
+  </div>
+</section>
+
+<!-- ===========================================================
+     FEATURE 08 — AI Sticker / GIF (5 scenes)
+     =========================================================== -->
+<section class="scene" data-scene="s08-intro" data-title="AI Sticker / GIF / Animation" data-feature="08" data-step="0" data-of="5" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 08 · AI · MANUAL RAIL</div>
+    <h2>AI Sticker / GIF / Animation</h2>
+    <p>Generate branded sticker packs + one-click hero animations. Lives as a 5th tab in the manual rail. Stickers persist in Brand Kit for reuse across campaigns.</p>
+    <button class="start-btn" data-advance-to="s08-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+
+<section class="scene" data-scene="s08-1" data-title="Manual rail · Stickers tab" data-feature="08" data-step="1" data-of="5" data-channel="email" data-channel-variants="whatsapp" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 08</span> · <span class="scene-eyebrow-step">Scene 1 of 5</span> · <span class="scene-eyebrow-title">Manual rail · Stickers tab</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f08">C-71/v.stickers-tab</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Manual rail · 5th tab "Stickers"</div>
+      <div class="mcds-manual-rail">
+        <div class="mcds-rail-tabs" data-cid="C-71/v.stickers-tab">
+          <div class="mcds-rail-tab"><span class="glyph">📦</span>Blocks</div>
+          <div class="mcds-rail-tab"><span class="glyph">▦</span>Sections</div>
+          <div class="mcds-rail-tab"><span class="glyph">🎨</span>Styles</div>
+          <div class="mcds-rail-tab"><span class="glyph">✨</span>Image</div>
+          <div class="mcds-rail-tab advance-hotspot" data-advance-to="s08-2" role="button" tabindex="0"><span class="glyph">🎭</span>Stickers<span class="new-pill">NEW</span></div>
+        </div>
+        <div class="mcds-rail-panel">
+          <div class="rp-title">Blocks</div>
+          <div class="rp-tile-grid">
+            <div class="rp-tile">Heading</div><div class="rp-tile">Image</div>
+          </div>
+        </div>
+        <div class="canvas-side" style="background: var(--color-bg-tertiary); border-radius: 8px; padding: 18px;">
+          <div class="canvas-hero"></div>
+          <div class="canvas-line long"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Manual rail accepts a 5th tab via the same <code>C-71</code> variant pattern as Dream Lab.</div>
+</section>
+
+<section class="scene" data-scene="s08-2" data-title="Stickers panel · prompt + presets" data-feature="08" data-step="2" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 08</span> · <span class="scene-eyebrow-step">Scene 2 of 5</span> · <span class="scene-eyebrow-title">Stickers · prompt + presets</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f08">C-19 · C-25/v.sticker-prompts</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Stickers panel open</div>
+      <div class="mcds-manual-rail">
+        <div class="mcds-rail-tabs">
+          <div class="mcds-rail-tab"><span class="glyph">📦</span></div>
+          <div class="mcds-rail-tab"><span class="glyph">▦</span></div>
+          <div class="mcds-rail-tab"><span class="glyph">🎨</span></div>
+          <div class="mcds-rail-tab"><span class="glyph">✨</span></div>
+          <div class="mcds-rail-tab active"><span class="glyph">🎭</span>Stickers</div>
+        </div>
+        <div class="mcds-rail-panel" style="grid-column: span 2;">
+          <div class="rp-title">Sticker generator <span class="mcds-tag new">NEW</span></div>
+          <div class="rp-sub">Branded sticker packs + hero animations</div>
+          <div style="background: var(--color-bg-primary); border:1px solid var(--color-border-default); border-radius:8px; padding: 10px; margin-bottom: 10px;" data-cid="C-19">
+            <div style="font-size: 12px; color: var(--color-text-primary);">A friendly mascot variant for our spring launch</div>
+          </div>
+          <div class="mcds-chip-row" data-cid="C-25/v.sticker-prompts">
+            <span class="mcds-chip">↳ Branded mascot</span>
+            <span class="mcds-chip">↳ Holiday pack</span>
+            <span class="mcds-chip">↳ Reaction set</span>
+            <span class="mcds-chip">↳ Hero animation</span>
+          </div>
+          <button class="mcds-cta advance-hotspot" data-advance-to="s08-3" data-cid="C-53" style="margin-top: 14px;">✦ Generate sticker pack</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Prompt + 4 preset chips. Same structure as Dream Lab (feature 02) — no new primitives.</div>
+</section>
+
+<section class="scene" data-scene="s08-3" data-title="Stickers · generating" data-feature="08" data-step="3" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 08</span> · <span class="scene-eyebrow-step">Scene 3 of 5</span> · <span class="scene-eyebrow-title">Generating sticker pack · ~5 sec</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f08">C-42</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Sticker pack generation</div>
+      <div style="text-align: center; padding: 60px 0;">
+        <span class="mcds-spinner" style="width: 28px; height: 28px;"></span>
+        <p style="margin: 18px 0 4px; font-size: 14px;">Generating 8-sticker pack…</p>
+      </div>
+      <div style="text-align: right;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s08-4" data-cid="C-53">Continue &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Same spinner pattern.</div>
+</section>
+
+<section class="scene" data-scene="s08-4" data-title="Generated sticker pack · 8 stickers" data-feature="08" data-step="4" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 08</span> · <span class="scene-eyebrow-step">Scene 4 of 5</span> · <span class="scene-eyebrow-title">8-sticker pack ready</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f08">C-72 sticker grid</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">8 stickers · Spring '26 mascot pack</div>
+      <div style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: var(--border-radius-lv3); padding: 18px;">
+        <div class="mcds-sticker-pack" style="font-size: 32px; gap: 12px; display: flex; flex-wrap: wrap; justify-content: center;" data-cid="C-72">
+          <span class="advance-hotspot" data-advance-to="s08-5" role="button" tabindex="0" style="padding: 8px; background: var(--color-bg-secondary); border-radius: var(--border-radius-lv3);">😊</span>
+          <span style="padding: 8px;">😍</span>
+          <span style="padding: 8px;">🎉</span>
+          <span style="padding: 8px;">💡</span>
+          <span style="padding: 8px;">❤️</span>
+          <span style="padding: 8px;">🔥</span>
+          <span style="padding: 8px;">⭐</span>
+          <span style="padding: 8px;">✨</span>
+        </div>
+        <p style="font-size: 12px; text-align: center; color: var(--color-text-secondary); margin: 14px 0 0;">Click a sticker to drop it in the canvas. The pack is saved to your Brand Kit.</p>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Stickers reuse the <code>C-72</code> tile grid pattern. Each sticker drops into the canvas as a regular image block.</div>
+</section>
+
+<section class="scene" data-scene="s08-5" data-title="Sticker dropped in canvas" data-feature="08" data-step="5" data-of="5" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 08</span> · <span class="scene-eyebrow-step">Scene 5 of 5</span> · <span class="scene-eyebrow-title">Sticker in the email body</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f08">C-61 block</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Sticker block placed in body</div>
+      <div class="canvas-side" style="background: var(--color-bg-tertiary); border-radius: 8px; padding: 24px; max-width: 480px; margin: 0 auto;" data-cid="C-61">
+        <div class="canvas-hero" style="background: linear-gradient(135deg, #c5d2e2, #017E89);"></div>
+        <div class="canvas-line long" style="margin-top: 10px;"></div>
+        <div style="font-size: 36px; text-align: center; margin: 12px 0;">😊</div>
+        <div class="canvas-line short" style="margin: 0 auto;"></div>
+        <div class="canvas-line cta" style="margin: 14px auto 0; display: block;"></div>
+      </div>
+      <div style="margin-top: 16px; text-align: right;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s08-outro" data-cid="C-53">Feature complete &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Sticker rendered in the body. C-97 image manipulation applies; conversational editing (feature 03) can re-style.</div>
+</section>
+
+<section class="scene" data-scene="s08-outro" data-title="Feature 08 complete" data-feature="08" data-step="5" data-of="5" hidden>
+  <div class="outro-card">
+    <span class="check">✓</span>
+    <div class="feature-tag">FEATURE 08 · COMPLETE</div>
+    <h2>AI Sticker / GIF / Animation</h2>
+    <p>You generated an 8-sticker pack and dropped one into the canvas. Two variants registered. Composes <strong>entirely</strong> from existing primitives.</p>
+    <button class="next-btn" data-advance-to="s09-intro" data-cid="C-53">Next · Web Research &rarr;</button>
+  </div>
+</section>
+
+<!-- ===========================================================
+     FEATURE 09 — Web Research Integration (3 scenes)
+     =========================================================== -->
+<section class="scene" data-scene="s09-intro" data-title="Web Research Integration" data-feature="09" data-step="0" data-of="3" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 09 · AI 2.0 · STRATEGY PANEL</div>
+    <h2>Web Research Integration</h2>
+    <p>Before generating, AI searches the web for competitive, seasonal, and trend context. A new "Research depth" field in the strategy panel lets you pick None / Quick / Deep.</p>
+    <button class="start-btn" data-advance-to="s09-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+
+<section class="scene" data-scene="s09-1" data-title="Strategy panel · Research depth field" data-feature="09" data-step="1" data-of="3" data-channel="email" data-channel-variants="sms" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 09</span> · <span class="scene-eyebrow-step">Scene 1 of 3</span> · <span class="scene-eyebrow-title">Strategy panel · Research depth field</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f09">C-46/v.research-depth</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Strategy panel · new field above visual style</div>
+      <div class="mcds-strategy">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom: 14px;"><span class="mcds-snowflake">✦</span><strong>Email strategy</strong><span class="mcds-tag ready">Ready</span></div>
+        <div class="sp-row"><span class="sp-label">Goal</span><span class="sp-value">Retention: Customer loyalty</span></div>
+        <div class="sp-row"><span class="sp-label">Recipients</span><span class="sp-value">New email subscribers (2,150)</span></div>
+        <div class="sp-row"><span class="sp-label">Focus metric</span><span class="sp-value">Revenue</span></div>
+        <div class="sp-row advance-hotspot" data-advance-to="s09-2" data-cid="C-46/v.research-depth" role="button" tabindex="0" style="background: var(--color-accent-blue-light); margin: 0 -16px; padding: 8px 16px;">
+          <span class="sp-label">Research depth <span class="mcds-tag new">NEW</span></span>
+          <span class="sp-value new">Quick (under 10s) ▾</span>
+        </div>
+        <div class="sp-row"><span class="sp-label">Visual style</span><span class="sp-value">Modern · teal</span></div>
+      </div>
+      <div style="margin-top: 16px;">
+        <button class="mcds-cta">✦ Create email</button>
+      </div>
+    </div>
+    <div class="scene-annotation" style="top: 260px; left: 60%;">
+      <span class="annotation-arrow">&larr;</span>
+      Click the <strong>Research depth</strong> row to demo the research turn.
+    </div>
+  </div>
+  <div class="scene-caption">New field added to the strategy panel using the existing <code>C-46</code> select pattern. 3 options: None, Quick, Deep.</div>
+</section>
+
+<section class="scene" data-scene="s09-2" data-title="Web research · scanning" data-feature="09" data-step="2" data-of="3" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 09</span> · <span class="scene-eyebrow-step">Scene 2 of 3</span> · <span class="scene-eyebrow-title">Web research · scanning 12 sources</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f09">research-pending state · C-42</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Scanning sources before generation</div>
+      <div style="text-align: center; padding: 50px 0;">
+        <span class="mcds-spinner" style="width: 28px; height: 28px;"></span>
+        <p style="margin: 18px 0 4px; font-size: 14px;">Scanning 12 sources on welcome-email best practices…</p>
+        <p style="font-size: 12px; color: var(--color-text-tertiary);">Industry benchmarks · Reddit · Mailchimp internal data</p>
+      </div>
+      <div style="text-align: right;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s09-3" data-cid="C-53">Continue &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Same spinner. Research runs before generation so the AI has fresh context.</div>
+</section>
+
+<section class="scene" data-scene="s09-3" data-title="Research findings · in chat thread" data-feature="09" data-step="3" data-of="3" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 09</span> · <span class="scene-eyebrow-step">Scene 3 of 3</span> · <span class="scene-eyebrow-title">3 findings in chat thread</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f09">C-43 prose · C-55 disclaimer</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Web research findings · before strategy</div>
+      <div class="mcds-chat-bubble assistant">
+        <div class="ab-header"><span class="mcds-snowflake">✦</span>Web research · 12 sources scanned <span class="mcds-tag ready">Ready</span></div>
+        <p style="font-size:13px; margin: 8px 0;"><strong>1.</strong> Q3 2025 industry-avg open rate for welcome emails = <strong>47%</strong> (your benchmark target).</p>
+        <p style="font-size:13px; margin: 8px 0;"><strong>2.</strong> Top-performing welcome emails reference the user's signup source within the first 3 lines.</p>
+        <p style="font-size:13px; margin: 8px 0;"><strong>3.</strong> Including a single CTA (vs 2+) lifts CTR ~15%.</p>
+        <div class="mcds-disclaimer">
+          Sources: 12 indexed pages · <a href="#" style="color: var(--color-accent-blue);">see citations &rarr;</a> · Intuit Intelligence can make mistakes.
+        </div>
+      </div>
+      <div style="margin-top: 16px; text-align: right;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s09-outro" data-cid="C-53">Feature complete &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Findings render in the standard <code>C-43</code> prose pattern. Citations link out via existing <code>C-55</code> disclaimer-link style.</div>
+</section>
+
+<section class="scene" data-scene="s09-outro" data-title="Feature 09 complete" data-feature="09" data-step="3" data-of="3" hidden>
+  <div class="outro-card">
+    <span class="check">✓</span>
+    <div class="feature-tag">FEATURE 09 · COMPLETE</div>
+    <h2>Web Research Integration</h2>
+    <p>You picked Quick depth, saw the research turn, and got 3 findings before generation. <strong>One variant.</strong></p>
+    <button class="next-btn" data-advance-to="s10-intro" data-cid="C-53">Next · MCP Bridge &rarr;</button>
+  </div>
+</section>
+
+<!-- ===========================================================
+     FEATURE 10 — ChatGPT & Claude MCP Bridge (3 scenes)
+     =========================================================== -->
+<section class="scene" data-scene="s10-intro" data-title="ChatGPT & Claude MCP Bridge" data-feature="10" data-step="0" data-of="3" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 10 · AI 2.0 · SETTINGS</div>
+    <h2>ChatGPT &amp; Claude MCP Bridge</h2>
+    <p>Expose Mailchimp campaign creation as an MCP server. A marketer working in ChatGPT, Claude, or Cursor can hand off "draft a welcome email for my MC audience" and pull back the rendered draft.</p>
+    <button class="start-btn" data-advance-to="s10-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+
+<section class="scene" data-scene="s10-1" data-title="Settings · MCP section" data-feature="10" data-step="1" data-of="3" data-channel="email" data-channel-variants="sms" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 10</span> · <span class="scene-eyebrow-step">Scene 1 of 3</span> · <span class="scene-eyebrow-title">Settings · new MCP section</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f10">C-91/v.mcp-section</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Prototype settings · 3rd section "MCP server"</div>
+      <div class="mcds-settings" data-cid="C-91/v.mcp-section">
+        <div class="ss-section">
+          <div class="ss-section-title">Live-Context Connectors</div>
+          <div class="ss-row"><span class="ss-label">Slack · Drive · Notion · Zoom</span><span style="font-size: 11px; color: var(--color-text-tertiary);">4 connected</span></div>
+        </div>
+        <div class="ss-section">
+          <div class="ss-section-title">Expose Mailchimp as MCP server <span class="mcds-tag new">NEW</span></div>
+          <p style="font-size: 12px; color: var(--color-text-secondary); margin: 0 0 10px;">Let ChatGPT, Claude, or Cursor call Mailchimp directly.</p>
+          <div class="ss-row advance-hotspot" data-advance-to="s10-2" data-cid="C-92" role="button" tabindex="0">
+            <span class="ss-label">MCP server</span>
+            <span class="mcds-toggle"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="scene-annotation" style="top: 220px; right: 80px;">
+      <span class="annotation-arrow">&rarr;</span>
+      Toggle <strong>MCP server</strong> on.
+    </div>
+  </div>
+  <div class="scene-caption">Settings popover (<code>C-91</code>) grows a 3rd section. Same labeling pattern as Experiences and Connectors.</div>
+</section>
+
+<section class="scene" data-scene="s10-2" data-title="MCP enabled · token issued" data-feature="10" data-step="2" data-of="3" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 10</span> · <span class="scene-eyebrow-step">Scene 2 of 3</span> · <span class="scene-eyebrow-title">MCP enabled · bearer token issued</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f10">C-90/v.mcp-token-row</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">MCP server on · token revealed</div>
+      <div class="mcds-settings">
+        <div class="ss-section">
+          <div class="ss-section-title">Expose Mailchimp as MCP server <span class="mcds-tag ready">Active</span></div>
+          <div class="ss-row" style="margin-bottom: 8px;">
+            <span class="ss-label">MCP server</span>
+            <span class="mcds-toggle on"></span>
+          </div>
+          <p style="font-size: 11px; color: var(--color-text-tertiary); margin: 4px 0;">Bearer token</p>
+          <div class="mcds-token-row" data-cid="C-90/v.mcp-token-row">
+            <span>mc_live_a8f3b9c2e7d6f1...</span>
+            <span class="token-eye" style="margin-left: auto;">👁</span>
+            <span class="token-copy advance-hotspot" data-advance-to="s10-3" role="button" tabindex="0">📋</span>
+          </div>
+          <div style="display: flex; gap: 8px; margin-top: 10px;">
+            <button class="mcds-cta-secondary" style="font-size: 11px; padding: 4px 10px;">Regenerate token</button>
+            <button class="mcds-cta-secondary" style="font-size: 11px; padding: 4px 10px;">Revoke all</button>
+          </div>
+          <p style="font-size: 11px; color: var(--color-text-tertiary); margin-top: 10px;">Last used <strong>4 minutes ago</strong> by Claude 4.5 (Cursor)</p>
+          <p style="font-size: 11px; color: var(--color-accent-blue); margin-top: 6px;">📖 Connection guide &rarr;</p>
+        </div>
+      </div>
+    </div>
+    <div class="scene-annotation" style="top: 220px; right: 20px;">
+      <span class="annotation-arrow">&rarr;</span>
+      Click <strong>📋 copy</strong> to demo the token-copied state.
+    </div>
+  </div>
+  <div class="scene-caption">Token row (<code>C-90/v.mcp-token-row</code>) is a variant of the social-link input row from Brand Kit. Last-used metadata + connection guide link.</div>
+</section>
+
+<section class="scene" data-scene="s10-3" data-title="Token copied · external client connected" data-feature="10" data-step="3" data-of="3" data-channel="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 10</span> · <span class="scene-eyebrow-step">Scene 3 of 3</span> · <span class="scene-eyebrow-title">Token copied · external client connected</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f10">token-copied state</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">External AI client calling Mailchimp via MCP</div>
+      <div style="text-align: center; padding: 40px 20px;">
+        <div style="display:inline-flex; align-items:center; gap:10px; background: #E6F5EE; color: #036A4F; padding: 12px 18px; border-radius: var(--border-radius-lv6); font-weight: 600;">
+          <span>📋</span> Token copied to clipboard
+        </div>
+        <p style="font-size: 13px; color: var(--color-text-secondary); max-width: 540px; margin: 24px auto 12px;">
+          Paste it into your external AI client's MCP configuration. Mailchimp now appears as an addressable tool in Claude / ChatGPT / Cursor.
+        </p>
+        <div style="display:inline-block; text-align:left; background: #1F2937; color: #F0F4F6; padding: 14px 18px; border-radius: var(--border-radius-lv3); font-family: ui-monospace, monospace; font-size: 11.5px; line-height: 1.7;">
+          <div style="color: #727E85;"># Claude desktop MCP config</div>
+          <div>"mailchimp": {</div>
+          <div style="padding-left: 16px;">"url": "<span style="color: #017E89;">https://mcp.mailchimp.com</span>",</div>
+          <div style="padding-left: 16px;">"token": "<span style="color: #FFE01B;">mc_live_a8f3b9c2…</span>"</div>
+          <div>}</div>
+        </div>
+        <button class="mcds-cta advance-hotspot" data-advance-to="s10-outro" data-cid="C-53" style="margin-top: 24px;">Feature complete &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Phase 1's most outward-facing feature. The token unlocks Mailchimp as a tool callable from any MCP-capable client.</div>
+</section>
+
+<section class="scene" data-scene="s10-outro" data-title="Feature 10 complete" data-feature="10" data-step="3" data-of="3" hidden>
+  <div class="outro-card">
+    <span class="check">✓</span>
+    <div class="feature-tag">FEATURE 10 · COMPLETE</div>
+    <h2>ChatGPT & Claude MCP Bridge</h2>
+    <p>MCP server enabled, token issued, external client connected. <strong>Two variants registered.</strong></p>
+    <button class="next-btn" data-advance-to="s-flowzen" data-cid="C-53">See it all together &rarr;</button>
+  </div>
+</section>
+
+<!-- ===========================================================
+     CROSS-CUTTING — Flow finale + send confirm + terminal
+     =========================================================== -->
+<section class="scene" data-scene="s-flowzen" data-title="All 10 features integrated" hidden>
+  <div class="intro-card" style="max-width: 880px;">
+    <div class="feature-tag">FREDDIE PHASE 1 · INTEGRATED</div>
+    <h2>Here's what we built today.</h2>
+    <p style="text-align: left;">
+      One email that uses all 10 features: <strong>Brand Voice 2.0</strong> shaped the tone · <strong>Memory</strong> seeded the prompt with team learnings · <strong>Live-Context Connectors</strong> pulled the Q3 launch brief from Notion · <strong>Web Research</strong> brought in the 47% open-rate benchmark · <strong>Dream Lab</strong> generated the hero · <strong>AI Image Manipulation</strong> brush-replaced a region · <strong>Conversational Editing</strong> refined the copy · <strong>Magic Layers</strong> brought in a competitor reference · <strong>Stickers</strong> added the mascot · <strong>MCP Bridge</strong> exposes the whole thing to external AI.
+    </p>
+    <div style="background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 24px; margin: 20px 0;">
+      <div class="fdpx-mcds-frame" style="padding: 16px; min-height: auto;">
+        <div class="canvas-side" style="background: var(--color-bg-tertiary); border-radius: 8px; padding: 18px; max-width: 420px; margin: 0 auto;">
+          <div class="canvas-line short" style="background: #4C555B; height: 14px;"></div>
+          <div class="canvas-hero" style="background: linear-gradient(135deg, #2c3e50, #017E89); margin-top: 10px; height: 80px;"></div>
+          <div class="canvas-line long" style="margin-top: 8px;"></div>
+          <div style="font-size: 28px; text-align: center; margin: 8px 0;">😊</div>
+          <div class="canvas-line short" style="margin: 0 auto;"></div>
+          <div class="canvas-line cta" style="margin: 12px auto 0; display: block;"></div>
+        </div>
+      </div>
+    </div>
+    <button class="start-btn" data-advance-to="s-send-confirm" data-cid="C-53">Send the email &rarr;</button>
+  </div>
+</section>
+
+<section class="scene" data-scene="s-send-confirm" data-title="Send confirm modal" hidden>
+  <div class="intro-card" style="max-width: 520px;">
+    <div class="feature-tag">SEND CONFIRMATION</div>
+    <h2>Ready to send?</h2>
+    <p style="text-align: left;">
+      <strong>Recipients:</strong> New email subscribers (2,150)<br>
+      <strong>From:</strong> Bright Light Co. &lt;hello@brightlight.co&gt;<br>
+      <strong>Subject:</strong> Welcome to the Community<br>
+      <strong>Brand Voice:</strong> Default · Brand kit applied · footer verified
+    </p>
+    <p style="font-size: 12px; color: var(--muted); text-align: left; margin-top: 12px;">
+      Closes the pre-mortem #4 gap (audience-confirmation modal at Send).
+    </p>
+    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 14px;">
+      <button class="mcds-cta-secondary" style="padding: 10px 18px;">Cancel</button>
+      <button class="start-btn" data-advance-to="s-terminal" data-cid="C-53">Send to 2,150 subscribers</button>
+    </div>
+  </div>
+</section>
+
+<section class="scene" data-scene="s-terminal" data-title="Sent" hidden>
+  <div class="outro-card" style="max-width: 640px;">
+    <span class="check" style="font-size: 64px;">✓</span>
+    <div class="feature-tag">SENT</div>
+    <h2>Your email is on its way.</h2>
+    <p>
+      2,150 recipients · Bright Light Co. · Welcome to the Community<br>
+      <strong>The entire workflow stayed in Freddie.</strong> No Canva round-trip, no manual copy-paste, no compliance gaps.
+    </p>
+    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 14px;">
+      <button class="next-btn" data-advance-to="s-menu" data-cid="C-53">Restart walkthrough</button>
+      <a class="next-btn" href="../freddie-deepak-phase1.html" data-advance-to="s-exit" style="background: var(--ink); text-decoration: none;">Back to spec</a>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================================
+     CHANNEL VARIANTS · SMS scenes for features 03/05/06/07/09/10
+     (channel-agnostic features that work text-only)
+     Each scene mirrors its Email counterpart's flow with SMS-specific
+     content rendered into a compact phone-frame canvas.
+     ==================================================================== -->
+
+<section class="scene" data-scene="s03-1-sms" data-title="SMS · refine chips · text-only intents" data-feature="03" data-step="1" data-of="4" data-channel="sms" data-channel-variants="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 03 · SMS</span> · <span class="scene-eyebrow-step">Scene 1 of 4</span> · <span class="scene-eyebrow-title">Refine via chat · text-only intents</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f03">C-54 · C-70/v.refine-chips (text-only)</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">SMS tab · post-generation chat</div>
+      <div class="mcds-editor">
+        <div class="chat-side">
+          <div class="mcds-chat-bubble assistant">
+            <div class="ab-header"><span class="mcds-snowflake">✦</span>SMS ready · 154 chars</div>
+            <p style="font-size:12px;margin:0;">Refine via chat. Image-related intents (Swap hero / Image edits) are not available on SMS — text only.</p>
+          </div>
+          <div class="mcds-chip-row" data-cid="C-70/v.refine-chips">
+            <span class="mcds-chip advance-hotspot" data-advance-to="s03-2-sms" role="button" tabindex="0">Shorten</span>
+            <span class="mcds-chip">Add urgency</span>
+            <span class="mcds-chip">More casual tone</span>
+            <span class="mcds-chip" style="opacity: .4;">Swap hero (N/A on SMS)</span>
+          </div>
+        </div>
+        <div class="canvas-side">
+          <div style="background: white; max-width: 280px; margin: 0 auto; padding: 16px; border-radius: 18px; box-shadow: var(--elevation-lv2); font-size: 13px;">
+            <div style="font-size: 10px; color: var(--color-text-tertiary); text-transform: uppercase; margin-bottom: 6px;">Bright Light Co. · today</div>
+            <p style="margin: 0; line-height: 1.5;">Welcome to the family! We hand-pick every product. Use code WELCOME15 for 15% off your first order. Reply STOP to unsubscribe.</p>
+            <p style="font-size: 10px; color: var(--color-text-tertiary); margin: 8px 0 0;">154 / 160 chars · 1 segment</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Same chat composer (<code>C-54</code>) and refine chips (<code>C-70/v.refine-chips</code>). Image intents are disabled and labeled "N/A on SMS" — honoring R4 channel parity by physics.</div>
+</section>
+
+<section class="scene" data-scene="s03-2-sms" data-title="SMS · shortened body · diff" data-feature="03" data-step="2" data-of="4" data-channel="sms" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 03 · SMS</span> · <span class="scene-eyebrow-step">Scene 2 of 4</span> · <span class="scene-eyebrow-title">Shortened · 154 → 98 chars</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f03">C-43/v.preview-diff (text)</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Text-only preview-diff</div>
+      <div class="mcds-editor">
+        <div class="chat-side">
+          <div class="mcds-chat-bubble user"><strong>You:</strong> Shorten</div>
+          <div class="mcds-chat-bubble assistant">
+            <div class="ab-header"><span class="mcds-snowflake">✦</span>Shortened by 36% <span class="mcds-tag ready">Ready</span></div>
+            <div style="background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); border-radius: var(--border-radius-lv3); padding: 8px; margin: 6px 0; font-size: 11px;" data-cid="C-43/v.preview-diff">
+              <p style="margin: 0 0 4px; color: var(--color-text-tertiary); text-decoration: line-through;">Welcome to the family! We hand-pick every product. Use code WELCOME15 for 15% off your first order. Reply STOP to unsubscribe.</p>
+              <p style="margin: 0; color: var(--color-text-primary);"><strong>Welcome! Save 15% on your first order with WELCOME15. Reply STOP to unsubscribe.</strong></p>
+            </div>
+            <div style="display:flex;gap:8px;margin-top:8px;">
+              <button class="mcds-cta advance-hotspot" data-advance-to="s03-3-sms" data-cid="C-53" style="font-size:11px;padding:5px 12px;">✓ Accept</button>
+              <button class="mcds-cta-secondary" style="font-size:11px;padding:5px 12px;">↺ Regenerate</button>
+            </div>
+          </div>
+        </div>
+        <div class="canvas-side">
+          <div style="background: white; max-width: 280px; margin: 0 auto; padding: 16px; border-radius: 18px; box-shadow: var(--elevation-lv2); font-size: 13px; opacity: .6;">
+            <p style="margin: 0;">Welcome to the family! We hand-pick every product. Use code WELCOME15 for 15% off your first order. Reply STOP to unsubscribe.</p>
+          </div>
+          <p style="font-size: 11px; color: var(--color-text-tertiary); text-align: center; margin-top: 8px;">Original · pending replacement</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Same <code>C-43/v.preview-diff</code> pattern, but text-only instead of thumbnail-paired. Character count shown alongside.</div>
+</section>
+
+<section class="scene" data-scene="s03-3-sms" data-title="SMS · accepted" data-feature="03" data-step="3" data-of="4" data-channel="sms" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 03 · SMS</span> · <span class="scene-eyebrow-step">Scene 3 of 4</span> · <span class="scene-eyebrow-title">Accepted · canvas updated</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f03">commit state</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">SMS body committed · 98 chars</div>
+      <div class="mcds-editor">
+        <div class="chat-side">
+          <div class="mcds-chat-bubble assistant">
+            <div class="ab-header"><span class="mcds-snowflake">✦</span>Updated <span class="mcds-tag ready">Done</span></div>
+          </div>
+          <div class="mcds-chip-row">
+            <span class="mcds-chip advance-hotspot" data-advance-to="s03-4-sms" role="button" tabindex="0">Add urgency</span>
+            <span class="mcds-chip">More casual</span>
+          </div>
+        </div>
+        <div class="canvas-side">
+          <div style="background: white; max-width: 280px; margin: 0 auto; padding: 16px; border-radius: 18px; box-shadow: var(--elevation-lv2); font-size: 13px;">
+            <div style="font-size: 10px; color: var(--color-text-tertiary); text-transform: uppercase; margin-bottom: 6px;">Bright Light Co. · today</div>
+            <p style="margin: 0; line-height: 1.5;">Welcome! Save 15% on your first order with WELCOME15. Reply STOP to unsubscribe.</p>
+            <p style="font-size: 10px; color: var(--color-text-tertiary); margin: 8px 0 0;">98 / 160 chars · 1 segment</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Committed body. Chained intents available (e.g. Add urgency) just like Email.</div>
+</section>
+
+<section class="scene" data-scene="s03-4-sms" data-title="SMS · second intent applied" data-feature="03" data-step="4" data-of="4" data-channel="sms" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 03 · SMS</span> · <span class="scene-eyebrow-step">Scene 4 of 4</span> · <span class="scene-eyebrow-title">Urgency added · ready to send</span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Urgency added · still under 160 chars</div>
+      <div class="mcds-editor">
+        <div class="chat-side">
+          <div class="mcds-chat-bubble user"><strong>You:</strong> Add urgency</div>
+          <div class="mcds-chat-bubble assistant">
+            <div class="ab-header"><span class="mcds-snowflake">✦</span>Urgency added <span class="mcds-tag ready">Done</span></div>
+          </div>
+        </div>
+        <div class="canvas-side">
+          <div style="background: white; max-width: 280px; margin: 0 auto; padding: 16px; border-radius: 18px; box-shadow: var(--elevation-lv2); font-size: 13px;">
+            <p style="margin: 0; line-height: 1.5;"><strong>24hr only:</strong> 15% off your first order with WELCOME15. Reply STOP to unsubscribe.</p>
+            <p style="font-size: 10px; color: var(--color-text-tertiary); margin: 8px 0 0;">94 / 160 chars · 1 segment</p>
+          </div>
+          <div style="text-align: right; margin-top: 16px;">
+            <button class="mcds-cta advance-hotspot" data-advance-to="s03-outro" data-cid="C-53">Done with SMS &rarr;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Same chained-refinement pattern as Email. Refine intents in SMS scope to text only.</div>
+</section>
+
+<section class="scene" data-scene="s05-1-sms" data-title="SMS · Brand Voice 2.0 applied to copy" data-feature="05" data-step="1" data-of="5" data-channel="sms" data-channel-variants="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 05 · SMS</span> · <span class="scene-eyebrow-step">Brand Voice in copy</span> · <span class="scene-eyebrow-title">Tone applies to SMS body</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f05">C-89 voice profile in SMS</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Two profiles · same campaign · SMS body changes tone</div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+        <div>
+          <p style="font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--color-text-tertiary); margin: 0 0 8px;">Default profile</p>
+          <div style="background: white; padding: 16px; border-radius: 18px; box-shadow: var(--elevation-lv1); font-size: 13px;">
+            <p style="margin: 0;">Welcome to the family! Save 15% with WELCOME15. Reply STOP to opt out.</p>
+          </div>
+        </div>
+        <div>
+          <p style="font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--color-text-tertiary); margin: 0 0 8px;">Launch profile <span class="mcds-tag new">active</span></p>
+          <div style="background: white; padding: 16px; border-radius: 18px; box-shadow: var(--elevation-lv1); font-size: 13px; border: 2px solid var(--color-accent-blue);">
+            <p style="margin: 0;"><strong>Spring '26 launch:</strong> 15% off this week only. Code WELCOME15. STOP to opt out.</p>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: right; margin-top: 16px;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s05-outro" data-cid="C-53">Continue &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Brand Voice 2.0 profiles apply uniformly across channels. The SMS body switches register without re-prompting — same profile picker, same broadcast pattern.</div>
+</section>
+
+<section class="scene" data-scene="s06-1-sms" data-title="SMS · memory chips in composer" data-feature="06" data-step="1" data-of="5" data-channel="sms" data-channel-variants="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 06 · SMS</span> · <span class="scene-eyebrow-step">Memory in SMS composer</span> · <span class="scene-eyebrow-title">Memory chips below quick prompts</span>
+    <span class="scene-eyebrow-cid">demonstrates <a href="../freddie-deepak-phase1.html#f06">C-25/v.memory in SMS</a></span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">SMS tab composer · with memory chips</div>
+      <h4 class="mcds-h1">Generate SMS with Mailchimp AI</h4>
+      <p class="mcds-sub">Turn ideas into ready-to-send texts. Memory chips work the same way as Email.</p>
+      <div class="mcds-composer">
+        <div class="mcds-composer-input">Describe the SMS you want…</div>
+        <div class="mcds-composer-actions">
+          <div style="display:flex; gap:6px;">
+            <button class="mcds-icon-btn">+</button>
+            <button class="mcds-icon-btn">⫯⫯⫯</button>
+            <button class="mcds-icon-btn">🎤</button>
+          </div>
+          <button class="mcds-cta">✦ Generate</button>
+        </div>
+      </div>
+      <div class="mcds-chip-row">
+        <span class="mcds-chip">↳ Send a flash sale alert via text</span>
+        <span class="mcds-chip">↳ Write a welcome text for new subscribers</span>
+      </div>
+      <div class="mcds-chip-row" data-cid="C-25/v.memory">
+        <span class="mcds-chip memory advance-hotspot" data-advance-to="s06-outro" role="button" tabindex="0">🧠 Tuesday 10am AEST highest engagement</span>
+        <span class="mcds-chip memory">🧠 Customers respond best to social-proof framing</span>
+        <span class="mcds-chip memory">🧠 Email subjects under 50 chars perform best</span>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Memory chips render identically on the SMS composer surface. Cross-channel by design.</div>
+</section>
+
+<section class="scene" data-scene="s07-1-sms" data-title="SMS · live-context banner" data-feature="07" data-step="1" data-of="5" data-channel="sms" data-channel-variants="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 07 · SMS</span> · <span class="scene-eyebrow-step">Connectors apply to SMS</span> · <span class="scene-eyebrow-title">Same banner · SMS tab</span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">SMS composer · live-context banner active</div>
+      <h4 class="mcds-h1">Generate SMS with Mailchimp AI</h4>
+      <div class="mcds-composer">
+        <div class="mcds-composer-input">Describe the SMS you want…</div>
+        <div class="mcds-composer-actions">
+          <div style="display:flex; gap:6px;"><button class="mcds-icon-btn">+</button><button class="mcds-icon-btn">⫯⫯⫯</button><button class="mcds-icon-btn">🎤</button></div>
+          <button class="mcds-cta">✦ Generate</button>
+        </div>
+      </div>
+      <div class="mcds-brand-banner" data-cid="C-23/v.live-context-banner">
+        <span><strong>Pulling from</strong> your Brand Kit · <span class="mcds-connector-logo slack">S</span>Slack <code>#marketing-launches</code> · <span class="mcds-connector-logo notion">N</span>"Q3 launch brief"</span>
+        <button class="mcds-cta-secondary" style="font-size: 11px; padding: 4px 10px;">Manage</button>
+      </div>
+      <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 16px;">Connectors are workspace-level — every channel sees the same context. SMS prompts inherit the launch tone the team set in Notion.</p>
+      <div style="margin-top: 16px; text-align: right;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s07-outro" data-cid="C-53">Continue &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Connectors are workspace-scoped: the same banner appears on Email, SMS, and WhatsApp composers.</div>
+</section>
+
+<section class="scene" data-scene="s09-1-sms" data-title="SMS · research applies to brief" data-feature="09" data-step="1" data-of="3" data-channel="sms" data-channel-variants="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 09 · SMS</span> · <span class="scene-eyebrow-step">Research applies to SMS</span> · <span class="scene-eyebrow-title">Strategy panel · Research depth</span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">SMS strategy panel · with research</div>
+      <div class="mcds-strategy">
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom: 14px;"><span class="mcds-snowflake">✦</span><strong>SMS strategy</strong></div>
+        <div class="sp-row"><span class="sp-label">Goal</span><span class="sp-value">Retention</span></div>
+        <div class="sp-row"><span class="sp-label">Recipients</span><span class="sp-value">SMS subscribers (1,420)</span></div>
+        <div class="sp-row" style="background: var(--color-accent-blue-light); margin: 0 -16px; padding: 8px 16px;">
+          <span class="sp-label">Research depth <span class="mcds-tag new">NEW</span></span>
+          <span class="sp-value new">Quick (under 10s) ▾</span>
+        </div>
+        <div class="sp-row"><span class="sp-label">Length target</span><span class="sp-value">Under 160 chars · 1 segment</span></div>
+      </div>
+      <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 16px;">Research informs SMS just like Email — competitive opens, peak engagement windows, opt-out copy norms.</p>
+      <div style="margin-top: 16px; text-align: right;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s09-outro" data-cid="C-53">Continue &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Same <code>C-46/v.research-depth</code> field. SMS-specific length-target row is a regular <code>C-46</code>.</div>
+</section>
+
+<section class="scene" data-scene="s10-1-sms" data-title="SMS · MCP exposes SMS authoring" data-feature="10" data-step="1" data-of="3" data-channel="sms" data-channel-variants="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 10 · SMS</span> · <span class="scene-eyebrow-step">MCP is workspace-level</span> · <span class="scene-eyebrow-title">SMS authoring exposed too</span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Same MCP token · works for SMS authoring</div>
+      <div style="text-align: center; padding: 30px 20px;">
+        <p style="font-size: 13px; color: var(--color-text-secondary); max-width: 540px; margin: 0 auto 16px;">
+          MCP is workspace-level. The same bearer token lets external clients author Email, SMS, <em>and</em> WhatsApp campaigns.
+        </p>
+        <div style="display:inline-block; text-align:left; background: #1F2937; color: #F0F4F6; padding: 14px 18px; border-radius: var(--border-radius-lv3); font-family: ui-monospace, monospace; font-size: 11.5px; line-height: 1.7;">
+          <div style="color: #727E85;"># Claude asks Mailchimp to draft an SMS</div>
+          <div><span style="color: #017E89;">tool</span>: mailchimp.compose</div>
+          <div>  channel: <span style="color: #FFE01B;">sms</span></div>
+          <div>  audience: "SMS subscribers"</div>
+          <div>  intent: "spring launch · 15% off"</div>
+        </div>
+        <div style="margin-top: 24px;">
+          <button class="mcds-cta advance-hotspot" data-advance-to="s10-outro" data-cid="C-53">Continue &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Single token, all channels addressable. No per-channel auth.</div>
+</section>
+
+<!-- ====================================================================
+     CHANNEL VARIANTS · WhatsApp scenes for features 01/02/04/08
+     (image-relevant features that natively support media on WhatsApp)
+     ==================================================================== -->
+
+<section class="scene" data-scene="s01-1-w" data-title="WhatsApp · image manipulation in message" data-feature="01" data-step="1" data-of="6" data-channel="whatsapp" data-channel-variants="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 01 · WhatsApp</span> · <span class="scene-eyebrow-step">Image edit in WA message</span> · <span class="scene-eyebrow-title">Same C-97 popover on WA media</span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">WhatsApp tab · image message · selection state</div>
+      <div class="mcds-editor">
+        <div class="chat-side">
+          <div class="mcds-chat-bubble assistant">
+            <div class="ab-header"><span class="mcds-snowflake">✦</span>WhatsApp image ready</div>
+            <p style="font-size:12px;margin:0;">Click the image to edit inline. Same C-97 popover as Email.</p>
+          </div>
+        </div>
+        <div class="canvas-side">
+          <div style="background: #DCF8C6; padding: 12px; border-radius: 12px; max-width: 260px; margin: 0 auto;">
+            <div class="canvas-hero selected" style="height: 140px; margin-bottom: 8px;" data-cid="C-61"></div>
+            <p style="margin: 0; font-size: 12px;"><strong>Bright Light Co.</strong></p>
+            <p style="margin: 4px 0 0; font-size: 12px;">Welcome! Tap above to see our spring collection.</p>
+          </div>
+          <div class="image-popover" data-cid="C-97" style="top: 130px; left: 60px;">
+            <div class="mcds-label" style="margin-bottom: 4px;">✦ Edit image · <span class="mcds-tag new">C-97</span></div>
+            <div class="pop-row advance-hotspot" data-advance-to="s01-outro" role="button" tabindex="0">🖌 Brush replace</div>
+            <div class="pop-row">✂ Subject extract</div>
+            <div class="pop-row">↔ Frame extend</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">WhatsApp natively supports image messages. The C-97 popover anchors to media just as in Email.</div>
+</section>
+
+<section class="scene" data-scene="s02-1-w" data-title="WhatsApp · Dream Lab for WA hero" data-feature="02" data-step="1" data-of="5" data-channel="whatsapp" data-channel-variants="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 02 · WhatsApp</span> · <span class="scene-eyebrow-step">Dream Lab on WA</span> · <span class="scene-eyebrow-title">9:16 aspect for WA Status</span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Dream Lab · 9:16 aspect ratio for WhatsApp Status</div>
+      <div style="text-align: center; padding: 30px;">
+        <div style="display: inline-block; background: #DCF8C6; padding: 12px; border-radius: 12px;">
+          <div style="background: linear-gradient(135deg, #c5d2e2, #017E89); width: 180px; height: 320px; border-radius: 8px;"></div>
+        </div>
+        <p style="font-size: 13px; color: var(--color-text-secondary); margin: 20px auto 0; max-width: 400px;">
+          Dream Lab generates 9:16 aspect-ratio images for WhatsApp Status posts. Same C-58/v.aspect control.
+        </p>
+        <button class="mcds-cta advance-hotspot" data-advance-to="s02-outro" data-cid="C-53" style="margin-top: 16px;">Continue &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Same Dream Lab panel, different aspect ratio appropriate for WhatsApp Status.</div>
+</section>
+
+<section class="scene" data-scene="s04-1-w" data-title="WhatsApp · Magic Layers · image only" data-feature="04" data-step="1" data-of="4" data-channel="whatsapp" data-channel-variants="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 04 · WhatsApp</span> · <span class="scene-eyebrow-step">Image-only ingestion</span> · <span class="scene-eyebrow-title">Partial parity · no PDF/HTML</span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">WhatsApp Magic Layers · image attach only</div>
+      <h4 class="mcds-h1">Generate WhatsApp with Mailchimp AI</h4>
+      <p class="mcds-sub">Drop a flat image to reconstruct as a WA-friendly post.</p>
+      <div class="mcds-composer">
+        <div class="mcds-composer-input">Describe the WhatsApp post — or drop an image…</div>
+        <div class="mcds-composer-actions">
+          <div style="display:flex; gap:6px;"><button class="mcds-icon-btn">+</button><button class="mcds-icon-btn">⫯⫯⫯</button><button class="mcds-icon-btn">🎤</button></div>
+          <button class="mcds-cta">✦ Generate</button>
+        </div>
+      </div>
+      <div style="background: #FFEFD9; border-left: 3px solid var(--color-action-special-use); padding: 10px 14px; margin-top: 14px; font-size: 12px; border-radius: 6px;">
+        ⚠ <strong>Partial parity:</strong> WhatsApp Magic Layers supports image-only ingestion. PDF and HTML reconstruction are Email-only (physics: WA does not render structured documents).
+      </div>
+      <div style="text-align: right; margin-top: 16px;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s04-outro" data-cid="C-53">Continue &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Explicit "Partial parity" callout. Honors R4 by being honest about physics constraints.</div>
+</section>
+
+<section class="scene" data-scene="s08-1-w" data-title="WhatsApp · stickers native" data-feature="08" data-step="1" data-of="5" data-channel="whatsapp" data-channel-variants="email" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 08 · WhatsApp</span> · <span class="scene-eyebrow-step">Stickers · native to WA</span> · <span class="scene-eyebrow-title">Send sticker messages</span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">WhatsApp · sticker as standalone message</div>
+      <div style="text-align: center; padding: 30px;">
+        <div style="display: inline-block; background: #DCF8C6; padding: 16px 20px; border-radius: 12px;">
+          <p style="margin: 0 0 8px; font-size: 12px;"><strong>Bright Light Co.</strong></p>
+          <div style="background: white; padding: 8px; border-radius: 8px; font-size: 64px;">😊</div>
+          <p style="margin: 8px 0 0; font-size: 12px;">Welcome to the family ✨</p>
+        </div>
+        <p style="font-size: 13px; color: var(--color-text-secondary); margin: 20px auto 0; max-width: 440px;">
+          Stickers are native to WhatsApp. The same generator produces packs that work as standalone messages, replies, or reactions.
+        </p>
+        <button class="mcds-cta advance-hotspot" data-advance-to="s08-outro" data-cid="C-53" style="margin-top: 16px;">Continue &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Stickers slot directly into WhatsApp's native sticker-message format.</div>
+</section>
+
+</main>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
