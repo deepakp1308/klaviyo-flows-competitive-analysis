@@ -818,6 +818,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="proto-canva">Prototype: Canva AI 2.0</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="proto-audit-walk">Audit Gap Walkthrough</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="proto-canva-walk">Canva AI 2.0 Walkthrough</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="overlap">Freddie vs Agent Mode</button>
     </div>
     <div style="display:flex; gap:8px;">
       <a class="btn" href="mailchimp.html">→ Automations brief</a>
@@ -15176,6 +15177,147 @@ Lens 5 (Strategy Overlay) ── component_id joins back to ──→ Lens 3 + s
 </div><!-- /panel-proto-canva-walk -->
 
 
+<!-- ============================================================ -->
+<!-- TAB 23: FREDDIE BUILDER vs AGENT MODE — OVERLAP ANALYSIS      -->
+<!-- ============================================================ -->
+<div class="tabpanel" id="panel-overlap" role="tabpanel">
+<style>
+  #panel-overlap h2 .num { display: inline-block; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 800; color: var(--brand); background: var(--chip); padding: 2px 6px; border-radius: 4px; margin-right: 8px; transform: translateY(-2px); letter-spacing: .08em; }
+  #panel-overlap .ov-pill { display: inline-block; font-size: 10px; font-weight: 700; padding: 3px 8px; border-radius: 4px; letter-spacing: .04em; }
+  #panel-overlap .ov-pill.shared { background: #E6F5EE; color: #036A4F; }
+  #panel-overlap .ov-pill.freddie { background: #FFEFD9; color: #8A4A00; }
+  #panel-overlap .ov-pill.agent { background: #E8F3F4; color: #007C89; }
+  #panel-overlap .ov-pill.sev { background: #FFE7E0; color: #9A1F00; }
+  #panel-overlap .ov-kpi { display: flex; gap: 12px; margin: 18px 0 24px; }
+  #panel-overlap .ov-kpi .k { background: var(--paper); border: 1px solid var(--line); border-radius: 8px; padding: 16px; flex: 1; text-align: center; }
+  #panel-overlap .ov-kpi .k .v { font-size: 28px; font-weight: 800; letter-spacing: -.3px; }
+  #panel-overlap .ov-kpi .k .l { font-size: 11px; color: var(--muted); margin-top: 4px; }
+  #panel-overlap .ov-kpi .k.green .v { color: #036A4F; }
+  #panel-overlap .ov-kpi .k.amber .v { color: #8A4A00; }
+  #panel-overlap .ov-kpi .k.teal .v { color: #007C89; }
+  #panel-overlap td.b { font-weight: 600; color: var(--ink); }
+</style>
+
+<section class="page" aria-label="Overlap Analysis">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Tab 23 &middot; Freddie Builder vs Agent Mode &mdash; Overlap Analysis</div>
+      <h1>Feature Overlap: Freddie Builder Fixes vs Deepak's Agent Mode</h1>
+      <div class="subtitle">Cross-reference of every feature, functionality, and experience recommended for the Freddie Builder (P0/P1/P2 from the <a href="#designaudit" onclick="document.querySelector('[data-tab=designaudit]').click();return false;">Agent Mode Design Audit</a>) against every feature in Deepak's Agent Mode prototype (from <a href="#proto-audit-walk" onclick="document.querySelector('[data-tab=proto-audit-walk]').click();return false;">Audit Gap Walkthrough</a> + <a href="#proto-canva-walk" onclick="document.querySelector('[data-tab=proto-canva-walk]').click();return false;">Canva AI 2.0 Walkthrough</a>). Each item classified as: <span class="ov-pill shared">SHARED</span> (needed by both), <span class="ov-pill freddie">FREDDIE ONLY</span> (unique to the builder), or <span class="ov-pill agent">AGENT MODE ONLY</span> (unique to the agent experience).</div>
+    </div>
+  </div>
+
+  <div class="ov-kpi">
+    <div class="k green"><div class="v">14</div><div class="l">Shared — needed by both surfaces</div></div>
+    <div class="k amber"><div class="v">8</div><div class="l">Freddie Builder only</div></div>
+    <div class="k teal"><div class="v">17</div><div class="l">Agent Mode only</div></div>
+    <div class="k"><div class="v">39</div><div class="l">Total unique capabilities</div></div>
+  </div>
+
+  <!-- ===== SHARED ===== -->
+  <div style="margin-top:8px">
+    <h2><span class="num">01</span>Shared &mdash; Required by both Freddie Builder &amp; Agent Mode <span class="ov-pill shared">14 items</span></h2>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:10px;">These capabilities are needed regardless of surface. Both the Freddie Builder and the Agent Mode must deliver them. The implementation differs (Freddie uses modals/buttons; Agent Mode uses conversational reasoning), but the customer outcome is the same.</p>
+  </div>
+
+  <table style="margin-top:4px">
+    <thead>
+      <tr><th style="width:30px">#</th><th>Feature / Capability</th><th style="width:120px">Freddie Impl.</th><th style="width:120px">Agent Mode Impl.</th><th style="width:80px">Audit Ref</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="b">S-1</td><td><strong>Audience-confirmation before Send.</strong> User must explicitly confirm recipient count and segment before broadcasting.</td><td>Mandatory confirm modal with recipient count</td><td>AI Rail asks: "Before I send to 2,150 recipients&hellip;" — conversational confirmation</td><td>P0-1</td></tr>
+      <tr><td class="b">S-2</td><td><strong>SMS TCPA compliance gating.</strong> SMS channel must be blocked until compliance guardrails ship.</td><td>Feature-flag SMS tab OFF + tooltip</td><td>Governance panel "Pre-publish legal check" + nav item gating</td><td>P0-2</td></tr>
+      <tr><td class="b">S-3</td><td><strong>AI-content verification pre-send.</strong> Footer, promo codes, products validated against real entities before send.</td><td>Pre-send checklist modal</td><td>AI Rail reasoning + Connectors verify live catalog data</td><td>P0-3</td></tr>
+      <tr><td class="b">S-4</td><td><strong>Manual mode as first-class entry.</strong> Users must be able to skip AI and go straight to manual editing.</td><td>"Skip AI — open blank editor" button on Create screen</td><td>Persistent sidebar nav + direct channel routes (Campaigns, SMS) bypass AI</td><td>P0-4</td></tr>
+      <tr><td class="b">S-5</td><td><strong>Send-test recipient picker.</strong> Test email must go to a specified address, not a default.</td><td>Recipient picker modal with own email pre-filled</td><td>AI Rail tool call: send_test(to: "maya@&hellip;") with confirmation</td><td>P0-5</td></tr>
+      <tr><td class="b">S-6</td><td><strong>Brand Kit / Brand Intelligence enforcement.</strong> Theme presets must not silently override brand settings.</td><td>Apply-and-confirm dialog: "Keep brand colors / override?"</td><td>Brand Intelligence rules engine + brand-compliance check on every generation</td><td>P0-6</td></tr>
+      <tr><td class="b">S-7</td><td><strong>Custom font upload.</strong> Users need to upload their own fonts, not just pick from 23 web-safe fonts.</td><td>Font-upload UI in Brand Kit modal</td><td>Brand Intelligence font rule + upload connector</td><td>P1-1</td></tr>
+      <tr><td class="b">S-8</td><td><strong>Value-first brand communication (not upgrade pressure).</strong> Free tier should see brand features as value, not as a gate.</td><td>Reframe brand-context banner copy</td><td>Daily Brief leads with insights, not upgrade prompts</td><td>P1-2</td></tr>
+      <tr><td class="b">S-9</td><td><strong>Error / Failed state for AI generation.</strong> Generation failures must show diagnostic feedback + retry.</td><td>"Failed" pill on artifact cards + retry button</td><td>AI Rail error message: "I wasn't able to generate — here's why" + retry</td><td>P1-6</td></tr>
+      <tr><td class="b">S-10</td><td><strong>Cancel / abort during AI generation.</strong> Long-running generation must be cancellable.</td><td>Cancel button on generation spinner</td><td>Tool-pill cancel: stop in-progress tool operation</td><td>P1-7</td></tr>
+      <tr><td class="b">S-11</td><td><strong>Autosave visibility / state contract.</strong> Users must know their work is saved and what state is preserved.</td><td>"Saved / Saving&hellip;" indicator in toolbar</td><td>AI Rail reasoning: "I've saved your draft. Manual edits preserved."</td><td>P1-9</td></tr>
+      <tr><td class="b">S-12</td><td><strong>Deep-linkable editor.</strong> Editor and strategy views must be shareable/bookmarkable.</td><td>Convert right-pane states to route-based or query-param navigation</td><td>Hash-based routing (#brief, #memory, #brand, etc.)</td><td>P1-10</td></tr>
+      <tr><td class="b">S-13</td><td><strong>WCAG 2.2 AA accessibility.</strong> All interactive components need proper aria-labels, touch targets, focus traps.</td><td>Full a11y engineering pass on all components</td><td>Full a11y engineering pass on all components</td><td>P2-1</td></tr>
+      <tr><td class="b">S-14</td><td><strong>Rendering parity / inbox preview.</strong> Need real Gmail/Outlook/Apple Mail rendering, not just CSS preview.</td><td>Litmus/Email on Acid integration in Preview</td><td>Connectors surface: inbox-preview connector integration</td><td>P2-10</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ===== FREDDIE ONLY ===== -->
+  <div style="margin-top:28px">
+    <h2><span class="num">02</span>Freddie Builder Only <span class="ov-pill freddie">8 items</span></h2>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:10px;">Features unique to the Freddie Builder surface that don't apply to the Agent Mode architecture. These are either specific to the Freddie UI patterns (tab bar, chat thread, theme popover) or are Builder-specific infrastructure investments.</p>
+  </div>
+
+  <table style="margin-top:4px">
+    <thead>
+      <tr><th style="width:30px">#</th><th>Feature / Capability</th><th>Why Freddie Only</th><th style="width:80px">Audit Ref</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="b">FO-1</td><td><strong>Templates carousel with surface-origin filter (NEB / Classic / All).</strong></td><td>The Freddie Builder uses a templates carousel on the Create tab. The Agent Mode uses an Artifacts library with a Filter button instead — different UI pattern, same need met differently.</td><td>P1-3</td></tr>
+      <tr><td class="b">FO-2</td><td><strong>Universal Content primitive (Pillar 2.1).</strong></td><td>The Freddie Builder needs Universal Content shipped as infrastructure. Agent Mode already has Memory Library as its equivalent. Freddie lacks this primitive entirely.</td><td>P1-4</td></tr>
+      <tr><td class="b">FO-3</td><td><strong>Version history in chat thread (per-generation rollback).</strong></td><td>Freddie's chat thread needs an explicit version-history drawer with restorable checkpoints. Agent Mode's per-message structure naturally creates these boundaries — less explicit UI needed.</td><td>P1-5</td></tr>
+      <tr><td class="b">FO-4</td><td><strong>HTML code mode escape hatch (NEB Code Mode, Pillar 2.2.3).</strong></td><td>Critical for Freddie's premium/agency ceiling. Agent Mode surfaces this as an "HTML editor" skill card — architecturally different approach.</td><td>P1-8</td></tr>
+      <tr><td class="b">FO-5</td><td><strong>Two-shell navigation breadcrumb.</strong></td><td>Specific to Freddie's trap-door pattern where Create disposes global nav. Agent Mode eliminates the pattern entirely with persistent sidebar, so no breadcrumb needed.</td><td>P2-4</td></tr>
+      <tr><td class="b">FO-6</td><td><strong>Sidebar conversation search + rename.</strong></td><td>Freddie's sidebar conversation list lacks search/rename. Agent Mode's AI Rail uses a different conversation persistence model.</td><td>P2-5</td></tr>
+      <tr><td class="b">FO-7</td><td><strong>Stub tab affordance clarity.</strong></td><td>6 of 8 channel tabs in Freddie are stubs. Need "Coming soon" badges or disabled states. Agent Mode has no stub tabs — all sidebar items route to real surfaces.</td><td>P2-8</td></tr>
+      <tr><td class="b">FO-8</td><td><strong>Per-edit undo (not just full regenerate).</strong></td><td>Freddie's Copy/Like/Dislike/Regenerate row only offers binary regenerate. Specific to the Freddie chat+editor paradigm. Agent Mode's element-level editing makes this less critical.</td><td>P2-9</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ===== AGENT MODE ONLY ===== -->
+  <div style="margin-top:28px">
+    <h2><span class="num">03</span>Agent Mode Only <span class="ov-pill agent">17 items</span></h2>
+    <p style="font-size:12px;color:var(--muted);margin-bottom:10px;">Features unique to Deepak's Agent Mode prototype. These either don't have a Freddie Builder equivalent, or represent entirely new capabilities from the Canva AI 2.0 competitive gap closure that the Freddie surface was never designed to deliver.</p>
+  </div>
+
+  <table style="margin-top:4px">
+    <thead>
+      <tr><th style="width:30px">#</th><th>Feature / Capability</th><th>Why Agent Mode Only</th><th style="width:80px">Source</th></tr>
+    </thead>
+    <tbody>
+      <tr><td class="b">AO-1</td><td><strong>Multi-channel bundle generation from one prompt.</strong> Email + SMS + WhatsApp + Landing page generated simultaneously.</td><td>Freddie creates one channel at a time. The bundle paradigm requires the agent orchestration layer.</td><td>Canva 2.0</td></tr>
+      <tr><td class="b">AO-2</td><td><strong>Memory Library — persistent AI learning across campaigns.</strong></td><td>Freddie has no memory system. Every session starts from baseline. Memory is architecturally native to the agent model.</td><td>Canva 2.0</td></tr>
+      <tr><td class="b">AO-3</td><td><strong>Campaign Sheets (Sheets AI + Bulk Create + Connect Data).</strong></td><td>Freddie is a single-email editor. The spreadsheet-based campaign planning paradigm doesn't fit the Freddie UI.</td><td>Canva 2.0</td></tr>
+      <tr><td class="b">AO-4</td><td><strong>Live data connectors (Shopify, Slack, Gmail, Notion, etc.).</strong></td><td>Freddie doesn't have a connector surface. Data integrations are native to the agent architecture.</td><td>Canva 2.0</td></tr>
+      <tr><td class="b">AO-5</td><td><strong>MCP integration — external AI reads Mailchimp design context.</strong></td><td>Freddie is a closed-loop editor. The MCP protocol requires the agent's tool-use architecture.</td><td>Canva 2.0</td></tr>
+      <tr><td class="b">AO-6</td><td><strong>AI Governance (Canva Shield) — data, model, and content controls.</strong></td><td>Freddie has no governance surface. Enterprise controls require the dedicated governance panel.</td><td>Canva 2.0</td></tr>
+      <tr><td class="b">AO-7</td><td><strong>Magic Design — complete first-draft from prompt.</strong></td><td>Freddie has prompt-to-email, but Magic Design is the broader Canva-equivalent multi-format version. The agent surface is where it lives.</td><td>Canva 2.0</td></tr>
+      <tr><td class="b">AO-8</td><td><strong>Magic Edit / Grab / Expand / Morph — image manipulation suite.</strong></td><td>Freddie's editor has no image manipulation beyond upload. The Magic family requires the Focus view's floating toolbar.</td><td>Canva 2.0</td></tr>
+      <tr><td class="b">AO-9</td><td><strong>Magic Layers — flat images become editable layered designs.</strong></td><td>Not applicable to Freddie's block-based email editor paradigm.</td><td>Canva 2.0</td></tr>
+      <tr><td class="b">AO-10</td><td><strong>Magic Resize / Switch — one design &rarr; 8+ channel placements.</strong></td><td>Freddie creates one channel at a time. Multi-format resize is native to the bundle paradigm.</td><td>Canva 2.0</td></tr>
+      <tr><td class="b">AO-11</td><td><strong>Magic Translate — 100+ language translation with brand-voice preservation.</strong></td><td>Freddie has no translation capability. Requires the agent's brand intelligence + memory context.</td><td>Canva 2.0</td></tr>
+      <tr><td class="b">AO-12</td><td><strong>Magic Media — text-to-image and text-to-video (Veo-3).</strong></td><td>Freddie has no generative media. Requires the agent's creative AI skill infrastructure.</td><td>Canva 2.0</td></tr>
+      <tr><td class="b">AO-13</td><td><strong>Dream Lab — high-fidelity image generation with style references.</strong></td><td>Same as above — generative media requires the agent skill infrastructure.</td><td>Canva 2.0</td></tr>
+      <tr><td class="b">AO-14</td><td><strong>Design-aware AI chat with element-level preservation (Layered Object Intelligence).</strong></td><td>Freddie's conversational editing regenerates at the full-email level. Element-level editing requires the agent's layered intelligence.</td><td>Canva 2.0</td></tr>
+      <tr><td class="b">AO-15</td><td><strong>@Mailchimp AI in comments — tag AI in review threads.</strong></td><td>Freddie has no comments/review layer. Multi-author collaboration requires the agent's Focus view.</td><td>Canva 2.0</td></tr>
+      <tr><td class="b">AO-16</td><td><strong>Scheduled AI tasks — recurring autonomous generation.</strong></td><td>Freddie is a manual creation tool. Autonomous recurring generation is an agent-native concept.</td><td>Canva 2.0</td></tr>
+      <tr><td class="b">AO-17</td><td><strong>Canva Code 2.0 — prompt-built interactive landing pages.</strong></td><td>Freddie builds emails/SMS. Interactive landing pages with quizzes and calculators are a separate artifact type native to the agent surface.</td><td>Canva 2.0</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ===== SUMMARY ===== -->
+  <div style="margin-top:28px">
+    <h2><span class="num">04</span>Strategic read</h2>
+  </div>
+
+  <div class="pull" style="margin-top:8px">
+    <strong>The overlap tells a clear story.</strong> Of 39 total capabilities across both surfaces:
+    <ul style="margin:8px 0 0;padding-left:18px;font-size:13px;line-height:1.7;">
+      <li><strong>14 are shared (36%)</strong> &mdash; these are primarily the P0 launch-blocking and P1 trust/safety requirements (audience confirmation, TCPA gating, content verification, manual mode, error states, accessibility). Both surfaces must deliver them, but they implement differently: Freddie uses modals and buttons, Agent Mode uses conversational reasoning and governance panels.</li>
+      <li><strong>8 are Freddie-only (21%)</strong> &mdash; these are specific to Freddie's UI paradigm: templates carousel, version history in chat thread, HTML code mode, two-shell breadcrumb, stub tab affordances, conversation search, per-edit undo, and Universal Content as an infrastructure primitive. These are technical debts and UX fixes unique to the existing Freddie surface.</li>
+      <li><strong>17 are Agent Mode-only (44%)</strong> &mdash; these are the Canva AI 2.0 competitive gap closures that are architecturally impossible in the Freddie paradigm: multi-channel bundles, persistent memory, campaign sheets, live data connectors, MCP, governance, the full Magic creative AI family (10 tools), element-level editing, @AI in comments, scheduled tasks, and interactive landing pages. <em>These represent the future surface — capabilities Freddie was never designed to deliver.</em></li>
+    </ul>
+  </div>
+
+  <div class="pull" style="margin-top:14px">
+    <strong>Recommendation.</strong> Ship the 14 shared capabilities on the Freddie Builder as the immediate priority (these are the P0/P1 mitigations required before any user exposure). Simultaneously build Deepak's Agent Mode as the future surface. The 8 Freddie-only items are worth investing in only if the Freddie Builder remains the default for the next 2+ quarters. If the Agent Mode ships as the primary surface within Q3-Q4, the Freddie-only items become sunken cost &mdash; the Agent Mode's architecture renders them unnecessary (persistent sidebar eliminates the breadcrumb need; Memory Library replaces Universal Content; element-level editing replaces per-edit undo; Artifacts surface replaces the templates carousel).
+  </div>
+
+  <p class="source"><strong>Source:</strong> Freddie Builder capabilities from <a href="#designaudit" onclick="document.querySelector('[data-tab=designaudit]').click();return false;">Tab 18 (Agent Mode Design Audit)</a> P0/P1/P2 priority buckets (26 items). Agent Mode capabilities from <a href="#proto-audit" onclick="document.querySelector('[data-tab=proto-audit]').click();return false;">Tab 19</a> (12 audit-gap features) + <a href="#proto-canva" onclick="document.querySelector('[data-tab=proto-canva]').click();return false;">Tab 20</a> (11 Canva AI 2.0 features). Overlap determined by matching customer outcome (not implementation approach).</p>
+</section>
+</div><!-- /panel-overlap -->
+
+
 </div>
 
 <script>
@@ -15202,7 +15344,7 @@ Lens 5 (Strategy Overlay) ── component_id joins back to ──→ Lens 3 + s
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','revised','migration','repointel','canvas','memo','buildplan','freddie','freddiep2','planpage','concerns','designaudit','proto-audit','proto-canva','proto-audit-walk','proto-canva-walk'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','revised','migration','repointel','canvas','memo','buildplan','freddie','freddiep2','planpage','concerns','designaudit','proto-audit','proto-canva','proto-audit-walk','proto-canva-walk','overlap'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
