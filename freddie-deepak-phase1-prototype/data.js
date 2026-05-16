@@ -3,9 +3,8 @@
    v1.0 · May 2026
 
    Single source-of-truth object tree consumed by every scene.
-   - Brand: "Bright Light Co." (a fictional DTC brand consistent with the
-     baseline content inventory from ai-email-generator-decomp/docs/09)
-   - Email content reuses the "Welcome to the Community" baseline string
+   - Brand: "Stride Athletics" — synthetic demo DTC (see synthetic-demo-pack/)
+   - Email narrative aligns with Spring Velocity / Volt Runner campaign copy
    - Memories, connectors, research, MCP token are all plausible
      placeholders kept short enough to fit a scene
 
@@ -15,7 +14,7 @@
 
 window.FDPX_DATA = {
   brand: {
-    name: "Bright Light Co.",
+    name: "Stride Athletics",
     primary: "#017E89",
     accent: "#F4EFE6",
     fontHead: "Means Web",
@@ -35,28 +34,28 @@ window.FDPX_DATA = {
   },
 
   email: {
-    subject: "Welcome to the Community",
-    heroLine: "Designed by hand, made for you",
+    subject: "Spring Velocity: Volt Runner ships free this week",
+    heroLine: "Train in rhythm this spring",
     recipientList: "New email subscribers",
     recipientCount: 2150,
-    promoCode: "Welcome guide + first-week bonus",
+    promoCode: "SPRINGVEL · bundle ship-free + Volt at $128",
     focusMetric: "Revenue",
-    products: ["Product 1", "Product 2"],
+    products: ["Stride Volt Runner (SA-VOLT-M-001)", "Stride Life Bundle"],
     bodyBlocks: [
-      { id: "b1", type: "Header", text: "Bright Light Co." },
-      { id: "b2", type: "Hero",    text: "Designed by hand, made for you" },
-      { id: "b3", type: "Body",    text: "Welcome to the family. Here's a small thank-you for joining." },
-      { id: "b4", type: "Coupon",  text: "WELCOME15 · 15% off your first order" },
-      { id: "b5", type: "Body",    text: "We hand-pick every product. Browse the collection at your pace." },
-      { id: "b6", type: "CTA",     text: "Shop now" },
-      { id: "b7", type: "Footer",  text: "123 Main St, Suite 100, New York, NY 10001 · Unsubscribe" }
+      { id: "b1", type: "Header", text: "Stride Athletics" },
+      { id: "b2", type: "Hero",    text: "Train in rhythm this spring" },
+      { id: "b3", type: "Body",    text: "Spring Velocity is here — Volt Runner ($128), City Pierce Jacket, and the Life Bundle ($198) with free ground shipping through Sunday." },
+      { id: "b4", type: "Coupon",  text: "SPRINGVEL · extra savings on bundles + Volt launch" },
+      { id: "b5", type: "Body",    text: "Every mile earns its rest: Flow Mat + Sunrise Hood pair with the Volt for recovery days." },
+      { id: "b6", type: "CTA",     text: "Shop Spring Velocity" },
+      { id: "b7", type: "Footer",  text: "stride-athletics.example.com · Demo addresses only · Unsubscribe" }
     ]
   },
 
   memories: [
     { id: "m1",  text: "Customers respond best to social-proof framing", category: "Style" },
     { id: "m2",  text: "Tuesday 10am AEST highest engagement",            category: "Cadence" },
-    { id: "m3",  text: "Spring Refresh is the launch tag",                category: "Inventory" },
+    { id: "m3",  text: "Spring Velocity is the hero launch tag",                category: "Inventory" },
     { id: "m4",  text: "Hero CTAs work best in active voice",             category: "Style" },
     { id: "m5",  text: "Single CTA outperforms 2-CTA by 15% CTR",         category: "Performance" },
     { id: "m6",  text: "Audience prefers warmth over urgency",            category: "Brand voice" },

@@ -1,1 +1,3 @@
-Demo photography in this folder is bundled for the Phase 1 prototype only. Sources are license-friendly stock (e.g. Unsplash) — keep photographer attribution if you replace files or publish elsewhere. This prototype does not use third-party retail sites’ artwork or copy.
+Demo photography in this folder is bundled for the Phase 1 prototype only. Sources are license-friendly stock (e.g. Unsplash) — keep photographer attribution if you replace files or publish elsewhere. This prototype does not use third-party retail sites' artwork or copy.
+
+The playable prototype now primarily references images under synthetic-demo-pack/images/ (Stride Athletics demo) for heroes, Magic Layers, and sticker grids. Files here remain optional legacy placeholders.

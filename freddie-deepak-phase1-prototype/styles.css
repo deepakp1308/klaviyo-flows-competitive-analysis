@@ -1466,10 +1466,10 @@ a { color: var(--ink-2); }
   background-size: cover;
   background-position: center;
 }
-.fdpx-mcds-frame .mcds-result-thumb:nth-child(1) { background-image: url("assets/board-thumb-1.jpg"); }
-.fdpx-mcds-frame .mcds-result-thumb:nth-child(2) { background-image: url("assets/board-thumb-2.jpg"); }
-.fdpx-mcds-frame .mcds-result-thumb:nth-child(3) { background-image: url("assets/board-thumb-3.jpg"); }
-.fdpx-mcds-frame .mcds-result-thumb:nth-child(4) { background-image: url("assets/board-thumb-4.jpg"); }
+.fdpx-mcds-frame .mcds-result-thumb:nth-child(1) { background-image: url("synthetic-demo-pack/images/09-kicks-flatlay.jpg"); }
+.fdpx-mcds-frame .mcds-result-thumb:nth-child(2) { background-image: url("synthetic-demo-pack/images/18-kettlebells.jpg"); }
+.fdpx-mcds-frame .mcds-result-thumb:nth-child(3) { background-image: url("synthetic-demo-pack/images/19-studio-class.jpg"); }
+.fdpx-mcds-frame .mcds-result-thumb:nth-child(4) { background-image: url("synthetic-demo-pack/images/06-yoga-mat.jpg"); }
 .fdpx-mcds-frame .mcds-sticker-pack img,
 .fdpx-mcds-frame .mcds-sticker-pack .fdpx-sticker {
   width: 44px;
