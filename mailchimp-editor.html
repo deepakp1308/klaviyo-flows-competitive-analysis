@@ -815,6 +815,8 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="designaudit">Agent Mode Design Audit</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="proto-audit">Prototype: Audit Gaps</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="proto-canva">Prototype: Canva AI 2.0</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="proto-audit-walk">Audit Gap Walkthrough</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="proto-canva-walk">Canva AI 2.0 Walkthrough</button>
     </div>
     <div style="display:flex; gap:8px;">
       <a class="btn" href="mailchimp.html">→ Automations brief</a>
@@ -12238,881 +12240,332 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 <div class="tabpanel" id="panel-planpage" role="tabpanel">
 <style>
   #panel-planpage {
-    background: var(--paper);
-    border: 1px solid var(--line);
-    border-radius: 14px;
-    box-shadow: var(--shadow);
+    background: #fff;
     padding: 0;
     margin: 0;
   }
-  #panel-planpage .pop-page {
-    max-width: 1000px;
-    margin: 0 auto;
-    padding: 48px 40px 56px;
-    color: var(--ink);
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    line-height: 1.38;
-  }
-  #panel-planpage .pop-page + .pop-page {
-    border-top: 2px dashed var(--line);
-  }
-  #panel-planpage .pop-title-bar {
-    background: var(--ink);
-    color: white;
-    padding: 14px 24px;
-    border-radius: 8px;
-    margin-bottom: 24px;
+  #panel-planpage .pop-subtabs {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-  #panel-planpage .pop-title-bar h1 {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 22px;
-    font-weight: 700;
-    margin: 0;
-    letter-spacing: -0.01em;
-    color: white;
-    line-height: 1.2;
-  }
-  #panel-planpage .pop-title-bar .pop-badge {
-    font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .1em;
-    text-transform: uppercase;
-    background: var(--brand);
-    color: white;
-    padding: 4px 10px;
-    border-radius: 4px;
-    white-space: nowrap;
-  }
-  #panel-planpage .pop-vision {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 15px;
-    line-height: 1.5;
-    color: var(--ink);
-    margin: 0 0 24px;
-    padding: 16px 20px;
-    background: linear-gradient(90deg, #FFFCF0 0%, #FFFFFF 60%);
-    border-left: 3px solid var(--brand);
-    border-radius: 0 8px 8px 0;
-  }
-  #panel-planpage .pop-vision em { color: var(--brand); font-style: italic; }
-  #panel-planpage .pop-eyebrow {
-    font-family: 'Inter', sans-serif;
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .12em;
-    text-transform: uppercase;
-    color: var(--brand);
-    margin: 28px 0 10px;
-  }
-  #panel-planpage .pop-eyebrow:first-of-type { margin-top: 0; }
-  #panel-planpage h2.pop-h2 {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 17px;
-    font-weight: 700;
-    color: var(--ink);
-    margin: 0 0 12px;
-    line-height: 1.2;
-  }
-  #panel-planpage .pop-grid {
-    display: grid;
-    gap: 12px;
-    margin-bottom: 20px;
-  }
-  #panel-planpage .pop-grid.cols-2 { grid-template-columns: 1fr 1fr; }
-  #panel-planpage .pop-grid.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
-  #panel-planpage .pop-grid.cols-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
-  #panel-planpage .pop-card {
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 12px 14px;
-    background: #fff;
-  }
-  #panel-planpage .pop-card h4 {
-    font-family: 'Inter', sans-serif;
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--ink);
-    margin: 0 0 4px;
-    line-height: 1.3;
-  }
-  #panel-planpage .pop-card p {
-    font-size: 11.5px;
-    color: var(--ink-2);
-    margin: 0;
-    line-height: 1.4;
-  }
-  #panel-planpage .pop-card.tenet { border-left: 3px solid var(--brand); }
-  #panel-planpage .pop-card.benefit { border-left: 3px solid var(--good); }
-  #panel-planpage .pop-card.diff { border-left: 3px solid #4338CA; }
-  #panel-planpage .pop-card.moat { border-left: 3px solid var(--ink); }
-  #panel-planpage .pop-card .pop-num {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 22px;
-    font-weight: 700;
-    color: var(--brand);
-    line-height: 1;
-    margin-bottom: 4px;
-  }
-  #panel-planpage .pop-roadmap {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 10.5px;
-    margin: 8px 0 20px;
-  }
-  #panel-planpage .pop-roadmap th,
-  #panel-planpage .pop-roadmap td {
-    border: 1px solid var(--line);
-    padding: 8px 10px;
-    vertical-align: top;
-    text-align: left;
-  }
-  #panel-planpage .pop-roadmap th {
-    font-weight: 700;
-    color: white;
-    font-size: 11px;
-    letter-spacing: .04em;
-  }
-  #panel-planpage .pop-roadmap th.q1h { background: #4F46E5; }
-  #panel-planpage .pop-roadmap th.q2h { background: #7C3AED; }
-  #panel-planpage .pop-roadmap th.q3h { background: #DB2777; }
-  #panel-planpage .pop-roadmap th.q4h { background: var(--brand); }
-  #panel-planpage .pop-roadmap th.col-label {
-    background: #FAFAFB;
-    color: var(--ink);
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    width: 120px;
-  }
-  #panel-planpage .pop-roadmap td { font-size: 10.5px; line-height: 1.4; color: var(--ink-2); background: #fff; }
-  #panel-planpage .pop-roadmap td ul { margin: 0; padding-left: 14px; }
-  #panel-planpage .pop-roadmap td ul li { margin-bottom: 2px; }
-  #panel-planpage .pop-roadmap td strong { color: var(--ink); }
-  #panel-planpage .pop-shift {
-    display: grid;
-    grid-template-columns: 1fr 40px 1fr;
-    gap: 0;
-    align-items: start;
-    margin: 8px 0 20px;
-  }
-  #panel-planpage .pop-shift .from-box,
-  #panel-planpage .pop-shift .to-box {
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 12px 14px;
-    font-size: 12px;
-    line-height: 1.45;
-    color: var(--ink-2);
-  }
-  #panel-planpage .pop-shift .from-box { background: #FFF5F2; border-left: 3px solid var(--bad); }
-  #panel-planpage .pop-shift .to-box { background: #F4FBF7; border-left: 3px solid var(--good); }
-  #panel-planpage .pop-shift .from-box strong { color: var(--bad); }
-  #panel-planpage .pop-shift .to-box strong { color: var(--good); }
-  #panel-planpage .pop-shift .arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    color: var(--brand);
-    font-weight: 700;
-  }
-  #panel-planpage .pop-metrics {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 12px;
-    margin: 8px 0 12px;
-  }
-  #panel-planpage .pop-metrics .m-group {
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 12px 14px;
-    background: #fff;
-  }
-  #panel-planpage .pop-metrics .m-group h5 {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin: 0 0 8px;
-  }
-  #panel-planpage .pop-metrics .m-row {
-    display: grid;
-    grid-template-columns: 70px 1fr;
     gap: 6px;
-    font-size: 11px;
-    margin-bottom: 4px;
+    padding: 16px 24px 0;
+    max-width: 900px;
+    margin: 0 auto;
   }
-  #panel-planpage .pop-metrics .m-row .m-label {
+  #panel-planpage .pop-subtab-btn {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    padding: 5px 16px;
+    border-radius: 100px;
+    border: 1px solid #D1D5DB;
+    background: #F3F4F6;
+    color: #374151;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  #panel-planpage .pop-subtab-btn.active {
+    background: #1F2937;
+    color: #fff;
+    border-color: #1F2937;
+  }
+  #panel-planpage .pop-body {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 20px 24px 32px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 12.5px;
+    line-height: 1.35;
+    color: #111827;
+  }
+  #panel-planpage .pop-body h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 13.5px;
     font-weight: 700;
-    font-size: 9.5px;
-    letter-spacing: .04em;
+    color: #111827;
+    margin: 18px 0 6px;
     text-transform: uppercase;
-    color: var(--brand);
-    padding-top: 1px;
+    letter-spacing: .04em;
   }
-  #panel-planpage .pop-metrics .m-row .m-val { color: var(--ink-2); line-height: 1.35; }
-  #panel-planpage .pop-source {
-    font-size: 10.5px;
-    color: var(--muted);
-    margin-top: 16px;
-    line-height: 1.4;
-    border-top: 1px solid var(--line);
-    padding-top: 10px;
-  }
-  #panel-planpage .pop-source a { color: var(--muted); text-decoration: underline; }
-
-  #panel-planpage .pop-pillar-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  #panel-planpage .pop-pillar-card {
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 12px 14px;
-    background: #fff;
-  }
-  #panel-planpage .pop-pillar-card.pp1 { border-left: 3px solid var(--bad); }
-  #panel-planpage .pop-pillar-card.pp2 { border-left: 3px solid var(--brand); }
-  #panel-planpage .pop-pillar-card.pp3 { border-left: 3px solid var(--good); }
-  #panel-planpage .pop-pillar-card h4 {
-    font-family: 'Source Serif 4', Georgia, serif;
+  #panel-planpage .pop-body h2:first-child { margin-top: 0; }
+  #panel-planpage .pop-body h3 {
+    font-family: 'Inter', sans-serif;
     font-size: 13px;
     font-weight: 700;
-    color: var(--ink);
-    margin: 0 0 6px;
+    color: #111827;
+    margin: 14px 0 4px;
   }
-  #panel-planpage .pop-pillar-card p {
-    font-size: 11px;
-    color: var(--ink-2);
-    margin: 0 0 6px;
-    line-height: 1.4;
-  }
-  #panel-planpage .pop-pillar-card ul {
-    margin: 0;
-    padding-left: 14px;
-    font-size: 10.5px;
-    color: var(--ink-2);
-    line-height: 1.4;
-  }
-  #panel-planpage .pop-pillar-card ul li { margin-bottom: 2px; }
-  #panel-planpage .pop-risk-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 11px;
-    margin: 8px 0 16px;
-  }
-  #panel-planpage .pop-risk-table th {
-    background: #FAFAFB;
-    font-size: 9.5px;
-    font-weight: 800;
-    letter-spacing: .06em;
-    text-transform: uppercase;
-    color: var(--muted);
-    text-align: left;
-    padding: 6px 10px;
-    border-bottom: 1px solid var(--line);
-  }
-  #panel-planpage .pop-risk-table td {
-    padding: 6px 10px;
-    border-bottom: 1px solid var(--line);
-    vertical-align: top;
-    color: var(--ink-2);
+  #panel-planpage .pop-body p {
+    margin: 0 0 8px;
     line-height: 1.35;
   }
-  #panel-planpage .pop-risk-table td strong { color: var(--ink); }
-  #panel-planpage .pop-cohort-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 12px;
-    margin-bottom: 16px;
+  #panel-planpage .pop-body ul,
+  #panel-planpage .pop-body ol {
+    margin: 0 0 8px;
+    padding-left: 18px;
   }
-  #panel-planpage .pop-cohort-card {
-    border: 1px solid var(--line);
-    border-radius: 8px;
-    padding: 14px;
-    text-align: center;
+  #panel-planpage .pop-body li {
+    margin-bottom: 2px;
+    line-height: 1.35;
   }
-  #panel-planpage .pop-cohort-card.paid { border-left: 4px solid var(--brand); background: linear-gradient(180deg,#FFFCF0,#FFFFFF); }
-  #panel-planpage .pop-cohort-card.free { border-left: 4px solid var(--good); background: linear-gradient(180deg,#F4FBF7,#FFFFFF); }
-  #panel-planpage .pop-cohort-card.trial { border-left: 4px solid #4338CA; background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
-  #panel-planpage .pop-cohort-card .cc-label {
-    font-size: 10px;
-    font-weight: 800;
-    letter-spacing: .08em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 4px;
+  #panel-planpage .pop-body table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12px;
+    margin: 4px 0 12px;
   }
-  #panel-planpage .pop-cohort-card .cc-num {
-    font-family: 'Source Serif 4', Georgia, serif;
-    font-size: 28px;
+  #panel-planpage .pop-body th {
+    background: #F9FAFB;
+    font-size: 11px;
     font-weight: 700;
-    line-height: 1;
-    margin-bottom: 4px;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #6B7280;
+    text-align: left;
+    padding: 6px 10px;
+    border: 1px solid #E5E7EB;
   }
-  #panel-planpage .pop-cohort-card.paid .cc-num { color: var(--brand); }
-  #panel-planpage .pop-cohort-card.free .cc-num { color: var(--good); }
-  #panel-planpage .pop-cohort-card.trial .cc-num { color: #4338CA; }
-  #panel-planpage .pop-cohort-card .cc-detail { font-size: 10.5px; color: var(--ink-2); }
-  #panel-planpage .pop-page-label {
+  #panel-planpage .pop-body td {
+    padding: 6px 10px;
+    border: 1px solid #E5E7EB;
+    vertical-align: top;
+    line-height: 1.35;
+  }
+  #panel-planpage .pop-body td strong { color: #111827; }
+  #panel-planpage .pop-body .pop-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: .02em;
+    color: #111827;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+  }
+  #panel-planpage .pop-body .page-break {
+    border-top: 2px dashed #D1D5DB;
+    margin: 24px 0 18px;
+    position: relative;
+  }
+  #panel-planpage .pop-body .page-break::after {
+    content: 'PAGE 2';
+    position: absolute;
+    top: -8px;
+    left: 0;
+    background: #fff;
+    padding-right: 8px;
     font-size: 10px;
     font-weight: 700;
     letter-spacing: .1em;
-    text-transform: uppercase;
-    color: var(--muted);
-    margin-bottom: 8px;
+    color: #9CA3AF;
   }
   @media print {
-    #panel-planpage .pop-page { padding: 24px 20px 24px; }
-    #panel-planpage .pop-page.page-1 { page-break-after: always; }
-    #panel-planpage .pop-page.page-2 { page-break-after: always; }
-    #panel-planpage .pop-title-bar { padding: 8px 16px; margin-bottom: 14px; }
-    #panel-planpage .pop-title-bar h1 { font-size: 17px; }
-    #panel-planpage .pop-vision { font-size: 12px; padding: 10px 14px; margin-bottom: 14px; }
-    #panel-planpage .pop-eyebrow { margin: 14px 0 6px; font-size: 9px; }
-    #panel-planpage .pop-card p, #panel-planpage .pop-card h4 { font-size: 10px; }
-    #panel-planpage .pop-roadmap { font-size: 9px; }
-    #panel-planpage .pop-roadmap th, #panel-planpage .pop-roadmap td { padding: 4px 6px; }
-    #panel-planpage .pop-shift .from-box, #panel-planpage .pop-shift .to-box { font-size: 10px; padding: 8px 10px; }
-    #panel-planpage .pop-metrics .m-row { font-size: 9.5px; }
-    #panel-planpage .pop-source { font-size: 9px; }
-    #panel-planpage .pop-grid { gap: 8px; }
-  }
-  @media (max-width: 720px) {
-    #panel-planpage .pop-grid.cols-2,
-    #panel-planpage .pop-grid.cols-3,
-    #panel-planpage .pop-grid.cols-4 { grid-template-columns: 1fr; }
-    #panel-planpage .pop-shift { grid-template-columns: 1fr; }
-    #panel-planpage .pop-shift .arrow { transform: rotate(90deg); }
-    #panel-planpage .pop-metrics { grid-template-columns: 1fr; }
-    #panel-planpage .pop-pillar-row { grid-template-columns: 1fr; }
-    #panel-planpage .pop-cohort-row { grid-template-columns: 1fr; }
+    #panel-planpage .pop-subtabs { display: none; }
+    #panel-planpage .pop-body { padding: 12px 16px; font-size: 11px; }
+    #panel-planpage .pop-body h2 { font-size: 12px; margin: 10px 0 4px; }
+    #panel-planpage .pop-body table { font-size: 10px; }
+    #panel-planpage .pop-body th, #panel-planpage .pop-body td { padding: 4px 6px; }
+    #panel-planpage [data-pop-tab]:not(.pop-tab-active) { display: none !important; }
+    #panel-planpage .pop-body .page-break { page-break-before: always; border: none; margin: 0; }
+    #panel-planpage .pop-body .page-break::after { display: none; }
   }
 </style>
 
-<!-- ==================== VERSION 1: ONE-PAGER (Page 1) ==================== -->
-<div class="pop-page page-1">
-  <div class="pop-page-label">Version 1 &middot; One-Pager</div>
-
-  <div class="pop-title-bar">
-    <h1>Unified Email/SMS Builder &mdash; Plan on a Page</h1>
-    <span class="pop-badge">FY27</span>
-  </div>
-
-  <div class="pop-vision">
-    Reimagine Mailchimp&rsquo;s builder as an <em>AI-first unified creation platform</em> that beats Canva on creative depth, beats Klaviyo on send-time intelligence, and delivers the industry&rsquo;s most trusted campaign-to-revenue pipeline for SMBs. One builder, every channel, every customer &mdash; from first send to measurable revenue.
-  </div>
-
-  <!-- KEY TENETS -->
-  <div class="pop-eyebrow">Key Tenets</div>
-  <div class="pop-grid cols-4">
-    <div class="pop-card tenet">
-      <h4>Quality Is the Product</h4>
-      <p>Every send must render exactly as designed, on every client, every device. P1 Quality &amp; Trust Foundation burns down cited HVC bugs (~$95K/mo exposure) before any new capability ships.</p>
-    </div>
-    <div class="pop-card tenet">
-      <h4>AI That Ships, Not Demos</h4>
-      <p>AI is embedded in the creation flow &mdash; not bolted on. Brand-Kit-aware conversational editing, generative SMS, and AI performance watchdog replace generic assistants with send-ready output.</p>
-    </div>
-    <div class="pop-card tenet">
-      <h4>One Builder, Every Channel</h4>
-      <p>Email, SMS, and push compose in a single canvas with Universal Content blocks. Edit once, adapt per channel. Eliminates the fragmented workflow that costs SMBs hours per campaign.</p>
-    </div>
-    <div class="pop-card tenet">
-      <h4>Revenue You Can Measure</h4>
-      <p>Every feature ties to a customer outcome: time saved, trust earned, or dollars driven. In-canvas revenue attribution and campaign confidence scoring make ROI visible at send time.</p>
-    </div>
-  </div>
-
-  <!-- UNRIVALED CUSTOMER BENEFIT -->
-  <div class="pop-eyebrow">Unrivaled Customer Benefit</div>
-  <div class="pop-grid cols-3">
-    <div class="pop-card benefit">
-      <div class="pop-num">1</div>
-      <h4>Saves Time</h4>
-      <p>From signup to first send in minutes, not hours. AI-generated drafts, Universal Content reuse, and a unified canvas cut campaign creation time by 60%+ for the 1.02M paid active users and 870K free users who build in the editor every month.</p>
-    </div>
-    <div class="pop-card benefit">
-      <div class="pop-num">2</div>
-      <h4>Builds Trust &amp; Confidence</h4>
-      <p>Pre-send confidence scoring, render-fidelity guarantees (&ge;99%), and Brand Kit enforcement mean customers send knowing it will look right and land in the inbox. Directly addresses the 17 HVC themes (~$95K/mo cited MRR) eroding trust today.</p>
-    </div>
-    <div class="pop-card benefit">
-      <div class="pop-num">3</div>
-      <h4>Drives Revenue</h4>
-      <p>In-canvas revenue attribution, Smart Send personalization, and AI performance watchdog transform the builder from a design tool into a revenue engine. Target: ~$21M ARR across paid ($6.7M), free ($8.7M), and trial ($5.6M) cohorts.</p>
-    </div>
-  </div>
-
-  <!-- DIFFERENTIATION -->
-  <div class="pop-eyebrow">Differentiation vs. Competitors</div>
-  <div class="pop-grid cols-2">
-    <div class="pop-card diff">
-      <h4>1. vs. Canva: Creative AI + ESP-Native Intelligence</h4>
-      <p>Canva owns design but cannot replicate ESP-native send-time intelligence &mdash; inbox placement, per-profile Smart Send, deliverability scoring, and campaign revenue attribution. We match Canva&rsquo;s creative depth (Brand Kit, Magic-tier editing, conversational AI) and add the marketing execution layer Canva structurally cannot build.</p>
-    </div>
-    <div class="pop-card diff">
-      <h4>2. vs. Klaviyo: Brand-Aware Conversational + Outcome-Anchored</h4>
-      <p>Klaviyo leads in flow automation but lags in creative tooling &mdash; no co-editing, no multi-brand kits, no Brand-Kit-aware conversational AI. Mailchimp&rsquo;s unified builder combines Intuit-scale AI with financial-outcome anchoring (campaign-to-revenue attribution via Intuit ecosystem data) that a standalone ESP cannot replicate.</p>
-    </div>
-  </div>
-
-  <!-- COMPETITIVE MOAT -->
-  <div class="pop-eyebrow">Competitive Moat</div>
-  <div class="pop-grid cols-3">
-    <div class="pop-card moat">
-      <h4>Brand Data Moat</h4>
-      <p>Brand Kit + Memory accumulate customer brand rules, tone, visual assets, and audience preferences over time. Every send makes the AI smarter. Switching cost compounds with usage.</p>
-    </div>
-    <div class="pop-card moat">
-      <h4>Send-Time Intelligence Moat</h4>
-      <p>ESP-native telemetry (deliverability, engagement, inbox placement) feeds AI personalization at send time. This data exists only inside the sending platform &mdash; no design tool or CRM can access it.</p>
-    </div>
-    <div class="pop-card moat">
-      <h4>Platform Moat</h4>
-      <p>Intuit ecosystem (QuickBooks, Credit Karma, TurboTax) unlocks financial-outcome data &mdash; campaign &rarr; revenue attribution, business health scoring &mdash; that no standalone ESP or design tool can match.</p>
-    </div>
-  </div>
-
-  <!-- FY27 PHASED ROADMAP -->
-  <div class="pop-eyebrow">FY27 Phased Roadmap</div>
-  <table class="pop-roadmap">
-    <thead>
-      <tr>
-        <th class="col-label">Phase</th>
-        <th class="q1h">Q1: Foundation</th>
-        <th class="q2h">Q2: AI Activation</th>
-        <th class="q3h">Q3: Unification</th>
-        <th class="q4h">Q4: Revenue Engine</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Key Features</strong></td>
-        <td>
-          <ul>
-            <li>NEB rendering parity fixes</li>
-            <li>Brand Kit reliability + multi-brand</li>
-            <li>Builder SLOs (99.9% uptime, P95 &lt;500ms)</li>
-            <li>Content Studio + Canva sync fix</li>
-            <li>NEB Code Mode for Classic migration</li>
-          </ul>
-        </td>
-        <td>
-          <ul>
-            <li>Universal Content blocks (Klaviyo parity)</li>
-            <li>Write with AI funnel recovery</li>
-            <li>Conversational in-canvas editing</li>
-            <li>AI Email Setup Agent (first-send)</li>
-            <li>Template ICP fit (B2B, ProServ)</li>
-          </ul>
-        </td>
-        <td>
-          <ul>
-            <li>Unified email + SMS canvas</li>
-            <li>Generative SMS in composer</li>
-            <li>Real-time multi-author collaboration</li>
-            <li>AI image gen + Magic-tier editing</li>
-            <li>Cross-template / cross-flow reuse</li>
-          </ul>
-        </td>
-        <td>
-          <ul>
-            <li>In-canvas revenue attribution</li>
-            <li>Per-profile Smart Send</li>
-            <li>AI Performance Watchdog</li>
-            <li>Campaign confidence scoring</li>
-            <li>Compliance-aware localization</li>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <td><strong>Experience Unlocked</strong></td>
-        <td>
-          <ul>
-            <li>&ldquo;My sends look exactly as designed&rdquo;</li>
-            <li>&ldquo;Brand Kit just works&rdquo;</li>
-            <li>Classic &rarr; NEB migration unblocked</li>
-          </ul>
-        </td>
-        <td>
-          <ul>
-            <li>&ldquo;Signup to first send in minutes&rdquo;</li>
-            <li>&ldquo;AI drafts match my brand voice&rdquo;</li>
-            <li>Edit once, reuse everywhere</li>
-          </ul>
-        </td>
-        <td>
-          <ul>
-            <li>&ldquo;Email + SMS feel like one campaign&rdquo;</li>
-            <li>Team workflows without save conflicts</li>
-            <li>Canva-grade creative without leaving MC</li>
-          </ul>
-        </td>
-        <td>
-          <ul>
-            <li>&ldquo;I see revenue impact before I send&rdquo;</li>
-            <li>Personalized timing per recipient</li>
-            <li>Enterprise-grade governance + compliance</li>
-          </ul>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- EXPERIENCE SHIFT -->
-  <div class="pop-eyebrow">The Experience Shift</div>
-  <div class="pop-shift">
-    <div class="from-box">
-      <strong>FROM:</strong> A manual, channel-fragmented workflow where email and SMS are built in separate tools, AI is a bolted-on text generator that ignores your brand, and campaign success is measured after the fact &mdash; if at all. Customers spend hours assembling each send and have no confidence it will render correctly.
-    </div>
-    <div class="arrow">&rarr;</div>
-    <div class="to-box">
-      <strong>TO:</strong> An AI-first unified builder where a single conversational prompt generates brand-consistent, channel-adapted creative across email, SMS, and push. Send-time intelligence optimizes delivery per recipient, revenue attribution is visible before send, and every interaction makes the AI smarter. Creation time drops from hours to minutes.
-    </div>
-  </div>
-
-  <!-- METRICS -->
-  <div class="pop-eyebrow">How We Measure Success</div>
-  <div class="pop-metrics">
-    <div class="m-group">
-      <h5>Customer Benefit Metrics</h5>
-      <div class="m-row"><div class="m-label">Primary</div><div class="m-val"><strong>Time-to-first-send:</strong> signup &rarr; first campaign sent (target: &lt;15 min for new users, from current ~45 min)</div></div>
-      <div class="m-row"><div class="m-label">Primary</div><div class="m-val"><strong>Campaign confidence score:</strong> % of sends passing pre-send checklist (render, deliverability, brand compliance) without manual fixes</div></div>
-      <div class="m-row"><div class="m-label">Secondary</div><div class="m-val"><strong>AI adoption rate:</strong> % of campaigns using at least one AI feature (Write with AI, generative image, Smart Send)</div></div>
-      <div class="m-row"><div class="m-label">Secondary</div><div class="m-val"><strong>Universal Content reuse rate:</strong> % of campaigns using a saved Universal Content block</div></div>
-    </div>
-    <div class="m-group">
-      <h5>Business Outcome Metrics</h5>
-      <div class="m-row"><div class="m-label">Primary</div><div class="m-val"><strong>Editor-attributed ARR:</strong> ~$21M target (Paid $6.7M + Free $8.7M + Trial $5.6M) via adoption, activation, retention, and conversion uplift</div></div>
-      <div class="m-row"><div class="m-label">Primary</div><div class="m-val"><strong>NEB adoption rate:</strong> % of paid senders using New Email Builder as primary (target: &gt;80%, closing Classic tail)</div></div>
-      <div class="m-row"><div class="m-label">Secondary</div><div class="m-val"><strong>SMS attach rate:</strong> % of email campaigns with paired SMS send (target: 2x current baseline)</div></div>
-      <div class="m-row"><div class="m-label">Secondary</div><div class="m-val"><strong>Bulk Established retention:</strong> reverse the &minus;9.4% YoY decline (888.7K avg/mo) to flat or positive</div></div>
-    </div>
-  </div>
-
-  <div class="pop-source">
-    <strong>Sources:</strong> <a href="#revised" onclick="document.querySelector('[data-tab=revised]').click();return false;">Revised Goals</a> (~$21M ARR, 3 cohorts) &middot; <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> (74 initiatives, 5 pillars) &middot; <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a> (17 themes, ~$95K/mo) &middot; <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a> (5 Bets, 5 Workflow Shapes) &middot; <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> (BigQuery baselines) &middot; <a href="#memo" onclick="document.querySelector('[data-tab=memo]').click();return false;">Strategy Memo</a> &middot; <a href="#freddiep2" onclick="document.querySelector('[data-tab=freddiep2]').click();return false;">Freddie Phase 2</a> (8 send-time capabilities).
-  </div>
+<div class="pop-subtabs">
+  <button class="pop-subtab-btn active" data-pop-target="onepager">One-Pager</button>
+  <button class="pop-subtab-btn" data-pop-target="twopager">Two-Pager</button>
 </div>
 
+<!-- ==================== ONE-PAGER ==================== -->
+<div class="pop-body pop-tab-active" data-pop-tab="onepager">
 
-<!-- ==================== VERSION 2: TWO-PAGER (Pages 2-3) ==================== -->
-<div class="pop-page page-2">
-  <div class="pop-page-label">Version 2 &middot; Two-Pager &middot; Page 1 of 2</div>
+<div class="pop-title">Mailchimp Unified Builder &mdash; Plan on a Page</div>
 
-  <div class="pop-title-bar">
-    <h1>Unified Email/SMS Builder &mdash; Expanded Plan on a Page</h1>
-    <span class="pop-badge">FY27 &middot; Detailed</span>
-  </div>
+<h2>Vision</h2>
+<p>Reimagine Mailchimp&rsquo;s builder as an AI-first unified creation platform that beats Canva on creative depth, beats Klaviyo on send-time intelligence, and delivers the most trusted campaign-to-revenue pipeline for SMBs. One builder, every channel, every customer&mdash;from first send to measurable revenue.</p>
 
-  <div class="pop-vision">
-    Reimagine Mailchimp&rsquo;s builder as an <em>AI-first unified creation platform</em> that beats Canva on creative depth, beats Klaviyo on send-time intelligence, and delivers the industry&rsquo;s most trusted campaign-to-revenue pipeline for SMBs. This plan connects 74 tactical initiatives across 5 customer-benefit pillars to a ~$21M ARR goal &mdash; with every claim traced to cited HVC MRR, BigQuery baselines, or validated user research.
-  </div>
+<h2>Key Tenets</h2>
+<table>
+  <thead><tr><th>Tenet</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Quality Is the Product</strong></td><td>Every send renders exactly as designed. P1 Quality &amp; Trust burns down ~$95K/mo HVC exposure before new features ship.</td></tr>
+    <tr><td><strong>AI That Ships, Not Demos</strong></td><td>Brand-Kit-aware conversational editing, generative SMS, and AI performance watchdog replace generic assistants with send-ready output.</td></tr>
+    <tr><td><strong>One Builder, Every Channel</strong></td><td>Email, SMS, and push in a single canvas with Universal Content blocks. Edit once, adapt per channel.</td></tr>
+    <tr><td><strong>Revenue You Can Measure</strong></td><td>In-canvas revenue attribution and campaign confidence scoring make ROI visible at send time.</td></tr>
+  </tbody>
+</table>
 
-  <!-- KEY TENETS (expanded) -->
-  <div class="pop-eyebrow">Key Tenets</div>
-  <div class="pop-grid cols-2">
-    <div class="pop-card tenet">
-      <h4>Quality Is the Product (P1 Quality &amp; Trust Foundation)</h4>
-      <p>Every send must render exactly as designed. P1 addresses 19 initiatives across NEB rendering, Brand Kit reliability, Content Studio stability, and Creative Assistant rediscovery &mdash; plus Builder SLOs (99.9% uptime, 99.5% crash-free, P95 load &lt;500ms, render fidelity &ge;99%). This burns down ~$15K/mo in cited HVC pain and reverses the bulk churn +2.1pp YoY trend before any new capability ships. Ships Q1.</p>
-    </div>
-    <div class="pop-card tenet">
-      <h4>AI That Ships, Not Demos (P2 AI-First Creative Experience)</h4>
-      <p>Brand-Kit-aware conversational editing, Write with AI funnel recovery (reversing Explore &minus;73.7% YoY collapse), generative SMS, AI image generation, and AI Performance Watchdog. 15 initiatives in P4 + AI elements across P2&ndash;P3. Maps to UR Bet #1 (conversational) and UR Bet #3 (AI-first activation). Ships Q2&ndash;Q3.</p>
-    </div>
-    <div class="pop-card tenet">
-      <h4>One Builder, Every Channel (P3 The Complete Builder)</h4>
-      <p>Universal Content blocks (Klaviyo Spring 2026 parity), unified email+SMS canvas, NEB Code Mode for Classic migration, and cross-template reuse. 11 initiatives in P2 + 16 in P5. Eliminates the channel-fragmented workflow and protects ~$1&ndash;2M in Premium/agency churn from Classic sunset. Ships Q2&ndash;Q3.</p>
-    </div>
-    <div class="pop-card tenet">
-      <h4>Revenue You Can Measure (Outcome Anchor)</h4>
-      <p>In-canvas revenue attribution, campaign confidence scoring, per-profile Smart Send, and financial-outcome dashboards. Every builder feature ties to a measurable customer outcome: time saved, trust earned, or dollars driven. Leverages Intuit ecosystem data (QuickBooks, Credit Karma) for campaign &rarr; revenue attribution no standalone ESP can match. Ships Q4.</p>
-    </div>
-  </div>
+<h2>Customer Benefit</h2>
+<ol>
+  <li><strong>Saves Time</strong> &mdash; Signup to first send in minutes. AI drafts, Universal Content reuse, and unified canvas cut creation time 60%+ for 1.02M paid and 870K free monthly active users.</li>
+  <li><strong>Builds Trust</strong> &mdash; Pre-send confidence scoring, render-fidelity guarantees (&ge;99%), and Brand Kit enforcement address 17 HVC themes (~$95K/mo cited MRR).</li>
+  <li><strong>Drives Revenue</strong> &mdash; In-canvas revenue attribution and Smart Send personalization transform the builder into a revenue engine. Target: ~$21M ARR ($6.7M paid + $8.7M free + $5.6M trial).</li>
+</ol>
 
-  <!-- PER-PILLAR BREAKDOWN -->
-  <div class="pop-eyebrow">Strategy Pillars &mdash; Representative Initiatives</div>
-  <div class="pop-pillar-row">
-    <div class="pop-pillar-card pp1">
-      <h4>P1: Quality &amp; Trust Foundation</h4>
-      <p>19 initiatives &middot; $3&ndash;5M ARR &middot; 0&ndash;3 months</p>
-      <ul>
-        <li><strong>I-1.1.1</strong> NEB rendering parity ($1,820/mo cited)</li>
-        <li><strong>I-1.2.2</strong> Font upload + AI font recognition ($3,350/mo)</li>
-        <li><strong>I-1.2.3</strong> Multi-brand kits ($2,460/mo)</li>
-        <li><strong>I-1.3.1</strong> Canva sync reliability ($2,500/mo)</li>
-        <li><strong>I-1.5</strong> Builder SLOs operating contract</li>
-      </ul>
-    </div>
-    <div class="pop-pillar-card pp2">
-      <h4>P2: AI-First Creative Experience</h4>
-      <p>26 initiatives (P2+P4) &middot; $8&ndash;13M ARR &middot; 3&ndash;12 months</p>
-      <ul>
-        <li><strong>I-2.1</strong> Universal Content blocks (Klaviyo parity)</li>
-        <li><strong>I-2.2</strong> NEB Code Mode + Liquid (Classic migration)</li>
-        <li><strong>I-4.1</strong> Write with AI funnel recovery (critical)</li>
-        <li><strong>I-4.2</strong> Conversational in-canvas editing</li>
-        <li><strong>I-4.4</strong> AI image gen + Magic-tier editing</li>
-      </ul>
-    </div>
-    <div class="pop-pillar-card pp3">
-      <h4>P3: The Complete Builder</h4>
-      <p>29 initiatives (P3+P5) &middot; $9&ndash;14M ARR &middot; 3&ndash;18 months</p>
-      <ul>
-        <li><strong>I-3.1</strong> New-user onboarding + AI Setup Agent</li>
-        <li><strong>I-3.2</strong> Template ICP fit (B2B, ProServ, non-ecom)</li>
-        <li><strong>I-5.1</strong> Unified email + SMS canvas</li>
-        <li><strong>I-5.2</strong> SMS retention + composer depth</li>
-        <li><strong>I-5.3</strong> Real-time multi-author collaboration</li>
-      </ul>
-    </div>
-  </div>
+<h2>Differentiation</h2>
+<table>
+  <thead><tr><th>Competitor</th><th>Our Advantage</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Canva</strong></td><td>Canva owns design but has no ESP-native send-time intelligence&mdash;inbox placement, per-profile Smart Send, deliverability scoring, campaign revenue attribution. We match creative depth and add the execution layer Canva structurally cannot build.</td></tr>
+    <tr><td><strong>Klaviyo</strong></td><td>Klaviyo leads flow automation but lacks co-editing, multi-brand kits, and Brand-Kit-aware conversational AI. Our unified builder combines Intuit-scale AI with campaign&rarr;revenue attribution via QuickBooks that no standalone ESP can replicate.</td></tr>
+  </tbody>
+</table>
 
-  <!-- UNRIVALED CUSTOMER BENEFIT (expanded) -->
-  <div class="pop-eyebrow">Unrivaled Customer Benefit</div>
-  <div class="pop-grid cols-3">
-    <div class="pop-card benefit">
-      <div class="pop-num">1</div>
-      <h4>Saves Time</h4>
-      <p>From signup to first send in minutes. AI-generated drafts, Universal Content reuse, and a unified canvas cut creation time by 60%+. Addresses UR Bet #3 (AI-first activation) and UR Workflow Shape #1 (Fast Monday Send). 1.02M paid + 870K free users build in the editor monthly &mdash; even a 10-minute saving per campaign compounds to millions of recovered hours annually.</p>
-    </div>
-    <div class="pop-card benefit">
-      <div class="pop-num">2</div>
-      <h4>Builds Trust &amp; Confidence</h4>
-      <p>Pre-send confidence scoring, render-fidelity guarantees, Brand Kit enforcement, and Builder SLOs. Directly addresses 17 HVC themes (~$95K/mo cited MRR) and the bulk churn +2.1pp YoY trend. Maps to UR Bet #2 (trust) and the #1 VoC theme: &ldquo;my email doesn&rsquo;t look right when it arrives.&rdquo; Builder SLOs (99.9% uptime, P95 &lt;500ms) set the quality floor.</p>
-    </div>
-    <div class="pop-card benefit">
-      <div class="pop-num">3</div>
-      <h4>Drives Revenue</h4>
-      <p>In-canvas revenue attribution, Smart Send personalization, and AI Performance Watchdog transform the builder into a revenue engine. Target: ~$21M ARR. Maps to UR Bet #5 (financial outcomes) and Growth Model levers L1&ndash;L6. Campaign-to-revenue pipeline leverages Intuit ecosystem data that Canva and Klaviyo structurally lack.</p>
-    </div>
-  </div>
+<h2>FY27 Roadmap</h2>
+<table>
+  <thead><tr><th>Phase</th><th>Key Features</th><th>Experience Unlocked</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Q1: Foundation</strong></td><td>NEB rendering parity, Brand Kit reliability + multi-brand, Builder SLOs (99.9% uptime), Content Studio + Canva sync, NEB Code Mode</td><td>&ldquo;My sends look exactly as designed&rdquo;; Classic&rarr;NEB migration unblocked</td></tr>
+    <tr><td><strong>Q2: AI Activation</strong></td><td>Universal Content blocks (Klaviyo parity), Write with AI funnel recovery, conversational in-canvas editing, AI Email Setup Agent, template ICP fit</td><td>&ldquo;Signup to first send in minutes&rdquo;; AI drafts match brand voice</td></tr>
+    <tr><td><strong>Q3: Unification</strong></td><td>Unified email+SMS canvas, generative SMS, real-time multi-author collab, AI image gen + Magic-tier editing, cross-template reuse</td><td>&ldquo;Email + SMS feel like one campaign&rdquo;; Canva-grade creative inside MC</td></tr>
+    <tr><td><strong>Q4: Revenue Engine</strong></td><td>In-canvas revenue attribution, per-profile Smart Send, AI Performance Watchdog, campaign confidence scoring, compliance-aware localization</td><td>&ldquo;I see revenue impact before I send&rdquo;; personalized timing per recipient</td></tr>
+  </tbody>
+</table>
 
-  <!-- FINANCIAL CASE PER COHORT -->
-  <div class="pop-eyebrow">Financial Case &mdash; ~$21M ARR by Cohort</div>
-  <div class="pop-cohort-row">
-    <div class="pop-cohort-card paid">
-      <div class="cc-label">Paid Customers</div>
-      <div class="cc-num">$6.7M</div>
-      <div class="cc-detail">1.02M paid active users/mo &middot; Direct ARR uplift via retention + activation &middot; ~32% of goal</div>
-    </div>
-    <div class="pop-cohort-card free">
-      <div class="cc-label">Free Users</div>
-      <div class="cc-num">$8.7M</div>
-      <div class="cc-detail">870K free active users/mo &middot; Free &rarr; Paid conversion uplift &middot; ~41% of goal &middot; 2x paid volume opportunity</div>
-    </div>
-    <div class="pop-cohort-card trial">
-      <div class="cc-label">Trial Signups</div>
-      <div class="cc-num">$5.6M</div>
-      <div class="cc-detail">2.36M signups/yr &middot; Trial &rarr; Paid activation &middot; ~27% of goal &middot; Worst single YoY decline (&minus;3.0pp)</div>
-    </div>
-  </div>
+<h2>Experience Shift</h2>
+<p><strong>FROM:</strong> Manual, channel-fragmented workflow. Email and SMS built in separate tools. AI is a bolted-on text generator that ignores your brand. Campaign success measured after the fact, if at all.</p>
+<p><strong>TO:</strong> AI-first unified builder. One conversational prompt generates brand-consistent creative across email, SMS, and push. Send-time intelligence optimizes per recipient. Revenue attribution visible before send. Creation time drops from hours to minutes.</p>
 
-  <!-- DIFFERENTIATION (expanded) -->
-  <div class="pop-eyebrow">Differentiation vs. Competitors</div>
-  <div class="pop-grid cols-2">
-    <div class="pop-card diff">
-      <h4>1. vs. Canva: Creative AI + ESP-Native = Unreplicable</h4>
-      <p>Canva owns design but has no sending infrastructure, deliverability data, audience segmentation, or campaign analytics. We close 18 documented Canva AI/AI 2.0 creative gaps (conversational campaign start, Magic Layers, Dream Lab, AI image manipulation, brand intelligence, memory, MCP bridge) while adding the marketing execution layer &mdash; inbox placement, per-profile Smart Send, deliverability scoring, A/B testing, and campaign revenue attribution &mdash; that Canva structurally cannot build. Source: Canva gap analysis (18 gaps) + Freddie Phase 2 (8 send-time capabilities).</p>
-    </div>
-    <div class="pop-card diff">
-      <h4>2. vs. Klaviyo: Brand-Aware + Financial-Outcome-Anchored</h4>
-      <p>Klaviyo (143K+ brands, 4.6/5 G2) leads in flow automation and DTC engagement-based pricing. But: no real-time co-editing, no multi-brand kits within one account, no Brand-Kit-aware conversational AI, and no financial-outcome attribution beyond email revenue. Mailchimp&rsquo;s unified builder combines Intuit-scale AI with campaign &rarr; QuickBooks revenue tracing that a standalone ESP cannot replicate. Klaviyo&rsquo;s DTC concentration and active-profile pricing are structural exposures we exploit with SMB breadth + Intuit ecosystem depth. Source: Klaviyo Brief + Klaviyo VoC tabs.</p>
-    </div>
-  </div>
+<h2>Metrics</h2>
+<table>
+  <thead><tr><th>Type</th><th>Primary</th><th>Secondary</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Customer Benefit</strong></td><td>Time-to-first-send &lt;15 min (from ~45 min); Campaign confidence score &gt;85%</td><td>AI adoption rate (% campaigns with &ge;1 AI feature); Universal Content reuse rate</td></tr>
+    <tr><td><strong>Business Outcome</strong></td><td>Editor-attributed ARR ~$21M (Paid $6.7M + Free $8.7M + Trial $5.6M); NEB adoption &gt;80%</td><td>SMS attach rate 2x baseline; Bulk Established retention flat or positive (reversing &minus;9.4% YoY)</td></tr>
+  </tbody>
+</table>
 
-  <div class="pop-source">
-    <strong>Continued on Page 2 &rarr;</strong> Competitive moats, detailed FY27 roadmap with credibility milestones, experience shift, risk &amp; mitigation, and full metrics framework.
-  </div>
 </div>
 
-<div class="pop-page page-3">
-  <div class="pop-page-label">Version 2 &middot; Two-Pager &middot; Page 2 of 2</div>
+<!-- ==================== TWO-PAGER ==================== -->
+<div class="pop-body" data-pop-tab="twopager" style="display:none;">
 
-  <!-- COMPETITIVE MOAT (expanded) -->
-  <div class="pop-eyebrow">Competitive Moat</div>
-  <div class="pop-grid cols-3">
-    <div class="pop-card moat">
-      <h4>Brand Data Moat</h4>
-      <p>Brand Kit + Memory accumulate customer brand rules, tone, visual assets, audience preferences, and campaign history over time. Every send trains the AI on that customer&rsquo;s brand. Competitors start from zero; we start from the customer&rsquo;s corpus. Multi-brand kits (I-1.2.3) and Brand Intelligence rules engine deepen this moat for agencies and multi-brand SMBs. Switching cost compounds with every campaign sent.</p>
-    </div>
-    <div class="pop-card moat">
-      <h4>Send-Time Intelligence Moat</h4>
-      <p>ESP-native telemetry &mdash; deliverability scores, inbox placement rates, open/click signals, bounce patterns, complaint loops, per-profile engagement history &mdash; feeds AI personalization at send time. This data exists only inside the sending platform. Canva has none of it. Klaviyo has it for DTC but lacks the Intuit financial layer. Freddie Phase 2 capabilities (send-time AI personalization, performance loop, compliance-aware localization) are architecturally impossible for a design tool to replicate.</p>
-    </div>
-    <div class="pop-card moat">
-      <h4>Platform Moat</h4>
-      <p>Intuit ecosystem (QuickBooks, Credit Karma, TurboTax) unlocks financial-outcome data no standalone ESP or design tool can match. Campaign &rarr; invoice attribution, business health scoring, tax-season targeting, and cross-product audience enrichment create a closed-loop revenue pipeline. This is the unique Mailchimp advantage within Intuit &mdash; the only marketing platform that can trace a campaign send to a QuickBooks transaction.</p>
-    </div>
-  </div>
+<div class="pop-title">Mailchimp Unified Builder &mdash; Plan on a Page (Expanded)</div>
 
-  <!-- FY27 DETAILED ROADMAP -->
-  <div class="pop-eyebrow">FY27 Phased Roadmap with Credibility Milestones</div>
-  <table class="pop-roadmap">
-    <thead>
-      <tr>
-        <th class="col-label">Phase</th>
-        <th class="q1h">Q1: Foundation<br/><span style="font-weight:400;font-size:9px;">Jul&ndash;Sep</span></th>
-        <th class="q2h">Q2: AI Activation<br/><span style="font-weight:400;font-size:9px;">Oct&ndash;Dec</span></th>
-        <th class="q3h">Q3: Unification<br/><span style="font-weight:400;font-size:9px;">Jan&ndash;Mar</span></th>
-        <th class="q4h">Q4: Revenue Engine<br/><span style="font-weight:400;font-size:9px;">Apr&ndash;Jun</span></th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Key Features</strong></td>
-        <td>
-          <ul>
-            <li><strong>I-1.1</strong> NEB rendering parity fixes (HVC #3&ndash;6)</li>
-            <li><strong>I-1.2</strong> Brand Kit reliability + multi-brand (HVC #7&ndash;10)</li>
-            <li><strong>I-1.5</strong> Builder SLOs operating contract</li>
-            <li><strong>I-1.3</strong> Content Studio + Canva sync (HVC #12&ndash;13)</li>
-            <li><strong>I-2.2</strong> NEB Code Mode + Liquid (Classic migration gate)</li>
-          </ul>
-        </td>
-        <td>
-          <ul>
-            <li><strong>I-2.1</strong> Universal Content blocks (Klaviyo parity)</li>
-            <li><strong>I-4.1</strong> Write with AI funnel recovery (Explore &minus;73.7%)</li>
-            <li><strong>I-4.2</strong> Conversational in-canvas editing (UR Bet #1)</li>
-            <li><strong>I-3.1</strong> AI Email Setup Agent (UR Bet #3)</li>
-            <li><strong>I-3.2</strong> Template ICP fit (B2B, ProServ, non-ecom)</li>
-          </ul>
-        </td>
-        <td>
-          <ul>
-            <li><strong>I-5.1</strong> Unified email + SMS canvas</li>
-            <li><strong>I-4.3</strong> Generative SMS in composer</li>
-            <li><strong>I-5.3</strong> Real-time multi-author collab (UR Bet #4)</li>
-            <li><strong>I-4.4</strong> AI image gen + Magic-tier editing</li>
-            <li><strong>I-2.3</strong> Cross-template / cross-flow reuse</li>
-          </ul>
-        </td>
-        <td>
-          <ul>
-            <li><strong>I-4.4.x</strong> In-canvas revenue attribution</li>
-            <li>Per-profile Smart Send (Freddie P2 S03)</li>
-            <li>AI Performance Watchdog (Freddie P2 S02)</li>
-            <li>Campaign confidence scoring</li>
-            <li>Compliance-aware localization (Freddie P2 S05)</li>
-          </ul>
-        </td>
-      </tr>
-      <tr>
-        <td><strong>Credibility Milestones</strong></td>
-        <td>
-          <ul>
-            <li>0 open S4 HVC rendering bugs</li>
-            <li>Builder SLOs passing for 30 consecutive days</li>
-            <li>Brand Kit data-drift alerting live</li>
-          </ul>
-        </td>
-        <td>
-          <ul>
-            <li>Write with AI Explore collapse reversed (target: &minus;30% vs &minus;73.7%)</li>
-            <li>Universal Content in 10% of campaigns</li>
-            <li>First-send &lt;20 min for new-user P75</li>
-          </ul>
-        </td>
-        <td>
-          <ul>
-            <li>SMS attach rate 2x baseline</li>
-            <li>NEB adoption &gt;70% of paid senders</li>
-            <li>Real-time collab beta with 100 accounts</li>
-          </ul>
-        </td>
-        <td>
-          <ul>
-            <li>~$21M ARR run-rate achieved</li>
-            <li>Bulk Established retention flat or positive YoY</li>
-            <li>Campaign confidence score &gt;85% of sends</li>
-          </ul>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<h2>Vision</h2>
+<p>Reimagine Mailchimp&rsquo;s builder as an AI-first unified creation platform that beats Canva on creative depth, beats Klaviyo on send-time intelligence, and delivers the most trusted campaign-to-revenue pipeline for SMBs. This plan connects 74 tactical initiatives across 3 pillars to a ~$21M ARR goal&mdash;every claim traced to cited HVC MRR, BigQuery baselines, or validated user research.</p>
 
-  <!-- EXPERIENCE SHIFT -->
-  <div class="pop-eyebrow">The Experience Shift</div>
-  <div class="pop-shift">
-    <div class="from-box">
-      <strong>FROM:</strong> A manual, channel-fragmented workflow where email and SMS are built in separate tools with separate templates, separate brand settings, and separate analytics. AI is a bolted-on text generator (Write with AI: Explore &minus;73.7% YoY, churn 77.2%) that ignores your brand kit and produces generic copy. Campaign success is measured after the fact &mdash; if at all. Customers spend hours per campaign, lack confidence their sends will render correctly (17 HVC themes, ~$95K/mo cited), and have no line-of-sight from &ldquo;send&rdquo; to &ldquo;revenue.&rdquo;
-    </div>
-    <div class="arrow">&rarr;</div>
-    <div class="to-box">
-      <strong>TO:</strong> An AI-first unified builder where a single conversational prompt generates brand-consistent, channel-adapted creative across email, SMS, and push. Universal Content blocks eliminate duplicate work. Send-time intelligence optimizes delivery per recipient using ESP-native telemetry. In-canvas revenue attribution connects every campaign to financial outcomes via the Intuit ecosystem. Brand Kit + Memory compound with every send. Campaign confidence scoring eliminates pre-send anxiety. Creation time drops from hours to minutes. The builder becomes the revenue engine.
-    </div>
-  </div>
+<h2>Key Tenets</h2>
+<table>
+  <thead><tr><th>Tenet</th><th>Description</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Quality Is the Product</strong></td><td>P1 Quality &amp; Trust Foundation: 19 initiatives across NEB rendering, Brand Kit reliability, Content Studio stability. Builder SLOs (99.9% uptime, P95 &lt;500ms, render fidelity &ge;99%). Burns down ~$95K/mo HVC exposure before new features ship. Ships Q1.</td></tr>
+    <tr><td><strong>AI That Ships, Not Demos</strong></td><td>P2 AI-First Creative: Brand-Kit-aware conversational editing, Write with AI funnel recovery (reversing Explore &minus;73.7% YoY), generative SMS, AI image gen, AI Performance Watchdog. Ships Q2&ndash;Q3.</td></tr>
+    <tr><td><strong>One Builder, Every Channel</strong></td><td>P3 The Complete Builder: Universal Content blocks (Klaviyo Spring 2026 parity), unified email+SMS canvas, NEB Code Mode for Classic migration. Protects ~$1&ndash;2M Premium/agency churn. Ships Q2&ndash;Q3.</td></tr>
+    <tr><td><strong>Revenue You Can Measure</strong></td><td>In-canvas revenue attribution, campaign confidence scoring, per-profile Smart Send. Leverages Intuit ecosystem (QuickBooks, Credit Karma) for campaign&rarr;revenue attribution no standalone ESP can match. Ships Q4.</td></tr>
+  </tbody>
+</table>
 
-  <!-- RISK & MITIGATION -->
-  <div class="pop-eyebrow">Top 5 Risks &amp; Mitigations</div>
-  <table class="pop-risk-table">
-    <thead>
-      <tr><th style="width:25%;">Risk</th><th style="width:35%;">Impact</th><th style="width:40%;">Mitigation</th></tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><strong>Classic sunset backlash</strong></td>
-        <td>~$1&ndash;2M Premium/agency churn if NEB Code Mode ships late. Classic users have deep Liquid/HTML workflows.</td>
-        <td>NEB Code Mode (I-2.2) ships Q1 <em>before</em> any sunset comms. Parity-gated migration: no customer forced until Code Mode + template import verified. Classic usage telemetry gate per NEA&rarr;NUNI Migration plan.</td>
-      </tr>
-      <tr>
-        <td><strong>Write with AI trust deficit</strong></td>
-        <td>Explore &minus;73.7% YoY + churn 77.2%. Users tried AI, got generic output, abandoned. Relaunching without trust recovery risks permanent brand damage.</td>
-        <td>Policy + product parallel tracks (I-4.1). Brand-Kit-aware generation mandatory before relaunch. Transparent AI attribution (&ldquo;Draft by Intuit Assist &middot; trained on your brand&rdquo;). Opt-in reactivation, not forced.</td>
-      </tr>
-      <tr>
-        <td><strong>Klaviyo Universal Content parity</strong></td>
-        <td>Klaviyo shipped Universal Content Spring 2026. Every month we delay widens the gap narrative in DTC migration pitches.</td>
-        <td>Universal Content blocks (I-2.1) prioritized Q2. Ship as reusable primitive that also powers unified canvas (I-5.1), so we build once and compound &mdash; not a one-off parity patch.</td>
-      </tr>
-      <tr>
-        <td><strong>SMS churn outpaces growth</strong></td>
-        <td>SMS +73.5% Explore growth but 53% churn. Net gains erode if retention isn&rsquo;t addressed alongside acquisition.</td>
-        <td>SMS retention initiatives (I-5.2) paired with unified canvas (I-5.1). Generative SMS (I-4.3) reduces creation friction. TCPA compliance automation (HVC #16, $57K cited) removes the #1 fear barrier.</td>
-      </tr>
-      <tr>
-        <td><strong>Intuit AI policy constraints</strong></td>
-        <td>Intuit AI Responsible Use policy may limit generative capabilities (image gen, personalization depth) vs. Canva/Klaviyo with fewer constraints.</td>
-        <td>Early policy engagement on each capability. Ship with guardrails as product features (Mailchimp Shield, AI Governance surface), turning compliance into competitive advantage for regulated SMBs.</td>
-      </tr>
-    </tbody>
-  </table>
+<h2>Customer Benefit</h2>
+<ol>
+  <li><strong>Saves Time</strong> &mdash; Signup to first send in minutes. AI drafts, Universal Content reuse, and unified canvas cut creation time 60%+. 1.02M paid + 870K free monthly active users. Maps to UR Bet #3 (AI-first activation) and Workflow Shape #1 (Fast Monday Send).</li>
+  <li><strong>Builds Trust</strong> &mdash; Pre-send confidence scoring, render-fidelity guarantees, Brand Kit enforcement, Builder SLOs. Addresses 17 HVC themes (~$95K/mo cited MRR) and bulk churn +2.1pp YoY trend. Maps to UR Bet #2.</li>
+  <li><strong>Drives Revenue</strong> &mdash; In-canvas revenue attribution, Smart Send personalization, AI Performance Watchdog. Target: ~$21M ARR. Maps to UR Bet #5 (financial outcomes) and Growth Model levers L1&ndash;L6.</li>
+</ol>
 
-  <!-- METRICS (expanded) -->
-  <div class="pop-eyebrow">How We Measure Success</div>
-  <div class="pop-metrics">
-    <div class="m-group">
-      <h5>Customer Benefit Metrics</h5>
-      <div class="m-row"><div class="m-label">Primary</div><div class="m-val"><strong>Time-to-first-send:</strong> signup &rarr; first campaign sent. Target: &lt;15 min (P75 new users). Current: ~45 min. Lever: AI Setup Agent + template ICP fit.</div></div>
-      <div class="m-row"><div class="m-label">Primary</div><div class="m-val"><strong>Campaign confidence score:</strong> % of sends passing pre-send checklist (render fidelity, deliverability, brand compliance, accessibility) without manual fixes. Target: &gt;85%.</div></div>
-      <div class="m-row"><div class="m-label">Secondary</div><div class="m-val"><strong>AI adoption rate:</strong> % of campaigns using &ge;1 AI feature. Tracks Write with AI recovery and conversational editing adoption. Baseline: current Explore &minus;73.7% YoY collapse.</div></div>
-      <div class="m-row"><div class="m-label">Secondary</div><div class="m-val"><strong>Universal Content reuse:</strong> % of campaigns reusing a saved block. Leading indicator of cross-channel efficiency gains. Target: 10% by Q2.</div></div>
-      <div class="m-row"><div class="m-label">Secondary</div><div class="m-val"><strong>NPS / CSAT (builder):</strong> builder-scoped satisfaction. Currently not isolated &mdash; instrument as part of Builder SLO work (P1.5).</div></div>
-    </div>
-    <div class="m-group">
-      <h5>Business Outcome Metrics</h5>
-      <div class="m-row"><div class="m-label">Primary</div><div class="m-val"><strong>Editor-attributed ARR:</strong> ~$21M target. Paid $6.7M (retention + activation) + Free $8.7M (free &rarr; paid conversion) + Trial $5.6M (trial &rarr; paid activation). Per Revised Goals methodology.</div></div>
-      <div class="m-row"><div class="m-label">Primary</div><div class="m-val"><strong>NEB adoption:</strong> % of paid senders using NEB as primary builder. Target: &gt;80% by Q4. Gate for Classic sunset.</div></div>
-      <div class="m-row"><div class="m-label">Secondary</div><div class="m-val"><strong>Bulk Established retention:</strong> reverse &minus;9.4% YoY (888.7K avg/mo). Target: flat or positive by Q4. Growth Model L1.</div></div>
-      <div class="m-row"><div class="m-label">Secondary</div><div class="m-val"><strong>SMS attach + retention:</strong> attach rate 2x baseline; churn &lt;40% (from 53%). Growth Model L3.</div></div>
-      <div class="m-row"><div class="m-label">Secondary</div><div class="m-val"><strong>HVC exposure burn-down:</strong> reduce cited HVC MRR exposure from ~$95K/mo to &lt;$20K/mo by Q2.</div></div>
-    </div>
-  </div>
+<h2>Differentiation</h2>
+<table>
+  <thead><tr><th>Competitor</th><th>Our Advantage</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Canva</strong></td><td>Canva owns design but has no sending infrastructure, deliverability data, or campaign analytics. We close 18 documented creative gaps (conversational start, Magic Layers, Dream Lab, AI image manipulation, brand intelligence, memory) and add inbox placement, Smart Send, deliverability scoring, A/B testing, and revenue attribution that Canva structurally cannot build.</td></tr>
+    <tr><td><strong>Klaviyo</strong></td><td>Klaviyo (143K+ brands, 4.6/5 G2) leads flow automation and DTC pricing. But: no co-editing, no multi-brand kits, no Brand-Kit-aware conversational AI, no financial-outcome attribution beyond email revenue. Our builder combines Intuit-scale AI with campaign&rarr;QuickBooks revenue tracing. Klaviyo&rsquo;s DTC concentration is a structural exposure we exploit with SMB breadth.</td></tr>
+  </tbody>
+</table>
 
-  <div class="pop-source">
-    <strong>Sources:</strong> <a href="#revised" onclick="document.querySelector('[data-tab=revised]').click();return false;">Revised Goals</a> (~$21M ARR across 3 cohorts, 10 levers, conservative targets) &middot; <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> (74 initiatives, 5 pillars, 20 sub-themes) &middot; <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a> (17 themes, ~$95K/mo cited MRR) &middot; <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a> (5 Bets, 5 Workflow Shapes, 25 HeyMarvin briefs) &middot; <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> (BigQuery baselines, YoY trends) &middot; <a href="#growthmodel" onclick="document.querySelector('[data-tab=growthmodel]').click();return false;">Growth Model</a> ($25&ndash;30M incremental, L1&ndash;L6 levers) &middot; <a href="#lossattr" onclick="document.querySelector('[data-tab=lossattr]').click();return false;">Loss Attribution</a> ($36&ndash;67M sensitivity band) &middot; <a href="#memo" onclick="document.querySelector('[data-tab=memo]').click();return false;">Strategy Memo</a> &middot; <a href="#freddie" onclick="document.querySelector('[data-tab=freddie]').click();return false;">Freddie Assessment</a> (0/17 HVC solved, 14 risks) &middot; <a href="#freddiep2" onclick="document.querySelector('[data-tab=freddiep2]').click();return false;">Freddie Phase 2</a> (8 send-time capabilities) &middot; <a href="#klviedi" onclick="document.querySelector('[data-tab=klviedi]').click();return false;">Klaviyo Brief</a> + <a href="#klvivoc" onclick="document.querySelector('[data-tab=klvivoc]').click();return false;">Klaviyo VoC</a> (competitive baseline).
-  </div>
+<h2>FY27 Roadmap</h2>
+<table>
+  <thead><tr><th>Phase</th><th>Key Features</th><th>Experience Unlocked</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Q1: Foundation</strong></td><td>NEB rendering parity (HVC #3&ndash;6), Brand Kit reliability + multi-brand (HVC #7&ndash;10), Builder SLOs, Content Studio + Canva sync (HVC #12&ndash;13), NEB Code Mode + Liquid</td><td>&ldquo;My sends look exactly as designed&rdquo;; Brand Kit just works; Classic&rarr;NEB unblocked</td></tr>
+    <tr><td><strong>Q2: AI Activation</strong></td><td>Universal Content blocks (Klaviyo parity), Write with AI recovery (Explore &minus;73.7%), conversational in-canvas editing (UR Bet #1), AI Setup Agent (UR Bet #3), template ICP fit</td><td>&ldquo;Signup to first send in minutes&rdquo;; AI drafts match brand voice; edit once, reuse everywhere</td></tr>
+    <tr><td><strong>Q3: Unification</strong></td><td>Unified email+SMS canvas, generative SMS, real-time multi-author collab (UR Bet #4), AI image gen + Magic-tier editing, cross-template reuse</td><td>&ldquo;Email + SMS feel like one campaign&rdquo;; team workflows without save conflicts</td></tr>
+    <tr><td><strong>Q4: Revenue Engine</strong></td><td>In-canvas revenue attribution, per-profile Smart Send (Freddie P2 S03), AI Performance Watchdog (P2 S02), campaign confidence scoring, compliance-aware localization (P2 S05)</td><td>&ldquo;I see revenue impact before I send&rdquo;; personalized timing; enterprise-grade compliance</td></tr>
+  </tbody>
+</table>
+
+<h2>Experience Shift</h2>
+<p><strong>FROM:</strong> Manual, channel-fragmented workflow. Email and SMS built in separate tools with separate templates, brand settings, and analytics. AI is a bolted-on text generator (Write with AI: Explore &minus;73.7% YoY, churn 77.2%) that ignores your brand. Customers spend hours per campaign with no confidence sends will render correctly (17 HVC themes, ~$95K/mo cited).</p>
+<p><strong>TO:</strong> AI-first unified builder. One conversational prompt generates brand-consistent, channel-adapted creative. Universal Content blocks eliminate duplicate work. Send-time intelligence optimizes per recipient via ESP-native telemetry. Revenue attribution connects every campaign to financial outcomes via Intuit ecosystem. Brand Kit + Memory compound with every send. Creation time drops from hours to minutes.</p>
+
+<h2>Metrics</h2>
+<table>
+  <thead><tr><th>Type</th><th>Primary</th><th>Secondary</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Customer Benefit</strong></td><td>Time-to-first-send &lt;15 min (from ~45 min); Campaign confidence &gt;85% of sends</td><td>AI adoption rate; Universal Content reuse 10% by Q2; NPS/CSAT (builder-scoped)</td></tr>
+    <tr><td><strong>Business Outcome</strong></td><td>Editor-attributed ARR ~$21M (Paid $6.7M + Free $8.7M + Trial $5.6M); NEB adoption &gt;80%</td><td>Bulk Established retention flat/positive (from &minus;9.4% YoY); SMS attach 2x; HVC exposure &lt;$20K/mo by Q2</td></tr>
+  </tbody>
+</table>
+
+<!-- Page 2 -->
+<div class="page-break"></div>
+
+<h2>3-Pillar Summary</h2>
+<table>
+  <thead><tr><th>Pillar</th><th>Horizon</th><th>Key Initiatives</th><th>Customer Outcome</th><th>$ Target</th></tr></thead>
+  <tbody>
+    <tr><td><strong>P1 Quality &amp; Trust</strong></td><td>0&ndash;3 months</td><td>NEB rendering parity, Brand Kit reliability + multi-brand, Canva sync, Builder SLOs, Content Studio stability</td><td>Builds Trust</td><td>$3&ndash;5M ARR</td></tr>
+    <tr><td><strong>P2 AI-First Creative</strong></td><td>3&ndash;12 months</td><td>Write with AI recovery, conversational editing, AI image gen, generative SMS, AI Performance Watchdog, Universal Content</td><td>Saves Time</td><td>$8&ndash;13M ARR</td></tr>
+    <tr><td><strong>P3 The Complete Builder</strong></td><td>3&ndash;18 months</td><td>Unified email+SMS canvas, NEB Code Mode, real-time collab, cross-template reuse, SMS retention, AI Setup Agent</td><td>Drives Revenue</td><td>$9&ndash;14M ARR</td></tr>
+  </tbody>
+</table>
+
+<h2>Financial Case</h2>
+<table>
+  <thead><tr><th>Cohort</th><th>Volume</th><th>Mechanism</th><th>Target</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Paid Customers</strong></td><td>1.02M active/mo</td><td>Retention + activation uplift</td><td>$6.7M</td></tr>
+    <tr><td><strong>Free Users</strong></td><td>870K active/mo</td><td>Free&rarr;Paid conversion uplift</td><td>$8.7M</td></tr>
+    <tr><td><strong>Trial Signups</strong></td><td>2.36M signups/yr</td><td>Trial&rarr;Paid activation</td><td>$5.6M</td></tr>
+    <tr><td colspan="3" style="text-align:right;"><strong>Total</strong></td><td><strong>~$21M</strong></td></tr>
+  </tbody>
+</table>
+
+<h2>Top 5 Risks &amp; Mitigations</h2>
+<table>
+  <thead><tr><th>Risk</th><th>Impact</th><th>Mitigation</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Classic sunset backlash</strong></td><td>~$1&ndash;2M Premium/agency churn if NEB Code Mode ships late</td><td>Code Mode ships Q1 before sunset comms; parity-gated migration; telemetry gate</td></tr>
+    <tr><td><strong>Write with AI trust deficit</strong></td><td>Explore &minus;73.7% YoY, churn 77.2%; relaunch risks permanent brand damage</td><td>Brand-Kit-aware generation mandatory before relaunch; transparent AI attribution; opt-in reactivation</td></tr>
+    <tr><td><strong>Klaviyo Universal Content parity</strong></td><td>Every month of delay widens gap narrative in DTC migration pitches</td><td>Universal Content prioritized Q2; built as reusable primitive powering unified canvas</td></tr>
+    <tr><td><strong>SMS churn outpaces growth</strong></td><td>+73.5% Explore growth but 53% churn; net gains erode</td><td>SMS retention paired with unified canvas; generative SMS reduces friction; TCPA automation ($57K cited)</td></tr>
+    <tr><td><strong>Intuit AI policy constraints</strong></td><td>May limit generative capabilities vs. Canva/Klaviyo</td><td>Early policy engagement; guardrails as product features (Mailchimp Shield); compliance as competitive advantage</td></tr>
+  </tbody>
+</table>
+
+<h2>Credibility Milestones</h2>
+<table>
+  <thead><tr><th>Quarter</th><th>Milestone</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Q1</strong></td><td>0 open S4 HVC rendering bugs; Builder SLOs passing 30 consecutive days; Brand Kit data-drift alerting live</td></tr>
+    <tr><td><strong>Q2</strong></td><td>Write with AI Explore collapse reversed (target &minus;30% vs &minus;73.7%); Universal Content in 10% of campaigns; first-send &lt;20 min P75</td></tr>
+    <tr><td><strong>Q3</strong></td><td>SMS attach rate 2x baseline; NEB adoption &gt;70% of paid senders; real-time collab beta with 100 accounts</td></tr>
+    <tr><td><strong>Q4</strong></td><td>~$21M ARR run-rate achieved; Bulk Established retention flat or positive YoY; campaign confidence &gt;85% of sends</td></tr>
+  </tbody>
+</table>
+
 </div>
+
+<script>
+(function(){
+  var panel = document.getElementById('panel-planpage');
+  var btns = panel.querySelectorAll('.pop-subtab-btn');
+  var tabs = panel.querySelectorAll('[data-pop-tab]');
+  btns.forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var target = btn.getAttribute('data-pop-target');
+      btns.forEach(function(b){ b.classList.remove('active'); });
+      btn.classList.add('active');
+      tabs.forEach(function(t){
+        if(t.getAttribute('data-pop-tab') === target){
+          t.style.display = '';
+          t.classList.add('pop-tab-active');
+        } else {
+          t.style.display = 'none';
+          t.classList.remove('pop-tab-active');
+        }
+      });
+    });
+  });
+})();
+</script>
 
 </div><!-- /panel-planpage -->
 
