@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mailchimp Email/SMS Unified Editor &amp; Builder — Competitive + Internal Strategy Brief</title>
-<meta name="description" content="17-tab executive brief on Mailchimp's unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist) with side-by-side competitive briefs for Klaviyo (Klaviyo Brief + Klaviyo VoC): capabilities, AI surface, JTBD, customers, pricing, internal HVC VoC, BigQuery product health, growth model, loss attribution, Nuni YoY audit (QA-validated metrics + target band $20-24M), revised goals (product-adoption scorecards across paid/free/trial cohorts ~$21M editor commitment), NEA->NUNI migration briefing (3-phase parity-gated playbook for $566M paid NEA ARR + $281M HVC concentration), NUNI repo intel (7-layer forensic + AI readiness + pain->code map across 62 repos in collab-email org), initiative canvas, strategy memo, build plan, Freddie / AI Email Generator prototype assessment (17 HVC themes + 5 UR bets + 10 Revised Goals levers scored, plus 14-risk pre-mortem on the new design), and synthesized sentiment from Reddit, G2, Trustpilot, vendor community, blogs." />
+<meta name="description" content="18-tab executive brief on Mailchimp's unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist) with side-by-side competitive briefs for Klaviyo (Klaviyo Brief + Klaviyo VoC): capabilities, AI surface, JTBD, customers, pricing, internal HVC VoC, BigQuery product health, growth model, loss attribution, Nuni YoY audit (QA-validated metrics + target band $20-24M), revised goals (product-adoption scorecards across paid/free/trial cohorts ~$21M editor commitment), NEA->NUNI migration briefing (3-phase parity-gated playbook for $566M paid NEA ARR + $281M HVC concentration), NUNI repo intel (7-layer forensic + AI readiness + pain->code map across 62 repos in collab-email org), initiative canvas, strategy memo, build plan, Freddie / AI Email Generator prototype assessment (17 HVC themes + 5 UR bets + 10 Revised Goals levers scored, plus 14-risk pre-mortem on the new design), Design Audit (Builder Lens Stack: 5-lens framework with 96-component JTBD matrix + 45-finding heuristic scorecard + Builder Hierarchy heatmap + top-10 RICE recommendations), and synthesized sentiment from Reddit, G2, Trustpilot, vendor community, blogs." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
@@ -810,6 +810,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="memo">Strategy Memo</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="buildplan">Build Plan</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="freddie">Freddie Assessment</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="designaudit">Design Audit</button>
     </div>
     <div style="display:flex; gap:8px;">
       <a class="btn" href="mailchimp.html">→ Automations brief</a>
@@ -11575,6 +11576,484 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 </div><!-- /panel-freddie -->
 
 
+<div class="tabpanel" id="panel-designaudit" role="tabpanel">
+<style>
+  #panel-designaudit h2 .num { display: inline-block; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 800; color: var(--brand); background: var(--chip); padding: 2px 6px; border-radius: 4px; margin-right: 8px; transform: translateY(-2px); letter-spacing: .08em; }
+  #panel-designaudit .sev-pill { display: inline-block; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 4px; letter-spacing: .04em; text-transform: uppercase; }
+  #panel-designaudit .sev-pill.s4 { background: #4B0000; color: #FFE7E0; }
+  #panel-designaudit .sev-pill.s3 { background: #FFE7E0; color: #9A1F00; }
+  #panel-designaudit .sev-pill.s2 { background: #FFEFD9; color: #8A4A00; }
+  #panel-designaudit .sev-pill.s1 { background: #FFFAF0; color: #6B5400; }
+  #panel-designaudit .sev-pill.s0 { background: #E6F5EE; color: #036A4F; }
+  #panel-designaudit .lens-card { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; }
+  #panel-designaudit .lens-card.l1 { border-left: 4px solid var(--brand);   background: linear-gradient(180deg,#FBFAFF,#FFFFFF); }
+  #panel-designaudit .lens-card.l2 { border-left: 4px solid #4472c4;         background: linear-gradient(180deg,#F4F8FE,#FFFFFF); }
+  #panel-designaudit .lens-card.l3 { border-left: 4px solid var(--good);     background: linear-gradient(180deg,#F4FBF7,#FFFFFF); }
+  #panel-designaudit .lens-card.l4 { border-left: 4px solid var(--warn);     background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-designaudit .lens-card.l5 { border-left: 4px solid var(--bad);      background: linear-gradient(180deg,#FFF5F2,#FFFFFF); }
+  #panel-designaudit .lens-card h4 { font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; margin: 0 0 6px; color: var(--ink); }
+  #panel-designaudit .lens-card .lens-eye { font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; margin-bottom: 4px; }
+  #panel-designaudit .lens-card.l1 .lens-eye { color: var(--brand); }
+  #panel-designaudit .lens-card.l2 .lens-eye { color: #4472c4; }
+  #panel-designaudit .lens-card.l3 .lens-eye { color: var(--good); }
+  #panel-designaudit .lens-card.l4 .lens-eye { color: var(--warn); }
+  #panel-designaudit .lens-card.l5 .lens-eye { color: var(--bad); }
+  #panel-designaudit td.b { font-weight: 600; color: var(--ink); }
+  #panel-designaudit .heatbar { display: inline-block; height: 12px; background: var(--brand); border-radius: 2px; vertical-align: middle; margin-right: 6px; }
+  #panel-designaudit .heatbar.cool { background: #4472c4; }
+  #panel-designaudit .heatbar.warm { background: var(--warn); }
+  #panel-designaudit .heatbar.hot  { background: var(--bad); }
+  #panel-designaudit .ascii-box { font-family: 'JetBrains Mono', 'SF Mono', Menlo, monospace; font-size: 11px; line-height: 1.45; background: #F8FAFB; border: 1px solid var(--line); border-radius: 6px; padding: 12px; overflow-x: auto; white-space: pre; color: var(--ink-2); }
+  #panel-designaudit .rec-row { display: grid; grid-template-columns: 30px 1fr 60px 50px 90px; gap: 8px; align-items: center; padding: 8px 12px; border-bottom: 1px solid var(--line); font-size: 12px; }
+  #panel-designaudit .rec-row:last-child { border-bottom: none; }
+  #panel-designaudit .rec-rank { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 18px; color: var(--brand); }
+  #panel-designaudit .rec-rec { color: var(--ink-2); }
+  #panel-designaudit .rec-rec b { color: var(--ink); }
+  #panel-designaudit .rice-pill { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; letter-spacing: .04em; }
+  #panel-designaudit .rice-pill.high { background: #E6F5EE; color: #036A4F; }
+  #panel-designaudit .rice-pill.med  { background: #FFEFD9; color: #8A4A00; }
+  #panel-designaudit .rice-pill.low  { background: #FFFAF0; color: #6B5400; }
+</style>
+
+<!-- Tab 18 Page 1: Exec summary + framework overview -->
+<section class="page" aria-label="Design Assessment Page 1">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Tab 18 &middot; Design + UX Assessment of the Freddie prototype</div>
+      <h1>The Builder Lens Stack &mdash; a 5-lens framework</h1>
+      <div class="subtitle">Structured design + UX assessment of the new Freddie / AI Email Generator prototype (<a href="https://ai-email-generator-steel.vercel.app/create" target="_blank" rel="noopener">ai-email-generator-steel.vercel.app</a>) using a 5-lens framework spined by the Builder Hierarchy of Needs (6 levels) + 7-Phase JTBD Creation Journey already adopted in this brief's strategy work. Answers: page hierarchy, workflow hierarchy, components &amp; widgets, component relationships, design approach, usability &amp; UX, and per-component functional benefit + customer problem solved. Cross-references <a href="#freddie" onclick="document.querySelector('[data-tab=freddie]').click();return false;">Tab 17 (Strategy fit)</a>, <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a>, <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a>, <a href="#revised" onclick="document.querySelector('[data-tab=revised]').click();return false;">Revised Goals</a>.</div>
+    </div>
+    <div class="meta">
+      <div>v1.0 &middot; 5 pages &middot; May 2026</div>
+      <div>96 components &middot; 45 heuristic findings &middot; 9 critical risks</div>
+    </div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="v">96</div><div class="l">Components mapped (atoms / molecules / organisms / templates)</div></div>
+    <div class="kpi"><div class="v">45</div><div class="l">Heuristic findings (Nielsen 10 + 5 AI heuristics + WCAG 2.2 AA)</div></div>
+    <div class="kpi"><div class="v">9 critical</div><div class="l">S4 findings &mdash; launch-blocking; concentrated in Flow E (Send)</div></div>
+    <div class="kpi"><div class="v">~$12.4M</div><div class="l">Plausible Revised Goals capture mid-estimate (49&ndash;70% of $21M)</div></div>
+  </div>
+
+  <div class="pull" style="margin-top:16px">
+    <strong>Bottom line.</strong> The design is a demo of where AI fits &mdash; not a delivery of the FY27 strategy. It is strong on activation (T1 + F2 + PA1 = ~58% of the $21M target) and credible on brand-voice consistency. It does <em>not</em> touch the dollar concentrations (SMS TCPA, Brand Kit reliability, rendering parity, multi-author, custom code) and it <em>amplifies risk</em> on several HVC themes. The Builder Hierarchy heatmap reveals the design over-invests in L3-L5 (where Mailchimp already scores 3-5) and under-invests in L1, L2, L6 (where the dollar gaps are).
+    <cite>Verdict: <strong>Iterate, don't ship as default.</strong> Ship the prototype as a feature-flagged front door for T1 (trial) + F2 (free activation) only, with 5 launch-blocking mitigations from Lens 4, and concurrent shipping of Pillar 1.5 Builder SLOs + 2.1 Universal Content + 5.2 SMS TCPA guardrails.</cite>
+  </div>
+
+  <div style="margin-top:18px">
+    <h2><span class="num">01</span>The 5 lenses &mdash; what each captures</h2>
+    <p>Each lens produces a distinct artifact. The <strong>Component &times; JTBD Matrix (Lens 3)</strong> is the spine; every other artifact carries <code>component_id</code> as the join key.</p>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1fr 1fr; gap: 8px; margin-top: 10px;">
+    <div class="lens-card l1">
+      <div class="lens-eye">LENS 1</div>
+      <h4>Structural IA</h4>
+      <p style="font-size: 11.5px; margin: 4px 0;">Sitemap &middot; route hierarchy &middot; modal vs route &middot; tab-vs-page rationale</p>
+    </div>
+    <div class="lens-card l2">
+      <div class="lens-eye">LENS 2</div>
+      <h4>Interaction Model</h4>
+      <p style="font-size: 11.5px; margin: 4px 0;">State transitions &middot; 5 task flows &middot; entry/exit &middot; error states</p>
+    </div>
+    <div class="lens-card l3">
+      <div class="lens-eye">LENS 3 (SPINE)</div>
+      <h4>Component &times; JTBD</h4>
+      <p style="font-size: 11.5px; margin: 4px 0;">96 components &middot; per-component: customer problem, benefit, JTBD phase, BH level</p>
+    </div>
+    <div class="lens-card l4">
+      <div class="lens-eye">LENS 4</div>
+      <h4>Heuristics + a11y</h4>
+      <p style="font-size: 11.5px; margin: 4px 0;">Nielsen 10 + 5 AI heuristics + WCAG 2.2 AA &middot; severity 0-4</p>
+    </div>
+    <div class="lens-card l5">
+      <div class="lens-eye">LENS 5</div>
+      <h4>Strategy Overlay</h4>
+      <p style="font-size: 11.5px; margin: 4px 0;">Builder Hierarchy heatmap &middot; Pillar coverage &middot; RICE top-10</p>
+    </div>
+  </div>
+
+  <div style="margin-top:18px">
+    <h2><span class="num">02</span>Why this framework over alternatives</h2>
+  </div>
+  <table style="margin-top:6px">
+    <thead><tr><th style="width:28%">Considered alternative</th><th>Rejected because</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Nielsen 10 only</td><td>Doesn't cover state machines, JTBD mapping, or strategy fit. Closes only 1 of 4 named gaps.</td></tr>
+      <tr><td class="b">Pure JTBD component map</td><td>Tells you "why each component exists" but says nothing about heuristic violations, accessibility, or state transitions. Closes 1 of 4 gaps.</td></tr>
+      <tr><td class="b">Atomic Design alone</td><td>Already implicitly done in <code>docs/04-components.md</code>. Repeating adds no information.</td></tr>
+      <tr><td class="b">Lightweight single-canvas audit</td><td>Flattens the IA/state-machine layer (gap #1) and won't carry a stakeholder readout.</td></tr>
+      <tr><td class="b">Full Hybrid B (6 layers)</td><td>Builder Hierarchy as a standalone layer duplicates JTBD. Folding it in as a scoring overlay is leaner.</td></tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:18px">
+    <h2><span class="num">03</span>How the 5 lenses join (the spine model)</h2>
+  </div>
+  <div class="ascii-box">Lens 1 (IA Map) ────────────────────────────┐
+                                            ↓
+Lens 2 (State Diagram) ── feeds task selection for ──→ Lens 4 (Heuristic walkthrough)
+                                            ↓
+Lens 3 (Component × JTBD Matrix) ── is the index table for ──→ everything else
+                                            ↑
+Lens 4 (Heuristic Scorecard) ── component_id joins back to ──→ Lens 3
+                                            ↑
+Lens 5 (Strategy Overlay) ── component_id joins back to ──→ Lens 3 + scores from Lens 4</div>
+  <p class="source"><strong>Where to find the source documents:</strong> Each lens has a markdown source at <code>/Users/dprabhakara/ai_workspace/freddie-design-assessment/lenses/0[1-5]-*.md</code>. Component inventory pulled from <code>ai-email-generator-decomp/docs/04-components.md</code>. State diagrams sourced from <code>docs/05-generation-flow.md</code> + screenshots 17-25. Strategy alignment per <a href="#memo" onclick="document.querySelector('[data-tab=memo]').click();return false;">Strategy Memo</a> Builder Hierarchy of Needs framework.</p>
+</section>
+
+<!-- Tab 18 Page 2: IA Map + State Diagram (Lenses 1 + 2) -->
+<section class="page" aria-label="Design Assessment Page 2">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Tab 18 &middot; Page 2 of 5 &middot; Lenses 1 + 2</div>
+      <h1 style="font-size:24px">IA map + state diagram</h1>
+      <div class="subtitle">Answers: <strong>page hierarchy</strong> (parent/child relationships) &middot; <strong>workflow hierarchy</strong> (step ordering &amp; state transitions) &middot; <strong>how the page is built from a design standpoint</strong> (shell switching, modal-vs-route).</div>
+    </div>
+    <div class="meta"><strong>3</strong> real routes &middot; <strong>2</strong> distinct shells &middot; <strong>5</strong> task flows</div>
+  </div>
+
+  <h2 style="margin-top:6px"><span class="num">2.1</span>The sitemap (real + placeholder)</h2>
+  <div class="ascii-box">freddie / ai-email-generator-steel.vercel.app
+│
+├── ROOT SHELL — "Home dashboard" shell (yellow stripe + global nav)
+│   └── / (Home dashboard) — REAL ROUTE
+│       ├── Top bar (Search, Live expert help, Avatar)
+│       ├── Left product nav (PLACEHOLDER — only Create is functional)
+│       │   ├── Create → routes to /create
+│       │   ├── Home ⊙ (active)
+│       │   └── 9 more nav items (Campaigns, Automations, SMS, Forms, Audience,
+│       │       Analytics, Website, Content, Integrations) — all placeholders
+│       └── Main: Marketing conversions + Audience + Revenue + Recent campaigns
+│
+└── CONVERSATION SHELL — "Create / Chat" shell (no global product nav)
+    │
+    ├── /create — REAL ROUTE
+    │   ├── Sidebar (collapsed 60px / expanded 240px)
+    │   │   ├── + New (start fresh conversation)
+    │   │   ├── Conversation list (empty state "No conversations yet")
+    │   │   └── Footer: Prototype settings + Brand &amp; business context
+    │   ├── Tab pill bar (8 channels — 6 of 8 are stubs)
+    │   │   ├── Email      [Pattern A — AI composer + recents + templates]
+    │   │   ├── SMS        [Pattern A]
+    │   │   ├── WhatsApp   [Pattern A]
+    │   │   ├── Automation [Pattern B — no AI; recents + scratch + templates]
+    │   │   ├── Form       [Pattern C — type cards + template grid]
+    │   │   ├── Survey     [Pattern C]
+    │   │   ├── Social     [Pattern C-stripped — hero card only]
+    │   │   └── Campaign   [Pattern A-stripped — composer only]
+    │   └── First-run onboarding overlay (URL importer)
+    │
+    └── /chat — REAL ROUTE
+        ├── Sidebar (persists from /create)
+        ├── Chat thread column (left)
+        └── Right panel (STATE A: strategy brief OR STATE B: email editor)
+            └── Modal layer: Brand Kit, Prototype settings, Theme popover</div>
+
+  <h2 style="margin-top:14px"><span class="num">2.2</span>The two-shell switching decision</h2>
+  <p style="font-size: 13px;">The app has two distinct shells. Clicking <code>Create</code> from Home doesn't just navigate &mdash; it <strong>disposes of all global navigation</strong>. The user loses the path back to Analytics, Audience, Campaigns. The only way back is the <code>×</code> Exit button &rarr; <code>/</code>, which is a one-way trap-door pattern.</p>
+
+  <h2 style="margin-top:14px"><span class="num">2.3</span>Modal vs route decisions</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:18%">Surface</th><th style="width:14%">Type</th><th>Why this choice &middot; where it hurts</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Brand Kit</td><td>Modal (full-screen)</td><td>Cross-cutting context. Modal correct &mdash; it's a "setup" task. <strong>Issue</strong>: apply-on-save behavior invisible (pre-mortem #6).</td></tr>
+      <tr><td class="b">Prototype settings</td><td>Popover</td><td>Quick-toggle area. Popover correct.</td></tr>
+      <tr><td class="b">Theme editor</td><td>Popover</td><td>Quick-toggle visual style. Popover correct. <strong>Issue</strong>: presets can override Brand Kit silently (pre-mortem #10).</td></tr>
+      <tr><td class="b">Onboarding</td><td>Overlay on /create</td><td>Disposable once dismissed. Reasonable.</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">Email editor canvas</td><td>Right-pane state (not a route)</td><td><strong>Questionable</strong>: editor un-deep-linkable. User can't share "the editor on this email."</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">Strategy panel</td><td>Right-pane state (mutex with editor)</td><td><strong>Questionable</strong>: brief un-deep-linkable. Browser back/forward breaks.</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:14px"><span class="num">2.4</span>Five task flows + their highest-severity risks</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:20%">Flow</th><th style="width:8%">Built?</th><th style="width:10%">Avg sev.</th><th>Highest-severity risk</th></tr></thead>
+    <tbody>
+      <tr><td class="b">A &middot; Cold start (free → first send)</td><td>✅ Yes</td><td>2.45</td><td>#5 brand-context banner upgrade pressure</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">B &middot; Power user (skip AI)</td><td>❌ Not really</td><td><strong>3.00</strong></td><td>#2 manual mode hidden behind post-generation radio (Critical)</td></tr>
+      <tr><td class="b">C &middot; Brand Kit loop-back</td><td>✅ Modal works</td><td>3.00</td><td>#6 Brand Kit data amplification</td></tr>
+      <tr><td class="b">D &middot; Refinement loop in editor</td><td>✅ Three paths</td><td>2.56</td><td>#10 theme preset overrides Brand Kit silently</td></tr>
+      <tr style="background:#4B0000;color:#FFE7E0"><td class="b" style="color:#FFE7E0">E &middot; Send (terminal action)</td><td>✅ Buttons present</td><td><strong>3.57</strong></td><td>#4 TCPA-class incident path (Critical · 4 of 9 S4 findings here)</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:14px"><span class="num">2.5</span>The "state contract" gap</h2>
+  <p style="font-size: 13px;">The prototype doesn't make clear <em>what state is preserved, where, and when</em>. Three classes of state are at play &mdash; Brand Kit (shared), conversation thread (per conversation), in-flight email draft (per chat), manual edits, theme selection. The user has no published contract: "Your draft is saved every X seconds. Manual edits are preserved when switching to AI unless you explicitly regenerate the section." This drives the Save-vs-Send ambiguity (pre-mortem #9) and the AI &harr; manual round-trip fragility (Flow D).</p>
+
+  <p class="source"><strong>Full source:</strong> Lens 1 + Lens 2 detailed write-ups at <code>freddie-design-assessment/lenses/01-structural-ia.md</code> and <code>02-interaction-model.md</code>. State diagrams use Mermaid <code>stateDiagram-v2</code>; rendered in the source markdown.</p>
+</section>
+
+<!-- Tab 18 Page 3: Component × JTBD Matrix (Lens 3, the spine) -->
+<section class="page" aria-label="Design Assessment Page 3">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Tab 18 &middot; Page 3 of 5 &middot; Lens 3 (the spine)</div>
+      <h1 style="font-size:24px">Component &times; JTBD Matrix</h1>
+      <div class="subtitle">Answers: <strong>widgets and components used</strong> &middot; <strong>relationships between components</strong> &middot; <strong>per-component functional benefit + customer problem solved</strong>. 96 components mapped, each with: hierarchy level (atom/molecule/organism/template) &middot; customer problem &middot; functional benefit &middot; JTBD phase (1 of 7) &middot; Builder Hierarchy level (1 of 6).</div>
+    </div>
+    <div class="meta"><strong>96</strong> components &middot; <strong>8</strong> groups &middot; <strong>0</strong> HVC themes directly solved by any single component</div>
+  </div>
+
+  <h2 style="margin-top:6px"><span class="num">3.1</span>Distribution by hierarchy level (Atomic Design)</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th>Level</th><th>Count</th><th>Share</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Atom</td><td>38</td><td>40%</td><td>Single primitives (buttons, inputs, icons, badges)</td></tr>
+      <tr><td class="b">Molecule</td><td>39</td><td>41%</td><td>Small atom groups (chips, KPI cells, search bar)</td></tr>
+      <tr><td class="b">Organism</td><td>16</td><td>17%</td><td>Distinct UI regions (composer, modal, panel, card)</td></tr>
+      <tr><td class="b">Template</td><td>2</td><td>2%</td><td>Layout patterns (Home shell, Conversation shell)</td></tr>
+      <tr style="background:#F4FBF7"><td class="b">Total</td><td><strong>95</strong></td><td>100%</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:14px"><span class="num">3.2</span>Distribution by JTBD phase</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th>JTBD Phase</th><th>Count</th><th>%</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td class="b">P1 Choose structure</td><td>14</td><td>18%</td><td>Strong &mdash; onboarding + chips + recents + templates all here</td></tr>
+      <tr style="background:#F4FBF7"><td class="b">P2 Establish brand &amp; style</td><td>18</td><td>23%</td><td><strong>Strongest</strong> &mdash; Brand Kit modal + theme popover + style inputs</td></tr>
+      <tr><td class="b">P3 Add &amp; place content (Compose)</td><td>17</td><td>22%</td><td>Strong &mdash; composer + chat + canvas + manual blocks</td></tr>
+      <tr><td class="b">P4 Refine &amp; polish (Compose)</td><td>8</td><td>10%</td><td>Adequate &mdash; follow-up chips + edit/redo + theme tweaks</td></tr>
+      <tr><td class="b">P5 Personalize &amp; tailor</td><td>8</td><td>10%</td><td>Adequate &mdash; strategy panel fields + brand voice</td></tr>
+      <tr><td class="b">P6 Preview &amp; QA loop</td><td>9</td><td>12%</td><td>Adequate &mdash; viewport radio + Preview + Send test + KPIs</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">P7 Learn &amp; reuse</td><td>5</td><td>7%</td><td><strong>Gap</strong> &mdash; recents + drafts + AI feedback only, no Universal Content</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:14px"><span class="num">3.3</span>Sample matrix rows &mdash; the key components on each surface</h2>
+  <p style="font-size: 12px; color: var(--muted);">Full 96-row matrix in source <code>03-component-jtbd-matrix.md</code>; 18 representative rows shown here.</p>
+
+  <h3 style="margin-top:8px; font-size:13px; font-family:'Source Serif 4',Georgia,serif;">App-shell components</h3>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:6%">ID</th><th style="width:14%">Component</th><th style="width:6%">Lvl</th><th style="width:20%">Customer problem solved</th><th style="width:20%">Functional benefit</th><th style="width:6%">JTBD</th><th style="width:6%">BH</th><th style="width:8%">HVC</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td class="b">C-07</td><td>Left product nav (Home shell)</td><td>Org</td><td>"Get me to the area I care about"</td><td>Product-area navigation (11 items)</td><td>—</td><td>L3</td><td>—</td><td><span class="sev-pill s3">Risk</span> 10 of 11 placeholders</td></tr>
+      <tr><td class="b">C-09</td><td>Sidebar expanded (Conv shell)</td><td>Org</td><td>"Show me my conversations"</td><td>Conversation history + settings + brand context</td><td>P7</td><td>L3</td><td>—</td><td><span class="sev-pill s2">Partial</span> no search/rename</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">C-12</td><td>Exit (×) button</td><td>Atom</td><td>"Get me out of here"</td><td>One-click return to home</td><td>—</td><td>L3</td><td>—</td><td><span class="sev-pill s3">Risk</span> one-way trap-door</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:10px; font-size:13px; font-family:'Source Serif 4',Georgia,serif;">Create-tab + composer components</h3>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:6%">ID</th><th style="width:14%">Component</th><th style="width:6%">Lvl</th><th style="width:20%">Customer problem solved</th><th style="width:20%">Functional benefit</th><th style="width:6%">JTBD</th><th style="width:6%">BH</th><th style="width:8%">HVC</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr style="background:#FFF5F2"><td class="b">C-13</td><td>Tab pill bar (8 channels)</td><td>Org</td><td>"Which channel am I creating for?"</td><td>Channel switcher</td><td>P1</td><td>L6</td><td>—</td><td><span class="sev-pill s3">Risk</span> 6 of 8 stubs</td></tr>
+      <tr><td class="b">C-16</td><td>AI composer shell (Pattern A)</td><td>Org</td><td>"Blank-page paralysis"</td><td>Prompt-to-email primary flow</td><td>P1, P3</td><td>L5</td><td>—</td><td><span class="sev-pill s0">Solves</span> primary value prop</td></tr>
+      <tr><td class="b">C-19</td><td>Prompt input textarea</td><td>Atom</td><td>"Describe what I want"</td><td>Free-form prompt entry</td><td>P1</td><td>L5</td><td>—</td><td><span class="sev-pill s0">Solves</span></td></tr>
+      <tr style="background:#FFF5F2"><td class="b">C-23</td><td>Brand-context banner</td><td>Mol</td><td>"AI doesn't know my brand"</td><td>Reminds + gates better output</td><td>P2</td><td>L4</td><td>#8</td><td><span class="sev-pill s4">Critical Risk</span> upgrade pressure on Free</td></tr>
+      <tr><td class="b">C-25</td><td>Quick-prompt chip (↳)</td><td>Mol</td><td>"I don't know what to ask"</td><td>Pre-seeded prompt examples</td><td>P1</td><td>L5</td><td>—</td><td><span class="sev-pill s0">Solves</span></td></tr>
+      <tr style="background:#FFF5F2"><td class="b">C-27</td><td>"Start from recent email" carousel</td><td>Org</td><td>"I have unfinished work"</td><td>Resume Drafts + edit Sent</td><td>P1, P7</td><td>L3</td><td>#6</td><td><span class="sev-pill s4">Critical Risk</span> origin filter missing</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:10px; font-size:13px; font-family:'Source Serif 4',Georgia,serif;">Chat thread + strategy panel components</h3>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:6%">ID</th><th style="width:14%">Component</th><th style="width:6%">Lvl</th><th style="width:20%">Customer problem solved</th><th style="width:20%">Functional benefit</th><th style="width:6%">JTBD</th><th style="width:6%">BH</th><th style="width:8%">HVC</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td class="b">C-41</td><td>Assistant artifact card (Ready pill)</td><td>Mol</td><td>"Did AI succeed?"</td><td>Status indicator</td><td>P3, P6</td><td>L5</td><td>—</td><td><span class="sev-pill s2">Partial</span> no Failed state</td></tr>
+      <tr><td class="b">C-43</td><td>Assistant message body (prose)</td><td>Mol</td><td>"Explain what AI did + why"</td><td>Narrative reasoning</td><td>P3, P6</td><td>L5</td><td>—</td><td><span class="sev-pill s0">Solves</span> strong UX pattern</td></tr>
+      <tr><td class="b">C-44</td><td>Copy/Like/Dislike/Regenerate row</td><td>Mol</td><td>"Tell AI it was good/bad"</td><td>Feedback loop + iteration</td><td>P4, P7</td><td>L5</td><td>—</td><td><span class="sev-pill s0">Solves</span> standard pattern</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">C-48</td><td>Strategy: Recipients select</td><td>Mol</td><td>"Who gets this?"</td><td>Audience selection</td><td>P5</td><td>L5</td><td>—</td><td><span class="sev-pill s4">Critical Risk</span> no audience confirm at send</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:10px; font-size:13px; font-family:'Source Serif 4',Georgia,serif;">Editor + manual mode components</h3>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:6%">ID</th><th style="width:14%">Component</th><th style="width:6%">Lvl</th><th style="width:20%">Customer problem solved</th><th style="width:20%">Functional benefit</th><th style="width:6%">JTBD</th><th style="width:6%">BH</th><th style="width:8%">HVC</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr style="background:#FFF5F2"><td class="b">C-57</td><td>Mode radio (✦ AI / pencil manual)</td><td>Mol</td><td>"AI or manual?"</td><td>Mode switcher</td><td>P1, P3</td><td>L5</td><td>—</td><td><span class="sev-pill s4">Critical Risk</span> manual hidden post-gen</td></tr>
+      <tr><td class="b">C-58</td><td>Viewport radio (desktop/mobile/split)</td><td>Mol</td><td>"How does it look on different devices?"</td><td>Multi-viewport preview</td><td>P6</td><td>L2</td><td>#3</td><td><span class="sev-pill s2">Partial</span> doesn't fix divergence</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">C-67</td><td>Send email split button (▾)</td><td>Mol</td><td>"Ship it" + alt actions</td><td>Primary + Save draft + Export</td><td>P6</td><td>L3</td><td>—</td><td><span class="sev-pill s4">Critical Risk</span> no audience confirm</td></tr>
+      <tr><td class="b">C-70</td><td>Suggested follow-up toolbar</td><td>Mol</td><td>"What should I refine?"</td><td>Pre-seeded refinement prompts</td><td>P4</td><td>L5</td><td>—</td><td><span class="sev-pill s0">Solves</span> strong discovery</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:10px; font-size:13px; font-family:'Source Serif 4',Georgia,serif;">Brand Kit modal components</h3>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:6%">ID</th><th style="width:14%">Component</th><th style="width:6%">Lvl</th><th style="width:20%">Customer problem solved</th><th style="width:20%">Functional benefit</th><th style="width:6%">JTBD</th><th style="width:6%">BH</th><th style="width:8%">HVC</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr style="background:#FFF5F2"><td class="b">C-85</td><td>Logo upload tile</td><td>Org</td><td>"Add my logo"</td><td>Logo upload + variants</td><td>P2</td><td>L4</td><td>#9</td><td><span class="sev-pill s3">Risk</span> single-brand only</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">C-87</td><td>Font selectors (Heading/Body/Base size)</td><td>Mol</td><td>"Apply brand fonts"</td><td>Hardcoded 23-font dropdown</td><td>P2</td><td>L4</td><td>#10</td><td><span class="sev-pill s4">Critical Risk</span> no upload UI</td></tr>
+      <tr><td class="b">C-89</td><td>Brand voice composite (4 sub-fields)</td><td>Org</td><td>"Define brand tone for AI"</td><td>Personality/Formality/CTA/Headline style</td><td>P2, P5</td><td>L5</td><td>—</td><td><span class="sev-pill s0">Solves</span> AI input</td></tr>
+    </tbody>
+  </table>
+
+  <p class="source"><strong>Read the full 96-component matrix:</strong> <code>freddie-design-assessment/lenses/03-component-jtbd-matrix.md</code>. Each row carries <code>component_id</code> as the join key into Lens 4 (heuristic findings) and Lens 5 (strategy fit). HVC theme cross-references resolve to <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a>.</p>
+</section>
+
+<!-- Tab 18 Page 4: Heuristic + Accessibility Scorecard (Lens 4) -->
+<section class="page" aria-label="Design Assessment Page 4">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Tab 18 &middot; Page 4 of 5 &middot; Lens 4</div>
+      <h1 style="font-size:24px">Heuristic + Accessibility scorecard</h1>
+      <div class="subtitle">Answers: <strong>usability and user experience</strong>. Each of the 5 task flows from Lens 2 walked against <strong>Nielsen's 10 + 5 AI-specific heuristics (Microsoft HAX / Amershi)</strong> + WCAG 2.2 AA spot-check on top 10 components. 45 total findings · 9 critical (S4) · concentrated in Flow E (Send).</div>
+    </div>
+    <div class="meta">Nielsen 10 + 5 AI + WCAG 2.2 AA &middot; severity 0&ndash;4 &middot; <strong>9 S4</strong> · <strong>22 S3</strong> · <strong>13 S2</strong> · <strong>1 S1</strong></div>
+  </div>
+
+  <h2 style="margin-top:6px"><span class="num">4.1</span>The 15 heuristics applied</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:30%">Nielsen 10 (classical)</th><th>5 AI-specific (Microsoft HAX / Amershi)</th></tr></thead>
+    <tbody>
+      <tr><td class="b">N1 Visibility of status</td><td class="b">AI1 Make clear what AI can do</td></tr>
+      <tr><td class="b">N2 Match with real world</td><td class="b">AI2 Make clear how well AI can do it (calibrated trust)</td></tr>
+      <tr><td class="b">N3 User control &amp; freedom</td><td class="b">AI3 Time services based on context</td></tr>
+      <tr><td class="b">N4 Consistency &amp; standards</td><td class="b">AI4 Scope services when in doubt (graceful degradation)</td></tr>
+      <tr><td class="b">N5 Error prevention</td><td class="b">AI5 Support efficient correction</td></tr>
+      <tr><td class="b">N6 Recognition over recall</td><td colspan="1" style="text-align:center;color:var(--muted);font-size:12px;">+ severity scale: <strong>S0</strong> none &middot; <strong>S1</strong> minor &middot; <strong>S2</strong> moderate &middot; <strong>S3</strong> major &middot; <strong>S4</strong> critical (HVC-class)</td></tr>
+      <tr><td class="b">N7 Flexibility &amp; efficiency</td><td></td></tr>
+      <tr><td class="b">N8 Aesthetic &amp; minimalist</td><td></td></tr>
+      <tr><td class="b">N9 Help recognize/recover errors</td><td></td></tr>
+      <tr><td class="b">N10 Help &amp; documentation</td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:14px"><span class="num">4.2</span>Heuristic coverage summary (45 findings across 15 heuristics)</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:30%">Heuristic</th><th style="width:8%">S4</th><th style="width:8%">S3</th><th style="width:8%">S2</th><th style="width:8%">S1</th><th style="width:8%">Total</th><th>Comment</th></tr></thead>
+    <tbody>
+      <tr><td class="b">N1 Visibility of status</td><td>0</td><td>4</td><td>4</td><td>1</td><td><strong>9</strong></td><td>Most-cited issue: status weak across loading, autosave, post-send</td></tr>
+      <tr><td class="b">N3 User control &amp; freedom</td><td>1</td><td>4</td><td>0</td><td>0</td><td>5</td><td>Power-user flow worst &mdash; manual hidden, no skip-AI, no version history</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">N5 Error prevention</td><td><strong>4</strong></td><td>2</td><td>1</td><td>0</td><td><strong>7</strong></td><td><strong>Highest critical-finding count</strong></td></tr>
+      <tr><td class="b">N9 Recover from errors</td><td>1</td><td>2</td><td>0</td><td>0</td><td>3</td><td>Font-upload bug + send-error + Brand Kit incident recovery</td></tr>
+      <tr><td class="b">AI2 Calibrated trust</td><td>1</td><td>2</td><td>0</td><td>0</td><td>3</td><td>No confidence indicator, no change summary, no AI-content verification at send</td></tr>
+      <tr><td class="b">AI4 Scope when in doubt</td><td>1</td><td>3</td><td>0</td><td>0</td><td>4</td><td>URL fail + incomplete Brand Kit + power-user signal + SMS compliance</td></tr>
+      <tr><td class="b">AI5 Efficient correction</td><td>0</td><td>2</td><td>3</td><td>0</td><td>5</td><td>No preview-before-apply, no version history, no field-edit signal</td></tr>
+      <tr><td colspan="2" class="b">Others (N2, N4, N6, N7, N8, N10, AI1, AI3)</td><td colspan="3">1 S4 + 5 S3 + 5 S2 = 11 findings</td><td>11</td><td>Lower-density issues</td></tr>
+      <tr style="background:#F4FBF7"><td class="b">TOTAL</td><td><strong>9</strong></td><td><strong>22</strong></td><td><strong>13</strong></td><td><strong>1</strong></td><td><strong>45</strong></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:14px"><span class="num">4.3</span>The 9 critical (S4) findings &mdash; launch-blocking</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:5%">#</th><th style="width:14%">Flow</th><th style="width:8%">Heur.</th><th style="width:35%">Finding</th><th>Recommendation</th></tr></thead>
+    <tbody>
+      <tr><td class="b">A10</td><td>A Cold start</td><td>N5</td><td>"Send email" has no audience-confirmation modal &middot; 2,150 subs / 1 click</td><td>Mandatory confirm modal w/ recipient count</td></tr>
+      <tr><td class="b">B1</td><td>B Power user</td><td>N3</td><td>Manual mode is post-generation &middot; must interact w/ AI first</td><td>Primary "Skip AI &mdash; open blank editor" button</td></tr>
+      <tr><td class="b">B5</td><td>B Power user</td><td>N7</td><td>No HTML escape hatch even in manual &middot; Premium/agency ceiling</td><td>Ship NEB Code Mode (Pillar 2.2.3, Q3)</td></tr>
+      <tr><td class="b">C5</td><td>C Brand Kit</td><td>N9</td><td>No font upload affordance &middot; HVC #10 ($3,350/mo) unfixable</td><td>Add "+ Upload custom font" + AI font-recognition parity</td></tr>
+      <tr><td class="b">D4</td><td>D Refinement</td><td>N5</td><td>Theme preset can silently override Brand Kit (Wes Turner pattern)</td><td>Apply-and-confirm dialog: "Keep brand colors / override w/ preset"</td></tr>
+      <tr><td class="b">E1</td><td>E Send</td><td>N5</td><td>Same as A10 from editor surface</td><td>Same mitigation</td></tr>
+      <tr><td class="b">E2</td><td>E Send</td><td>AI2</td><td>No AI-content verification at send &middot; hallucinated footer/promo/products</td><td>Pre-send checklist: footer verified, promos match catalog, products in stock</td></tr>
+      <tr><td class="b">E4</td><td>E Send</td><td>N5</td><td>"Send a test email" has no recipient modal &middot; could go to wrong address</td><td>Recipient picker modal w/ own email pre-filled</td></tr>
+      <tr style="background:#4B0000;color:#FFE7E0"><td class="b" style="color:#FFE7E0">E7</td><td style="color:#FFE7E0">E Send (SMS)</td><td style="color:#FFE7E0">AI4</td><td style="color:#FFE7E0">SMS AI can generate non-TCPA-compliant content &middot; <strong>replays $57K HVC #16</strong></td><td style="color:#FFE7E0">Feature-flag SMS tab OFF until <a href="#canvas" style="color:#FFE7E0" onclick="document.querySelector('[data-tab=canvas]').click();return false;">I-5.2.3</a> guardrails ship</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:6px; font-size: 12px;"><strong>Critical observation:</strong> 5 of 9 criticals are concentrated in Flow E (Send). The most consequential transition is the most underspecified flow in the prototype.</p>
+
+  <h2 style="margin-top:14px"><span class="num">4.4</span>WCAG 2.2 AA spot-check on top 10 components</h2>
+  <p style="font-size: 13px;">No critical Level A failures spotted at a glance, but multiple <strong>AA-borderline</strong> issues:</p>
+  <ul style="font-size: 12.5px; margin-top: 4px; padding-left: 20px;">
+    <li>Icon-only buttons (Copy, Like, Dislike, Regenerate, mode radio) need <code>aria-label</code></li>
+    <li>Touch-target sizing (24&times;24) should be 44&times;44 per WCAG 2.2 SC 2.5.8 &mdash; affects mode radio, viewport radio, theme preset cards</li>
+    <li>Mode switcher needs <code>role="radiogroup"</code> + clear "AI" vs "Manual" labels for screen readers</li>
+    <li>Send buttons should include recipient count in accessible name: "Send email to 2,150 recipients"</li>
+    <li>Brand-context banner needs <code>role="region"</code> + <code>aria-label</code></li>
+    <li>Theme popover needs dialog role + focus trap + escape close</li>
+  </ul>
+  <p style="font-size: 13px;"><strong>Recommendation:</strong> full WCAG 2.2 AA audit by an a11y specialist before GA &mdash; especially because this surface is the entry point for ~870K monthly Free users where assistive-tech usage is non-zero.</p>
+
+  <h2 style="margin-top:14px"><span class="num">4.5</span>Severity heatmap (cross-flow)</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th>Flow</th><th>S4</th><th>S3</th><th>S2</th><th>S1</th><th>Total</th><th>Avg severity</th></tr></thead>
+    <tbody>
+      <tr><td class="b">A Cold start</td><td>1</td><td>5</td><td>4</td><td>1</td><td>11</td><td>2.45</td></tr>
+      <tr><td class="b">B Power user</td><td>2</td><td>4</td><td>2</td><td>0</td><td>8</td><td>3.00</td></tr>
+      <tr><td class="b">C Brand Kit loop</td><td>1</td><td>4</td><td>1</td><td>0</td><td>6</td><td>3.00</td></tr>
+      <tr><td class="b">D Refinement loop</td><td>1</td><td>3</td><td>5</td><td>0</td><td>9</td><td>2.56</td></tr>
+      <tr style="background:#4B0000;color:#FFE7E0"><td class="b" style="color:#FFE7E0">E Send</td><td style="color:#FFE7E0"><strong>4</strong></td><td style="color:#FFE7E0">3</td><td style="color:#FFE7E0">0</td><td style="color:#FFE7E0">0</td><td style="color:#FFE7E0">7</td><td style="color:#FFE7E0"><strong>3.57</strong></td></tr>
+    </tbody>
+  </table>
+
+  <p class="source"><strong>Full source:</strong> Lens 4 write-up at <code>freddie-design-assessment/lenses/04-heuristic-accessibility.md</code>. Each finding cross-references <code>component_id</code> from Lens 3 + a Recommendation. Screenshots referenced via <code>ai-email-generator-decomp/screenshots/</code> (29 PNGs).</p>
+</section>
+
+<!-- Tab 18 Page 5: Strategy Overlay + RICE recommendations -->
+<section class="page" aria-label="Design Assessment Page 5">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Tab 18 &middot; Page 5 of 5 &middot; Lens 5 + Top-10 RICE</div>
+      <h1 style="font-size:24px">Strategy-fit overlay + top-10 recommendations</h1>
+      <div class="subtitle">Builder Hierarchy heatmap (where the design invests vs where the strategy says the gaps are) + FY27 Pillar coverage scorecard + top-10 RICE-scored recommendations. <strong>Exec decision unblocked here</strong>: go / iterate / kill verdict for Freddie's direction.</div>
+    </div>
+    <div class="meta"><strong>~$10&ndash;15M</strong> capture (mid ~$12.4M / 59% of $21M) &middot; <strong>$6&ndash;18M</strong> downside if criticals unmitigated</div>
+  </div>
+
+  <h2 style="margin-top:6px"><span class="num">5.1</span>Builder Hierarchy heatmap &mdash; the strategic decoupling</h2>
+  <p style="font-size: 13px;">The density of components per Builder Hierarchy level shows <strong>where the prototype invests vs where the strategy has the biggest gaps</strong>. The design optimizes for L3-L5 (where Mailchimp already scores 3-5) and under-invests in L1, L2, L6 (where the dollar exposures concentrate).</p>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:30%">Builder Hierarchy level</th><th style="width:6%">Cnt</th><th style="width:38%">Density</th><th>Verdict</th></tr></thead>
+    <tbody>
+      <tr><td class="b">L1 Reliable &amp; Performant</td><td>4</td><td><span class="heatbar" style="width:8%"></span> 5%</td><td><span class="sev-pill s3">Under-invested</span> L1 is foundational</td></tr>
+      <tr><td class="b">L2 Mobile &amp; Rendering</td><td>3</td><td><span class="heatbar" style="width:6%"></span> 4%</td><td><span class="sev-pill s3">Under-invested</span> HVC #3 ($1,820/mo)</td></tr>
+      <tr><td class="b">L3 Efficient Workflow</td><td>36</td><td><span class="heatbar warm" style="width:70%"></span> 47%</td><td><span class="sev-pill s2">Over-invested</span> most components live here</td></tr>
+      <tr><td class="b">L4 Brand-Native &amp; Reusable</td><td>19</td><td><span class="heatbar warm" style="width:38%"></span> 25%</td><td><span class="sev-pill s0">Strategic fit</span> Pillar 2 ships through here</td></tr>
+      <tr><td class="b">L5 Intelligent &amp; AI-Powered</td><td>16</td><td><span class="heatbar hot" style="width:32%"></span> 21%</td><td><span class="sev-pill s0">Strategic fit</span> Pillar 4 ships through here</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">L6 Omnichannel &amp; Extensible</td><td>3</td><td><span class="heatbar cool" style="width:6%"></span> 4%</td><td><span class="sev-pill s4">Critical gap</span> HVC #16 ($57K), Bet 4 (multi-author)</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:14px"><span class="num">5.2</span>FY27 Pillar coverage scorecard</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:30%">Pillar</th><th style="width:8%">Strong</th><th style="width:8%">Partial</th><th style="width:8%">Miss</th><th style="width:8%">Risk</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="b">P1 Quality &amp; Trust</td><td>0</td><td>2</td><td>2</td><td>1</td><td>Builder SLOs missing; Brand Kit reliability amplification risk</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">P2 Universal Content + Migration</td><td>0</td><td>0</td><td>3</td><td>0</td><td><strong>Universal Content primitive entirely missing</strong></td></tr>
+      <tr style="background:#F4FBF7"><td class="b">P3 Activation</td><td>2</td><td>1</td><td>0</td><td>1</td><td><strong>Prototype IS this pillar</strong> &mdash; strong fit</td></tr>
+      <tr><td class="b">P4 AI</td><td>1</td><td>0</td><td>2</td><td>1</td><td>Conversational wedge built; image gen + Smart Send + Watchdog missing</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">P5 Unified Canvas + Collab</td><td>0</td><td>0</td><td>3</td><td>1</td><td>Co-edit misrepresented (Comments button); SMS TCPA risk; tabs ≠ canvas</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:14px"><span class="num">5.3</span>Capture roll-up (carried forward from Tab 17)</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th>Cohort</th><th>Target $</th><th>Capture estimate</th><th>Capture %</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Paid</td><td>$6.7M</td><td>$2.4&ndash;3.8M</td><td>36&ndash;57%</td></tr>
+      <tr><td class="b">Free</td><td>$8.7M</td><td>$4.1&ndash;6.0M</td><td>47&ndash;69%</td></tr>
+      <tr><td class="b">Trial</td><td>$5.6M</td><td>$3.7&ndash;4.9M</td><td>66&ndash;88%</td></tr>
+      <tr style="background:#F4FBF7"><td class="b">Total</td><td><strong>$21.0M</strong></td><td><strong>$10.2&ndash;14.7M</strong></td><td><strong>49&ndash;70%</strong></td></tr>
+      <tr><td class="b">Mid estimate</td><td>&mdash;</td><td><strong>~$12.4M</strong></td><td><strong>59%</strong></td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:14px"><span class="num">5.4</span>Top-10 RICE-scored recommendations</h2>
+  <p style="font-size: 12px;">Formula: <strong>R</strong>each (cohort) &times; <strong>I</strong>mpact (Lens 4 severity) &times; <strong>C</strong>onfidence &times; <strong>E</strong>ffort.</p>
+  <div style="margin-top: 6px; background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 4px;">
+    <div class="rec-row" style="background: #F8FAFB; font-weight: 700; font-size: 11px; color: var(--muted); border-bottom: 2px solid var(--line);">
+      <span>#</span><span>Recommendation</span><span>Reach</span><span>Impact</span><span>RICE</span>
+    </div>
+    <div class="rec-row"><span class="rec-rank">1</span><span class="rec-rec"><b>Mandatory audience-confirmation modal at Send</b> (E1, E4) &mdash; 2,150 subs, one click is the path to the $57K-class TCPA incident</span><span style="font-size:11px;">All paid (~1M)</span><span><span class="sev-pill s4">S4</span></span><span><span class="rice-pill high">HIGH</span></span></div>
+    <div class="rec-row"><span class="rec-rank">2</span><span class="rec-rec"><b>Feature-flag SMS tab OFF until TCPA guardrails ship</b> &mdash; $57K/mo at risk; AI can trivially generate non-compliant SMS today</span><span style="font-size:11px;">SMS (6.7K)</span><span><span class="sev-pill s4">S4</span></span><span><span class="rice-pill high">HIGH</span></span></div>
+    <div class="rec-row"><span class="rec-rank">3</span><span class="rec-rec"><b>AI-content verification pre-send</b> (E2) &mdash; footer address, promo codes, products must bind to real entities, not hallucinations</span><span style="font-size:11px;">All AI users</span><span><span class="sev-pill s4">S4</span></span><span><span class="rice-pill high">HIGH</span></span></div>
+    <div class="rec-row"><span class="rec-rank">4</span><span class="rec-rec"><b>Surface manual mode as primary entry + remember preference</b> (B1, B2, B4) &mdash; $281M HVC NEA stayer risk if forced through AI</span><span style="font-size:11px;">Premium+agency</span><span><span class="sev-pill s4">S4</span></span><span><span class="rice-pill high">HIGH</span></span></div>
+    <div class="rec-row"><span class="rec-rank">5</span><span class="rec-rec"><b>Reframe brand-context banner from upgrade pressure → value framing for Free</b> (A3, C-23) &mdash; F4 CSAT regression risk</span><span style="font-size:11px;">Free (~870K)</span><span><span class="sev-pill s3">S3</span></span><span><span class="rice-pill high">HIGH</span></span></div>
+    <div class="rec-row"><span class="rec-rank">6</span><span class="rec-rec"><b>Add font-upload UI in Brand Kit + AI font-recognition parity</b> (C5) &mdash; HVC #10 ($3,350/mo) currently unfixable on this surface</span><span style="font-size:11px;">Premium</span><span><span class="sev-pill s4">S4</span></span><span><span class="rice-pill med">MED</span></span></div>
+    <div class="rec-row"><span class="rec-rank">7</span><span class="rec-rec"><b>Templates carousel must have surface-origin filter</b> (NEB / Classic / All) &mdash; HVC #6 reverse for Classic anchors</span><span style="font-size:11px;">Classic anchors</span><span><span class="sev-pill s3">S3</span></span><span><span class="rice-pill med">MED</span></span></div>
+    <div class="rec-row"><span class="rec-rank">8</span><span class="rec-rec"><b>Theme preset application must respect Brand Kit (apply-and-confirm)</b> (D4) &mdash; Wes Turner pill-CTA pattern recurs otherwise</span><span style="font-size:11px;">All AI users</span><span><span class="sev-pill s4">S4</span></span><span><span class="rice-pill med">MED</span></span></div>
+    <div class="rec-row"><span class="rec-rank">9</span><span class="rec-rec"><b>Ship Universal Content primitive concurrently with this surface</b> (Pillar 2.1) &mdash; the 2026 most-asked feature is the P7 gap</span><span style="font-size:11px;">All editor users</span><span><span class="sev-pill s3">S3</span></span><span><span class="rice-pill med">MED</span></span></div>
+    <div class="rec-row"><span class="rec-rank">10</span><span class="rec-rec"><b>Add version history in chat thread</b> (D1) &mdash; per-generation rollback; restores Jack Hally / all-week ad-libber persona</span><span style="font-size:11px;">Power users</span><span><span class="sev-pill s3">S3</span></span><span><span class="rice-pill med">MED</span></span></div>
+  </div>
+
+  <h2 style="margin-top:18px"><span class="num">06</span>Dual-mode bottom lines</h2>
+  <table style="margin-top:6px">
+    <thead><tr><th style="width:18%">Audience</th><th>Read</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Exec audience</td><td><strong>Go / Iterate / Kill verdict: Iterate, don't ship as default.</strong> $10&ndash;15M upside is real (T1 + F2 activation), but $6&ndash;18M downside from unmitigated criticals could net flat or negative. Spend: ship as feature-flagged front door for trial + free signups, with 5 launch-blocking mitigations + concurrent shipping of P1.5 / P2.1 / P5.2.</td></tr>
+      <tr><td class="b">Design-team audience</td><td>The <strong>45 findings from Lens 4 + 96 components in Lens 3</strong> are the actionable backlog. Top priority: Flow E (Send) is the weakest flow with 4 of 9 criticals concentrated there. Second priority: Power-user (Flow B) needs structural rethink &mdash; manual mode shouldn't be post-generation only. Pattern to internalize: Brand Kit centrality means every Brand Kit bug becomes an email-level bug.</td></tr>
+    </tbody>
+  </table>
+
+  <p class="source"><strong>Sources cited:</strong> All 5 lens markdown files at <code>/Users/dprabhakara/ai_workspace/freddie-design-assessment/lenses/</code>. Decomposition at <code>ai-email-generator-decomp/docs/01-10</code>. Cross-references to <a href="#freddie" onclick="document.querySelector('[data-tab=freddie]').click();return false;">Tab 17 Strategy fit assessment</a>, <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a>, <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a>, <a href="#revised" onclick="document.querySelector('[data-tab=revised]').click();return false;">Revised Goals</a>, <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a>, <a href="#memo" onclick="document.querySelector('[data-tab=memo]').click();return false;">Strategy Memo</a>. Framework adopted from Builder Hierarchy of Needs + 7-Phase JTBD Creation Journey (per Nuni Builder Strategy &amp; Roadmap: Ose Amiegheme, Erin McCue, JB Lovell, Ashley Wiesner).</p>
+</section>
+
+</div><!-- /panel-designaudit -->
+
+
+
 
 
 </div>
@@ -11603,7 +12082,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','revised','migration','repointel','canvas','memo','buildplan','freddie'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','revised','migration','repointel','canvas','memo','buildplan','freddie','designaudit'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
