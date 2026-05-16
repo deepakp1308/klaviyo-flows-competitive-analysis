@@ -142,5 +142,14 @@ window.FDPX_DATA = {
     { num: "10", name: "ChatGPT & Claude MCP Bridge",
       layer: "AI 2.0", surface: "Settings",        sceneCount: 3,
       tagline: "Expose Mailchimp as an MCP server. Drive campaigns from external AI clients." }
-  ]
+  ],
+
+  /** Short value lines for the sticky chrome (overrides auto-generated payoff text). */
+  scenePayoffs: {
+    "s-menu": "Choose any Phase 1 capability—or walk all ten in order for the full story.",
+    "s-flowintro": "One path from plan to send: every new AI surface is switched on along the way.",
+    "s-flowzen": "All ten extensions compose: connectors, memory, brand voice, design AI, and MCP—together.",
+    "s-send-confirm": "Final checklist before ship: channel parity, brand version, and AI traces reviewed.",
+    "s-terminal": "You stayed inside Mailchimp for the whole creative loop—no Canva round-trip."
+  }
 };

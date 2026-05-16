@@ -25,8 +25,48 @@
   const exitBtn    = document.querySelector('[data-nav="exit"]');
   const counterEl  = document.querySelector('.counter-label');
   const channelTabs = document.querySelectorAll('.channel-tabs button');
+  const payoffEl   = document.getElementById('chrome-payoff');
+  const progressFill = document.getElementById('chrome-progress-fill');
+  const progressLabel = document.getElementById('chrome-progress-label');
+  const progressBar  = document.querySelector('.chrome-progress');
 
   if (!stage) { console.error('[fdpx] missing .stage'); return; }
+
+  function payoffText(sceneId, scene) {
+    const overrides = window.FDPX_DATA && window.FDPX_DATA.scenePayoffs;
+    if (overrides && overrides[sceneId]) return overrides[sceneId];
+    const baseId = sceneId.replace(/-(sms|w)$/, '');
+    if (baseId !== sceneId && overrides && overrides[baseId]) return overrides[baseId];
+    const f = scene.dataset.feature;
+    const title = scene.dataset.title || '';
+    if (f && window.FDPX_DATA && window.FDPX_DATA.features) {
+      const feat = window.FDPX_DATA.features.find(function (x) { return x.num === f; });
+      if (feat && title) return feat.name + ' — ' + title + '.';
+      if (feat) return feat.tagline;
+    }
+    if (title) return title + ' — follow the highlighted control.';
+    return '';
+  }
+
+  function markFeatureProgressFromScene(sceneId) {
+    var m = sceneId.match(/^s(\d{2})-outro$/);
+    if (!m) return;
+    var key = 'fdpx_done_features';
+    var raw = sessionStorage.getItem(key) || '';
+    var set = new Set(raw.split(',').filter(Boolean));
+    set.add(m[1]);
+    sessionStorage.setItem(key, Array.from(set).sort().join(','));
+  }
+
+  function syncMenuDoneStates() {
+    var grid = document.getElementById('feature-menu');
+    if (!grid) return;
+    var done = (sessionStorage.getItem('fdpx_done_features') || '').split(',').filter(Boolean);
+    grid.querySelectorAll('.menu-tile[data-feature-num]').forEach(function (tile) {
+      var n = tile.getAttribute('data-feature-num');
+      tile.classList.toggle('menu-tile--done', done.indexOf(n) !== -1);
+    });
+  }
 
   // ----- Scene index -------------------------------------------------------
   // Build a list of every scene id in DOM order; expose for debugging.
@@ -113,30 +153,49 @@
     }, previous ? TRANSITION_MS : 0);
 
     currentSceneId = id;
+    markFeatureProgressFromScene(id);
     updateChrome(target);
     updateChannelTabs(target);
   }
 
   // ----- Chrome counter ----------------------------------------------------
   function updateChrome(scene) {
-    if (!counterEl) return;
-    const f = scene.dataset.feature;
-    const step = scene.dataset.step;
-    const of = scene.dataset.of;
-    const title = scene.dataset.title || '';
-    if (f && step && of) {
-      counterEl.innerHTML =
-        '<strong>Feature ' + f + '</strong> &middot; ' +
-        'Scene <strong>' + step + ' of ' + of + '</strong>' +
-        (title ? ' &middot; ' + title : '');
-    } else if (title) {
-      counterEl.innerHTML = '<strong>' + title + '</strong>';
-    } else {
-      counterEl.textContent = '';
+    if (counterEl) {
+      const f = scene.dataset.feature;
+      const step = scene.dataset.step;
+      const of = scene.dataset.of;
+      const title = scene.dataset.title || '';
+      if (f && step && of) {
+        counterEl.innerHTML =
+          '<strong>Feature ' + f + '</strong> &middot; ' +
+          'Scene <strong>' + step + ' of ' + of + '</strong>' +
+          (title ? ' &middot; ' + title : '');
+      } else if (title) {
+        counterEl.innerHTML = '<strong>' + title + '</strong>';
+      } else {
+        counterEl.textContent = '';
+      }
     }
 
-    // Prev/Next disabled at boundaries
+    if (payoffEl) {
+      const copy = payoffText(currentSceneId, scene);
+      payoffEl.textContent = copy;
+    }
+
     const idx = sceneIds.indexOf(currentSceneId);
+    const pct = sceneIds.length > 1 ? Math.round((idx / (sceneIds.length - 1)) * 100) : 100;
+    if (progressFill) {
+      progressFill.style.width = pct + '%';
+    }
+    if (progressBar) {
+      progressBar.setAttribute('aria-valuenow', String(pct));
+    }
+    if (progressLabel) {
+      progressLabel.textContent = 'Scene ' + (idx >= 0 ? idx + 1 : 0) + ' / ' + sceneIds.length;
+    }
+
+    if (currentSceneId === 's-menu') syncMenuDoneStates();
+
     if (prevBtn) prevBtn.disabled = idx <= 0;
     if (nextBtn) nextBtn.disabled = idx === -1 || idx >= sceneIds.length - 1;
   }

@@ -7,7 +7,7 @@
 <meta name="description" content="Playable storyboard prototype of Freddie Deepak's Phase 1 — extending the Freddie / AI Email Generator with 10 new AI / AI 2.0 features (Image Manipulation, Dream Lab, Conversational Design Editing, Magic Layers, Brand Voice 2.0, Memory, Connectors, Sticker/GIF, Web Research, MCP Bridge). All 10 features fully clickable end-to-end across Email + SMS + WhatsApp. 96 baseline components reused, 1 new C-ID (C-97), 20 variants registered." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -31,10 +31,19 @@
       </div>
     </div>
     <nav class="nav" aria-label="Storyboard navigation">
-      <button data-nav="prev" aria-label="Previous scene">&larr; Prev</button>
-      <button data-nav="next" class="primary" aria-label="Next scene">Next &rarr;</button>
+      <button type="button" data-nav="prev" aria-label="Previous scene">&larr; Prev</button>
+      <button type="button" data-nav="next" class="primary" aria-label="Next scene">Next &rarr;</button>
       <a class="btn" href="../freddie-deepak-phase1.html" data-nav="exit">Exit to spec</a>
     </nav>
+  </div>
+  <div class="chrome-subrow">
+    <p class="chrome-payoff" id="chrome-payoff" aria-live="polite"></p>
+    <div class="chrome-progress-meta">
+      <div class="chrome-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Walkthrough progress">
+        <div class="chrome-progress-fill" id="chrome-progress-fill"></div>
+      </div>
+      <span class="chrome-progress-label" id="chrome-progress-label" aria-hidden="true"></span>
+    </div>
   </div>
 </header>
 
@@ -65,7 +74,7 @@
         Walk all 10 features &rarr;
       </button>
     </div>
-    <div class="hero-art" aria-hidden="true">✦</div>
+    <div class="hero-art" aria-hidden="true"><span class="hero-art-inner"></span></div>
   </div>
 
   <div class="menu-grid" id="feature-menu" role="list"></div>
@@ -75,14 +84,18 @@
   document.addEventListener('DOMContentLoaded', () => {
     const grid = document.getElementById('feature-menu');
     if (!grid || !window.FDPX_DATA) return;
-    grid.innerHTML = window.FDPX_DATA.features.map(f => `
-      <a class="menu-tile" data-jump-to="s${f.num}-intro" role="listitem">
+    const done = (sessionStorage.getItem('fdpx_done_features') || '').split(',').filter(Boolean);
+    grid.innerHTML = window.FDPX_DATA.features.map(f => {
+      const doneClass = done.includes(f.num) ? ' menu-tile--done' : '';
+      return `
+      <a class="menu-tile${doneClass}" data-jump-to="s${f.num}-intro" data-feature-num="${f.num}" role="listitem">
         <span class="tile-num">FEAT ${f.num}</span>
         <span class="tile-layer">${f.layer}</span>
         <span class="tile-name">${f.name}</span>
+        <span class="tile-tagline">${f.tagline}</span>
         <span class="tile-meta">${f.surface} · ${f.sceneCount} scenes</span>
-      </a>
-    `).join('');
+      </a>`;
+    }).join('');
   });
 </script>
 
@@ -139,9 +152,14 @@
       <div class="mcds-editor">
         <div class="chat-side">
           <div class="mcds-chat-bubble assistant">
-            <div class="ab-header"><span class="mcds-snowflake">✦</span>Email is ready <span class="mcds-tag ready">Ready</span></div>
+            <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>Email is ready <span class="mcds-tag ready">Ready</span></div>
             <p style="font-size:12px; margin:0;">Built a welcome email with social-proof hero. Click any element on the canvas to edit it.</p>
-            <div class="mcds-feedback-row"><span>📋 Copy</span><span>👍</span><span>👎</span><span>↺</span></div>
+            <div class="mcds-feedback-row">
+              <span class="mcds-fr-item"><span class="fdpx-ico fdpx-ico-copy" aria-hidden="true"></span>Copy</span>
+              <span class="mcds-fr-item" aria-label="Thumbs up"><span class="fdpx-ico fdpx-ico-thumb-up" aria-hidden="true"></span></span>
+              <span class="mcds-fr-item" aria-label="Thumbs down"><span class="fdpx-ico fdpx-ico-thumb-down" aria-hidden="true"></span></span>
+              <span class="mcds-fr-item" aria-label="Redo"><span class="fdpx-ico fdpx-ico-refresh" aria-hidden="true"></span></span>
+            </div>
           </div>
           <div class="mcds-chip-row">
             <span class="mcds-chip">Add a CTA</span>
@@ -181,7 +199,7 @@
       <div class="mcds-editor">
         <div class="chat-side">
           <div class="mcds-chat-bubble assistant">
-            <div class="ab-header"><span class="mcds-snowflake">✦</span>Image selected</div>
+            <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>Image selected</div>
             <p style="font-size:12px; margin:0;">A selection ring is now around the hero. Choose an action from the popover.</p>
           </div>
         </div>
@@ -222,7 +240,7 @@
             <strong>You:</strong> "Make the hero more professional, B2B SaaS audience"
           </div>
           <div class="mcds-chat-bubble assistant">
-            <div class="ab-header"><span class="mcds-snowflake">✦</span>Hero restyle staged <span class="mcds-tag ready">Ready</span></div>
+            <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>Hero restyle staged <span class="mcds-tag ready">Ready</span></div>
             <div class="preview-diff" data-cid="C-43/v.preview-diff">
               <div class="thumb"></div>
               <span class="arrow">&rarr;</span>
@@ -231,8 +249,11 @@
             </div>
             <div style="display:flex; gap:8px; font-size:11px; color: var(--color-text-secondary); align-items: center;">
               <button class="mcds-cta advance-hotspot" data-advance-to="s01-5" data-cid="C-53" style="font-size:11px; padding: 4px 10px;">✓ Accept</button>
-              <button class="mcds-cta-secondary" style="font-size:11px; padding: 4px 10px;">↺ Regenerate</button>
-              <span>👍 👎</span>
+              <button class="mcds-cta-secondary mcds-btn-regen" style="font-size:11px; padding: 4px 10px;">Regenerate</button>
+              <span class="mcds-fr-item mcds-fr-item--pair" role="group" aria-label="Rate response">
+                <span class="fdpx-ico fdpx-ico-thumb-up" aria-hidden="true"></span>
+                <span class="fdpx-ico fdpx-ico-thumb-down" aria-hidden="true"></span>
+              </span>
             </div>
           </div>
           <div class="mcds-chip-row" data-cid="C-70/v.refine-chips">
@@ -245,11 +266,11 @@
         <div class="canvas-side">
           <div class="canvas-hero selected" data-cid="C-61"></div>
           <div class="image-popover" data-cid="C-97" style="top: 116px; left: 28px;">
-            <div class="mcds-label" style="margin-bottom: 6px;">✦ Edit image with AI <span class="mcds-tag new">C-97 · NEW</span></div>
-            <div class="pop-row advance-hotspot" data-advance-to="s01-4" role="button" tabindex="0">🖌 Brush replace</div>
-            <div class="pop-row">✂ Subject extract</div>
-            <div class="pop-row">↔ Frame extend</div>
-            <div class="pop-row">✨ Themed effects</div>
+            <div class="mcds-label mcds-label--ai" style="margin-bottom: 6px;">Edit image with AI <span class="mcds-tag new">C-97 · NEW</span></div>
+            <div class="pop-row pop-row--brush advance-hotspot" data-advance-to="s01-4" role="button" tabindex="0">Brush replace</div>
+            <div class="pop-row pop-row--scissors">Subject extract</div>
+            <div class="pop-row pop-row--frame">Frame extend</div>
+            <div class="pop-row pop-row--fx">Themed effects</div>
             <div style="border-top: 1px solid var(--color-border-default); margin-top: 6px; padding-top: 6px;">
               <div class="pop-row" style="color: var(--color-text-tertiary); font-size:11px;">Open in Dream Lab &rarr;</div>
             </div>
@@ -261,7 +282,7 @@
     </div>
   </div>
   <div class="scene-caption">
-    <strong>W2 hero scene.</strong> The popover (<code>C-97</code>) anchors to the selected element; chat shows the staged preview-diff (<code>C-43/v.preview-diff</code>); follow-up chips (<code>C-70/v.refine-chips</code>) carry conversational refinement intents. Click <strong>🖌 Brush replace</strong> in the popover &mdash; or <strong>✓ Accept</strong> the chat-staged change.
+    <strong>W2 hero scene.</strong> The popover (<code>C-97</code>) anchors to the selected element; chat shows the staged preview-diff (<code>C-43/v.preview-diff</code>); follow-up chips (<code>C-70/v.refine-chips</code>) carry conversational refinement intents. Click <strong>Brush replace</strong> in the popover &mdash; or <strong>Accept</strong> the chat-staged change.
   </div>
 </section>
 
@@ -278,7 +299,7 @@
       <div class="mcds-editor">
         <div class="chat-side">
           <div class="mcds-chat-bubble assistant">
-            <div class="ab-header"><span class="mcds-snowflake">✦</span>Brush replacing… <span class="mcds-spinner"></span></div>
+            <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>Brush replacing… <span class="mcds-spinner"></span></div>
             <p style="font-size:12px; margin: 4px 0 0;">Regenerating the painted region with brand-aware imagery.</p>
           </div>
         </div>
@@ -316,14 +337,17 @@
       <div class="mcds-editor">
         <div class="chat-side">
           <div class="mcds-chat-bubble assistant">
-            <div class="ab-header"><span class="mcds-snowflake">✦</span>Brush replace complete</div>
+            <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>Brush replace complete</div>
             <p style="font-size:12px; margin:0;">Brush-replaced the hero region with a more polished result. Accept to commit, or regenerate.</p>
             <div style="display:flex; gap:8px; margin-top:8px;">
               <button class="mcds-cta advance-hotspot" data-advance-to="s01-6" data-cid="C-53" style="font-size:11px; padding: 5px 12px;">✓ Accept</button>
-              <button class="mcds-cta-secondary" style="font-size:11px; padding: 5px 12px;">↺ Regenerate</button>
+              <button class="mcds-cta-secondary mcds-btn-regen" style="font-size:11px; padding: 5px 12px;">Regenerate</button>
             </div>
             <div class="mcds-feedback-row" data-cid="C-44">
-              <span>📋 Copy</span><span>👍</span><span>👎</span><span>↺</span>
+              <span class="mcds-fr-item"><span class="fdpx-ico fdpx-ico-copy" aria-hidden="true"></span>Copy</span>
+              <span class="mcds-fr-item" aria-label="Thumbs up"><span class="fdpx-ico fdpx-ico-thumb-up" aria-hidden="true"></span></span>
+              <span class="mcds-fr-item" aria-label="Thumbs down"><span class="fdpx-ico fdpx-ico-thumb-down" aria-hidden="true"></span></span>
+              <span class="mcds-fr-item" aria-label="Redo"><span class="fdpx-ico fdpx-ico-refresh" aria-hidden="true"></span></span>
             </div>
           </div>
         </div>
@@ -354,7 +378,7 @@
       <div class="mcds-editor">
         <div class="chat-side">
           <div class="mcds-chat-bubble assistant">
-            <div class="ab-header"><span class="mcds-snowflake">✦</span>Hero updated <span class="mcds-tag ready">Done</span></div>
+            <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>Hero updated <span class="mcds-tag ready">Done</span></div>
             <p style="font-size:12px; margin:0;">The change is committed. The popover is available again for the next edit.</p>
           </div>
           <div class="mcds-chip-row">
@@ -423,7 +447,7 @@
           <div class="mcds-rail-tab"><span class="glyph">📦</span>Blocks</div>
           <div class="mcds-rail-tab"><span class="glyph">▦</span>Sections</div>
           <div class="mcds-rail-tab"><span class="glyph">🎨</span>Styles</div>
-          <div class="mcds-rail-tab advance-hotspot" data-advance-to="s02-2" role="button" tabindex="0"><span class="glyph">✨</span>Image<span class="new-pill">NEW</span></div>
+          <div class="mcds-rail-tab advance-hotspot" data-advance-to="s02-2" role="button" tabindex="0"><span class="glyph glyph--sparkle" aria-hidden="true"></span>Image<span class="new-pill">NEW</span></div>
           <div class="mcds-rail-tab"><span class="glyph">🎭</span>Stickers<span class="new-pill">NEW</span></div>
         </div>
         <div class="mcds-rail-panel">
@@ -467,7 +491,7 @@
           <div class="mcds-rail-tab"><span class="glyph">📦</span>Blocks</div>
           <div class="mcds-rail-tab"><span class="glyph">▦</span>Sections</div>
           <div class="mcds-rail-tab"><span class="glyph">🎨</span>Styles</div>
-          <div class="mcds-rail-tab active"><span class="glyph">✨</span>Image</div>
+          <div class="mcds-rail-tab active"><span class="glyph glyph--sparkle" aria-hidden="true"></span>Image</div>
           <div class="mcds-rail-tab"><span class="glyph">🎭</span>Stickers</div>
         </div>
         <div class="mcds-rail-panel" style="grid-column: span 2;">
@@ -492,7 +516,7 @@
             <span class="mcds-chip">↳ Lifestyle</span>
             <span class="mcds-chip">↳ Illustration</span>
           </div>
-          <button class="mcds-cta advance-hotspot" data-advance-to="s02-3" data-cid="C-53" style="margin-top: 14px;">✦ Generate image</button>
+          <button class="mcds-cta mcds-cta--sparkle advance-hotspot" data-advance-to="s02-3" data-cid="C-53" style="margin-top: 14px;">Generate image</button>
         </div>
       </div>
     </div>
@@ -540,7 +564,10 @@
         <div class="mcds-result-thumb"></div>
       </div>
       <div class="mcds-feedback-row" data-cid="C-44" style="margin-top: 16px;">
-        <span>📋 Copy prompt</span><span>👍</span><span>👎</span><span>↺ Regenerate all</span>
+        <span class="mcds-fr-item"><span class="fdpx-ico fdpx-ico-copy" aria-hidden="true"></span>Copy prompt</span>
+        <span class="mcds-fr-item" aria-label="Thumbs up"><span class="fdpx-ico fdpx-ico-thumb-up" aria-hidden="true"></span></span>
+        <span class="mcds-fr-item" aria-label="Thumbs down"><span class="fdpx-ico fdpx-ico-thumb-down" aria-hidden="true"></span></span>
+        <span class="mcds-fr-item"><span class="fdpx-ico fdpx-ico-refresh" aria-hidden="true"></span>Regenerate all</span>
       </div>
     </div>
     <div class="scene-annotation" style="top: 160px; left: 60px;">
@@ -566,7 +593,7 @@
           <div class="mcds-rail-tab"><span class="glyph">📦</span>Blocks</div>
           <div class="mcds-rail-tab"><span class="glyph">▦</span>Sections</div>
           <div class="mcds-rail-tab"><span class="glyph">🎨</span>Styles</div>
-          <div class="mcds-rail-tab active"><span class="glyph">✨</span>Image</div>
+          <div class="mcds-rail-tab active"><span class="glyph glyph--sparkle" aria-hidden="true"></span>Image</div>
           <div class="mcds-rail-tab"><span class="glyph">🎭</span>Stickers</div>
         </div>
         <div class="mcds-rail-panel">
@@ -628,7 +655,7 @@
       <div class="mcds-editor">
         <div class="chat-side">
           <div class="mcds-chat-bubble assistant">
-            <div class="ab-header"><span class="mcds-snowflake">✦</span>Email ready · refine via chat</div>
+            <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>Email ready · refine via chat</div>
             <p style="font-size:12px;margin:0;">Type a change, or pick a refine chip below.</p>
           </div>
           <div style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: var(--border-radius-lv5); padding: 10px 14px;" data-cid="C-54">
@@ -668,7 +695,7 @@
         <div class="chat-side">
           <div class="mcds-chat-bubble user"><strong>You:</strong> Make professional</div>
           <div class="mcds-chat-bubble assistant">
-            <div class="ab-header"><span class="mcds-snowflake">✦</span>Hero restyled <span class="mcds-tag ready">Ready</span></div>
+            <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>Hero restyled <span class="mcds-tag ready">Ready</span></div>
             <div class="preview-diff" data-cid="C-43/v.preview-diff">
               <div class="thumb" style="background: linear-gradient(135deg, #FFE7E0, #DB334D);"></div>
               <span class="arrow">&rarr;</span>
@@ -677,7 +704,7 @@
             <p style="font-size:12px;margin:6px 0 0;">Switched to a steel-blue palette and tightened the headline. Canvas un-touched until Accept.</p>
             <div style="display:flex; gap:8px; margin-top: 8px;">
               <button class="mcds-cta advance-hotspot" data-advance-to="s03-3" data-cid="C-53" style="font-size:11px; padding: 5px 12px;">✓ Accept</button>
-              <button class="mcds-cta-secondary" style="font-size:11px; padding: 5px 12px;">↺ Regenerate</button>
+              <button class="mcds-cta-secondary mcds-btn-regen" style="font-size:11px; padding: 5px 12px;">Regenerate</button>
             </div>
           </div>
         </div>
@@ -704,9 +731,14 @@
       <div class="mcds-editor">
         <div class="chat-side">
           <div class="mcds-chat-bubble assistant">
-            <div class="ab-header"><span class="mcds-snowflake">✦</span>Updated <span class="mcds-tag ready">Done</span></div>
+            <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>Updated <span class="mcds-tag ready">Done</span></div>
             <p style="font-size:12px;margin:0;">Canvas now reflects the change. What's next?</p>
-            <div class="mcds-feedback-row" data-cid="C-44"><span>📋</span><span>👍</span><span>👎</span><span>↺</span></div>
+            <div class="mcds-feedback-row" data-cid="C-44">
+              <span class="mcds-fr-item"><span class="fdpx-ico fdpx-ico-copy" aria-hidden="true"></span></span>
+              <span class="mcds-fr-item" aria-label="Thumbs up"><span class="fdpx-ico fdpx-ico-thumb-up" aria-hidden="true"></span></span>
+              <span class="mcds-fr-item" aria-label="Thumbs down"><span class="fdpx-ico fdpx-ico-thumb-down" aria-hidden="true"></span></span>
+              <span class="mcds-fr-item" aria-label="Redo"><span class="fdpx-ico fdpx-ico-refresh" aria-hidden="true"></span></span>
+            </div>
           </div>
           <div style="background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: var(--border-radius-lv5); padding: 10px 14px;">
             <div style="font-size:12px; color: var(--color-text-tertiary);">Ask anything…</div>
@@ -740,7 +772,7 @@
         <div class="chat-side">
           <div class="mcds-chat-bubble user"><strong>You:</strong> Shorten copy</div>
           <div class="mcds-chat-bubble assistant">
-            <div class="ab-header"><span class="mcds-snowflake">✦</span>Body shortened by 32% <span class="mcds-tag ready">Done</span></div>
+            <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>Body shortened by 32% <span class="mcds-tag ready">Done</span></div>
             <p style="font-size:12px;margin:0;">Removed two paragraphs, kept the social proof. Canvas updated.</p>
           </div>
         </div>
@@ -798,7 +830,7 @@
             <button class="mcds-icon-btn">⫯⫯⫯</button>
             <button class="mcds-icon-btn">🎤</button>
           </div>
-          <button class="mcds-cta">✦ Generate</button>
+          <button class="mcds-cta mcds-cta--sparkle">Generate</button>
         </div>
       </div>
       <p style="font-size: 11px; color: var(--color-text-tertiary); margin-top: 14px;">Tip: paste a competitor email screenshot, a PDF brief, or an old HTML template.</p>
@@ -821,7 +853,7 @@
       <div class="mcds-label">competitor-promo.jpg · reconstruction in progress</div>
       <div style="background: var(--color-accent-blue-light); border-radius: var(--border-radius-lv3); padding: 14px 18px;" data-cid="C-23/v.ingestion-progress">
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-          <span class="mcds-snowflake">✦</span>
+          <span class="mcds-snowflake" aria-hidden="true"></span>
           <strong>Reconstructing layers from competitor-promo.jpg</strong>
           <span class="mcds-spinner" style="margin-left: auto;"></span>
         </div>
@@ -847,7 +879,7 @@
     <div class="fdpx-mcds-frame">
       <div class="mcds-label">Magic Layers assistant message</div>
       <div class="mcds-chat-bubble assistant">
-        <div class="ab-header"><span class="mcds-snowflake">✦</span>Magic Layers · 7 editable blocks <span class="mcds-tag ready">Ready</span></div>
+        <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>Magic Layers · 7 editable blocks <span class="mcds-tag ready">Ready</span></div>
         <p style="font-size:12.5px;margin:0 0 8px;">
           Reconstructed from <strong>competitor-promo.jpg</strong>. Detected: 1 Header · 1 Hero · 2 Body · 1 Coupon · 1 Product Grid · 1 Footer.
           Brand Kit applied — your logo replaced theirs, colors normalized to your teal/cream palette.
@@ -872,7 +904,7 @@
           <div class="mcds-rail-tab active"><span class="glyph">📦</span>Blocks</div>
           <div class="mcds-rail-tab"><span class="glyph">▦</span>Sections</div>
           <div class="mcds-rail-tab"><span class="glyph">🎨</span>Styles</div>
-          <div class="mcds-rail-tab"><span class="glyph">✨</span>Image</div>
+          <div class="mcds-rail-tab"><span class="glyph glyph--sparkle" aria-hidden="true"></span>Image</div>
           <div class="mcds-rail-tab"><span class="glyph">🎭</span>Stickers</div>
         </div>
         <div class="mcds-rail-panel">
@@ -1162,7 +1194,7 @@
               <span style="font-size: 16px;">🧠</span>
               <div style="flex: 1;">
                 <p style="font-size: 13px; margin: 0; font-weight: 600;">Customers respond best to social-proof framing</p>
-                <p style="font-size: 11px; color: var(--color-text-tertiary); margin: 4px 0 0;">Saved May 8 · used in 6 campaigns · 👍 4 times</p>
+                <p style="font-size: 11px; color: var(--color-text-tertiary); margin: 4px 0 0;">Saved May 8 · used in 6 campaigns · <span class="mcds-inline-positive">Marked helpful 4×</span></p>
               </div>
               <div style="display: flex; gap: 8px; color: var(--color-text-tertiary); font-size: 12px;"><span>✎</span><span>✕</span></div>
             </div>
@@ -1219,7 +1251,7 @@
             <button class="mcds-icon-btn">⫯⫯⫯</button>
             <button class="mcds-icon-btn">🎤</button>
           </div>
-          <button class="mcds-cta">✦ Generate</button>
+          <button class="mcds-cta mcds-cta--sparkle">Generate</button>
         </div>
       </div>
 
@@ -1261,7 +1293,7 @@
             <button class="mcds-icon-btn">⫯⫯⫯</button>
             <button class="mcds-icon-btn">🎤</button>
           </div>
-          <button class="mcds-cta advance-hotspot" data-advance-to="s06-5" data-cid="C-53">✦ Generate</button>
+          <button class="mcds-cta mcds-cta--sparkle advance-hotspot" data-advance-to="s06-5" data-cid="C-53">Generate</button>
         </div>
       </div>
       <p style="font-size: 12px; color: var(--color-text-secondary); margin-top: 14px;">
@@ -1282,7 +1314,7 @@
       <div class="mcds-label">Strategy panel · post-generation</div>
       <div class="mcds-strategy" data-cid="C-45">
         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 14px;">
-          <span class="mcds-snowflake">✦</span>
+          <span class="mcds-snowflake" aria-hidden="true"></span>
           <strong>Email strategy</strong>
           <span class="mcds-tag ready">Ready</span>
           <span class="mcds-chip memory" style="margin-left: auto; font-size: 10.5px; padding: 3px 8px;">🧠 Drawing on 12 memories</span>
@@ -1429,7 +1461,7 @@
             <button class="mcds-icon-btn">⫯⫯⫯</button>
             <button class="mcds-icon-btn">🎤</button>
           </div>
-          <button class="mcds-cta">✦ Generate</button>
+          <button class="mcds-cta mcds-cta--sparkle">Generate</button>
         </div>
       </div>
       <div class="mcds-brand-banner" data-cid="C-23/v.live-context-banner">
@@ -1479,7 +1511,7 @@
           <div class="mcds-rail-tab"><span class="glyph">📦</span>Blocks</div>
           <div class="mcds-rail-tab"><span class="glyph">▦</span>Sections</div>
           <div class="mcds-rail-tab"><span class="glyph">🎨</span>Styles</div>
-          <div class="mcds-rail-tab"><span class="glyph">✨</span>Image</div>
+          <div class="mcds-rail-tab"><span class="glyph glyph--sparkle" aria-hidden="true"></span>Image</div>
           <div class="mcds-rail-tab advance-hotspot" data-advance-to="s08-2" role="button" tabindex="0"><span class="glyph">🎭</span>Stickers<span class="new-pill">NEW</span></div>
         </div>
         <div class="mcds-rail-panel">
@@ -1511,7 +1543,7 @@
           <div class="mcds-rail-tab"><span class="glyph">📦</span></div>
           <div class="mcds-rail-tab"><span class="glyph">▦</span></div>
           <div class="mcds-rail-tab"><span class="glyph">🎨</span></div>
-          <div class="mcds-rail-tab"><span class="glyph">✨</span></div>
+          <div class="mcds-rail-tab"><span class="glyph glyph--sparkle" aria-hidden="true"></span></div>
           <div class="mcds-rail-tab active"><span class="glyph">🎭</span>Stickers</div>
         </div>
         <div class="mcds-rail-panel" style="grid-column: span 2;">
@@ -1526,7 +1558,7 @@
             <span class="mcds-chip">↳ Reaction set</span>
             <span class="mcds-chip">↳ Hero animation</span>
           </div>
-          <button class="mcds-cta advance-hotspot" data-advance-to="s08-3" data-cid="C-53" style="margin-top: 14px;">✦ Generate sticker pack</button>
+          <button class="mcds-cta mcds-cta--sparkle advance-hotspot" data-advance-to="s08-3" data-cid="C-53" style="margin-top: 14px;">Generate sticker pack</button>
         </div>
       </div>
     </div>
@@ -1571,7 +1603,7 @@
           <span style="padding: 8px;">❤️</span>
           <span style="padding: 8px;">🔥</span>
           <span style="padding: 8px;">⭐</span>
-          <span style="padding: 8px;">✨</span>
+          <span class="glyph glyph--sparkle glyph--sparkle-inline" aria-hidden="true" style="padding: 8px;"></span>
         </div>
         <p style="font-size: 12px; text-align: center; color: var(--color-text-secondary); margin: 14px 0 0;">Click a sticker to drop it in the canvas. The pack is saved to your Brand Kit.</p>
       </div>
@@ -1634,7 +1666,7 @@
     <div class="fdpx-mcds-frame">
       <div class="mcds-label">Strategy panel · new field above visual style</div>
       <div class="mcds-strategy">
-        <div style="display:flex; align-items:center; gap:8px; margin-bottom: 14px;"><span class="mcds-snowflake">✦</span><strong>Email strategy</strong><span class="mcds-tag ready">Ready</span></div>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom: 14px;"><span class="mcds-snowflake" aria-hidden="true"></span><strong>Email strategy</strong><span class="mcds-tag ready">Ready</span></div>
         <div class="sp-row"><span class="sp-label">Goal</span><span class="sp-value">Retention: Customer loyalty</span></div>
         <div class="sp-row"><span class="sp-label">Recipients</span><span class="sp-value">New email subscribers (2,150)</span></div>
         <div class="sp-row"><span class="sp-label">Focus metric</span><span class="sp-value">Revenue</span></div>
@@ -1645,7 +1677,7 @@
         <div class="sp-row"><span class="sp-label">Visual style</span><span class="sp-value">Modern · teal</span></div>
       </div>
       <div style="margin-top: 16px;">
-        <button class="mcds-cta">✦ Create email</button>
+        <button class="mcds-cta mcds-cta--sparkle">Create email</button>
       </div>
     </div>
     <div class="scene-annotation" style="top: 260px; left: 60%;">
@@ -1686,7 +1718,7 @@
     <div class="fdpx-mcds-frame">
       <div class="mcds-label">Web research findings · before strategy</div>
       <div class="mcds-chat-bubble assistant">
-        <div class="ab-header"><span class="mcds-snowflake">✦</span>Web research · 12 sources scanned <span class="mcds-tag ready">Ready</span></div>
+        <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>Web research · 12 sources scanned <span class="mcds-tag ready">Ready</span></div>
         <p style="font-size:13px; margin: 8px 0;"><strong>1.</strong> Q3 2025 industry-avg open rate for welcome emails = <strong>47%</strong> (your benchmark target).</p>
         <p style="font-size:13px; margin: 8px 0;"><strong>2.</strong> Top-performing welcome emails reference the user's signup source within the first 3 lines.</p>
         <p style="font-size:13px; margin: 8px 0;"><strong>3.</strong> Including a single CTA (vs 2+) lifts CTR ~15%.</p>
@@ -1774,7 +1806,7 @@
           <div class="mcds-token-row" data-cid="C-90/v.mcp-token-row">
             <span>mc_live_a8f3b9c2e7d6f1...</span>
             <span class="token-eye" style="margin-left: auto;">👁</span>
-            <span class="token-copy advance-hotspot" data-advance-to="s10-3" role="button" tabindex="0">📋</span>
+            <span class="token-copy advance-hotspot fdpx-ico fdpx-ico-copy" data-advance-to="s10-3" role="button" tabindex="0" aria-label="Copy token"></span>
           </div>
           <div style="display: flex; gap: 8px; margin-top: 10px;">
             <button class="mcds-cta-secondary" style="font-size: 11px; padding: 4px 10px;">Regenerate token</button>
@@ -1787,7 +1819,7 @@
     </div>
     <div class="scene-annotation" style="top: 220px; right: 20px;">
       <span class="annotation-arrow">&rarr;</span>
-      Click <strong>📋 copy</strong> to demo the token-copied state.
+      Click <strong>copy</strong> to demo the token-copied state.
     </div>
   </div>
   <div class="scene-caption">Token row (<code>C-90/v.mcp-token-row</code>) is a variant of the social-link input row from Brand Kit. Last-used metadata + connection guide link.</div>
@@ -1803,7 +1835,7 @@
       <div class="mcds-label">External AI client calling Mailchimp via MCP</div>
       <div style="text-align: center; padding: 40px 20px;">
         <div style="display:inline-flex; align-items:center; gap:10px; background: #E6F5EE; color: #036A4F; padding: 12px 18px; border-radius: var(--border-radius-lv6); font-weight: 600;">
-          <span>📋</span> Token copied to clipboard
+          <span class="mcds-toast-copy"><span class="fdpx-ico fdpx-ico-copy" aria-hidden="true"></span> Token copied to clipboard</span>
         </div>
         <p style="font-size: 13px; color: var(--color-text-secondary); max-width: 540px; margin: 24px auto 12px;">
           Paste it into your external AI client's MCP configuration. Mailchimp now appears as an addressable tool in Claude / ChatGPT / Cursor.
@@ -1912,7 +1944,7 @@
       <div class="mcds-editor">
         <div class="chat-side">
           <div class="mcds-chat-bubble assistant">
-            <div class="ab-header"><span class="mcds-snowflake">✦</span>SMS ready · 154 chars</div>
+            <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>SMS ready · 154 chars</div>
             <p style="font-size:12px;margin:0;">Refine via chat. Image-related intents (Swap hero / Image edits) are not available on SMS — text only.</p>
           </div>
           <div class="mcds-chip-row" data-cid="C-70/v.refine-chips">
@@ -1947,14 +1979,14 @@
         <div class="chat-side">
           <div class="mcds-chat-bubble user"><strong>You:</strong> Shorten</div>
           <div class="mcds-chat-bubble assistant">
-            <div class="ab-header"><span class="mcds-snowflake">✦</span>Shortened by 36% <span class="mcds-tag ready">Ready</span></div>
+            <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>Shortened by 36% <span class="mcds-tag ready">Ready</span></div>
             <div style="background: var(--color-bg-secondary); border: 1px solid var(--color-border-default); border-radius: var(--border-radius-lv3); padding: 8px; margin: 6px 0; font-size: 11px;" data-cid="C-43/v.preview-diff">
               <p style="margin: 0 0 4px; color: var(--color-text-tertiary); text-decoration: line-through;">Welcome to the family! We hand-pick every product. Use code WELCOME15 for 15% off your first order. Reply STOP to unsubscribe.</p>
               <p style="margin: 0; color: var(--color-text-primary);"><strong>Welcome! Save 15% on your first order with WELCOME15. Reply STOP to unsubscribe.</strong></p>
             </div>
             <div style="display:flex;gap:8px;margin-top:8px;">
               <button class="mcds-cta advance-hotspot" data-advance-to="s03-3-sms" data-cid="C-53" style="font-size:11px;padding:5px 12px;">✓ Accept</button>
-              <button class="mcds-cta-secondary" style="font-size:11px;padding:5px 12px;">↺ Regenerate</button>
+              <button class="mcds-cta-secondary mcds-btn-regen" style="font-size:11px;padding:5px 12px;">Regenerate</button>
             </div>
           </div>
         </div>
@@ -1981,7 +2013,7 @@
       <div class="mcds-editor">
         <div class="chat-side">
           <div class="mcds-chat-bubble assistant">
-            <div class="ab-header"><span class="mcds-snowflake">✦</span>Updated <span class="mcds-tag ready">Done</span></div>
+            <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>Updated <span class="mcds-tag ready">Done</span></div>
           </div>
           <div class="mcds-chip-row">
             <span class="mcds-chip advance-hotspot" data-advance-to="s03-4-sms" role="button" tabindex="0">Add urgency</span>
@@ -2012,7 +2044,7 @@
         <div class="chat-side">
           <div class="mcds-chat-bubble user"><strong>You:</strong> Add urgency</div>
           <div class="mcds-chat-bubble assistant">
-            <div class="ab-header"><span class="mcds-snowflake">✦</span>Urgency added <span class="mcds-tag ready">Done</span></div>
+            <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>Urgency added <span class="mcds-tag ready">Done</span></div>
           </div>
         </div>
         <div class="canvas-side">
@@ -2078,7 +2110,7 @@
             <button class="mcds-icon-btn">⫯⫯⫯</button>
             <button class="mcds-icon-btn">🎤</button>
           </div>
-          <button class="mcds-cta">✦ Generate</button>
+          <button class="mcds-cta mcds-cta--sparkle">Generate</button>
         </div>
       </div>
       <div class="mcds-chip-row">
@@ -2107,7 +2139,7 @@
         <div class="mcds-composer-input">Describe the SMS you want…</div>
         <div class="mcds-composer-actions">
           <div style="display:flex; gap:6px;"><button class="mcds-icon-btn">+</button><button class="mcds-icon-btn">⫯⫯⫯</button><button class="mcds-icon-btn">🎤</button></div>
-          <button class="mcds-cta">✦ Generate</button>
+          <button class="mcds-cta mcds-cta--sparkle">Generate</button>
         </div>
       </div>
       <div class="mcds-brand-banner" data-cid="C-23/v.live-context-banner">
@@ -2131,7 +2163,7 @@
     <div class="fdpx-mcds-frame">
       <div class="mcds-label">SMS strategy panel · with research</div>
       <div class="mcds-strategy">
-        <div style="display:flex; align-items:center; gap:8px; margin-bottom: 14px;"><span class="mcds-snowflake">✦</span><strong>SMS strategy</strong></div>
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom: 14px;"><span class="mcds-snowflake" aria-hidden="true"></span><strong>SMS strategy</strong></div>
         <div class="sp-row"><span class="sp-label">Goal</span><span class="sp-value">Retention</span></div>
         <div class="sp-row"><span class="sp-label">Recipients</span><span class="sp-value">SMS subscribers (1,420)</span></div>
         <div class="sp-row" style="background: var(--color-accent-blue-light); margin: 0 -16px; padding: 8px 16px;">
@@ -2191,7 +2223,7 @@
       <div class="mcds-editor">
         <div class="chat-side">
           <div class="mcds-chat-bubble assistant">
-            <div class="ab-header"><span class="mcds-snowflake">✦</span>WhatsApp image ready</div>
+            <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span>WhatsApp image ready</div>
             <p style="font-size:12px;margin:0;">Click the image to edit inline. Same C-97 popover as Email.</p>
           </div>
         </div>
@@ -2202,10 +2234,10 @@
             <p style="margin: 4px 0 0; font-size: 12px;">Welcome! Tap above to see our spring collection.</p>
           </div>
           <div class="image-popover" data-cid="C-97" style="top: 130px; left: 60px;">
-            <div class="mcds-label" style="margin-bottom: 4px;">✦ Edit image · <span class="mcds-tag new">C-97</span></div>
-            <div class="pop-row advance-hotspot" data-advance-to="s01-outro" role="button" tabindex="0">🖌 Brush replace</div>
-            <div class="pop-row">✂ Subject extract</div>
-            <div class="pop-row">↔ Frame extend</div>
+            <div class="mcds-label mcds-label--ai" style="margin-bottom: 4px;">Edit image · <span class="mcds-tag new">C-97</span></div>
+            <div class="pop-row pop-row--brush advance-hotspot" data-advance-to="s01-outro" role="button" tabindex="0">Brush replace</div>
+            <div class="pop-row pop-row--scissors">Subject extract</div>
+            <div class="pop-row pop-row--frame">Frame extend</div>
           </div>
         </div>
       </div>
@@ -2248,7 +2280,7 @@
         <div class="mcds-composer-input">Describe the WhatsApp post — or drop an image…</div>
         <div class="mcds-composer-actions">
           <div style="display:flex; gap:6px;"><button class="mcds-icon-btn">+</button><button class="mcds-icon-btn">⫯⫯⫯</button><button class="mcds-icon-btn">🎤</button></div>
-          <button class="mcds-cta">✦ Generate</button>
+          <button class="mcds-cta mcds-cta--sparkle">Generate</button>
         </div>
       </div>
       <div style="background: #FFEFD9; border-left: 3px solid var(--color-action-special-use); padding: 10px 14px; margin-top: 14px; font-size: 12px; border-radius: 6px;">
@@ -2273,7 +2305,7 @@
         <div style="display: inline-block; background: #DCF8C6; padding: 16px 20px; border-radius: 12px;">
           <p style="margin: 0 0 8px; font-size: 12px;"><strong>Bright Light Co.</strong></p>
           <div style="background: white; padding: 8px; border-radius: 8px; font-size: 64px;">😊</div>
-          <p style="margin: 8px 0 0; font-size: 12px;">Welcome to the family ✨</p>
+          <p style="margin: 8px 0 0; font-size: 12px;">Welcome to the family<span class="mcds-text-sparkle" aria-hidden="true"></span></p>
         </div>
         <p style="font-size: 13px; color: var(--color-text-secondary); margin: 20px auto 0; max-width: 440px;">
           Stickers are native to WhatsApp. The same generator produces packs that work as standalone messages, replies, or reactions.
