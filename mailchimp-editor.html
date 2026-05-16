@@ -4,7 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Mailchimp Email/SMS Unified Editor &amp; Builder — Competitive + Internal Strategy Brief</title>
-<meta name="description" content="16-tab executive brief on Mailchimp's unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist) with side-by-side competitive briefs for Klaviyo (Klaviyo Brief + Klaviyo VoC): capabilities, AI surface, JTBD, customers, pricing, internal HVC VoC, BigQuery product health, growth model, loss attribution, Nuni YoY audit (QA-validated metrics + target band $20-24M), revised goals (product-adoption scorecards across paid/free/trial cohorts ~$21M editor commitment), NEA->NUNI migration briefing (3-phase parity-gated playbook for $566M paid NEA ARR + $281M HVC concentration), NUNI repo intel (7-layer forensic + AI readiness + pain->code map across 62 repos in collab-email org), initiative canvas, strategy memo, build plan, and synthesized sentiment from Reddit, G2, Trustpilot, vendor community, blogs." />
+<meta name="description" content="17-tab executive brief on Mailchimp's unified authoring surface (New Email Builder + SMS composer + Content Studio + Brand Kit + AI Assist) with side-by-side competitive briefs for Klaviyo (Klaviyo Brief + Klaviyo VoC): capabilities, AI surface, JTBD, customers, pricing, internal HVC VoC, BigQuery product health, growth model, loss attribution, Nuni YoY audit (QA-validated metrics + target band $20-24M), revised goals (product-adoption scorecards across paid/free/trial cohorts ~$21M editor commitment), NEA->NUNI migration briefing (3-phase parity-gated playbook for $566M paid NEA ARR + $281M HVC concentration), NUNI repo intel (7-layer forensic + AI readiness + pain->code map across 62 repos in collab-email org), initiative canvas, strategy memo, build plan, Freddie / AI Email Generator prototype assessment (17 HVC themes + 5 UR bets + 10 Revised Goals levers scored, plus 14-risk pre-mortem on the new design), and synthesized sentiment from Reddit, G2, Trustpilot, vendor community, blogs." />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
@@ -809,6 +809,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="canvas">Initiative Canvas</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="memo">Strategy Memo</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="buildplan">Build Plan</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="freddie">Freddie Assessment</button>
     </div>
     <div style="display:flex; gap:8px;">
       <a class="btn" href="mailchimp.html">→ Automations brief</a>
@@ -11153,6 +11154,429 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 </div><!-- /panel-buildplan -->
 
 
+<div class="tabpanel" id="panel-freddie" role="tabpanel">
+<style>
+  #panel-freddie h2 .num { display: inline-block; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 800; color: var(--brand); background: var(--chip); padding: 2px 6px; border-radius: 4px; margin-right: 8px; transform: translateY(-2px); letter-spacing: .08em; }
+  #panel-freddie .verdict-pill { display: inline-block; font-size: 10px; font-weight: 800; padding: 3px 8px; border-radius: 4px; letter-spacing: .04em; text-transform: uppercase; }
+  #panel-freddie .verdict-pill.solves   { background: #E6F5EE; color: #036A4F; }
+  #panel-freddie .verdict-pill.partial  { background: #FFEFD9; color: #8A4A00; }
+  #panel-freddie .verdict-pill.miss     { background: #FFE7E0; color: #9A1F00; }
+  #panel-freddie .verdict-pill.worse    { background: #4B0000; color: #FFE7E0; }
+  #panel-freddie .score-card { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 14px 16px; }
+  #panel-freddie .score-card.good { border-left: 4px solid var(--good); background: linear-gradient(180deg,#F4FBF7,#FFFFFF); }
+  #panel-freddie .score-card.warn { border-left: 4px solid var(--warn); background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-freddie .score-card.bad  { border-left: 4px solid var(--bad);  background: linear-gradient(180deg,#FFF5F2,#FFFFFF); }
+  #panel-freddie .score-card h4 { font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; margin: 0 0 6px; color: var(--ink); }
+  #panel-freddie .score-card .num-big { font-family: 'Inter', sans-serif; font-size: 24px; font-weight: 800; color: var(--ink); line-height: 1.1; }
+  #panel-freddie .score-card .sub { font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+  #panel-freddie .risk-card { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin-bottom: 10px; }
+  #panel-freddie .risk-card.crit { border-left: 4px solid var(--bad);  background: linear-gradient(180deg,#FFF5F2,#FFFFFF); }
+  #panel-freddie .risk-card.mod  { border-left: 4px solid var(--warn); background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-freddie .risk-card.low  { border-left: 4px solid var(--good); background: linear-gradient(180deg,#F4FBF7,#FFFFFF); }
+  #panel-freddie .risk-card .risk-eye { font-size: 10.5px; text-transform: uppercase; letter-spacing: .08em; font-weight: 700; margin-bottom: 4px; }
+  #panel-freddie .risk-card.crit .risk-eye { color: var(--bad); }
+  #panel-freddie .risk-card.mod  .risk-eye { color: var(--warn); }
+  #panel-freddie .risk-card.low  .risk-eye { color: var(--good); }
+  #panel-freddie .risk-card h4 { margin: 0 0 4px; font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; }
+  #panel-freddie .risk-card .risk-meta { font-size: 11px; color: var(--muted); margin-bottom: 6px; }
+  #panel-freddie .risk-card p { font-size: 12.5px; margin: 4px 0; }
+  #panel-freddie td.b { font-weight: 600; color: var(--ink); }
+  #panel-freddie .pic-card { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }
+  #panel-freddie .pic-card.win  { border-top: 4px solid var(--good); }
+  #panel-freddie .pic-card.gap  { border-top: 4px solid var(--warn); }
+  #panel-freddie .pic-card.risk { border-top: 4px solid var(--bad);  }
+  #panel-freddie .pic-card h4 { margin: 0 0 8px; font-family: 'Source Serif 4', Georgia, serif; font-size: 14px; }
+  #panel-freddie .pic-card ul { margin: 4px 0 0 16px; padding: 0; }
+  #panel-freddie .pic-card li { font-size: 12px; color: var(--ink-2); margin-bottom: 4px; }
+</style>
+
+<!-- Tab 17 Page 1: Headline + executive read -->
+<section class="page" aria-label="Freddie Prototype Assessment Page 1">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Tab 17 &middot; Freddie / AI Email Generator Prototype Assessment</div>
+      <h1>How does the new design score against the strategy?</h1>
+      <div class="subtitle">Structured assessment of the new Freddie / AI Email Generator prototype (<a href="https://ai-email-generator-steel.vercel.app/create" target="_blank" rel="noopener">ai-email-generator-steel.vercel.app</a>) against this brief's three load-bearing artifacts &mdash; <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a> (17 cited themes / ~$95K/mo), <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a> (5 bets / Discovery table / 5 Workflow Shapes), and <a href="#revised" onclick="document.querySelector('[data-tab=revised]').click();return false;">Revised Goals</a> (~$21M ARR / 10 levers). Plus a pre-mortem on new bugs and "move my cheese" risks the design introduces. Full decomposition of the prototype: github.intuit.com/dprabhakara/ai-email-generator-decomp (29 screenshots).</div>
+    </div>
+    <div class="meta">
+      <div>v1.0 &middot; 4 pages &middot; May 2026</div>
+      <div>Confidence: <strong>HIGH</strong> on coverage mapping &middot; <strong>MED</strong> on $ capture estimate</div>
+    </div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="v">0 / 17</div><div class="l">HVC themes directly solved (5 partial; 12 not addressed; 4 may worsen)</div></div>
+    <div class="kpi"><div class="v">~$7.2K</div><div class="l">Cited HVC MRR addressed (7.6% of $95K total &mdash; $57K SMS TCPA unchanged)</div></div>
+    <div class="kpi"><div class="v">~$10&ndash;15M</div><div class="l">Plausible Revised Goals capture (of $21M; mid ~$12.4M = 59%)</div></div>
+    <div class="kpi"><div class="v">14</div><div class="l">"Move my cheese" risks identified (5 critical &middot; 6 moderate &middot; 3 low)</div></div>
+  </div>
+
+  <div class="pull" style="margin-top:16px">
+    <strong>Executive read in 60 seconds.</strong> This is the right AI surface for FY27 but it is not yet the editor strategy. It addresses the activation funnel beautifully (T1 trial + F2 free + PA1 paid adoption = ~58% of the revised goal) and the brand/voice consistency story credibly. It does <em>not</em> touch the dollar concentrations (SMS TCPA, Brand Kit reliability, rendering parity, multi-author, custom-code) and it makes several Phase-1 <a href="#migration" onclick="document.querySelector('[data-tab=migration]').click();return false;">Migration</a> prerequisites <em>harder</em>, not easier.
+    <cite>Ship it as the front door with the strategy's Pillars 1+2+5 work shipping concurrently &mdash; not as a substitute for them. The $6&ndash;18M downside band from unmitigated critical risks is comparable to the $10&ndash;15M upside, so mitigations are launch-blocking, not P2 follow-ups.</cite>
+  </div>
+
+  <div style="margin-top:18px">
+    <h2><span class="num">01</span>What the prototype actually offers</h2>
+    <p>The Freddie prototype reshapes Create around an <strong>AI-first chat surface</strong> that takes a prompt or quick-prompt chip, returns an <strong>editable strategy brief</strong> (Goal / Date / Recipients / Promo / Focus Metric / Featured Products / Visual Style), then on approval renders a complete email in a <strong>split editor</strong> (chat left, iframe canvas right) with <strong>suggested follow-up chips</strong> (Add a CTA / Change the theme / Check for accessibility / Optimize for mobile) and a <strong>floating theme popover</strong> (8 presets in Light/Dark). Manual editing falls back to the classic Mailchimp drag-drop builder (Blocks / Sections / Styles). A unified <strong>8-channel tab bar</strong> (Email / SMS / WhatsApp / Automation / Form / Survey / Social post / Campaign) sits at the top &mdash; though most non-email tabs are stub surfaces with hero CTAs only. A <strong>Brand Kit modal</strong> covers My business / Logos / Colors / Fonts / Buttons / Brand voice / Social links. Send actions include <strong>Send a test email</strong> and a split <strong>Send email</strong> button with Save draft / Export HTML.</p>
+  </div>
+
+  <div style="margin-top:18px">
+    <h2><span class="num">02</span>How to read the three pictures (the synthesis)</h2>
+    <div class="grid-3" style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; margin-top: 8px;">
+      <div class="pic-card win">
+        <h4>Picture 1 &middot; Where this design wins</h4>
+        <ul>
+          <li><strong>T1 Trial activation</strong> &mdash; biggest single lever in the goal ($5.0M / 89% of trial)</li>
+          <li><strong>F2 Free activation</strong> &mdash; biggest single Free lever ($3.6M / 41% of free)</li>
+          <li><strong>PA1 Bulk adoption</strong> &mdash; closes paid "Unexplored" residual (~$1.9M)</li>
+          <li><strong>UR Bet 2 Discovery</strong> &mdash; chip-prompts surface capability at moment of need</li>
+          <li><strong>UR Bet 3 vertical fit</strong> &mdash; structurally ready (content still DTC-flavored)</li>
+          <li><strong>CB1 Time to Activate</strong> &mdash; 5d&rarr;2d Klaviyo cadence plausible</li>
+          <li><strong>Workflow Shapes #1 + #5</strong> &mdash; Fast Monday + low-frequency both fit</li>
+        </ul>
+      </div>
+      <div class="pic-card gap">
+        <h4>Picture 2 &middot; Where this design doesn't help</h4>
+        <ul>
+          <li><strong>$57K SMS TCPA</strong> &mdash; needs Initiative I-5.2.3, not this surface</li>
+          <li><strong>Brand Kit reliability</strong> &mdash; needs I-1.2.1/2/3 data fixes</li>
+          <li><strong>NEB rendering parity</strong> &mdash; needs email-render-pipeline wired to CI</li>
+          <li><strong>Multi-author co-edit</strong> &mdash; needs Pillar 5.3 Q5 ship</li>
+          <li><strong>Custom code / Liquid</strong> &mdash; needs NEB Code Mode (Pillar 2.2.3, Q3)</li>
+          <li><strong>NEA&rarr;NUNI migration</strong> &mdash; needs the 3-phase parity-gated playbook</li>
+          <li><strong>CSAT-to-neutral</strong> ($5.6M, 27%) &mdash; needs Builder SLOs, not new AI</li>
+        </ul>
+      </div>
+      <div class="pic-card risk">
+        <h4>Picture 3 &middot; Where this design might hurt</h4>
+        <ul>
+          <li><strong>HVC #6 reverse</strong> &mdash; legacy templates may not surface in recents</li>
+          <li><strong>HVC #12 stronger</strong> &mdash; AI defaults make Premium feel more forced</li>
+          <li><strong>HVC #8/#10 amplified</strong> &mdash; bad Brand Kit data poisons every AI output</li>
+          <li><strong>HVC #16 unchanged</strong> &mdash; SMS TCPA risk persists on new surface</li>
+          <li><strong>F4 CSAT regression</strong> &mdash; Brand-context banner = upgrade pressure on Free</li>
+          <li><strong>Strategy R1 accelerated</strong> &mdash; Premium / agency feel pushed harder</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <p class="source"><strong>Source:</strong> Prototype decomposition at github.intuit.com/dprabhakara/ai-email-generator-decomp (29 screenshots + 11 docs covering routes, all 8 Create tabs, Brand Kit modal, Prototype settings, end-to-end generation flow, manual mode, design tokens, content inventory, runtime). Scored against this brief's <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a>, <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a>, and <a href="#revised" onclick="document.querySelector('[data-tab=revised]').click();return false;">Revised Goals</a>.</p>
+</section>
+
+<!-- Tab 17 Page 2: Q1 HVC + UR coverage -->
+<section class="page" aria-label="Freddie Prototype Assessment Page 2">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Tab 17 &middot; Page 2 of 4 &middot; HVC + UR coverage</div>
+      <h1 style="font-size:24px">Q1: How many of the bugs and barriers does it solve?</h1>
+      <div class="subtitle">All 17 HVC themes scored against the prototype, then the 5 UR bets + Discovery table + 5 Workflow Shapes. Verdicts: <span class="verdict-pill solves">SOLVES</span> directly addresses the cited root cause &middot; <span class="verdict-pill partial">PARTIAL</span> touches the symptom but not the root &middot; <span class="verdict-pill miss">MISS</span> design is silent or out-of-scope &middot; <span class="verdict-pill worse">WORSENS</span> design likely makes the problem harder.</div>
+    </div>
+    <div class="meta"><strong>0</strong> SOLVES &middot; <strong>5</strong> PARTIAL &middot; <strong>12</strong> MISS &middot; <strong>4</strong> WORSEN</div>
+  </div>
+
+  <h2 style="margin-top:6px"><span class="num">2.1</span>HVC Risk Map &mdash; all 17 themes</h2>
+
+  <table style="margin-top:6px">
+    <thead><tr><th style="width:5%">#</th><th style="width:24%">Theme</th><th style="width:8%">$/mo</th><th style="width:9%">Verdict</th><th>Rationale</th></tr></thead>
+    <tbody>
+      <tr><td class="b">1</td><td>No legacy &rarr; New Builder migration; bulk template updates impossible</td><td>$330</td><td><span class="verdict-pill miss">MISS</span></td><td>Prototype has no migration tooling. The 181-template customer's "system where templates share content like Brand Kit but more substantial" is the <strong>Universal Content</strong> ask &mdash; the prototype has saved/template content in iframe previews but no propagation primitive. Recents/templates carousels actually <em>replicate</em> the template-scoped saved-content pattern customer is complaining about.</td></tr>
+      <tr><td class="b">2</td><td>Support / product dead-ends on legacy &rarr; New conversion</td><td>$504</td><td><span class="verdict-pill miss">MISS</span></td><td>Service-design problem, not authoring. Out-of-scope for the prototype.</td></tr>
+      <tr><td class="b">3</td><td>Rendering diverges: forwarded mail, mobile line-breaks, image shrink, Ctrl+K Firefox/Chrome, light/dark, bg images</td><td>$1,820</td><td><span class="verdict-pill partial">PARTIAL</span></td><td>3-way viewport radio (desktop/mobile/split) + Preview button increase trust the customer is seeing what subscribers see. <strong>But</strong>: doesn't fix the underlying render-divergence bugs. Without <code>email-render-pipeline</code> wired into CI (<a href="#repointel" onclick="document.querySelector('[data-tab=repointel]').click();return false;">Repo Intel</a> finding), preview parity is still aspirational. Addresses the trust symptom, not the engineering root cause.</td></tr>
+      <tr><td class="b">4</td><td>Multi-author save conflicts &mdash; no presence indicator</td><td>$340</td><td><span class="verdict-pill miss">MISS</span></td><td>Single-editor by design. No presence, no co-edit, no conflict UI. This is <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">UR Bet 4</a> and <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Pillar 5.3</a> &mdash; separate scope. Adjacent risk: the conversation sidebar could give false signal that conversations are shared/teamed.</td></tr>
+      <tr><td class="b">5</td><td>Dual builders + custom code &mdash; block ordering glitches, "templates moved" nav</td><td>$410</td><td><span class="verdict-pill partial">PARTIAL</span></td><td>Prototype shows <em>one</em> editor, eliminating dual-surface confusion at the navigation layer. But no HTML/code escape hatch (the reason Premium anchored on Classic). Block-ordering runtime bug not fixed. Addresses surface confusion; doesn't address custom-code need.</td></tr>
+      <tr><td class="b">6</td><td>Template list / campaign wizard &mdash; NEB templates not surfacing</td><td>$1,950</td><td><span class="verdict-pill partial">PARTIAL</span> + <span class="verdict-pill worse">WORSE</span></td><td>"Start from recent email" + "Start from template" carousels surface NEB-styled previews directly &mdash; right pattern. <strong>But</strong> no indication legacy / custom-coded templates also surface. "View all templates" is a placeholder. For the inverse customer (Classic templates anchor), the design likely <em>worsens</em> &mdash; HVC #6 reverse. See <strong>pre-mortem risk #1</strong>.</td></tr>
+      <tr><td class="b">7</td><td>Brand fonts not usable in landing pages / forms; iPhone fallbacks</td><td>$655</td><td><span class="verdict-pill miss">MISS</span></td><td>LP / signup-form font rendering is out-of-surface. Brand Kit modal lets you upload fonts but the LP-application bug isn't in scope.</td></tr>
+      <tr><td class="b">8</td><td>Brand Kit regression / stale kit / colors dropped (Feb 2026 incident)</td><td>thread</td><td><span class="verdict-pill miss">MISS</span> + <span class="verdict-pill worse">WORSE</span></td><td>Data-correctness incident, not design. <strong>But</strong> the prototype centers Brand Kit in every AI surface &mdash; if Brand Kit data is wrong, AI-generated outputs amplify the wrongness across every send. Blast radius goes from "one slot on Brand Kit page" to "every AI-generated email." See <strong>pre-mortem risk #6</strong>.</td></tr>
+      <tr><td class="b">9</td><td>Logo asset metadata / multi-brand kits</td><td>$2,460</td><td><span class="verdict-pill miss">MISS</span></td><td>Brand Kit modal supports a <em>single</em> brand kit. No multi-brand picker in AI composer, no per-conversation brand switcher, no sub-brand concept. Agencies + multi-brand teams not served. Initiative I-1.2.3 entirely missing.</td></tr>
+      <tr><td class="b">10</td><td>Font upload / Creative Assistant mismatch</td><td>$3,350</td><td><span class="verdict-pill miss">MISS</span> + <span class="verdict-pill worse">WORSE</span></td><td>Brand Kit Fonts section shows a <strong>hardcoded dropdown of 23 fonts</strong> &mdash; DIN 2014, Asul, Readex Pro (the named HVC fonts) are not in the list and there is <em>no upload affordance visible</em>. Worse than current state. See <strong>pre-mortem risk #7</strong>.</td></tr>
+      <tr><td class="b">11</td><td>Creative Assistant rediscovery / shrink &mdash; banner workflows</td><td>$2,650</td><td><span class="verdict-pill partial">PARTIAL</span></td><td>AI image generation + 8 theme presets are adjacent to what customers want (branded banners inside MC, not Canva). But no explicit banner / social asset workflow. Could be positioned as "Creative Assistant 2.0" but doesn't restore the workflows the named customers used.</td></tr>
+      <tr><td class="b">12</td><td>Content Studio instability + forced New Builder narrative</td><td>$621</td><td><span class="verdict-pill partial">PARTIAL</span></td><td>Single-editor design softens "forced to New Builder" tone. <strong>But</strong> Content Studio image-loading bug not fixed. And the prototype's implicit messaging ("Mailchimp AI is the way you make emails now") is <em>more</em> of a forcing function, not less.</td></tr>
+      <tr><td class="b">13</td><td>Canva &harr; Mailchimp &mdash; sync loss, email sent without graphic</td><td>$2,500+</td><td><span class="verdict-pill miss">MISS</span></td><td>No Canva integration visible in prototype. Asset attach is a generic <code>+</code> button. Canva sync still broken at data-pipeline layer. Worse: design pulls more customers <em>into</em> the in-canvas flow that displaced Canva, so pressure on broken sync goes up.</td></tr>
+      <tr><td class="b">14</td><td>SMS / journey reporting &mdash; empty, N/A, hard to find</td><td>$1,386</td><td><span class="verdict-pill miss">MISS</span></td><td>SMS reporting is downstream of editor. Generic Home dashboard segment toggle changes the active pill but same data. Real SMS reporting (Theme 14) not in scope.</td></tr>
+      <tr><td class="b">15</td><td>SMS credits &mdash; negative balance hidden, undelivered burn</td><td>$3,592</td><td><span class="verdict-pill miss">MISS</span></td><td>No SMS credits UI. Composing SMS in this design produces a chat conversation and a hypothetical render &mdash; none of the credit-balance, opt-out, delivery-cost machinery is present. The Send CTA in an SMS conversation likely creates the exact silent-burn problem the customer cited.</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">16</td><td><strong>Duplicate TCPA opt-out in sent SMS ($57K HVC)</strong></td><td><strong>$57,000</strong></td><td><span class="verdict-pill miss">MISS</span> + <span class="verdict-pill worse">WORSE</span></td><td>Single largest cited HVC in the brief. The prototype's SMS composer doesn't have any of the TCPA guardrails (I-5.2.3). Worse, the AI chip "Send a flash sale alert via text" could trivially produce non-compliant opt-out content with no AccessibilityLinter / ComplianceChecker wired in. <strong>$57K incident pattern more likely to recur on this surface, not less.</strong> See <strong>pre-mortem risk #4</strong>.</td></tr>
+      <tr><td class="b">17</td><td>SMS merge depth &middot; MMS POC</td><td>&mdash;</td><td><span class="verdict-pill miss">MISS</span></td><td>No merge-tag depth, MMS attach UI, or branded short-link config. SMS in prototype = single chat-generated message string.</td></tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:14px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+    <div class="score-card good">
+      <div class="num-big">0</div>
+      <div class="sub"><strong>SOLVES directly</strong> &middot; $0 / $95K cited = 0%</div>
+    </div>
+    <div class="score-card warn">
+      <div class="num-big">5</div>
+      <div class="sub"><strong>PARTIAL</strong> (#3, #5, #6, #11, #12) &middot; ~$7.2K/mo = 7.6%</div>
+    </div>
+    <div class="score-card bad">
+      <div class="num-big">12</div>
+      <div class="sub"><strong>MISS</strong> &middot; ~$73K/mo = 76.8% (incl. $57K TCPA = 60% alone)</div>
+    </div>
+    <div class="score-card bad">
+      <div class="num-big">4</div>
+      <div class="sub"><strong>WORSEN</strong> (#6, #8, #10, #16) &middot; overlapping</div>
+    </div>
+  </div>
+
+  <h2 style="margin-top:18px"><span class="num">2.2</span>User Research &mdash; 5 UR bets + Discovery table + Workflow Shapes</h2>
+
+  <h3 style="margin-top:8px; font-size:14px; font-family:'Source Serif 4',Georgia,serif;">The 5 UR bets</h3>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:8%">Bet</th><th style="width:26%">What customers want</th><th style="width:11%">Verdict</th><th>Rationale</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Bet 1</td><td>Saved blocks / section reuse</td><td><span class="verdict-pill partial">PARTIAL</span></td><td>"Sections" panel in manual mode (Hero, Image+Text, Header, Product List, Coupon, Button, Text, Footer, Product Grid, Banner CTA) &mdash; these are <em>layouts to insert</em>, not <em>blocks that propagate edits</em>. No edit-once-applies-everywhere primitive. Matches the surface, misses the propagation.</td></tr>
+      <tr><td class="b">Bet 2</td><td>Discovery / activation for high-frequency users</td><td><span class="verdict-pill solves">SOLVES</span></td><td>The AI surface itself <em>is</em> discovery: suggested-prompt chips on every tab, follow-up chips on the editor ("Add a call to action", "Change theme", "Check accessibility", "Optimize for mobile"), Home dashboard "Done for you" pattern. Strong fit for Clint (DRAFT-resurrect) and Bianka (proactive A/B suggestion).</td></tr>
+      <tr><td class="b">Bet 3</td><td>B2B / ProServ template gallery lane</td><td><span class="verdict-pill solves">SOLVES</span> intent</td><td>Templates section has 10 templates with category pills (Announcement, Invitation, Abandoned cart, Post-purchase, Editorial essay). Several skew non-ecom. <strong>But</strong> actual content still DTC-flavored ("Your Brand", "Spring Collection"). Structure supports vertical fit; content still defaults to DTC. Initiative-level fix needed.</td></tr>
+      <tr><td class="b">Bet 4</td><td>Real multi-author editing</td><td><span class="verdict-pill miss">MISS</span></td><td>Same as HVC #4. No presence, no co-edit, no commenting, no version history. Single-editor design throughout.</td></tr>
+      <tr><td class="b">Bet 5</td><td>Direct manipulation upgrades (asymmetric resize, 1-click 2-column, post-hoc A/B, Brand-Kit CTA defaults)</td><td><span class="verdict-pill partial">PARTIAL</span></td><td>Manual mode preserves existing NEB drag-drop builder, so Bet 5 improvements would still need to ship in NEB itself. <em>However</em>, AI surface bypasses much of this need by generating layout &mdash; for Workflow Shapes #1+#5, Bet 5 becomes less load-bearing. For Shapes #3+#4, Bet 5 is still the unmet need. Bypassed for some personas, not solved for others.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:14px; font-size:14px; font-family:'Source Serif 4',Georgia,serif;">Discovery table &mdash; multi-year undiscovered features</h3>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:14%">Customer</th><th>Undiscovered</th><th style="width:10%">Duration</th><th style="width:11%">Helped?</th><th>Rationale</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Bianka Kiss</td><td>A/B testing</td><td>Years</td><td><span class="verdict-pill partial">PARTIAL</span></td><td>"Optimize for mobile" follow-up chip is A/B-adjacent; A/B not surfaced by name. Multivariant lives in a Scratch-row card user must notice.</td></tr>
+      <tr><td class="b">Jack Hally</td><td>New Email Builder</td><td>4&ndash;6 yrs on inherited legacy template</td><td><span class="verdict-pill miss">MISS</span></td><td>Jack stays on legacy template he inherited; prototype has no "your account is on Classic &mdash; try NEB" prompt. Migration awareness gone.</td></tr>
+      <tr><td class="b">Jeffrey Davis</td><td>My Products / Woo product pull</td><td>3.5 yrs</td><td><span class="verdict-pill partial">PARTIAL</span></td><td>"Featured products" in strategy panel could surface this &mdash; only if catalog connected. No connection prompt visible.</td></tr>
+      <tr><td class="b">Clint Bartley</td><td>Welcome automation (in DRAFT)</td><td>1 yr (first send never happened)</td><td><span class="verdict-pill solves">SOLVES</span></td><td>Recent cards on Email tab show Drafts with "Edited X" sub. Clint sees his Draft with "Create" overlay &mdash; high probability of resurrection.</td></tr>
+      <tr><td class="b">Wes Turner</td><td>Saved blocks (pre-ship)</td><td>At time of call</td><td><span class="verdict-pill partial">PARTIAL</span></td><td>Same as Bet 1 &mdash; Sections panel surfaces inserts but doesn't propagate edits. Wes feels partially seen.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:14px; font-size:14px; font-family:'Source Serif 4',Georgia,serif;">Workflow Shapes</h3>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:16%">Shape</th><th style="width:18%">Examples</th><th style="width:11%">Prototype fit</th><th>Rationale</th></tr></thead>
+    <tbody>
+      <tr><td class="b">#1 Fast Monday sender</td><td>Andrew, Andrea, Kim, Clint</td><td><span class="verdict-pill solves">STRONG</span></td><td>Quick-prompt chip + recent card flow gets them to sendable email in minutes.</td></tr>
+      <tr><td class="b">#2 All-week ad-libber</td><td>Jack Hally (10&ndash;20 logins/day)</td><td><span class="verdict-pill miss">WEAK</span></td><td>Jack edits a living newsletter; the chat-conversation paradigm doesn't fit "continuous edit", no save-conflict UX.</td></tr>
+      <tr><td class="b">#3 Brand-first methodical</td><td>Wes, Bob</td><td><span class="verdict-pill partial">MIXED</span></td><td>Brand Kit modal supports setup; manual mode preserves precision; Sections help; Saved blocks propagation missing.</td></tr>
+      <tr><td class="b">#4 Third-party-in-loop</td><td>Andrea (Bee.io), Wes (Canva), Jack (Express)</td><td><span class="verdict-pill partial">MIXED</span></td><td>AI image gen + Visual Style picker theoretically reduces Canva need; no migration tooling from Bee/Express.</td></tr>
+      <tr><td class="b">#5 Low-frequency / discovery gap</td><td>Shannon, Matt, Gilles</td><td><span class="verdict-pill solves">STRONG</span></td><td>Chip prompts + suggested follow-ups make capability surface itself.</td></tr>
+    </tbody>
+  </table>
+
+  <p class="source"><strong>UR coverage roll-up:</strong> 2 of 5 bets fully addressed (Discovery, vertical fit) &middot; 2 partial (Saved blocks, Direct manipulation) &middot; 1 not addressed (multi-author). Discovery table: 1 of 5 fully (Clint) &middot; 3 partial &middot; 1 unhelped (Jack). Workflow shapes: 3 of 5 well served, 2 of 5 poorly.</p>
+</section>
+
+<!-- Tab 17 Page 3: Q2 Revised Goals capture -->
+<section class="page" aria-label="Freddie Prototype Assessment Page 3">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Tab 17 &middot; Page 3 of 4 &middot; Revised Goals capture</div>
+      <h1 style="font-size:24px">Q2: How much of the $21M target can this design plausibly capture?</h1>
+      <div class="subtitle">Per-lever scoring against the <a href="#revised" onclick="document.querySelector('[data-tab=revised]').click();return false;">Revised Goals</a> (Tab 11): 3 cohorts &times; 10 levers + 5 customer-benefit metrics. Capture % asks: of the editor-attributable portion of each lever, how much does this design credibly move? Full-stack $ = editor-share &times; capture-% &times; lever-$.</div>
+    </div>
+    <div class="meta"><strong>~$10&ndash;15M</strong> capture band &middot; <strong>mid ~$12.4M</strong> &middot; <strong>59%</strong> of $21M</div>
+  </div>
+
+  <h2 style="margin-top:6px"><span class="num">3.1</span>Paid cohort &mdash; $6.7M target &middot; 4 levers</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:22%">Lever</th><th style="width:10%">Target</th><th style="width:6%">$</th><th style="width:13%">Alignment</th><th style="width:11%">Capture est.</th><th>Rationale</th></tr></thead>
+    <tbody>
+      <tr><td class="b">PA1 Bulk adoption</td><td>92.7% &rarr; 95%</td><td>$1.9M</td><td><span class="verdict-pill solves">STRONG</span></td><td>$1.3&ndash;1.7M (70&ndash;90%)</td><td>AI surface is textbook conversion of "Unexplored" 7.3% paid users. AI Setup Agent + Brand Kit auto-applied are named mechanisms; prototype implements first two. Some structural non-users (API-only, dormant multi-seat) unreachable.</td></tr>
+      <tr><td class="b">PA2 Bulk activation</td><td>60.6% &rarr; 67%</td><td>$0.8M</td><td><span class="verdict-pill partial">MODERATE</span></td><td>$0.3&ndash;0.5M (40&ndash;65%)</td><td>Activation is "touched &rarr; Established" &mdash; habitual sending. AI surface helps the <em>first</em> send. Doesn't help repeat sending (PA3). The &minus;2.4pp YoY decline is the bleeding edge per Nuni audit &mdash; only addressed if "your draft is here" cards surface old abandonders.</td></tr>
+      <tr><td class="b">PA3 30d repeat send</td><td>83.2% &rarr; 87%</td><td>$0.9M</td><td><span class="verdict-pill miss">WEAK</span></td><td>$0.2&ndash;0.4M (20&ndash;45%)</td><td>Repeat usage driven by lifecycle/trigger campaigns + onboarding + omnichannel (L4 lever in <a href="#memo" onclick="document.querySelector('[data-tab=memo]').click();return false;">Strategy Memo</a>). Prototype doesn't change the trigger model or per-recipient relevance. Conversation history sidebar could lift repeat (Clint pattern) but only if well-surfaced.</td></tr>
+      <tr style="background:#FFFAF0"><td class="b">PA4 Net CSAT</td><td>&minus;29.3 &rarr; 0 (neutral)</td><td><strong>$3.1M</strong></td><td><span class="verdict-pill partial">MIXED</span></td><td>$0.6&ndash;1.2M (20&ndash;40%)</td><td>CSAT depends on Builder SLOs (P1.5), parity polish, render fidelity, AI quality, Klaviyo gap closures. Prototype adds <strong>AI quality risk</strong> (hallucination liability) <em>without</em> addressing rendering/SLO foundations. New surface feels modern &rarr; lifts CSAT. New surface that produces wrong-brand emails or hallucinated promo codes &rarr; lowers CSAT. Roll the dice.</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:4px"><strong>Paid subtotal capture estimate: ~$2.4&ndash;3.8M of $6.7M (36&ndash;57%).</strong></p>
+
+  <h2 style="margin-top:14px"><span class="num">3.2</span>Free cohort &mdash; $8.7M target (biggest) &middot; 4 levers</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:22%">Lever</th><th style="width:10%">Target</th><th style="width:6%">$</th><th style="width:13%">Alignment</th><th style="width:11%">Capture est.</th><th>Rationale</th></tr></thead>
+    <tbody>
+      <tr><td class="b">F1 Free adoption</td><td>75% &rarr; 82%</td><td>$0.9M</td><td><span class="verdict-pill solves">STRONG</span></td><td>$0.7&ndash;0.9M (75&ndash;95%)</td><td>AI surface is the right tool for first-touch on builder for free users. Brand Kit auto-extract on signup (named in I-3.1.2) closes this; prototype has the receiving UI for it (Brand Kit modal with URL importer).</td></tr>
+      <tr style="background:#F4FBF7"><td class="b">F2 Free activation</td><td>48.1% &rarr; 55%</td><td><strong>$3.6M</strong></td><td><span class="verdict-pill solves">STRONG</span></td><td>$2.4&ndash;3.2M (65&ndash;90%)</td><td><strong>Single biggest Free lever &middot; single biggest revenue capture from this prototype.</strong> "Touched &rarr; Established" for a free user is roughly "did they send something they're proud of?" &mdash; AI generates sendable email in minutes. Recents/templates carousels close the loop.</td></tr>
+      <tr><td class="b">F3 Free 30d repeat send</td><td>73.4% &rarr; 80%</td><td>$1.7M</td><td><span class="verdict-pill partial">MODERATE</span></td><td>$0.5&ndash;0.9M (30&ndash;55%)</td><td>Repeat is engagement + trigger + lifecycle marketing. Prototype lifts repeat through conversation continuity and suggested-prompt chips but doesn't ship the deeper lifecycle mechanics (Smart Send Time, AI Performance Watchdog, omnichannel reminders).</td></tr>
+      <tr><td class="b">F4 Free Net CSAT</td><td>&minus;29.3 &rarr; 0</td><td>$2.5M</td><td><span class="verdict-pill partial">MIXED</span></td><td>$0.5&ndash;1.0M (20&ndash;40%)</td><td>Same logic as PA4 &mdash; modernity boost vs hallucination risk. F4 also has the <strong>upgrade-pressure side effect</strong>: the brand-context banner ("Get better results by adding brand and business information [Open Brand Kit / Set up Brand Kit]") feels like upsell pressure on Free users, potentially <em>lowering</em> Free CSAT.</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:4px"><strong>Free subtotal capture estimate: ~$4.1&ndash;6.0M of $8.7M (47&ndash;69%).</strong></p>
+
+  <h2 style="margin-top:14px"><span class="num">3.3</span>Trial cohort &mdash; $5.6M target &middot; 2 levers</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:22%">Lever</th><th style="width:10%">Target</th><th style="width:6%">$</th><th style="width:13%">Alignment</th><th style="width:11%">Capture est.</th><th>Rationale</th></tr></thead>
+    <tbody>
+      <tr style="background:#F4FBF7"><td class="b">T1 Trial activation 90d</td><td>10.8% &rarr; 16%</td><td><strong>$5.0M</strong></td><td><span class="verdict-pill solves">STRONGEST</span></td><td>$3.5&ndash;4.5M (70&ndash;90%)</td><td><strong>Largest single lever in the entire $21M goal. Prototype is purpose-built for it.</strong> New signup, no campaigns yet, AI agent says "Create a welcome email for new subscribers" &rarr; 3 clicks &rarr; preview &rarr; send a test. T-1 was 13.8% before declining to 10.8%; recovering to 16% on the back of AI Setup Agent is highly plausible. <strong>This is where the prototype earns its keep.</strong></td></tr>
+      <tr><td class="b">T2 Trial 30d repeat</td><td>72.8% &rarr; 80%</td><td>$0.6M</td><td><span class="verdict-pill partial">MODERATE</span></td><td>$0.2&ndash;0.4M (30&ndash;65%)</td><td>Repeat after first send needs lifecycle hooks and value reinforcement. Recents/templates carousel + suggested follow-ups help; lack of in-canvas revenue reporting (I-4.4.4) means customer doesn't see the lift, doesn't feel the loop.</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:4px"><strong>Trial subtotal capture estimate: ~$3.7&ndash;4.9M of $5.6M (66&ndash;88%).</strong></p>
+
+  <h2 style="margin-top:14px"><span class="num">3.4</span>Customer Benefit Metrics &mdash; CB1&ndash;5 (no $, leading indicators)</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:30%">Metric</th><th style="width:18%">T0 &rarr; FY27</th><th style="width:14%">Alignment</th><th>Rationale</th></tr></thead>
+    <tbody>
+      <tr><td class="b">CB1 Median Time to Activate</td><td>5d &rarr; 2d</td><td><span class="verdict-pill solves">STRONG</span></td><td>AI Setup Agent pattern is the named mechanism. 2-day Klaviyo cadence plausible with this surface.</td></tr>
+      <tr><td class="b">CB2 Avg open rate</td><td>28.27% &rarr; 35%</td><td><span class="verdict-pill miss">WEAK</span></td><td>Open rate is subject line + send time + segmentation. Prototype generates subject lines; doesn't run Smart Send Time or AI Performance Watchdog. Industry benchmark gap unlikely to close from this alone.</td></tr>
+      <tr><td class="b">CB3 Avg click rate</td><td>1.70% &rarr; 3.0%</td><td><span class="verdict-pill miss">WEAK</span></td><td>Click rate is content quality + personalization + dynamic blocks. AI-generated content helps; lack of per-recipient personalization caps the lift.</td></tr>
+      <tr><td class="b">CB4 RPME</td><td>$1.74 &rarr; $2.50</td><td><span class="verdict-pill miss">WEAK</span></td><td>Conversion lift needs personalization + send-time intelligence + omnichannel attribution. Prototype generates email; doesn't ship the optimization stack.</td></tr>
+      <tr><td class="b">CB5 % MC share-of-channel-rev</td><td>~15% &rarr; 25%</td><td><span class="verdict-pill miss">MISS</span></td><td>Requires omnichannel attach (SMS/Push/WhatsApp). Prototype shows tabs but only Email is functional.</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:14px"><span class="num">3.5</span>Revised Goals capture roll-up</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th>Cohort</th><th>Target $</th><th>Capture estimate</th><th>Capture %</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Paid</td><td>$6.7M</td><td>$2.4&ndash;3.8M</td><td>36&ndash;57%</td></tr>
+      <tr><td class="b">Free</td><td>$8.7M</td><td>$4.1&ndash;6.0M</td><td>47&ndash;69%</td></tr>
+      <tr><td class="b">Trial</td><td>$5.6M</td><td>$3.7&ndash;4.9M</td><td>66&ndash;88%</td></tr>
+      <tr style="background:#F4FBF7"><td class="b">Total</td><td><strong>$21.0M</strong></td><td><strong>$10.2&ndash;14.7M</strong></td><td><strong>49&ndash;70%</strong></td></tr>
+      <tr><td class="b">Mid estimate</td><td>&mdash;</td><td><strong>~$12.4M</strong></td><td><strong>59%</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="pull" style="margin-top:14px">
+    <strong>Single most important number.</strong> T1 Trial activation alone at 70&ndash;90% capture is $3.5&ndash;4.5M, which is 17&ndash;21% of the entire $21M goal. <em>If this prototype only lifted trial activation and did nothing else, it would still be a financially meaningful FY27 ship.</em>
+    <cite>The residual $6&ndash;13M depends on: (1) Universal Content / saved-blocks shipping concurrently &middot; (2) Render fidelity + Builder SLOs (Pillar 1.5) &middot; (3) CSAT recovering on its own from "feels modern" tailwind &middot; (4) SMS/omnichannel actually working (Pillar 5) &middot; (5) In-canvas revenue surfacing (I-4.4.4, Klaviyo countermove).</cite>
+  </div>
+
+  <p class="source"><strong>Source:</strong> Revised Goals scorecards from <a href="#revised" onclick="document.querySelector('[data-tab=revised]').click();return false;">Tab 11</a> (PA1&ndash;4, F1&ndash;4, T1&ndash;2, CB1&ndash;5). Capture estimates apply within the Tab 11 editor causal share assumptions (Paid adoption/activation 50%, Paid repeat 35%, Paid CSAT 30%, Free all 20%, Trial all 25%). My capture % asks "of the editor-attributable portion of each lever, how much does this design credibly move?" Full-stack $ = editor causal share &times; my capture % &times; lever $.</p>
+</section>
+
+<!-- Tab 17 Page 4: Q3 Pre-mortem -->
+<section class="page" aria-label="Freddie Prototype Assessment Page 4">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Tab 17 &middot; Page 4 of 4 &middot; Pre-mortem</div>
+      <h1 style="font-size:24px">Q3: What new bugs and "move my cheese" problems will this open up?</h1>
+      <div class="subtitle">For each surface, asked: <em>what existing customer expectation does this break? What new failure mode does it create?</em> Severity = (1) <strong>Critical</strong> &mdash; likely HVC-scale escalations or revenue impact &gt;$1K/mo each &middot; (2) <strong>Moderate</strong> &mdash; friction but not escalations &middot; (3) <strong>Low</strong> &mdash; annoyance, observable in NPS / Reddit but not financially material.</div>
+    </div>
+    <div class="meta"><strong>5</strong> CRITICAL &middot; <strong>6</strong> MODERATE &middot; <strong>3</strong> LOW &middot; ~$6&ndash;18M downside band</div>
+  </div>
+
+  <h2 style="margin-top:6px"><span class="num">4.1</span>Critical risks (5) &mdash; launch-blocking</h2>
+
+  <div class="risk-card crit">
+    <div class="risk-eye">RISK #1 &middot; CRITICAL</div>
+    <h4>Existing recents/templates discovery regression</h4>
+    <div class="risk-meta">Affected: Long-tenure HVCs, Premium accounts &middot; Cited MRR exposure if it goes wrong: $1,950 + risk to broader Classic-anchored Premium base (Strategy R1: $1&ndash;2M ARR)</div>
+    <p><strong>Symptom:</strong> Recents carousel on <code>/create</code> Email tab shows iframe previews of NEB-styled branded emails. Question: does it surface customer's <em>legacy / custom-coded / Classic</em> templates, or only NEB-built items? The decomposition strongly suggests NEB-native only.</p>
+    <p><strong>Why it's critical:</strong> For the $1,950/mo customer from HVC #6 ("Where are my new templates?"), the design <em>may</em> help. But for the mirror customer &mdash; long-tenure Premium with templates all in Classic &mdash; this is <strong>HVC #6 in reverse</strong>: "Where are my legacy templates?" Could directly regress on a documented HVC theme.</p>
+    <p><strong>Mitigation:</strong> Templates carousel must have origin filter (All / NEB / Classic / Custom HTML). "View all templates" needs deep-link parity. Add migration-awareness prompt for Jack Hally's Discovery-table case ("This template is in Classic &mdash; try New Builder?").</p>
+  </div>
+
+  <div class="risk-card crit">
+    <div class="risk-eye">RISK #2 &middot; CRITICAL</div>
+    <h4>Manual mode is hidden; escape hatch is discoverability-fragile</h4>
+    <div class="risk-meta">Affected: Power users, Premium / agency, customers needing custom HTML &middot; Cited MRR if it goes wrong: subset of $281M HVC ARR (Migration Tab 12) + Premium / agency cohort = $5&ndash;15M ARR risk</div>
+    <p><strong>Symptom:</strong> Manual mode reached via a small pencil-icon radio in the editor top bar (next to ✦ AI radio). Most users won't discover it unless they specifically look. For Wes Turner, Bob Gray, and the 38K HVC NEA stayers, manual mode <em>is</em> the product &mdash; brand-precision lives there.</p>
+    <p><strong>Why it's critical:</strong> Premium customer can't find manual editor on first visit &rarr; churns before discovering AI was optional. This is exactly the "Mailchimp is forcing me to AI" pattern that HVC #12 already cites in proto form. Strategy explicitly says don't force-migrate HVCs &mdash; the prototype's default-to-AI behavior is a softer version of the same forcing function.</p>
+    <p><strong>Mitigation:</strong> Surface manual mode as a primary entry &mdash; not a radio after generation. "Skip AI &mdash; open blank editor" link on composer surface. Remember last-used mode and default to it. For Premium / Legacy plan users, default to manual entirely.</p>
+  </div>
+
+  <div class="risk-card crit">
+    <div class="risk-eye">RISK #3 &middot; CRITICAL</div>
+    <h4>AI hallucination liability (especially in regulated content)</h4>
+    <div class="risk-meta">Affected: Every paid customer who clicks Send on AI-generated content &middot; If it goes wrong: press-coverage scale Mailchimp-brand event</div>
+    <p><strong>Symptom:</strong> Prototype generates copy, subject lines, hero text, CTAs, and <strong>footer compliance text</strong> ("123 Main St, Your City, State 12345"). Sample "Welcome to the Community!" has hardcoded "Your Brand" + placeholder address &mdash; fine for prototype, catastrophic if shipped without Brand Kit binding for footer address, sender, unsubscribe.</p>
+    <p><strong>Three named failure modes:</strong> (1) <strong>Wrong physical address</strong> &mdash; CAN-SPAM requires valid physical postal address; AI hallucinated address = federal regulatory exposure per send. (2) <strong>Hallucinated promo codes / dates</strong> &mdash; strategy brief auto-suggests "Exclusive welcome guide + first-week bonus content"; AI-fabricated code in a Send button = support nightmare. (3) <strong>Hallucinated products</strong> &mdash; "Featured Products: Product 1, Product 2" placeholder; without catalog connect, copy will <em>make up</em> products that don't exist.</p>
+    <p><strong>Mitigation:</strong> All footer compliance fields must be Brand-Kit-sourced, never AI-generated. Promo blocks must bind to a real promo entity. Product blocks must bind to live SKUs. Pre-send checklist needs "AI-generated fields verified" gate. AccessibilityLinter + ComplianceChecker (Build Plan Tools 11+12) wired before GA.</p>
+  </div>
+
+  <div class="risk-card crit">
+    <div class="risk-eye">RISK #4 &middot; CRITICAL</div>
+    <h4>SMS TCPA exposure unchanged (or worse) on the new surface</h4>
+    <div class="risk-meta">Affected: All SMS-sending customers (~6.7K Established + growth cohort) &middot; Cited MRR if it goes wrong: $57,000/mo per HVC-class incident</div>
+    <p><strong>Symptom:</strong> Same as HVC #16 ($57K C3 Festivals incident). New design adds "Send a flash sale alert via text" quick-prompt chip in SMS tab + chat-driven SMS composer &mdash; but strategy explicitly calls out (I-5.2.3) that SMS needs <strong>TCPA guardrails, opt-out compliance checks, duplicate-opt-out detector</strong> before any new SMS authoring surface ships. Prototype has none of this.</p>
+    <p><strong>Why it's existential:</strong> AI-generated SMS body could include or omit required opt-out instructions silently. No Compliance Coach. Shipping the new design's SMS tab without TCPA infrastructure means recreating the $57K incident pattern on a more frequently-touched surface. Strategy memo Q1 fix that must precede anything else in SMS.</p>
+    <p><strong>Mitigation:</strong> SMS tab must be <strong>dark-launched or feature-flagged OFF</strong> in the new design until I-5.2.3 ships. Prototype settings already has a "SMS AI" toggle &mdash; wire it to the actual TCPA-readiness check.</p>
+  </div>
+
+  <div class="risk-card crit">
+    <div class="risk-eye">RISK #5 &middot; CRITICAL</div>
+    <h4>Brand-context banner becomes upgrade pressure on Free</h4>
+    <div class="risk-meta">Affected: Free users (~870K monthly active = F1&ndash;F4 cohort = $8.7M of revised goal) &middot; Direct risk to goal: ~$0.1&ndash;0.4M off F4; bigger impact via lowered F2 conversion sensitivity</div>
+    <p><strong>Symptom:</strong> The composer has an inline banner: "Get better results by adding brand and business information [Open Brand Kit] [Set up Brand Kit]". Sits between composer and quick-prompt chips &mdash; high-friction position.</p>
+    <p><strong>Why it's critical:</strong> For Free users without a paid plan, this is upsell pressure on every Create visit. Klaviyo VoC explicitly cites pricing complexity / Feb '25 active-profile billing as the &minus;72 net-sentiment biggest single Klaviyo wound. Strategy memo says counter-position Mailchimp on pricing transparency (I-3.4.3 engagement-based pricing). Putting "Set up Brand Kit" in front of every Free user every visit is the <em>opposite</em> of that counter-positioning play.</p>
+    <p><strong>Mitigation:</strong> For Free users, change banner to <strong>value framing</strong>: "Generated content will use your brand colors and voice once you upload them &mdash; takes 2 minutes." Hide banner once Brand Kit is set up. Never show banner on the same screen as the AI output &mdash; it telegraphs the AI doesn't know the customer's brand.</p>
+  </div>
+
+  <h2 style="margin-top:16px"><span class="num">4.2</span>Moderate risks (6)</h2>
+
+  <div class="risk-card mod">
+    <div class="risk-eye">RISK #6 &middot; MODERATE</div>
+    <h4>Brand Kit data correctness amplification</h4>
+    <p>AI surface centers Brand Kit (every chip, every preview). If Brand Kit data is wrong (stale kit per HVC #8 Feb 2026 incident), AI's generated outputs <em>amplify</em> the wrongness across every send. Blast radius goes from "one slot on Brand Kit page" to "every AI-generated email." Mitigation: I-1.2.1 must ship before AI is default. "Set up Brand Kit" must run URL importer with confirmation step.</p>
+  </div>
+
+  <div class="risk-card mod">
+    <div class="risk-eye">RISK #7 &middot; MODERATE</div>
+    <h4>Font upload UI is missing (HVC #10 mirror)</h4>
+    <p>Brand Kit Fonts section shows hardcoded dropdown of 23 fonts (DM Sans, Inter, Lato, &hellip;). The named customer's brand font (DIN 2014, Asul, Readex Pro from HVC #10) is not in the list and there's <em>no upload affordance visible</em>. Worse than current state &mdash; at least the upload UI exists today, even if broken. Affected: Premium customers ($3,350/mo cited). Mitigation: add "+ Upload custom font" affordance; validate uploaded fonts flow through to AI outputs.</p>
+  </div>
+
+  <div class="risk-card mod">
+    <div class="risk-eye">RISK #8 &middot; MODERATE</div>
+    <h4>Conversation history sidebar lacks search / organization</h4>
+    <p>Sidebar lists conversations grouped by day ("Today", "Yesterday"). For a power user with 10&ndash;20 conversations/day (Jack Hally pattern, Workflow Shape #2), this becomes unscannable within a week. No search, rename, folder, or tag. Mitigation: add conversation rename, search, pin, archive; group by campaign / project, not just chronology.</p>
+  </div>
+
+  <div class="risk-card mod">
+    <div class="risk-eye">RISK #9 &middot; MODERATE</div>
+    <h4>"Save draft" vs "Send" model is ambiguous</h4>
+    <p>Split-button reveals Save draft + Export HTML. Customer mental model: "I'm chatting with AI to write an email, then send it." Product model: "you're in a draft, you have to explicitly save, then explicitly send." Misalignment is high &mdash; particularly for Workflow Shapes #1 (Fast Monday sender) and #5 (low-frequency). Mitigation: autosave aggressively + show "Draft saved &middot; 2s ago" indicator; reserve "Send email" CTA for actual sends; confirm-on-send.</p>
+  </div>
+
+  <div class="risk-card mod">
+    <div class="risk-eye">RISK #10 &middot; MODERATE</div>
+    <h4>Theme presets without Brand Kit overrule the customer's brand</h4>
+    <p>The floating Aa theme editor offers 8 presets (Modern, Warm, Minimal, Botanical, Editorial, Sunset, Luxe, Coastal). If a customer with configured Brand Kit clicks a preset, what happens? Prototype doesn't make this clear. For Wes (HVC pill-CTA-reshaped pain), a preset that silently overrules his Brand Kit is exactly the failure mode that drove him to Canva. Mitigation: preset application must show before/after with explicit Apply; brand-kit-bound elements (logo, link color, button style) must NEVER be overridden without confirmation.</p>
+  </div>
+
+  <div class="risk-card mod">
+    <div class="risk-eye">RISK #11 &middot; MODERATE</div>
+    <h4>Non-email tabs are stubs but presented as equal-weight</h4>
+    <p>Tab bar shows 8 tabs as visually equal. <strong>6 of them are stubs</strong> &mdash; WhatsApp/SMS use same chips (likely copy bug); Social post is just a hero card; Automation has no AI composer; Form/Survey are template galleries. Customer who clicks Campaign expecting "multichannel campaign builder" gets a chat composer that produces a strategy brief &mdash; promise bigger than delivery. Pattern HVC #12 customer is already complaining about. Mitigation: tabs that aren't fully built should be visually subdued or labeled "Coming Q3" / "Preview".</p>
+  </div>
+
+  <h2 style="margin-top:16px"><span class="num">4.3</span>Low risks (3)</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:6%">#</th><th>Risk</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td class="b">12</td><td>Sidebar collapse/expand state not remembered cross-session</td><td>Standard SaaS UX hygiene; easy fix</td></tr>
+      <tr><td class="b">13</td><td>Dark mode toggle in prototype settings affects only the prototype, not generated email previews</td><td>Likely an artifact of the prototype build; easy to clarify</td></tr>
+      <tr><td class="b">14</td><td>Voice input is in the composer with no visible language picker</td><td>Accessibility / international users may not know what languages are supported</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:16px"><span class="num">4.4</span>Pre-mortem roll-up</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th>Severity</th><th>Count</th><th>Cumulative MRR risk</th></tr></thead>
+    <tbody>
+      <tr><td class="b">Critical</td><td>5 (Risks 1&ndash;5)</td><td>$5&ndash;15M ARR at risk if all manifest</td></tr>
+      <tr><td class="b">Moderate</td><td>6 (Risks 6&ndash;11)</td><td>$1&ndash;3M ARR at risk</td></tr>
+      <tr><td class="b">Low</td><td>3 (Risks 12&ndash;14)</td><td>&lt;$0.5M ARR</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">Total identified</td><td>14</td><td><strong>~$6&ndash;18M downside band</strong></td></tr>
+    </tbody>
+  </table>
+
+  <div class="pull" style="margin-top:14px">
+    <strong>Sobering observation.</strong> The $6&ndash;18M downside band is comparable to the $10&ndash;15M upside this prototype unlocks. <em>If the critical risks aren't mitigated pre-GA, the net could be flat-to-negative versus today's experience.</em>
+    <cite>That's the case for shipping these mitigations as launch-blockers, not P2 follow-ups.</cite>
+  </div>
+
+  <h2 style="margin-top:18px"><span class="num">05</span>Recommendations &mdash; if I were ranking</h2>
+  <ol style="margin-top:6px; padding-left: 20px; font-size: 13px; line-height: 1.55;">
+    <li><strong>Ship the AI composer + chat surface + strategy brief flow</strong> as the new front door for <code>/create</code> Email tab. Target T1 + F2 + PA1 wins. Do <em>not</em> make it the default for Premium / Legacy plan users yet (use the prototype's "Prototype settings" toggles as the actual A/B mechanism).</li>
+    <li><strong>Feature-flag off SMS, WhatsApp, Campaign tabs</strong> until the strategy's TCPA / multichannel infra ships. Show them as "Coming Q3" placeholders. Avoid creating new dollar exposure on top of HVC #16.</li>
+    <li><strong>Add the 5 critical-risk mitigations as launch-blocking:</strong> recents filter for surface origin &middot; manual-mode primary entry point &middot; Brand-Kit-bound footer compliance &middot; SMS tab gated on I-5.2.3 &middot; Brand-context banner re-framed for Free.</li>
+    <li><strong>Pair the launch with concurrent ships:</strong> I-1.2.1 (Brand Kit data correctness) &middot; I-1.2.2 (Font upload + CA parity) &middot; I-3.1.4 (AI Email Setup Agent &mdash; formalized as a flow, not just a chat) &middot; I-2.1.1 (Universal Content as primitive &mdash; exposed in the AI surface as "Edit once, propagates").</li>
+    <li><strong>Track these in-product metrics from day one:</strong> First-send time (CB1) &middot; Free activation (F2) &middot; Trial activation (T1) &middot; AI hallucination rate (new metric &mdash; must instrument before GA) &middot; Manual-mode discovery (new metric &mdash; must instrument before GA) &middot; Brand-Kit-completion rate by tier.</li>
+  </ol>
+
+  <p class="source"><strong>What this document is and isn't.</strong> <em>Is:</em> an evidence-grounded scoring of a prototype against three pre-existing strategy artifacts (<a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a>, <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a>, <a href="#revised" onclick="document.querySelector('[data-tab=revised]').click();return false;">Revised Goals</a>) plus a structured pre-mortem. <em>Isn't:</em> a user-tested validation. None of the risks have been measured against actual customer reaction &mdash; they are predictions from product-design first principles plus the strategy's own evidence base. Right next step before any go/no-go is a 25-customer UR pass on the prototype with the existing HeyMarvin panel. Cross-references: <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> (74 initiatives that this design partially exercises) &middot; <a href="#memo" onclick="document.querySelector('[data-tab=memo]').click();return false;">Strategy Memo</a> (6-quarter roadmap; this design is the Q2&ndash;Q5 visible surface) &middot; <a href="#migration" onclick="document.querySelector('[data-tab=migration]').click();return false;">Migration</a> (Phase 1 prereqs that this design must not undermine).</p>
+</section>
+
+</div><!-- /panel-freddie -->
+
+
+
+
 </div>
 
 <script>
@@ -11179,7 +11603,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','revised','migration','repointel','canvas','memo','buildplan'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','revised','migration','repointel','canvas','memo','buildplan','freddie'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
