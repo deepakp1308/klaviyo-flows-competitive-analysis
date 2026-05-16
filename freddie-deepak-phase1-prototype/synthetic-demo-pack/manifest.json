@@ -1,0 +1,238 @@
+{
+  "brand": {
+    "name": "Stride Athletics",
+    "tagline": "Train in rhythm.",
+    "domain": "stride-athletics.example.com",
+    "supportEmail": "hello@stride-athletics.example.com",
+    "instagram": "@strideathletics_demo"
+  },
+  "campaignTheme": {
+    "id": "spring-velocity-2026",
+    "season": "Spring 2026",
+    "tone": "Direct, warm, performance-aware without hype"
+  },
+  "products": [
+    {
+      "id": "sa-001",
+      "sku": "SA-VOLT-M-001",
+      "name": "Stride Volt Runner",
+      "category": "Footwear",
+      "priceUSD": 128,
+      "compareAtUSD": 148,
+      "image": "images/01-modern-gym-led.jpg",
+      "shortCopy": "Light daily trainer tuned for neighborhood miles.",
+      "longCopy": "The Volt Runner balances cushion and ground feel for easy mileage. Breathable upper, recycled foam midsole, rubber coverage on high-wear paths. Fits true to size; half sizes available.",
+      "bullets": ["8 mm drop", "240 g (men's 9)", "30-day trial returns"]
+    },
+    {
+      "id": "sa-002",
+      "sku": "SA-FLOOR-CREW",
+      "name": "Stride Floor Crew Tee",
+      "category": "Apparel",
+      "priceUSD": 38,
+      "image": "images/02-rotterdam-floor.jpg",
+      "shortCopy": "Anti-odor tee that survives back-to-back sessions.",
+      "longCopy": "Athletic cut, flat seams, and a weight that layers under a shell. Wicking knit sourced for durability in commercial gyms and home setups alike.",
+      "bullets": ["Relaxed athletic fit", "Machine wash cold", "Heather options"]
+    },
+    {
+      "id": "sa-003",
+      "sku": "SA-CITY-PIERCE",
+      "name": "Stride City Pierce Jacket",
+      "category": "Outerwear",
+      "priceUSD": 142,
+      "image": "images/03-city-runner.jpg",
+      "shortCopy": "Wind-resistant shell for dawn commutes and cooldowns.",
+      "longCopy": "Packable hood, reflective hits at shoulder and hem, DWR without crinkle noise. Designed for 40–55°F layering over the Crew Tee.",
+      "bullets": ["Two zip pockets", "Elastic cuffs", "Bluesign-minded trims"]
+    },
+    {
+      "id": "sa-004",
+      "sku": "SA-HIIT-GRIP",
+      "name": "Stride HIIT Grip Trainer",
+      "category": "Footwear",
+      "priceUSD": 115,
+      "image": "images/04-hiit-floor.jpg",
+      "shortCopy": "Lateral support for intervals, sled pushes, and circuits.",
+      "longCopy": "Stable platform, flexible forefoot, and outsole siping that grips stall mats. Not a running shoe—built for mixed conditioning.",
+      "bullets": ["Wide toe box option", "Low profile", "90-day outsole warranty"]
+    },
+    {
+      "id": "sa-005",
+      "sku": "SA-OPEN-24",
+      "name": "Stride Open Gym Short",
+      "category": "Apparel",
+      "priceUSD": 52,
+      "image": "images/05-open-gym.jpg",
+      "shortCopy": "7-inch liner short with phone slot that does not bounce.",
+      "longCopy": "Compression liner phone pocket, sweat-wicking shell, and a drawcord that stays tied. Tested on squat days and treadmill finishers.",
+      "bullets": ["Side zip pocket", "Anti-chafe liner", "Unisex sizing"]
+    },
+    {
+      "id": "sa-006",
+      "sku": "SA-FLOW-MAT",
+      "name": "Stride Flow Mat 5 mm",
+      "category": "Accessories",
+      "priceUSD": 48,
+      "image": "images/06-yoga-mat.jpg",
+      "shortCopy": "Grip that holds in humid studios.",
+      "longCopy": "Closed-cell top layer resists moisture; bottom texture limits slide on hardwood. Rolls tight and includes carry strap.",
+      "bullets": ["183 × 68 cm", "Phthalate-free", "180-day texture guarantee"]
+    },
+    {
+      "id": "sa-007",
+      "sku": "SA-RACK-GLOVE",
+      "name": "Stride Rack Gloves Lite",
+      "category": "Accessories",
+      "priceUSD": 34,
+      "image": "images/07-rack-weights.jpg",
+      "shortCopy": "Minimal palm padding; full bar feel.",
+      "longCopy": "Synthetic suede palm, mesh back, and integrated wrist wrap optional. Sizing by hand circumference chart on site.",
+      "bullets": ["Hook-and-loop cuff", "Touchscreen thumb", "Wash on delicate"]
+    },
+    {
+      "id": "sa-008",
+      "sku": "SA-STAIR-POCKET",
+      "name": "Stride Stair Pocket Legging",
+      "category": "Apparel",
+      "priceUSD": 88,
+      "image": "images/08-stairs-run.jpg",
+      "shortCopy": "Side pocket fits pro phones; no sag at mile five.",
+      "longCopy": "Matte compression fabric with sweat channeling and UPF 40+. High rise stays put on stairs and tempo runs.",
+      "bullets": ["25\" and 28\" inseam", "Squat test approved", "Cold wash"]
+    },
+    {
+      "id": "sa-009",
+      "sku": "SA-KICK-FLAT",
+      "name": "Stride Kick Flat Crew Sock (3-pack)",
+      "category": "Accessories",
+      "priceUSD": 24,
+      "image": "images/09-kicks-flatlay.jpg",
+      "shortCopy": "Arch band and cushioned forefoot for daily wear.",
+      "longCopy": "Structured cotton blend with reinforcement in toe and heel. Neutral palette matches Volt and HIIT lines.",
+      "bullets": ["Sizes S–XL", "Mesh vent zone", "Tagless"]
+    },
+    {
+      "id": "sa-010",
+      "sku": "SA-TRACK-REPEATS",
+      "name": "Stride Track Repeats Split Short",
+      "category": "Apparel",
+      "priceUSD": 46,
+      "image": "images/10-track-repeat.jpg",
+      "shortCopy": "3-inch split for turnover days.",
+      "longCopy": "Featherweight shell, brief liner, and reflective logo at hem. Built for workouts under 12K on the oval or roads.",
+      "bullets": ["Internal drawcord", "Recycled shell option", "Anti-ride liner"]
+    },
+    {
+      "id": "sa-011",
+      "sku": "SA-ROAD-TEMPO",
+      "name": "Stride Road Tempo Singlet",
+      "category": "Apparel",
+      "priceUSD": 44,
+      "image": "images/11-road-run.jpg",
+      "shortCopy": "Laser-cut armholes to reduce friction on long tempos.",
+      "longCopy": "Race-day weight with everyday durability. Drop tail for coverage; bonded seams at shoulder.",
+      "bullets": ["EU marathon testers", "UV-aware dyes", "Unisex"]
+    },
+    {
+      "id": "sa-012",
+      "sku": "SA-SUNRISE-HOOD",
+      "name": "Stride Sunrise Recovery Hoodie",
+      "category": "Apparel",
+      "priceUSD": 96,
+      "image": "images/12-sunrise-kick.jpg",
+      "shortCopy": "French terry with stretch for post-run coffee runs.",
+      "longCopy": "Kangaroo pocket with hidden zip pouch, three-panel hood, rib that keeps shape after dryer low heat.",
+      "bullets": ["Oversized fit option", "Cotton-modal blend", "Garment dyed"]
+    },
+    {
+      "id": "sa-013",
+      "sku": "SA-TRAIL-GATE",
+      "name": "Stride Trail Gate Pack 12L",
+      "category": "Accessories",
+      "priceUSD": 112,
+      "image": "images/13-trail-gate.jpg",
+      "shortCopy": "Vest-fit pack for water, poles, and a light shell.",
+      "longCopy": "Front bottle pockets, trekking pole loops, and sternum straps that adjust on the fly. Fits torsos 15–19 inches per size guide.",
+      "bullets": ["Hydration ready", "Emergency whistle", "Bladder optional"]
+    },
+    {
+      "id": "sa-014",
+      "sku": "SA-MOTION-CONCEPT",
+      "name": "Stride Motion Concept Film",
+      "category": "Digital",
+      "priceUSD": 0,
+      "image": "images/14-motion-blur.jpg",
+      "shortCopy": "Brand film: speed, blur, and sound design teaser.",
+      "longCopy": "Use this asset for paid social bumpers and email hero video still. 15s / 6s cutdowns available on Stride Drop channel (demo).",
+      "bullets": ["16:9 and 9:16", "No music rights issues (demo)", "Replace with brand video in production"]
+    },
+    {
+      "id": "sa-015",
+      "sku": "SA-MTN-RIDGE",
+      "name": "Stride Mountain Ridge Wind Pant",
+      "category": "Apparel",
+      "priceUSD": 118,
+      "image": "images/15-mountain-jog.jpg",
+      "shortCopy": "Tapered shell with ankle zip for boots or runners.",
+      "longCopy": "Mapped stretch panels at knee; ankle zip clears shoes without removing. PFC-free DWR.",
+      "bullets": ["Articulated knee", "Zip hand pockets", "Tall inseam +2\""]
+    },
+    {
+      "id": "sa-016",
+      "sku": "SA-GROUP-PASS",
+      "name": "Stride Group Training 10-Pack",
+      "category": "Service",
+      "priceUSD": 229,
+      "image": "images/16-group-road.jpg",
+      "shortCopy": "Ten drop-in credits for partner studios nationwide (demo).",
+      "longCopy": "Redeem via Stride app; roll unused credits one quarter. Partnership list rotates—prototype copy only.",
+      "bullets": ["Shareable with household", "Freeze once per year", "Corporate invoicing"]
+    },
+    {
+      "id": "sa-017",
+      "sku": "SA-SPRINT-SPIKE",
+      "name": "Stride Sprint Spike Proto",
+      "category": "Footwear",
+      "priceUSD": 135,
+      "image": "images/17-track-sprint.jpg",
+      "shortCopy": "6-pin plate for 400–1500m.",
+      "longCopy": "Aggressive toe spring with removable pins. Not certified for all federations—check local rules before race day.",
+      "bullets": ["Featherweight upper", "Tool included", "Narrow last"]
+    },
+    {
+      "id": "sa-018",
+      "sku": "SA-KETTLE-KIT",
+      "name": "Stride Kettle Kit (12 + 16 kg)",
+      "category": "Equipment",
+      "priceUSD": 189,
+      "image": "images/18-kettlebells.jpg",
+      "shortCopy": "Matte powder coat, color-coded handles.",
+      "longCopy": "Flat base for renegade rows; wide handle for two-hand swings. Sold as pair with online start guide PDF.",
+      "bullets": ["KG stamped", "Rubber floor friendly", "Ships LTL"]
+    },
+    {
+      "id": "sa-019",
+      "sku": "SA-STUDIO-RES",
+      "name": "Stride Studio Reservation Credit",
+      "category": "Service",
+      "priceUSD": 28,
+      "image": "images/19-studio-class.jpg",
+      "shortCopy": "Single studio class credit (demo cities).",
+      "longCopy": "Late cancel policy: refund if >12h. Waitlist auto-enroll via SMS.",
+      "bullets": ["Bring-a-friend code once", "Towel add-on", "Bike number held 5 min"]
+    },
+    {
+      "id": "sa-020",
+      "sku": "SA-LIFE-BUNDLE",
+      "name": "Stride Life Bundle · Volt + Crew + Mat",
+      "category": "Bundle",
+      "priceUSD": 198,
+      "compareAtUSD": 214,
+      "image": "images/20-stride-lifestyle.jpg",
+      "shortCopy": "Starter bundle for the new season.",
+      "longCopy": "Includes Volt Runner (one color), Floor Crew Tee (choose size), and Flow Mat. Bundle discount auto-applied at checkout in prototype flows.",
+      "bullets": ["Free ground shipping", "Gift note", "30-day on footwear"]
+    }
+  ]
+}

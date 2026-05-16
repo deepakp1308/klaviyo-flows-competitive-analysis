@@ -1,0 +1,27 @@
+Unsplash — https://unsplash.com/license
+
+Per-file credits (look up photographer on the Unsplash photo page). Filename → Unsplash page or stable image reference.
+
+01-modern-gym-led.jpg     https://unsplash.com/photos/EC4mdytpvmk
+02-rotterdam-floor.jpg    https://unsplash.com/photos/WChqiwxP8cw
+03-city-runner.jpg        photo-1503341455253-b2e723bb3dbb
+04-hiit-floor.jpg         photo-1518611012118-696072aa579a
+05-open-gym.jpg           photo-1534438327276-14e5300c3a48
+06-yoga-mat.jpg           photo-1544367567-0f2fcb009e0b
+07-rack-weights.jpg       photo-1517836357463-d25dfeac3438
+08-stairs-run.jpg         photo-1476480862126-209bfaa8edc8
+09-kicks-flatlay.jpg      photo-1556906781-9a412961c28c
+10-track-repeat.jpg       photo-1590333748338-d629e4564ad9
+11-road-run.jpg           photo-1581889470536-467bdbe30cd0
+12-sunrise-kick.jpg       photo-1491553895911-0055eca6402d
+13-trail-gate.jpg         photo-1517963879433-6ad2b056d712
+14-motion-blur.jpg        photo-1639843093167-ed40b985c01e
+15-mountain-jog.jpg       photo-1522040942177-269680274214
+16-group-road.jpg         photo-1613936360976-8f35cf0e5461
+17-track-sprint.jpg       photo-1547941126-3d5322b218b0
+18-kettlebells.jpg        photo-1583454110551-21f2fa2afe61
+19-studio-class.jpg       photo-1571902943202-507ec2618e8f
+20-stride-lifestyle.jpg   photo-1601925260368-ae2f83cf8b7f
+
+Some frames may show third-party athletic footwear or apparel as captured in stock photography.
+Stride Athletics product names in manifest.json are fictional and do not describe the goods in each photo.

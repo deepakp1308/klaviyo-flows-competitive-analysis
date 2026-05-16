@@ -1,0 +1,33 @@
+STRIDE ATHLETICS · EMAIL · Spring Velocity 2026
+================================================
+From: Stride Athletics <hello@stride-athletics.example.com>
+Subject: Spring miles, same rhythm — Volt Runner ships free this week
+Preheader: Bundles from $198 · 30 days on footwear · New Pierce Jacket
+
+HERO (alt text)
+Spring track session — Stride Spring Velocity
+
+HEADLINE
+Train in rhythm this spring.
+
+BODY
+The Volt Runner is back in stock for neighborhood miles, and the new City Pierce Jacket cuts wind on dawn commutes. Stack the Life Bundle—Volt, Floor Crew Tee, Flow Mat—for $198 (was $214).
+
+• SA-VOLT-M-001 — now $128 (compare $148)
+• Free ground shipping on bundles through Sunday (demo deadline)
+• 30-day trial on footwear; hassle-free exchanges
+
+PRIMARY CTA [button]
+Shop Spring Velocity → https://stride-athletics.example.com/spring-velocity
+
+SECONDARY CTA [text link]
+Size guide + fit notes → https://stride-athletics.example.com/fit
+
+FOOTER
+Stride Athletics · stride-athletics.example.com
+You received this because you joined Stride Draft List (prototype).
+Unsubscribe · Preferences · 123 Market St, Demo City
+
+IMAGE GRID (suggested filenames from demo pack)
+Row 1: images/01-modern-gym-led.jpg, images/09-kicks-flatlay.jpg
+Row 2: images/03-city-runner.jpg, images/20-stride-lifestyle.jpg

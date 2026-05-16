@@ -1,0 +1,27 @@
+STRIDE ATHLETICS · WhatsApp / conversational templates
+========================================================
+Brand notes: use casual line breaks; one CTA per message; attach media from demo pack paths.
+
+--- Message 1 · Status-style caption (text only) ---
+Spring Velocity is here ⚡ Volt Runner · Pierce Jacket · Life Bundle $198. Train in rhythm. #StrideAthletics #SpringVelocity
+
+--- Message 2 · With image (attach images/03-city-runner.jpg) ---
+*Stride* — Morning miles?
+
+The *City Pierce Jacket* blocks wind without the crunch. Pair it with the *Volt Runner* ($128 this week).
+
+Tap to shop: https://stride-athletics.example.com/spring-velocity
+
+--- Message 3 · Reply flow (customer: "bundle") ---
+Great choice. The *Life Bundle* is $198 and includes:
+• Volt Runner (pick color)
+• Floor Crew Tee (size)
+• Flow Mat 5 mm
+
+Reply *SIZE* with your tee size and we'll hold inventory 24h (demo).
+
+--- Message 4 · Stickers / rich note ---
+Attach images/09-kicks-flatlay.jpg as catalog teaser. Caption: "Flat lay inspo — Kick Flat socks ship free with Volt (demo promo)."
+
+--- Message 5 · OOO / compliance stub ---
+Stride Athletics (demo). Opt out: reply STOP. Help: help@stride-athletics.example.com
