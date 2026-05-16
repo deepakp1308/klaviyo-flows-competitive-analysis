@@ -1,0 +1,2087 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Freddie Deepak's Phase 1 &mdash; Mailchimp campaign creation surface, 10 extensions</title>
+<meta name="description" content="Design spec for Freddie Deepak's Phase 1: extending the Freddie / AI Email Generator prototype with 10 Phase 1 features from the Canva-gap roadmap. Uses only baseline components and design tokens; every new affordance traces back to a C-XX baseline ID or a /v.label variant. 7 sections: Overview, Constraint manifest, Feature x Surface heatmap, Plan-step extensions, Design-step extensions, Cross-cutting, Execution. Mocks Email/SMS/WhatsApp where physics allow." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  /* ========================================================== */
+  /* POSTER CHROME (inherited from mailchimp-editor.html)        */
+  /* This is the brief-site visual language: amber + Inter.      */
+  /* ========================================================== */
+  :root {
+    --ink: #0E1116;
+    --ink-2: #1F2937;
+    --muted: #4B5563;
+    --line: #E5E7EB;
+    --line-2: #D1D5DB;
+    --bg: #F8F7F4;
+    --paper: #FFFFFF;
+    --brand: #C28A00;
+    --brand-2: #FF7A1A;
+    --good: #047857;
+    --warn: #B45309;
+    --bad: #B91C1C;
+    --chip: #FFF6D9;
+    --chip-ink: #6B4A00;
+    --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.45;
+  }
+  .toolbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(248,247,244,.85);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .toolbar-inner {
+    max-width: 1180px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; gap: 12px;
+  }
+  .brand-mark {
+    display:flex; align-items:center; gap:10px;
+    font-weight: 700; font-size: 14px; color: var(--ink-2);
+  }
+  .brand-dot { width: 10px; height: 10px; border-radius: 3px; background: #FFE01B; box-shadow: 0 0 0 3px rgba(255,224,27,.35); border: 1px solid #C28A00; }
+  .toolbar a.btn, .toolbar button.btn {
+    border: 1px solid var(--line-2);
+    background: var(--paper);
+    color: var(--ink-2);
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .toolbar .btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .toolbar .btn:hover { transform: translateY(-1px); }
+  .anchor-strip {
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 8px 20px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .anchor-strip a {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    background: var(--chip);
+    border: 1px solid #F2E8C2;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-right: 6px;
+    text-decoration: none;
+  }
+  .anchor-strip a:hover { color: var(--chip-ink); }
+
+  .page-wrap { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+
+  .page {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 28px 32px 26px;
+    margin-bottom: 22px;
+  }
+  .page-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700;
+  }
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 1.15;
+    margin: 6px 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; }
+  .meta {
+    text-align: right;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .meta strong { color: var(--ink-2); }
+  @media (max-width: 880px) {
+    .page { padding: 20px; }
+    h1 { font-size: 24px; }
+  }
+  h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    margin: 18px 0 8px;
+    letter-spacing: -0.005em;
+  }
+  h2 .num {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--chip-ink);
+    background: var(--chip);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 8px;
+    transform: translateY(-2px);
+    letter-spacing: .08em;
+  }
+  h3 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px;
+    margin: 12px 0 4px;
+  }
+  p { margin: 0 0 8px; font-size: 13.5px; color: var(--ink-2); }
+  ul { margin: 4px 0 8px; padding-left: 18px; }
+  li { font-size: 13px; color: var(--ink-2); margin-bottom: 4px; }
+  li strong { color: var(--ink); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; background: #F1F2F4; padding: 1px 5px; border-radius: 3px; color: var(--ink-2); }
+
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .card.tinted { background: #FFFCF0; border-color: #F2E8C2; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .kpi {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFB 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .kpi .v {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .kpi .l { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .chip {
+    background: var(--chip);
+    color: var(--chip-ink);
+    border-radius: 999px;
+    padding: 3px 9px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    border: 1px solid #F2E8C2;
+  }
+  .chip.warm { background: #FFEFE0; color: #9A4A00; border-color: #FCD9B6; }
+  .chip.green { background: #E6F5EE; color: #036A4F; border-color: #BFE6D3; }
+  .chip.gray { background: #F1F2F4; color: #374151; border-color: #E2E5EA; }
+  .chip.red { background: #FFE7E0; color: #9A1F00; border-color: #FCD0BF; }
+  .chip.blue { background: #E0EDFF; color: #0F4A8F; border-color: #BFD7F7; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: #FAFAFB;
+  }
+  td.cid { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; color: var(--ink-2); }
+
+  .pull {
+    border-left: 3px solid var(--brand);
+    padding: 8px 12px;
+    background: #FFFCF0;
+    border-radius: 6px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px;
+    color: var(--ink-2);
+    margin: 14px 0;
+  }
+  .pull cite {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-style: normal;
+  }
+  .source {
+    font-size: 10.5px; color: var(--muted);
+    border-top: 1px dashed var(--line);
+    margin-top: 14px;
+    padding-top: 10px;
+  }
+  .source a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Wireframe ASCII blocks */
+  pre.wireframe {
+    background: #FAFAFB;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    overflow-x: auto;
+    margin: 8px 0;
+  }
+
+  /* Per-feature card with hierarchy */
+  .feature-card {
+    border-left: 4px solid var(--brand);
+    background: #FFFCF0;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+  }
+  .feature-card .feature-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .feature-card .feature-num {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--brand);
+    background: var(--paper);
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #F2E8C2;
+  }
+  .feature-card h3 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    margin: 0;
+  }
+  .feature-card .feature-meta {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    margin-bottom: 10px;
+  }
+  .feature-card .lbl {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-weight: 700;
+    color: var(--muted);
+    margin: 10px 0 4px;
+  }
+
+  /* Heatmap table styling */
+  .heatmap td {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11px;
+    text-align: center;
+  }
+  .heatmap td.feature {
+    font-family: 'Inter', sans-serif;
+    text-align: left;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .heatmap td.fill { background: #FFFCF0; color: var(--chip-ink); }
+  .heatmap td.fill.heavy { background: #FFF3CC; }
+
+  /* Parity matrix cells */
+  .parity td.full { background: #E6F5EE; color: #036A4F; font-weight: 700; }
+  .parity td.partial { background: #FFEFD9; color: #8A4A00; font-weight: 700; }
+  .parity td.na { background: #F1F2F4; color: #4B5563; font-style: italic; }
+
+  /* Constraint rule callout */
+  .rule {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 12px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+  .rule:last-child { border-bottom: none; }
+  .rule .id {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--brand);
+  }
+  .rule .desc { font-size: 13px; color: var(--ink-2); }
+
+  /* ========================================================== */
+  /* MCDS FRAME (Freddie design-system tokens)                   */
+  /* This scope renders wireframe mockups in the prototype's     */
+  /* actual visual language: teal + Graphik-feel + lv5 radii.    */
+  /* ========================================================== */
+  .fdpx-mcds-frame {
+    /* mcds semantic tokens */
+    --color-bg-primary: #FFFFFF;
+    --color-bg-secondary: #F8FAFB;
+    --color-bg-tertiary: #F0F4F6;
+    --color-bg-user-bubble: #F0F4F6;
+    --color-bg-hover: #F0F4F6;
+    --color-text-primary: #21262A;
+    --color-text-secondary: #4C555B;
+    --color-text-tertiary: #727E85;
+    --color-text-on-dark: #FFFFFF;
+    --color-accent-blue: #017E89;
+    --color-accent-blue-hover: #006771;
+    --color-accent-blue-light: #E0EDFF;
+    --color-border-default: #E2E9ED;
+    --color-border-selection: #017E89;
+    --color-action-special-use: #FFE01B;
+    --color-ui-negative: #DB334D;
+    --border-radius-lv0: 0;
+    --border-radius-lv1: 2px;
+    --border-radius-lv2: 4px;
+    --border-radius-lv3: 8px;
+    --border-radius-lv4: 12px;
+    --border-radius-lv5: 38px;
+    --border-radius-lv6: 9999px;
+    --elevation-lv1: 0 2px 2px 0 rgba(76,85,91,.2);
+    --elevation-lv2: 0 2px 8px 0 rgba(76,85,91,.2);
+    --elevation-lv3: 0 4px 16px 0 rgba(76,85,91,.2);
+
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-lv4);
+    padding: 24px;
+    margin: 12px 0;
+    font-family: 'Inter', "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+    color: var(--color-text-primary);
+  }
+  .fdpx-mcds-frame .mcds-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-weight: 700;
+    color: var(--color-text-tertiary);
+    margin-bottom: 12px;
+  }
+  .fdpx-mcds-frame h4.mcds-h1 {
+    font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1.2;
+    margin: 8px 0 4px;
+    color: var(--color-text-primary);
+  }
+  .fdpx-mcds-frame .mcds-sub {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+  }
+  .fdpx-mcds-frame .mcds-composer {
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-lv5);
+    padding: 14px 18px;
+    margin: 10px 0;
+    box-shadow: var(--elevation-lv1);
+  }
+  .fdpx-mcds-frame .mcds-composer-input {
+    font-size: 14px;
+    color: var(--color-text-tertiary);
+    padding: 4px 0 10px;
+  }
+  .fdpx-mcds-frame .mcds-composer-actions {
+    display: flex; gap: 10px; align-items: center; justify-content: space-between;
+    padding-top: 8px;
+    border-top: 1px solid var(--color-border-default);
+  }
+  .fdpx-mcds-frame .mcds-icon-btn {
+    width: 28px; height: 28px;
+    border-radius: var(--border-radius-lv2);
+    background: transparent;
+    border: none;
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .fdpx-mcds-frame .mcds-icon-btn:hover { background: var(--color-bg-hover); }
+  .fdpx-mcds-frame .mcds-cta {
+    background: var(--color-accent-blue);
+    color: var(--color-text-on-dark);
+    padding: 7px 14px;
+    border-radius: var(--border-radius-lv6);
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+  }
+  .fdpx-mcds-frame .mcds-cta-secondary {
+    background: transparent;
+    color: var(--color-text-primary);
+    padding: 7px 14px;
+    border-radius: var(--border-radius-lv6);
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--color-border-default);
+  }
+  .fdpx-mcds-frame .mcds-brand-banner {
+    background: var(--color-accent-blue-light);
+    border-radius: var(--border-radius-lv3);
+    padding: 10px 14px;
+    font-size: 12.5px;
+    color: var(--color-text-primary);
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    margin: 10px 0;
+  }
+  .fdpx-mcds-frame .mcds-chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .fdpx-mcds-frame .mcds-chip {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-secondary);
+    border-radius: var(--border-radius-lv6);
+    padding: 6px 12px;
+    font-size: 12px;
+    border: 1px solid var(--color-border-default);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .fdpx-mcds-frame .mcds-chip.memory {
+    background: #FFFBE6;
+    color: #6B5400;
+    border-color: #F2E2A8;
+  }
+  .fdpx-mcds-frame .mcds-snowflake {
+    display: inline-block;
+    width: 24px; height: 24px;
+    background: linear-gradient(135deg, #017E89, #4472c4);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .fdpx-mcds-frame .mcds-tag {
+    display: inline-block;
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    padding: 2px 7px;
+    border-radius: var(--border-radius-lv2);
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border-default);
+    margin-left: 6px;
+  }
+  .fdpx-mcds-frame .mcds-cid-callout {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 9.5px;
+    color: var(--color-text-tertiary);
+    background: var(--color-bg-secondary);
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: 1px dashed var(--color-border-default);
+  }
+
+  /* Channel-split row inside mcds frame */
+  .mcds-channel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-top: 12px;
+  }
+  .mcds-channel-grid > div {
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-lv3);
+    padding: 12px 14px;
+  }
+  .mcds-channel-grid h5 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    font-weight: 700;
+    color: var(--color-text-tertiary);
+    margin: 0 0 8px;
+  }
+  .mcds-channel-grid p { font-size: 12px; color: var(--color-text-primary); margin: 0; }
+
+  /* Editor canvas mock */
+  .mcds-editor {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 14px;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-lv3);
+    padding: 14px;
+  }
+  .mcds-editor .chat-side {
+    background: var(--color-bg-secondary);
+    border-radius: var(--border-radius-lv3);
+    padding: 12px;
+    font-size: 12px;
+  }
+  .mcds-editor .canvas-side {
+    background: var(--color-bg-tertiary);
+    border-radius: var(--border-radius-lv3);
+    padding: 18px;
+    position: relative;
+    min-height: 180px;
+  }
+  .mcds-editor .canvas-hero {
+    background: linear-gradient(135deg, #4472c4 0%, #017E89 100%);
+    height: 100px;
+    border-radius: var(--border-radius-lv3);
+    margin-bottom: 10px;
+    position: relative;
+    border: 2px solid var(--color-accent-blue);
+  }
+  .mcds-editor .canvas-hero.selected::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border: 2px dashed var(--color-accent-blue);
+    border-radius: var(--border-radius-lv3);
+  }
+  .mcds-editor .image-popover {
+    position: absolute;
+    top: 110px;
+    left: 32px;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-lv3);
+    padding: 8px;
+    box-shadow: var(--elevation-lv2);
+    z-index: 5;
+    font-size: 11.5px;
+  }
+  .mcds-editor .image-popover .pop-row {
+    padding: 5px 8px;
+    border-radius: var(--border-radius-lv2);
+  }
+  .mcds-editor .image-popover .pop-row:hover { background: var(--color-bg-hover); }
+  .mcds-editor .canvas-line {
+    height: 8px;
+    background: var(--color-border-default);
+    border-radius: 2px;
+    margin: 6px 0;
+  }
+  .mcds-editor .canvas-line.long { width: 70%; }
+  .mcds-editor .canvas-line.short { width: 40%; }
+  .mcds-editor .preview-diff {
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-lv3);
+    padding: 8px;
+    margin: 8px 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .mcds-editor .preview-diff .thumb {
+    width: 40px; height: 30px;
+    background: linear-gradient(135deg, #c5d2e2, #017E89);
+    border-radius: 3px;
+  }
+  .mcds-editor .preview-diff .arrow { color: var(--color-text-tertiary); }
+
+  /* Brand Kit modal mock */
+  .mcds-brandkit {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-lv3);
+    padding: 16px;
+    min-height: 360px;
+  }
+  .mcds-brandkit .bk-nav { font-size: 12px; }
+  .mcds-brandkit .bk-nav .bk-item {
+    padding: 7px 10px;
+    border-radius: var(--border-radius-lv2);
+    color: var(--color-text-secondary);
+    margin-bottom: 2px;
+  }
+  .mcds-brandkit .bk-nav .bk-item.active {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+  .mcds-brandkit .bk-body h5 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    margin: 0 0 8px;
+  }
+  .mcds-brandkit .bk-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 10px 0;
+  }
+  .mcds-brandkit .bk-field {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .mcds-brandkit .bk-field-value {
+    font-size: 13px;
+    color: var(--color-text-primary);
+    padding: 7px 10px;
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-lv2);
+    background: var(--color-bg-primary);
+    margin-top: 4px;
+  }
+  .mcds-brandkit .bk-profile-row {
+    display: flex; gap: 12px; align-items: center;
+    margin: 10px 0;
+  }
+  .mcds-brandkit .bk-profile-radio {
+    width: 14px; height: 14px;
+    border: 2px solid var(--color-text-tertiary);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .mcds-brandkit .bk-profile-radio.checked {
+    border-color: var(--color-accent-blue);
+    background: radial-gradient(circle at center, var(--color-accent-blue) 0%, var(--color-accent-blue) 35%, transparent 38%);
+  }
+  .mcds-brandkit .bk-broadcast {
+    background: var(--color-accent-blue-light);
+    border-radius: var(--border-radius-lv3);
+    padding: 10px 14px;
+    margin-top: 14px;
+    font-size: 12.5px;
+    color: var(--color-text-primary);
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    padding: 20px;
+  }
+  footer a { color: var(--muted); }
+
+  @media (max-width: 880px) {
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+    .mcds-editor { grid-template-columns: 1fr; }
+    .mcds-brandkit { grid-template-columns: 1fr; }
+    .mcds-channel-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="brand-mark">
+      <span class="brand-dot"></span>
+      Freddie Deepak's Phase 1 &middot; Design spec
+    </div>
+    <div style="display:flex; gap: 8px;">
+      <a class="btn" href="mailchimp-editor.html">&larr; Back to editor brief</a>
+      <button class="btn primary" onclick="window.print()">Print / Save as PDF</button>
+    </div>
+  </div>
+</div>
+
+<nav class="anchor-strip">
+  <a href="#overview">1 &middot; Overview</a>
+  <a href="#constraints">2 &middot; Constraints</a>
+  <a href="#heatmap">3 &middot; Feature heatmap</a>
+  <a href="#plan-step">4 &middot; Plan-step features</a>
+  <a href="#design-step">5 &middot; Design-step features</a>
+  <a href="#cross-cutting">6 &middot; Cross-cutting</a>
+  <a href="#execution">7 &middot; Execution</a>
+</nav>
+
+<div class="page-wrap">
+
+<!-- ================================================================ -->
+<!-- SECTION 1 - OVERVIEW + KPI STRIP                                   -->
+<!-- ================================================================ -->
+<section class="page" id="overview">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Freddie Deepak's Phase 1 &middot; Design spec</div>
+      <h1>Mailchimp campaign creation surface, 10 extensions, zero new components without rationale</h1>
+      <div class="subtitle">A design extension of the existing <strong>Freddie / AI Email Generator</strong> prototype. Adds all 10 features from the <a href="https://deepakp1308.github.io/canva-campaign-analysis/" target="_blank" rel="noopener">Canva-gap roadmap</a> Phase 1 to the existing surface using <strong>only</strong> baseline components and design tokens. Every new affordance traces back to a baseline <code>C-XX</code> ID or is filed as a <code>/v.label</code> variant of one. The win condition: a marketer completes the full creative workflow &mdash; from blank brief to send-ready, brand-perfect, hyper-personalized campaign &mdash; without leaving Mailchimp for Canva.</div>
+    </div>
+    <div class="meta">
+      <div>v1.0 &middot; 7 sections &middot; May 2026</div>
+      <div>Source baseline: <strong>96</strong> components &middot; <a href="mailchimp-editor.html#designaudit">Lens 3</a></div>
+    </div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="v">10</div><div class="l">Phase 1 features &middot; AI / AI 2.0 layer &middot; cross-channel where physics allow</div></div>
+    <div class="kpi"><div class="v">96</div><div class="l">Baseline components reused (C-01 to C-96 &middot; no breakage)</div></div>
+    <div class="kpi"><div class="v">1</div><div class="l">Genuinely new C-ID introduced (<code>C-97</code> image manipulation popover &middot; variant class of <code>C-95</code>)</div></div>
+    <div class="kpi"><div class="v">18</div><div class="l">Component variants registered (<code>/v.label</code> suffix &middot; stay under parent C-ID)</div></div>
+  </div>
+
+  <div class="pull">
+    Phase 1 is not about beating Canva &mdash; it's about <strong>stopping the round-trip</strong>. The Canva-gap analysis names three root causes in priority order: image-editing friction &middot; lack of conversational design tools &middot; brand consistency at scale. Features 01, 03, and 05 address those directly. Features 02, 04, 06, 07, 08, 09, 10 reinforce.
+    <cite>Source: deepakp1308/canva-campaign-analysis &middot; Phase 1 = 2&ndash;3 quarters, all 10 features ship across Email + SMS + WhatsApp where physics permit.</cite>
+  </div>
+
+  <h2><span class="num">01</span>What this spec is and isn't</h2>
+  <table style="margin-top:6px">
+    <thead><tr><th style="width:48%">Is</th><th>Isn't</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>A baseline-compliant design that ships <strong>10 named Phase 1 features</strong> into the existing Freddie surface</td>
+        <td>A from-scratch redesign &middot; baseline IA + state model + tokens are preserved</td>
+      </tr>
+      <tr>
+        <td>An <strong>annotated screen spec</strong> &mdash; ASCII wireframes for 7 features, full HTML+CSS mockups for the 3 load-bearing surfaces (Plan composer / Design editor / Brand Kit)</td>
+        <td>A pixel-perfect Figma file &mdash; mockups are baseline-faithful but expect refinement</td>
+      </tr>
+      <tr>
+        <td>A <strong>component-traceable spec</strong> &mdash; every affordance points to a <code>C-XX</code> baseline ID or a registered <code>/v.label</code> variant</td>
+        <td>A vague "AI surface" sketch &mdash; if a component doesn't map back to the baseline, it doesn't ship</td>
+      </tr>
+      <tr>
+        <td>A <strong>channel-honest matrix</strong> &mdash; explicit Email / SMS / WhatsApp coverage with N/A cells for physics constraints</td>
+        <td>Aspirational omnichannel marketing copy &middot; "no images in SMS" is a hard constraint, not a roadmap item</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:18px"><span class="num">02</span>Reading guide &mdash; how to navigate this 7-section spec</h2>
+  <ul>
+    <li><strong>Section 1 &middot; Overview</strong> (this page) &middot; the framing + KPI strip + reading guide</li>
+    <li><strong>Section 2 &middot; Constraint manifest</strong> &middot; the 7 design rules R1&ndash;R7, locked mcds token table, the dual-CSS explainer (poster chrome vs mcds frame)</li>
+    <li><strong>Section 3 &middot; Feature &times; Surface heatmap</strong> &middot; single 10&times;5 table showing where each feature lands in the existing surface (Plan composer / Strategy panel / Design editor / Brand Kit / Sidebar+Settings)</li>
+    <li><strong>Section 4 &middot; Plan-step features</strong> &middot; per-feature cards for #5, #6, #7, #9, #10 (Brand Voice 2.0 / Memory / Live-Context Connectors / Web Research / MCP Bridge)</li>
+    <li><strong>Section 5 &middot; Design-step features</strong> &middot; per-feature cards for #1, #2, #3, #4, #8 (Image Manipulation / Dream Lab / Conversational Design Editing / Magic Layers / Sticker-GIF) &mdash; includes the 3 load-bearing HTML+CSS wireframes</li>
+    <li><strong>Section 6 &middot; Cross-cutting</strong> &middot; full 10&times;3 channel parity matrix, flow deltas (which of the 5 baseline flows change), new states inventory, complete new C-ID register, token compliance attestation</li>
+    <li><strong>Section 7 &middot; Execution</strong> &middot; build sequence + validation checklist + cross-references back to the 18-tab brief, the 5 design lenses, and the Canva-gap analysis</li>
+  </ul>
+
+  <p class="source"><strong>Cross-references:</strong> Baseline component inventory at <a href="mailchimp-editor.html#designaudit">Tab 18 Design Audit Lens 3</a> (96 components, C-01 to C-96) &middot; Baseline task flows at Lens 2 &middot; Strategy alignment at <a href="mailchimp-editor.html#memo">Strategy Memo</a> Pillar 4 (AI) and Pillar 5 (Unified Canvas + Collab) &middot; Revised Goals at <a href="mailchimp-editor.html#revised">Tab 11</a> &middot; The 10 Phase 1 features sourced from <a href="https://deepakp1308.github.io/canva-campaign-analysis/">deepakp1308.github.io/canva-campaign-analysis/</a> Phase 1 roadmap.</p>
+</section>
+
+<!-- ================================================================ -->
+<!-- SECTION 2 - CONSTRAINT MANIFEST                                    -->
+<!-- ================================================================ -->
+<section class="page" id="constraints">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Section 2 of 7 &middot; The non-negotiables</div>
+      <h1 style="font-size:24px">Constraint manifest &mdash; the 7 rules every design decision honors</h1>
+      <div class="subtitle">"Use only what's in the baseline. No white-coding. No invented widgets." This section formalizes that into 7 rules with examples, lists the locked design tokens, and explains the dual-CSS strategy used in this spec (poster chrome for the page itself; mcds frame for the wireframe mockups inside it).</div>
+    </div>
+    <div class="meta">
+      <div>R1&ndash;R7 &middot; mcds tokens locked</div>
+      <div>Inventory ceiling: <strong>97</strong> (96 baseline + 1 new)</div>
+    </div>
+  </div>
+
+  <h2 style="margin-top:6px"><span class="num">2.1</span>The 7 design rules</h2>
+  <div class="card tinted">
+    <div class="rule"><div class="id">R1</div><div class="desc"><strong>No new tokens.</strong> Only the mcds token set: teal <code>#017E89</code>, yellow <code>#FFE01B</code> (brand cue only), text/bg neutrals, Graphik Web + Means Web fonts, radii <code>lv0</code>&ndash;<code>lv6</code>, elevation L0&ndash;L4. New affordances must compose from these.</div></div>
+    <div class="rule"><div class="id">R2</div><div class="desc"><strong>No new shapes.</strong> Every new affordance reuses an existing primitive class &mdash; popover, chip, modal, panel, button, select, toggle, banner, card. If a feature requires a genuinely new shape, it gets a new <code>C-XX</code> ID with rationale documented in this spec.</div></div>
+    <div class="rule"><div class="id">R3</div><div class="desc"><strong>Variant policy.</strong> Variants of existing components stay under the parent ID with a <code>/v.label</code> suffix (e.g. <code>C-25/v.memory</code>). The inventory stays at 96 baseline IDs. Only genuinely new shapes get new C-IDs (C-97+).</div></div>
+    <div class="rule"><div class="id">R4</div><div class="desc"><strong>Channel parity by physics.</strong> Each feature gets a row in the 10&times;3 matrix (Section 6). Cells are <span class="chip green">Full</span>, <span class="chip warm">Partial</span>, or <span class="chip gray">N/A (physics)</span>. No aspirational checkmarks for "images in SMS." Honest matrix.</div></div>
+    <div class="rule"><div class="id">R5</div><div class="desc"><strong>Yellow is brand cue only.</strong> <code>#FFE01B</code> appears <em>only</em> as the Home top-stripe (baseline C-02). It is never used for AI affordances, CTAs, alerts, or new feature surfaces. That stripe is the only sanctioned yellow in the entire surface.</div></div>
+    <div class="rule"><div class="id">R6</div><div class="desc"><strong>Teal is the AI primary action color.</strong> <code>#017E89</code> is the color of every Generate, Create, Confirm, and Send CTA &mdash; matching the existing baseline. New AI-feature CTAs inherit this color, not yellow, not amber, not red.</div></div>
+    <div class="rule"><div class="id">R7</div><div class="desc"><strong>No invented copy.</strong> Quick-prompt chip text, follow-up chip text, theme preset names, and section labels reuse baseline strings where possible. New strings are added only when the feature genuinely needs them, and they follow the existing voice (sentence case, action-first, &lt;50 chars).</div></div>
+  </div>
+
+  <h2 style="margin-top:18px"><span class="num">2.2</span>The locked mcds token table</h2>
+  <p>Reproduced verbatim from <code>ai-email-generator-decomp/docs/03-design-tokens.md</code>. Every wireframe mockup in this spec uses these tokens; new affordances inherit them.</p>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:30%">Token category</th><th style="width:30%">Names</th><th>Locked values</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Surfaces</strong></td><td><code>--color-bg-primary / -secondary / -tertiary / -user-bubble / -hover</code></td><td><code>#FFFFFF</code> &middot; <code>#F8FAFB</code> &middot; <code>#F0F4F6</code> &middot; <code>#F0F4F6</code> &middot; <code>#F0F4F6</code></td></tr>
+      <tr><td><strong>Text</strong></td><td><code>--color-text-primary / -secondary / -tertiary / -on-dark</code></td><td><code>#21262A</code> &middot; <code>#4C555B</code> &middot; <code>#727E85</code> &middot; <code>#FFFFFF</code></td></tr>
+      <tr><td><strong>Accent (AI)</strong></td><td><code>--color-accent-blue / -hover / -light</code></td><td><strong><code>#017E89</code></strong> &middot; <code>#006771</code> &middot; <code>#E0EDFF</code></td></tr>
+      <tr><td><strong>Brand cue</strong></td><td><code>--color-action-special-use</code></td><td><code>#FFE01B</code> (Mailchimp yellow &middot; brand cue only per R5)</td></tr>
+      <tr><td><strong>Destructive</strong></td><td><code>--color-ui-negative</code></td><td><code>#DB334D</code></td></tr>
+      <tr><td><strong>Borders</strong></td><td><code>--color-border-default / -selection</code></td><td><code>#E2E9ED</code> &middot; <code>#017E89</code> (focus ring)</td></tr>
+      <tr><td><strong>Typography</strong></td><td><code>--font-display-*</code> (Means) &middot; <code>--font-heading-*</code> + <code>--font-text-*</code> (Graphik)</td><td>Means Web 400 for AI H1s &middot; Graphik Web 400/500 for everything else</td></tr>
+      <tr><td><strong>Radii</strong></td><td><code>lv0 / lv1 / lv2 / lv3 / lv4 / lv5 / lv6</code></td><td><code>0</code> &middot; <code>2</code> &middot; <code>4</code> &middot; <code>8</code> &middot; <code>12</code> &middot; <code>38</code> (composer shell) &middot; <code>9999px</code> (pills)</td></tr>
+      <tr><td><strong>Elevation</strong></td><td>L0&ndash;L4</td><td><code>none</code> / <code>0 2px 2px</code> / <code>0 2px 8px</code> / <code>0 4px 16px</code> / <code>0 6px 24px</code> all on <code>rgba(76,85,91,.2)</code></td></tr>
+      <tr><td><strong>Motion</strong></td><td><code>--duration-fade-*</code> &middot; <code>--animation-curve</code></td><td><code>150ms</code> / <code>200ms</code> &middot; <code>cubic-bezier(.35, 0, .25, 1)</code></td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:18px"><span class="num">2.3</span>The dual-CSS strategy</h2>
+  <p>This spec uses <strong>two design systems simultaneously</strong> &mdash; intentionally, and visibly separated:</p>
+  <div class="kpi-row" style="grid-template-columns: 1fr 1fr;">
+    <div class="card">
+      <h3>Poster chrome &middot; this page</h3>
+      <p style="font-size:12.5px">Inherited from <code>mailchimp-editor.html</code>. Amber <code>#C28A00</code>, cream chips <code>#FFF6D9</code>, Inter + Source Serif 4. Used for the spec page itself: sections, headings, KPI cells, chips, tables, callouts.</p>
+      <div class="chips">
+        <span class="chip">--brand #C28A00</span>
+        <span class="chip">--chip #FFF6D9</span>
+        <span class="chip">Inter / Source Serif 4</span>
+      </div>
+    </div>
+    <div class="card tinted">
+      <h3>mcds frame &middot; wireframe mockups</h3>
+      <p style="font-size:12.5px">Scoped under <code>.fdpx-mcds-frame</code>. Teal <code>#017E89</code>, Mailchimp yellow <code>#FFE01B</code>, neutral <code>#F8FAFB</code> bg, Graphik fallback to Inter, Means fallback to Source Serif. Used inside wireframe boxes so a reader sees "yes this is Freddie, not a generic brief."</p>
+      <div class="chips">
+        <span class="chip green">--color-accent-blue #017E89</span>
+        <span class="chip">Graphik / Means</span>
+        <span class="chip gray">lv0&ndash;lv6 radii</span>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:10px"><strong>Why two systems?</strong> Because the spec is a document about the prototype, not the prototype itself. The page chrome must read as part of the brief (consistent with Tabs 1&ndash;18). The wireframes inside the page must read as Freddie (consistent with what's shipping). Mixing them would either make the spec look like a generic Word doc, or make the wireframes look like brief-tab content. Two scoped CSS contexts solve this.</p>
+
+  <h2 style="margin-top:18px"><span class="num">2.4</span>Policy chip legend &mdash; how to read the per-feature cards</h2>
+  <p>Each per-feature card in Sections 4 + 5 uses these chips to communicate compliance with R2 + R3:</p>
+  <div class="chips" style="margin-top: 10px;">
+    <span class="chip green">Reuse</span>
+    <span style="font-size: 12px; color: var(--muted);">&mdash; the affordance reuses an existing C-XX baseline component unchanged</span>
+  </div>
+  <div class="chips" style="margin-top: 8px;">
+    <span class="chip warm">Variant</span>
+    <span style="font-size: 12px; color: var(--muted);">&mdash; a variant of an existing component, registered as <code>C-XX/v.label</code> (inventory stays at 96)</span>
+  </div>
+  <div class="chips" style="margin-top: 8px;">
+    <span class="chip red">New C-ID</span>
+    <span style="font-size: 12px; color: var(--muted);">&mdash; genuinely new shape, gets a new <code>C-97+</code> ID with rationale. Currently only <code>C-97</code> exists.</span>
+  </div>
+
+  <p class="source"><strong>Source manifest:</strong> Token table from <code>ai-email-generator-decomp/docs/03-design-tokens.md</code>. Component primitive families from <code>ai-email-generator-decomp/docs/04-components.md</code>. Variant policy decided via design-spec planning round (see plan file). Poster chrome CSS copied verbatim from <code>mailchimp-editor.html</code> root <code>:root</code> block.</p>
+</section>
+
+<!-- ================================================================ -->
+<!-- SECTION 3 - FEATURE x SURFACE HEATMAP                              -->
+<!-- ================================================================ -->
+<section class="page" id="heatmap">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Section 3 of 7 &middot; The spine</div>
+      <h1 style="font-size:24px">Feature &times; Surface heatmap</h1>
+      <div class="subtitle">Single table mapping the 10 Phase 1 features to the 5 baseline surfaces (Plan composer, Strategy panel, Design editor, Brand Kit modal, Sidebar + Settings). Filled cells indicate the surface gets extended; bold cells mark the <em>primary</em> surface for the feature. C-XX annotations point to the specific component being extended.</div>
+    </div>
+    <div class="meta">
+      <div>10 features &times; 5 surfaces</div>
+      <div>1 new C-ID &middot; 18 variants</div>
+    </div>
+  </div>
+
+  <table class="heatmap" style="margin-top:8px">
+    <thead>
+      <tr>
+        <th style="width:24%">Phase 1 feature</th>
+        <th style="width:5%">Layer</th>
+        <th>Plan composer (Email/SMS/WA tabs)</th>
+        <th>Strategy panel (right pane)</th>
+        <th>Design editor (canvas + chat)</th>
+        <th>Brand Kit modal</th>
+        <th>Sidebar + Settings</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="feature">01 &middot; AI Image Manipulation Suite</td>
+        <td>AI</td>
+        <td></td><td></td>
+        <td class="fill heavy"><strong>C-61, C-70, C-44 + new C-97</strong></td>
+        <td></td><td></td>
+      </tr>
+      <tr>
+        <td class="feature">02 &middot; Dream Lab (AI image gen)</td>
+        <td>AI</td>
+        <td></td><td></td>
+        <td class="fill heavy"><strong>C-71/v.image-tab, C-19, C-58/v.aspect</strong></td>
+        <td></td><td></td>
+      </tr>
+      <tr>
+        <td class="feature">03 &middot; Conversational Design Editing</td>
+        <td>AI 2.0</td>
+        <td></td><td></td>
+        <td class="fill heavy"><strong>C-54, C-43/v.preview-diff, C-70/v.refine-chips</strong></td>
+        <td></td><td></td>
+      </tr>
+      <tr>
+        <td class="feature">04 &middot; Magic Layers</td>
+        <td>AI 2.0</td>
+        <td class="fill heavy"><strong>C-20, C-23/v.ingestion-progress</strong></td>
+        <td></td>
+        <td class="fill">C-53/v.open-as-editable, C-72</td>
+        <td></td><td></td>
+      </tr>
+      <tr>
+        <td class="feature">05 &middot; Brand Voice 2.0 + Brand Intelligence</td>
+        <td>AI / AI 2.0</td>
+        <td class="fill">C-23/v.brand-update-broadcast</td>
+        <td></td><td></td>
+        <td class="fill heavy"><strong>C-89/v.profile-picker, C-87</strong></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td class="feature">06 &middot; Mailchimp Memory</td>
+        <td>AI 2.0</td>
+        <td class="fill">C-25/v.memory</td>
+        <td class="fill">C-45 (recall chip)</td>
+        <td></td><td></td>
+        <td class="fill heavy"><strong>C-9, C-11/v.memory-entry, C-82/v.memory-drawer</strong></td>
+      </tr>
+      <tr>
+        <td class="feature">07 &middot; Live-Context Connectors</td>
+        <td>AI 2.0</td>
+        <td class="fill heavy"><strong>C-23/v.live-context-banner</strong></td>
+        <td class="fill">C-43 prose response</td>
+        <td></td><td></td>
+        <td class="fill"><strong>C-91/v.connector-section, C-92/v.connector-toggle</strong></td>
+      </tr>
+      <tr>
+        <td class="feature">08 &middot; AI Sticker / GIF / Animation</td>
+        <td>AI</td>
+        <td></td><td></td>
+        <td class="fill heavy"><strong>C-71/v.stickers-tab, C-72, C-25/v.sticker-prompts</strong></td>
+        <td></td><td></td>
+      </tr>
+      <tr>
+        <td class="feature">09 &middot; Web Research Integration</td>
+        <td>AI 2.0</td>
+        <td></td>
+        <td class="fill heavy"><strong>C-46/v.research-depth, C-43 prose</strong></td>
+        <td></td><td></td><td></td>
+      </tr>
+      <tr>
+        <td class="feature">10 &middot; ChatGPT &amp; Claude MCP Bridge</td>
+        <td>AI 2.0</td>
+        <td></td><td></td><td></td><td></td>
+        <td class="fill heavy"><strong>C-91/v.mcp-section, C-92, C-90/v.mcp-token-row</strong></td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:14px"><span class="num">3.1</span>What this heatmap reveals</h2>
+  <ul>
+    <li><strong>Design editor is the most-touched surface</strong> &mdash; 5 of 10 features extend it (Image Manipulation, Dream Lab, Conversational Editing, Magic Layers's downstream, Stickers). This is consistent with Phase 1's stated goal: close the Canva round-trip happens at the Design step.</li>
+    <li><strong>Sidebar + Settings is the second-most-touched</strong> &mdash; 4 features (Memory, Live-Context Connectors, MCP Bridge, partial Brand Voice broadcast) land there. The settings popover (C-91) becomes the operator-facing config hub.</li>
+    <li><strong>Brand Kit modal receives just 1 primary extension</strong> (Brand Voice 2.0) &mdash; correct, because Brand Kit is already mature in the baseline. Phase 1 deepens it, doesn't reshape it.</li>
+    <li><strong>Plan composer receives 3 primary extensions</strong> (Magic Layers ingestion, Live-Context Connectors banner, Memory chips) &mdash; these are the "what to consider before generating" surface.</li>
+    <li><strong>Strategy panel gets 1 primary extension</strong> (Web Research depth field, #9). Confirms the strategy panel is a settled pattern; new fields slot in via <code>C-46/v.*</code> variants.</li>
+    <li><strong>Only 1 genuinely new C-ID</strong> (<code>C-97</code> image manipulation popover, for feature #1). Every other feature decomposes into existing primitives.</li>
+  </ul>
+
+  <p class="source"><strong>Heatmap method:</strong> Each cell shows the primary <code>C-XX</code> reuse + any <code>/v.label</code> variants introduced. Bold + heavy-fill cells = primary surface. Light-fill cells = secondary touchpoint. Empty cells = feature does not touch that surface. Full per-feature decomposition in Sections 4 (Plan-step) + 5 (Design-step).</p>
+</section>
+
+<!-- ================================================================ -->
+<!-- SECTION 4 - PLAN-STEP FEATURES (#5, #6, #7, #9, #10)               -->
+<!-- ================================================================ -->
+<section class="page" id="plan-step">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Section 4 of 7 &middot; Plan step</div>
+      <h1 style="font-size:24px">5 Phase 1 features that extend the Plan step</h1>
+      <div class="subtitle">Plan step in the 7-phase JTBD = "Pick the doctype, choose a template, define intent." These 5 features deepen the planning surface (composer, strategy panel, sidebar, settings) so the AI has the brand voice, memory, live context, and research it needs before any pixel is generated. Includes load-bearing wireframes W1 (Plan composer) and W3 (Brand Kit Brand Voice 2.0).</div>
+    </div>
+    <div class="meta">
+      <div>Features 05, 06, 07, 09, 10</div>
+      <div>Primary surfaces: Composer &middot; Sidebar &middot; Settings &middot; Brand Kit</div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- FEATURE 05 - BRAND VOICE 2.0 + BRAND INTEL    -->
+  <!-- ============================================ -->
+  <div class="feature-card" id="f05">
+    <div class="feature-head">
+      <div class="feature-num">05</div>
+      <h3>Brand Voice 2.0 + Brand Intelligence</h3>
+    </div>
+    <div class="feature-meta">Design step &middot; AI / AI 2.0 layer &middot; Primary surface: Brand Kit modal &middot; Secondary: composer banner &middot; Cross-channel: Full / Full / Full</div>
+
+    <p><strong>What it does.</strong> Persists named brand-voice profiles (Default, Holiday, Launch, ...) inside the Brand Kit so AI generations can be tuned per-campaign without losing the master brand. "Brand Intelligence" auto-extracts tone, voice, do's-and-don'ts from a URL into editable fields. A broadcast banner appears on the Email tab when Brand Kit changed since last visit, with a one-click "Update all old templates" CTA.</p>
+
+    <div class="lbl">Wireframe W3 &middot; Brand Kit modal &middot; Brand Voice 2.0 (the load-bearing mockup for this feature)</div>
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">mcds frame &middot; rendered in Freddie tokens</div>
+      <div class="mcds-brandkit">
+        <div class="bk-nav">
+          <div class="bk-item">My Business</div>
+          <div class="bk-item">Logos</div>
+          <div class="bk-item">Colors</div>
+          <div class="bk-item">Fonts</div>
+          <div class="bk-item">Buttons</div>
+          <div class="bk-item active">Brand Voice <span class="mcds-cid-callout">C-89</span></div>
+          <div class="bk-item">Social Links</div>
+        </div>
+        <div class="bk-body">
+          <h5>Brand Voice 2.0 <span class="mcds-cid-callout">C-89/v.profile-picker</span></h5>
+          <p style="font-size:12.5px; color: var(--color-text-secondary); margin: 0 0 12px;">Save and switch between brand-voice profiles. AI generations will use the active profile by default.</p>
+
+          <div class="bk-profile-row">
+            <span class="mcds-label" style="margin: 0;">Active profile</span>
+            <div style="display:flex; gap:18px; align-items:center;">
+              <label style="display:inline-flex; gap:6px; align-items:center; font-size:12.5px;"><span class="bk-profile-radio checked"></span> Default</label>
+              <label style="display:inline-flex; gap:6px; align-items:center; font-size:12.5px;"><span class="bk-profile-radio"></span> Holiday</label>
+              <label style="display:inline-flex; gap:6px; align-items:center; font-size:12.5px;"><span class="bk-profile-radio"></span> Launch</label>
+              <label style="display:inline-flex; gap:6px; align-items:center; font-size:12.5px; color: var(--color-text-tertiary);">+ New profile</label>
+            </div>
+          </div>
+
+          <div class="bk-field-row">
+            <div>
+              <div class="bk-field">Personality</div>
+              <div class="bk-field-value">Warm, confident, direct</div>
+            </div>
+            <div>
+              <div class="bk-field">Formality (0&ndash;100)</div>
+              <div class="bk-field-value">50 &middot; conversational</div>
+            </div>
+          </div>
+          <div class="bk-field-row">
+            <div>
+              <div class="bk-field">CTA style</div>
+              <div class="bk-field-value">Action verbs first &middot; "Get yours" not "Click here"</div>
+            </div>
+            <div>
+              <div class="bk-field">Headline style</div>
+              <div class="bk-field-value">Sentence case, no exclamation marks</div>
+            </div>
+          </div>
+
+          <div style="margin-top: 16px; padding: 12px 14px; background: var(--color-bg-secondary); border-radius: var(--border-radius-lv3); border: 1px solid var(--color-border-default);">
+            <div class="mcds-label" style="display:flex; justify-content:space-between; align-items:center;">
+              <span>Brand Intelligence <span class="mcds-cid-callout">C-89 auto-extract</span></span>
+              <span style="text-transform: none; font-weight: 500;"><a href="#" style="color: var(--color-accent-blue); text-decoration: none; font-size: 11px;">Re-scan website &rarr;</a></span>
+            </div>
+            <p style="font-size:12px; margin: 6px 0 0;">Auto-detected from your URL last week: <strong>Tone</strong> warm + confident &middot; <strong>Voice</strong> first-person plural &middot; <strong>Avoid</strong> jargon, em-dashes &middot; <strong>Sentence length</strong> 8&ndash;18 words avg</p>
+          </div>
+
+          <div class="bk-broadcast">
+            <span><strong>12 drafts use your previous voice profile.</strong> <span style="color: var(--color-text-secondary);">Update them to the latest Default voice in one pass?</span></span>
+            <button class="mcds-cta">Update all 12</button>
+            <span class="mcds-cid-callout">C-23/v.brand-update-broadcast</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lbl">Component breakdown</div>
+    <table>
+      <thead><tr><th style="width:30%">Affordance</th><th style="width:18%">Maps to</th><th>Reuse / Variant</th></tr></thead>
+      <tbody>
+        <tr><td>Profile picker (radio group)</td><td><code>C-89/v.profile-picker</code></td><td><span class="chip warm">Variant</span> &middot; radio-group molecule rendered inside C-89 brand voice composite</td></tr>
+        <tr><td>Brand Intelligence auto-detected card</td><td><code>C-89</code> (existing field)</td><td><span class="chip green">Reuse</span> &middot; rendered as a new row inside the existing composite (no new shape)</td></tr>
+        <tr><td>"Re-scan website" link</td><td><code>C-83 URL importer</code></td><td><span class="chip green">Reuse</span> &middot; same URL importer modal, re-entered from this surface</td></tr>
+        <tr><td>"12 drafts" broadcast banner on Email tab</td><td><code>C-23/v.brand-update-broadcast</code></td><td><span class="chip warm">Variant</span> &middot; brand-context banner with broadcast state (count + CTA)</td></tr>
+        <tr><td>"Update all 12" primary CTA</td><td><code>C-53 Create email CTA</code></td><td><span class="chip green">Reuse</span> &middot; same teal pill button</td></tr>
+      </tbody>
+    </table>
+
+    <div class="lbl">State delta vs baseline</div>
+    <ul>
+      <li>Drafts now carry a <code>brandVersion</code> field; banner shows when current Brand Kit &gt; draft's version</li>
+      <li>Banner has 3 states: <strong>dismissed</strong> (user X'd it) &middot; <strong>acted-on</strong> (clicked Update all) &middot; <strong>never-shown</strong> (drafts all current)</li>
+      <li>Profile picker has 3+ states: built-in Default + user-defined profiles (Holiday, Launch, etc.) + add-new</li>
+    </ul>
+
+    <div class="lbl">Channel parity</div>
+    <table class="parity">
+      <thead><tr><th>Email</th><th>SMS</th><th>WhatsApp</th></tr></thead>
+      <tbody><tr><td class="full">Full</td><td class="full">Full</td><td class="full">Full</td></tr></tbody>
+    </table>
+    <p style="font-size: 11.5px; color: var(--muted); margin-top: 4px;">All three channels generate copy via AI, so brand voice profiles + broadcast applies uniformly. SMS / WhatsApp use the same profile via the channel-specific composer.</p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- FEATURE 06 - MAILCHIMP MEMORY                  -->
+  <!-- ============================================ -->
+  <div class="feature-card" id="f06">
+    <div class="feature-head">
+      <div class="feature-num">06</div>
+      <h3>Mailchimp Memory &middot; Living Memory</h3>
+    </div>
+    <div class="feature-meta">Plan step &middot; AI 2.0 layer &middot; Primary surface: Sidebar (memory drawer) &middot; Secondary: composer chip + strategy panel chip &middot; Cross-channel: Full / Full / Full</div>
+
+    <p><strong>What it does.</strong> AI learns the team's style and preferences across recurring campaigns and stores them as durable "memories." A new sidebar entry "Things I remember" opens a memory drawer (reusing the Brand Kit modal's left-nav pattern). Memory recall surfaces as a chip in the composer ("🧠 Use last week's launch tone") and as a chip inside the strategy panel header ("Drawing on 12 memories").</p>
+
+    <div class="lbl">Wireframe W1a &middot; Plan composer Email tab with memory chip + connector banner (load-bearing mockup)</div>
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">mcds frame &middot; Email tab composer extended for Phase 1</div>
+      <h4 class="mcds-h1">Generate emails with Mailchimp AI</h4>
+      <p class="mcds-sub">Turn ideas into ready-to-send campaigns.</p>
+
+      <div class="mcds-composer">
+        <div class="mcds-composer-input">Describe the email you want&hellip;</div>
+        <div class="mcds-composer-actions">
+          <div style="display:flex; gap:6px;">
+            <button class="mcds-icon-btn">+</button>
+            <button class="mcds-icon-btn">⫯⫯⫯</button>
+            <button class="mcds-icon-btn">🎤</button>
+          </div>
+          <button class="mcds-cta">✦ Generate</button>
+        </div>
+      </div>
+
+      <div class="mcds-brand-banner">
+        <span><strong>Pulling from</strong> your Brand Kit &middot; Slack <code>#marketing-launches</code> &middot; Notion "Q3 launch brief" <span class="mcds-cid-callout">C-23/v.live-context-banner</span></span>
+        <button class="mcds-cta-secondary" style="font-size: 11px; padding: 4px 10px;">Manage sources</button>
+      </div>
+
+      <div class="mcds-chip-row">
+        <span class="mcds-chip">↳ Create a welcome email for new subscribers <span class="mcds-cid-callout">C-25</span></span>
+        <span class="mcds-chip">↳ Design a flash sale promotion email</span>
+        <span class="mcds-chip">↳ Build a monthly newsletter</span>
+      </div>
+      <div class="mcds-chip-row">
+        <span class="mcds-chip memory">🧠 Use last week's launch tone <span class="mcds-cid-callout">C-25/v.memory</span></span>
+        <span class="mcds-chip memory">🧠 Customers respond best to social-proof framing</span>
+        <span class="mcds-chip memory">🧠 Continue the "Spring Refresh" series</span>
+      </div>
+    </div>
+
+    <div class="lbl">Memory drawer (sidebar) wireframe (ASCII)</div>
+    <pre class="wireframe">┌─── Sidebar (expanded, 240px) ──── [C-9] ────┐
+│ 🐵 Freddie · home   [×]                      │
+│                                              │
+│ [+ New]                                      │
+│                                              │
+│ TODAY                                        │
+│   Welcome email for SS '26                   │
+│   Flash sale draft v3                        │
+│                                              │
+│ YESTERDAY                                    │
+│   Welcome-series experiment                  │
+│                                              │
+│ THINGS I REMEMBER [12 facts] →  [NEW]  ◀── C-11/v.memory-entry
+│                                              │
+│ ⚙ Prototype settings                         │
+│ 🎨 Brand & business context                  │
+└──────────────────────────────────────────────┘
+        ↓ clicking opens memory drawer
+┌─── Things I remember (modal) [C-82/v.memory-drawer] ────┐
+│ Brand voice    │  Recently saved memories               │
+│ Audience       │                                        │
+│ Style ←active  │  · Hero CTAs work best in active voice │
+│ Cadence        │  · Tuesday 10am AEST highest engagement│
+│ Performance    │  · Customers respond to social proof   │
+│ Inventory      │  · "Spring Refresh" is the launch tag  │
+│                │                                        │
+│ + Add a memory │  [Edit]  [Forget this]                 │
+└──────────────────────────────────────────────────────────┘</pre>
+
+    <div class="lbl">Component breakdown</div>
+    <table>
+      <thead><tr><th style="width:30%">Affordance</th><th style="width:18%">Maps to</th><th>Reuse / Variant</th></tr></thead>
+      <tbody>
+        <tr><td>Memory recall chip in composer</td><td><code>C-25/v.memory</code></td><td><span class="chip warm">Variant</span> &middot; quick-prompt chip with 🧠 glyph instead of ↳; same shape, same hover, same lv6 radius</td></tr>
+        <tr><td>"Things I remember" sidebar entry</td><td><code>C-11/v.memory-entry</code></td><td><span class="chip warm">Variant</span> &middot; conversation-list item with count badge + "NEW" tag</td></tr>
+        <tr><td>Memory drawer (modal)</td><td><code>C-82/v.memory-drawer</code></td><td><span class="chip warm">Variant</span> &middot; Brand Kit modal left-nav reused with 6 memory categories</td></tr>
+        <tr><td>"Drawing on N memories" chip in strategy panel header</td><td><code>C-45 header</code> + <code>C-25/v.memory</code></td><td><span class="chip green">Reuse</span> &middot; status chip rendered inside existing header bar</td></tr>
+        <tr><td>"+ Add a memory" affordance</td><td><code>C-10 + New button</code></td><td><span class="chip green">Reuse</span> &middot; same primary CTA pattern from sidebar</td></tr>
+      </tbody>
+    </table>
+
+    <div class="lbl">State delta vs baseline</div>
+    <ul>
+      <li>Sidebar gains a "Things I remember" entry below conversation list, persists across sessions</li>
+      <li>Composer gains a second chip row (memory chips) below the standard quick-prompt chips &mdash; only shows if memories exist for the active channel + brand profile</li>
+      <li>Strategy panel header shows memory-count chip when generation drew on memories; clicking it opens the memory drawer scrolled to the recalled items</li>
+      <li>Each memory has states: <strong>fresh</strong> (just learned) &middot; <strong>used</strong> (applied recently) &middot; <strong>stale</strong> (not used in 90d) &middot; <strong>forgotten</strong> (user dismissed)</li>
+    </ul>
+
+    <div class="lbl">Channel parity</div>
+    <table class="parity">
+      <thead><tr><th>Email</th><th>SMS</th><th>WhatsApp</th></tr></thead>
+      <tbody><tr><td class="full">Full</td><td class="full">Full</td><td class="full">Full</td></tr></tbody>
+    </table>
+    <p style="font-size: 11.5px; color: var(--muted); margin-top: 4px;">Memory is channel-agnostic by design. Some memories may be channel-tagged ("Tuesday 10am works best for SMS"), but the recall chip surfaces apply universally.</p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- FEATURE 07 - LIVE-CONTEXT CONNECTORS          -->
+  <!-- ============================================ -->
+  <div class="feature-card" id="f07">
+    <div class="feature-head">
+      <div class="feature-num">07</div>
+      <h3>Live-Context Connectors</h3>
+    </div>
+    <div class="feature-meta">Plan step &middot; AI 2.0 layer &middot; Primary surface: composer banner + Prototype settings &middot; Cross-channel: Full / Full / Full</div>
+
+    <p><strong>What it does.</strong> Enable Slack, Drive, Notion, Zoom, Calendar connectors in Prototype settings; once enabled, AI pulls live context (latest launch brief in Notion, this week's marketing standup notes in Slack) directly into the campaign prompt. The composer's existing brand banner extends to show <em>which sources are feeding the AI right now</em> with a "Manage sources" link.</p>
+
+    <div class="lbl">Wireframe W1b &middot; Live-context banner already shown in W1a above (feature 06). Settings popover wireframe below (ASCII).</div>
+    <pre class="wireframe">┌─── Prototype settings popover [C-91] ─────────────────────────┐
+│ EXPERIENCES                                                    │
+│   SMS AI                              [●—] on                  │
+│   WhatsApp AI                         [●—] on                  │
+│   Campaign AI                         [●—] on                  │
+│                                                                │
+│ LIVE-CONTEXT CONNECTORS  [NEW]  ◀── C-91/v.connector-section   │
+│   ▣ Slack         last sync 2m ago    [●—] on  [C-92/v.connector-toggle]
+│   ▣ Google Drive  last sync 11m ago   [●—] on                  │
+│   ▣ Notion        last sync 3m ago    [●—] on                  │
+│   ▣ Zoom          not connected       [—○] off [Connect]       │
+│   ▣ Calendar      not connected       [—○] off [Connect]       │
+│                                                                │
+│ DISPLAY                                                        │
+│   Dark mode                           [—○] off                 │
+│                                                                │
+│ EXPOSE MAILCHIMP AS MCP SERVER  [NEW]  ◀── C-91/v.mcp-section  │
+│   (see feature 10)                                             │
+│                                                                │
+│ ─────────────────────────────                                  │
+│ [Reset brand kit]                                              │
+└────────────────────────────────────────────────────────────────┘</pre>
+
+    <div class="lbl">Connector OAuth + sync flow (ASCII state diagram)</div>
+    <pre class="wireframe">[connector OFF] ── click Connect ──→ [browser OAuth] ──→ [granted]
+                                                              │
+                                                              ↓
+[granted] ── auto-sync starts ──→ [syncing] ──→ [sync complete · last sync = now]
+                                                              │
+                                                              ↓ (next composer visit)
+                                                  C-23/v.live-context-banner
+                                                  "Pulling from Slack #marketing-launches"</pre>
+
+    <div class="lbl">Component breakdown</div>
+    <table>
+      <thead><tr><th style="width:30%">Affordance</th><th style="width:18%">Maps to</th><th>Reuse / Variant</th></tr></thead>
+      <tbody>
+        <tr><td>"Live-Context Connectors" section in settings</td><td><code>C-91/v.connector-section</code></td><td><span class="chip warm">Variant</span> &middot; new labeled section inside settings popover; same internal layout as Experiences section</td></tr>
+        <tr><td>Per-connector toggle row</td><td><code>C-92/v.connector-toggle</code></td><td><span class="chip warm">Variant</span> &middot; experience-toggle molecule with service-logo (vendor SVG) + last-sync timestamp</td></tr>
+        <tr><td>"Connect" button for OAuth-required connector</td><td><code>C-66 Send a test email</code> button pattern</td><td><span class="chip green">Reuse</span> &middot; same secondary button style</td></tr>
+        <tr><td>Live-context banner on composer ("Pulling from Slack ...")</td><td><code>C-23/v.live-context-banner</code></td><td><span class="chip warm">Variant</span> &middot; brand-context banner extended to list source list + "Manage sources" link</td></tr>
+        <tr><td>Sync-in-progress indicator</td><td><code>C-42 Building spinner</code></td><td><span class="chip green">Reuse</span> &middot; snowflake spinner from chat thread, recolored to grey for non-AI use? No &mdash; keep teal per R6 to mark AI-related sync</td></tr>
+      </tbody>
+    </table>
+
+    <div class="lbl">State delta vs baseline</div>
+    <ul>
+      <li>Settings popover grows from 1 section (Experiences) to 3 sections (Experiences + Connectors + MCP)</li>
+      <li>Composer's brand banner has 2 new states: <strong>brand-only</strong> (existing) &middot; <strong>brand + N connectors</strong> (new, lists sources)</li>
+      <li>Each connector has 4 states: <strong>not-connected</strong> &middot; <strong>connecting</strong> &middot; <strong>connected-syncing</strong> &middot; <strong>connected-ready</strong></li>
+    </ul>
+
+    <div class="lbl">Channel parity</div>
+    <table class="parity">
+      <thead><tr><th>Email</th><th>SMS</th><th>WhatsApp</th></tr></thead>
+      <tbody><tr><td class="full">Full</td><td class="full">Full</td><td class="full">Full</td></tr></tbody>
+    </table>
+    <p style="font-size: 11.5px; color: var(--muted); margin-top: 4px;">Connectors are workspace-level, channel-agnostic. The live-context banner renders identically on Email / SMS / WhatsApp composer surfaces.</p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- FEATURE 09 - WEB RESEARCH INTEGRATION         -->
+  <!-- ============================================ -->
+  <div class="feature-card" id="f09">
+    <div class="feature-head">
+      <div class="feature-num">09</div>
+      <h3>Web Research Integration</h3>
+    </div>
+    <div class="feature-meta">Plan step &middot; AI 2.0 layer &middot; Primary surface: strategy panel &middot; Cross-channel: Full / Full / Full</div>
+
+    <p><strong>What it does.</strong> Before generating an email, AI searches the web and brings back structured competitive / seasonal / trend insights. A new "Research depth" field in the strategy panel lets the user pick None / Quick (under 10s) / Deep (under 60s). The chat thread shows research findings as a prose response with citations rendered using the existing AI disclaimer pattern.</p>
+
+    <div class="lbl">Wireframe (ASCII) &middot; Strategy panel with new "Research depth" field</div>
+    <pre class="wireframe">┌─── Strategy panel (right pane) ── Ready ── × ─────────┐
+│  [C-45 header]                                          │
+│  Email strategy                                         │
+│  Welcome to the community                               │
+│                                                         │
+│  Goal              ▾  Retention: Customer loyalty  [C-46]
+│  Date                 _________________  📅       [C-47]
+│  Recipients        ▾  New email subscribers (2,150)[C-48]
+│                                                         │
+│  Featured promo    ▾  Welcome guide + bonus       [C-49]
+│  Focus metric      ▾  Revenue                     [C-50]
+│                                                         │
+│  Research depth    ▾  Quick (under 10s)      ◀── NEW   │
+│                       [None]                           [C-46/v.research-depth]
+│                       [Quick · under 10s]              │
+│                       [Deep · under 60s · best]         │
+│                                                         │
+│  Featured products    [Product 1] [Product 2] [+]  [C-51]
+│  Visual style         ▣ ▣ ▣ ▣                     [C-52]
+│                                                         │
+│  ─────────────────────────────                          │
+│  [✦ Create email →]                                 [C-53]
+└─────────────────────────────────────────────────────────┘
+
+         after Create email click (chat thread):
+┌─── Assistant message [C-43] ────────────────────────────┐
+│ ✦ Email strategy: Version 1                  [Ready]    │
+│   Welcome to the Community                              │
+│                                                         │
+│ I scanned 12 sources on welcome-email best practices    │
+│ this week. Three highest-signal findings I'm using:     │
+│                                                         │
+│ 1. Q3 2025 industry-avg open rate for first welcome     │
+│    email = 47% (your benchmark target).                 │
+│ 2. Top-performing welcome emails reference user's       │
+│    signup source within the first 3 lines.              │
+│ 3. Including a single CTA (vs 2+) lifts CTR ~15%.       │
+│                                                         │
+│ Sources: 12 indexed pages · see citations →             │
+│ ⚠ Intuit Intelligence can make mistakes... [C-55]       │
+└─────────────────────────────────────────────────────────┘</pre>
+
+    <div class="lbl">Component breakdown</div>
+    <table>
+      <thead><tr><th style="width:30%">Affordance</th><th style="width:18%">Maps to</th><th>Reuse / Variant</th></tr></thead>
+      <tbody>
+        <tr><td>"Research depth" select field</td><td><code>C-46/v.research-depth</code></td><td><span class="chip warm">Variant</span> &middot; same select pattern as Goal/Focus-metric, new label + 3 options</td></tr>
+        <tr><td>Research findings prose in chat</td><td><code>C-43 assistant message body</code></td><td><span class="chip green">Reuse</span> &middot; same prose pattern, citations rendered as inline numbered superscripts</td></tr>
+        <tr><td>"see citations →" link</td><td><code>C-65 Edit Brand Kit link</code> pattern</td><td><span class="chip green">Reuse</span> &middot; same footer-link style; opens citations modal</td></tr>
+        <tr><td>Research-pending state on Create email CTA</td><td><code>C-53</code> with C-42 spinner</td><td><span class="chip green">Reuse</span> &middot; CTA disabled during research, building spinner replaces the arrow</td></tr>
+      </tbody>
+    </table>
+
+    <div class="lbl">State delta vs baseline</div>
+    <ul>
+      <li>Strategy panel adds one new field (Research depth); panel height grows by ~40px</li>
+      <li>Create email CTA has new state: <strong>research-pending</strong> (disabled, spinner inline) for Quick/Deep selections</li>
+      <li>Chat thread shows research-findings response <em>before</em> the email-strategy response (sequential), so the user sees the data the AI used</li>
+    </ul>
+
+    <div class="lbl">Channel parity</div>
+    <table class="parity">
+      <thead><tr><th>Email</th><th>SMS</th><th>WhatsApp</th></tr></thead>
+      <tbody><tr><td class="full">Full</td><td class="full">Full</td><td class="full">Full</td></tr></tbody>
+    </table>
+    <p style="font-size: 11.5px; color: var(--muted); margin-top: 4px;">Web research is content-agnostic. SMS and WhatsApp strategies benefit equally from competitive / seasonal context.</p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- FEATURE 10 - CHATGPT & CLAUDE MCP BRIDGE      -->
+  <!-- ============================================ -->
+  <div class="feature-card" id="f10">
+    <div class="feature-head">
+      <div class="feature-num">10</div>
+      <h3>ChatGPT &amp; Claude MCP Bridge</h3>
+    </div>
+    <div class="feature-meta">Plan step &middot; AI 2.0 layer &middot; Primary surface: Prototype settings &middot; Cross-channel: Full / Full / Full (workspace-level)</div>
+
+    <p><strong>What it does.</strong> Expose Mailchimp campaign creation as an MCP server so a marketer working in ChatGPT, Claude, or Cursor can hand off "draft a welcome email for my MC audience X" to Mailchimp and pull back the rendered draft. Enable via a new section in Prototype settings, generate a bearer token, copy to clipboard. No new end-user surface in the campaign builder &mdash; it's an operator/admin affordance.</p>
+
+    <div class="lbl">Wireframe (ASCII) &middot; MCP section in Prototype settings</div>
+    <pre class="wireframe">┌─── Prototype settings popover [C-91] ─────────────────────────┐
+│ (Experiences + Connectors sections above)                      │
+│                                                                │
+│ EXPOSE MAILCHIMP AS MCP SERVER  [NEW]  ◀── C-91/v.mcp-section  │
+│   Let ChatGPT, Claude, or Cursor call Mailchimp directly.      │
+│                                                                │
+│   MCP server                          [●—] enabled             │
+│                                       [C-92]                   │
+│                                                                │
+│   Bearer token                                                 │
+│   ┌──────────────────────────────────────────────────────┐    │
+│   │ mc_live_a8f3b9c2e7d6f1...    👁  📋               │    │
+│   │ [C-90/v.mcp-token-row: monospace + eye + copy]     │    │
+│   └──────────────────────────────────────────────────────┘    │
+│                                                                │
+│   [Regenerate token]   [Revoke all]                            │
+│   Last used 4m ago by Claude 4.5 (Cursor)                      │
+│                                                                │
+│   📖 Connection guide → (deep-link to Help Center)            │
+└────────────────────────────────────────────────────────────────┘</pre>
+
+    <div class="lbl">Component breakdown</div>
+    <table>
+      <thead><tr><th style="width:30%">Affordance</th><th style="width:18%">Maps to</th><th>Reuse / Variant</th></tr></thead>
+      <tbody>
+        <tr><td>"Expose Mailchimp as MCP server" section</td><td><code>C-91/v.mcp-section</code></td><td><span class="chip warm">Variant</span> &middot; new labeled section in settings popover, same layout as Experiences/Connectors</td></tr>
+        <tr><td>MCP server enable/disable toggle</td><td><code>C-92 experience toggle</code></td><td><span class="chip green">Reuse</span> &middot; identical toggle molecule</td></tr>
+        <tr><td>Bearer token reveal row (monospace + eye + copy)</td><td><code>C-90/v.mcp-token-row</code></td><td><span class="chip warm">Variant</span> &middot; social-link input row with monospace font + eye/copy buttons</td></tr>
+        <tr><td>"Regenerate token" / "Revoke all" buttons</td><td><code>C-94 Reset brand kit</code></td><td><span class="chip green">Reuse</span> &middot; same secondary button style as the Reset button below</td></tr>
+        <tr><td>"Connection guide →" link</td><td><code>C-55 AI disclaimer link</code></td><td><span class="chip green">Reuse</span> &middot; same external link style</td></tr>
+      </tbody>
+    </table>
+
+    <div class="lbl">State delta vs baseline</div>
+    <ul>
+      <li>Settings popover grows from 2 sections (now 3 with Connectors) to 3 sections (Experiences / Connectors / MCP) &middot; popover height grows by ~120px</li>
+      <li>New workspace-level state: <strong>MCP-server-enabled</strong> &middot; bearer token has <strong>hidden</strong> / <strong>revealed</strong> / <strong>copied</strong> states</li>
+      <li>Token last-used metadata persists, surfaces inline ("4m ago by Claude 4.5 (Cursor)")</li>
+    </ul>
+
+    <div class="lbl">Channel parity</div>
+    <table class="parity">
+      <thead><tr><th>Email</th><th>SMS</th><th>WhatsApp</th></tr></thead>
+      <tbody><tr><td class="full">Full</td><td class="full">Full</td><td class="full">Full</td></tr></tbody>
+    </table>
+    <p style="font-size: 11.5px; color: var(--muted); margin-top: 4px;">MCP exposure is workspace-level &mdash; once enabled, all three channels are addressable via the external client. No per-channel toggle needed.</p>
+  </div>
+
+  <p class="source"><strong>Section 4 source:</strong> Features 05, 06, 07, 09, 10 from <a href="https://deepakp1308.github.io/canva-campaign-analysis/">Canva-gap Phase 1 roadmap</a>. Baseline components from <a href="mailchimp-editor.html#designaudit">Lens 3 Component &times; JTBD Matrix</a> (96 IDs). Variant naming follows policy R3 from Section 2. Wireframe W1 (composer) rendered as HTML+CSS in the <code>.fdpx-mcds-frame</code> scope; W3 (Brand Kit Brand Voice 2.0) rendered the same way; remaining wireframes are ASCII per the user-approved Phase 1 depth.</p>
+</section>
+
+<!-- ================================================================ -->
+<!-- SECTION 5 - DESIGN-STEP FEATURES (#1, #2, #3, #4, #8)              -->
+<!-- ================================================================ -->
+<section class="page" id="design-step">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Section 5 of 7 &middot; Design step</div>
+      <h1 style="font-size:24px">5 Phase 1 features that extend the Design step</h1>
+      <div class="subtitle">Design step in the 7-phase JTBD = "Lay out blocks, add content, apply brand identity, ensure mobile responsiveness." These 5 features close the round-trip to Canva by keeping image editing, design iteration, layered reconstruction, and asset generation inside the Freddie editor. Includes load-bearing wireframe W2 (Design editor with image-selected popover + chat preview-diff).</div>
+    </div>
+    <div class="meta">
+      <div>Features 01, 02, 03, 04, 08</div>
+      <div>Primary surface: Design editor &middot; canvas + chat + manual rail</div>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- FEATURE 01 - AI IMAGE MANIPULATION SUITE      -->
+  <!-- ============================================ -->
+  <div class="feature-card" id="f01">
+    <div class="feature-head">
+      <div class="feature-num">01</div>
+      <h3>AI Image Manipulation Suite</h3>
+    </div>
+    <div class="feature-meta">Design step &middot; AI layer &middot; Primary surface: editor canvas (in-context popover) &middot; The most-requested Canva-parity feature &middot; Cross-channel: Full / N/A (no images in SMS) / Full</div>
+
+    <p><strong>What it does.</strong> Right-click (or selection-tap) on any <code>&lt;img&gt;</code> block inside the email canvas reveals 4 in-context AI actions: <strong>brush-replace</strong> (paint over a region, regenerate that region), <strong>subject-extract</strong> (cut subject from background), <strong>frame-extend</strong> (extend canvas in any direction with generated content), <strong>themed text/shape effects</strong> (apply Brand-Kit-aware overlays). The popover is anchored to the selected element; the result replaces the original image in-place after Accept.</p>
+
+    <div class="lbl">Wireframe W2 &middot; Design editor with image-selected state + new popover (load-bearing mockup)</div>
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">mcds frame &middot; canvas + chat split-view, image clicked, popover open</div>
+      <div class="mcds-editor">
+        <div class="chat-side">
+          <div style="font-size:11px; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: .1em; margin-bottom: 6px;">Friday, May 16</div>
+
+          <div style="background: var(--color-bg-primary); border-radius: var(--border-radius-lv3); padding: 10px; margin-bottom: 8px; font-size: 12px;">
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom: 6px;">
+              <span class="mcds-snowflake">✦</span>
+              <strong>Email strategy: Version 1</strong>
+              <span class="mcds-tag" style="background: #E6F5EE; color: #036A4F; border-color: #BFE6D3;">Ready</span>
+            </div>
+            <p style="font-size:12px; margin:0;">Built a warm welcome with social-proof hero. Click any section to refine, or describe changes here.</p>
+          </div>
+
+          <div style="background: var(--color-bg-primary); border-radius: var(--border-radius-lv3); padding: 10px; margin-bottom: 8px; font-size: 12px;">
+            <strong>You:</strong> "Make the hero more professional, B2B SaaS audience"
+          </div>
+
+          <div class="preview-diff">
+            <div class="thumb"></div>
+            <span class="arrow">→</span>
+            <div class="thumb" style="background: linear-gradient(135deg, #2c3e50, #017E89);"></div>
+            <span style="font-size:11px; color: var(--color-text-secondary); margin-left: 6px;">Hero restyled</span>
+            <span class="mcds-cid-callout" style="margin-left: auto;">C-43/v.preview-diff</span>
+          </div>
+
+          <div style="display:flex; gap:8px; font-size:11px; color: var(--color-text-secondary);">
+            <button class="mcds-cta" style="font-size:11px; padding: 4px 10px;">✓ Accept</button>
+            <button class="mcds-cta-secondary" style="font-size:11px; padding: 4px 10px;">↺ Regenerate</button>
+            <button class="mcds-icon-btn" style="font-size:14px;">👍</button>
+            <button class="mcds-icon-btn" style="font-size:14px;">👎</button>
+          </div>
+
+          <div style="margin-top: 16px; background: var(--color-bg-primary); border-radius: var(--border-radius-lv5); padding: 8px 12px; border: 1px solid var(--color-border-default);">
+            <span style="font-size:12px; color: var(--color-text-tertiary);">Ask anything&hellip;</span>
+          </div>
+          <div style="margin-top: 8px; display:flex; gap: 4px; flex-wrap: wrap;">
+            <span class="mcds-chip" style="font-size:10.5px;">Swap hero</span>
+            <span class="mcds-chip" style="font-size:10.5px;">Shorten copy</span>
+            <span class="mcds-chip" style="font-size:10.5px;">Add urgency</span>
+            <span class="mcds-cid-callout" style="margin-top:4px;">C-70/v.refine-chips</span>
+          </div>
+        </div>
+
+        <div class="canvas-side">
+          <div class="canvas-hero selected">
+            <span class="mcds-cid-callout" style="position:absolute; top:6px; right:6px; background: white;">C-61 hero selected</span>
+          </div>
+
+          <div class="image-popover">
+            <div style="font-size:10px; color: var(--color-text-tertiary); text-transform: uppercase; letter-spacing: .08em; margin-bottom: 6px;">✦ Edit image with AI <span class="mcds-cid-callout" style="margin-left: 4px;">C-97 (NEW)</span></div>
+            <div class="pop-row">🖌 Brush replace</div>
+            <div class="pop-row">✂ Subject extract</div>
+            <div class="pop-row">↔ Frame extend</div>
+            <div class="pop-row">✨ Themed effects</div>
+            <div style="border-top: 1px solid var(--color-border-default); margin-top: 6px; padding-top: 6px;">
+              <div class="pop-row" style="color: var(--color-text-tertiary); font-size:11px;">Open in Dream Lab → <span class="mcds-cid-callout">f02</span></div>
+            </div>
+          </div>
+
+          <div class="canvas-line long" style="margin-top: 14px;"></div>
+          <div class="canvas-line short"></div>
+          <div class="canvas-line long"></div>
+
+          <div style="position: absolute; bottom: 10px; right: 10px;">
+            <div style="display:inline-flex; align-items: center; gap:4px; background: var(--color-bg-primary); border: 1px solid var(--color-border-default); border-radius: var(--border-radius-lv6); padding: 4px 10px; font-size: 11px; box-shadow: var(--elevation-lv1);">
+              <span style="font-family: 'Source Serif 4', Georgia, serif; font-size: 13px;">Aa</span>
+              Edit theme
+              <span class="mcds-cid-callout">C-62</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p style="font-size: 11px; color: var(--color-text-tertiary); margin-top: 10px;">Mode radio C-57 (✦ AI / ✎ manual) and viewport radio C-58 omitted from this crop for clarity; they remain in the editor top bar as in the baseline.</p>
+    </div>
+
+    <div class="lbl">Component breakdown</div>
+    <table>
+      <thead><tr><th style="width:30%">Affordance</th><th style="width:18%">Maps to</th><th>Reuse / Variant / New</th></tr></thead>
+      <tbody>
+        <tr><td>Element-selection state on canvas</td><td><code>C-61 iframe canvas</code></td><td><span class="chip green">Reuse</span> &middot; selection now becomes a first-class state (today the canvas has no select state)</td></tr>
+        <tr style="background:#FFF5F2"><td><strong>Image manipulation popover</strong></td><td><strong><code>C-97 (NEW)</code></strong></td><td><span class="chip red">New C-ID</span> &middot; variant <em>class</em> of <code>C-95</code> theme popover but anchored to in-canvas elements instead of the floating Aa button. The only genuinely new shape in the spec.</td></tr>
+        <tr><td>4 sub-actions (brush, extract, extend, effects)</td><td><code>C-25 quick-prompt chip</code> pattern</td><td><span class="chip green">Reuse</span> &middot; styled as menu rows in the popover (same hover pattern)</td></tr>
+        <tr><td>"Open in Dream Lab" deep-link</td><td><code>C-65 Edit Brand Kit link</code></td><td><span class="chip green">Reuse</span> &middot; same teal footer-link style; routes to feature 02</td></tr>
+        <tr><td>"Edit this image with AI" chip in C-70</td><td><code>C-70 follow-up toolbar</code></td><td><span class="chip green">Reuse</span> &middot; new chip text using existing chip primitive</td></tr>
+        <tr><td>Image-processing spinner</td><td><code>C-42 building spinner</code></td><td><span class="chip green">Reuse</span> &middot; same snowflake-spinner overlay during regenerate</td></tr>
+      </tbody>
+    </table>
+
+    <div class="lbl">Rationale for the new C-97</div>
+    <p style="font-size: 12.5px;">Every other Phase 1 feature decomposes into existing primitives or variants. Image Manipulation is the exception because <strong>no baseline component anchors to an in-canvas element</strong>. The closest baseline pattern is <code>C-95 Theme editor popover</code> (floating, anchored to the Aa button below the canvas). C-97 is the same popover primitive (same elevation L2, same lv3 radius, same content style), but its anchor target is an element <em>inside</em> the iframe. This warrants a new C-ID under R2/R3 because the interaction model is materially different (selection-driven, not button-driven), even though the visual primitive is reused.</p>
+
+    <div class="lbl">State delta vs baseline</div>
+    <ul>
+      <li>Canvas (C-61) introduces a <strong>selection state</strong> for the first time (focus ring + popover anchor)</li>
+      <li>Popover (C-97) has states: <strong>open</strong> &middot; <strong>action-pending</strong> (one of 4 sub-actions clicked) &middot; <strong>regenerating</strong> &middot; <strong>result-staged</strong> (preview before Accept)</li>
+      <li>Mode radio (C-57) gets an additional implicit state: <strong>AI mode + image-selected</strong> &mdash; the floating Aa stays hidden when an element is selected (to make room for C-97)</li>
+    </ul>
+
+    <div class="lbl">Channel parity</div>
+    <table class="parity">
+      <thead><tr><th>Email</th><th>SMS</th><th>WhatsApp</th></tr></thead>
+      <tbody><tr><td class="full">Full</td><td class="na">N/A (no images in SMS)</td><td class="full">Full (image messages)</td></tr></tbody>
+    </table>
+    <p style="font-size: 11.5px; color: var(--muted); margin-top: 4px;">SMS is text-only by RFC; the SMS tab's design editor has no image blocks to manipulate. WhatsApp supports image messages so the full C-97 popover renders identically there.</p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- FEATURE 02 - DREAM LAB                         -->
+  <!-- ============================================ -->
+  <div class="feature-card" id="f02">
+    <div class="feature-head">
+      <div class="feature-num">02</div>
+      <h3>Dream Lab &mdash; AI image generation with style references</h3>
+    </div>
+    <div class="feature-meta">Design step &middot; AI layer &middot; Primary surface: manual rail 4th tab "Image" &middot; Cross-channel: Full / N/A / Full</div>
+
+    <p><strong>What it does.</strong> High-fidelity AI image generation from a text prompt plus an uploaded brand-style reference image. The user picks aspect ratio (1:1 / 4:5 / 16:9 / 9:16), style strength (slider), and one of 4 style presets (editorial, product, lifestyle, illustration). Result drops into the canvas as a new image block.</p>
+
+    <div class="lbl">Wireframe (ASCII) &middot; Dream Lab panel inside manual-mode rail</div>
+    <pre class="wireframe">┌─── Manual mode left rail [C-71] ────────────┐
+│  📦 Blocks                                   │
+│  ▦ Sections                                  │
+│  🎨 Styles                                   │
+│  ✨ Image  [NEW] ◀── C-71/v.image-tab        │
+└──────────────────────────────────────────────┘
+       ↓ clicking "Image" opens Dream Lab panel
+┌─── Dream Lab [C-19 prompt + C-20 attach + C-21 sliders] ────┐
+│                                                              │
+│ Describe the image                              [C-19]      │
+│ ┌──────────────────────────────────────────────────────┐    │
+│ │ A confident professional holding a coffee cup,       │    │
+│ │ window light, soft focus background                  │    │
+│ └──────────────────────────────────────────────────────┘    │
+│                                                              │
+│ [+ Style reference image] [C-20 attach]                     │
+│   └─ uploaded: brand-shoot-2024-q3.jpg  [×]                  │
+│                                                              │
+│ Style strength       ●━━━━━━━━━━━━━━━○  72%  [C-21 sliders]│
+│                                                              │
+│ Aspect ratio   ◯ 1:1   ⦿ 4:5   ◯ 16:9   ◯ 9:16              │
+│                       [C-58/v.aspect]                        │
+│                                                              │
+│ Style preset                                                 │
+│   [↳ Editorial] [↳ Product] [↳ Lifestyle] [↳ Illustration]  │
+│                        [C-25 chips]                          │
+│                                                              │
+│ ─────────────────────                                        │
+│ [✦ Generate image]                              [C-53 CTA]   │
+└──────────────────────────────────────────────────────────────┘
+       ↓ result preview appears here once Generate completes
+[4 result thumbnails appear inline]  ─ pick one to drop in canvas
+[👍 / 👎 / ↻ Regenerate]  [C-44 feedback row]</pre>
+
+    <div class="lbl">Component breakdown</div>
+    <table>
+      <thead><tr><th style="width:30%">Affordance</th><th style="width:18%">Maps to</th><th>Reuse / Variant</th></tr></thead>
+      <tbody>
+        <tr><td>"Image" tab in manual rail</td><td><code>C-71/v.image-tab</code></td><td><span class="chip warm">Variant</span> &middot; left-rail tab pattern, 4th tab below Blocks/Sections/Styles</td></tr>
+        <tr><td>Prompt textarea</td><td><code>C-19</code></td><td><span class="chip green">Reuse</span> &middot; same composer textarea, relabeled "Describe the image"</td></tr>
+        <tr><td>Style-reference attach</td><td><code>C-20</code></td><td><span class="chip green">Reuse</span> &middot; same + attach button, file-picker only</td></tr>
+        <tr><td>Style-strength slider</td><td><code>C-89 brand voice formality slider</code></td><td><span class="chip green">Reuse</span> &middot; same 0&ndash;100 slider primitive</td></tr>
+        <tr><td>Aspect ratio segmented control</td><td><code>C-58/v.aspect</code></td><td><span class="chip warm">Variant</span> &middot; viewport-radio molecule with 4 labels (1:1 / 4:5 / 16:9 / 9:16) instead of desktop/mobile/split</td></tr>
+        <tr><td>Style preset chips</td><td><code>C-25</code></td><td><span class="chip green">Reuse</span> &middot; same quick-prompt chip with ↳ glyph</td></tr>
+        <tr><td>Generate CTA</td><td><code>C-53 Create email CTA</code></td><td><span class="chip green">Reuse</span> &middot; teal pill, label "✦ Generate image"</td></tr>
+        <tr><td>Result-thumbnail picker</td><td><code>C-52 visual style picker</code></td><td><span class="chip green">Reuse</span> &middot; same 3-4-swatch picker pattern</td></tr>
+        <tr><td>Feedback row on result</td><td><code>C-44</code></td><td><span class="chip green">Reuse</span> &middot; Copy/Like/Dislike/Regenerate</td></tr>
+      </tbody>
+    </table>
+
+    <div class="lbl">State delta vs baseline</div>
+    <ul>
+      <li>Manual rail (C-71) grows from 3 tabs to 4 tabs (Blocks / Sections / Styles / Image)</li>
+      <li>Dream Lab states: <strong>empty</strong> (no prompt yet) &middot; <strong>generating</strong> (spinner) &middot; <strong>4-result-grid</strong> &middot; <strong>selected-result-in-canvas</strong></li>
+      <li>Generated image becomes a regular C-61-canvas-image-block; C-97 popover (feature 01) applies to it</li>
+    </ul>
+
+    <div class="lbl">Channel parity</div>
+    <table class="parity">
+      <thead><tr><th>Email</th><th>SMS</th><th>WhatsApp</th></tr></thead>
+      <tbody><tr><td class="full">Full</td><td class="na">N/A</td><td class="full">Full</td></tr></tbody>
+    </table>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- FEATURE 03 - CONVERSATIONAL DESIGN EDITING    -->
+  <!-- ============================================ -->
+  <div class="feature-card" id="f03">
+    <div class="feature-head">
+      <div class="feature-num">03</div>
+      <h3>Conversational Design Editing</h3>
+    </div>
+    <div class="feature-meta">Design step &middot; AI 2.0 layer &middot; Primary surface: chat composer (C-54) + assistant message body (C-43) &middot; Cross-channel: Full / Full / Full</div>
+
+    <p><strong>What it does.</strong> The existing post-generation chat composer (<code>C-54</code> "Ask anything&hellip;") becomes the primary edit channel for the entire builder. Plain-English instructions like "Make the hero more professional," "Swap the hero," "Shorten body 30%," "Add urgency" are parsed and applied as scoped changes. Result is rendered as a <strong>before&rarr;after preview-diff strip</strong> inside the assistant message (using thumbnails of the affected region). User clicks Accept or Regenerate; manual edits are preserved.</p>
+
+    <div class="lbl">Wireframe W2b &middot; The preview-diff is already shown in feature 01's W2 mockup above (chat side, "Hero restyled" row). Below: the conversational-editing intent map.</div>
+    <pre class="wireframe">User intent (plain English)         →  Scoped change applied
+───────────────────────────────────    ────────────────────────────────
+"Make the hero more professional"   →  Theme tweak  + copy rewrite (hero only)
+"Swap the hero"                     →  Section replace (Hero section, alternative)
+"Shorten copy 30%"                  →  Copy compression (body sections)
+"Add urgency"                       →  Subject + hero copy rewrite + CTA verbs
+"Make it feel like our spring launch" → Style transfer (uses Memory feature 06)
+"Use Bold Product Cardstyle layout"  → Section swap (manual mode sections)
+                                       [reuses C-75 Sections panel content]</pre>
+
+    <div class="lbl">Component breakdown</div>
+    <table>
+      <thead><tr><th style="width:30%">Affordance</th><th style="width:18%">Maps to</th><th>Reuse / Variant</th></tr></thead>
+      <tbody>
+        <tr><td>Chat composer (post-generation)</td><td><code>C-54</code></td><td><span class="chip green">Reuse</span> &middot; verbatim; the entire feature is scope-expansion of what intents it parses</td></tr>
+        <tr><td>Assistant message body</td><td><code>C-43/v.preview-diff</code></td><td><span class="chip warm">Variant</span> &middot; existing prose with embedded before&rarr;after thumbnail strip (uses <code>C-28</code> thumbnail primitive)</td></tr>
+        <tr><td>Follow-up chips with new text</td><td><code>C-70/v.refine-chips</code></td><td><span class="chip warm">Variant</span> &middot; existing chip toolbar, new content: "Swap hero" / "Make professional" / "Shorten copy" / "Add urgency"</td></tr>
+        <tr><td>Accept / Regenerate buttons</td><td><code>C-53 + C-44</code></td><td><span class="chip green">Reuse</span> &middot; primary teal pill (Accept) + Regenerate from feedback row</td></tr>
+        <tr><td>Like / Dislike feedback</td><td><code>C-44</code></td><td><span class="chip green">Reuse</span> &middot; existing 👍/👎 feedback row, signals to AI which intents land</td></tr>
+      </tbody>
+    </table>
+
+    <div class="lbl">State delta vs baseline</div>
+    <ul>
+      <li>Chat thread gains a new state: <strong>staged-change</strong> (between AI proposal and user Accept) &mdash; preview-diff visible, canvas un-touched until Accept</li>
+      <li>Accept commits the change to the canvas iframe; Regenerate rolls the staged change back and re-runs the prompt</li>
+      <li>Manual edits made between AI prompts are preserved &mdash; the staged-change applies as a layered patch, not a full canvas replace</li>
+    </ul>
+
+    <div class="lbl">Channel parity</div>
+    <table class="parity">
+      <thead><tr><th>Email</th><th>SMS</th><th>WhatsApp</th></tr></thead>
+      <tbody><tr><td class="full">Full</td><td class="full">Full (text-only edits)</td><td class="full">Full</td></tr></tbody>
+    </table>
+    <p style="font-size: 11.5px; color: var(--muted); margin-top: 4px;">SMS conversational editing scopes to text-only changes ("shorten 30%," "more urgent," "change CTA verb"). Image-related intents are rejected on SMS with a hint ("SMS doesn't support images &mdash; try the WhatsApp tab").</p>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- FEATURE 04 - MAGIC LAYERS                      -->
+  <!-- ============================================ -->
+  <div class="feature-card" id="f04">
+    <div class="feature-head">
+      <div class="feature-num">04</div>
+      <h3>Magic Layers &mdash; flat to editable</h3>
+    </div>
+    <div class="feature-meta">Design step &middot; AI 2.0 layer &middot; Primary surface: composer attach + ingestion banner &middot; Cross-channel: Full / N/A / Partial</div>
+
+    <p><strong>What it does.</strong> Drop a flat image / PDF / HTML file into the composer's existing <code>+ attach</code> button. AI detects sections and reconstructs them as editable layered blocks. A progress banner shows ingestion ("Reading sections&hellip; 3 detected: Header, Hero, Footer"). User clicks "Open as editable email" and the result populates as draggable blocks in the manual editor.</p>
+
+    <div class="lbl">Wireframe (ASCII) &middot; Magic Layers ingestion flow</div>
+    <pre class="wireframe">┌─── Email tab composer [C-16] ───────────────────────────────────┐
+│                                                                  │
+│ Describe the email&hellip;                                        │
+│                          [+] ←── drop a flat file (jpg/pdf/html) │
+│                          [C-20]                                  │
+└──────────────────────────────────────────────────────────────────┘
+                              ↓ drop detected
+┌─── Ingestion banner [C-23/v.ingestion-progress] ────────────────┐
+│ ✦ Reconstructing layers from "competitor-promo.jpg"             │
+│   ●●●●●●●●●●○○○ 72%   3 sections detected                       │
+│   ✓ Header   ✓ Hero   ⌛ Body   ⋯ Footer (next)                  │
+└──────────────────────────────────────────────────────────────────┘
+                              ↓ ingestion complete
+┌─── Assistant message [C-43] ────────────────────────────────────┐
+│ ✦ Magic Layers · 7 editable blocks                  [Ready]     │
+│   Reconstructed from competitor-promo.jpg                       │
+│                                                                 │
+│ I extracted these sections: 1 Header, 1 Hero, 2 Body, 1 Coupon, │
+│ 1 Product Grid, 1 Footer. Brand Kit applied: your logo replaced │
+│ theirs, colors normalized to teal/cream palette.                │
+│                                                                 │
+│ [Open as editable email →]              [C-53/v.open-as-editable]
+│ [👍 / 👎 / Regenerate]   [C-44]                                  │
+└─────────────────────────────────────────────────────────────────┘
+                              ↓ click "Open as editable email"
+[Manual mode opens with 7 blocks pre-populated in C-61 canvas]
+[User can now drag, edit, or run feature 03 conversational editing]</pre>
+
+    <div class="lbl">Component breakdown</div>
+    <table>
+      <thead><tr><th style="width:30%">Affordance</th><th style="width:18%">Maps to</th><th>Reuse / Variant</th></tr></thead>
+      <tbody>
+        <tr><td>File drop on attach button</td><td><code>C-20</code></td><td><span class="chip green">Reuse</span> &middot; existing + attach button, accepts jpg/pdf/html in addition to existing types</td></tr>
+        <tr><td>Ingestion progress banner</td><td><code>C-23/v.ingestion-progress</code></td><td><span class="chip warm">Variant</span> &middot; brand-context banner with progress bar + per-section status</td></tr>
+        <tr><td>Ingestion building spinner</td><td><code>C-42</code></td><td><span class="chip green">Reuse</span> &middot; snowflake spinner in banner</td></tr>
+        <tr><td>"Open as editable email" CTA</td><td><code>C-53/v.open-as-editable</code></td><td><span class="chip warm">Variant</span> &middot; primary CTA with different label; routes to manual mode pre-populated</td></tr>
+        <tr><td>Reconstructed blocks in canvas</td><td><code>C-72 content blocks grid</code></td><td><span class="chip green">Reuse</span> &middot; blocks from Sections panel populate the canvas as if user dragged them in</td></tr>
+        <tr><td>Section-detection assistant prose</td><td><code>C-43</code></td><td><span class="chip green">Reuse</span> &middot; standard prose response listing detected sections</td></tr>
+      </tbody>
+    </table>
+
+    <div class="lbl">Note on "zero genuinely new C-IDs"</div>
+    <p style="font-size: 12.5px;">Magic Layers is the cleanest Phase 1 feature &mdash; it composes <em>entirely</em> from existing primitives and 2 variants. No new shape needed. The ingestion banner is conceptually new (progress + per-section status) but reuses <code>C-23</code>'s shape with state extensions.</p>
+
+    <div class="lbl">State delta vs baseline</div>
+    <ul>
+      <li>Composer attach (C-20) gains <strong>ingestion-pending</strong> state (file dropped, waiting to start)</li>
+      <li>Banner (C-23/v.ingestion-progress) has states: <strong>idle</strong> &middot; <strong>reading</strong> &middot; <strong>%-progress</strong> &middot; <strong>complete</strong> &middot; <strong>failed</strong></li>
+      <li>Flow routes Cold-start &rarr; Magic-Layers-ingestion &rarr; Manual-mode-pre-populated (skips strategy panel)</li>
+    </ul>
+
+    <div class="lbl">Channel parity</div>
+    <table class="parity">
+      <thead><tr><th>Email</th><th>SMS</th><th>WhatsApp</th></tr></thead>
+      <tbody><tr><td class="full">Full</td><td class="na">N/A (no flat artifacts to ingest)</td><td class="partial">Partial (image attach only, no PDF/HTML)</td></tr></tbody>
+    </table>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- FEATURE 08 - AI STICKER / GIF / ANIMATION     -->
+  <!-- ============================================ -->
+  <div class="feature-card" id="f08">
+    <div class="feature-head">
+      <div class="feature-num">08</div>
+      <h3>AI Sticker / GIF / Animation Generator</h3>
+    </div>
+    <div class="feature-meta">Design step &middot; AI layer &middot; Primary surface: manual rail 5th tab "Stickers" &middot; Cross-channel: Full / N/A / Full</div>
+
+    <p><strong>What it does.</strong> Generate branded sticker packs (mascot, holiday, reaction sets) and one-click animations for hero blocks. Lives as a 5th tab in the manual mode left rail alongside Blocks / Sections / Styles / Image. Generated stickers persist in Brand Kit as a new asset type, addressable from any future campaign.</p>
+
+    <div class="lbl">Wireframe (ASCII) &middot; Stickers tab in manual rail</div>
+    <pre class="wireframe">┌─── Manual mode left rail [C-71] ───────────────────────────────┐
+│  📦 Blocks                                                      │
+│  ▦ Sections                                                     │
+│  🎨 Styles                                                      │
+│  ✨ Image                  ◀── feature 02                       │
+│  🎭 Stickers  [NEW]        ◀── C-71/v.stickers-tab              │
+└────────────────────────────────────────────────────────────────┘
+       ↓ clicking "Stickers" opens generator
+┌─── Stickers panel ──────────────────────────────────────────────┐
+│ Describe the sticker pack                          [C-19]      │
+│ ┌──────────────────────────────────────────────────────────┐    │
+│ │ A friendly mascot variant for our spring launch          │    │
+│ └──────────────────────────────────────────────────────────┘    │
+│                                                                  │
+│ Style preset                                                     │
+│   [↳ Branded mascot]  [↳ Holiday pack]  [↳ Reaction set]        │
+│   [↳ Hero animation]                                             │
+│                       [C-25/v.sticker-prompts]                   │
+│                                                                  │
+│ [✦ Generate sticker pack]                            [C-53 CTA] │
+│                                                                  │
+│ ───────────────────────────────                                  │
+│ Recent packs                                                     │
+│   [😊][😍][🎉][💡] Spring '26 mascot · 8 stickers      [Use]    │
+│   [❤️][🔥][⭐][✨] Reaction set v2 · 4 stickers         [Use]    │
+│                              [C-72 blocks grid]                  │
+└──────────────────────────────────────────────────────────────────┘</pre>
+
+    <div class="lbl">Component breakdown</div>
+    <table>
+      <thead><tr><th style="width:30%">Affordance</th><th style="width:18%">Maps to</th><th>Reuse / Variant</th></tr></thead>
+      <tbody>
+        <tr><td>"Stickers" tab in manual rail</td><td><code>C-71/v.stickers-tab</code></td><td><span class="chip warm">Variant</span> &middot; 5th tab using the same tab molecule</td></tr>
+        <tr><td>Prompt textarea</td><td><code>C-19</code></td><td><span class="chip green">Reuse</span> &middot; existing composer textarea, relabeled</td></tr>
+        <tr><td>Style preset chips</td><td><code>C-25/v.sticker-prompts</code></td><td><span class="chip warm">Variant</span> &middot; quick-prompt chip text variants (Branded mascot / Holiday pack / Reaction set / Hero animation)</td></tr>
+        <tr><td>Generate CTA</td><td><code>C-53</code></td><td><span class="chip green">Reuse</span> &middot; teal pill, label "✦ Generate sticker pack"</td></tr>
+        <tr><td>Sticker pack tile grid</td><td><code>C-72 blocks tile grid</code></td><td><span class="chip green">Reuse</span> &middot; same drag-drop tile primitive as Blocks panel</td></tr>
+        <tr><td>"Use" button on saved pack</td><td><code>C-66 Send a test email</code></td><td><span class="chip green">Reuse</span> &middot; secondary button style; inserts pack into canvas</td></tr>
+      </tbody>
+    </table>
+
+    <div class="lbl">State delta vs baseline</div>
+    <ul>
+      <li>Manual rail grows from 4 tabs (with feature 02) to 5 tabs (Blocks / Sections / Styles / Image / Stickers)</li>
+      <li>Brand Kit assets gain a new type: <strong>sticker-pack</strong> &middot; surfaces in Logos section? &mdash; no, surfaces in a new "Stickers &amp; assets" sub-section (also a <code>C-82/v.stickers-bk-tab</code> variant if it lands; out of Phase 1 scope, addressable from manual rail only for now)</li>
+      <li>Generated sticker becomes a regular C-72 block; can be dragged into Hero, Body, or Footer sections</li>
+    </ul>
+
+    <div class="lbl">Channel parity</div>
+    <table class="parity">
+      <thead><tr><th>Email</th><th>SMS</th><th>WhatsApp</th></tr></thead>
+      <tbody><tr><td class="full">Full (animated GIF blocks)</td><td class="na">N/A (no media in SMS)</td><td class="full">Full (sticker messages native to WhatsApp)</td></tr></tbody>
+    </table>
+  </div>
+
+  <p class="source"><strong>Section 5 source:</strong> Features 01, 02, 03, 04, 08 from <a href="https://deepakp1308.github.io/canva-campaign-analysis/">Canva-gap Phase 1 roadmap</a>. Wireframe W2 (Design editor with image-selected popover + chat preview-diff) rendered as HTML+CSS in <code>.fdpx-mcds-frame</code>. The only genuinely new C-ID in the entire spec is <code>C-97 Image manipulation popover</code> &mdash; rationale: it's a popover anchored to an in-canvas element, which has no baseline analog. Every other feature decomposes into existing primitives or registered variants.</p>
+</section>
+
+<!-- ================================================================ -->
+<!-- SECTION 6 - CROSS-CUTTING CONCERNS                                 -->
+<!-- ================================================================ -->
+<section class="page" id="cross-cutting">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Section 6 of 7 &middot; The system view</div>
+      <h1 style="font-size:24px">Cross-cutting concerns</h1>
+      <div class="subtitle">Four system-level views that span all 10 features: (1) the full 10&times;3 channel parity matrix, (2) flow deltas to the 5 baseline task flows, (3) a complete inventory of new states introduced, (4) the registered new C-ID + variant list, (5) token compliance attestation.</div>
+    </div>
+    <div class="meta">
+      <div>10 features &middot; 3 channels &middot; 5 flows</div>
+      <div>1 new C-ID &middot; 18 variants &middot; 12 new states</div>
+    </div>
+  </div>
+
+  <h2 style="margin-top:6px"><span class="num">6.1</span>Channel parity matrix &mdash; full 10&times;3</h2>
+  <p>Rule R4 from Section 2: each feature gets an honest cell per channel. <span class="chip green">Full</span> = ships unchanged · <span class="chip warm">Partial</span> = ships with explicit scope-down · <span class="chip gray">N/A</span> = physics constraint, not a roadmap item.</p>
+  <table class="parity" style="margin-top:8px">
+    <thead>
+      <tr>
+        <th style="width:30%">Feature</th>
+        <th style="width:8%">Layer</th>
+        <th style="width:18%">Email</th>
+        <th style="width:18%">SMS</th>
+        <th style="width:18%">WhatsApp</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>01</strong> AI Image Manipulation Suite</td><td>AI</td><td class="full">Full</td><td class="na">N/A &middot; no images in SMS RFC</td><td class="full">Full &middot; image messages</td></tr>
+      <tr><td><strong>02</strong> Dream Lab</td><td>AI</td><td class="full">Full</td><td class="na">N/A &middot; text-only channel</td><td class="full">Full</td></tr>
+      <tr><td><strong>03</strong> Conversational Design Editing</td><td>AI 2.0</td><td class="full">Full</td><td class="full">Full &middot; text-only edit intents</td><td class="full">Full</td></tr>
+      <tr><td><strong>04</strong> Magic Layers</td><td>AI 2.0</td><td class="full">Full</td><td class="na">N/A &middot; no flat artifacts to ingest</td><td class="partial">Partial &middot; image attach only, no PDF/HTML</td></tr>
+      <tr><td><strong>05</strong> Brand Voice 2.0 + Brand Intelligence</td><td>AI / AI 2.0</td><td class="full">Full</td><td class="full">Full &middot; tone applies to all copy</td><td class="full">Full</td></tr>
+      <tr><td><strong>06</strong> Mailchimp Memory</td><td>AI 2.0</td><td class="full">Full</td><td class="full">Full</td><td class="full">Full</td></tr>
+      <tr><td><strong>07</strong> Live-Context Connectors</td><td>AI 2.0</td><td class="full">Full</td><td class="full">Full</td><td class="full">Full</td></tr>
+      <tr><td><strong>08</strong> AI Sticker / GIF / Animation</td><td>AI</td><td class="full">Full &middot; animated GIFs</td><td class="na">N/A &middot; no media in SMS</td><td class="full">Full &middot; sticker messages native</td></tr>
+      <tr><td><strong>09</strong> Web Research Integration</td><td>AI 2.0</td><td class="full">Full</td><td class="full">Full</td><td class="full">Full</td></tr>
+      <tr><td><strong>10</strong> ChatGPT &amp; Claude MCP Bridge</td><td>AI 2.0</td><td class="full">Full</td><td class="full">Full &middot; workspace-level</td><td class="full">Full</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size: 12px; color: var(--muted); margin-top: 6px;"><strong>Coverage roll-up:</strong> 30 total cells &middot; 23 Full &middot; 1 Partial (feature 04 on WhatsApp) &middot; 6 N/A. SMS is the most-constrained channel because of its text-only physics; WhatsApp benefits from media support and lands as Full for 8 of 10 features.</p>
+
+  <h2 style="margin-top:18px"><span class="num">6.2</span>Flow deltas &mdash; which of the 5 baseline task flows change</h2>
+  <p>Source: Lens 2 baseline task flows from <a href="mailchimp-editor.html#designaudit">Design Audit Tab 18</a>.</p>
+  <table style="margin-top:6px">
+    <thead><tr><th style="width:18%">Baseline flow</th><th style="width:24%">Affected by features</th><th>New states / steps introduced</th></tr></thead>
+    <tbody>
+      <tr><td><strong>A &middot; Cold start</strong> <br><span style="font-size:11px; color: var(--muted);">First-time signup → first send</span></td><td>05 (Brand Voice broadcast) &middot; 06 (Memory recall) &middot; 09 (Web Research)</td><td>Memory-recall-on-first-visit (returning users) &middot; brand-broadcast-banner state &middot; web-research-pending state delays Create CTA</td></tr>
+      <tr><td><strong>B &middot; Power user</strong> <br><span style="font-size:11px; color: var(--muted);">Recent → resume → refine</span></td><td>04 (Magic Layers) &middot; 10 (MCP Bridge)</td><td>Magic-Layers-ingestion state on composer attach &middot; MCP-server-enabled state on workspace</td></tr>
+      <tr><td><strong>C &middot; Brand Kit loop-back</strong> <br><span style="font-size:11px; color: var(--muted);">Mid-flow brand setup</span></td><td>05 (Brand Voice 2.0) &middot; 07 (Connectors)</td><td>Brand-profile-versioned state &middot; connector-OAuth state &middot; connector-syncing state</td></tr>
+      <tr><td><strong>D &middot; Refinement</strong> <br><span style="font-size:11px; color: var(--muted);">Post-generation iteration</span></td><td>01 (Image) &middot; 02 (Dream Lab) &middot; 03 (Conv. Editing) &middot; 08 (Stickers)</td><td>Image-selected canvas state &middot; staged-change preview-diff state (between AI proposal &amp; Accept) &middot; sticker-pack state</td></tr>
+      <tr><td><strong>E &middot; Send</strong> <br><span style="font-size:11px; color: var(--muted);">Terminal action</span></td><td>(unchanged)</td><td>None &middot; Phase 1 does not touch the Send transition. Existing Send-button audience-confirm gap (pre-mortem #4 Critical) remains and should be addressed concurrently per Tab 18 recommendations.</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:18px"><span class="num">6.3</span>New states inventory</h2>
+  <p>12 new states introduced across Phase 1, grouped by surface.</p>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:25%">Surface</th><th>State name</th><th>Triggered by</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Canvas (C-61)</strong></td><td>image-selected</td><td>Click an image block in canvas → enables C-97 popover anchor (feature 01)</td></tr>
+      <tr><td><strong>Canvas (C-61)</strong></td><td>regenerating (per-element)</td><td>C-97 popover action confirmed → snowflake overlay during regen (feature 01)</td></tr>
+      <tr><td><strong>Chat thread (C-43)</strong></td><td>staged-change</td><td>AI proposes a refinement → preview-diff visible, canvas untouched until Accept (feature 03)</td></tr>
+      <tr><td><strong>Composer attach (C-20)</strong></td><td>ingestion-pending</td><td>Flat file dropped → C-23/v.ingestion-progress banner appears (feature 04)</td></tr>
+      <tr><td><strong>Brand Kit (C-89)</strong></td><td>profile-active</td><td>Profile picker radio changed → all future AI gens use this profile (feature 05)</td></tr>
+      <tr><td><strong>Email tab</strong></td><td>brand-broadcast-pending</td><td>Brand Kit changed since last visit → C-23/v.brand-update-broadcast banner shows (feature 05)</td></tr>
+      <tr><td><strong>Drafts</strong></td><td>brandVersion mismatch</td><td>Draft's brandVersion &lt; current Brand Kit version → counts toward "12 drafts" banner (feature 05)</td></tr>
+      <tr><td><strong>Sidebar (C-9)</strong></td><td>memory-drawer-open</td><td>Click "Things I remember" entry → C-82/v.memory-drawer modal opens (feature 06)</td></tr>
+      <tr><td><strong>Composer (C-16)</strong></td><td>memory-chips-visible</td><td>Active brand profile has matching memories → C-25/v.memory chips render below standard chips (feature 06)</td></tr>
+      <tr><td><strong>Settings popover (C-91)</strong></td><td>connector-syncing</td><td>Connector OAuth granted → snowflake spinner per row until sync complete (feature 07)</td></tr>
+      <tr><td><strong>Strategy panel (C-46)</strong></td><td>research-pending</td><td>Research depth = Quick/Deep → Create email CTA disabled, spinner inline (feature 09)</td></tr>
+      <tr><td><strong>Settings popover (C-91)</strong></td><td>mcp-server-enabled</td><td>MCP toggle on → bearer-token row visible, token in hidden state until eye toggled (feature 10)</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:18px"><span class="num">6.4</span>New C-ID + variant register</h2>
+  <p>Per policy R3 from Section 2: variants stay under the parent C-ID with <code>/v.label</code> suffix. The baseline inventory stays at 96; the spec adds <strong>1</strong> genuinely new C-ID (<code>C-97</code>) and <strong>18</strong> variants.</p>
+
+  <h3>New C-IDs (1)</h3>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:14%">ID</th><th style="width:24%">Name</th><th style="width:18%">Parent / closest analog</th><th>Rationale for new C-ID</th></tr></thead>
+    <tbody>
+      <tr style="background:#FFF5F2"><td class="cid"><strong>C-97</strong></td><td>Image manipulation popover</td><td><code>C-95 Theme popover</code></td><td>Same popover primitive (lv3 radius, elevation L2, white bg) but anchored to an in-canvas element via element-selection, not the floating Aa button. The interaction model is materially different (selection-driven, not chrome-driven), so it gets a new C-ID under R2.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top: 14px;">Component variants (18) &middot; all under parent C-IDs</h3>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:24%">Variant ID</th><th style="width:18%">Parent</th><th style="width:20%">Used by feature</th><th>Difference from parent</th></tr></thead>
+    <tbody>
+      <tr><td class="cid">C-23/v.live-context-banner</td><td>C-23 banner</td><td>07 Connectors</td><td>Extended to list connected sources + "Manage sources" link</td></tr>
+      <tr><td class="cid">C-23/v.ingestion-progress</td><td>C-23 banner</td><td>04 Magic Layers</td><td>Progress bar + per-section detection status</td></tr>
+      <tr><td class="cid">C-23/v.brand-update-broadcast</td><td>C-23 banner</td><td>05 Brand Voice 2.0</td><td>Count badge ("12 drafts") + primary CTA ("Update all 12")</td></tr>
+      <tr><td class="cid">C-25/v.memory</td><td>C-25 quick-prompt chip</td><td>06 Memory</td><td>🧠 glyph instead of ↳ &middot; warm yellow chip background instead of grey-blue</td></tr>
+      <tr><td class="cid">C-25/v.sticker-prompts</td><td>C-25</td><td>08 Stickers</td><td>Text variants: "Branded mascot" / "Holiday pack" / "Reaction set" / "Hero animation"</td></tr>
+      <tr><td class="cid">C-43/v.preview-diff</td><td>C-43 assistant message body</td><td>03 Conversational Editing</td><td>Embedded before&rarr;after thumbnail strip (uses C-28 thumbnail primitive)</td></tr>
+      <tr><td class="cid">C-46/v.research-depth</td><td>C-46 Goal select</td><td>09 Web Research</td><td>3-option select: None / Quick / Deep &middot; inline with other strategy fields</td></tr>
+      <tr><td class="cid">C-53/v.open-as-editable</td><td>C-53 Create email CTA</td><td>04 Magic Layers</td><td>Same teal pill, label "Open as editable email →"; routes to manual mode pre-populated</td></tr>
+      <tr><td class="cid">C-58/v.aspect</td><td>C-58 Viewport radio</td><td>02 Dream Lab</td><td>Labels 1:1 / 4:5 / 16:9 / 9:16 instead of desktop/mobile/split &middot; 4-option vs 3</td></tr>
+      <tr><td class="cid">C-70/v.refine-chips</td><td>C-70 follow-up toolbar</td><td>03 Conversational Editing</td><td>New chip text: "Swap hero" / "Make professional" / "Shorten copy" / "Add urgency"</td></tr>
+      <tr><td class="cid">C-71/v.image-tab</td><td>C-71 left rail tabs</td><td>02 Dream Lab</td><td>4th tab "Image" below Blocks/Sections/Styles</td></tr>
+      <tr><td class="cid">C-71/v.stickers-tab</td><td>C-71 left rail tabs</td><td>08 Stickers</td><td>5th tab "Stickers" alongside Image</td></tr>
+      <tr><td class="cid">C-82/v.memory-drawer</td><td>C-82 Brand Kit left tab nav</td><td>06 Memory</td><td>Same left-nav molecule with 6 memory categories instead of 7 brand sections</td></tr>
+      <tr><td class="cid">C-89/v.profile-picker</td><td>C-89 brand voice composite</td><td>05 Brand Voice 2.0</td><td>Profile-picker radio group inserted at top of composite (Default / Holiday / Launch / +)</td></tr>
+      <tr><td class="cid">C-90/v.mcp-token-row</td><td>C-90 social link row</td><td>10 MCP Bridge</td><td>Monospace token field + eye toggle + copy button instead of platform URL input</td></tr>
+      <tr><td class="cid">C-91/v.connector-section</td><td>C-91 settings popover</td><td>07 Connectors</td><td>New labeled section "Live-Context Connectors" inside settings popover</td></tr>
+      <tr><td class="cid">C-91/v.mcp-section</td><td>C-91 settings popover</td><td>10 MCP Bridge</td><td>New labeled section "Expose Mailchimp as MCP server" inside settings popover</td></tr>
+      <tr><td class="cid">C-92/v.connector-toggle</td><td>C-92 experience toggle</td><td>07 Connectors</td><td>Toggle row with vendor logo + last-sync timestamp metadata</td></tr>
+      <tr><td class="cid">C-11/v.memory-entry</td><td>C-11 conversation list item</td><td>06 Memory</td><td>Sidebar entry labeled "Things I remember" with count badge + NEW tag</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:18px"><span class="num">6.5</span>Token compliance attestation</h2>
+  <p>Every Phase 1 affordance was checked against the rules R1, R5, R6 from Section 2. No new colors, no new fonts, no new radii. Yellow stays as brand cue only. Teal stays as AI primary action.</p>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:32%">Affordance</th><th style="width:18%">Color used</th><th style="width:18%">Token</th><th>R1 / R5 / R6 compliant?</th></tr></thead>
+    <tbody>
+      <tr><td>All ✦ Generate / Create / Confirm CTAs (every feature)</td><td>Teal</td><td><code>--color-accent-blue #017E89</code></td><td>✓ Yes &middot; R6</td></tr>
+      <tr><td>C-23/v.brand-update-broadcast banner alert</td><td>Subtle teal background</td><td><code>--color-accent-blue-light #E0EDFF</code></td><td>✓ Yes &middot; reuses existing banner token (R1)</td></tr>
+      <tr><td>C-90/v.mcp-token-row monospace field</td><td>Neutral bg + system mono font</td><td><code>--color-bg-secondary</code> + <code>ui-monospace</code></td><td>✓ Yes &middot; system font already in stack; no new font</td></tr>
+      <tr><td>C-25/v.memory chip (warm yellow background)</td><td>Soft warm bg #FFFBE6</td><td>Chip primitive bg variant (within mcds neutral surface palette)</td><td>✓ Yes &middot; not the #FFE01B brand stripe; subtle differentiator</td></tr>
+      <tr><td>Connector vendor logos (Slack, Drive, Notion, etc.)</td><td>Vendor SVG, no recolor</td><td>n/a &middot; vendor assets</td><td>✓ Yes &middot; vendor logos exempt from token rule per industry convention</td></tr>
+      <tr><td>C-97 popover elevation</td><td>Shadow L2</td><td><code>0 2px 8px 0 rgba(76,85,91,.2)</code></td><td>✓ Yes &middot; matches C-95 theme popover</td></tr>
+      <tr style="background:#F4FBF7"><td><strong>Yellow #FFE01B usage</strong></td><td>Home top-stripe ONLY (existing C-02)</td><td><code>--color-action-special-use</code></td><td>✓ Yes &middot; <strong>explicitly never used</strong> for any Phase 1 affordance per R5</td></tr>
+      <tr><td>Destructive actions (none in Phase 1)</td><td>n/a</td><td><code>--color-ui-negative</code> reserved</td><td>✓ Yes &middot; no destructive actions introduced</td></tr>
+    </tbody>
+  </table>
+
+  <p class="source"><strong>Section 6 source:</strong> Channel parity rules from R4 (Section 2). Flow definitions from <a href="mailchimp-editor.html#designaudit">Lens 2 baseline task flows</a>. Variant register reflects R3 policy. Token attestation reflects R1 + R5 + R6. The 12 new states inventory is the authoritative list for engineering scope &mdash; each maps to a specific surface and trigger.</p>
+</section>
+
+<!-- ================================================================ -->
+<!-- SECTION 7 - EXECUTION + CROSS-REFERENCES                           -->
+<!-- ================================================================ -->
+<section class="page" id="execution">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Section 7 of 7 &middot; Ship checklist</div>
+      <h1 style="font-size:24px">Execution sequence + cross-references</h1>
+      <div class="subtitle">The build sequence to ship Freddie Deepak's Phase 1, the validation gates that block GA, and back-references to the 18-tab brief + 5 design lenses + Canva-gap analysis.</div>
+    </div>
+    <div class="meta">
+      <div>11-step build sequence</div>
+      <div>Cross-refs: 4 tabs &middot; 5 lenses &middot; 1 site</div>
+    </div>
+  </div>
+
+  <h2 style="margin-top:6px"><span class="num">7.1</span>Build sequence (engineering work order)</h2>
+  <p>Recommended order honors three orchestration moves: (a) ship the lowest-risk Plan-step extensions first to surface the AI's <em>context</em>, (b) ship the chat-side scope expansion before the in-canvas popover, (c) ship the operator-config features (MCP, connectors) before they become end-user-visible.</p>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:6%">#</th><th style="width:30%">Step</th><th style="width:14%">Features</th><th>Why this order</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1</strong></td><td>Connector OAuth + sync infrastructure</td><td>07</td><td>Foundation for live-context retrieval; nothing else depends on it but feature 07's UX requires it backed</td></tr>
+      <tr><td><strong>2</strong></td><td>Persistent memory store + recall API</td><td>06</td><td>Same: shared infra used by features 06 and partially 09</td></tr>
+      <tr><td><strong>3</strong></td><td>Web research backend (search + citation extraction)</td><td>09</td><td>Strategy-panel-side change; reuses C-46 select primitive</td></tr>
+      <tr><td><strong>4</strong></td><td>Brand Voice 2.0 + Brand Intelligence URL extractor</td><td>05</td><td>Brand Kit extension; ships independent of generation surface</td></tr>
+      <tr><td><strong>5</strong></td><td>MCP server endpoint + bearer-token issuance</td><td>10</td><td>Operator surface only; no end-user impact until external clients connect</td></tr>
+      <tr><td><strong>6</strong></td><td>Settings popover restructure (3 sections: Experiences / Connectors / MCP)</td><td>07, 10</td><td>Single shipped layout change consolidates 2 features into the popover</td></tr>
+      <tr><td><strong>7</strong></td><td>Composer + sidebar surface changes (memory chip, live-context banner, memory drawer)</td><td>06, 07</td><td>End-user-visible Plan-step rollout begins; activates with feature-flag</td></tr>
+      <tr><td><strong>8</strong></td><td>Conversational Design Editing intent expansion + preview-diff in chat</td><td>03</td><td>Chat-side scope expansion; uses existing C-54 + new C-43/v.preview-diff variant</td></tr>
+      <tr><td><strong>9</strong></td><td>Dream Lab + Stickers tabs in manual mode rail</td><td>02, 08</td><td>Both are new tabs in C-71; ship together for symmetry</td></tr>
+      <tr><td><strong>10</strong></td><td>Magic Layers ingestion pipeline + composer integration</td><td>04</td><td>Composer + manual mode integration; cleanest decomposition into existing primitives</td></tr>
+      <tr><td><strong>11</strong></td><td>AI Image Manipulation Suite + C-97 popover (the only new C-ID)</td><td>01</td><td><strong>Highest-risk: ships last</strong>. Requires canvas selection-state work + new popover primitive. Most engineering-heavy.</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:18px"><span class="num">7.2</span>Validation gates (block GA)</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:28%">Gate</th><th>Check</th></tr></thead>
+    <tbody>
+      <tr><td><strong>G1 &middot; C-XX inventory check</strong></td><td>Every reference in the live UI traces back to a baseline C-XX ID or a registered <code>/v.label</code> variant from Section 6.4. The inventory ceiling stays at 97 (96 baseline + C-97).</td></tr>
+      <tr><td><strong>G2 &middot; Token compliance check</strong></td><td>No new hex values introduced; yellow #FFE01B unused outside the existing Home top-stripe; teal #017E89 is the only AI primary action color.</td></tr>
+      <tr><td><strong>G3 &middot; Channel parity honest</strong></td><td>Each feature ships with the exact parity declared in Section 6.1. SMS does <em>not</em> get image-related features pretending to work.</td></tr>
+      <tr><td><strong>G4 &middot; Flow A (cold start) end-to-end</strong></td><td>New free user signs up &rarr; URL imports brand &rarr; Brand Voice 2.0 auto-detects &rarr; Memory empty (first visit) &rarr; AI generates with research-depth Quick &rarr; reaches Editor with all states correct. Time-to-first-send target: ≤ 2 days (CB1 from Revised Goals).</td></tr>
+      <tr><td><strong>G5 &middot; Flow B (power user) end-to-end</strong></td><td>Returning power user opens prior conversation &rarr; sees memory chips in composer &rarr; refines via Conversational Design Editing &rarr; uses Image Manipulation popover &rarr; Send. All staged-change states roll back cleanly on regenerate.</td></tr>
+      <tr><td><strong>G6 &middot; Settings popover height fits viewport</strong></td><td>3-section settings popover (Experiences / Connectors / MCP) must fit a 720px-height viewport without scroll. If overflow, collapse to accordion.</td></tr>
+      <tr><td><strong>G7 &middot; Manual rail 5 tabs scroll behavior</strong></td><td>C-71 left rail with 5 tabs (Blocks / Sections / Styles / Image / Stickers) renders cleanly at 60-80px width. No tab labels truncated.</td></tr>
+      <tr><td><strong>G8 &middot; Connector OAuth doesn't break flows</strong></td><td>OAuth redirect for Slack/Drive/Notion/Zoom/Calendar must return user to composer with state preserved &mdash; no draft loss.</td></tr>
+      <tr><td><strong>G9 &middot; Hallucination guardrails (pre-mortem #3 unaddressed by this spec)</strong></td><td><strong>External dependency.</strong> Phase 1 does not solve the AI-hallucination liability identified in Tab 18 Lens 4 Risk #3 (footer address, promo codes, products). Ship Phase 1 only if pre-send verification is concurrently in roadmap.</td></tr>
+      <tr><td><strong>G10 &middot; Send-flow audience confirm (pre-mortem #4 unaddressed by this spec)</strong></td><td><strong>External dependency.</strong> Phase 1 does not solve the missing audience-confirm modal at Send. Ship Phase 1 only if Send confirm is concurrently in roadmap.</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:18px"><span class="num">7.3</span>What this spec deliberately does <em>not</em> ship</h2>
+  <ul>
+    <li><strong>Phase 2 features</strong> &mdash; Agentic Campaign Orchestrator &middot; Real-Time Campaign Performance Loop &middot; Send-Time AI Personalization &middot; Cross-Channel Asset Studio &middot; Compliance-Aware Localization &middot; AMP for Email &middot; Mailchimp Shield governance suite &middot; Cross-Domain Conversational Agent. Per the Canva analysis, Phase 2 = "where Mailchimp wins permanently."</li>
+    <li><strong>Universal Content propagation primitive</strong> (Pillar 2.1 in the FY27 strategy memo) &mdash; not in the Phase 1 roadmap, but the highest-leverage strategic ship. Brand Voice 2.0 (feature 05) is adjacent; full Universal Content is its own initiative.</li>
+    <li><strong>Real-time multi-author co-edit</strong> (UR Bet 4) &mdash; Pillar 5.3, separate initiative.</li>
+    <li><strong>NEB Code Mode + Liquid templating</strong> (Pillar 2.2.3) &mdash; the HTML escape hatch for Premium / agency power users. Phase 1 does not address; Tab 18 pre-mortem #2 (manual mode hidden behind post-generation radio) remains open and is a launch-blocking concern for the Premium cohort.</li>
+    <li><strong>SMS TCPA guardrails</strong> (I-5.2.3) &mdash; Phase 1 does not surface SMS-compliance affordances. SMS AI is enabled in Prototype settings but the underlying ComplianceChecker tool (Build Plan Tools 11+12) must ship concurrently.</li>
+    <li><strong>Pre-send AI-content verification</strong> &mdash; the hallucination liability identified in Tab 18 Lens 4 Risk #3. Not in Phase 1 scope; this spec assumes it ships in parallel.</li>
+  </ul>
+
+  <h2 style="margin-top:18px"><span class="num">7.4</span>Cross-references &middot; the source-of-truth back-links</h2>
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:30%">Artifact</th><th style="width:18%">Location</th><th>Used in this spec for</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Tab 18 &middot; Design Audit</strong> (the Builder Lens Stack)</td><td><a href="mailchimp-editor.html#designaudit">mailchimp-editor.html#designaudit</a></td><td>96-component inventory (C-01 to C-96) &middot; 5-lens framework &middot; pre-mortem references</td></tr>
+      <tr><td><strong>Tab 17 &middot; Freddie Strategy Assessment</strong></td><td><a href="mailchimp-editor.html#freddie">mailchimp-editor.html#freddie</a></td><td>HVC / UR / Revised Goals scoring against the prototype</td></tr>
+      <tr><td><strong>Tab 11 &middot; Revised Goals</strong></td><td><a href="mailchimp-editor.html#revised">mailchimp-editor.html#revised</a></td><td>$21M ARR target &middot; CB1&ndash;5 customer benefit metrics</td></tr>
+      <tr><td><strong>Tab 15 &middot; Strategy Memo</strong></td><td><a href="mailchimp-editor.html#memo">mailchimp-editor.html#memo</a></td><td>5 FY27 Pillars &middot; 6-quarter roadmap &middot; Builder Hierarchy of Needs</td></tr>
+      <tr><td><strong>Lens 1 &middot; Structural IA</strong></td><td><code>freddie-design-assessment/lenses/01-structural-ia.md</code></td><td>Sitemap / route hierarchy / 2-shell decision &middot; reused for IA continuity</td></tr>
+      <tr><td><strong>Lens 2 &middot; Interaction Model</strong></td><td><code>freddie-design-assessment/lenses/02-interaction-model.md</code></td><td>5 baseline task flows A&ndash;E &middot; state contract for chat ↔ editor mutex</td></tr>
+      <tr><td><strong>Lens 3 &middot; Component &times; JTBD Matrix</strong></td><td><code>freddie-design-assessment/lenses/03-component-jtbd-matrix.md</code></td><td>Canonical 96-component spine &middot; cited by C-XX throughout this spec</td></tr>
+      <tr><td><strong>Lens 4 &middot; Heuristic + a11y Scorecard</strong></td><td><code>freddie-design-assessment/lenses/04-heuristic-accessibility.md</code></td><td>The 9 critical (S4) findings &middot; pre-mortem #3 + #4 cited as external dependencies (G9, G10)</td></tr>
+      <tr><td><strong>Lens 5 &middot; Strategy-Fit Overlay</strong></td><td><code>freddie-design-assessment/lenses/05-strategy-fit.md</code></td><td>Builder Hierarchy heatmap &middot; FY27 Pillar coverage scorecard &middot; top-10 RICE</td></tr>
+      <tr><td><strong>Decomp doc 03 &middot; Design tokens</strong></td><td><code>ai-email-generator-decomp/docs/03-design-tokens.md</code></td><td>Verbatim mcds token table in Section 2.2</td></tr>
+      <tr><td><strong>Decomp doc 04 &middot; Components</strong></td><td><code>ai-email-generator-decomp/docs/04-components.md</code></td><td>Component-family vocabulary &middot; primitive-class names</td></tr>
+      <tr><td><strong>Canva-gap analysis</strong> (the source for Phase 1 features)</td><td><a href="https://deepakp1308.github.io/canva-campaign-analysis/">deepakp1308.github.io/canva-campaign-analysis/</a></td><td>The 10 named Phase 1 features &middot; 7-step JTBD workflow &middot; 5 value dimensions &middot; Harvey-ball ratings</td></tr>
+    </tbody>
+  </table>
+
+  <h2 style="margin-top:18px"><span class="num">7.5</span>What success looks like for this spec</h2>
+  <div class="pull">
+    A designer or engineer reads this spec and ships any of the 10 Phase 1 features without inventing a single new component, hex value, or interaction pattern outside the registered baseline + the 19 declared variants + C-97. The Canva round-trip stops because the marketer can edit images, generate stickers, reconstruct flat artifacts, refine via chat, and pull live brand context &mdash; all without leaving Freddie. The work is recognizably Freddie at every pixel.
+    <cite>If a contributor finds themselves needing a hex value outside the mcds palette, a font outside Graphik + Means, or a shape that doesn't reduce to popover / chip / modal / panel / button / select / toggle / banner / card &mdash; stop. Either compose from existing primitives, or open a new C-ID conversation with rationale. R2 + R3 are load-bearing.</cite>
+  </div>
+
+  <p class="source"><strong>Spec complete.</strong> v1.0 &middot; May 2026 &middot; Authored using the planning workflow in <code>~/.claude/plans/hey-so-you-have-greedy-acorn.md</code> &middot; All wireframes, component decompositions, and validation gates traced to either the Freddie baseline (<code>ai-email-generator-decomp/</code>), the Builder Lens Stack (<code>freddie-design-assessment/lenses/</code>), or the Canva-gap roadmap (<a href="https://deepakp1308.github.io/canva-campaign-analysis/">canva-campaign-analysis</a>). Iteration history will live in this repo's git log; raise design questions or component-ID disputes via PR comment on <code>klaviyo-flows-competitive-analysis</code>.</p>
+</section>
+
+</div><!-- /page-wrap -->
+
+<footer>
+  <p>Freddie Deepak's Phase 1 &middot; v1.0 &middot; May 2026 &middot; <a href="mailchimp-editor.html">Back to the 18-tab editor brief</a> &middot; <a href="https://deepakp1308.github.io/canva-campaign-analysis/">Canva-gap analysis source</a></p>
+</footer>
+
+</body>
+</html>
