@@ -812,6 +812,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="freddie">Freddie Assessment</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="freddiep2">Freddie Phase 2 specs</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="planpage">Plan on a Page</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="concerns">Freddie Concerns</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="designaudit">Agent Mode Design Audit</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="proto-audit">Prototype: Audit Gaps</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="proto-canva">Prototype: Canva AI 2.0</button>
@@ -12570,6 +12571,322 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 </div><!-- /panel-planpage -->
 
 
+<div class="tabpanel" id="panel-concerns" role="tabpanel">
+<style>
+  #panel-concerns {
+    background: #fff;
+    padding: 0;
+    margin: 0;
+  }
+  #panel-concerns .cx-body {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 28px 32px 36px;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-size: 11.5px;
+    line-height: 1.35;
+    color: #111827;
+  }
+  #panel-concerns .cx-body h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 800;
+    color: #111827;
+    margin: 0 0 2px;
+    letter-spacing: .01em;
+  }
+  #panel-concerns .cx-body .cx-subtitle {
+    font-size: 11px;
+    color: #6B7280;
+    margin: 0 0 16px;
+  }
+  #panel-concerns .cx-body hr {
+    border: none;
+    border-top: 1px solid #E5E7EB;
+    margin: 18px 0 16px;
+  }
+  #panel-concerns .cx-body h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 12.5px;
+    font-weight: 800;
+    color: #111827;
+    margin: 16px 0 6px;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+  }
+  #panel-concerns .cx-body h2:first-of-type { margin-top: 0; }
+  #panel-concerns .cx-body h3 {
+    font-family: 'Inter', sans-serif;
+    font-size: 11.5px;
+    font-weight: 700;
+    color: #111827;
+    margin: 10px 0 3px;
+  }
+  #panel-concerns .cx-body p {
+    margin: 0 0 6px;
+    line-height: 1.35;
+  }
+  #panel-concerns .cx-body ul,
+  #panel-concerns .cx-body ol {
+    margin: 0 0 6px;
+    padding-left: 16px;
+  }
+  #panel-concerns .cx-body li {
+    margin-bottom: 2px;
+    line-height: 1.35;
+    font-size: 11px;
+  }
+  #panel-concerns .cx-body table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10.5px;
+    margin: 4px 0 10px;
+  }
+  #panel-concerns .cx-body th {
+    background: #F9FAFB;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: #6B7280;
+    text-align: left;
+    padding: 4px 8px;
+    border: 1px solid #E5E7EB;
+  }
+  #panel-concerns .cx-body td {
+    padding: 4px 8px;
+    border: 1px solid #E5E7EB;
+    vertical-align: top;
+    line-height: 1.35;
+  }
+  #panel-concerns .cx-body td strong { color: #111827; }
+  #panel-concerns .cx-body .cx-concern-num {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    color: #9A1F00;
+    background: #FFE7E0;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-right: 6px;
+    letter-spacing: .06em;
+    vertical-align: middle;
+  }
+  #panel-concerns .cx-body .cx-rec-num {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    color: #036A4F;
+    background: #E6F5EE;
+    padding: 2px 7px;
+    border-radius: 4px;
+    margin-right: 6px;
+    letter-spacing: .06em;
+    vertical-align: middle;
+  }
+  #panel-concerns .cx-body a { color: #1D4ED8; text-decoration: none; }
+  #panel-concerns .cx-body a:hover { text-decoration: underline; }
+  @media print {
+    #panel-concerns .cx-body { padding: 12px 16px; font-size: 10px; }
+    #panel-concerns .cx-body h1 { font-size: 13px; }
+    #panel-concerns .cx-body h2 { font-size: 11px; margin: 10px 0 4px; }
+    #panel-concerns .cx-body table { font-size: 9px; }
+    #panel-concerns .cx-body th, #panel-concerns .cx-body td { padding: 3px 5px; }
+    #panel-concerns .cx-body li { font-size: 9.5px; }
+  }
+</style>
+
+<div class="cx-body">
+
+<h1>Freddie / AI Email Generator: Three Structural Concerns</h1>
+<p class="cx-subtitle">Evidence-grounded assessment &middot; Executive read &middot; May 2026</p>
+
+<hr/>
+
+<h2><span class="cx-concern-num">C1</span> Freddie does not solve the problems customers have been raising for years</h2>
+
+<p>Customers have cited bugs, barriers, and unmet needs across the builder for years &mdash; NEB rendering breaks, Brand Kit data corruption, font upload failures, Content Studio instability, template portability gaps, SMS TCPA exposure. These are not edge cases; they are the <strong>top-cited reasons</strong> customers escalate, churn, or refuse to migrate. The Freddie prototype adds a beautiful AI front door, but the house behind it still has the same broken plumbing.</p>
+
+<h3>Proof points</h3>
+<ul>
+  <li><strong>~$95K/mo in cited HVC MRR exposure</strong> across 17 themes (NEB, Brand Kit, Canva sync, Content Studio, SMS) &mdash; <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a></li>
+  <li><strong>$57K/mo single SMS TCPA incident</strong> &mdash; largest individual cited HVC exposure</li>
+  <li>HVC #3 ($1,820/mo) &mdash; email renders differently in editor vs inbox</li>
+  <li>HVC #8, #10 &mdash; Brand Kit data wrong; font upload broken ($3,350/mo combined)</li>
+  <li>HVC #6 ($1,950/mo) &mdash; templates don&rsquo;t appear in campaign creation</li>
+  <li>HVC #13 ($2,500/mo) &mdash; Canva graphics vanish in sent email</li>
+  <li><strong>&gt;90% negative sentiment</strong> on NEB reliability, rendering, portability &mdash; <a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">Voice of Customer</a></li>
+  <li>Bulk email Established users <strong>&minus;9.4% YoY</strong>; Explore <strong>&minus;19.2% YoY</strong> &mdash; <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a></li>
+  <li>Write with AI: Explore collapsed <strong>&minus;73.7% YoY</strong>; churn <strong>+15.4pp</strong> &mdash; <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a></li>
+</ul>
+
+<h3>Freddie&rsquo;s gap</h3>
+<p>The Freddie prototype scores <strong>0/17 HVC themes directly solved. 5 partial. 12 not addressed. 4 may worsen</strong> (HVC #6 reverse &mdash; legacy templates don&rsquo;t surface in recents; HVC #12 &mdash; Premium pressure amplified; HVC #8/#10 &mdash; Brand Kit bugs amplified by AI generation volume; HVC #16 &mdash; SMS TCPA unchanged). See <a href="#freddie" onclick="document.querySelector('[data-tab=freddie]').click();return false;">Freddie Assessment</a>.</p>
+
+<h3>Customer impact</h3>
+<p>Customers who adopt Freddie will hit the same rendering, Brand Kit, and portability bugs &mdash; now amplified because AI generates <strong>more content</strong> that flows through the same broken pipeline. Every AI-generated email still renders through NEB, still pulls from the same Brand Kit data, still lands in the same inbox rendering lottery.</p>
+
+<h3>Business impact</h3>
+<p><strong>$6&ndash;18M downside band</strong> from unmitigated critical risks (per <a href="#freddie" onclick="document.querySelector('[data-tab=freddie]').click();return false;">Freddie Assessment</a> pre-mortem) &mdash; comparable to the $10&ndash;15M upside the prototype unlocks. Net could be flat-to-negative if foundation work is deferred.</p>
+
+<hr/>
+
+<h2><span class="cx-concern-num">C2</span> Freddie does not close competitive gaps &mdash; it&rsquo;s a facelift, not a capability shift</h2>
+
+<p>Freddie redesigns the creation surface (chat-first AI composer, strategy brief, split editor) but does not add structural capabilities that close gaps vs Canva AI 2.0 or Klaviyo. The prototype is structurally a chat wrapper around the existing generation pipeline &mdash; same Brand Kit inputs, same NEB rendering output, same single-channel email.</p>
+
+<h3>Competitive proof points</h3>
+<table>
+  <thead><tr><th style="width:22%;">Capability</th><th style="width:39%;">Canva AI 2.0 / Klaviyo ships</th><th style="width:39%;">Freddie status</th></tr></thead>
+  <tbody>
+    <tr><td>Conversational campaign start</td><td>Canva AI 2.0 &amp; Klaviyo Marketing Agent</td><td>Chat UI exists, but wraps existing gen pipeline</td></tr>
+    <tr><td>Dream Lab / AI image generation</td><td>Canva ships Dream Lab</td><td>Not in prototype</td></tr>
+    <tr><td>Magic Layers / AI design manipulation</td><td>Canva ships Magic Layers</td><td>Not in prototype</td></tr>
+    <tr><td>Brand Intelligence (update-all-templates)</td><td>Canva ships brand-wide updates</td><td>Not in prototype</td></tr>
+    <tr><td>Live connectors (10+ enterprise apps)</td><td>Canva ships live data connectors</td><td>Not in prototype</td></tr>
+    <tr><td>Web research / agentic orchestration</td><td>Canva ships web research agent</td><td>Not in prototype</td></tr>
+    <tr><td>Universal Content (reusable blocks)</td><td>Klaviyo Spring 2026 default</td><td>Not in prototype</td></tr>
+    <tr><td>Marketing Agent (autonomous flow setup)</td><td>Klaviyo GA Spring 2025</td><td>Not in prototype</td></tr>
+    <tr><td>Smart Send Time per-profile</td><td>Klaviyo ships</td><td>Not in prototype</td></tr>
+    <tr><td>Channel Affinity / Personalized A/B</td><td>Klaviyo ships</td><td>Not in prototype</td></tr>
+    <tr><td>Image Remix</td><td>Klaviyo ships</td><td>Not in prototype</td></tr>
+    <tr><td>Multi-author collaboration</td><td>Stensul, Knak ship; Klaviyo partial</td><td>Comments button placeholder only</td></tr>
+    <tr><td>NEB Code Mode / HTML escape hatch</td><td>Stensul, Knak, Klaviyo have code mode</td><td>Not in prototype (Pillar 2.2.3)</td></tr>
+  </tbody>
+</table>
+
+<h3>Prototype surface concerns</h3>
+<ul>
+  <li><strong>6 of 8 channel tabs are stubs</strong> (SMS, WhatsApp, Automation, Form, Survey, Social, Campaign) &mdash; &ldquo;unified&rdquo; is a tab bar, not a canvas</li>
+  <li><strong>No Universal Content primitive</strong> &mdash; the most-requested feature and Klaviyo&rsquo;s Spring 2026 default</li>
+  <li><strong>No multi-author collaboration</strong> &mdash; Comments button is a placeholder</li>
+</ul>
+
+<h3>Usability concerns (from <a href="#designaudit" onclick="document.querySelector('[data-tab=designaudit]').click();return false;">Design Audit</a> Lens 4 heuristic audit)</h3>
+<ul>
+  <li><strong>45 heuristic findings, 9 critical (S4)</strong>, concentrated in Flow E (Send)</li>
+  <li>Manual mode hidden behind post-generation radio &mdash; power users forced through AI</li>
+  <li>Theme presets silently override Brand Kit</li>
+  <li>No audience confirmation at send &mdash; path to accidental mass-send</li>
+  <li>No AI-content verification &mdash; hallucinated footer addresses, promo codes, products</li>
+  <li>No version history in chat thread</li>
+  <li><strong>&ldquo;Move my cheese&rdquo; risks:</strong> 14 identified, 5 critical</li>
+</ul>
+
+<h3>What UR and ecommerce experts wanted that&rsquo;s missing</h3>
+<ul>
+  <li><strong>UR Bet #1: Universal Content</strong> &mdash; not in prototype</li>
+  <li><strong>UR Bet #2: Feature discovery</strong> &mdash; partially addressed (chips help)</li>
+  <li><strong>UR Bet #3: Vertical/ICP fit</strong> &mdash; DTC-only templates and copy</li>
+  <li><strong>UR Bet #4: Multi-author</strong> &mdash; misrepresented (Comments button placeholder)</li>
+  <li><strong>UR Bet #5: SMS depth</strong> &mdash; stubs only</li>
+</ul>
+
+<h3>Business impact</h3>
+<p>Without structural capability additions, Freddie is a design refresh on a shrinking base. Bulk Established <strong>&minus;9.4% YoY</strong> continues. The competitive gap with Canva and Klaviyo <strong>widens, not closes</strong>. See <a href="#freddie" onclick="document.querySelector('[data-tab=freddie]').click();return false;">Freddie Assessment</a> and <a href="#klviedi" onclick="document.querySelector('[data-tab=klviedi]').click();return false;">Klaviyo Brief</a>.</p>
+
+<hr/>
+
+<h2><span class="cx-concern-num">C3</span> Legacy builder migration is stalled, and Freddie inherits the same barriers</h2>
+
+<p>We&rsquo;re building a third version of the builder (Freddie), but the migration from legacy (Classic/NEA) to current (NEB/NUNI) is incomplete. Customers who haven&rsquo;t moved won&rsquo;t try Freddie either &mdash; same gaps, same barriers, now with added &ldquo;move my cheese&rdquo; risk.</p>
+
+<h3>Migration proof points (from <a href="#migration" onclick="document.querySelector('[data-tab=migration]').click();return false;">NEA&rarr;NUNI Migration</a> and <a href="#nuniaudit" onclick="document.querySelector('[data-tab=nuniaudit]').click();return false;">Nuni YoY Audit</a>)</h3>
+<ul>
+  <li><strong>41.9% of paid users</strong> (384,261 of 917,145) are still on NEA &mdash; representing <strong>$566M ARR</strong></li>
+  <li><strong>$281M ARR</strong> concentrated in 38,145 HVC accounts on NEA &mdash; 52.2% of HVC are NEA stayers</li>
+  <li><strong>225,784 users tried NUNI and reverted back</strong> to NEA &mdash; more reverters than completed migrators (218,723)</li>
+  <li><strong>94.7% negative</strong> paid badge sentiment on NUNI &mdash; CES dropped 0.10 points (3.90 vs 4.00)</li>
+  <li>HVC migration funnel <strong>collapsed 91%</strong> &mdash; from 10,930/mo (May 2024) to 898/mo (April 2026)</li>
+  <li>Editor-cited churn: <strong>$1.32M ARR</strong> floor (adj. <strong>$3.96M</strong>); velocity <strong>doubled</strong> post-default-flip (48 &rarr; 94/mo)</li>
+  <li>Legacy Monthly plan: <strong>91,746 users, 69.1% NEA share, $242M ARR</strong> &mdash; largest single NEA pocket</li>
+  <li>Top barriers: no code mode, no custom HTML, template incompatibility, rendering regressions, Brand Kit bugs</li>
+</ul>
+
+<h3>NEA&rarr;NUNI migration has a 3-phase parity-gated playbook that&rsquo;s not complete</h3>
+<ul>
+  <li><strong>Phase 1</strong> (months 0&ndash;3): default-flip low-risk &mdash; $60M ARR mitigated</li>
+  <li><strong>Phase 2</strong> (months 3&ndash;9): concierge nudge medium-risk &mdash; cumulative $182M</li>
+  <li><strong>Phase 3</strong> (months 9&ndash;18): hybrid + concierge for HVC &mdash; $281M protected</li>
+  <li>Classic sunset <strong>cannot happen</strong> until NEB Code Mode ships (protects ~$1&ndash;2M Premium/agency churn)</li>
+</ul>
+
+<h3>Why these customers won&rsquo;t try Freddie</h3>
+<ul>
+  <li>No HTML/CSS escape hatch (Critical finding B5 in <a href="#designaudit" onclick="document.querySelector('[data-tab=designaudit]').click();return false;">Design Audit</a>)</li>
+  <li>No template portability from Classic &rarr; Freddie</li>
+  <li>Brand Kit bugs amplified &mdash; every AI output uses Brand Kit data</li>
+  <li>Manual mode hidden &mdash; power users lose their primary workflow</li>
+  <li>No rendering parity guarantee</li>
+  <li>Freddie makes migration <strong>harder</strong>: legacy templates may not surface in recents (HVC #6 reverse); AI defaults make Premium feel more forced (HVC #12)</li>
+</ul>
+
+<h3>Business impact</h3>
+<p>The <strong>$566M paid NEA ARR base</strong> (of which <strong>$281M is HVC</strong>) represents the highest-ARPU, longest-tenured cohort. These customers are at risk of churn to Klaviyo, Stensul, or Knak if pushed toward a surface that removes their existing capabilities. Historical revert rate of 8&ndash;10% applied to $281M HVC ARR implies <strong>$23&ndash;28M ARR at risk</strong> from forced migration without parity. See <a href="#migration" onclick="document.querySelector('[data-tab=migration]').click();return false;">NEA&rarr;NUNI Migration</a>.</p>
+
+<hr/>
+
+<h2>RECOMMENDED PATH FORWARD</h2>
+
+<p><span class="cx-rec-num">1</span> <strong>Job #1: Fix the foundation before shipping Freddie as default</strong></p>
+<ul>
+  <li>Ship NEB rendering parity &mdash; close HVC #3 (editor vs inbox mismatch, $1,820/mo)</li>
+  <li>Ship Brand Kit data correctness and font upload fix &mdash; close HVC #8, #10 ($3,350/mo)</li>
+  <li>Ship Content Studio stability and Canva sync &mdash; close HVC #13 ($2,500/mo)</li>
+  <li>Ship SMS TCPA guardrails and pre-send verification (hallucination guardrails) &mdash; close HVC #16 ($57K/mo)</li>
+  <li>Ship audience confirmation modal at send &mdash; prevent accidental mass-send (S4 finding)</li>
+  <li>Publish Builder SLOs as an operating contract (99.9% uptime, P95 &lt;500ms, render fidelity &ge;99%)</li>
+  <li><strong>These are not P2 follow-ups &mdash; they are launch-blocking for Freddie</strong></li>
+</ul>
+
+<p><span class="cx-rec-num">2</span> <strong>Don&rsquo;t break what works &mdash; preserve customer mental models</strong></p>
+<ul>
+  <li>Surface manual mode as primary entry point (not hidden behind AI post-generation radio)</li>
+  <li>Template origin filter (Classic / NEB / All) to prevent HVC #6 reverse ($1,950/mo)</li>
+  <li>Theme presets must apply-and-confirm, not silently override Brand Kit</li>
+  <li>Brand-context banner reframed from upgrade pressure to value framing for Free &mdash; mitigate HVC #12</li>
+  <li>Version history in chat thread for power-user confidence</li>
+  <li>Undo/redo in conversational editing &mdash; fix &ldquo;one-way AI change&rdquo; problem</li>
+  <li>Preserve &ldquo;Edit in Classic&rdquo; escape hatch for at least 12 months post-Freddie launch</li>
+  <li>Add AI-content verification step: flagged merge tags, hallucinated addresses, promo codes</li>
+  <li>Strategy-brief step should be skippable, not mandatory for returning users</li>
+</ul>
+
+<p><span class="cx-rec-num">3</span> <strong>Make structural changes, not just design changes &mdash; close competitive gaps</strong></p>
+<ul>
+  <li>Ship Universal Content as a primitive (Klaviyo parity, most-requested feature) &mdash; <a href="#klviedi" onclick="document.querySelector('[data-tab=klviedi]').click();return false;">Klaviyo Brief</a></li>
+  <li>Ship NEB Code Mode before any Classic sunset communication (protects ~$1&ndash;2M Premium/agency churn)</li>
+  <li>Add conversational editing, Dream Lab, Brand Intelligence from Phase 1 spec (Canva gap closure) &mdash; <a href="#freddiep2" onclick="document.querySelector('[data-tab=freddiep2]').click();return false;">Freddie Phase 2</a></li>
+  <li>Add per-profile Smart Send Time, AI Performance Watchdog, Mailchimp Shield from Phase 2 spec (ESP-native moat) &mdash; <a href="#freddiep2" onclick="document.querySelector('[data-tab=freddiep2]').click();return false;">Freddie Phase 2</a></li>
+  <li>Build toward unified email+SMS canvas &mdash; not just a tab bar with stubs</li>
+  <li>Ship real-time multi-author collaboration (Stensul/Knak parity) &mdash; Initiative Canvas P5</li>
+  <li>Ship cross-template reuse and NEA &rarr; NUNI template migration tool &mdash; Initiative Canvas P2</li>
+  <li>Add in-canvas revenue attribution &mdash; the Intuit ecosystem advantage no standalone ESP can replicate</li>
+  <li>Ship AI image generation at Canva grade &mdash; Initiative Canvas P4.4.4</li>
+</ul>
+
+<hr/>
+
+<p style="font-size: 10px; color: #9CA3AF; margin-top: 12px;"><strong>Sources:</strong> All figures from existing brief tabs &mdash;
+<a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a>,
+<a href="#sentiment" onclick="document.querySelector('[data-tab=sentiment]').click();return false;">VoC</a>,
+<a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a>,
+<a href="#revised" onclick="document.querySelector('[data-tab=revised]').click();return false;">Revised Goals</a>,
+<a href="#freddie" onclick="document.querySelector('[data-tab=freddie]').click();return false;">Freddie Assessment</a>,
+<a href="#designaudit" onclick="document.querySelector('[data-tab=designaudit]').click();return false;">Design Audit</a>,
+<a href="#migration" onclick="document.querySelector('[data-tab=migration]').click();return false;">NEA&rarr;NUNI Migration</a>,
+<a href="#nuniaudit" onclick="document.querySelector('[data-tab=nuniaudit]').click();return false;">Nuni YoY Audit</a>,
+<a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a>,
+<a href="#klviedi" onclick="document.querySelector('[data-tab=klviedi]').click();return false;">Klaviyo Brief</a>,
+<a href="#freddiep2" onclick="document.querySelector('[data-tab=freddiep2]').click();return false;">Freddie Phase 2</a>.
+No fabricated data. May 2026.</p>
+
+</div>
+</div><!-- /panel-concerns -->
+
+
 <div class="tabpanel" id="panel-designaudit" role="tabpanel">
 <style>
   #panel-designaudit h2 .num { display: inline-block; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 800; color: var(--brand); background: var(--chip); padding: 2px 6px; border-radius: 4px; margin-right: 8px; transform: translateY(-2px); letter-spacing: .08em; }
@@ -14885,7 +15202,7 @@ Lens 5 (Strategy Overlay) ── component_id joins back to ──→ Lens 3 + s
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','revised','migration','repointel','canvas','memo','buildplan','freddie','freddiep2','planpage','designaudit','proto-audit','proto-canva','proto-audit-walk','proto-canva-walk'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','revised','migration','repointel','canvas','memo','buildplan','freddie','freddiep2','planpage','concerns','designaudit','proto-audit','proto-canva','proto-audit-walk','proto-canva-walk'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
