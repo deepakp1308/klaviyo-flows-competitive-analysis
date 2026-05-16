@@ -49,7 +49,7 @@
 <section class="scene" data-scene="s2-menu" data-title="Feature menu" aria-label="Feature menu" hidden>
   <div class="menu-hero">
     <div>
-      <div class="scene-eyebrow" style="border-bottom:none; padding-bottom:0; margin-bottom:14px;">
+      <div class="scene-eyebrow eyebrow-flat">
         <span class="scene-eyebrow-num">Phase 2</span> ·
         <span class="scene-eyebrow-title">8 capabilities · Canva-gap “permanent win” layer</span>
         <span class="scene-eyebrow-cid"><a href="../freddie-deepak-phase2.html">see the design spec &rarr;</a></span>
@@ -124,22 +124,22 @@
   <div class="scene-stage">
     <div class="fdpx-mcds-frame">
       <div class="mcds-label">Agent run · Spring Velocity</div>
-      <div class="mcds-editor" style="display:block; padding:16px;">
-        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+      <div class="mcds-editor mcds-editor--single">
+        <div class="stack-tags">
           <span class="mcds-tag new">Brief</span>
           <span class="mcds-tag">Creative</span>
           <span class="mcds-tag">Audience</span>
           <span class="mcds-tag">Schedule</span>
         </div>
-        <div style="border:1px solid var(--color-line-hairline,#E5E7EB); border-radius:8px; padding:12px; font-size:12px; background:#F9FAFB;">
-          <div style="display:grid; gap:8px;">
-            <div><strong>1.</strong> Pull brief from Notion + last week’s memory <span style="color:#047857;">ready</span></div>
-            <div><strong>2.</strong> Generate hero + body variants (Brand Voice: Launch) <span style="color:#B45309;">pending approval</span></div>
-            <div><strong>3.</strong> Bind segment “New subs · engaged 30d” <span style="color:#6B7280;">queued</span></div>
-            <div><strong>4.</strong> Propose Tue 10:00 AEST send <span style="color:#6B7280;">queued</span></div>
+        <div class="plan-list-wrap">
+          <div class="plan-list">
+            <div><strong>1.</strong> Pull brief from Notion + last week’s memory <span class="status-ready">ready</span></div>
+            <div><strong>2.</strong> Generate hero + body variants (Brand Voice: Launch) <span class="status-warn">pending approval</span></div>
+            <div><strong>3.</strong> Bind segment “New subs · engaged 30d” <span class="status-muted">queued</span></div>
+            <div><strong>4.</strong> Propose Tue 10:00 AEST send <span class="status-muted">queued</span></div>
           </div>
         </div>
-        <div style="text-align:right; margin-top:14px;">
+        <div class="cta-row cta-row-lg">
           <button class="mcds-cta advance-hotspot" data-advance-to="s201-2" data-cid="C-53,C-98/v.timeline-step">Approve step 2 &rarr;</button>
         </div>
       </div>
@@ -156,14 +156,14 @@
   <div class="scene-stage">
     <div class="fdpx-mcds-frame">
       <div class="mcds-label">Audit · workspace governance</div>
-      <div style="padding:14px; font-size:12px;">
-        <table style="width:100%; border-collapse:collapse;">
-          <tr style="border-bottom:1px solid var(--color-line-hairline,#E5E7EB);"><th style="text-align:left;padding:6px 0;">Actor</th><th style="text-align:left;">Action</th><th style="text-align:left;">Time</th></tr>
-          <tr><td class="b" style="padding:6px 0;">Freddie</td><td>Proposed creative variants</td><td>10:02</td></tr>
+      <div class="table-wrap">
+        <table class="scene-table">
+          <tr><th>Actor</th><th>Action</th><th>Time</th></tr>
+          <tr><td class="b">Freddie</td><td>Proposed creative variants</td><td>10:02</td></tr>
           <tr><td class="b">A. Kim</td><td>Approved variant B</td><td>10:08</td></tr>
           <tr><td class="b">Shield policy</td><td>PII scan passed</td><td>10:08</td></tr>
         </table>
-        <div style="text-align:right; margin-top:14px;">
+        <div class="cta-row cta-row-lg">
           <button class="mcds-cta advance-hotspot" data-advance-to="s201-outro" data-cid="C-54">Continue &rarr;</button>
         </div>
       </div>
@@ -199,12 +199,12 @@
   <div class="scene-stage">
     <div class="fdpx-mcds-frame">
       <div class="mcds-label mcds-label--ai">Live cohort · first 4h</div>
-      <div style="display:flex; gap:12px; flex-wrap:wrap; padding:12px; background:#F0FDF4; border-radius:8px; font-size:12px;">
-        <div><strong>Open</strong><br><span style="font-size:18px;font-weight:800;">41.2%</span></div>
-        <div><strong>Click overall</strong><br><span style="font-size:18px;font-weight:800;">3.8%</span></div>
-        <div style="border-left:3px solid #B45309; padding-left:10px;"><strong>Mobile CTR</strong><br><span style="color:#B45309;">−12% vs benchmark</span></div>
+      <div class="kpi-strip">
+        <div><strong>Open</strong><br><span class="kpi-value">41.2%</span></div>
+        <div><strong>Click overall</strong><br><span class="kpi-value">3.8%</span></div>
+        <div class="kpi-alert"><strong>Mobile CTR</strong><br><span class="status-warn">−12% vs benchmark</span></div>
       </div>
-      <div style="text-align:right; margin-top:12px;">
+      <div class="cta-row">
         <button class="mcds-cta advance-hotspot" data-advance-to="s202-2" data-cid="C-53,C-99/v.kpi-strip">Investigate mobile &rarr;</button>
       </div>
     </div>
@@ -215,9 +215,9 @@
   <div class="scene-stage">
     <div class="fdpx-mcds-frame">
       <div class="mcds-label">Freddie suggestion · hero tap-target</div>
-      <div class="mcds-chat-bubble assistant" style="max-width:none; margin:12px 0;">
+      <div class="mcds-chat-bubble assistant assistant-note">
         <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span> Performance insight</div>
-        <p style="font-size:12px;margin:0 0 8px;">Mobile readers stall on the hero CTA — button height under 44px in preview. Want me to enlarge CTA + shorten headline?</p>
+        <p>Mobile readers stall on the hero CTA — button height under 44px in preview. Want me to enlarge CTA + shorten headline?</p>
         <button class="mcds-cta advance-hotspot" data-advance-to="s202-outro" data-cid="C-43/v.preview-diff">Apply mobile fix &rarr;</button>
       </div>
     </div>
@@ -245,13 +245,13 @@
   <div class="scene-stage">
     <div class="fdpx-mcds-frame">
       <div class="mcds-label">Personalization matrix · audited</div>
-      <div style="font-size:12px; padding:10px;">
-        <p style="margin:0 0 8px;"><strong>Dimensions:</strong> engagement tier · last product · locale</p>
-        <ul style="margin:0; padding-left:18px;">
+      <div class="scene-copy-sm scene-block-pad">
+        <p><strong>Dimensions:</strong> engagement tier · last product · locale</p>
+        <ul class="list-tight">
           <li>12 cells generated · 3 suppressed by policy (health claims)</li>
           <li>Fallback: hero A + static CTA for unknown profiles</li>
         </ul>
-        <div style="text-align:right; margin-top:12px;">
+        <div class="cta-row">
           <button class="mcds-cta advance-hotspot" data-advance-to="s203-2" data-cid="C-46,C-48">Review suppressed cells &rarr;</button>
         </div>
       </div>
@@ -263,10 +263,10 @@
   <div class="scene-stage">
     <div class="fdpx-mcds-frame">
       <div class="mcds-label">Profile simulator</div>
-      <p style="font-size:12px;">Preview as: <strong>New sub · Melbourne · Volt interest</strong></p>
-      <div class="canvas-hero fdpx-photo-cover" style="height:120px; background-image:linear-gradient(120deg,#017E89,#0e1116);" data-cid="C-61"></div>
-      <p style="font-size:13px; margin:8px 0 0;">Your Volt Runner reservation opens in 1 hour — spring shipping unlocked.</p>
-      <div style="text-align:right; margin-top:12px;">
+      <p class="scene-copy-sm">Preview as: <strong>New sub · Melbourne · Volt interest</strong></p>
+      <div class="canvas-hero fdpx-photo-cover personalization-hero" data-cid="C-61"></div>
+      <p class="scene-copy-base">Your Volt Runner reservation opens in 1 hour — spring shipping unlocked.</p>
+      <div class="cta-row">
         <button class="mcds-cta advance-hotspot" data-advance-to="s203-outro" data-cid="C-53">Confirm assembly rules &rarr;</button>
       </div>
     </div>
@@ -293,13 +293,13 @@
   <div class="scene-stage">
     <div class="fdpx-mcds-frame">
       <div class="mcds-label">Derivatives from master asset</div>
-      <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; font-size:11px;">
-        <div style="border:1px solid #E5E7EB; padding:8px; border-radius:6px;"><strong>Email hero</strong> · 600×400</div>
-        <div style="border:1px solid #E5E7EB; padding:8px; border-radius:6px;"><strong>SMS / MMS</strong> · 640 square</div>
-        <div style="border:1px solid #E5E7EB; padding:8px; border-radius:6px;"><strong>Instagram</strong> · 4:5</div>
-        <div style="border:1px solid #E5E7EB; padding:8px; border-radius:6px;"><strong>Meta display</strong> · 1.91:1</div>
+      <div class="asset-grid">
+        <div class="asset-tile"><strong>Email hero</strong> · 600×400</div>
+        <div class="asset-tile"><strong>SMS / MMS</strong> · 640 square</div>
+        <div class="asset-tile"><strong>Instagram</strong> · 4:5</div>
+        <div class="asset-tile"><strong>Meta display</strong> · 1.91:1</div>
       </div>
-      <div style="text-align:right; margin-top:12px;">
+      <div class="cta-row">
         <button class="mcds-cta advance-hotspot" data-advance-to="s204-2" data-cid="C-71,C-53/v.open-as-editable">Sync to active campaign &rarr;</button>
       </div>
     </div>
@@ -310,7 +310,7 @@
   <div class="scene-stage">
     <div class="fdpx-mcds-frame">
       <div class="mcds-label mcds-label--ai">Linked objects</div>
-      <p style="font-size:12px;">Changing master asset marks Email + Social child crops stale — batch refresh available.</p>
+      <p class="scene-copy-sm">Changing master asset marks Email + Social child crops stale — batch refresh available.</p>
       <button class="mcds-cta advance-hotspot" data-advance-to="s204-outro" data-cid="C-53">Run refresh &rarr;</button>
     </div>
   </div>
@@ -336,12 +336,12 @@
   <div class="scene-stage">
     <div class="fdpx-mcds-frame">
       <div class="mcds-label">Active pack · en-AU commerce</div>
-      <ul style="font-size:12px;">
-        <li>Unsubscribe + physical address block · <span style="color:#047857">required</span></li>
+      <ul class="policy-list">
+        <li>Unsubscribe + physical address block · <span class="required">required</span></li>
         <li>Promo pricing clause · auto-inserted for % discounts</li>
         <li>“Sale” language guardrail · avoid misleading urgency</li>
       </ul>
-      <div style="text-align:right;"><button class="mcds-cta advance-hotspot" data-advance-to="s205-2" data-cid="C-82,C-89">Open Brand Voice (AU) &rarr;</button></div>
+      <div class="cta-row"><button class="mcds-cta advance-hotspot" data-advance-to="s205-2" data-cid="C-82,C-89">Open Brand Voice (AU) &rarr;</button></div>
     </div>
   </div>
   <div class="scene-caption">Localization is <strong>policy + copy + layout</strong>, not just translation.</div>
@@ -349,9 +349,9 @@
 <section class="scene" data-scene="s205-2" data-title="Blocking issues" data-feature="05" data-step="2" data-of="3" hidden>
   <div class="scene-stage">
     <div class="fdpx-mcds-frame">
-      <div style="background:#FFF5F2;border-left:3px solid #B91C1C;padding:10px 12px;border-radius:6px;font-size:12px;">
+      <div class="callout-danger">
         <strong>Cannot send fr-CA draft:</strong> missing FR mandatory footer line MC-22.b.
-        <div style="margin-top:8px;"><button class="mcds-cta advance-hotspot" data-advance-to="s205-outro" data-cid="C-23">Insert approved footer &rarr;</button></div>
+        <div class="cta-row"><button class="mcds-cta advance-hotspot" data-advance-to="s205-outro" data-cid="C-23">Insert approved footer &rarr;</button></div>
       </div>
     </div>
   </div>
@@ -377,8 +377,8 @@
   <div class="scene-stage">
     <div class="fdpx-mcds-frame">
       <div class="mcds-label">AMP · product carousel</div>
-      <div style="background:#E0EDFF;padding:12px;border-radius:8px;font-size:12px;">
-        <p style="margin:0 0 8px;"><strong>AMP component:</strong> amp-carousel · 3 SKUs · taps recorded as click events</p>
+      <div class="callout-info">
+        <p><strong>AMP component:</strong> amp-carousel · 3 SKUs · taps recorded as click events</p>
         <button class="mcds-cta advance-hotspot" data-advance-to="s206-2" data-cid="C-100,C-61">Validate AMP HTML &rarr;</button>
       </div>
     </div>
@@ -389,7 +389,7 @@
   <div class="scene-stage">
     <div class="fdpx-mcds-frame">
       <div class="mcds-label">Static fallback · paired automatically</div>
-      <p style="font-size:12px;">Non-AMP clients see a single hero + stacked products — same copy, no interactive taps.</p>
+      <p class="scene-copy-sm">Non-AMP clients see a single hero + stacked products — same copy, no interactive taps.</p>
       <button class="mcds-cta advance-hotspot" data-advance-to="s206-outro" data-cid="C-53">Publish paired MIME &rarr;</button>
     </div>
   </div>
@@ -415,9 +415,9 @@
   <div class="scene-stage">
     <div class="fdpx-mcds-frame">
       <div class="mcds-label mcds-label--ai">Shield · pre-send scan</div>
-      <div style="font-size:12px;">
-        <div style="padding:8px; background:#F4FBF7; border-radius:6px; margin-bottom:6px;">PII scan · <strong>clean</strong></div>
-        <div style="padding:8px; background:#FFFAF0; border-radius:6px; margin-bottom:6px;">Comparative claim “#1 shoe in ANZ” · <strong>needs legal</strong></div>
+      <div class="review-lines">
+        <div class="line-ok">PII scan · <strong>clean</strong></div>
+        <div class="line-warn">Comparative claim “#1 shoe in ANZ” · <strong>needs legal</strong></div>
         <button class="mcds-cta advance-hotspot" data-advance-to="s207-2" data-cid="C-101,C-91">Route to legal queue &rarr;</button>
       </div>
     </div>
@@ -428,7 +428,7 @@
   <div class="scene-stage">
     <div class="fdpx-mcds-frame">
       <div class="mcds-label">Approvals matrix</div>
-      <p style="font-size:12px;">Creative lead ✓ · Legal ⏳ · Finance n/a (under threshold)</p>
+      <p class="scene-copy-sm">Creative lead ✓ · Legal ⏳ · Finance n/a (under threshold)</p>
       <button class="mcds-cta advance-hotspot" data-advance-to="s207-outro" data-cid="C-53">Notify stakeholders &rarr;</button>
     </div>
   </div>
@@ -454,10 +454,10 @@
   <div class="scene-stage">
     <div class="fdpx-mcds-frame">
       <div class="mcds-label">MCP server · tool registry</div>
-      <pre style="background:#1F2937;color:#E5E7EB;padding:12px;border-radius:8px;font-size:11px;overflow:auto;">mailchimp.agent.orchestrate  ✓ workspace
+      <pre class="code-panel">mailchimp.agent.orchestrate  ✓ workspace
 shopify.inventory.snapshot   ✓ read-only
 zendesk.ticket.linkCampaign  ✓ bi-directional</pre>
-      <div style="text-align:right; margin-top:10px;">
+      <div class="cta-row">
         <button class="mcds-cta advance-hotspot" data-advance-to="s208-2" data-cid="C-90/v.mcp-section,C-102">Rotate scoped token &rarr;</button>
       </div>
     </div>
@@ -468,7 +468,7 @@ zendesk.ticket.linkCampaign  ✓ bi-directional</pre>
   <div class="scene-stage">
     <div class="fdpx-mcds-frame">
       <div class="mcds-label">Context handoff</div>
-      <p style="font-size:12px;">Support agent references ticket #4481 → Freddie loads the <strong>same campaign graph</strong> the marketer approved.</p>
+      <p class="scene-copy-sm">Support agent references ticket #4481 → Freddie loads the <strong>same campaign graph</strong> the marketer approved.</p>
       <button class="mcds-cta advance-hotspot" data-advance-to="s208-outro" data-cid="C-54">Open shared timeline &rarr;</button>
     </div>
   </div>
@@ -499,8 +499,8 @@ zendesk.ticket.linkCampaign  ✓ bi-directional</pre>
     <div class="feature-tag">COMPLETE</div>
     <h2>Mailchimp’s durable wedge</h2>
     <p>Creative canvases will commoditize. <strong>Send-time intelligence, policy, and cross-channel operations</strong> stay ESP-native — that’s Phase 2.</p>
-    <p><a class="walk-all" style="display:inline-block;margin-top:8px;text-decoration:none;" href="../freddie-deepak-phase2.html">Return to full spec</a>
-    · <a class="walk-all" style="display:inline-block;margin-top:8px;text-decoration:none;" href="../freddie-deepak-phase1-prototype/">Phase 1 prototype</a></p>
+    <p class="footer-links"><a class="walk-all" href="../freddie-deepak-phase2.html">Return to full spec</a>
+    · <a class="walk-all" href="../freddie-deepak-phase1-prototype/">Phase 1 prototype</a></p>
   </div>
 </section>
 
