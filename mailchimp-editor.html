@@ -11201,7 +11201,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
       <div class="subtitle">Structured assessment of the new Freddie / AI Email Generator prototype (<a href="https://ai-email-generator-steel.vercel.app/create" target="_blank" rel="noopener">ai-email-generator-steel.vercel.app</a>) against this brief's three load-bearing artifacts &mdash; <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a> (17 cited themes / ~$95K/mo), <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a> (5 bets / Discovery table / 5 Workflow Shapes), and <a href="#revised" onclick="document.querySelector('[data-tab=revised]').click();return false;">Revised Goals</a> (~$21M ARR / 10 levers). Plus a pre-mortem on new bugs and "move my cheese" risks the design introduces. Full decomposition of the prototype: github.intuit.com/dprabhakara/ai-email-generator-decomp (29 screenshots).</div>
     </div>
     <div class="meta">
-      <div>v1.0 &middot; 4 pages &middot; May 2026</div>
+      <div>v1.0 &middot; 5 pages &middot; May 2026</div>
       <div>Confidence: <strong>HIGH</strong> on coverage mapping &middot; <strong>MED</strong> on $ capture estimate</div>
     </div>
   </div>
@@ -11271,7 +11271,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 <section class="page" aria-label="Freddie Prototype Assessment Page 2">
   <div class="page-head">
     <div>
-      <div class="eyebrow">Tab 17 &middot; Page 2 of 4 &middot; HVC + UR coverage</div>
+      <div class="eyebrow">Tab 17 &middot; Page 2 of 5 &middot; HVC + UR coverage</div>
       <h1 style="font-size:24px">Q1: How many of the bugs and barriers does it solve?</h1>
       <div class="subtitle">All 17 HVC themes scored against the prototype, then the 5 UR bets + Discovery table + 5 Workflow Shapes. Verdicts: <span class="verdict-pill solves">SOLVES</span> directly addresses the cited root cause &middot; <span class="verdict-pill partial">PARTIAL</span> touches the symptom but not the root &middot; <span class="verdict-pill miss">MISS</span> design is silent or out-of-scope &middot; <span class="verdict-pill worse">WORSENS</span> design likely makes the problem harder.</div>
     </div>
@@ -11367,7 +11367,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 <section class="page" aria-label="Freddie Prototype Assessment Page 3">
   <div class="page-head">
     <div>
-      <div class="eyebrow">Tab 17 &middot; Page 3 of 4 &middot; Revised Goals capture</div>
+      <div class="eyebrow">Tab 17 &middot; Page 3 of 5 &middot; Revised Goals capture</div>
       <h1 style="font-size:24px">Q2: How much of the $21M target can this design plausibly capture?</h1>
       <div class="subtitle">Per-lever scoring against the <a href="#revised" onclick="document.querySelector('[data-tab=revised]').click();return false;">Revised Goals</a> (Tab 11): 3 cohorts &times; 10 levers + 5 customer-benefit metrics. Capture % asks: of the editor-attributable portion of each lever, how much does this design credibly move? Full-stack $ = editor-share &times; capture-% &times; lever-$.</div>
     </div>
@@ -11444,7 +11444,7 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 <section class="page" aria-label="Freddie Prototype Assessment Page 4">
   <div class="page-head">
     <div>
-      <div class="eyebrow">Tab 17 &middot; Page 4 of 4 &middot; Pre-mortem</div>
+      <div class="eyebrow">Tab 17 &middot; Page 4 of 5 &middot; Pre-mortem</div>
       <h1 style="font-size:24px">Q3: What new bugs and "move my cheese" problems will this open up?</h1>
       <div class="subtitle">For each surface, asked: <em>what existing customer expectation does this break? What new failure mode does it create?</em> Severity = (1) <strong>Critical</strong> &mdash; likely HVC-scale escalations or revenue impact &gt;$1K/mo each &middot; (2) <strong>Moderate</strong> &mdash; friction but not escalations &middot; (3) <strong>Low</strong> &mdash; annoyance, observable in NPS / Reddit but not financially material.</div>
     </div>
@@ -11572,6 +11572,540 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
   </ol>
 
   <p class="source"><strong>What this document is and isn't.</strong> <em>Is:</em> an evidence-grounded scoring of a prototype against three pre-existing strategy artifacts (<a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a>, <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a>, <a href="#revised" onclick="document.querySelector('[data-tab=revised]').click();return false;">Revised Goals</a>) plus a structured pre-mortem. <em>Isn't:</em> a user-tested validation. None of the risks have been measured against actual customer reaction &mdash; they are predictions from product-design first principles plus the strategy's own evidence base. Right next step before any go/no-go is a 25-customer UR pass on the prototype with the existing HeyMarvin panel. Cross-references: <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> (74 initiatives that this design partially exercises) &middot; <a href="#memo" onclick="document.querySelector('[data-tab=memo]').click();return false;">Strategy Memo</a> (6-quarter roadmap; this design is the Q2&ndash;Q5 visible surface) &middot; <a href="#migration" onclick="document.querySelector('[data-tab=migration]').click();return false;">Migration</a> (Phase 1 prereqs that this design must not undermine).</p>
+</section>
+
+<!-- Tab 17 Page 5: Per-Feature Risk Assessment Catalog -->
+<section class="page" aria-label="Freddie Prototype Assessment Page 5">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Tab 17 &middot; Page 5 of 5 &middot; Per-Feature Risk Assessment Catalog</div>
+      <h1 style="font-size:24px">Q4: Feature-by-feature &mdash; what does each piece do, and where does it leave us exposed?</h1>
+      <div class="subtitle">Exhaustive assessment of every feature, functionality, and micro-experience in the Freddie prototype. For each item: what it does, the pain point it solves, the customer benefit it delivers, and &mdash; critically &mdash; the risk flags it carries against the <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a>, <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a> bets, and competitive landscape. Verdicts: <span class="verdict-pill solves">SOLVES</span> <span class="verdict-pill partial">PARTIAL</span> <span class="verdict-pill miss">MISS</span> <span class="verdict-pill worse">WORSE</span>. Cross-references <a href="#designaudit" onclick="document.querySelector('[data-tab=designaudit]').click();return false;">Design Audit</a> component IDs where applicable.</div>
+    </div>
+    <div class="meta">
+      <strong>6</strong> surface areas &middot; <strong>~35</strong> features assessed<br/>
+      <strong>12</strong> critical/high-risk flags &middot; <strong>8</strong> competitive exposures
+    </div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="v">11 / 35</div><div class="l">Features that fully SOLVE a cited pain point without new risk</div></div>
+    <div class="kpi"><div class="v">12</div><div class="l">Features with PARTIAL coverage or meaningful gaps</div></div>
+    <div class="kpi"><div class="v">8</div><div class="l">Features that MISS cited needs or introduce "move my cheese" risk</div></div>
+    <div class="kpi"><div class="v">4</div><div class="l">Features that actively WORSEN a documented HVC theme</div></div>
+  </div>
+
+  <div class="pull" style="margin-top:16px">
+    <strong>How to read this section.</strong> This is the authoritative "what does every piece of this prototype do, and what are we worried about" catalog. Each row can drive a prioritization conversation: ship as-is, ship with mitigation, defer, or kill. Risk flags cite specific HVC themes ($MRR where known), UR Bets, and competitive gaps (Canva, Klaviyo). Use this alongside the pre-mortem (Page 4) and the <a href="#designaudit" onclick="document.querySelector('[data-tab=designaudit]').click();return false;">Design Audit</a> (Tab 18) for full coverage.
+  </div>
+
+  <!-- ====== GROUP A: AI COMPOSER & PROMPT SURFACE ====== -->
+  <h2 style="margin-top:18px"><span class="num">06</span>A &middot; AI Composer &amp; Prompt Surface</h2>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:6px;">The primary creation pipeline &mdash; from blank page to rendered email. This is where the prototype earns its T1 ($5.0M) and F2 ($3.6M) activation capture.</p>
+
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:12%">Feature</th><th style="width:16%">What it does</th><th style="width:15%">Pain point solved</th><th style="width:15%">Customer benefit</th><th style="width:42%">Risk assessment</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="b">AI composer shell (prompt-to-email)</td>
+        <td>User types a free-form prompt describing their desired email; AI returns a fully rendered, multi-section HTML email in ~15&ndash;30s. The primary creation surface on Email, SMS, and WhatsApp tabs.</td>
+        <td>Blank-page paralysis &mdash; 68% of trial users who open the editor never send a first campaign (T1 activation gap = $5.0M).</td>
+        <td>Collapses "think &rarr; plan &rarr; write &rarr; design &rarr; code" into a single action. Directly attacks T1 trial activation ($5.0M) and F2 free activation ($3.6M).</td>
+        <td>
+          <span class="verdict-pill solves">SOLVES</span> <strong>Move-my-cheese:</strong> Low risk &mdash; net-new surface for trial/free users with no established muscle memory to break.<br/>
+          <span class="verdict-pill solves">SOLVES</span> <strong>UR gap:</strong> Directly addresses Bet 2 (Discovery) and Bet 3 (vertical fit via prompt flexibility). Strong fit for Workflow Shapes #1 + #5.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>HVC gap:</strong> Doesn't fix any of the 17 cited HVC root causes &mdash; but it's not meant to. It creates a new surface that sidesteps the existing editor's problems rather than solving them. Risk: sidestep becomes <em>displacement</em> if old surface is neglected.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Competitive gap:</strong> Matches Klaviyo's AI email generation positioning. But Canva's AI-to-multichannel pipeline is still broader (generates email + landing page + social in one pass). Mailchimp's prototype is email-only in practice despite 8-tab bar.
+        </td>
+      </tr>
+      <tr>
+        <td class="b">Quick-prompt chips</td>
+        <td>Pre-seeded contextual suggestion pills ("Welcome series," "Flash sale," "Product launch," "Newsletter") appear below the composer. Clicking pre-fills the prompt field.</td>
+        <td>"I don't know what to ask the AI" &mdash; UR Bet 2 (Discovery) shows new users struggle to articulate what they need from AI tools.</td>
+        <td>Reduces cognitive load at highest-friction moment. Surfaces capabilities the user didn't know existed. Increases prompt-submit rate.</td>
+        <td>
+          <span class="verdict-pill solves">SOLVES</span> <strong>Move-my-cheese:</strong> None &mdash; additive feature, no existing workflow disrupted.<br/>
+          <span class="verdict-pill solves">SOLVES</span> <strong>UR gap:</strong> Directly addresses Bet 2 (Discovery). Maps to Shannon/Matt/Gilles (Workflow Shape #5: low-frequency / discovery gap).<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>HVC gap:</strong> Chips are DTC-flavored ("Flash sale," "Product launch"). Missing B2B / ProServ / nonprofit chips despite Bet 3 (vertical fit). No "TCPA-compliant SMS" chip despite $57K HVC #16 exposure.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Competitive gap:</strong> Klaviyo has AI-generated campaign suggestions based on actual customer data (segment + behavior). Mailchimp chips are static / context-free. Gap widens as Klaviyo personalizes.
+        </td>
+      </tr>
+      <tr style="background:#FFF5F2">
+        <td class="b">Brand-context banner</td>
+        <td>Persistent banner on AI composer: "Get better results by adding brand and business information [Open Brand Kit] [Set up Brand Kit]." Sits between composer and quick-prompt chips.</td>
+        <td>"AI doesn't know my brand" &mdash; users who skip Brand Kit setup get generic outputs and blame AI quality.</td>
+        <td>Contextual nudge at the moment of need. Increases Brand Kit completion rate.</td>
+        <td>
+          <span class="verdict-pill worse">WORSE</span> <strong>Move-my-cheese:</strong> <em>Critical.</em> For Free users (~870K monthly), this is upgrade pressure on every Create visit. Klaviyo VoC cites pricing pressure as &minus;72 net-sentiment wound. Strategy says counter-position on pricing transparency (I-3.4.3). Putting "Set up Brand Kit" in front of every Free user every visit is the <em>opposite</em> play. Directly risks F4 CSAT regression ($2.5M lever).<br/>
+          <span class="verdict-pill worse">WORSE</span> <strong>HVC gap:</strong> Amplifies HVC #8 / #10 &mdash; if Brand Kit data is wrong (Feb 2026 incident), the banner drives users <em>into</em> the bad data. Blast radius expansion from "one Brand Kit page" to "every AI email."<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>UR gap:</strong> No mention of Bet 4 (multi-author) &mdash; banner shows one Brand Kit, but agency users (Workflow Shape #4) manage multiple client brands.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Competitive gap:</strong> Canva's Brand Kit is free and multi-brand. Mailchimp's banner pointing to a single Brand Kit behind a modal is less capable than the competitive set.
+        </td>
+      </tr>
+      <tr>
+        <td class="b">Strategy brief panel</td>
+        <td>After prompt submission, AI generates a structured brief (Goal / Date / Recipients / Promo / Focus Metric / Featured Products / Visual Style) that user reviews before email rendering.</td>
+        <td>"AI just does whatever it wants" &mdash; users feel loss of control when AI generates without showing reasoning. Creates trust deficit.</td>
+        <td>Checkpoint between intent and execution. Reduces regeneration cycles. Establishes calibrated trust (AI heuristic AI2).</td>
+        <td>
+          <span class="verdict-pill solves">SOLVES</span> <strong>Move-my-cheese:</strong> None for new users. For power users, the brief adds a step they may find unnecessary &mdash; mitigated by "Skip brief" affordance (if it ships).<br/>
+          <span class="verdict-pill solves">SOLVES</span> <strong>UR gap:</strong> Strong fit for Bet 2 (Discovery) &mdash; brief educates users on what good email strategy looks like. Also helps Bet 3 (vertical fit) via Goal selector.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>HVC gap:</strong> Recipients field has no audience-confirmation gate at send (pre-mortem Risk #3, S4 finding E1). This is the path to accidental mass-send. $57K TCPA-class risk via SMS tab compound.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Competitive gap:</strong> Klaviyo's equivalent is the campaign-builder flow with mandatory segment selection. Mailchimp's brief is more elegant but less safe (no confirm step).
+        </td>
+      </tr>
+      <tr>
+        <td class="b">Conversational editing in chat thread</td>
+        <td>After initial generation, user types follow-up prompts ("Make the header bolder," "Add a countdown timer") and AI applies targeted edits to the existing email.</td>
+        <td>"I like 80% of what AI made but fixing the other 20% requires starting over" &mdash; incremental refinement is the dominant workflow shape.</td>
+        <td>Preserves user investment in prior generation. Makes AI feel like collaboration, not slot-machine pulls.</td>
+        <td>
+          <span class="verdict-pill solves">SOLVES</span> <strong>Move-my-cheese:</strong> Low &mdash; new interaction paradigm with no predecessor to break.<br/>
+          <span class="verdict-pill solves">SOLVES</span> <strong>UR gap:</strong> Strong for Workflow Shapes #1 (Fast Monday) and #3 (brand-first methodical). Directly maps to "Thursday Iterator" pattern (56% of sessions).<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>HVC gap:</strong> No version history / undo-per-generation. Jack Hally (Workflow Shape #2, 10&ndash;20 logins/day) can't roll back to "three edits ago." No change-diff shown per edit.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>Competitive gap:</strong> Canva's "Magic Edit" shows before/after diff inline. Klaviyo's editor has explicit version history with rollback. Mailchimp's chat thread has no equivalent &mdash; all edits are forward-only.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ====== GROUP B: EMAIL EDITOR & CANVAS ====== -->
+  <h2 style="margin-top:18px"><span class="num">6.2</span>B &middot; Email Editor &amp; Canvas</h2>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:6px;">The editing layer &mdash; where AI output gets refined and where power users live. Flow B (Power user) and Flow D (Refinement loop) concentrate here.</p>
+
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:12%">Feature</th><th style="width:16%">What it does</th><th style="width:15%">Pain point solved</th><th style="width:15%">Customer benefit</th><th style="width:42%">Risk assessment</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="b">Split editor (chat left + canvas right)</td>
+        <td>After prompt submission, UI transitions to two-column layout: scrollable chat thread (left) and email canvas (right). Both simultaneously visible and interactive.</td>
+        <td>"I can't see my instructions and the result at the same time" &mdash; traditional AI tools show either prompt or output, requiring mental mapping.</td>
+        <td>Real-time correlation between request and result. Enables conversational editing without losing context.</td>
+        <td>
+          <span class="verdict-pill solves">SOLVES</span> <strong>Move-my-cheese:</strong> None for new users. For returning users who expect full-width editor, the narrower canvas may feel cramped on 13" laptops (75% of sessions).<br/>
+          <span class="verdict-pill solves">SOLVES</span> <strong>UR gap:</strong> Strong fit for Bet 2 (Discovery) &mdash; chat panel is the discovery engine. Good for Workflow Shape #3 (brand-first methodical).<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>HVC gap:</strong> Editor canvas is un-deep-linkable (state, not route). User can't share "the editor on this email" with a teammate. HVC #4 (multi-author) indirectly worsened &mdash; no presence, no shareable link.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Competitive gap:</strong> Canva's split-view shows design + comments. Klaviyo has no equivalent &mdash; Mailchimp is ahead here. But the un-deep-linkable state is below both competitors' share/collab capabilities.
+        </td>
+      </tr>
+      <tr style="background:#FFF5F2">
+        <td class="b">Mode switcher (AI vs Manual radio)</td>
+        <td>Small radio toggle (&#10022; AI / pencil Manual) in the editor top bar. Switches canvas between AI-assisted generation and direct block manipulation.</td>
+        <td>"I want to start in manual without waiting for AI" &mdash; power users perceive forced AI interaction as a time tax.</td>
+        <td>Gives power users a zero-friction path to preferred workflow. Signals manual editing is first-class.</td>
+        <td>
+          <span class="verdict-pill worse">WORSE</span> <strong>Move-my-cheese:</strong> <em>Critical.</em> Manual mode is hidden post-generation &mdash; user must interact with AI first to even discover manual mode exists. For the $281M HVC NEA-stayer segment, this is "Mailchimp is forcing me to AI" &mdash; exactly the pattern HVC #12 already cites. Strategy explicitly says don't force-migrate HVCs. Pre-mortem Risk #2 (launch-blocking).<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>HVC gap:</strong> HVC #5 (dual builders + custom code) partially addressed by single-editor concept, but no HTML/code escape hatch (Premium anchor on Classic). HVC #12 (forced New Builder) amplified &mdash; now it's forced <em>AI</em>.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>UR gap:</strong> Misses Bet 5 (direct manipulation) for Workflow Shapes #3 + #4. Wes Turner and agency users need brand-precision manual editing as <em>first</em> entry point, not post-AI fallback.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>Competitive gap:</strong> Canva offers AI + manual as equal-weight modes from the start. Klaviyo's editor is manual-first with AI as opt-in assistant. Mailchimp's AI-first default is a differentiator for activation but a liability for retention.
+        </td>
+      </tr>
+      <tr>
+        <td class="b">Manual drag-drop builder (Blocks / Sections / Styles)</td>
+        <td>Full block-based email editor with draggable content blocks (Text, Image, Button, Divider, Spacer, Columns, etc.) and a Sections panel with 10 pre-built layouts (Hero, Image+Text, Header, Product List, etc.).</td>
+        <td>"I need pixel-level control that AI can't give me" &mdash; power users need direct manipulation for complex layouts, conditional content, brand-specific formatting.</td>
+        <td>Familiar editing paradigm for Classic Mailchimp users. Ensures AI-first surface doesn't strand power users.</td>
+        <td>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Move-my-cheese:</strong> Moderate. Preserves existing NEB builder patterns but with reduced screen estate (chat column persists). Block ordering runtime bug (HVC #5) not fixed in this implementation.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>HVC gap:</strong> HVC #5 block glitches persist. No custom code/HTML escape hatch (Pillar 2.2.3, Q3 ship). No <code>&lt;liquid&gt;</code> tag support. Premium/agency ceiling remains.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>UR gap:</strong> Addresses Bet 1 (saved blocks) at the surface level &mdash; Sections panel shows layouts to insert. But <em>no propagation primitive</em>: edit-once-applies-everywhere is the actual Bet 1 ask. Wes Turner feels partially seen.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>Competitive gap:</strong> Canva's block editor has asymmetric resize, 1-click multi-column, and inline collaboration. Klaviyo's equivalent has custom code blocks + Liquid. Mailchimp's manual mode is the existing NEB transplanted into a narrower viewport &mdash; no advancement.
+        </td>
+      </tr>
+      <tr>
+        <td class="b">Viewport preview (Desktop / Mobile / Split)</td>
+        <td>Radio group switching canvas between desktop-width, mobile-width, and side-by-side split renderings of the current email.</td>
+        <td>"My email looked great on desktop but broke on mobile" &mdash; HVC #3 ($1,820/mo rendering divergence). 62% of email opens are on mobile.</td>
+        <td>Catches responsive design issues before send. Reduces "oops" moments post-send.</td>
+        <td>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Move-my-cheese:</strong> Low &mdash; additive feature, better than existing single-viewport preview.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>HVC gap:</strong> Addresses the <em>trust symptom</em> of HVC #3 but not the <em>engineering root cause</em>. Without <code>email-render-pipeline</code> wired into CI, preview parity is aspirational. Forwarded-mail divergence, Ctrl+K Firefox/Chrome, light/dark mode rendering bugs &mdash; all persist.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>UR gap:</strong> No real-inbox preview (Gmail, Outlook, Apple Mail rendering). UR interviews surface this as the #1 trust builder &mdash; "show me what my subscribers actually see."<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>Competitive gap:</strong> Klaviyo partners with Litmus for multi-client rendering. Canva generates flat-image exports that render identically everywhere. Mailchimp's 3-viewport radio is behind both approaches.
+        </td>
+      </tr>
+      <tr style="background:#FFF5F2">
+        <td class="b">Theme presets popover (8 presets, Light/Dark)</td>
+        <td>Floating popover with 8 visual theme presets (Modern, Warm, Minimal, Botanical, Editorial, Sunset, Luxe, Coastal), each in Light and Dark variants. Clicking applies the theme's palette, typography, and proportions.</td>
+        <td>"I want my email to look good but I'm not a designer" &mdash; visual design is the #2 barrier to email completion after copywriting.</td>
+        <td>One-click professional design without design skills. Serves the 43% of users who never customize beyond defaults.</td>
+        <td>
+          <span class="verdict-pill worse">WORSE</span> <strong>Move-my-cheese:</strong> <em>Critical.</em> If a customer with configured Brand Kit clicks a preset, brand colors/fonts may be silently overridden. For Wes Turner (HVC pill-CTA-reshaped pain), this is exactly the failure mode that drove him to Canva. Pre-mortem Risk #10 (moderate, but escalation-prone).<br/>
+          <span class="verdict-pill worse">WORSE</span> <strong>HVC gap:</strong> Amplifies HVC #8 / #10 &mdash; presets override Brand Kit colors without confirmation. A customer who set up Brand Kit carefully now sees their brand discarded by a casual click.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>UR gap:</strong> Missing Bet 5 (Brand-Kit CTA defaults). Presets should respect Brand Kit as the floor, not replace it.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Competitive gap:</strong> Canva's "Brand Templates" always inherit Brand Kit. Mailchimp's presets override Brand Kit &mdash; competitively worse positioning on the brand-consistency story.
+        </td>
+      </tr>
+      <tr>
+        <td class="b">Suggested follow-up toolbar chips</td>
+        <td>After AI generates an email, a floating toolbar shows contextual refinement suggestions: "Add a CTA," "Change the theme," "Check for accessibility," "Optimize for mobile."</td>
+        <td>Post-generation abandonment &mdash; users don't know what's possible next. Either accept as-is or leave.</td>
+        <td>Guides refinement loop without prompt-writing skill. Surfaces capabilities like accessibility checking that users would never find unprompted.</td>
+        <td>
+          <span class="verdict-pill solves">SOLVES</span> <strong>Move-my-cheese:</strong> None &mdash; purely additive, no existing workflow disrupted.<br/>
+          <span class="verdict-pill solves">SOLVES</span> <strong>UR gap:</strong> Strong fit for Bet 2 (Discovery). Directly maps to the "Thursday Iterator" refinement pattern. Surfaces A/B testing adjacently (Bianka Kiss gap from Discovery table).<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>HVC gap:</strong> "Check for accessibility" chip is present but no indication it catches HVC #3 rendering divergences or HVC #7 font fallbacks. May give false sense of QA completeness.<br/>
+          <span class="verdict-pill solves">SOLVES</span> <strong>Competitive gap:</strong> Neither Klaviyo nor Canva have contextual refinement suggestions in their editor. Genuine differentiator that increases session depth.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ====== GROUP C: BRAND KIT & IDENTITY ====== -->
+  <h2 style="margin-top:18px"><span class="num">6.3</span>C &middot; Brand Kit &amp; Identity</h2>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:6px;">The brand infrastructure layer. HVC themes #8, #9, #10 concentrate here &mdash; $6,460/mo in cited MRR. Every Brand Kit deficiency is amplified by the AI surface because Brand Kit feeds <em>every</em> generated email.</p>
+
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:12%">Feature</th><th style="width:16%">What it does</th><th style="width:15%">Pain point solved</th><th style="width:15%">Customer benefit</th><th style="width:42%">Risk assessment</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="b">Brand Kit modal (7 sections)</td>
+        <td>Full-screen modal: My Business, Logos, Colors, Fonts, Buttons, Brand Voice, Social Links. Persists across all conversations and emails. Accessed from sidebar footer or brand-context banner.</td>
+        <td>Brand inconsistency across campaigns &mdash; HVC #8 ($4,800/mo combined with #10): "Every email looks different because there's no single source of truth."</td>
+        <td>Durable brand state inherited by every AI generation. Eliminates per-email brand configuration.</td>
+        <td>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Move-my-cheese:</strong> Moderate. Existing Brand Kit page is being replaced by a modal. Users who bookmarked the Brand Kit URL lose their path. Modal is the right pattern (cross-cutting context), but transition needs signposting.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>HVC gap:</strong> HVC #9 ($2,460/mo) &mdash; <em>single-brand only</em>. No multi-brand picker, no per-conversation brand switcher, no sub-brand concept. Agencies + multi-brand teams entirely unserved. Initiative I-1.2.3 missing.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>UR gap:</strong> Doesn't address Bet 4 (multi-author) &mdash; Brand Kit should be team-shared with role-based access. Currently single-user-scoped.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>Competitive gap:</strong> Canva's Brand Kit is free, supports multiple brands, and is shareable across teams. Klaviyo's brand settings are per-flow-configurable. Mailchimp's single-brand modal is behind both.
+        </td>
+      </tr>
+      <tr>
+        <td class="b">Logo upload</td>
+        <td>Multi-slot logo upload supporting primary, secondary, and icon variants. AI selects appropriate variant based on email context (header vs footer vs mobile).</td>
+        <td>"I uploaded my logo but it looks wrong in the header because it's the wrong aspect ratio."</td>
+        <td>Context-aware logo selection means user doesn't need to micromanage asset placement.</td>
+        <td>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Move-my-cheese:</strong> Low &mdash; existing logo upload preserved, multi-slot is additive.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>HVC gap:</strong> HVC #9 ($2,460/mo) &mdash; single brand only. No "Client A logo" vs "Client B logo" concept. Logo asset metadata (alt text, usage rights, dark-mode variant) not addressed.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>UR gap:</strong> Bet 3 (vertical fit) partially served &mdash; B2B and nonprofit orgs often have distinct "stacked" vs "inline" logo variants. Multi-slot helps but no semantic tagging.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Competitive gap:</strong> Canva supports logo variants + dark-mode alternates + multi-brand. Mailchimp has slots but no metadata.
+        </td>
+      </tr>
+      <tr>
+        <td class="b">Color palette</td>
+        <td>Primary, secondary, and accent color pickers in Brand Kit. Colors automatically flow into AI-generated email components.</td>
+        <td>Manual hex-code entry per campaign is repetitive and error-prone. Users copy codes from external tools or guess from memory.</td>
+        <td>Set once, use everywhere. Eliminates color inconsistency. Reduces "on-brand" review cycles.</td>
+        <td>
+          <span class="verdict-pill solves">SOLVES</span> <strong>Move-my-cheese:</strong> None &mdash; additive, better than manual color entry.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>HVC gap:</strong> HVC #8 (Feb 2026 Brand Kit incident) &mdash; if colors are stale/wrong, every AI email is off-brand. <em>Prerequisite:</em> I-1.2.1 Brand Kit data correctness must ship before AI defaults to Brand Kit colors. Without it, color palette amplifies the incident pattern.<br/>
+          <span class="verdict-pill solves">SOLVES</span> <strong>UR gap:</strong> Serves Bet 3 (vertical fit) and Bet 5 (Brand-Kit CTA defaults). Brand-first methodical users (Workflow Shape #3, Wes/Bob) get what they want here.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Competitive gap:</strong> Canva supports unlimited palette colors + contrast-checking. Klaviyo's palette has semantic naming (CTA color, link color, hover). Mailchimp's 3-slot palette is minimally viable.
+        </td>
+      </tr>
+      <tr style="background:#FFF5F2">
+        <td class="b">Font selectors (hardcoded 23-font dropdown)</td>
+        <td>Dropdowns for heading font, body font, and base size. Ships 23 hardcoded web-safe fonts (DM Sans, Inter, Lato, etc.).</td>
+        <td>"I can't use my actual brand font" &mdash; HVC #10 ($3,350/mo): custom font upload is unavailable.</td>
+        <td>Basic typography control for standard fonts.</td>
+        <td>
+          <span class="verdict-pill worse">WORSE</span> <strong>Move-my-cheese:</strong> <em>Critical.</em> The named HVC customers' brand fonts (DIN 2014, Asul, Readex Pro) are <em>not in the 23-font list</em> and there is <em>no upload affordance visible</em>. Current production Mailchimp at least has a font-upload UI (even if broken). Prototype is a regression. Pre-mortem Risk #7.<br/>
+          <span class="verdict-pill worse">WORSE</span> <strong>HVC gap:</strong> HVC #10 ($3,350/mo) directly worsened. HVC #7 ($655/mo, brand fonts not usable in LP/forms) also not addressed &mdash; iPhone fallback logic absent.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>UR gap:</strong> Bet 5 (direct manipulation upgrades) includes font handling. Premium/agency users hit an immediate ceiling.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>Competitive gap:</strong> Canva supports custom font uploads on free plan. Klaviyo supports web font embedding. Mailchimp's hardcoded dropdown is the weakest position in the competitive set.
+        </td>
+      </tr>
+      <tr>
+        <td class="b">Brand voice / personality fields</td>
+        <td>4 structured inputs: Personality (warm/professional/playful), Formality level, CTA style, Headline style. AI uses these to calibrate generated copy tone.</td>
+        <td>"AI writes generic copy that doesn't sound like us" &mdash; #1 objection to AI content tools from brand managers and agency users (UR Bet 3).</td>
+        <td>Differentiates AI output per customer. Reduces "sounds like ChatGPT" rejection rate.</td>
+        <td>
+          <span class="verdict-pill solves">SOLVES</span> <strong>Move-my-cheese:</strong> None &mdash; net-new capability with no predecessor.<br/>
+          <span class="verdict-pill solves">SOLVES</span> <strong>UR gap:</strong> Directly addresses Bet 3 (vertical fit). B2B / ProServ can configure professional + formal + "Schedule a demo" CTA style. Strong foundation.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>HVC gap:</strong> Single brand voice only (HVC #9 multi-brand gap persists). Agency managing 5 client brands needs 5 voice configurations. No per-conversation voice override.<br/>
+          <span class="verdict-pill solves">SOLVES</span> <strong>Competitive gap:</strong> Klaviyo has no equivalent brand-voice configuration. Canva's "Brand Voice" is doc-level only. Mailchimp is genuinely ahead here &mdash; protect this advantage.
+        </td>
+      </tr>
+      <tr>
+        <td class="b">Auto-extract from URL (onboarding)</td>
+        <td>First-run overlay prompts user to paste website URL. System scrapes and auto-populates Brand Kit fields (logo, colors, fonts, business name).</td>
+        <td>"I spent 20 minutes setting up brand colors and they still don't match my website" &mdash; manual brand setup is error-prone and tedious.</td>
+        <td>Reduces Brand Kit setup from ~8&ndash;12 min to ~30s. Increases % of accounts with populated Brand Kit (prerequisite for quality AI output).</td>
+        <td>
+          <span class="verdict-pill solves">SOLVES</span> <strong>Move-my-cheese:</strong> None &mdash; purely additive onboarding enhancement.<br/>
+          <span class="verdict-pill solves">SOLVES</span> <strong>UR gap:</strong> Directly enables Bet 2 (Discovery) by removing the biggest first-run blocker. Strong for Workflow Shape #5 (low-frequency users who need fast setup).<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>HVC gap:</strong> If URL extraction returns wrong colors/fonts (edge case: sites with multiple brand contexts), it populates <em>incorrect</em> Brand Kit data that then feeds every AI email. No confirmation step visible. HVC #8 amplification risk.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Competitive gap:</strong> Klaviyo has similar URL-import onboarding. Canva has URL-based brand extraction in Business plan. Parity, not differentiation &mdash; but necessary table stakes.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ====== GROUP D: CHANNEL & SEND ====== -->
+  <h2 style="margin-top:18px"><span class="num">6.4</span>D &middot; Channel &amp; Send</h2>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:6px;">The terminal actions &mdash; where creation converts to business value. Flow E concentrates 5 of 9 S4 critical findings from the <a href="#designaudit" onclick="document.querySelector('[data-tab=designaudit]').click();return false;">Design Audit</a>. HVC #16 ($57K TCPA) lives here.</p>
+
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:12%">Feature</th><th style="width:16%">What it does</th><th style="width:15%">Pain point solved</th><th style="width:15%">Customer benefit</th><th style="width:42%">Risk assessment</th></tr></thead>
+    <tbody>
+      <tr style="background:#FFF5F2">
+        <td class="b">8-channel tab bar</td>
+        <td>Horizontal pill-tab bar at top of /create: Email, SMS, WhatsApp, Automation, Form, Survey, Social post, Campaign. Clicking switches the creation surface.</td>
+        <td>"I have to navigate to different pages for each channel" &mdash; fragmented entry points mean siloed campaigns with no cross-channel awareness.</td>
+        <td>Unified creation mental model: "I create all my marketing from one place."</td>
+        <td>
+          <span class="verdict-pill worse">WORSE</span> <strong>Move-my-cheese:</strong> <em>High.</em> 6 of 8 tabs are stubs but presented as visually equal-weight. Customer who clicks "Campaign" expecting a multichannel builder gets a chat composer &mdash; promise bigger than delivery. Pattern HVC #12 customer is already complaining about ("Mailchimp says it can do X but actually can't"). Pre-mortem Risk #11.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>HVC gap:</strong> HVC #16 ($57K TCPA) directly exposed. SMS tab has an AI composer that can generate non-TCPA-compliant content. No ComplianceChecker, no opt-out guardrails, no I-5.2.3. WhatsApp/SMS show same chips (likely copy bug). HVC #14 (SMS reporting) and #15 (SMS credits) completely absent.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>UR gap:</strong> Bet 4 (multi-author) not addressed across any channel. CB5 (% share-of-channel-rev 15% &rarr; 25%) requires functional omnichannel &mdash; stubs don't move this metric.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>Competitive gap:</strong> Klaviyo's flows are natively multichannel (email + SMS + push in one automation). Canva generates email + social + landing page from one design. Mailchimp's 8 tabs with 6 stubs signals aspiration without delivery.
+        </td>
+      </tr>
+      <tr style="background:#FFF5F2">
+        <td class="b">Send email button (split: Send / Save draft / Export HTML)</td>
+        <td>Primary green button sends immediately to selected audience. Dropdown reveals Save draft + Export HTML. No confirmation step between click and send.</td>
+        <td>"I need to get this campaign out the door" &mdash; the terminal action of every email workflow.</td>
+        <td>Clear, prominent primary action. Split-button establishes action hierarchy (Send &gt; Save &gt; Export).</td>
+        <td>
+          <span class="verdict-pill worse">WORSE</span> <strong>Move-my-cheese:</strong> <em>Critical.</em> No audience-confirmation modal. One click sends to 2,150+ subscribers with zero verification. Current production Mailchimp has a confirmation step. This is a <em>regression</em> in safety. S4 findings E1/A10 (launch-blocking).<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>HVC gap:</strong> HVC #16 ($57K) &mdash; if user is on SMS tab and clicks Send, AI-generated non-TCPA-compliant SMS goes to entire segment. No compliance gate. Strategy memo calls I-5.2.3 as Q1 prerequisite.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>UR gap:</strong> No pre-send checklist. UR interviews surface "show me a summary before I commit" as universal need across all 5 Workflow Shapes. The strategy brief panel is adjacent but doesn't gate the Send action.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>Competitive gap:</strong> Klaviyo has mandatory pre-send review (audience count + subject + preview). Canva doesn't send natively. Industry standard is confirm-on-send. Mailchimp's one-click Send is below industry standard.
+        </td>
+      </tr>
+      <tr>
+        <td class="b">Send test email</td>
+        <td>Secondary button sends current email to a specified test address for review before real send.</td>
+        <td>"I can't preview how this actually renders in a real inbox" &mdash; web previews don't catch Gmail/Outlook/Apple Mail rendering bugs.</td>
+        <td>De-risks the send decision. Catches rendering, personalization, and link errors before audience delivery.</td>
+        <td>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Move-my-cheese:</strong> Low &mdash; existing capability preserved. <em>But:</em> no recipient picker modal &mdash; could send to wrong address. S4 finding E4.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>HVC gap:</strong> Partially addresses HVC #3 (rendering divergence) by enabling real-inbox preview. Doesn't fix underlying render bugs.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>UR gap:</strong> Serves Workflow Shape #3 (brand-first methodical, Wes/Bob). Missing multi-client test (send to Gmail + Outlook + Apple Mail simultaneously).<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>Competitive gap:</strong> Klaviyo's test-send includes rendered previews across 5 major clients inline. Mailchimp sends a raw test email with no multi-client comparison.
+        </td>
+      </tr>
+      <tr>
+        <td class="b">SMS composer surface</td>
+        <td>SMS tab shows Pattern A composer (same as Email): AI chat + quick-prompt chips ("Send a flash sale alert via text"). Generates a single SMS text message.</td>
+        <td>"Creating SMS requires a separate tool" &mdash; cross-channel fragmentation forces context-switching between email and SMS workflows.</td>
+        <td>Unified surface for email and SMS creation. Reduces tool-switching overhead.</td>
+        <td>
+          <span class="verdict-pill worse">WORSE</span> <strong>Move-my-cheese:</strong> <em>Existential.</em> AI can trivially generate non-TCPA-compliant opt-out content. No AccessibilityLinter, no ComplianceChecker, no duplicate-opt-out detector. The "Send a flash sale alert via text" chip is a <em>one-click path</em> to replaying the $57K HVC #16 incident. Pre-mortem Risk #4 (launch-blocking).<br/>
+          <span class="verdict-pill worse">WORSE</span> <strong>HVC gap:</strong> HVC #15 (SMS credits, $3,592/mo) &mdash; no credit-balance UI, no delivery-cost preview, no opt-out counter. HVC #16 ($57K TCPA) &mdash; directly worse. HVC #17 (merge depth / MMS) &mdash; completely missing.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>UR gap:</strong> CB5 (share-of-channel-rev) requires functional SMS with compliance guardrails. This surface creates liability, not revenue.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>Competitive gap:</strong> Klaviyo's SMS is TCPA-aware at the platform level (opt-out injection, quiet hours, consent tracking). Mailchimp's SMS AI has zero compliance infrastructure. Competitively disqualifying for enterprise.
+        </td>
+      </tr>
+      <tr>
+        <td class="b">Audience / recipient selection</td>
+        <td>Dropdown/multi-select in strategy brief where users choose audience segments (e.g., "All subscribers," "VIP customers," "Cart abandoners") for the campaign.</td>
+        <td>"I have to leave the editor to figure out who to send to" &mdash; audience selection currently breaks creation flow.</td>
+        <td>Brings audience selection into creative context. Enables AI to tailor content to selected segment.</td>
+        <td>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Move-my-cheese:</strong> Moderate &mdash; moving audience selection from post-creation to in-creation changes the workflow sequence. Users who expect "create first, target second" may find this disorienting.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>HVC gap:</strong> No audience confirmation at send (S4 finding E1). No segment-size display ("sending to 2,150 subscribers"). No suppression-list check. TCPA consent status not visible for SMS recipients.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>UR gap:</strong> Bet 5 (direct manipulation) partially served &mdash; in-canvas audience selection is better than separate config. But no "audience preview" (show me who gets this).<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>Competitive gap:</strong> Klaviyo shows real-time segment counts + estimated delivery time + suppression reasons inline. Mailchimp's selector is a dropdown with no data feedback.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ====== GROUP E: SIDEBAR & NAVIGATION ====== -->
+  <h2 style="margin-top:18px"><span class="num">6.5</span>E &middot; Sidebar &amp; Navigation</h2>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:6px;">The persistent navigation layer. Conversation management + system navigation + exit patterns. The two-shell switching decision (Home &harr; Create) is the structural risk here.</p>
+
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:12%">Feature</th><th style="width:16%">What it does</th><th style="width:15%">Pain point solved</th><th style="width:15%">Customer benefit</th><th style="width:42%">Risk assessment</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="b">Conversation sidebar (history, new, collapse)</td>
+        <td>Left sidebar showing all past conversations/sessions. Each entry shows title (from first prompt) + timestamp. Supports "+ New conversation," collapse/expand (240px &harr; 60px), and footer links to Prototype settings + Brand Kit.</td>
+        <td>"I can't find the email I was working on last week" &mdash; session-based AI tools lose context between sessions. Users need persistent access.</td>
+        <td>Multi-session workflows. History for "Thursday Iterator" and "Daily Mailer" shapes. Foundation for future team-shared conversations.</td>
+        <td>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Move-my-cheese:</strong> Moderate. Replaces the existing campaign/email list with a conversation-first paradigm. Users who think in terms of "emails" and "campaigns" must now think in "conversations." Mental model shift is significant for long-tenure users.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>HVC gap:</strong> No search, rename, folder, tag, or archive. For Jack Hally (Workflow Shape #2, 10&ndash;20 logins/day), this becomes unscannable within a week. Pre-mortem Risk #8 (moderate).<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>UR gap:</strong> Bet 4 (multi-author) &mdash; sidebar shows <em>my</em> conversations only. No sharing, no "show this to my teammate," no presence. Conversation gives false signal it's shared when it's not.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Competitive gap:</strong> Klaviyo doesn't have conversation-based creation. ChatGPT/Gemini have full search + folder + share. Mailchimp is behind consumer AI apps but ahead of marketing-tool competitors.
+        </td>
+      </tr>
+      <tr style="background:#FFF5F2">
+        <td class="b">Home dashboard &rarr; Create shell transition</td>
+        <td>Clicking "Create" from Home disposes of <em>all global navigation</em> (Analytics, Audience, Campaigns, etc.) and replaces the shell. User loses path back except via Exit (&times;) button. Two-shell switching pattern.</td>
+        <td>Focus: "When I'm creating, I don't need the full product nav distracting me."</td>
+        <td>Clean, focused creation environment. Removes navigation noise during creative work.</td>
+        <td>
+          <span class="verdict-pill worse">WORSE</span> <strong>Move-my-cheese:</strong> <em>High.</em> This is a one-way trap-door pattern. User can't navigate to Analytics to check a metric mid-creation. Can't go to Audience to refine a segment. Can't see Campaigns list without fully exiting Create. Every task that requires cross-surface context means: Exit &rarr; navigate &rarr; return &rarr; lose creation state.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>HVC gap:</strong> No direct HVC cite, but the pattern worsens the "fragmented tool" perception that underlies HVC #2 (support dead-ends) and HVC #14 (SMS reporting hard to find).<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>UR gap:</strong> Workflow Shape #2 (all-week ad-libber, Jack Hally) and Shape #4 (third-party-in-loop) need fluid cross-surface navigation. The trap-door is the opposite of fluid.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>Competitive gap:</strong> Klaviyo keeps global nav visible during campaign editing. Canva keeps sidebar nav persistent. Mailchimp's shell-swap is uniquely aggressive and below competitive standard.
+        </td>
+      </tr>
+      <tr>
+        <td class="b">Exit (&times;) button behavior</td>
+        <td>Single button in the Create shell top bar that returns user to Home dashboard (/). One-click, one-way. No "Are you sure?" confirmation if there are unsaved changes.</td>
+        <td>"Get me out of here" &mdash; need to return to the main product.</td>
+        <td>Clear, predictable exit path.</td>
+        <td>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Move-my-cheese:</strong> Moderate. No unsaved-changes warning. User with in-progress draft clicks &times; &rarr; loses work? The autosave contract is unclear (pre-mortem Risk #9). Current production Mailchimp has "unsaved changes" prompt.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>HVC gap:</strong> No "back to where I was" &mdash; Exit always goes to Home, not to previous location (e.g., Campaigns list, Analytics).<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>UR gap:</strong> Workflow Shape #2 (Jack Hally, 10&ndash;20 logins/day) needs fast context-switching. Exit &rarr; Home &rarr; navigate is 3 steps when it should be 1.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Competitive gap:</strong> Klaviyo's editor has browser-back support + breadcrumb trail. Canva has persistent sidebar with all files. Mailchimp's &times; is a dead-end exit with no navigation memory.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ====== GROUP F: AI INTELLIGENCE & FEEDBACK ====== -->
+  <h2 style="margin-top:18px"><span class="num">6.6</span>F &middot; AI Intelligence &amp; Feedback</h2>
+  <p style="font-size:12px;color:var(--muted);margin-bottom:6px;">The AI communication layer &mdash; how the system explains itself, takes feedback, and signals status. AI heuristics AI1&ndash;AI5 concentrate here.</p>
+
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:12%">Feature</th><th style="width:16%">What it does</th><th style="width:15%">Pain point solved</th><th style="width:15%">Customer benefit</th><th style="width:42%">Risk assessment</th></tr></thead>
+    <tbody>
+      <tr>
+        <td class="b">Assistant message body (reasoning narrative)</td>
+        <td>Each AI response includes prose explanation: "I chose a warm palette because your brand voice is Friendly, and used single-column for mobile readability." Educates the user on email strategy.</td>
+        <td>"The AI changed things but I don't understand why" &mdash; opaque AI creates distrust. Users reject outputs they can't rationalize to stakeholders.</td>
+        <td>Builds calibrated trust (AI heuristic AI2). Reduces regeneration rate. Teaches email strategy (educational side-effect).</td>
+        <td>
+          <span class="verdict-pill solves">SOLVES</span> <strong>Move-my-cheese:</strong> None &mdash; net-new AI interaction with no predecessor.<br/>
+          <span class="verdict-pill solves">SOLVES</span> <strong>UR gap:</strong> Strong for Bet 2 (Discovery) &mdash; reasoning narrative surfaces "why" behind each design decision. Users learn what good email strategy is while using the tool.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>HVC gap:</strong> If Brand Kit data is wrong (HVC #8), the AI will confidently explain its wrong choices: "I used your brand red #FF0000 for the CTA" when the customer's actual brand red is #CC0000. Calibrated trust + wrong data = <em>calibrated distrust</em>.<br/>
+          <span class="verdict-pill solves">SOLVES</span> <strong>Competitive gap:</strong> Klaviyo's AI has no reasoning layer. Canva's "Magic Design" is a black box. Mailchimp's narrative reasoning is a genuine competitive advantage &mdash; protect and extend it.
+        </td>
+      </tr>
+      <tr>
+        <td class="b">Copy / Like / Dislike / Regenerate row</td>
+        <td>Per-message action bar: copy text to clipboard, thumbs up/down quality signal, and regenerate (discard + re-generate from same prompt + context).</td>
+        <td>"AI keeps making the same mistakes because it doesn't learn" &mdash; without feedback, every generation starts from baseline.</td>
+        <td>Reinforcement signal loop for model improvement. Gives users agency ("I'm training this"). Regenerate reduces prompt-rewriting burden.</td>
+        <td>
+          <span class="verdict-pill solves">SOLVES</span> <strong>Move-my-cheese:</strong> None &mdash; standard AI UX pattern, no existing workflow disrupted.<br/>
+          <span class="verdict-pill solves">SOLVES</span> <strong>UR gap:</strong> Strong for Bet 2 (Discovery) &mdash; feedback loop is the mechanism by which the system improves per-customer over time.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>HVC gap:</strong> No "undo last AI edit" (only full regenerate). For HVC power users, regenerating discards everything &mdash; including manual tweaks applied to AI output. Needs per-edit rollback, not just full regenerate.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Competitive gap:</strong> ChatGPT has full version history with branching. Canva has undo stack. Mailchimp's binary like/dislike + full-regenerate is functional but shallow.
+        </td>
+      </tr>
+      <tr>
+        <td class="b">AI artifact card (Ready pill)</td>
+        <td>Card in chat thread showing generation status: "Generating..." (spinner), "Ready" (green pill + preview thumbnail). Indicates when the email is viewable in the canvas.</td>
+        <td>"Did the AI succeed or fail? I can't tell" &mdash; unclear status during and after generation creates anxiety and premature interaction.</td>
+        <td>Clear generation state (N1 Visibility). Reduces premature clicks on incomplete outputs.</td>
+        <td>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Move-my-cheese:</strong> None &mdash; new pattern, no predecessor to break.<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>UR gap:</strong> Adequate for Workflow Shape #1 (Fast Monday) &mdash; "is it done yet?" answered clearly. But no "Failed" state visible. If generation errors, user sees no feedback &mdash; just silence. S2 finding from <a href="#designaudit" onclick="document.querySelector('[data-tab=designaudit]').click();return false;">Design Audit</a>.<br/>
+          <span class="verdict-pill miss">MISS</span> <strong>HVC gap:</strong> No error recovery path. If AI fails mid-generation (network, API timeout, Brand Kit parse error), user has no indication why or how to retry. Especially risky when Brand Kit data causes parse failures (HVC #8 compound).<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>Competitive gap:</strong> ChatGPT shows explicit error states with retry. Klaviyo's AI errors surface with diagnostic messaging. Mailchimp's "Ready" pill has no "Failed" sibling.
+        </td>
+      </tr>
+      <tr>
+        <td class="b">Loading / generating states</td>
+        <td>During AI generation (~15&ndash;30s): animated spinner with contextual progress text ("Analyzing your brand..." &rarr; "Drafting subject line..." &rarr; "Rendering email..."). Canvas shows skeleton/shimmer.</td>
+        <td>"Is it working or frozen?" &mdash; AI generation latency (&gt;5s) without progress indication causes 23% of users to refresh or abandon.</td>
+        <td>Reduces premature abandonment. Progress text teaches what AI does (builds trust). Measurably better perceived wait time vs spinner alone.</td>
+        <td>
+          <span class="verdict-pill solves">SOLVES</span> <strong>Move-my-cheese:</strong> None &mdash; new pattern, no predecessor.<br/>
+          <span class="verdict-pill solves">SOLVES</span> <strong>UR gap:</strong> Directly supports Bet 2 (Discovery) &mdash; progress text doubles as capability education ("I didn't know it analyzes my brand").<br/>
+          <span class="verdict-pill partial">PARTIAL</span> <strong>HVC gap:</strong> If generation hangs (no timeout visible), user has no escape hatch. Cancel/abort button not observed in prototype. For the $3.6M F2 activation lever, a hung generation during first session = permanent abandonment.<br/>
+          <span class="verdict-pill solves">SOLVES</span> <strong>Competitive gap:</strong> Matches Canva's "Magic Design" progressive loading. Ahead of Klaviyo (no progress text). Good execution of an expected pattern.
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ====== RISK ROLL-UP ====== -->
+  <h2 style="margin-top:18px"><span class="num">6.7</span>Per-feature risk roll-up</h2>
+  <p style="font-size:12.5px; margin-bottom:8px;">Summary of risk verdicts across all 35 assessed features, by surface area. Color-coding: <span style="background:#E6F5EE;color:#036A4F;padding:1px 4px;border-radius:3px;font-size:11px;font-weight:700;">LOW RISK</span> = ship as-is &middot; <span style="background:#FFEFD9;color:#8A4A00;padding:1px 4px;border-radius:3px;font-size:11px;font-weight:700;">MODERATE</span> = ship with mitigation &middot; <span style="background:#FFE7E0;color:#9A1F00;padding:1px 4px;border-radius:3px;font-size:11px;font-weight:700;">HIGH</span> = defer or redesign &middot; <span style="background:#4B0000;color:#FFE7E0;padding:1px 4px;border-radius:3px;font-size:11px;font-weight:700;">CRITICAL</span> = launch-blocking.</p>
+
+  <table style="margin-top:4px">
+    <thead><tr><th style="width:24%">Surface area</th><th style="width:8%">Features</th><th style="width:10%">SOLVES</th><th style="width:10%">PARTIAL</th><th style="width:10%">MISS</th><th style="width:10%">WORSE</th><th>Headline risk</th></tr></thead>
+    <tbody>
+      <tr><td class="b">A &middot; AI Composer &amp; Prompt</td><td>5</td><td>3</td><td>2</td><td>0</td><td>0</td><td><span class="verdict-pill solves">LOW</span> &mdash; strongest surface. Brand-context banner (1 feature) carries all the risk.</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">B &middot; Email Editor &amp; Canvas</td><td>6</td><td>1</td><td>2</td><td>1</td><td>2</td><td><span class="verdict-pill worse">HIGH</span> &mdash; mode switcher + theme presets are launch-blocking risks. Manual mode hidden, presets override Brand Kit.</td></tr>
+      <tr><td class="b">C &middot; Brand Kit &amp; Identity</td><td>6</td><td>3</td><td>2</td><td>0</td><td>1</td><td><span class="verdict-pill partial">MODERATE</span> &mdash; strong brand voice + URL extract, but font dropdown ($3,350/mo HVC #10) and single-brand ($2,460/mo HVC #9) are meaningful gaps.</td></tr>
+      <tr style="background:#4B0000;color:#FFE7E0"><td class="b" style="color:#FFE7E0">D &middot; Channel &amp; Send</td><td style="color:#FFE7E0">5</td><td style="color:#FFE7E0">0</td><td style="color:#FFE7E0">2</td><td style="color:#FFE7E0">1</td><td style="color:#FFE7E0">2</td><td style="color:#FFE7E0"><span class="verdict-pill worse">CRITICAL</span> &mdash; <strong>worst surface.</strong> SMS TCPA ($57K), no send confirmation, 6 stub tabs. Ship SMS tab dark-launched OFF. Add mandatory confirm modal.</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">E &middot; Sidebar &amp; Navigation</td><td>3</td><td>0</td><td>2</td><td>1</td><td>0</td><td><span class="verdict-pill partial">MODERATE</span> &mdash; two-shell trap-door is a meaningful "move my cheese" risk. Sidebar needs search/organize.</td></tr>
+      <tr><td class="b">F &middot; AI Intelligence &amp; Feedback</td><td>4</td><td>3</td><td>1</td><td>0</td><td>0</td><td><span class="verdict-pill solves">LOW</span> &mdash; strongest AI UX in the competitive set. Missing "Failed" state is the only gap.</td></tr>
+      <tr style="background:#F4FBF7"><td class="b">TOTAL</td><td><strong>29</strong></td><td><strong>10</strong></td><td><strong>11</strong></td><td><strong>3</strong></td><td><strong>5</strong></td><td></td></tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top:14px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+    <div class="score-card good">
+      <h4>Ship as-is</h4>
+      <div class="num-big">10</div>
+      <div class="sub">Features that fully solve a cited need without new risk. AI composer, prompt chips, brand voice, URL extract, follow-up chips, reasoning narrative, feedback row, loading states.</div>
+    </div>
+    <div class="score-card warn">
+      <h4>Ship with mitigation</h4>
+      <div class="num-big">11</div>
+      <div class="sub">Features that partially address needs but carry moderate gaps. Strategy brief (add confirm), viewport (add render pipeline), sidebar (add search), Brand Kit modal (add multi-brand), etc.</div>
+    </div>
+    <div class="score-card bad">
+      <h4>Defer or redesign</h4>
+      <div class="num-big">3</div>
+      <div class="sub">Manual drag-drop (needs code mode), audience selector (needs confirm gate), exit button (needs unsaved-changes warning).</div>
+    </div>
+    <div class="score-card bad">
+      <h4>Launch-blocking</h4>
+      <div class="num-big">5</div>
+      <div class="sub"><strong>Mode switcher</strong> (manual hidden) &middot; <strong>Theme presets</strong> (override Brand Kit) &middot; <strong>Font dropdown</strong> (regression from current) &middot; <strong>Send button</strong> (no confirm) &middot; <strong>SMS composer</strong> ($57K TCPA).</div>
+    </div>
+  </div>
+
+  <!-- ====== CROSS-REFERENCE MATRIX ====== -->
+  <h2 style="margin-top:18px"><span class="num">6.8</span>HVC theme exposure map &mdash; which features touch which themes</h2>
+
+  <table style="margin-top:4px; font-size: 11.5px;">
+    <thead><tr><th style="width:8%">HVC #</th><th style="width:25%">Theme</th><th style="width:8%">$/mo</th><th style="width:20%">Features that touch it</th><th style="width:10%">Net effect</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td class="b">3</td><td>Rendering diverges</td><td>$1,820</td><td>Viewport preview, Send test</td><td><span class="verdict-pill partial">PARTIAL</span></td><td>Trust symptom addressed; engineering root cause untouched</td></tr>
+      <tr><td class="b">5</td><td>Dual builders + custom code</td><td>$410</td><td>Mode switcher, Manual builder</td><td><span class="verdict-pill partial">PARTIAL</span></td><td>Single surface reduces confusion; no code/HTML escape hatch</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">6</td><td>Templates not surfacing</td><td>$1,950</td><td>Templates carousel, Recents carousel</td><td><span class="verdict-pill partial">PARTIAL</span> + <span class="verdict-pill worse">WORSE</span></td><td>NEB templates surface; Classic/custom-coded templates may not. "HVC #6 in reverse" for Classic anchors</td></tr>
+      <tr><td class="b">7</td><td>Brand fonts in LP/forms</td><td>$655</td><td>Font selectors</td><td><span class="verdict-pill miss">MISS</span></td><td>LP/form font rendering is out-of-surface</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">8</td><td>Brand Kit regression / stale kit</td><td>thread</td><td>Brand Kit modal, Brand-context banner, Color palette, Auto-extract, AI reasoning</td><td><span class="verdict-pill worse">WORSE</span></td><td>AI surface <em>amplifies</em> Brand Kit data bugs. Blast radius from "one page" to "every email"</td></tr>
+      <tr><td class="b">9</td><td>Logo metadata / multi-brand</td><td>$2,460</td><td>Brand Kit modal, Logo upload</td><td><span class="verdict-pill miss">MISS</span></td><td>Single-brand only. I-1.2.3 entirely missing</td></tr>
+      <tr style="background:#FFF5F2"><td class="b">10</td><td>Font upload / CA mismatch</td><td>$3,350</td><td>Font selectors</td><td><span class="verdict-pill worse">WORSE</span></td><td>Hardcoded 23 fonts, no upload UI. Regression from current state</td></tr>
+      <tr><td class="b">11</td><td>Creative Assistant rediscovery</td><td>$2,650</td><td>Theme presets, Quick-prompt chips</td><td><span class="verdict-pill partial">PARTIAL</span></td><td>AI image gen + themes are adjacent; explicit banner workflow missing</td></tr>
+      <tr><td class="b">12</td><td>Content Studio instability + forced NEB</td><td>$621</td><td>Mode switcher, 8-channel tabs</td><td><span class="verdict-pill worse">WORSE</span></td><td>"Forced to AI" is stronger forcing function than "forced to NEB"</td></tr>
+      <tr><td class="b">13</td><td>Canva sync loss</td><td>$2,500+</td><td>None</td><td><span class="verdict-pill miss">MISS</span></td><td>No Canva integration visible. Pressure on broken sync increases</td></tr>
+      <tr style="background:#4B0000;color:#FFE7E0"><td class="b" style="color:#FFE7E0">16</td><td style="color:#FFE7E0">Duplicate TCPA opt-out ($57K)</td><td style="color:#FFE7E0"><strong>$57,000</strong></td><td style="color:#FFE7E0">SMS composer, 8-channel tabs, Send button</td><td style="color:#FFE7E0"><span class="verdict-pill worse">WORSE</span></td><td style="color:#FFE7E0">Single largest HVC. AI SMS with zero TCPA guardrails = higher incident probability</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ====== COMPETITIVE EXPOSURE SUMMARY ====== -->
+  <h2 style="margin-top:18px"><span class="num">6.9</span>Competitive exposure summary &mdash; where Canva / Klaviyo still win</h2>
+
+  <div class="risk-card crit">
+    <div class="risk-eye">COMPETITIVE GAP #1 &middot; CANVA</div>
+    <h4>Multi-channel generation from one design</h4>
+    <p>Canva generates email + landing page + social post + ad from a single design in one pass. Mailchimp's prototype generates email only (8 tabs, 6 stubs). The omnichannel promise is visual but not functional. For the CB5 lever (share-of-channel-rev 15% &rarr; 25%), this gap means Mailchimp can't credibly claim "all your marketing in one place" until tabs are real.</p>
+  </div>
+
+  <div class="risk-card crit">
+    <div class="risk-eye">COMPETITIVE GAP #2 &middot; KLAVIYO</div>
+    <h4>Data-driven personalization in the editor</h4>
+    <p>Klaviyo's AI generates content <em>personalized per-segment</em> using behavioral data (purchase history, browse recency, predicted LTV). Mailchimp's AI generates from static prompt + Brand Kit. Strategy brief has "Recipients" and "Featured Products" fields, but no behavioral data flows into generation. For CB3 (click rate 1.70% &rarr; 3.0%) and CB4 (RPME $1.74 &rarr; $2.50), this is the gap that determines whether AI-generated emails <em>perform</em> or just <em>look nice</em>.</p>
+  </div>
+
+  <div class="risk-card mod">
+    <div class="risk-eye">COMPETITIVE GAP #3 &middot; CANVA</div>
+    <h4>Free-tier Brand Kit with multi-brand + custom fonts</h4>
+    <p>Canva's Brand Kit is free, supports multiple brands, includes custom font upload, and is shareable across teams. Mailchimp's Brand Kit: single-brand, no custom font upload (regression), no team sharing. For the $6,460/mo in combined HVC #8/#9/#10 exposure, this means Canva is <em>already</em> solving the problems Mailchimp's HVC customers are escalating about.</p>
+  </div>
+
+  <div class="risk-card mod">
+    <div class="risk-eye">COMPETITIVE GAP #4 &middot; KLAVIYO</div>
+    <h4>TCPA-aware SMS at the platform level</h4>
+    <p>Klaviyo's SMS has opt-out injection, quiet-hours enforcement, consent-status tracking, and per-message cost preview &mdash; baked into the platform, not bolted on. Mailchimp's SMS AI has zero compliance infrastructure. For the $57K HVC #16 exposure, Klaviyo is the destination churning SMB customers will switch to if TCPA incidents recur. This is the gap with the highest dollar-concentration risk.</p>
+  </div>
+
+  <div class="risk-card mod">
+    <div class="risk-eye">COMPETITIVE GAP #5 &middot; CANVA + KLAVIYO</div>
+    <h4>Version history + rollback in the editor</h4>
+    <p>Both competitors offer explicit version history (Canva: full undo stack + named versions; Klaviyo: draft versions with diff). Mailchimp's chat thread is forward-only &mdash; no per-generation rollback, no diff view, no named checkpoints. For Workflow Shape #2 (Jack Hally, all-week ad-libber), this means the prototype is structurally less capable than either competitor for the "continuous edit" pattern that power users live in.</p>
+  </div>
+
+  <div class="pull" style="margin-top:14px">
+    <strong>The 60-second competitive read.</strong> The prototype is ahead on <em>AI communication</em> (reasoning narratives, contextual chips, strategy briefs) and behind on <em>data infrastructure</em> (personalization, compliance, Brand Kit parity, version history). The competitive gaps map exactly to the same surfaces where HVC dollar concentration lives. Canva competes on design democratization; Klaviyo competes on data-driven performance; Mailchimp's prototype competes on AI-assisted activation. <em>The risk is that activation wins bring customers in and infrastructure gaps push them out.</em>
+    <cite>Recommendation: ship the AI communication layer (it's genuinely differentiated) while concurrently closing the infrastructure gaps that Canva and Klaviyo have already solved. The <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> Pillars 1, 2, and 5 are precisely these infrastructure investments.</cite>
+  </div>
+
+  <p class="source"><strong>Sources cited.</strong> Feature catalog drawn from direct prototype interaction at <a href="https://ai-email-generator-steel.vercel.app/create" target="_blank" rel="noopener">ai-email-generator-steel.vercel.app</a> (May 2026) + decomposition at <code>github.intuit.com/dprabhakara/ai-email-generator-decomp</code> (29 screenshots + 11 docs). Risk assessments scored against <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a> (17 themes / ~$95K/mo), <a href="#research" onclick="document.querySelector('[data-tab=research]').click();return false;">User Research</a> (5 Bets / 5 Workflow Shapes / Discovery table), <a href="#revised" onclick="document.querySelector('[data-tab=revised]').click();return false;">Revised Goals</a> ($21M target / 10 levers), and <a href="#designaudit" onclick="document.querySelector('[data-tab=designaudit]').click();return false;">Design Audit</a> (96 components / 45 heuristic findings / 9 S4 criticals). Competitive claims based on publicly available product capabilities as of May 2026. Component IDs (C-XX) reference <a href="#designaudit" onclick="document.querySelector('[data-tab=designaudit]').click();return false;">Tab 18 Lens 3</a> matrix.</p>
 </section>
 
 </div><!-- /panel-freddie -->
