@@ -1,0 +1,935 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Freddie Deepak's Phase 1 &mdash; Mailchimp campaign creation surface, 10 extensions</title>
+<title>Freddie Deepak Phase 2 &mdash; Phase 2 specs · send-time intelligence layer</title>
+<meta name="description" content="Freddie Deepak Phase 2 design spec: eight Mailchimp-native capabilities from the Canva-gap roadmap (orchestration, performance loop, send-time personalization, asset studio, localization, AMP, Shield, cross-domain agent). Continues Phase 1 component discipline; proposes C-98–C-102. Companion playable prototype in freddie-deepak-phase2-prototype/." />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  /* ========================================================== */
+  /* POSTER CHROME (inherited from mailchimp-editor.html)        */
+  /* This is the brief-site visual language: amber + Inter.      */
+  /* ========================================================== */
+  :root {
+    --ink: #0E1116;
+    --ink-2: #1F2937;
+    --muted: #4B5563;
+    --line: #E5E7EB;
+    --line-2: #D1D5DB;
+    --bg: #F8F7F4;
+    --paper: #FFFFFF;
+    --brand: #C28A00;
+    --brand-2: #FF7A1A;
+    --good: #047857;
+    --warn: #B45309;
+    --bad: #B91C1C;
+    --chip: #FFF6D9;
+    --chip-ink: #6B4A00;
+    --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.45;
+  }
+  .toolbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(248,247,244,.85);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .toolbar-inner {
+    max-width: 1180px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; gap: 12px;
+  }
+  .brand-mark {
+    display:flex; align-items:center; gap:10px;
+    font-weight: 700; font-size: 14px; color: var(--ink-2);
+  }
+  .brand-dot { width: 10px; height: 10px; border-radius: 3px; background: #FFE01B; box-shadow: 0 0 0 3px rgba(255,224,27,.35); border: 1px solid #C28A00; }
+  .toolbar a.btn, .toolbar button.btn {
+    border: 1px solid var(--line-2);
+    background: var(--paper);
+    color: var(--ink-2);
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .toolbar .btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .toolbar .btn:hover { transform: translateY(-1px); }
+  .anchor-strip {
+    background: var(--paper);
+    border-bottom: 1px solid var(--line);
+    padding: 8px 20px;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .anchor-strip a {
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--muted);
+    background: var(--chip);
+    border: 1px solid #F2E8C2;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-right: 6px;
+    text-decoration: none;
+  }
+  .anchor-strip a:hover { color: var(--chip-ink); }
+
+  .page-wrap { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+
+  .page {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 28px 32px 26px;
+    margin-bottom: 22px;
+  }
+  .page-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700;
+  }
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 30px;
+    line-height: 1.15;
+    margin: 6px 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; }
+  .meta {
+    text-align: right;
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .meta strong { color: var(--ink-2); }
+  @media (max-width: 880px) {
+    .page { padding: 20px; }
+    h1 { font-size: 24px; }
+  }
+  h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px;
+    margin: 18px 0 8px;
+    letter-spacing: -0.005em;
+  }
+  h2 .num {
+    display: inline-block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 800;
+    color: var(--chip-ink);
+    background: var(--chip);
+    padding: 2px 6px;
+    border-radius: 4px;
+    margin-right: 8px;
+    transform: translateY(-2px);
+    letter-spacing: .08em;
+  }
+  h3 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px;
+    margin: 12px 0 4px;
+  }
+  p { margin: 0 0 8px; font-size: 13.5px; color: var(--ink-2); }
+  ul { margin: 4px 0 8px; padding-left: 18px; }
+  li { font-size: 13px; color: var(--ink-2); margin-bottom: 4px; }
+  li strong { color: var(--ink); }
+  code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; background: #F1F2F4; padding: 1px 5px; border-radius: 3px; color: var(--ink-2); }
+
+  .card {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+  .card.tinted { background: #FFFCF0; border-color: #F2E8C2; }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
+  .kpi {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFB 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .kpi .v {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 22px;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .kpi .l { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 6px; }
+  .chip {
+    background: var(--chip);
+    color: var(--chip-ink);
+    border-radius: 999px;
+    padding: 3px 9px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: .01em;
+    border: 1px solid #F2E8C2;
+  }
+  .chip.warm { background: #FFEFE0; color: #9A4A00; border-color: #FCD9B6; }
+  .chip.green { background: #E6F5EE; color: #036A4F; border-color: #BFE6D3; }
+  .chip.gray { background: #F1F2F4; color: #374151; border-color: #E2E5EA; }
+  .chip.red { background: #FFE7E0; color: #9A1F00; border-color: #FCD0BF; }
+  .chip.blue { background: #E0EDFF; color: #0F4A8F; border-color: #BFD7F7; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: #FAFAFB;
+  }
+  td.cid { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 11.5px; color: var(--ink-2); }
+
+  .pull {
+    border-left: 3px solid var(--brand);
+    padding: 8px 12px;
+    background: #FFFCF0;
+    border-radius: 6px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14px;
+    color: var(--ink-2);
+    margin: 14px 0;
+  }
+  .pull cite {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 6px;
+    font-style: normal;
+  }
+  .source {
+    font-size: 10.5px; color: var(--muted);
+    border-top: 1px dashed var(--line);
+    margin-top: 14px;
+    padding-top: 10px;
+  }
+  .source a { color: var(--muted); text-decoration: underline; text-underline-offset: 2px; }
+
+  /* Wireframe ASCII blocks */
+  pre.wireframe {
+    background: #FAFAFB;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11px;
+    line-height: 1.5;
+    color: var(--ink-2);
+    overflow-x: auto;
+    margin: 8px 0;
+  }
+
+  /* Per-feature card with hierarchy */
+  .feature-card {
+    border-left: 4px solid var(--brand);
+    background: #FFFCF0;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+  }
+  .feature-card .feature-head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .feature-card .feature-num {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 14px;
+    color: var(--brand);
+    background: var(--paper);
+    padding: 3px 8px;
+    border-radius: 6px;
+    border: 1px solid #F2E8C2;
+  }
+  .feature-card h3 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 17px;
+    margin: 0;
+  }
+  .feature-card .feature-meta {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 4px;
+    margin-bottom: 10px;
+  }
+  .feature-card .lbl {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    font-weight: 700;
+    color: var(--muted);
+    margin: 10px 0 4px;
+  }
+
+  /* Heatmap table styling */
+  .heatmap td {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 11px;
+    text-align: center;
+  }
+  .heatmap td.feature {
+    font-family: 'Inter', sans-serif;
+    text-align: left;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .heatmap td.fill { background: #FFFCF0; color: var(--chip-ink); }
+  .heatmap td.fill.heavy { background: #FFF3CC; }
+
+  /* Parity matrix cells */
+  .parity td.full { background: #E6F5EE; color: #036A4F; font-weight: 700; }
+  .parity td.partial { background: #FFEFD9; color: #8A4A00; font-weight: 700; }
+  .parity td.na { background: #F1F2F4; color: #4B5563; font-style: italic; }
+
+  /* Constraint rule callout */
+  .rule {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 12px;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    align-items: center;
+  }
+  .rule:last-child { border-bottom: none; }
+  .rule .id {
+    font-family: 'Inter', sans-serif;
+    font-weight: 800;
+    font-size: 13px;
+    color: var(--brand);
+  }
+  .rule .desc { font-size: 13px; color: var(--ink-2); }
+
+  /* ========================================================== */
+  /* MCDS FRAME (Freddie design-system tokens)                   */
+  /* This scope renders wireframe mockups in the prototype's     */
+  /* actual visual language: teal + Graphik-feel + lv5 radii.    */
+  /* ========================================================== */
+  .fdpx-mcds-frame {
+    /* mcds semantic tokens */
+    --color-bg-primary: #FFFFFF;
+    --color-bg-secondary: #F8FAFB;
+    --color-bg-tertiary: #F0F4F6;
+    --color-bg-user-bubble: #F0F4F6;
+    --color-bg-hover: #F0F4F6;
+    --color-text-primary: #21262A;
+    --color-text-secondary: #4C555B;
+    --color-text-tertiary: #727E85;
+    --color-text-on-dark: #FFFFFF;
+    --color-accent-blue: #017E89;
+    --color-accent-blue-hover: #006771;
+    --color-accent-blue-light: #E0EDFF;
+    --color-border-default: #E2E9ED;
+    --color-border-selection: #017E89;
+    --color-action-special-use: #FFE01B;
+    --color-ui-negative: #DB334D;
+    --border-radius-lv0: 0;
+    --border-radius-lv1: 2px;
+    --border-radius-lv2: 4px;
+    --border-radius-lv3: 8px;
+    --border-radius-lv4: 12px;
+    --border-radius-lv5: 38px;
+    --border-radius-lv6: 9999px;
+    --elevation-lv1: 0 2px 2px 0 rgba(76,85,91,.2);
+    --elevation-lv2: 0 2px 8px 0 rgba(76,85,91,.2);
+    --elevation-lv3: 0 4px 16px 0 rgba(76,85,91,.2);
+
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-lv4);
+    padding: 24px;
+    margin: 12px 0;
+    font-family: 'Inter', "Helvetica Neue", Helvetica, Arial, Verdana, sans-serif;
+    color: var(--color-text-primary);
+  }
+  .fdpx-mcds-frame .mcds-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    font-weight: 700;
+    color: var(--color-text-tertiary);
+    margin-bottom: 12px;
+  }
+  .fdpx-mcds-frame h4.mcds-h1 {
+    font-family: 'Source Serif 4', Georgia, "Times New Roman", serif;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1.2;
+    margin: 8px 0 4px;
+    color: var(--color-text-primary);
+  }
+  .fdpx-mcds-frame .mcds-sub {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+  }
+  .fdpx-mcds-frame .mcds-composer {
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-lv5);
+    padding: 14px 18px;
+    margin: 10px 0;
+    box-shadow: var(--elevation-lv1);
+  }
+  .fdpx-mcds-frame .mcds-composer-input {
+    font-size: 14px;
+    color: var(--color-text-tertiary);
+    padding: 4px 0 10px;
+  }
+  .fdpx-mcds-frame .mcds-composer-actions {
+    display: flex; gap: 10px; align-items: center; justify-content: space-between;
+    padding-top: 8px;
+    border-top: 1px solid var(--color-border-default);
+  }
+  .fdpx-mcds-frame .mcds-icon-btn {
+    width: 28px; height: 28px;
+    border-radius: var(--border-radius-lv2);
+    background: transparent;
+    border: none;
+    color: var(--color-text-secondary);
+    font-size: 14px;
+    cursor: pointer;
+  }
+  .fdpx-mcds-frame .mcds-icon-btn:hover { background: var(--color-bg-hover); }
+  .fdpx-mcds-frame .mcds-cta {
+    background: var(--color-accent-blue);
+    color: var(--color-text-on-dark);
+    padding: 7px 14px;
+    border-radius: var(--border-radius-lv6);
+    font-size: 13px;
+    font-weight: 600;
+    border: none;
+  }
+  .fdpx-mcds-frame .mcds-cta-secondary {
+    background: transparent;
+    color: var(--color-text-primary);
+    padding: 7px 14px;
+    border-radius: var(--border-radius-lv6);
+    font-size: 13px;
+    font-weight: 600;
+    border: 1px solid var(--color-border-default);
+  }
+  .fdpx-mcds-frame .mcds-brand-banner {
+    background: var(--color-accent-blue-light);
+    border-radius: var(--border-radius-lv3);
+    padding: 10px 14px;
+    font-size: 12.5px;
+    color: var(--color-text-primary);
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+    margin: 10px 0;
+  }
+  .fdpx-mcds-frame .mcds-chip-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .fdpx-mcds-frame .mcds-chip {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-secondary);
+    border-radius: var(--border-radius-lv6);
+    padding: 6px 12px;
+    font-size: 12px;
+    border: 1px solid var(--color-border-default);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .fdpx-mcds-frame .mcds-chip.memory {
+    background: #FFFBE6;
+    color: #6B5400;
+    border-color: #F2E2A8;
+  }
+  .fdpx-mcds-frame .mcds-snowflake {
+    display: inline-block;
+    width: 24px; height: 24px;
+    background: linear-gradient(135deg, #017E89, #4472c4);
+    color: white;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 24px;
+    font-size: 13px;
+    font-weight: 700;
+  }
+  .fdpx-mcds-frame .mcds-tag {
+    display: inline-block;
+    font-size: 9.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    padding: 2px 7px;
+    border-radius: var(--border-radius-lv2);
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-secondary);
+    border: 1px solid var(--color-border-default);
+    margin-left: 6px;
+  }
+  .fdpx-mcds-frame .mcds-cid-callout {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 9.5px;
+    color: var(--color-text-tertiary);
+    background: var(--color-bg-secondary);
+    padding: 1px 5px;
+    border-radius: 3px;
+    border: 1px dashed var(--color-border-default);
+  }
+
+  /* Channel-split row inside mcds frame */
+  .mcds-channel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 14px;
+    margin-top: 12px;
+  }
+  .mcds-channel-grid > div {
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-lv3);
+    padding: 12px 14px;
+  }
+  .mcds-channel-grid h5 {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    font-weight: 700;
+    color: var(--color-text-tertiary);
+    margin: 0 0 8px;
+  }
+  .mcds-channel-grid p { font-size: 12px; color: var(--color-text-primary); margin: 0; }
+
+  /* Editor canvas mock */
+  .mcds-editor {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    gap: 14px;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-lv3);
+    padding: 14px;
+  }
+  .mcds-editor .chat-side {
+    background: var(--color-bg-secondary);
+    border-radius: var(--border-radius-lv3);
+    padding: 12px;
+    font-size: 12px;
+  }
+  .mcds-editor .canvas-side {
+    background: var(--color-bg-tertiary);
+    border-radius: var(--border-radius-lv3);
+    padding: 18px;
+    position: relative;
+    min-height: 180px;
+  }
+  .mcds-editor .canvas-hero {
+    background: linear-gradient(135deg, #4472c4 0%, #017E89 100%);
+    height: 100px;
+    border-radius: var(--border-radius-lv3);
+    margin-bottom: 10px;
+    position: relative;
+    border: 2px solid var(--color-accent-blue);
+  }
+  .mcds-editor .canvas-hero.selected::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    border: 2px dashed var(--color-accent-blue);
+    border-radius: var(--border-radius-lv3);
+  }
+  .mcds-editor .image-popover {
+    position: absolute;
+    top: 110px;
+    left: 32px;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-lv3);
+    padding: 8px;
+    box-shadow: var(--elevation-lv2);
+    z-index: 5;
+    font-size: 11.5px;
+  }
+  .mcds-editor .image-popover .pop-row {
+    padding: 5px 8px;
+    border-radius: var(--border-radius-lv2);
+  }
+  .mcds-editor .image-popover .pop-row:hover { background: var(--color-bg-hover); }
+  .mcds-editor .canvas-line {
+    height: 8px;
+    background: var(--color-border-default);
+    border-radius: 2px;
+    margin: 6px 0;
+  }
+  .mcds-editor .canvas-line.long { width: 70%; }
+  .mcds-editor .canvas-line.short { width: 40%; }
+  .mcds-editor .preview-diff {
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-lv3);
+    padding: 8px;
+    margin: 8px 0;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+  }
+  .mcds-editor .preview-diff .thumb {
+    width: 40px; height: 30px;
+    background: linear-gradient(135deg, #c5d2e2, #017E89);
+    border-radius: 3px;
+  }
+  .mcds-editor .preview-diff .arrow { color: var(--color-text-tertiary); }
+
+  /* Brand Kit modal mock */
+  .mcds-brandkit {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    gap: 16px;
+    background: var(--color-bg-primary);
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-lv3);
+    padding: 16px;
+    min-height: 360px;
+  }
+  .mcds-brandkit .bk-nav { font-size: 12px; }
+  .mcds-brandkit .bk-nav .bk-item {
+    padding: 7px 10px;
+    border-radius: var(--border-radius-lv2);
+    color: var(--color-text-secondary);
+    margin-bottom: 2px;
+  }
+  .mcds-brandkit .bk-nav .bk-item.active {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+    font-weight: 600;
+  }
+  .mcds-brandkit .bk-body h5 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    margin: 0 0 8px;
+  }
+  .mcds-brandkit .bk-field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 10px 0;
+  }
+  .mcds-brandkit .bk-field {
+    font-size: 11px;
+    color: var(--color-text-tertiary);
+    text-transform: uppercase;
+    letter-spacing: .06em;
+  }
+  .mcds-brandkit .bk-field-value {
+    font-size: 13px;
+    color: var(--color-text-primary);
+    padding: 7px 10px;
+    border: 1px solid var(--color-border-default);
+    border-radius: var(--border-radius-lv2);
+    background: var(--color-bg-primary);
+    margin-top: 4px;
+  }
+  .mcds-brandkit .bk-profile-row {
+    display: flex; gap: 12px; align-items: center;
+    margin: 10px 0;
+  }
+  .mcds-brandkit .bk-profile-radio {
+    width: 14px; height: 14px;
+    border: 2px solid var(--color-text-tertiary);
+    border-radius: 50%;
+    display: inline-block;
+  }
+  .mcds-brandkit .bk-profile-radio.checked {
+    border-color: var(--color-accent-blue);
+    background: radial-gradient(circle at center, var(--color-accent-blue) 0%, var(--color-accent-blue) 35%, transparent 38%);
+  }
+  .mcds-brandkit .bk-broadcast {
+    background: var(--color-accent-blue-light);
+    border-radius: var(--border-radius-lv3);
+    padding: 10px 14px;
+    margin-top: 14px;
+    font-size: 12.5px;
+    color: var(--color-text-primary);
+    display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--muted);
+    padding: 20px;
+  }
+  footer a { color: var(--muted); }
+
+  @media (max-width: 880px) {
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+    .mcds-editor { grid-template-columns: 1fr; }
+    .mcds-brandkit { grid-template-columns: 1fr; }
+    .mcds-channel-grid { grid-template-columns: 1fr; }
+  }
+</style>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="brand-mark"><span class="brand-dot"></span> Freddie Deepak Phase 2 specs</div>
+    <div style="display:flex;gap:8px;flex-wrap:wrap;">
+      <a class="btn primary" href="freddie-deepak-phase2-prototype/">Playable prototype</a>
+      <a class="btn" href="freddie-deepak-phase1.html">Phase 1 spec</a>
+      <a class="btn" href="mailchimp-editor.html#freddiep2">Editor brief tab</a>
+    </div>
+  </div>
+  <div class="anchor-strip">
+    <a href="#overview">Overview</a>
+    <a href="#constraints">Constraints</a>
+    <a href="#heatmap">Heatmap</a>
+    <a href="#features">Eight features</a>
+    <a href="#components">Components</a>
+    <a href="#execution">Execution</a>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+<section class="page" id="overview">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Section 1 of 6 · Phase 2 positioning</div>
+      <h1>Freddie Deepak Phase 2 — where Mailchimp wins permanently</h1>
+      <div class="subtitle">Phase 1 closed the <strong>creative parity</strong> gap vs. generalist design tools. Phase 2 maps the next eight capabilities from the same Canva-gap analysis into <strong>Mailchimp primitives</strong>: orchestrated sends, live performance feedback, assembly-time personalization, governed multi-channel assets, compliance-first localization, AMP, enterprise Shield, and a cross-domain Freddie agent. This document is the spec pair to <a href="freddie-deepak-phase1.html">Phase 1</a>.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Prototype:</strong> email-first</div>
+      <div><strong>Features:</strong> 8</div>
+    </div>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="v">8</div><div class="l">capabilities spanning Plan → Send → Govern → Extend</div></div>
+    <div class="kpi"><div class="v">C-98–102</div><div class="l">five new baseline proposals (this phase)</div></div>
+    <div class="kpi"><div class="v">ESP-native</div><div class="l">telemetry + policy + MIME physics competitors lack</div></div>
+    <div class="kpi"><div class="v">1 loop</div><div class="l">performance data → scoped canvas edits</div></div>
+  </div>
+
+  <div class="pull">
+    Phase 2 is deliberately <strong>not “more stickers.”</strong> It is send-time truth: the same object model that powers orchestration is the one that records approvals, evaluates Shield policies, and serves AMP with static fallbacks.
+    <cite>Name cue: stakeholders asked for this tab to appear as <strong>“Freddie Deepak Phase 2 specs”</strong> (editor brief) — file + toolbar title align to that.</cite>
+  </div>
+
+  <h2><span class="num">1.1</span>Relationship to Phase 1</h2>
+  <p>Phase 1 extended composer, manual rail, Brand Kit, settings, and MCP with ten creative-depth features. Phase 2 assumes those surfaces exist and adds <strong>downstream operational AI</strong>: agent runs with gates, metric-aware refinement, personalization assembly, derivative assets, locale law packs, interactive MIME, governance suite, and federated tool scopes.</p>
+</section>
+
+<section class="page" id="constraints">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Section 2 · Constraint manifest</div>
+      <h1 style="font-size:24px">Inherited rules + Phase 2 deltas</h1>
+      <div class="subtitle">R1–R6 from Phase 1 still apply (tokens, C-ID discipline, honest channel parity). Phase 2 adds <strong>R7-ops</strong> and <strong>R8-policy</strong>.</div>
+    </div>
+    <div class="meta">Spec v1.0 · May 2026</div>
+  </div>
+
+  <h2><span class="num">2.1</span>Load-bearing rules</h2>
+  <div class="card tinted">
+    <div class="rule"><div class="id">R7-ops</div><div class="desc">Every “agentic” action must map to a <strong>workspace object</strong> (campaign, journey step, asset graph entry) with a <strong>checkpoint id</strong> — no orphan LLM traces.</div></div>
+    <div class="rule"><div class="id">R8-policy</div><div class="desc">Personalization and localization features ship with a <strong>suppress + explain</strong> contract: if a cell is blocked, marketers see the rule name, not a silent omission.</div></div>
+    <div class="rule"><div class="id">R4-bis</div><div class="desc">This prototype is <strong>email-first</strong>. SMS/WhatsApp equivalents are backlog unless an affordance is physically identical (e.g., asset crops).</div></div>
+  </div>
+
+  <h2><span class="num">2.2</span>New component proposals (baseline IDs)</h2>
+  <table>
+    <thead><tr><th>C-ID</th><th>Primitive</th><th>Primary feature</th></tr></thead>
+    <tbody>
+      <tr><td class="cid">C-98</td><td>Orchestration timeline / plan graph row</td><td>01 Agentic Orchestrator</td></tr>
+      <tr><td class="cid">C-99</td><td>Live KPI strip (contextual metrics)</td><td>02 Performance Loop</td></tr>
+      <tr><td class="cid">C-100</td><td>AMP module shell + validation status</td><td>06 AMP for Email</td></tr>
+      <tr><td class="cid">C-101</td><td>Shield evaluation summary panel</td><td>07 Mailchimp Shield</td></tr>
+      <tr><td class="cid">C-102</td><td>Cross-domain MCP tool registry row</td><td>08 Cross-domain agent</td></tr>
+    </tbody>
+  </table>
+  <p>Features 03–05 primarily compose Phase 1 primitives (<code>C-46</code>, <code>C-82</code>, <code>C-89</code>, <code>C-23</code>, <code>C-61</code>) with new <strong>/v.phase2-*</strong> variants (register alongside Phase 1’s variant catalog).</p>
+</section>
+
+<section class="page" id="heatmap">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Section 3 · Feature × surface</div>
+      <h1 style="font-size:24px">Where Phase 2 lands in the builder</h1>
+    </div>
+  </div>
+  <table class="heatmap">
+    <thead><tr><th>Feature</th><th>Plan / brief</th><th>Composer</th><th>Editor canvas</th><th>Settings / admin</th><th>Reporting</th></tr></thead>
+    <tbody>
+      <tr><td class="feature">01 Orchestrator</td><td class="fill heavy">●</td><td class="fill">○</td><td class="fill">○</td><td class="fill">○</td><td class="fill">○</td></tr>
+      <tr><td class="feature">02 Performance loop</td><td class="fill">○</td><td class="fill">○</td><td class="fill heavy">●</td><td class="fill">○</td><td class="fill heavy">●</td></tr>
+      <tr><td class="feature">03 Send-time personalization</td><td class="fill">○</td><td class="fill heavy">●</td><td class="fill heavy">●</td><td class="fill">○</td><td class="fill">○</td></tr>
+      <tr><td class="feature">04 Asset studio</td><td class="fill">○</td><td class="fill">○</td><td class="fill heavy">●</td><td class="fill heavy">●</td><td class="fill">○</td></tr>
+      <tr><td class="feature">05 Localization</td><td class="fill heavy">●</td><td class="fill">○</td><td class="fill heavy">●</td><td class="fill heavy">●</td><td class="fill">○</td></tr>
+      <tr><td class="feature">06 AMP email</td><td class="fill">○</td><td class="fill">○</td><td class="fill heavy">●</td><td class="fill">○</td><td class="fill">○</td></tr>
+      <tr><td class="feature">07 Shield</td><td class="fill">○</td><td class="fill">○</td><td class="fill">○</td><td class="fill heavy">●</td><td class="fill heavy">●</td></tr>
+      <tr><td class="feature">08 Cross-domain agent</td><td class="fill">○</td><td class="fill heavy">●</td><td class="fill">○</td><td class="fill heavy">●</td><td class="fill">○</td></tr>
+    </tbody>
+  </table>
+  <p class="source">● primary surface · ○ secondary touches. Heatmap is directional for staffing, not a maturity score.</p>
+</section>
+
+<section class="page" id="features">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Section 4 · Capability definitions</div>
+      <h1 style="font-size:24px">Eight Phase 2 features (Canva AI → Mailchimp)</h1>
+    </div>
+  </div>
+
+  <div class="feature-card" id="f2-01">
+    <div class="feature-head"><span class="feature-num">01</span><h3>Agentic Campaign Orchestrator</h3></div>
+    <div class="feature-meta">Plan graph · human checkpoints · audit trails</div>
+    <p>Freddie proposes multi-step graphs (brief → creative → audience → schedule). Each edge requires explicit approval; exports an <strong>audit row</strong> for Shield. Uses <code>C-98</code> plus existing composer strategy fields.</p>
+    <div class="lbl">Mailchimp wedge</div>
+    <p>Campaign objects already live in Mailchimp — orchestration attaches to real sends, not slides.</p>
+  </div>
+
+  <div class="feature-card" id="f2-02">
+    <div class="feature-head"><span class="feature-num">02</span><h3>Real-Time Campaign Performance Loop</h3></div>
+    <div class="feature-meta">Live KPI strip · anomaly → chat suggestion</div>
+    <p>While editing or reviewing an active send, a <code>C-99</code> strip shows cohort KPIs. On regression, Freddie proposes a <strong>scoped edit</strong> with preview diff (reuses <code>C-43/v.preview-diff</code>).</p>
+  </div>
+
+  <div class="feature-card" id="f2-03">
+    <div class="feature-head"><span class="feature-num">03</span><h3>Send-Time AI Personalization</h3></div>
+    <div class="feature-meta">Assembly matrix · policy suppress with explain</div>
+    <p>Dimensionality (affinity, tier, locale) maps to content cells. Blocked cells surface rule ids (R8-policy). Simulator uses profile fixtures from audience service.</p>
+  </div>
+
+  <div class="feature-card" id="f2-04">
+    <div class="feature-head"><span class="feature-num">04</span><h3>Cross-Channel Asset Studio</h3></div>
+    <div class="feature-meta">Master asset → derivative crops</div>
+    <p>Exports align to channel safe zones; ties into Universal Content / Content Studio roadmap. Changing the master marks derivatives <em>stale</em> with batch refresh.</p>
+  </div>
+
+  <div class="feature-card" id="f2-05">
+    <div class="feature-head"><span class="feature-num">05</span><h3>Compliance-Aware Localization</h3></div>
+    <div class="feature-meta">Locale packs · mandatory footers · tone profiles</div>
+    <p>Packs combine legal text, price/promo rules, and Brand Voice per region. Hard stops prevent schedule when mandatory blocks missing.</p>
+  </div>
+
+  <div class="feature-card" id="f2-06">
+    <div class="feature-head"><span class="feature-num">06</span><h3>AMP for Email</h3></div>
+    <div class="feature-meta">AMP components + static fallback pairing</div>
+    <p><code>C-100</code> wraps validated AMP snippets; publishing emits multipart structure with paired static HTML per best practice.</p>
+  </div>
+
+  <div class="feature-card" id="f2-07">
+    <div class="feature-head"><span class="feature-num">07</span><h3>Mailchimp Shield (governance suite)</h3></div>
+    <div class="feature-meta">PII · claims · approvals matrix</div>
+    <p><code>C-101</code> aggregates scanners + human roles. Designed for enterprise procurement stories (not bolt-on “AI trust badges”).</p>
+  </div>
+
+  <div class="feature-card" id="f2-08">
+    <div class="feature-head"><span class="feature-num">08</span><h3>Cross-Domain Conversational Agent</h3></div>
+    <div class="feature-meta">MCP scopes · Shopify/helpdesk handoff</div>
+    <p>Extends Phase 1 MCP with <code>C-102</code> tool registry rows and per-domain credentials. Same campaign graph surfaces in support context.</p>
+  </div>
+</section>
+
+<section class="page" id="components">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Section 5 · Variant register (excerpt)</div>
+      <h1 style="font-size:24px">Notable variants on existing baselines</h1>
+    </div>
+  </div>
+  <table>
+    <thead><tr><th>Variant ID</th><th>Base</th><th>Feature</th><th>Note</th></tr></thead>
+    <tbody>
+      <tr><td class="cid">C-43/v.performance-suggestion</td><td>Assistant body</td><td>02</td><td>Embeds KPI delta + proposed action</td></tr>
+      <tr><td class="cid">C-46/v.personalization-matrix</td><td>Goal / strategy fields</td><td>03</td><td>Highlights suppressed cells</td></tr>
+      <tr><td class="cid">C-23/v.locale-blocker</td><td>Banner</td><td>05</td><td>Hard-stop with pack id + fix CTA</td></tr>
+      <tr><td class="cid">C-90/v.scoped-mcp-tools</td><td>Token / integrations row</td><td>08</td><td>Lists enabled external tools</td></tr>
+      <tr><td class="cid">C-91/v.shield-section</td><td>Settings popover</td><td>07</td><td>Labeled Shield policies + approvers</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="page" id="execution">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Section 6 · Execution</div>
+      <h1 style="font-size:24px">Build sequence + validation gates</h1>
+    </div>
+  </div>
+
+  <h2><span class="num">6.1</span>Recommended build order</h2>
+  <table>
+    <thead><tr><th>#</th><th>Step</th><th>Features</th><th>Rationale</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>Shield policy engine + audit store</td><td>07, 01</td><td>Orchestrator checkpoints require durable policy evaluation</td></tr>
+      <tr><td>2</td><td>Localization packs + mandatory blocks</td><td>05</td><td>Unblocks international sends before personalization expands</td></tr>
+      <tr><td>3</td><td>Live metrics ingress + C-99 strip</td><td>02</td><td>Feeds the refinement loop early</td></tr>
+      <tr><td>4</td><td>Assembly-time personalization engine</td><td>03</td><td>Uses packs + Shield outcomes</td></tr>
+      <tr><td>5</td><td>Asset derivative graph</td><td>04</td><td>Depends on stable asset IDs from Phase 1 content surfaces</td></tr>
+      <tr><td>6</td><td>AMP validator + MIME publisher</td><td>06</td><td>Isolated pipeline; pair with rendering tests</td></tr>
+      <tr><td>7</td><td>Cross-domain MCP registry</td><td>08</td><td>External OAuth + scoped tokens last</td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">6.2</span>Gates (block GA)</h2>
+  <ul>
+    <li><strong>G-P2-1</strong> Shield must log evaluator version with every send decision.</li>
+    <li><strong>G-P2-2</strong> Personalization matrix must never emit a cell without provenance (rule id or model id).</li>
+    <li><strong>G-P2-3</strong> AMP publishes only with paired static fallback passing pixel-diff parity tests.</li>
+    <li><strong>G-P2-4</strong> Cross-domain tools require explicit workspace opt-in per vendor.</li>
+  </ul>
+
+  <p class="source"><strong>Cross-refs:</strong> <a href="freddie-deepak-phase1.html#execution">Phase 1 execution</a> · <a href="mailchimp-editor.html#designaudit">Design Audit</a> · <a href="https://deepakp1308.github.io/canva-campaign-analysis/">Canva-gap analysis</a></p>
+</section>
+
+</div>
+
+<footer>
+  <p>Freddie Deepak Phase 2 specs · v1.0 · May 2026 · <a href="freddie-deepak-phase2-prototype/">Playable prototype</a> · <a href="freddie-deepak-phase1.html">Phase 1 spec</a> · <a href="mailchimp-editor.html#freddiep2">Editor brief tab</a> · <a href="https://deepakp1308.github.io/canva-campaign-analysis/">Canva-gap source</a></p>
+</footer>
+
+</body>
+</html>

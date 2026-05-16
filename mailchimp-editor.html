@@ -810,6 +810,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="memo">Strategy Memo</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="buildplan">Build Plan</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="freddie">Freddie Assessment</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="freddiep2">Freddie Phase 2 specs</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="designaudit">Design Audit</button>
     </div>
     <div style="display:flex; gap:8px;">
@@ -11576,6 +11577,48 @@ Directional <span class="out">$2&ndash;5M</span> ARR risk (low confidence; polic
 </div><!-- /panel-freddie -->
 
 
+<div class="tabpanel" id="panel-freddiep2" role="tabpanel">
+<style>
+  #panel-freddiep2 td.b { font-weight: 600; color: var(--ink); }
+</style>
+<section class="page" aria-label="Freddie Deepak Phase 2 specs">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Tab 17b &middot; Freddie Deepak Phase 2 (Freddie debug phase two specs)</div>
+      <h1>Phase 2: Canva AI / AI 2.0 → Mailchimp send-time intelligence</h1>
+      <div class="subtitle">Companion to <a href="freddie-deepak-phase1.html">Phase 1</a> (creative depth). Phase 2 translates the eight “permanent win” capabilities from the Canva-gap roadmap into Mailchimp surfaces: orchestration, live performance feedback, send-time personalization, cross-channel asset studio, compliance-aware localization, AMP for email, Mailchimp Shield, and a cross-domain Freddie agent.</div>
+    </div>
+    <div class="meta">
+      <div><strong>Artifacts</strong></div>
+      <div><a class="btn primary" href="freddie-deepak-phase2.html">Readable spec</a></div>
+      <div style="margin-top:6px;"><a class="btn" href="freddie-deepak-phase2-prototype/">Playable prototype</a></div>
+    </div>
+  </div>
+
+  <div class="pull" style="margin-top:12px">
+    <strong>How to use this tab.</strong> Open the <a href="freddie-deepak-phase2.html">spec</a> for constraint manifest, heatmap, per-feature definitions, and execution gates. Open the <a href="freddie-deepak-phase2-prototype/">prototype</a> for an email-first click-through (hash routes like <code>#s201-intro</code>).
+  </div>
+
+  <h2 style="margin-top:18px"><span class="num" style="font-family:'Inter',sans-serif;font-size:10px;font-weight:800;color:var(--brand);background:var(--chip);padding:2px 6px;border-radius:4px;margin-right:8px;">01</span>The eight mapped capabilities</h2>
+  <table style="margin-top:8px">
+    <thead><tr><th>#</th><th>Capability</th><th>Mailchimp angle</th></tr></thead>
+    <tbody>
+      <tr><td class="b">01</td><td class="b">Agentic Campaign Orchestrator</td><td>Plan graph + human checkpoints + audit for every agent step</td></tr>
+      <tr><td class="b">02</td><td class="b">Real-Time Campaign Performance Loop</td><td>Live KPI strip beside the canvas → scoped fix suggestions</td></tr>
+      <tr><td class="b">03</td><td class="b">Send-Time AI Personalization</td><td>Assembly matrix with policy suppress + explain</td></tr>
+      <tr><td class="b">04</td><td class="b">Cross-Channel Asset Studio</td><td>Master asset → channel-safe derivatives (ties to Universal Content)</td></tr>
+      <tr><td class="b">05</td><td class="b">Compliance-Aware Localization</td><td>Locale packs: legal blocks + tone + hard stops before send</td></tr>
+      <tr><td class="b">06</td><td class="b">AMP for Email</td><td>Interactive components with paired static fallback MIME</td></tr>
+      <tr><td class="b">07</td><td class="b">Mailchimp Shield</td><td>PII, claims, approvals — enterprise governance as product UI</td></tr>
+      <tr><td class="b">08</td><td class="b">Cross-Domain Conversational Agent</td><td>MCP tool registry + handoff across Mailchimp, store, helpdesk</td></tr>
+    </tbody>
+  </table>
+
+  <p class="source"><strong>Source list in Phase 1 §7.3</strong> (deliberately out of Phase 1 scope). This spec picks up that list verbatim and expands it. Canva analysis: <a href="https://deepakp1308.github.io/canva-campaign-analysis/">deepakp1308.github.io/canva-campaign-analysis/</a></p>
+</section>
+</div><!-- /panel-freddiep2 -->
+
+
 <div class="tabpanel" id="panel-designaudit" role="tabpanel">
 <style>
   #panel-designaudit h2 .num { display: inline-block; font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 800; color: var(--brand); background: var(--chip); padding: 2px 6px; border-radius: 4px; margin-right: 8px; transform: translateY(-2px); letter-spacing: .08em; }
@@ -12082,7 +12125,7 @@ Lens 5 (Strategy Overlay) ── component_id joins back to ──→ Lens 3 + s
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','revised','migration','repointel','canvas','memo','buildplan','freddie','designaudit'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','revised','migration','repointel','canvas','memo','buildplan','freddie','freddiep2','designaudit'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 

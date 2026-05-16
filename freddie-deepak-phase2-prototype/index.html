@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Freddie Deepak Phase 2 &mdash; Playable Prototype</title>
+<meta name="description" content="Playable storyboard for Freddie Deepak Phase 2: eight Mailchimp-native capabilities mapped from Canva AI / AI 2.0 — agentic orchestration, live performance loop, send-time personalization, cross-channel asset studio, compliance localization, AMP email, Mailchimp Shield, cross-domain agent. Email-first walkthrough." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="chrome" role="banner">
+  <div class="chrome-inner">
+    <div class="brand-mark">
+      <span class="brand-dot"></span>
+      Freddie Deepak Phase 2
+      <span class="brand-mark-sub">· playable prototype</span>
+    </div>
+    <div class="counter" aria-live="polite">
+      <span class="counter-label">Loading…</span>
+      <span class="brand-mark-sub" style="margin-left:10px;font-weight:500;">Email-first</span>
+    </div>
+    <nav class="nav" aria-label="Storyboard navigation">
+      <button type="button" data-nav="prev" aria-label="Previous scene">&larr; Prev</button>
+      <button type="button" data-nav="next" class="primary" aria-label="Next scene">Next &rarr;</button>
+      <a class="btn" href="../freddie-deepak-phase2.html" data-nav="exit">Exit to spec</a>
+    </nav>
+  </div>
+  <div class="chrome-subrow">
+    <p class="chrome-payoff" id="chrome-payoff" aria-live="polite"></p>
+    <div class="chrome-progress-meta">
+      <div class="chrome-progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-label="Walkthrough progress">
+        <div class="chrome-progress-fill" id="chrome-progress-fill"></div>
+      </div>
+      <span class="chrome-progress-label" id="chrome-progress-label" aria-hidden="true"></span>
+    </div>
+  </div>
+</header>
+
+<main class="stage" id="stage">
+
+<section class="scene" data-scene="s2-menu" data-title="Feature menu" aria-label="Feature menu" hidden>
+  <div class="menu-hero">
+    <div>
+      <div class="scene-eyebrow" style="border-bottom:none; padding-bottom:0; margin-bottom:14px;">
+        <span class="scene-eyebrow-num">Phase 2</span> ·
+        <span class="scene-eyebrow-title">8 capabilities · Canva-gap “permanent win” layer</span>
+        <span class="scene-eyebrow-cid"><a href="../freddie-deepak-phase2.html">see the design spec &rarr;</a></span>
+      </div>
+      <h1>What changes when Freddie ships Phase 2.</h1>
+      <p class="lead">
+        Phase 1 deepened creative tooling. <strong>Phase 2</strong> closes the loop around
+        <strong>orchestration, live performance, personalization, compliance, and governance</strong>
+        — the layers where ESPs beat pure design tools. This prototype is email-first; SMS/WhatsApp parity is explicit backlog.
+      </p>
+      <button class="walk-all" data-jump-to="s2-flowintro" data-cid="C-53">
+        Walk all 8 features &rarr;
+      </button>
+    </div>
+    <div class="hero-art" aria-hidden="true"><span class="hero-art-inner"></span></div>
+  </div>
+  <div class="menu-grid" id="feature-menu" role="list"></div>
+</section>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const grid = document.getElementById('feature-menu');
+    if (!grid || !window.FDPX_DATA) return;
+    const done = (sessionStorage.getItem('fdp2_done_features') || '').split(',').filter(Boolean);
+    grid.innerHTML = window.FDPX_DATA.features.map(f => {
+      const doneClass = done.includes(f.num) ? ' menu-tile--done' : '';
+      return `
+      <a class="menu-tile${doneClass}" data-jump-to="s2${f.num}-intro" data-feature-num="${f.num}" role="listitem">
+        <span class="tile-num">FEAT ${f.num}</span>
+        <span class="tile-layer">${f.layer}</span>
+        <span class="tile-name">${f.name}</span>
+        <span class="tile-tagline">${f.tagline}</span>
+        <span class="tile-meta">${f.surface} · ${f.sceneCount} scenes</span>
+      </a>`;
+    }).join('');
+  });
+</script>
+
+<section class="scene" data-scene="s2-flowintro" data-title="Phase 2 framing" data-step="0" data-of="0" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">PHASE 2 · SEND-TIME INTELLIGENCE</div>
+    <h2>From “beautiful draft” to “provably safe send”</h2>
+    <p>
+      Phase 2 maps the next eight items from the <strong>Canva analysis</strong> into Mailchimp primitives:
+      agents that <em>orchestrate</em> work, telemetry that <em>feeds back</em> into the editor, personalization
+      at <em>assembly time</em>, assets that <em>span channels</em>, locale-aware compliance, <strong>AMP</strong>,
+      enterprise <strong>Shield</strong>, and a <strong>cross-domain</strong> Freddie.
+    </p>
+    <p>Press <strong>Next</strong> or click the highlighted controls. Keyboard: &larr; / &rarr;.</p>
+    <button class="start-btn" data-advance-to="s201-intro" data-cid="C-53">Begin · Feature 01 &rarr;</button>
+  </div>
+</section>
+
+<!-- ========== FEAT 01 Agentic Campaign Orchestrator ========== -->
+<section class="scene" data-scene="s201-intro" data-title="Orchestrator" data-feature="01" data-step="0" data-of="3" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 01 · PLAN / JOURNEY</div>
+    <h2>Agentic Campaign Orchestrator</h2>
+    <p>
+      Freddie proposes a <strong>bounded plan graph</strong>: brief intake, creative generation, audience selection,
+      and schedule — each step requiring explicit human approval before the agent proceeds.
+    </p>
+    <button class="start-btn" data-advance-to="s201-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+<section class="scene" data-scene="s201-1" data-title="Plan graph proposed" data-feature="01" data-step="1" data-of="3" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 01</span> ·
+    <span class="scene-eyebrow-step">Scene 1 of 3</span> ·
+    <span class="scene-eyebrow-title">Orchestration timeline</span>
+    <span class="scene-eyebrow-cid"><code data-cid="C-98">C-98</code> · orchestration rail</span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Agent run · Spring Velocity</div>
+      <div class="mcds-editor" style="display:block; padding:16px;">
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+          <span class="mcds-tag new">Brief</span>
+          <span class="mcds-tag">Creative</span>
+          <span class="mcds-tag">Audience</span>
+          <span class="mcds-tag">Schedule</span>
+        </div>
+        <div style="border:1px solid var(--color-line-hairline,#E5E7EB); border-radius:8px; padding:12px; font-size:12px; background:#F9FAFB;">
+          <div style="display:grid; gap:8px;">
+            <div><strong>1.</strong> Pull brief from Notion + last week’s memory <span style="color:#047857;">ready</span></div>
+            <div><strong>2.</strong> Generate hero + body variants (Brand Voice: Launch) <span style="color:#B45309;">pending approval</span></div>
+            <div><strong>3.</strong> Bind segment “New subs · engaged 30d” <span style="color:#6B7280;">queued</span></div>
+            <div><strong>4.</strong> Propose Tue 10:00 AEST send <span style="color:#6B7280;">queued</span></div>
+          </div>
+        </div>
+        <div style="text-align:right; margin-top:14px;">
+          <button class="mcds-cta advance-hotspot" data-advance-to="s201-2" data-cid="C-53,C-98/v.timeline-step">Approve step 2 &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Orchestration stays <strong>inspectable</strong>: every agent action maps to a human checkpoint.</div>
+</section>
+<section class="scene" data-scene="s201-2" data-title="Audit trail" data-feature="01" data-step="2" data-of="3" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 01</span> ·
+    <span class="scene-eyebrow-step">Scene 2 of 3</span> ·
+    <span class="scene-eyebrow-title">Who approved what</span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Audit · workspace governance</div>
+      <div style="padding:14px; font-size:12px;">
+        <table style="width:100%; border-collapse:collapse;">
+          <tr style="border-bottom:1px solid var(--color-line-hairline,#E5E7EB);"><th style="text-align:left;padding:6px 0;">Actor</th><th style="text-align:left;">Action</th><th style="text-align:left;">Time</th></tr>
+          <tr><td class="b" style="padding:6px 0;">Freddie</td><td>Proposed creative variants</td><td>10:02</td></tr>
+          <tr><td class="b">A. Kim</td><td>Approved variant B</td><td>10:08</td></tr>
+          <tr><td class="b">Shield policy</td><td>PII scan passed</td><td>10:08</td></tr>
+        </table>
+        <div style="text-align:right; margin-top:14px;">
+          <button class="mcds-cta advance-hotspot" data-advance-to="s201-outro" data-cid="C-54">Continue &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Pairs with <strong>Shield</strong> (Feature 07) — approvals are durable records, not chat logs.</div>
+</section>
+<section class="scene" data-scene="s201-outro" data-title="Feature 01 complete" data-feature="01" data-step="3" data-of="3" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 01 · OUTRO</div>
+    <h2>Agentic, not autonomous</h2>
+    <p>The differentiator vs generic LLM wrappers is <strong>governed autonomy inside the ESP</strong> — the same object model as your live sends.</p>
+    <button class="start-btn" data-advance-to="s202-intro" data-cid="C-53">Next feature &rarr;</button>
+  </div>
+</section>
+
+<!-- ========== FEAT 02 Real-Time Performance Loop ========== -->
+<section class="scene" data-scene="s202-intro" data-title="Performance loop" data-feature="02" data-step="0" data-of="3" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 02 · LIVE TELEMETRY</div>
+    <h2>Real-Time Campaign Performance Loop</h2>
+    <p>Live opens, clicks, and revenue proxies stream beside the canvas. When an anomaly hits (e.g. mobile CTR dips), Freddie suggests a <strong>scoped edit</strong> with a preview diff.</p>
+    <button class="start-btn" data-advance-to="s202-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+<section class="scene" data-scene="s202-1" data-title="Live KPI strip" data-feature="02" data-step="1" data-of="3" hidden>
+  <header class="scene-eyebrow">
+    <span class="scene-eyebrow-num">Feature 02</span> ·
+    <span class="scene-eyebrow-step">Scene 1 of 3</span> ·
+    <span class="scene-eyebrow-title">KPIs beside the draft</span>
+    <span class="scene-eyebrow-cid"><code data-cid="C-99">C-99</code> · live metric strip</span>
+  </header>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label mcds-label--ai">Live cohort · first 4h</div>
+      <div style="display:flex; gap:12px; flex-wrap:wrap; padding:12px; background:#F0FDF4; border-radius:8px; font-size:12px;">
+        <div><strong>Open</strong><br><span style="font-size:18px;font-weight:800;">41.2%</span></div>
+        <div><strong>Click overall</strong><br><span style="font-size:18px;font-weight:800;">3.8%</span></div>
+        <div style="border-left:3px solid #B45309; padding-left:10px;"><strong>Mobile CTR</strong><br><span style="color:#B45309;">−12% vs benchmark</span></div>
+      </div>
+      <div style="text-align:right; margin-top:12px;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s202-2" data-cid="C-53,C-99/v.kpi-strip">Investigate mobile &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Telemetry is read-only on production sends; proposed edits create a <strong>staged revision</strong>.</div>
+</section>
+<section class="scene" data-scene="s202-2" data-title="Suggested fix" data-feature="02" data-step="2" data-of="3" hidden>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Freddie suggestion · hero tap-target</div>
+      <div class="mcds-chat-bubble assistant" style="max-width:none; margin:12px 0;">
+        <div class="ab-header"><span class="mcds-snowflake" aria-hidden="true"></span> Performance insight</div>
+        <p style="font-size:12px;margin:0 0 8px;">Mobile readers stall on the hero CTA — button height under 44px in preview. Want me to enlarge CTA + shorten headline?</p>
+        <button class="mcds-cta advance-hotspot" data-advance-to="s202-outro" data-cid="C-43/v.preview-diff">Apply mobile fix &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Connects measurement to <strong>Conversational Editing</strong> patterns from Phase 1.</div>
+</section>
+<section class="scene" data-scene="s202-outro" data-title="Feature 02 complete" data-feature="02" data-step="3" data-of="3" hidden>
+  <div class="intro-card">
+    <h2>Close the loop inside Mailchimp</h2>
+    <p>No export to a separate analytics studio to answer “why is this underperforming?”</p>
+    <button class="start-btn" data-advance-to="s203-intro" data-cid="C-53">Next feature &rarr;</button>
+  </div>
+</section>
+
+<!-- ========== FEAT 03 Send-Time Personalization ========== -->
+<section class="scene" data-scene="s203-intro" data-title="Send-time personalization" data-feature="03" data-step="0" data-of="3" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 03 · ASSEMBLY</div>
+    <h2>Send-Time AI Personalization</h2>
+    <p>At insert, Freddie assembles variants per profile: product affinity, engagement tier, locale — bounded by <strong>brand rules and Shield policies</strong>.</p>
+    <button class="start-btn" data-advance-to="s203-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+<section class="scene" data-scene="s203-1" data-title="Variant matrix" data-feature="03" data-step="1" data-of="3" hidden>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Personalization matrix · audited</div>
+      <div style="font-size:12px; padding:10px;">
+        <p style="margin:0 0 8px;"><strong>Dimensions:</strong> engagement tier · last product · locale</p>
+        <ul style="margin:0; padding-left:18px;">
+          <li>12 cells generated · 3 suppressed by policy (health claims)</li>
+          <li>Fallback: hero A + static CTA for unknown profiles</li>
+        </ul>
+        <div style="text-align:right; margin-top:12px;">
+          <button class="mcds-cta advance-hotspot" data-advance-to="s203-2" data-cid="C-46,C-48">Review suppressed cells &rarr;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Honest ESP physics: personalization without a <strong>policy layer</strong> is a liability.</div>
+</section>
+<section class="scene" data-scene="s203-2" data-title="Send-time preview" data-feature="03" data-step="2" data-of="3" hidden>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Profile simulator</div>
+      <p style="font-size:12px;">Preview as: <strong>New sub · Melbourne · Volt interest</strong></p>
+      <div class="canvas-hero fdpx-photo-cover" style="height:120px; background-image:linear-gradient(120deg,#017E89,#0e1116);" data-cid="C-61"></div>
+      <p style="font-size:13px; margin:8px 0 0;">Your Volt Runner reservation opens in 1 hour — spring shipping unlocked.</p>
+      <div style="text-align:right; margin-top:12px;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s203-outro" data-cid="C-53">Confirm assembly rules &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Same preview contract as Phase 1 — now with <strong>per-profile</strong> output.</div>
+</section>
+<section class="scene" data-scene="s203-outro" data-title="Feature 03 complete" data-feature="03" data-step="3" data-of="3" hidden>
+  <div class="intro-card">
+    <h2>Personalization Mailchimp can defend</h2>
+    <button class="start-btn" data-advance-to="s204-intro" data-cid="C-53">Next feature &rarr;</button>
+  </div>
+</section>
+
+<!-- ========== FEAT 04 Cross-Channel Asset Studio ========== -->
+<section class="scene" data-scene="s204-intro" data-title="Asset studio" data-feature="04" data-step="0" data-of="3" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 04 · CONTENT STUDIO</div>
+    <h2>Cross-Channel Asset Studio</h2>
+    <p>One Stride hero is cropped and typed for <strong>email, SMS media, social, display</strong> — linked back to the same Brand Kit tokens.</p>
+    <button class="start-btn" data-advance-to="s204-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+<section class="scene" data-scene="s204-1" data-title="Export grid" data-feature="04" data-step="1" data-of="3" hidden>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Derivatives from master asset</div>
+      <div style="display:grid; grid-template-columns: repeat(2, 1fr); gap:10px; font-size:11px;">
+        <div style="border:1px solid #E5E7EB; padding:8px; border-radius:6px;"><strong>Email hero</strong> · 600×400</div>
+        <div style="border:1px solid #E5E7EB; padding:8px; border-radius:6px;"><strong>SMS / MMS</strong> · 640 square</div>
+        <div style="border:1px solid #E5E7EB; padding:8px; border-radius:6px;"><strong>Instagram</strong> · 4:5</div>
+        <div style="border:1px solid #E5E7EB; padding:8px; border-radius:6px;"><strong>Meta display</strong> · 1.91:1</div>
+      </div>
+      <div style="text-align:right; margin-top:12px;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s204-2" data-cid="C-71,C-53/v.open-as-editable">Sync to active campaign &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Bridges <strong>Phase 1 Dream Lab / image tooling</strong> to downstream channel crops.</div>
+</section>
+<section class="scene" data-scene="s204-2" data-title="Campaign binding" data-feature="04" data-step="2" data-of="3" hidden>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label mcds-label--ai">Linked objects</div>
+      <p style="font-size:12px;">Changing master asset marks Email + Social child crops stale — batch refresh available.</p>
+      <button class="mcds-cta advance-hotspot" data-advance-to="s204-outro" data-cid="C-53">Run refresh &rarr;</button>
+    </div>
+  </div>
+  <div class="scene-caption">Leans on Universal Content strategy — asset graph is the spine.</div>
+</section>
+<section class="scene" data-scene="s204-outro" data-title="Feature 04 complete" data-feature="04" data-step="3" data-of="3" hidden>
+  <div class="intro-card">
+    <h2>Design once, propagate safely</h2>
+    <button class="start-btn" data-advance-to="s205-intro" data-cid="C-53">Next feature &rarr;</button>
+  </div>
+</section>
+
+<!-- ========== FEAT 05 Compliance-Aware Localization ========== -->
+<section class="scene" data-scene="s205-intro" data-title="Localization" data-feature="05" data-step="0" data-of="3" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 05 · LEGAL + LOCALE</div>
+    <h2>Compliance-Aware Localization</h2>
+    <p>Locale packs inject mandatory footers (CAN-SPAM, CASL, GDPR promos), adjust currency and date formats, and steer tone via Brand Voice profiles per region.</p>
+    <button class="start-btn" data-advance-to="s205-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+<section class="scene" data-scene="s205-1" data-title="Locale pack" data-feature="05" data-step="1" data-of="3" hidden>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Active pack · en-AU commerce</div>
+      <ul style="font-size:12px;">
+        <li>Unsubscribe + physical address block · <span style="color:#047857">required</span></li>
+        <li>Promo pricing clause · auto-inserted for % discounts</li>
+        <li>“Sale” language guardrail · avoid misleading urgency</li>
+      </ul>
+      <div style="text-align:right;"><button class="mcds-cta advance-hotspot" data-advance-to="s205-2" data-cid="C-82,C-89">Open Brand Voice (AU) &rarr;</button></div>
+    </div>
+  </div>
+  <div class="scene-caption">Localization is <strong>policy + copy + layout</strong>, not just translation.</div>
+</section>
+<section class="scene" data-scene="s205-2" data-title="Blocking issues" data-feature="05" data-step="2" data-of="3" hidden>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div style="background:#FFF5F2;border-left:3px solid #B91C1C;padding:10px 12px;border-radius:6px;font-size:12px;">
+        <strong>Cannot send fr-CA draft:</strong> missing FR mandatory footer line MC-22.b.
+        <div style="margin-top:8px;"><button class="mcds-cta advance-hotspot" data-advance-to="s205-outro" data-cid="C-23">Insert approved footer &rarr;</button></div>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Hard stops mirror <strong>Shield</strong> — marketing can’t “OK” past missing compliance primitives.</div>
+</section>
+<section class="scene" data-scene="s205-outro" data-title="Feature 05 complete" data-feature="05" data-step="3" data-of="3" hidden>
+  <div class="intro-card">
+    <h2>Send confidently in every region</h2>
+    <button class="start-btn" data-advance-to="s206-intro" data-cid="C-53">Next feature &rarr;</button>
+  </div>
+</section>
+
+<!-- ========== FEAT 06 AMP for Email ========== -->
+<section class="scene" data-scene="s206-intro" data-title="AMP email" data-feature="06" data-step="0" data-of="3" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 06 · INTERACTIVE EMAIL</div>
+    <h2>AMP for Email</h2>
+    <p>Carousel, accordion, and lightweight forms validate in AMP preview. Clients without support receive the <strong>static fallback</strong> generated from the same brief.</p>
+    <button class="start-btn" data-advance-to="s206-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+<section class="scene" data-scene="s206-1" data-title="AMP module" data-feature="06" data-step="1" data-of="3" hidden>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">AMP · product carousel</div>
+      <div style="background:#E0EDFF;padding:12px;border-radius:8px;font-size:12px;">
+        <p style="margin:0 0 8px;"><strong>AMP component:</strong> amp-carousel · 3 SKUs · taps recorded as click events</p>
+        <button class="mcds-cta advance-hotspot" data-advance-to="s206-2" data-cid="C-100,C-61">Validate AMP HTML &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Proposed <code data-cid="C-100">C-100</code> · AMP block shell (spec-only for this prototype).</div>
+</section>
+<section class="scene" data-scene="s206-2" data-title="Fallback pairing" data-feature="06" data-step="2" data-of="3" hidden>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Static fallback · paired automatically</div>
+      <p style="font-size:12px;">Non-AMP clients see a single hero + stacked products — same copy, no interactive taps.</p>
+      <button class="mcds-cta advance-hotspot" data-advance-to="s206-outro" data-cid="C-53">Publish paired MIME &rarr;</button>
+    </div>
+  </div>
+  <div class="scene-caption">Mirrors industry pattern: <strong>multipart/alternative</strong> with disciplined parity.</div>
+</section>
+<section class="scene" data-scene="s206-outro" data-title="Feature 06 complete" data-feature="06" data-step="3" data-of="3" hidden>
+  <div class="intro-card">
+    <h2>Interactive without abandoning the long tail</h2>
+    <button class="start-btn" data-advance-to="s207-intro" data-cid="C-53">Next feature &rarr;</button>
+  </div>
+</section>
+
+<!-- ========== FEAT 07 Mailchimp Shield ========== -->
+<section class="scene" data-scene="s207-intro" data-title="Shield" data-feature="07" data-step="0" data-of="3" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 07 · GOVERNANCE</div>
+    <h2>Mailchimp Shield</h2>
+    <p>Policy packs combine <strong>PII detection, claim review, brand destructiveness checks, and role-based approval</strong> — evaluated before schedule locks.</p>
+    <button class="start-btn" data-advance-to="s207-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+<section class="scene" data-scene="s207-1" data-title="Policy evaluation" data-feature="07" data-step="1" data-of="3" hidden>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label mcds-label--ai">Shield · pre-send scan</div>
+      <div style="font-size:12px;">
+        <div style="padding:8px; background:#F4FBF7; border-radius:6px; margin-bottom:6px;">PII scan · <strong>clean</strong></div>
+        <div style="padding:8px; background:#FFFAF0; border-radius:6px; margin-bottom:6px;">Comparative claim “#1 shoe in ANZ” · <strong>needs legal</strong></div>
+        <button class="mcds-cta advance-hotspot" data-advance-to="s207-2" data-cid="C-101,C-91">Route to legal queue &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Proposed <code data-cid="C-101">C-101</code> · Shield evaluation panel.</div>
+</section>
+<section class="scene" data-scene="s207-2" data-title="Role approval" data-feature="07" data-step="2" data-of="3" hidden>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Approvals matrix</div>
+      <p style="font-size:12px;">Creative lead ✓ · Legal ⏳ · Finance n/a (under threshold)</p>
+      <button class="mcds-cta advance-hotspot" data-advance-to="s207-outro" data-cid="C-53">Notify stakeholders &rarr;</button>
+    </div>
+  </div>
+  <div class="scene-caption">Enterprise procurement stories anchor here — not in sticker packs.</div>
+</section>
+<section class="scene" data-scene="s207-outro" data-title="Feature 07 complete" data-feature="07" data-step="3" data-of="3" hidden>
+  <div class="intro-card">
+    <h2>Governance as a product surface</h2>
+    <button class="start-btn" data-advance-to="s208-intro" data-cid="C-53">Next feature &rarr;</button>
+  </div>
+</section>
+
+<!-- ========== FEAT 08 Cross-Domain Agent ========== -->
+<section class="scene" data-scene="s208-intro" data-title="Cross-domain agent" data-feature="08" data-step="0" data-of="3" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">FEATURE 08 · MCP + PARTNERS</div>
+    <h2>Cross-Domain Conversational Agent</h2>
+    <p>The same Freddie reasoning core — authorized via MCP — surfaces in <strong>Mailchimp, your storefront admin, and helpdesk</strong>, with scoped tools per domain.</p>
+    <button class="start-btn" data-advance-to="s208-1" data-cid="C-53">Start &rarr;</button>
+  </div>
+</section>
+<section class="scene" data-scene="s208-1" data-title="Tool scopes" data-feature="08" data-step="1" data-of="3" hidden>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">MCP server · tool registry</div>
+      <pre style="background:#1F2937;color:#E5E7EB;padding:12px;border-radius:8px;font-size:11px;overflow:auto;">mailchimp.agent.orchestrate  ✓ workspace
+shopify.inventory.snapshot   ✓ read-only
+zendesk.ticket.linkCampaign  ✓ bi-directional</pre>
+      <div style="text-align:right; margin-top:10px;">
+        <button class="mcds-cta advance-hotspot" data-advance-to="s208-2" data-cid="C-90/v.mcp-section,C-102">Rotate scoped token &rarr;</button>
+      </div>
+    </div>
+  </div>
+  <div class="scene-caption">Extends Phase 1 MCP bridge with <strong>domain-scoped credentials</strong> (<code data-cid="C-102">C-102</code> · registry row).</div>
+</section>
+<section class="scene" data-scene="s208-2" data-title="Continuity handoff" data-feature="08" data-step="2" data-of="3" hidden>
+  <div class="scene-stage">
+    <div class="fdpx-mcds-frame">
+      <div class="mcds-label">Context handoff</div>
+      <p style="font-size:12px;">Support agent references ticket #4481 → Freddie loads the <strong>same campaign graph</strong> the marketer approved.</p>
+      <button class="mcds-cta advance-hotspot" data-advance-to="s208-outro" data-cid="C-54">Open shared timeline &rarr;</button>
+    </div>
+  </div>
+  <div class="scene-caption">The win: <strong>one object model</strong> across customer-facing surfaces.</div>
+</section>
+<section class="scene" data-scene="s208-outro" data-title="Feature 08 complete" data-feature="08" data-step="3" data-of="3" hidden>
+  <div class="intro-card">
+    <h2>Freddie off the canvas, not a different brain</h2>
+    <button class="start-btn" data-advance-to="s2-flowzen" data-cid="C-53">Finale &rarr;</button>
+  </div>
+</section>
+
+<section class="scene" data-scene="s2-flowzen" data-title="Composition finale" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">PHASE 2 · ZEN DIAGRAM</div>
+    <h2>How the eight features interlock</h2>
+    <p>
+      <strong>Orchestrator</strong> sequences work → <strong>Performance loop</strong> feeds learning →
+      <strong>Send-time personalization</strong> applies it → <strong>Asset studio</strong> keeps surfaces aligned →
+      <strong>Localization + AMP + Shield</strong> constrain what can ship → <strong>Cross-domain agent</strong> exposes the same truth everywhere.
+    </p>
+    <button class="start-btn" data-advance-to="s2-terminal" data-cid="C-53">End walkthrough &rarr;</button>
+  </div>
+</section>
+
+<section class="scene" data-scene="s2-terminal" data-title="Thanks" hidden>
+  <div class="intro-card">
+    <div class="feature-tag">COMPLETE</div>
+    <h2>Mailchimp’s durable wedge</h2>
+    <p>Creative canvases will commoditize. <strong>Send-time intelligence, policy, and cross-channel operations</strong> stay ESP-native — that’s Phase 2.</p>
+    <p><a class="walk-all" style="display:inline-block;margin-top:8px;text-decoration:none;" href="../freddie-deepak-phase2.html">Return to full spec</a>
+    · <a class="walk-all" style="display:inline-block;margin-top:8px;text-decoration:none;" href="../freddie-deepak-phase1-prototype/">Phase 1 prototype</a></p>
+  </div>
+</section>
+
+</main>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
