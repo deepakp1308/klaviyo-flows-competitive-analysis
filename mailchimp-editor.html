@@ -14394,6 +14394,470 @@ Lens 5 (Strategy Overlay) ── component_id joins back to ──→ Lens 3 + s
 </div><!-- /panel-proto-canva -->
 
 
+<!-- ============================================================ -->
+<!-- TAB 21: AUDIT GAP WALKTHROUGH (interactive step-by-step)      -->
+<!-- ============================================================ -->
+<div class="tabpanel" id="panel-proto-audit-walk" role="tabpanel">
+<style>
+  #panel-proto-audit-walk .walk-shell { max-width: 820px; margin: 0 auto; padding: 28px 32px 80px; }
+  #panel-proto-audit-walk .walk-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  #panel-proto-audit-walk .walk-header .step-label { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; color: var(--brand); letter-spacing: .04em; }
+  #panel-proto-audit-walk .walk-header .proto-link { font-size: 12px; }
+  #panel-proto-audit-walk .progress-track { height: 4px; background: var(--line); border-radius: 2px; margin-bottom: 24px; overflow: hidden; }
+  #panel-proto-audit-walk .progress-fill { height: 100%; background: var(--brand); border-radius: 2px; transition: width .35s ease; }
+  #panel-proto-audit-walk .walk-card { background: var(--paper); border: 1px solid var(--line); border-radius: 12px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  #panel-proto-audit-walk .walk-card .feat-name { font-family: 'Source Serif 4', Georgia, serif; font-size: 22px; font-weight: 700; color: var(--ink); margin: 0 0 4px; }
+  #panel-proto-audit-walk .walk-card .audit-refs { margin-bottom: 14px; }
+  #panel-proto-audit-walk .walk-card .audit-refs .ref { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: #E6F5EE; color: #036A4F; letter-spacing: .04em; margin-right: 4px; }
+  #panel-proto-audit-walk .walk-card .section { margin-bottom: 18px; }
+  #panel-proto-audit-walk .walk-card .section-label { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 5px; }
+  #panel-proto-audit-walk .walk-card .section-body { font-size: 13.5px; color: var(--ink-2); line-height: 1.65; }
+  #panel-proto-audit-walk .walk-card .interact-box { background: var(--chip); border: 1px solid var(--line); border-left: 3px solid var(--brand); border-radius: 8px; padding: 14px 16px; margin-top: 6px; }
+  #panel-proto-audit-walk .walk-card .interact-box .interact-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--brand); margin-bottom: 5px; }
+  #panel-proto-audit-walk .walk-card .interact-box .interact-body { font-size: 13px; color: var(--ink-2); line-height: 1.6; }
+  #panel-proto-audit-walk .walk-card .interact-box a { color: var(--brand); font-weight: 600; }
+  #panel-proto-audit-walk .walk-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+  #panel-proto-audit-walk .walk-nav .btn-walk { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; border: 1px solid var(--line); cursor: pointer; background: var(--paper); color: var(--ink); font-family: inherit; transition: all .15s; }
+  #panel-proto-audit-walk .walk-nav .btn-walk:hover { background: var(--chip); border-color: var(--brand); }
+  #panel-proto-audit-walk .walk-nav .btn-walk.primary { background: var(--brand); color: white; border-color: var(--brand); }
+  #panel-proto-audit-walk .walk-nav .btn-walk.primary:hover { filter: brightness(1.1); }
+  #panel-proto-audit-walk .walk-nav .btn-walk:disabled { opacity: .35; cursor: default; pointer-events: none; }
+  #panel-proto-audit-walk .walk-nav .step-dots { display: flex; gap: 5px; }
+  #panel-proto-audit-walk .walk-nav .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); cursor: pointer; transition: background .2s; }
+  #panel-proto-audit-walk .walk-nav .dot.active { background: var(--brand); }
+  #panel-proto-audit-walk .walk-nav .dot.done { background: #036A4F; }
+</style>
+
+<div class="walk-shell">
+  <div class="page-head" style="margin-bottom:20px;">
+    <div>
+      <div class="eyebrow">Tab 21 &middot; Interactive Walkthrough</div>
+      <h1 style="font-size:22px;">Audit Gap Walkthrough &mdash; Step by Step</h1>
+      <div class="subtitle">Click <strong>Next</strong> to walk through each feature in Deepak's prototype that resolves an Agent Mode Design Audit finding. Each step shows the feature, where to find it in the <a href="https://github.intuit.com/pages/dprabhakara/mailchimp-agent-shell-anatomy/v2/#brief" target="_blank" rel="noopener">live prototype</a>, the problem it solves, and the customer benefit.</div>
+    </div>
+  </div>
+
+  <div class="walk-header">
+    <span class="step-label" id="aw-step-label">Step 1 of 12</span>
+    <a class="proto-link" href="https://github.intuit.com/pages/dprabhakara/mailchimp-agent-shell-anatomy/v2/#brief" target="_blank" rel="noopener">Open prototype &rarr;</a>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="aw-progress" style="width:8.33%"></div></div>
+
+  <div class="walk-card" id="aw-card"></div>
+
+  <div class="walk-nav">
+    <button class="btn-walk" id="aw-prev" disabled>&larr; Previous</button>
+    <div class="step-dots" id="aw-dots"></div>
+    <button class="btn-walk primary" id="aw-next">Next &rarr;</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  var PROTO = 'https://github.intuit.com/pages/dprabhakara/mailchimp-agent-shell-anatomy/v2/';
+  var steps = [
+    {
+      name: 'Persistent Sidebar Navigation',
+      refs: ['P2-4','P0-4'],
+      surface: 'Global sidebar — visible on all screens',
+      whatItIs: 'A 232px sidebar persists on every surface in the application. All product areas — Home, Campaigns, Automations, SMS, Forms, Audience, Analytics, Content, Integrations — remain visible and clickable at all times. The "Mailchimp AI" hub is a navigation item among peers, not a separate world.',
+      interaction: 'Open the prototype. The sidebar is immediately visible on the left. Click any nav item — <strong>Home</strong>, <strong>Campaigns</strong>, <strong>Analytics</strong> — and notice the sidebar never disappears. Compare this to the Freddie prototype where clicking "Create" removes all global navigation.',
+      protoHash: '#brief',
+      problem: '<strong>Eliminates the two-shell trap-door pattern.</strong> In the Freddie prototype, clicking "Create" disposes of all global nav — the user loses the path back to Analytics, Audience, Campaigns. The only way back is the × exit button, creating a one-way trap-door that breaks wayfinding.',
+      benefit: 'Users never lose their navigation context. They can jump from AI-assisted creation to Audience, then to Analytics, then back to their draft — without reorienting. Reduces "where am I?" anxiety. Critical for the $281M HVC NEA-stayer segment who navigate frequently between creation and data.'
+    },
+    {
+      name: '+ Create Button as Universal Entry Point',
+      refs: ['P0-4'],
+      surface: 'Sidebar — top position',
+      whatItIs: 'A teal "+ Create" button sits at the top of the sidebar, above all navigation items. It opens the conversational campaign start surface but does not force AI interaction. Power users can also navigate directly to Campaigns, SMS, or any channel from the persistent sidebar.',
+      interaction: 'Look at the <strong>top of the sidebar</strong>. The teal "+ Create" button is the first item. Click it — it routes to the conversational start. Then click <strong>Campaigns</strong> or <strong>SMS</strong> in the sidebar to confirm you can bypass AI entirely.',
+      protoHash: '#brief',
+      problem: '<strong>Manual mode as a first-class entry.</strong> The Freddie prototype forces users through AI interaction before manual mode is accessible (B1 critical finding). Here, the Create button doesn\'t presume AI — power users navigate directly to their preferred channel.',
+      benefit: 'The $281M HVC NEA-stayer segment gets a zero-friction path to their preferred workflow. New users get AI-first guidance. Neither is forced into the other\'s flow. The system respects user intent.'
+    },
+    {
+      name: 'Hash-Based Deep-Linkable Routing',
+      refs: ['P1-10'],
+      surface: 'All surfaces — URL architecture',
+      whatItIs: 'Every surface is deep-linkable via URL hash (#brief, #memory, #brand, #governance, #artifacts, etc.). The inner-nav items update the URL hash on click. Browser back/forward buttons work correctly.',
+      interaction: 'Click through several inner-nav items: <strong>Daily brief</strong>, then <strong>Memory Library</strong>, then <strong>Brand Intelligence</strong>. Watch the URL hash change in your browser\'s address bar. Use the browser <strong>Back</strong> button — it returns to the previous surface.',
+      protoHash: '#brief',
+      problem: '<strong>Editor and strategy panel now bookmarkable and shareable.</strong> The Freddie prototype\'s editor and strategy brief are right-pane states (not routes) — users can\'t share "the editor on this email" or bookmark progress. Browser back/forward breaks.',
+      benefit: 'Teams can share links to specific surfaces: "Look at our Brand Intelligence rules" or "Check the campaign sheets." Enables handoff between team members, supports multi-session workflows.'
+    },
+    {
+      name: 'Persistent AI Rail with Conversational Reasoning',
+      refs: ['P0-1','P0-3','P1-6','P1-7'],
+      surface: 'AI Rail — 380px right panel, persistent',
+      whatItIs: 'A 380px right-side panel containing a full conversational thread between the user and the AI agent. The AI communicates with reasoning narratives, shows tool-use pills for every data operation, surfaces expert team members, and includes a composer input with "+ context" and "?" help mode buttons.',
+      interaction: 'The AI Rail is visible on the <strong>right side</strong> of the prototype. Read the conversation — notice how Kimberlee explains her reasoning, shows tool-use pills, and offers action buttons. Type a message in the <strong>composer at the bottom</strong> and press Enter to see a simulated response. Click the <strong>× button</strong> to collapse the rail, then click it again to restore.',
+      protoHash: '#brief',
+      problem: '<strong>Transforms mechanical confirmations into natural agent conversations.</strong> The Freddie prototype\'s one-click Send (P0-1) becomes an agent-mediated confirmation. AI content verification (P0-3) becomes the agent\'s reasoning narrative. Error states (P1-6) become diagnostic conversations. Generation hangs (P1-7) become cancellable tool operations.',
+      benefit: 'The customer interacts with an intelligent collaborator who explains, confirms, and catches errors conversationally — not with mechanical dialogs and silent failures. Trust is built through transparency: every data source is attributed, every action is explained.'
+    },
+    {
+      name: 'Tool-Use Transparency Pills',
+      refs: ['P1-9','P1-7'],
+      surface: 'AI Rail + Daily Brief',
+      whatItIs: 'Every AI operation surfaces as a visible "tool pill" with a spinner animation during execution and a green checkmark when complete. Examples: "Loading brand profile", "Cross-referencing benchmarks", "Generating imagery (Magic Media)".',
+      interaction: 'On the <strong>Daily Brief</strong> surface, look at the top — two green tool pills ("Retrieving marketing data", "Cross-referencing benchmarks") plus a Canva connectors badge. In the <strong>AI Rail</strong>, each agent message shows tool pills above the response text.',
+      protoHash: '#brief',
+      problem: '<strong>Makes AI operations visible and cancellable.</strong> Replaces the Freddie prototype\'s opaque generation (no cancel, no progress, no escape hatch) with transparent, step-by-step tool operations. The user sees exactly what the AI is doing at every moment.',
+      benefit: 'Users never wonder "is it working or frozen?" Every AI operation is named, visible, and completable. Directly addresses the $3.6M F2 activation lever — a hung first session with no feedback causes permanent abandonment.'
+    },
+    {
+      name: 'Multi-Expert Agent Team',
+      refs: ['P1-5'],
+      surface: 'AI Rail — conversation thread',
+      whatItIs: 'Named expert agents (Kimberlee — Email Strategist, Jane — Audience Expert) join the conversation with specialized knowledge. They tag-team: Kimberlee drafts the email while Jane provides audience insights. The AI references its memory: "Houseplant Collectors prefer education to promo."',
+      interaction: 'In the <strong>AI Rail</strong>, read the conversation thread. Notice two distinct experts: <strong>Kimberlee</strong> (yellow avatar "K") and <strong>Jane</strong> (blue avatar "J"). Each has a declared role. Jane\'s message includes a "Memory used" attribution at the bottom.',
+      protoHash: '#brief',
+      problem: '<strong>Creates a team-of-experts model that builds calibrated trust (AI2).</strong> Single-AI-voice systems feel opaque. Specialized experts with named roles and declared reasoning create higher trust. The memory attribution creates a version-history-like audit trail.',
+      benefit: 'The customer feels they have a marketing team, not a chatbot. Each expert brings declared expertise and shows their reasoning. The memory system means the AI gets better over time — the #1 differentiator for retention.'
+    },
+    {
+      name: 'Daily Brief with Proactive Intelligence',
+      refs: ['P1-2'],
+      surface: 'Daily Brief — #brief',
+      whatItIs: 'The default landing surface: "Good morning, Maya." with three key insights, four momentum KPI cards (open rate, revenue, audience health, sender reputation), suggested next moves with impact badges, and patterns worth watching.',
+      interaction: 'This is the <strong>default surface</strong> when you open the prototype. Read the insights banner (yellow left-border card). Look at the four <strong>momentum metric cards</strong> below it. Scroll to <strong>Suggested next moves</strong> — notice the "High impact" badge and the "CANVA 2.0 · NEW" badge. Click <strong>"Draft email"</strong> to open the Focus view.',
+      protoHash: '#brief',
+      problem: '<strong>Replaces upgrade-pressure branding with value-first AI communication.</strong> The Freddie prototype\'s brand-context banner pressures Free users to upgrade (P1-2, F4 CSAT regression). The Daily Brief leads with "here\'s what I found for you today" — value is delivered before any ask.',
+      benefit: 'Users open Mailchimp and immediately see actionable intelligence: what\'s working, what needs attention, and what to do next. The AI earns trust by delivering value on the first screen, every session.'
+    },
+    {
+      name: 'Focus View: Three-Panel Artifact Editor',
+      refs: ['P1-10','P2-3','P2-9'],
+      surface: 'Focus view — full-screen overlay',
+      whatItIs: 'A full-screen overlay with three panels: left chat (340px, conversational editing), center canvas (email preview with Magic toolbar floating above), and right edit rail (240px, structured tools organized into Magic family, Add content, and Comments & review groups).',
+      interaction: 'From the Daily Brief, click <strong>"Draft email"</strong> in the Suggested next moves card, or click <strong>"Open email"</strong> in the AI Rail. The Focus view opens as a full-screen overlay. Look at the <strong>dark floating toolbar</strong> above the email (Magic Edit, Magic Expand, etc.). Read the chat on the left — notice the user said "Make the hero more autumnal" and the AI edited only the hero. Click <strong>"← Back"</strong> to close.',
+      protoHash: '#brief',
+      problem: '<strong>Deep-linkable, full-featured editing with element-level AI edits.</strong> Addresses deep-linking (P1-10), preview-before-apply via conversational editing (P2-3), and per-edit control via element-level operations (P2-9): "editing hero only."',
+      benefit: 'Users say "make the hero more autumnal" and the AI edits only the hero while preserving everything else. Manual tools and AI tools sit side by side — the user picks their preferred mode per edit, per block, per moment.'
+    },
+    {
+      name: 'AI Skills & Tools Surface',
+      refs: ['P0-4','P1-8'],
+      surface: 'AI Skills & Tools — #skills',
+      whatItIs: 'A discoverable catalog of every AI capability in three groups: Creative AI (Magic Write, Design, image editing), Agentic AI (conversational start, design-aware chat, MCP, scheduled tasks), and Data & Productivity (Sheets AI, Bulk Create, Canva Code). Each skill has a toggle switch.',
+      interaction: 'In the hub inner-nav, click <strong>"AI skills & tools"</strong>. Scroll through the three sections. Click any <strong>toggle switch</strong> to enable/disable a skill. Notice that manual tools and AI tools are listed side by side — neither is hidden.',
+      protoHash: '#skills',
+      problem: '<strong>Makes manual tools and code mode discoverable alongside AI.</strong> Addresses P0-4 (manual mode visibility) by listing all tools in one catalog. Addresses P1-8 (HTML code mode) by providing architecture for a "Code & export" skill card.',
+      benefit: 'Users discover capabilities they didn\'t know existed. Power users find their manual tools immediately. Enterprise admins can toggle individual AI capabilities on/off for compliance.'
+    },
+    {
+      name: 'Artifacts Surface with Type-Based Library',
+      refs: ['P1-3'],
+      surface: 'Artifacts — #artifacts',
+      whatItIs: 'A visual library of every AI-generated artifact: emails, SMS variants, WhatsApp stories, landing pages, audience segments, campaign sheets. Each card shows a colored thumbnail, channel icon, AI badge, title, and status.',
+      interaction: 'In the hub inner-nav, click <strong>"Artifacts"</strong>. Browse the card grid — notice the different channel icons (✉️ Email, 📱 SMS, 💬 WhatsApp, 🌐 Landing page) and the CANVA 2.0 badges on newer artifacts. The <strong>Filter</strong> button is where origin filtering (NEB/Classic/All) would live.',
+      protoHash: '#artifacts',
+      problem: '<strong>Template origin filtering architecture.</strong> Addresses P1-3 (templates carousel needs surface-origin filter). The Artifacts surface supports type-based and origin-based categorization with the Filter button.',
+      benefit: 'Users find all their past work in one place — filterable, searchable, organized by type. Classic anchor users (HVC #6) can find familiar templates. The library grows with usage, creating a "portfolio" effect that increases retention.'
+    },
+    {
+      name: 'Expert Team Surface',
+      refs: [],
+      surface: 'Expert Team — #experts',
+      whatItIs: 'A scheduling surface for human experts: Kimberlee Amsbaugh (Email Strategist, 4.8★, 12 yrs) and Jane Kligner (Audience Expert, 4.9★, 11 yrs). Each card shows availability time slots. Monthly impact: "~12 hrs saved · 1,840 VIPs segmented · $4,200 revenue."',
+      interaction: 'In the hub inner-nav, click <strong>"Expert team"</strong>. See the two expert cards with <strong>available time slots</strong> (9:00, 9:30, 10:00, 11:00, 1:00 PM). Click any time slot to simulate booking.',
+      protoHash: '#experts',
+      problem: '<strong>Human-in-loop for power users who need more than AI.</strong> Creates an escalation path for complex creative decisions. Combines AI automation for routine work with human expertise for high-stakes decisions.',
+      benefit: 'Customers get the speed of AI plus the judgment of experienced humans. Power users and agencies who don\'t trust AI alone have a named, rated expert they can consult.'
+    },
+    {
+      name: 'Home Dashboard with AI Prompt-Starter Chips',
+      refs: [],
+      surface: 'Home — data-pane="home"',
+      whatItIs: 'The traditional Home dashboard with marketing-conversions metrics (Total sends, Delivery, Open, Click, Order rate, Unsub). Below the metrics, AI prompt-starter chips appear: "Last 30 days of campaign performance?", "How is our Houseplant Collectors segment trending?"',
+      interaction: 'In the sidebar, click <strong>"Home"</strong>. See the marketing conversions card with 6 metrics. Below it, notice the <strong>✨ insight chips</strong>. These route into the AI Rail for deep analysis. Click any chip to see how it bridges the traditional dashboard and the AI agent.',
+      protoHash: '#home',
+      problem: '<strong>Bridges traditional dashboard and AI interaction.</strong> Users who land on Home see AI as an enhancement to data they already understand. Prompt-starter chips introduce AI capabilities in context.',
+      benefit: 'Zero-friction AI discovery for users who aren\'t comfortable with agent-first workflows. The AI meets them where they already are (the dashboard). Increases AI adoption among the cautious majority.'
+    }
+  ];
+
+  var current = 0;
+  var card = document.getElementById('aw-card');
+  var label = document.getElementById('aw-step-label');
+  var progress = document.getElementById('aw-progress');
+  var prevBtn = document.getElementById('aw-prev');
+  var nextBtn = document.getElementById('aw-next');
+  var dotsWrap = document.getElementById('aw-dots');
+
+  for (var i = 0; i < steps.length; i++) {
+    var d = document.createElement('span');
+    d.className = 'dot';
+    d.setAttribute('data-idx', i);
+    dotsWrap.appendChild(d);
+  }
+  dotsWrap.addEventListener('click', function(e) {
+    var idx = e.target.getAttribute('data-idx');
+    if (idx !== null) render(parseInt(idx, 10));
+  });
+
+  function render(idx) {
+    current = idx;
+    var s = steps[idx];
+    var refsHtml = '';
+    if (s.refs.length) {
+      refsHtml = '<div class="audit-refs">' + s.refs.map(function(r) { return '<span class="ref">' + r + '</span>'; }).join('') + '</div>';
+    }
+    card.innerHTML =
+      '<h2 class="feat-name">' + s.name + '</h2>' +
+      refsHtml +
+      '<div class="section"><div class="section-label">What it is</div><div class="section-body">' + s.whatItIs + '</div></div>' +
+      '<div class="section"><div class="section-label">Problem it solves</div><div class="section-body">' + s.problem + '</div></div>' +
+      '<div class="section"><div class="section-label">Customer benefit</div><div class="section-body">' + s.benefit + '</div></div>' +
+      '<div class="interact-box">' +
+        '<div class="interact-label">Where to interact in the prototype</div>' +
+        '<div class="interact-body">' + s.interaction + '<br/><a href="' + PROTO + s.protoHash + '" target="_blank" rel="noopener">Open this surface in the prototype &rarr;</a></div>' +
+      '</div>';
+    label.textContent = 'Step ' + (idx + 1) + ' of ' + steps.length;
+    progress.style.width = ((idx + 1) / steps.length * 100) + '%';
+    prevBtn.disabled = idx === 0;
+    nextBtn.textContent = idx === steps.length - 1 ? 'Done ✓' : 'Next →';
+    nextBtn.disabled = false;
+    var dots = dotsWrap.children;
+    for (var j = 0; j < dots.length; j++) {
+      dots[j].className = j < idx ? 'dot done' : j === idx ? 'dot active' : 'dot';
+    }
+  }
+
+  prevBtn.addEventListener('click', function() { if (current > 0) render(current - 1); });
+  nextBtn.addEventListener('click', function() { if (current < steps.length - 1) render(current + 1); });
+  render(0);
+})();
+</script>
+</div><!-- /panel-proto-audit-walk -->
+
+
+<!-- ============================================================ -->
+<!-- TAB 22: CANVA AI 2.0 WALKTHROUGH (interactive step-by-step)   -->
+<!-- ============================================================ -->
+<div class="tabpanel" id="panel-proto-canva-walk" role="tabpanel">
+<style>
+  #panel-proto-canva-walk .walk-shell { max-width: 820px; margin: 0 auto; padding: 28px 32px 80px; }
+  #panel-proto-canva-walk .walk-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px; }
+  #panel-proto-canva-walk .walk-header .step-label { font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700; color: #007C89; letter-spacing: .04em; }
+  #panel-proto-canva-walk .walk-header .proto-link { font-size: 12px; }
+  #panel-proto-canva-walk .progress-track { height: 4px; background: var(--line); border-radius: 2px; margin-bottom: 24px; overflow: hidden; }
+  #panel-proto-canva-walk .progress-fill { height: 100%; background: #007C89; border-radius: 2px; transition: width .35s ease; }
+  #panel-proto-canva-walk .walk-card { background: var(--paper); border: 1px solid var(--line); border-left: 3px solid #007C89; border-radius: 12px; padding: 28px 32px; box-shadow: 0 1px 3px rgba(0,0,0,.04); }
+  #panel-proto-canva-walk .walk-card .feat-name { font-family: 'Source Serif 4', Georgia, serif; font-size: 22px; font-weight: 700; color: var(--ink); margin: 0 0 4px; }
+  #panel-proto-canva-walk .walk-card .canva-refs { margin-bottom: 14px; }
+  #panel-proto-canva-walk .walk-card .canva-refs .ref { display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 6px; border-radius: 4px; background: #007C89; color: white; letter-spacing: .04em; margin-right: 4px; }
+  #panel-proto-canva-walk .walk-card .section { margin-bottom: 18px; }
+  #panel-proto-canva-walk .walk-card .section-label { font-family: 'Inter', sans-serif; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); margin-bottom: 5px; }
+  #panel-proto-canva-walk .walk-card .section-body { font-size: 13.5px; color: var(--ink-2); line-height: 1.65; }
+  #panel-proto-canva-walk .walk-card .interact-box { background: #E8F3F4; border: 1px solid #C5DFE2; border-left: 3px solid #007C89; border-radius: 8px; padding: 14px 16px; margin-top: 6px; }
+  #panel-proto-canva-walk .walk-card .interact-box .interact-label { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: #007C89; margin-bottom: 5px; }
+  #panel-proto-canva-walk .walk-card .interact-box .interact-body { font-size: 13px; color: var(--ink-2); line-height: 1.6; }
+  #panel-proto-canva-walk .walk-card .interact-box a { color: #007C89; font-weight: 600; }
+  #panel-proto-canva-walk .walk-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 20px; }
+  #panel-proto-canva-walk .walk-nav .btn-walk { display: inline-flex; align-items: center; gap: 6px; padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600; border: 1px solid var(--line); cursor: pointer; background: var(--paper); color: var(--ink); font-family: inherit; transition: all .15s; }
+  #panel-proto-canva-walk .walk-nav .btn-walk:hover { background: #E8F3F4; border-color: #007C89; }
+  #panel-proto-canva-walk .walk-nav .btn-walk.primary { background: #007C89; color: white; border-color: #007C89; }
+  #panel-proto-canva-walk .walk-nav .btn-walk.primary:hover { filter: brightness(1.1); }
+  #panel-proto-canva-walk .walk-nav .btn-walk:disabled { opacity: .35; cursor: default; pointer-events: none; }
+  #panel-proto-canva-walk .walk-nav .step-dots { display: flex; gap: 5px; }
+  #panel-proto-canva-walk .walk-nav .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--line); cursor: pointer; transition: background .2s; }
+  #panel-proto-canva-walk .walk-nav .dot.active { background: #007C89; }
+  #panel-proto-canva-walk .walk-nav .dot.done { background: #005F6B; }
+</style>
+
+<div class="walk-shell">
+  <div class="page-head" style="margin-bottom:20px;">
+    <div>
+      <div class="eyebrow">Tab 22 &middot; Interactive Walkthrough</div>
+      <h1 style="font-size:22px;">Canva AI 2.0 Gap Closure &mdash; Step by Step</h1>
+      <div class="subtitle">Click <strong>Next</strong> to walk through each feature in Deepak's prototype that closes the competitive gap between Mailchimp's agent mode and Canva's AI / AI 2.0 capabilities. Each step shows the feature, where to find it in the <a href="https://github.intuit.com/pages/dprabhakara/mailchimp-agent-shell-anatomy/v2/#brief" target="_blank" rel="noopener">live prototype</a>, the problem it solves, and the customer benefit.</div>
+    </div>
+  </div>
+
+  <div class="walk-header">
+    <span class="step-label" id="cw-step-label">Step 1 of 11</span>
+    <a class="proto-link" href="https://github.intuit.com/pages/dprabhakara/mailchimp-agent-shell-anatomy/v2/#brief" target="_blank" rel="noopener">Open prototype &rarr;</a>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="cw-progress" style="width:9.09%"></div></div>
+
+  <div class="walk-card" id="cw-card"></div>
+
+  <div class="walk-nav">
+    <button class="btn-walk" id="cw-prev" disabled>&larr; Previous</button>
+    <div class="step-dots" id="cw-dots"></div>
+    <button class="btn-walk primary" id="cw-next">Next &rarr;</button>
+  </div>
+</div>
+
+<script>
+(function() {
+  var PROTO = 'https://github.intuit.com/pages/dprabhakara/mailchimp-agent-shell-anatomy/v2/';
+  var steps = [
+    {
+      name: 'Multi-Channel Bundle Generation',
+      refs: ['CANVA 2.0'],
+      surface: 'New Conversation — #conv-start',
+      whatItIs: 'A hero-scale creation surface: "What should we build today, Maya?" with channel selector pills (Email, SMS, WhatsApp, Landing page, Social post, + Custom), a large prompt composer, quick-prompt chips, and a "Generate bundle →" button. On submit, the AI generates all four channel variants simultaneously, returning a 2×2 grid of bundle tiles — each with its own preview, channel label, and action buttons.',
+      interaction: 'In the hub inner-nav, click <strong>"New conversation"</strong> (or click the <strong>+ Create</strong> button in the sidebar). See the channel pills at the top — 4 are active by default. Type a prompt or click a <strong>quick-prompt chip</strong> (e.g., "Father\'s Day houseplant collectors"). Click <strong>"Generate bundle →"</strong> to see the 4-channel result appear below with Open editor and Send test buttons per channel.',
+      protoHash: '#conv-start',
+      problem: '<strong>Canva gap: multi-channel campaign from a single prompt.</strong> Canva\'s AI 2.0 generates entire multi-format campaigns from one prompt. Mailchimp currently creates one channel at a time in separate workflows.',
+      benefit: 'The marketer types one prompt and gets a coordinated 4-channel campaign in seconds. "Each channel got its own variant. They share copy DNA but follow channel best practices." Collapses 4 separate creation sessions into one. Directly attacks T1 trial activation ($5.0M).'
+    },
+    {
+      name: 'Memory Library — Persistent AI Learning',
+      refs: ['CANVA 2.0'],
+      surface: 'Memory Library — #memory',
+      whatItIs: 'A full surface for AI-learned rules organized in three categories: Voice & copy patterns ("Always frame plants as self-care, never as decor"), Audience & segmentation ("Houseplant Collectors respond to education content — 2.3× higher click rate"), and Visual style ("Hero images: natural light, in-room context"). Each rule shows its learning source and recency.',
+      interaction: 'In the hub inner-nav, click <strong>"Memory Library"</strong>. Read through the three sections: <strong>Voice & copy patterns</strong>, <strong>Audience & segmentation</strong>, and <strong>Visual style</strong>. Notice each rule shows its source ("Learned from: 18 campaigns · Last reinforced 4 days ago"). Click any <strong>Edit</strong> button. Also try <strong>"+ Teach AI a new rule"</strong> at the top right.',
+      protoHash: '#memory',
+      problem: '<strong>Canva gap: per-account AI learning.</strong> Canva\'s Memory stores user preferences, brand rules, and learned patterns across sessions. Mailchimp\'s current AI starts from baseline every time. This also serves as the Universal Content primitive (P1-4).',
+      benefit: 'The AI gets smarter with every campaign. "Maya overrode this 7 times in 2025; it stuck." Users no longer re-explain their brand voice every session. The single biggest retention differentiator against competitors where AI resets every session.'
+    },
+    {
+      name: 'Campaign Sheets — Prompt-to-Calendar',
+      refs: ['CANVA 2.0'],
+      surface: 'Campaign Sheets — #sheets',
+      whatItIs: 'A spreadsheet-style surface where the AI generates structured campaign content from a prompt. Example: "Father\'s Day campaign · 4-week sequence" with 6 rows (tease, main drop, VIP access, all subs, cart abandoners, lapsed) and 6 columns (Send date, Segment, Subject line, Hero copy, Product, CTA). AI-generated cells are highlighted with ✨.',
+      interaction: 'In the hub inner-nav, click <strong>"Campaign Sheets"</strong>. See the spreadsheet with <strong>6 rows and 6 columns</strong>. Notice the ✨ markers on AI-generated cells (subject lines and hero copy). Look at the toolbar: <strong>"+ Add column"</strong>, <strong>"✨ Fill empty cells"</strong>, and <strong>"Connect to email canvas"</strong>.',
+      protoHash: '#sheets',
+      problem: '<strong>Canva gap: Sheets AI + Bulk Create + Connect Data.</strong> Canva\'s Sheets AI lets users prompt for spreadsheet content and connect cells to design elements. Mailchimp has no equivalent.',
+      benefit: '"Edit a cell, regenerate the rest." Marketers who plan in spreadsheets get AI-powered content generation inside their planning workflow. "Connect to email canvas" means each row becomes a real campaign variant — no copy-pasting.'
+    },
+    {
+      name: 'Live Data Connectors + MCP',
+      refs: ['CANVA 2.0'],
+      surface: 'Connectors — #connectors',
+      whatItIs: '5 connected integrations (Shopify, Slack, Gmail, Google Drive, Notion) and 8 available (HubSpot, Google Calendar, Microsoft 365, etc.). Each connector has a toggle switch. A special MCP card: "Let ChatGPT, Claude, or your own agent read your Mailchimp design context."',
+      interaction: 'In the hub inner-nav, click <strong>"Connectors"</strong>. See the 5 connected integrations with <strong>green toggle switches</strong>. Click any toggle to disconnect/reconnect. Scroll down to see the 8 available connectors. At the bottom, find the <strong>MCP integration banner</strong> with a Configure button.',
+      protoHash: '#connectors',
+      problem: '<strong>Canva gap: Connectors + MCP.</strong> Canva connects to 30+ apps and exposes MCP for external AI. Mailchimp\'s AI operates in a data silo — no live context from the tools marketers actually use.',
+      benefit: '"Every assistant reply that uses external data gets a coin-stamp showing which sources it touched." The AI doesn\'t hallucinate product data — it pulls from Shopify. External AI tools can use Mailchimp data without screen-scraping.'
+    },
+    {
+      name: 'Brand Intelligence — Rules Engine',
+      refs: ['CANVA 2.0'],
+      surface: 'Brand Intelligence — #brand',
+      whatItIs: 'Two-column layout: left shows "Active brand rules" (6 declarative rules: "Use Playfair Display for headlines, Inter for body. Never Helvetica.") with a refresh banner ("23 artifacts will be refreshed"). Right shows Palette (4 swatches), Voice profile, and brand compliance ("100% pass brand check ✓").',
+      interaction: 'In the hub inner-nav, click <strong>"Brand Intelligence"</strong>. Read the 6 brand rules on the left. Look at the <strong>teal refresh banner</strong>: "23 saved artifacts will be refreshed when you click Update all to latest brand." On the right, see the <strong>4 color swatches</strong> and the <strong>green compliance indicator</strong>. Click <strong>"⚡ Update all artifacts to latest brand"</strong> at the top.',
+      protoHash: '#brand',
+      problem: '<strong>Canva gap: Brand Kit as an enforceable rules engine.</strong> Canva\'s Brand Kit enforces rules across all designs. Mailchimp\'s is a modal that can be silently overridden by themes (P0-6). This transforms brand settings into active rules with one-click retroactive updates.',
+      benefit: '"100% of active artifacts pass brand check." Brand consistency is automated. When the customer changes their brand green, all 23 artifacts refresh automatically. No manual per-email updates. No silent overrides.'
+    },
+    {
+      name: 'AI Governance (Canva Shield)',
+      refs: ['CANVA 2.0'],
+      surface: 'AI Governance — #governance',
+      whatItIs: 'Three governance sections: (1) Data & retention — chat retention (90 days), PII exclusion (ENFORCED), web research scope; (2) Model selection — approved models (Claude, GPT-5), data residency (US-only); (3) Content review — pre-send human review for audiences >5,000, compliance lint (CAN-SPAM, GDPR, CCPA — ALWAYS ON).',
+      interaction: 'In the hub inner-nav, click <strong>"AI governance"</strong>. In <strong>Data & retention</strong>, see the "Audience data in prompts" rule with the green <strong>ENFORCED</strong> badge. Toggle the <strong>Web research scope</strong> switch. In <strong>Model selection</strong>, click <strong>"Edit list"</strong>. In <strong>Content review</strong>, see the compliance lint rule with <strong>ALWAYS ON</strong> badge.',
+      protoHash: '#governance',
+      problem: '<strong>Canva gap: Canva Shield for enterprise AI governance.</strong> Canva Shield gives enterprise teams control over what AI can see, store, and produce. Mailchimp has no equivalent. This addresses P0-2 (TCPA), P0-1 (audience confirmation), and P0-3 (AI content verification).',
+      benefit: 'Enterprise customers get the controls their legal/compliance teams require. "Audience PII is never sent to external models." "AI-generated sends go through a human reviewer when audience is >5,000." Table-stakes for enterprise adoption.'
+    },
+    {
+      name: 'Magic Creative AI Family (10 Tools)',
+      refs: ['CANVA 2.0'],
+      surface: 'AI Skills & Tools + Focus View',
+      whatItIs: 'Ten creative AI capabilities from Canva\'s Magic family: Magic Write, Magic Design, Magic Edit/Grab/Expand/Morph, Magic Layers, Magic Resize/Switch, Magic Translate, Magic Media (text-to-image/video), and Dream Lab. Surfaced as a floating toolbar in the Focus view and as toggleable skill cards.',
+      interaction: 'First, go to <strong>"AI skills & tools"</strong> in the inner nav and scroll to <strong>"Creative AI · Magic family"</strong> — see all 8 skill cards with toggle switches. Then open the <strong>Focus view</strong> (click "Draft email" from the Daily Brief). See the <strong>dark floating toolbar</strong> above the email canvas: Magic Edit, Magic Expand, Magic Grab, Magic Morph, Style match, Remove BG. On the right edit rail, see <strong>Magic Layers, Magic Resize, Magic Translate, Magic Media, Dream Lab</strong>.',
+      protoHash: '#skills',
+      problem: '<strong>Canva gap: the entire Magic creative AI toolkit.</strong> Canva offers brush-replace, subject extraction, frame-fill, themed effects, editable layers, multi-format resize, 100+ language translation, text-to-image/video, and high-fidelity generation. Mailchimp has none of these.',
+      benefit: 'Marketers who aren\'t designers can: remove backgrounds (Grab), extend images (Expand), apply themes (Morph), resize to fit SMS/social (Resize), and translate to 100+ languages (Translate). Collapses the "I need a designer" barrier.'
+    },
+    {
+      name: 'Design-Aware AI Chat',
+      refs: ['CANVA 2.0'],
+      surface: 'Focus View — Chat panel',
+      whatItIs: 'In the Focus view, the user types "Make the hero more autumnal." The AI responds: "Done — hero shifted to warmer tones. Body copy unchanged. The change applied only to the hero block — your CTA, product picks, and footer are untouched." A tool pill confirms: "Layered object intelligence · editing hero only."',
+      interaction: 'Open the <strong>Focus view</strong> (click "Draft email" or "Open email"). In the <strong>left chat panel</strong>, read the conversation. Notice the user said "Make the hero more autumnal" and the AI\'s response includes the tool pill <strong>"Layered object intelligence · editing hero only"</strong>. The AI explicitly declares what was and wasn\'t changed. The composer says <strong>"Edit this email by talking to me…"</strong>.',
+      protoHash: '#brief',
+      problem: '<strong>Canva gap: conversational design editing with element-level intelligence.</strong> Canva\'s AI 2.0 supports design-aware chat where edits target specific elements without full regeneration. Mailchimp\'s Freddie only offers full regeneration.',
+      benefit: '"Edit by element without regenerating the whole thing." Users preserve their investment in prior edits. Each refinement is surgical, not destructive. The AI\'s explicit change declaration builds calibrated trust.'
+    },
+    {
+      name: '@Mailchimp AI in Comments',
+      refs: ['CANVA 2.0'],
+      surface: 'Focus View — Edit rail → Comments & review',
+      whatItIs: 'In the Focus view\'s right-side edit rail, under "Comments & review", an item enables tagging the AI in a comment thread so it applies the suggested fix in place. This enables multi-author collaborative workflows.',
+      interaction: 'Open the <strong>Focus view</strong>. In the <strong>right edit rail</strong>, scroll to the <strong>"Comments & review"</strong> group. See three items: <strong>Comments (2)</strong>, <strong>✨ @Mailchimp AI in comments</strong> (teal text), and <strong>Review checklist</strong>. The @Mailchimp AI item enables the Canva 2.0 pattern of AI-in-comments collaboration.',
+      protoHash: '#brief',
+      problem: '<strong>Canva gap: AI-in-comments collaboration.</strong> Canva lets collaborators tag the AI in comment threads. Mailchimp has no AI collaboration layer. This enables multi-author workflows (HVC #4, Bet 4).',
+      benefit: 'A manager comments "make the CTA bigger" and tags @Mailchimp AI, which applies the change immediately. Reduces the round-trip between review feedback and implementation from hours to seconds.'
+    },
+    {
+      name: 'External AI (MCP), Web Research, Scheduled Tasks',
+      refs: ['CANVA 2.0'],
+      surface: 'AI Skills & Tools — Agentic AI section',
+      whatItIs: 'Three agentic capabilities: (1) ChatGPT & Claude via MCP — external AI reads Mailchimp design context; (2) Web research — live competitive and seasonal data pulls; (3) Scheduled AI tasks — set-and-forget recurring generation (e.g., weekly SMS batches). Each is a toggleable skill card.',
+      interaction: 'Go to <strong>"AI skills & tools"</strong> and scroll to <strong>"Agentic AI · Reasoning & orchestration"</strong>. Find the three cards: <strong>Web research</strong>, <strong>ChatGPT & Claude (MCP)</strong>, and <strong>Scheduled AI tasks</strong>. Toggle them on/off. Also see the MCP integration in the <strong>Connectors</strong> surface.',
+      protoHash: '#skills',
+      problem: '<strong>Canva gap: AI platform extensibility.</strong> Canva\'s MCP, web research, and scheduled tasks make it a platform, not just a tool. Mailchimp\'s AI is self-contained with no extensibility.',
+      benefit: 'Users who already use ChatGPT/Claude can generate Mailchimp campaigns from those tools. Seasonal data informs recommendations automatically. Weekly recurring campaigns generate themselves. AI becomes a marketing autopilot.'
+    },
+    {
+      name: 'Bulk Create, Fill Empty Cells, Magic Formulas, Canva Code 2.0',
+      refs: ['CANVA 2.0'],
+      surface: 'AI Skills & Tools — Data & productivity section',
+      whatItIs: 'Five data/productivity AI tools: Sheets AI (prompt → campaign calendar), Bulk Create (CSV-driven variant generation, 300 rows × 60 cols), Fill Empty Cells (Magic Write at scale), Magic Formulas (natural-language → spreadsheet formula), and Canva Code 2.0 (prompt-built interactive landing pages with quizzes & calculators).',
+      interaction: 'Go to <strong>"AI skills & tools"</strong> and scroll to <strong>"Data & productivity"</strong>. See the 5 skill cards: <strong>Sheets AI</strong>, <strong>Bulk Create</strong>, <strong>Fill Empty Cells</strong>, <strong>Magic Formulas</strong>, and <strong>Canva Code 2.0</strong>. Toggle them on/off. Then visit the <strong>Campaign Sheets</strong> surface to see Sheets AI + Fill Empty Cells working together on a real campaign calendar.',
+      protoHash: '#skills',
+      problem: '<strong>Canva gap: AI-powered data workflows.</strong> Canva\'s Sheets AI and Bulk Create let users generate hundreds of design variants from spreadsheet data. Mailchimp has no equivalent.',
+      benefit: 'E-commerce marketers with 300-product catalogs can generate per-product email variants from a CSV. Campaign managers build 4-week content calendars from a prompt. Marketing teams create interactive landing pages without engineering.'
+    }
+  ];
+
+  var current = 0;
+  var card = document.getElementById('cw-card');
+  var label = document.getElementById('cw-step-label');
+  var progress = document.getElementById('cw-progress');
+  var prevBtn = document.getElementById('cw-prev');
+  var nextBtn = document.getElementById('cw-next');
+  var dotsWrap = document.getElementById('cw-dots');
+
+  for (var i = 0; i < steps.length; i++) {
+    var d = document.createElement('span');
+    d.className = 'dot';
+    d.setAttribute('data-idx', i);
+    dotsWrap.appendChild(d);
+  }
+  dotsWrap.addEventListener('click', function(e) {
+    var idx = e.target.getAttribute('data-idx');
+    if (idx !== null) render(parseInt(idx, 10));
+  });
+
+  function render(idx) {
+    current = idx;
+    var s = steps[idx];
+    var refsHtml = '<div class="canva-refs">' + s.refs.map(function(r) { return '<span class="ref">' + r + '</span>'; }).join('') + '</div>';
+    card.innerHTML =
+      '<h2 class="feat-name">' + s.name + '</h2>' +
+      refsHtml +
+      '<div class="section"><div class="section-label">What it is</div><div class="section-body">' + s.whatItIs + '</div></div>' +
+      '<div class="section"><div class="section-label">Problem it solves</div><div class="section-body">' + s.problem + '</div></div>' +
+      '<div class="section"><div class="section-label">Customer benefit</div><div class="section-body">' + s.benefit + '</div></div>' +
+      '<div class="interact-box">' +
+        '<div class="interact-label">Where to interact in the prototype</div>' +
+        '<div class="interact-body">' + s.interaction + '<br/><a href="' + PROTO + s.protoHash + '" target="_blank" rel="noopener">Open this surface in the prototype &rarr;</a></div>' +
+      '</div>';
+    label.textContent = 'Step ' + (idx + 1) + ' of ' + steps.length;
+    progress.style.width = ((idx + 1) / steps.length * 100) + '%';
+    prevBtn.disabled = idx === 0;
+    nextBtn.textContent = idx === steps.length - 1 ? 'Done ✓' : 'Next →';
+    nextBtn.disabled = false;
+    var dots = dotsWrap.children;
+    for (var j = 0; j < dots.length; j++) {
+      dots[j].className = j < idx ? 'dot done' : j === idx ? 'dot active' : 'dot';
+    }
+  }
+
+  prevBtn.addEventListener('click', function() { if (current > 0) render(current - 1); });
+  nextBtn.addEventListener('click', function() { if (current < steps.length - 1) render(current + 1); });
+  render(0);
+})();
+</script>
+</div><!-- /panel-proto-canva-walk -->
+
 
 </div>
 
@@ -14421,7 +14885,7 @@ Lens 5 (Strategy Overlay) ── component_id joins back to ──→ Lens 3 + s
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','revised','migration','repointel','canvas','memo','buildplan','freddie','freddiep2','planpage','designaudit','proto-audit','proto-canva'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','klviedi','klvivoc','hvcrisk','research','health','growthmodel','lossattr','nuniaudit','revised','migration','repointel','canvas','memo','buildplan','freddie','freddiep2','planpage','designaudit','proto-audit','proto-canva','proto-audit-walk','proto-canva-walk'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
