@@ -146,18 +146,31 @@
 
     if (previous) {
       previous.style.opacity = '0';
-      setTimeout(() => { previous.hidden = true; previous.style.opacity = ''; }, TRANSITION_MS);
+      previous.style.transform = 'translateY(8px)';
+      setTimeout(() => {
+        previous.hidden = true;
+        previous.style.opacity = '';
+        previous.style.transform = '';
+      }, TRANSITION_MS);
     }
 
     setTimeout(() => {
       target.hidden = false;
       void target.offsetHeight;
-      target.style.opacity = '1';
+      target.style.opacity = '0';
+      target.style.transform = 'translateY(10px)';
+      requestAnimationFrame(() => {
+        target.style.opacity = '1';
+        target.style.transform = 'translateY(0)';
+      });
 
       const hotspot = target.querySelector('[data-advance-to]');
       if (hotspot && !opts.noFocus) hotspot.focus({ preventScroll: false });
 
-      window.scrollTo({ top: 0, behavior: opts.smooth === false ? 'auto' : 'smooth' });
+      window.scrollTo({
+        top: 0,
+        behavior: (opts.smooth === false || prefersReducedMotion()) ? 'auto' : 'smooth'
+      });
 
       scheduleAutoAdvance(target);
     }, previous ? TRANSITION_MS : 0);

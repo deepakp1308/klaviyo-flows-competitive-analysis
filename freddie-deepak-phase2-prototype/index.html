@@ -21,7 +21,11 @@
     </div>
     <div class="counter" aria-live="polite">
       <span class="counter-label">Loading…</span>
-      <span class="brand-mark-sub" style="margin-left:10px;font-weight:500;">Email-first</span>
+      <div class="channel-tabs" role="tablist" aria-label="Channel">
+        <button data-channel="email" class="active" role="tab" aria-selected="true">Email</button>
+        <button data-channel="sms" role="tab" aria-selected="false" disabled>SMS</button>
+        <button data-channel="whatsapp" role="tab" aria-selected="false" disabled>WhatsApp</button>
+      </div>
     </div>
     <nav class="nav" aria-label="Storyboard navigation">
       <button type="button" data-nav="prev" aria-label="Previous scene">&larr; Prev</button>

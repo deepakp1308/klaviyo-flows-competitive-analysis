@@ -9,6 +9,8 @@
    - top-chrome counter sync (feature N · scene X of Y)
    - scene-graph validator (logs missing successors on load)
    - channel-tab switch where data-channel-variants exists
+   - async / "generating" scenes: optional data-auto-advance-ms + data-auto-advance-to
+     (skipped when prefers-reduced-motion: reduce); Continue still works immediately
    ========================================================================= */
 
 (function () {
@@ -30,7 +32,42 @@
   const progressLabel = document.getElementById('chrome-progress-label');
   const progressBar  = document.querySelector('.chrome-progress');
 
+  let autoAdvanceTimer = null;
+
   if (!stage) { console.error('[fdpx] missing .stage'); return; }
+
+  function clearAutoAdvance() {
+    if (autoAdvanceTimer) {
+      clearTimeout(autoAdvanceTimer);
+      autoAdvanceTimer = null;
+    }
+  }
+
+  function prefersReducedMotion() {
+    try {
+      return window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  /** Spinner / "generating" scenes auto-advance after a beat (unless reduced-motion). */
+  function scheduleAutoAdvance(sceneEl) {
+    clearAutoAdvance();
+    if (!sceneEl || prefersReducedMotion()) return;
+    const rawMs = sceneEl.dataset.autoAdvanceMs;
+    const dest = sceneEl.dataset.autoAdvanceTo;
+    if (!rawMs || !dest) return;
+    const ms = parseInt(rawMs, 10);
+    if (!ms || ms < 800) return;
+    const sceneId = sceneEl.dataset.scene;
+    autoAdvanceTimer = setTimeout(function () {
+      autoAdvanceTimer = null;
+      if (currentSceneId !== sceneId) return;
+      if (readHash() !== sceneId) return;
+      setHash(dest);
+    }, ms);
+  }
 
   function payoffText(sceneId, scene) {
     const overrides = window.FDPX_DATA && window.FDPX_DATA.scenePayoffs;
@@ -128,13 +165,19 @@
       return showScene(DEFAULT_SCENE);
     }
 
+    clearAutoAdvance();
     const previous = currentSceneId ? getScene(currentSceneId) : null;
     if (previous === target) return;
 
     // Fade-out previous
     if (previous) {
       previous.style.opacity = '0';
-      setTimeout(() => { previous.hidden = true; previous.style.opacity = ''; }, TRANSITION_MS);
+      previous.style.transform = 'translateY(8px)';
+      setTimeout(() => {
+        previous.hidden = true;
+        previous.style.opacity = '';
+        previous.style.transform = '';
+      }, TRANSITION_MS);
     }
 
     // Fade-in target after the fade-out window
@@ -142,14 +185,24 @@
       target.hidden = false;
       // force reflow so the opacity transition runs
       void target.offsetHeight;
-      target.style.opacity = '1';
+      target.style.opacity = '0';
+      target.style.transform = 'translateY(10px)';
+      requestAnimationFrame(() => {
+        target.style.opacity = '1';
+        target.style.transform = 'translateY(0)';
+      });
 
       // Focus the advance hotspot for keyboard users
       const hotspot = target.querySelector('[data-advance-to]');
       if (hotspot && !opts.noFocus) hotspot.focus({ preventScroll: false });
 
       // Scroll to top of stage
-      window.scrollTo({ top: 0, behavior: opts.smooth === false ? 'auto' : 'smooth' });
+      window.scrollTo({
+        top: 0,
+        behavior: (opts.smooth === false || prefersReducedMotion()) ? 'auto' : 'smooth'
+      });
+
+      scheduleAutoAdvance(target);
     }, previous ? TRANSITION_MS : 0);
 
     currentSceneId = id;
