@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mailchimp Unified Builder — FY27 Roadmap</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 10pt; color: #000; background: #fff; line-height: 1.45; padding: 32px 40px; max-width: 1400px; margin: 0 auto; }
+
+  .page-label { font-size: 9pt; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #555; margin-bottom: 4px; }
+  h1 { font-size: 16pt; font-weight: 700; margin-bottom: 6px; }
+  h2 { font-size: 12pt; font-weight: 700; margin-bottom: 8px; margin-top: 20px; border-bottom: 2px solid #000; padding-bottom: 4px; }
+  h3 { font-size: 10pt; font-weight: 700; margin-bottom: 4px; }
+
+  .vision-box { background: #f5f5f5; border-left: 4px solid #000; padding: 12px 16px; margin: 12px 0 16px 0; }
+  .vision-box p { font-size: 10pt; line-height: 1.5; }
+
+  .pillar-overview { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 16px; }
+  .pillar-card { border: 1px solid #ccc; padding: 12px; }
+  .pillar-card h3 { font-size: 10pt; margin-bottom: 4px; }
+  .pillar-card .pillar-num { font-size: 8pt; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: #fff; background: #000; display: inline-block; padding: 2px 8px; margin-bottom: 6px; }
+  .pillar-card p { font-size: 9pt; color: #333; line-height: 1.4; }
+  .pillar-card .subthemes { font-size: 8pt; color: #555; margin-top: 6px; font-style: italic; }
+
+  .guiding { background: #f5f5f5; border: 1px solid #ddd; padding: 12px 16px; margin: 12px 0 16px 0; }
+  .guiding p { font-size: 9pt; line-height: 1.5; color: #333; }
+  .guiding strong { color: #000; }
+
+  .divider { border: none; border-top: 1px solid #ddd; margin: 16px 0; }
+  .divider-heavy { border: none; border-top: 3px solid #000; margin: 24px 0; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 9pt; margin-top: 8px; }
+  th, td { border: 1px solid #bfbfbf; padding: 8px 10px; vertical-align: top; text-align: left; }
+  th { background: #d9e2f3; font-weight: 700; font-size: 9pt; }
+  .pillar-cell { background: #f2f2f2; min-width: 180px; }
+  .pillar-name { font-weight: 700; font-size: 10pt; }
+  .pillar-scope { font-size: 8pt; color: #555; font-style: italic; margin-top: 3px; }
+  .q-header { text-align: center; }
+  .q-label { font-size: 10pt; font-weight: 700; }
+  .q-theme { font-size: 8pt; font-weight: 400; font-style: italic; color: #555; }
+
+  ul { margin: 0; padding-left: 14px; }
+  ul li { margin-bottom: 3px; line-height: 1.4; }
+  .sub-label { font-weight: 700; font-size: 8pt; letter-spacing: 0.04em; text-transform: uppercase; color: #555; margin-top: 6px; margin-bottom: 2px; }
+  .sub-label:first-child { margin-top: 0; }
+
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 12px 0; }
+  .stat-box { text-align: center; border: 1px solid #ddd; padding: 10px 8px; }
+  .stat-num { font-size: 18pt; font-weight: 700; }
+  .stat-desc { font-size: 8pt; color: #555; margin-top: 2px; }
+
+  .nav-bar { margin-bottom: 16px; padding: 8px 0; border-bottom: 2px solid #000; }
+  .nav-bar a { font-size: 9pt; font-weight: 700; color: #000; text-decoration: none; margin-right: 20px; }
+  .nav-bar a.active { border-bottom: 2px solid #000; padding-bottom: 4px; }
+
+  @media print {
+    body { padding: 16px; font-size: 8pt; }
+    table { font-size: 7.5pt; }
+    th, td { padding: 5px 6px; }
+    h1 { font-size: 14pt; }
+    h2 { font-size: 11pt; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav-bar">
+  <a href="unified-builder-roadmap.html" class="active">Unified Builder Roadmap</a>
+  <a href="mailchimp-editor.html#canvas">Initiative Canvas</a>
+  <a href="mailchimp-editor.html">Editor Strategy Brief</a>
+</div>
+
+<div class="page-label">Mailchimp Unified Builder</div>
+<h1>FY27 Unified Builder Roadmap</h1>
+
+<div class="vision-box">
+  <p>Transform the Mailchimp editor from a bifurcated, bug-cited builder into a unified, AI-powered authoring surface that customers trust to ship campaigns. Across four quarters, the roadmap moves from stabilizing the foundation and proving AI speed-to-value, to shipping reusable content and migration tools, to unifying email and SMS in one canvas, to enabling team-scale collaboration and governance.</p>
+  <p style="margin-top:8px;">52 initiatives across 4 pillars and 13 sub-themes, sequenced to change the "clunky/outdated" perception and close named competitive gaps against Klaviyo, Canva, and Stensul.</p>
+</div>
+
+<div class="stat-grid">
+  <div class="stat-box">
+    <div class="stat-num">4</div>
+    <div class="stat-desc">Strategic pillars</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-num">13</div>
+    <div class="stat-desc">Sub-themes</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-num">52</div>
+    <div class="stat-desc">Initiatives</div>
+  </div>
+  <div class="stat-box">
+    <div class="stat-num">4</div>
+    <div class="stat-desc">Quarters (FY27)</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<h2>Strategic Pillars</h2>
+<div class="pillar-overview">
+  <div class="pillar-card">
+    <div class="pillar-num">Pillar 1</div>
+    <h3>Builder Trust &amp; Reliability</h3>
+    <p>Core functionality that customers must be able to depend on before anything else ships. Burns down cited HVC tickets, fixes rendering divergence, stabilizes Brand Kit and Content Studio, and publishes builder SLOs.</p>
+    <div class="subthemes">Sub-themes: Editor Rendering &amp; Core Fixes &middot; Brand Kit Reliability &amp; Multi-Brand &middot; Content Studio &amp; Canva Integration &middot; Collaboration &middot; Platform Reliability &amp; OPEX</div>
+  </div>
+  <div class="pillar-card">
+    <div class="pillar-num">Pillar 2</div>
+    <h3>Universal Builder, Portability &amp; Migration</h3>
+    <p>A configurable builder that supports reusable content, seamless migration from Classic to New Builder, and cross-product portability. Closes the Klaviyo Spring 2026 Universal Content parity gap.</p>
+    <div class="subthemes">Sub-themes: Universal Content Blocks &middot; Builder Migration Prerequisites &middot; Cross-Product Template Portability</div>
+  </div>
+  <div class="pillar-card">
+    <div class="pillar-num">Pillar 3</div>
+    <h3>AI-Powered Builder &amp; Accelerated Time to Value</h3>
+    <p>An intelligent builder that removes barriers, collapses the time from signup to first send, and uses AI to accelerate every step of creating and optimizing omni-channel campaigns.</p>
+    <div class="subthemes">Sub-themes: Activation &amp; Onboarding &middot; Template Gallery &amp; Vertical Coverage &middot; AI Content &amp; Copy Generation &middot; AI-Powered Design, Personalization &amp; Performance</div>
+  </div>
+  <div class="pillar-card">
+    <div class="pillar-num">Pillar 4</div>
+    <h3>Unified Omni-Channel Builder &amp; Activation</h3>
+    <p>A single authoring surface that makes email and SMS feel like one campaign, and proactive nudges that turn inactive users into active senders.</p>
+    <div class="subthemes">Sub-themes: Generative SMS &middot; Unified Email + SMS Authoring &middot; Activation &amp; Feature Discovery</div>
+  </div>
+</div>
+
+<hr class="divider">
+
+<h2>Sequencing Principles</h2>
+<div class="guiding">
+  <p><strong>Trust the builder &rarr; Reuse content everywhere &rarr; AI accelerates every step &rarr; Unified across channels &rarr; Teams work together natively.</strong></p>
+  <p style="margin-top:6px;">Each layer depends on the one before it. You can't reuse content if the builder is broken. You can't trust AI output if content isn't reusable. You can't unify channels if AI isn't making authoring fast. You can't collaborate if the unified surface doesn't exist yet. Q1 pairs trust fixes with AI quick wins to satisfy both customer need and leadership visibility. Q2 ships the remaining AI capabilities and migration tools on a stabilized foundation. Q3 unifies email and SMS. Q4 adds team-scale governance.</p>
+</div>
+
+<hr class="divider-heavy">
+
+<h1>FY27 Phased Roadmap</h1>
+<p style="color:#555; font-style:italic; margin-bottom:10px;">4 pillars, 4 quarters &mdash; from foundation and AI quick wins to a unified, collaborative omni-channel builder</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="min-width:180px;">Strategic Pillar</th>
+      <th class="q-header"><span class="q-label">Q1</span><br><span class="q-theme">Foundation, Trust &amp; AI Quick Wins</span></th>
+      <th class="q-header"><span class="q-label">Q2</span><br><span class="q-theme">AI at Scale &amp; Migration Ships</span></th>
+      <th class="q-header"><span class="q-label">Q3</span><br><span class="q-theme">Unified Omni-Channel</span></th>
+      <th class="q-header"><span class="q-label">Q4</span><br><span class="q-theme">Team Scale &amp; Governance</span></th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- PILLAR 1 -->
+    <tr>
+      <td class="pillar-cell">
+        <div class="pillar-name">Builder Trust &amp; Reliability</div>
+        <div class="pillar-scope">Editor rendering, Brand Kit, Content Studio, Canva integration, platform SLOs, collaboration, multi-brand governance</div>
+      </td>
+      <td>
+        <div class="sub-label">Editor Rendering</div>
+        <ul>
+          <li>Fix inbox rendering divergence (forwarded-mail reflow, mobile line-breaks, image-shrink)</li>
+          <li>Fix block reorder requiring page refresh &amp; vanishing template navigation</li>
+          <li>Surface NEB templates in campaign creation wizard</li>
+          <li>Automated cross-browser regression suite (Safari, Firefox, Chrome on every CI build)</li>
+          <li>Multi-author save-conflict detection with presence indicators &amp; merge prompts</li>
+        </ul>
+        <div class="sub-label">Brand Kit</div>
+        <ul>
+          <li>Brand Kit data correctness fix &amp; drift monitoring (ramp to 100%)</li>
+          <li>Font upload bug fix &amp; Creative Assistant custom font recognition</li>
+        </ul>
+        <div class="sub-label">Content Studio &amp; Canva</div>
+        <ul>
+          <li>Content Studio stability (eliminate quit-and-reload pattern)</li>
+          <li>Canva-to-Mailchimp sync reliability with sync-status indicators</li>
+        </ul>
+        <div class="sub-label">Platform</div>
+        <ul>
+          <li>Builder SLO operating contract (99.9% uptime, P95 load &lt;500ms, render fidelity &ge;99%)</li>
+        </ul>
+      </td>
+      <td>
+        <div class="sub-label">Editor Rendering</div>
+        <ul>
+          <li>Light/dark mode variant rendering &amp; background images on blocks</li>
+          <li>Inline link validation, spam-score guidance &amp; SPF/DKIM/DMARC wizard</li>
+        </ul>
+        <div class="sub-label">Brand Kit</div>
+        <ul>
+          <li>Brand fonts selectable in landing pages &amp; signup forms (iPhone fallback fix)</li>
+        </ul>
+        <div class="sub-label">Content Studio</div>
+        <ul>
+          <li>Folder reordering, deletion &amp; search-in-folder for asset organization</li>
+        </ul>
+      </td>
+      <td>
+        <div class="sub-label">Brand Kit</div>
+        <ul>
+          <li>Multi-brand kits per account (main brand + sub-brands, Canva-style)</li>
+        </ul>
+      </td>
+      <td>
+        <div class="sub-label">Collaboration</div>
+        <ul>
+          <li>Real-time multi-author co-editing with live cursors &amp; presence indicators</li>
+          <li>Block-level @-mention comments with resolve-in-context</li>
+          <li>Multi-step approval workflow with full version history &amp; rollback</li>
+        </ul>
+        <div class="sub-label">Governance</div>
+        <ul>
+          <li>Locked layouts mode with role-based access for brand governance</li>
+          <li>Cross-account brand inheritance for agencies (Slack-style context switching)</li>
+        </ul>
+      </td>
+    </tr>
+
+    <!-- PILLAR 2 -->
+    <tr>
+      <td class="pillar-cell">
+        <div class="pillar-name">Universal Builder, Portability &amp; Migration</div>
+        <div class="pillar-scope">Universal Content, Classic&rarr;NEB migration, cross-product template portability, Code Mode</div>
+      </td>
+      <td>
+        <div class="sub-label">Universal Content</div>
+        <ul>
+          <li>Universal Content block primitive (account-level, edit-once-propagates-everywhere)</li>
+          <li>Auto-migration of existing saved blocks to Universal Content</li>
+        </ul>
+        <div class="sub-label">Migration</div>
+        <ul>
+          <li>Bulk template migration tool (181-template pattern) STARTS</li>
+          <li>NEB Code Mode (HTML/CSS escape hatch) STARTS</li>
+        </ul>
+      </td>
+      <td>
+        <div class="sub-label">Migration</div>
+        <ul>
+          <li>Bulk template migration tool SHIPS</li>
+          <li>1:1 migration tool with style-fidelity guarantee &amp; support enablement</li>
+          <li>NEB Code Mode SHIPS (precondition for Classic sunset)</li>
+          <li>NEB Liquid templating for power users &amp; dynamic content</li>
+        </ul>
+        <div class="sub-label">Portability</div>
+        <ul>
+          <li>Brand Kit auto-applied to Universal blocks at insertion</li>
+          <li>Template categorization fix (layout-only browse mode, better search &amp; tagging)</li>
+        </ul>
+      </td>
+      <td>
+        <div class="sub-label">Portability</div>
+        <ul>
+          <li>Universal Content blocks render in Customer Journey Builder email steps</li>
+          <li>Universal Content audit &amp; version history (impact preview before edit)</li>
+        </ul>
+      </td>
+      <td>
+        <div class="sub-label">Migration</div>
+        <ul>
+          <li>Funded migration program with 12-month grace period &amp; in-product tracker</li>
+        </ul>
+      </td>
+    </tr>
+
+    <!-- PILLAR 3 -->
+    <tr>
+      <td class="pillar-cell">
+        <div class="pillar-name">AI-Powered Builder &amp; Accelerated Time to Value</div>
+        <div class="pillar-scope">Activation, onboarding, AI content &amp; copy, AI design, personalization, performance intelligence</div>
+      </td>
+      <td>
+        <div class="sub-label">Activation &amp; Onboarding</div>
+        <ul>
+          <li>Brand Kit auto-extract on signup with first email pre-branded</li>
+          <li>AI Email Setup Agent (URL &rarr; scaffolded campaign in 3 clicks) STARTS</li>
+        </ul>
+        <div class="sub-label">AI Content</div>
+        <ul>
+          <li>Write with AI quality &amp; brand-tone improvements (deeper Brand Kit integration)</li>
+        </ul>
+      </td>
+      <td>
+        <div class="sub-label">Activation &amp; Onboarding</div>
+        <ul>
+          <li>Industry-specific welcome flow templates pre-loaded by business type</li>
+          <li>AI Email Setup Agent SHIPS</li>
+        </ul>
+        <div class="sub-label">Templates</div>
+        <ul>
+          <li>B2B &amp; professional services template gallery (skeleton layouts)</li>
+          <li>Industry-aware template gallery (6&ndash;8 per vertical)</li>
+        </ul>
+        <div class="sub-label">AI Design &amp; Performance</div>
+        <ul>
+          <li>AI image generation tied to customer product catalog</li>
+          <li>Image Remix in flow email steps (Klaviyo parity)</li>
+          <li>In-canvas revenue per recipient &amp; per step (Klaviyo parity)</li>
+        </ul>
+      </td>
+      <td>
+        <div class="sub-label">AI Design &amp; Personalization</div>
+        <ul>
+          <li>Per-recipient dynamic images (last product viewed, predicted next product)</li>
+          <li>Per-profile Smart Send Time &amp; Personalized A/B in send config</li>
+        </ul>
+      </td>
+      <td>
+        <div class="sub-label">AI Content</div>
+        <ul>
+          <li>AI brand-style transfer between campaigns (no competitor ships this)</li>
+        </ul>
+      </td>
+    </tr>
+
+    <!-- PILLAR 4 -->
+    <tr>
+      <td class="pillar-cell">
+        <div class="pillar-name">Unified Omni-Channel Builder &amp; Activation</div>
+        <div class="pillar-scope">Generative SMS, unified email+SMS authoring, cross-channel preview, feature discovery, activation nudges</div>
+      </td>
+      <td>
+        <div class="sub-label">Generative SMS</div>
+        <ul>
+          <li>Brand-Kit-aware generative SMS in composer (character-limit auto-compression, brand-tone)</li>
+        </ul>
+      </td>
+      <td>
+        <div class="sub-label">Generative SMS</div>
+        <ul>
+          <li>SMS variant generation &amp; A/B testing in composer</li>
+        </ul>
+        <div class="sub-label">Activation</div>
+        <ul>
+          <li>DRAFT-resurrect campaign with proactive nudges (&ldquo;in DRAFT for X days&rdquo;)</li>
+        </ul>
+      </td>
+      <td>
+        <div class="sub-label">Unified Authoring</div>
+        <ul>
+          <li>Shared content blocks render in both email + SMS (Universal Content extends to SMS)</li>
+          <li>Cross-channel preview side-by-side at compose time</li>
+          <li>Brand Kit applied to SMS branded short links &amp; sender ID</li>
+        </ul>
+        <div class="sub-label">Activation</div>
+        <ul>
+          <li>Contextual feature discovery prompts (&ldquo;turn this into an automation?&rdquo;)</li>
+        </ul>
+      </td>
+      <td>
+        &mdash;
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<hr class="divider-heavy">
+
+<h2>Pillar Detail: Initiatives by Sub-Theme</h2>
+<p style="color:#555; font-style:italic; margin-bottom:12px;">Complete list of 52 initiatives organized by pillar and sub-theme, with customer problem context and functional benefit.</p>
+
+<h3 style="margin-top:16px; margin-bottom:8px; border-bottom:1px solid #ddd; padding-bottom:4px;">Pillar 1: Builder Trust &amp; Reliability</h3>
+<p style="font-size:9pt; color:#555; margin-bottom:10px;">Core functionality that customers must be able to depend on before anything else ships</p>
+
+<p style="font-size:9pt; margin-bottom:4px;"><strong>Editor Rendering &amp; Core Fixes</strong> &mdash; Emails break in the inbox even though they look correct in the editor, which is the most fundamental trust gap in the builder.</p>
+<ul style="margin-bottom:10px;">
+  <li>Fix inbox rendering divergence across forwarded-mail reflow, mobile line-breaks, and image-shrink in send. The email a customer designs should be the email every recipient sees, regardless of client or device.</li>
+  <li>Fix block reorder requiring page refresh and vanishing template navigation. Customers should be able to rearrange content blocks and find their templates without reloading the page.</li>
+  <li>Surface new builder templates in the campaign creation wizard. Customers who build templates in the new editor should be able to find and use them when creating a campaign.</li>
+  <li>Automated cross-browser regression suite across Safari, Firefox, and Chrome on every CI build. Browser-specific bugs like broken link insertion on Firefox should be caught before they reach production.</li>
+  <li>Multi-author save-conflict detection with presence indicators and merge prompts. When two team members edit the same email, neither person's work should be silently lost.</li>
+  <li>Light/dark mode variant rendering and background images on blocks. Customers should be able to design for modern inbox environments and maintain brand consistency across light and dark email clients.</li>
+  <li>Inline link validation, spam-score guidance, and SPF/DKIM/DMARC wizard. Customers should catch broken links, accessibility gaps, and deliverability red flags before hitting send.</li>
+</ul>
+
+<p style="font-size:9pt; margin-bottom:4px;"><strong>Brand Kit Reliability &amp; Multi-Brand</strong> &mdash; Brand Kit serves stale data and only supports one brand per account, forcing customers to manually patch colors and rebuild assets per sub-brand.</p>
+<ul style="margin-bottom:10px;">
+  <li>Brand Kit data correctness fix and drift monitoring by ramping the Austin Milt fix to 100%. Customers should see their actual brand colors every time, not stale or missing values.</li>
+  <li>Brand fonts selectable in landing pages and signup forms with iPhone fallback fix. A customer's brand typography should be consistent across email, landing pages, and forms on every device.</li>
+  <li>Font upload bug fix and Creative Assistant custom font recognition. When a customer uploads a brand font, AI-generated designs should actually use it instead of falling back to defaults.</li>
+  <li>Multi-brand kits per account for main brand plus sub-brands, Canva-style. Agencies and multi-brand businesses should manage all their brands from one account without rebuilding assets.</li>
+  <li>Locked layouts mode with role-based access for brand governance. Teams should be able to protect brand integrity at scale by locking down layouts, colors, and fonts that only admins can change.</li>
+  <li>Cross-account brand inheritance for agencies with Slack-style context switching. Agencies should maintain one Brand Kit per client and switch between them seamlessly.</li>
+</ul>
+
+<p style="font-size:9pt; margin-bottom:4px;"><strong>Content Studio &amp; Canva Integration</strong> &mdash; Images fail to load, folders can't be organized, and Canva graphics silently disappear from sent emails.</p>
+<ul style="margin-bottom:10px;">
+  <li>Content Studio stability fix to eliminate the quit-and-reload pattern and forced-redirect loop. A customer's asset library should load reliably the first time without workarounds.</li>
+  <li>Folder reordering, deletion, and search-in-folder for asset organization. Customers should be able to organize and find their files the way they think, instead of scrolling through a flat list.</li>
+  <li>Canva-to-Mailchimp sync reliability with sync-status indicators. Canva graphics that appear in the editor should actually show up in the sent email, with clear status on sync health.</li>
+</ul>
+
+<p style="font-size:9pt; margin-bottom:4px;"><strong>Collaboration</strong> &mdash; Only one person can edit at a time and all approval cycles happen outside Mailchimp.</p>
+<ul style="margin-bottom:10px;">
+  <li>Real-time multi-author co-editing with live cursors and presence indicators. Marketing teams of two or more should be able to work together in the same email simultaneously, Google-Docs-style.</li>
+  <li>Notion-style block-level @-mention comments with resolve-in-context. Design feedback should happen directly on the content block instead of in disconnected Slack threads and emails.</li>
+  <li>Multi-step approval workflow from designer to copywriter to manager with full version history and rollback. The entire review and sign-off process should stay inside Mailchimp with a complete audit trail.</li>
+</ul>
+
+<p style="font-size:9pt; margin-bottom:4px;"><strong>Platform Reliability &amp; OPEX</strong> &mdash; No published quality bar exists, and bugs ship to production where customers find them before engineering does.</p>
+<ul style="margin-bottom:10px;">
+  <li>Builder SLO operating contract covering 99.9% uptime, P95 load under 500ms, rendering fidelity at 99% or above, and crash-free sessions at 99.5% or above. There should be a published bar that engineering maintains, CSO can reference, and new features don't ship until they meet.</li>
+</ul>
+
+<hr class="divider">
+
+<h3 style="margin-top:16px; margin-bottom:8px; border-bottom:1px solid #ddd; padding-bottom:4px;">Pillar 2: Universal Builder, Portability &amp; Migration</h3>
+<p style="font-size:9pt; color:#555; margin-bottom:10px;">A configurable builder that supports reusable content, seamless migration from Classic to New Builder, and cross-product portability</p>
+
+<p style="font-size:9pt; margin-bottom:4px;"><strong>Universal Content Blocks</strong> &mdash; Content is still template-scoped in Mailchimp, meaning customers maintain the same header, footer, or promo banner across dozens of templates manually. Klaviyo made this the default editor primitive in Spring 2026.</p>
+<ul style="margin-bottom:10px;">
+  <li>Universal Content block primitive that lives at account level, insertable into any template or campaign, with edits propagating to all instances on next send. Customers should be able to edit a header or footer once and have every send update automatically.</li>
+  <li>Auto-migration of existing saved blocks to Universal Content with a one-click migration tool, preview, and preserved usage metadata. Existing customers should get Universal Content benefits immediately on day one without starting over.</li>
+</ul>
+
+<p style="font-size:9pt; margin-bottom:4px;"><strong>Builder Migration Prerequisites</strong> &mdash; Migrating from Classic to New Builder is painful, unsupported, and risky. Without Code Mode and funded assistance, retiring Classic exposes an estimated $1&ndash;2M in ARR.</p>
+<ul style="margin-bottom:10px;">
+  <li>Bulk template migration tool for the 181-template pattern with multi-select, side-by-side preview, and style preservation. Customers should migrate years of template work in minutes, not days.</li>
+  <li>1:1 migration tool with style-fidelity guarantee and first-class support enablement. Migration should become a reliable process where support has a real path forward instead of ending chats or disappearing.</li>
+  <li>NEB Code Mode with full HTML/CSS escape hatch, shipped before any Classic sunset communication. Power users and agencies who anchor on Classic for custom code should be able to move to the new builder without giving up control.</li>
+  <li>NEB Liquid templating for power users and dynamic content with per-recipient dynamic blocks for name, location, last product, and last engagement. Power users and agencies should be able to build truly personalized campaigns inside the new builder.</li>
+  <li>Funded migration program with 12-month grace period, 1:1 migration assistance for Premium and agency Classic users, and an in-product migration tracker. Migration should be a positive event for high-value customers with no surprises.</li>
+</ul>
+
+<p style="font-size:9pt; margin-bottom:4px;"><strong>Cross-Product Template Portability</strong> &mdash; Universal Content only delivers full value if it works across campaigns, automations, and brand surfaces. Today, content is siloed per product surface.</p>
+<ul style="margin-bottom:10px;">
+  <li>Universal Content blocks render in Customer Journey Builder email steps for cross-product reuse. Automation emails should inherit the same brand updates as campaigns with no drift between channels.</li>
+  <li>Brand Kit auto-applied to Universal blocks at insertion so colors, fonts, and logos apply automatically. Customers should not have to manually restyle every block insertion.</li>
+  <li>Universal Content audit and version history showing "used in N templates / N journeys" with rollback and impact preview before edit. Customers should edit with confidence knowing exactly what a change affects across active sends.</li>
+  <li>Template categorization fix with layout-only browse mode, better filtering and search, and use-case tagging. Customers should find templates the way they actually browse instead of fighting the current category structure.</li>
+</ul>
+
+<hr class="divider">
+
+<h3 style="margin-top:16px; margin-bottom:8px; border-bottom:1px solid #ddd; padding-bottom:4px;">Pillar 3: AI-Powered Builder &amp; Accelerated Time to Value</h3>
+<p style="font-size:9pt; color:#555; margin-bottom:10px;">An intelligent builder that removes barriers, collapses the time from signup to first send, and uses AI to accelerate every step of creating and optimizing omni-channel campaigns</p>
+
+<p style="font-size:9pt; margin-bottom:4px;"><strong>Activation &amp; Onboarding</strong> &mdash; New customers describe Mailchimp as "more powerful but slower to first value." Generic templates and manual brand setup create unnecessary friction before the product proves its worth.</p>
+<ul style="margin-bottom:10px;">
+  <li>Brand Kit auto-extract on signup with first email pre-branded. When a customer signs up and provides their website URL, their logo, colors, and fonts should be pulled automatically so their first email looks on-brand without any manual restyling.</li>
+  <li>Industry-specific welcome flow templates pre-loaded by business type. Onboarding should ask "what kind of business?" and pre-load 3 to 5 tailored templates so customers can get their first send out the door in under 30 minutes.</li>
+  <li>AI Email Setup Agent that takes a URL and scaffolds a campaign in 3 clicks. This mirrors Klaviyo's Marketing Agent for the editor side, where Intuit Assist scaffolds a first newsletter, promo, or welcome campaign with Brand Kit auto-applied and an ICP-fit template selected.</li>
+</ul>
+
+<p style="font-size:9pt; margin-bottom:4px;"><strong>Template Gallery &amp; Vertical Coverage</strong> &mdash; B2B, professional services, nonprofits, and restaurant customers can't find a starting template that matches their business. The current gallery feels ecommerce-first.</p>
+<ul style="margin-bottom:10px;">
+  <li>B2B and professional services template gallery with skeleton layouts. Information-dense, text-first templates with structured layouts instead of mock ecommerce shells, so non-ecom customer activation matches ecom.</li>
+  <li>Industry-aware template gallery with 6 to 8 templates per vertical covering ecom, ProServ, services, B2B SaaS, restaurants, and nonprofits. Customers should see templates that look like their business, tied to the business type they selected during onboarding.</li>
+</ul>
+
+<p style="font-size:9pt; margin-bottom:4px;"><strong>AI Content &amp; Copy Generation</strong> &mdash; Write with AI's Explore funnel collapsed 73.7% YoY and churn hit 77.2%. Quality issues drove customers to try it once and never come back.</p>
+<ul style="margin-bottom:10px;">
+  <li>Write with AI quality and brand-tone improvements with deeper Brand Kit integration for voice, tone, and audience awareness. Returning users should get notably better output that reflects their actual brand, not generic AI copy.</li>
+  <li>AI brand-style transfer between campaigns. Customers should be able to say "make this email look like our spring campaign style" and have stylistic choices turn into a reusable brand-style object that other campaigns can inherit. No competitor ships this today.</li>
+</ul>
+
+<p style="font-size:9pt; margin-bottom:4px;"><strong>AI-Powered Design, Personalization &amp; Performance</strong> &mdash; Klaviyo leads on in-canvas AI features like Image Remix, per-profile Smart Send, and inline revenue metrics. Mailchimp has no equivalent for any of these today.</p>
+<ul style="margin-bottom:10px;">
+  <li>AI image generation tied to the customer's product catalog. Hero images should be generated from the actual product the email is about, with brand-kit-applied scenes, not generic stock imagery.</li>
+  <li>Image Remix in flow email steps for Klaviyo parity. Customers should be able to iterate hero images via prompt inside flows and campaigns in seconds.</li>
+  <li>Per-recipient dynamic images based on last product viewed, last category, or predicted next product. Automation emails should personalize at the image level for conversion lift on browse, cart, and post-purchase flows.</li>
+  <li>In-canvas revenue per recipient and per step for Klaviyo parity. Revenue, opens, clicks, and conversion should be visible inline at each block in the post-send report so renewal conversations move from vanity metrics to dollars shipped.</li>
+  <li>Per-profile Smart Send Time and Personalized A/B in send config. Sends should ship at the per-recipient optimal time and A/B winners should be picked per profile, not one global winner. This closes a named Klaviyo gap with 10 to 30% lift cited in their case studies.</li>
+</ul>
+
+<hr class="divider">
+
+<h3 style="margin-top:16px; margin-bottom:8px; border-bottom:1px solid #ddd; padding-bottom:4px;">Pillar 4: Unified Omni-Channel Builder &amp; Activation</h3>
+<p style="font-size:9pt; color:#555; margin-bottom:10px;">A single authoring surface that makes email and SMS feel like one campaign, and proactive nudges that turn inactive users into active senders</p>
+
+<p style="font-size:9pt; margin-bottom:4px;"><strong>Generative SMS</strong> &mdash; SMS adoption is growing 73.5% YoY but the composer has no AI assistance. Customers face blank-page anxiety and manual rewrite cycles to fit character limits.</p>
+<ul style="margin-bottom:10px;">
+  <li>Brand-Kit-aware generative SMS in the composer with character-limit auto-compression, brand-tone awareness, and automatic opt-out compliance. Nobody ships Brand-Kit-aware SMS generation inside the composer today, and this eliminates rewrite cycles while keeping messages on-brand.</li>
+  <li>SMS variant generation and A/B testing in the composer. Customers should be able to generate multiple SMS variants from one prompt and test them without leaving the composer.</li>
+</ul>
+
+<p style="font-size:9pt; margin-bottom:4px;"><strong>Unified Email + SMS Authoring</strong> &mdash; Despite the "email + SMS together" marketing, the SMS composer is a completely separate surface with no shared content blocks, no shared preview, and no cross-channel content reuse. "Unified" is currently a billing claim, not an authoring reality.</p>
+<ul style="margin-bottom:10px;">
+  <li>Shared content blocks that render in both email and SMS. The Universal Content primitive should extend to SMS so the same block edited once renders correctly in both channels, with content-type-aware formatting (full HTML in email, compressed text in SMS).</li>
+  <li>Cross-channel preview side-by-side at compose time. Customers should see how their copy reads in both email and SMS format simultaneously in one canvas, instead of switching between two separate surfaces and copy-pasting.</li>
+  <li>Brand Kit applied to SMS branded short links and sender ID. SMS sends should be visibly branded so they feel like a natural extension of the customer's email design, which improves trust and click-through.</li>
+</ul>
+
+<p style="font-size:9pt; margin-bottom:4px;"><strong>Activation &amp; Feature Discovery</strong> &mdash; Mailchimp ships features that customers never find because there's no contextual hand-off from what they're doing now to what they should try next. Customers leave campaigns in DRAFT for months.</p>
+<ul style="margin-bottom:10px;">
+  <li>Contextual feature discovery prompts that surface adjacent capabilities at the moment of intent. After sending a campaign, the system should prompt "turn this into an automation?" so capability utilization compounds and customers get more value per session.</li>
+  <li>DRAFT-resurrect campaign with proactive nudges. When a welcome flow has been sitting in DRAFT for weeks, the system should nudge "your welcome flow has been in DRAFT for X days" with one-click activate, turning "I'll do it later" intentions into actual sends.</li>
+</ul>
+
+<hr class="divider">
+
+<p style="font-size:8pt; color:#888; margin-top:16px;">Generated from <a href="mailchimp-editor.html#canvas" style="color:#555;">Initiative Canvas v2.0</a> &middot; 52 initiatives across 4 pillars &middot; Source: Editor + SMS competitive analysis, HVC Risk Map, User Research, Product Health, Growth Model, Strategy 6-Pager</p>
+
+</body>
+</html>
