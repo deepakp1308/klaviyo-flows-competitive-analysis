@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unified Builder — Workflow Health & VOC</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 9pt; color: #000; background: #fff; line-height: 1.4; padding: 24px 32px; max-width: 1600px; margin: 0 auto; }
+  h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; }
+  h2 { font-size: 11pt; font-weight: 700; margin-bottom: 8px; margin-top: 24px; border-bottom: 2px solid #1a3a5c; padding-bottom: 4px; }
+  .subtitle { font-size: 9pt; color: #555; font-style: italic; margin-bottom: 16px; }
+  .nav { margin-bottom: 16px; padding: 8px 0; border-bottom: 2px solid #1a3a5c; }
+  .nav a { font-size: 9pt; font-weight: 700; color: #1a3a5c; text-decoration: none; margin-right: 20px; }
+  .nav a.active { border-bottom: 2px solid #1a3a5c; padding-bottom: 4px; }
+
+  .meta-box { background: #f5f5f5; border: 1px solid #ddd; padding: 12px 16px; margin-bottom: 16px; display: flex; gap: 32px; flex-wrap: wrap; }
+  .meta-item { font-size: 8.5pt; }
+  .meta-item strong { color: #1a3a5c; }
+
+  .summary-bar { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+  .summary-card { flex: 1; min-width: 140px; border: 2px solid #1a3a5c; padding: 12px; text-align: center; }
+  .summary-card .num { font-size: 18pt; font-weight: 700; color: #1a3a5c; }
+  .summary-card .label { font-size: 8pt; color: #555; margin-top: 2px; }
+
+  .workflow-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 0; border: 1px solid #bfbfbf; margin-bottom: 24px; }
+  .wf-col { border-right: 1px solid #bfbfbf; }
+  .wf-col:last-child { border-right: none; }
+  .wf-header { background: #1a3a5c; color: #fff; padding: 8px 6px; text-align: center; font-weight: 700; font-size: 8.5pt; min-height: 50px; display: flex; align-items: center; justify-content: center; }
+  .wf-jtbd { background: #eef2ff; padding: 6px; font-size: 7.5pt; color: #333; text-align: center; min-height: 44px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #bfbfbf; }
+  .wf-stats { padding: 6px; text-align: center; border-bottom: 1px solid #bfbfbf; background: #fff; }
+  .wf-stats .mrr { font-size: 12pt; font-weight: 700; color: #B91C1C; }
+  .wf-stats .count { font-size: 8pt; color: #555; margin-top: 2px; }
+  .wf-bugs { padding: 6px; border-bottom: 1px solid #bfbfbf; background: #FEF2F2; }
+  .wf-barriers { padding: 6px; background: #FFFBEB; }
+  .wf-bugs .section-label, .wf-barriers .section-label { font-size: 7pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+  .wf-bugs .section-label { color: #991B1B; }
+  .wf-barriers .section-label { color: #92400E; }
+  .wf-bugs ul, .wf-barriers ul { margin: 0; padding-left: 10px; font-size: 7.5pt; line-height: 1.35; }
+  .wf-bugs ul li, .wf-barriers ul li { margin-bottom: 3px; }
+  .wf-sub-stats { font-size: 7pt; color: #555; margin-bottom: 4px; }
+
+  .detail-table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 8px; }
+  .detail-table th { background: #1a3a5c; color: #fff; font-weight: 700; padding: 6px 8px; text-align: left; font-size: 8pt; }
+  .detail-table td { border: 1px solid #bfbfbf; padding: 6px 8px; vertical-align: top; }
+  .detail-table .stage-cell { background: #f2f2f2; font-weight: 700; font-size: 9pt; }
+  .detail-table .mrr-cell { font-weight: 700; color: #B91C1C; }
+
+  .note { font-size: 8pt; color: #888; margin-top: 8px; }
+
+  @media print { body { padding: 12px; font-size: 7.5pt; } }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="unified-builder-roadmap.html">Unified Builder Roadmap</a>
+  <a href="unified-builder-vp-swimlanes.html">VP Swim Lanes</a>
+  <a href="unified-builder-critical-path.html">Critical Path &amp; Hypotheses</a>
+  <a href="unified-builder-revenue-attribution.html">Revenue Attribution</a>
+  <a href="unified-builder-workflow-health.html" class="active">Workflow Health &amp; VOC</a>
+</div>
+
+<h1>Builder Workflow Health: Bugs &amp; Barriers by Stage</h1>
+<p class="subtitle">Customer-reported bugs and barriers to use mapped to 7 email builder workflow stages, with MRR exposure and top cited issues</p>
+
+<div class="meta-box">
+  <div class="meta-item"><strong>Data Window:</strong> Feb 22 &ndash; May 22, 2026 (last 3 months)</div>
+  <div class="meta-item"><strong>Source:</strong> unitQ AI-classified feedback</div>
+  <div class="meta-item"><strong>Channels:</strong> Zendesk support tickets, in-app feedback badges, CSAT surveys, PRS surveys</div>
+  <div class="meta-item"><strong>Filters:</strong> Negative sentiment, quality_issue + experience_issue feedback types</div>
+  <div class="meta-item"><strong>Scope:</strong> Email builder, templates, Brand Kit, Content Studio, preview, personalization workflows</div>
+</div>
+
+<div class="summary-bar">
+  <div class="summary-card">
+    <div class="num">$149K+</div>
+    <div class="label">Combined MRR Exposure / mo</div>
+  </div>
+  <div class="summary-card">
+    <div class="num">2,056</div>
+    <div class="label">Total Negative VOC Items</div>
+  </div>
+  <div class="summary-card">
+    <div class="num">$77K</div>
+    <div class="label">Bug MRR Exposure / mo</div>
+  </div>
+  <div class="summary-card">
+    <div class="num">$73K</div>
+    <div class="label">Barrier MRR Exposure / mo</div>
+  </div>
+  <div class="summary-card">
+    <div class="num">7</div>
+    <div class="label">Workflow Stages Assessed</div>
+  </div>
+</div>
+
+<h2>Workflow Stage Overview</h2>
+
+<div class="workflow-grid">
+  <!-- HEADERS -->
+  <div class="wf-col">
+    <div class="wf-header">1. Choose Structure</div>
+    <div class="wf-jtbd"><strong>Define the Skeleton:</strong> Pick a starting point and set the campaign layout</div>
+    <div class="wf-stats">
+      <div class="mrr">$34.0K/mo</div>
+      <div class="count">731 VOC items</div>
+    </div>
+    <div class="wf-bugs">
+      <div class="section-label">Bugs ($27.4K &middot; 290 items)</div>
+      <ul>
+        <li>Preview layout differs from delivered emails</li>
+        <li>A/B campaigns send stale HTML despite edits</li>
+        <li>New builder hides forms and analytics</li>
+      </ul>
+    </div>
+    <div class="wf-barriers">
+      <div class="section-label">Barriers ($6.6K &middot; 441 items)</div>
+      <ul>
+        <li>Template library hard to find; only legacy templates show</li>
+        <li>Confusing navigation between campaigns and templates</li>
+        <li>Paywall restricts free templates</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wf-col">
+    <div class="wf-header">2. Establish Brand &amp; Style</div>
+    <div class="wf-jtbd"><strong>Set the Rules:</strong> Create a durable style hierarchy for brand consistency</div>
+    <div class="wf-stats">
+      <div class="mrr">$12.1K/mo</div>
+      <div class="count">194 VOC items</div>
+    </div>
+    <div class="wf-bugs">
+      <div class="section-label">Bugs ($10.7K &middot; 185 items)</div>
+      <ul>
+        <li>Font uploads fail or don't appear as selectable</li>
+        <li>Brand Kit logo previews broken / dead links</li>
+        <li>Dark mode colors broken; "undefined" errors</li>
+      </ul>
+    </div>
+    <div class="wf-barriers">
+      <div class="section-label">Barriers ($1.5K &middot; 9 items)</div>
+      <ul>
+        <li>Brand Kit styles revert across assets</li>
+        <li>No centralized hub that propagates styles</li>
+        <li>Custom fonts fall back on iPhone</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wf-col">
+    <div class="wf-header">3. Add &amp; Place Content</div>
+    <div class="wf-jtbd"><strong>Assemble:</strong> Insert assets and blocks where intended without surprises</div>
+    <div class="wf-stats">
+      <div class="mrr">$3.7K/mo</div>
+      <div class="count">304 VOC items</div>
+    </div>
+    <div class="wf-bugs">
+      <div class="section-label">Bugs ($1.6K &middot; 50 items)</div>
+      <ul>
+        <li>Drag-and-drop blocks reorder after save</li>
+        <li>Copy/paste breaks responsive layout</li>
+        <li>iPad drag fails; redesign removes controls</li>
+      </ul>
+    </div>
+    <div class="wf-barriers">
+      <div class="section-label">Barriers ($2.1K &middot; 254 items)</div>
+      <ul>
+        <li>Blocks unclickable and undeletable</li>
+        <li>Images vanish in previews</li>
+        <li>No reusable block library across campaigns</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wf-col">
+    <div class="wf-header">4. Refine &amp; Polish</div>
+    <div class="wf-jtbd"><strong>Craft:</strong> Edit copy, adjust imagery, and fine-tune spacing</div>
+    <div class="wf-stats">
+      <div class="mrr">$9.7K/mo</div>
+      <div class="count">308 VOC items</div>
+    </div>
+    <div class="wf-bugs">
+      <div class="section-label">Bugs ($4.4K &middot; 160 items)</div>
+      <ul>
+        <li>Text formatting drifts; fonts/sizes change unpredictably</li>
+        <li>Word paste breaks styles; images vanish</li>
+        <li>Outlook renders scrambled vs preview</li>
+      </ul>
+    </div>
+    <div class="wf-barriers">
+      <div class="section-label">Barriers ($5.3K &middot; 148 items)</div>
+      <ul>
+        <li>Rigid templates; no clean HTML editing</li>
+        <li>Undo/delete fail; lists mis-sort</li>
+        <li>Limited formatting tools vs competitors</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wf-col">
+    <div class="wf-header">5. Personalize &amp; Tailor</div>
+    <div class="wf-jtbd"><strong>Add Context:</strong> Convert generic content into audience-specific messages</div>
+    <div class="wf-stats">
+      <div class="mrr">$38.3K/mo</div>
+      <div class="count">110 VOC items</div>
+    </div>
+    <div class="wf-bugs">
+      <div class="section-label">Bugs ($8.7K &middot; 15 items)</div>
+      <ul>
+        <li>Merge tags render blank; dynamic content fails</li>
+        <li>Segment logic overlaps distort send totals</li>
+        <li>UI save failures stall campaigns</li>
+      </ul>
+    </div>
+    <div class="wf-barriers">
+      <div class="section-label">Barriers ($29.6K &middot; 95 items)</div>
+      <ul>
+        <li>Audience selection confusing; duplicate merges</li>
+        <li>Tags and segments desync recipient counts</li>
+        <li>Automations skip sends; personalization blanks</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wf-col">
+    <div class="wf-header">6. Preview &amp; Validate</div>
+    <div class="wf-jtbd"><strong>Gain Confidence:</strong> Confirm output quality across devices and send with confidence</div>
+    <div class="wf-stats">
+      <div class="mrr" style="color:#991B1B; font-size:13pt;">$48.0K/mo</div>
+      <div class="count">351 VOC items &middot; <strong>Highest MRR</strong></div>
+    </div>
+    <div class="wf-bugs">
+      <div class="section-label">Bugs ($24.8K &middot; 197 items)</div>
+      <ul>
+        <li>Builder preview differs from Outlook/mobile rendering</li>
+        <li>Replicated campaigns save as templates incorrectly</li>
+        <li>Test campaign emails bounce or never arrive</li>
+      </ul>
+    </div>
+    <div class="wf-barriers">
+      <div class="section-label">Barriers ($23.2K &middot; 154 items)</div>
+      <ul>
+        <li>Mobile style toggle merges desktop edits</li>
+        <li>Preview features grayed out; forcing repeated test sends</li>
+        <li>Login portal blocks support and screenshot sharing</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="wf-col">
+    <div class="wf-header">7. Learn + Reuse</div>
+    <div class="wf-jtbd"><strong>Be Efficient:</strong> Save successful patterns to speed up next campaign</div>
+    <div class="wf-stats">
+      <div class="mrr">$3.4K/mo</div>
+      <div class="count">58 VOC items</div>
+    </div>
+    <div class="wf-bugs">
+      <div class="section-label">Bugs ($0.5K &middot; 4 items)</div>
+      <ul>
+        <li>Duplicating campaigns corrupts layout</li>
+        <li>Legacy builder opens instead of new</li>
+      </ul>
+    </div>
+    <div class="wf-barriers">
+      <div class="section-label">Barriers ($2.9K &middot; 54 items)</div>
+      <ul>
+        <li>Cannot save campaign as reusable template</li>
+        <li>No cross-campaign block library</li>
+        <li>"Totally unclear how to save a section for reuse"</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<h2>MRR Exposure Detail by Workflow Stage</h2>
+
+<table class="detail-table">
+  <thead>
+    <tr>
+      <th>Workflow Stage</th>
+      <th>Type</th>
+      <th>VOC Count</th>
+      <th>MRR Exposure</th>
+      <th>Top 3 Customers (MRR)</th>
+      <th>Key Cited Issues</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="stage-cell" rowspan="2">1. Choose Structure</td>
+      <td>Bugs</td>
+      <td>290</td>
+      <td class="mrr-cell">$27,432/mo</td>
+      <td>$5,906 &middot; $2,110 &middot; $1,800</td>
+      <td>Preview-to-inbox divergence; A/B campaigns send stale HTML; builder hides forms/analytics</td>
+    </tr>
+    <tr>
+      <td>Barriers</td>
+      <td>441</td>
+      <td class="mrr-cell">$6,555/mo</td>
+      <td>$1,658 &middot; $977 &middot; $492</td>
+      <td>Template library invisible; confusing navigation between campaigns/templates; paywall restrictions</td>
+    </tr>
+    <tr>
+      <td class="stage-cell" rowspan="2">2. Establish Brand &amp; Style</td>
+      <td>Bugs</td>
+      <td>185</td>
+      <td class="mrr-cell">$10,663/mo</td>
+      <td>$1,600 &middot; $1,380 &middot; $663</td>
+      <td>Font upload failures; Brand Kit logo broken/dead links; dark mode "undefined" errors</td>
+    </tr>
+    <tr>
+      <td>Barriers</td>
+      <td>9</td>
+      <td class="mrr-cell">$1,464/mo</td>
+      <td>$663 &middot; $535 &middot; $132</td>
+      <td>Brand Kit styles revert across assets; no centralized propagation; iPhone font fallback</td>
+    </tr>
+    <tr>
+      <td class="stage-cell" rowspan="2">3. Add &amp; Place Content</td>
+      <td>Bugs</td>
+      <td>50</td>
+      <td class="mrr-cell">$1,556/mo</td>
+      <td>$510 &middot; $135 &middot; $132</td>
+      <td>Drag-and-drop reorders after save; copy/paste breaks layout; iPad drag fails</td>
+    </tr>
+    <tr>
+      <td>Barriers</td>
+      <td>254</td>
+      <td class="mrr-cell">$2,132/mo</td>
+      <td>$672 &middot; $135 &middot; $132</td>
+      <td>Blocks unclickable/undeletable; images vanish; no reusable block library</td>
+    </tr>
+    <tr>
+      <td class="stage-cell" rowspan="2">4. Refine &amp; Polish</td>
+      <td>Bugs</td>
+      <td>160</td>
+      <td class="mrr-cell">$4,411/mo</td>
+      <td>$492 &middot; $465 &middot; $361</td>
+      <td>Text formatting drifts cross-device; Word paste breaks styles; Outlook renders scrambled</td>
+    </tr>
+    <tr>
+      <td>Barriers</td>
+      <td>148</td>
+      <td class="mrr-cell">$5,268/mo</td>
+      <td>$1,220 &middot; $456 &middot; $383</td>
+      <td>Rigid templates; no clean HTML editing; undo/delete fail; limited formatting vs competitors</td>
+    </tr>
+    <tr>
+      <td class="stage-cell" rowspan="2">5. Personalize &amp; Tailor</td>
+      <td>Bugs</td>
+      <td>15</td>
+      <td class="mrr-cell">$8,681/mo</td>
+      <td>$1,658 &middot; $1,600 &middot; $1,500</td>
+      <td>Merge tags blank; segment logic overlaps; UI save failures stall campaigns</td>
+    </tr>
+    <tr>
+      <td>Barriers</td>
+      <td>95</td>
+      <td class="mrr-cell">$29,630/mo</td>
+      <td>$4,394 &middot; $3,199 &middot; $3,199</td>
+      <td>Audience selection confusing; tags desync counts; automations skip sends</td>
+    </tr>
+    <tr>
+      <td class="stage-cell" rowspan="2" style="background:#fee2e2;">6. Preview &amp; Validate</td>
+      <td>Bugs</td>
+      <td>197</td>
+      <td class="mrr-cell" style="font-size:10pt;">$24,817/mo</td>
+      <td>$5,906 &middot; $2,149 &middot; $2,110</td>
+      <td>Builder preview differs from Outlook/mobile; replicated campaigns save incorrectly; test emails bounce</td>
+    </tr>
+    <tr>
+      <td>Barriers</td>
+      <td>154</td>
+      <td class="mrr-cell" style="font-size:10pt;">$23,192/mo</td>
+      <td>$5,906 &middot; $2,110 &middot; $1,639</td>
+      <td>Mobile toggle merges desktop edits; preview grayed out; login portal blocks support</td>
+    </tr>
+    <tr>
+      <td class="stage-cell" rowspan="2">7. Learn + Reuse</td>
+      <td>Bugs</td>
+      <td>4</td>
+      <td class="mrr-cell">$492/mo</td>
+      <td>$492</td>
+      <td>Duplicating campaigns corrupts layout; legacy builder opens unexpectedly</td>
+    </tr>
+    <tr>
+      <td>Barriers</td>
+      <td>54</td>
+      <td class="mrr-cell">$2,866/mo</td>
+      <td>$425 &middot; $309 &middot; $265</td>
+      <td>Can't save campaign as template; no cross-campaign block library; "unclear how to save a section"</td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="note" style="margin-top:16px;"><strong>Data caveats:</strong> MRR values from unitQ metadata (mrr_int field). 8 of 14 queries returned more results than the 100-item page limit; actual MRR exposure is likely higher than $149K/mo. Items with null MRR (typically Free plan users) are included in VOC counts but excluded from MRR sums. Some high-value customers appear across multiple workflow stages. MRR values are not globally deduplicated across stages.</p>
+
+<p class="note">Generated May 22, 2026. Source: unitQ AI-classified feedback (Zendesk, in-app feedback badges, CSAT surveys, PRS surveys). Scope: email builder, templates, Brand Kit, Content Studio, preview, personalization workflows. Negative sentiment only.</p>
+
+</body>
+</html>
