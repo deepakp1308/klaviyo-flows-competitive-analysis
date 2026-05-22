@@ -85,7 +85,7 @@
 <div class="tenets-grid-2">
   <div class="tenet">
     <h3>1. Customers Can't Trust the Builder They Already Use</h3>
-    <p>~$15.5K/mo in builder-related HVC MRR has been cited in the last 3 months alone. A $5,879/mo P0 escalation (elDiario.es) blocked campaign sends entirely due to a segmentation bug. A $402/mo customer reports NEB emails "look totally different when forwarded." A $3,000/mo Premium customer writes "bugs cause frustration quite frequently." Brand Kit serves stale colors after a partially-ramped fix. Canva graphics vanish from sent emails. Bulk email churn rose +2.1pp YoY to 40%. The builder scores 2 out of 5 on workflow efficiency vs Klaviyo's 3 and Canva's 5.</p>
+    <p>~$15.5K/mo in builder-related HVC MRR has been cited in the last 3 months alone. A $5,879/mo P0 escalation (elDiario.es) blocked campaign sends entirely due to a segmentation bug. A $402/mo customer reports Builder emails "look totally different when forwarded." A $3,000/mo Premium customer writes "bugs cause frustration quite frequently." Brand Kit serves stale colors after a partially-ramped fix. Canva graphics vanish from sent emails. Bulk email churn rose +2.1pp YoY to 40%. The builder scores 2 out of 5 on workflow efficiency vs Klaviyo's 3 and Canva's 5.</p>
   </div>
   <div class="tenet">
     <h3>2. Multiple Builders with No Portability or Interoperability</h3>
@@ -173,7 +173,7 @@
 <div class="metrics-grid">
   <div class="metric-section">
     <h3>Product Adoption, Engagement &amp; Time to Activation</h3>
-    <p>Builder adoption rate across all users from 84% to &gt;90%. Builder activation rate (touched &rarr; Established) from 55% to &gt;65%. 30-day repeat send rate from 83% to &gt;87%. NEB adoption among all builder users to &gt;80%. Universal Content adoption among NEB active users to 50&ndash;70% within 6 months of launch. Time to first send from 6 days median to &lt;2 days. Time from blank page to campaign-ready email from ~45 minutes to &lt;15 minutes.</p>
+    <p>Builder adoption rate across all users from 84% to &gt;90%. Builder activation rate (touched &rarr; Established) from 55% to &gt;65%. 30-day repeat send rate from 83% to &gt;87%. Builder adoption among all builder users to &gt;80%. Universal Content adoption among Builder active users to 50&ndash;70% within 6 months of launch. Time to first send from 6 days median to &lt;2 days. Time from blank page to campaign-ready email from ~45 minutes to &lt;15 minutes.</p>
   </div>
   <div class="metric-section">
     <h3>Customer Benefit Metrics</h3>
@@ -247,7 +247,7 @@
         <ul>
           <li>Fix inbox rendering divergence (forwarded-mail reflow, mobile line-breaks, image-shrink)</li>
           <li>Fix block reorder requiring page refresh &amp; vanishing template navigation</li>
-          <li>Surface NEB templates in campaign creation wizard</li>
+          <li>Surface Builder templates in campaign creation wizard</li>
           <li>Automated cross-browser regression suite (Safari, Firefox, Chrome on every CI build)</li>
           <li>Multi-author save-conflict detection with presence indicators &amp; merge prompts</li>
         </ul>
@@ -306,7 +306,7 @@
     <tr>
       <td class="pillar-cell">
         <div class="pillar-name">Universal Builder, Portability &amp; Migration</div>
-        <div class="pillar-scope">Universal Content, Classic&rarr;NEB migration, cross-product template portability, Code Mode</div>
+        <div class="pillar-scope">Universal Content, Classic&rarr;Builder migration, cross-product template portability, Code Mode</div>
       </td>
       <td>
         <div class="sub-label">Universal Content</div>
@@ -317,7 +317,7 @@
         <div class="sub-label">Migration</div>
         <ul>
           <li>Bulk template migration tool (181-template pattern) STARTS</li>
-          <li>NEB Code Mode (HTML/CSS escape hatch) STARTS</li>
+          <li>Builder Code Mode (HTML/CSS escape hatch) STARTS</li>
         </ul>
       </td>
       <td>
@@ -325,8 +325,8 @@
         <ul>
           <li>Bulk template migration tool SHIPS</li>
           <li>1:1 migration tool with style-fidelity guarantee &amp; support enablement</li>
-          <li>NEB Code Mode SHIPS (precondition for Classic sunset)</li>
-          <li>NEB Liquid templating for power users &amp; dynamic content</li>
+          <li>Builder Code Mode SHIPS (precondition for Classic sunset)</li>
+          <li>Builder Liquid templating for power users &amp; dynamic content</li>
         </ul>
         <div class="sub-label">Portability</div>
         <ul>
@@ -454,10 +454,10 @@
   <tbody>
     <tr><td class="init-cell">Inbox rendering parity fix</td><td>Fix forwarded-mail divergence, "read full message" reflow breakage, mobile line-break injection, and image-shrink in send.</td><td>Emails look correct in the editor but break in the inbox, losing every recipient's first impression. $1,820/mo cited across 4 named HVC accounts.</td><td>The email a customer designs is the email every recipient sees, regardless of client or device.</td></tr>
     <tr><td class="init-cell">Block reorder &amp; template navigation fix</td><td>Fix block reorder requiring page refresh, vanishing templates link, and intermittent "templates moved" warning.</td><td>Customers can't move blocks without a refresh; templates link disappears between sessions. $410/mo Premium cited.</td><td>Editor behaves predictably without workarounds or support tickets.</td></tr>
-    <tr><td class="init-cell">Template surfacing in campaign wizard</td><td>Fix the bug where New Builder templates don't appear in the campaign creation tab.</td><td>Customer builds NEB templates but only sees legacy templates when creating a campaign. $1,950/mo cited.</td><td>Customers can find and use the templates they built.</td></tr>
+    <tr><td class="init-cell">Template surfacing in campaign wizard</td><td>Fix the bug where New Builder templates don't appear in the campaign creation tab.</td><td>Customer builds Builder templates but only sees legacy templates when creating a campaign. $1,950/mo cited.</td><td>Customers can find and use the templates they built.</td></tr>
     <tr><td class="init-cell">Cross-browser regression suite</td><td>Browser-matrix automated tests (Safari, Firefox, Chrome) on every CI build.</td><td>Browser-specific bugs like broken Ctrl+K link insertion ship to production and customers find them first.</td><td>Regressions caught before release; ship velocity up because the team isn't firefighting browser bugs.</td></tr>
     <tr><td class="init-cell">Multi-author save-conflict detection</td><td>Show "someone else is editing" presence indicator; non-blocking save; merge prompt instead of generic error.</td><td>Two team members edit the same email and one person's work is silently lost. $340/mo cited.</td><td>Teams stop losing work; foundation laid for full real-time collaboration.</td></tr>
-    <tr><td class="init-cell">Light/dark mode &amp; background images</td><td>Implement light/dark variant rendering and allow background images on blocks.</td><td>Customers needing dark-mode rendering or background images for brand consistency can't achieve either in NEB. $468/mo cited.</td><td>Modern email design parity and brand consistency across all email clients.</td></tr>
+    <tr><td class="init-cell">Light/dark mode &amp; background images</td><td>Implement light/dark variant rendering and allow background images on blocks.</td><td>Customers needing dark-mode rendering or background images for brand consistency can't achieve either in Builder. $468/mo cited.</td><td>Modern email design parity and brand consistency across all email clients.</td></tr>
     <tr><td class="init-cell">Inline link checker &amp; deliverability hints</td><td>Real-time link validation, spam-score guidance, SPF/DKIM/DMARC wizard, and alt-text completeness check.</td><td>Pre-send checklist misses contrast, link purpose, and deliverability red flags like missing authentication.</td><td>Deliverability issues caught before send; fewer inbox-placement complaints.</td></tr>
     <tr><td class="init-cell">Brand Kit data correctness fix</td><td>Stop serving stale Brand Kit data; backfill missing colors; ramp fix to 100%; add drift monitoring and alerting.</td><td>Brand Kit shows logo but drops colors after a partially-ramped incident fix. Some customers still see stale data.</td><td>Brand Kit is reliable; customers stop manually patching colors every campaign.</td></tr>
     <tr><td class="init-cell">Brand fonts in landing pages &amp; forms</td><td>Make uploaded fonts selectable in LP/form builder; fix iPhone system-font fallback.</td><td>Brand fonts work in email but fall back to system fonts on iPhone landing pages. $655/mo cited.</td><td>Brand Kit applies consistently everywhere; landing pages match email design.</td></tr>
@@ -465,7 +465,7 @@
     <tr><td class="init-cell">Multi-brand kits per account</td><td>Allow multiple Brand Kits per account (main brand + sub-brands), Canva-style.</td><td>Multi-brand teams rebuild content per sub-brand because Brand Kit is single-instance. $2,460/mo cited.</td><td>Agencies and multi-brand businesses manage all brands from one account.</td></tr>
     <tr><td class="init-cell">Locked layouts for brand governance</td><td>Locked layouts mode with role-based access; blocking accessibility checks on send.</td><td>Multi-author teams have no way to lock brand integrity. Anyone can override colors, fonts, or layout.</td><td>Teams enforce brand consistency at scale with SMB-friendly governance controls.</td></tr>
     <tr><td class="init-cell">Cross-account brand inheritance</td><td>One Brand Kit per client; switch context like Slack workspaces; shared Universal Content library across agency clients.</td><td>Agency dashboard exists but Brand Kit is per-account; agencies rebuild assets for each client.</td><td>Agency efficiency up and churn down; competitive with Klaviyo One agency tier.</td></tr>
-    <tr><td class="init-cell">Content Studio stability fix</td><td>Fix image-not-loading bugs; eliminate the quit-and-reload pattern; fix forced-redirect loop into NEB.</td><td>Customer literally describes "Content Studio not loading images. Email builder breaking… keep quitting out and re-loading." $621/mo cited.</td><td>Asset library works on first load; support escalations reduced.</td></tr>
+    <tr><td class="init-cell">Content Studio stability fix</td><td>Fix image-not-loading bugs; eliminate the quit-and-reload pattern; fix forced-redirect loop into Builder.</td><td>Customer literally describes "Content Studio not loading images. Email builder breaking… keep quitting out and re-loading." $621/mo cited.</td><td>Asset library works on first load; support escalations reduced.</td></tr>
     <tr><td class="init-cell">Folder management in Content Studio</td><td>Allow folder reordering, folder deletion, and search-in-folder; restore IA fundamentals.</td><td>Customers can't reorder or delete folders. Basic organization is missing. $361/mo cited.</td><td>Customers organize assets the way they think; less time hunting for files.</td></tr>
     <tr><td class="init-cell">Canva-to-Mailchimp sync reliability</td><td>Fix silent-failure mode where Canva graphic shows in editor but is missing in sent email; add sync-status indicators.</td><td>Two named customers describe "most frustrating thing ever," including a live email sent without the synced graphic. $2,500/mo cited.</td><td>Canva work reliably shows up in sends; silent-failure mode eliminated.</td></tr>
     <tr><td class="init-cell">Real-time multi-author co-editing</td><td>Google-Docs-style live cursors, presence indicators, and non-blocking concurrent edit.</td><td>Only one person can edit at a time; teams work around it with screenshots and shared drafts. &minus;48 net sentiment.</td><td>Marketing teams of 2+ work together natively in the same email.</td></tr>
@@ -483,10 +483,10 @@
   <tbody>
     <tr><td class="init-cell">Universal Content block primitive</td><td>Account-level edit-once-propagates-everywhere block type; insertable into any template, campaign, or CJB email step.</td><td>Saved content is template-scoped. A customer with 181 templates maintains the same footer 181 times. Klaviyo shipped this as the default in Spring 2026.</td><td>Edit a header or footer once; all sends update automatically.</td></tr>
     <tr><td class="init-cell">Auto-migration of saved blocks</td><td>One-click migration tool with preview; bulk migrate template-scoped saved blocks to Universal Content; preserve usage metadata.</td><td>Customers have years of saved-content investment scattered per template; manual migration is a non-starter.</td><td>Existing customers get Universal Content benefits on day one without starting over.</td></tr>
-    <tr><td class="init-cell">Bulk template migration tool</td><td>Multi-select templates; preview side-by-side; bulk migrate to NEB; preserve content and style.</td><td>Customer with 181 templates: "I need to individually update them which will take days." $330/mo cited.</td><td>Migrate years of template work in minutes, not days.</td></tr>
+    <tr><td class="init-cell">Bulk template migration tool</td><td>Multi-select templates; preview side-by-side; bulk migrate to Builder; preserve content and style.</td><td>Customer with 181 templates: "I need to individually update them which will take days." $330/mo cited.</td><td>Migrate years of template work in minutes, not days.</td></tr>
     <tr><td class="init-cell">1:1 migration tool with support enablement</td><td>Single-template migration with style-fidelity guarantee; first-class support workflow; migration-success monitoring.</td><td>Support ended chat on one customer and disappeared on another after 30 minutes. $504/mo cited.</td><td>Migration becomes a reliable process; support has a real path forward.</td></tr>
-    <tr><td class="init-cell">NEB Code Mode</td><td>Custom HTML/CSS authoring inside NEB; ships before any Classic sunset communication.</td><td>NEB has no HTML/CSS escape hatch. Premium and agency users anchor on Classic specifically for custom code. Sunset without Code Mode risks $1&ndash;2M ARR.</td><td>Power users get NEB without giving up control; safe to retire Classic.</td></tr>
-    <tr><td class="init-cell">NEB Liquid templating</td><td>Liquid (or Handlebars) templating in Code Mode; per-recipient dynamic blocks for name, location, last product, last engagement.</td><td>Personalization today is limited to merge tags and conditional show/hide. No first-class dynamic content.</td><td>Power users build truly personalized campaigns inside the new builder.</td></tr>
+    <tr><td class="init-cell">Builder Code Mode</td><td>Custom HTML/CSS authoring inside Builder; ships before any Classic sunset communication.</td><td>Builder has no HTML/CSS escape hatch. Premium and agency users anchor on Classic specifically for custom code. Sunset without Code Mode risks $1&ndash;2M ARR.</td><td>Power users get Builder without giving up control; safe to retire Classic.</td></tr>
+    <tr><td class="init-cell">Builder Liquid templating</td><td>Liquid (or Handlebars) templating in Code Mode; per-recipient dynamic blocks for name, location, last product, last engagement.</td><td>Personalization today is limited to merge tags and conditional show/hide. No first-class dynamic content.</td><td>Power users build truly personalized campaigns inside the new builder.</td></tr>
     <tr><td class="init-cell">Funded migration program</td><td>1:1 migration assistance for Premium/agency Classic users; 12-month grace period; in-product migration tracker.</td><td>~70K assumed Classic Established users; even 10% churn = $1&ndash;2M ARR loss.</td><td>Migration is a positive event with no surprises; Classic sunset becomes safe to announce.</td></tr>
     <tr><td class="init-cell">Universal Content in CJB</td><td>Same Universal Content primitive available inside Customer Journey Builder email steps; cross-product reuse.</td><td>CJB emails can't reuse saved content; double-maintenance across campaigns and automations.</td><td>Automation emails inherit the same brand updates as campaigns; no drift between channels.</td></tr>
     <tr><td class="init-cell">Brand Kit auto-applied to Universal blocks</td><td>When customer inserts a Universal block, Brand Kit colors, fonts, and logos auto-apply.</td><td>Without auto-apply, customers manually restyle each block insertion, defeating the "edit once" promise.</td><td>Brand consistency at zero effort on every insertion.</td></tr>
