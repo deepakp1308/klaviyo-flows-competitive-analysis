@@ -28,6 +28,9 @@
 
   .note { font-size: 8pt; color: #888; margin-top: 8px; }
 
+  .new-init { background: #FFFBEB; }
+  .new-tag { display: inline-block; font-size: 6.5pt; font-weight: 700; padding: 1px 5px; border-radius: 2px; background: #F59E0B; color: #fff; margin-left: 4px; vertical-align: middle; letter-spacing: 0.03em; }
+
   @media print {
     body { padding: 12px; font-size: 7.5pt; }
     table { font-size: 7pt; }
@@ -44,7 +47,7 @@
 </div>
 
 <h1>Critical Path: Key Bets by Quarter</h1>
-<p class="subtitle">9 highest-leverage initiatives across 4 quarters. These drive ~65% of the total projected revenue impact (~$13.7M of $21M). The remaining ~35% comes from the full portfolio of supporting initiatives.</p>
+<p class="subtitle">10 highest-leverage initiatives across 4 quarters. These drive ~65% of the total projected revenue impact (~$13.7M of $21M). The remaining ~35% comes from the full portfolio of supporting initiatives.</p>
 <p class="note">All leading and lagging indicator targets are subsets of the overall model (not additive). Critical path initiatives are the minimum viable set that must ship on time for the business case to hold.</p>
 
 <!-- Q1 -->
@@ -145,6 +148,7 @@
       <th></th>
       <th>Shared Content Blocks in Email + SMS</th>
       <th>Per-Profile Smart Send Time &amp; Personalized A/B</th>
+      <th class="new-init">Goal-Driven Campaign Agent <span class="new-tag">NEW</span></th>
     </tr>
   </thead>
   <tbody>
@@ -152,26 +156,31 @@
       <td class="row-label">Hypothesis</td>
       <td>If Universal Content extends to SMS with content-type-aware rendering, cross-channel campaign creation rate will increase from near-zero to 15% of campaigns, and the "unified is a billing claim" narrative will reverse.</td>
       <td>If sends ship at the per-recipient optimal time and A/B winners are picked per profile, open rates will increase 10&ndash;15% and click rates 5&ndash;8% for users who adopt, directly improving campaign performance and MC-attributed revenue.</td>
+      <td class="new-init">If a merchant can describe a goal in natural language and get a complete, on-brand, store-data-populated campaign ready to review, campaign creation time will drop from ~45 minutes to under 10 minutes, and activation rate will accelerate as the barrier between intent and execution is removed. No competitor ships this combination today.</td>
     </tr>
     <tr>
       <td class="row-label">Customer Problem</td>
       <td>Email and SMS compose in separate surfaces. No shared content blocks, no shared preview, no cross-channel content reuse. The builder scores 0/5 on omni-channel vs Klaviyo's 3. Customers copy-paste, reformat, and preview separately.</td>
       <td>Klaviyo has per-profile Smart Send Time, Personalized A/B, and Channel Affinity all productized with 10&ndash;30% lift cited. Mailchimp has store-level send-time only and one-size-fits-all A/B winners.</td>
+      <td class="new-init">Customers start every campaign from a pre-built template and customize manually. 260+ templates are marketing-generic, not ecommerce-lifecycle-specific. Klaviyo's Marketing Agent does URL-to-campaign but outputs a fixed set of campaign types. No platform generates a complete email from a goal + brand + store data.</td>
     </tr>
     <tr>
       <td class="row-label">Customer Benefit</td>
       <td>Compose once, ship everywhere. Email and SMS share the same content, the same brand, and the same preview surface. Cross-channel is how the product works.</td>
       <td>Sends ship at the per-recipient optimal time. A/B optimizes per profile, not in aggregate. Campaign performance improves without additional effort.</td>
+      <td class="new-init">Describe what you want to achieve, answer a few questions, and get a campaign ready to review. The agent features the right products for the right audience using actual store data. First mover in the biggest strategic whitespace in email marketing.</td>
     </tr>
     <tr>
       <td class="row-label">Leading Indicator</td>
       <td class="metric">Cross-channel campaign rate: 0% &rarr; 15%. SMS attach rate: baseline &rarr; 1.5&times;. 30-day repeat: +1.5pp from cross-channel adopters</td>
       <td class="metric">Open rate: +10&ndash;15% for adopters. Click rate: +5&ndash;8%. MC-attributed revenue: +1&ndash;2pp from performance lift</td>
+      <td class="metric new-init">Campaign creation time: ~45 min &rarr; &lt;10 min. Agent-generated campaign adoption: 20% of new campaigns within 90 days. Activation rate: +1.5pp incremental from reduced creation friction</td>
     </tr>
     <tr>
       <td class="row-label">Lagging Impact</td>
       <td class="metric">Retention: Cross-channel users retain at higher rates (SMS attach = higher LTV). Contributes to 30-day repeat target (+3.8pp paid, +6.6pp free) and SMS attach 2&times; target.</td>
       <td class="metric">Retention + Upgrades: Performance lift drives higher MC-attributed revenue, stronger renewal conversations, and justification for higher-tier plans. Contributes to paid ARPU lever.</td>
+      <td class="metric new-init">Activation + Retention: Faster campaign creation drives higher 30-day repeat rate and reduces abandonment. Store-data-aware generation improves campaign performance, contributing to MC-attributed revenue lift. Competitive moat: compounding creative-performance loop begins with every agent-generated campaign.</td>
     </tr>
   </tbody>
 </table>

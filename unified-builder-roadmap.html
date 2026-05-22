@@ -54,6 +54,9 @@
   .nav-bar a { font-size: 9pt; font-weight: 700; color: #000; text-decoration: none; margin-right: 20px; }
   .nav-bar a.active { border-bottom: 2px solid #000; padding-bottom: 4px; }
 
+  .new-init { background: #FFFBEB; }
+  .new-tag { display: inline-block; font-size: 6.5pt; font-weight: 700; padding: 1px 5px; border-radius: 2px; background: #F59E0B; color: #fff; margin-left: 4px; vertical-align: middle; letter-spacing: 0.03em; }
+
   @media print {
     body { padding: 16px; font-size: 8pt; }
     table { font-size: 7.5pt; }
@@ -109,15 +112,15 @@
 <div class="tenets-grid">
   <div class="tenet">
     <h3>1. Trust Before Features</h3>
-    <p>Every send matches the editor. Brand Kit is always current. No new capability ships to production without meeting published SLOs. Reliability is not a prerequisite to check off; it is the product experience. Customers should open the builder and feel confident, not cautious.</p>
+    <p>Every send matches the editor. Brand Kit is always current and actively enforced, not just stored. A compliance score checks every email against brand standards before send. No new capability ships to production without meeting published SLOs. Reliability is not a prerequisite to check off; it is the product experience. Customers should open the builder and feel confident, not cautious.</p>
   </div>
   <div class="tenet">
     <h3>2. Author Once, Deliver Everywhere</h3>
     <p>Content blocks, brand assets, and styles are account-level primitives that propagate across templates, campaigns, automations, and channels. A footer edited once updates everywhere it appears. No customer should maintain the same content in two places.</p>
   </div>
   <div class="tenet">
-    <h3>3. AI That Knows Your Brand</h3>
-    <p>Every AI capability is grounded in Brand Kit: voice, tone, colors, fonts, and product catalog. AI does not generate generic content; it generates the customer's content faster. From auto-branded first emails on signup to campaign-style transfer, AI earns trust by being visibly on-brand from the first interaction.</p>
+    <h3>3. AI That Knows Your Brand and Your Store</h3>
+    <p>Every AI capability is grounded in Brand Kit (voice, tone, colors, fonts) and the customer's store data (bestsellers, segments, purchase frequency, AOV). AI does not generate generic content; it generates the customer's content using the customer's data. A merchant describes a goal in natural language and gets a complete, on-brand, store-data-populated campaign ready to review. From auto-branded first emails on signup to goal-driven campaign generation, AI earns trust by being visibly on-brand and commercially intelligent from the first interaction.</p>
   </div>
 </div>
 <div class="tenets-grid-2">
@@ -154,12 +157,12 @@
 <h2>Competitive Moat</h2>
 <div class="tenets-grid">
   <div class="tenet">
-    <h3>Brand-Kit-Aware AI That No Design Tool Can Match</h3>
-    <p>Design-first tools can generate layouts, but they don't know the customer's audience, send history, product catalog, or campaign performance. Mailchimp's AI is grounded in Brand Kit (voice, tone, fonts, colors, logos) AND the customer's marketing data (segments, engagement patterns, revenue attribution). AI-generated copy, images, and campaign scaffolding are both on-brand and on-strategy. A pure design tool can make something look right; only Mailchimp can make it perform right. The more campaigns a customer runs, the sharper the AI becomes, creating switching cost that compounds with every cycle.</p>
+    <h3>Brand &amp; Store-Aware AI That No Design Tool Can Match</h3>
+    <p>Design-first tools can generate layouts, but they don't know the customer's audience, send history, product catalog, or campaign performance. Standalone ESPs have performance data but no creative intelligence or brand enforcement. Mailchimp's AI is grounded in Brand Kit (voice, tone, fonts, colors, logos), the customer's store data (bestsellers, segments, AOV), and campaign performance history. A merchant describes a goal and gets a complete, on-brand, store-data-populated campaign. No competitor ships this combination. A pure design tool can make something look right; only Mailchimp can make it perform right with the right products for the right audience. The more campaigns a customer runs, the sharper the AI becomes, creating switching cost that compounds with every cycle.</p>
   </div>
   <div class="tenet">
     <h3>Compounding Creative-Performance Intelligence Loop</h3>
-    <p>Every campaign a customer sends feeds back into the system. Which subject line drove revenue. Which hero image converted. Which send time worked for which segment. Which brand-style variant outperformed. Over time, the builder doesn't just help customers create faster; it helps them create better, because creative decisions are informed by performance data and performance optimization is informed by creative context. No competitor closes this loop. Design tools have creative but no performance data. ESPs have performance data but no creative intelligence. Mailchimp compounds both in one surface, and the learning history is non-portable.</p>
+    <p>Every campaign a customer sends feeds back into the system. Which subject line drove revenue. Which hero image converted. Which send time worked for which segment. Which brand-style variant outperformed. Which lifecycle email is missing vs. benchmark. Over time, the builder doesn't just help customers create faster; it helps them create better, because creative decisions are informed by performance data, store intelligence informs product selection, and the lifecycle gap analyzer proactively surfaces the next highest-ROI email to build. No competitor closes this loop. Design tools have creative but no performance data. ESPs have performance data but no creative intelligence or goal-driven generation. Mailchimp compounds all three in one surface, and the learning history is non-portable.</p>
   </div>
   <div class="tenet">
     <h3>Omni-Channel Authoring with Unified Content Primitives</h3>
@@ -255,6 +258,7 @@
         <ul>
           <li>Brand Kit data correctness fix &amp; drift monitoring (ramp to 100%)</li>
           <li>Font upload bug fix &amp; Creative Assistant custom font recognition</li>
+          <li class="new-init">Brand voice profile in Brand Kit (tone, vocabulary, CTA styles, audience context) <span class="new-tag">NEW</span></li>
         </ul>
         <div class="sub-label">Content Studio &amp; Canva</div>
         <ul>
@@ -275,6 +279,8 @@
         <div class="sub-label">Brand Kit</div>
         <ul>
           <li>Brand fonts selectable in landing pages &amp; signup forms (iPhone fallback fix)</li>
+          <li class="new-init">Brand compliance score (0&ndash;100 pre-send check against Brand Kit standards) <span class="new-tag">NEW</span></li>
+          <li class="new-init">Brand Kit maturity dashboard (completeness %, guided setup prompts) <span class="new-tag">NEW</span></li>
         </ul>
         <div class="sub-label">Content Studio</div>
         <ul>
@@ -376,6 +382,8 @@
         <ul>
           <li>B2B &amp; professional services template gallery (skeleton layouts)</li>
           <li>Industry-aware template gallery (6&ndash;8 per vertical)</li>
+          <li class="new-init">Ecommerce lifecycle template library (12 stages &times; 3&ndash;5 variants with live product blocks) <span class="new-tag">NEW</span></li>
+          <li class="new-init">Store-connected template preview (preview with actual products, brand colors, logo) <span class="new-tag">NEW</span></li>
         </ul>
         <div class="sub-label">AI Design &amp; Performance</div>
         <ul>
@@ -389,12 +397,17 @@
         <ul>
           <li>Per-recipient dynamic images (last product viewed, predicted next product)</li>
           <li>Per-profile Smart Send Time &amp; Personalized A/B in send config</li>
+          <li class="new-init">Lifecycle coverage gap analyzer (&ldquo;You're missing winback &mdash; merchants with winback see 12% higher repeat purchase&rdquo;) <span class="new-tag">NEW</span></li>
+          <li class="new-init">Goal-driven campaign agent (natural language goal &rarr; agent asks questions &rarr; generates complete on-brand email) <span class="new-tag">NEW</span></li>
+          <li class="new-init">Conversational email refinement (iterate in natural language on a live preview) <span class="new-tag">NEW</span></li>
         </ul>
       </td>
       <td>
         <div class="sub-label">AI Content</div>
         <ul>
           <li>AI brand-style transfer between campaigns (no competitor ships this)</li>
+          <li class="new-init">Campaign brief to multi-variant (goal brief &rarr; 3 variants with A/B recommendation) <span class="new-tag">NEW</span></li>
+          <li class="new-init">Store intelligence in generation (AI uses bestsellers, segments, AOV to make content decisions) <span class="new-tag">NEW</span></li>
         </ul>
       </td>
     </tr>
@@ -465,6 +478,9 @@
     <tr><td class="init-cell">Multi-brand kits per account</td><td>Allow multiple Brand Kits per account (main brand + sub-brands), Canva-style.</td><td>Multi-brand teams rebuild content per sub-brand because Brand Kit is single-instance. $2,460/mo cited.</td><td>Agencies and multi-brand businesses manage all brands from one account.</td></tr>
     <tr><td class="init-cell">Locked layouts for brand governance</td><td>Locked layouts mode with role-based access; blocking accessibility checks on send.</td><td>Multi-author teams have no way to lock brand integrity. Anyone can override colors, fonts, or layout.</td><td>Teams enforce brand consistency at scale with SMB-friendly governance controls.</td></tr>
     <tr><td class="init-cell">Cross-account brand inheritance</td><td>One Brand Kit per client; switch context like Slack workspaces; shared Universal Content library across agency clients.</td><td>Agency dashboard exists but Brand Kit is per-account; agencies rebuild assets for each client.</td><td>Agency efficiency up and churn down; competitive with Klaviyo One agency tier.</td></tr>
+    <tr class="new-init"><td class="init-cell">Brand voice profile in Brand Kit <span class="new-tag">NEW</span></td><td>Extend Brand Kit beyond visual assets to include tone (casual/formal), vocabulary (words to use/avoid), CTA styles, and audience context. AI generation and compliance checking both reference this profile.</td><td>Brand Kit is visual-only. AI generates generic copy because it has no voice/tone guidance. Mailchimp is Level 2 (storage) vs Canva Level 4 (enforcement).</td><td>AI-generated content sounds like the customer's brand, not a generic AI. Moves Brand Kit from storage to active intelligence.</td></tr>
+    <tr class="new-init"><td class="init-cell">Brand compliance score <span class="new-tag">NEW</span></td><td>Every email gets a 0&ndash;100 brand compliance score before send, checking colors, fonts, logo usage, voice/tone, and accessibility against Brand Kit standards. Real-time flagging of off-brand elements during creation.</td><td>No enforcement exists today. Users can override brand colors, use off-brand fonts, and skip accessibility without any signal. Stensul and Knak validate in real time; Mailchimp does not.</td><td>Customers know their send is on-brand before hitting send. Off-brand elements are flagged and corrected during creation, not after.</td></tr>
+    <tr class="new-init"><td class="init-cell">Brand Kit maturity dashboard <span class="new-tag">NEW</span></td><td>Show the merchant their Brand Kit completeness (e.g., "40% set up &mdash; add brand voice and CTA styles to unlock AI-powered brand consistency") with guided setup prompts for each missing element.</td><td>Customers don't know what Brand Kit can do or what they're missing. Adoption of Brand Kit features is low because there's no guided path to completeness.</td><td>Customers discover and configure Brand Kit features progressively. Each addition unlocks more AI capability, creating a compound adoption loop.</td></tr>
     <tr><td class="init-cell">Content Studio stability fix</td><td>Fix image-not-loading bugs; eliminate the quit-and-reload pattern; fix forced-redirect loop into Builder.</td><td>Customer literally describes "Content Studio not loading images. Email builder breaking… keep quitting out and re-loading." $621/mo cited.</td><td>Asset library works on first load; support escalations reduced.</td></tr>
     <tr><td class="init-cell">Folder management in Content Studio</td><td>Allow folder reordering, folder deletion, and search-in-folder; restore IA fundamentals.</td><td>Customers can't reorder or delete folders. Basic organization is missing. $361/mo cited.</td><td>Customers organize assets the way they think; less time hunting for files.</td></tr>
     <tr><td class="init-cell">Canva-to-Mailchimp sync reliability</td><td>Fix silent-failure mode where Canva graphic shows in editor but is missing in sent email; add sync-status indicators.</td><td>Two named customers describe "most frustrating thing ever," including a live email sent without the synced graphic. $2,500/mo cited.</td><td>Canva work reliably shows up in sends; silent-failure mode eliminated.</td></tr>
@@ -513,6 +529,13 @@
     <tr><td class="init-cell">Per-recipient dynamic images</td><td>Image blocks that personalize per recipient: last product viewed, last category, predicted next product.</td><td>Klaviyo, Bloomreach, and Movable Ink set the bar for dynamic content. Mailchimp has nothing at the image level.</td><td>Automation emails personalize at the image level; conversion lift on browse, cart, and post-purchase flows.</td></tr>
     <tr><td class="init-cell">In-canvas revenue per recipient</td><td>Show revenue, opens, clicks, and conversion inline at each block in the post-send report; revenue-per-recipient view.</td><td>Klaviyo's in-builder revenue metrics have +56 net sentiment. Mailchimp's editor reports don't expose per-block revenue.</td><td>Customer proves email ROI inline; renewal conversations move from vanity metrics to dollars shipped.</td></tr>
     <tr><td class="init-cell">Per-profile Smart Send Time &amp; Personalized A/B</td><td>Per-profile send-time optimization; A/B winner picked per profile, not one global winner; Channel Affinity per profile.</td><td>Klaviyo has all three productized with 10&ndash;30% lift cited. Mailchimp has store-level send-time only and one-size-fits-all A/B.</td><td>Sends ship at the per-recipient optimal time; A/B optimizes per profile, not in aggregate.</td></tr>
+    <tr class="new-init"><td class="init-cell">Ecommerce lifecycle template library <span class="new-tag">NEW</span></td><td>12 lifecycle stages (welcome, abandoned cart, browse abandonment, post-purchase, cross-sell, replenishment, winback, VIP, back-in-stock, price drop, seasonal) &times; 3&ndash;5 variants each, with live product blocks that pull from the customer's connected store.</td><td>260+ templates are marketing-generic, not ecommerce-lifecycle-specific. An ecommerce merchant sees newsletter layouts, not "abandoned cart with dynamic product grid." Klaviyo has 160+ lifecycle-native templates with catalog sync.</td><td>Ecommerce merchants find templates mapped to exactly the email they need to send, pre-populated with their actual products.</td></tr>
+    <tr class="new-init"><td class="init-cell">Store-connected template preview <span class="new-tag">NEW</span></td><td>When a merchant opens a template, it previews with their actual products, brand colors, and logo instead of placeholder content.</td><td>Templates preview with generic placeholder content. Merchants can't tell if a template will work for them until they spend time customizing it.</td><td>Merchants see their store in the template before they commit. Faster decision-making, higher template adoption.</td></tr>
+    <tr class="new-init"><td class="init-cell">Lifecycle coverage gap analyzer <span class="new-tag">NEW</span></td><td>Show merchants which lifecycle emails they're missing vs. benchmarks (e.g., "You have welcome and abandoned cart, but no winback. Merchants with winback flows see 12% higher repeat purchase").</td><td>Merchants don't know what lifecycle emails they're missing or the revenue impact of the gap. No platform proactively surfaces this.</td><td>Merchants discover high-ROI email programs they haven't built yet, with data-backed urgency to act.</td></tr>
+    <tr class="new-init"><td class="init-cell">Goal-driven campaign agent <span class="new-tag">NEW</span></td><td>Natural language input ("re-engage customers who haven't bought in 60 days with 15% off top sellers"). Agent asks clarifying questions (product category, tone, email or email+SMS), then generates a complete, on-brand, store-data-populated email with dynamic product blocks, subject line, preview text, and audience segment.</td><td>No platform combines goal-driven conversational Q&amp;A + novel layout generation + brand asset integration + store data + responsive HTML + full send lifecycle. This is the biggest strategic whitespace in the market.</td><td>Customers describe what they want to achieve and get a ready-to-review campaign without touching a template. First mover advantage.</td></tr>
+    <tr class="new-init"><td class="init-cell">Conversational email refinement <span class="new-tag">NEW</span></td><td>After initial generation, the merchant iterates in natural language ("make the hero bigger, add a countdown timer, change CTA to Shop Now"). The agent modifies the live preview in real time.</td><td>After AI generates a first draft, editing requires switching to drag-and-drop manual mode. The conversational flow breaks.</td><td>The entire creation-to-refinement loop stays conversational. No mode switch between AI generation and manual editing.</td></tr>
+    <tr class="new-init"><td class="init-cell">Campaign brief to multi-variant <span class="new-tag">NEW</span></td><td>Merchant provides a goal brief; agent generates 3 variants (different layouts, copy angles, hero treatments) and recommends which to A/B test with reasoning.</td><td>Creating A/B variants is manual. Merchants rarely test because variant creation takes too long. Klaviyo's Personalized A/B picks winners but doesn't generate the variants.</td><td>Three testable variants from one brief. Agent explains why each variant works, reducing the expertise needed to run effective A/B tests.</td></tr>
+    <tr class="new-init"><td class="init-cell">Store intelligence in generation <span class="new-tag">NEW</span></td><td>The agent uses the merchant's actual store data (bestsellers, slow movers, customer segments, purchase frequency, AOV) to make content decisions during generation.</td><td>AI generation today is Brand-Kit-aware but not store-data-aware. It doesn't know which products to feature or which segments to target.</td><td>AI features the right products for the right audience based on actual store performance, not merchant guesswork.</td></tr>
   </tbody>
 </table>
 
