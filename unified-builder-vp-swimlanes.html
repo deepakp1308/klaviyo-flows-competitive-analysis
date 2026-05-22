@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unified Builder — VP Swim Lane Mapping</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 9pt; color: #000; background: #fff; line-height: 1.4; padding: 24px 32px; max-width: 1500px; margin: 0 auto; }
+  h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; }
+  h2 { font-size: 11pt; font-weight: 700; margin-bottom: 8px; margin-top: 20px; }
+  .subtitle { font-size: 9pt; color: #555; font-style: italic; margin-bottom: 16px; }
+  .nav { margin-bottom: 16px; padding: 8px 0; border-bottom: 2px solid #1a3a5c; }
+  .nav a { font-size: 9pt; font-weight: 700; color: #1a3a5c; text-decoration: none; margin-right: 20px; }
+  .nav a:hover { text-decoration: underline; }
+  .nav a.active { border-bottom: 2px solid #1a3a5c; padding-bottom: 4px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 8px; table-layout: fixed; }
+  th, td { border: 1px solid #bfbfbf; padding: 6px 8px; vertical-align: top; text-align: left; }
+
+  .header-row th { background: #1a3a5c; color: #fff; font-weight: 700; font-size: 9pt; text-align: center; }
+  .header-row th:first-child { text-align: left; }
+
+  .theme-row td { background: #1a3a5c; color: #fff; font-weight: 700; font-size: 9pt; }
+
+  .swimlane-label { background: #f2f2f2; font-weight: 700; font-size: 9pt; width: 180px; min-width: 180px; }
+  .swimlane-label .desc { font-weight: 400; font-size: 7.5pt; color: #555; margin-top: 3px; font-style: italic; }
+
+  td ul { margin: 0; padding-left: 12px; }
+  td ul li { margin-bottom: 3px; line-height: 1.35; }
+  td ul li.highlight { font-weight: 600; color: #1a3a5c; }
+
+  .pillar-tag { display: inline-block; font-size: 6.5pt; font-weight: 700; padding: 1px 4px; border-radius: 2px; margin-left: 3px; vertical-align: middle; }
+  .tag-p1 { background: #fee2e2; color: #991b1b; }
+  .tag-p2 { background: #fef3c7; color: #92400e; }
+  .tag-p3 { background: #dbeafe; color: #1e40af; }
+  .tag-p4 { background: #dcfce7; color: #166534; }
+
+  .legend { margin: 12px 0 16px 0; }
+  .legend span { margin-right: 16px; font-size: 8pt; }
+
+  .rationale-table th { background: #1a3a5c; color: #fff; }
+
+  @media print {
+    body { padding: 12px; font-size: 7.5pt; }
+    table { font-size: 7pt; }
+    th, td { padding: 4px 5px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="unified-builder-roadmap.html">Unified Builder Roadmap</a>
+  <a href="unified-builder-vp-swimlanes.html" class="active">VP Swim Lanes</a>
+</div>
+
+<h1>Unified Builder Initiatives Mapped to VP Swim Lanes</h1>
+<p class="subtitle">52 initiatives from 4 builder strategic pillars mapped to 5 VP-level swim lanes across FY27</p>
+
+<div class="legend">
+  <span><span class="pillar-tag tag-p1">P1</span> Builder Trust &amp; Reliability</span>
+  <span><span class="pillar-tag tag-p2">P2</span> Universal Builder, Portability &amp; Migration</span>
+  <span><span class="pillar-tag tag-p3">P3</span> AI-Powered Builder &amp; Accelerated Time to Value</span>
+  <span><span class="pillar-tag tag-p4">P4</span> Unified Omni-Channel Builder &amp; Activation</span>
+</div>
+
+<table>
+  <colgroup>
+    <col style="width:180px">
+    <col style="width:25%">
+    <col style="width:25%">
+    <col style="width:25%">
+    <col style="width:25%">
+  </colgroup>
+  <thead>
+    <tr class="header-row">
+      <th>FY27 Roadmap</th>
+      <th>Q1 FY27</th>
+      <th>Q2 FY27</th>
+      <th>Q3 FY27</th>
+      <th>Q4 FY27</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- GTM PRODUCT THEMES -->
+    <tr class="theme-row">
+      <td>GTM Product Themes</td>
+      <td>Agent Mode</td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+
+    <!-- ACCELERATE ACTIVATION -->
+    <tr>
+      <td class="swimlane-label">
+        Accelerate Activation to First Business Payoff
+        <div class="desc">Compress time from signup to first send; remove barriers that block customers from reaching value</div>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">Brand Kit auto-extract on signup <span class="pillar-tag tag-p3">P3</span></li>
+          <li>AI Email Setup Agent STARTS <span class="pillar-tag tag-p3">P3</span></li>
+          <li class="highlight">Universal Content block primitive <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Auto-migration of saved blocks to Universal Content <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Bulk template migration tool STARTS <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Write with AI quality &amp; brand-tone improvements <span class="pillar-tag tag-p3">P3</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">AI Email Setup Agent SHIPS <span class="pillar-tag tag-p3">P3</span></li>
+          <li>Industry-specific welcome flow templates <span class="pillar-tag tag-p3">P3</span></li>
+          <li>B2B &amp; ProServ template gallery <span class="pillar-tag tag-p3">P3</span></li>
+          <li>Industry-aware template gallery (6&ndash;8 per vertical) <span class="pillar-tag tag-p3">P3</span></li>
+          <li>Template categorization fix (layout-only browse) <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Brand Kit auto-applied to Universal blocks <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Bulk template migration tool SHIPS <span class="pillar-tag tag-p2">P2</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Contextual feature discovery prompts <span class="pillar-tag tag-p4">P4</span></li>
+          <li>DRAFT-resurrect campaign with proactive nudges <span class="pillar-tag tag-p4">P4</span></li>
+          <li>Universal Content blocks render in CJB <span class="pillar-tag tag-p2">P2</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Funded migration program (12-month grace period) <span class="pillar-tag tag-p2">P2</span></li>
+        </ul>
+      </td>
+    </tr>
+
+    <!-- WIN ICP EXPANSION -->
+    <tr>
+      <td class="swimlane-label">
+        Win ICP Expansion Through Product-Led Growth Systems
+        <div class="desc">Drive upgrades, expansion revenue, and deeper adoption among agencies, multi-brand, and mid-market ICPs</div>
+      </td>
+      <td>
+        <ul>
+          <li>NEB Code Mode STARTS <span class="pillar-tag tag-p2">P2</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">NEB Code Mode SHIPS <span class="pillar-tag tag-p2">P2</span></li>
+          <li>NEB Liquid templating for power users <span class="pillar-tag tag-p2">P2</span></li>
+          <li>1:1 migration tool with support enablement <span class="pillar-tag tag-p2">P2</span></li>
+          <li class="highlight">In-canvas revenue per recipient (Klaviyo parity) <span class="pillar-tag tag-p3">P3</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">Multi-brand kits per account <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Universal Content audit &amp; version history <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Per-profile Smart Send Time &amp; Personalized A/B <span class="pillar-tag tag-p3">P3</span></li>
+          <li>Per-recipient dynamic images <span class="pillar-tag tag-p3">P3</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">Real-time multi-author co-editing <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Block-level comments &amp; @-mentions <span class="pillar-tag tag-p1">P1</span></li>
+          <li class="highlight">Approval workflow &amp; version history <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Locked layouts for brand governance <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Cross-account brand inheritance for agencies <span class="pillar-tag tag-p1">P1</span></li>
+          <li>AI brand-style transfer between campaigns <span class="pillar-tag tag-p3">P3</span></li>
+        </ul>
+      </td>
+    </tr>
+
+    <!-- SCALE OMNICHANNEL -->
+    <tr>
+      <td class="swimlane-label">
+        Scale Omnichannel Adoption
+        <div class="desc">Unify email and SMS into one authoring surface; grow cross-channel campaign adoption</div>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">Brand-Kit-aware generative SMS in composer <span class="pillar-tag tag-p4">P4</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>SMS variant generation &amp; A/B in composer <span class="pillar-tag tag-p4">P4</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">Shared content blocks in email + SMS <span class="pillar-tag tag-p4">P4</span></li>
+          <li class="highlight">Cross-channel preview side-by-side <span class="pillar-tag tag-p4">P4</span></li>
+          <li>Brand Kit on SMS short links &amp; sender ID <span class="pillar-tag tag-p4">P4</span></li>
+        </ul>
+      </td>
+      <td>
+        &mdash;
+      </td>
+    </tr>
+
+    <!-- BECOME AI-FIRST -->
+    <tr>
+      <td class="swimlane-label">
+        Become an AI-First Platform
+        <div class="desc">AI capabilities that transform the builder from a composition tool into an intelligent authoring surface</div>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">Brand Kit auto-extract on signup <span class="pillar-tag tag-p3">P3</span></li>
+          <li class="highlight">Write with AI quality &amp; brand-tone improvements <span class="pillar-tag tag-p3">P3</span></li>
+          <li>AI Email Setup Agent STARTS <span class="pillar-tag tag-p3">P3</span></li>
+          <li>Brand-Kit-aware generative SMS <span class="pillar-tag tag-p4">P4</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">AI Email Setup Agent SHIPS <span class="pillar-tag tag-p3">P3</span></li>
+          <li class="highlight">AI image generation from product catalog <span class="pillar-tag tag-p3">P3</span></li>
+          <li>Image Remix in flow email steps <span class="pillar-tag tag-p3">P3</span></li>
+          <li class="highlight">In-canvas revenue per recipient <span class="pillar-tag tag-p3">P3</span></li>
+          <li>SMS variant generation &amp; A/B <span class="pillar-tag tag-p4">P4</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Per-recipient dynamic images <span class="pillar-tag tag-p3">P3</span></li>
+          <li class="highlight">Per-profile Smart Send Time &amp; Personalized A/B <span class="pillar-tag tag-p3">P3</span></li>
+          <li>Contextual feature discovery prompts <span class="pillar-tag tag-p4">P4</span></li>
+          <li>DRAFT-resurrect campaign <span class="pillar-tag tag-p4">P4</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">AI brand-style transfer between campaigns <span class="pillar-tag tag-p3">P3</span></li>
+        </ul>
+      </td>
+    </tr>
+
+    <!-- STEP FUNCTION QUALITY -->
+    <tr>
+      <td class="swimlane-label">
+        Step Function Quality &amp; Performance Improvements
+        <div class="desc">Builder reliability, rendering fidelity, Brand Kit trust, Content Studio stability, and platform SLOs</div>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">Inbox rendering parity fix <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Block reorder &amp; template navigation fix <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Template surfacing in campaign wizard <span class="pillar-tag tag-p1">P1</span></li>
+          <li class="highlight">Cross-browser regression suite <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Multi-author save-conflict detection <span class="pillar-tag tag-p1">P1</span></li>
+          <li class="highlight">Brand Kit data correctness fix <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Font upload &amp; Creative Assistant parity <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Content Studio stability fix <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Canva-to-Mailchimp sync reliability <span class="pillar-tag tag-p1">P1</span></li>
+          <li class="highlight">Builder SLO operating contract <span class="pillar-tag tag-p1">P1</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Light/dark mode &amp; background images <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Inline link checker &amp; deliverability hints <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Brand fonts in landing pages &amp; forms <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Folder management in Content Studio <span class="pillar-tag tag-p1">P1</span></li>
+        </ul>
+      </td>
+      <td>
+        &mdash;
+      </td>
+      <td>
+        &mdash;
+      </td>
+    </tr>
+
+  </tbody>
+</table>
+
+<h2 style="margin-top:24px;">Mapping Rationale</h2>
+<table class="rationale-table" style="font-size:9pt; margin-top:8px;">
+  <thead>
+    <tr><th style="background:#1a3a5c; color:#fff; width:200px;">VP Swim Lane</th><th style="background:#1a3a5c; color:#fff;">Why These Initiatives Map Here</th><th style="background:#1a3a5c; color:#fff; width:200px;">Builder Pillars Represented</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="font-weight:600;">Accelerate Activation to First Business Payoff</td>
+      <td>Initiatives that compress time from signup to first send and remove barriers that block customers from reaching value. Brand Kit auto-extract and AI Setup Agent eliminate manual onboarding friction. Universal Content and auto-migration give existing customers immediate reuse value. Template gallery improvements and industry-specific templates ensure every vertical finds a starting point. Contextual discovery prompts and DRAFT-resurrect turn stalled users into active senders. The activation gap represents ~$14.3M in unrealized ARR across Free and Trial cohorts.</td>
+      <td>P2 (Universal Content, migration), P3 (AI onboarding, templates), P4 (discovery, activation)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600;">Win ICP Expansion Through Product-Led Growth</td>
+      <td>Initiatives that drive upgrades, expansion revenue, and deeper adoption among agencies, multi-brand teams, and mid-market customers. Code Mode and Liquid templating unlock Premium/agency users stuck on Classic ($1&ndash;2M ARR at risk). Multi-brand kits, locked layouts, and cross-account brand inheritance serve the agency segment that Klaviyo One targets. Collaboration (co-editing, comments, approval workflows) opens the team-workflow segment that Stensul and Knak own at enterprise price. In-canvas revenue metrics, Smart Send, and dynamic images are premium capabilities that justify higher plans.</td>
+      <td>P1 (collaboration, governance), P2 (Code Mode, migration), P3 (AI performance)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600;">Scale Omnichannel Adoption</td>
+      <td>Initiatives that unify email and SMS into one authoring surface and grow cross-channel campaign adoption. Generative SMS brings AI to the SMS composer for the first time. Shared content blocks, cross-channel preview, and Brand Kit on SMS short links turn "unified" from a billing claim into an authoring reality. These directly address the 0/5 omni-channel score vs Klaviyo's 3, the largest absolute competitive gap.</td>
+      <td>P4 (unified authoring, generative SMS)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600;">Become an AI-First Platform</td>
+      <td>Core AI capabilities that transform the builder from a composition tool into an intelligent authoring surface. Brand Kit auto-extract, AI Setup Agent, Write with AI quality, and generative SMS are the Q1 AI quick wins visible to leadership. AI image generation, Image Remix, in-canvas revenue, Smart Send, and Personalized A/B close named Klaviyo gaps. Brand-style transfer is a differentiated capability no competitor ships. Contextual discovery and DRAFT-resurrect use AI-informed nudges to drive activation. These initiatives build the compounding creative-performance intelligence loop that is the builder's primary competitive moat.</td>
+      <td>P3 (all AI initiatives), P4 (generative SMS, discovery)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600;">Step Function Quality &amp; Performance</td>
+      <td>All reliability, rendering, and trust initiatives. Inbox rendering parity, Brand Kit data correctness, Content Studio stability, and Canva sync reliability address the ~$15.5K/mo in cited HVC MRR from the last 3 months. Cross-browser regression suite and Builder SLO operating contract shift quality from reactive (customers find bugs) to proactive (CI catches them). These are concentrated in Q1&ndash;Q2 because trust is the foundation every other swim lane depends on. Bulk churn rose +2.1pp YoY to 40%; this swim lane directly reverses that trend.</td>
+      <td>P1 (all trust &amp; reliability initiatives)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p style="font-size:8pt; color:#888; margin-top:16px;">Note: Some initiatives appear in multiple swim lanes (e.g., Brand Kit auto-extract maps to both Activation and AI-First; generative SMS maps to both Omnichannel and AI-First). This reflects genuine cross-lane value. The primary mapping is where the initiative's business impact is strongest.</p>
+
+</body>
+</html>
