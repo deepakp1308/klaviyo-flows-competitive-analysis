@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unified Builder — Critical Path & Hypotheses</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 9pt; color: #000; background: #fff; line-height: 1.4; padding: 24px 32px; max-width: 1500px; margin: 0 auto; }
+  h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; }
+  h2 { font-size: 11pt; font-weight: 700; margin-bottom: 8px; margin-top: 24px; border-bottom: 2px solid #1a3a5c; padding-bottom: 4px; }
+  h3 { font-size: 10pt; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { font-size: 9pt; color: #555; font-style: italic; margin-bottom: 16px; }
+  .nav { margin-bottom: 16px; padding: 8px 0; border-bottom: 2px solid #1a3a5c; }
+  .nav a { font-size: 9pt; font-weight: 700; color: #1a3a5c; text-decoration: none; margin-right: 20px; }
+  .nav a.active { border-bottom: 2px solid #1a3a5c; padding-bottom: 4px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 8px; }
+  th, td { border: 1px solid #bfbfbf; padding: 8px 10px; vertical-align: top; text-align: left; }
+  th { background: #1a3a5c; color: #fff; font-weight: 700; font-size: 9pt; }
+  .row-label { background: #f2f2f2; font-weight: 700; font-size: 9pt; width: 140px; min-width: 140px; }
+  .metric { font-weight: 700; color: #1a3a5c; }
+
+  .summary-box { background: #f5f5f5; border: 2px solid #1a3a5c; padding: 16px; margin: 16px 0; }
+  .summary-box h3 { margin-bottom: 8px; }
+  .summary-table td { border: none; padding: 4px 16px 4px 0; font-size: 9pt; }
+  .summary-table .val { font-weight: 700; }
+
+  .note { font-size: 8pt; color: #888; margin-top: 8px; }
+
+  @media print {
+    body { padding: 12px; font-size: 7.5pt; }
+    table { font-size: 7pt; }
+    th, td { padding: 4px 6px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="unified-builder-roadmap.html">Unified Builder Roadmap</a>
+  <a href="unified-builder-vp-swimlanes.html">VP Swim Lanes</a>
+  <a href="unified-builder-critical-path.html" class="active">Critical Path &amp; Hypotheses</a>
+</div>
+
+<h1>Critical Path: Key Bets by Quarter</h1>
+<p class="subtitle">9 highest-leverage initiatives across 4 quarters. These drive ~65% of the total projected revenue impact (~$13.7M of $21M). The remaining ~35% comes from the full portfolio of supporting initiatives.</p>
+<p class="note">All leading and lagging indicator targets are subsets of the overall model (not additive). Critical path initiatives are the minimum viable set that must ship on time for the business case to hold.</p>
+
+<!-- Q1 -->
+
+<h2>Q1: Foundation, Trust &amp; AI Quick Wins</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Inbox Rendering Parity + Builder SLO Contract</th>
+      <th>Universal Content Block Primitive</th>
+      <th>Brand Kit Auto-Extract on Signup</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="row-label">Hypothesis</td>
+      <td>If we fix the top rendering bugs and publish a Builder SLO contract, bulk churn will begin reversing from 40.0% as customers stop encountering broken sends and Net CSAT will recover from &minus;29.3 toward &minus;20 by end of Q1.</td>
+      <td>If we ship Universal Content as an account-level primitive, customers with 10+ templates will adopt it within 60 days, and content maintenance time per campaign cycle will drop measurably as duplicate editing is eliminated.</td>
+      <td>If we auto-extract Brand Kit on signup so the first email is pre-branded, median time to first send will compress from 6 days toward 4 days and activation rate will begin recovering from 60.6%.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Customer Problem</td>
+      <td>Emails render differently in the inbox than in the editor. A $949/mo Premium customer's forwarded emails break. A $5,879/mo P0 escalation blocked campaign sends entirely. Brand Kit serves stale data. No published quality bar exists. ~$15.5K/mo in HVC MRR cited in the last 3 months.</td>
+      <td>Saved content is template-scoped. A $330/mo customer with 181 templates maintains the same footer 181 times. Klaviyo shipped this as the default primitive in Spring 2026. Every quarter without parity widens the competitive gap.</td>
+      <td>Customers sign up, get generic templates, and must manually restyle before the product proves its worth. Median time to first send is 6 days. Bulk activation dropped &minus;2.4pp YoY to 60.6%. The &lt;12-month cohort dropped &minus;22.8%.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Customer Benefit</td>
+      <td>The email a customer designs is the email every recipient sees. A published quality bar that engineering maintains and new features don't ship until they meet.</td>
+      <td>Edit a header, footer, or promo banner once and every send updates automatically. No duplicate maintenance across templates or channels.</td>
+      <td>First email looks on-brand without any manual restyling. The product earns trust in the first session, not the first month.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Leading Indicator</td>
+      <td class="metric">Net CSAT: &minus;29.3 &rarr; &minus;20 (+9.3pp in Q1). Bulk churn: 40.0% &rarr; 39.5% (&minus;0.5pp)</td>
+      <td class="metric">Universal Content adoption: 0% &rarr; 20% of NEB active users within 60 days of launch</td>
+      <td class="metric">Time to first send: 6 days &rarr; 4 days. Activation rate: 60.6% &rarr; 61.5% (+0.9pp)</td>
+    </tr>
+    <tr>
+      <td class="row-label">Lagging Impact</td>
+      <td class="metric">Retention: CSAT recovery is the single largest retention lever. +9.3pp CSAT &times; 30% editor causal share = ~$1.0M ARR from churn reduction in paid cohort.</td>
+      <td class="metric">Retention + Activation: Customers who adopt Universal Content maintain more templates actively, increasing 30-day repeat rate. Contributes to L1 bulk recovery lever (~$1.9M paid adoption target).</td>
+      <td class="metric">Trial-to-paid: +0.9pp activation &times; 25% trial causal share. Faster first-send compresses the trial window, increasing trial-to-paid conversion. Contributes to the $5.6M trial cohort target.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Q2 -->
+
+<h2>Q2: AI at Scale &amp; Migration Ships</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>AI Email Setup Agent SHIPS</th>
+      <th>NEB Code Mode SHIPS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="row-label">Hypothesis</td>
+      <td>If a new customer can paste a URL and get a scaffolded, on-brand campaign in 3 clicks, time to first send will compress from 4 days to under 2 days and trial activation will increase from 10.8% toward 13% by end of Q2.</td>
+      <td>If we ship Code Mode inside NEB before any Classic sunset communication, Premium and agency users will begin migrating voluntarily, and the $1&ndash;2M ARR Classic sunset risk will be structurally mitigated.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Customer Problem</td>
+      <td>Klaviyo's Marketing Agent sets up flows in ~3 clicks. Mailchimp has no autonomous setup agent. New customers describe Mailchimp as "more powerful but slower to first value." Trial activation is 10.8% and dropping &minus;3.0pp YoY, the worst decline in the revised goals scorecard.</td>
+      <td>NEB has no HTML/CSS escape hatch. A $504/mo customer's migration support ended the chat. Premium and agency users anchor on Classic specifically for custom code. Retiring Classic without Code Mode risks $1&ndash;2M in ARR. Bulk Established fell &minus;9.4% YoY.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Customer Benefit</td>
+      <td>First campaign is live before the customer finishes onboarding. Matches Klaviyo's URL-to-campaign speed with Mailchimp's Brand Kit advantage.</td>
+      <td>Power users get the new builder without giving up control. Migration becomes a choice, not a loss. Safe to retire Classic.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Leading Indicator</td>
+      <td class="metric">Time to first send: 4 days &rarr; &lt;2 days. Trial activation: 10.8% &rarr; 13% (+2.2pp cumulative)</td>
+      <td class="metric">NEB adoption among Classic-anchored users: baseline &rarr; 25% voluntary migration within 90 days of Code Mode GA</td>
+    </tr>
+    <tr>
+      <td class="row-label">Lagging Impact</td>
+      <td class="metric">Trial-to-paid: +2.2pp trial activation &times; 25% causal share = incremental ~62K first-senders/yr. At $540/yr at-booking ARPU, contributes ~$2.5M toward the $5.6M trial target.</td>
+      <td class="metric">Retention: Mitigates $1&ndash;2M Classic sunset ARR risk. Paid adoption: +2.3pp target unlocked as Classic users can now move to NEB without losing capability.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Q3 -->
+
+<h2>Q3: Unified Omni-Channel</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Shared Content Blocks in Email + SMS</th>
+      <th>Per-Profile Smart Send Time &amp; Personalized A/B</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="row-label">Hypothesis</td>
+      <td>If Universal Content extends to SMS with content-type-aware rendering, cross-channel campaign creation rate will increase from near-zero to 15% of campaigns, and the "unified is a billing claim" narrative will reverse.</td>
+      <td>If sends ship at the per-recipient optimal time and A/B winners are picked per profile, open rates will increase 10&ndash;15% and click rates 5&ndash;8% for users who adopt, directly improving campaign performance and MC-attributed revenue.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Customer Problem</td>
+      <td>Email and SMS compose in separate surfaces. No shared content blocks, no shared preview, no cross-channel content reuse. The builder scores 0/5 on omni-channel vs Klaviyo's 3. Customers copy-paste, reformat, and preview separately.</td>
+      <td>Klaviyo has per-profile Smart Send Time, Personalized A/B, and Channel Affinity all productized with 10&ndash;30% lift cited. Mailchimp has store-level send-time only and one-size-fits-all A/B winners.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Customer Benefit</td>
+      <td>Compose once, ship everywhere. Email and SMS share the same content, the same brand, and the same preview surface. Cross-channel is how the product works.</td>
+      <td>Sends ship at the per-recipient optimal time. A/B optimizes per profile, not in aggregate. Campaign performance improves without additional effort.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Leading Indicator</td>
+      <td class="metric">Cross-channel campaign rate: 0% &rarr; 15%. SMS attach rate: baseline &rarr; 1.5&times;. 30-day repeat: +1.5pp from cross-channel adopters</td>
+      <td class="metric">Open rate: +10&ndash;15% for adopters. Click rate: +5&ndash;8%. MC-attributed revenue: +1&ndash;2pp from performance lift</td>
+    </tr>
+    <tr>
+      <td class="row-label">Lagging Impact</td>
+      <td class="metric">Retention: Cross-channel users retain at higher rates (SMS attach = higher LTV). Contributes to 30-day repeat target (+3.8pp paid, +6.6pp free) and SMS attach 2&times; target.</td>
+      <td class="metric">Retention + Upgrades: Performance lift drives higher MC-attributed revenue, stronger renewal conversations, and justification for higher-tier plans. Contributes to paid ARPU lever.</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Q4 -->
+
+<h2>Q4: Team Scale &amp; Governance</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th></th>
+      <th>Real-Time Multi-Author Co-Editing + Approval Workflow</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="row-label">Hypothesis</td>
+      <td>If marketing teams of 2+ can co-edit in real time with in-context comments and multi-step approval, Mailchimp will reverse the &minus;48 net sentiment on collaboration, retain agency and mid-market accounts at higher rates, and differentiate against both Klaviyo (no co-edit) and Stensul (enterprise-only governance).</td>
+    </tr>
+    <tr>
+      <td class="row-label">Customer Problem</td>
+      <td>Only one person can edit at a time. Save conflicts silently lose work ($340/mo cited). Approval happens via Slack, email, and screenshots with no audit trail. A $57K/mo HVC customer: "I don't look at it; I just hope it's right." Teams needing multi-author workflows are forced outside the product. Second-most-cited user research bet.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Customer Benefit</td>
+      <td>Marketing teams work together natively inside Mailchimp. Design feedback happens on the content block. The entire review and sign-off process stays in-product with a complete audit trail. Collaboration becomes a reason to stay, not a reason to leave.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Leading Indicator</td>
+      <td class="metric">Collaboration net sentiment: &minus;48 &rarr; positive. Multi-author session rate: 0% &rarr; 20% of team accounts. Approval workflow adoption: 15% of Standard+ accounts within 90 days.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Lagging Impact</td>
+      <td class="metric">Retention: Team-account retention lifts as Mailchimp becomes the collaboration hub (not just a send tool). Upgrades: Collaboration and governance features justify Standard and Premium tiers for agency and mid-market segments. Contributes to ARPU + outcomes lever (~$0.9M paid repeat, upgrade targets).</td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- CUMULATIVE SUMMARY -->
+
+<div class="summary-box">
+  <h3>Full-Year Cumulative: Critical Path Initiatives Only (~65% of Portfolio)</h3>
+  <table class="summary-table">
+    <tr>
+      <td colspan="4" style="font-weight:700; padding-bottom:8px;">Leading Indicators (critical path contribution / overall target)</td>
+    </tr>
+    <tr>
+      <td>Net CSAT</td><td class="val">+9.3pp / +29.3pp (32%)</td>
+      <td>Activation Rate</td><td class="val">+3.1pp / +6.4pp (48%)</td>
+    </tr>
+    <tr>
+      <td>Trial Activation</td><td class="val">+2.2pp / +5.2pp (42%)</td>
+      <td>Time to First Send</td><td class="val">6d &rarr; &lt;2d (target met)</td>
+    </tr>
+    <tr>
+      <td>Universal Content Adoption</td><td class="val">0% &rarr; 50&ndash;70% (by Q3)</td>
+      <td>Cross-Channel Campaign Rate</td><td class="val">0% &rarr; 15%</td>
+    </tr>
+    <tr><td colspan="4" style="padding-top:12px; font-weight:700; padding-bottom:8px;">Lagging Indicators (critical path contribution)</td></tr>
+    <tr>
+      <td>Paid Retention</td><td class="val">CSAT recovery + rendering trust = largest churn reduction drivers</td>
+      <td>Trial-to-Paid</td><td class="val">AI Setup Agent + time-to-first-send compression = ~$2.5M of $5.6M trial target</td>
+    </tr>
+    <tr>
+      <td>Free-to-Paid</td><td class="val">Activation recovery + repeat send = driving ~$8.7M free target</td>
+      <td>Upgrades</td><td class="val">Collaboration + governance + Smart Send = mid-market tier justification</td>
+    </tr>
+    <tr><td colspan="4" style="padding-top:12px; font-weight:700; padding-bottom:8px;">Estimated Revenue (critical path / total portfolio)</td></tr>
+    <tr>
+      <td>Annual Revenue Impact</td><td class="val" style="font-size:12pt;">~$13.7M / $21.0M (65%)</td>
+      <td></td><td></td>
+    </tr>
+  </table>
+</div>
+
+<p class="note">All numbers are subsets of the overall $21M model. The remaining ~35% of lift (~$7.3M) comes from ~43 supporting initiatives across the four strategic pillars, including template gallery improvements, Image Remix, dynamic images, in-canvas revenue metrics, migration program completion, Content Studio folder management, and Brand Kit multi-brand/governance capabilities. Leading indicator progression is cumulative from the FY26 baseline.</p>
+
+</body>
+</html>
