@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unified Builder — Competitive Position Post-FY27</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 9pt; color: #000; background: #fff; line-height: 1.4; padding: 24px 32px; max-width: 1500px; margin: 0 auto; }
+  h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; }
+  h2 { font-size: 11pt; font-weight: 700; margin-bottom: 8px; margin-top: 24px; border-bottom: 2px solid #1a3a5c; padding-bottom: 4px; }
+  h3 { font-size: 10pt; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { font-size: 9pt; color: #555; font-style: italic; margin-bottom: 16px; }
+  .nav { margin-bottom: 16px; padding: 8px 0; border-bottom: 2px solid #1a3a5c; }
+  .nav a { font-size: 9pt; font-weight: 700; color: #1a3a5c; text-decoration: none; margin-right: 20px; }
+  .nav a.active { border-bottom: 2px solid #1a3a5c; padding-bottom: 4px; }
+
+  table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 8px; }
+  th, td { border: 1px solid #bfbfbf; padding: 6px 8px; vertical-align: top; text-align: left; }
+  th { background: #1a3a5c; color: #fff; font-weight: 700; font-size: 8pt; }
+
+  .lead { background: #DCFCE7; font-weight: 700; color: #166534; text-align: center; }
+  .parity { background: #FEF3C7; font-weight: 700; color: #92400E; text-align: center; }
+  .trail { background: #FEE2E2; font-weight: 700; color: #991B1B; text-align: center; }
+  .cap-cell { font-weight: 600; background: #f9fafb; }
+  .cat-row td { background: #f2f2f2; font-weight: 700; font-size: 9pt; }
+
+  .scorecard { display: flex; gap: 16px; margin: 16px 0; flex-wrap: wrap; }
+  .score-card { flex: 1; min-width: 120px; border: 2px solid #1a3a5c; padding: 12px; text-align: center; }
+  .score-card .num { font-size: 20pt; font-weight: 700; }
+  .score-card .label { font-size: 8pt; color: #555; margin-top: 2px; }
+  .score-lead .num { color: #166534; }
+  .score-parity .num { color: #92400E; }
+  .score-trail .num { color: #991B1B; }
+
+  .insight-box { background: #f5f5f5; border: 1px solid #ddd; padding: 12px; margin: 12px 0; font-size: 9pt; }
+  .insight-box strong { color: #1a3a5c; }
+
+  .note { font-size: 8pt; color: #888; margin-top: 8px; }
+
+  @media print { body { padding: 12px; font-size: 7.5pt; } table { font-size: 7pt; } }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="unified-builder-roadmap.html">Unified Builder Roadmap</a>
+  <a href="unified-builder-vp-swimlanes.html">VP Swim Lanes</a>
+  <a href="unified-builder-critical-path.html">Critical Path &amp; Hypotheses</a>
+  <a href="unified-builder-revenue-attribution.html">Revenue Attribution</a>
+  <a href="unified-builder-workflow-health.html">Workflow Health &amp; VOC</a>
+  <a href="unified-builder-competitive-position.html" class="active">Competitive Position</a>
+</div>
+
+<h1>Competitive Position: Where We Stand After FY27</h1>
+<p class="subtitle">Capability-by-capability assessment of the Unified Builder post-roadmap execution vs Klaviyo and Canva. Verdict: Lead, Parity, or Trail.</p>
+
+<!-- ═══════ VS KLAVIYO ═══════ -->
+
+<h2>Mailchimp Unified Builder vs Klaviyo (Post-FY27)</h2>
+
+<div class="scorecard">
+  <div class="score-card score-lead"><div class="num">5</div><div class="label">MC Leads</div></div>
+  <div class="score-card score-parity"><div class="num">4</div><div class="label">Parity</div></div>
+  <div class="score-card score-trail"><div class="num">5</div><div class="label">MC Trails</div></div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:160px;">Capability</th>
+      <th>Klaviyo Today</th>
+      <th>Mailchimp Post-FY27</th>
+      <th style="width:80px;">Verdict</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="cat-row"><td colspan="4">Content &amp; Reuse</td></tr>
+    <tr>
+      <td class="cap-cell">Universal Content</td>
+      <td>Shipped Spring 2026 as default primitive. All saved content is universal by default. Edit once, propagates everywhere.</td>
+      <td>Ships Q1 FY27 with auto-migration, CJB propagation, audit + version history, and Brand Kit auto-applied on insertion. Cross-channel extension to SMS in Q3.</td>
+      <td class="parity">Parity</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Template Library</td>
+      <td>160+ templates, 60+ pre-built flows. Organized by ecommerce lifecycle stage with live catalog sync.</td>
+      <td>260+ existing templates plus new ecommerce lifecycle library (12 stages &times; 3&ndash;5 variants), B2B/ProServ gallery, industry-aware gallery (6&ndash;8 per vertical), store-connected preview.</td>
+      <td class="parity">Parity</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Code / Templating</td>
+      <td>Django/Jinja templating. Full HTML/CSS control. Deep dynamic content.</td>
+      <td>Builder Code Mode (HTML/CSS) + Liquid templating in Q2. Closes the gap but Klaviyo&rsquo;s templating ecosystem is more mature.</td>
+      <td class="trail">Trails</td>
+    </tr>
+
+    <tr class="cat-row"><td colspan="4">AI &amp; Intelligence</td></tr>
+    <tr>
+      <td class="cap-cell">AI Setup Agent</td>
+      <td>Marketing Agent: URL &rarr; flows in ~3 clicks. GA since Spring 2025. 60K+ brands onboarded through it.</td>
+      <td>AI Email Setup Agent ships Q2. Goal-driven campaign agent (NL goal &rarr; complete campaign) ships Q3. Store intelligence in generation ships Q4. Combination exceeds Klaviyo but ships later.</td>
+      <td class="parity">Parity</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">AI Image Generation</td>
+      <td>Image Remix: iterate hero images via prompt in canvas. AI product recs in email.</td>
+      <td>AI image gen tied to product catalog (Q2), Image Remix parity (Q2), per-recipient dynamic images (Q3). Brand-Kit-applied scenes is a differentiator Klaviyo doesn&rsquo;t have.</td>
+      <td class="parity">Parity</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Per-Profile Smart Send</td>
+      <td>Per-profile send-time optimization, Channel Affinity, Personalized A/B. All productized with 10&ndash;30% lift cited.</td>
+      <td>Per-profile Smart Send Time + Personalized A/B ships Q3. Channel Affinity not in FY27 scope.</td>
+      <td class="trail">Trails</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">AI Performance Watchdog</td>
+      <td>AI auto-monitors send performance proactively. Praised in Klaviyo VoC.</td>
+      <td>Not in FY27 roadmap. This was in the original initiative canvas but not prioritized in the 4-pillar roadmap.</td>
+      <td class="trail">Trails</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Brand-Kit-Aware AI</td>
+      <td>Brand Styling auto-applied. No voice/tone profile. No compliance scoring. No brand-aware conversational editing.</td>
+      <td>Brand Kit + voice profile (Q1) + compliance score (Q2) + brand-style transfer (Q4) + Brand-Kit-aware generative SMS. Conversational editing grounded in Brand Kit + store data. No competitor ships this combination.</td>
+      <td class="lead">LEADS</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Goal-Driven Campaign Agent</td>
+      <td>Marketing Agent is URL-to-campaign but outputs fixed campaign types. Not truly goal-driven or conversational.</td>
+      <td>Goal-driven agent (Q3): NL goal &rarr; asks questions &rarr; generates complete on-brand, store-data-populated email. Conversational refinement. Campaign brief to multi-variant (Q4). No competitor ships this.</td>
+      <td class="lead">LEADS</td>
+    </tr>
+
+    <tr class="cat-row"><td colspan="4">Omni-Channel</td></tr>
+    <tr>
+      <td class="cap-cell">Multi-Channel Canvas</td>
+      <td>5-channel canvas: Email + SMS + Push + WhatsApp + In-app. Headline omnichannel story.</td>
+      <td>Email + SMS unified authoring (Q3) with shared blocks and cross-channel preview. Push, WhatsApp, In-app not in FY27 scope. 2 channels vs 5.</td>
+      <td class="trail">Trails</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">In-Builder Revenue Metrics</td>
+      <td>Revenue per recipient, per-step inline in post-send report. +56 net sentiment in VoC.</td>
+      <td>In-canvas revenue per recipient and per step ships Q2. Direct parity.</td>
+      <td class="parity">Parity</td>
+    </tr>
+
+    <tr class="cat-row"><td colspan="4">Collaboration &amp; Governance</td></tr>
+    <tr>
+      <td class="cap-cell">Real-Time Collaboration</td>
+      <td>No real-time co-editing. Single editor at a time. No in-canvas comments.</td>
+      <td>Google-Docs-style co-editing (Q4), block-level @-mention comments, multi-step approval workflow with version history. Differentiator.</td>
+      <td class="lead">LEADS</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Brand Governance</td>
+      <td>No locked layouts. No approval workflows. No multi-brand kits within one account.</td>
+      <td>Multi-brand kits (Q3), locked layouts with role-based access (Q4), cross-account brand inheritance for agencies (Q4), brand compliance scoring (Q2). Full SMB-friendly governance stack.</td>
+      <td class="lead">LEADS</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Multi-Brand Management</td>
+      <td>No multi-brand within one account. Agencies use separate accounts.</td>
+      <td>Multi-brand kits per account (Q3) + cross-account brand inheritance with Slack-style switching (Q4). Canva-style but with email-specific enforcement.</td>
+      <td class="lead">LEADS</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="insight-box">
+  <strong>Net Assessment vs Klaviyo:</strong> After FY27 execution, Mailchimp surpasses Klaviyo in collaboration, brand governance, multi-brand management, Brand-Kit-aware AI, and goal-driven campaign generation. These are areas Klaviyo has not invested in and has no announced roadmap for. Mailchimp reaches parity on Universal Content, templates, AI setup agent, and revenue metrics. Klaviyo retains the lead on multi-channel canvas (5 vs 2 channels), per-profile intelligence maturity (Smart Send, Channel Affinity), templating depth (Django ecosystem), and AI auto-monitors. <strong>The collaboration + governance + Brand-Kit-aware AI combination is the "Mailchimp wins on team workflows" story that no competitor can match.</strong>
+</div>
+
+<!-- ═══════ VS CANVA ═══════ -->
+
+<h2>Mailchimp Unified Builder vs Canva (Post-FY27)</h2>
+
+<div class="scorecard">
+  <div class="score-card score-lead"><div class="num">14</div><div class="label">MC Leads</div></div>
+  <div class="score-card score-parity"><div class="num">5</div><div class="label">Parity</div></div>
+  <div class="score-card score-trail"><div class="num">3</div><div class="label">MC Trails</div></div>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:160px;">Capability</th>
+      <th>Canva Today</th>
+      <th>Mailchimp Post-FY27</th>
+      <th style="width:80px;">Verdict</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="cat-row"><td colspan="4">Design &amp; Editing</td></tr>
+    <tr>
+      <td class="cap-cell">Visual Editor Polish</td>
+      <td>World-class drag-and-drop with 13-year design heritage. Pixel-perfect control. Best-in-class for non-technical users.</td>
+      <td>Builder improvements in rendering, drag-and-drop reliability, light/dark mode. Good but not Canva-level design polish.</td>
+      <td class="trail">Trails</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Template Volume</td>
+      <td>3.6M+ templates across all design types. Massive selection.</td>
+      <td>260+ email templates plus ecommerce lifecycle, industry, and B2B galleries. Purpose-built for email but far fewer total templates.</td>
+      <td class="trail">Trails</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">AI Image Generation</td>
+      <td>Magic Design generates novel layouts from prompts. Text-to-image, background removal, Magic Eraser. Creative-first.</td>
+      <td>AI image gen tied to product catalog with Brand-Kit-applied scenes. Less creative breadth but more marketing-specific: right product, right scene, right brand.</td>
+      <td class="parity">Parity</td>
+    </tr>
+
+    <tr class="cat-row"><td colspan="4">Brand &amp; Governance</td></tr>
+    <tr>
+      <td class="cap-cell">Brand Kit Storage</td>
+      <td>Up to 1,000 Brand Kits. Logos, colors, fonts, brand voice. Most mature in market.</td>
+      <td>Multi-brand kits (Q3), brand voice profile (Q1), brand compliance scoring (Q2), Brand Kit maturity dashboard (Q2). Fewer kits but deeper enforcement for email.</td>
+      <td class="parity">Parity</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Multi-Brand Scale</td>
+      <td>Up to 1,000 Brand Kits at Enterprise tier. Industry-leading scale.</td>
+      <td>Multi-brand kits per account + cross-account inheritance. Designed for agencies but not 1,000-kit scale.</td>
+      <td class="trail">Trails</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Brand Enforcement</td>
+      <td>Locked template elements. Magic Write enforces brand voice. Work Kits per team function.</td>
+      <td>Brand compliance score (0&ndash;100 pre-send), locked layouts, role-based access, brand voice profile referenced by AI generation. Email-specific enforcement.</td>
+      <td class="parity">Parity</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Approval Workflows</td>
+      <td>Enterprise approval workflows with routing. Mature governance.</td>
+      <td>Multi-step approval (designer &rarr; copywriter &rarr; manager) with version history and rollback (Q4).</td>
+      <td class="parity">Parity</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Real-Time Collaboration</td>
+      <td>Best-in-class real-time co-editing. Figma/Google-Docs level. Core to the product since inception.</td>
+      <td>Google-Docs-style co-editing (Q4), block-level comments, presence indicators. Functional parity but not Canva&rsquo;s depth.</td>
+      <td class="parity">Parity</td>
+    </tr>
+
+    <tr class="cat-row"><td colspan="4">ESP &amp; Marketing Infrastructure (Mailchimp Structural Advantages)</td></tr>
+    <tr>
+      <td class="cap-cell">Send Infrastructure &amp; Deliverability</td>
+      <td>No native send. Relies on integration with ESPs or basic Canva Email Campaigns (limited).</td>
+      <td>Full ESP: 1.5T emails delivered, SPF/DKIM/DMARC, deliverability monitoring, Builder SLOs, inbox placement optimization.</td>
+      <td class="lead">LEADS</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Audience Segmentation</td>
+      <td>No audience management. Canva doesn&rsquo;t know who your customers are.</td>
+      <td>Full segmentation, tags, merge tags, conditional content, audience management, CRM-level contact profiles.</td>
+      <td class="lead">LEADS</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Campaign Analytics</td>
+      <td>Basic open/click for Canva Email Campaigns. No revenue attribution, no per-block analytics.</td>
+      <td>In-canvas revenue per recipient, per-step analytics, campaign health monitoring, MC-attributed revenue tracking.</td>
+      <td class="lead">LEADS</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Automation / Journeys</td>
+      <td>No automation capability. Static sends only.</td>
+      <td>Full Customer Journey Builder, welcome flows, abandoned cart, browse abandonment, post-purchase sequences.</td>
+      <td class="lead">LEADS</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Personalization</td>
+      <td>No merge tags, no dynamic content, no conditional logic. One-size-fits-all designs.</td>
+      <td>Merge tags, conditional show/hide, Liquid templating (Q2), per-recipient dynamic images (Q3), per-profile Smart Send (Q3).</td>
+      <td class="lead">LEADS</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Ecommerce Integration</td>
+      <td>No ecommerce integration. Cannot pull product catalog, track purchases, or attribute revenue.</td>
+      <td>Shopify/WooCommerce integration, product blocks with live catalog, AI image gen from catalog, store-connected preview, ecommerce lifecycle templates.</td>
+      <td class="lead">LEADS</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">A/B Testing</td>
+      <td>No A/B testing capability.</td>
+      <td>Subject line A/B, content A/B, multivariate (Standard+), Personalized A/B per profile (Q3), campaign brief to multi-variant (Q4).</td>
+      <td class="lead">LEADS</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Omni-Channel (Email + SMS)</td>
+      <td>Email only. No SMS capability.</td>
+      <td>Email + SMS unified authoring with shared blocks, cross-channel preview, generative SMS, Brand Kit on SMS short links.</td>
+      <td class="lead">LEADS</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Universal Content</td>
+      <td>Reusable design elements exist but not email-specific. No propagation across sends.</td>
+      <td>Universal Content propagates across templates, campaigns, CJB, and SMS. Audit + version history. Cross-product reuse.</td>
+      <td class="lead">LEADS</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Rendering Fidelity</td>
+      <td>Designs may not render consistently across email clients. Not optimized for inbox rendering.</td>
+      <td>Cross-browser regression suite, rendering fidelity &ge;99% SLO, inbox rendering parity, mobile preview. Email-client-specific optimization.</td>
+      <td class="lead">LEADS</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">AI Grounded in Performance Data</td>
+      <td>AI generates creative output but has zero campaign performance data, zero audience knowledge, zero store intelligence.</td>
+      <td>AI grounded in Brand Kit + store data + campaign performance history. Goal-driven agent uses bestsellers, segments, AOV. Compounding creative-performance loop.</td>
+      <td class="lead">LEADS</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Store Intelligence in Generation</td>
+      <td>No store data awareness. Cannot feature products based on performance.</td>
+      <td>AI uses bestsellers, slow movers, customer segments, purchase frequency, AOV to make content decisions (Q4). Right products for right audience.</td>
+      <td class="lead">LEADS</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Compliance &amp; Deliverability Tools</td>
+      <td>No email compliance tools. No SPF/DKIM, no spam-score, no link checking.</td>
+      <td>Inline link checker, spam-score guidance, SPF/DKIM/DMARC wizard, brand compliance score, TCPA guardrails for SMS.</td>
+      <td class="lead">LEADS</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="insight-box">
+  <strong>Net Assessment vs Canva:</strong> Mailchimp leads or matches in 19 of 22 capabilities. Canva&rsquo;s 3 leads are on its home turf: visual editor polish (13-year head start), template volume (3.6M+ vs purpose-built email), and multi-brand scale (1,000 kits). Every ESP-specific capability &mdash; deliverability, segmentation, analytics, automation, personalization, ecommerce, A/B testing, rendering fidelity &mdash; is a structural advantage Canva cannot replicate without becoming a full ESP. <strong>The competitive risk is not Canva building an ESP. It&rsquo;s the &ldquo;design in Canva, send through cheap ESP&rdquo; workflow becoming normative among SMBs who don&rsquo;t value the intelligence layer.</strong> Mailchimp&rsquo;s defense is making the AI so good that leaving the platform means losing visible, measurable value.
+</div>
+
+<!-- ═══════ SUMMARY ═══════ -->
+
+<h2>Strategic Summary: Where We Surpass, Where We&rsquo;re At Parity, Where We Trail</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="width:200px;">Competitive Dimension</th>
+      <th>vs Klaviyo</th>
+      <th>vs Canva</th>
+      <th>Strategic Implication</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="cap-cell">Brand-Kit-Aware AI + Store Intelligence</td>
+      <td class="lead">LEADS</td>
+      <td class="lead">LEADS</td>
+      <td>No competitor ships Brand Kit + store data + performance history in one AI loop. This is the primary moat. First mover on goal-driven campaign generation.</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Collaboration &amp; Governance</td>
+      <td class="lead">LEADS</td>
+      <td class="parity">Parity</td>
+      <td>Beats Klaviyo (no co-edit, no governance). Reaches Canva parity. The &ldquo;Mailchimp wins on team workflows&rdquo; story is credible post-FY27.</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Multi-Brand Management</td>
+      <td class="lead">LEADS</td>
+      <td class="trail">Trails (scale)</td>
+      <td>Beats Klaviyo (no multi-brand). Trails Canva on sheer scale (1,000 kits) but leads on email-specific enforcement and agency workflows.</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Universal Content &amp; Reuse</td>
+      <td class="parity">Parity</td>
+      <td class="lead">LEADS</td>
+      <td>Closes the Spring 2026 Klaviyo gap. Exceeds Canva because UC propagates across email, SMS, CJB with audit trail.</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Template Library &amp; Activation</td>
+      <td class="parity">Parity</td>
+      <td class="trail">Trails (volume)</td>
+      <td>Ecommerce lifecycle templates + store-connected preview close the Klaviyo gap. Can&rsquo;t match Canva&rsquo;s 3.6M volume but purpose-built for email.</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Multi-Channel Canvas</td>
+      <td class="trail">Trails</td>
+      <td class="lead">LEADS</td>
+      <td>2 channels (email+SMS) vs Klaviyo&rsquo;s 5. Shared blocks and unified preview are strong but channel count is a headline gap. Beats Canva (email only).</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Per-Profile Intelligence</td>
+      <td class="trail">Trails</td>
+      <td class="lead">LEADS</td>
+      <td>Smart Send + Personalized A/B ship Q3 but Channel Affinity and AI auto-monitors not in scope. Klaviyo&rsquo;s ML models have 2+ years of training data advantage.</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">Visual Design Polish</td>
+      <td class="lead">LEADS</td>
+      <td class="trail">Trails</td>
+      <td>Beats Klaviyo on UX (Mailchimp&rsquo;s historical strength). Canva&rsquo;s 13-year design heritage is unassailable on pure design. Not a battle to fight.</td>
+    </tr>
+    <tr>
+      <td class="cap-cell">ESP Infrastructure</td>
+      <td class="parity">Parity</td>
+      <td class="lead">LEADS</td>
+      <td>Deliverability, segmentation, analytics, automation are structural ESP advantages Canva cannot replicate. Klaviyo is a peer on infrastructure.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="insight-box">
+  <strong>Bottom Line:</strong> After FY27 execution, Mailchimp surpasses Klaviyo in collaboration, brand governance, Brand-Kit-aware AI, and goal-driven campaign generation. These are differentiated capabilities Klaviyo has not invested in. Mailchimp reaches parity on Universal Content, templates, and revenue metrics. Klaviyo retains the lead on multi-channel breadth (5 vs 2) and per-profile ML maturity. Against Canva, Mailchimp leads in 14 of 22 capabilities &mdash; every ESP-specific dimension &mdash; while trailing only on visual design polish, template volume, and multi-brand scale. <strong>The roadmap transforms Mailchimp from a builder customers tolerate into a builder that leads on team workflows, brand intelligence, and creative-performance compounding &mdash; three dimensions neither competitor owns.</strong>
+</div>
+
+<p class="note" style="margin-top:16px;">Competitive assessment based on publicly available product information, G2/Capterra reviews, Klaviyo Spring 2026 announcements, Canva 2025-2026 product updates, and Mailchimp FY27 roadmap initiatives. Verdicts assume full roadmap execution on schedule.</p>
+
+</body>
+</html>
