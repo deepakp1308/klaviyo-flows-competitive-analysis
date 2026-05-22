@@ -398,7 +398,7 @@
         <div class="sub-label">Editor Rendering</div>
         <ul>
           <li>Fix inbox rendering divergence (forwarded-mail reflow, mobile line-breaks, image-shrink)</li>
-          <li>Fix block reorder requiring page refresh &amp; vanishing template navigation</li>
+          <li>Fix block reorder, drag-and-drop reliability across devices (incl. iPad/tablet) &amp; vanishing template navigation</li>
           <li>Surface Builder templates in campaign creation wizard</li>
           <li>Automated cross-browser regression suite (Safari, Firefox, Chrome on every CI build)</li>
           <li>Multi-author save-conflict detection with presence indicators &amp; merge prompts</li>
@@ -408,6 +408,11 @@
           <li>Brand Kit data correctness fix &amp; drift monitoring (ramp to 100%)</li>
           <li>Font upload bug fix &amp; Creative Assistant custom font recognition</li>
           <li class="">Brand voice profile in Brand Kit (tone, vocabulary, CTA styles, audience context)</li>
+          <li>Brand Kit automated regression suite (catch font, logo, color regressions pre-release)</li>
+        </ul>
+        <div class="sub-label">Editor Reliability</div>
+        <ul>
+          <li>Copy/paste formatting normalization (Word, Google Docs, external sources)</li>
         </ul>
         <div class="sub-label">Content Studio &amp; Canva</div>
         <ul>
@@ -615,7 +620,7 @@
   </thead>
   <tbody>
     <tr><td class="init-cell">Inbox rendering parity fix</td><td>Fix forwarded-mail divergence, "read full message" reflow breakage, mobile line-break injection, and image-shrink in send.</td><td>Emails look correct in the editor but break in the inbox, losing every recipient's first impression. $1,820/mo cited across 4 named HVC accounts.</td><td>The email a customer designs is the email every recipient sees, regardless of client or device.</td></tr>
-    <tr><td class="init-cell">Block reorder &amp; template navigation fix</td><td>Fix block reorder requiring page refresh, vanishing templates link, and intermittent "templates moved" warning.</td><td>Customers can't move blocks without a refresh; templates link disappears between sessions. $410/mo Premium cited.</td><td>Editor behaves predictably without workarounds or support tickets.</td></tr>
+    <tr><td class="init-cell">Block reorder, drag-and-drop reliability &amp; template navigation fix</td><td>Fix block reorder requiring page refresh, drag-and-drop reliability across devices including iPad/tablet, vanishing templates link, and intermittent "templates moved" warning.</td><td>Customers can't move blocks without a refresh; drag-and-drop fails on iPad; blocks reorder after save. 304 VOC items and $3.7K/mo MRR in the last 3 months.</td><td>Editor behaves predictably across all devices without workarounds or support tickets.</td></tr>
     <tr><td class="init-cell">Template surfacing in campaign wizard</td><td>Fix the bug where New Builder templates don't appear in the campaign creation tab.</td><td>Customer builds Builder templates but only sees legacy templates when creating a campaign. $1,950/mo cited.</td><td>Customers can find and use the templates they built.</td></tr>
     <tr><td class="init-cell">Cross-browser regression suite</td><td>Browser-matrix automated tests (Safari, Firefox, Chrome) on every CI build.</td><td>Browser-specific bugs like broken Ctrl+K link insertion ship to production and customers find them first.</td><td>Regressions caught before release; ship velocity up because the team isn't firefighting browser bugs.</td></tr>
     <tr><td class="init-cell">Multi-author save-conflict detection</td><td>Show "someone else is editing" presence indicator; non-blocking save; merge prompt instead of generic error.</td><td>Two team members edit the same email and one person's work is silently lost. $340/mo cited.</td><td>Teams stop losing work; foundation laid for full real-time collaboration.</td></tr>
@@ -637,6 +642,8 @@
     <tr><td class="init-cell">Block-level comments &amp; @-mentions</td><td>Notion-style comment on any block; @-mention teammates; resolve in context.</td><td>Design feedback happens in disconnected Slack threads and email, not on the actual content.</td><td>Approval cycles happen inside Mailchimp; Slack/email ping-pong eliminated.</td></tr>
     <tr><td class="init-cell">Approval workflow &amp; version history</td><td>Multi-step approval (designer &rarr; copywriter &rarr; manager); full version history with rollback; audit trail.</td><td>Multi-step approval happens entirely outside the product with no audit trail.</td><td>Governance needs met in-product; full version history with rollback.</td></tr>
     <tr><td class="init-cell">Builder SLO operating contract</td><td>Publish SLOs: uptime &ge;99.9%, crash-free &ge;99.5%, save/publish &ge;99.99%, P95 load &lt;500ms, rendering fidelity &ge;99%.</td><td>No published quality bar exists. Bugs ship to production and customers find them before engineering does.</td><td>Published bar that engineering maintains, CSO can reference, and new features don't ship until they meet.</td></tr>
+    <tr><td class="init-cell">Brand Kit automated regression suite</td><td>Automated test suite for Brand Kit: font upload, logo rendering, color propagation, style inheritance across templates and AI surfaces. Runs on every CI build, catches regressions before release.</td><td>Brand Kit is the only worsening workflow stage (+104% VOC increase). Fixes are reactive; regressions ship to production because there's no automated Brand Kit test coverage. Font uploads fail, logos show as dead links, styles revert across assets.</td><td>Brand Kit regressions caught pre-release. Engineering stops firefighting Brand Kit bugs reactively. The +104% trend reverses.</td></tr>
+    <tr><td class="init-cell">Copy/paste formatting normalization</td><td>Normalize formatting when pasting from external sources (Word, Google Docs, rich text). Strip invisible HTML artifacts, preserve intended styling (bold, links, lists), prevent layout-breaking injections.</td><td>308 VOC items and $9.7K/mo MRR in the Refine &amp; Polish stage. Text formatting drifts across devices (90 items), Word paste breaks styles (70 items), undo/delete fail (44 items). This is a daily workflow for most users and it's broken. Stage trend is flat &mdash; not improving.</td><td>Pasted content preserves intended formatting without manual cleanup. Customers stop losing hours to invisible formatting bugs.</td></tr>
   </tbody>
 </table>
 
