@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CJB Workflow Health — Bugs &amp; Barriers by Stage</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 9pt; color: #000; background: #fff; line-height: 1.4; padding: 24px 32px; max-width: 1600px; margin: 0 auto; }
+  h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; }
+  h2 { font-size: 11pt; font-weight: 700; margin-bottom: 8px; margin-top: 24px; border-bottom: 2px solid #166D3B; padding-bottom: 4px; }
+  .subtitle { font-size: 9pt; color: #555; font-style: italic; margin-bottom: 16px; }
+  .nav { margin-bottom: 16px; padding: 8px 0; border-bottom: 2px solid #166D3B; }
+  .nav a { font-size: 9pt; font-weight: 700; color: #166D3B; text-decoration: none; margin-right: 20px; }
+  .nav a.active { border-bottom: 2px solid #166D3B; padding-bottom: 4px; }
+
+  .meta-box { background: #f5f5f5; border: 1px solid #ddd; padding: 12px 16px; margin-bottom: 16px; display: flex; gap: 32px; flex-wrap: wrap; }
+  .meta-item { font-size: 8.5pt; }
+  .meta-item strong { color: #166D3B; }
+
+  .summary-bar { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+  .summary-card { flex: 1; min-width: 140px; border: 2px solid #166D3B; padding: 12px; text-align: center; }
+  .summary-card .num { font-size: 18pt; font-weight: 700; color: #166D3B; }
+  .summary-card .label { font-size: 8pt; color: #555; margin-top: 2px; }
+
+  .workflow-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0; border: 1px solid #bfbfbf; margin-bottom: 24px; }
+  .wf-col { border-right: 1px solid #bfbfbf; }
+  .wf-col:last-child { border-right: none; }
+  .wf-header { background: #166D3B; color: #fff; padding: 8px 6px; text-align: center; font-weight: 700; font-size: 8.5pt; min-height: 50px; display: flex; align-items: center; justify-content: center; }
+  .wf-jtbd { background: #eef6f0; padding: 6px; font-size: 7.5pt; color: #333; text-align: center; min-height: 44px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #bfbfbf; }
+  .wf-stats { padding: 6px; text-align: center; border-bottom: 1px solid #bfbfbf; background: #fff; }
+  .wf-stats .mrr { font-size: 12pt; font-weight: 700; color: #B91C1C; }
+  .wf-stats .count { font-size: 8pt; color: #555; margin-top: 2px; }
+  .wf-bugs { padding: 6px; border-bottom: 1px solid #bfbfbf; background: #FEF2F2; }
+  .wf-barriers { padding: 6px; background: #FFFBEB; }
+  .wf-bugs .section-label, .wf-barriers .section-label { font-size: 7pt; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+  .wf-bugs .section-label { color: #991B1B; }
+  .wf-barriers .section-label { color: #92400E; }
+  .wf-bugs ul, .wf-barriers ul { margin: 0; padding-left: 10px; font-size: 7.5pt; line-height: 1.35; }
+  .wf-bugs ul li, .wf-barriers ul li { margin-bottom: 3px; }
+  .wf-sub-stats { font-size: 7pt; color: #555; margin-bottom: 4px; }
+
+  .detail-table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 8px; }
+  .detail-table th { background: #166D3B; color: #fff; font-weight: 700; padding: 6px 8px; text-align: left; font-size: 8pt; }
+  .detail-table td { border: 1px solid #bfbfbf; padding: 6px 8px; vertical-align: top; }
+  .detail-table .stage-cell { background: #f2f2f2; font-weight: 700; font-size: 9pt; }
+  .detail-table .mrr-cell { font-weight: 700; color: #B91C1C; }
+
+  .note { font-size: 8pt; color: #888; margin-top: 8px; }
+
+  @media print { body { padding: 12px; font-size: 7.5pt; } }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <a href="cjb-workflow-health.html" class="active">CJB Workflow Health</a>
+  <a href="mailchimp.html#hvcrisk">HVC Risk Map</a>
+  <a href="mailchimp.html#research">UX Research</a>
+  <a href="mailchimp.html">CJB Strategy Dossier</a>
+  <a href="unified-builder-workflow-health.html">Builder Workflow Health</a>
+</div>
+
+<h1>CJB Workflow Health: Bugs &amp; Barriers by Stage</h1>
+<p class="subtitle">Customer-reported bugs and barriers to use mapped to 8 Customer Journey Builder workflow stages, with MRR exposure and top cited issues</p>
+
+<div class="meta-box">
+  <div class="meta-item"><strong>Data Window:</strong> Feb 22 &ndash; May 22, 2026 (last 3 months)</div>
+  <div class="meta-item"><strong>Source:</strong> unitQ AI-classified feedback</div>
+  <div class="meta-item"><strong>Channels:</strong> Zendesk support tickets, in-app feedback, CSAT surveys, PRS surveys, Reddit, Mailchimp conversations</div>
+  <div class="meta-item"><strong>Filters:</strong> Negative sentiment, quality_issue + experience_issue feedback types</div>
+  <div class="meta-item"><strong>Scope:</strong> Customer Journey Builder / Marketing Automation Flows (Starting Points, Flow Points, triggers, activation, reporting)</div>
+</div>
+
+<div class="summary-bar">
+  <div class="summary-card">
+    <div class="num">$177.5K+</div>
+    <div class="label">Combined MRR Exposure / mo</div>
+  </div>
+  <div class="summary-card">
+    <div class="num">2,552</div>
+    <div class="label">Total Negative VOC Items</div>
+  </div>
+  <div class="summary-card">
+    <div class="num">~1,400</div>
+    <div class="label">Bug (quality_issue) VOC</div>
+  </div>
+  <div class="summary-card">
+    <div class="num">~1,152</div>
+    <div class="label">Barrier (experience_issue) VOC</div>
+  </div>
+  <div class="summary-card">
+    <div class="num">8</div>
+    <div class="label">Workflow Stages Assessed</div>
+  </div>
+</div>
+
+<h2>Workflow Stage Overview</h2>
+
+<div class="workflow-grid">
+  <!-- STAGE 1: Discover & Choose Intent -->
+  <div class="wf-col">
+    <div class="wf-header">1. Discover &amp; Choose Intent</div>
+    <div class="wf-jtbd"><strong>Find the Right Automation:</strong> Browse templates, pick a marketing objective, or generate a journey with AI</div>
+    <div class="wf-stats">
+      <div class="mrr">~80</div>
+      <div class="count">VOC items</div>
+    </div>
+    <div class="wf-bugs">
+      <div class="section-label">Bugs (38 items)</div>
+      <ul>
+        <li>RSS Campaign Not Showing/Sending (38, +322%)</li>
+        <li>RSS Feed Connection Errors (29, &minus;29%)</li>
+      </ul>
+    </div>
+    <div class="wf-barriers">
+      <div class="section-label">Barriers (42 items)</div>
+      <ul>
+        <li>Template library search/filter missing</li>
+        <li>Pre-built flow templates limited</li>
+        <li>AI-powered suggestions layout shift</li>
+        <li>Tools Not Meeting User Needs (11, +1000%)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- STAGE 2: Define Entry & Audience -->
+  <div class="wf-col">
+    <div class="wf-header">2. Define Entry &amp; Audience</div>
+    <div class="wf-jtbd"><strong>Set Who Enters and Why:</strong> Choose Starting Points, connect integrations, define who enters the flow</div>
+    <div class="wf-stats">
+      <div class="mrr">~404</div>
+      <div class="count">VOC items</div>
+    </div>
+    <div class="wf-bugs">
+      <div class="section-label">Bugs (~250 items)</div>
+      <ul>
+        <li>Date-Based Triggers Malfunctioning (50, &minus;24%)</li>
+        <li>Subscribers Not Added To Flows (118, &minus;32%)</li>
+      </ul>
+    </div>
+    <div class="wf-barriers">
+      <div class="section-label">Barriers (~154 items)</div>
+      <ul>
+        <li>Tag-based enrollment stalls (~236 est. subtopic)</li>
+        <li>Pop-up/form&rarr;flow disconnects</li>
+        <li>Trigger confusion: entry vs re-entry rules</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- STAGE 3: Design the Journey Map -->
+  <div class="wf-col">
+    <div class="wf-header">3. Design the Journey Map</div>
+    <div class="wf-jtbd"><strong>Lay Out the Path:</strong> Add delays, splits, wait-for-trigger rules, map the contact journey on canvas</div>
+    <div class="wf-stats">
+      <div class="mrr" style="color:#991B1B; font-size:13pt;">~902</div>
+      <div class="count">VOC items &middot; <strong>2nd Largest</strong></div>
+    </div>
+    <div class="wf-bugs">
+      <div class="section-label">Bugs (~550 items)</div>
+      <ul>
+        <li>Difficulty Creating Or Completing Automations (709, &minus;25%)</li>
+        <li>Slow/confusing builder UX</li>
+        <li>Classic&rarr;CJB migration failures</li>
+      </ul>
+    </div>
+    <div class="wf-barriers">
+      <div class="section-label">Barriers (~352 items)</div>
+      <ul>
+        <li>Setup Incomplete Or Ongoing (193, &minus;9%)</li>
+        <li>Delay configuration unclear</li>
+        <li>Split path UX / branching logic backwards</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- STAGE 4: Compose Step Content -->
+  <div class="wf-col">
+    <div class="wf-header">4. Compose Step Content</div>
+    <div class="wf-jtbd"><strong>Write Each Message:</strong> Design email/SMS content at each Action step with on-brand creative</div>
+    <div class="wf-stats">
+      <div class="mrr">~170</div>
+      <div class="count">VOC items</div>
+    </div>
+    <div class="wf-bugs">
+      <div class="section-label">Bugs (~95 items)</div>
+      <ul>
+        <li>Legacy editor still used in CJB</li>
+        <li>Editor glitches within journey context</li>
+      </ul>
+    </div>
+    <div class="wf-barriers">
+      <div class="section-label">Barriers (~75 items)</div>
+      <ul>
+        <li>Brand Kit not applied to automation emails</li>
+        <li>Email editing intermediate click friction</li>
+        <li>AI generative copy not available in journeys</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- STAGE 5: Target, Split & Personalize -->
+  <div class="wf-col">
+    <div class="wf-header">5. Target, Split &amp; Personalize</div>
+    <div class="wf-jtbd"><strong>Right Message, Right Branch:</strong> Conditional splits, segments, tags, event-based personalization</div>
+    <div class="wf-stats">
+      <div class="mrr">~150</div>
+      <div class="count">VOC items</div>
+    </div>
+    <div class="wf-bugs">
+      <div class="section-label">Bugs (~85 items)</div>
+      <ul>
+        <li>Event-property access in branches broken</li>
+        <li>Advanced segmentation missing in splits</li>
+      </ul>
+    </div>
+    <div class="wf-barriers">
+      <div class="section-label">Barriers (~65 items)</div>
+      <ul>
+        <li>Product exclusion/filter by collections</li>
+        <li>Named/reusable conditions unavailable</li>
+        <li>Tag-based enrollment sub-theme overlap</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- STAGE 6: Validate & Sandbox -->
+  <div class="wf-col">
+    <div class="wf-header">6. Validate &amp; Sandbox</div>
+    <div class="wf-jtbd"><strong>Prove It Before Live Send:</strong> Review the map, test content, confirm readiness before activation</div>
+    <div class="wf-stats">
+      <div class="mrr">~90</div>
+      <div class="count">VOC items</div>
+    </div>
+    <div class="wf-bugs">
+      <div class="section-label">Bugs (~40 items)</div>
+      <ul>
+        <li>Test send failures in journey context</li>
+        <li>SMS abandoned cart TCPA compliance gaps</li>
+      </ul>
+    </div>
+    <div class="wf-barriers">
+      <div class="section-label">Barriers (~50 items)</div>
+      <ul>
+        <li>Premature turn-on before content ready</li>
+        <li>No sandbox-tier evaluation ($6K/mo HVC risk)</li>
+        <li>Users struggle following lengthy instructions (~54 est.)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- STAGE 7: Activate & Go Live -->
+  <div class="wf-col">
+    <div class="wf-header">7. Activate &amp; Go Live</div>
+    <div class="wf-jtbd"><strong>Turn It On with Confidence:</strong> Activate the journey, wire triggers, confirm automations actually send</div>
+    <div class="wf-stats">
+      <div class="mrr" style="color:#991B1B; font-size:13pt;">~1,100</div>
+      <div class="count">VOC items &middot; <strong>Largest Stage</strong></div>
+    </div>
+    <div class="wf-bugs">
+      <div class="section-label">Bugs (~850 items)</div>
+      <ul>
+        <li>Automations Not Working Or Failing (1,286, &minus;28%)</li>
+        <li>Welcome Emails Missing (~457 est.)</li>
+        <li>Flows Freeze After Editing &amp; Pausing (~290 est.)</li>
+        <li>Paused Automations Losing Triggers (21, &minus;47%)</li>
+      </ul>
+    </div>
+    <div class="wf-barriers">
+      <div class="section-label">Barriers (~250 items)</div>
+      <ul>
+        <li>Automations not sending after activation</li>
+        <li>Welcome flow failures despite contact sync</li>
+        <li>SMS auto-enabled unexpectedly (3, &minus;86%)</li>
+        <li>Deliverability / inbox placement issues</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- STAGE 8: Monitor, Measure & Improve -->
+  <div class="wf-col">
+    <div class="wf-header">8. Monitor, Measure &amp; Improve</div>
+    <div class="wf-jtbd"><strong>Know If It&rsquo;s Working:</strong> Track per-step KPIs, revenue, and iterate on live flows</div>
+    <div class="wf-stats">
+      <div class="mrr">~187</div>
+      <div class="count">VOC items</div>
+    </div>
+    <div class="wf-bugs">
+      <div class="section-label">Bugs (~100 items)</div>
+      <ul>
+        <li>Reporting stats wrong on automations</li>
+        <li>Date picker / range UI broken</li>
+      </ul>
+    </div>
+    <div class="wf-barriers">
+      <div class="section-label">Barriers (~87 items)</div>
+      <ul>
+        <li>Per-step KPIs not viewable ($5.1K/mo HVC)</li>
+        <li>Aggregate reporting missing</li>
+        <li>Sharing / export permissions</li>
+        <li>Cross-channel analytics unavailable</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<h2>Trend: Are We Getting Better or Worse?</h2>
+<p style="font-size:8.5pt; color:#555; margin-bottom:10px;">Comparing negative VOC volume per workflow stage: <strong>prior 3 months</strong> (baseline) vs <strong>Feb&ndash;May 2026</strong> (current). Source: unitQ. Improving = &gt;15% decrease. Flat = &plusmn;15%. Worsening = &gt;15% increase.</p>
+
+<table class="detail-table" style="margin-bottom:20px;">
+  <thead>
+    <tr>
+      <th>Workflow Stage</th>
+      <th style="text-align:center;">Baseline</th>
+      <th style="text-align:center;">Current</th>
+      <th style="text-align:center;">Change</th>
+      <th style="text-align:center;">Trend</th>
+      <th>What This Means</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="background:#FEF2F2;"><strong>1. Discover &amp; Choose Intent</strong></td>
+      <td style="text-align:center; background:#FEF2F2;">1</td>
+      <td style="text-align:center; background:#FEF2F2;">11</td>
+      <td style="text-align:center; color:#B91C1C; font-weight:700; background:#FEF2F2;">+1000%</td>
+      <td style="text-align:center; background:#FEE2E2; font-weight:700; color:#991B1B;">Worsening</td>
+      <td style="background:#FEF2F2;">&ldquo;Tools Not Meeting User Needs&rdquo; spiked from 1 to 11 items. Low absolute volume but a new emerging theme &mdash; template discovery, AI suggestions, and integration-specific templates are surfacing as unmet needs. <strong>Emerging signal to watch.</strong></td>
+    </tr>
+    <tr>
+      <td><strong>2. Define Entry &amp; Audience</strong></td>
+      <td style="text-align:center;">239</td>
+      <td style="text-align:center;">168</td>
+      <td style="text-align:center; color:#047857; font-weight:700;">&minus;30%</td>
+      <td style="text-align:center; background:#DCFCE7; font-weight:700;">Improving</td>
+      <td>Date-based triggers (&minus;24%) and subscriber enrollment (&minus;32%) are both declining. Tag-based enrollment stalls remain a significant subtopic (~236 est.) but overall trajectory is positive.</td>
+    </tr>
+    <tr>
+      <td><strong>3. Design the Journey Map</strong></td>
+      <td style="text-align:center;">1,155</td>
+      <td style="text-align:center;">902</td>
+      <td style="text-align:center; color:#047857; font-weight:700;">&minus;22%</td>
+      <td style="text-align:center; background:#DCFCE7; font-weight:700;">Improving</td>
+      <td>Still the second-largest stage by volume. Builder UX and journey creation complaints declining but &ldquo;Setup Incomplete&rdquo; (193) is only &minus;9%, dragging the improvement rate. Classic&rarr;CJB migration remains a persistent friction.</td>
+    </tr>
+    <tr>
+      <td><strong>4. Compose Step Content</strong></td>
+      <td style="text-align:center;">223</td>
+      <td style="text-align:center;">170</td>
+      <td style="text-align:center; color:#047857; font-weight:700;">&minus;24%</td>
+      <td style="text-align:center; background:#DCFCE7; font-weight:700;">Improving</td>
+      <td>Editor-in-journey complaints declining. Legacy editor usage within CJB still cited but trending down as NEB adoption increases.</td>
+    </tr>
+    <tr>
+      <td><strong>5. Target, Split &amp; Personalize</strong></td>
+      <td style="text-align:center;">150</td>
+      <td style="text-align:center;">150</td>
+      <td style="text-align:center; font-weight:700;">0%</td>
+      <td style="text-align:center; background:#FEF3C7; font-weight:700;">Flat</td>
+      <td>No improvement. Conditional splits, event-property access, and product filtering requests are stable. Feature gaps (named conditions, collection filters) not being addressed.</td>
+    </tr>
+    <tr>
+      <td style="background:#FEF2F2;"><strong>6. Validate &amp; Sandbox</strong></td>
+      <td style="text-align:center; background:#FEF2F2;">~50</td>
+      <td style="text-align:center; background:#FEF2F2;">90</td>
+      <td style="text-align:center; color:#B91C1C; font-weight:700; background:#FEF2F2;">+80%</td>
+      <td style="text-align:center; background:#FEE2E2; font-weight:700; color:#991B1B;">Worsening</td>
+      <td style="background:#FEF2F2;">New UX research signals: premature turn-on before content is ready is a binding activation constraint. No priced Slack VoC but research flags $6K/mo HVC risk from missing sandbox tier. <strong>Activation blocker.</strong></td>
+    </tr>
+    <tr>
+      <td><strong>7. Activate &amp; Go Live</strong></td>
+      <td style="text-align:center;">1,822</td>
+      <td style="text-align:center;">1,307</td>
+      <td style="text-align:center; color:#047857; font-weight:700;">&minus;28%</td>
+      <td style="text-align:center; background:#DCFCE7; font-weight:700;">Improving</td>
+      <td>Largest stage by volume (~1,100 items). &ldquo;Automations Not Working Or Failing&rdquo; (1,286) is the single largest unitQ category but declining &minus;28%. Welcome email failures (~457 est.) and flows freezing after edits (~290 est.) remain top subtopics. Paused automations losing triggers down &minus;47%.</td>
+    </tr>
+    <tr>
+      <td style="background:#FEF2F2;"><strong>8. Monitor, Measure &amp; Improve</strong></td>
+      <td style="text-align:center; background:#FEF2F2;">149</td>
+      <td style="text-align:center; background:#FEF2F2;">187</td>
+      <td style="text-align:center; color:#B91C1C; font-weight:700; background:#FEF2F2;">+26%</td>
+      <td style="text-align:center; background:#FEE2E2; font-weight:700; color:#991B1B;">Worsening</td>
+      <td style="background:#FEF2F2;">Analytics requests growing. Per-step KPI visibility ($5.1K/mo HVC exposure), aggregate reporting, and cross-channel analytics are accelerating themes. <strong>Only worsening MRR-concentrated stage.</strong></td>
+    </tr>
+  </tbody>
+</table>
+
+<div style="background:#FEF2F2; border:1px solid #FECACA; padding:10px; margin-bottom:20px; font-size:8.5pt;">
+  <strong style="color:#991B1B;">Action Required:</strong> <strong>Stage 7 (Activate &amp; Go Live)</strong> is the highest-volume stage at ~1,100 VOC items, driven by &ldquo;Automations Not Working Or Failing&rdquo; (1,286 items &mdash; the single largest category in the Automations tree). However, the trend is improving (&minus;28%). <strong>Stage 8 (Monitor, Measure &amp; Improve)</strong> is the only worsening MRR-concentrated stage at +26% &mdash; Analytics requests are growing and per-step KPI visibility is a $5.1K/mo HVC pain point. <strong>Stage 1 (Discover)</strong> spiked +1000% on &ldquo;Tools Not Meeting User Needs&rdquo; &mdash; a new emerging theme with low absolute volume. <strong>Stage 6 (Validate &amp; Sandbox)</strong> has no priced Slack VoC but UX research flags premature turn-on as a binding activation constraint.
+</div>
+
+<h2>MRR Exposure Detail by Workflow Stage</h2>
+
+<table class="detail-table">
+  <thead>
+    <tr>
+      <th>Workflow Stage</th>
+      <th>Type</th>
+      <th>VOC Count</th>
+      <th>Key unitQ Categories</th>
+      <th>Key Cited Issues</th>
+      <th>HVC MRR Samples</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="stage-cell" rowspan="2">1. Discover &amp; Choose Intent</td>
+      <td>Bugs</td>
+      <td>38</td>
+      <td>RSS Campaign Not Showing/Sending (38, +322%); RSS Feed Connection Errors (29, &minus;29%)</td>
+      <td>RSS campaigns failing to send; feed connection errors on import</td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td>Barriers</td>
+      <td>42</td>
+      <td>Tools Not Meeting User Needs (11, +1000%)</td>
+      <td>Template library limited; AI suggestions layout shift; integration-specific templates missing</td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td class="stage-cell" rowspan="2">2. Define Entry &amp; Audience</td>
+      <td>Bugs</td>
+      <td>~250</td>
+      <td>Date-Based Triggers (50, &minus;24%); Subscribers Not Added (118, &minus;32%)</td>
+      <td>Date-based triggers misfiring; subscribers not enrolling in flows</td>
+      <td>$978 &middot; $755 &middot; $535</td>
+    </tr>
+    <tr>
+      <td>Barriers</td>
+      <td>~154</td>
+      <td>Tag-Based Enrollment Stalls (~236 est. subtopic)</td>
+      <td>Pop-up/form&rarr;flow disconnects; trigger confusion; API/Zapier/Typeform entry failures</td>
+      <td>$630 &middot; $509 &middot; $450</td>
+    </tr>
+    <tr>
+      <td class="stage-cell" rowspan="2">3. Design the Journey Map</td>
+      <td>Bugs</td>
+      <td>~550</td>
+      <td>Difficulty Creating/Completing (709, &minus;25%)</td>
+      <td>Slow/confusing builder UX; Classic&rarr;CJB migration failures; journey creation stalls</td>
+      <td>$2,400 &middot; $1,553 &middot; $900</td>
+    </tr>
+    <tr>
+      <td>Barriers</td>
+      <td>~352</td>
+      <td>Setup Incomplete Or Ongoing (193, &minus;9%)</td>
+      <td>Delay configuration unclear; split path UX; branching logic backwards</td>
+      <td>$1,150 &middot; $576 &middot; $455</td>
+    </tr>
+    <tr>
+      <td class="stage-cell" rowspan="2">4. Compose Step Content</td>
+      <td>Bugs</td>
+      <td>~95</td>
+      <td>Cross-ref: Email/Design categories in journey context</td>
+      <td>Legacy editor still used in CJB; editor glitches within journey context</td>
+      <td>$402 &middot; $384 &middot; $310</td>
+    </tr>
+    <tr>
+      <td>Barriers</td>
+      <td>~75</td>
+      <td>Cross-ref: Brand Kit / Content Studio gaps</td>
+      <td>Brand Kit not applied to automation emails; email editing intermediate click; AI copy unavailable in journeys</td>
+      <td>$350 &middot; $340 &middot; $310</td>
+    </tr>
+    <tr>
+      <td class="stage-cell" rowspan="2">5. Target, Split &amp; Personalize</td>
+      <td>Bugs</td>
+      <td>~85</td>
+      <td>Tag-Based Enrollment sub-themes; audience mgmt intersection</td>
+      <td>Event-property access in branches broken; advanced segmentation missing in splits</td>
+      <td>$425 &middot; $321 &middot; $310</td>
+    </tr>
+    <tr>
+      <td>Barriers</td>
+      <td>~65</td>
+      <td>Audience management intersection</td>
+      <td>Product exclusion/filter by collections; named/reusable conditions unavailable</td>
+      <td>$509 &middot; $450 &middot; $310</td>
+    </tr>
+    <tr>
+      <td class="stage-cell" rowspan="2">6. Validate &amp; Sandbox</td>
+      <td>Bugs</td>
+      <td>~40</td>
+      <td>Subtopic #5: Users Struggle Following Instructions (~54 est.)</td>
+      <td>Test send failures in journey context; SMS TCPA compliance gaps</td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td>Barriers</td>
+      <td>~50</td>
+      <td>UX research signals (no priced VoC)</td>
+      <td>Premature turn-on before content ready; no sandbox-tier evaluation ($6K/mo HVC risk)</td>
+      <td>&mdash;</td>
+    </tr>
+    <tr>
+      <td class="stage-cell" rowspan="2" style="background:#fee2e2;">7. Activate &amp; Go Live</td>
+      <td>Bugs</td>
+      <td>~850</td>
+      <td style="font-size:8pt;">Automations Not Working (1,286, &minus;28%); Welcome Emails Missing (~457); Flows Freeze After Editing (~290); Paused Losing Triggers (21, &minus;47%)</td>
+      <td>Automations not sending/failing; welcome flow failures despite contact sync; flows freezing after edits; paused automations losing queued triggers</td>
+      <td class="mrr-cell">$5,098 &middot; $3,000 &middot; $2,580</td>
+    </tr>
+    <tr>
+      <td>Barriers</td>
+      <td>~250</td>
+      <td>SMS auto-enabled (3, &minus;86%); deliverability issues</td>
+      <td>Automations not sending after activation; welcome flow failures; SMS auto-enabled unexpectedly; inbox placement issues</td>
+      <td class="mrr-cell">$2,400 &middot; $1,553 &middot; $1,150</td>
+    </tr>
+    <tr>
+      <td class="stage-cell" rowspan="2" style="background:#FEF2F2;">8. Monitor, Measure &amp; Improve</td>
+      <td>Bugs</td>
+      <td>~100</td>
+      <td>Cross-ref: Analytics categories (187, +26%)</td>
+      <td>Reporting stats wrong on automations; date picker/range UI broken</td>
+      <td class="mrr-cell">$978 &middot; $755 &middot; $630</td>
+    </tr>
+    <tr>
+      <td>Barriers</td>
+      <td>~87</td>
+      <td>Analytics category growing (+26%)</td>
+      <td>Per-step KPIs not viewable ($5.1K/mo); aggregate reporting missing; sharing/export permissions; cross-channel analytics</td>
+      <td class="mrr-cell">$5,098 &middot; $2,580 &middot; $900</td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="note" style="margin-top:16px;"><strong>Data caveats:</strong> VOC counts are mapped from unitQ leaf categories and AI-discovered subtopics to workflow stages; some items span multiple stages. MRR values sampled from unitQ HVC-filtered queries (mrr_int field); $177.5K/mo total from HVC Risk Map (same data, different view). Items with null MRR (typically Free plan users) are included in VOC counts but excluded from MRR sums. Some high-value customers appear across multiple workflow stages. Subtopic population estimates extrapolated from 1,000-sample analysis of 2,170 items. Positive-sentiment categories (id:140 Successful Journey Creation, id:138 Positive Automation Feedback) excluded from stage mapping.</p>
+
+<p class="note">Generated May 22, 2026. Source: unitQ AI-classified feedback (Zendesk support tickets, in-app feedback, CSAT surveys, PRS surveys, Reddit, Mailchimp conversations). Scope: Customer Journey Builder / Marketing Automation Flows &mdash; Starting Points, Flow Points, triggers, activation, reporting. Negative sentiment only. Automations::All (id:85): 1,701 current / 2,362 previous / &minus;28% change.</p>
+
+</body>
+</html>
