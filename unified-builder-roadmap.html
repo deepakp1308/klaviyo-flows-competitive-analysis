@@ -443,136 +443,94 @@
 
 <hr class="divider-heavy">
 
-<h2>Pillar Detail: Initiatives by Sub-Theme</h2>
-<p style="color:#555; font-style:italic; margin-bottom:12px;">Complete list of 52 initiatives organized by pillar and sub-theme, with customer problem context and functional benefit.</p>
+<h1>Initiative Details by Strategic Pillar</h1>
+<p style="color:#555; font-style:italic; margin-bottom:12px;">What each initiative is, the specific problem it solves, and the key functional benefit for the customer</p>
 
-<h3 style="margin-top:16px; margin-bottom:8px; border-bottom:1px solid #ddd; padding-bottom:4px;">Pillar 1: Builder Trust &amp; Reliability</h3>
-<p style="font-size:9pt; color:#555; margin-bottom:10px;">Core functionality that customers must be able to depend on before anything else ships</p>
+<h2>Builder Trust &amp; Reliability</h2>
+<table class="detail-table">
+  <thead>
+    <tr><th style="min-width:160px">Initiative</th><th>What It Is</th><th>Problem It Solves</th><th>Key Customer Benefit</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="init-cell">Inbox rendering parity fix</td><td>Fix forwarded-mail divergence, "read full message" reflow breakage, mobile line-break injection, and image-shrink in send.</td><td>Emails look correct in the editor but break in the inbox, losing every recipient's first impression. $1,820/mo cited across 4 named HVC accounts.</td><td>The email a customer designs is the email every recipient sees, regardless of client or device.</td></tr>
+    <tr><td class="init-cell">Block reorder &amp; template navigation fix</td><td>Fix block reorder requiring page refresh, vanishing templates link, and intermittent "templates moved" warning.</td><td>Customers can't move blocks without a refresh; templates link disappears between sessions. $410/mo Premium cited.</td><td>Editor behaves predictably without workarounds or support tickets.</td></tr>
+    <tr><td class="init-cell">Template surfacing in campaign wizard</td><td>Fix the bug where New Builder templates don't appear in the campaign creation tab.</td><td>Customer builds NEB templates but only sees legacy templates when creating a campaign. $1,950/mo cited.</td><td>Customers can find and use the templates they built.</td></tr>
+    <tr><td class="init-cell">Cross-browser regression suite</td><td>Browser-matrix automated tests (Safari, Firefox, Chrome) on every CI build.</td><td>Browser-specific bugs like broken Ctrl+K link insertion ship to production and customers find them first.</td><td>Regressions caught before release; ship velocity up because the team isn't firefighting browser bugs.</td></tr>
+    <tr><td class="init-cell">Multi-author save-conflict detection</td><td>Show "someone else is editing" presence indicator; non-blocking save; merge prompt instead of generic error.</td><td>Two team members edit the same email and one person's work is silently lost. $340/mo cited.</td><td>Teams stop losing work; foundation laid for full real-time collaboration.</td></tr>
+    <tr><td class="init-cell">Light/dark mode &amp; background images</td><td>Implement light/dark variant rendering and allow background images on blocks.</td><td>Customers needing dark-mode rendering or background images for brand consistency can't achieve either in NEB. $468/mo cited.</td><td>Modern email design parity and brand consistency across all email clients.</td></tr>
+    <tr><td class="init-cell">Inline link checker &amp; deliverability hints</td><td>Real-time link validation, spam-score guidance, SPF/DKIM/DMARC wizard, and alt-text completeness check.</td><td>Pre-send checklist misses contrast, link purpose, and deliverability red flags like missing authentication.</td><td>Deliverability issues caught before send; fewer inbox-placement complaints.</td></tr>
+    <tr><td class="init-cell">Brand Kit data correctness fix</td><td>Stop serving stale Brand Kit data; backfill missing colors; ramp fix to 100%; add drift monitoring and alerting.</td><td>Brand Kit shows logo but drops colors after a partially-ramped incident fix. Some customers still see stale data.</td><td>Brand Kit is reliable; customers stop manually patching colors every campaign.</td></tr>
+    <tr><td class="init-cell">Brand fonts in landing pages &amp; forms</td><td>Make uploaded fonts selectable in LP/form builder; fix iPhone system-font fallback.</td><td>Brand fonts work in email but fall back to system fonts on iPhone landing pages. $655/mo cited.</td><td>Brand Kit applies consistently everywhere; landing pages match email design.</td></tr>
+    <tr><td class="init-cell">Font upload &amp; Creative Assistant parity</td><td>Fix font-package upload bug; ensure Creative Assistant recognizes uploaded custom fonts.</td><td>Customer uploads brand font, Brand Kit accepts it, but Creative Assistant ignores it. $3,350/mo cited.</td><td>Brand font flows through every AI-generated design automatically.</td></tr>
+    <tr><td class="init-cell">Multi-brand kits per account</td><td>Allow multiple Brand Kits per account (main brand + sub-brands), Canva-style.</td><td>Multi-brand teams rebuild content per sub-brand because Brand Kit is single-instance. $2,460/mo cited.</td><td>Agencies and multi-brand businesses manage all brands from one account.</td></tr>
+    <tr><td class="init-cell">Locked layouts for brand governance</td><td>Locked layouts mode with role-based access; blocking accessibility checks on send.</td><td>Multi-author teams have no way to lock brand integrity. Anyone can override colors, fonts, or layout.</td><td>Teams enforce brand consistency at scale with SMB-friendly governance controls.</td></tr>
+    <tr><td class="init-cell">Cross-account brand inheritance</td><td>One Brand Kit per client; switch context like Slack workspaces; shared Universal Content library across agency clients.</td><td>Agency dashboard exists but Brand Kit is per-account; agencies rebuild assets for each client.</td><td>Agency efficiency up and churn down; competitive with Klaviyo One agency tier.</td></tr>
+    <tr><td class="init-cell">Content Studio stability fix</td><td>Fix image-not-loading bugs; eliminate the quit-and-reload pattern; fix forced-redirect loop into NEB.</td><td>Customer literally describes "Content Studio not loading images. Email builder breaking… keep quitting out and re-loading." $621/mo cited.</td><td>Asset library works on first load; support escalations reduced.</td></tr>
+    <tr><td class="init-cell">Folder management in Content Studio</td><td>Allow folder reordering, folder deletion, and search-in-folder; restore IA fundamentals.</td><td>Customers can't reorder or delete folders. Basic organization is missing. $361/mo cited.</td><td>Customers organize assets the way they think; less time hunting for files.</td></tr>
+    <tr><td class="init-cell">Canva-to-Mailchimp sync reliability</td><td>Fix silent-failure mode where Canva graphic shows in editor but is missing in sent email; add sync-status indicators.</td><td>Two named customers describe "most frustrating thing ever," including a live email sent without the synced graphic. $2,500/mo cited.</td><td>Canva work reliably shows up in sends; silent-failure mode eliminated.</td></tr>
+    <tr><td class="init-cell">Real-time multi-author co-editing</td><td>Google-Docs-style live cursors, presence indicators, and non-blocking concurrent edit.</td><td>Only one person can edit at a time; teams work around it with screenshots and shared drafts. &minus;48 net sentiment.</td><td>Marketing teams of 2+ work together natively in the same email.</td></tr>
+    <tr><td class="init-cell">Block-level comments &amp; @-mentions</td><td>Notion-style comment on any block; @-mention teammates; resolve in context.</td><td>Design feedback happens in disconnected Slack threads and email, not on the actual content.</td><td>Approval cycles happen inside Mailchimp; Slack/email ping-pong eliminated.</td></tr>
+    <tr><td class="init-cell">Approval workflow &amp; version history</td><td>Multi-step approval (designer &rarr; copywriter &rarr; manager); full version history with rollback; audit trail.</td><td>Multi-step approval happens entirely outside the product with no audit trail.</td><td>Governance needs met in-product; full version history with rollback.</td></tr>
+    <tr><td class="init-cell">Builder SLO operating contract</td><td>Publish SLOs: uptime &ge;99.9%, crash-free &ge;99.5%, save/publish &ge;99.99%, P95 load &lt;500ms, rendering fidelity &ge;99%.</td><td>No published quality bar exists. Bugs ship to production and customers find them before engineering does.</td><td>Published bar that engineering maintains, CSO can reference, and new features don't ship until they meet.</td></tr>
+  </tbody>
+</table>
 
-<p style="font-size:9pt; margin-bottom:4px;"><strong>Editor Rendering &amp; Core Fixes</strong> &mdash; Emails break in the inbox even though they look correct in the editor, which is the most fundamental trust gap in the builder.</p>
-<ul style="margin-bottom:10px;">
-  <li>Fix inbox rendering divergence across forwarded-mail reflow, mobile line-breaks, and image-shrink in send. The email a customer designs should be the email every recipient sees, regardless of client or device.</li>
-  <li>Fix block reorder requiring page refresh and vanishing template navigation. Customers should be able to rearrange content blocks and find their templates without reloading the page.</li>
-  <li>Surface new builder templates in the campaign creation wizard. Customers who build templates in the new editor should be able to find and use them when creating a campaign.</li>
-  <li>Automated cross-browser regression suite across Safari, Firefox, and Chrome on every CI build. Browser-specific bugs like broken link insertion on Firefox should be caught before they reach production.</li>
-  <li>Multi-author save-conflict detection with presence indicators and merge prompts. When two team members edit the same email, neither person's work should be silently lost.</li>
-  <li>Light/dark mode variant rendering and background images on blocks. Customers should be able to design for modern inbox environments and maintain brand consistency across light and dark email clients.</li>
-  <li>Inline link validation, spam-score guidance, and SPF/DKIM/DMARC wizard. Customers should catch broken links, accessibility gaps, and deliverability red flags before hitting send.</li>
-</ul>
+<h2>Universal Builder, Portability &amp; Migration</h2>
+<table class="detail-table">
+  <thead>
+    <tr><th style="min-width:160px">Initiative</th><th>What It Is</th><th>Problem It Solves</th><th>Key Customer Benefit</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="init-cell">Universal Content block primitive</td><td>Account-level edit-once-propagates-everywhere block type; insertable into any template, campaign, or CJB email step.</td><td>Saved content is template-scoped. A customer with 181 templates maintains the same footer 181 times. Klaviyo shipped this as the default in Spring 2026.</td><td>Edit a header or footer once; all sends update automatically.</td></tr>
+    <tr><td class="init-cell">Auto-migration of saved blocks</td><td>One-click migration tool with preview; bulk migrate template-scoped saved blocks to Universal Content; preserve usage metadata.</td><td>Customers have years of saved-content investment scattered per template; manual migration is a non-starter.</td><td>Existing customers get Universal Content benefits on day one without starting over.</td></tr>
+    <tr><td class="init-cell">Bulk template migration tool</td><td>Multi-select templates; preview side-by-side; bulk migrate to NEB; preserve content and style.</td><td>Customer with 181 templates: "I need to individually update them which will take days." $330/mo cited.</td><td>Migrate years of template work in minutes, not days.</td></tr>
+    <tr><td class="init-cell">1:1 migration tool with support enablement</td><td>Single-template migration with style-fidelity guarantee; first-class support workflow; migration-success monitoring.</td><td>Support ended chat on one customer and disappeared on another after 30 minutes. $504/mo cited.</td><td>Migration becomes a reliable process; support has a real path forward.</td></tr>
+    <tr><td class="init-cell">NEB Code Mode</td><td>Custom HTML/CSS authoring inside NEB; ships before any Classic sunset communication.</td><td>NEB has no HTML/CSS escape hatch. Premium and agency users anchor on Classic specifically for custom code. Sunset without Code Mode risks $1&ndash;2M ARR.</td><td>Power users get NEB without giving up control; safe to retire Classic.</td></tr>
+    <tr><td class="init-cell">NEB Liquid templating</td><td>Liquid (or Handlebars) templating in Code Mode; per-recipient dynamic blocks for name, location, last product, last engagement.</td><td>Personalization today is limited to merge tags and conditional show/hide. No first-class dynamic content.</td><td>Power users build truly personalized campaigns inside the new builder.</td></tr>
+    <tr><td class="init-cell">Funded migration program</td><td>1:1 migration assistance for Premium/agency Classic users; 12-month grace period; in-product migration tracker.</td><td>~70K assumed Classic Established users; even 10% churn = $1&ndash;2M ARR loss.</td><td>Migration is a positive event with no surprises; Classic sunset becomes safe to announce.</td></tr>
+    <tr><td class="init-cell">Universal Content in CJB</td><td>Same Universal Content primitive available inside Customer Journey Builder email steps; cross-product reuse.</td><td>CJB emails can't reuse saved content; double-maintenance across campaigns and automations.</td><td>Automation emails inherit the same brand updates as campaigns; no drift between channels.</td></tr>
+    <tr><td class="init-cell">Brand Kit auto-applied to Universal blocks</td><td>When customer inserts a Universal block, Brand Kit colors, fonts, and logos auto-apply.</td><td>Without auto-apply, customers manually restyle each block insertion, defeating the "edit once" promise.</td><td>Brand consistency at zero effort on every insertion.</td></tr>
+    <tr><td class="init-cell">Universal Content audit &amp; version history</td><td>Show "used in N templates / N journeys"; version history with rollback; impact preview before edit.</td><td>Universal Content is powerful but dangerous. One wrong edit propagates to many sends without governance.</td><td>Customers edit with confidence knowing exactly what a change affects.</td></tr>
+    <tr><td class="init-cell">Template categorization fix</td><td>Layout-only browse mode; better filter/search; tag templates with use case and layout type.</td><td>Customers ignore category IA and browse by layout, but the filter doesn't support that.</td><td>Find templates the way they actually browse; faster activation.</td></tr>
+  </tbody>
+</table>
 
-<p style="font-size:9pt; margin-bottom:4px;"><strong>Brand Kit Reliability &amp; Multi-Brand</strong> &mdash; Brand Kit serves stale data and only supports one brand per account, forcing customers to manually patch colors and rebuild assets per sub-brand.</p>
-<ul style="margin-bottom:10px;">
-  <li>Brand Kit data correctness fix and drift monitoring by ramping the Austin Milt fix to 100%. Customers should see their actual brand colors every time, not stale or missing values.</li>
-  <li>Brand fonts selectable in landing pages and signup forms with iPhone fallback fix. A customer's brand typography should be consistent across email, landing pages, and forms on every device.</li>
-  <li>Font upload bug fix and Creative Assistant custom font recognition. When a customer uploads a brand font, AI-generated designs should actually use it instead of falling back to defaults.</li>
-  <li>Multi-brand kits per account for main brand plus sub-brands, Canva-style. Agencies and multi-brand businesses should manage all their brands from one account without rebuilding assets.</li>
-  <li>Locked layouts mode with role-based access for brand governance. Teams should be able to protect brand integrity at scale by locking down layouts, colors, and fonts that only admins can change.</li>
-  <li>Cross-account brand inheritance for agencies with Slack-style context switching. Agencies should maintain one Brand Kit per client and switch between them seamlessly.</li>
-</ul>
+<h2>AI-Powered Builder &amp; Accelerated Time to Value</h2>
+<table class="detail-table">
+  <thead>
+    <tr><th style="min-width:160px">Initiative</th><th>What It Is</th><th>Problem It Solves</th><th>Key Customer Benefit</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="init-cell">Brand Kit auto-extract on signup</td><td>On signup, prompt for website URL; auto-extract logo, colors, and fonts into Brand Kit; first send template pre-branded.</td><td>Customer signs up, gets generic templates, has to manually restyle before value is proved.</td><td>First email looks on-brand without any manual restyling; activation rate goes up.</td></tr>
+    <tr><td class="init-cell">Industry-specific welcome flow templates</td><td>Onboarding asks "what kind of business?"; pre-loads 3&ndash;5 templates tailored to that industry; one-click activate.</td><td>Generic templates slow customers down. User research shows fast Monday-morning senders want to ship same-day.</td><td>First send out the door in under 30 minutes for industry-fit customers.</td></tr>
+    <tr><td class="init-cell">AI Email Setup Agent</td><td>Customer pastes website URL; Intuit Assist scaffolds first newsletter, promo, or welcome campaign with Brand Kit auto-applied and ICP-fit template.</td><td>Klaviyo's Marketing Agent sets up flows in ~3 clicks. Mailchimp has no autonomous setup agent. New customers describe Mailchimp as "slower to first value."</td><td>First campaign is live before they finish onboarding; matches Klaviyo's URL-to-campaign speed.</td></tr>
+    <tr><td class="init-cell">B2B &amp; ProServ template gallery</td><td>Information-dense skeleton layouts: text-first, charts, structured layouts instead of mock ecommerce shells.</td><td>UR Bet #3: "many… not tailored towards your organization." "Feel more like e-commerce emails."</td><td>Non-ecom customer activation matches ecom customer activation.</td></tr>
+    <tr><td class="init-cell">Industry-aware template gallery</td><td>Pre-built templates tailored to 6&ndash;8 verticals: ecom, ProServ, services, B2B SaaS, restaurants, nonprofits. Tied to onboarding business-type selection.</td><td>Single generic gallery serves all industries badly. Klaviyo has 60+ templates segmented by vertical.</td><td>Customers see templates that look like their business; faster activation across all verticals.</td></tr>
+    <tr><td class="init-cell">Write with AI quality &amp; brand-tone improvements</td><td>Deeper Brand Kit integration for voice, tone, and audience awareness; user-feedback loop into model fine-tuning.</td><td>AI output quality vs ChatGPT/Claude drove customers to try it once and never come back. Explore &minus;73.7% YoY, churn 77.2%.</td><td>Returning users get notably better output that reflects their actual brand, not generic AI copy.</td></tr>
+    <tr><td class="init-cell">AI brand-style transfer</td><td>"Make this email look like our spring campaign style"; turn one campaign's stylistic choices into a reusable brand-style object.</td><td>No competitor ships this. Campaign series feel disconnected without manual restyling between sends.</td><td>Campaign series feels intentionally connected without manual restyling; differentiator vs all competitors.</td></tr>
+    <tr><td class="init-cell">AI image generation from product catalog</td><td>Generate hero images from the product the email is about; brand-kit-applied scene; Brand Kit + ecom integration + Creative Assistant in one workflow.</td><td>Generic image generation exists everywhere; tied to this customer's product catalog with brand-kit-applied scene is unique.</td><td>Right image, not stock image; ecom customer lift on conversion.</td></tr>
+    <tr><td class="init-cell">Image Remix in flow email steps</td><td>Drag-in dynamic image blocks that auto-vary; iterate hero images via prompt inside flow/campaign.</td><td>Klaviyo Image Remix lets customers iterate hero images via prompt; Mailchimp lacks this entirely.</td><td>Iterate designs in seconds; closes a named Klaviyo gap.</td></tr>
+    <tr><td class="init-cell">Per-recipient dynamic images</td><td>Image blocks that personalize per recipient: last product viewed, last category, predicted next product.</td><td>Klaviyo, Bloomreach, and Movable Ink set the bar for dynamic content. Mailchimp has nothing at the image level.</td><td>Automation emails personalize at the image level; conversion lift on browse, cart, and post-purchase flows.</td></tr>
+    <tr><td class="init-cell">In-canvas revenue per recipient</td><td>Show revenue, opens, clicks, and conversion inline at each block in the post-send report; revenue-per-recipient view.</td><td>Klaviyo's in-builder revenue metrics have +56 net sentiment. Mailchimp's editor reports don't expose per-block revenue.</td><td>Customer proves email ROI inline; renewal conversations move from vanity metrics to dollars shipped.</td></tr>
+    <tr><td class="init-cell">Per-profile Smart Send Time &amp; Personalized A/B</td><td>Per-profile send-time optimization; A/B winner picked per profile, not one global winner; Channel Affinity per profile.</td><td>Klaviyo has all three productized with 10&ndash;30% lift cited. Mailchimp has store-level send-time only and one-size-fits-all A/B.</td><td>Sends ship at the per-recipient optimal time; A/B optimizes per profile, not in aggregate.</td></tr>
+  </tbody>
+</table>
 
-<p style="font-size:9pt; margin-bottom:4px;"><strong>Content Studio &amp; Canva Integration</strong> &mdash; Images fail to load, folders can't be organized, and Canva graphics silently disappear from sent emails.</p>
-<ul style="margin-bottom:10px;">
-  <li>Content Studio stability fix to eliminate the quit-and-reload pattern and forced-redirect loop. A customer's asset library should load reliably the first time without workarounds.</li>
-  <li>Folder reordering, deletion, and search-in-folder for asset organization. Customers should be able to organize and find their files the way they think, instead of scrolling through a flat list.</li>
-  <li>Canva-to-Mailchimp sync reliability with sync-status indicators. Canva graphics that appear in the editor should actually show up in the sent email, with clear status on sync health.</li>
-</ul>
-
-<p style="font-size:9pt; margin-bottom:4px;"><strong>Collaboration</strong> &mdash; Only one person can edit at a time and all approval cycles happen outside Mailchimp.</p>
-<ul style="margin-bottom:10px;">
-  <li>Real-time multi-author co-editing with live cursors and presence indicators. Marketing teams of two or more should be able to work together in the same email simultaneously, Google-Docs-style.</li>
-  <li>Notion-style block-level @-mention comments with resolve-in-context. Design feedback should happen directly on the content block instead of in disconnected Slack threads and emails.</li>
-  <li>Multi-step approval workflow from designer to copywriter to manager with full version history and rollback. The entire review and sign-off process should stay inside Mailchimp with a complete audit trail.</li>
-</ul>
-
-<p style="font-size:9pt; margin-bottom:4px;"><strong>Platform Reliability &amp; OPEX</strong> &mdash; No published quality bar exists, and bugs ship to production where customers find them before engineering does.</p>
-<ul style="margin-bottom:10px;">
-  <li>Builder SLO operating contract covering 99.9% uptime, P95 load under 500ms, rendering fidelity at 99% or above, and crash-free sessions at 99.5% or above. There should be a published bar that engineering maintains, CSO can reference, and new features don't ship until they meet.</li>
-</ul>
-
-<hr class="divider">
-
-<h3 style="margin-top:16px; margin-bottom:8px; border-bottom:1px solid #ddd; padding-bottom:4px;">Pillar 2: Universal Builder, Portability &amp; Migration</h3>
-<p style="font-size:9pt; color:#555; margin-bottom:10px;">A configurable builder that supports reusable content, seamless migration from Classic to New Builder, and cross-product portability</p>
-
-<p style="font-size:9pt; margin-bottom:4px;"><strong>Universal Content Blocks</strong> &mdash; Content is still template-scoped in Mailchimp, meaning customers maintain the same header, footer, or promo banner across dozens of templates manually. Klaviyo made this the default editor primitive in Spring 2026.</p>
-<ul style="margin-bottom:10px;">
-  <li>Universal Content block primitive that lives at account level, insertable into any template or campaign, with edits propagating to all instances on next send. Customers should be able to edit a header or footer once and have every send update automatically.</li>
-  <li>Auto-migration of existing saved blocks to Universal Content with a one-click migration tool, preview, and preserved usage metadata. Existing customers should get Universal Content benefits immediately on day one without starting over.</li>
-</ul>
-
-<p style="font-size:9pt; margin-bottom:4px;"><strong>Builder Migration Prerequisites</strong> &mdash; Migrating from Classic to New Builder is painful, unsupported, and risky. Without Code Mode and funded assistance, retiring Classic exposes an estimated $1&ndash;2M in ARR.</p>
-<ul style="margin-bottom:10px;">
-  <li>Bulk template migration tool for the 181-template pattern with multi-select, side-by-side preview, and style preservation. Customers should migrate years of template work in minutes, not days.</li>
-  <li>1:1 migration tool with style-fidelity guarantee and first-class support enablement. Migration should become a reliable process where support has a real path forward instead of ending chats or disappearing.</li>
-  <li>NEB Code Mode with full HTML/CSS escape hatch, shipped before any Classic sunset communication. Power users and agencies who anchor on Classic for custom code should be able to move to the new builder without giving up control.</li>
-  <li>NEB Liquid templating for power users and dynamic content with per-recipient dynamic blocks for name, location, last product, and last engagement. Power users and agencies should be able to build truly personalized campaigns inside the new builder.</li>
-  <li>Funded migration program with 12-month grace period, 1:1 migration assistance for Premium and agency Classic users, and an in-product migration tracker. Migration should be a positive event for high-value customers with no surprises.</li>
-</ul>
-
-<p style="font-size:9pt; margin-bottom:4px;"><strong>Cross-Product Template Portability</strong> &mdash; Universal Content only delivers full value if it works across campaigns, automations, and brand surfaces. Today, content is siloed per product surface.</p>
-<ul style="margin-bottom:10px;">
-  <li>Universal Content blocks render in Customer Journey Builder email steps for cross-product reuse. Automation emails should inherit the same brand updates as campaigns with no drift between channels.</li>
-  <li>Brand Kit auto-applied to Universal blocks at insertion so colors, fonts, and logos apply automatically. Customers should not have to manually restyle every block insertion.</li>
-  <li>Universal Content audit and version history showing "used in N templates / N journeys" with rollback and impact preview before edit. Customers should edit with confidence knowing exactly what a change affects across active sends.</li>
-  <li>Template categorization fix with layout-only browse mode, better filtering and search, and use-case tagging. Customers should find templates the way they actually browse instead of fighting the current category structure.</li>
-</ul>
-
-<hr class="divider">
-
-<h3 style="margin-top:16px; margin-bottom:8px; border-bottom:1px solid #ddd; padding-bottom:4px;">Pillar 3: AI-Powered Builder &amp; Accelerated Time to Value</h3>
-<p style="font-size:9pt; color:#555; margin-bottom:10px;">An intelligent builder that removes barriers, collapses the time from signup to first send, and uses AI to accelerate every step of creating and optimizing omni-channel campaigns</p>
-
-<p style="font-size:9pt; margin-bottom:4px;"><strong>Activation &amp; Onboarding</strong> &mdash; New customers describe Mailchimp as "more powerful but slower to first value." Generic templates and manual brand setup create unnecessary friction before the product proves its worth.</p>
-<ul style="margin-bottom:10px;">
-  <li>Brand Kit auto-extract on signup with first email pre-branded. When a customer signs up and provides their website URL, their logo, colors, and fonts should be pulled automatically so their first email looks on-brand without any manual restyling.</li>
-  <li>Industry-specific welcome flow templates pre-loaded by business type. Onboarding should ask "what kind of business?" and pre-load 3 to 5 tailored templates so customers can get their first send out the door in under 30 minutes.</li>
-  <li>AI Email Setup Agent that takes a URL and scaffolds a campaign in 3 clicks. This mirrors Klaviyo's Marketing Agent for the editor side, where Intuit Assist scaffolds a first newsletter, promo, or welcome campaign with Brand Kit auto-applied and an ICP-fit template selected.</li>
-</ul>
-
-<p style="font-size:9pt; margin-bottom:4px;"><strong>Template Gallery &amp; Vertical Coverage</strong> &mdash; B2B, professional services, nonprofits, and restaurant customers can't find a starting template that matches their business. The current gallery feels ecommerce-first.</p>
-<ul style="margin-bottom:10px;">
-  <li>B2B and professional services template gallery with skeleton layouts. Information-dense, text-first templates with structured layouts instead of mock ecommerce shells, so non-ecom customer activation matches ecom.</li>
-  <li>Industry-aware template gallery with 6 to 8 templates per vertical covering ecom, ProServ, services, B2B SaaS, restaurants, and nonprofits. Customers should see templates that look like their business, tied to the business type they selected during onboarding.</li>
-</ul>
-
-<p style="font-size:9pt; margin-bottom:4px;"><strong>AI Content &amp; Copy Generation</strong> &mdash; Write with AI's Explore funnel collapsed 73.7% YoY and churn hit 77.2%. Quality issues drove customers to try it once and never come back.</p>
-<ul style="margin-bottom:10px;">
-  <li>Write with AI quality and brand-tone improvements with deeper Brand Kit integration for voice, tone, and audience awareness. Returning users should get notably better output that reflects their actual brand, not generic AI copy.</li>
-  <li>AI brand-style transfer between campaigns. Customers should be able to say "make this email look like our spring campaign style" and have stylistic choices turn into a reusable brand-style object that other campaigns can inherit. No competitor ships this today.</li>
-</ul>
-
-<p style="font-size:9pt; margin-bottom:4px;"><strong>AI-Powered Design, Personalization &amp; Performance</strong> &mdash; Klaviyo leads on in-canvas AI features like Image Remix, per-profile Smart Send, and inline revenue metrics. Mailchimp has no equivalent for any of these today.</p>
-<ul style="margin-bottom:10px;">
-  <li>AI image generation tied to the customer's product catalog. Hero images should be generated from the actual product the email is about, with brand-kit-applied scenes, not generic stock imagery.</li>
-  <li>Image Remix in flow email steps for Klaviyo parity. Customers should be able to iterate hero images via prompt inside flows and campaigns in seconds.</li>
-  <li>Per-recipient dynamic images based on last product viewed, last category, or predicted next product. Automation emails should personalize at the image level for conversion lift on browse, cart, and post-purchase flows.</li>
-  <li>In-canvas revenue per recipient and per step for Klaviyo parity. Revenue, opens, clicks, and conversion should be visible inline at each block in the post-send report so renewal conversations move from vanity metrics to dollars shipped.</li>
-  <li>Per-profile Smart Send Time and Personalized A/B in send config. Sends should ship at the per-recipient optimal time and A/B winners should be picked per profile, not one global winner. This closes a named Klaviyo gap with 10 to 30% lift cited in their case studies.</li>
-</ul>
-
-<hr class="divider">
-
-<h3 style="margin-top:16px; margin-bottom:8px; border-bottom:1px solid #ddd; padding-bottom:4px;">Pillar 4: Unified Omni-Channel Builder &amp; Activation</h3>
-<p style="font-size:9pt; color:#555; margin-bottom:10px;">A single authoring surface that makes email and SMS feel like one campaign, and proactive nudges that turn inactive users into active senders</p>
-
-<p style="font-size:9pt; margin-bottom:4px;"><strong>Generative SMS</strong> &mdash; SMS adoption is growing 73.5% YoY but the composer has no AI assistance. Customers face blank-page anxiety and manual rewrite cycles to fit character limits.</p>
-<ul style="margin-bottom:10px;">
-  <li>Brand-Kit-aware generative SMS in the composer with character-limit auto-compression, brand-tone awareness, and automatic opt-out compliance. Nobody ships Brand-Kit-aware SMS generation inside the composer today, and this eliminates rewrite cycles while keeping messages on-brand.</li>
-  <li>SMS variant generation and A/B testing in the composer. Customers should be able to generate multiple SMS variants from one prompt and test them without leaving the composer.</li>
-</ul>
-
-<p style="font-size:9pt; margin-bottom:4px;"><strong>Unified Email + SMS Authoring</strong> &mdash; Despite the "email + SMS together" marketing, the SMS composer is a completely separate surface with no shared content blocks, no shared preview, and no cross-channel content reuse. "Unified" is currently a billing claim, not an authoring reality.</p>
-<ul style="margin-bottom:10px;">
-  <li>Shared content blocks that render in both email and SMS. The Universal Content primitive should extend to SMS so the same block edited once renders correctly in both channels, with content-type-aware formatting (full HTML in email, compressed text in SMS).</li>
-  <li>Cross-channel preview side-by-side at compose time. Customers should see how their copy reads in both email and SMS format simultaneously in one canvas, instead of switching between two separate surfaces and copy-pasting.</li>
-  <li>Brand Kit applied to SMS branded short links and sender ID. SMS sends should be visibly branded so they feel like a natural extension of the customer's email design, which improves trust and click-through.</li>
-</ul>
-
-<p style="font-size:9pt; margin-bottom:4px;"><strong>Activation &amp; Feature Discovery</strong> &mdash; Mailchimp ships features that customers never find because there's no contextual hand-off from what they're doing now to what they should try next. Customers leave campaigns in DRAFT for months.</p>
-<ul style="margin-bottom:10px;">
-  <li>Contextual feature discovery prompts that surface adjacent capabilities at the moment of intent. After sending a campaign, the system should prompt "turn this into an automation?" so capability utilization compounds and customers get more value per session.</li>
-  <li>DRAFT-resurrect campaign with proactive nudges. When a welcome flow has been sitting in DRAFT for weeks, the system should nudge "your welcome flow has been in DRAFT for X days" with one-click activate, turning "I'll do it later" intentions into actual sends.</li>
-</ul>
+<h2>Unified Omni-Channel Builder &amp; Activation</h2>
+<table class="detail-table">
+  <thead>
+    <tr><th style="min-width:160px">Initiative</th><th>What It Is</th><th>Problem It Solves</th><th>Key Customer Benefit</th></tr>
+  </thead>
+  <tbody>
+    <tr><td class="init-cell">Brand-Kit-aware generative SMS</td><td>Character-limit-compressing, brand-tone-aware, opt-out-compliance-automatic SMS generation inside the composer.</td><td>SMS composer has no AI assistance. Nobody ships Brand-Kit-aware SMS generation inside the composer today.</td><td>Eliminates blank-page anxiety and rewrite cycles while keeping messages on-brand.</td></tr>
+    <tr><td class="init-cell">SMS variant generation &amp; A/B</td><td>Generate multiple SMS variants from one prompt; in-composer A/B with character-limit and Brand Kit awareness.</td><td>SMS composer has no A/B capability; manual variant creation slows iteration.</td><td>Ship better-performing SMS without leaving the composer; iteration cycle compresses.</td></tr>
+    <tr><td class="init-cell">Shared content blocks in email + SMS</td><td>Universal Content extends to SMS; same block edited once renders correctly in both channels with content-type-aware formatting.</td><td>Email and SMS are separate surfaces with no shared content blocks, preview, or cross-channel reuse. "Unified is a billing claim."</td><td>Compose once, ship everywhere; eliminates duplicated authoring work.</td></tr>
+    <tr><td class="init-cell">Cross-channel preview side-by-side</td><td>Real-time email + SMS preview in one canvas; see how copy reads in both formats simultaneously.</td><td>Customer composes email, switches to SMS composer, copy-pastes, reformats, previews separately.</td><td>Iterate on cross-channel campaigns in one motion; faster ship time; fewer mistakes.</td></tr>
+    <tr><td class="init-cell">Brand Kit on SMS short links &amp; sender ID</td><td>Brand Kit colors/logo applied to branded SMS short links; sender ID consistent with brand.</td><td>Branded short links exist but don't inherit Brand Kit; sender ID is separate config.</td><td>SMS sends are visibly branded; feels like an extension of email design; trust and click-through up.</td></tr>
+    <tr><td class="init-cell">Contextual feature discovery prompts</td><td>"You've used X, try Y" prompts; surface adjacent capabilities at the moment of intent (e.g., "turn this into an automation?").</td><td>Mailchimp ships features customers never find. No contextual hand-off from current behavior to next-best capability.</td><td>Capability utilization compounds; customer gets more value per session.</td></tr>
+    <tr><td class="init-cell">DRAFT-resurrect campaign</td><td>"Your welcome flow has been in DRAFT for X days" nudge with one-click activate. Proactive chatbot suggestions for low-frequency users.</td><td>UR customer left welcome automation in DRAFT for over a year: "I just haven't gotten deep enough into it yet." Self-blame, declining trust.</td><td>"I'll do it later" intentions actually execute; reduces silent churn from low-frequency users.</td></tr>
+  </tbody>
+</table>
 
 <hr class="divider">
 
