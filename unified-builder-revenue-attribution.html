@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unified Builder — Initiative Revenue Attribution</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 9pt; color: #000; background: #fff; line-height: 1.4; padding: 24px 32px; max-width: 1500px; margin: 0 auto; }
+  h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; }
+  h2 { font-size: 11pt; font-weight: 700; margin-bottom: 8px; margin-top: 24px; border-bottom: 2px solid #1a3a5c; padding-bottom: 4px; }
+  h3 { font-size: 10pt; font-weight: 700; margin-bottom: 6px; }
+  .subtitle { font-size: 9pt; color: #555; font-style: italic; margin-bottom: 16px; }
+  .nav { margin-bottom: 16px; padding: 8px 0; border-bottom: 2px solid #1a3a5c; }
+  .nav a { font-size: 9pt; font-weight: 700; color: #1a3a5c; text-decoration: none; margin-right: 20px; }
+  .nav a.active { border-bottom: 2px solid #1a3a5c; padding-bottom: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 8px; }
+  th, td { border: 1px solid #bfbfbf; padding: 6px 8px; vertical-align: top; text-align: left; }
+  th { background: #1a3a5c; color: #fff; font-weight: 700; font-size: 8pt; }
+  .pillar-header td { background: #f2f2f2; font-weight: 700; font-size: 9pt; }
+  .sub-header td { background: #fafafa; font-weight: 600; font-size: 8.5pt; font-style: italic; }
+  .total-row td { font-weight: 700; background: #eef2ff; }
+  .grand-total td { font-weight: 700; background: #1a3a5c; color: #fff; font-size: 9pt; }
+  .note { font-size: 8pt; color: #888; margin-top: 8px; }
+  .summary-box { background: #f5f5f5; border: 2px solid #1a3a5c; padding: 16px; margin: 16px 0; }
+  .formula { font-family: monospace; font-size: 8pt; background: #f5f5f5; padding: 2px 6px; border-radius: 2px; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .channel-tag { display: inline-block; font-size: 7.5pt; font-weight: 700; padding: 1px 6px; border-radius: 2px; white-space: nowrap; }
+  .ch-ret { background: #e8f0fe; color: #1a3a5c; }
+  .ch-t2p { background: #fef3e0; color: #8a5d00; }
+  .ch-f2p { background: #e6f4ea; color: #1a6b3a; }
+  .ch-upg { background: #fce8e6; color: #8c1d18; }
+  .ch-multi { background: #f3e8fd; color: #5b2c8a; }
+  ul.caveat-list { margin: 8px 0 8px 20px; }
+  ul.caveat-list li { margin-bottom: 4px; }
+  @media print { body { padding: 12px; font-size: 7.5pt; } table { font-size: 7pt; } th, td { padding: 4px 5px; } }
+</style>
+</head>
+<body>
+<div class="nav">
+  <a href="unified-builder-roadmap.html">Unified Builder Roadmap</a>
+  <a href="unified-builder-vp-swimlanes.html">VP Swim Lanes</a>
+  <a href="unified-builder-critical-path.html">Critical Path &amp; Hypotheses</a>
+  <a href="unified-builder-revenue-attribution.html" class="active">Revenue Attribution</a>
+</div>
+
+<h1>Initiative-Level Revenue Attribution</h1>
+<p class="subtitle">Per-initiative revenue breakdown across retention, trial-to-paid, free-to-paid, and upgrades. Total: ~$21.0M ARR.</p>
+
+<div class="summary-box">
+  <h3>Revenue by Channel</h3>
+  <table>
+    <tr>
+      <th>Channel</th>
+      <th style="text-align:right; width:100px;">ARR ($M)</th>
+      <th style="text-align:right; width:70px;">Share</th>
+      <th>Source Cohorts</th>
+    </tr>
+    <tr>
+      <td><span class="channel-tag ch-f2p">Free-to-Paid</span></td>
+      <td class="num">$8.70</td>
+      <td class="num">41%</td>
+      <td>F1 Adoption + F2 Activation + F3 Repeat + F4 CSAT</td>
+    </tr>
+    <tr>
+      <td><span class="channel-tag ch-t2p">Trial-to-Paid</span></td>
+      <td class="num">$5.60</td>
+      <td class="num">27%</td>
+      <td>T1 Activation + T2 Repeat</td>
+    </tr>
+    <tr>
+      <td><span class="channel-tag ch-ret">Retention</span></td>
+      <td class="num">$4.00</td>
+      <td class="num">19%</td>
+      <td>PA3 Repeat + PA4 CSAT</td>
+    </tr>
+    <tr>
+      <td><span class="channel-tag ch-upg">Upgrades</span></td>
+      <td class="num">$2.70</td>
+      <td class="num">13%</td>
+      <td>PA1 Adoption + PA2 Activation</td>
+    </tr>
+    <tr class="grand-total">
+      <td>Total</td>
+      <td class="num">$21.00</td>
+      <td class="num">100%</td>
+      <td></td>
+    </tr>
+  </table>
+</div>
+
+<!-- ─────────────────────────────────────────── MAIN TABLE ─────────────────────────────────────────── -->
+
+<h2>Initiative Revenue Attribution</h2>
+<p class="note">All values in $M. "—" = no attributed revenue in that channel. Initiatives may contribute to multiple channels simultaneously.</p>
+
+<table>
+<thead>
+  <tr>
+    <th style="width:22%;">Initiative</th>
+    <th style="width:12%;">Sub-Theme</th>
+    <th style="width:10%;">Primary Channel</th>
+    <th class="num" style="width:9%;">Retention ($M)</th>
+    <th class="num" style="width:9%;">Trial-to-Paid ($M)</th>
+    <th class="num" style="width:9%;">Free-to-Paid ($M)</th>
+    <th class="num" style="width:9%;">Upgrades ($M)</th>
+    <th class="num" style="width:9%;">Total ($M)</th>
+  </tr>
+</thead>
+<tbody>
+
+<!-- ═══════════════ PILLAR 1: Quality & Rendering Fidelity ═══════════════ -->
+<tr class="pillar-header">
+  <td colspan="8">Pillar 1 — Quality &amp; Rendering Fidelity</td>
+</tr>
+
+<!-- Sub-theme: Rendering -->
+<tr class="sub-header">
+  <td colspan="8">Rendering</td>
+</tr>
+<tr>
+  <td>Rendering Parity &amp; Fixes</td>
+  <td>Rendering</td>
+  <td><span class="channel-tag ch-ret">Retention</span></td>
+  <td class="num">0.60</td>
+  <td class="num">—</td>
+  <td class="num">0.50</td>
+  <td class="num">0.40</td>
+  <td class="num"><strong>1.50</strong></td>
+</tr>
+<tr class="total-row">
+  <td colspan="2" style="text-align:right;">Sub-theme total: Rendering</td>
+  <td></td>
+  <td class="num">0.60</td>
+  <td class="num">—</td>
+  <td class="num">0.50</td>
+  <td class="num">0.40</td>
+  <td class="num"><strong>1.50</strong></td>
+</tr>
+
+<!-- Sub-theme: Stability & Performance -->
+<tr class="sub-header">
+  <td colspan="8">Stability &amp; Performance</td>
+</tr>
+<tr>
+  <td>Content Studio &amp; Canva</td>
+  <td>Stability &amp; Perf</td>
+  <td><span class="channel-tag ch-ret">Retention</span></td>
+  <td class="num">0.50</td>
+  <td class="num">—</td>
+  <td class="num">0.30</td>
+  <td class="num">0.20</td>
+  <td class="num"><strong>1.00</strong></td>
+</tr>
+<tr>
+  <td>Cross-Browser Regression Suite</td>
+  <td>Stability &amp; Perf</td>
+  <td><span class="channel-tag ch-ret">Retention</span></td>
+  <td class="num">0.30</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.30</strong></td>
+</tr>
+<tr>
+  <td>Builder SLO &amp; Performance Contract</td>
+  <td>Stability &amp; Perf</td>
+  <td><span class="channel-tag ch-multi">Multi</span></td>
+  <td class="num">0.30</td>
+  <td class="num">—</td>
+  <td class="num">0.30</td>
+  <td class="num">0.30</td>
+  <td class="num"><strong>0.90</strong></td>
+</tr>
+<tr>
+  <td>Site Performance (Light/Dark, Link Checker)</td>
+  <td>Stability &amp; Perf</td>
+  <td><span class="channel-tag ch-ret">Retention</span></td>
+  <td class="num">0.20</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.20</strong></td>
+</tr>
+<tr class="total-row">
+  <td colspan="2" style="text-align:right;">Sub-theme total: Stability &amp; Performance</td>
+  <td></td>
+  <td class="num">1.30</td>
+  <td class="num">—</td>
+  <td class="num">0.60</td>
+  <td class="num">0.50</td>
+  <td class="num"><strong>2.40</strong></td>
+</tr>
+
+<!-- Pillar 1 Total -->
+<tr class="total-row" style="border-top: 2px solid #1a3a5c;">
+  <td colspan="2" style="text-align:right;">Pillar 1 Total</td>
+  <td></td>
+  <td class="num">1.90</td>
+  <td class="num">—</td>
+  <td class="num">1.10</td>
+  <td class="num">0.90</td>
+  <td class="num"><strong>3.90</strong></td>
+</tr>
+
+<!-- ═══════════════ PILLAR 2: Brand Kit & Brand Experience ═══════════════ -->
+<tr class="pillar-header">
+  <td colspan="8">Pillar 2 — Brand Kit &amp; Brand Experience</td>
+</tr>
+
+<!-- Sub-theme: Brand Kit Core -->
+<tr class="sub-header">
+  <td colspan="8">Brand Kit Core</td>
+</tr>
+<tr>
+  <td>Brand Kit Correctness &amp; Reliability</td>
+  <td>BK Core</td>
+  <td><span class="channel-tag ch-ret">Retention</span></td>
+  <td class="num">0.40</td>
+  <td class="num">—</td>
+  <td class="num">0.40</td>
+  <td class="num">0.30</td>
+  <td class="num"><strong>1.10</strong></td>
+</tr>
+<tr>
+  <td>Brand Kit Auto-Extract</td>
+  <td>BK Core</td>
+  <td><span class="channel-tag ch-t2p">Trial-to-Paid</span></td>
+  <td class="num">—</td>
+  <td class="num">0.80</td>
+  <td class="num">0.20</td>
+  <td class="num">0.20</td>
+  <td class="num"><strong>1.20</strong></td>
+</tr>
+<tr class="total-row">
+  <td colspan="2" style="text-align:right;">Sub-theme total: Brand Kit Core</td>
+  <td></td>
+  <td class="num">0.40</td>
+  <td class="num">0.80</td>
+  <td class="num">0.60</td>
+  <td class="num">0.50</td>
+  <td class="num"><strong>2.30</strong></td>
+</tr>
+
+<!-- Sub-theme: Brand Compliance & Maturity -->
+<tr class="sub-header">
+  <td colspan="8">Brand Compliance &amp; Maturity</td>
+</tr>
+<tr>
+  <td>Brand Compliance Score</td>
+  <td>Brand Compliance</td>
+  <td><span class="channel-tag ch-multi">Multi</span></td>
+  <td class="num">0.20</td>
+  <td class="num">—</td>
+  <td class="num">0.20</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.40</strong></td>
+</tr>
+<tr>
+  <td>Brand Kit Maturity Dashboard</td>
+  <td>Brand Compliance</td>
+  <td><span class="channel-tag ch-f2p">Free-to-Paid</span></td>
+  <td class="num">0.10</td>
+  <td class="num">—</td>
+  <td class="num">0.30</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.40</strong></td>
+</tr>
+<tr class="total-row">
+  <td colspan="2" style="text-align:right;">Sub-theme total: Brand Compliance &amp; Maturity</td>
+  <td></td>
+  <td class="num">0.30</td>
+  <td class="num">—</td>
+  <td class="num">0.50</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.80</strong></td>
+</tr>
+
+<!-- Pillar 2 Total -->
+<tr class="total-row" style="border-top: 2px solid #1a3a5c;">
+  <td colspan="2" style="text-align:right;">Pillar 2 Total</td>
+  <td></td>
+  <td class="num">0.70</td>
+  <td class="num">0.80</td>
+  <td class="num">1.10</td>
+  <td class="num">0.50</td>
+  <td class="num"><strong>3.10</strong></td>
+</tr>
+
+<!-- ═══════════════ PILLAR 3: Templates & Activation ═══════════════ -->
+<tr class="pillar-header">
+  <td colspan="8">Pillar 3 — Templates &amp; Activation</td>
+</tr>
+
+<!-- Sub-theme: Template Library -->
+<tr class="sub-header">
+  <td colspan="8">Template Library</td>
+</tr>
+<tr>
+  <td>Industry Templates</td>
+  <td>Template Library</td>
+  <td><span class="channel-tag ch-multi">Multi</span></td>
+  <td class="num">—</td>
+  <td class="num">0.60</td>
+  <td class="num">0.60</td>
+  <td class="num">0.15</td>
+  <td class="num"><strong>1.35</strong></td>
+</tr>
+<tr>
+  <td>Ecommerce Lifecycle Templates</td>
+  <td>Template Library</td>
+  <td><span class="channel-tag ch-t2p">Trial-to-Paid</span></td>
+  <td class="num">—</td>
+  <td class="num">0.50</td>
+  <td class="num">0.20</td>
+  <td class="num">0.15</td>
+  <td class="num"><strong>0.85</strong></td>
+</tr>
+<tr>
+  <td>Welcome Flow Templates</td>
+  <td>Template Library</td>
+  <td><span class="channel-tag ch-t2p">Trial-to-Paid</span></td>
+  <td class="num">—</td>
+  <td class="num">0.50</td>
+  <td class="num">0.40</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.90</strong></td>
+</tr>
+<tr>
+  <td>Free-Tier Template Improvements</td>
+  <td>Template Library</td>
+  <td><span class="channel-tag ch-f2p">Free-to-Paid</span></td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">0.30</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.30</strong></td>
+</tr>
+<tr>
+  <td>Template Categorization</td>
+  <td>Template Library</td>
+  <td><span class="channel-tag ch-upg">Upgrades</span></td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">0.15</td>
+  <td class="num"><strong>0.15</strong></td>
+</tr>
+<tr>
+  <td>B2B / ProServ Gallery</td>
+  <td>Template Library</td>
+  <td><span class="channel-tag ch-f2p">Free-to-Paid</span></td>
+  <td class="num">—</td>
+  <td class="num">0.30</td>
+  <td class="num">0.40</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.70</strong></td>
+</tr>
+<tr class="total-row">
+  <td colspan="2" style="text-align:right;">Sub-theme total: Template Library</td>
+  <td></td>
+  <td class="num">—</td>
+  <td class="num">1.90</td>
+  <td class="num">1.90</td>
+  <td class="num">0.45</td>
+  <td class="num"><strong>4.25</strong></td>
+</tr>
+
+<!-- Sub-theme: AI-Powered Onboarding -->
+<tr class="sub-header">
+  <td colspan="8">AI-Powered Onboarding</td>
+</tr>
+<tr>
+  <td>AI Setup Agent</td>
+  <td>AI Onboarding</td>
+  <td><span class="channel-tag ch-t2p">Trial-to-Paid</span></td>
+  <td class="num">—</td>
+  <td class="num">1.20</td>
+  <td class="num">0.80</td>
+  <td class="num">0.15</td>
+  <td class="num"><strong>2.15</strong></td>
+</tr>
+<tr>
+  <td>Store-Connected Preview</td>
+  <td>AI Onboarding</td>
+  <td><span class="channel-tag ch-t2p">Trial-to-Paid</span></td>
+  <td class="num">—</td>
+  <td class="num">0.30</td>
+  <td class="num">0.20</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.50</strong></td>
+</tr>
+<tr class="total-row">
+  <td colspan="2" style="text-align:right;">Sub-theme total: AI-Powered Onboarding</td>
+  <td></td>
+  <td class="num">—</td>
+  <td class="num">1.50</td>
+  <td class="num">1.00</td>
+  <td class="num">0.15</td>
+  <td class="num"><strong>2.65</strong></td>
+</tr>
+
+<!-- Pillar 3 Total -->
+<tr class="total-row" style="border-top: 2px solid #1a3a5c;">
+  <td colspan="2" style="text-align:right;">Pillar 3 Total</td>
+  <td></td>
+  <td class="num">—</td>
+  <td class="num">3.40</td>
+  <td class="num">2.90</td>
+  <td class="num">0.60</td>
+  <td class="num"><strong>6.90</strong></td>
+</tr>
+
+<!-- ═══════════════ PILLAR 4: Content Reuse & Discovery ═══════════════ -->
+<tr class="pillar-header">
+  <td colspan="8">Pillar 4 — Content Reuse &amp; Discovery</td>
+</tr>
+
+<!-- Sub-theme: Universal Content -->
+<tr class="sub-header">
+  <td colspan="8">Universal Content</td>
+</tr>
+<tr>
+  <td>Universal Content Primitive</td>
+  <td>Universal Content</td>
+  <td><span class="channel-tag ch-multi">Multi</span></td>
+  <td class="num">0.20</td>
+  <td class="num">0.15</td>
+  <td class="num">0.40</td>
+  <td class="num">0.40</td>
+  <td class="num"><strong>1.15</strong></td>
+</tr>
+<tr>
+  <td>UC in CJB (Customer Journey Builder)</td>
+  <td>Universal Content</td>
+  <td><span class="channel-tag ch-ret">Retention</span></td>
+  <td class="num">0.10</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.10</strong></td>
+</tr>
+<tr>
+  <td>UC Auto-Migration</td>
+  <td>Universal Content</td>
+  <td><span class="channel-tag ch-f2p">Free-to-Paid</span></td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">0.20</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.20</strong></td>
+</tr>
+<tr>
+  <td>Shared Blocks (Email + SMS)</td>
+  <td>Universal Content</td>
+  <td><span class="channel-tag ch-ret">Retention</span></td>
+  <td class="num">0.15</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.15</strong></td>
+</tr>
+<tr class="total-row">
+  <td colspan="2" style="text-align:right;">Sub-theme total: Universal Content</td>
+  <td></td>
+  <td class="num">0.45</td>
+  <td class="num">0.15</td>
+  <td class="num">0.60</td>
+  <td class="num">0.40</td>
+  <td class="num"><strong>1.60</strong></td>
+</tr>
+
+<!-- Sub-theme: Discovery & Engagement -->
+<tr class="sub-header">
+  <td colspan="8">Discovery &amp; Engagement</td>
+</tr>
+<tr>
+  <td>Contextual Discovery</td>
+  <td>Discovery</td>
+  <td><span class="channel-tag ch-f2p">Free-to-Paid</span></td>
+  <td class="num">0.10</td>
+  <td class="num">0.15</td>
+  <td class="num">0.30</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.55</strong></td>
+</tr>
+<tr>
+  <td>DRAFT-Resurrect</td>
+  <td>Discovery</td>
+  <td><span class="channel-tag ch-f2p">Free-to-Paid</span></td>
+  <td class="num">0.10</td>
+  <td class="num">0.10</td>
+  <td class="num">0.30</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.50</strong></td>
+</tr>
+<tr>
+  <td>Feature Discovery (General)</td>
+  <td>Discovery</td>
+  <td><span class="channel-tag ch-f2p">Free-to-Paid</span></td>
+  <td class="num">—</td>
+  <td class="num">0.20</td>
+  <td class="num">0.50</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.70</strong></td>
+</tr>
+<tr>
+  <td>30-Day Repeat Engagement</td>
+  <td>Discovery</td>
+  <td><span class="channel-tag ch-ret">Retention</span></td>
+  <td class="num">0.25</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.25</strong></td>
+</tr>
+<tr class="total-row">
+  <td colspan="2" style="text-align:right;">Sub-theme total: Discovery &amp; Engagement</td>
+  <td></td>
+  <td class="num">0.45</td>
+  <td class="num">0.45</td>
+  <td class="num">1.10</td>
+  <td class="num">—</td>
+  <td class="num"><strong>2.00</strong></td>
+</tr>
+
+<!-- Pillar 4 Total -->
+<tr class="total-row" style="border-top: 2px solid #1a3a5c;">
+  <td colspan="2" style="text-align:right;">Pillar 4 Total</td>
+  <td></td>
+  <td class="num">0.90</td>
+  <td class="num">0.60</td>
+  <td class="num">1.70</td>
+  <td class="num">0.40</td>
+  <td class="num"><strong>3.60</strong></td>
+</tr>
+
+<!-- ═══════════════ PILLAR 5: AI & Campaign Intelligence ═══════════════ -->
+<tr class="pillar-header">
+  <td colspan="8">Pillar 5 — AI &amp; Campaign Intelligence</td>
+</tr>
+
+<!-- Sub-theme: AI Campaign Features -->
+<tr class="sub-header">
+  <td colspan="8">AI Campaign Features</td>
+</tr>
+<tr>
+  <td>Goal-Driven Campaign Agent</td>
+  <td>AI Campaign</td>
+  <td><span class="channel-tag ch-f2p">Free-to-Paid</span></td>
+  <td class="num">—</td>
+  <td class="num">0.60</td>
+  <td class="num">0.80</td>
+  <td class="num">—</td>
+  <td class="num"><strong>1.40</strong></td>
+</tr>
+<tr>
+  <td>Conversational Refinement</td>
+  <td>AI Campaign</td>
+  <td><span class="channel-tag ch-f2p">Free-to-Paid</span></td>
+  <td class="num">—</td>
+  <td class="num">0.20</td>
+  <td class="num">0.30</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.50</strong></td>
+</tr>
+<tr>
+  <td>Lifecycle Gap Analyzer</td>
+  <td>AI Campaign</td>
+  <td><span class="channel-tag ch-f2p">Free-to-Paid</span></td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">0.30</td>
+  <td class="num">—</td>
+  <td class="num"><strong>0.30</strong></td>
+</tr>
+<tr class="total-row">
+  <td colspan="2" style="text-align:right;">Sub-theme total: AI Campaign Features</td>
+  <td></td>
+  <td class="num">—</td>
+  <td class="num">0.80</td>
+  <td class="num">1.40</td>
+  <td class="num">—</td>
+  <td class="num"><strong>2.20</strong></td>
+</tr>
+
+<!-- Sub-theme: Code & Migration -->
+<tr class="sub-header">
+  <td colspan="8">Code &amp; Migration</td>
+</tr>
+<tr>
+  <td>Code Mode / Migration Tools</td>
+  <td>Code &amp; Migration</td>
+  <td><span class="channel-tag ch-upg">Upgrades</span></td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">0.30</td>
+  <td class="num"><strong>0.30</strong></td>
+</tr>
+<tr class="total-row">
+  <td colspan="2" style="text-align:right;">Sub-theme total: Code &amp; Migration</td>
+  <td></td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">—</td>
+  <td class="num">0.30</td>
+  <td class="num"><strong>0.30</strong></td>
+</tr>
+
+<!-- Sub-theme: Ease of Use -->
+<tr class="sub-header">
+  <td colspan="8">Ease of Use</td>
+</tr>
+<tr>
+  <td>Ease of Use Improvements (Templates, AI Quality)</td>
+  <td>Ease of Use</td>
+  <td><span class="channel-tag ch-multi">Multi</span></td>
+  <td class="num">0.50</td>
+  <td class="num">—</td>
+  <td class="num">0.50</td>
+  <td class="num">—</td>
+  <td class="num"><strong>1.00</strong></td>
+</tr>
+<tr class="total-row">
+  <td colspan="2" style="text-align:right;">Sub-theme total: Ease of Use</td>
+  <td></td>
+  <td class="num">0.50</td>
+  <td class="num">—</td>
+  <td class="num">0.50</td>
+  <td class="num">—</td>
+  <td class="num"><strong>1.00</strong></td>
+</tr>
+
+<!-- Pillar 5 Total -->
+<tr class="total-row" style="border-top: 2px solid #1a3a5c;">
+  <td colspan="2" style="text-align:right;">Pillar 5 Total</td>
+  <td></td>
+  <td class="num">0.50</td>
+  <td class="num">0.80</td>
+  <td class="num">1.90</td>
+  <td class="num">0.30</td>
+  <td class="num"><strong>3.50</strong></td>
+</tr>
+
+<!-- ═══════════════ GRAND TOTAL ═══════════════ -->
+<tr class="grand-total">
+  <td colspan="2" style="text-align:right;">Grand Total (30 initiatives)</td>
+  <td></td>
+  <td class="num">4.00</td>
+  <td class="num">5.60</td>
+  <td class="num">8.70</td>
+  <td class="num">2.70</td>
+  <td class="num"><strong>21.00</strong></td>
+</tr>
+
+</tbody>
+</table>
+
+<!-- ─────────────────────── PILLAR SUMMARY ─────────────────────── -->
+
+<h2>Pillar Summary</h2>
+<table>
+  <tr>
+    <th>Pillar</th>
+    <th class="num" style="width:9%;">Retention ($M)</th>
+    <th class="num" style="width:9%;">Trial-to-Paid ($M)</th>
+    <th class="num" style="width:9%;">Free-to-Paid ($M)</th>
+    <th class="num" style="width:9%;">Upgrades ($M)</th>
+    <th class="num" style="width:9%;">Total ($M)</th>
+    <th class="num" style="width:8%;">Share</th>
+  </tr>
+  <tr>
+    <td>P1 — Quality &amp; Rendering Fidelity</td>
+    <td class="num">1.90</td>
+    <td class="num">—</td>
+    <td class="num">1.10</td>
+    <td class="num">0.90</td>
+    <td class="num"><strong>3.90</strong></td>
+    <td class="num">19%</td>
+  </tr>
+  <tr>
+    <td>P2 — Brand Kit &amp; Brand Experience</td>
+    <td class="num">0.70</td>
+    <td class="num">0.80</td>
+    <td class="num">1.10</td>
+    <td class="num">0.50</td>
+    <td class="num"><strong>3.10</strong></td>
+    <td class="num">15%</td>
+  </tr>
+  <tr>
+    <td>P3 — Templates &amp; Activation</td>
+    <td class="num">—</td>
+    <td class="num">3.40</td>
+    <td class="num">2.90</td>
+    <td class="num">0.60</td>
+    <td class="num"><strong>6.90</strong></td>
+    <td class="num">33%</td>
+  </tr>
+  <tr>
+    <td>P4 — Content Reuse &amp; Discovery</td>
+    <td class="num">0.90</td>
+    <td class="num">0.60</td>
+    <td class="num">1.70</td>
+    <td class="num">0.40</td>
+    <td class="num"><strong>3.60</strong></td>
+    <td class="num">17%</td>
+  </tr>
+  <tr>
+    <td>P5 — AI &amp; Campaign Intelligence</td>
+    <td class="num">0.50</td>
+    <td class="num">0.80</td>
+    <td class="num">1.90</td>
+    <td class="num">0.30</td>
+    <td class="num"><strong>3.50</strong></td>
+    <td class="num">17%</td>
+  </tr>
+  <tr class="grand-total">
+    <td>Grand Total</td>
+    <td class="num">4.00</td>
+    <td class="num">5.60</td>
+    <td class="num">8.70</td>
+    <td class="num">2.70</td>
+    <td class="num"><strong>21.00</strong></td>
+    <td class="num">100%</td>
+  </tr>
+</table>
+
+<!-- ─────────────────────── APPENDIX A ─────────────────────── -->
+
+<h2>Appendix A: Revenue Formulas</h2>
+<p class="note">Each lever uses a purpose-built formula. Causal share discounts the portion of lift attributable to the editor/builder vs. other product factors.</p>
+
+<h3>Paid Cohort — Retention &amp; Upgrades ($6.7M)</h3>
+<table>
+  <tr>
+    <th>Lever</th>
+    <th>Formula</th>
+    <th class="num">Subtotal ($M)</th>
+  </tr>
+  <tr>
+    <td>PA1 Adoption → Upgrades</td>
+    <td><span class="formula">adoption_lift_pp × paid_users × pct_to_active × ARPU_steady × causal_share_adoption</span></td>
+    <td class="num">1.90</td>
+  </tr>
+  <tr>
+    <td>PA2 Activation → Upgrades</td>
+    <td><span class="formula">activation_lift_pp × paid_touched × pct_prevented_churn × ARPU_steady × causal_share_activation</span></td>
+    <td class="num">0.80</td>
+  </tr>
+  <tr>
+    <td>PA3 Repeat → Retention</td>
+    <td><span class="formula">repeat_lift_pp × first_senders × LTV_half × causal_share_repeat</span></td>
+    <td class="num">0.90</td>
+  </tr>
+  <tr>
+    <td>PA4 CSAT → Retention</td>
+    <td><span class="formula">CSAT_lift × standard_users × churn_reduction_rate × ARPU_steady × causal_share_CSAT</span></td>
+    <td class="num">3.10</td>
+  </tr>
+  <tr class="total-row">
+    <td colspan="2" style="text-align:right;">Paid Cohort Total</td>
+    <td class="num"><strong>6.70</strong></td>
+  </tr>
+</table>
+
+<h3>Free Cohort — Free-to-Paid Conversion ($8.7M)</h3>
+<table>
+  <tr>
+    <th>Lever</th>
+    <th>Formula</th>
+    <th class="num">Subtotal ($M)</th>
+  </tr>
+  <tr>
+    <td>F1 Adoption</td>
+    <td><span class="formula">adoption_lift_pp × free_users × pct_to_trial × trial_conv_rate × ARPU_booking × causal_share_free</span></td>
+    <td class="num">0.90</td>
+  </tr>
+  <tr>
+    <td>F2 Activation</td>
+    <td><span class="formula">activation_lift_pp × free_touched × pct_to_trial × trial_conv_rate × ARPU_booking × causal_share_free</span></td>
+    <td class="num">3.60</td>
+  </tr>
+  <tr>
+    <td>F3 Repeat</td>
+    <td><span class="formula">repeat_lift_pp × free_senders × pct_to_trial × trial_conv_rate × ARPU_booking × causal_share_free</span></td>
+    <td class="num">1.70</td>
+  </tr>
+  <tr>
+    <td>F4 CSAT</td>
+    <td><span class="formula">CSAT_lift × free_users × pct_to_trial × trial_conv_rate × ARPU_booking × causal_share_free</span></td>
+    <td class="num">2.50</td>
+  </tr>
+  <tr class="total-row">
+    <td colspan="2" style="text-align:right;">Free Cohort Total</td>
+    <td class="num"><strong>8.70</strong></td>
+  </tr>
+</table>
+
+<h3>Trial Cohort — Trial-to-Paid Conversion ($5.6M)</h3>
+<table>
+  <tr>
+    <th>Lever</th>
+    <th>Formula</th>
+    <th class="num">Subtotal ($M)</th>
+  </tr>
+  <tr>
+    <td>T1 Activation</td>
+    <td><span class="formula">trial_activation_lift × signups_yr × at_booking_ARPU × causal_share_trial</span></td>
+    <td class="num">5.00</td>
+  </tr>
+  <tr>
+    <td>T2 Repeat</td>
+    <td><span class="formula">trial_repeat_lift × signups_yr × at_booking_ARPU × causal_share_trial</span></td>
+    <td class="num">0.60</td>
+  </tr>
+  <tr class="total-row">
+    <td colspan="2" style="text-align:right;">Trial Cohort Total</td>
+    <td class="num"><strong>5.60</strong></td>
+  </tr>
+</table>
+
+<!-- ─────────────────────── APPENDIX B ─────────────────────── -->
+
+<h2>Appendix B: Base Data</h2>
+<table>
+  <tr>
+    <th style="width:40%;">Metric</th>
+    <th style="width:25%;">Value</th>
+    <th style="width:35%;">Notes</th>
+  </tr>
+  <tr>
+    <td>Paid active users / month</td>
+    <td class="num">1,015,648</td>
+    <td>Monthly active paid accounts</td>
+  </tr>
+  <tr>
+    <td>Free active users / month</td>
+    <td class="num">870,303</td>
+    <td>Monthly active free accounts</td>
+  </tr>
+  <tr>
+    <td>Trial signups / year</td>
+    <td class="num">~2,360,000</td>
+    <td>Annualized new trial starts</td>
+  </tr>
+  <tr>
+    <td>ARPU at-booking (monthly)</td>
+    <td class="num">$45.35</td>
+    <td>Revenue at signup / first payment</td>
+  </tr>
+  <tr>
+    <td>ARPU at-booking (annual)</td>
+    <td class="num">$544.20</td>
+    <td>$45.35 × 12</td>
+  </tr>
+  <tr>
+    <td>ARPU steady-state (monthly)</td>
+    <td class="num">$91.44</td>
+    <td>Mature account revenue (includes upgrades, add-ons)</td>
+  </tr>
+  <tr>
+    <td>ARPU steady-state (annual)</td>
+    <td class="num">$1,097.28</td>
+    <td>$91.44 × 12</td>
+  </tr>
+  <tr class="pillar-header">
+    <td colspan="3">Editor Causal Shares</td>
+  </tr>
+  <tr>
+    <td>Paid — Adoption / Activation</td>
+    <td class="num">50%</td>
+    <td>Share of outcome lift attributable to editor improvements</td>
+  </tr>
+  <tr>
+    <td>Paid — Repeat</td>
+    <td class="num">35%</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Paid — CSAT</td>
+    <td class="num">30%</td>
+    <td></td>
+  </tr>
+  <tr>
+    <td>Free</td>
+    <td class="num">20%</td>
+    <td>Lower share — free users have shallower engagement</td>
+  </tr>
+  <tr>
+    <td>Trial</td>
+    <td class="num">25%</td>
+    <td></td>
+  </tr>
+</table>
+
+<!-- ─────────────────────── APPENDIX C ─────────────────────── -->
+
+<h2>Appendix C: Assumptions &amp; Caveats</h2>
+<ul class="caveat-list">
+  <li><strong>Modeled estimates, not actuals.</strong> All revenue numbers are forward-looking modeled estimates based on cohort sizing, lift assumptions, and causal share discounting. They are not measured actuals.</li>
+  <li><strong>Causal shares are conservative.</strong> Editor causal shares (20–50%) intentionally discount contribution to avoid over-claiming. Actual impact may be higher or lower depending on feature adoption curves.</li>
+  <li><strong>No compounding.</strong> Each initiative's revenue is calculated independently. We do not compound benefits (e.g., an adoption lift that also improves repeat is counted in the higher-impact lever only).</li>
+  <li><strong>Multi-lever contributions.</strong> Many initiatives contribute to multiple revenue channels simultaneously (e.g., Brand Kit Auto-Extract appears in Upgrades, Free-to-Paid, and Trial-to-Paid). The per-channel amounts reflect the cohort-specific impact.</li>
+  <li><strong>Within-lever splits are proportional estimates.</strong> Per-initiative dollar splits within a given lever (e.g., the breakdown of PA4's $3.1M across 10 initiatives) are proportional estimates based on relative impact assessment, not independently measured.</li>
+  <li><strong>Attribution requires controlled experimentation.</strong> To validate these estimates, each initiative needs controlled A/B testing with holdout groups. These numbers should be treated as planning inputs, not commitments.</li>
+  <li><strong>ARPU values are blended.</strong> At-booking ARPU ($45.35/mo) applies to new conversions; steady-state ARPU ($91.44/mo) applies to retention and upgrade calculations. Actual per-plan ARPU varies.</li>
+  <li><strong>Time horizon is annual.</strong> All figures are annualized ARR impact assuming full rollout. Actual ramp depends on ship dates and adoption curves.</li>
+</ul>
+
+<p class="note" style="margin-top: 24px; border-top: 1px solid #ddd; padding-top: 12px;">
+  Unified Builder — Initiative Revenue Attribution &nbsp;|&nbsp; Generated for planning purposes &nbsp;|&nbsp; All values are modeled estimates subject to validation through controlled experimentation.
+</p>
+
+</body>
+</html>
