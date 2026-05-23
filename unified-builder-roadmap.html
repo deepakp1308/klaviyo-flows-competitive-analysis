@@ -33,6 +33,8 @@
   table { width: 100%; border-collapse: collapse; font-size: 9pt; margin-top: 8px; }
   th, td { border: 1px solid #bfbfbf; padding: 8px 10px; vertical-align: top; text-align: left; }
   th { background: #d9e2f3; font-weight: 700; font-size: 9pt; }
+  .cluster-priority-cell { background: #f2f2f2; font-weight: 700; }
+  .exec-ev { font-weight: 700; color: #B91C1C; }
   .pillar-cell { background: #f2f2f2; min-width: 180px; }
   .pillar-name { font-weight: 700; font-size: 10pt; }
   .pillar-scope { font-size: 8pt; color: #555; font-style: italic; margin-top: 3px; }
@@ -736,9 +738,188 @@
 
 <hr class="divider">
 
+<!-- CUSTOMER_TARGETING_EXEC_START -->
 <hr class="divider-heavy">
 
-<h1>Business Case &amp; Projections</h1>
+<h1 id="customer-targeting-exec">Customer Targeting — Executive Priority Ranking</h1>
+<p style="color:#555; font-style:italic; margin-bottom:10px;">Who to prioritize for FY27 Builder ARR · Full population BigQuery analysis (1,651,592 eligible customers) · <a href="unified-builder-workflow-health.html#targeting">Full targeting analysis &rarr;</a></p>
+
+<div class="vision-box">
+  <p><strong>Bottom line:</strong> Close the $920K gap to $21M by executing <strong>Bundle A in Q1&ndash;Q2</strong> (Universal Content + migration + Code Mode), running <strong>Bundle B in parallel</strong> (rendering/trust for high-friction cohorts), and deferring volume-heavy dormant-free activation (C7) until foundation ships. <strong>903,111 customers (55% of cohort) in the top 6 clusters deliver $16.67M (83% of FY27 EV).</strong> Do not reshuffle the roadmap &mdash; compress Q1/Q2 delivery on the Wave 1 critical path.</p>
+</div>
+
+<div class="stat-grid">
+  <div class="stat-box"><div class="stat-num">1,651,592</div><div class="stat-desc">Eligible Builder customers</div></div>
+  <div class="stat-box"><div class="stat-num">$20.08M</div><div class="stat-desc">FY27 P50 expected value</div></div>
+  <div class="stat-box"><div class="stat-num">$920K</div><div class="stat-desc">Gap to $21M target</div></div>
+  <div class="stat-box"><div class="stat-num">$16.67M</div><div class="stat-desc">Bundle A EV (780,441 customers)</div></div>
+</div>
+
+<div class="guiding">
+  <p><strong>How to read priority tiers</strong></p>
+  <p><strong>P1 &mdash; Wave 1 Revenue (Bundle A):</strong> 780,441 customers &middot; $16.67M FY27 EV &middot; Execute Q1&ndash;Q2. Universal Content, migration, Code Mode, AI Setup Agent.</p>
+  <p><strong>P2 &mdash; Foundation Fix (Bundle B):</strong> 304,948 customers &middot; $763K FY27 EV &middot; Parallel Q1. Rendering/trust before activation (C8, C9, C0).</p>
+  <p><strong>P3 &mdash; Activation &amp; AI (Bundle C):</strong> 566,203 customers &middot; $2.65M FY27 EV &middot; Q2&ndash;Q3 after foundation. Templates, AI builder, onboarding.</p>
+  <p><strong>P4 &mdash; Deprioritize for $21M:</strong> C7 Dormant Free (345,413 customers, $4K EV). Largest count, lowest return.</p>
+</div>
+
+<table>
+  <thead>
+    <tr>
+      <th>Priority Rank</th><th>Tier</th><th>Cluster</th><th>Customers</th><th>% Cohort</th><th>Avg MRR</th><th>FY27 Revenue Impact</th><th>Bundle</th><th>Primary Lever</th><th>Why Prioritize (or Deprioritize)</th>
+    </tr>
+  </thead>
+  <tbody><tr>
+          <td style="text-align:center"><strong>1</strong></td>
+          <td style="text-align:center">P1</td>
+          <td class="cluster-priority-cell">C2 · High-MRR Power Users</td>
+          <td style="text-align:right">37,079</td>
+          <td style="text-align:right">2.2%</td>
+          <td style="text-align:right">$676</td>
+          <td class="exec-ev" style="text-align:right">$5.17M</td>
+          <td style="text-align:center">A</td>
+          <td>Universal Content</td>
+          <td>Highest FY27 EV; $676 avg MRR power users. Universal Content + migration + Code Mode unlock disproportionate value per account.</td>
+        </tr><tr>
+          <td style="text-align:center"><strong>2</strong></td>
+          <td style="text-align:center">P1</td>
+          <td class="cluster-priority-cell">C5 · Enterprise-Scale Power Senders</td>
+          <td style="text-align:right">33,836</td>
+          <td style="text-align:right">2.0%</td>
+          <td style="text-align:right">$433</td>
+          <td class="exec-ev" style="text-align:right">$3.36M</td>
+          <td style="text-align:center">A</td>
+          <td>Universal Content</td>
+          <td>Enterprise-intensity senders (~194 creates/mo). Stress-test rendering and ship Code Mode; high completion = fast adoption.</td>
+        </tr><tr>
+          <td style="text-align:center"><strong>3</strong></td>
+          <td style="text-align:center">P1</td>
+          <td class="cluster-priority-cell">C6 · Tenured High-Completion Senders</td>
+          <td style="text-align:right">254,185</td>
+          <td style="text-align:right">15.4%</td>
+          <td style="text-align:right">$45</td>
+          <td class="exec-ev" style="text-align:right">$2.54M</td>
+          <td style="text-align:center">A</td>
+          <td>Universal Content</td>
+          <td>Largest healthy mid-market cluster (15% of cohort). Protect established 83% completion habit with UC + AI efficiency plays.</td>
+        </tr><tr>
+          <td style="text-align:center"><strong>4</strong></td>
+          <td style="text-align:center">P1</td>
+          <td class="cluster-priority-cell">C3 · Consistent Volume Senders</td>
+          <td style="text-align:right">104,424</td>
+          <td style="text-align:right">6.3%</td>
+          <td style="text-align:right">$88</td>
+          <td class="exec-ev" style="text-align:right">$2.11M</td>
+          <td style="text-align:center">A</td>
+          <td>Universal Content</td>
+          <td>Stable volume senders with 76% completion. Retention + cross-channel expansion; strong Universal Content eligibility.</td>
+        </tr><tr>
+          <td style="text-align:center"><strong>5</strong></td>
+          <td style="text-align:center">P1</td>
+          <td class="cluster-priority-cell">C1 · Reliable Mid-Market Senders</td>
+          <td style="text-align:right">277,782</td>
+          <td style="text-align:right">16.8%</td>
+          <td style="text-align:right">$33</td>
+          <td class="exec-ev" style="text-align:right">$1.90M</td>
+          <td style="text-align:center">A</td>
+          <td>Ai Builder</td>
+          <td>Broad mid-market base (17% of cohort). Reliable senders — AI Setup Agent + Universal Content drive efficiency at scale.</td>
+        </tr><tr>
+          <td style="text-align:center"><strong>6</strong></td>
+          <td style="text-align:center">P3</td>
+          <td class="cluster-priority-cell">C4 · Growing-but-Incomplete Senders</td>
+          <td style="text-align:right">195,805</td>
+          <td style="text-align:right">11.9%</td>
+          <td style="text-align:right">$39</td>
+          <td class="exec-ev" style="text-align:right">$1.59M</td>
+          <td style="text-align:center">C</td>
+          <td>Ai Builder</td>
+          <td>Create-but-don't-publish gap (~43% completion). Template + AI assist after foundation fixes; meaningful EV but needs trust first.</td>
+        </tr><tr>
+          <td style="text-align:center"><strong>7</strong></td>
+          <td style="text-align:center">P1</td>
+          <td class="cluster-priority-cell">C11 · Rising-Usage Power Senders</td>
+          <td style="text-align:right">73,135</td>
+          <td style="text-align:right">4.4%</td>
+          <td style="text-align:right">$94</td>
+          <td class="exec-ev" style="text-align:right">$1.58M</td>
+          <td style="text-align:center">A</td>
+          <td>Universal Content</td>
+          <td>Rising-usage power senders with expansion headroom. Wave-1 Universal Content candidates with growing publish trends.</td>
+        </tr><tr>
+          <td style="text-align:center"><strong>8</strong></td>
+          <td style="text-align:center">P3</td>
+          <td class="cluster-priority-cell">C10 · AI-Adopted Premium Senders</td>
+          <td style="text-align:right">4,573</td>
+          <td style="text-align:right">0.3%</td>
+          <td style="text-align:right">$561</td>
+          <td class="exec-ev" style="text-align:right">$589K</td>
+          <td style="text-align:center">C</td>
+          <td>Universal Content</td>
+          <td>Premium AI-adopted senders ($561 MRR). Expand Universal Content + Code Mode; small count, high per-user value.</td>
+        </tr><tr>
+          <td style="text-align:center"><strong>9</strong></td>
+          <td style="text-align:center">P3</td>
+          <td class="cluster-priority-cell">C12 · AI-Ready Mid-Market Senders</td>
+          <td style="text-align:right">20,412</td>
+          <td style="text-align:right">1.2%</td>
+          <td style="text-align:right">$107</td>
+          <td class="exec-ev" style="text-align:right">$471K</td>
+          <td style="text-align:center">C</td>
+          <td>Universal Content</td>
+          <td>AI-ready mid-market bridge cluster. Connect AI builder investments to Universal Content migration path.</td>
+        </tr><tr>
+          <td style="text-align:center"><strong>10</strong></td>
+          <td style="text-align:center">P2</td>
+          <td class="cluster-priority-cell">C8 · Test-Heavy, Low-Publish Friction</td>
+          <td style="text-align:right">23,196</td>
+          <td style="text-align:right">1.4%</td>
+          <td style="text-align:right">$73</td>
+          <td class="exec-ev" style="text-align:right">$382K</td>
+          <td style="text-align:center">B</td>
+          <td>Universal Content</td>
+          <td>Test-heavy, low-publish (33% completion). Rendering/trust fixes are prerequisite — foundation before activation.</td>
+        </tr><tr>
+          <td style="text-align:center"><strong>11</strong></td>
+          <td style="text-align:center">P2</td>
+          <td class="cluster-priority-cell">C9 · High-Friction Abandoners</td>
+          <td style="text-align:right">132,430</td>
+          <td style="text-align:right">8.0%</td>
+          <td style="text-align:right">$13</td>
+          <td class="exec-ev" style="text-align:right">$280K</td>
+          <td style="text-align:center">B</td>
+          <td>Ai Builder</td>
+          <td>Highest friction (0.75): creates but almost never publishes. Fix foundation in Q1 parallel track; low FY27 EV but high product-health signal.</td>
+        </tr><tr>
+          <td style="text-align:center"><strong>12</strong></td>
+          <td style="text-align:center">P2</td>
+          <td class="cluster-priority-cell">C0 · Dormant Paid (Declining Usage)</td>
+          <td style="text-align:right">149,322</td>
+          <td style="text-align:right">9.0%</td>
+          <td style="text-align:right">$61</td>
+          <td class="exec-ev" style="text-align:right">$101K</td>
+          <td style="text-align:center">B</td>
+          <td>Ai Builder</td>
+          <td>Dormant paid with declining usage. Win-back via DRAFT-resurrect + rendering trust; churn protection, not growth lever.</td>
+        </tr><tr>
+          <td style="text-align:center"><strong>13</strong></td>
+          <td style="text-align:center">P4</td>
+          <td class="cluster-priority-cell">C7 · Dormant Free / Low-MRR Base</td>
+          <td style="text-align:right">345,413</td>
+          <td style="text-align:right">20.9%</td>
+          <td style="text-align:right">$20</td>
+          <td class="exec-ev" style="text-align:right">$4K</td>
+          <td style="text-align:center">C</td>
+          <td>Rendering Fix</td>
+          <td>Largest cluster by count (21% of cohort) but near-zero completion. Activation only after Bundle B fixes; do not prioritize for $21M gap.</td>
+        </tr></tbody>
+</table>
+<p style="font-size:8pt; color:#888; margin-top:8px;">Priority rank = FY27 EV if roadmap initiatives reach eligible customers (16% FY27 realization factor). Cohort = paid + active free Builder users with 90d activity. Not all 48M Mailchimp accounts.</p>
+<!-- CUSTOMER_TARGETING_EXEC_END -->
+
+<hr class="divider-heavy">
+
+<h1 id="business-case">Business Case &amp; Projections</h1>
 <p style="color:#555; font-style:italic; margin-bottom:10px;">FY26 baseline &rarr; FY27 targets. Editor-attributed ARR model across paid, free, and trial cohorts using conservative causal shares.</p>
 <p style="font-size:8pt; color:#888; margin-bottom:16px;">Sources: bi_aggregate.product_journey_monthly, bi_aggregate.mbr_monthly, product_journey_monthly. Pipeline date 2026-05-11.</p>
 
