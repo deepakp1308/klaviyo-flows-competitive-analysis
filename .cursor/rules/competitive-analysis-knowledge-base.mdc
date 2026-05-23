@@ -1,0 +1,78 @@
+---
+description: Klaviyo/Mailchimp/Shopify competitive analysis knowledge base — site structure, derivation methodology, and strategic outputs
+alwaysApply: true
+---
+
+# Competitive Analysis Knowledge Base
+
+**Live site:** https://deepakp1308.github.io/klaviyo-flows-competitive-analysis/
+**Repo:** klaviyo-flows-competitive-analysis (GitHub Pages, static HTML)
+
+## Document Map
+
+### Core competitor briefs (parallel 2-tab structure: Executive Brief + VoC)
+| File | Subject | VoC sample |
+|------|---------|------------|
+| `index.html` | **Klaviyo Flows** — Flows AI, Marketing Agent, predictive triggers, 5-channel canvas | 600+ reviews/threads |
+| `mailchimp.html` | **Mailchimp CJB/Marketing Automation Flows** — 13-tab FY27 strategy dossier | 14K+ public + Slack HVC + HeyMarvin |
+| `shopify.html` | **Shopify Marketing Automations + Flow** — Sidekick/Magic, native commerce data | 10K+ reviews/threads |
+| `emerging-threats.html` | **6 startups** vs all three incumbents: Customer.io, Attentive, Auxia, Postscript, Mailmodo, Loops | 3K+ reviews/threads |
+
+### Mailchimp internal strategy layers
+| File | Subject |
+|------|---------|
+| `mailchimp-editor.html` | 18-tab unified editor/builder brief (NEB, SMS, Brand Kit, Freddie) |
+| `unified-builder-*.html` (6 files) | FY27 Unified Builder: roadmap, VP swimlanes, critical path, revenue attribution, workflow health, competitive position (~$21M ARR, 52 initiatives) |
+| `cjb-repo-analysis.html` | CJB backend forensic (13 repos, C2 re-platform, UI still in monolith) |
+| `nuni-repo-analysis.html` | NUNI editor forensic (62 repos, schema drift, AI UI 8× faster than editor) |
+| `freddie-concerns.html` | 3 structural concerns: foundation pain, Canva/Klaviyo gap, NEA migration stalled |
+| `freddie-deepak-phase1.html` / `phase2.html` | Canva-gap creative parity + Mailchimp-native send-time capabilities |
+
+### Doc generators (untracked locally)
+`create_all_docs.py`, `create_docx.py`, `generate_roadmap_docx.py` — export Unified Builder content to DOCX.
+
+## Derivation Methodology (layered evidence stack)
+
+1. **Competitive desk research** — Klaviyo/Mailchimp/Shopify/emerging-threat product pages, help center, pricing, case studies; third-party comparisons (Costbench, Jellyreach, AI:Productivity, Nudgify, Omnisend, etc.)
+2. **Public VoC** — Qualitative synthesis (NOT statistical NLP): G2, Trustpilot, Capterra, Reddit, vendor communities, agency blogs, YouTube. Thematic coding into Love/Hate/Mixed + net-sentiment scores (qualitative, not computed)
+3. **Slack HVC VoC** (Mailchimp internal) — `#hvc_feedback`, `#mc-hvc-escalations`, `#mc-feedback-summary`; HVC = $299+/mo MRR; dedup by user+quote; keyword + negative sentiment filter
+4. **HeyMarvin UX research** — 50 videos → Whisper → 21 customer briefs → synthesis; repo: github.com/deepakp1308/mailchimp-automation-research (Intuit-internal)
+5. **BigQuery product health** — `bi_aggregate.product_journey_monthly` (89.4M rows), `mbr_monthly`; stages Unexplored→Explore→Try→Establish→Abandon
+6. **PRD audit** — 9 Elizabeth Bertasi PDFs mapped to evidence gaps
+7. **Repo forensics** — CJB (`crmmktg-mktauto`) and NUNI (`collab-email`) GitHub org analysis
+8. **Cross-tab synthesis** — Initiative Canvas (72 initiatives), Strategy 6-Pager, Growth Model, Loss Attribution
+
+## Cross-Competitor Gap Mappings (in mailchimp.html Initiative Canvas)
+
+- **Klaviyo: 26 named gaps** — 5-channel canvas, Marketing Agent, Flows AI, predictive triggers, Smart Send Time, Channel Affinity, Universal Content, free-tier flows, etc. → P2/P4/P5 initiatives
+- **Shopify: 16 named gaps** — Sidekick conversational editing (D1 headline steal), native commerce data, free bundling, Flow ops scale → P4/P5
+- **Emerging threats: 6 companies** — vertical slices (Customer.io SaaS, Postscript Shopify SMS, Auxia agentic, etc.)
+
+## Key Strategic Numbers (Mailchimp Automations FY27)
+
+- **Target:** +$20–25M automation ARR (lower band of $20–32M envelope)
+- **HVC exposure:** $177.5K/mo (73 themes, automation); $70K/mo nav/search (separate)
+- **Product health:** CJB Established 132K (+18.4% YoY); Activation 33.6%; Churn 40.2%; Free CJB adoption 1.1%
+- **Binding constraint:** Activation funnel, not capability (customers use 10–20% of features)
+- **Critical dependency:** Eventbus migration gates P3–P5 (real-time triggers, WhatsApp, conversational)
+
+## Competitive Positioning Summary
+
+- **Klaviyo:** DTC depth moat (Shopify gravity, 5-channel canvas, 10+ in-flow AI, Marketing Agent); exposed on pricing (Feb 2025 active-profile model), support, UI redesign backlash
+- **Shopify:** Free/default starter ("good enough, often free"); exposed on channel depth, A/B testing, predictive triggers; hybrid pattern "Klaviyo flows + Shopify Email broadcast"
+- **Mailchimp:** Strong UX simplicity + brand; squeezed from below (Shopify free) and above (Klaviyo depth); Classic deprecation June 2025 gutted free tier
+- **Emerging:** Death by verticalized cuts (4.65/5 G2 avg); no single replacement
+
+## Unified Builder FY27 (Editor lane, separate from CJB)
+
+- **4 pillars:** P1 Trust, P2 Universal Content/Migration, P3 AI/TTV, P4 Omni-channel
+- **~$21M ARR target;** critical path: rendering parity → Universal Content → AI Setup Agent → shared email+SMS blocks → co-editing
+- **Freddie concern:** 0/17 HVC themes solved; AI shipping 8× faster than trust fixes
+
+## When editing or extending this repo
+
+- Preserve cross-links between briefs (toolbar nav pattern)
+- Maintain two-tab (or multi-tab) hash routing (`#brief`, `#sentiment`, etc.)
+- VoC claims must cite derivation method (qualitative synthesis, sample size)
+- Mailchimp internal tabs reference Intuit-internal sources — handle accordingly
+- Competitor briefs frame "what it means for us" from Mailchimp perspective
