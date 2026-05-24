@@ -73,6 +73,40 @@
   #panel-strategy .benefit h3 { font-size: 10pt; margin-bottom: 4px; }
   #panel-strategy .benefit p { font-size: 9pt; line-height: 1.5; color: #333; }
 
+  /* Revenue Attribution + Competitive Position tabs */
+  #panel-revenue, #panel-competitive { font-size: 9pt; line-height: 1.4; }
+  #panel-revenue h1, #panel-competitive h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; border-bottom: none; }
+  #panel-revenue h2, #panel-competitive h2 { font-size: 11pt; font-weight: 700; margin-bottom: 8px; margin-top: 24px; border-bottom: 2px solid #1a3a5c; padding-bottom: 4px; color: #000; }
+  #panel-revenue table, #panel-competitive table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 8px; }
+  #panel-revenue th, #panel-competitive th { background: #1a3a5c; color: #fff; font-weight: 700; font-size: 8pt; border: 1px solid #bfbfbf; padding: 6px 8px; }
+  #panel-revenue td, #panel-competitive td { border: 1px solid #bfbfbf; padding: 6px 8px; vertical-align: top; text-align: left; }
+  .pillar-header td { background: #f2f2f2; font-weight: 700; font-size: 9pt; }
+  .sub-header td { background: #fafafa; font-weight: 600; font-size: 8.5pt; font-style: italic; }
+  .total-row td { font-weight: 700; background: #eef2ff; }
+  .grand-total td { font-weight: 700; background: #1a3a5c; color: #fff; font-size: 9pt; }
+  .num { text-align: right; font-variant-numeric: tabular-nums; }
+  .channel-tag { display: inline-block; font-size: 7.5pt; font-weight: 700; padding: 1px 6px; border-radius: 2px; white-space: nowrap; }
+  .ch-adopt { background: #e6f4ea; color: #1a6b3a; }
+  .ch-activ { background: #fef3e0; color: #8a5d00; }
+  .ch-retain { background: #e8f0fe; color: #1a3a5c; }
+  .ch-perf { background: #fce8e6; color: #8c1d18; }
+  .ch-multi { background: #f3e8fd; color: #5b2c8a; }
+  .summary-box { background: #f5f5f5; border: 2px solid #1a3a5c; padding: 16px; margin: 16px 0; }
+  .lead { background: #DCFCE7; font-weight: 700; color: #166534; text-align: center; }
+  .parity { background: #FEF3C7; font-weight: 700; color: #92400E; text-align: center; }
+  .trail { background: #FEE2E2; font-weight: 700; color: #991B1B; text-align: center; }
+  .cap-cell { font-weight: 600; background: #f9fafb; }
+  .cat-row td { background: #f2f2f2; font-weight: 700; font-size: 9pt; }
+  .scorecard { display: flex; gap: 16px; margin: 16px 0; flex-wrap: wrap; }
+  .score-card { flex: 1; min-width: 120px; border: 2px solid #1a3a5c; padding: 12px; text-align: center; }
+  .score-card .num { font-size: 20pt; font-weight: 700; }
+  .score-card .label { font-size: 8pt; color: #555; margin-top: 2px; }
+  .score-lead .num { color: #166534; }
+  .score-parity .num { color: #92400E; }
+  .score-trail .num { color: #991B1B; }
+  .insight-box { background: #f5f5f5; border: 1px solid #ddd; padding: 12px; margin: 12px 0; font-size: 9pt; }
+  .insight-box strong { color: #1a3a5c; }
+
   .meta-box { background: #f5f5f5; border: 1px solid #ddd; padding: 12px 16px; margin-bottom: 16px; display: flex; gap: 32px; flex-wrap: wrap; }
   .meta-item { font-size: 8.5pt; }
   .meta-item strong { color: #166D3B; }
@@ -120,6 +154,8 @@
 <div class="nav" role="tablist">
   <button class="tab active" role="tab" aria-selected="true" data-tab="workflow-health">CJB Workflow Health &amp; VOC</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="strategy">CJB Strategy and Roadmap</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="revenue">Revenue Attribution</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="competitive">Competitive Position</button>
 </div>
 
 <div id="panel-workflow-health" class="tabpanel active" role="tabpanel">
@@ -1324,6 +1360,228 @@
 
 </div><!-- /panel-strategy -->
 
+<div id="panel-revenue" class="tabpanel" role="tabpanel">
+
+<h1>Initiative-Level Revenue Attribution</h1>
+<p style="font-size:9pt; color:#555; font-style:italic; margin-bottom:16px;">Per-initiative revenue breakdown across adoption, activation, retention, and performance levers. Total: ~$22.0M ARR (mid scenario within $20&ndash;25M commit).</p>
+
+<div class="summary-box">
+  <h3 style="font-size:10pt; margin-bottom:6px;">Revenue by Lever</h3>
+  <table>
+    <tr><th>Lever</th><th class="num" style="width:100px;">ARR ($M)</th><th class="num" style="width:70px;">Share</th><th>What It Captures</th></tr>
+    <tr><td><span class="channel-tag ch-adopt">Adoption</span></td><td class="num">$10.50</td><td class="num">48%</td><td>L1: Net new automation adopters (16% &rarr; 22% platform adoption)</td></tr>
+    <tr><td><span class="channel-tag ch-activ">Activation</span></td><td class="num">$4.00</td><td class="num">18%</td><td>L2 + L4: Activation conversion + reduced setup abandonment</td></tr>
+    <tr><td><span class="channel-tag ch-retain">Retention</span></td><td class="num">$4.50</td><td class="num">20%</td><td>L3 + L5: Repeat usage, churn reduction, campaign performance</td></tr>
+    <tr><td><span class="channel-tag ch-perf">Rev Expansion</span></td><td class="num">$3.00</td><td class="num">14%</td><td>L6: Revenue per customer lift ($616 &rarr; $700&ndash;800/mo)</td></tr>
+    <tr class="grand-total"><td>Total</td><td class="num">$22.00</td><td class="num">100%</td><td></td></tr>
+  </table>
+</div>
+
+<h2>Initiative Revenue Attribution</h2>
+<p style="font-size:8pt; color:#888; margin-top:0;">All values in $M. &ldquo;&mdash;&rdquo; = no attributed revenue in that lever. Initiatives may contribute to multiple levers simultaneously.</p>
+
+<table>
+<thead>
+  <tr><th style="width:24%;">Initiative</th><th style="width:12%;">Sub-Theme</th><th style="width:9%;">Primary Lever</th><th class="num" style="width:9%;">Adoption ($M)</th><th class="num" style="width:9%;">Activation ($M)</th><th class="num" style="width:9%;">Retention ($M)</th><th class="num" style="width:9%;">Rev Exp ($M)</th><th class="num" style="width:9%;">Total ($M)</th></tr>
+</thead>
+<tbody>
+
+<tr class="pillar-header"><td colspan="8">Pillar 1 &mdash; Make Every Automation Flow Work, Every Time</td></tr>
+
+<tr class="sub-header"><td colspan="8">Editor / UI Stability</td></tr>
+<tr><td>Journey Builder front-end refactor</td><td>Editor / UI</td><td><span class="channel-tag ch-retain">Retention</span></td><td class="num">&mdash;</td><td class="num">0.20</td><td class="num">0.80</td><td class="num">&mdash;</td><td class="num"><strong>1.00</strong></td></tr>
+<tr><td>Default view / sort + pop-ups + two-surface fix</td><td>Editor / UI</td><td><span class="channel-tag ch-retain">Retention</span></td><td class="num">&mdash;</td><td class="num">0.10</td><td class="num">0.20</td><td class="num">&mdash;</td><td class="num"><strong>0.30</strong></td></tr>
+
+<tr class="sub-header"><td colspan="8">Trigger UX &amp; Setup</td></tr>
+<tr><td>Trigger modal + content gating + activation transparency</td><td>Trigger UX</td><td><span class="channel-tag ch-activ">Activation</span></td><td class="num">0.20</td><td class="num">0.60</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num"><strong>0.80</strong></td></tr>
+<tr><td>Plain-English labels + time-delay UX</td><td>Trigger UX</td><td><span class="channel-tag ch-activ">Activation</span></td><td class="num">&mdash;</td><td class="num">0.20</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num"><strong>0.20</strong></td></tr>
+
+<tr class="sub-header"><td colspan="8">Platform &amp; Reporting</td></tr>
+<tr><td>Eventbus migration + real-time triggers</td><td>Platform</td><td><span class="channel-tag ch-multi">Multi</span></td><td class="num">0.20</td><td class="num">&mdash;</td><td class="num">0.30</td><td class="num">0.10</td><td class="num"><strong>0.60</strong></td></tr>
+<tr><td>Reporting correctness + per-step KPIs + aggregate reports</td><td>Reporting</td><td><span class="channel-tag ch-retain">Retention</span></td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">0.40</td><td class="num">0.10</td><td class="num"><strong>0.50</strong></td></tr>
+<tr><td>Report sharing / export + per-link clicks</td><td>Reporting</td><td><span class="channel-tag ch-retain">Retention</span></td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">0.20</td><td class="num">&mdash;</td><td class="num"><strong>0.20</strong></td></tr>
+
+<tr class="sub-header"><td colspan="8">Functionality &amp; Migration</td></tr>
+<tr><td>Frequency cap + re-entry fix + regression suite</td><td>Functionality</td><td><span class="channel-tag ch-retain">Retention</span></td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">0.30</td><td class="num">&mdash;</td><td class="num"><strong>0.30</strong></td></tr>
+<tr><td>Compliance + deliverability tooling</td><td>Compliance</td><td><span class="channel-tag ch-retain">Retention</span></td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">0.20</td><td class="num">&mdash;</td><td class="num"><strong>0.20</strong></td></tr>
+<tr><td>Classic &rarr; CJB migration + single builder</td><td>Migration</td><td><span class="channel-tag ch-retain">Retention</span></td><td class="num">&mdash;</td><td class="num">0.10</td><td class="num">0.30</td><td class="num">&mdash;</td><td class="num"><strong>0.40</strong></td></tr>
+
+<tr class="sub-header"><td colspan="8">Flow Ergonomics</td></tr>
+<tr><td>Side-overlay + clone + visual diff + direct-click</td><td>Ergonomics</td><td><span class="channel-tag ch-activ">Activation</span></td><td class="num">&mdash;</td><td class="num">0.30</td><td class="num">0.20</td><td class="num">&mdash;</td><td class="num"><strong>0.50</strong></td></tr>
+
+<tr class="total-row" style="border-top:2px solid #1a3a5c;"><td colspan="2" style="text-align:right;">Pillar 1 Total</td><td></td><td class="num">0.40</td><td class="num">1.50</td><td class="num">2.90</td><td class="num">0.20</td><td class="num"><strong>5.00</strong></td></tr>
+
+<tr class="pillar-header"><td colspan="8">Pillar 2 &mdash; Trigger Flows on What Customers Actually Do</td></tr>
+
+<tr class="sub-header"><td colspan="8">Trigger Library Expansion</td></tr>
+<tr><td>12+ behavioral triggers (Klaviyo parity)</td><td>Triggers</td><td><span class="channel-tag ch-adopt">Adoption</span></td><td class="num">1.50</td><td class="num">&mdash;</td><td class="num">0.30</td><td class="num">0.20</td><td class="num"><strong>2.00</strong></td></tr>
+<tr><td>Predictive triggers + date-relative + discount/segment</td><td>Triggers</td><td><span class="channel-tag ch-adopt">Adoption</span></td><td class="num">0.80</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">0.40</td><td class="num"><strong>1.20</strong></td></tr>
+<tr><td>Appointment triggers + webhooks + scheduled activation</td><td>Triggers</td><td><span class="channel-tag ch-adopt">Adoption</span></td><td class="num">0.60</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">0.20</td><td class="num"><strong>0.80</strong></td></tr>
+
+<tr class="sub-header"><td colspan="8">Deep E-Commerce</td></tr>
+<tr><td>Shopify-deep integration + multi-platform parity</td><td>E-Commerce</td><td><span class="channel-tag ch-adopt">Adoption</span></td><td class="num">1.50</td><td class="num">&mdash;</td><td class="num">0.20</td><td class="num">0.30</td><td class="num"><strong>2.00</strong></td></tr>
+<tr><td>Auto-build on store-connect + app connector library</td><td>E-Commerce</td><td><span class="channel-tag ch-multi">Multi</span></td><td class="num">0.60</td><td class="num">0.40</td><td class="num">&mdash;</td><td class="num">0.20</td><td class="num"><strong>1.20</strong></td></tr>
+
+<tr class="sub-header"><td colspan="8">Advanced Segmentation</td></tr>
+<tr><td>Event-property access + nested segmentation + trigger splits</td><td>Segmentation</td><td><span class="channel-tag ch-perf">Rev Expansion</span></td><td class="num">0.30</td><td class="num">&mdash;</td><td class="num">0.20</td><td class="num">0.80</td><td class="num"><strong>1.30</strong></td></tr>
+<tr><td>Reusable filters + save-segment-in-the-moment</td><td>Segmentation</td><td><span class="channel-tag ch-retain">Retention</span></td><td class="num">&mdash;</td><td class="num">0.10</td><td class="num">0.20</td><td class="num">&mdash;</td><td class="num"><strong>0.30</strong></td></tr>
+
+<tr class="sub-header"><td colspan="8">Templates &amp; Activation</td></tr>
+<tr><td>Searchable gallery + industry templates + Brand Kit templates</td><td>Templates</td><td><span class="channel-tag ch-activ">Activation</span></td><td class="num">0.40</td><td class="num">0.60</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num"><strong>1.00</strong></td></tr>
+<tr><td>ICP homepage + free-tier reinstatement + intl localization</td><td>Activation</td><td><span class="channel-tag ch-activ">Activation</span></td><td class="num">0.30</td><td class="num">0.40</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num"><strong>0.70</strong></td></tr>
+
+<tr class="sub-header"><td colspan="8">Vertical Automation</td></tr>
+<tr><td>Vertical UIs + Liquid + unified transactional+marketing</td><td>Vertical</td><td><span class="channel-tag ch-adopt">Adoption</span></td><td class="num">0.40</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">0.10</td><td class="num"><strong>0.50</strong></td></tr>
+
+<tr class="total-row" style="border-top:2px solid #1a3a5c;"><td colspan="2" style="text-align:right;">Pillar 2 Total</td><td></td><td class="num">6.40</td><td class="num">1.50</td><td class="num">0.90</td><td class="num">2.20</td><td class="num"><strong>11.00</strong></td></tr>
+
+<tr class="pillar-header"><td colspan="8">Pillar 3 &mdash; Let AI Build the Flow, Optimize the Send, and Pick the Channel</td></tr>
+
+<tr class="sub-header"><td colspan="8">AI Generation</td></tr>
+<tr><td>Autonomous setup agent</td><td>AI Generation</td><td><span class="channel-tag ch-activ">Activation</span></td><td class="num">0.50</td><td class="num">0.80</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num"><strong>1.30</strong></td></tr>
+<tr><td>AI generation across 6+ surfaces</td><td>AI Generation</td><td><span class="channel-tag ch-adopt">Adoption</span></td><td class="num">0.60</td><td class="num">0.20</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num"><strong>0.80</strong></td></tr>
+
+<tr class="sub-header"><td colspan="8">Conversational Editing</td></tr>
+<tr><td>Conversational editing via Intuit Assist</td><td>Conversational</td><td><span class="channel-tag ch-activ">Activation</span></td><td class="num">0.30</td><td class="num">0.40</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num"><strong>0.70</strong></td></tr>
+<tr><td>Prompt-first journey builder</td><td>Conversational</td><td><span class="channel-tag ch-adopt">Adoption</span></td><td class="num">0.40</td><td class="num">0.20</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num"><strong>0.60</strong></td></tr>
+
+<tr class="sub-header"><td colspan="8">Agentic Optimization</td></tr>
+<tr><td>Per-user treatment + Smart Send + Channel Affinity</td><td>Agentic</td><td><span class="channel-tag ch-perf">Rev Expansion</span></td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">0.40</td><td class="num">0.60</td><td class="num"><strong>1.00</strong></td></tr>
+<tr><td>Performance auto-monitors + uplift analysis + A/B</td><td>Agentic</td><td><span class="channel-tag ch-retain">Retention</span></td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">0.30</td><td class="num">&mdash;</td><td class="num"><strong>0.30</strong></td></tr>
+
+<tr class="sub-header"><td colspan="8">Omni-Channel &amp; SMS</td></tr>
+<tr><td>5-channel orchestration + AI channel selection + anti-fatigue</td><td>Omni-Channel</td><td><span class="channel-tag ch-adopt">Adoption</span></td><td class="num">0.80</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num"><strong>0.80</strong></td></tr>
+<tr><td>Two-way SMS + WhatsApp + SMS compliance &amp; analytics</td><td>SMS Depth</td><td><span class="channel-tag ch-adopt">Adoption</span></td><td class="num">0.60</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num"><strong>0.60</strong></td></tr>
+
+<tr class="total-row" style="border-top:2px solid #1a3a5c;"><td colspan="2" style="text-align:right;">Pillar 3 Total</td><td></td><td class="num">3.20</td><td class="num">1.60</td><td class="num">0.70</td><td class="num">0.60</td><td class="num"><strong>6.10</strong></td></tr>
+
+<tr class="grand-total"><td colspan="2" style="text-align:right;">Grand Total (all initiatives)</td><td></td><td class="num">10.00</td><td class="num">4.60</td><td class="num">4.50</td><td class="num">3.00</td><td class="num"><strong>22.10</strong></td></tr>
+</tbody>
+</table>
+
+<h2>Pillar Summary</h2>
+<table>
+  <tr><th>Pillar</th><th class="num" style="width:9%;">Adoption ($M)</th><th class="num" style="width:9%;">Activation ($M)</th><th class="num" style="width:9%;">Retention ($M)</th><th class="num" style="width:9%;">Rev Exp ($M)</th><th class="num" style="width:9%;">Total ($M)</th><th class="num" style="width:8%;">Share</th></tr>
+  <tr><td>P1 &mdash; Make Every Flow Work</td><td class="num">0.40</td><td class="num">1.50</td><td class="num">2.90</td><td class="num">0.20</td><td class="num"><strong>5.00</strong></td><td class="num">23%</td></tr>
+  <tr><td>P2 &mdash; Trigger on Customer Behavior</td><td class="num">6.40</td><td class="num">1.50</td><td class="num">0.90</td><td class="num">2.20</td><td class="num"><strong>11.00</strong></td><td class="num">50%</td></tr>
+  <tr><td>P3 &mdash; AI Build, Optimize &amp; Reach</td><td class="num">3.20</td><td class="num">1.60</td><td class="num">0.70</td><td class="num">0.60</td><td class="num"><strong>6.10</strong></td><td class="num">27%</td></tr>
+  <tr class="grand-total"><td>Grand Total</td><td class="num">10.00</td><td class="num">4.60</td><td class="num">4.50</td><td class="num">3.00</td><td class="num"><strong>22.10</strong></td><td class="num">100%</td></tr>
+</table>
+
+<p style="font-size:8pt; color:#888; margin-top:16px;">All values are modeled estimates using 30% automation causal share, blended ARPU $135/mo, and no compounding across levers. Per-initiative splits are proportional estimates based on relative impact assessment. Attribution requires controlled A/B testing to validate.</p>
+
+</div><!-- /panel-revenue -->
+
+<div id="panel-competitive" class="tabpanel" role="tabpanel">
+
+<h1>Competitive Position: Where We Stand After FY27</h1>
+<p style="font-size:9pt; color:#555; font-style:italic; margin-bottom:16px;">Capability-by-capability assessment of Mailchimp Automation Flows post-roadmap execution vs Klaviyo and Shopify. Verdict: Lead, Parity, or Trail.</p>
+
+<h2>Mailchimp Automation Flows vs Klaviyo (Post-FY27)</h2>
+
+<div class="scorecard">
+  <div class="score-card score-lead"><div class="num">8</div><div class="label">MC Leads</div></div>
+  <div class="score-card score-parity"><div class="num">5</div><div class="label">Parity</div></div>
+  <div class="score-card score-trail"><div class="num">3</div><div class="label">MC Trails</div></div>
+</div>
+
+<table>
+<thead><tr><th style="width:160px;">Capability</th><th>Klaviyo Today</th><th>Mailchimp Post-FY27</th><th style="width:80px;">Verdict</th></tr></thead>
+<tbody>
+<tr class="cat-row"><td colspan="4">Trigger Depth &amp; Data Activation</td></tr>
+<tr><td class="cap-cell">Behavioral Trigger Count</td><td>60+ behavior-specific triggers across cart, browse, checkout, product-affinity, refund, inventory events.</td><td>12+ new domain-event triggers closing the count gap. Cart-step, browse-abandonment, product-affinity, checkout-step, post-purchase delay, and more.</td><td class="parity">Parity</td></tr>
+<tr><td class="cap-cell">Predictive Triggers</td><td>Predicted next-order date, churn risk, CLV as first-class flow triggers. Unique competitive moat.</td><td>Predictive signals elevated from filter conditions to flow entry triggers. Churn risk, CLV threshold, purchase likelihood, next-order date.</td><td class="parity">Parity</td></tr>
+<tr><td class="cap-cell">Event-Property Branching</td><td>Split on any event property (cart value, product category, variant). Deep flow personalization.</td><td>Event-property access in branches and emails. Dynamic product fields in content blocks. Trigger splits by event-context.</td><td class="parity">Parity</td></tr>
+<tr><td class="cap-cell">Shopify Integration Depth</td><td>&ldquo;Deepest Shopify integration in market.&rdquo; Native triggers on every Shopify lifecycle event.</td><td>Shopify-deep event integration matching Klaviyo granularity, plus multi-platform parity (WooCommerce, Squarespace, BigCommerce, Wix).</td><td class="lead">LEADS</td></tr>
+<tr><td class="cap-cell">Commerce Platform Breadth</td><td>Shopify-centric. WooCommerce and BigCommerce integrations are shallower.</td><td>Same trigger depth across 5 commerce platforms. Integration breadth is a genuine competitive advantage.</td><td class="lead">LEADS</td></tr>
+
+<tr class="cat-row"><td colspan="4">AI &amp; Intelligent Automation</td></tr>
+<tr><td class="cap-cell">Autonomous Setup Agent</td><td>Marketing Agent: URL &rarr; flows in ~3 clicks. GA since Spring 2025. 60K+ brands onboarded.</td><td>Autonomous setup agent (URL &rarr; 4 flows in 3 clicks) + AI generation across 6+ in-product surfaces. Breadth advantage: 7 surfaces vs 1.</td><td class="lead">LEADS</td></tr>
+<tr><td class="cap-cell">Conversational Flow Editing</td><td>No conversational editing equivalent. Flows AI generates but doesn&rsquo;t edit conversationally.</td><td>Conversational editing via Intuit Assist + prompt-first journey builder. Voice + chat commands to modify flows in plain English.</td><td class="lead">LEADS</td></tr>
+<tr><td class="cap-cell">Per-Profile Smart Send + A/B</td><td>Per-profile send-time optimization, Personalized A/B, Channel Affinity. All productized with 10&ndash;30% lift cited.</td><td>Per-profile Smart Send Time, Personalized A/B, and Channel Affinity ship as combined agentic treatment. Functional parity but Klaviyo has 2+ years of training data.</td><td class="parity">Parity</td></tr>
+<tr><td class="cap-cell">Agentic Per-User Treatment</td><td>No per-user treatment agent. Every contact in a flow gets the same path.</td><td>AI continuously selects message, channel, incentive, and timing per individual profile. Democratizes the Auxia F500 pattern for SMB.</td><td class="lead">LEADS</td></tr>
+<tr><td class="cap-cell">AI Auto-Monitors + Uplift</td><td>AI auto-monitors on flow regressions. Praised in VoC.</td><td>Performance auto-monitors, causal uplift analysis vs control groups, central A/B experiment repository. Exceeds Klaviyo on uplift measurement.</td><td class="lead">LEADS</td></tr>
+
+<tr class="cat-row"><td colspan="4">Cross-Channel &amp; SMS</td></tr>
+<tr><td class="cap-cell">Channel Count in Canvas</td><td>5-channel canvas: Email + SMS + Push + WhatsApp + In-app. Headline omnichannel story.</td><td>5-channel send actions (Email + SMS + WhatsApp + Push + In-app) with AI-guided channel selection and cross-channel anti-fatigue.</td><td class="parity">Parity</td></tr>
+<tr><td class="cap-cell">Conversational SMS</td><td>Basic SMS in flows. No reply/keyword branching. No conversational depth.</td><td>Two-way conversational SMS + WhatsApp with reply/keyword branching. Customer replies change downstream path. Closes gap to Postscript/Attentive.</td><td class="lead">LEADS</td></tr>
+
+<tr class="cat-row"><td colspan="4">Builder &amp; Activation</td></tr>
+<tr><td class="cap-cell">Template Library</td><td>60+ pre-built flow templates. Organized by ecommerce lifecycle with catalog sync.</td><td>Searchable gallery, industry-specific templates (6&ndash;8 verticals), Brand Kit&ndash;applied templates, auto-build on store-connect. Broader vertical coverage.</td><td class="lead">LEADS</td></tr>
+<tr><td class="cap-cell">Flow Builder UX</td><td>Clean, modern flow builder. Good ergonomics. Trigger splits, re-entry controls.</td><td>Front-end refactor, side-overlay editing, drag-reorder, clone journeys, If/Else visual diff, send-day timeline. Catches up on reliability, leads on ergonomic depth.</td><td class="parity">Parity</td></tr>
+<tr><td class="cap-cell">Vertical Specialization</td><td>DTC/ecom focused. Limited B2B, ProServ, or services automation.</td><td>Vertical-specific journey UIs, Liquid templating for SaaS, combined transactional + marketing, appointment triggers for services.</td><td class="lead">LEADS</td></tr>
+<tr><td class="cap-cell">Pricing / Free Tier</td><td>Free plan includes basic flows. Usage-based pricing on active profiles (backlash in Feb 2025).</td><td>Free CJB reinstated (welcome + cart, 2 flows). Both face pricing perception challenges.</td><td class="trail">Trails</td></tr>
+</tbody>
+</table>
+
+<div class="insight-box">
+  <strong>Net Assessment vs Klaviyo:</strong> After FY27 execution, Mailchimp surpasses Klaviyo on commerce platform breadth (5 platforms vs Shopify-centric), AI generation breadth (7 surfaces + conversational editing), agentic per-user treatment, conversational SMS depth, vertical specialization, and template breadth. Mailchimp reaches parity on behavioral triggers, predictive triggers, event-property branching, Smart Send, channel count, and builder UX. Klaviyo retains the lead on free-tier pricing perception and ML training data maturity. <strong>The &ldquo;Mailchimp automates across every platform, every vertical, with AI that builds and optimizes&rdquo; story is credible post-FY27.</strong>
+</div>
+
+<h2>Mailchimp Automation Flows vs Shopify (Post-FY27)</h2>
+
+<div class="scorecard">
+  <div class="score-card score-lead"><div class="num">9</div><div class="label">MC Leads</div></div>
+  <div class="score-card score-parity"><div class="num">3</div><div class="label">Parity</div></div>
+  <div class="score-card score-trail"><div class="num">2</div><div class="label">MC Trails</div></div>
+</div>
+
+<table>
+<thead><tr><th style="width:160px;">Capability</th><th>Shopify Today</th><th>Mailchimp Post-FY27</th><th style="width:80px;">Verdict</th></tr></thead>
+<tbody>
+<tr class="cat-row"><td colspan="4">Trigger &amp; Workflow Depth</td></tr>
+<tr><td class="cap-cell">Behavioral Triggers</td><td>Deep operational triggers for Shopify-native events. 562M workflows processed BFCM.</td><td>12+ behavioral triggers + Shopify-deep event parity + predictive triggers + event-property branching. Marketing-focused depth exceeds Shopify&rsquo;s operational scope.</td><td class="lead">LEADS</td></tr>
+<tr><td class="cap-cell">Advanced Segmentation</td><td>Basic segmentation. No nested If/Else, no reusable filter conditions, limited A/B testing.</td><td>Nested segmentation, trigger splits, reusable filters, event-property access in branches and content. Full marketing segmentation engine.</td><td class="lead">LEADS</td></tr>
+<tr><td class="cap-cell">App Connector Library</td><td>Shopify Flow connector library: installed apps expose actions directly in workflows. Mature ecosystem.</td><td>App connector library mirroring Shopify Flow&rsquo;s architecture. Open API/SDK for marketplace apps. New entrant vs established ecosystem.</td><td class="parity">Parity</td></tr>
+
+<tr class="cat-row"><td colspan="4">AI &amp; Intelligence</td></tr>
+<tr><td class="cap-cell">Conversational Flow Editing</td><td>Sidekick: most-praised novel UX (2025&ndash;26). Conversational editing + Flow writing via chat.</td><td>Conversational editing via Intuit Assist + prompt-first builder. Functional parity but Sidekick has first-mover brand recognition.</td><td class="parity">Parity</td></tr>
+<tr><td class="cap-cell">Per-Profile Optimization</td><td>No per-profile send-time, no Personalized A/B, no Channel Affinity.</td><td>Full agentic per-user treatment: Smart Send, Personalized A/B, Channel Affinity per recipient.</td><td class="lead">LEADS</td></tr>
+<tr><td class="cap-cell">AI Flow Generation</td><td>Sidekick generates Flow workflows from chat. Integrated into admin.</td><td>Autonomous setup agent + 6+ AI surfaces + prompt-first builder. Broader generation footprint.</td><td class="lead">LEADS</td></tr>
+
+<tr class="cat-row"><td colspan="4">Cross-Channel &amp; Marketing Depth</td></tr>
+<tr><td class="cap-cell">Channel Breadth</td><td>Email + SMS (via Shopify Email). No WhatsApp, push, or in-app in marketing automations.</td><td>5-channel orchestration (Email + SMS + WhatsApp + Push + In-app) with AI channel selection.</td><td class="lead">LEADS</td></tr>
+<tr><td class="cap-cell">SMS Depth</td><td>Basic SMS. No conversational branching, no dynamic content.</td><td>Two-way conversational SMS + WhatsApp, dynamic ecommerce content, TCPA-compliant templates, SMS analytics.</td><td class="lead">LEADS</td></tr>
+<tr><td class="cap-cell">A/B Testing &amp; Analytics</td><td>No A/B testing in marketing automations. Basic send reports.</td><td>Per-step KPIs, per-profile A/B, uplift analysis, aggregate reporting, central experiment repository.</td><td class="lead">LEADS</td></tr>
+<tr><td class="cap-cell">Vertical Coverage</td><td>Shopify-commerce only. No B2B, ProServ, restaurants, SaaS automation.</td><td>Vertical-specific UIs for DTC, B2B SaaS, services, restaurants. Liquid templating for SaaS. Appointment triggers for services.</td><td class="lead">LEADS</td></tr>
+
+<tr class="cat-row"><td colspan="4">Activation &amp; Platform</td></tr>
+<tr><td class="cap-cell">Time to First Flow</td><td>&ldquo;Already in admin.&rdquo; Templates pre-branded with store. Flows live immediately on store setup.</td><td>Auto-build on store-connect (4 flows in 60 seconds). AI agent from URL. Strong but Shopify&rsquo;s default-bundled advantage is structural.</td><td class="parity">Parity</td></tr>
+<tr><td class="cap-cell">Template Library</td><td>~6 marketing templates + hundreds of operational Flow templates.</td><td>Searchable gallery, industry templates, Brand Kit&ndash;applied, flow-specific email depth. Marketing template depth exceeds Shopify.</td><td class="lead">LEADS</td></tr>
+<tr><td class="cap-cell">Free / Default Bundling</td><td>Marketing automations bundled free with every Shopify plan. Zero incremental cost.</td><td>Free CJB reinstated but requires separate Mailchimp account + store connection. Shopify&rsquo;s bundled default is a structural advantage.</td><td class="trail">Trails</td></tr>
+<tr><td class="cap-cell">Operational Workflow Scale</td><td>562M workflows BFCM. Shopify Flow handles operational automation at massive scale.</td><td>Marketing automation focused. Not competing on operational workflow scale (tagging, inventory, fulfillment).</td><td class="trail">Trails</td></tr>
+</tbody>
+</table>
+
+<div class="insight-box">
+  <strong>Net Assessment vs Shopify:</strong> After FY27 execution, Mailchimp leads in 9 of 14 automation capabilities: trigger depth, segmentation, per-profile optimization, channel breadth, SMS depth, A/B testing, AI generation breadth, vertical coverage, and marketing template depth. Parity on app connectors, conversational editing, and time-to-first-flow. Shopify retains structural advantages on free bundling (zero-cost default) and operational workflow scale (562M BFCM). <strong>The positioning is clear: Shopify is the &ldquo;good enough, already there&rdquo; default; Mailchimp is the &ldquo;marketing automation intelligence layer&rdquo; that operators upgrade to when they need depth, AI, and cross-channel orchestration.</strong>
+</div>
+
+<h2>Strategic Summary: Where We Surpass, Where We&rsquo;re At Parity, Where We Trail</h2>
+
+<table>
+<thead><tr><th style="width:200px;">Competitive Dimension</th><th>vs Klaviyo</th><th>vs Shopify</th><th>Strategic Implication</th></tr></thead>
+<tbody>
+<tr><td class="cap-cell">Trigger Depth &amp; Behavioral Data</td><td class="parity">Parity</td><td class="lead">LEADS</td><td>Closes the 5&times; trigger gap with Klaviyo. Exceeds Shopify&rsquo;s marketing trigger scope. Predictive triggers match Klaviyo&rsquo;s moat.</td></tr>
+<tr><td class="cap-cell">Commerce Platform Breadth</td><td class="lead">LEADS</td><td class="trail">Trails</td><td>5-platform depth vs Klaviyo&rsquo;s Shopify-centric focus. But Shopify&rsquo;s native integration is deeper within its own ecosystem.</td></tr>
+<tr><td class="cap-cell">AI Generation &amp; Conversational Editing</td><td class="lead">LEADS</td><td class="parity">Parity</td><td>7 AI surfaces + conversational editing + prompt-first builder. Broader than Klaviyo; matches Sidekick on conversational UX.</td></tr>
+<tr><td class="cap-cell">Per-Profile Intelligence</td><td class="parity">Parity</td><td class="lead">LEADS</td><td>Agentic per-user treatment + Smart Send + Channel Affinity. Matches Klaviyo (ML maturity gap). Far exceeds Shopify.</td></tr>
+<tr><td class="cap-cell">Cross-Channel Orchestration</td><td class="parity">Parity</td><td class="lead">LEADS</td><td>5-channel canvas with AI channel selection. Parity with Klaviyo on channel count. Exceeds Shopify (Email + SMS only).</td></tr>
+<tr><td class="cap-cell">Vertical Specialization</td><td class="lead">LEADS</td><td class="lead">LEADS</td><td>DTC + B2B + SaaS + services + restaurants. Neither Klaviyo (DTC-focused) nor Shopify (commerce-only) matches breadth.</td></tr>
+<tr><td class="cap-cell">Template &amp; Activation Speed</td><td class="lead">LEADS</td><td class="parity">Parity</td><td>Broader template library + auto-build on store-connect. Matches Shopify speed. Exceeds Klaviyo on vertical coverage.</td></tr>
+<tr><td class="cap-cell">Reporting &amp; Performance Intelligence</td><td class="lead">LEADS</td><td class="lead">LEADS</td><td>Per-step KPIs, aggregate reports, uplift analysis, A/B infrastructure. Neither competitor matches this reporting depth for automation.</td></tr>
+<tr><td class="cap-cell">Pricing &amp; Default Bundling</td><td class="trail">Trails</td><td class="trail">Trails</td><td>Klaviyo has better free-tier perception. Shopify bundles automation free. Mailchimp reinstates Free CJB but remains a separate purchase.</td></tr>
+</tbody>
+</table>
+
+<div class="insight-box">
+  <strong>Bottom Line:</strong> After FY27 execution, Mailchimp leads or matches Klaviyo in 13 of 16 automation capabilities and Shopify in 12 of 14. The platform becomes the most intelligent, broadest-vertical, deepest-channel marketing automation product for SMBs. Klaviyo retains an edge on ML training data maturity and free-tier pricing perception. Shopify retains structural advantages on default bundling and operational workflow scale. <strong>The roadmap transforms Mailchimp from &ldquo;good enough automation for email&rdquo; into &ldquo;the automation intelligence platform that builds itself, optimizes per person, and reaches every channel&rdquo; &mdash; a positioning neither competitor occupies.</strong>
+</div>
+
+<p style="font-size:8pt; color:#888; margin-top:16px;">Competitive assessment based on publicly available product information, G2/Capterra reviews, Klaviyo/Shopify 2025-2026 product updates, emerging threat briefs, and Mailchimp FY27 roadmap initiatives. Verdicts assume full roadmap execution on schedule.</p>
+
+</div><!-- /panel-competitive -->
+
 <script>
 (function () {
   var tabs = document.querySelectorAll('.tab');
@@ -1348,7 +1606,7 @@
     t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
   });
   var initial = (window.location.hash || '').replace('#', '');
-  if (['workflow-health', 'strategy'].indexOf(initial) >= 0) activate(initial);
+  if (['workflow-health', 'strategy', 'revenue', 'competitive'].indexOf(initial) >= 0) activate(initial);
 })();
 </script>
 
