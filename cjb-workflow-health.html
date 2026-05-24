@@ -26,15 +26,20 @@
   .tab.active { color: #166D3B; border-bottom: 2px solid #166D3B; background: #eef6f0; }
   .tabpanel { display: none; }
   .tabpanel.active { display: block; }
-  .vision-box { background: #eef6f0; border-left: 4px solid #166D3B; padding: 12px 16px; margin: 12px 0 16px 0; font-size: 9pt; line-height: 1.5; }
-  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 12px 0 16px 0; }
-  .stat-box { text-align: center; border: 1px solid #bfbfbf; padding: 10px 8px; }
-  .stat-num { font-size: 16pt; font-weight: 700; color: #166D3B; }
-  .stat-desc { font-size: 8pt; color: #555; margin-top: 2px; }
-  .pillar-table .detail-table th { background: #166D3B; color: #fff; }
-  .pillar-table .subtheme-row td { background: #eef6f0; font-weight: 700; font-size: 8.5pt; color: #166D3B; border-top: 2px solid #166D3B; }
-  .pillar-table .init-cell { font-weight: 700; min-width: 160px; }
-  .source-note { font-size: 8pt; color: #888; margin-top: 12px; }
+  .divider-heavy { border: none; border-top: 3px solid #000; margin: 24px 0; }
+
+  /* Strategy tab — matches unified-builder-roadmap.html chapter styling */
+  #panel-strategy { font-size: 10pt; line-height: 1.45; }
+  #panel-strategy h1 { font-size: 16pt; font-weight: 700; margin-bottom: 6px; border-bottom: none; margin-top: 0; padding-bottom: 0; }
+  #panel-strategy h2 { font-size: 12pt; font-weight: 700; margin-bottom: 8px; margin-top: 20px; border-bottom: 2px solid #000; padding-bottom: 4px; color: #000; }
+  #panel-strategy .chapter-sub { color: #555; font-style: italic; margin-bottom: 12px; font-size: 10pt; }
+  #panel-strategy table { width: 100%; border-collapse: collapse; font-size: 9pt; margin-top: 8px; }
+  #panel-strategy th, #panel-strategy td { border: 1px solid #bfbfbf; padding: 8px 10px; vertical-align: top; text-align: left; }
+  #panel-strategy th { background: #d9e2f3; font-weight: 700; font-size: 9pt; color: #000; }
+  #panel-strategy .init-cell { font-weight: 700; min-width: 160px; }
+  #panel-strategy .subtheme-row td { background: #f2f2f2; font-weight: 700; font-size: 8pt; letter-spacing: 0.04em; text-transform: uppercase; color: #555; }
+  #panel-strategy .source-note { font-size: 8pt; color: #888; margin-top: 16px; }
+  #panel-strategy .source-note a { color: #000; }
 
   .meta-box { background: #f5f5f5; border: 1px solid #ddd; padding: 12px 16px; margin-bottom: 16px; display: flex; gap: 32px; flex-wrap: wrap; }
   .meta-item { font-size: 8.5pt; }
@@ -562,27 +567,12 @@
 
 <div id="panel-strategy" class="tabpanel" role="tabpanel">
 
-<h1>CJB Strategy and Roadmap</h1>
-<p class="subtitle">FY27 Customer Journey Builder automation strategy &mdash; foundational initiatives that restore trust, fix activation blockers, and modernize the automation platform</p>
+<hr class="divider-heavy">
 
-<div class="vision-box">
-  <p><strong>Strategic intent:</strong> Make automations actually work before adding new capability. Pillar 1 closes ~$124K+/mo in HVC MRR exposure across 23 initiatives drawn from the <a href="mailchimp.html#canvas">Initiative Canvas</a>. Each initiative shows what it is, the specific problem it solves, and the key functional benefit for the customer.</p>
-</div>
+<h1>Initiative Details by Strategic Pillar</h1>
+<p class="chapter-sub">What each initiative is, the specific problem it solves, and the key functional benefit for the customer</p>
 
-<div class="stat-grid">
-  <div class="stat-box"><div class="stat-num">23</div><div class="stat-desc">Pillar 1 initiatives</div></div>
-  <div class="stat-box"><div class="stat-num">6</div><div class="stat-desc">Sub-themes</div></div>
-  <div class="stat-box"><div class="stat-num">~$124K+</div><div class="stat-desc">Combined HVC MRR / mo</div></div>
-  <div class="stat-box"><div class="stat-num">$2&ndash;4M</div><div class="stat-desc">FY27 P1 ARR target</div></div>
-</div>
-
-<h2>Initiative Details by Strategic Pillar</h2>
-<p class="subtitle" style="margin-top:-4px;">What each initiative is, the specific problem it solves, and the key functional benefit for the customer</p>
-
-<h2 style="margin-top:16px; font-size:10pt; border-bottom-color:#B91C1C; color:#B91C1C;">Pillar 1: Automation Trust &amp; Reliability</h2>
-<p class="subtitle" style="margin-bottom:12px;"><em>&ldquo;Make my automations actually work&rdquo;</em> &mdash; Internal name: Quality &amp; Trust. 0&ndash;3 months.</p>
-
-<div class="pillar-table">
+<h2>Automation Trust &amp; Reliability</h2>
 <table class="detail-table">
   <thead>
     <tr><th style="min-width:160px">Initiative</th><th>What It Is</th><th>Problem It Solves</th><th>Key Customer Benefit</th></tr>
@@ -624,9 +614,8 @@
     <tr><td class="init-cell">Date picker / date-range UI + custom-field sorting</td><td>Replace broken date-range picker with a usable one; restore custom-field sort in audience views.</td><td>Customer wants daily stats for last 30 days but date picker makes it painful; can&rsquo;t sort audience by custom fields anymore (regression). <strong>$1,080/mo</strong> HVC.</td><td>Customer pulls reports they need without fighting the UI.</td></tr>
   </tbody>
 </table>
-</div>
 
-<p class="source-note"><strong>Source:</strong> Initiative Canvas from <a href="mailchimp.html#canvas">Mailchimp Marketing Automation Flows strategy dossier</a>. HVC MRR figures from Slack HVC VoC + HVC Risk Map. Pillars 2 and 3 (Data Activation, Activation Foundation) to follow.</p>
+<p class="source-note"><strong>Source:</strong> Initiative Canvas from <a href="mailchimp.html#canvas">Mailchimp Marketing Automation Flows strategy dossier</a>. HVC MRR figures from Slack HVC VoC + HVC Risk Map.</p>
 
 </div><!-- /panel-strategy -->
 
