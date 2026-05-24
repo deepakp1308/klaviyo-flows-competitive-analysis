@@ -3,16 +3,38 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CJB Workflow Health — Bugs &amp; Barriers by Stage</title>
+<title>CJB Workflow Health &amp; Strategy — Customer Journey Builder</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: Arial, Helvetica, sans-serif; font-size: 9pt; color: #000; background: #fff; line-height: 1.4; padding: 24px 32px; max-width: 1600px; margin: 0 auto; }
   h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; }
   h2 { font-size: 11pt; font-weight: 700; margin-bottom: 8px; margin-top: 24px; border-bottom: 2px solid #166D3B; padding-bottom: 4px; }
   .subtitle { font-size: 9pt; color: #555; font-style: italic; margin-bottom: 16px; }
-  .nav { margin-bottom: 16px; padding: 8px 0; border-bottom: 2px solid #166D3B; }
-  .nav a { font-size: 9pt; font-weight: 700; color: #166D3B; text-decoration: none; margin-right: 20px; }
-  .nav a.active { border-bottom: 2px solid #166D3B; padding-bottom: 4px; }
+  .nav { margin-bottom: 16px; padding: 8px 0; border-bottom: 2px solid #166D3B; display: flex; gap: 4px; flex-wrap: wrap; }
+  .tab {
+    border: 0;
+    background: transparent;
+    color: #555;
+    font-size: 9pt;
+    font-weight: 700;
+    padding: 8px 14px;
+    cursor: pointer;
+    font-family: inherit;
+    border-radius: 4px 4px 0 0;
+  }
+  .tab:hover { color: #166D3B; background: #eef6f0; }
+  .tab.active { color: #166D3B; border-bottom: 2px solid #166D3B; background: #eef6f0; }
+  .tabpanel { display: none; }
+  .tabpanel.active { display: block; }
+  .vision-box { background: #eef6f0; border-left: 4px solid #166D3B; padding: 12px 16px; margin: 12px 0 16px 0; font-size: 9pt; line-height: 1.5; }
+  .stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin: 12px 0 16px 0; }
+  .stat-box { text-align: center; border: 1px solid #bfbfbf; padding: 10px 8px; }
+  .stat-num { font-size: 16pt; font-weight: 700; color: #166D3B; }
+  .stat-desc { font-size: 8pt; color: #555; margin-top: 2px; }
+  .pillar-table .detail-table th { background: #166D3B; color: #fff; }
+  .pillar-table .subtheme-row td { background: #eef6f0; font-weight: 700; font-size: 8.5pt; color: #166D3B; border-top: 2px solid #166D3B; }
+  .pillar-table .init-cell { font-weight: 700; min-width: 160px; }
+  .source-note { font-size: 8pt; color: #888; margin-top: 12px; }
 
   .meta-box { background: #f5f5f5; border: 1px solid #ddd; padding: 12px 16px; margin-bottom: 16px; display: flex; gap: 32px; flex-wrap: wrap; }
   .meta-item { font-size: 8.5pt; }
@@ -48,14 +70,22 @@
 
   .note { font-size: 8pt; color: #888; margin-top: 8px; }
 
-  @media print { body { padding: 12px; font-size: 7.5pt; } }
+  @media print {
+    body { padding: 12px; font-size: 7.5pt; }
+    .tabpanel { display: block !important; page-break-before: always; }
+    .tabpanel:first-of-type { page-break-before: auto; }
+    .nav { display: none; }
+  }
 </style>
 </head>
 <body>
 
-<div class="nav">
-  <a href="cjb-workflow-health.html" class="active">CJB Workflow Health &amp; VOC</a>
+<div class="nav" role="tablist">
+  <button class="tab active" role="tab" aria-selected="true" data-tab="workflow-health">CJB Workflow Health &amp; VOC</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="strategy">CJB Strategy and Roadmap</button>
 </div>
+
+<div id="panel-workflow-health" class="tabpanel active" role="tabpanel">
 
 <h1>CJB Workflow Health: Bugs &amp; Barriers by Stage</h1>
 <p class="subtitle">Customer-reported bugs and barriers to use mapped to 8 Customer Journey Builder workflow stages, with MRR exposure and top cited issues</p>
@@ -527,6 +557,106 @@
 <p class="note" style="margin-top:16px;"><strong>Data caveats:</strong> VOC counts are mapped from unitQ leaf categories and AI-discovered subtopics to workflow stages; some items span multiple stages. MRR values sampled from unitQ HVC-filtered queries (mrr_int field); $177.5K/mo total from HVC Risk Map (same data, different view). Items with null MRR (typically Free plan users) are included in VOC counts but excluded from MRR sums. Some high-value customers appear across multiple workflow stages. Subtopic population estimates extrapolated from 1,000-sample analysis of 2,170 items. Positive-sentiment categories (id:140 Successful Journey Creation, id:138 Positive Automation Feedback) excluded from stage mapping.</p>
 
 <p class="note">Generated May 22, 2026. Source: unitQ AI-classified feedback (Zendesk support tickets, in-app feedback, CSAT surveys, PRS surveys, Reddit, Mailchimp conversations). Scope: Customer Journey Builder / Marketing Automation Flows &mdash; Starting Points, Flow Points, triggers, activation, reporting. Negative sentiment only. Automations::All (id:85): 1,701 current / 2,362 previous / &minus;28% change.</p>
+
+</div><!-- /panel-workflow-health -->
+
+<div id="panel-strategy" class="tabpanel" role="tabpanel">
+
+<h1>CJB Strategy and Roadmap</h1>
+<p class="subtitle">FY27 Customer Journey Builder automation strategy &mdash; foundational initiatives that restore trust, fix activation blockers, and modernize the automation platform</p>
+
+<div class="vision-box">
+  <p><strong>Strategic intent:</strong> Make automations actually work before adding new capability. Pillar 1 closes ~$124K+/mo in HVC MRR exposure across 23 initiatives drawn from the <a href="mailchimp.html#canvas">Initiative Canvas</a>. Each initiative shows what it is, the specific problem it solves, and the key functional benefit for the customer.</p>
+</div>
+
+<div class="stat-grid">
+  <div class="stat-box"><div class="stat-num">23</div><div class="stat-desc">Pillar 1 initiatives</div></div>
+  <div class="stat-box"><div class="stat-num">6</div><div class="stat-desc">Sub-themes</div></div>
+  <div class="stat-box"><div class="stat-num">~$124K+</div><div class="stat-desc">Combined HVC MRR / mo</div></div>
+  <div class="stat-box"><div class="stat-num">$2&ndash;4M</div><div class="stat-desc">FY27 P1 ARR target</div></div>
+</div>
+
+<h2>Initiative Details by Strategic Pillar</h2>
+<p class="subtitle" style="margin-top:-4px;">What each initiative is, the specific problem it solves, and the key functional benefit for the customer</p>
+
+<h2 style="margin-top:16px; font-size:10pt; border-bottom-color:#B91C1C; color:#B91C1C;">Pillar 1: Automation Trust &amp; Reliability</h2>
+<p class="subtitle" style="margin-bottom:12px;"><em>&ldquo;Make my automations actually work&rdquo;</em> &mdash; Internal name: Quality &amp; Trust. 0&ndash;3 months.</p>
+
+<div class="pillar-table">
+<table class="detail-table">
+  <thead>
+    <tr><th style="min-width:160px">Initiative</th><th>What It Is</th><th>Problem It Solves</th><th>Key Customer Benefit</th></tr>
+  </thead>
+  <tbody>
+    <tr class="subtheme-row"><td colspan="4">Sub-theme 1.1 &mdash; Editor / UI Stability &amp; Scalability</td></tr>
+    <tr><td class="init-cell">Journey Builder front-end refactor</td><td>Front-end rewrite of CJB to fix scroll bugs, replicate-flow errors, missing scrollbars, &ldquo;View email&rdquo; stale state, and classic automation misfire.</td><td>HVCs can&rsquo;t use the builder reliably &mdash; largest single HVC pain at <strong>$16,507/mo</strong>. Customers churning over UX bugs and &ldquo;clunky/outdated&rdquo; complaints.</td><td>Customers complete flow setup without the UI breaking; trust restored; HVCs stop migrating to Klaviyo over builder quality.</td></tr>
+    <tr><td class="init-cell">Default view / sort order fix</td><td>Restore automation sort behavior in campaigns + automations list; stop &ldquo;All&rdquo; view from surfacing journeys first.</td><td>Customers can&rsquo;t find their own automations &mdash; sort order broken, journeys hijack the default view. <strong>$2,925/mo</strong> HVC exposure.</td><td>Customers find their automation in one click; &ldquo;where did my flow go?&rdquo; support tickets drop.</td></tr>
+    <tr><td class="init-cell">Pop-ups / forms feeding flows fix</td><td>New pop-ups + signup forms enroll contacts directly into welcome / abandoned-cart flows; eliminate forced detour through Automations menu.</td><td>Customer sets up a pop-up expecting a welcome email, but the pop-up doesn&rsquo;t enroll into any flow without multi-step manual configuration (UR Barrier #10). <strong>$450/mo</strong> HVC.</td><td>Signup forms automatically convert new contacts into the welcome journey &mdash; no extra clicks, no lost signups.</td></tr>
+    <tr><td class="init-cell">Two-surface confusion fix</td><td>In-product framing of &ldquo;Classic Auto vs Customer Journey Builder&rdquo; with inline explainer; visible toggle: &ldquo;I&rsquo;m on Classic &mdash; show me where to migrate.&rdquo;</td><td>Customers don&rsquo;t know there are two automation surfaces (UR Barrier #8). They choose the wrong surface and duplicate effort.</td><td>Customer immediately knows which surface they&rsquo;re on; one-click jump to the right one; no wasted setup work.</td></tr>
+
+    <tr class="subtheme-row"><td colspan="4">Sub-theme 3.1 &mdash; Trigger Selection &amp; Setup UX</td></tr>
+    <tr><td class="init-cell">Trigger modal redesign</td><td>Replace trigger-selection modal with searchable, filterable, grouped UX. Resolves trigger-not-searchable, misleading loading spinner, wait-for-trigger pass-through confusion, and unnecessary &ldquo;From Audience&rdquo; surfacing.</td><td>Single biggest barrier-cluster at <strong>$16,000/mo</strong> across 4 HVC themes. Customer scrolls through unsorted trigger list, sees misleading loading state, gets lost on which trigger to pick.</td><td>Customer finds the right trigger in 10 seconds, not 5 minutes; activation conversion goes up.</td></tr>
+    <tr><td class="init-cell">Content-completion gating before &ldquo;Turn On&rdquo;</td><td>Disable activation until content is complete; surface clear &ldquo;what&rsquo;s missing to publish&rdquo; checklist.</td><td>Customer turns on a flow before content is ready &rarr; enrolls real customers into a broken flow &rarr; angry recipients + chargebacks. <strong>$11,384/mo</strong> combined HVC.</td><td>Customer can&rsquo;t accidentally ship a half-built flow; safer to experiment; trust in the platform restored.</td></tr>
+    <tr><td class="init-cell">Trigger setup confusion / &lsquo;not activated&rsquo; states</td><td>Surface inline checklist: &ldquo;your flow is not active because: [missing content / no audience / paused].&rdquo; One-click resolve link per item.</td><td>Customer thinks their simple signup flow is live but it&rsquo;s actually inactive &mdash; no signal explaining why; loses real signups. <strong>$535/mo</strong> HVC.</td><td>Immediate feedback when something blocks activation; resolves in one click; no silent flow-not-firing failures.</td></tr>
+    <tr><td class="init-cell">Plain-English labels + inline explainers</td><td>Rewrite jargon-heavy trigger / condition / split labels into plain English with hover-tooltip explanations.</td><td>Customer hits a config screen full of terms like &ldquo;explicit unsub via API&rdquo; or &ldquo;trigger filter precedence rule&rdquo; &mdash; gives up. Multi-trigger UX inconsistent across types. <strong>$4,000/mo</strong> HVC.</td><td>Non-technical operators configure flows without docs; &ldquo;I don&rsquo;t understand this&rdquo; support tickets drop.</td></tr>
+    <tr><td class="init-cell">Time-delay UX consistency</td><td>Move delay configuration out of trigger config and into standalone canvas steps; align minimum-delay options with real customer use cases.</td><td>Eric S1.49 UR: delays are buried in trigger config, hard to find, inconsistent across trigger types &mdash; customer misconfigures delays and flows misfire.</td><td>Customer sees delay timing as a clear canvas step; can adjust at-a-glance; consistent UX across all trigger types.</td></tr>
+
+    <tr class="subtheme-row"><td colspan="4">Sub-theme 2.3 &mdash; Event-Driven Processing (Foundational Platform)</td></tr>
+    <tr><td class="init-cell">Monolith &rarr; Eventbus migration</td><td>Critical platform refactor moving event processing from monolithic batch to event-bus streaming. Unblocks real-time triggers, Conversational Automations, and WhatsApp send action.</td><td>Current event processing causes &ldquo;Automations Not Sending&rdquo; (<strong>$4,780/mo</strong>), Editor latency (<strong>$16,507/mo</strong>), and blocks every real-time feature in P3&ndash;P5. Combined <strong>$21,287/mo</strong> HVC exposure.</td><td>Automations fire instantly when an event happens; foundation for every modern automation feature; editor latency disappears.</td></tr>
+    <tr><td class="init-cell">Real-time event-driven triggers as standard</td><td>Sub-second trigger evaluation; eliminate batch-processing lag.</td><td>Customer&rsquo;s &ldquo;abandoned cart&rdquo; trigger doesn&rsquo;t fire for 15&ndash;60 minutes because of batch processing &rarr; recovery rate drops 30&ndash;50% vs real-time. Klaviyo fires in seconds.</td><td>Recovery flows fire while customer intent is still hot; conversion lift on time-sensitive automations.</td></tr>
+
+    <tr class="subtheme-row"><td colspan="4">Sub-theme 1.3 &mdash; Functionality of Automations</td></tr>
+    <tr><td class="init-cell">Frequency cap / suppression across flows</td><td>Cross-flow frequency cap (max N sends per contact per day/week); exclusion rules; one-flow-at-a-time enforcement; unified suppression list for transactional + marketing.</td><td>A customer enrolled in 3 active flows can get 5+ emails in a day &rarr; unsub spike &rarr; list rot. Klaviyo + Bloomreach have this; missing in MC = B2B dealbreaker. <strong>$2,576/mo</strong> HVC.</td><td>Contacts get the right number of touches; unsubs drop; list quality stays high; deliverability protected. Closes Klaviyo Smart Send gap.</td></tr>
+    <tr><td class="init-cell">Re-entry / cool-down settings persistence fix</td><td>Persist re-entry interval setting; stop snap-back to default 5-min after save.</td><td>Customer sets a 24-hr cool-down; system silently reverts to 5 min; flow re-enters customers too aggressively &rarr; unsubscribes. <strong>$300/mo</strong> HVC.</td><td>Customer&rsquo;s chosen frequency rules persist; no surprise spam to their list; deliverability protected.</td></tr>
+    <tr><td class="init-cell">Cross-browser regression suite + automated UI smoke tests</td><td>Browser-matrix automated test suite (Safari, Firefox, Chrome) + smoke tests on every CI build.</td><td>UI bugs recur because there&rsquo;s no regression coverage; customers find browser-specific failures in production.</td><td>No regressions reach customers; ship velocity goes up because the team isn&rsquo;t firefighting browser bugs reactively.</td></tr>
+
+    <tr class="subtheme-row"><td colspan="4">Sub-theme 1.5 / 2.3 / 4.2 &mdash; Classic &rarr; Journey Builder Migration &amp; Unified Builder</td></tr>
+    <tr><td class="init-cell">Auto-migration tool Classic &rarr; CJB</td><td>Side-by-side preview, one-click migration, 90-day graceful sunset guarantee, full migration-history preservation (stats carry over).</td><td>Classic Auto Establishers down <strong>-51.8% YoY</strong> (Product Health F#1); migration bugs cause stats loss + customer churn. <strong>$1,715/mo</strong> HVC.</td><td>Customer migrates without losing history or contacts; reporting trends stay intact; no surprise downgrades.</td></tr>
+    <tr><td class="init-cell">CJB legacy editor consolidation</td><td>Stop CJB from spawning the legacy email editor mid-flow; switch entire CJB to modernized editor.</td><td>Customers in modern CJB get bumped into the legacy editor for email steps &mdash; visual mismatch + capability gap. <strong>$1,265/mo</strong> HVC.</td><td>Customer stays in one consistent editor; no jarring UX shift; modernized features (e.g., AI generation) available everywhere.</td></tr>
+    <tr><td class="init-cell">Sub-hour delays in CJB + flexible delay UX</td><td>Allow 5-minute, 15-minute, custom-minute delays (currently 1-hour minimum); delays as standalone canvas steps (not embedded in trigger config).</td><td>Wes Turner UR: external systems deliver in 5 minutes; MC&rsquo;s minimum 1-hour delay loses the conversion window. Time-delay UX is buried in trigger config. <strong>$7,000/mo</strong> HVC.</td><td>Customer matches the urgency of their use case (5-min cart-recovery, 15-min checkout-abandonment); delay logic is clear on the canvas.</td></tr>
+    <tr><td class="init-cell">Single modernized Automations builder</td><td>Consolidate Classic Automations &rarr; CJB &rarr; Marketing Automation Flows into one modern unified builder. Eliminates the legacy editor inside CJB and the Editor / UI Glitches root cause.</td><td><strong>$17,772/mo</strong> combined HVC pain (Editor Glitches + Legacy editor in CJB). Multi-surface confusion is a top User Research barrier. Brand decay &ldquo;clunky and outdated&rdquo; feeds churn-to-Klaviyo.</td><td>Customer uses one consistent modern builder; no surface-confusion; UI bugs fixed at the source; brand sentiment improves.</td></tr>
+
+    <tr class="subtheme-row"><td colspan="4">Sub-theme 3.3 &mdash; Flow Building Ergonomics</td></tr>
+    <tr><td class="init-cell">Edit panel side-overlay + drag-reorder + in-place rename</td><td>Edit panel becomes a non-blocking side-overlay (doesn&rsquo;t cover canvas); drag-and-drop reorder of flow steps; rename automations and steps directly on the canvas.</td><td>Customer can&rsquo;t see the rest of their flow while editing one step; can&rsquo;t reorder steps without rebuilding; renaming requires duplicating the entire flow. <strong>$9,000/mo</strong> HVC.</td><td>Customer iterates on flow structure in seconds; refactor without fear; fewer mistakes.</td></tr>
+    <tr><td class="init-cell">Clone entire journey + delete split paths + slider numeric input</td><td>One-click &ldquo;duplicate journey&rdquo;; delete a single split path without losing the whole split; numeric input field next to slider for split percentage.</td><td>Customer must rebuild entire flow to clone; deleting one path of a split removes the whole split; slider-only split % is imprecise (Jacob S2.43). <strong>$6,350/mo</strong> HVC.</td><td>Customer copies-and-iterates on flows safely; precise control over split distribution; fewer &ldquo;I deleted the whole thing by mistake&rdquo; tickets.</td></tr>
+    <tr><td class="init-cell">If/Else vs Split visual differentiation</td><td>Distinct shapes and colors for If/Else conditions vs Split paths on the canvas.</td><td>Eric S1.47: If/Else and Split blocks look identical &rarr; customers confuse them and build broken logic. <strong>$1,000/mo</strong> HVC.</td><td>Customer reads the canvas at-a-glance; logic errors prevented before publish.</td></tr>
+    <tr><td class="init-cell">Email-editing direct-click + calculated send-day visibility</td><td>Click email step &rarr; opens editor directly (no intermediate &ldquo;edit content&rdquo; page); show Day 0 / Day 1 timeline on canvas.</td><td>Customer clicks email step &rarr; goes to a holding page &rarr; clicks again to actually edit. Day-N timing is invisible on the canvas. <strong>$3,000/mo</strong> HVC.</td><td>Customer edits emails one click instead of two; sees the entire flow timing at-a-glance.</td></tr>
+    <tr><td class="init-cell">Date picker / date-range UI + custom-field sorting</td><td>Replace broken date-range picker with a usable one; restore custom-field sort in audience views.</td><td>Customer wants daily stats for last 30 days but date picker makes it painful; can&rsquo;t sort audience by custom fields anymore (regression). <strong>$1,080/mo</strong> HVC.</td><td>Customer pulls reports they need without fighting the UI.</td></tr>
+  </tbody>
+</table>
+</div>
+
+<p class="source-note"><strong>Source:</strong> Initiative Canvas from <a href="mailchimp.html#canvas">Mailchimp Marketing Automation Flows strategy dossier</a>. HVC MRR figures from Slack HVC VoC + HVC Risk Map. Pillars 2 and 3 (Data Activation, Activation Foundation) to follow.</p>
+
+</div><!-- /panel-strategy -->
+
+<script>
+(function () {
+  var tabs = document.querySelectorAll('.tab');
+  var panels = document.querySelectorAll('.tabpanel');
+  function activate(name) {
+    tabs.forEach(function (t) {
+      var match = t.getAttribute('data-tab') === name;
+      t.classList.toggle('active', match);
+      t.setAttribute('aria-selected', match ? 'true' : 'false');
+    });
+    panels.forEach(function (p) {
+      p.classList.toggle('active', p.id === 'panel-' + name);
+    });
+    try {
+      var url = new URL(window.location.href);
+      url.hash = name;
+      history.replaceState(null, '', url.toString());
+    } catch (e) {}
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+  tabs.forEach(function (t) {
+    t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
+  });
+  var initial = (window.location.hash || '').replace('#', '');
+  if (['workflow-health', 'strategy'].indexOf(initial) >= 0) activate(initial);
+})();
+</script>
 
 </body>
 </html>
