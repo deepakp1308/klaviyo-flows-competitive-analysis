@@ -592,6 +592,66 @@
 
 <h1>Reimagining Mailchimp Automation Flows</h1>
 
+<h2>Business Impact: What These Problems Are Costing Us</h2>
+<p class="chapter-sub">Year-over-year product adoption, activation, retention, and revenue metrics show the cost of not addressing automation flow problems. Data window: May 2024&ndash;Apr 2025 (T-1) vs May 2025&ndash;Apr 2026 (T0).</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="background:#1a3a5c; color:#fff;">Metric</th>
+      <th style="background:#1a3a5c; color:#fff;">Last Year (T-1)</th>
+      <th style="background:#1a3a5c; color:#fff;">Current (T0)</th>
+      <th style="background:#1a3a5c; color:#fff;">YoY Change</th>
+      <th style="background:#1a3a5c; color:#fff;">What This Tells Us</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr><td colspan="5" style="background:#f2f2f2; font-weight:700;">Product Adoption &amp; Activation</td></tr>
+    <tr><td><strong>CJB Established Users/mo</strong></td><td>111,500</td><td>132,002</td><td style="color:#047857; font-weight:700;">+18.4% (+20.5K)</td><td>CJB is growing, but not fast enough to offset Classic collapse. Combined automation Establishers down &minus;50.6K/mo (&minus;20.3%).</td></tr>
+    <tr><td><strong>Classic Auto Established/mo</strong></td><td>137,500</td><td>66,307</td><td style="color:#B91C1C; font-weight:700;">&minus;51.8% (&minus;71.1K)</td><td>Classic is collapsing faster than CJB grows. Without a safe migration path, the decline accelerates.</td></tr>
+    <tr><td><strong>CJB Activation Rate</strong></td><td>19.2%</td><td>33.6%</td><td style="color:#047857; font-weight:700;">+14.4pp</td><td>Activation improving, but still means 2 in 3 customers who explore CJB never reach Established. Binding constraint on growth.</td></tr>
+    <tr><td><strong>Active Automation Adoption (platform)</strong></td><td>&mdash;</td><td>16%</td><td style="font-weight:700;">&mdash;</td><td>84% of eligible accounts have no active automation. Massive untapped TAM within the existing install base.</td></tr>
+    <tr><td><strong>FTU 30-Day Turn-On</strong></td><td>6.8%</td><td>6.8%</td><td style="color:#B91C1C; font-weight:700;">Flat</td><td>93% of first-time users never activate a flow in their first 30 days. The builder is too daunting for new customers to reach value.</td></tr>
+    <tr><td><strong>Free CJB Adoption</strong></td><td>&mdash;</td><td>1.1%</td><td style="font-weight:700;">&mdash;</td><td>16&times; worse than Standard (17.6%), 29&times; worse than Premium (32.1%). June 2025 Classic removal gutted the Free tier entirely.</td></tr>
+    <tr><td><strong>New Users (&lt;1mo) Adoption</strong></td><td>&mdash;</td><td>0.9%</td><td style="color:#B91C1C; font-weight:700;">&minus;1.1% YoY</td><td>99% of brand-new users never activate automation in their first month. Time-to-first-flow is the critical gap vs Klaviyo and Shopify.</td></tr>
+    <tr><td colspan="5" style="background:#f2f2f2; font-weight:700;">Retention &amp; Churn</td></tr>
+    <tr><td><strong>CJB Churn Rate</strong></td><td>41.4%</td><td>40.2%</td><td style="color:#047857; font-weight:700;">&minus;1.2pp (improving)</td><td>Churn improving slightly but still 40% &mdash; nearly half of Established users abandon each year.</td></tr>
+    <tr><td><strong>CJB Abandon Volume/mo</strong></td><td>78,800</td><td>88,874</td><td style="color:#B91C1C; font-weight:700;">+12.7% (+10K)</td><td>More customers touching CJB but walking away. Abandon volume rising faster than Established volume.</td></tr>
+    <tr><td><strong>Combined Abandoners/mo</strong></td><td>133,200</td><td>166,000</td><td style="color:#B91C1C; font-weight:700;">+24.6% (+32.8K)</td><td>Across CJB + Classic, 32.8K more customers per month are walking away from automation than a year ago.</td></tr>
+    <tr><td><strong>Setup Abandonment Rate</strong></td><td>~40&ndash;50%</td><td>~40&ndash;50%</td><td style="color:#B91C1C; font-weight:700;">Flat</td><td>Half of all flow setup attempts abandoned before completion. Trigger UX, content-completion confusion, and builder instability are root causes.</td></tr>
+    <tr><td colspan="5" style="background:#f2f2f2; font-weight:700;">Revenue Impact &amp; HVC Exposure</td></tr>
+    <tr><td><strong>Booked Automation P&amp;L Loss (12mo)</strong></td><td>&mdash;</td><td>$3&ndash;5M</td><td style="color:#B91C1C; font-weight:700;">&mdash;</td><td>Actual P&amp;L erosion attributable to automation (~30% of &minus;$9.5M platform decline).</td></tr>
+    <tr><td><strong>Modeled Drag (12mo)</strong></td><td>&mdash;</td><td>$12&ndash;26M</td><td style="color:#B91C1C; font-weight:700;">&mdash;</td><td>Counterfactual: adoption shortfall &times; $135 ARPU &times; causal share. The revenue automation <em>should</em> be generating but isn&rsquo;t.</td></tr>
+    <tr><td><strong>HVC MRR Exposure (automation)</strong></td><td>&mdash;</td><td>$177.5K/mo (~$2.1M/yr)</td><td style="font-weight:700;">&mdash;</td><td>73 negative themes across 103 HVC customers. Editor/UI Glitches alone = $16.5K/mo.</td></tr>
+    <tr><td colspan="5" style="background:#f2f2f2; font-weight:700;">Key Segment Gaps</td></tr>
+    <tr><td><strong>ECU Adoption (connected stores)</strong></td><td>&mdash;</td><td>29.7%</td><td style="color:#047857; font-weight:700;">+6.7pp YoY</td><td>ECU adopts at 6.6&times; non-ecom. Converting 10% of ecom&rarr;ECU &#8776; ~5K incremental Established/mo. The gold cohort for trigger-depth investment.</td></tr>
+    <tr><td><strong>HVC Adoption</strong></td><td>&mdash;</td><td>24.2%</td><td style="color:#047857; font-weight:700;">+4.9pp YoY</td><td>HVC adopts at 3.7&times; non-HVC. HVC churn 34% vs non-HVC 41% &mdash; HVCs who adopt, stick. Protect this cohort.</td></tr>
+  </tbody>
+</table>
+<p style="font-size:8pt; color:#888; margin-top:8px;">Sources: bi_aggregate.product_journey_monthly (89.4M rows), bi_aggregate.mbr_monthly (99.98% match). Loss Attribution 3-layer framework from Initiative Canvas.</p>
+
+<hr class="divider">
+
+<h2>How We Measure Success</h2>
+<div class="guiding">
+  <h3>Product Adoption, Engagement &amp; Time to Activation</h3>
+  <p>Active automation adoption across platform from 16% to &gt;22%. CJB activation rate (Explore &rarr; Established) from 33.6% to &gt;42%. FTU 30-day turn-on from 6.8% to &gt;15%. CJB Established users from 132K to 155&ndash;170K/mo. Setup completion rate from ~50% to &gt;70%. Time to first automation send from 14&ndash;21 days to &lt;7 days. Multi-flow adoption (&gt;1 active flow) from ~30&ndash;40% to &gt;50%.</p>
+</div>
+<div class="guiding">
+  <h3>Customer Benefit Metrics</h3>
+  <p>Automation open rate maintained at 35&ndash;42% (1.8&times; bulk average). Automation CTR from 5&ndash;7% to 7&ndash;9%. Revenue per automation adopter from $616/mo to $700&ndash;800/mo. ECU adoption from 29.7% to 40%+. Elimination of &ldquo;Automations Not Sending&rdquo; lag (15&ndash;60 min batch &rarr; sub-second real-time).</p>
+</div>
+<div class="guiding">
+  <h3>Business Outcome Metrics</h3>
+  <p>Combined automation-attributed ARR target: +$20&ndash;25M (commit floor) within $20&ndash;32M modeling envelope. CJB churn from 40.2% to 35&ndash;37%. Combined abandoners from 166K/mo to &lt;130K/mo. Free CJB adoption from 1.1% to &gt;5%. HVC automation MRR exposure from $177.5K/mo to &lt;$90K/mo. Gross monthly platform churn (paid) from 3.2% to 2.6%.</p>
+</div>
+<div class="guiding">
+  <h3>Quality Indicators</h3>
+  <p>Automation trigger latency: batch 15&ndash;60 min &rarr; sub-second (Eventbus). CJB builder crash-free sessions &ge;99.5%. Flow activation reliability &ge;99.9%. Cross-browser regression catch rate &gt;95% pre-release. Reporting accuracy: stats match across all views post-attribution fix. Compliance review SLA: 24&ndash;48h cap with in-flight campaign protection.</p>
+</div>
+
+<hr class="divider-heavy">
+
 <h2>Strategic Pillars</h2>
 <div class="pillar-overview">
   <div class="pillar-card">
@@ -1044,7 +1104,99 @@
   </tbody>
 </table>
 
-<p class="source-note"><strong>Source:</strong> Initiative Canvas from <a href="mailchimp.html#canvas">Mailchimp Marketing Automation Flows strategy dossier</a>. HVC MRR figures from Slack HVC VoC + HVC Risk Map. Unified Builder initiatives tracked on the <a href="unified-builder-roadmap.html">Unified Builder FY27 roadmap</a>.</p>
+<hr class="divider-heavy">
+
+<h1>Business Case &amp; Projections</h1>
+<p class="chapter-sub">FY26 baseline &rarr; FY27 targets. Automation-attributed ARR model across 6 revenue levers using conservative causal shares.</p>
+
+<h2>FY26 Baselines</h2>
+<table>
+  <thead><tr><th>Metric</th><th>Value</th><th>Metric</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td><strong>CJB Established/mo</strong></td><td>132,002</td><td><strong>Classic Established/mo</strong></td><td>66,307 (&minus;51.8% YoY)</td></tr>
+    <tr><td><strong>CJB Activation Rate</strong></td><td>33.6% (+14.4pp YoY)</td><td><strong>CJB Churn Rate</strong></td><td>40.2% (&minus;1.2pp YoY)</td></tr>
+    <tr><td><strong>Active Automation Adoption</strong></td><td>16% of eligible accounts</td><td><strong>FTU 30-Day Turn-On</strong></td><td>6.8% (flat)</td></tr>
+    <tr><td><strong>Revenue per Adopter</strong></td><td>$616/mo ($7,400/yr)</td><td><strong>Blended ARPU</strong></td><td>$135/mo per paid adopter</td></tr>
+    <tr><td><strong>ECU Adoption</strong></td><td>29.7% (+6.7pp YoY)</td><td><strong>HVC Adoption</strong></td><td>24.2% (+4.9pp YoY)</td></tr>
+    <tr><td><strong>Free CJB Adoption</strong></td><td>1.1%</td><td><strong>Setup Abandonment</strong></td><td>~40&ndash;50%</td></tr>
+  </tbody>
+</table>
+
+<hr class="divider">
+
+<h2>Leading Indicators: Baselines &amp; Targets</h2>
+<table>
+  <thead><tr><th>Leading Indicator</th><th>FY26 Baseline</th><th>FY27 Target</th><th>Lift</th><th>What This Measures</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Platform Automation Adoption</strong></td><td>16%</td><td>22%+</td><td>+6pp</td><td>% of eligible accounts with at least one active automation flow.</td></tr>
+    <tr><td><strong>CJB Activation Rate</strong></td><td>33.6%</td><td>42&ndash;48%</td><td>+8&ndash;14pp</td><td>% of users who explore CJB and reach Established status.</td></tr>
+    <tr><td><strong>FTU 30-Day Turn-On</strong></td><td>6.8%</td><td>15%+</td><td>+8.2pp</td><td>% of first-time users who activate their first flow within 30 days.</td></tr>
+    <tr><td><strong>CJB Established Users/mo</strong></td><td>132K</td><td>155&ndash;170K</td><td>+18&ndash;28%</td><td>Monthly average Established automation users on CJB.</td></tr>
+    <tr><td><strong>CJB Churn Rate</strong></td><td>40.2%</td><td>35&ndash;37%</td><td>&minus;3 to &minus;5pp</td><td>% of Established users who move to Abandon. Builder quality + feature depth reduce churn.</td></tr>
+    <tr><td><strong>Setup Completion Rate</strong></td><td>~50&ndash;60%</td><td>70&ndash;75%</td><td>+15&ndash;20pp</td><td>% of flow setup attempts that reach activation.</td></tr>
+    <tr><td><strong>Time to First Automation Send</strong></td><td>14&ndash;21 days</td><td>&lt;7 days</td><td>&minus;50&ndash;67%</td><td>Median days from signup to first automated send.</td></tr>
+    <tr><td><strong>ECU Adoption</strong></td><td>29.7%</td><td>40%+</td><td>+10pp</td><td>Connected-store automation adoption. Auto-build + deep triggers drive this.</td></tr>
+    <tr><td><strong>Multi-Flow Adoption</strong></td><td>~30&ndash;40%</td><td>50%+</td><td>+10&ndash;20pp</td><td>% of adopters running &gt;1 active flow.</td></tr>
+  </tbody>
+</table>
+
+<hr class="divider">
+
+<h2>How Leading Indicators Drive Business Outcomes</h2>
+<p class="chapter-sub">Each leading indicator improvement translates to retention, conversion, and upgrade outcomes through automation-attributed causal shares.</p>
+<table>
+  <thead><tr><th>Leading Indicator Lift</th><th>&rarr; Retention (Churn Reduction)</th><th>&rarr; Free-to-Paid</th><th>&rarr; Revenue per Adopter</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Adoption &amp; Activation</strong></td><td>More users reaching Established = fewer who abandon before experiencing value. +25K net adopters &times; $135 ARPU &times; 30% causal share = $12.2M L1 contribution.</td><td>Free users who activate hit plan limits faster. Free adoption 1.1% &rarr; 5%+ = incremental Free&rarr;Paid conversions.</td><td>Activated users who run &gt;1 flow encounter upgrade prompts at natural limit-hit moments.</td></tr>
+    <tr><td><strong>Setup Completion &amp; FTU Turn-On</strong></td><td>Setup abandon 40&ndash;50% &rarr; 25&ndash;30% recovers ~800 net adopters/mo. FTU 6.8% &rarr; 15% = 2.2&times; more first-month activations.</td><td>Customers who complete setup in their first session have 2&ndash;3&times; higher conversion rates.</td><td>&mdash;</td></tr>
+    <tr><td><strong>Churn Reduction</strong></td><td>Churn 40.2% &rarr; 35&ndash;37% = ~6.5&ndash;10K fewer Abandoners/mo. Builder quality, reporting accuracy, and frequency controls are the largest retention levers.</td><td>&mdash;</td><td>&mdash;</td></tr>
+    <tr><td><strong>Campaign Performance (AI + Triggers)</strong></td><td>&mdash;</td><td>&mdash;</td><td>Per-profile Smart Send (+10&ndash;30% open lift), predictive triggers, and event-property personalization lift revenue per adopter from $616 &rarr; $700&ndash;800/mo.</td></tr>
+  </tbody>
+</table>
+
+<hr class="divider">
+
+<h2>Projected Business Impact</h2>
+<table>
+  <thead><tr><th>Revenue Lever</th><th>Key Inputs</th><th>How It Translates</th><th>FY27 ARR</th></tr></thead>
+  <tbody>
+    <tr><td><strong>L1: Adoption Growth</strong></td><td>+25K net adopters (mid); adoption 16% &rarr; 22%</td><td>25K &times; $135 ARPU &times; 12 &times; 30% causal share</td><td><strong>$10&ndash;13M</strong></td></tr>
+    <tr><td><strong>L2: Activation + Sends</strong></td><td>Activation 33.6% &rarr; 42&ndash;48%; FTU 6.8% &rarr; 15%</td><td>More users reaching Established and sending first flow</td><td><strong>$3&ndash;5M</strong></td></tr>
+    <tr><td><strong>L3: Repeat Usage</strong></td><td>Multi-flow adoption 30&ndash;40% &rarr; 50%+</td><td>Deeper usage drives tier upgrades and reduces silent churn</td><td><strong>$2&ndash;4M</strong></td></tr>
+    <tr><td><strong>L4: Reduced Abandonment</strong></td><td>Setup abandon 40&ndash;50% &rarr; 25&ndash;30%</td><td>~800 net recovered adopters/mo convert to Established</td><td><strong>$1&ndash;2M</strong></td></tr>
+    <tr><td><strong>L5: Campaign Performance</strong></td><td>Churn 3.2% &rarr; 2.6%/mo; AI optimization lifts</td><td>Better automation performance = lower churn + higher revenue attribution</td><td><strong>$3&ndash;5M</strong></td></tr>
+    <tr><td><strong>L6: Revenue per Customer</strong></td><td>$616 &rarr; $700&ndash;800/mo per adopter</td><td>Predictive triggers, cross-channel, personalization drive more customer GMV</td><td><strong>$2&ndash;3M</strong></td></tr>
+  </tbody>
+</table>
+
+<div style="background:#f5f5f5; border:2px solid #000; padding:16px; margin:16px 0;">
+  <h3 style="margin-bottom:8px;">Total Automation-Attributed Annual Revenue Impact</h3>
+  <table style="border:none;">
+    <tr><td style="border:none; font-size:14pt; font-weight:700; padding:4px 20px 4px 0;">+$20&ndash;25M</td><td style="border:none; font-size:10pt; color:#555;">Commit floor &mdash; combined automation ARR across all 6 levers</td></tr>
+    <tr><td style="border:none; font-weight:700; padding:4px 20px 4px 0;">$10&ndash;13M</td><td style="border:none; font-size:9pt; color:#555;">From Adoption Growth: net new adopters driven by trigger depth, templates, AI agent, and free-tier reinstatement (50%)</td></tr>
+    <tr><td style="border:none; font-weight:700; padding:4px 20px 4px 0;">$3&ndash;5M</td><td style="border:none; font-size:9pt; color:#555;">From Activation + Sends: FTU turn-on, setup completion, time-to-first-flow compression (18%)</td></tr>
+    <tr><td style="border:none; font-weight:700; padding:4px 20px 4px 0;">$5&ndash;7M</td><td style="border:none; font-size:9pt; color:#555;">From Performance + Revenue per Customer: AI optimization, churn reduction, campaign performance lifts (32%)</td></tr>
+  </table>
+  <p style="font-size:8pt; color:#555; margin-top:8px;">Modeling envelope: $20&ndash;32M. Mid scenario: $21.4M. Pillar stack: P1 $2&ndash;4M + P2 $4&ndash;7M + P3 $5&ndash;8M + AI $6&ndash;10M + Cross-Channel $3&ndash;5M.</p>
+</div>
+
+<hr class="divider">
+
+<h2>Methodology &amp; Assumptions</h2>
+<div class="guiding">
+  <h3>Data Sources</h3>
+  <p>User and adoption baselines from bi_aggregate.product_journey_monthly (89.4M rows, May 2024&ndash;Apr 2026). ARPU from bi_aggregate.mbr_monthly: blended $135/mo per paid automation adopter; customer-attributed revenue $616/mo. Volume base: 132K CJB Established/mo, ~153K active automation adopters, 16% platform adoption rate.</p>
+</div>
+<div class="guiding">
+  <h3>Conservative Guardrails</h3>
+  <p>Automation causal share: 30% (sensitivity 30&ndash;50%). All conversion estimates use blended ARPU ($135/mo), not customer-attributed ($616/mo). No compounding assumed across levers. Commit floor $20&ndash;25M is the sub-band of Strategy $20&ndash;32M envelope.</p>
+</div>
+<div class="guiding">
+  <h3>Key Risks</h3>
+  <p>Eventbus migration is the binding constraint &mdash; real-time triggers, conversational automations, and WhatsApp all gate on it. If Eventbus slips past Q3, Pillar 2 trigger depth and Pillar 3 channel expansion are delayed. Adoption growth (L1) is the largest lever ($10&ndash;13M of $20&ndash;25M). Classic collapse (&minus;51.8% YoY) creates urgency: combined users declining 20.3% YoY despite CJB growth. Attribution requires controlled experimentation to validate causal shares.</p>
+</div>
+
+<p class="source-note"><strong>Source:</strong> Initiative Canvas from <a href="mailchimp.html#canvas">Mailchimp Marketing Automation Flows strategy dossier</a>. HVC MRR from Slack HVC VoC + HVC Risk Map. Growth Model and Loss Attribution from canvas tabs. Unified Builder initiatives on <a href="unified-builder-roadmap.html">Unified Builder FY27 roadmap</a>.</p>
 
 </div><!-- /panel-strategy -->
 
