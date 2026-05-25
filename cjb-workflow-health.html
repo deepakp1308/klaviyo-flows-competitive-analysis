@@ -1586,133 +1586,284 @@
 <div id="panel-targeting" class="tabpanel" role="tabpanel">
 
 <h1>Customer Targeting &mdash; Executive Priority Ranking</h1>
-<p style="font-size:9pt; color:#555; font-style:italic; margin-bottom:10px;">Who to prioritize for FY27 Automation ARR &middot; Full population BigQuery analysis (1,645,139 eligible customers) &middot; KMeans clustering on 18 CJB behavioral features</p>
+<p style="font-size:9pt; color:#555; font-style:italic; margin-bottom:10px;">Who to prioritize for FY27 Automation ARR &middot; Full population BigQuery analysis (1,645,139 eligible customers) &middot; KMeans clustering on 23 CJB behavioral features</p>
 
 <div style="background:#f5f5f5; border-left:4px solid #000; padding:12px 16px; margin:12px 0 16px 0;">
-  <p style="font-size:10pt; line-height:1.5;"><strong>Bottom line:</strong> Close the automation ARR gap by executing <strong>Bundle A in Q1&ndash;Q2</strong> (trigger depth + segmentation + agentic optimization for active flow users), running <strong>Bundle B in parallel</strong> (trigger UX + eventbus for frustrated/high-MRR users), and deferring dormant-base activation (C1, C7, C9) until foundation ships. <strong>55,268 customers (3.4% of cohort) in the top 3 clusters deliver $20.98M (95% of FY27 EV).</strong> The automation opportunity is concentrated in a small, high-value, high-activity population.</p>
+  <p style="font-size:10pt; line-height:1.5;"><strong>Bottom line:</strong> Close the automation ARR gap by executing <strong>Bundle A in Q1&ndash;Q2</strong> (segmentation + agentic optimization + trigger depth for active flow users), running <strong>Bundle B in parallel</strong> (trigger UX + eventbus + AI agent for frustrated/high-MRR users), and deferring dormant-base activation until foundation ships. <strong>55,097 customers (3.3% of cohort) in the top 3 clusters deliver $20.97M (95% of FY27 EV).</strong> The automation opportunity is concentrated in a small, high-value, high-activity population.</p>
 </div>
 
 <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:12px 0;">
   <div style="text-align:center; border:1px solid #ddd; padding:10px 8px;"><div style="font-size:18pt; font-weight:700;">1,645,139</div><div style="font-size:8pt; color:#555;">Eligible customers</div></div>
   <div style="text-align:center; border:1px solid #ddd; padding:10px 8px;"><div style="font-size:18pt; font-weight:700;">$22.0M</div><div style="font-size:8pt; color:#555;">FY27 macro-calibrated EV</div></div>
-  <div style="text-align:center; border:1px solid #ddd; padding:10px 8px;"><div style="font-size:18pt; font-weight:700;">55,268</div><div style="font-size:8pt; color:#555;">P1 customers (3.4%)</div></div>
-  <div style="text-align:center; border:1px solid #ddd; padding:10px 8px;"><div style="font-size:18pt; font-weight:700;">$20.98M</div><div style="font-size:8pt; color:#555;">P1 Bundle A EV (95%)</div></div>
+  <div style="text-align:center; border:1px solid #ddd; padding:10px 8px;"><div style="font-size:18pt; font-weight:700;">55,097</div><div style="font-size:8pt; color:#555;">P1 customers (3.3%)</div></div>
+  <div style="text-align:center; border:1px solid #ddd; padding:10px 8px;"><div style="font-size:18pt; font-weight:700;">$20.97M</div><div style="font-size:8pt; color:#555;">P1 Bundle A EV (95%)</div></div>
 </div>
 
 <div style="background:#f5f5f5; border:1px solid #ddd; padding:12px 16px; margin:12px 0 16px 0; font-size:9pt;">
   <p><strong>How to read priority tiers</strong></p>
-  <p><strong>P1 &mdash; Wave 1 Revenue (Bundle A):</strong> 55,268 customers &middot; $20.98M FY27 EV &middot; Execute Q1&ndash;Q2. Active multi-flow users + rising-usage power users. Trigger depth, segmentation, agentic optimization.</p>
-  <p><strong>P2 &mdash; Foundation Fix (Bundle B):</strong> 96,640 customers &middot; $830K FY27 EV &middot; Parallel Q1. Setup-frustrated abandoners + high-MRR frustrated users. Trigger UX, eventbus, reporting.</p>
-  <p><strong>P3/P4 &mdash; Activation &amp; AI (Bundle C):</strong> 1,493,231 customers &middot; $188K FY27 EV &middot; Q2&ndash;Q3 after foundation. Dormant base, AI agent, free activation, templates.</p>
+  <p><strong>P1 &mdash; Wave 1 Revenue (Bundle A):</strong> 55,097 customers &middot; $20.97M FY27 EV &middot; Execute Q1&ndash;Q2. Active multi-flow users + tenured high-completion users. Segmentation, agentic optimization, trigger depth.</p>
+  <p><strong>P2 &mdash; Foundation Fix (Bundle B):</strong> 123,935 customers &middot; $910K FY27 EV &middot; Parallel Q1. Setup-frustrated abandoners + high-MRR frustrated users. Trigger UX, eventbus, AI agent.</p>
+  <p><strong>P3/P4 &mdash; Activation &amp; AI (Bundle C):</strong> 1,466,107 customers &middot; $123K FY27 EV &middot; Q2&ndash;Q3 after foundation. Dormant base, templates, free activation, ecommerce deep.</p>
 </div>
+
+<h2>Feature &rarr; Revenue Outcome Correlations</h2>
+<p style="font-size:9pt; color:#555; margin-bottom:8px;">Pearson <em>r</em> at customer level (N=1,722,983) across 23 CJB behavioral features. Outcomes from <code>bi_finance.user_cloud_monthly_status</code> (May FY26) + behavioral proxies where finance join absent.</p>
+
+<div style="display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin:8px 0 12px 0; font-size:8pt;">
+  <div style="border:1px solid #ddd; padding:6px;"><strong>Overall Revenue</strong><br>avg_mrr r=+0.42<br>automation_active_days r=+0.35</div>
+  <div style="border:1px solid #ddd; padding:6px;"><strong>Retention</strong><br>automation_active_days r=+0.24<br>integration_usage r=+0.20</div>
+  <div style="border:1px solid #ddd; padding:6px;"><strong>Upsell</strong><br>tenure_months r=+0.16<br>automation_active_days r=+0.15</div>
+  <div style="border:1px solid #ddd; padding:6px;"><strong>Trial &rarr; Sub</strong><br>integration_count r=+0.24<br>cjb_completion_rate r=+0.12</div>
+  <div style="border:1px solid #ddd; padding:6px;"><strong>Free &rarr; Paid</strong><br>total_eligible_initiatives r=+0.24<br>cjb_completion_rate r=+0.22</div>
+</div>
+
+<table>
+  <thead><tr><th>Feature</th><th>Free → Paid</th><th>Overall Revenue (log MRR)</th><th>Retention</th><th>Trial → Sub</th><th>Upsell / Expansion</th></tr></thead>
+  <tbody>
+<tr><td style="font-weight:600;">avg_mrr</td><td style="text-align:center; color:#555;">-0.019</td><td style="text-align:center; color:#166534;">+0.424</td><td style="text-align:center; color:#166534;">+0.200</td><td style="text-align:center; color:#555;">-0.021</td><td style="text-align:center; color:#15803D;">+0.088</td></tr>
+<tr><td style="font-weight:600;">automation_active_days_90d</td><td style="text-align:center; color:#555;">-0.013</td><td style="text-align:center; color:#166534;">+0.349</td><td style="text-align:center; color:#166534;">+0.238</td><td style="text-align:center; color:#555;">-0.030</td><td style="text-align:center; color:#15803D;">+0.146</td></tr>
+<tr><td style="font-weight:600;">integration_usage_events_90d</td><td style="text-align:center; color:#555;">-0.004</td><td style="text-align:center; color:#166534;">+0.305</td><td style="text-align:center; color:#166534;">+0.205</td><td style="text-align:center; color:#555;">-0.031</td><td style="text-align:center; color:#15803D;">+0.080</td></tr>
+<tr><td style="font-weight:600;">total_eligible_initiatives</td><td style="text-align:center; color:#166534;">+0.240</td><td style="text-align:center; color:#DC2626;">-0.085</td><td style="text-align:center; color:#B91C1C;">-0.158</td><td style="text-align:center; color:#15803D;">+0.104</td><td style="text-align:center; color:#555;">+0.025</td></tr>
+<tr><td style="font-weight:600;">integration_count_90d</td><td style="text-align:center; color:#166534;">+0.227</td><td style="text-align:center; color:#555;">-0.006</td><td style="text-align:center; color:#555;">-0.067</td><td style="text-align:center; color:#166534;">+0.240</td><td style="text-align:center; color:#555;">+0.037</td></tr>
+<tr><td style="font-weight:600;">cjb_abandonment_rate</td><td style="text-align:center; color:#B91C1C;">-0.222</td><td style="text-align:center; color:#DC2626;">-0.117</td><td style="text-align:center; color:#555;">-0.077</td><td style="text-align:center; color:#DC2626;">-0.116</td><td style="text-align:center; color:#555;">-0.066</td></tr>
+<tr><td style="font-weight:600;">cjb_completion_rate</td><td style="text-align:center; color:#166534;">+0.222</td><td style="text-align:center; color:#15803D;">+0.117</td><td style="text-align:center; color:#555;">+0.077</td><td style="text-align:center; color:#15803D;">+0.116</td><td style="text-align:center; color:#555;">+0.066</td></tr>
+<tr><td style="font-weight:600;">tenure_months</td><td style="text-align:center; color:#DC2626;">-0.133</td><td style="text-align:center; color:#166534;">+0.193</td><td style="text-align:center; color:#15803D;">+0.101</td><td style="text-align:center; color:#B91C1C;">-0.183</td><td style="text-align:center; color:#166534;">+0.162</td></tr>
+<tr><td style="font-weight:600;">email_sends_per_week</td><td style="text-align:center; color:#555;">-0.020</td><td style="text-align:center; color:#166534;">+0.162</td><td style="text-align:center; color:#15803D;">+0.099</td><td style="text-align:center; color:#555;">-0.026</td><td style="text-align:center; color:#555;">+0.067</td></tr>
+<tr><td style="font-weight:600;">days_since_last_cjb_action</td><td style="text-align:center; color:#15803D;">+0.134</td><td style="text-align:center; color:#15803D;">+0.139</td><td style="text-align:center; color:#15803D;">+0.096</td><td style="text-align:center; color:#555;">+0.061</td><td style="text-align:center; color:#555;">+0.034</td></tr>
+<tr><td style="font-weight:600;">days_since_last_email_send</td><td style="text-align:center; color:#555;">-0.017</td><td style="text-align:center; color:#15803D;">+0.093</td><td style="text-align:center; color:#15803D;">+0.097</td><td style="text-align:center; color:#555;">+0.014</td><td style="text-align:center; color:#555;">-0.005</td></tr>
+<tr><td style="font-weight:600;">cjb_creates_90d</td><td style="text-align:center; color:#15803D;">+0.093</td><td style="text-align:center; color:#555;">+0.058</td><td style="text-align:center; color:#555;">+0.030</td><td style="text-align:center; color:#555;">+0.047</td><td style="text-align:center; color:#555;">+0.043</td></tr>
+<tr><td style="font-weight:600;">ai_content_creates_90d</td><td style="text-align:center; color:#555;">-0.002</td><td style="text-align:center; color:#555;">+0.070</td><td style="text-align:center; color:#555;">+0.045</td><td style="text-align:center; color:#555;">-0.004</td><td style="text-align:center; color:#555;">+0.020</td></tr>
+<tr><td style="font-weight:600;">cjb_pauses_90d</td><td style="text-align:center; color:#555;">+0.051</td><td style="text-align:center; color:#555;">+0.068</td><td style="text-align:center; color:#555;">+0.033</td><td style="text-align:center; color:#555;">+0.021</td><td style="text-align:center; color:#555;">+0.036</td></tr>
+<tr><td style="font-weight:600;">cjb_restarts_90d</td><td style="text-align:center; color:#555;">+0.059</td><td style="text-align:center; color:#555;">+0.068</td><td style="text-align:center; color:#555;">+0.033</td><td style="text-align:center; color:#555;">+0.027</td><td style="text-align:center; color:#555;">+0.038</td></tr>
+<tr><td style="font-weight:600;">list_size</td><td style="text-align:center; color:#555;">-0.004</td><td style="text-align:center; color:#555;">+0.061</td><td style="text-align:center; color:#555;">+0.013</td><td style="text-align:center; color:#555;">-0.006</td><td style="text-align:center; color:#555;">+0.015</td></tr>
+<tr><td style="font-weight:600;">cjb_starts_90d</td><td style="text-align:center; color:#555;">+0.060</td><td style="text-align:center; color:#555;">+0.048</td><td style="text-align:center; color:#555;">+0.026</td><td style="text-align:center; color:#555;">+0.030</td><td style="text-align:center; color:#555;">+0.037</td></tr>
+<tr><td style="font-weight:600;">starts_trend</td><td style="text-align:center; color:#555;">+0.016</td><td style="text-align:center; color:#555;">-0.007</td><td style="text-align:center; color:#555;">+0.010</td><td style="text-align:center; color:#555;">+0.015</td><td style="text-align:center; color:#555;">+0.041</td></tr>
+<tr><td style="font-weight:600;">friction_score</td><td style="text-align:center; color:#555;">-0.040</td><td style="text-align:center; color:#555;">-0.037</td><td style="text-align:center; color:#555;">-0.030</td><td style="text-align:center; color:#555;">-0.026</td><td style="text-align:center; color:#555;">-0.024</td></tr>
+<tr><td style="font-weight:600;">total_automation_events_90d</td><td style="text-align:center; color:#555;">-0.001</td><td style="text-align:center; color:#555;">+0.036</td><td style="text-align:center; color:#555;">+0.021</td><td style="text-align:center; color:#555;">-0.002</td><td style="text-align:center; color:#555;">+0.015</td></tr>
+<tr><td style="font-weight:600;">creates_trend</td><td style="text-align:center; color:#555;">+0.013</td><td style="text-align:center; color:#555;">-0.018</td><td style="text-align:center; color:#555;">-0.003</td><td style="text-align:center; color:#555;">+0.012</td><td style="text-align:center; color:#555;">+0.028</td></tr>
+<tr><td style="font-weight:600;">email_creates_90d</td><td style="text-align:center; color:#555;">-0.001</td><td style="text-align:center; color:#555;">+0.024</td><td style="text-align:center; color:#555;">+0.014</td><td style="text-align:center; color:#555;">-0.002</td><td style="text-align:center; color:#555;">+0.010</td></tr>
+<tr><td style="font-weight:600;">sms_creates_90d</td><td style="text-align:center; color:#ccc;">&mdash;</td><td style="text-align:center; color:#ccc;">&mdash;</td><td style="text-align:center; color:#ccc;">&mdash;</td><td style="text-align:center; color:#ccc;">&mdash;</td><td style="text-align:center; color:#ccc;">&mdash;</td></tr>
+  </tbody>
+</table>
+<p style="font-size:8pt; color:#888;">Strongest revenue predictors: <strong>avg_mrr</strong> (+0.42), <strong>automation_active_days_90d</strong> (+0.35), <strong>integration_usage_events_90d</strong> (+0.31). Conversion levers differ: free&rarr;paid driven by <strong>cjb_completion_rate</strong> (+0.22) and <strong>integration_count</strong> (+0.23); retention by automation engagement depth, not list size.</p>
+
+<hr style="border:none; border-top:2px solid #000; margin:24px 0;">
+
+<h2>Initiative &rarr; Customer Microcluster Targeting</h2>
+<p style="font-size:9pt; color:#555; margin-bottom:8px;">Each initiative&rsquo;s eligible customer EV distributed across microclusters. Percentages sum to 100% per initiative (EV-weighted from propensity &times; eligibility &times; annual ARR).</p>
+
+<table>
+  <thead><tr><th style="width:32%;">Initiative (Sub-Theme, Quarter)</th><th>Target Microclusters (% of Initiative EV)</th></tr></thead>
+  <tbody>
+    <tr>
+      <td style="font-weight:600; vertical-align:top;">Journey Builder front-end refactor (Editor / UI, Q1)</td>
+      <td style="font-size:8.5pt;">C3 Active Mid-Market Multi-Flow Users (55%), C6 Tenured High-Completion Flow Users (25%), C11 Rising-Intent Integration Users (6%), C4 Enterprise High-MRR, Automation-Frustrated (6%), C12 Stable Power Flow Users (Low Trend) (3%), C8 Setup-Frustrated Abandoners (3%), C9 Enterprise Premium (No Automation) (2%), C0 High-MRR Integrated Power Users (0%)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600; vertical-align:top;">Trigger modal + content gating + activation transparency (Trigger UX, Q1)</td>
+      <td style="font-size:8.5pt;">C3 Active Mid-Market Multi-Flow Users (33%), C6 Tenured High-Completion Flow Users (27%), C12 Stable Power Flow Users (Low Trend) (10%), C4 Enterprise High-MRR, Automation-Frustrated (10%), C11 Rising-Intent Integration Users (10%), C8 Setup-Frustrated Abandoners (5%), C9 Enterprise Premium (No Automation) (3%), C0 High-MRR Integrated Power Users (1%)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600; vertical-align:top;">Eventbus migration + real-time triggers (Platform, Q2–Q3)</td>
+      <td style="font-size:8.5pt;">C3 Active Mid-Market Multi-Flow Users (43%), C6 Tenured High-Completion Flow Users (31%), C12 Stable Power Flow Users (Low Trend) (20%), C4 Enterprise High-MRR, Automation-Frustrated (3%), C11 Rising-Intent Integration Users (2%), C9 Enterprise Premium (No Automation) (1%)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600; vertical-align:top;">Reporting correctness + per-step KPIs (Reporting, Q1–Q2)</td>
+      <td style="font-size:8.5pt;">C3 Active Mid-Market Multi-Flow Users (59%), C6 Tenured High-Completion Flow Users (33%), C12 Stable Power Flow Users (Low Trend) (8%)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600; vertical-align:top;">Classic → CJB migration + single builder (Migration, Q2–Q3)</td>
+      <td style="font-size:8.5pt;">C3 Active Mid-Market Multi-Flow Users (50%), C6 Tenured High-Completion Flow Users (32%), C12 Stable Power Flow Users (Low Trend) (10%), C4 Enterprise High-MRR, Automation-Frustrated (5%), C9 Enterprise Premium (No Automation) (1%), C11 Rising-Intent Integration Users (1%), C8 Setup-Frustrated Abandoners (1%)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600; vertical-align:top;">12+ behavioral triggers + predictive triggers (Triggers, Q1–Q2)</td>
+      <td style="font-size:8.5pt;">C3 Active Mid-Market Multi-Flow Users (27%), C6 Tenured High-Completion Flow Users (22%), C8 Setup-Frustrated Abandoners (16%), C12 Stable Power Flow Users (Low Trend) (16%), C4 Enterprise High-MRR, Automation-Frustrated (11%), C9 Enterprise Premium (No Automation) (5%), C11 Rising-Intent Integration Users (2%), C0 High-MRR Integrated Power Users (1%)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600; vertical-align:top;">Shopify-deep integration + multi-platform parity (E-Commerce, Q1–Q2)</td>
+      <td style="font-size:8.5pt;">C3 Active Mid-Market Multi-Flow Users (28%), C6 Tenured High-Completion Flow Users (22%), C12 Stable Power Flow Users (Low Trend) (15%), C8 Setup-Frustrated Abandoners (14%), C4 Enterprise High-MRR, Automation-Frustrated (10%), C9 Enterprise Premium (No Automation) (5%), C11 Rising-Intent Integration Users (3%), C0 High-MRR Integrated Power Users (2%)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600; vertical-align:top;">Event-property + nested segmentation + trigger splits (Segmentation, Q2)</td>
+      <td style="font-size:8.5pt;">C3 Active Mid-Market Multi-Flow Users (42%), C6 Tenured High-Completion Flow Users (35%), C12 Stable Power Flow Users (Low Trend) (21%), C4 Enterprise High-MRR, Automation-Frustrated (2%)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600; vertical-align:top;">Searchable gallery + industry templates (Templates, Q1–Q2)</td>
+      <td style="font-size:8.5pt;">C3 Active Mid-Market Multi-Flow Users (33%), C6 Tenured High-Completion Flow Users (27%), C12 Stable Power Flow Users (Low Trend) (10%), C4 Enterprise High-MRR, Automation-Frustrated (10%), C11 Rising-Intent Integration Users (10%), C8 Setup-Frustrated Abandoners (5%), C9 Enterprise Premium (No Automation) (3%), C0 High-MRR Integrated Power Users (1%)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600; vertical-align:top;">ICP homepage + free-tier reinstatement (Activation, Q2)</td>
+      <td style="font-size:8.5pt;">C3 Active Mid-Market Multi-Flow Users (32%), C6 Tenured High-Completion Flow Users (16%), C8 Setup-Frustrated Abandoners (15%), C12 Stable Power Flow Users (Low Trend) (14%), C9 Enterprise Premium (No Automation) (11%), C11 Rising-Intent Integration Users (6%), C4 Enterprise High-MRR, Automation-Frustrated (5%), C0 High-MRR Integrated Power Users (1%)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600; vertical-align:top;">Vertical UIs + unified transactional+marketing (Vertical, Q2)</td>
+      <td style="font-size:8.5pt;">C3 Active Mid-Market Multi-Flow Users (27%), C6 Tenured High-Completion Flow Users (21%), C8 Setup-Frustrated Abandoners (17%), C12 Stable Power Flow Users (Low Trend) (16%), C4 Enterprise High-MRR, Automation-Frustrated (11%), C9 Enterprise Premium (No Automation) (5%), C11 Rising-Intent Integration Users (2%), C0 High-MRR Integrated Power Users (1%)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600; vertical-align:top;">Autonomous setup agent (AI Generation, Q1)</td>
+      <td style="font-size:8.5pt;">C3 Active Mid-Market Multi-Flow Users (26%), C6 Tenured High-Completion Flow Users (22%), C8 Setup-Frustrated Abandoners (17%), C12 Stable Power Flow Users (Low Trend) (16%), C4 Enterprise High-MRR, Automation-Frustrated (10%), C9 Enterprise Premium (No Automation) (6%), C11 Rising-Intent Integration Users (2%)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600; vertical-align:top;">Conversational editing via Intuit Assist (Conversational, Q2–Q3)</td>
+      <td style="font-size:8.5pt;">C3 Active Mid-Market Multi-Flow Users (27%), C6 Tenured High-Completion Flow Users (22%), C8 Setup-Frustrated Abandoners (16%), C12 Stable Power Flow Users (Low Trend) (16%), C4 Enterprise High-MRR, Automation-Frustrated (11%), C9 Enterprise Premium (No Automation) (5%), C11 Rising-Intent Integration Users (2%), C0 High-MRR Integrated Power Users (1%)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600; vertical-align:top;">Per-user treatment + Smart Send + Channel Affinity (Agentic, Q3)</td>
+      <td style="font-size:8.5pt;">C3 Active Mid-Market Multi-Flow Users (60%), C6 Tenured High-Completion Flow Users (32%), C12 Stable Power Flow Users (Low Trend) (7%)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600; vertical-align:top;">5-channel orchestration + AI channel selection (Omni-Channel, Q3–Q4)</td>
+      <td style="font-size:8.5pt;">C3 Active Mid-Market Multi-Flow Users (43%), C6 Tenured High-Completion Flow Users (31%), C12 Stable Power Flow Users (Low Trend) (20%), C4 Enterprise High-MRR, Automation-Frustrated (3%), C11 Rising-Intent Integration Users (2%), C9 Enterprise Premium (No Automation) (1%)</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr style="border:none; border-top:2px solid #000; margin:24px 0;">
+
+<h2>Cluster Priority Ranking</h2>
+<p style="font-size:9pt; color:#555; font-style:italic; margin-bottom:10px;">Primary Lever = highest-EV roadmap initiative mapped to sub-theme and ship quarter.</p>
 
 <table>
   <thead>
     <tr>
-      <th>Priority Rank</th><th>Tier</th><th>Cluster</th><th style="text-align:right;">Customers</th><th style="text-align:right;">% Cohort</th><th style="text-align:right;">Avg MRR</th><th style="text-align:right;">FY27 Revenue Impact</th><th>Bundle</th><th>Primary Lever</th><th>Why Prioritize (or Deprioritize)</th>
+      <th>Priority Rank</th><th>Tier</th><th>Cluster</th><th style="text-align:right;">Customers</th><th style="text-align:right;">% Cohort</th><th style="text-align:right;">Avg MRR</th><th style="text-align:right;">FY27 Revenue Impact</th><th>Bundle</th><th>Primary Lever (Initiative &middot; Sub-Theme &middot; Quarter)</th><th>Why Prioritize (or Deprioritize)</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td style="text-align:center;"><strong>1</strong></td><td style="text-align:center;">P1</td>
-      <td style="background:#f2f2f2; font-weight:700;">C6 &middot; Active Mid-Market Multi-Flow Users</td>
-      <td style="text-align:right;">13,697</td><td style="text-align:right;">0.8%</td><td style="text-align:right;">$246</td>
-      <td style="text-align:right; font-weight:700; color:#B91C1C;">$9.47M</td>
-      <td style="text-align:center;">A</td><td>Segmentation</td>
-      <td>Highest FY27 EV; 80.4% completion rate, 3.4 avg starts/90d. Advanced segmentation + trigger splits unlock disproportionate value. Multi-flow power users who convert every improvement into revenue.</td>
+      <td style="background:#f2f2f2; font-weight:700;">C3 &middot; Active Mid-Market Multi-Flow Users</td>
+      <td style="text-align:right;">14,095</td><td style="text-align:right;">0.9%</td>
+      <td style="text-align:right;">$252</td>
+      <td style="text-align:right; font-weight:700; color:#B91C1C;">$10.50M</td>
+      <td style="text-align:center;">A</td>
+      <td style="font-size:8.5pt;">Event-property + nested segmentation + trigger splits (Segmentation, Q2)</td>
+      <td>Highest FY27 EV; 82% completion, 3.7 avg starts/90d. Advanced segmentation + trigger splits unlock disproportionate value. Multi-flow power users who convert every improvement into revenue.</td>
     </tr>
     <tr>
       <td style="text-align:center;"><strong>2</strong></td><td style="text-align:center;">P1</td>
-      <td style="background:#f2f2f2; font-weight:700;">C8 &middot; Tenured High-Completion Flow Users</td>
-      <td style="text-align:right;">19,210</td><td style="text-align:right;">1.2%</td><td style="text-align:right;">$162</td>
-      <td style="text-align:right; font-weight:700; color:#B91C1C;">$7.54M</td>
-      <td style="text-align:center;">A</td><td>Agentic Optimization</td>
-      <td>85.2% completion, stable usage (low trend). Per-profile Smart Send + A/B + Channel Affinity lift revenue per flow. Protect and expand this high-completion cohort.</td>
+      <td style="background:#f2f2f2; font-weight:700;">C6 &middot; Tenured High-Completion Flow Users</td>
+      <td style="text-align:right;">21,711</td><td style="text-align:right;">1.3%</td>
+      <td style="text-align:right;">$133</td>
+      <td style="text-align:right; font-weight:700; color:#B91C1C;">$6.52M</td>
+      <td style="text-align:center;">A</td>
+      <td style="font-size:8.5pt;">Per-user treatment + Smart Send + Channel Affinity (Agentic, Q3)</td>
+      <td>85% completion, stable usage. Per-profile Smart Send + A/B + Channel Affinity lift revenue per flow. Protect and expand this high-completion cohort.</td>
     </tr>
     <tr>
       <td style="text-align:center;"><strong>3</strong></td><td style="text-align:center;">P1</td>
-      <td style="background:#f2f2f2; font-weight:700;">C3 &middot; Rising-Usage Power Flow Users</td>
-      <td style="text-align:right;">22,361</td><td style="text-align:right;">1.4%</td><td style="text-align:right;">$95</td>
-      <td style="text-align:right; font-weight:700; color:#B91C1C;">$3.97M</td>
-      <td style="text-align:center;">A</td><td>Trigger Depth</td>
-      <td>88.9% completion, highest growth trends. 12+ behavioral triggers + predictive triggers capture this cohort&rsquo;s expanding usage. Rising stars with expansion headroom.</td>
+      <td style="background:#f2f2f2; font-weight:700;">C12 &middot; Stable Power Flow Users (Low Trend)</td>
+      <td style="text-align:right;">19,291</td><td style="text-align:right;">1.2%</td>
+      <td style="text-align:right;">$108</td>
+      <td style="text-align:right; font-weight:700; color:#B91C1C;">$3.95M</td>
+      <td style="text-align:center;">A</td>
+      <td style="font-size:8.5pt;">12+ behavioral triggers + predictive triggers (Triggers, Q1–Q2)</td>
+      <td>89% completion, low trend but stable. 12+ behavioral triggers + predictive triggers capture expansion headroom in tenured power users.</td>
     </tr>
     <tr>
       <td style="text-align:center;"><strong>4</strong></td><td style="text-align:center;">P2</td>
-      <td style="background:#f2f2f2; font-weight:700;">C5 &middot; Setup-Frustrated Abandoners</td>
-      <td style="text-align:right;">38,124</td><td style="text-align:right;">2.3%</td><td style="text-align:right;">$60</td>
-      <td style="text-align:right; font-weight:700; color:#B91C1C;">$461K</td>
-      <td style="text-align:center;">B</td><td>Trigger UX</td>
-      <td>81% friction score, 99.6% create-no-start rate. These customers try but fail. Trigger modal redesign + content-completion gating are prerequisite &mdash; foundation before activation.</td>
+      <td style="background:#f2f2f2; font-weight:700;">C8 &middot; Setup-Frustrated Abandoners</td>
+      <td style="text-align:right;">36,684</td><td style="text-align:right;">2.2%</td>
+      <td style="text-align:right;">$58</td>
+      <td style="text-align:right; font-weight:700; color:#B91C1C;">$420K</td>
+      <td style="text-align:center;">B</td>
+      <td style="font-size:8.5pt;">Trigger modal + content gating + activation transparency (Trigger UX, Q1)</td>
+      <td>80% friction score, 99.97% create-no-start rate. Trigger modal redesign + content-completion gating are prerequisite — foundation before activation.</td>
     </tr>
     <tr>
       <td style="text-align:center;"><strong>5</strong></td><td style="text-align:center;">P2</td>
-      <td style="background:#f2f2f2; font-weight:700;">C10 &middot; Enterprise Premium Power Users</td>
-      <td style="text-align:right;">23,451</td><td style="text-align:right;">1.4%</td><td style="text-align:right;">$818</td>
-      <td style="text-align:right; font-weight:700; color:#B91C1C;">$240K</td>
-      <td style="text-align:center;">B</td><td>Reporting</td>
-      <td>Highest avg MRR ($818) but near-zero automation completion. Reporting correctness + per-step KPIs earn trust. High per-account value if activated.</td>
+      <td style="background:#f2f2f2; font-weight:700;">C4 &middot; Enterprise High-MRR, Automation-Frustrated</td>
+      <td style="text-align:right;">31,847</td><td style="text-align:right;">1.9%</td>
+      <td style="text-align:right;">$410</td>
+      <td style="text-align:right; font-weight:700; color:#B91C1C;">$236K</td>
+      <td style="text-align:center;">B</td>
+      <td style="font-size:8.5pt;">Eventbus migration + real-time triggers (Platform, Q2–Q3)</td>
+      <td>High avg MRR ($410) but near-zero automation completion. Eventbus + real-time triggers resolve delivery failures for high-value accounts.</td>
     </tr>
     <tr>
       <td style="text-align:center;"><strong>6</strong></td><td style="text-align:center;">P2</td>
-      <td style="background:#f2f2f2; font-weight:700;">C11 &middot; High-MRR Frustrated (Automation Gap)</td>
-      <td style="text-align:right;">35,065</td><td style="text-align:right;">2.1%</td><td style="text-align:right;">$301</td>
-      <td style="text-align:right; font-weight:700; color:#B91C1C;">$130K</td>
-      <td style="text-align:center;">B</td><td>Eventbus</td>
-      <td>$301 avg MRR but frustrated (42% friction). Eventbus + real-time triggers resolve &ldquo;Automations Not Sending&rdquo; for high-value accounts. Churn protection, not growth lever.</td>
+      <td style="background:#f2f2f2; font-weight:700;">C9 &middot; Enterprise Premium (No Automation)</td>
+      <td style="text-align:right;">39,111</td><td style="text-align:right;">2.4%</td>
+      <td style="text-align:right;">$639</td>
+      <td style="text-align:right; font-weight:700; color:#B91C1C;">$132K</td>
+      <td style="text-align:center;">B</td>
+      <td style="font-size:8.5pt;">Autonomous setup agent (AI Generation, Q1)</td>
+      <td>Highest avg MRR ($639) but minimal CJB activity. Autonomous setup agent is the only viable path to convert enterprise email-heavy users.</td>
     </tr>
     <tr>
-      <td style="text-align:center;"><strong>7</strong></td><td style="text-align:center;">P4</td>
-      <td style="background:#f2f2f2; font-weight:700;">C0 &middot; High-MRR AI-Ready Automation Users</td>
-      <td style="text-align:right;">18,295</td><td style="text-align:right;">1.1%</td><td style="text-align:right;">$186</td>
-      <td style="text-align:right;">$59K</td>
-      <td style="text-align:center;">C</td><td>AI Agent</td>
-      <td>High MRR but minimal CJB activity. AI agent + conversational editing needed to convert email-heavy users to automation adopters. Q2&ndash;Q3 after AI ships.</td>
+      <td style="text-align:center;"><strong>7</strong></td><td style="text-align:center;">P2</td>
+      <td style="background:#f2f2f2; font-weight:700;">C11 &middot; Rising-Intent Integration Users</td>
+      <td style="text-align:right;">16,293</td><td style="text-align:right;">1.0%</td>
+      <td style="text-align:right;">$143</td>
+      <td style="text-align:right; font-weight:700; color:#B91C1C;">$123K</td>
+      <td style="text-align:center;">B</td>
+      <td style="font-size:8.5pt;">Autonomous setup agent (AI Generation, Q1)</td>
+      <td>Integration-heavy rising-intent users with pause/restart friction. AI agent + trigger depth convert integration signals into active flows.</td>
     </tr>
     <tr>
       <td style="text-align:center;"><strong>8</strong></td><td style="text-align:center;">P4</td>
-      <td style="background:#f2f2f2; font-weight:700;">C2 &middot; Dormant High-MRR Paid</td>
-      <td style="text-align:right;">91,064</td><td style="text-align:right;">5.5%</td><td style="text-align:right;">$227</td>
+      <td style="background:#f2f2f2; font-weight:700;">C0 &middot; High-MRR Integrated Power Users</td>
+      <td style="text-align:right;">17,455</td><td style="text-align:right;">1.1%</td>
+      <td style="text-align:right;">$161</td>
       <td style="text-align:right;">$36K</td>
-      <td style="text-align:center;">C</td><td>Trigger Depth</td>
-      <td>$227 avg MRR but zero automation completion. Trigger depth + templates after foundation. High MRR = high churn protection value if activated.</td>
+      <td style="text-align:center;">C</td>
+      <td style="font-size:8.5pt;">Autonomous setup agent (AI Generation, Q1)</td>
+      <td>High MRR, AI-ready email users. AI agent + conversational editing needed to convert email-heavy users to automation adopters.</td>
     </tr>
     <tr>
       <td style="text-align:center;"><strong>9</strong></td><td style="text-align:center;">P4</td>
-      <td style="background:#f2f2f2; font-weight:700;">C4 &middot; Enterprise Dormant (High MRR, No Flows)</td>
-      <td style="text-align:right;">28,973</td><td style="text-align:right;">1.8%</td><td style="text-align:right;">$336</td>
-      <td style="text-align:right;">$32K</td>
-      <td style="text-align:center;">C</td><td>AI Agent</td>
-      <td>Enterprise accounts ($336 MRR) with zero flow activity. AI agent for autonomous setup is the only viable path. Defer until AI ships.</td>
+      <td style="background:#f2f2f2; font-weight:700;">C2 &middot; Low-Tier Paid, Dormant Automation</td>
+      <td style="text-align:right;">397,107</td><td style="text-align:right;">24.1%</td>
+      <td style="text-align:right;">$37</td>
+      <td style="text-align:right;">$22K</td>
+      <td style="text-align:center;">C</td>
+      <td style="font-size:8.5pt;">Searchable gallery + industry templates (Templates, Q1–Q2)</td>
+      <td>Largest dormant paid cluster. Templates + industry gallery after foundation. Volume play, not near-term revenue.</td>
     </tr>
     <tr>
       <td style="text-align:center;"><strong>10</strong></td><td style="text-align:center;">P4</td>
-      <td style="background:#f2f2f2; font-weight:700;">C1 &middot; Dormant Low-MRR Base</td>
-      <td style="text-align:right;">775,701</td><td style="text-align:right;">47.1%</td><td style="text-align:right;">$20</td>
-      <td style="text-align:right;">$28K</td>
-      <td style="text-align:center;">C</td><td>Free Activation</td>
-      <td>Largest cluster (47%) but near-zero automation activity. Free CJB reinstatement + templates after foundation. Do not prioritize for $22M gap.</td>
+      <td style="background:#f2f2f2; font-weight:700;">C10 &middot; Dormant Low-MRR Free/Low Base</td>
+      <td style="text-align:right;">631,863</td><td style="text-align:right;">38.4%</td>
+      <td style="text-align:right;">$20</td>
+      <td style="text-align:right;">$19K</td>
+      <td style="text-align:center;">C</td>
+      <td style="font-size:8.5pt;">ICP homepage + free-tier reinstatement (Activation, Q2)</td>
+      <td>47% of cohort, near-zero automation. Free CJB reinstatement + templates after foundation. Do not prioritize for $22M gap.</td>
     </tr>
     <tr>
       <td style="text-align:center;"><strong>11</strong></td><td style="text-align:center;">P4</td>
-      <td style="background:#f2f2f2; font-weight:700;">C7 &middot; Dormant Low-Tier Paid</td>
-      <td style="text-align:right;">418,239</td><td style="text-align:right;">25.4%</td><td style="text-align:right;">$25</td>
-      <td style="text-align:right;">$17K</td>
-      <td style="text-align:center;">C</td><td>Templates</td>
-      <td>Second-largest cluster, low-tier paid, zero automation. Templates + industry gallery after activation infrastructure. Volume play, not near-term revenue.</td>
+      <td style="background:#f2f2f2; font-weight:700;">C1 &middot; Active Paid, Campaign-Heavy, No Automation</td>
+      <td style="text-align:right;">153,011</td><td style="text-align:right;">9.3%</td>
+      <td style="text-align:right;">$69</td>
+      <td style="text-align:right;">$18K</td>
+      <td style="text-align:center;">C</td>
+      <td style="font-size:8.5pt;">12+ behavioral triggers + predictive triggers (Triggers, Q1–Q2)</td>
+      <td>Campaign-heavy, integration-active but zero CJB. Trigger depth converts existing email engagement into automation adoption.</td>
     </tr>
     <tr>
       <td style="text-align:center;"><strong>12</strong></td><td style="text-align:center;">P4</td>
-      <td style="background:#f2f2f2; font-weight:700;">C9 &middot; Dormant Mid-Tier Paid</td>
-      <td style="text-align:right;">160,959</td><td style="text-align:right;">9.8%</td><td style="text-align:right;">$47</td>
+      <td style="background:#f2f2f2; font-weight:700;">C5 &middot; Mid-Tier Campaign Senders, No CJB</td>
+      <td style="text-align:right;">107,960</td><td style="text-align:right;">6.6%</td>
+      <td style="text-align:right;">$85</td>
       <td style="text-align:right;">$16K</td>
-      <td style="text-align:center;">C</td><td>Ecommerce Deep</td>
-      <td>Mid-tier paid with email activity but no automation. Ecommerce deep triggers + auto-build on store-connect after foundation. Activation only after Bundle B.</td>
+      <td style="text-align:center;">C</td>
+      <td style="font-size:8.5pt;">Shopify-deep integration + multi-platform parity (E-Commerce, Q1–Q2)</td>
+      <td>Mid-tier senders with email activity but no CJB. Ecommerce deep triggers + auto-build on store-connect after foundation.</td>
+    </tr>
+    <tr>
+      <td style="text-align:center;"><strong>13</strong></td><td style="text-align:center;">P4</td>
+      <td style="background:#f2f2f2; font-weight:700;">C7 &middot; Mid-Tier Paid, Dormant Automation</td>
+      <td style="text-align:right;">158,711</td><td style="text-align:right;">9.6%</td>
+      <td style="text-align:right;">$47</td>
+      <td style="text-align:right;">$12K</td>
+      <td style="text-align:center;">C</td>
+      <td style="font-size:8.5pt;">Shopify-deep integration + multi-platform parity (E-Commerce, Q1–Q2)</td>
+      <td>Mid-tier paid, dormant automation. Ecommerce deep triggers after Bundle B foundation ships.</td>
     </tr>
   </tbody>
 </table>
 
-<p style="font-size:8pt; color:#888; margin-top:8px;">Priority rank = FY27 EV from macro-calibrated model ($22M distributed proportional to cluster annualized revenue &times; CJB activity signal). Cohort = paid + active free customers with 90d login (1,645,139). KMeans k=12 (silhouette=0.381) on 18 CJB behavioral features from bi_activities.users_activities + bi_reporting.users + bi_customer.customer_outcomes_monthly. Pipeline: <code>mailchimp-cjb-targeting-plan</code>.</p>
+<p style="font-size:8pt; color:#888; margin-top:8px;">Priority rank = FY27 EV from macro-calibrated model ($22M distributed proportional to cluster annualized revenue &times; CJB activity signal). Cohort = paid + active free customers with 90d login (1,645,139). KMeans k=13 (silhouette=0.278) on 23 CJB behavioral features from bi_activities.users_activities + bi_reporting.users + bi_finance.user_cloud_monthly_status. Correlations: Pearson r at customer level (N=1,722,983). Pipeline: <code>mailchimp-cjb-targeting-plan</code>.</p>
 
 </div><!-- /panel-targeting -->
 
