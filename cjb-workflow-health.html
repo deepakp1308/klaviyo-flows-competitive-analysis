@@ -192,9 +192,25 @@
   #panel-critical .metric { font-weight: 700; color: #000; }
   #panel-critical .summary-box { background: #f5f5f5; border: 2px solid #000; padding: 16px; margin: 16px 0; }
 
+  /* Edit mode */
+  .edit-toolbar { position: fixed; top: 12px; right: 16px; z-index: 9999; display: flex; gap: 8px; align-items: center; }
+  .edit-toolbar button { font-family: Arial, Helvetica, sans-serif; font-size: 9pt; font-weight: 700; padding: 6px 14px; border: 2px solid #000; cursor: pointer; border-radius: 2px; }
+  .edit-toggle { background: #fff; color: #000; }
+  .edit-toggle.active { background: #000; color: #fff; }
+  .edit-download { background: #000; color: #fff; display: none; }
+  body.editing .edit-download { display: inline-block; }
+  body.editing [contenteditable="true"]:hover { outline: 1px dashed #999; outline-offset: 2px; }
+  body.editing [contenteditable="true"]:focus { outline: 2px solid #000; outline-offset: 2px; background: #fffde7; }
+  @media print { .edit-toolbar { display: none; } }
+
 </style>
 </head>
 <body>
+
+<div class="edit-toolbar">
+  <button class="edit-toggle" id="editToggle">Edit Mode</button>
+  <button class="edit-download" id="editDownload">Download HTML</button>
+</div>
 
 <div class="nav" role="tablist">
   <button class="tab active" role="tab" aria-selected="true" data-tab="strategy">CJB Strategy and Roadmap</button>
@@ -2764,6 +2780,47 @@
   });
   var initial = (window.location.hash || '').replace('#', '');
   if (tabNames.indexOf(initial) >= 0) activate(initial);
+})();
+</script>
+<script>
+(function () {
+  var editing = false;
+  var toggle = document.getElementById('editToggle');
+  var download = document.getElementById('editDownload');
+  var editableSelector = '.tabpanel h1, .tabpanel h2, .tabpanel h3, .tabpanel p, .tabpanel td, .tabpanel th, .tabpanel li, .tabpanel .insight-box > p, .tabpanel .vision-box > p, .tabpanel .exec-section > p, .tabpanel .exec-section li';
+
+  function setEditing(on) {
+    editing = on;
+    document.body.classList.toggle('editing', on);
+    toggle.classList.toggle('active', on);
+    toggle.textContent = on ? 'Exit Edit Mode' : 'Edit Mode';
+    var els = document.querySelectorAll(editableSelector);
+    for (var i = 0; i < els.length; i++) {
+      if (on) {
+        els[i].setAttribute('contenteditable', 'true');
+        els[i].setAttribute('spellcheck', 'true');
+      } else {
+        els[i].removeAttribute('contenteditable');
+        els[i].removeAttribute('spellcheck');
+      }
+    }
+  }
+
+  toggle.addEventListener('click', function () { setEditing(!editing); });
+
+  download.addEventListener('click', function () {
+    setEditing(false);
+    var toolbar = document.querySelector('.edit-toolbar');
+    toolbar.style.display = 'none';
+    var html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+    toolbar.style.display = '';
+    var blob = new Blob([html], { type: 'text/html' });
+    var a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'cjb-workflow-health.html';
+    a.click();
+    URL.revokeObjectURL(a.href);
+  });
 })();
 </script>
 
