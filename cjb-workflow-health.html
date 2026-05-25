@@ -1905,12 +1905,16 @@
 
 <p style="font-size:8pt; color:#888; margin-top:8px;">Priority rank = FY27 EV from macro-calibrated model ($22M distributed proportional to cluster annualized revenue &times; CJB activity signal). Cohort = paid + active free customers with 90d login (1,645,139). KMeans k=13 (silhouette=0.278) on 23 CJB behavioral features from bi_activities.users_activities + bi_reporting.users + bi_finance.user_cloud_monthly_status. Correlations: Pearson r at customer level (N=1,722,983). Pipeline: <code>mailchimp-cjb-targeting-plan</code>.</p>
 
-<!-- VP SWIM LANES + CRITICAL PATH PANELS (insert before script) -->
+</div><!-- /panel-targeting -->
 
 <div id="panel-swimlanes" class="tabpanel" role="tabpanel">
 
 <h1>Automation Initiatives Mapped to VP Swim Lanes</h1>
-<p class="subtitle">57 initiatives from 3 automation strategic pillars mapped to 5 VP-level swim lanes across FY27</p>
+<p class="subtitle">57 initiatives from 3 automation strategic pillars mapped to 5 VP-level swim lanes across FY27 &middot; <a href="#strategy" style="color:#166D3B;">Strategy &amp; Roadmap</a> &middot; <a href="#critical" style="color:#166D3B;">Critical Path &amp; Hypotheses</a> &middot; <a href="#revenue" style="color:#166D3B;">Revenue Attribution</a> &middot; <a href="#targeting" style="color:#166D3B;">Customer Targeting</a></p>
+
+<div class="insight-box" style="margin:12px 0 16px 0; border-left:4px solid #166D3B;">
+  <p><strong>How this connects:</strong> Swim lanes translate the <a href="#strategy">3 automation pillars</a> into Mailchimp&rsquo;s 5 VP-level GTM themes. Highlighted initiatives are on the <a href="#critical">FY27 critical path</a> (~$14.3M of $22M). Pillar tags map back to initiative detail tables on the Strategy tab. Revenue weightings are on the <a href="#revenue">Revenue Attribution</a> tab; cluster priority is on <a href="#targeting">Customer Targeting</a>.</p>
+</div>
 
 <div class="legend" style="margin:12px 0 16px 0;">
   <span><span class="pillar-tag tag-p1">P1</span> Make Every Automation Flow Work, Every Time</span>
@@ -2166,7 +2170,12 @@
 <div id="panel-critical" class="tabpanel" role="tabpanel">
 
 <h1>Critical Path: Key Bets by Quarter</h1>
-<p class="subtitle">10 highest-leverage automation initiatives across 4 quarters. These drive ~65% of the total projected revenue impact (~$14.3M of $22M). The remaining ~35% comes from the full portfolio of supporting initiatives.</p>
+<p class="subtitle">10 highest-leverage automation initiatives across 4 quarters. These drive ~65% of the total projected revenue impact (~$14.3M of $22M). The remaining ~35% comes from the full portfolio of supporting initiatives. &middot; <a href="#swimlanes" style="color:#166D3B;">VP Swim Lanes</a> &middot; <a href="#strategy" style="color:#166D3B;">Strategy &amp; Roadmap</a> &middot; <a href="#revenue" style="color:#166D3B;">Revenue Attribution</a></p>
+
+<div class="insight-box" style="margin:12px 0 16px 0; border-left:4px solid #166D3B;">
+  <p><strong>How this connects:</strong> Each bet maps to a highlighted initiative in <a href="#swimlanes">VP Swim Lanes</a>, a row in the <a href="#strategy">FY27 Phased Roadmap</a>, and a revenue line in <a href="#revenue">Revenue Attribution</a>. Leading/lagging indicators tie to <em>How We Measure Success</em> on the Strategy tab (activation 33.6%&rarr;42%, FTU turn-on 6.8%&rarr;15%, ECU adoption 29.7%&rarr;40%+). Store-connect auto-build and Shopify-deep integration are Q2 critical-path bets targeting the integration-driven clusters (C3, C6, C11) from Customer Targeting.</p>
+</div>
+
 <p class="note">All leading and lagging indicator targets are subsets of the overall model (not additive). Critical path initiatives are the minimum viable set that must ship on time for the $20&ndash;25M automation ARR case to hold.</p>
 
 <h2>Q1: Foundation, Trust &amp; AI Quick Wins</h2>
@@ -2389,8 +2398,22 @@
   tabs.forEach(function (t) {
     t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
   });
+  var tabNames = ['workflow-health', 'strategy', 'revenue', 'competitive', 'targeting', 'swimlanes', 'critical'];
+  document.addEventListener('click', function (e) {
+    var link = e.target.closest('a[href^="#"]');
+    if (!link) return;
+    var name = (link.getAttribute('href') || '').replace('#', '');
+    if (tabNames.indexOf(name) >= 0) {
+      e.preventDefault();
+      activate(name);
+    }
+  });
+  window.addEventListener('hashchange', function () {
+    var name = (window.location.hash || '').replace('#', '');
+    if (tabNames.indexOf(name) >= 0) activate(name);
+  });
   var initial = (window.location.hash || '').replace('#', '');
-  if (['workflow-health', 'strategy', 'revenue', 'competitive', 'targeting', 'swimlanes', 'critical'].indexOf(initial) >= 0) activate(initial);
+  if (tabNames.indexOf(initial) >= 0) activate(initial);
 })();
 </script>
 
