@@ -147,6 +147,32 @@
     .tabpanel:first-of-type { page-break-before: auto; }
     .nav { display: none; }
   }
+
+  /* VP Swim Lanes + Critical Path tabs */
+  #panel-swimlanes, #panel-critical { font-size: 9pt; line-height: 1.4; }
+  #panel-swimlanes h1, #panel-critical h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; border-bottom: none; }
+  #panel-swimlanes h2, #panel-critical h2 { font-size: 11pt; font-weight: 700; margin-bottom: 8px; margin-top: 24px; border-bottom: 2px solid #166D3B; padding-bottom: 4px; color: #000; }
+  #panel-swimlanes .subtitle, #panel-critical .subtitle { font-size: 9pt; color: #555; font-style: italic; margin-bottom: 16px; }
+  #panel-swimlanes table, #panel-critical table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 8px; }
+  #panel-swimlanes th, #panel-critical th { background: #166D3B; color: #fff; font-weight: 700; font-size: 8pt; border: 1px solid #bfbfbf; padding: 6px 8px; }
+  #panel-swimlanes td, #panel-critical td { border: 1px solid #bfbfbf; padding: 6px 8px; vertical-align: top; text-align: left; }
+  #panel-swimlanes .header-row th, #panel-critical .header-row th { font-size: 9pt; text-align: center; }
+  #panel-swimlanes .header-row th:first-child { text-align: left; }
+  #panel-swimlanes .theme-row td { background: #166D3B; color: #fff; font-weight: 700; font-size: 9pt; }
+  #panel-swimlanes .swimlane-label { background: #f2f2f2; font-weight: 700; font-size: 9pt; width: 180px; min-width: 180px; }
+  #panel-swimlanes .swimlane-label .desc { font-weight: 400; font-size: 7.5pt; color: #555; margin-top: 3px; font-style: italic; }
+  #panel-swimlanes td ul, #panel-critical td ul { margin: 0; padding-left: 12px; }
+  #panel-swimlanes td ul li { margin-bottom: 3px; line-height: 1.35; }
+  #panel-swimlanes td ul li.highlight { font-weight: 600; color: #166D3B; }
+  #panel-swimlanes .pillar-tag { display: inline-block; font-size: 6.5pt; font-weight: 700; padding: 1px 4px; border-radius: 2px; margin-left: 3px; vertical-align: middle; }
+  #panel-swimlanes .tag-p1 { background: #fee2e2; color: #991b1b; }
+  #panel-swimlanes .tag-p2 { background: #fef3c7; color: #92400e; }
+  #panel-swimlanes .tag-p3 { background: #dbeafe; color: #1e40af; }
+  #panel-swimlanes .rationale-table th { background: #166D3B; color: #fff; }
+  #panel-critical .row-label { background: #f2f2f2; font-weight: 700; font-size: 9pt; width: 140px; min-width: 140px; }
+  #panel-critical .metric { font-weight: 700; color: #166D3B; }
+  #panel-critical .summary-box { background: #f5f5f5; border: 2px solid #166D3B; padding: 16px; margin: 16px 0; }
+
 </style>
 </head>
 <body>
@@ -157,6 +183,8 @@
   <button class="tab" role="tab" aria-selected="false" data-tab="revenue">Revenue Attribution</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="competitive">Competitive Position</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="targeting">Customer Targeting</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="swimlanes">VP Swim Lanes</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="critical">Critical Path &amp; Hypotheses</button>
 </div>
 
 <div id="panel-workflow-health" class="tabpanel active" role="tabpanel">
@@ -1877,7 +1905,466 @@
 
 <p style="font-size:8pt; color:#888; margin-top:8px;">Priority rank = FY27 EV from macro-calibrated model ($22M distributed proportional to cluster annualized revenue &times; CJB activity signal). Cohort = paid + active free customers with 90d login (1,645,139). KMeans k=13 (silhouette=0.278) on 23 CJB behavioral features from bi_activities.users_activities + bi_reporting.users + bi_finance.user_cloud_monthly_status. Correlations: Pearson r at customer level (N=1,722,983). Pipeline: <code>mailchimp-cjb-targeting-plan</code>.</p>
 
-</div><!-- /panel-targeting -->
+<!-- VP SWIM LANES + CRITICAL PATH PANELS (insert before script) -->
+
+<div id="panel-swimlanes" class="tabpanel" role="tabpanel">
+
+<h1>Automation Initiatives Mapped to VP Swim Lanes</h1>
+<p class="subtitle">57 initiatives from 3 automation strategic pillars mapped to 5 VP-level swim lanes across FY27</p>
+
+<div class="legend" style="margin:12px 0 16px 0;">
+  <span><span class="pillar-tag tag-p1">P1</span> Make Every Automation Flow Work, Every Time</span>
+  <span><span class="pillar-tag tag-p2">P2</span> Trigger Flows on What Customers Actually Do</span>
+  <span><span class="pillar-tag tag-p3">P3</span> Let AI Build the Flow, Optimize the Send, and Pick the Channel</span>
+</div>
+
+<table class="swim-table">
+  <colgroup>
+    <col style="width:180px">
+    <col style="width:25%">
+    <col style="width:25%">
+    <col style="width:25%">
+    <col style="width:25%">
+  </colgroup>
+  <thead>
+    <tr class="header-row">
+      <th>FY27 Roadmap</th>
+      <th>Q1 FY27</th>
+      <th>Q2 FY27</th>
+      <th>Q3 FY27</th>
+      <th>Q4 FY27</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr class="theme-row">
+      <td>GTM Product Themes</td>
+      <td>Trust the Flow</td>
+      <td>Trigger on Intent</td>
+      <td>AI at Scale</td>
+      <td>Omni-Channel Automation</td>
+    </tr>
+
+    <tr>
+      <td class="swimlane-label">
+        Accelerate Activation to First Business Payoff
+        <div class="desc">Compress time from signup to first live automation; remove barriers blocking the aha moment</div>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">Trigger modal redesign + content gating <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Searchable template gallery <span class="pillar-tag tag-p2">P2</span></li>
+          <li class="highlight">Autonomous setup agent STARTS <span class="pillar-tag tag-p3">P3</span></li>
+          <li>Plain-English trigger labels + inline explainers <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Pop-ups / forms feeding flows <span class="pillar-tag tag-p1">P1</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">Autonomous setup agent SHIPS <span class="pillar-tag tag-p3">P3</span></li>
+          <li>Auto-build journey on store-connect <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Industry-specific template gallery <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Brand Kit&ndash;applied templates + flow email depth <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Classic &rarr; CJB auto-migration tool <span class="pillar-tag tag-p1">P1</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Reinstate basic CJB on Free plan <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Prompt-first journey builder STARTS <span class="pillar-tag tag-p3">P3</span></li>
+          <li>Side-overlay edit panel + clone journey <span class="pillar-tag tag-p1">P1</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>ICP-focused homepage + integration-aware ranking <span class="pillar-tag tag-p2">P2</span></li>
+          <li>International localization + small-list reframe <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Prompt-first journey builder SHIPS <span class="pillar-tag tag-p3">P3</span></li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="swimlane-label">
+        Win ICP Expansion Through Product-Led Growth Systems
+        <div class="desc">Drive upgrades, expansion revenue, and deeper adoption among e-commerce, agency, and mid-market ICPs</div>
+      </td>
+      <td>
+        <ul>
+          <li>12+ new behavioral triggers STARTS <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Shopify-deep event integration STARTS <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Date-relative + recurring triggers <span class="pillar-tag tag-p2">P2</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">12+ behavioral triggers SHIPS <span class="pillar-tag tag-p2">P2</span></li>
+          <li class="highlight">Predictive triggers as flow entry conditions <span class="pillar-tag tag-p2">P2</span></li>
+          <li class="highlight">Event-property access in flow branches <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Nested segmentation inside CJB <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Shopify-deep integration SHIPS <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Multi-platform commerce parity STARTS <span class="pillar-tag tag-p2">P2</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Trigger splits: differentiated paths from one event <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Webhooks as flow actions <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Multi-platform commerce parity SHIPS <span class="pillar-tag tag-p2">P2</span></li>
+          <li>App connector library <span class="pillar-tag tag-p2">P2</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Vertical-specific journey UIs <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Liquid templating + unlimited events <span class="pillar-tag tag-p2">P2</span></li>
+          <li>Unified transactional + marketing in one product <span class="pillar-tag tag-p2">P2</span></li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="swimlane-label">
+        Scale Omnichannel Adoption
+        <div class="desc">Grow SMS, WhatsApp, and cross-channel automation from a single flow canvas</div>
+      </td>
+      <td>
+        <ul>
+          <li>SMS compliance, dynamic content &amp; analytics <span class="pillar-tag tag-p3">P3</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Two-way conversational SMS + WhatsApp STARTS <span class="pillar-tag tag-p3">P3</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">5-channel send actions with AI channel selection <span class="pillar-tag tag-p3">P3</span></li>
+          <li>Two-way conversational SMS + WhatsApp SHIPS <span class="pillar-tag tag-p3">P3</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">Cross-channel orchestration + AI anti-fatigue <span class="pillar-tag tag-p3">P3</span></li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="swimlane-label">
+        Become an AI-First Platform
+        <div class="desc">Transform automation from a manual builder into an intelligent, self-optimizing system</div>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">Autonomous setup agent STARTS <span class="pillar-tag tag-p3">P3</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">Autonomous setup agent SHIPS <span class="pillar-tag tag-p3">P3</span></li>
+          <li>AI generation across 6+ surfaces STARTS <span class="pillar-tag tag-p3">P3</span></li>
+          <li>Prompt-first journey builder STARTS <span class="pillar-tag tag-p3">P3</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>AI generation across 6+ surfaces SHIPS <span class="pillar-tag tag-p3">P3</span></li>
+          <li class="highlight">Conversational editing via Intuit Assist <span class="pillar-tag tag-p3">P3</span></li>
+          <li>Performance auto-monitors + uplift analysis <span class="pillar-tag tag-p3">P3</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">Agentic per-user treatment + Smart Send + Channel Affinity <span class="pillar-tag tag-p3">P3</span></li>
+          <li>Prompt-first journey builder SHIPS <span class="pillar-tag tag-p3">P3</span></li>
+        </ul>
+      </td>
+    </tr>
+
+    <tr>
+      <td class="swimlane-label">
+        Step Function Quality &amp; Performance Improvements
+        <div class="desc">Automation reliability, real-time triggers, reporting trust, migration safety, and platform SLOs</div>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">Journey Builder front-end refactor <span class="pillar-tag tag-p1">P1</span></li>
+          <li class="highlight">Trigger modal + activation transparency <span class="pillar-tag tag-p1">P1</span></li>
+          <li class="highlight">Cross-browser regression suite <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Re-entry / cool-down persistence fix <span class="pillar-tag tag-p1">P1</span></li>
+          <li class="highlight">Reporting / stats correctness fix <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Two-surface confusion resolution <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Default view / sort order fix <span class="pillar-tag tag-p1">P1</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Monolith &rarr; Eventbus migration STARTS <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Per-step KPIs + aggregate journey reporting <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Compliance transparency + deliverability tooling <span class="pillar-tag tag-p1">P1</span></li>
+          <li>CJB legacy editor consolidation <span class="pillar-tag tag-p1">P1</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li class="highlight">Eventbus migration SHIPS + real-time triggers <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Single modernized Automations builder STARTS <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Report sharing / export / permissions <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Side-overlay + drag-reorder + in-place rename <span class="pillar-tag tag-p1">P1</span></li>
+        </ul>
+      </td>
+      <td>
+        <ul>
+          <li>Single modernized Automations builder SHIPS <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Cross-flow frequency cap + suppression <span class="pillar-tag tag-p1">P1</span></li>
+          <li>Flow ergonomics polish (If/Else diff, direct-click edit) <span class="pillar-tag tag-p1">P1</span></li>
+        </ul>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 style="margin-top:24px;">Mapping Rationale</h2>
+<table class="rationale-table" style="font-size:9pt; margin-top:8px;">
+  <thead>
+    <tr><th style="width:200px;">VP Swim Lane</th><th>Why These Initiatives Map Here</th><th style="width:200px;">Automation Pillars</th></tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="font-weight:600;">Accelerate Activation to First Business Payoff</td>
+      <td>FTU 30-day turn-on is 6.8% &mdash; 93% of new users never activate a flow. Trigger UX ($16K/mo barrier cluster), searchable templates, autonomous setup agent (URL to 4 live flows), and auto-build on store-connect compress time-to-first-automation from 14&ndash;21 days to under 7. Free-tier reinstatement and ICP homepage address the 1.1% Free CJB adoption rate (16&times; worse than Standard).</td>
+      <td>P1 (trigger UX), P2 (templates, store-connect), P3 (AI agent, prompt-first)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600;">Win ICP Expansion Through Product-Led Growth</td>
+      <td>Trigger depth is why operators choose Klaviyo (5&times; more triggers). Event-property branching ($10K/mo HVC gap), predictive triggers, Shopify-deep integration, and vertical UIs unlock e-commerce gold cohort (ECU 29.7%, 6.6&times; multiplier). Segmentation + trigger splits drive expansion revenue per flow. Liquid templating and unified transactional+marketing open SaaS and ProServ ICPs.</td>
+      <td>P2 (triggers, e-commerce, segmentation, vertical)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600;">Scale Omnichannel Adoption</td>
+      <td>Mailchimp automation is Email + SMS only today &mdash; the single biggest functional gap per the Executive Brief. Klaviyo, Customer.io, and Attentive orchestrate 5 channels in one canvas. Two-way SMS, WhatsApp, AI channel selection, and cross-channel anti-fatigue turn automation from email-centric to true omni-channel orchestration.</td>
+      <td>P3 (SMS depth, omni-channel orchestration)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600;">Become an AI-First Platform</td>
+      <td>Klaviyo&rsquo;s Marketing Agent sets up flows in ~3 clicks; Shopify Sidekick wins every demo. Autonomous setup agent, conversational editing, AI generation across 6+ surfaces, and agentic per-user treatment create the compounding automation-performance loop no competitor ships at SMB price points. This is the primary competitive moat and the switching cost that grows with every flow cycle.</td>
+      <td>P3 (AI generation, conversational, agentic optimization)</td>
+    </tr>
+    <tr>
+      <td style="font-weight:600;">Step Function Quality &amp; Performance</td>
+      <td>$177.5K/mo HVC MRR across 73 automation themes. Builder instability ($16.5K/mo) is the #1 pain. &ldquo;Automations Not Sending&rdquo; ($4.8K/mo) from 15&ndash;60 min batch lag. CJB churn 40.2%. Eventbus, reporting correctness, and migration safety are concentrated Q1&ndash;Q3 because every AI demo backfires when customers discover flows don&rsquo;t send reliably. Protects ~$3&ndash;5M in booked automation revenue.</td>
+      <td>P1 (editor, platform, reporting, migration, ergonomics)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p class="note">Some initiatives appear in multiple swim lanes (e.g., autonomous setup agent maps to both Activation and AI-First; eventbus maps to Quality and ICP Expansion via real-time triggers). Primary mapping reflects where business impact is strongest.</p>
+
+</div><!-- /panel-swimlanes -->
+
+<div id="panel-critical" class="tabpanel" role="tabpanel">
+
+<h1>Critical Path: Key Bets by Quarter</h1>
+<p class="subtitle">10 highest-leverage automation initiatives across 4 quarters. These drive ~65% of the total projected revenue impact (~$14.3M of $22M). The remaining ~35% comes from the full portfolio of supporting initiatives.</p>
+<p class="note">All leading and lagging indicator targets are subsets of the overall model (not additive). Critical path initiatives are the minimum viable set that must ship on time for the $20&ndash;25M automation ARR case to hold.</p>
+
+<h2>Q1: Foundation, Trust &amp; AI Quick Wins</h2>
+<table class="cp-table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Journey Builder Refactor + Regression Suite + Re-Entry Fix</th>
+      <th>Trigger Modal + Content Gating + Activation Transparency</th>
+      <th>Autonomous Setup Agent STARTS + Reporting Correctness</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="row-label">Hypothesis</td>
+      <td>If we rebuild the CJB front-end, ship a cross-browser regression suite, and fix re-entry persistence, setup completion will rise from ~50% toward 65% and HVC editor complaints ($16.5K/mo) will begin reversing by end of Q1.</td>
+      <td>If the trigger modal is searchable, content-completion is gated before activation, and flow state is transparent, the 99.6% create-no-start rate in frustrated clusters will drop and FTU 30-day turn-on will begin recovering from 6.8%.</td>
+      <td>If we fix reporting stat mismatches and start the autonomous setup agent (URL &rarr; scaffolded flows), customers will trust automation metrics before AI ships and early adopters will activate first flows without manual builder navigation.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Customer Problem</td>
+      <td>$16,507/mo in editor/UI glitches &mdash; scroll failures, replicate-flow errors, stale previews. Re-entry settings silently revert to 5 minutes. No automated regression testing. Builder scores &ldquo;clunky and outdated&rdquo; in VoC.</td>
+      <td>Trigger modal is unsearchable ($16K/mo barrier cluster). Customers activate half-built flows and enroll real contacts into broken journeys ($11.4K/mo). Setup abandonment 40&ndash;50% and flat. 88,874 customers/mo touch CJB and walk away.</td>
+      <td>Stats don&rsquo;t match across views &mdash; customers can&rsquo;t trust automation ROI. Klaviyo&rsquo;s Marketing Agent sets up flows in ~3 clicks; Mailchimp has no equivalent. New users describe Mailchimp as &ldquo;more powerful but slower to first value.&rdquo;</td>
+    </tr>
+    <tr>
+      <td class="row-label">Customer Benefit</td>
+      <td>Flows build reliably on first attempt. Re-entry settings persist as configured. Quality shifts from reactive (customers find bugs) to proactive (CI catches them).</td>
+      <td>Customers find the right trigger in seconds, can&rsquo;t accidentally go live with incomplete content, and always know whether a flow is draft, active, or paused.</td>
+      <td>Reporting numbers match everywhere. First automation scaffolds from a URL before the customer learns the builder &mdash; matching Klaviyo speed with Mailchimp Brand Kit advantage.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Leading Indicator</td>
+      <td class="metric">Setup completion: ~50% &rarr; 65%. CJB builder crash-free sessions: baseline &rarr; &ge;99.5%</td>
+      <td class="metric">FTU 30-day turn-on: 6.8% &rarr; 9%. Create-no-start rate: 99.6% &rarr; &lt;85% in P2 frustrated clusters</td>
+      <td class="metric">Reporting accuracy incidents: baseline &rarr; zero cross-view mismatches. Agent early-access adoption: 10% of new automation explorers within 60 days</td>
+    </tr>
+    <tr>
+      <td class="row-label">Lagging Impact</td>
+      <td class="metric">Retention: Protects $16.5K/mo HVC + begins reversing 40.2% CJB churn. Contributes ~$1.3M of Pillar 1 retention ARR.</td>
+      <td class="metric">Activation: +2.2pp FTU turn-on &times; activation causal share. Contributes ~$0.8M activation ARR and reduces 166K/mo combined abandoners.</td>
+      <td class="metric">Activation + Trust: Reporting fix protects existing automation revenue; agent STARTS build pipeline for Q2 SHIPS (~$1.3M activation ARR).</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Q2: Trigger Depth &amp; AI Agent Ships</h2>
+<table class="cp-table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Autonomous Setup Agent SHIPS</th>
+      <th>12+ Behavioral Triggers SHIPS + Shopify-Deep Integration SHIPS</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="row-label">Hypothesis</td>
+      <td>If a new customer can paste a URL and get 4 live, on-brand automations in 3 clicks, time to first automation send will compress from 14&ndash;21 days to under 7 days and CJB activation will increase from 33.6% toward 38% by end of Q2.</td>
+      <td>If we ship 12+ behavioral triggers and Shopify-deep event integration (cart-step, browse-abandonment, checkout events), operators who currently choose Klaviyo for trigger depth will adopt Mailchimp automation, and ECU adoption will rise from 29.7% toward 35%.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Customer Problem</td>
+      <td>Klaviyo Marketing Agent + Shopify Sidekick win every competitive demo. Mailchimp has no autonomous setup. Combined automation Establishers declining &minus;20.3% YoY despite CJB growth because activation never delivers the aha moment.</td>
+      <td>Klaviyo offers 5&times; more behavior-specific triggers. Event-property branching is the single largest missing feature ($10K/mo HVC). Shopify integration is &ldquo;broad but shallow.&rdquo; Customers manually rebuild the same 4 ecommerce flows on every store connect.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Customer Benefit</td>
+      <td>First automations are live before onboarding finishes. URL-to-flows matches Klaviyo speed; Brand Kit + store data make flows visibly on-brand from click one.</td>
+      <td>Automations fire on cart abandonment, browse events, checkout steps, and product affinity &mdash; not just list joins. Store-connect auto-builds welcome, cart recovery, post-purchase, and win-back in 60 seconds.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Leading Indicator</td>
+      <td class="metric">Time to first automation send: 14&ndash;21d &rarr; &lt;7d. CJB activation: 33.6% &rarr; 38% (+4.4pp)</td>
+      <td class="metric">Behavioral trigger adoption: baseline &rarr; 30% of active automation users. ECU adoption: 29.7% &rarr; 35%. Auto-build on store-connect: 40% of new Shopify connects</td>
+    </tr>
+    <tr>
+      <td class="row-label">Lagging Impact</td>
+      <td class="metric">Activation + Adoption: ~$1.3M agent ARR + pipeline for AI surfaces. Contributes to $10&ndash;13M adoption-growth envelope (50% of $22M target).</td>
+      <td class="metric">Adoption: ~$4.0M combined (triggers $2.0M + Shopify-deep $2.0M). Largest single-quarter revenue unlock in the automation portfolio. Closes primary Klaviyo trigger-depth gap.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Q3: Segmentation, Real-Time &amp; AI at Scale</h2>
+<table class="cp-table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Event-Property + Nested Segmentation + Trigger Splits</th>
+      <th>Eventbus Migration SHIPS + Real-Time Triggers</th>
+      <th>Conversational Editing + AI Generation Across 6+ Surfaces</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="row-label">Hypothesis</td>
+      <td>If customers can branch flows by cart content, nest segments inside journeys, and split paths from a single behavioral event, revenue per automation adopter will increase from $616/mo toward $700/mo as personalization depth drives conversion.</td>
+      <td>If trigger evaluation moves from 15&ndash;60 minute batch to sub-second real-time via Eventbus, &ldquo;Automations Not Sending&rdquo; tickets ($4.8K/mo) will collapse and high-MRR frustrated clusters (C4, C9) will retain.</td>
+      <td>If customers can edit flows conversationally (&ldquo;add a 3-day delay before the second email&rdquo;) and AI generates content across 6+ automation surfaces, multi-flow adoption will rise from ~30&ndash;40% to &gt;50% among active users.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Customer Problem</td>
+      <td>Event-property branching ($10K/mo) blocks cart-content personalization. Predictive data exists as filters, not triggers. Klaviyo uses CLV and purchase likelihood to act before churn; Mailchimp cannot.</td>
+      <td>Batch processing fires triggers 15&ndash;60 minutes late. Klaviyo fires in seconds. High-MRR enterprise accounts ($410&ndash;639 avg MRR) hit delivery failures and churn despite high email engagement.</td>
+      <td>Shopify Sidekick is the most-praised novel UX in the category. Mailchimp loses the demo moment in every competitive evaluation. Flow editing requires navigating a complex canvas for simple changes.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Customer Benefit</td>
+      <td>Flows personalize by what&rsquo;s in the cart, who the customer is, and what they did &mdash; not just list membership. One event, multiple differentiated paths.</td>
+      <td>Every trigger fires when the event happens, not when the batch runs. Automations feel instant and trustworthy for high-value accounts.</td>
+      <td>Describe the change in plain language; AI makes it. Content generates in-context across email steps, SMS, delays, and conditions without leaving the flow.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Leading Indicator</td>
+      <td class="metric">Segmentation feature adoption: 0% &rarr; 25% of active multi-flow users. Revenue per automation adopter: $616 &rarr; $680/mo</td>
+      <td class="metric">Trigger latency: 15&ndash;60 min &rarr; sub-second. &ldquo;Not sending&rdquo; ticket volume: baseline &rarr; &minus;70%</td>
+      <td class="metric">Conversational edit adoption: 15% of flow edits via Assist within 90 days. Multi-flow adoption: ~35% &rarr; 50%</td>
+    </tr>
+    <tr>
+      <td class="row-label">Lagging Impact</td>
+      <td class="metric">Rev Expansion: ~$1.3M segmentation ARR. Targets C3/C6/C12 clusters delivering 95% of FY27 EV ($20.97M).</td>
+      <td class="metric">Retention: ~$0.6M eventbus ARR + churn protection for 124K P2 frustrated/high-MRR customers. Unblocks all real-time trigger depth in Pillar 2.</td>
+      <td class="metric">Activation + Adoption: ~$1.5M combined AI surface ARR. Builds pipeline for Q4 agentic optimization.</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2>Q4: Agentic Optimization &amp; Omni-Channel Scale</h2>
+<table class="cp-table">
+  <thead>
+    <tr>
+      <th></th>
+      <th>Agentic Per-User Treatment + Smart Send + Channel Affinity + 5-Channel Orchestration</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="row-label">Hypothesis</td>
+      <td>If every contact in a flow receives per-profile Smart Send Time, Personalized A/B, Channel Affinity, and AI-coordinated anti-fatigue across 5 channels, open rates will increase 10&ndash;15%, automation CTR will rise from 5&ndash;7% to 7&ndash;9%, and Mailchimp will open the strategic whitespace no competitor fills at SMB price points: continuous per-recipient optimization in real time.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Customer Problem</td>
+      <td>Every contact gets the same path &mdash; same message, same channel, same timing. Klaviyo ships per-profile Smart Send (+10&ndash;30% open lift), Personalized A/B, and Channel Affinity in-canvas. Auxia productized per-user treatment for F500 (84% LTV lift). Mailchimp has store-level send-time only. Platform is Email + SMS only vs Klaviyo&rsquo;s 5-channel canvas.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Customer Benefit</td>
+      <td>Every recipient gets the optimal message, channel, and timing automatically. Flows get smarter with every send. The longer a customer runs automations, the better they perform &mdash; creating non-portable switching cost that compounds with every cycle.</td>
+    </tr>
+    <tr>
+      <td class="row-label">Leading Indicator</td>
+      <td class="metric">Agentic feature adoption: 20% of active flow users within 90 days. Open rate: +10&ndash;15% for adopters. SMS/WhatsApp attach: 1.5&times; among omni-channel flow users</td>
+    </tr>
+    <tr>
+      <td class="row-label">Lagging Impact</td>
+      <td class="metric">Rev Expansion + Retention: ~$1.8M combined (agentic $1.0M + omni-channel $0.8M). Closes Klaviyo agentic optimization gap. Compounding performance loop becomes the primary competitive moat.</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="summary-box">
+  <h3 style="font-size:10pt; margin-bottom:8px;">Full-Year Cumulative: Critical Path Initiatives Only (~65% of Portfolio)</h3>
+  <table class="summary-table" style="width:100%; border-collapse:collapse;">
+    <tr>
+      <td colspan="4" style="font-weight:700; padding-bottom:8px;">Leading Indicators (critical path contribution / overall target)</td>
+    </tr>
+    <tr>
+      <td>Setup Completion Rate</td><td class="val" style="font-weight:700;">~50% &rarr; 70% (target met)</td>
+      <td>FTU 30-Day Turn-On</td><td class="val" style="font-weight:700;">6.8% &rarr; 12% / 15% (80%)</td>
+    </tr>
+    <tr>
+      <td>CJB Activation Rate</td><td class="val" style="font-weight:700;">+4.4pp / +8.4pp (52%)</td>
+      <td>Active Automation Adoption</td><td class="val" style="font-weight:700;">16% &rarr; 20% / 22% (67%)</td>
+    </tr>
+    <tr>
+      <td>Trigger Latency</td><td class="val" style="font-weight:700;">Batch &rarr; sub-second (Q3)</td>
+      <td>Multi-Flow Adoption</td><td class="val" style="font-weight:700;">~35% &rarr; 50% (Q3&ndash;Q4)</td>
+    </tr>
+    <tr><td colspan="4" style="padding-top:12px; font-weight:700; padding-bottom:8px;">Lagging Indicators (critical path contribution)</td></tr>
+    <tr>
+      <td>Paid Retention</td><td class="val" style="font-weight:700;">Foundation + eventbus = largest churn reduction drivers (40.2% &rarr; 37%)</td>
+      <td>Automation Adoption</td><td class="val" style="font-weight:700;">Trigger depth + agent = ~$10M of $10.5M adoption target</td>
+    </tr>
+    <tr>
+      <td>Rev per Adopter</td><td class="val" style="font-weight:700;">Segmentation + agentic = $616 &rarr; $750/mo path</td>
+      <td>HVC MRR Exposure</td><td class="val" style="font-weight:700;">$177.5K/mo &rarr; &lt;$120K/mo by Q4 (foundation fixes)</td>
+    </tr>
+    <tr><td colspan="4" style="padding-top:12px; font-weight:700; padding-bottom:8px;">Estimated Revenue (critical path / total portfolio)</td></tr>
+    <tr>
+      <td>Annual Revenue Impact</td><td class="val" style="font-weight:700; font-size:12pt;">~$14.3M / $22.0M (65%)</td>
+      <td colspan="2"></td>
+    </tr>
+  </table>
+</div>
+
+<p class="note">All numbers are subsets of the overall $22M model. The remaining ~35% of lift (~$7.7M) comes from ~47 supporting initiatives across three pillars, including flow ergonomics, compliance tooling, vertical UIs, free-tier reinstatement, appointment triggers, webhooks, and SMS analytics depth. Leading indicator progression is cumulative from FY26 baseline.</p>
+
+</div><!-- /panel-critical -->
 
 <script>
 (function () {
@@ -1903,7 +2390,7 @@
     t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
   });
   var initial = (window.location.hash || '').replace('#', '');
-  if (['workflow-health', 'strategy', 'revenue', 'competitive', 'targeting'].indexOf(initial) >= 0) activate(initial);
+  if (['workflow-health', 'strategy', 'revenue', 'competitive', 'targeting', 'swimlanes', 'critical'].indexOf(initial) >= 0) activate(initial);
 })();
 </script>
 
