@@ -8,9 +8,9 @@
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body { font-family: Arial, Helvetica, sans-serif; font-size: 9pt; color: #000; background: #fff; line-height: 1.4; padding: 24px 32px; max-width: 1600px; margin: 0 auto; }
   h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; }
-  h2 { font-size: 11pt; font-weight: 700; margin-bottom: 8px; margin-top: 24px; border-bottom: 2px solid #166D3B; padding-bottom: 4px; }
+  h2 { font-size: 11pt; font-weight: 700; margin-bottom: 8px; margin-top: 24px; border-bottom: 2px solid #000; padding-bottom: 4px; }
   .subtitle { font-size: 9pt; color: #555; font-style: italic; margin-bottom: 16px; }
-  .nav { margin-bottom: 16px; padding: 8px 0; border-bottom: 2px solid #166D3B; display: flex; gap: 4px; flex-wrap: wrap; }
+  .nav { margin-bottom: 16px; padding: 8px 0; border-bottom: 2px solid #000; display: flex; gap: 4px; flex-wrap: wrap; }
   .tab {
     border: 0;
     background: transparent;
@@ -22,8 +22,8 @@
     font-family: inherit;
     border-radius: 4px 4px 0 0;
   }
-  .tab:hover { color: #166D3B; background: #eef6f0; }
-  .tab.active { color: #166D3B; border-bottom: 2px solid #166D3B; background: #eef6f0; }
+  .tab:hover { color: #000; background: #f5f5f5; }
+  .tab.active { color: #000; border-bottom: 2px solid #000; background: #f5f5f5; }
   .tabpanel { display: none; }
   .tabpanel.active { display: block; }
   .divider-heavy { border: none; border-top: 3px solid #000; margin: 24px 0; }
@@ -76,19 +76,19 @@
   /* CJB Market Upside tab */
   #panel-market-upside { font-size: 9pt; line-height: 1.45; }
   #panel-market-upside h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; border-bottom: none; }
-  #panel-market-upside h2 { font-size: 11pt; font-weight: 700; margin: 24px 0 8px 0; border-bottom: 2px solid #166D3B; padding-bottom: 4px; }
+  #panel-market-upside h2 { font-size: 11pt; font-weight: 700; margin: 24px 0 8px 0; border-bottom: 2px solid #000; padding-bottom: 4px; }
   #panel-market-upside h3 { font-size: 10pt; font-weight: 700; margin: 16px 0 6px 0; }
-  #panel-market-upside .exec-section { background: #f5f5f5; border-left: 4px solid #166D3B; padding: 12px 16px; margin: 8px 0 12px 0; }
+  #panel-market-upside .exec-section { background: #f5f5f5; border-left: 4px solid #000; padding: 12px 16px; margin: 8px 0 12px 0; }
   #panel-market-upside .exec-section p { font-size: 9.5pt; line-height: 1.55; margin: 6px 0; }
   #panel-market-upside .exec-section ul { font-size: 9pt; line-height: 1.55; margin: 4px 0 4px 16px; padding: 0; }
   #panel-market-upside .exec-section li { margin-bottom: 4px; }
   #panel-market-upside table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 8px; }
   #panel-market-upside th, #panel-market-upside td { border: 1px solid #bfbfbf; padding: 6px 8px; vertical-align: top; text-align: left; }
-  #panel-market-upside th { background: #166D3B; color: #fff; font-weight: 700; font-size: 8pt; }
+  #panel-market-upside th { background: #000; color: #fff; font-weight: 700; font-size: 8pt; }
   #panel-market-upside .num { text-align: right; font-variant-numeric: tabular-nums; }
   #panel-market-upside .subtitle { font-size: 9pt; color: #555; margin-bottom: 12px; }
-  #panel-market-upside .subtitle a { color: #166D3B; }
-  #panel-market-upside .seg-header td { background: #e6f4ea; font-weight: 700; font-size: 9pt; }
+  #panel-market-upside .subtitle a { color: #000; }
+  #panel-market-upside .seg-header td { background: #f2f2f2; font-weight: 700; font-size: 9pt; }
   #panel-market-upside .target-row td { background: #fef3e0; }
   #panel-market-upside .total-row td { background: #1a3a5c; color: #fff; font-weight: 700; }
 
@@ -105,13 +105,13 @@
   .grand-total td { font-weight: 700; background: #1a3a5c; color: #fff; font-size: 9pt; }
   .num { text-align: right; font-variant-numeric: tabular-nums; }
   .channel-tag { display: inline-block; font-size: 7.5pt; font-weight: 700; padding: 1px 6px; border-radius: 2px; white-space: nowrap; }
-  .ch-adopt { background: #e6f4ea; color: #1a6b3a; }
+  .ch-adopt { background: #f2f2f2; color: #000; }
   .ch-activ { background: #fef3e0; color: #8a5d00; }
   .ch-retain { background: #e8f0fe; color: #1a3a5c; }
   .ch-perf { background: #fce8e6; color: #8c1d18; }
   .ch-multi { background: #f3e8fd; color: #5b2c8a; }
   .summary-box { background: #f5f5f5; border: 2px solid #1a3a5c; padding: 16px; margin: 16px 0; }
-  .lead { background: #DCFCE7; font-weight: 700; color: #166534; text-align: center; }
+  .lead { background: #f2f2f2; font-weight: 700; color: #000; text-align: center; }
   .parity { background: #FEF3C7; font-weight: 700; color: #92400E; text-align: center; }
   .trail { background: #FEE2E2; font-weight: 700; color: #991B1B; text-align: center; }
   .cap-cell { font-weight: 600; background: #f9fafb; }
@@ -120,7 +120,7 @@
   .score-card { flex: 1; min-width: 120px; border: 2px solid #1a3a5c; padding: 12px; text-align: center; }
   .score-card .num { font-size: 20pt; font-weight: 700; }
   .score-card .label { font-size: 8pt; color: #555; margin-top: 2px; }
-  .score-lead .num { color: #166534; }
+  .score-lead .num { color: #000; }
   .score-parity .num { color: #92400E; }
   .score-trail .num { color: #991B1B; }
   .insight-box { background: #f5f5f5; border: 1px solid #ddd; padding: 12px; margin: 12px 0; font-size: 9pt; }
@@ -128,18 +128,18 @@
 
   .meta-box { background: #f5f5f5; border: 1px solid #ddd; padding: 12px 16px; margin-bottom: 16px; display: flex; gap: 32px; flex-wrap: wrap; }
   .meta-item { font-size: 8.5pt; }
-  .meta-item strong { color: #166D3B; }
+  .meta-item strong { color: #000; }
 
   .summary-bar { display: flex; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
-  .summary-card { flex: 1; min-width: 140px; border: 2px solid #166D3B; padding: 12px; text-align: center; }
-  .summary-card .num { font-size: 18pt; font-weight: 700; color: #166D3B; }
+  .summary-card { flex: 1; min-width: 140px; border: 2px solid #000; padding: 12px; text-align: center; }
+  .summary-card .num { font-size: 18pt; font-weight: 700; color: #000; }
   .summary-card .label { font-size: 8pt; color: #555; margin-top: 2px; }
 
   .workflow-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0; border: 1px solid #bfbfbf; margin-bottom: 24px; }
   .wf-col { border-right: 1px solid #bfbfbf; }
   .wf-col:last-child { border-right: none; }
-  .wf-header { background: #166D3B; color: #fff; padding: 8px 6px; text-align: center; font-weight: 700; font-size: 8.5pt; min-height: 50px; display: flex; align-items: center; justify-content: center; }
-  .wf-jtbd { background: #eef6f0; padding: 6px; font-size: 7.5pt; color: #333; text-align: center; min-height: 44px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #bfbfbf; }
+  .wf-header { background: #000; color: #fff; padding: 8px 6px; text-align: center; font-weight: 700; font-size: 8.5pt; min-height: 50px; display: flex; align-items: center; justify-content: center; }
+  .wf-jtbd { background: #f5f5f5; padding: 6px; font-size: 7.5pt; color: #333; text-align: center; min-height: 44px; display: flex; align-items: center; justify-content: center; border-bottom: 1px solid #bfbfbf; }
   .wf-stats { padding: 6px; text-align: center; border-bottom: 1px solid #bfbfbf; background: #fff; }
   .wf-stats .mrr { font-size: 12pt; font-weight: 700; color: #B91C1C; }
   .wf-stats .count { font-size: 8pt; color: #555; margin-top: 2px; }
@@ -153,7 +153,7 @@
   .wf-sub-stats { font-size: 7pt; color: #555; margin-bottom: 4px; }
 
   .detail-table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 8px; }
-  .detail-table th { background: #166D3B; color: #fff; font-weight: 700; padding: 6px 8px; text-align: left; font-size: 8pt; }
+  .detail-table th { background: #000; color: #fff; font-weight: 700; padding: 6px 8px; text-align: left; font-size: 8pt; }
   .detail-table td { border: 1px solid #bfbfbf; padding: 6px 8px; vertical-align: top; }
   .detail-table .stage-cell { background: #f2f2f2; font-weight: 700; font-size: 9pt; }
   .detail-table .mrr-cell { font-weight: 700; color: #B91C1C; }
@@ -170,27 +170,27 @@
   /* VP Swim Lanes + Critical Path tabs */
   #panel-swimlanes, #panel-critical { font-size: 9pt; line-height: 1.4; }
   #panel-swimlanes h1, #panel-critical h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; border-bottom: none; }
-  #panel-swimlanes h2, #panel-critical h2 { font-size: 11pt; font-weight: 700; margin-bottom: 8px; margin-top: 24px; border-bottom: 2px solid #166D3B; padding-bottom: 4px; color: #000; }
+  #panel-swimlanes h2, #panel-critical h2 { font-size: 11pt; font-weight: 700; margin-bottom: 8px; margin-top: 24px; border-bottom: 2px solid #000; padding-bottom: 4px; color: #000; }
   #panel-swimlanes .subtitle, #panel-critical .subtitle { font-size: 9pt; color: #555; font-style: italic; margin-bottom: 16px; }
   #panel-swimlanes table, #panel-critical table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 8px; }
-  #panel-swimlanes th, #panel-critical th { background: #166D3B; color: #fff; font-weight: 700; font-size: 8pt; border: 1px solid #bfbfbf; padding: 6px 8px; }
+  #panel-swimlanes th, #panel-critical th { background: #000; color: #fff; font-weight: 700; font-size: 8pt; border: 1px solid #bfbfbf; padding: 6px 8px; }
   #panel-swimlanes td, #panel-critical td { border: 1px solid #bfbfbf; padding: 6px 8px; vertical-align: top; text-align: left; }
   #panel-swimlanes .header-row th, #panel-critical .header-row th { font-size: 9pt; text-align: center; }
   #panel-swimlanes .header-row th:first-child { text-align: left; }
-  #panel-swimlanes .theme-row td { background: #166D3B; color: #fff; font-weight: 700; font-size: 9pt; }
+  #panel-swimlanes .theme-row td { background: #000; color: #fff; font-weight: 700; font-size: 9pt; }
   #panel-swimlanes .swimlane-label { background: #f2f2f2; font-weight: 700; font-size: 9pt; width: 180px; min-width: 180px; }
   #panel-swimlanes .swimlane-label .desc { font-weight: 400; font-size: 7.5pt; color: #555; margin-top: 3px; font-style: italic; }
   #panel-swimlanes td ul, #panel-critical td ul { margin: 0; padding-left: 12px; }
   #panel-swimlanes td ul li { margin-bottom: 3px; line-height: 1.35; }
-  #panel-swimlanes td ul li.highlight { font-weight: 600; color: #166D3B; }
+  #panel-swimlanes td ul li.highlight { font-weight: 600; color: #000; }
   #panel-swimlanes .pillar-tag { display: inline-block; font-size: 6.5pt; font-weight: 700; padding: 1px 4px; border-radius: 2px; margin-left: 3px; vertical-align: middle; }
   #panel-swimlanes .tag-p1 { background: #fee2e2; color: #991b1b; }
   #panel-swimlanes .tag-p2 { background: #fef3c7; color: #92400e; }
   #panel-swimlanes .tag-p3 { background: #dbeafe; color: #1e40af; }
-  #panel-swimlanes .rationale-table th { background: #166D3B; color: #fff; }
+  #panel-swimlanes .rationale-table th { background: #000; color: #fff; }
   #panel-critical .row-label { background: #f2f2f2; font-weight: 700; font-size: 9pt; width: 140px; min-width: 140px; }
-  #panel-critical .metric { font-weight: 700; color: #166D3B; }
-  #panel-critical .summary-box { background: #f5f5f5; border: 2px solid #166D3B; padding: 16px; margin: 16px 0; }
+  #panel-critical .metric { font-weight: 700; color: #000; }
+  #panel-critical .summary-box { background: #f5f5f5; border: 2px solid #000; padding: 16px; margin: 16px 0; }
 
 </style>
 </head>
@@ -324,13 +324,13 @@
   </thead>
   <tbody>
     <tr><td colspan="5" style="background:#f2f2f2; font-weight:700;">Product Adoption &amp; Activation</td></tr>
-    <tr><td><strong>CJB Established Users/mo</strong></td><td>111,500</td><td>132,002</td><td style="color:#047857; font-weight:700;">+18.4% (+20.5K)</td><td>CJB is growing, but not fast enough to offset Classic collapse. Combined automation Establishers down &minus;50.6K/mo (&minus;20.3%).</td></tr>
+    <tr><td><strong>CJB Established Users/mo</strong></td><td>111,500</td><td>132,002</td><td style="color:#333; font-weight:700;">+18.4% (+20.5K)</td><td>CJB is growing, but not fast enough to offset Classic collapse. Combined automation Establishers down &minus;50.6K/mo (&minus;20.3%).</td></tr>
     <tr><td><strong>Classic Auto Established/mo</strong></td><td>137,500</td><td>66,307</td><td style="color:#B91C1C; font-weight:700;">&minus;51.8% (&minus;71.1K)</td><td>Classic is collapsing faster than CJB grows. Without a safe migration path, the decline accelerates.</td></tr>
-    <tr><td><strong>CJB Activation Rate</strong></td><td>19.2%</td><td>33.6%</td><td style="color:#047857; font-weight:700;">+14.4pp</td><td>Activation improving, but still means 2 in 3 customers who explore CJB never reach Established. Binding constraint on growth.</td></tr>
+    <tr><td><strong>CJB Activation Rate</strong></td><td>19.2%</td><td>33.6%</td><td style="color:#333; font-weight:700;">+14.4pp</td><td>Activation improving, but still means 2 in 3 customers who explore CJB never reach Established. Binding constraint on growth.</td></tr>
     <tr><td><strong>Active Automation Adoption (platform)</strong></td><td>&mdash;</td><td>16%</td><td style="font-weight:700;">&mdash;</td><td>84% of eligible accounts have no active automation. Massive untapped TAM within the existing install base.</td></tr>
     <tr><td><strong>FTU 30-Day Turn-On</strong></td><td>6.8%</td><td>6.8%</td><td style="color:#B91C1C; font-weight:700;">Flat</td><td>93% of first-time users never activate a flow in their first 30 days. The builder is too daunting for new customers to reach value.</td></tr>
     <tr><td colspan="5" style="background:#f2f2f2; font-weight:700;">Retention &amp; Churn</td></tr>
-    <tr><td><strong>CJB Churn Rate</strong></td><td>41.4%</td><td>40.2%</td><td style="color:#047857; font-weight:700;">&minus;1.2pp (improving)</td><td>Churn improving slightly but still 40% &mdash; nearly half of Established users abandon each year.</td></tr>
+    <tr><td><strong>CJB Churn Rate</strong></td><td>41.4%</td><td>40.2%</td><td style="color:#333; font-weight:700;">&minus;1.2pp (improving)</td><td>Churn improving slightly but still 40% &mdash; nearly half of Established users abandon each year.</td></tr>
     <tr><td><strong>CJB Abandon Volume/mo</strong></td><td>78,800</td><td>88,874</td><td style="color:#B91C1C; font-weight:700;">+12.7% (+10K)</td><td>More customers touching CJB but walking away. Abandon volume rising faster than Established volume.</td></tr>
     <tr><td><strong>Combined Abandoners/mo</strong></td><td>133,200</td><td>166,000</td><td style="color:#B91C1C; font-weight:700;">+24.6% (+32.8K)</td><td>Across CJB + Classic, 32.8K more customers per month are walking away from automation than a year ago.</td></tr>
     <tr><td><strong>Setup Abandonment Rate</strong></td><td>~40&ndash;50%</td><td>~40&ndash;50%</td><td style="color:#B91C1C; font-weight:700;">Flat</td><td>Half of all flow setup attempts abandoned before completion. Trigger UX, content-completion confusion, and builder instability are root causes.</td></tr>
@@ -940,9 +940,9 @@
 <div id="panel-swimlanes" class="tabpanel" role="tabpanel">
 
 <h1>Automation Initiatives Mapped to VP Swim Lanes</h1>
-<p class="subtitle">57 initiatives from 3 automation strategic pillars mapped to 5 VP-level swim lanes across FY27 &middot; <a href="#strategy" style="color:#166D3B;">Strategy &amp; Roadmap</a> &middot; <a href="#critical" style="color:#166D3B;">Critical Path &amp; Hypotheses</a> &middot; <a href="#revenue" style="color:#166D3B;">Revenue Attribution</a> &middot; <a href="#targeting" style="color:#166D3B;">Customer Targeting</a></p>
+<p class="subtitle">57 initiatives from 3 automation strategic pillars mapped to 5 VP-level swim lanes across FY27 &middot; <a href="#strategy" style="color:#000;">Strategy &amp; Roadmap</a> &middot; <a href="#critical" style="color:#000;">Critical Path &amp; Hypotheses</a> &middot; <a href="#revenue" style="color:#000;">Revenue Attribution</a> &middot; <a href="#targeting" style="color:#000;">Customer Targeting</a></p>
 
-<div class="insight-box" style="margin:12px 0 16px 0; border-left:4px solid #166D3B;">
+<div class="insight-box" style="margin:12px 0 16px 0; border-left:4px solid #000;">
   <p><strong>How this connects:</strong> Swim lanes translate the <a href="#strategy">3 automation pillars</a> into Mailchimp&rsquo;s 5 VP-level GTM themes. Highlighted initiatives are on the <a href="#critical">FY27 critical path</a> (~$14.3M of $22M). Pillar tags map back to initiative detail tables on the Strategy tab. Revenue weightings are on the <a href="#revenue">Revenue Attribution</a> tab; cluster priority is on <a href="#targeting">Customer Targeting</a>.</p>
 </div>
 
@@ -1200,9 +1200,9 @@
 <div id="panel-critical" class="tabpanel" role="tabpanel">
 
 <h1>Critical Path: Key Bets by Quarter</h1>
-<p class="subtitle">10 highest-leverage automation initiatives across 4 quarters. These drive ~65% of the total projected revenue impact (~$14.3M of $22M). The remaining ~35% comes from the full portfolio of supporting initiatives. &middot; <a href="#swimlanes" style="color:#166D3B;">VP Swim Lanes</a> &middot; <a href="#strategy" style="color:#166D3B;">Strategy &amp; Roadmap</a> &middot; <a href="#revenue" style="color:#166D3B;">Revenue Attribution</a></p>
+<p class="subtitle">10 highest-leverage automation initiatives across 4 quarters. These drive ~65% of the total projected revenue impact (~$14.3M of $22M). The remaining ~35% comes from the full portfolio of supporting initiatives. &middot; <a href="#swimlanes" style="color:#000;">VP Swim Lanes</a> &middot; <a href="#strategy" style="color:#000;">Strategy &amp; Roadmap</a> &middot; <a href="#revenue" style="color:#000;">Revenue Attribution</a></p>
 
-<div class="insight-box" style="margin:12px 0 16px 0; border-left:4px solid #166D3B;">
+<div class="insight-box" style="margin:12px 0 16px 0; border-left:4px solid #000;">
   <p><strong>How this connects:</strong> Each bet maps to a highlighted initiative in <a href="#swimlanes">VP Swim Lanes</a>, a row in the <a href="#strategy">FY27 Phased Roadmap</a>, and a revenue line in <a href="#revenue">Revenue Attribution</a>. Leading/lagging indicators tie to <em>How We Measure Success</em> on the Strategy tab (activation 33.6%&rarr;42%, FTU turn-on 6.8%&rarr;15%, ECU adoption 29.7%&rarr;40%+). Store-connect auto-build and Shopify-deep integration are Q2 critical-path bets targeting the integration-driven clusters (C3, C6, C11) from Customer Targeting.</p>
 </div>
 
@@ -1699,24 +1699,24 @@
       <td><strong>2. Define Entry &amp; Audience</strong></td>
       <td style="text-align:center;">239</td>
       <td style="text-align:center;">168</td>
-      <td style="text-align:center; color:#047857; font-weight:700;">&minus;30%</td>
-      <td style="text-align:center; background:#DCFCE7; font-weight:700;">Improving</td>
+      <td style="text-align:center; color:#333; font-weight:700;">&minus;30%</td>
+      <td style="text-align:center; background:#f2f2f2; font-weight:700;">Improving</td>
       <td>Date-based triggers (&minus;24%) and subscriber enrollment (&minus;32%) are both declining. Tag-based enrollment stalls remain a significant subtopic (~236 est.) but overall trajectory is positive.</td>
     </tr>
     <tr>
       <td><strong>3. Design the Journey Map</strong></td>
       <td style="text-align:center;">1,155</td>
       <td style="text-align:center;">902</td>
-      <td style="text-align:center; color:#047857; font-weight:700;">&minus;22%</td>
-      <td style="text-align:center; background:#DCFCE7; font-weight:700;">Improving</td>
+      <td style="text-align:center; color:#333; font-weight:700;">&minus;22%</td>
+      <td style="text-align:center; background:#f2f2f2; font-weight:700;">Improving</td>
       <td>Still the second-largest stage by volume. Builder UX and journey creation complaints declining but &ldquo;Setup Incomplete&rdquo; (193) is only &minus;9%, dragging the improvement rate. Classic&rarr;CJB migration remains a persistent friction.</td>
     </tr>
     <tr>
       <td><strong>4. Compose Step Content</strong></td>
       <td style="text-align:center;">223</td>
       <td style="text-align:center;">170</td>
-      <td style="text-align:center; color:#047857; font-weight:700;">&minus;24%</td>
-      <td style="text-align:center; background:#DCFCE7; font-weight:700;">Improving</td>
+      <td style="text-align:center; color:#333; font-weight:700;">&minus;24%</td>
+      <td style="text-align:center; background:#f2f2f2; font-weight:700;">Improving</td>
       <td>Editor-in-journey complaints declining. Legacy editor usage within CJB still cited but trending down as NEB adoption increases.</td>
     </tr>
     <tr>
@@ -1739,8 +1739,8 @@
       <td><strong>7. Activate &amp; Go Live</strong></td>
       <td style="text-align:center;">1,822</td>
       <td style="text-align:center;">1,307</td>
-      <td style="text-align:center; color:#047857; font-weight:700;">&minus;28%</td>
-      <td style="text-align:center; background:#DCFCE7; font-weight:700;">Improving</td>
+      <td style="text-align:center; color:#333; font-weight:700;">&minus;28%</td>
+      <td style="text-align:center; background:#f2f2f2; font-weight:700;">Improving</td>
       <td>Largest stage by volume (~1,100 items). &ldquo;Automations Not Working Or Failing&rdquo; (1,286) is the single largest unitQ category but declining &minus;28%. Welcome email failures (~457 est.) and flows freezing after edits (~290 est.) remain top subtopics. Paused automations losing triggers down &minus;47%.</td>
     </tr>
     <tr>
@@ -1950,18 +1950,18 @@
 <table>
   <thead><tr><th>Feature</th><th>Free → Paid</th><th>Overall Revenue (log MRR)</th><th>Retention</th><th>Trial → Sub</th><th>Upsell / Expansion</th></tr></thead>
   <tbody>
-<tr><td style="font-weight:600;">avg_mrr</td><td style="text-align:center; color:#555;">-0.019</td><td style="text-align:center; color:#166534;">+0.424</td><td style="text-align:center; color:#166534;">+0.200</td><td style="text-align:center; color:#555;">-0.021</td><td style="text-align:center; color:#15803D;">+0.088</td></tr>
-<tr><td style="font-weight:600;">automation_active_days_90d</td><td style="text-align:center; color:#555;">-0.013</td><td style="text-align:center; color:#166534;">+0.349</td><td style="text-align:center; color:#166534;">+0.238</td><td style="text-align:center; color:#555;">-0.030</td><td style="text-align:center; color:#15803D;">+0.146</td></tr>
-<tr><td style="font-weight:600;">integration_usage_events_90d</td><td style="text-align:center; color:#555;">-0.004</td><td style="text-align:center; color:#166534;">+0.305</td><td style="text-align:center; color:#166534;">+0.205</td><td style="text-align:center; color:#555;">-0.031</td><td style="text-align:center; color:#15803D;">+0.080</td></tr>
-<tr><td style="font-weight:600;">total_eligible_initiatives</td><td style="text-align:center; color:#166534;">+0.240</td><td style="text-align:center; color:#DC2626;">-0.085</td><td style="text-align:center; color:#B91C1C;">-0.158</td><td style="text-align:center; color:#15803D;">+0.104</td><td style="text-align:center; color:#555;">+0.025</td></tr>
-<tr><td style="font-weight:600;">integration_count_90d</td><td style="text-align:center; color:#166534;">+0.227</td><td style="text-align:center; color:#555;">-0.006</td><td style="text-align:center; color:#555;">-0.067</td><td style="text-align:center; color:#166534;">+0.240</td><td style="text-align:center; color:#555;">+0.037</td></tr>
+<tr><td style="font-weight:600;">avg_mrr</td><td style="text-align:center; color:#555;">-0.019</td><td style="text-align:center; color:#000;">+0.424</td><td style="text-align:center; color:#000;">+0.200</td><td style="text-align:center; color:#555;">-0.021</td><td style="text-align:center; color:#555;">+0.088</td></tr>
+<tr><td style="font-weight:600;">automation_active_days_90d</td><td style="text-align:center; color:#555;">-0.013</td><td style="text-align:center; color:#000;">+0.349</td><td style="text-align:center; color:#000;">+0.238</td><td style="text-align:center; color:#555;">-0.030</td><td style="text-align:center; color:#555;">+0.146</td></tr>
+<tr><td style="font-weight:600;">integration_usage_events_90d</td><td style="text-align:center; color:#555;">-0.004</td><td style="text-align:center; color:#000;">+0.305</td><td style="text-align:center; color:#000;">+0.205</td><td style="text-align:center; color:#555;">-0.031</td><td style="text-align:center; color:#555;">+0.080</td></tr>
+<tr><td style="font-weight:600;">total_eligible_initiatives</td><td style="text-align:center; color:#000;">+0.240</td><td style="text-align:center; color:#DC2626;">-0.085</td><td style="text-align:center; color:#B91C1C;">-0.158</td><td style="text-align:center; color:#555;">+0.104</td><td style="text-align:center; color:#555;">+0.025</td></tr>
+<tr><td style="font-weight:600;">integration_count_90d</td><td style="text-align:center; color:#000;">+0.227</td><td style="text-align:center; color:#555;">-0.006</td><td style="text-align:center; color:#555;">-0.067</td><td style="text-align:center; color:#000;">+0.240</td><td style="text-align:center; color:#555;">+0.037</td></tr>
 <tr><td style="font-weight:600;">cjb_abandonment_rate</td><td style="text-align:center; color:#B91C1C;">-0.222</td><td style="text-align:center; color:#DC2626;">-0.117</td><td style="text-align:center; color:#555;">-0.077</td><td style="text-align:center; color:#DC2626;">-0.116</td><td style="text-align:center; color:#555;">-0.066</td></tr>
-<tr><td style="font-weight:600;">cjb_completion_rate</td><td style="text-align:center; color:#166534;">+0.222</td><td style="text-align:center; color:#15803D;">+0.117</td><td style="text-align:center; color:#555;">+0.077</td><td style="text-align:center; color:#15803D;">+0.116</td><td style="text-align:center; color:#555;">+0.066</td></tr>
-<tr><td style="font-weight:600;">tenure_months</td><td style="text-align:center; color:#DC2626;">-0.133</td><td style="text-align:center; color:#166534;">+0.193</td><td style="text-align:center; color:#15803D;">+0.101</td><td style="text-align:center; color:#B91C1C;">-0.183</td><td style="text-align:center; color:#166534;">+0.162</td></tr>
-<tr><td style="font-weight:600;">email_sends_per_week</td><td style="text-align:center; color:#555;">-0.020</td><td style="text-align:center; color:#166534;">+0.162</td><td style="text-align:center; color:#15803D;">+0.099</td><td style="text-align:center; color:#555;">-0.026</td><td style="text-align:center; color:#555;">+0.067</td></tr>
-<tr><td style="font-weight:600;">days_since_last_cjb_action</td><td style="text-align:center; color:#15803D;">+0.134</td><td style="text-align:center; color:#15803D;">+0.139</td><td style="text-align:center; color:#15803D;">+0.096</td><td style="text-align:center; color:#555;">+0.061</td><td style="text-align:center; color:#555;">+0.034</td></tr>
-<tr><td style="font-weight:600;">days_since_last_email_send</td><td style="text-align:center; color:#555;">-0.017</td><td style="text-align:center; color:#15803D;">+0.093</td><td style="text-align:center; color:#15803D;">+0.097</td><td style="text-align:center; color:#555;">+0.014</td><td style="text-align:center; color:#555;">-0.005</td></tr>
-<tr><td style="font-weight:600;">cjb_creates_90d</td><td style="text-align:center; color:#15803D;">+0.093</td><td style="text-align:center; color:#555;">+0.058</td><td style="text-align:center; color:#555;">+0.030</td><td style="text-align:center; color:#555;">+0.047</td><td style="text-align:center; color:#555;">+0.043</td></tr>
+<tr><td style="font-weight:600;">cjb_completion_rate</td><td style="text-align:center; color:#000;">+0.222</td><td style="text-align:center; color:#555;">+0.117</td><td style="text-align:center; color:#555;">+0.077</td><td style="text-align:center; color:#555;">+0.116</td><td style="text-align:center; color:#555;">+0.066</td></tr>
+<tr><td style="font-weight:600;">tenure_months</td><td style="text-align:center; color:#DC2626;">-0.133</td><td style="text-align:center; color:#000;">+0.193</td><td style="text-align:center; color:#555;">+0.101</td><td style="text-align:center; color:#B91C1C;">-0.183</td><td style="text-align:center; color:#000;">+0.162</td></tr>
+<tr><td style="font-weight:600;">email_sends_per_week</td><td style="text-align:center; color:#555;">-0.020</td><td style="text-align:center; color:#000;">+0.162</td><td style="text-align:center; color:#555;">+0.099</td><td style="text-align:center; color:#555;">-0.026</td><td style="text-align:center; color:#555;">+0.067</td></tr>
+<tr><td style="font-weight:600;">days_since_last_cjb_action</td><td style="text-align:center; color:#555;">+0.134</td><td style="text-align:center; color:#555;">+0.139</td><td style="text-align:center; color:#555;">+0.096</td><td style="text-align:center; color:#555;">+0.061</td><td style="text-align:center; color:#555;">+0.034</td></tr>
+<tr><td style="font-weight:600;">days_since_last_email_send</td><td style="text-align:center; color:#555;">-0.017</td><td style="text-align:center; color:#555;">+0.093</td><td style="text-align:center; color:#555;">+0.097</td><td style="text-align:center; color:#555;">+0.014</td><td style="text-align:center; color:#555;">-0.005</td></tr>
+<tr><td style="font-weight:600;">cjb_creates_90d</td><td style="text-align:center; color:#555;">+0.093</td><td style="text-align:center; color:#555;">+0.058</td><td style="text-align:center; color:#555;">+0.030</td><td style="text-align:center; color:#555;">+0.047</td><td style="text-align:center; color:#555;">+0.043</td></tr>
 <tr><td style="font-weight:600;">ai_content_creates_90d</td><td style="text-align:center; color:#555;">-0.002</td><td style="text-align:center; color:#555;">+0.070</td><td style="text-align:center; color:#555;">+0.045</td><td style="text-align:center; color:#555;">-0.004</td><td style="text-align:center; color:#555;">+0.020</td></tr>
 <tr><td style="font-weight:600;">cjb_pauses_90d</td><td style="text-align:center; color:#555;">+0.051</td><td style="text-align:center; color:#555;">+0.068</td><td style="text-align:center; color:#555;">+0.033</td><td style="text-align:center; color:#555;">+0.021</td><td style="text-align:center; color:#555;">+0.036</td></tr>
 <tr><td style="font-weight:600;">cjb_restarts_90d</td><td style="text-align:center; color:#555;">+0.059</td><td style="text-align:center; color:#555;">+0.068</td><td style="text-align:center; color:#555;">+0.033</td><td style="text-align:center; color:#555;">+0.027</td><td style="text-align:center; color:#555;">+0.038</td></tr>
