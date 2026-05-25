@@ -41,10 +41,10 @@ run.font.name = 'Arial'
 # ============ VISION ============
 doc.add_heading('Vision', level=1)
 doc.add_paragraph(
-    'Create the best-in-class omni-channel builder for SMBs. One trusted surface where AI knows your brand, '
-    'content is authored once and delivered everywhere, and every campaign ships faster, performs better, and '
-    'compounds the intelligence that makes the next one even stronger. Every send builds more confidence in the '
-    'platform than the last.'
+    'We envision a future where Mailchimp is the marketing surface that knows your brand, your store, '
+    'and your performance history — and turns a business goal into a complete, on-brand campaign ready to send. '
+    'Every campaign makes the next one smarter, faster, and more profitable. Leaving Mailchimp doesn\'t just '
+    'mean losing a builder; it means losing compounding marketing intelligence no design tool or ESP can replicate.'
 )
 
 # ============ STUBBORN CUSTOMER PROBLEM ============
