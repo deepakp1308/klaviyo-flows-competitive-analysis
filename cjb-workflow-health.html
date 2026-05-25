@@ -198,7 +198,10 @@
   .edit-toggle { background: #fff; color: #000; }
   .edit-toggle.active { background: #000; color: #fff; }
   .edit-download { background: #000; color: #fff; display: none; }
-  body.editing .edit-download { display: inline-block; }
+  .edit-clear { background: #fff; color: #B91C1C; border-color: #B91C1C; display: none; }
+  .edit-status { font-family: Arial, Helvetica, sans-serif; font-size: 8pt; color: #555; padding: 0 4px; }
+  .edit-status.has-edits { color: #000; font-weight: 700; }
+  body.editing .edit-download, body.editing .edit-clear { display: inline-block; }
   body.editing [contenteditable="true"]:hover { outline: 1px dashed #999; outline-offset: 2px; }
   body.editing [contenteditable="true"]:focus { outline: 2px solid #000; outline-offset: 2px; background: #fffde7; }
   @media print { .edit-toolbar { display: none; } }
@@ -208,8 +211,10 @@
 <body>
 
 <div class="edit-toolbar">
+  <span class="edit-status" id="editStatus"></span>
   <button class="edit-toggle" id="editToggle">Edit Mode</button>
   <button class="edit-download" id="editDownload">Download HTML</button>
+  <button class="edit-clear" id="editClear">Clear Local Edits</button>
 </div>
 
 <div class="nav" role="tablist">
@@ -2783,10 +2788,86 @@
 </script>
 <script>
 (function () {
+  var STORAGE_KEY = 'cjb-edits';
   var editing = false;
+  var saveTimer = null;
   var toggle = document.getElementById('editToggle');
   var download = document.getElementById('editDownload');
-  var editableSelector = '.tabpanel h1, .tabpanel h2, .tabpanel h3, .tabpanel p, .tabpanel td, .tabpanel th, .tabpanel li, .tabpanel .insight-box > p, .tabpanel .vision-box > p, .tabpanel .exec-section > p, .tabpanel .exec-section li';
+  var clearBtn = document.getElementById('editClear');
+  var status = document.getElementById('editStatus');
+
+  var editableSelector = '.tabpanel h1, .tabpanel h2, .tabpanel h3, .tabpanel p, .tabpanel td, .tabpanel th, .tabpanel li';
+
+  function getEditableId(el) {
+    var panels = document.querySelectorAll('.tabpanel');
+    for (var p = 0; p < panels.length; p++) {
+      var all = panels[p].querySelectorAll('h1,h2,h3,p,td,th,li');
+      for (var i = 0; i < all.length; i++) {
+        if (all[i] === el) return panels[p].id + ':' + i;
+      }
+    }
+    return null;
+  }
+
+  function saveEdits() {
+    var edits = {};
+    var panels = document.querySelectorAll('.tabpanel');
+    for (var p = 0; p < panels.length; p++) {
+      var all = panels[p].querySelectorAll('h1,h2,h3,p,td,th,li');
+      for (var i = 0; i < all.length; i++) {
+        var key = panels[p].id + ':' + i;
+        if (all[i].dataset.original && all[i].innerHTML !== all[i].dataset.original) {
+          edits[key] = all[i].innerHTML;
+        }
+      }
+    }
+    if (Object.keys(edits).length > 0) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(edits));
+      updateStatus(Object.keys(edits).length);
+    } else {
+      localStorage.removeItem(STORAGE_KEY);
+      updateStatus(0);
+    }
+  }
+
+  function loadEdits() {
+    var raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return 0;
+    var edits = JSON.parse(raw);
+    var count = 0;
+    var panels = document.querySelectorAll('.tabpanel');
+    for (var p = 0; p < panels.length; p++) {
+      var all = panels[p].querySelectorAll('h1,h2,h3,p,td,th,li');
+      for (var i = 0; i < all.length; i++) {
+        var key = panels[p].id + ':' + i;
+        if (edits[key]) {
+          all[i].innerHTML = edits[key];
+          count++;
+        }
+      }
+    }
+    return count;
+  }
+
+  function storeOriginals() {
+    var panels = document.querySelectorAll('.tabpanel');
+    for (var p = 0; p < panels.length; p++) {
+      var all = panels[p].querySelectorAll('h1,h2,h3,p,td,th,li');
+      for (var i = 0; i < all.length; i++) {
+        if (!all[i].dataset.original) all[i].dataset.original = all[i].innerHTML;
+      }
+    }
+  }
+
+  function updateStatus(n) {
+    if (n > 0) {
+      status.textContent = n + ' edit' + (n > 1 ? 's' : '') + ' saved locally';
+      status.className = 'edit-status has-edits';
+    } else {
+      status.textContent = '';
+      status.className = 'edit-status';
+    }
+  }
 
   function setEditing(on) {
     editing = on;
@@ -2803,16 +2884,34 @@
         els[i].removeAttribute('spellcheck');
       }
     }
+    if (!on) saveEdits();
   }
 
+  function debounceSave() {
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(saveEdits, 1000);
+  }
+
+  document.addEventListener('input', function (e) {
+    if (editing && e.target.closest('.tabpanel')) debounceSave();
+  });
+
   toggle.addEventListener('click', function () { setEditing(!editing); });
+
+  clearBtn.addEventListener('click', function () {
+    if (!confirm('Discard all local edits and restore the deployed version?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  });
 
   download.addEventListener('click', function () {
     setEditing(false);
     var toolbar = document.querySelector('.edit-toolbar');
     toolbar.style.display = 'none';
+    document.querySelectorAll('[data-original]').forEach(function (el) { delete el.dataset.original; });
     var html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
     toolbar.style.display = '';
+    storeOriginals();
     var blob = new Blob([html], { type: 'text/html' });
     var a = document.createElement('a');
     a.href = URL.createObjectURL(blob);
@@ -2820,6 +2919,10 @@
     a.click();
     URL.revokeObjectURL(a.href);
   });
+
+  storeOriginals();
+  var restored = loadEdits();
+  updateStatus(restored);
 })();
 </script>
 
