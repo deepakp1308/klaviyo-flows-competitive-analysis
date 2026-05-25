@@ -73,22 +73,15 @@
   #panel-strategy .benefit h3 { font-size: 10pt; margin-bottom: 4px; }
   #panel-strategy .benefit p { font-size: 9pt; line-height: 1.5; color: #333; }
 
-  /* Adoption Ceiling tab */
-  #panel-adoption-ceiling { font-size: 9pt; line-height: 1.45; }
-  #panel-adoption-ceiling h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; border-bottom: none; }
-  #panel-adoption-ceiling h2 { font-size: 11pt; font-weight: 700; margin: 20px 0 8px 0; border-bottom: 2px solid #166D3B; padding-bottom: 4px; }
-  #panel-adoption-ceiling table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 8px; }
-  #panel-adoption-ceiling th, #panel-adoption-ceiling td { border: 1px solid #bfbfbf; padding: 6px 8px; vertical-align: top; text-align: left; }
-  #panel-adoption-ceiling th { background: #166D3B; color: #fff; font-weight: 700; font-size: 8pt; }
-  #panel-adoption-ceiling .num { text-align: right; font-variant-numeric: tabular-nums; }
-  #panel-adoption-ceiling .subtitle { font-size: 9pt; color: #555; margin-bottom: 12px; }
-  #panel-adoption-ceiling .subtitle a { color: #166D3B; }
-
-  /* Market Upside tab */
+  /* CJB Market Upside tab */
   #panel-market-upside { font-size: 9pt; line-height: 1.45; }
   #panel-market-upside h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; border-bottom: none; }
   #panel-market-upside h2 { font-size: 11pt; font-weight: 700; margin: 24px 0 8px 0; border-bottom: 2px solid #166D3B; padding-bottom: 4px; }
   #panel-market-upside h3 { font-size: 10pt; font-weight: 700; margin: 16px 0 6px 0; }
+  #panel-market-upside .exec-section { background: #f5f5f5; border-left: 4px solid #166D3B; padding: 12px 16px; margin: 8px 0 12px 0; }
+  #panel-market-upside .exec-section p { font-size: 9.5pt; line-height: 1.55; margin: 6px 0; }
+  #panel-market-upside .exec-section ul { font-size: 9pt; line-height: 1.55; margin: 4px 0 4px 16px; padding: 0; }
+  #panel-market-upside .exec-section li { margin-bottom: 4px; }
   #panel-market-upside table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 8px; }
   #panel-market-upside th, #panel-market-upside td { border: 1px solid #bfbfbf; padding: 6px 8px; vertical-align: top; text-align: left; }
   #panel-market-upside th { background: #166D3B; color: #fff; font-weight: 700; font-size: 8pt; }
@@ -211,8 +204,7 @@
   <button class="tab" role="tab" aria-selected="false" data-tab="targeting">Customer Targeting</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="swimlanes">VP Swim Lanes</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="critical">Critical Path &amp; Hypotheses</button>
-  <button class="tab" role="tab" aria-selected="false" data-tab="adoption-ceiling">Adoption Ceiling</button>
-  <button class="tab" role="tab" aria-selected="false" data-tab="market-upside">Market Upside</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="market-upside">CJB Market Upside</button>
 </div>
 
 <div id="panel-workflow-health" class="tabpanel active" role="tabpanel">
@@ -824,7 +816,7 @@
 <hr class="divider">
 
 <h2>How We Measure Success</h2>
-<p class="chapter-sub">FY27 targets are calibrated against a realistic adoption ceiling, not competitor folklore. See the <a href="#adoption-ceiling">Adoption Ceiling</a> tab for BigQuery TAM/SAM analysis, current vs target ranges, and Klaviyo benchmark context.</p>
+<p class="chapter-sub">FY27 targets are calibrated against realistic adoption ceilings by segment. See the <a href="#market-upside">CJB Market Upside</a> tab for BigQuery TAM/SAM analysis, Klaviyo benchmark comparison, and segment-level phased targets.</p>
 <div class="guiding">
   <h3>Product Adoption, Engagement &amp; Time to Activation</h3>
   <ul>
@@ -2406,139 +2398,39 @@
 
 </div><!-- /panel-critical -->
 
-<div id="panel-adoption-ceiling" class="tabpanel" role="tabpanel">
-
-<h1>Automation Adoption Ceiling &amp; Goal Setting</h1>
-<p class="subtitle">BigQuery TAM/SAM analysis to level-set FY27 adoption targets &middot; May 2026 snapshot &middot; <a href="#strategy">Strategy &amp; Roadmap</a> &middot; <a href="#revenue">Revenue Attribution</a> &middot; <a href="#targeting">Customer Targeting</a></p>
-
-<div class="insight-box">
-  <p><strong>Executive read:</strong> A 60&ndash;90% platform-wide automation adoption rate is <em>not</em> a realistic Mailchimp ceiling. That range applies to <strong>integrated ecommerce subsets</strong> (Klaviyo benchmark: ~75% of Shopify brands run core flows). Mailchimp&rsquo;s best-fit serviceable market (email-active + store connected) is already at <strong>50% CJB adoption</strong>. Platform-wide paid ceiling is <strong>25&ndash;28%</strong>; paid+free with basic CJB reinstatement is <strong>18&ndash;24%</strong>. FY27 target of <strong>16% &rarr; 22%</strong> is ambitious but inside the defensible range.</p>
-</div>
-
-<div class="scorecard">
-  <div class="score-card"><div class="num">733K</div><div class="label">Paid active (30d)</div></div>
-  <div class="score-card"><div class="num">50K</div><div class="label">Best-fit SAM (email + ECU)</div></div>
-  <div class="score-card"><div class="num">22%</div><div class="label">Current CJB adoption (paid, ever)</div></div>
-  <div class="score-card"><div class="num">50%</div><div class="label">Current in best-fit SAM</div></div>
-  <div class="score-card"><div class="num">22&ndash;28%</div><div class="label">Realistic paid ceiling</div></div>
-  <div class="score-card"><div class="num">55&ndash;68%</div><div class="label">Best-fit SAM ceiling</div></div>
-</div>
-
-<h2>Definitions</h2>
-<table>
-  <thead><tr><th>Term</th><th>Definition</th><th>Source</th></tr></thead>
-  <tbody>
-    <tr><td><strong>TAM</strong></td><td>All paid Mailchimp customers active in last 30 days</td><td><code>bi_reporting.users</code></td></tr>
-    <tr><td><strong>SAM</strong></td><td>Behavior-qualified subset with demonstrated need + ability to run behavioral automation (see tiers below)</td><td>BigQuery customer-level, May 2026</td></tr>
-    <tr><td><strong>Adopted (current)</strong></td><td>Customer has turned on at least one CJB flow since Jan 2023 (<code>start</code> action on <code>customer_journey_builder</code>)</td><td><code>bi_activities.users_activities</code></td></tr>
-    <tr><td><strong>Active adopter (90d)</strong></td><td>CJB <code>start</code> in last 90 days</td><td>Activity window</td></tr>
-    <tr><td><strong>PRD platform adoption (16%)</strong></td><td>Eligible paid accounts with at least one active automation flow (broader BI definition; aligns ~16&ndash;22% range)</td><td>Product Health / PRD baseline</td></tr>
-    <tr><td><strong>Activation rate (33.6%)</strong></td><td>Of customers who enter the CJB funnel (Explore+), share reaching Established</td><td><code>product_journey_monthly</code></td></tr>
-  </tbody>
-</table>
-
-<h2>SAM Tiers: Who Can Genuinely Adopt?</h2>
-<p style="font-size:9pt; color:#555; margin-bottom:8px;">Tier criteria stack from broad (all paid) to narrow (best-fit). Percentages are share of 733K paid active base.</p>
-<table>
-  <thead>
-    <tr>
-      <th>Tier</th><th>Behavior criteria</th><th class="num">Population</th><th class="num">% of paid</th>
-      <th class="num">CJB adopters</th><th class="num">Current adoption</th>
-      <th class="num">Ceiling low</th><th class="num">Ceiling high</th><th>Rationale</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr><td><strong>A</strong></td><td>Paid + active (30d login)</td><td class="num">733,429</td><td class="num">100%</td><td class="num">161,639</td><td class="num">22.0%</td><td class="num">22%</td><td class="num">28%</td><td>Full paid base; includes B2B, broadcast-only, dormant</td></tr>
-    <tr><td><strong>B</strong></td><td>Email-active: &ge;1 email send in 90d</td><td class="num">624,081</td><td class="num">85%</td><td class="num">136,532</td><td class="num">21.9%</td><td class="num">24%</td><td class="num">30%</td><td>Minimum bar: actually sends marketing email</td></tr>
-    <tr><td><strong>C</strong></td><td>List size &ge;100 contacts</td><td class="num">686,870</td><td class="num">94%</td><td class="num">151,045</td><td class="num">22.0%</td><td class="num">23%</td><td class="num">29%</td><td>Audience scale for automation ROI</td></tr>
-    <tr><td><strong>D</strong></td><td>Ecommerce: store on platform (<code>ecomm</code> or <code>ecu</code>)</td><td class="num">272,696</td><td class="num">37%</td><td class="num">86,060</td><td class="num">31.6%</td><td class="num">35%</td><td class="num">42%</td><td>Behavioral triggers matter; cart/browse use cases</td></tr>
-    <tr><td><strong>E</strong></td><td>ECU: ecommerce store <strong>connected</strong> (integration live)</td><td class="num">57,264</td><td class="num">8%</td><td class="num">28,292</td><td class="num">49.4%</td><td class="num">55%</td><td class="num">65%</td><td>Klaviyo-comparable subset; real-time event potential</td></tr>
-    <tr><td><strong>F</strong></td><td>Integration connect in 90d</td><td class="num">180,970</td><td class="num">25%</td><td class="num">75,240</td><td class="num">41.6%</td><td class="num">45%</td><td class="num">55%</td><td>Recent integration activity signal</td></tr>
-    <tr><td><strong>G</strong></td><td>Email-active + ecommerce</td><td class="num">232,116</td><td class="num">32%</td><td class="num">73,241</td><td class="num">31.6%</td><td class="num">35%</td><td class="num">42%</td><td>Core ecommerce marketer profile</td></tr>
-    <tr class="total-row"><td><strong>H ★</strong></td><td><strong>Email-active + ECU (best-fit SAM)</strong></td><td class="num"><strong>50,301</strong></td><td class="num"><strong>7%</strong></td><td class="num"><strong>25,251</strong></td><td class="num"><strong>50.2%</strong></td><td class="num"><strong>55%</strong></td><td class="num"><strong>68%</strong></td><td><strong>Primary serve market</strong> &mdash; comparable to Klaviyo&rsquo;s integrated-merchant base</td></tr>
-  </tbody>
-</table>
-
-<h2>Paid vs Paid+Free Expansion</h2>
-<table>
-  <thead><tr><th>Scenario</th><th class="num">Addressable base</th><th class="num">Current adopters</th><th class="num">Current %</th><th class="num">FY27 target</th><th class="num">Realistic ceiling</th><th>Notes</th></tr></thead>
-  <tbody>
-    <tr><td><strong>Paid only</strong> (active 30d)</td><td class="num">733,429</td><td class="num">161,639</td><td class="num">22.0%</td><td class="num">22%+ (PRD)</td><td class="num">25&ndash;28%</td><td>Non-ecom majority caps platform-wide rate</td></tr>
-    <tr><td><strong>Paid + free active</strong> (90d login)</td><td class="num">1,389,256</td><td class="num">178,127</td><td class="num">12.8%</td><td class="num">~15&ndash;18%</td><td class="num">18&ndash;24%</td><td>Free CJB at 0.75% active today; reinstatement unlocks top-of-funnel</td></tr>
-    <tr><td><strong>Paid+free, email-active</strong></td><td class="num">952,966</td><td class="num">142,175</td><td class="num">14.9%</td><td class="num">~18&ndash;20%</td><td class="num">22&ndash;28%</td><td>Excludes dormant free accounts</td></tr>
-    <tr><td><strong>Paid+free, ECU</strong></td><td class="num">72,910</td><td class="num">30,095</td><td class="num">41.3%</td><td class="num">45%+</td><td class="num">55&ndash;65%</td><td>Integrated merchants across plans</td></tr>
-  </tbody>
-</table>
-
-<h2>Current State vs FY27 Target vs Ceiling</h2>
-<table>
-  <thead><tr><th>Metric</th><th>Current (T0)</th><th>FY27 target</th><th>Realistic ceiling</th><th>Gap to ceiling</th></tr></thead>
-  <tbody>
-    <tr><td><strong>Platform adoption (paid eligible)</strong></td><td>16% (PRD) / 22% (activity ever)</td><td><strong>22%</strong></td><td>25&ndash;28%</td><td>+3&ndash;6pp headroom after FY27</td></tr>
-    <tr><td><strong>CJB activation (Explore &rarr; Establish)</strong></td><td>33.6%</td><td><strong>42%</strong></td><td>48&ndash;55% (ECU-like segments)</td><td>Activation, not TAM, is binding constraint</td></tr>
-    <tr><td><strong>CJB Established users/mo</strong></td><td>132K</td><td><strong>155&ndash;170K</strong></td><td>~180&ndash;195K at 28% paid ceiling</td><td>+48&ndash;63K vs today at ceiling</td></tr>
-    <tr><td><strong>Best-fit SAM (Tier H) adoption</strong></td><td>50.2% (25K / 50K)</td><td><strong>55%+</strong></td><td>55&ndash;68%</td><td>Already halfway to Klaviyo-like integrated rates</td></tr>
-    <tr><td><strong>Free CJB adoption</strong></td><td>1.1% (product journey) / 0.75% (90d active)</td><td><strong>5%+</strong></td><td>8&ndash;12% with reinstatement</td><td>Shopify-free wedge defense</td></tr>
-    <tr><td><strong>FTU 30-day turn-on</strong></td><td>6.8%</td><td><strong>15%</strong></td><td>20&ndash;25% (ECU new bookings)</td><td>Setup/agent unlock, not market size</td></tr>
-  </tbody>
-</table>
-
-<h2>Product Journey Validation (aggregate BI, May 2026)</h2>
-<p style="font-size:9pt; color:#555;">Cross-check from <code>bi_aggregate.product_journey_monthly</code> &mdash; CJB penetration by ecommerce status (paid monthly/annual plans):</p>
-<table>
-  <thead><tr><th><code>ecomm_status</code></th><th class="num">Established</th><th class="num">In funnel</th><th class="num">Active adoption rate</th><th class="num">Penetration (all)</th></tr></thead>
-  <tbody>
-    <tr><td><strong>ecu</strong> (connected)</td><td class="num">15,863</td><td class="num">35,053</td><td class="num">45.3%</td><td class="num">24.8%</td></tr>
-    <tr><td><strong>ecomm</strong> (store, not connected)</td><td class="num">25,505</td><td class="num">74,680</td><td class="num">34.2%</td><td class="num">10.6%</td></tr>
-    <tr><td><strong>non</strong></td><td class="num">35,533</td><td class="num">104,301</td><td class="num">34.1%</td><td class="num">7.1%</td></tr>
-  </tbody>
-</table>
-
-<h2>Klaviyo Benchmark Reality Check</h2>
-<div class="insight-box">
-  <p><strong>What &ldquo;60&ndash;90%&rdquo; likely refers to:</strong> Among <em>Shopify-integrated DTC brands</em>, ~75% run core flows (Placed Order, Checkout Started) &mdash; not all Klaviyo accounts platform-wide. Klaviyo vendor adoption in the email category is ~17&ndash;19% of organizations (Ramp, May 2026).</p>
-  <p><strong>Mailchimp apples-to-apples:</strong> Tier H (email-active + ECU) = 50,301 customers at <strong>50.2% adoption today</strong>. That is the correct comparison set for &ldquo;integrated merchant automation penetration,&rdquo; not the 733K paid base.</p>
-  <p><strong>Implication for goal setting:</strong> Set platform target at <strong>22%</strong> (achievable, +6pp), best-fit SAM at <strong>55&ndash;60%</strong>, and ECU segment at <strong>60&ndash;65%</strong>. Do not anchor exec expectations to 90% platform-wide.</p>
-</div>
-
-<h2>Incremental Adopter Math (FY27)</h2>
-<table>
-  <thead><tr><th>Scenario</th><th class="num">New adopters</th><th>Calculation</th></tr></thead>
-  <tbody>
-    <tr><td>Platform 16% &rarr; 22% (PRD, ~989K paid eligible)</td><td class="num">~59K</td><td>6pp &times; paid eligible base</td></tr>
-    <tr><td>Paid active 22% &rarr; 25% (conservative ceiling)</td><td class="num">~22K</td><td>3pp &times; 733K active</td></tr>
-    <tr><td>Tier H 50% &rarr; 58% (best-fit SAM mid-ceiling)</td><td class="num">~4K</td><td>8pp &times; 50K SAM (high yield, small pool)</td></tr>
-    <tr><td>Free reinstatement 0.75% &rarr; 5% (656K free active)</td><td class="num">~28K</td><td>Largest volume unlock; separate from paid ceiling</td></tr>
-    <tr><td><strong>Non-adopters in Tier H remaining</strong></td><td class="num">25,050</td><td>Half of best-fit SAM still unconverted &mdash; highest-ROI pool</td></tr>
-  </tbody>
-</table>
-
-<h2>Connection to FY27 Goals</h2>
-<ul style="font-size:9pt; line-height:1.5;">
-  <li><strong>Revenue Attribution L1</strong> (+$10&ndash;13M): assumes 16% &rarr; 22% platform adoption &mdash; sits at lower bound of paid ceiling, defensible.</li>
-  <li><strong>Critical Path Q2 bets</strong> (store-connect auto-build, Shopify-deep triggers): target Tier H non-adopters (25K) and Tier E ECU pool (29K non-adopters on paid).</li>
-  <li><strong>Customer Targeting clusters</strong> C3, C6, C11 map to SAM tiers D&ndash;H; initiative EV should prioritize Tier H completion before broad platform pushes.</li>
-  <li><strong>Activation 33.6% &rarr; 42%</strong> matters more than raw TAM: 571K paid active customers have never adopted; 487K of those send email but haven&rsquo;t started CJB.</li>
-</ul>
-
-<p style="font-size:8pt; color:#888; margin-top:16px;"><strong>Methodology:</strong> BigQuery May 2026 snapshot. Customer-level: <code>bi_reporting.users</code> + <code>bi_activities.users_activities</code> (CJB <code>start</code> since 2023-01-01; email publish 90d; integration connect 90d). Aggregate validation: <code>bi_aggregate.product_journey_monthly</code>. Ceiling ranges: segment best-in-class penetration + activation rates, capped below Klaviyo integrated-merchant benchmarks (75%) and adjusted for Mailchimp&rsquo;s non-ecom majority. Pipeline: ad hoc BQ analysis for goal-setting tab.</p>
-
-</div><!-- /panel-adoption-ceiling -->
-
 <div id="panel-market-upside" class="tabpanel" role="tabpanel">
 
-<h1>Addressable Market &amp; Revenue Upside</h1>
-<p class="subtitle">Segment-by-segment adoption opportunity with phased FY27 targets and conservative revenue impact &middot; BigQuery May 2026 &middot; <a href="#adoption-ceiling">Adoption Ceiling</a> &middot; <a href="#strategy">Strategy &amp; Roadmap</a> &middot; <a href="#revenue">Revenue Attribution</a></p>
+<h1>CJB Market Upside</h1>
+<p class="subtitle">Automation adoption opportunity by segment with phased FY27 targets &middot; BigQuery May 2026 &middot; <a href="#strategy">Strategy &amp; Roadmap</a> &middot; <a href="#revenue">Revenue Attribution</a></p>
 
-<div class="insight-box">
-  <p><strong>Executive read:</strong> Mailchimp automation upside comes from three distinct segments with different ceilings and different playbooks. <strong>Shopify-connected</strong> merchants (20K paid) are the Klaviyo-benchmark comparison: 52% adoption today vs Klaviyo&rsquo;s 75% &mdash; a <strong>3,181-customer gap worth $823K/yr conservatively</strong>. <strong>All ECU</strong> merchants (57K across Shopify, WooCommerce, BigCommerce, etc.) are at 49% and represent <strong>$1.7M/yr</strong> at 63% target. <strong>Non-ecommerce</strong> (459K) is the largest pool at 16% adoption with 203K automation-ready non-adopters worth <strong>$6.1M/yr</strong>. Combined conservative FY27 upside: <strong>$8.6M/yr</strong> in incremental MRR lift from adoption alone, before retention and upgrade multipliers.</p>
-</div>
+<div class="exec-section">
+  <p><strong>The &ldquo;Klaviyo is at 60&ndash;90% automation adoption&rdquo; claim needs context.</strong> That number comes from a <a href="https://blog.littledata.io/2026/03/09/the-ultimate-guide-to-klaviyo-flows/" target="_blank" rel="noopener">Littledata study (March 2026)</a> of 416 self-selected Shopify brands already on Klaviyo. Among that subset, 75% had at least one active flow on Placed Order or Checkout Started. It is not a platform-wide rate &mdash; it is the adoption rate among integrated ecommerce merchants who already chose a DTC automation tool.</p>
 
-<div class="scorecard">
-  <div class="score-card"><div class="num">$8.6M</div><div class="label">Combined FY27 conservative upside</div></div>
-  <div class="score-card"><div class="num">52,369</div><div class="label">New adopters at FY27 targets</div></div>
-  <div class="score-card"><div class="num">3 segments</div><div class="label">Shopify &middot; All ECU &middot; Non-ecom</div></div>
-  <div class="score-card"><div class="num">75%</div><div class="label">Klaviyo Shopify benchmark</div></div>
+  <p><strong>Apples-to-apples: Mailchimp Shopify-connected paid customers are at 52.1% CJB adoption today.</strong> Using the same methodology (any CJB flow ever started, among customers with a live Shopify integration), we are 23pp behind Klaviyo&rsquo;s benchmark. Premium Shopify merchants are already at 74.6% &mdash; matching Klaviyo. The gap is concentrated in Essentials (39.8%) and Legacy (44.5%).</p>
+
+  <p><strong>To reach Klaviyo parity (~68&ndash;75%) on Shopify by end of FY27, we need:</strong></p>
+  <ul>
+    <li><strong>Shopify-deep triggers</strong> &mdash; cart-step, browse-abandonment, product-affinity events that Klaviyo fires today and Mailchimp doesn&rsquo;t (Q1)</li>
+    <li><strong>Auto-build on store-connect</strong> &mdash; welcome, cart abandon, post-purchase flows live within minutes of connecting Shopify (Q1&ndash;Q2)</li>
+    <li><strong>Searchable trigger modal + content-completion gating</strong> &mdash; stop setup abandonment at the trigger-selection and activation steps (Q1)</li>
+    <li><strong>Template gallery + prompt-first builder</strong> &mdash; reduce &ldquo;blank page&rdquo; friction for Standard and Essentials merchants (Q2)</li>
+  </ul>
+
+  <p><strong>Beyond Shopify: other ecommerce platforms are a bigger aggregate pool.</strong> WooCommerce (60.5% adoption, 18.8K users), BigCommerce (56.2%), and Magento (54.5%) already outperform Shopify adoption. Squarespace (41.4%, 19.6K users) and Wix (39.2%, 17.7K users) trail due to shallower trigger depth. To get these platforms to 58&ndash;63% adoption by FY27, we need:</p>
+  <ul>
+    <li><strong>Cross-platform trigger parity</strong> &mdash; extend Shopify-deep triggers to WooCommerce, BigCommerce, and Squarespace (Q2)</li>
+    <li><strong>Integration nudge + auto-connect wizard</strong> &mdash; convert the 214K ecomm customers who have a store but haven&rsquo;t connected it (Q2)</li>
+    <li><strong>Industry-specific flow templates</strong> for retail verticals beyond DTC (Q2&ndash;Q3)</li>
+  </ul>
+
+  <p><strong>Non-ecommerce is the largest untapped pool.</strong> 459K paid active non-ecom customers are at 16.4% CJB adoption. Of the 383K non-adopters, 203K (53%) are automation-ready: they send &ge;3 emails per 90 days and have 500+ contacts. These are B2B, professional services, nonprofits, and creators who run campaigns but have never set up a welcome or re-engagement flow. To move from 16% to 20&ndash;22% by FY27, we need:</p>
+  <ul>
+    <li><strong>Autonomous setup agent</strong> &mdash; URL to live flow in 3 clicks for non-ecom verticals (Q2&ndash;Q3)</li>
+    <li><strong>Prompt-first journey builder</strong> &mdash; &ldquo;describe your flow in plain English&rdquo; replaces node-by-node setup (Q2)</li>
+    <li><strong>Vertical templates</strong> for B2B onboarding, event follow-up, membership renewal, nonprofit donor journeys (Q1&ndash;Q3)</li>
+  </ul>
+
+  <p><strong>Bottom line:</strong> If we deliver across all three segments, platform-wide paid adoption moves from today&rsquo;s <strong>16%</strong> to a range of <strong>20&ndash;24%</strong> by end of FY27 (low = ecom-only initiatives; high = ecom + non-ecom activation + free tier reinstatement). Conservative revenue upside: <strong>$8.6&ndash;12.2M/yr</strong> in incremental MRR lift, with an additional $1.4M from retention and $0.9M from trial-to-sub conversion.</p>
 </div>
 
 <!-- ===== SECTION 1: KLAVIYO BENCHMARK ===== -->
@@ -2800,7 +2692,7 @@
   tabs.forEach(function (t) {
     t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
   });
-  var tabNames = ['workflow-health', 'strategy', 'revenue', 'competitive', 'targeting', 'swimlanes', 'critical', 'adoption-ceiling', 'market-upside'];
+  var tabNames = ['workflow-health', 'strategy', 'revenue', 'competitive', 'targeting', 'swimlanes', 'critical', 'market-upside'];
   document.addEventListener('click', function (e) {
     var link = e.target.closest('a[href^="#"]');
     if (!link) return;
