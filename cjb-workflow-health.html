@@ -1220,6 +1220,12 @@
   </thead>
   <tbody>
     <tr>
+      <td class="row-label">What It Is</td>
+      <td>Complete front-end rebuild of the CJB canvas &mdash; replaces the current React architecture that causes scroll failures, replicate-flow errors, and stale email previews. Adds an automated cross-browser regression suite (CI-gated) and fixes the re-entry settings bug where the 5-minute interval silently reverts after save.</td>
+      <td>Replace the unsearchable trigger-selection modal with a searchable, filterable, grouped UX. Add a content-completion gate that prevents &ldquo;Turn On&rdquo; until all email/SMS steps have content, with a clear &ldquo;what&rsquo;s missing&rdquo; checklist. Surface flow state (draft / active / paused / error) on every screen so customers always know where a journey stands.</td>
+      <td>Begin building the autonomous setup agent: customer pastes their website URL, the agent reads their brand, store, and audience data, and scaffolds 4 ready-to-review flows (welcome, cart abandon, post-purchase, win-back). In parallel, fix reporting stat mismatches where open/click/revenue numbers differ between the flow detail view, the aggregate report, and the campaign dashboard.</td>
+    </tr>
+    <tr>
       <td class="row-label">Hypothesis</td>
       <td>If we rebuild the CJB front-end, ship a cross-browser regression suite, and fix re-entry persistence, setup completion will rise from ~50% toward 65% and HVC editor complaints ($16.5K/mo) will begin reversing by end of Q1.</td>
       <td>If the trigger modal is searchable, content-completion is gated before activation, and flow state is transparent, the 99.6% create-no-start rate in frustrated clusters will drop and FTU 30-day turn-on will begin recovering from 6.8%.</td>
@@ -1263,6 +1269,11 @@
   </thead>
   <tbody>
     <tr>
+      <td class="row-label">What It Is</td>
+      <td>GA launch of the autonomous setup agent started in Q1. The shipped version takes a URL, reads store catalog + Brand Kit + audience segments, and generates 4 on-brand automation flows (welcome series, cart abandonment, post-purchase follow-up, win-back) that the customer reviews and activates in 3 clicks. Includes Brand Kit&ndash;applied email templates and pre-populated subject lines.</td>
+      <td>Ship 12+ new behavioral triggers closing the Klaviyo trigger-depth gap: cart-step (add/remove/update), browse abandonment, product-affinity (viewed &times;N), checkout started/completed, back-in-stock, price-drop, and predictive churn-risk. Simultaneously ship Shopify-deep integration that auto-builds welcome, cart recovery, post-purchase, and win-back flows the moment a Shopify store connects &mdash; no manual setup required.</td>
+    </tr>
+    <tr>
       <td class="row-label">Hypothesis</td>
       <td>If a new customer can paste a URL and get 4 live, on-brand automations in 3 clicks, time to first automation send will compress from 14&ndash;21 days to under 7 days and CJB activation will increase from 33.6% toward 38% by end of Q2.</td>
       <td>If we ship 12+ behavioral triggers and Shopify-deep event integration (cart-step, browse-abandonment, checkout events), operators who currently choose Klaviyo for trigger depth will adopt Mailchimp automation, and ECU adoption will rise from 29.7% toward 35%.</td>
@@ -1301,6 +1312,12 @@
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td class="row-label">What It Is</td>
+      <td>Enable flow branches based on event properties (e.g., &ldquo;cart contains product X&rdquo; or &ldquo;order value &gt;$100&rdquo;), nested segment conditions inside journey if/else nodes (combine tag + purchase history + engagement), and trigger splits that route a single behavioral event into multiple differentiated paths. This is the personalization depth layer Klaviyo uses for cart-content-aware flows.</td>
+      <td>Complete the migration from batch-processed trigger evaluation (15&ndash;60 minute latency) to the new Eventbus architecture delivering sub-second trigger firing. This is the infrastructure dependency that gates real-time behavioral triggers, WhatsApp automation, and conversational flows. Every trigger in Pillar 2 performs at Klaviyo-competitive speed only after Eventbus ships.</td>
+      <td>Ship conversational flow editing via Intuit Assist: customers describe changes in natural language (&ldquo;add a 3-day delay before the second email&rdquo; or &ldquo;split this path by purchase history&rdquo;) and the AI makes the edit. Simultaneously deploy AI content generation across 6+ automation surfaces: in-flow email steps, SMS body, subject lines, delay recommendations, condition suggestions, and flow-level strategy recommendations.</td>
+    </tr>
     <tr>
       <td class="row-label">Hypothesis</td>
       <td>If customers can branch flows by cart content, nest segments inside journeys, and split paths from a single behavioral event, revenue per automation adopter will increase from $616/mo toward $700/mo as personalization depth drives conversion.</td>
@@ -1343,6 +1360,10 @@
     </tr>
   </thead>
   <tbody>
+    <tr>
+      <td class="row-label">What It Is</td>
+      <td>Ship per-recipient optimization inside every automation flow: Smart Send Time picks the optimal send hour per contact (not per-store), Personalized A/B tests subject lines and content variants per-profile, and Channel Affinity automatically routes each recipient to their preferred channel (email, SMS, WhatsApp, push, or in-app). Wrap all four in a 5-channel orchestration canvas with AI-coordinated anti-fatigue rules that cap cross-channel frequency per recipient per day. This is the capability set Klaviyo ships today at DTC price points and Auxia sells to Fortune 500 at enterprise price points &mdash; no SMB-tier competitor offers all four together.</td>
+    </tr>
     <tr>
       <td class="row-label">Hypothesis</td>
       <td>If every contact in a flow receives per-profile Smart Send Time, Personalized A/B, Channel Affinity, and AI-coordinated anti-fatigue across 5 channels, open rates will increase 10&ndash;15%, automation CTR will rise from 5&ndash;7% to 7&ndash;9%, and Mailchimp will open the strategic whitespace no competitor fills at SMB price points: continuous per-recipient optimization in real time.</td>
