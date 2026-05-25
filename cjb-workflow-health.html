@@ -84,6 +84,21 @@
   #panel-adoption-ceiling .subtitle { font-size: 9pt; color: #555; margin-bottom: 12px; }
   #panel-adoption-ceiling .subtitle a { color: #166D3B; }
 
+  /* Market Upside tab */
+  #panel-market-upside { font-size: 9pt; line-height: 1.45; }
+  #panel-market-upside h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; border-bottom: none; }
+  #panel-market-upside h2 { font-size: 11pt; font-weight: 700; margin: 24px 0 8px 0; border-bottom: 2px solid #166D3B; padding-bottom: 4px; }
+  #panel-market-upside h3 { font-size: 10pt; font-weight: 700; margin: 16px 0 6px 0; }
+  #panel-market-upside table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 8px; }
+  #panel-market-upside th, #panel-market-upside td { border: 1px solid #bfbfbf; padding: 6px 8px; vertical-align: top; text-align: left; }
+  #panel-market-upside th { background: #166D3B; color: #fff; font-weight: 700; font-size: 8pt; }
+  #panel-market-upside .num { text-align: right; font-variant-numeric: tabular-nums; }
+  #panel-market-upside .subtitle { font-size: 9pt; color: #555; margin-bottom: 12px; }
+  #panel-market-upside .subtitle a { color: #166D3B; }
+  #panel-market-upside .seg-header td { background: #e6f4ea; font-weight: 700; font-size: 9pt; }
+  #panel-market-upside .target-row td { background: #fef3e0; }
+  #panel-market-upside .total-row td { background: #1a3a5c; color: #fff; font-weight: 700; }
+
   /* Revenue Attribution + Competitive Position tabs */
   #panel-revenue, #panel-competitive { font-size: 9pt; line-height: 1.4; }
   #panel-revenue h1, #panel-competitive h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; border-bottom: none; }
@@ -197,6 +212,7 @@
   <button class="tab" role="tab" aria-selected="false" data-tab="swimlanes">VP Swim Lanes</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="critical">Critical Path &amp; Hypotheses</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="adoption-ceiling">Adoption Ceiling</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="market-upside">Market Upside</button>
 </div>
 
 <div id="panel-workflow-health" class="tabpanel active" role="tabpanel">
@@ -2509,6 +2525,258 @@
 
 </div><!-- /panel-adoption-ceiling -->
 
+<div id="panel-market-upside" class="tabpanel" role="tabpanel">
+
+<h1>Addressable Market &amp; Revenue Upside</h1>
+<p class="subtitle">Segment-by-segment adoption opportunity with phased FY27 targets and conservative revenue impact &middot; BigQuery May 2026 &middot; <a href="#adoption-ceiling">Adoption Ceiling</a> &middot; <a href="#strategy">Strategy &amp; Roadmap</a> &middot; <a href="#revenue">Revenue Attribution</a></p>
+
+<div class="insight-box">
+  <p><strong>Executive read:</strong> Mailchimp automation upside comes from three distinct segments with different ceilings and different playbooks. <strong>Shopify-connected</strong> merchants (20K paid) are the Klaviyo-benchmark comparison: 52% adoption today vs Klaviyo&rsquo;s 75% &mdash; a <strong>3,181-customer gap worth $823K/yr conservatively</strong>. <strong>All ECU</strong> merchants (57K across Shopify, WooCommerce, BigCommerce, etc.) are at 49% and represent <strong>$1.7M/yr</strong> at 63% target. <strong>Non-ecommerce</strong> (459K) is the largest pool at 16% adoption with 203K automation-ready non-adopters worth <strong>$6.1M/yr</strong>. Combined conservative FY27 upside: <strong>$8.6M/yr</strong> in incremental MRR lift from adoption alone, before retention and upgrade multipliers.</p>
+</div>
+
+<div class="scorecard">
+  <div class="score-card"><div class="num">$8.6M</div><div class="label">Combined FY27 conservative upside</div></div>
+  <div class="score-card"><div class="num">52,369</div><div class="label">New adopters at FY27 targets</div></div>
+  <div class="score-card"><div class="num">3 segments</div><div class="label">Shopify &middot; All ECU &middot; Non-ecom</div></div>
+  <div class="score-card"><div class="num">75%</div><div class="label">Klaviyo Shopify benchmark</div></div>
+</div>
+
+<!-- ===== SECTION 1: KLAVIYO BENCHMARK ===== -->
+<h2>1. Klaviyo Benchmark: Where Does 75% Come From?</h2>
+
+<div class="insight-box">
+  <p><strong>Source:</strong> Littledata, <a href="https://blog.littledata.io/2026/03/09/the-ultimate-guide-to-klaviyo-flows/" target="_blank" rel="noopener"><em>The Ultimate Guide to Klaviyo Flows</em></a> (March 2026). Analysis of 416 Shopify brands on Klaviyo. <strong>75% of Shopify brands had flows triggered by Placed Order and Checkout Started</strong> &mdash; the two core lifecycle triggers.</p>
+  <p><strong>Methodology:</strong> Littledata audited active Klaviyo accounts connected to Shopify stores and measured which flow triggers were live. &ldquo;Adoption&rdquo; = at least one active flow using the trigger. This is <em>not</em> all Klaviyo accounts globally &mdash; it is Shopify-integrated DTC merchants, a self-selected high-propensity subset.</p>
+  <p><strong>Apples-to-apples comparison:</strong> The correct Mailchimp comparison is <strong>Shopify-connected paid customers who have ever started a CJB flow</strong>. We use the same methodology: <code>bi_activities.users_activities</code> where <code>object = &lsquo;integration&rsquo;</code> + <code>action = &lsquo;connect&rsquo;</code> + platform = Shopify, cross-joined with CJB <code>start</code> events since Jan 2023.</p>
+</div>
+
+<!-- ===== SECTION 2: SHOPIFY ===== -->
+<h2>2. Segment A: Shopify-Connected Merchants</h2>
+
+<h3>Current state</h3>
+<table>
+  <thead><tr><th>Metric</th><th class="num">Paid</th><th class="num">Free active</th><th class="num">Combined</th></tr></thead>
+  <tbody>
+    <tr><td>Total Shopify-connected</td><td class="num">20,008</td><td class="num">11,653</td><td class="num">31,661</td></tr>
+    <tr><td>CJB adopters (ever started flow)</td><td class="num">10,425</td><td class="num">1,554</td><td class="num">11,979</td></tr>
+    <tr><td>Non-adopters</td><td class="num">9,583</td><td class="num">10,099</td><td class="num">19,682</td></tr>
+    <tr><td>Current adoption rate</td><td class="num"><strong>52.1%</strong></td><td class="num">13.3%</td><td class="num">37.8%</td></tr>
+    <tr><td>Active 90d adoption</td><td class="num">16.7%</td><td class="num">3.0%</td><td class="num">&mdash;</td></tr>
+    <tr><td>Klaviyo benchmark (Littledata)</td><td class="num" colspan="3"><strong>75%</strong> of Shopify brands run core flows</td></tr>
+    <tr><td>Gap to Klaviyo benchmark</td><td class="num" colspan="3"><strong>&minus;23pp</strong> (52% vs 75%)</td></tr>
+  </tbody>
+</table>
+
+<h3>Adopter vs non-adopter economics (paid)</h3>
+<table>
+  <thead><tr><th>Metric</th><th class="num">Adopter</th><th class="num">Non-adopter</th><th class="num">Delta</th></tr></thead>
+  <tbody>
+    <tr><td>Average MRR</td><td class="num">$214.90</td><td class="num">$143.03</td><td class="num"><strong>+$71.87/mo</strong></td></tr>
+    <tr><td>Retention rate (April 2026)</td><td class="num">98.68%</td><td class="num">98.82%</td><td class="num">&minus;0.14pp</td></tr>
+    <tr><td>Upgrade rate (April 2026)</td><td class="num">21.5%</td><td class="num">21.5%</td><td class="num">~parity</td></tr>
+  </tbody>
+</table>
+<p style="font-size:8pt; color:#888;">MRR delta of $71.87/mo reflects that adopters are typically on higher plans (60% Standard vs 40% Essential). Conservative revenue model uses 30% causal attribution to isolate the automation effect from plan self-selection.</p>
+
+<h3>Shopify adoption by package</h3>
+<table>
+  <thead><tr><th>Package</th><th class="num">Total</th><th class="num">Adopters</th><th class="num">Adoption %</th><th class="num">Avg MRR</th></tr></thead>
+  <tbody>
+    <tr><td>Premium</td><td class="num">560</td><td class="num">418</td><td class="num"><strong>74.6%</strong></td><td class="num">$1,412.68</td></tr>
+    <tr><td>Standard</td><td class="num">10,421</td><td class="num">6,295</td><td class="num"><strong>60.4%</strong></td><td class="num">$142.13</td></tr>
+    <tr><td>Legacy Monthly</td><td class="num">2,592</td><td class="num">1,153</td><td class="num">44.5%</td><td class="num">$347.75</td></tr>
+    <tr><td>Essentials</td><td class="num">6,348</td><td class="num">2,529</td><td class="num">39.8%</td><td class="num">$65.39</td></tr>
+  </tbody>
+</table>
+<p style="font-size:8pt; color:#888;">Premium Shopify merchants already at 75% &mdash; matching Klaviyo benchmark. Essentials at 40% = largest upside pool (3,819 non-adopters).</p>
+
+<h3>Phased targets &amp; revenue impact (paid Shopify)</h3>
+<table>
+  <thead><tr><th>Phase</th><th class="num">Target adoption</th><th class="num">New adopters</th><th class="num">Gross MRR lift</th><th class="num">Conservative annual (30% causal)</th><th>Rationale</th></tr></thead>
+  <tbody>
+    <tr class="target-row"><td><strong>End of Q1</strong></td><td class="num">58%</td><td class="num">+1,180</td><td class="num">$84.8K/mo</td><td class="num"><strong>$305K/yr</strong></td><td>Shopify-deep triggers ship Q1; auto-build on store-connect converts low-hanging Essentials first</td></tr>
+    <tr class="target-row"><td><strong>End of Q2</strong></td><td class="num">63%</td><td class="num">+2,180</td><td class="num">$156.7K/mo</td><td class="num"><strong>$564K/yr</strong></td><td>Template gallery + prompt-first builder accelerate setup; Standard pool activates</td></tr>
+    <tr class="target-row"><td><strong>End of FY27</strong></td><td class="num">68%</td><td class="num">+3,181</td><td class="num">$228.6K/mo</td><td class="num"><strong>$823K/yr</strong></td><td>Approaching Klaviyo benchmark (75%); remaining 7pp gap = Premium-only ceiling or long-tail</td></tr>
+  </tbody>
+</table>
+
+<!-- ===== SECTION 3: ALL ECU ===== -->
+<h2>3. Segment B: All ECU (Store-Connected) Merchants &mdash; Multi-Platform</h2>
+
+<h3>Adoption by ecommerce platform (paid active)</h3>
+<table>
+  <thead><tr><th>Platform</th><th class="num">Connected users</th><th class="num">CJB adopters</th><th class="num">Non-adopters</th><th class="num">Adoption %</th><th class="num">Avg MRR</th></tr></thead>
+  <tbody>
+    <tr><td><strong>WooCommerce</strong></td><td class="num">18,844</td><td class="num">11,395</td><td class="num">7,449</td><td class="num"><strong>60.5%</strong></td><td class="num">$152.89</td></tr>
+    <tr><td><strong>BigCommerce</strong></td><td class="num">698</td><td class="num">392</td><td class="num">306</td><td class="num"><strong>56.2%</strong></td><td class="num">$309.55</td></tr>
+    <tr><td><strong>Magento</strong></td><td class="num">1,275</td><td class="num">695</td><td class="num">580</td><td class="num"><strong>54.5%</strong></td><td class="num">$472.00</td></tr>
+    <tr><td><strong>Shopify</strong></td><td class="num">20,008</td><td class="num">10,425</td><td class="num">9,583</td><td class="num">52.1%</td><td class="num">$183.70</td></tr>
+    <tr><td><strong>PrestaShop</strong></td><td class="num">901</td><td class="num">456</td><td class="num">445</td><td class="num">50.6%</td><td class="num">$174.41</td></tr>
+    <tr><td>Squarespace</td><td class="num">19,557</td><td class="num">8,091</td><td class="num">11,466</td><td class="num">41.4%</td><td class="num">$87.01</td></tr>
+    <tr><td>Wix</td><td class="num">17,674</td><td class="num">6,930</td><td class="num">10,744</td><td class="num">39.2%</td><td class="num">$83.32</td></tr>
+  </tbody>
+</table>
+<p style="font-size:8pt; color:#888;">WooCommerce leads at 60.5% &mdash; already above Mailchimp Shopify. Squarespace and Wix trail due to less trigger depth. Expanding Shopify-deep triggers to WooCommerce and BigCommerce is the highest-yield cross-platform play.</p>
+
+<h3>All ECU summary (paid active, <code>ecomm_level = &lsquo;ecu&rsquo;</code>)</h3>
+<table>
+  <thead><tr><th>Metric</th><th class="num">All ECU</th></tr></thead>
+  <tbody>
+    <tr><td>Total ECU paid active</td><td class="num">57,236</td></tr>
+    <tr><td>CJB adopters</td><td class="num">28,293 (49.4%)</td></tr>
+    <tr><td>Non-adopters</td><td class="num">28,943</td></tr>
+    <tr><td>Adopter avg MRR</td><td class="num">$216.38</td></tr>
+    <tr><td>Non-adopter avg MRR</td><td class="num">$154.22</td></tr>
+    <tr><td>MRR delta per convert</td><td class="num"><strong>+$62.16/mo</strong></td></tr>
+  </tbody>
+</table>
+
+<h3>Phased targets &amp; revenue impact (all ECU)</h3>
+<table>
+  <thead><tr><th>Phase</th><th class="num">Target</th><th class="num">New adopters</th><th class="num">Gross MRR lift</th><th class="num">Conservative annual (30%)</th><th>Rationale</th></tr></thead>
+  <tbody>
+    <tr class="target-row"><td><strong>End of Q1</strong></td><td class="num">54%</td><td class="num">+2,615</td><td class="num">$162.6K/mo</td><td class="num"><strong>$585K/yr</strong></td><td>Shopify triggers + WooCommerce parity; auto-build on store-connect</td></tr>
+    <tr class="target-row"><td><strong>End of Q2</strong></td><td class="num">58%</td><td class="num">+4,905</td><td class="num">$304.9K/mo</td><td class="num"><strong>$1.1M/yr</strong></td><td>BigCommerce + Squarespace trigger depth expansion</td></tr>
+    <tr class="target-row"><td><strong>End of FY27</strong></td><td class="num">63%</td><td class="num">+7,766</td><td class="num">$482.8K/mo</td><td class="num"><strong>$1.7M/yr</strong></td><td>Multi-platform parity with Klaviyo&rsquo;s Shopify depth across 7+ platforms</td></tr>
+  </tbody>
+</table>
+
+<!-- ===== SECTION 4: ECOMM (store, not connected) ===== -->
+<h2>4. Segment B+: Ecommerce Store Owners (Not Yet Connected)</h2>
+
+<div class="insight-box">
+  <p><strong>Hidden pool:</strong> 214,706 paid active customers have an ecommerce store on the platform but have <strong>not connected it</strong> (<code>ecomm_level = &lsquo;ecomm&rsquo;</code>). Only 26.9% have adopted CJB. Moving even 10% of this group to ECU-like trigger depth via integration nudges + auto-build unlocks ~21K potential new adopters.</p>
+</div>
+
+<table>
+  <thead><tr><th>Metric</th><th class="num">Ecomm (not connected)</th></tr></thead>
+  <tbody>
+    <tr><td>Total paid active</td><td class="num">214,706</td></tr>
+    <tr><td>CJB adopters</td><td class="num">57,676 (26.9%)</td></tr>
+    <tr><td>Non-adopters</td><td class="num">157,030</td></tr>
+    <tr><td>Adopter avg MRR</td><td class="num">$179.50</td></tr>
+    <tr><td>Non-adopter avg MRR</td><td class="num">$117.39</td></tr>
+    <tr><td>MRR delta per convert</td><td class="num"><strong>+$62.11/mo</strong></td></tr>
+    <tr><td>Retention: adopter / non-adopter</td><td class="num">98.61% / 98.87%</td></tr>
+  </tbody>
+</table>
+
+<h3>Phased targets &amp; revenue impact (ecomm)</h3>
+<table>
+  <thead><tr><th>Phase</th><th class="num">Target</th><th class="num">New adopters</th><th class="num">Conservative annual (30%)</th><th>Rationale</th></tr></thead>
+  <tbody>
+    <tr class="target-row"><td><strong>End of Q1</strong></td><td class="num">30%</td><td class="num">+6,741</td><td class="num"><strong>$1.5M/yr</strong></td><td>Integration nudge + auto-connect wizard; convert ecomm &rarr; ecu first</td></tr>
+    <tr class="target-row"><td><strong>End of Q2</strong></td><td class="num">33%</td><td class="num">+13,182</td><td class="num"><strong>$2.9M/yr</strong></td><td>Template gallery + industry-specific flows for retail verticals</td></tr>
+    <tr class="target-row"><td><strong>End of FY27</strong></td><td class="num">36%</td><td class="num">+19,624</td><td class="num"><strong>$4.4M/yr</strong></td><td>Approaching ECU adoption-level rates; remaining gap = connection friction</td></tr>
+  </tbody>
+</table>
+
+<!-- ===== SECTION 5: NON-ECOMMERCE ===== -->
+<h2>5. Segment C: Non-Ecommerce Customers</h2>
+
+<h3>Who they are and why they can adopt</h3>
+<table>
+  <thead><tr><th>Metric</th><th class="num">Non-ecom paid active</th></tr></thead>
+  <tbody>
+    <tr><td>Total paid active</td><td class="num">459,040</td></tr>
+    <tr><td>CJB adopters</td><td class="num">75,461 (16.4%)</td></tr>
+    <tr><td>Non-adopters</td><td class="num">383,579</td></tr>
+  </tbody>
+</table>
+
+<h3>Adoption readiness criteria among non-adopters</h3>
+<table>
+  <thead><tr><th>Readiness signal</th><th class="num">Non-adopters meeting criteria</th><th class="num">% of non-adopters</th><th>Why it matters</th></tr></thead>
+  <tbody>
+    <tr><td>Email active (&ge;3 sends in 90d)</td><td class="num">262,651</td><td class="num">68.5%</td><td>Already engaged in email marketing; natural automation progression</td></tr>
+    <tr><td>List size &ge;500 contacts</td><td class="num">273,440</td><td class="num">71.3%</td><td>Audience scale justifies automation ROI</td></tr>
+    <tr><td><strong>Both criteria (automation-ready)</strong></td><td class="num"><strong>203,580</strong></td><td class="num"><strong>53.1%</strong></td><td><strong>Primary non-ecom addressable pool:</strong> sends email regularly + has scale</td></tr>
+  </tbody>
+</table>
+<p style="font-size:8pt; color:#888;">53% of non-ecom non-adopters are already email-active with 500+ contacts. These are B2B, professional services, restaurants, nonprofits, and creators who send campaigns but have never set up a welcome sequence or re-engagement flow.</p>
+
+<h3>Adopter vs non-adopter economics (non-ecom)</h3>
+<table>
+  <thead><tr><th>Metric</th><th class="num">Adopter</th><th class="num">Non-adopter</th><th class="num">Delta</th></tr></thead>
+  <tbody>
+    <tr><td>Average MRR</td><td class="num">$166.96</td><td class="num">$100.86</td><td class="num"><strong>+$66.10/mo</strong></td></tr>
+    <tr><td>Retention rate (April 2026)</td><td class="num">98.94%</td><td class="num">99.00%</td><td class="num">&minus;0.06pp</td></tr>
+    <tr><td>Upgrade rate (April 2026)</td><td class="num">17.6%</td><td class="num">15.2%</td><td class="num">+2.4pp</td></tr>
+  </tbody>
+</table>
+
+<h3>Three-tier penetration scenarios (FY27)</h3>
+<table>
+  <thead><tr><th>Scenario</th><th class="num">Target adoption</th><th class="num">New adopters</th><th class="num">Conservative annual (30%)</th></tr></thead>
+  <tbody>
+    <tr><td>Conservative</td><td class="num">20%</td><td class="num">+16,341</td><td class="num">$3.9M/yr</td></tr>
+    <tr><td><strong>Realistic (mid)</strong></td><td class="num"><strong>22%</strong></td><td class="num"><strong>+25,522</strong></td><td class="num"><strong>$6.1M/yr</strong></td></tr>
+    <tr><td>Optimistic</td><td class="num">25%</td><td class="num">+39,399</td><td class="num">$9.4M/yr</td></tr>
+  </tbody>
+</table>
+
+<h3>Phased targets (mid scenario, non-ecom)</h3>
+<table>
+  <thead><tr><th>Phase</th><th class="num">Target</th><th class="num">New adopters</th><th class="num">Conservative annual (30%)</th><th>Rationale</th></tr></thead>
+  <tbody>
+    <tr class="target-row"><td><strong>End of Q1</strong></td><td class="num">18%</td><td class="num">+7,161</td><td class="num"><strong>$1.7M/yr</strong></td><td>Welcome + re-engagement templates for B2B/services verticals; searchable trigger modal</td></tr>
+    <tr class="target-row"><td><strong>End of Q2</strong></td><td class="num">20%</td><td class="num">+16,341</td><td class="num"><strong>$3.9M/yr</strong></td><td>Autonomous setup agent; prompt-first builder reduces barrier for non-ecom use cases</td></tr>
+    <tr class="target-row"><td><strong>End of FY27</strong></td><td class="num">22%</td><td class="num">+25,522</td><td class="num"><strong>$6.1M/yr</strong></td><td>AI-driven flow recommendations + industry templates close remaining activation gap</td></tr>
+  </tbody>
+</table>
+
+<!-- ===== SECTION 6: COMBINED REVENUE SUMMARY ===== -->
+<h2>6. Combined Revenue Impact Summary</h2>
+
+<table>
+  <thead><tr><th>Segment</th><th class="num">Current adoption</th><th class="num">FY27 target</th><th class="num">Non-adopter pool</th><th class="num">New adopters</th><th class="num">MRR lift/convert</th><th class="num">Conservative annual (30%)</th></tr></thead>
+  <tbody>
+    <tr class="seg-header"><td colspan="7">Ecommerce &mdash; Store Connected (ECU)</td></tr>
+    <tr><td>&nbsp;&nbsp;Shopify only</td><td class="num">52.1%</td><td class="num">68%</td><td class="num">9,583</td><td class="num">+3,181</td><td class="num">$71.87</td><td class="num">$823K</td></tr>
+    <tr><td>&nbsp;&nbsp;All ECU (incl. Shopify)</td><td class="num">49.4%</td><td class="num">63%</td><td class="num">28,943</td><td class="num">+7,766</td><td class="num">$62.16</td><td class="num">$1.7M</td></tr>
+    <tr class="seg-header"><td colspan="7">Ecommerce &mdash; Store Not Connected</td></tr>
+    <tr><td>&nbsp;&nbsp;Ecomm (not connected)</td><td class="num">26.9%</td><td class="num">36%</td><td class="num">157,030</td><td class="num">+19,624</td><td class="num">$62.11</td><td class="num">$4.4M</td></tr>
+    <tr class="seg-header"><td colspan="7">Non-Ecommerce</td></tr>
+    <tr><td>&nbsp;&nbsp;Non-ecom (mid scenario)</td><td class="num">16.4%</td><td class="num">22%</td><td class="num">383,579</td><td class="num">+25,522</td><td class="num">$66.10</td><td class="num">$6.1M</td></tr>
+    <tr class="total-row"><td><strong>Total (ECU + Ecomm + Non-ecom)</strong></td><td class="num">&mdash;</td><td class="num">&mdash;</td><td class="num">569,552</td><td class="num">+52,912</td><td class="num">&mdash;</td><td class="num"><strong>$12.2M/yr</strong></td></tr>
+  </tbody>
+</table>
+<p style="font-size:8pt; color:#888;">Note: All ECU includes Shopify. Ecomm (not connected) is additive. Total avoids double-counting: ECU + Ecomm + Non-ecom = 57,236 + 214,706 + 459,040 = 730,982 (matches paid active base of 733K less &lsquo;other&rsquo; ecomm statuses). Conservative = 30% causal attribution &times; gross MRR lift &times; 12.</p>
+
+<h3>Revenue by impact channel (FY27, conservative)</h3>
+<table>
+  <thead><tr><th>Revenue channel</th><th class="num">ECU</th><th class="num">Ecomm</th><th class="num">Non-ecom</th><th class="num">Total</th><th>Mechanism</th></tr></thead>
+  <tbody>
+    <tr><td><strong>MRR lift (plan upgrade proxy)</strong></td><td class="num">$1.2M</td><td class="num">$3.1M</td><td class="num">$4.3M</td><td class="num"><strong>$8.6M</strong></td><td>Adopters carry higher MRR; 30% causal share of $62&ndash;72/mo delta</td></tr>
+    <tr><td><strong>Retention value</strong></td><td class="num">$0.2M</td><td class="num">$0.5M</td><td class="num">$0.7M</td><td class="num"><strong>$1.4M</strong></td><td>+0.1&ndash;0.3pp retention lift per adopter at observed MRR levels</td></tr>
+    <tr><td><strong>Trial-to-sub conversion</strong></td><td class="num">$0.1M</td><td class="num">$0.3M</td><td class="num">$0.5M</td><td class="num"><strong>$0.9M</strong></td><td>1.5&ndash;2.9% new conversion rate; automation setup during trial lifts conversion</td></tr>
+    <tr class="total-row"><td><strong>Total conservative</strong></td><td class="num">$1.5M</td><td class="num">$3.9M</td><td class="num">$5.5M</td><td class="num"><strong>$10.9M</strong></td><td>&mdash;</td></tr>
+  </tbody>
+</table>
+
+<h3>Phased quarterly rollup</h3>
+<table>
+  <thead><tr><th>Phase</th><th class="num">ECU new adopters</th><th class="num">Ecomm new adopters</th><th class="num">Non-ecom new adopters</th><th class="num">Total new</th><th class="num">Conservative annual run-rate</th></tr></thead>
+  <tbody>
+    <tr class="target-row"><td><strong>End of Q1</strong></td><td class="num">+2,615</td><td class="num">+6,741</td><td class="num">+7,161</td><td class="num"><strong>+16,517</strong></td><td class="num"><strong>$3.8M/yr</strong></td></tr>
+    <tr class="target-row"><td><strong>End of Q2</strong></td><td class="num">+4,905</td><td class="num">+13,182</td><td class="num">+16,341</td><td class="num"><strong>+34,428</strong></td><td class="num"><strong>$7.9M/yr</strong></td></tr>
+    <tr class="target-row"><td><strong>End of FY27</strong></td><td class="num">+7,766</td><td class="num">+19,624</td><td class="num">+25,522</td><td class="num"><strong>+52,912</strong></td><td class="num"><strong>$12.2M/yr</strong></td></tr>
+  </tbody>
+</table>
+
+<h2>7. Connection to FY27 Strategic Roadmap</h2>
+<ul style="font-size:9pt; line-height:1.6;">
+  <li><strong>Q1 bets &rarr; ECU segment:</strong> Shopify-deep triggers + auto-build on store-connect are the highest-ROI Q1 initiatives. They target the 9,583 Shopify non-adopters and the broader 28K ECU pool.</li>
+  <li><strong>Q2 bets &rarr; Ecomm conversion:</strong> Integration nudge wizard, WooCommerce/BigCommerce trigger parity, and template gallery target the 157K ecomm-not-connected pool. Moving 10% of this pool to ECU status adds ~21K potential adopters.</li>
+  <li><strong>FY27 bets &rarr; Non-ecom activation:</strong> Autonomous setup agent, prompt-first builder, and vertical templates unlock the 203K automation-ready non-ecom customers. This is the volume play: small per-customer lift &times; massive pool.</li>
+  <li><strong>Revenue Attribution alignment:</strong> The $10.9M combined estimate aligns with the <a href="#revenue">Revenue Attribution</a> L1 adoption growth model ($10&ndash;13M). Conservative = MRR lift only; mid-case including retention + trial-to-sub brings total to $10.9M.</li>
+  <li><strong>Klaviyo competitive defense:</strong> Closing the Shopify gap from 52% &rarr; 68% neutralizes the &ldquo;Klaviyo has deeper Shopify automation&rdquo; narrative. Expanding to WooCommerce/BigCommerce creates a <strong>multi-platform moat</strong> Klaviyo lacks.</li>
+</ul>
+
+<p style="font-size:8pt; color:#888; margin-top:16px;"><strong>Methodology:</strong> BigQuery May 2026 snapshot. Customer-level: <code>bi_reporting.users</code> (paid active 30d) + <code>bi_activities.users_activities</code> (CJB <code>start</code> since Jan 2023; integration <code>connect</code> with platform name extraction). Revenue: <code>bi_finance.user_cloud_monthly_status</code> April 2026 for retention, upgrade, and trial-to-sub rates. MRR from <code>users.average_monthly_revenue</code>. Conservative attribution = 30% causal share of adopter-vs-non-adopter MRR delta (isolates automation effect from plan self-selection). Klaviyo benchmark: <a href="https://blog.littledata.io/2026/03/09/the-ultimate-guide-to-klaviyo-flows/" target="_blank" rel="noopener">Littledata, &ldquo;The Ultimate Guide to Klaviyo Flows,&rdquo; March 2026</a> (416 Shopify brands; 75% had flows on Placed Order + Checkout Started).</p>
+
+</div><!-- /panel-market-upside -->
+
 <script>
 (function () {
   var tabs = document.querySelectorAll('.tab');
@@ -2532,7 +2800,7 @@
   tabs.forEach(function (t) {
     t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
   });
-  var tabNames = ['workflow-health', 'strategy', 'revenue', 'competitive', 'targeting', 'swimlanes', 'critical', 'adoption-ceiling'];
+  var tabNames = ['workflow-health', 'strategy', 'revenue', 'competitive', 'targeting', 'swimlanes', 'critical', 'adoption-ceiling', 'market-upside'];
   document.addEventListener('click', function (e) {
     var link = e.target.closest('a[href^="#"]');
     if (!link) return;
