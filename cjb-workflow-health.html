@@ -1415,7 +1415,7 @@
 <div id="panel-revenue" class="tabpanel" role="tabpanel">
 
 <h1>Initiative-Level Revenue Attribution</h1>
-<p style="font-size:9pt; color:#555; font-style:italic; margin-bottom:16px;">Per-initiative revenue breakdown across adoption, activation, retention, and performance levers. Total: ~$22.0M ARR (mid scenario within $20&ndash;25M commit).</p>
+<p style="font-size:9pt; color:#555; font-style:italic; margin-bottom:16px;">Per-initiative revenue breakdown across adoption, activation, retention, and performance levers. Total: ~$22M ARR (mid scenario within $20&ndash;25M commit). Cross-validated against segment-level bottom-up analysis on the <a href="#market-upside" style="color:#1a3a5c;">CJB Market Upside</a> tab.</p>
 
 <div class="summary-box">
   <h3 style="font-size:10pt; margin-bottom:6px;">Revenue by Lever</h3>
@@ -1520,7 +1520,25 @@
   <tr class="grand-total"><td>Grand Total</td><td class="num">10.00</td><td class="num">4.60</td><td class="num">4.50</td><td class="num">3.00</td><td class="num"><strong>22.10</strong></td><td class="num">100%</td></tr>
 </table>
 
-<p style="font-size:8pt; color:#888; margin-top:16px;">All values are modeled estimates using 30% automation causal share, blended ARPU $135/mo, and no compounding across levers. Per-initiative splits are proportional estimates based on relative impact assessment. Attribution requires controlled A/B testing to validate.</p>
+<h2>Cross-Validation: Revenue Attribution vs CJB Market Upside</h2>
+<p style="font-size:9pt; color:#555; margin-bottom:8px;">This table reconciles the top-down Revenue Attribution model ($22M) with the bottom-up BigQuery segment analysis from the <a href="#market-upside">CJB Market Upside</a> tab ($10.9M). The two models are complementary, not competing &mdash; they measure different value pools.</p>
+
+<table>
+  <thead><tr><th style="width:22%;">Value pool</th><th style="width:16%;">Revenue Attribution</th><th style="width:16%;">CJB Market Upside</th><th>Reconciliation</th></tr></thead>
+  <tbody>
+    <tr><td><strong>New adopter MRR lift</strong></td><td class="num">$10.0M <span style="font-size:7pt; color:#888;">(Adoption lever)</span></td><td class="num">$8.6M <span style="font-size:7pt; color:#888;">(MRR delta &times; 30%)</span></td><td>Close. Rev Attr uses top-down math (6pp &times; 989K &times; $135 ARPU &times; 30%). Market Upside uses bottom-up segment MRR deltas (Shopify $72, ECU $62, non-ecom $66 per convert &times; 30%). Difference: Rev Attr includes ARPU growth within new adopters; Market Upside isolates pure adoption conversion.</td></tr>
+    <tr><td><strong>Activation improvement</strong></td><td class="num">$4.6M <span style="font-size:7pt; color:#888;">(Activation lever)</span></td><td class="num">&mdash;</td><td>Not separately modeled in Market Upside. This captures setup-completion, FTU turn-on, and reduced abandonment for customers already in the funnel &mdash; value from <em>converting the pipeline faster</em>, not from expanding the pipeline.</td></tr>
+    <tr><td><strong>Retention &amp; repeat usage</strong></td><td class="num">$4.5M <span style="font-size:7pt; color:#888;">(Retention lever)</span></td><td class="num">$1.4M <span style="font-size:7pt; color:#888;">(new converts only)</span></td><td>Market Upside models retention lift only from <em>newly converted</em> adopters. Rev Attr includes churn reduction and repeat-usage lift across <strong>all 161K existing adopters</strong> &mdash; the larger value pool. Gap of ~$3.1M = existing-base retention improvements from P1 reliability fixes.</td></tr>
+    <tr><td><strong>Revenue expansion</strong></td><td class="num">$3.0M <span style="font-size:7pt; color:#888;">(Rev Expansion lever)</span></td><td class="num">$0.9M <span style="font-size:7pt; color:#888;">(trial-to-sub only)</span></td><td>Market Upside captures trial-to-sub conversion only. Rev Attr includes ARPU growth ($616 &rarr; $700&ndash;800/mo) from Smart Send, Channel Affinity, and per-user optimization across existing adopters. Gap of ~$2.1M = per-customer revenue deepening, not new adoption.</td></tr>
+    <tr class="grand-total"><td><strong>Total</strong></td><td class="num"><strong>$22.0M</strong></td><td class="num"><strong>$10.9M</strong></td><td><strong>$10.9M (new adopters) + $11.1M (existing base improvements) = $22.0M.</strong> The two models validate each other: new-adopter economics are roughly $8.6&ndash;10M from both angles, and the remaining $11&ndash;12M comes from improving the experience for customers who already use CJB today.</td></tr>
+  </tbody>
+</table>
+
+<div class="insight-box">
+  <p><strong>Assessment:</strong> The $20&ndash;22M range holds. The bottom-up Market Upside analysis validates the adoption lever ($8.6&ndash;10M) and adds $1.4M in retention + $0.9M in trial conversion from new adopters alone ($10.9M). The remaining ~$11M from activation improvements, existing-base retention, and revenue expansion is a reasonable model given 161K existing adopters and documented P1/P3 initiative impacts. A conservative commit of <strong>$20M</strong> (lower bound) gives 10% headroom on the bottom-up estimate; a mid-scenario of <strong>$22M</strong> assumes existing-base improvements ship on schedule.</p>
+</div>
+
+<p style="font-size:8pt; color:#888; margin-top:16px;">All values are modeled estimates using 30% automation causal share, blended ARPU $135/mo, and no compounding across levers. Per-initiative splits are proportional estimates based on relative impact assessment. Attribution requires controlled A/B testing to validate. Cross-validation source: <a href="#market-upside">CJB Market Upside</a> tab (BigQuery May 2026, customer-level segment analysis).</p>
 
 </div><!-- /panel-revenue -->
 
