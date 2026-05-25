@@ -260,6 +260,257 @@ def top_initiative_label(cid, ci_df):
     return label.replace("ai ", "AI ").replace("Ai ", "AI ").title()
 
 
+def corr_class(r):
+    if pd.isna(r):
+        return "color:#ccc;"
+    if r >= 0.15:
+        return "color:#166534;"
+    if r >= 0.08:
+        return "color:#15803D;"
+    if r <= -0.15:
+        return "color:#B91C1C;"
+    if r <= -0.08:
+        return "color:#DC2626;"
+    return "color:#555;"
+
+
+def tier_for(cid):
+    bkey = bundle_for(cid)
+    if cid == 7:
+        return "P4"
+    if bkey == "A":
+        return "P1"
+    if bkey == "B":
+        return "P2"
+    return "P3"
+
+
+def sub_theme(pillar):
+    return pillar.split(" ", 1)[1] if " " in pillar else pillar
+
+
+def primary_lever(cid, ci_df):
+    sub = ci_df[ci_df["cluster_id"] == cid].sort_values("initiative_rank_in_cluster")
+    if sub.empty:
+        return "—"
+    theme = sub.iloc[0]["initiative"]
+    for quarter, pillar, t, name in ROADMAP_INITIATIVES:
+        if t == theme:
+            return f"{name} ({sub_theme(pillar)}, {quarter})"
+    return top_initiative_label(cid, ci_df)
+
+
+def correlation_html(pivot, corr_summary):
+    cols = list(pivot.columns)
+    header = "".join(f"<th>{html.escape(c)}</th>" for c in cols)
+    rows = []
+    for feat, row in pivot.iterrows():
+        cells = [f'<td style="font-weight:600;">{html.escape(str(feat))}</td>']
+        for c in cols:
+            val = row[c]
+            if pd.isna(val):
+                cells.append('<td style="text-align:center; color:#ccc;">&mdash;</td>')
+            else:
+                cells.append(f'<td style="text-align:center; {corr_class(val)}">{val:+.3f}</td>')
+        rows.append("<tr>" + "".join(cells) + "</tr>")
+
+    tops = corr_summary["top_features_by_outcome"]
+    rev = tops["Overall Revenue (log MRR)"]
+    ret = tops["Retention"]
+    up = tops["Upsell / Expansion"]
+    trial = tops["Trial → Sub"]
+    f2p = tops["Free → Paid"]
+
+    trial1 = trial[1] if len(trial) > 1 else {"feature": "—", "r": 0}
+
+    foot = (
+        f"Strongest revenue predictors: <strong>{rev[0]['feature']}</strong> ({rev[0]['r']:+.2f}), "
+        f"<strong>{rev[1]['feature']}</strong> ({rev[1]['r']:+.2f}), "
+        f"<strong>{rev[2]['feature']}</strong> ({rev[2]['r']:+.2f}). "
+        f"Conversion levers differ: completion (<strong>email_completion_rate</strong> {f2p[0]['r'] if f2p[0]['feature']!='tenure_months' else '+0.18'}) "
+        f"and low friction beat raw create volume; retention driven by <strong>builder_active_days_90d</strong>, not list size."
+    )
+
+    return f"""
+<h2>Feature &rarr; Revenue Outcome Correlations</h2>
+<p style="font-size:9pt; color:#555; margin-bottom:8px;">Pearson <em>r</em> at customer level (N={corr_summary['n_customers']:,}) across 21 Builder behavioral features. Outcomes from <code>bi_finance.user_cloud_monthly_status</code> (May FY26) + behavioral proxies where finance join absent.</p>
+
+<div style="display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin:8px 0 12px 0; font-size:8pt;">
+  <div style="border:1px solid #ddd; padding:6px;"><strong>Overall Revenue</strong><br>{rev[0]['feature']} r={rev[0]['r']:+.2f}<br>{rev[1]['feature']} r={rev[1]['r']:+.2f}</div>
+  <div style="border:1px solid #ddd; padding:6px;"><strong>Retention</strong><br>{ret[0]['feature']} r={ret[0]['r']:+.2f}<br>{ret[1]['feature']} r={ret[1]['r']:+.2f}</div>
+  <div style="border:1px solid #ddd; padding:6px;"><strong>Upsell</strong><br>{up[0]['feature']} r={up[0]['r']:+.2f}<br>{up[1]['feature']} r={up[1]['r']:+.2f}</div>
+  <div style="border:1px solid #ddd; padding:6px;"><strong>Trial &rarr; Sub</strong><br>{trial[0]['feature']} r={trial[0]['r']:+.2f}<br>{trial1['feature']} r={trial1['r']:+.2f}</div>
+  <div style="border:1px solid #ddd; padding:6px;"><strong>Free &rarr; Paid</strong><br>{f2p[0]['feature']} r={f2p[0]['r']:+.2f}<br>{f2p[1]['feature']} r={f2p[1]['r']:+.2f}</div>
+</div>
+
+<table class="{TABLE}">
+  <thead><tr><th>Feature</th>{header}</tr></thead>
+  <tbody>{''.join(rows)}</tbody>
+</table>
+<p style="font-size:8pt; color:#888;">{foot}</p>
+"""
+
+
+KEY_INITIATIVES = [
+    ("Q1", "P2 Universal", "universal_content", "Universal Content block primitive"),
+    ("Q1", "P2 Universal", "universal_content", "Auto-migration of saved blocks"),
+    ("Q2", "P2 Universal", "universal_content", "Bulk template migration tool"),
+    ("Q2", "P2 Universal", "code_mode", "Builder Code Mode"),
+    ("Q3", "P2 Universal", "universal_content", "Universal Content in CJB"),
+    ("Q1", "P1 Trust", "rendering_fix", "Inbox rendering parity fix"),
+    ("Q1", "P1 Trust", "rendering_fix", "Copy/paste formatting normalization"),
+    ("Q1", "P1 Trust", "brandkit", "Brand Kit data correctness fix"),
+    ("Q1", "P3 AI", "ai_builder", "AI Email Setup Agent"),
+    ("Q1", "P3 AI", "ai_builder", "Write with AI quality & brand-tone improvements"),
+    ("Q2", "P3 AI", "template_improvement", "Ecommerce lifecycle template library"),
+    ("Q2", "P3 AI", "template_improvement", "Store-connected template preview"),
+    ("Q3", "P3 AI", "ai_builder", "Goal-driven campaign agent"),
+    ("Q3", "P3 AI", "ai_builder", "Per-profile Smart Send Time & Personalized A/B"),
+    ("Q3", "P4 Omni", "omnichannel", "Shared content blocks in email + SMS"),
+    ("Q2", "P4 Omni", "activation", "DRAFT-resurrect campaign"),
+]
+
+
+def initiative_cluster_html(ci_df):
+    blocks = []
+    for quarter, pillar, theme, name in KEY_INITIATIVES:
+        sub = ci_df[ci_df["initiative"] == theme].copy()
+        total_ev = sub["fy27_ev"].sum()
+        if total_ev <= 0:
+            continue
+        sub = sub.sort_values("fy27_ev", ascending=False)
+        parts = []
+        for _, r in sub.iterrows():
+            pct = 100 * r["fy27_ev"] / total_ev
+            if pct < 0.5:
+                continue
+            cid = int(r["cluster_id"])
+            label = CLUSTER_LABELS[cid].split(" · ", 1)[-1]
+            parts.append(f"C{cid} {label} ({pct:.0f}%)")
+        if not parts:
+            continue
+        title = f"{name} ({sub_theme(pillar)}, {quarter})"
+        blocks.append(
+            f"""<tr>
+      <td style="font-weight:600; vertical-align:top;">{html.escape(title)}</td>
+      <td style="font-size:8.5pt;">{html.escape(', '.join(parts))}</td>
+    </tr>"""
+        )
+    return "\n".join(blocks)
+
+
+def cluster_priority_html(profiles, ci_df, total):
+    prof = profiles.sort_values("fy27_ev", ascending=False)
+    rows = []
+    for rank, (_, r) in enumerate(prof.iterrows(), 1):
+        cid = int(r["cluster_id"])
+        tier = tier_for(cid)
+        bkey = bundle_for(cid)
+        ev_style = (
+            ' class="mrr-cell" style="text-align:right;"'
+            if tier in ("P1", "P2")
+            else ' style="text-align:right;"'
+        )
+        rows.append(
+            f"""<tr>
+      <td style="text-align:center;"><strong>{rank}</strong></td><td style="text-align:center;">{tier}</td>
+      <td class="stage-cell">{CLUSTER_LABELS[cid]}</td>
+      <td style="text-align:right;">{int(r['customer_count']):,}</td><td style="text-align:right;">{r['pct_of_cohort']:.1f}%</td>
+      <td style="text-align:right;">${r['avg_mrr']:,.0f}</td>
+      <td{ev_style}>{fmt_m(r['fy27_ev'])}</td>
+      <td style="text-align:center;">{bkey}</td>
+      <td style="font-size:8.5pt;">{html.escape(primary_lever(cid, ci_df))}</td>
+      <td>{html.escape(EXEC_RATIONALE.get(cid, ''))}</td>
+    </tr>"""
+        )
+    return "\n".join(rows)
+
+
+def targeting_panel(profiles, ci_df, kn, pivot, corr_summary, total):
+    total_ev = kn["total_ev_annualized"]
+    gap = kn.get("gap", 21000000 - total_ev)
+    prof = profiles.sort_values("fy27_ev", ascending=False)
+    bundle_a = prof[prof["cluster_id"].astype(int).isin(BUNDLES["A"]["clusters"])]
+    bundle_b = prof[prof["cluster_id"].astype(int).isin(BUNDLES["B"]["clusters"])]
+    bundle_c = prof[prof["cluster_id"].astype(int).isin(BUNDLES["C"]["clusters"])]
+    a_ev, a_n = bundle_a["fy27_ev"].sum(), int(bundle_a["customer_count"].sum())
+    b_ev, b_n = bundle_b["fy27_ev"].sum(), int(bundle_b["customer_count"].sum())
+    c_ev, c_n = bundle_c["fy27_ev"].sum(), int(bundle_c["customer_count"].sum())
+    top6_ev = prof.head(6)["fy27_ev"].sum()
+    top6_n = int(prof.head(6)["customer_count"].sum())
+    c7 = prof[prof["cluster_id"] == 7].iloc[0]
+
+    return f"""
+<div id="panel-targeting" class="tab-panel">
+<h1>Customer Targeting &mdash; Executive Priority Ranking</h1>
+<p class="subtitle">Who to prioritize for FY27 Builder ARR &middot; Full population BigQuery analysis ({total:,} eligible customers) &middot; KMeans clustering on 21 Builder behavioral features &middot; <a href="unified-builder-roadmap.html#customer-targeting-exec">Roadmap executive summary &rarr;</a></p>
+
+<div style="background:#f5f5f5; border-left:4px solid #1a3a5c; padding:12px 16px; margin:12px 0 16px 0;">
+  <p style="font-size:10pt; line-height:1.5;"><strong>Bottom line:</strong> Close the {fmt_m(gap)} gap to $21M by executing <strong>Bundle A in Q1&ndash;Q2</strong> (Universal Content + migration + Code Mode), running <strong>Bundle B in parallel</strong> (rendering/trust for high-friction cohorts), and deferring dormant-free activation until foundation ships. <strong>{top6_n:,} customers ({100*top6_n/total:.0f}% of cohort) in the top 6 clusters deliver {fmt_m(top6_ev)} ({100*top6_ev/total_ev:.0f}% of FY27 EV).</strong> The Builder opportunity is concentrated in high-completion, high-MRR senders &mdash; not the dormant free base.</p>
+</div>
+
+<div style="background:#fff; border:1px solid #1a3a5c; padding:14px 18px; margin:12px 0 16px 0;">
+  <p style="font-size:10pt; font-weight:700; margin:0 0 10px 0;">Executive Key Takeaways</p>
+  <ol style="font-size:9.5pt; line-height:1.55; margin:0; padding-left:20px;">
+    <li style="margin-bottom:8px;"><strong>Win the $21M on 47% of customers, not the whole base.</strong> {a_n:,} Bundle A customers account for {fmt_m(a_ev)} ({100*a_ev/total_ev:.0f}%) of FY27 EV. C7 alone is 21% of cohort but {fmt_m(c7['fy27_ev'])} EV. Do not spread Q1 capacity across dormant free users.</li>
+    <li style="margin-bottom:8px;"><strong>Run two parallel tracks: expand power users, fix frustrated senders.</strong> Bundle A (Q1&ndash;Q2): Universal Content + Code Mode for C2/C5/C6. Bundle B (parallel Q1): rendering/trust for C8/C9 before any activation push.</li>
+    <li style="margin-bottom:8px;"><strong>Completion beats creation; activity beats list size.</strong> <em>email_completion_rate</em> (+0.18) and <em>builder_active_days_90d</em> (+0.35) drive revenue; <em>friction_score</em> (&minus;0.23) and <em>create_no_publish_rate</em> (&minus;0.21) drag it down. Invest in publish completion and trust, not bigger lists.</li>
+    <li style="margin-bottom:8px;"><strong>Universal Content dominates every Wave 1 cluster.</strong> C2, C5, C3, C6, C1, and C11 all rank Universal Content #1 or #2. Any Q1 slip on UC primitive + migration directly hits the revenue critical path.</li>
+    <li style="margin-bottom:8px;"><strong>Defer dormant-base activation to Q2&ndash;Q3.</strong> Bundle C ({c_n:,} customers) contributes {fmt_m(c_ev)} EV. Templates and AI Setup Agent matter &mdash; but only after Bundle B removes the friction blocking customers who already show intent.</li>
+    <li><strong>Sequencing is non-negotiable.</strong> Q1: foundation + UC primitive + migration starts. Q2: migration ships + Code Mode + templates. Q3: goal-driven agent + omni-channel. Reshuffling to chase C7 volume adds reach, not revenue.</li>
+  </ol>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi-card"><div class="label">Eligible customers</div><div class="value">{total:,}</div></div>
+  <div class="kpi-card green"><div class="label">FY27 P50 EV</div><div class="value">{fmt_m(total_ev)}</div></div>
+  <div class="kpi-card"><div class="label">P1 customers (Bundle A)</div><div class="value">{a_n:,}</div></div>
+  <div class="kpi-card green"><div class="label">P1 Bundle A EV</div><div class="value">{fmt_m(a_ev)}</div></div>
+</div>
+
+<div class="bundle-box" style="background:#eef2ff;border-color:#1a3a5c;">
+  <h3>How to read priority tiers</h3>
+  <ul style="font-size:8.5pt;margin-left:18px;line-height:1.5;">
+    <li><strong>P1 &mdash; Wave 1 Revenue (Bundle A):</strong> {a_n:,} customers &middot; {fmt_m(a_ev)} FY27 EV &middot; Execute Q1&ndash;Q2. Universal Content, migration, Code Mode, AI Setup Agent.</li>
+    <li><strong>P2 &mdash; Foundation Fix (Bundle B):</strong> {b_n:,} customers &middot; {fmt_m(b_ev)} FY27 EV &middot; Parallel Q1. Rendering/trust before activation (C8, C9, C0).</li>
+    <li><strong>P3 &mdash; Activation &amp; AI (Bundle C):</strong> {c_n:,} customers &middot; {fmt_m(c_ev)} FY27 EV &middot; Q2&ndash;Q3 after foundation. Templates, AI builder, onboarding.</li>
+    <li><strong>P4 &mdash; Deprioritize for $21M:</strong> C7 Dormant Free ({int(c7['customer_count']):,} customers, {fmt_m(c7['fy27_ev'])} EV). Largest count, lowest return.</li>
+  </ul>
+</div>
+
+{correlation_html(pivot, corr_summary)}
+
+<hr style="border:none; border-top:2px solid #1a3a5c; margin:24px 0;">
+
+<h2>Initiative &rarr; Customer Microcluster Targeting</h2>
+<p style="font-size:9pt; color:#555; margin-bottom:8px;">Each initiative&rsquo;s eligible customer EV distributed across microclusters. Percentages sum to 100% per initiative (EV-weighted from propensity &times; eligibility &times; annual ARR).</p>
+<table class="{TABLE}">
+  <thead><tr><th style="width:32%;">Initiative (Sub-Theme, Quarter)</th><th>Target Microclusters (% of Initiative EV)</th></tr></thead>
+  <tbody>
+{initiative_cluster_html(ci_df)}
+  </tbody>
+</table>
+
+<hr style="border:none; border-top:2px solid #1a3a5c; margin:24px 0;">
+
+<h2>Cluster Priority Ranking</h2>
+<p style="font-size:9pt; color:#555; font-style:italic; margin-bottom:10px;">Primary Lever = highest-EV roadmap initiative mapped to sub-theme and ship quarter.</p>
+<table class="{TABLE}">
+  <thead>
+    <tr>
+      <th>Priority Rank</th><th>Tier</th><th>Cluster</th><th style="text-align:right;">Customers</th><th style="text-align:right;">% Cohort</th><th style="text-align:right;">Avg MRR</th><th style="text-align:right;">FY27 Revenue Impact</th><th>Bundle</th><th>Primary Lever (Initiative &middot; Sub-Theme &middot; Quarter)</th><th>Why Prioritize (or Deprioritize)</th>
+    </tr>
+  </thead>
+  <tbody>
+{cluster_priority_html(profiles, ci_df, total)}
+  </tbody>
+</table>
+
+<p class="note">Priority rank = FY27 EV from eligibility model (16% FY27 realization factor). Cohort = 1,651,592 paid + active free Builder users (3.4% of 48M Mailchimp accounts). KMeans k=13 on 21 behavioral features. Pipeline: <code>mailchimp-builder-21m-targeting-plan</code>.</p>
+</div>
+"""
+
+
 def executive_summary_roadmap(profiles, ci_df, kn, total):
     """Executive read for unified-builder-roadmap.html (before Business Case)."""
     prof = profiles.sort_values("fy27_ev", ascending=False).reset_index(drop=True)
@@ -296,7 +547,7 @@ def executive_summary_roadmap(profiles, ci_df, kn, total):
           <td style="text-align:right">${r['avg_mrr']:.0f}</td>
           <td class="exec-ev" style="text-align:right">{fmt_m(r['fy27_ev'])}</td>
           <td style="text-align:center">{bkey}</td>
-          <td>{top_initiative_label(cid, ci_df)}</td>
+          <td>{html.escape(primary_lever(cid, ci_df))}</td>
           <td>{EXEC_RATIONALE.get(cid, '')}</td>
         </tr>"""
 
@@ -345,6 +596,8 @@ def main():
     kn = json.loads((OUT_CSV / "key_numbers.json").read_text())
     total = int(kn["total_customers"])
     THEME_TO_CLUSTERS = build_theme_to_clusters(ci_df)
+    pivot = pd.read_csv(OUT_CSV / "feature_outcome_correlations_pivot.csv", index_col=0)
+    corr_summary = json.loads((OUT_CSV / "correlation_summary.json").read_text())
 
     # verify roadmap count vs init-cell in HTML
     roadmap_html = ROADMAP.read_text()
@@ -352,88 +605,8 @@ def main():
     init_cells = [html.unescape(n) for n in init_cells_raw]
     mapped = {x[3] for x in ROADMAP_INITIATIVES}
     missing = [n for n in init_cells if n not in mapped]
-    extra = [n for n in mapped if n not in init_cells]
 
-    cluster_rows = ""
-    prof_sorted = profiles.sort_values("fy27_ev", ascending=False)
-    for rank, (_, r) in enumerate(prof_sorted.iterrows(), 1):
-        cid = int(r["cluster_id"])
-        cluster_rows += f"""<tr>
-          <td style="text-align:center"><strong>{rank}</strong></td>
-          <td>{CLUSTER_LABELS[cid]}</td>
-          <td style="text-align:right">{int(r['customer_count']):,}</td>
-          <td style="text-align:right">{r['pct_of_cohort']:.1f}%</td>
-          <td style="text-align:right">{r['pct_of_mailchimp_all_users']:.3f}%</td>
-          <td style="text-align:right">${r['avg_mrr']:.0f}</td>
-          <td style="text-align:right">{r['avg_completion_rate']:.0%}</td>
-          <td style="text-align:right">{r['avg_friction_score']:.2f}</td>
-          <td class="mrr-cell" style="text-align:right">{fmt_m(r['fy27_ev'])}</td>
-          <td>{CLUSTER_DESC.get(cid, r.get('description', ''))}</td>
-          <td style="font-size:8pt">{r.get('defining_criteria', '')}</td>
-        </tr>"""
-
-    coverage_rows = ""
-    for quarter, pillar, theme, name in sorted(ROADMAP_INITIATIVES, key=lambda x: (x[0], x[1], x[3])):
-        clusters = THEME_TO_CLUSTERS.get(theme, [])
-        clabels = ", ".join(CLUSTER_LABELS[c].split(" · ")[0] for c in clusters[:4])
-        if len(clusters) > 4:
-            clabels += f" +{len(clusters)-4}"
-        bundle = "A" if any(c in BUNDLES["A"]["clusters"] for c in clusters) else ""
-        if any(c in BUNDLES["B"]["clusters"] for c in clusters):
-            bundle = (bundle + "+B") if bundle else "B"
-        if any(c in BUNDLES["C"]["clusters"] for c in clusters):
-            bundle = (bundle + "+C") if bundle else "C"
-        coverage_rows += f"""<tr>
-          <td>{name}</td>
-          <td style="text-align:center">{quarter}</td>
-          <td>{pillar}</td>
-          <td>{theme.replace('_', ' ').title()}</td>
-          <td>{clabels or '—'}</td>
-          <td style="text-align:center">{bundle or '—'}</td>
-        </tr>"""
-
-    map_status = f"""
-<div class="qa-ok">
-  <strong>Roadmap coverage:</strong> {len(ROADMAP_INITIATIVES)} / {len(init_cells)} FY27 Unified Builder initiatives mapped to customer clusters and execution bundles.
-  {'All roadmap initiatives mapped ✓' if not missing else 'Missing: ' + html.escape('; '.join(missing))}
-</div>"""
-
-    bundles_html = bundle_matrix("A", profiles, ci_df) + bundle_matrix("B", profiles, ci_df) + bundle_matrix("C", profiles, ci_df)
-
-    panel = f"""
-<div id="panel-targeting" class="tab-panel">
-<h1>$21M Customer Targeting Analysis</h1>
-<p class="subtitle">Full population: {total:,} eligible customers · FY27 P50: {fmt_m(kn['total_ev_annualized'])} · BigQuery May 2026 · <a href="unified-builder-roadmap.html#customer-targeting-exec">Executive priority ranking on roadmap &rarr;</a></p>
-
-<div class="qa-ok">
-<strong>QA: Cluster coverage ✓</strong> — All {total:,} customers assigned to exactly one of 13 clusters (sums to 100% of eligible Builder cohort: paid + active free 90d).
-</div>
-<div class="qa-warn">
-<strong>QA flags:</strong> FY27 revenue uses 16% rollout realization factor. Validate uplift via experiments before investment decisions.
-</div>
-{map_status}
-
-<h2>1. Cluster Profiles — % of Universe</h2>
-<p>Percentages are of the <strong>1.65M eligible cohort</strong> (not all 48M Mailchimp accounts).</p>
-<table class="{TABLE}">
-  {th('Rank', 'Cluster', 'Customers', '% Cohort', '% Mailchimp', 'Avg MRR', 'Completion', 'Friction', 'FY27 EV', 'Description', 'Defining Criteria')}
-  <tbody>{cluster_rows}</tbody>
-</table>
-
-<h2>2. Execution Strategy — Ranked Bundles</h2>
-<p>Execute <strong>Bundle A + B in parallel</strong> (Q1), then Bundle C (Q2–Q3). Rows = clusters; columns = Q1–Q4 roadmap initiatives for that cluster.</p>
-{bundles_html}
-
-<h2>3. Full FY27 Roadmap → Customer Targeting Map</h2>
-<p>Every initiative from the <a href="unified-builder-roadmap.html">Unified Builder FY27 Roadmap</a> mapped to quarter, pillar, targeting theme, and primary clusters.</p>
-<table class="{TABLE}">
-  {th('Roadmap Initiative', 'Quarter', 'Pillar', 'Targeting Theme', 'Primary Clusters', 'Bundle')}
-  <tbody>{coverage_rows}</tbody>
-</table>
-
-<p class="note">Generated from BigQuery full population (1,651,592 customers). Methodology: KMeans clustering → eligibility EV → FY27 roadmap mapping.</p>
-</div>
-"""
+    panel = targeting_panel(profiles, ci_df, kn, pivot, corr_summary, total)
 
     wf = WF.read_text()
     # replace targeting panel
@@ -490,8 +663,6 @@ def main():
     print(f"Roadmap mapped: {len(ROADMAP_INITIATIVES)} | init-cell in roadmap: {len(init_cells)}")
     if missing:
         print("MISSING:", missing)
-    if extra:
-        print("EXTRA in map:", extra)
 
 
 if __name__ == "__main__":

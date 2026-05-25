@@ -530,772 +530,282 @@
 
 
 
+
 <div id="panel-targeting" class="tab-panel">
-<h1>$21M Customer Targeting Analysis</h1>
-<p class="subtitle">Full population: 1,651,592 eligible customers · FY27 P50: $20.08M · BigQuery May 2026 · <a href="unified-builder-roadmap.html#customer-targeting-exec">Executive priority ranking on roadmap &rarr;</a></p>
+<h1>Customer Targeting &mdash; Executive Priority Ranking</h1>
+<p class="subtitle">Who to prioritize for FY27 Builder ARR &middot; Full population BigQuery analysis (1,651,592 eligible customers) &middot; KMeans clustering on 21 Builder behavioral features &middot; <a href="unified-builder-roadmap.html#customer-targeting-exec">Roadmap executive summary &rarr;</a></p>
 
-<div class="qa-ok">
-<strong>QA: Cluster coverage ✓</strong> — All 1,651,592 customers assigned to exactly one of 13 clusters (sums to 100% of eligible Builder cohort: paid + active free 90d).
-</div>
-<div class="qa-warn">
-<strong>QA flags:</strong> FY27 revenue uses 16% rollout realization factor. Validate uplift via experiments before investment decisions.
+<div style="background:#f5f5f5; border-left:4px solid #1a3a5c; padding:12px 16px; margin:12px 0 16px 0;">
+  <p style="font-size:10pt; line-height:1.5;"><strong>Bottom line:</strong> Close the $920K gap to $21M by executing <strong>Bundle A in Q1&ndash;Q2</strong> (Universal Content + migration + Code Mode), running <strong>Bundle B in parallel</strong> (rendering/trust for high-friction cohorts), and deferring dormant-free activation until foundation ships. <strong>903,111 customers (55% of cohort) in the top 6 clusters deliver $16.67M (83% of FY27 EV).</strong> The Builder opportunity is concentrated in high-completion, high-MRR senders &mdash; not the dormant free base.</p>
 </div>
 
-<div class="qa-ok">
-  <strong>Roadmap coverage:</strong> 62 / 62 FY27 Unified Builder initiatives mapped to customer clusters and execution bundles.
-  All roadmap initiatives mapped ✓
+<div style="background:#fff; border:1px solid #1a3a5c; padding:14px 18px; margin:12px 0 16px 0;">
+  <p style="font-size:10pt; font-weight:700; margin:0 0 10px 0;">Executive Key Takeaways</p>
+  <ol style="font-size:9.5pt; line-height:1.55; margin:0; padding-left:20px;">
+    <li style="margin-bottom:8px;"><strong>Win the $21M on 47% of customers, not the whole base.</strong> 780,441 Bundle A customers account for $16.67M (83%) of FY27 EV. C7 alone is 21% of cohort but $4K EV. Do not spread Q1 capacity across dormant free users.</li>
+    <li style="margin-bottom:8px;"><strong>Run two parallel tracks: expand power users, fix frustrated senders.</strong> Bundle A (Q1&ndash;Q2): Universal Content + Code Mode for C2/C5/C6. Bundle B (parallel Q1): rendering/trust for C8/C9 before any activation push.</li>
+    <li style="margin-bottom:8px;"><strong>Completion beats creation; activity beats list size.</strong> <em>email_completion_rate</em> (+0.18) and <em>builder_active_days_90d</em> (+0.35) drive revenue; <em>friction_score</em> (&minus;0.23) and <em>create_no_publish_rate</em> (&minus;0.21) drag it down. Invest in publish completion and trust, not bigger lists.</li>
+    <li style="margin-bottom:8px;"><strong>Universal Content dominates every Wave 1 cluster.</strong> C2, C5, C3, C6, C1, and C11 all rank Universal Content #1 or #2. Any Q1 slip on UC primitive + migration directly hits the revenue critical path.</li>
+    <li style="margin-bottom:8px;"><strong>Defer dormant-base activation to Q2&ndash;Q3.</strong> Bundle C (566,203 customers) contributes $2.65M EV. Templates and AI Setup Agent matter &mdash; but only after Bundle B removes the friction blocking customers who already show intent.</li>
+    <li><strong>Sequencing is non-negotiable.</strong> Q1: foundation + UC primitive + migration starts. Q2: migration ships + Code Mode + templates. Q3: goal-driven agent + omni-channel. Reshuffling to chase C7 volume adds reach, not revenue.</li>
+  </ol>
 </div>
 
-<h2>1. Cluster Profiles — % of Universe</h2>
-<p>Percentages are of the <strong>1.65M eligible cohort</strong> (not all 48M Mailchimp accounts).</p>
+<div class="kpi-row">
+  <div class="kpi-card"><div class="label">Eligible customers</div><div class="value">1,651,592</div></div>
+  <div class="kpi-card green"><div class="label">FY27 P50 EV</div><div class="value">$20.08M</div></div>
+  <div class="kpi-card"><div class="label">P1 customers (Bundle A)</div><div class="value">780,441</div></div>
+  <div class="kpi-card green"><div class="label">P1 Bundle A EV</div><div class="value">$16.67M</div></div>
+</div>
+
+<div class="bundle-box" style="background:#eef2ff;border-color:#1a3a5c;">
+  <h3>How to read priority tiers</h3>
+  <ul style="font-size:8.5pt;margin-left:18px;line-height:1.5;">
+    <li><strong>P1 &mdash; Wave 1 Revenue (Bundle A):</strong> 780,441 customers &middot; $16.67M FY27 EV &middot; Execute Q1&ndash;Q2. Universal Content, migration, Code Mode, AI Setup Agent.</li>
+    <li><strong>P2 &mdash; Foundation Fix (Bundle B):</strong> 304,948 customers &middot; $763K FY27 EV &middot; Parallel Q1. Rendering/trust before activation (C8, C9, C0).</li>
+    <li><strong>P3 &mdash; Activation &amp; AI (Bundle C):</strong> 566,203 customers &middot; $2.65M FY27 EV &middot; Q2&ndash;Q3 after foundation. Templates, AI builder, onboarding.</li>
+    <li><strong>P4 &mdash; Deprioritize for $21M:</strong> C7 Dormant Free (345,413 customers, $4K EV). Largest count, lowest return.</li>
+  </ul>
+</div>
+
+
+<h2>Feature &rarr; Revenue Outcome Correlations</h2>
+<p style="font-size:9pt; color:#555; margin-bottom:8px;">Pearson <em>r</em> at customer level (N=1,729,501) across 21 Builder behavioral features. Outcomes from <code>bi_finance.user_cloud_monthly_status</code> (May FY26) + behavioral proxies where finance join absent.</p>
+
+<div style="display:grid; grid-template-columns:repeat(5,1fr); gap:8px; margin:8px 0 12px 0; font-size:8pt;">
+  <div style="border:1px solid #ddd; padding:6px;"><strong>Overall Revenue</strong><br>avg_mrr r=+0.42<br>builder_active_days_90d r=+0.35</div>
+  <div style="border:1px solid #ddd; padding:6px;"><strong>Retention</strong><br>builder_active_days_90d r=+0.19<br>create_no_publish_rate r=-0.16</div>
+  <div style="border:1px solid #ddd; padding:6px;"><strong>Upsell</strong><br>tenure_months r=+0.17<br>total_eligible_initiatives r=+0.14</div>
+  <div style="border:1px solid #ddd; padding:6px;"><strong>Trial &rarr; Sub</strong><br>tenure_months r=-0.09<br>create_no_publish_rate r=+0.04</div>
+  <div style="border:1px solid #ddd; padding:6px;"><strong>Free &rarr; Paid</strong><br>tenure_months r=-0.09<br>create_no_publish_rate r=+0.04</div>
+</div>
+
 <table class="detail-table targeting-table">
-  <thead><tr><th>Rank</th><th>Cluster</th><th>Customers</th><th>% Cohort</th><th>% Mailchimp</th><th>Avg MRR</th><th>Completion</th><th>Friction</th><th>FY27 EV</th><th>Description</th><th>Defining Criteria</th></tr></thead>
-  <tbody><tr>
-          <td style="text-align:center"><strong>1</strong></td>
-          <td>C2 · High-MRR Power Users</td>
-          <td style="text-align:right">37,079</td>
-          <td style="text-align:right">2.2%</td>
-          <td style="text-align:right">0.077%</td>
-          <td style="text-align:right">$676</td>
-          <td style="text-align:right">64%</td>
-          <td style="text-align:right">0.15</td>
-          <td class="mrr-cell" style="text-align:right">$5.17M</td>
-          <td>High-MRR ($676 avg), heavy Builder use. Universal Content + migration unlock disproportionate value.</td>
-          <td style="font-size:8pt">High MRR ($676+) · Distinguishers: high list_size; high avg_mrr; high builder_active_days_90d</td>
-        </tr><tr>
-          <td style="text-align:center"><strong>2</strong></td>
-          <td>C5 · Enterprise-Scale Power Senders</td>
-          <td style="text-align:right">33,836</td>
-          <td style="text-align:right">2.0%</td>
-          <td style="text-align:right">0.070%</td>
-          <td style="text-align:right">$433</td>
-          <td style="text-align:right">80%</td>
-          <td style="text-align:right">0.08</td>
-          <td class="mrr-cell" style="text-align:right">$3.36M</td>
-          <td>Highest-intensity senders (~194 creates/mo). Rendering, performance, Code Mode.</td>
-          <td style="font-size:8pt">Completion rate >70% · Low friction (<0.10) · High MRR ($433+) · Heavy Builder use (194 creates/90d) · Distinguishers: low creates_trend; low publishes_trend; high email_tests_90d</td>
-        </tr><tr>
-          <td style="text-align:center"><strong>3</strong></td>
-          <td>C6 · Tenured High-Completion Senders</td>
-          <td style="text-align:right">254,185</td>
-          <td style="text-align:right">15.4%</td>
-          <td style="text-align:right">0.530%</td>
-          <td style="text-align:right">$45</td>
-          <td style="text-align:right">83%</td>
-          <td style="text-align:right">0.07</td>
-          <td class="mrr-cell" style="text-align:right">$2.54M</td>
-          <td>Long-tenured 83% completion. Largest healthy mid-market cluster — protect established habit.</td>
-          <td style="font-size:8pt">Completion rate >70% · Low friction (<0.10) · Distinguishers: high creates_trend; high publishes_trend; high tenure_months</td>
-        </tr><tr>
-          <td style="text-align:center"><strong>4</strong></td>
-          <td>C3 · Consistent Volume Senders</td>
-          <td style="text-align:right">104,424</td>
-          <td style="text-align:right">6.3%</td>
-          <td style="text-align:right">0.218%</td>
-          <td style="text-align:right">$88</td>
-          <td style="text-align:right">76%</td>
-          <td style="text-align:right">0.10</td>
-          <td class="mrr-cell" style="text-align:right">$2.11M</td>
-          <td>Stable power senders ~28 creates/mo, 76% completion. Retention and cross-channel expansion.</td>
-          <td style="font-size:8pt">Completion rate >70% · Low friction (<0.10) · Distinguishers: low creates_trend; low publishes_trend; high builder_active_days_90d</td>
-        </tr><tr>
-          <td style="text-align:center"><strong>5</strong></td>
-          <td>C1 · Reliable Mid-Market Senders</td>
-          <td style="text-align:right">277,782</td>
-          <td style="text-align:right">16.8%</td>
-          <td style="text-align:right">0.579%</td>
-          <td style="text-align:right">$33</td>
-          <td style="text-align:right">93%</td>
-          <td style="text-align:right">0.03</td>
-          <td class="mrr-cell" style="text-align:right">$1.90M</td>
-          <td>Steady mid-market senders ~93% completion, low friction. Efficiency and Universal Content plays.</td>
-          <td style="font-size:8pt">Completion rate >70% · Low friction (<0.10) · Distinguishers: high email_completion_rate; low ai_content_creates_90d; low email_tests_90d</td>
-        </tr><tr>
-          <td style="text-align:center"><strong>6</strong></td>
-          <td>C4 · Growing-but-Incomplete Senders</td>
-          <td style="text-align:right">195,805</td>
-          <td style="text-align:right">11.9%</td>
-          <td style="text-align:right">0.408%</td>
-          <td style="text-align:right">$39</td>
-          <td style="text-align:right">43%</td>
-          <td style="text-align:right">0.23</td>
-          <td class="mrr-cell" style="text-align:right">$1.59M</td>
-          <td>Moderate completion (~43%), rising usage. Template + AI assist between create and publish.</td>
-          <td style="font-size:8pt">Distinguishers: high creates_trend; high publishes_trend; low ai_content_creates_90d</td>
-        </tr><tr>
-          <td style="text-align:center"><strong>7</strong></td>
-          <td>C11 · Rising-Usage Power Senders</td>
-          <td style="text-align:right">73,135</td>
-          <td style="text-align:right">4.4%</td>
-          <td style="text-align:right">0.152%</td>
-          <td style="text-align:right">$94</td>
-          <td style="text-align:right">75%</td>
-          <td style="text-align:right">0.10</td>
-          <td class="mrr-cell" style="text-align:right">$1.58M</td>
-          <td>Growing usage, ~75% completion. Wave-1 Universal Content candidates.</td>
-          <td style="font-size:8pt">Completion rate >70% · Heavy Builder use (33 creates/90d) · Distinguishers: high creates_trend; high publishes_trend; high builder_active_days_90d</td>
-        </tr><tr>
-          <td style="text-align:center"><strong>8</strong></td>
-          <td>C10 · AI-Adopted Premium Senders</td>
-          <td style="text-align:right">4,573</td>
-          <td style="text-align:right">0.3%</td>
-          <td style="text-align:right">0.009%</td>
-          <td style="text-align:right">$561</td>
-          <td style="text-align:right">72%</td>
-          <td style="text-align:right">0.11</td>
-          <td class="mrr-cell" style="text-align:right">$589K</td>
-          <td>Premium senders using AI templates + Brand Kit. Expand Universal Content + Code Mode.</td>
-          <td style="font-size:8pt">Completion rate >70% · High MRR ($561+) · Heavy Builder use (128 creates/90d) · Distinguishers: high ai_content_creates_90d; high ca_template_creates_90d; low publishes_trend</td>
-        </tr><tr>
-          <td style="text-align:center"><strong>9</strong></td>
-          <td>C12 · AI-Ready Mid-Market Senders</td>
-          <td style="text-align:right">20,412</td>
-          <td style="text-align:right">1.2%</td>
-          <td style="text-align:right">0.043%</td>
-          <td style="text-align:right">$107</td>
-          <td style="text-align:right">72%</td>
-          <td style="text-align:right">0.12</td>
-          <td class="mrr-cell" style="text-align:right">$471K</td>
-          <td>AI template adoption, moderate volume. Bridge AI builder and universal content.</td>
-          <td style="font-size:8pt">Completion rate >70% · Distinguishers: high ai_content_creates_90d; high ca_template_creates_90d; low creates_trend</td>
-        </tr><tr>
-          <td style="text-align:center"><strong>10</strong></td>
-          <td>C8 · Test-Heavy, Low-Publish Friction</td>
-          <td style="text-align:right">23,196</td>
-          <td style="text-align:right">1.4%</td>
-          <td style="text-align:right">0.048%</td>
-          <td style="text-align:right">$73</td>
-          <td style="text-align:right">33%</td>
-          <td style="text-align:right">0.36</td>
-          <td class="mrr-cell" style="text-align:right">$382K</td>
-          <td>Heavy testing (~75 tests), low publish (33% completion). Rendering/trust barrier.</td>
-          <td style="font-size:8pt">High friction (>0.35) · Heavy Builder use (75 creates/90d) · Distinguishers: low creates_trend; high email_tests_90d; high email_creates_90d</td>
-        </tr><tr>
-          <td style="text-align:center"><strong>11</strong></td>
-          <td>C9 · High-Friction Abandoners</td>
-          <td style="text-align:right">132,430</td>
-          <td style="text-align:right">8.0%</td>
-          <td style="text-align:right">0.276%</td>
-          <td style="text-align:right">$13</td>
-          <td style="text-align:right">0%</td>
-          <td style="text-align:right">0.75</td>
-          <td class="mrr-cell" style="text-align:right">$280K</td>
-          <td>Highest friction (0.75): create but almost never publish. Fix foundation first.</td>
-          <td style="font-size:8pt">Completion rate <10% · High friction (>0.35) · Low/free MRR ($13) · Distinguishers: high creates_trend; high friction_score; high publishes_trend</td>
-        </tr><tr>
-          <td style="text-align:center"><strong>12</strong></td>
-          <td>C0 · Dormant Paid (Declining Usage)</td>
-          <td style="text-align:right">149,322</td>
-          <td style="text-align:right">9.0%</td>
-          <td style="text-align:right">0.311%</td>
-          <td style="text-align:right">$61</td>
-          <td style="text-align:right">0%</td>
-          <td style="text-align:right">0.41</td>
-          <td class="mrr-cell" style="text-align:right">$101K</td>
-          <td>Paid accounts with near-zero Builder activity in 90d but positive MRR. Churn risk before they stop paying.</td>
-          <td style="font-size:8pt">Completion rate <10% · High friction (>0.35) · Minimal Builder use (<1 create/90d) · Distinguishers: high creates_trend; low ai_content_creates_90d; low email_completion_rate</td>
-        </tr><tr>
-          <td style="text-align:center"><strong>13</strong></td>
-          <td>C7 · Dormant Free / Low-MRR Base</td>
-          <td style="text-align:right">345,413</td>
-          <td style="text-align:right">20.9%</td>
-          <td style="text-align:right">0.720%</td>
-          <td style="text-align:right">$20</td>
-          <td style="text-align:right">0%</td>
-          <td style="text-align:right">0.40</td>
-          <td class="mrr-cell" style="text-align:right">$4K</td>
-          <td>Free/low-MRR, zero completion. Activation and first-send only.</td>
-          <td style="font-size:8pt">Completion rate <10% · High friction (>0.35) · Low/free MRR ($20) · Minimal Builder use (<1 create/90d) · Distinguishers: high creates_trend; low email_creates_90d; low ca_template_creates_90d</td>
-        </tr></tbody>
+  <thead><tr><th>Feature</th><th>Free → Paid</th><th>Overall Revenue (log MRR)</th><th>Retention</th><th>Trial → Sub</th><th>Upsell / Expansion</th></tr></thead>
+  <tbody><tr><td style="font-weight:600;">avg_mrr</td><td style="text-align:center; color:#555;">-0.025</td><td style="text-align:center; color:#166534;">+0.424</td><td style="text-align:center; color:#166534;">+0.150</td><td style="text-align:center; color:#555;">-0.025</td><td style="text-align:center; color:#15803D;">+0.089</td></tr><tr><td style="font-weight:600;">builder_active_days_90d</td><td style="text-align:center; color:#555;">-0.030</td><td style="text-align:center; color:#166534;">+0.345</td><td style="text-align:center; color:#166534;">+0.189</td><td style="text-align:center; color:#555;">-0.030</td><td style="text-align:center; color:#15803D;">+0.141</td></tr><tr><td style="font-weight:600;">total_eligible_initiatives</td><td style="text-align:center; color:#555;">+0.021</td><td style="text-align:center; color:#166534;">+0.232</td><td style="text-align:center; color:#15803D;">+0.122</td><td style="text-align:center; color:#555;">+0.021</td><td style="text-align:center; color:#15803D;">+0.142</td></tr><tr><td style="font-weight:600;">friction_score</td><td style="text-align:center; color:#555;">+0.037</td><td style="text-align:center; color:#B91C1C;">-0.229</td><td style="text-align:center; color:#B91C1C;">-0.158</td><td style="text-align:center; color:#555;">+0.037</td><td style="text-align:center; color:#555;">-0.068</td></tr><tr><td style="font-weight:600;">create_no_publish_rate</td><td style="text-align:center; color:#555;">+0.042</td><td style="text-align:center; color:#B91C1C;">-0.212</td><td style="text-align:center; color:#B91C1C;">-0.164</td><td style="text-align:center; color:#555;">+0.042</td><td style="text-align:center; color:#555;">-0.047</td></tr><tr><td style="font-weight:600;">tenure_months</td><td style="text-align:center; color:#DC2626;">-0.090</td><td style="text-align:center; color:#166534;">+0.194</td><td style="text-align:center; color:#15803D;">+0.081</td><td style="text-align:center; color:#DC2626;">-0.090</td><td style="text-align:center; color:#166534;">+0.166</td></tr><tr><td style="font-weight:600;">email_abandonment_rate</td><td style="text-align:center; color:#555;">+0.025</td><td style="text-align:center; color:#B91C1C;">-0.179</td><td style="text-align:center; color:#DC2626;">-0.113</td><td style="text-align:center; color:#555;">+0.025</td><td style="text-align:center; color:#555;">-0.063</td></tr><tr><td style="font-weight:600;">email_completion_rate</td><td style="text-align:center; color:#555;">-0.025</td><td style="text-align:center; color:#166534;">+0.179</td><td style="text-align:center; color:#15803D;">+0.113</td><td style="text-align:center; color:#555;">-0.025</td><td style="text-align:center; color:#555;">+0.063</td></tr><tr><td style="font-weight:600;">email_publishes_90d</td><td style="text-align:center; color:#555;">-0.012</td><td style="text-align:center; color:#166534;">+0.153</td><td style="text-align:center; color:#555;">+0.072</td><td style="text-align:center; color:#555;">-0.012</td><td style="text-align:center; color:#555;">+0.067</td></tr><tr><td style="font-weight:600;">test_no_send_rate</td><td style="text-align:center; color:#555;">+0.014</td><td style="text-align:center; color:#DC2626;">-0.096</td><td style="text-align:center; color:#555;">-0.071</td><td style="text-align:center; color:#555;">+0.014</td><td style="text-align:center; color:#555;">-0.021</td></tr><tr><td style="font-weight:600;">ai_content_creates_90d</td><td style="text-align:center; color:#555;">-0.003</td><td style="text-align:center; color:#555;">+0.070</td><td style="text-align:center; color:#555;">+0.036</td><td style="text-align:center; color:#555;">-0.003</td><td style="text-align:center; color:#555;">+0.020</td></tr><tr><td style="font-weight:600;">list_size</td><td style="text-align:center; color:#555;">-0.004</td><td style="text-align:center; color:#555;">+0.061</td><td style="text-align:center; color:#555;">+0.010</td><td style="text-align:center; color:#555;">-0.004</td><td style="text-align:center; color:#555;">+0.016</td></tr><tr><td style="font-weight:600;">ca_template_creates_90d</td><td style="text-align:center; color:#555;">-0.003</td><td style="text-align:center; color:#555;">+0.039</td><td style="text-align:center; color:#555;">+0.022</td><td style="text-align:center; color:#555;">-0.003</td><td style="text-align:center; color:#555;">+0.007</td></tr><tr><td style="font-weight:600;">total_builder_events_90d</td><td style="text-align:center; color:#555;">-0.002</td><td style="text-align:center; color:#555;">+0.034</td><td style="text-align:center; color:#555;">+0.016</td><td style="text-align:center; color:#555;">-0.002</td><td style="text-align:center; color:#555;">+0.015</td></tr><tr><td style="font-weight:600;">publishes_trend</td><td style="text-align:center; color:#555;">+0.026</td><td style="text-align:center; color:#555;">-0.032</td><td style="text-align:center; color:#555;">-0.016</td><td style="text-align:center; color:#555;">+0.026</td><td style="text-align:center; color:#555;">+0.000</td></tr><tr><td style="font-weight:600;">email_creates_90d</td><td style="text-align:center; color:#555;">-0.002</td><td style="text-align:center; color:#555;">+0.024</td><td style="text-align:center; color:#555;">+0.011</td><td style="text-align:center; color:#555;">-0.002</td><td style="text-align:center; color:#555;">+0.010</td></tr><tr><td style="font-weight:600;">email_tests_90d</td><td style="text-align:center; color:#555;">-0.000</td><td style="text-align:center; color:#555;">+0.007</td><td style="text-align:center; color:#555;">+0.003</td><td style="text-align:center; color:#555;">-0.000</td><td style="text-align:center; color:#555;">+0.004</td></tr><tr><td style="font-weight:600;">events_trend</td><td style="text-align:center; color:#555;">+0.004</td><td style="text-align:center; color:#555;">-0.004</td><td style="text-align:center; color:#555;">-0.002</td><td style="text-align:center; color:#555;">+0.004</td><td style="text-align:center; color:#555;">+0.000</td></tr><tr><td style="font-weight:600;">creates_trend</td><td style="text-align:center; color:#555;">+0.003</td><td style="text-align:center; color:#555;">-0.003</td><td style="text-align:center; color:#555;">-0.001</td><td style="text-align:center; color:#555;">+0.003</td><td style="text-align:center; color:#555;">+0.000</td></tr><tr><td style="font-weight:600;">automation_creates_90d</td><td style="text-align:center; color:#ccc;">&mdash;</td><td style="text-align:center; color:#ccc;">&mdash;</td><td style="text-align:center; color:#ccc;">&mdash;</td><td style="text-align:center; color:#ccc;">&mdash;</td><td style="text-align:center; color:#ccc;">&mdash;</td></tr><tr><td style="font-weight:600;">sms_creates_90d</td><td style="text-align:center; color:#ccc;">&mdash;</td><td style="text-align:center; color:#ccc;">&mdash;</td><td style="text-align:center; color:#ccc;">&mdash;</td><td style="text-align:center; color:#ccc;">&mdash;</td><td style="text-align:center; color:#ccc;">&mdash;</td></tr></tbody>
+</table>
+<p style="font-size:8pt; color:#888;">Strongest revenue predictors: <strong>avg_mrr</strong> (+0.42), <strong>builder_active_days_90d</strong> (+0.35), <strong>total_eligible_initiatives</strong> (+0.23). Conversion levers differ: completion (<strong>email_completion_rate</strong> +0.18) and low friction beat raw create volume; retention driven by <strong>builder_active_days_90d</strong>, not list size.</p>
+
+
+<hr style="border:none; border-top:2px solid #1a3a5c; margin:24px 0;">
+
+<h2>Initiative &rarr; Customer Microcluster Targeting</h2>
+<p style="font-size:9pt; color:#555; margin-bottom:8px;">Each initiative&rsquo;s eligible customer EV distributed across microclusters. Percentages sum to 100% per initiative (EV-weighted from propensity &times; eligibility &times; annual ARR).</p>
+<table class="detail-table targeting-table">
+  <thead><tr><th style="width:32%;">Initiative (Sub-Theme, Quarter)</th><th>Target Microclusters (% of Initiative EV)</th></tr></thead>
+  <tbody>
+<tr>
+      <td style="font-weight:600; vertical-align:top;">Universal Content block primitive (Universal, Q1)</td>
+      <td style="font-size:8.5pt;">C2 High-MRR Power Users (27%), C5 Enterprise-Scale Power Senders (19%), C6 Tenured High-Completion Senders (12%), C3 Consistent Volume Senders (12%), C11 Rising-Usage Power Senders (9%), C1 Reliable Mid-Market Senders (8%), C4 Growing-but-Incomplete Senders (6%), C10 AI-Adopted Premium Senders (3%), C12 AI-Ready Mid-Market Senders (3%), C8 Test-Heavy, Low-Publish Friction (2%)</td>
+    </tr>
+<tr>
+      <td style="font-weight:600; vertical-align:top;">Auto-migration of saved blocks (Universal, Q1)</td>
+      <td style="font-size:8.5pt;">C2 High-MRR Power Users (27%), C5 Enterprise-Scale Power Senders (19%), C6 Tenured High-Completion Senders (12%), C3 Consistent Volume Senders (12%), C11 Rising-Usage Power Senders (9%), C1 Reliable Mid-Market Senders (8%), C4 Growing-but-Incomplete Senders (6%), C10 AI-Adopted Premium Senders (3%), C12 AI-Ready Mid-Market Senders (3%), C8 Test-Heavy, Low-Publish Friction (2%)</td>
+    </tr>
+<tr>
+      <td style="font-weight:600; vertical-align:top;">Bulk template migration tool (Universal, Q2)</td>
+      <td style="font-size:8.5pt;">C2 High-MRR Power Users (27%), C5 Enterprise-Scale Power Senders (19%), C6 Tenured High-Completion Senders (12%), C3 Consistent Volume Senders (12%), C11 Rising-Usage Power Senders (9%), C1 Reliable Mid-Market Senders (8%), C4 Growing-but-Incomplete Senders (6%), C10 AI-Adopted Premium Senders (3%), C12 AI-Ready Mid-Market Senders (3%), C8 Test-Heavy, Low-Publish Friction (2%)</td>
+    </tr>
+<tr>
+      <td style="font-weight:600; vertical-align:top;">Builder Code Mode (Universal, Q2)</td>
+      <td style="font-size:8.5pt;">C2 High-MRR Power Users (36%), C5 Enterprise-Scale Power Senders (28%), C6 Tenured High-Completion Senders (12%), C3 Consistent Volume Senders (7%), C11 Rising-Usage Power Senders (6%), C10 AI-Adopted Premium Senders (5%), C8 Test-Heavy, Low-Publish Friction (2%), C12 AI-Ready Mid-Market Senders (2%), C4 Growing-but-Incomplete Senders (2%)</td>
+    </tr>
+<tr>
+      <td style="font-weight:600; vertical-align:top;">Universal Content in CJB (Universal, Q3)</td>
+      <td style="font-size:8.5pt;">C2 High-MRR Power Users (27%), C5 Enterprise-Scale Power Senders (19%), C6 Tenured High-Completion Senders (12%), C3 Consistent Volume Senders (12%), C11 Rising-Usage Power Senders (9%), C1 Reliable Mid-Market Senders (8%), C4 Growing-but-Incomplete Senders (6%), C10 AI-Adopted Premium Senders (3%), C12 AI-Ready Mid-Market Senders (3%), C8 Test-Heavy, Low-Publish Friction (2%)</td>
+    </tr>
+<tr>
+      <td style="font-weight:600; vertical-align:top;">Inbox rendering parity fix (Trust, Q1)</td>
+      <td style="font-size:8.5pt;">C4 Growing-but-Incomplete Senders (48%), C2 High-MRR Power Users (23%), C8 Test-Heavy, Low-Publish Friction (13%), C5 Enterprise-Scale Power Senders (4%), C3 Consistent Volume Senders (3%), C11 Rising-Usage Power Senders (3%), C6 Tenured High-Completion Senders (2%), C12 AI-Ready Mid-Market Senders (2%), C0 Dormant Paid (Declining Usage) (1%), C10 AI-Adopted Premium Senders (1%), C7 Dormant Free / Low-MRR Base (1%)</td>
+    </tr>
+<tr>
+      <td style="font-weight:600; vertical-align:top;">Copy/paste formatting normalization (Trust, Q1)</td>
+      <td style="font-size:8.5pt;">C4 Growing-but-Incomplete Senders (48%), C2 High-MRR Power Users (23%), C8 Test-Heavy, Low-Publish Friction (13%), C5 Enterprise-Scale Power Senders (4%), C3 Consistent Volume Senders (3%), C11 Rising-Usage Power Senders (3%), C6 Tenured High-Completion Senders (2%), C12 AI-Ready Mid-Market Senders (2%), C0 Dormant Paid (Declining Usage) (1%), C10 AI-Adopted Premium Senders (1%), C7 Dormant Free / Low-MRR Base (1%)</td>
+    </tr>
+<tr>
+      <td style="font-weight:600; vertical-align:top;">Brand Kit data correctness fix (Trust, Q1)</td>
+      <td style="font-size:8.5pt;">C2 High-MRR Power Users (26%), C5 Enterprise-Scale Power Senders (18%), C6 Tenured High-Completion Senders (12%), C3 Consistent Volume Senders (11%), C11 Rising-Usage Power Senders (8%), C4 Growing-but-Incomplete Senders (8%), C1 Reliable Mid-Market Senders (8%), C10 AI-Adopted Premium Senders (3%), C12 AI-Ready Mid-Market Senders (2%), C8 Test-Heavy, Low-Publish Friction (2%), C9 High-Friction Abandoners (1%)</td>
+    </tr>
+<tr>
+      <td style="font-weight:600; vertical-align:top;">AI Email Setup Agent (AI, Q1)</td>
+      <td style="font-size:8.5pt;">C2 High-MRR Power Users (27%), C5 Enterprise-Scale Power Senders (17%), C6 Tenured High-Completion Senders (13%), C3 Consistent Volume Senders (11%), C1 Reliable Mid-Market Senders (11%), C4 Growing-but-Incomplete Senders (9%), C11 Rising-Usage Power Senders (8%), C9 High-Friction Abandoners (2%), C8 Test-Heavy, Low-Publish Friction (2%), C0 Dormant Paid (Declining Usage) (1%)</td>
+    </tr>
+<tr>
+      <td style="font-weight:600; vertical-align:top;">Write with AI quality &amp; brand-tone improvements (AI, Q1)</td>
+      <td style="font-size:8.5pt;">C2 High-MRR Power Users (27%), C5 Enterprise-Scale Power Senders (17%), C6 Tenured High-Completion Senders (13%), C3 Consistent Volume Senders (11%), C1 Reliable Mid-Market Senders (11%), C4 Growing-but-Incomplete Senders (9%), C11 Rising-Usage Power Senders (8%), C9 High-Friction Abandoners (2%), C8 Test-Heavy, Low-Publish Friction (2%), C0 Dormant Paid (Declining Usage) (1%)</td>
+    </tr>
+<tr>
+      <td style="font-weight:600; vertical-align:top;">Ecommerce lifecycle template library (AI, Q2)</td>
+      <td style="font-size:8.5pt;">C4 Growing-but-Incomplete Senders (34%), C2 High-MRR Power Users (26%), C5 Enterprise-Scale Power Senders (8%), C8 Test-Heavy, Low-Publish Friction (8%), C3 Consistent Volume Senders (7%), C11 Rising-Usage Power Senders (6%), C6 Tenured High-Completion Senders (5%), C12 AI-Ready Mid-Market Senders (2%), C10 AI-Adopted Premium Senders (2%)</td>
+    </tr>
+<tr>
+      <td style="font-weight:600; vertical-align:top;">Store-connected template preview (AI, Q2)</td>
+      <td style="font-size:8.5pt;">C4 Growing-but-Incomplete Senders (34%), C2 High-MRR Power Users (26%), C5 Enterprise-Scale Power Senders (8%), C8 Test-Heavy, Low-Publish Friction (8%), C3 Consistent Volume Senders (7%), C11 Rising-Usage Power Senders (6%), C6 Tenured High-Completion Senders (5%), C12 AI-Ready Mid-Market Senders (2%), C10 AI-Adopted Premium Senders (2%)</td>
+    </tr>
+<tr>
+      <td style="font-weight:600; vertical-align:top;">Goal-driven campaign agent (AI, Q3)</td>
+      <td style="font-size:8.5pt;">C2 High-MRR Power Users (27%), C5 Enterprise-Scale Power Senders (17%), C6 Tenured High-Completion Senders (13%), C3 Consistent Volume Senders (11%), C1 Reliable Mid-Market Senders (11%), C4 Growing-but-Incomplete Senders (9%), C11 Rising-Usage Power Senders (8%), C9 High-Friction Abandoners (2%), C8 Test-Heavy, Low-Publish Friction (2%), C0 Dormant Paid (Declining Usage) (1%)</td>
+    </tr>
+<tr>
+      <td style="font-weight:600; vertical-align:top;">Per-profile Smart Send Time &amp; Personalized A/B (AI, Q3)</td>
+      <td style="font-size:8.5pt;">C2 High-MRR Power Users (27%), C5 Enterprise-Scale Power Senders (17%), C6 Tenured High-Completion Senders (13%), C3 Consistent Volume Senders (11%), C1 Reliable Mid-Market Senders (11%), C4 Growing-but-Incomplete Senders (9%), C11 Rising-Usage Power Senders (8%), C9 High-Friction Abandoners (2%), C8 Test-Heavy, Low-Publish Friction (2%), C0 Dormant Paid (Declining Usage) (1%)</td>
+    </tr>
+<tr>
+      <td style="font-weight:600; vertical-align:top;">Shared content blocks in email + SMS (Omni, Q3)</td>
+      <td style="font-size:8.5pt;">C2 High-MRR Power Users (28%), C5 Enterprise-Scale Power Senders (26%), C3 Consistent Volume Senders (14%), C11 Rising-Usage Power Senders (11%), C6 Tenured High-Completion Senders (7%), C10 AI-Adopted Premium Senders (5%), C1 Reliable Mid-Market Senders (3%), C8 Test-Heavy, Low-Publish Friction (3%), C12 AI-Ready Mid-Market Senders (2%), C4 Growing-but-Incomplete Senders (2%)</td>
+    </tr>
+<tr>
+      <td style="font-weight:600; vertical-align:top;">DRAFT-resurrect campaign (Omni, Q2)</td>
+      <td style="font-size:8.5pt;">C9 High-Friction Abandoners (63%), C2 High-MRR Power Users (18%), C0 Dormant Paid (Declining Usage) (17%), C8 Test-Heavy, Low-Publish Friction (2%)</td>
+    </tr>
+  </tbody>
 </table>
 
-<h2>2. Execution Strategy — Ranked Bundles</h2>
-<p>Execute <strong>Bundle A + B in parallel</strong> (Q1), then Bundle C (Q2–Q3). Rows = clusters; columns = Q1–Q4 roadmap initiatives for that cluster.</p>
+<hr style="border:none; border-top:2px solid #1a3a5c; margin:24px 0;">
 
-<div class="bundle-box">
-  <h3>Bundle A · Wave 1 Revenue</h3>
-  <p>High completion + high MRR/volume. Universal Content & Code Mode drive ~90% of Wave 1 EV. Execute in Q1–Q2.</p>
-  <table class="detail-table targeting-table">
-    <thead><tr><th>Cluster</th><th>Rank</th><th>Customers</th><th>FY27 Revenue Impact</th><th>Q1 Initiatives</th><th>Q2 Initiatives</th><th>Q3 Initiatives</th><th>Q4 Initiatives</th></tr></thead>
-    <tbody><tr>
-          <td class="stage-cell">C2 · High-MRR Power Users</td>
-          <td style="text-align:center">1</td>
-          <td style="text-align:right">37,079</td>
-          <td class="mrr-cell" style="text-align:right">$5.17M</td>
-          <td><ul><li>Universal Content block primitive</li><li>Auto-migration of saved blocks</li><li>AI Email Setup Agent</li><li>Write with AI quality &amp; brand-tone improvements</li><li>Brand Kit data correctness fix</li><li>Font upload &amp; Creative Assistant parity</li><li>Brand voice profile in Brand Kit</li><li>Brand-Kit-aware generative SMS</li></ul></td>
-          <td><ul><li>Bulk template migration tool</li><li>1:1 migration tool with support enablement</li><li>AI image generation from product catalog</li><li>Image Remix in flow email steps</li><li>In-canvas revenue per recipient</li><li>Brand fonts in landing pages &amp; forms</li><li>Brand compliance score</li><li>Brand Kit maturity dashboard</li><li>Brand Kit auto-applied to Universal blocks</li><li>Builder Code Mode</li><li>Builder Liquid templating</li><li>SMS variant generation &amp; A/B</li><li>Template categorization fix</li><li>B2B &amp; ProServ template gallery</li><li>Industry-aware template gallery</li><li>Ecommerce lifecycle template library</li><li>Store-connected template preview</li></ul></td>
-          <td><ul><li>Universal Content in CJB</li><li>Universal Content audit &amp; version history</li><li>Per-recipient dynamic images</li><li>Per-profile Smart Send Time &amp; Personalized A/B</li><li>Goal-driven campaign agent</li><li>Conversational email refinement</li><li>Multi-brand kits per account</li><li>Shared content blocks in email + SMS</li><li>Cross-channel preview side-by-side</li><li>Brand Kit on SMS short links &amp; sender ID</li></ul></td>
-          <td><ul><li>Funded migration program</li><li>AI brand-style transfer</li><li>Campaign brief to multi-variant</li><li>Store intelligence in generation</li><li>Locked layouts for brand governance</li><li>Cross-account brand inheritance</li><li>Real-time multi-author co-editing</li><li>Block-level comments &amp; @-mentions</li><li>Approval workflow &amp; version history</li></ul></td>
-        </tr><tr>
-          <td class="stage-cell">C5 · Enterprise-Scale Power Senders</td>
-          <td style="text-align:center">2</td>
-          <td style="text-align:right">33,836</td>
-          <td class="mrr-cell" style="text-align:right">$3.36M</td>
-          <td><ul><li>Universal Content block primitive</li><li>Auto-migration of saved blocks</li><li>AI Email Setup Agent</li><li>Write with AI quality &amp; brand-tone improvements</li><li>Brand Kit data correctness fix</li><li>Font upload &amp; Creative Assistant parity</li><li>Brand voice profile in Brand Kit</li><li>Brand-Kit-aware generative SMS</li></ul></td>
-          <td><ul><li>Bulk template migration tool</li><li>1:1 migration tool with support enablement</li><li>AI image generation from product catalog</li><li>Image Remix in flow email steps</li><li>In-canvas revenue per recipient</li><li>Brand fonts in landing pages &amp; forms</li><li>Brand compliance score</li><li>Brand Kit maturity dashboard</li><li>Brand Kit auto-applied to Universal blocks</li><li>Builder Code Mode</li><li>Builder Liquid templating</li><li>SMS variant generation &amp; A/B</li><li>Template categorization fix</li><li>B2B &amp; ProServ template gallery</li><li>Industry-aware template gallery</li><li>Ecommerce lifecycle template library</li><li>Store-connected template preview</li></ul></td>
-          <td><ul><li>Universal Content in CJB</li><li>Universal Content audit &amp; version history</li><li>Per-recipient dynamic images</li><li>Per-profile Smart Send Time &amp; Personalized A/B</li><li>Goal-driven campaign agent</li><li>Conversational email refinement</li><li>Multi-brand kits per account</li><li>Shared content blocks in email + SMS</li><li>Cross-channel preview side-by-side</li><li>Brand Kit on SMS short links &amp; sender ID</li></ul></td>
-          <td><ul><li>Funded migration program</li><li>AI brand-style transfer</li><li>Campaign brief to multi-variant</li><li>Store intelligence in generation</li><li>Locked layouts for brand governance</li><li>Cross-account brand inheritance</li><li>Real-time multi-author co-editing</li><li>Block-level comments &amp; @-mentions</li><li>Approval workflow &amp; version history</li></ul></td>
-        </tr><tr>
-          <td class="stage-cell">C6 · Tenured High-Completion Senders</td>
-          <td style="text-align:center">3</td>
-          <td style="text-align:right">254,185</td>
-          <td class="mrr-cell" style="text-align:right">$2.54M</td>
-          <td><ul><li>Universal Content block primitive</li><li>Auto-migration of saved blocks</li><li>AI Email Setup Agent</li><li>Write with AI quality &amp; brand-tone improvements</li><li>Brand Kit data correctness fix</li><li>Font upload &amp; Creative Assistant parity</li><li>Brand voice profile in Brand Kit</li><li>Brand-Kit-aware generative SMS</li></ul></td>
-          <td><ul><li>Bulk template migration tool</li><li>1:1 migration tool with support enablement</li><li>AI image generation from product catalog</li><li>Image Remix in flow email steps</li><li>In-canvas revenue per recipient</li><li>Brand fonts in landing pages &amp; forms</li><li>Brand compliance score</li><li>Brand Kit maturity dashboard</li><li>Brand Kit auto-applied to Universal blocks</li><li>Builder Code Mode</li><li>Builder Liquid templating</li><li>SMS variant generation &amp; A/B</li><li>Template categorization fix</li><li>B2B &amp; ProServ template gallery</li><li>Industry-aware template gallery</li><li>Ecommerce lifecycle template library</li><li>Store-connected template preview</li></ul></td>
-          <td><ul><li>Universal Content in CJB</li><li>Universal Content audit &amp; version history</li><li>Per-recipient dynamic images</li><li>Per-profile Smart Send Time &amp; Personalized A/B</li><li>Goal-driven campaign agent</li><li>Conversational email refinement</li><li>Multi-brand kits per account</li><li>Shared content blocks in email + SMS</li><li>Cross-channel preview side-by-side</li><li>Brand Kit on SMS short links &amp; sender ID</li></ul></td>
-          <td><ul><li>Funded migration program</li><li>AI brand-style transfer</li><li>Campaign brief to multi-variant</li><li>Store intelligence in generation</li><li>Locked layouts for brand governance</li><li>Cross-account brand inheritance</li></ul></td>
-        </tr><tr>
-          <td class="stage-cell">C3 · Consistent Volume Senders</td>
-          <td style="text-align:center">4</td>
-          <td style="text-align:right">104,424</td>
-          <td class="mrr-cell" style="text-align:right">$2.11M</td>
-          <td><ul><li>Universal Content block primitive</li><li>Auto-migration of saved blocks</li><li>AI Email Setup Agent</li><li>Write with AI quality &amp; brand-tone improvements</li><li>Brand Kit data correctness fix</li><li>Font upload &amp; Creative Assistant parity</li><li>Brand voice profile in Brand Kit</li><li>Brand-Kit-aware generative SMS</li></ul></td>
-          <td><ul><li>Bulk template migration tool</li><li>1:1 migration tool with support enablement</li><li>AI image generation from product catalog</li><li>Image Remix in flow email steps</li><li>In-canvas revenue per recipient</li><li>Brand fonts in landing pages &amp; forms</li><li>Brand compliance score</li><li>Brand Kit maturity dashboard</li><li>Brand Kit auto-applied to Universal blocks</li><li>SMS variant generation &amp; A/B</li><li>Builder Code Mode</li><li>Builder Liquid templating</li><li>Template categorization fix</li><li>B2B &amp; ProServ template gallery</li><li>Industry-aware template gallery</li><li>Ecommerce lifecycle template library</li><li>Store-connected template preview</li></ul></td>
-          <td><ul><li>Universal Content in CJB</li><li>Universal Content audit &amp; version history</li><li>Per-recipient dynamic images</li><li>Per-profile Smart Send Time &amp; Personalized A/B</li><li>Goal-driven campaign agent</li><li>Conversational email refinement</li><li>Multi-brand kits per account</li><li>Shared content blocks in email + SMS</li><li>Cross-channel preview side-by-side</li><li>Brand Kit on SMS short links &amp; sender ID</li></ul></td>
-          <td><ul><li>Funded migration program</li><li>AI brand-style transfer</li><li>Campaign brief to multi-variant</li><li>Store intelligence in generation</li><li>Locked layouts for brand governance</li><li>Cross-account brand inheritance</li><li>Real-time multi-author co-editing</li><li>Block-level comments &amp; @-mentions</li><li>Approval workflow &amp; version history</li></ul></td>
-        </tr><tr>
-          <td class="stage-cell">C1 · Reliable Mid-Market Senders</td>
-          <td style="text-align:center">5</td>
-          <td style="text-align:right">277,782</td>
-          <td class="mrr-cell" style="text-align:right">$1.90M</td>
-          <td><ul><li>AI Email Setup Agent</li><li>Write with AI quality &amp; brand-tone improvements</li><li>Universal Content block primitive</li><li>Auto-migration of saved blocks</li><li>Brand Kit data correctness fix</li><li>Font upload &amp; Creative Assistant parity</li><li>Brand voice profile in Brand Kit</li><li>Brand-Kit-aware generative SMS</li></ul></td>
-          <td><ul><li>AI image generation from product catalog</li><li>Image Remix in flow email steps</li><li>In-canvas revenue per recipient</li><li>Bulk template migration tool</li><li>1:1 migration tool with support enablement</li><li>Brand fonts in landing pages &amp; forms</li><li>Brand compliance score</li><li>Brand Kit maturity dashboard</li><li>Brand Kit auto-applied to Universal blocks</li><li>SMS variant generation &amp; A/B</li><li>Builder Code Mode</li><li>Builder Liquid templating</li></ul></td>
-          <td><ul><li>Per-recipient dynamic images</li><li>Per-profile Smart Send Time &amp; Personalized A/B</li><li>Goal-driven campaign agent</li><li>Conversational email refinement</li><li>Universal Content in CJB</li><li>Universal Content audit &amp; version history</li><li>Multi-brand kits per account</li><li>Shared content blocks in email + SMS</li><li>Cross-channel preview side-by-side</li><li>Brand Kit on SMS short links &amp; sender ID</li></ul></td>
-          <td><ul><li>AI brand-style transfer</li><li>Campaign brief to multi-variant</li><li>Store intelligence in generation</li><li>Funded migration program</li><li>Locked layouts for brand governance</li><li>Cross-account brand inheritance</li></ul></td>
-        </tr><tr>
-          <td class="stage-cell">C11 · Rising-Usage Power Senders</td>
-          <td style="text-align:center">6</td>
-          <td style="text-align:right">73,135</td>
-          <td class="mrr-cell" style="text-align:right">$1.58M</td>
-          <td><ul><li>Universal Content block primitive</li><li>Auto-migration of saved blocks</li><li>AI Email Setup Agent</li><li>Write with AI quality &amp; brand-tone improvements</li><li>Brand Kit data correctness fix</li><li>Font upload &amp; Creative Assistant parity</li><li>Brand voice profile in Brand Kit</li><li>Brand-Kit-aware generative SMS</li></ul></td>
-          <td><ul><li>Bulk template migration tool</li><li>1:1 migration tool with support enablement</li><li>AI image generation from product catalog</li><li>Image Remix in flow email steps</li><li>In-canvas revenue per recipient</li><li>Brand fonts in landing pages &amp; forms</li><li>Brand compliance score</li><li>Brand Kit maturity dashboard</li><li>Brand Kit auto-applied to Universal blocks</li><li>SMS variant generation &amp; A/B</li><li>Builder Code Mode</li><li>Builder Liquid templating</li><li>Template categorization fix</li><li>B2B &amp; ProServ template gallery</li><li>Industry-aware template gallery</li><li>Ecommerce lifecycle template library</li><li>Store-connected template preview</li></ul></td>
-          <td><ul><li>Universal Content in CJB</li><li>Universal Content audit &amp; version history</li><li>Per-recipient dynamic images</li><li>Per-profile Smart Send Time &amp; Personalized A/B</li><li>Goal-driven campaign agent</li><li>Conversational email refinement</li><li>Multi-brand kits per account</li><li>Shared content blocks in email + SMS</li><li>Cross-channel preview side-by-side</li><li>Brand Kit on SMS short links &amp; sender ID</li></ul></td>
-          <td><ul><li>Funded migration program</li><li>AI brand-style transfer</li><li>Campaign brief to multi-variant</li><li>Store intelligence in generation</li><li>Locked layouts for brand governance</li><li>Cross-account brand inheritance</li></ul></td>
-        </tr></tbody>
-  </table>
-</div>
-<div class="bundle-box">
-  <h3>Bundle B · Foundation Fix</h3>
-  <p>High friction or test-no-send. Fix rendering/trust BEFORE activation. Parallel to Bundle A in Q1.</p>
-  <table class="detail-table targeting-table">
-    <thead><tr><th>Cluster</th><th>Rank</th><th>Customers</th><th>FY27 Revenue Impact</th><th>Q1 Initiatives</th><th>Q2 Initiatives</th><th>Q3 Initiatives</th><th>Q4 Initiatives</th></tr></thead>
-    <tbody><tr>
-          <td class="stage-cell">C8 · Test-Heavy, Low-Publish Friction</td>
-          <td style="text-align:center">1</td>
-          <td style="text-align:right">23,196</td>
-          <td class="mrr-cell" style="text-align:right">$382K</td>
-          <td><ul><li>Universal Content block primitive</li><li>Auto-migration of saved blocks</li><li>AI Email Setup Agent</li><li>Write with AI quality &amp; brand-tone improvements</li><li>Brand Kit data correctness fix</li><li>Font upload &amp; Creative Assistant parity</li><li>Brand voice profile in Brand Kit</li><li>Brand-Kit-aware generative SMS</li></ul></td>
-          <td><ul><li>Bulk template migration tool</li><li>1:1 migration tool with support enablement</li><li>AI image generation from product catalog</li><li>Image Remix in flow email steps</li><li>In-canvas revenue per recipient</li><li>Template categorization fix</li><li>B2B &amp; ProServ template gallery</li><li>Industry-aware template gallery</li><li>Ecommerce lifecycle template library</li><li>Store-connected template preview</li><li>Brand fonts in landing pages &amp; forms</li><li>Brand compliance score</li><li>Brand Kit maturity dashboard</li><li>Brand Kit auto-applied to Universal blocks</li><li>SMS variant generation &amp; A/B</li><li>Builder Code Mode</li><li>Builder Liquid templating</li></ul></td>
-          <td><ul><li>Universal Content in CJB</li><li>Universal Content audit &amp; version history</li><li>Per-recipient dynamic images</li><li>Per-profile Smart Send Time &amp; Personalized A/B</li><li>Goal-driven campaign agent</li><li>Conversational email refinement</li><li>Multi-brand kits per account</li><li>Shared content blocks in email + SMS</li><li>Cross-channel preview side-by-side</li><li>Brand Kit on SMS short links &amp; sender ID</li></ul></td>
-          <td><ul><li>Funded migration program</li><li>AI brand-style transfer</li><li>Campaign brief to multi-variant</li><li>Store intelligence in generation</li><li>Locked layouts for brand governance</li><li>Cross-account brand inheritance</li></ul></td>
-        </tr><tr>
-          <td class="stage-cell">C9 · High-Friction Abandoners</td>
-          <td style="text-align:center">2</td>
-          <td style="text-align:right">132,430</td>
-          <td class="mrr-cell" style="text-align:right">$280K</td>
-          <td><ul><li>AI Email Setup Agent</li><li>Write with AI quality &amp; brand-tone improvements</li><li>Brand Kit auto-extract on signup</li><li>Brand Kit data correctness fix</li><li>Font upload &amp; Creative Assistant parity</li><li>Brand voice profile in Brand Kit</li><li>Universal Content block primitive</li><li>Auto-migration of saved blocks</li></ul></td>
-          <td><ul><li>AI image generation from product catalog</li><li>Image Remix in flow email steps</li><li>In-canvas revenue per recipient</li><li>Industry-specific welcome flow templates</li><li>DRAFT-resurrect campaign</li><li>Brand fonts in landing pages &amp; forms</li><li>Brand compliance score</li><li>Brand Kit maturity dashboard</li><li>Brand Kit auto-applied to Universal blocks</li><li>Template categorization fix</li><li>B2B &amp; ProServ template gallery</li><li>Industry-aware template gallery</li><li>Ecommerce lifecycle template library</li><li>Store-connected template preview</li><li>Builder Code Mode</li><li>Builder Liquid templating</li><li>Bulk template migration tool</li><li>1:1 migration tool with support enablement</li></ul></td>
-          <td><ul><li>Per-recipient dynamic images</li><li>Per-profile Smart Send Time &amp; Personalized A/B</li><li>Goal-driven campaign agent</li><li>Conversational email refinement</li><li>Lifecycle coverage gap analyzer</li><li>Contextual feature discovery prompts</li><li>Multi-brand kits per account</li><li>Universal Content in CJB</li><li>Universal Content audit &amp; version history</li></ul></td>
-          <td><ul><li>AI brand-style transfer</li><li>Campaign brief to multi-variant</li><li>Store intelligence in generation</li><li>Locked layouts for brand governance</li><li>Cross-account brand inheritance</li><li>Funded migration program</li></ul></td>
-        </tr><tr>
-          <td class="stage-cell">C0 · Dormant Paid (Declining Usage)</td>
-          <td style="text-align:center">3</td>
-          <td style="text-align:right">149,322</td>
-          <td class="mrr-cell" style="text-align:right">$101K</td>
-          <td><ul><li>AI Email Setup Agent</li><li>Write with AI quality &amp; brand-tone improvements</li><li>Brand Kit auto-extract on signup</li><li>Brand Kit data correctness fix</li><li>Font upload &amp; Creative Assistant parity</li><li>Brand voice profile in Brand Kit</li><li>Inbox rendering parity fix</li><li>Block reorder, drag-and-drop reliability &amp; template navigation fix</li><li>Template surfacing in campaign wizard</li><li>Cross-browser regression suite</li><li>Multi-author save-conflict detection</li><li>Content Studio stability fix</li><li>Canva-to-Mailchimp sync reliability</li><li>Builder SLO operating contract</li><li>Brand Kit automated regression suite</li><li>Copy/paste formatting normalization</li><li>Universal Content block primitive</li><li>Auto-migration of saved blocks</li></ul></td>
-          <td><ul><li>AI image generation from product catalog</li><li>Image Remix in flow email steps</li><li>In-canvas revenue per recipient</li><li>Industry-specific welcome flow templates</li><li>DRAFT-resurrect campaign</li><li>Brand fonts in landing pages &amp; forms</li><li>Brand compliance score</li><li>Brand Kit maturity dashboard</li><li>Brand Kit auto-applied to Universal blocks</li><li>Template categorization fix</li><li>B2B &amp; ProServ template gallery</li><li>Industry-aware template gallery</li><li>Ecommerce lifecycle template library</li><li>Store-connected template preview</li><li>Light/dark mode &amp; background images</li><li>Inline link checker &amp; deliverability hints</li><li>Folder management in Content Studio</li><li>Bulk template migration tool</li><li>1:1 migration tool with support enablement</li></ul></td>
-          <td><ul><li>Per-recipient dynamic images</li><li>Per-profile Smart Send Time &amp; Personalized A/B</li><li>Goal-driven campaign agent</li><li>Conversational email refinement</li><li>Lifecycle coverage gap analyzer</li><li>Contextual feature discovery prompts</li><li>Multi-brand kits per account</li><li>Universal Content in CJB</li><li>Universal Content audit &amp; version history</li></ul></td>
-          <td><ul><li>AI brand-style transfer</li><li>Campaign brief to multi-variant</li><li>Store intelligence in generation</li><li>Locked layouts for brand governance</li><li>Cross-account brand inheritance</li><li>Funded migration program</li></ul></td>
-        </tr></tbody>
-  </table>
-</div>
-<div class="bundle-box">
-  <h3>Bundle C · Activation & AI</h3>
-  <p>Low completion but meaningful intent. AI + activation after Bundle B fixes. C7 after foundation.</p>
-  <table class="detail-table targeting-table">
-    <thead><tr><th>Cluster</th><th>Rank</th><th>Customers</th><th>FY27 Revenue Impact</th><th>Q1 Initiatives</th><th>Q2 Initiatives</th><th>Q3 Initiatives</th><th>Q4 Initiatives</th></tr></thead>
-    <tbody><tr>
-          <td class="stage-cell">C4 · Growing-but-Incomplete Senders</td>
-          <td style="text-align:center">1</td>
-          <td style="text-align:right">195,805</td>
-          <td class="mrr-cell" style="text-align:right">$1.59M</td>
-          <td><ul><li>AI Email Setup Agent</li><li>Write with AI quality &amp; brand-tone improvements</li><li>Universal Content block primitive</li><li>Auto-migration of saved blocks</li><li>Brand Kit data correctness fix</li><li>Font upload &amp; Creative Assistant parity</li><li>Brand voice profile in Brand Kit</li><li>Inbox rendering parity fix</li><li>Block reorder, drag-and-drop reliability &amp; template navigation fix</li><li>Template surfacing in campaign wizard</li><li>Cross-browser regression suite</li><li>Multi-author save-conflict detection</li><li>Content Studio stability fix</li><li>Canva-to-Mailchimp sync reliability</li><li>Builder SLO operating contract</li><li>Brand Kit automated regression suite</li><li>Copy/paste formatting normalization</li><li>Brand-Kit-aware generative SMS</li></ul></td>
-          <td><ul><li>AI image generation from product catalog</li><li>Image Remix in flow email steps</li><li>In-canvas revenue per recipient</li><li>Template categorization fix</li><li>B2B &amp; ProServ template gallery</li><li>Industry-aware template gallery</li><li>Ecommerce lifecycle template library</li><li>Store-connected template preview</li><li>Bulk template migration tool</li><li>1:1 migration tool with support enablement</li><li>Brand fonts in landing pages &amp; forms</li><li>Brand compliance score</li><li>Brand Kit maturity dashboard</li><li>Brand Kit auto-applied to Universal blocks</li><li>Light/dark mode &amp; background images</li><li>Inline link checker &amp; deliverability hints</li><li>Folder management in Content Studio</li><li>SMS variant generation &amp; A/B</li></ul></td>
-          <td><ul><li>Per-recipient dynamic images</li><li>Per-profile Smart Send Time &amp; Personalized A/B</li><li>Goal-driven campaign agent</li><li>Conversational email refinement</li><li>Universal Content in CJB</li><li>Universal Content audit &amp; version history</li><li>Multi-brand kits per account</li><li>Shared content blocks in email + SMS</li><li>Cross-channel preview side-by-side</li><li>Brand Kit on SMS short links &amp; sender ID</li></ul></td>
-          <td><ul><li>AI brand-style transfer</li><li>Campaign brief to multi-variant</li><li>Store intelligence in generation</li><li>Funded migration program</li><li>Locked layouts for brand governance</li><li>Cross-account brand inheritance</li></ul></td>
-        </tr><tr>
-          <td class="stage-cell">C10 · AI-Adopted Premium Senders</td>
-          <td style="text-align:center">2</td>
-          <td style="text-align:right">4,573</td>
-          <td class="mrr-cell" style="text-align:right">$589K</td>
-          <td><ul><li>Universal Content block primitive</li><li>Auto-migration of saved blocks</li><li>Brand Kit data correctness fix</li><li>Font upload &amp; Creative Assistant parity</li><li>Brand voice profile in Brand Kit</li><li>Brand-Kit-aware generative SMS</li><li>Inbox rendering parity fix</li><li>Block reorder, drag-and-drop reliability &amp; template navigation fix</li><li>Template surfacing in campaign wizard</li><li>Cross-browser regression suite</li><li>Multi-author save-conflict detection</li><li>Content Studio stability fix</li><li>Canva-to-Mailchimp sync reliability</li><li>Builder SLO operating contract</li><li>Brand Kit automated regression suite</li><li>Copy/paste formatting normalization</li></ul></td>
-          <td><ul><li>Bulk template migration tool</li><li>1:1 migration tool with support enablement</li><li>Brand fonts in landing pages &amp; forms</li><li>Brand compliance score</li><li>Brand Kit maturity dashboard</li><li>Brand Kit auto-applied to Universal blocks</li><li>Builder Code Mode</li><li>Builder Liquid templating</li><li>SMS variant generation &amp; A/B</li><li>Template categorization fix</li><li>B2B &amp; ProServ template gallery</li><li>Industry-aware template gallery</li><li>Ecommerce lifecycle template library</li><li>Store-connected template preview</li><li>Light/dark mode &amp; background images</li><li>Inline link checker &amp; deliverability hints</li><li>Folder management in Content Studio</li></ul></td>
-          <td><ul><li>Universal Content in CJB</li><li>Universal Content audit &amp; version history</li><li>Multi-brand kits per account</li><li>Shared content blocks in email + SMS</li><li>Cross-channel preview side-by-side</li><li>Brand Kit on SMS short links &amp; sender ID</li></ul></td>
-          <td><ul><li>Funded migration program</li><li>Locked layouts for brand governance</li><li>Cross-account brand inheritance</li><li>Real-time multi-author co-editing</li><li>Block-level comments &amp; @-mentions</li><li>Approval workflow &amp; version history</li></ul></td>
-        </tr><tr>
-          <td class="stage-cell">C12 · AI-Ready Mid-Market Senders</td>
-          <td style="text-align:center">3</td>
-          <td style="text-align:right">20,412</td>
-          <td class="mrr-cell" style="text-align:right">$471K</td>
-          <td><ul><li>Universal Content block primitive</li><li>Auto-migration of saved blocks</li><li>Brand Kit data correctness fix</li><li>Font upload &amp; Creative Assistant parity</li><li>Brand voice profile in Brand Kit</li><li>Brand-Kit-aware generative SMS</li><li>Inbox rendering parity fix</li><li>Block reorder, drag-and-drop reliability &amp; template navigation fix</li><li>Template surfacing in campaign wizard</li><li>Cross-browser regression suite</li><li>Multi-author save-conflict detection</li><li>Content Studio stability fix</li><li>Canva-to-Mailchimp sync reliability</li><li>Builder SLO operating contract</li><li>Brand Kit automated regression suite</li><li>Copy/paste formatting normalization</li></ul></td>
-          <td><ul><li>Bulk template migration tool</li><li>1:1 migration tool with support enablement</li><li>Brand fonts in landing pages &amp; forms</li><li>Brand compliance score</li><li>Brand Kit maturity dashboard</li><li>Brand Kit auto-applied to Universal blocks</li><li>SMS variant generation &amp; A/B</li><li>Builder Code Mode</li><li>Builder Liquid templating</li><li>Template categorization fix</li><li>B2B &amp; ProServ template gallery</li><li>Industry-aware template gallery</li><li>Ecommerce lifecycle template library</li><li>Store-connected template preview</li><li>Light/dark mode &amp; background images</li><li>Inline link checker &amp; deliverability hints</li><li>Folder management in Content Studio</li></ul></td>
-          <td><ul><li>Universal Content in CJB</li><li>Universal Content audit &amp; version history</li><li>Multi-brand kits per account</li><li>Shared content blocks in email + SMS</li><li>Cross-channel preview side-by-side</li><li>Brand Kit on SMS short links &amp; sender ID</li></ul></td>
-          <td><ul><li>Funded migration program</li><li>Locked layouts for brand governance</li><li>Cross-account brand inheritance</li></ul></td>
-        </tr><tr>
-          <td class="stage-cell">C7 · Dormant Free / Low-MRR Base</td>
-          <td style="text-align:center">4</td>
-          <td style="text-align:right">345,413</td>
-          <td class="mrr-cell" style="text-align:right">$4K</td>
-          <td><ul><li>Inbox rendering parity fix</li><li>Block reorder, drag-and-drop reliability &amp; template navigation fix</li><li>Template surfacing in campaign wizard</li><li>Cross-browser regression suite</li><li>Multi-author save-conflict detection</li><li>Content Studio stability fix</li><li>Canva-to-Mailchimp sync reliability</li><li>Builder SLO operating contract</li><li>Brand Kit automated regression suite</li><li>Copy/paste formatting normalization</li><li>Universal Content block primitive</li><li>Auto-migration of saved blocks</li><li>Brand Kit auto-extract on signup</li><li>Brand-Kit-aware generative SMS</li></ul></td>
-          <td><ul><li>Light/dark mode &amp; background images</li><li>Inline link checker &amp; deliverability hints</li><li>Folder management in Content Studio</li><li>Bulk template migration tool</li><li>1:1 migration tool with support enablement</li><li>Industry-specific welcome flow templates</li><li>DRAFT-resurrect campaign</li><li>SMS variant generation &amp; A/B</li></ul></td>
-          <td><ul><li>Universal Content in CJB</li><li>Universal Content audit &amp; version history</li><li>Lifecycle coverage gap analyzer</li><li>Contextual feature discovery prompts</li><li>Shared content blocks in email + SMS</li><li>Cross-channel preview side-by-side</li><li>Brand Kit on SMS short links &amp; sender ID</li></ul></td>
-          <td><ul><li>Funded migration program</li></ul></td>
-        </tr></tbody>
-  </table>
-</div>
-
-<h2>3. Full FY27 Roadmap → Customer Targeting Map</h2>
-<p>Every initiative from the <a href="unified-builder-roadmap.html">Unified Builder FY27 Roadmap</a> mapped to quarter, pillar, targeting theme, and primary clusters.</p>
+<h2>Cluster Priority Ranking</h2>
+<p style="font-size:9pt; color:#555; font-style:italic; margin-bottom:10px;">Primary Lever = highest-EV roadmap initiative mapped to sub-theme and ship quarter.</p>
 <table class="detail-table targeting-table">
-  <thead><tr><th>Roadmap Initiative</th><th>Quarter</th><th>Pillar</th><th>Targeting Theme</th><th>Primary Clusters</th><th>Bundle</th></tr></thead>
-  <tbody><tr>
-          <td>Block reorder, drag-and-drop reliability & template navigation fix</td>
-          <td style="text-align:center">Q1</td>
-          <td>P1 Trust</td>
-          <td>Rendering Fix</td>
-          <td>C7</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Brand Kit automated regression suite</td>
-          <td style="text-align:center">Q1</td>
-          <td>P1 Trust</td>
-          <td>Rendering Fix</td>
-          <td>C7</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Brand Kit data correctness fix</td>
-          <td style="text-align:center">Q1</td>
-          <td>P1 Trust</td>
-          <td>Brandkit</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>Brand voice profile in Brand Kit</td>
-          <td style="text-align:center">Q1</td>
-          <td>P1 Trust</td>
-          <td>Brandkit</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>Builder SLO operating contract</td>
-          <td style="text-align:center">Q1</td>
-          <td>P1 Trust</td>
-          <td>Rendering Fix</td>
-          <td>C7</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Canva-to-Mailchimp sync reliability</td>
-          <td style="text-align:center">Q1</td>
-          <td>P1 Trust</td>
-          <td>Rendering Fix</td>
-          <td>C7</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Content Studio stability fix</td>
-          <td style="text-align:center">Q1</td>
-          <td>P1 Trust</td>
-          <td>Rendering Fix</td>
-          <td>C7</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Copy/paste formatting normalization</td>
-          <td style="text-align:center">Q1</td>
-          <td>P1 Trust</td>
-          <td>Rendering Fix</td>
-          <td>C7</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Cross-browser regression suite</td>
-          <td style="text-align:center">Q1</td>
-          <td>P1 Trust</td>
-          <td>Rendering Fix</td>
-          <td>C7</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Font upload & Creative Assistant parity</td>
-          <td style="text-align:center">Q1</td>
-          <td>P1 Trust</td>
-          <td>Brandkit</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>Inbox rendering parity fix</td>
-          <td style="text-align:center">Q1</td>
-          <td>P1 Trust</td>
-          <td>Rendering Fix</td>
-          <td>C7</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Multi-author save-conflict detection</td>
-          <td style="text-align:center">Q1</td>
-          <td>P1 Trust</td>
-          <td>Rendering Fix</td>
-          <td>C7</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Template surfacing in campaign wizard</td>
-          <td style="text-align:center">Q1</td>
-          <td>P1 Trust</td>
-          <td>Rendering Fix</td>
-          <td>C7</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Auto-migration of saved blocks</td>
-          <td style="text-align:center">Q1</td>
-          <td>P2 Universal</td>
-          <td>Universal Content</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>Universal Content block primitive</td>
-          <td style="text-align:center">Q1</td>
-          <td>P2 Universal</td>
-          <td>Universal Content</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>AI Email Setup Agent</td>
-          <td style="text-align:center">Q1</td>
-          <td>P3 AI</td>
-          <td>Ai Builder</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A+C</td>
-        </tr><tr>
-          <td>Brand Kit auto-extract on signup</td>
-          <td style="text-align:center">Q1</td>
-          <td>P3 AI</td>
-          <td>Activation</td>
-          <td>C9, C0, C7</td>
-          <td style="text-align:center">B+C</td>
-        </tr><tr>
-          <td>Write with AI quality & brand-tone improvements</td>
-          <td style="text-align:center">Q1</td>
-          <td>P3 AI</td>
-          <td>Ai Builder</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A+C</td>
-        </tr><tr>
-          <td>Brand-Kit-aware generative SMS</td>
-          <td style="text-align:center">Q1</td>
-          <td>P4 Omni</td>
-          <td>Omnichannel</td>
-          <td>C12</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Brand Kit maturity dashboard</td>
-          <td style="text-align:center">Q2</td>
-          <td>P1 Trust</td>
-          <td>Brandkit</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>Brand compliance score</td>
-          <td style="text-align:center">Q2</td>
-          <td>P1 Trust</td>
-          <td>Brandkit</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>Brand fonts in landing pages & forms</td>
-          <td style="text-align:center">Q2</td>
-          <td>P1 Trust</td>
-          <td>Brandkit</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>Folder management in Content Studio</td>
-          <td style="text-align:center">Q2</td>
-          <td>P1 Trust</td>
-          <td>Rendering Fix</td>
-          <td>C7</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Inline link checker & deliverability hints</td>
-          <td style="text-align:center">Q2</td>
-          <td>P1 Trust</td>
-          <td>Rendering Fix</td>
-          <td>C7</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Light/dark mode & background images</td>
-          <td style="text-align:center">Q2</td>
-          <td>P1 Trust</td>
-          <td>Rendering Fix</td>
-          <td>C7</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>1:1 migration tool with support enablement</td>
-          <td style="text-align:center">Q2</td>
-          <td>P2 Universal</td>
-          <td>Universal Content</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>Brand Kit auto-applied to Universal blocks</td>
-          <td style="text-align:center">Q2</td>
-          <td>P2 Universal</td>
-          <td>Brandkit</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>Builder Code Mode</td>
-          <td style="text-align:center">Q2</td>
-          <td>P2 Universal</td>
-          <td>Code Mode</td>
-          <td>C10</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Builder Liquid templating</td>
-          <td style="text-align:center">Q2</td>
-          <td>P2 Universal</td>
-          <td>Code Mode</td>
-          <td>C10</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Bulk template migration tool</td>
-          <td style="text-align:center">Q2</td>
-          <td>P2 Universal</td>
-          <td>Universal Content</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>Template categorization fix</td>
-          <td style="text-align:center">Q2</td>
-          <td>P2 Universal</td>
-          <td>Template Improvement</td>
-          <td>C4, C8</td>
-          <td style="text-align:center">B+C</td>
-        </tr><tr>
-          <td>AI image generation from product catalog</td>
-          <td style="text-align:center">Q2</td>
-          <td>P3 AI</td>
-          <td>Ai Builder</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A+C</td>
-        </tr><tr>
-          <td>B2B & ProServ template gallery</td>
-          <td style="text-align:center">Q2</td>
-          <td>P3 AI</td>
-          <td>Template Improvement</td>
-          <td>C4, C8</td>
-          <td style="text-align:center">B+C</td>
-        </tr><tr>
-          <td>Ecommerce lifecycle template library</td>
-          <td style="text-align:center">Q2</td>
-          <td>P3 AI</td>
-          <td>Template Improvement</td>
-          <td>C4, C8</td>
-          <td style="text-align:center">B+C</td>
-        </tr><tr>
-          <td>Image Remix in flow email steps</td>
-          <td style="text-align:center">Q2</td>
-          <td>P3 AI</td>
-          <td>Ai Builder</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A+C</td>
-        </tr><tr>
-          <td>In-canvas revenue per recipient</td>
-          <td style="text-align:center">Q2</td>
-          <td>P3 AI</td>
-          <td>Ai Builder</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A+C</td>
-        </tr><tr>
-          <td>Industry-aware template gallery</td>
-          <td style="text-align:center">Q2</td>
-          <td>P3 AI</td>
-          <td>Template Improvement</td>
-          <td>C4, C8</td>
-          <td style="text-align:center">B+C</td>
-        </tr><tr>
-          <td>Industry-specific welcome flow templates</td>
-          <td style="text-align:center">Q2</td>
-          <td>P3 AI</td>
-          <td>Activation</td>
-          <td>C9, C0, C7</td>
-          <td style="text-align:center">B+C</td>
-        </tr><tr>
-          <td>Store-connected template preview</td>
-          <td style="text-align:center">Q2</td>
-          <td>P3 AI</td>
-          <td>Template Improvement</td>
-          <td>C4, C8</td>
-          <td style="text-align:center">B+C</td>
-        </tr><tr>
-          <td>DRAFT-resurrect campaign</td>
-          <td style="text-align:center">Q2</td>
-          <td>P4 Omni</td>
-          <td>Activation</td>
-          <td>C9, C0, C7</td>
-          <td style="text-align:center">B+C</td>
-        </tr><tr>
-          <td>SMS variant generation & A/B</td>
-          <td style="text-align:center">Q2</td>
-          <td>P4 Omni</td>
-          <td>Omnichannel</td>
-          <td>C12</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Multi-brand kits per account</td>
-          <td style="text-align:center">Q3</td>
-          <td>P1 Trust</td>
-          <td>Brandkit</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>Universal Content audit & version history</td>
-          <td style="text-align:center">Q3</td>
-          <td>P2 Universal</td>
-          <td>Universal Content</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>Universal Content in CJB</td>
-          <td style="text-align:center">Q3</td>
-          <td>P2 Universal</td>
-          <td>Universal Content</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>Conversational email refinement</td>
-          <td style="text-align:center">Q3</td>
-          <td>P3 AI</td>
-          <td>Ai Builder</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A+C</td>
-        </tr><tr>
-          <td>Goal-driven campaign agent</td>
-          <td style="text-align:center">Q3</td>
-          <td>P3 AI</td>
-          <td>Ai Builder</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A+C</td>
-        </tr><tr>
-          <td>Lifecycle coverage gap analyzer</td>
-          <td style="text-align:center">Q3</td>
-          <td>P3 AI</td>
-          <td>Activation</td>
-          <td>C9, C0, C7</td>
-          <td style="text-align:center">B+C</td>
-        </tr><tr>
-          <td>Per-profile Smart Send Time & Personalized A/B</td>
-          <td style="text-align:center">Q3</td>
-          <td>P3 AI</td>
-          <td>Ai Builder</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A+C</td>
-        </tr><tr>
-          <td>Per-recipient dynamic images</td>
-          <td style="text-align:center">Q3</td>
-          <td>P3 AI</td>
-          <td>Ai Builder</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A+C</td>
-        </tr><tr>
-          <td>Brand Kit on SMS short links & sender ID</td>
-          <td style="text-align:center">Q3</td>
-          <td>P4 Omni</td>
-          <td>Omnichannel</td>
-          <td>C12</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Contextual feature discovery prompts</td>
-          <td style="text-align:center">Q3</td>
-          <td>P4 Omni</td>
-          <td>Activation</td>
-          <td>C9, C0, C7</td>
-          <td style="text-align:center">B+C</td>
-        </tr><tr>
-          <td>Cross-channel preview side-by-side</td>
-          <td style="text-align:center">Q3</td>
-          <td>P4 Omni</td>
-          <td>Omnichannel</td>
-          <td>C12</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Shared content blocks in email + SMS</td>
-          <td style="text-align:center">Q3</td>
-          <td>P4 Omni</td>
-          <td>Omnichannel</td>
-          <td>C12</td>
-          <td style="text-align:center">C</td>
-        </tr><tr>
-          <td>Approval workflow & version history</td>
-          <td style="text-align:center">Q4</td>
-          <td>P1 Trust</td>
-          <td>Collaboration</td>
-          <td>—</td>
-          <td style="text-align:center">—</td>
-        </tr><tr>
-          <td>Block-level comments & @-mentions</td>
-          <td style="text-align:center">Q4</td>
-          <td>P1 Trust</td>
-          <td>Collaboration</td>
-          <td>—</td>
-          <td style="text-align:center">—</td>
-        </tr><tr>
-          <td>Cross-account brand inheritance</td>
-          <td style="text-align:center">Q4</td>
-          <td>P1 Trust</td>
-          <td>Brandkit</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>Locked layouts for brand governance</td>
-          <td style="text-align:center">Q4</td>
-          <td>P1 Trust</td>
-          <td>Brandkit</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>Real-time multi-author co-editing</td>
-          <td style="text-align:center">Q4</td>
-          <td>P1 Trust</td>
-          <td>Collaboration</td>
-          <td>—</td>
-          <td style="text-align:center">—</td>
-        </tr><tr>
-          <td>Funded migration program</td>
-          <td style="text-align:center">Q4</td>
-          <td>P2 Universal</td>
-          <td>Universal Content</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A</td>
-        </tr><tr>
-          <td>AI brand-style transfer</td>
-          <td style="text-align:center">Q4</td>
-          <td>P3 AI</td>
-          <td>Ai Builder</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A+C</td>
-        </tr><tr>
-          <td>Campaign brief to multi-variant</td>
-          <td style="text-align:center">Q4</td>
-          <td>P3 AI</td>
-          <td>Ai Builder</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A+C</td>
-        </tr><tr>
-          <td>Store intelligence in generation</td>
-          <td style="text-align:center">Q4</td>
-          <td>P3 AI</td>
-          <td>Ai Builder</td>
-          <td>C2, C5, C6, C3 +2</td>
-          <td style="text-align:center">A+C</td>
-        </tr></tbody>
+  <thead>
+    <tr>
+      <th>Priority Rank</th><th>Tier</th><th>Cluster</th><th style="text-align:right;">Customers</th><th style="text-align:right;">% Cohort</th><th style="text-align:right;">Avg MRR</th><th style="text-align:right;">FY27 Revenue Impact</th><th>Bundle</th><th>Primary Lever (Initiative &middot; Sub-Theme &middot; Quarter)</th><th>Why Prioritize (or Deprioritize)</th>
+    </tr>
+  </thead>
+  <tbody>
+<tr>
+      <td style="text-align:center;"><strong>1</strong></td><td style="text-align:center;">P1</td>
+      <td class="stage-cell">C2 · High-MRR Power Users</td>
+      <td style="text-align:right;">37,079</td><td style="text-align:right;">2.2%</td>
+      <td style="text-align:right;">$676</td>
+      <td class="mrr-cell" style="text-align:right;">$5.17M</td>
+      <td style="text-align:center;">A</td>
+      <td style="font-size:8.5pt;">Universal Content block primitive (Universal, Q1)</td>
+      <td>Highest FY27 EV; $676 avg MRR power users. Universal Content + migration + Code Mode unlock disproportionate value per account.</td>
+    </tr>
+<tr>
+      <td style="text-align:center;"><strong>2</strong></td><td style="text-align:center;">P1</td>
+      <td class="stage-cell">C5 · Enterprise-Scale Power Senders</td>
+      <td style="text-align:right;">33,836</td><td style="text-align:right;">2.0%</td>
+      <td style="text-align:right;">$433</td>
+      <td class="mrr-cell" style="text-align:right;">$3.36M</td>
+      <td style="text-align:center;">A</td>
+      <td style="font-size:8.5pt;">Universal Content block primitive (Universal, Q1)</td>
+      <td>Enterprise-intensity senders (~194 creates/mo). Stress-test rendering and ship Code Mode; high completion = fast adoption.</td>
+    </tr>
+<tr>
+      <td style="text-align:center;"><strong>3</strong></td><td style="text-align:center;">P1</td>
+      <td class="stage-cell">C6 · Tenured High-Completion Senders</td>
+      <td style="text-align:right;">254,185</td><td style="text-align:right;">15.4%</td>
+      <td style="text-align:right;">$45</td>
+      <td class="mrr-cell" style="text-align:right;">$2.54M</td>
+      <td style="text-align:center;">A</td>
+      <td style="font-size:8.5pt;">Universal Content block primitive (Universal, Q1)</td>
+      <td>Largest healthy mid-market cluster (15% of cohort). Protect established 83% completion habit with UC + AI efficiency plays.</td>
+    </tr>
+<tr>
+      <td style="text-align:center;"><strong>4</strong></td><td style="text-align:center;">P1</td>
+      <td class="stage-cell">C3 · Consistent Volume Senders</td>
+      <td style="text-align:right;">104,424</td><td style="text-align:right;">6.3%</td>
+      <td style="text-align:right;">$88</td>
+      <td class="mrr-cell" style="text-align:right;">$2.11M</td>
+      <td style="text-align:center;">A</td>
+      <td style="font-size:8.5pt;">Universal Content block primitive (Universal, Q1)</td>
+      <td>Stable volume senders with 76% completion. Retention + cross-channel expansion; strong Universal Content eligibility.</td>
+    </tr>
+<tr>
+      <td style="text-align:center;"><strong>5</strong></td><td style="text-align:center;">P1</td>
+      <td class="stage-cell">C1 · Reliable Mid-Market Senders</td>
+      <td style="text-align:right;">277,782</td><td style="text-align:right;">16.8%</td>
+      <td style="text-align:right;">$33</td>
+      <td class="mrr-cell" style="text-align:right;">$1.90M</td>
+      <td style="text-align:center;">A</td>
+      <td style="font-size:8.5pt;">AI Email Setup Agent (AI, Q1)</td>
+      <td>Broad mid-market base (17% of cohort). Reliable senders — AI Setup Agent + Universal Content drive efficiency at scale.</td>
+    </tr>
+<tr>
+      <td style="text-align:center;"><strong>6</strong></td><td style="text-align:center;">P3</td>
+      <td class="stage-cell">C4 · Growing-but-Incomplete Senders</td>
+      <td style="text-align:right;">195,805</td><td style="text-align:right;">11.9%</td>
+      <td style="text-align:right;">$39</td>
+      <td style="text-align:right;">$1.59M</td>
+      <td style="text-align:center;">C</td>
+      <td style="font-size:8.5pt;">AI Email Setup Agent (AI, Q1)</td>
+      <td>Create-but-don&#x27;t-publish gap (~43% completion). Template + AI assist after foundation fixes; meaningful EV but needs trust first.</td>
+    </tr>
+<tr>
+      <td style="text-align:center;"><strong>7</strong></td><td style="text-align:center;">P1</td>
+      <td class="stage-cell">C11 · Rising-Usage Power Senders</td>
+      <td style="text-align:right;">73,135</td><td style="text-align:right;">4.4%</td>
+      <td style="text-align:right;">$94</td>
+      <td class="mrr-cell" style="text-align:right;">$1.58M</td>
+      <td style="text-align:center;">A</td>
+      <td style="font-size:8.5pt;">Universal Content block primitive (Universal, Q1)</td>
+      <td>Rising-usage power senders with expansion headroom. Wave-1 Universal Content candidates with growing publish trends.</td>
+    </tr>
+<tr>
+      <td style="text-align:center;"><strong>8</strong></td><td style="text-align:center;">P3</td>
+      <td class="stage-cell">C10 · AI-Adopted Premium Senders</td>
+      <td style="text-align:right;">4,573</td><td style="text-align:right;">0.3%</td>
+      <td style="text-align:right;">$561</td>
+      <td style="text-align:right;">$589K</td>
+      <td style="text-align:center;">C</td>
+      <td style="font-size:8.5pt;">Universal Content block primitive (Universal, Q1)</td>
+      <td>Premium AI-adopted senders ($561 MRR). Expand Universal Content + Code Mode; small count, high per-user value.</td>
+    </tr>
+<tr>
+      <td style="text-align:center;"><strong>9</strong></td><td style="text-align:center;">P3</td>
+      <td class="stage-cell">C12 · AI-Ready Mid-Market Senders</td>
+      <td style="text-align:right;">20,412</td><td style="text-align:right;">1.2%</td>
+      <td style="text-align:right;">$107</td>
+      <td style="text-align:right;">$471K</td>
+      <td style="text-align:center;">C</td>
+      <td style="font-size:8.5pt;">Universal Content block primitive (Universal, Q1)</td>
+      <td>AI-ready mid-market bridge cluster. Connect AI builder investments to Universal Content migration path.</td>
+    </tr>
+<tr>
+      <td style="text-align:center;"><strong>10</strong></td><td style="text-align:center;">P2</td>
+      <td class="stage-cell">C8 · Test-Heavy, Low-Publish Friction</td>
+      <td style="text-align:right;">23,196</td><td style="text-align:right;">1.4%</td>
+      <td style="text-align:right;">$73</td>
+      <td class="mrr-cell" style="text-align:right;">$382K</td>
+      <td style="text-align:center;">B</td>
+      <td style="font-size:8.5pt;">Universal Content block primitive (Universal, Q1)</td>
+      <td>Test-heavy, low-publish (33% completion). Rendering/trust fixes are prerequisite — foundation before activation.</td>
+    </tr>
+<tr>
+      <td style="text-align:center;"><strong>11</strong></td><td style="text-align:center;">P2</td>
+      <td class="stage-cell">C9 · High-Friction Abandoners</td>
+      <td style="text-align:right;">132,430</td><td style="text-align:right;">8.0%</td>
+      <td style="text-align:right;">$13</td>
+      <td class="mrr-cell" style="text-align:right;">$280K</td>
+      <td style="text-align:center;">B</td>
+      <td style="font-size:8.5pt;">AI Email Setup Agent (AI, Q1)</td>
+      <td>Highest friction (0.75): creates but almost never publishes. Fix foundation in Q1 parallel track; low FY27 EV but high product-health signal.</td>
+    </tr>
+<tr>
+      <td style="text-align:center;"><strong>12</strong></td><td style="text-align:center;">P2</td>
+      <td class="stage-cell">C0 · Dormant Paid (Declining Usage)</td>
+      <td style="text-align:right;">149,322</td><td style="text-align:right;">9.0%</td>
+      <td style="text-align:right;">$61</td>
+      <td class="mrr-cell" style="text-align:right;">$101K</td>
+      <td style="text-align:center;">B</td>
+      <td style="font-size:8.5pt;">AI Email Setup Agent (AI, Q1)</td>
+      <td>Dormant paid with declining usage. Win-back via DRAFT-resurrect + rendering trust; churn protection, not growth lever.</td>
+    </tr>
+<tr>
+      <td style="text-align:center;"><strong>13</strong></td><td style="text-align:center;">P4</td>
+      <td class="stage-cell">C7 · Dormant Free / Low-MRR Base</td>
+      <td style="text-align:right;">345,413</td><td style="text-align:right;">20.9%</td>
+      <td style="text-align:right;">$20</td>
+      <td style="text-align:right;">$4K</td>
+      <td style="text-align:center;">C</td>
+      <td style="font-size:8.5pt;">Inbox rendering parity fix (Trust, Q1)</td>
+      <td>Largest cluster by count (21% of cohort) but near-zero completion. Activation only after Bundle B fixes; do not prioritize for $21M gap.</td>
+    </tr>
+  </tbody>
 </table>
 
-<p class="note">Generated from BigQuery full population (1,651,592 customers). Methodology: KMeans clustering → eligibility EV → FY27 roadmap mapping.</p>
+<p class="note">Priority rank = FY27 EV from eligibility model (16% FY27 realization factor). Cohort = 1,651,592 paid + active free Builder users (3.4% of 48M Mailchimp accounts). KMeans k=13 on 21 behavioral features. Pipeline: <code>mailchimp-builder-21m-targeting-plan</code>.</p>
 </div>
 
 <script>
