@@ -28,9 +28,9 @@
   .frame-head { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; margin-bottom: 8px; }
   .step-id { font-family: ui-monospace, monospace; font-size: 9pt; background: #eee; padding: 2px 6px; }
   .stage-badge { font-size: 8pt; color: #444; }
-  .shot { background: #e8e8e8; border: 2px dashed #888; min-height: 140px; display: flex; align-items: center; justify-content: center;
-    text-align: center; padding: 16px; margin: 10px 0; font-size: 9pt; color: #333; }
-  .shot small { display: block; margin-top: 8px; color: #555; font-family: ui-monospace, monospace; font-size: 8pt; }
+  .shot { margin: 10px 0; border: 1px solid #bfbfbf; background: #fafafa; padding: 0; overflow: hidden; }
+  .shot img { display: block; width: 100%; height: auto; vertical-align: middle; }
+  .shot figcaption { font-size: 8.5pt; color: #555; padding: 8px 10px; border-top: 1px solid #e5e7eb; background: #f9fafb; }
   table { width: 100%; border-collapse: collapse; font-size: 9pt; margin: 8px 0; }
   th, td { border: 1px solid #bfbfbf; padding: 5px 7px; vertical-align: top; text-align: left; }
   th { background: #d9d9d9; }
@@ -104,7 +104,7 @@
     <li><strong>Flows built:</strong> Draft only; activation deliberately avoided per Scrawler guardrails.</li>
     <li><strong>Evidence:</strong> Live browser session 2026-05-26; step logs in <code>cjb-scrawler/findings/run-2026-05-26.jsonl</code> (not committed); synthesis in <a href="cjb-scrawler-report.html">cjb-scrawler-report.html</a> and <code>cjb-scrawler/fix-backlog.md</code>.</li>
     <li><strong>Taxonomy:</strong> 8-stage CJB workflow (stages 1–8 from <code>generate_cjb_workflow_health.py</code>).</li>
-    <li><strong>Screenshots:</strong> Placeholders below; capture to <code>cjb-scrawler/screenshots/run-2026-05-26/{step_id}.png</code> (gitignored) on next authenticated pass.</li>
+    <li><strong>Screenshots:</strong> Annotated figures below (SVG); optional live PNG capture to <code>cjb-marketer-audit/images/{step_id}.png</code> (gitignored) on next authenticated pass.</li>
     <li><strong>Test audience:</strong> Contact search succeeded; dedicated <code>Scrawler QA</code> segment not created (setup blocked).</li>
   </ul>
 </div>
@@ -128,8 +128,8 @@
     <span class="step-id">setup_01_login</span>
     <span class="stage-badge">Stage 2 — Define Entry &amp; Audience (access)</span>
   </div>
-  <div class="shot">Screenshot: Mailchimp login — Intuit email field, password, cookie consent banner overlay<br>
-    <small>cjb-scrawler/screenshots/run-2026-05-26/setup_01_login.png</small></div>
+  <figure class="shot"><img src="images/setup_01_login.svg" alt="Screenshot: Mailchimp login — Intuit email field, password, cookie consent banner overlay cjb-scrawler/screenshots/run-2026-05-26/setup_01_login.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: Mailchimp login — Intuit email field, password, cookie consent banner overlay<br>
+    <small>cjb-scrawler/screenshots/run-2026-05-26/setup_01_login.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> Full viewport at <code>login.mailchimp.com</code> showing Intuit-branded email-first form and cookie consent.</p>
   <dl class="meta-grid">
     <dt>Marketer goal</dt><dd>Reach authenticated Automations workspace quickly.</dd>
@@ -147,8 +147,8 @@
     <span class="step-id">setup_02_tfa</span>
     <span class="stage-badge">Stage 2</span>
   </div>
-  <div class="shot">Screenshot: SMS 2FA code entry (Intuit MFA)<br>
-    <small>cjb-scrawler/screenshots/run-2026-05-26/setup_02_tfa.png</small></div>
+  <figure class="shot"><img src="images/setup_02_tfa.svg" alt="Screenshot: SMS 2FA code entry (Intuit MFA) cjb-scrawler/screenshots/run-2026-05-26/setup_02_tfa.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: SMS 2FA code entry (Intuit MFA)<br>
+    <small>cjb-scrawler/screenshots/run-2026-05-26/setup_02_tfa.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> MFA challenge screen after password; SMS delivery indicated.</p>
   <dl class="meta-grid">
     <dt>Marketer goal</dt><dd>Complete secure login without abandoning automation work.</dd>
@@ -165,8 +165,8 @@
     <span class="step-id">setup_03_nav</span>
     <span class="stage-badge">Stage 1 — Discover</span>
   </div>
-  <div class="shot">Screenshot: Admin home → Automations / Customer Journeys entry<br>
-    <small>cjb-scrawler/screenshots/run-2026-05-26/setup_03_nav.png</small></div>
+  <figure class="shot"><img src="images/setup_03_nav.svg" alt="Screenshot: Admin home → Automations / Customer Journeys entry cjb-scrawler/screenshots/run-2026-05-26/setup_03_nav.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: Admin home → Automations / Customer Journeys entry<br>
+    <small>cjb-scrawler/screenshots/run-2026-05-26/setup_03_nav.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> Left nav with Automations highlighted; optional internal dev toolbar visible (staff account).</p>
   <dl class="meta-grid">
     <dt>Marketer goal</dt><dd>Open Customer Journey Builder list or create flow.</dd>
@@ -183,8 +183,8 @@
     <span class="step-id">setup_04_segment</span>
     <span class="stage-badge">Stage 2</span>
   </div>
-  <div class="shot">Screenshot: Audience → Segments (Scrawler QA not created) or contact search hit<br>
-    <small>cjb-scrawler/screenshots/run-2026-05-26/setup_04_segment.png</small></div>
+  <figure class="shot"><img src="images/setup_04_segment.svg" alt="Screenshot: Audience → Segments (Scrawler QA not created) or contact search hit cjb-scrawler/screenshots/run-2026-05-26/setup_04_segment.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: Audience → Segments (Scrawler QA not created) or contact search hit<br>
+    <small>cjb-scrawler/screenshots/run-2026-05-26/setup_04_segment.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> Either empty segment list or Contacts search showing test email match.</p>
   <dl class="meta-grid">
     <dt>Marketer goal</dt><dd>Isolate test contacts before live activation.</dd>
@@ -202,7 +202,7 @@
 
 <div class="frame" id="ecom_00_nav">
   <div class="frame-head"><span class="step-id">ecom_00_nav</span><span class="stage-badge">Stage 1</span><span>— pass</span></div>
-  <div class="shot">Screenshot: CJB canvas empty state — new journey title field, “Build from scratch”<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_00_nav.png</small></div>
+  <figure class="shot"><img src="images/ecom_00_nav.svg" alt="Screenshot: CJB canvas empty state — new journey title field, “Build from scratch” cjb-scrawler/screenshots/run-2026-05-26/ecom_00_nav.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: CJB canvas empty state — new journey title field, “Build from scratch”<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_00_nav.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> New journey screen; flow name <code>Scrawler_Ecom_Welcome_FirstPurchase</code> visible.</p>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Start welcome series without wrong template.</dd><dt>Actions taken</dt><dd>Automations → Create → Customer Journey; build from scratch.</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
@@ -211,7 +211,7 @@
 
 <div class="frame" id="ecom_01_intent">
   <div class="frame-head"><span class="step-id">ecom_01_intent</span><span class="stage-badge">Stage 1</span><span>— fail P1</span></div>
-  <div class="shot">Screenshot: Starting Points / trigger modal — category tabs (Popular, Contact Activity, Shopping…), no search box<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_01_intent.png</small></div>
+  <figure class="shot"><img src="images/ecom_01_intent.svg" alt="Screenshot: Starting Points / trigger modal — category tabs (Popular, Contact Activity, Shopping…), no search box cjb-scrawler/screenshots/run-2026-05-26/ecom_01_intent.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: Starting Points / trigger modal — category tabs (Popular, Contact Activity, Shopping…), no search box<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_01_intent.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> Full trigger picker showing tab strip and scrollable list; highlight absent search field.</p>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Find “signs up for email” without hunting every category.</dd><dt>Actions taken</dt><dd>Browsed tabs; selected signup trigger under Contact Activity (not Popular).</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
@@ -221,7 +221,7 @@
 
 <div class="frame" id="ecom_02_trigger">
   <div class="frame-head"><span class="step-id">ecom_02_trigger</span><span class="stage-badge">Stage 2</span><span>— pass</span></div>
-  <div class="shot">Screenshot: Trigger saved — “Signs up for Email” + Goodnight Fox audience<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_02_trigger.png</small></div>
+  <figure class="shot"><img src="images/ecom_02_trigger.svg" alt="Screenshot: Trigger saved — “Signs up for Email” + Goodnight Fox audience cjb-scrawler/screenshots/run-2026-05-26/ecom_02_trigger.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: Trigger saved — “Signs up for Email” + Goodnight Fox audience<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_02_trigger.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> Canvas with starting point node configured; trigger side panel closed.</p>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Limit entry to new subscribers on test/production audience.</dd><dt>Actions taken</dt><dd>Configured Signs up for Email on Goodnight Fox list.</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
@@ -230,7 +230,7 @@
 
 <div class="frame" id="ecom_03_email1">
   <div class="frame-head"><span class="step-id">ecom_03_email1</span><span class="stage-badge">Stage 4</span><span>— pass + fail P2</span></div>
-  <div class="shot">Screenshot: Legacy vs New Builder choice OR campaign wizard with subject “Welcome to Goodnight Fox…”<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_03_email1.png</small></div>
+  <figure class="shot"><img src="images/ecom_03_email1.svg" alt="Screenshot: Legacy vs New Builder choice OR campaign wizard with subject “Welcome to Goodnight Fox…” cjb-scrawler/screenshots/run-2026-05-26/ecom_03_email1.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: Legacy vs New Builder choice OR campaign wizard with subject “Welcome to Goodnight Fox…”<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_03_email1.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> Email step editor showing builder fork modal or legacy campaign setup with subject line filled.</p>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Ship on-brand welcome email immediately after signup.</dd><dt>Actions taken</dt><dd>Added Send email step; set subject; body partially configured via wizard.</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
@@ -240,7 +240,7 @@
 
 <div class="frame" id="ecom_04_delay1">
   <div class="frame-head"><span class="step-id">ecom_04_delay1</span><span class="stage-badge">Stage 3</span><span>— pass</span></div>
-  <div class="shot">Screenshot: Delay node inspector — “2 days” (changed from 1 week default)<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_04_delay1.png</small></div>
+  <figure class="shot"><img src="images/ecom_04_delay1.svg" alt="Screenshot: Delay node inspector — “2 days” (changed from 1 week default) cjb-scrawler/screenshots/run-2026-05-26/ecom_04_delay1.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: Delay node inspector — “2 days” (changed from 1 week default)<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_04_delay1.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> Canvas delay between email 1 and next step; inspector showing 2-day value.</p>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Wait 2–3 days before social-proof email (not 7).</dd><dt>Actions taken</dt><dd>Added delay via map “+”; changed default 1 week → 2 days.</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
@@ -250,7 +250,7 @@
 
 <div class="frame" id="ecom_05_email2">
   <div class="frame-head"><span class="step-id">ecom_05_email2</span><span class="stage-badge">Stage 4</span><span>— pass (incomplete)</span></div>
-  <div class="shot">Screenshot: Second email node on canvas — subject/content incomplete<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_05_email2.png</small></div>
+  <figure class="shot"><img src="images/ecom_05_email2.svg" alt="Screenshot: Second email node on canvas — subject/content incomplete cjb-scrawler/screenshots/run-2026-05-26/ecom_05_email2.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: Second email node on canvas — subject/content incomplete<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_05_email2.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> Two email nodes; second shows warning/incomplete state if UI exposes it.</p>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Email 2: social proof / bestsellers per playbook.</dd><dt>Actions taken</dt><dd>Added second Send email; did not finish content.</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
@@ -259,7 +259,7 @@
 
 <div class="frame" id="ecom_06_delay2">
   <div class="frame-head"><span class="step-id">ecom_06_delay2</span><span class="stage-badge">Stage 3</span><span>— blocked</span></div>
-  <div class="shot">Screenshot: Canvas stopping after email 2 — delays 3–4 not added (annotated)<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_06_delay2.png</small></div>
+  <figure class="shot"><img src="images/ecom_06_delay2.svg" alt="Screenshot: Canvas stopping after email 2 — delays 3–4 not added (annotated) cjb-scrawler/screenshots/run-2026-05-26/ecom_06_delay2.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: Canvas stopping after email 2 — delays 3–4 not added (annotated)<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_06_delay2.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> Partial map vs playbook target (3 emails, 2 delays).</p>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>3-day wait before offer email.</dd><dt>Actions taken</dt><dd>Not reached in live run (audit time budget).</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
@@ -268,7 +268,7 @@
 
 <div class="frame" id="ecom_07_email3">
   <div class="frame-head"><span class="step-id">ecom_07_email3</span><span class="stage-badge">Stage 4</span><span>— not run</span></div>
-  <div class="shot">Screenshot: (Planned) Third email — first-purchase offer ~10% off<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_07_email3.png</small></div>
+  <figure class="shot"><img src="images/ecom_07_email3.svg" alt="Screenshot: (Planned) Third email — first-purchase offer ~10% off cjb-scrawler/screenshots/run-2026-05-26/ecom_07_email3.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: (Planned) Third email — first-purchase offer ~10% off<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_07_email3.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> Email 3 step with promo CTA and code placeholder.</p>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Convert with exclusive first-order discount.</dd><dt>Actions taken</dt><dd>—</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
@@ -277,7 +277,7 @@
 
 <div class="frame" id="ecom_08_review">
   <div class="frame-head"><span class="step-id">ecom_08_review</span><span class="stage-badge">Stage 6</span><span>— pass</span></div>
-  <div class="shot">Screenshot: Review map / header — Continue disabled or Draft status; Turn On visible but not clicked<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_08_review.png</small></div>
+  <figure class="shot"><img src="images/ecom_08_review.svg" alt="Screenshot: Review map / header — Continue disabled or Draft status; Turn On visible but not clicked cjb-scrawler/screenshots/run-2026-05-26/ecom_08_review.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: Review map / header — Continue disabled or Draft status; Turn On visible but not clicked<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_08_review.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> Top bar showing Save, Continue (disabled state), Turn On (not activated).</p>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Validate map before go-live; avoid accidental activation.</dd><dt>Actions taken</dt><dd>Reviewed canvas; did not Turn On.</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
@@ -287,7 +287,7 @@
 
 <div class="frame" id="ecom_09_save">
   <div class="frame-head"><span class="step-id">ecom_09_save</span><span class="stage-badge">Stage 6</span><span>— pass</span></div>
-  <div class="shot">Screenshot: Automations list — journey in Draft<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_09_save.png</small></div>
+  <figure class="shot"><img src="images/ecom_09_save.svg" alt="Screenshot: Automations list — journey in Draft cjb-scrawler/screenshots/run-2026-05-26/ecom_09_save.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: Automations list — journey in Draft<br><small>cjb-scrawler/screenshots/run-2026-05-26/ecom_09_save.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> Customer Journeys index row for Scrawler_Ecom_* with Draft badge.</p>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Save work and return later to finish content.</dd><dt>Actions taken</dt><dd>Save and close (after closing email modals).</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
@@ -300,7 +300,7 @@
 
 <div class="frame" id="proserv_00_nav">
   <div class="frame-head"><span class="step-id">proserv_00_nav</span><span class="stage-badge">Stage 1</span><span>— pass</span></div>
-  <div class="shot">Screenshot: New ProServ journey — build from scratch (no abandoned-cart template)<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_00_nav.png</small></div>
+  <figure class="shot"><img src="images/proserv_00_nav.svg" alt="Screenshot: New ProServ journey — build from scratch (no abandoned-cart template) cjb-scrawler/screenshots/run-2026-05-26/proserv_00_nav.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: New ProServ journey — build from scratch (no abandoned-cart template)<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_00_nav.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> Blank canvas; flow name Scrawler_ProServ_*.</p>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Start nurture flow without e-commerce template noise.</dd><dt>Actions taken</dt><dd>Build from scratch (avoid cart templates).</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
@@ -309,7 +309,7 @@
 
 <div class="frame" id="proserv_01_template">
   <div class="frame-head"><span class="step-id">proserv_01_template</span><span class="stage-badge">Stage 1</span><span>— documented</span></div>
-  <div class="shot">Screenshot: Template gallery — cart/checkout templates prominent<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_01_template.png</small></div>
+  <figure class="shot"><img src="images/proserv_01_template.svg" alt="Screenshot: Template gallery — cart/checkout templates prominent cjb-scrawler/screenshots/run-2026-05-26/proserv_01_template.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: Template gallery — cart/checkout templates prominent<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_01_template.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> Optional gallery screen showing retail-first templates (for persona gap evidence).</p>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Find consultation/nurture template.</dd><dt>Actions taken</dt><dd>Skipped gallery; noted skew from parallel e-com run.</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
@@ -318,7 +318,7 @@
 
 <div class="frame" id="proserv_02_trigger">
   <div class="frame-head"><span class="step-id">proserv_02_trigger</span><span class="stage-badge">Stage 2</span><span>— pass</span></div>
-  <div class="shot">Screenshot: Tag trigger — combobox with long tag list; new tag scrawler-proserv-lead; Save Trigger disabled until confirmed<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_02_trigger.png</small></div>
+  <figure class="shot"><img src="images/proserv_02_trigger.svg" alt="Screenshot: Tag trigger — combobox with long tag list; new tag scrawler-proserv-lead; Save Trigger disabled until confirmed cjb-scrawler/screenshots/run-2026-05-26/proserv_02_trigger.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: Tag trigger — combobox with long tag list; new tag scrawler-proserv-lead; Save Trigger disabled until confirmed<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_02_trigger.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> Tag picker with radio selection; highlight finicky click target on tag row.</p>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Enter leads when tag applied (CRM/handoff pattern).</dd><dt>Actions taken</dt><dd>Created tag via combobox; selected tag; saved trigger.</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
@@ -329,7 +329,7 @@
 
 <div class="frame" id="proserv_03_email1">
   <div class="frame-head"><span class="step-id">proserv_03_email1</span><span class="stage-badge">Stage 4</span><span>— pass (shell only)</span></div>
-  <div class="shot">Screenshot: Single email node — content not configured<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_03_email1.png</small></div>
+  <figure class="shot"><img src="images/proserv_03_email1.svg" alt="Screenshot: Single email node — content not configured cjb-scrawler/screenshots/run-2026-05-26/proserv_03_email1.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: Single email node — content not configured<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_03_email1.png</small></figcaption></figure>
   <p><strong>Capture spec:</strong> Canvas with one Send email step; editor not completed.</p>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Personal intro — low promo tone.</dd><dt>Actions taken</dt><dd>Added email step; did not configure body.</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
@@ -339,7 +339,7 @@
 
 <div class="frame" id="proserv_04_delay1">
   <div class="frame-head"><span class="step-id">proserv_04_delay1</span><span class="stage-badge">Stage 3</span><span>— not run</span></div>
-  <div class="shot">Screenshot: (Planned) 3-day delay after email 1<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_04_delay1.png</small></div>
+  <figure class="shot"><img src="images/proserv_04_delay1.svg" alt="Screenshot: (Planned) 3-day delay after email 1 cjb-scrawler/screenshots/run-2026-05-26/proserv_04_delay1.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: (Planned) 3-day delay after email 1<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_04_delay1.png</small></figcaption></figure>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Space nurture emails for professional services cadence.</dd><dt>Actions taken</dt><dd>—</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
   <tr><td>1-week delay default if added without edit</td><td class="type-usability">Usability</td><td class="impact-slows">Slows</td><td>—</td></tr></table>
@@ -347,26 +347,26 @@
 
 <div class="frame" id="proserv_05_email2">
   <div class="frame-head"><span class="step-id">proserv_05_email2</span><span class="stage-badge">Stage 4</span><span>— not run</span></div>
-  <div class="shot">Screenshot: (Planned) Value content email — no cart language<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_05_email2.png</small></div>
+  <figure class="shot"><img src="images/proserv_05_email2.svg" alt="Screenshot: (Planned) Value content email — no cart language cjb-scrawler/screenshots/run-2026-05-26/proserv_05_email2.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: (Planned) Value content email — no cart language<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_05_email2.png</small></figcaption></figure>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Checklist/FAQ before consultation.</dd><dt>Actions taken</dt><dd>—</dd></dl>
   <table><tr><th colspan="4"><em>Blocked by partial run — required for launch.</em></th></tr></table>
 </div>
 
 <div class="frame" id="proserv_06_delay2">
   <div class="frame-head"><span class="step-id">proserv_06_delay2</span><span class="stage-badge">Stage 3</span><span>— not run</span></div>
-  <div class="shot">Screenshot: (Planned) 2-day delay<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_06_delay2.png</small></div>
+  <figure class="shot"><img src="images/proserv_06_delay2.svg" alt="Screenshot: (Planned) 2-day delay cjb-scrawler/screenshots/run-2026-05-26/proserv_06_delay2.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: (Planned) 2-day delay<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_06_delay2.png</small></figcaption></figure>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>2-day gap before booking CTA.</dd><dt>Actions taken</dt><dd>—</dd></dl>
 </div>
 
 <div class="frame" id="proserv_07_email3">
   <div class="frame-head"><span class="step-id">proserv_07_email3</span><span class="stage-badge">Stage 4</span><span>— not run</span></div>
-  <div class="shot">Screenshot: (Planned) Book a consultation CTA email<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_07_email3.png</small></div>
+  <figure class="shot"><img src="images/proserv_07_email3.svg" alt="Screenshot: (Planned) Book a consultation CTA email cjb-scrawler/screenshots/run-2026-05-26/proserv_07_email3.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: (Planned) Book a consultation CTA email<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_07_email3.png</small></figcaption></figure>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Single clear booking CTA.</dd><dt>Actions taken</dt><dd>—</dd></dl>
 </div>
 
 <div class="frame" id="proserv_08_branch">
   <div class="frame-head"><span class="step-id">proserv_08_branch</span><span class="stage-badge">Stage 5</span><span>— not run</span></div>
-  <div class="shot">Screenshot: (Planned) If/else on tag appointment-booked<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_08_branch.png</small></div>
+  <figure class="shot"><img src="images/proserv_08_branch.svg" alt="Screenshot: (Planned) If/else on tag appointment-booked cjb-scrawler/screenshots/run-2026-05-26/proserv_08_branch.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: (Planned) If/else on tag appointment-booked<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_08_branch.png</small></figcaption></figure>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Stop nurture when appointment booked.</dd><dt>Actions taken</dt><dd>Stretch step — not attempted.</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
   <tr><td>Advanced segmentation for simple tag branch</td><td class="type-barrier">Barrier</td><td class="impact-slows">Slows</td><td>Advanced Segmentation in CJB (if blocked)</td></tr></table>
@@ -374,7 +374,7 @@
 
 <div class="frame" id="proserv_09_review">
   <div class="frame-head"><span class="step-id">proserv_09_review</span><span class="stage-badge">Stage 6</span><span>— pass (early save)</span></div>
-  <div class="shot">Screenshot: Draft save — minimal map (trigger + 1 email shell)<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_09_review.png</small></div>
+  <figure class="shot"><img src="images/proserv_09_review.svg" alt="Screenshot: Draft save — minimal map (trigger + 1 email shell) cjb-scrawler/screenshots/run-2026-05-26/proserv_09_review.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: Draft save — minimal map (trigger + 1 email shell)<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_09_review.png</small></figcaption></figure>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Confirm Draft; no Turn On.</dd><dt>Actions taken</dt><dd>Save and close; logged as proserv_08_review in JSONL.</dd></dl>
   <table><tr><th>Issue</th><th>Type</th><th>Launch impact</th><th>HVC</th></tr>
   <tr><td>Continue / Turn On not viable with empty email</td><td class="type-launch">Launch-blocker</td><td class="impact-blocks">Blocks</td><td>—</td></tr></table>
@@ -382,7 +382,7 @@
 
 <div class="frame" id="proserv_10_save">
   <div class="frame-head"><span class="step-id">proserv_10_save</span><span class="stage-badge">Stage 6</span><span>— pass</span></div>
-  <div class="shot">Screenshot: Automations list — ProServ journey Draft<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_10_save.png</small></div>
+  <figure class="shot"><img src="images/proserv_10_save.svg" alt="Screenshot: Automations list — ProServ journey Draft cjb-scrawler/screenshots/run-2026-05-26/proserv_10_save.png" width="100%" height="auto" loading="lazy" decoding="async"/><figcaption>Screenshot: Automations list — ProServ journey Draft<br><small>cjb-scrawler/screenshots/run-2026-05-26/proserv_10_save.png</small></figcaption></figure>
   <dl class="meta-grid"><dt>Marketer goal</dt><dd>Persist Draft for later completion.</dd><dt>Actions taken</dt><dd>Exit to list view.</dd></dl>
 </div>
 
@@ -433,7 +433,7 @@
     <li><a href="../cjb-workflow-health.html">CJB workflow health</a></li>
     <li><a href="../index.html">Competitive analysis home</a></li>
   </ul>
-  <p style="margin-top:12px;">Screenshots: add PNGs under <code>../cjb-scrawler/screenshots/run-2026-05-26/{step_id}.png</code> and replace placeholder frames in a future pass.</p>
+  <p style="margin-top:12px;">Screenshots: replace SVG with PNG in <code>cjb-marketer-audit/images/</code> after a live capture pass and replace placeholder frames in a future pass.</p>
   <p style="margin-top:8px;">Published path: <code>/cjb-marketer-audit/</code> · Run ID <code>2026-05-26</code></p>
 </footer>
 
