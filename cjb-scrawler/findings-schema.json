@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/deepakp1308/klaviyo-flows-competitive-analysis/cjb-scrawler/findings-schema.json",
+  "title": "CJB Scrawler Finding",
+  "type": "object",
+  "required": [
+    "run_id",
+    "persona",
+    "step_id",
+    "stage",
+    "status",
+    "title",
+    "observed",
+    "expected",
+    "severity",
+    "evidence"
+  ],
+  "properties": {
+    "run_id": { "type": "string", "description": "ISO date or UUID for this audit run" },
+    "persona": { "enum": ["ecom", "proserv", "setup"] },
+    "step_id": { "type": "string" },
+    "stage": { "type": "integer", "minimum": 1, "maximum": 8 },
+    "status": { "enum": ["pass", "fail", "blocked"] },
+    "title": { "type": "string" },
+    "observed": { "type": "string" },
+    "expected": { "type": "string" },
+    "severity": { "enum": ["P0", "P1", "P2", "P3", "—"] },
+    "symptom_hash": { "type": "string" },
+    "known_theme": { "type": "string" },
+    "novel": { "type": "boolean" },
+    "hvc_mrr_proxy": { "type": "string" },
+    "engineering_lane": {
+      "enum": [
+        "cjb_canvas_ui",
+        "c2_platform",
+        "template_catalog",
+        "editor_neb",
+        "integrations",
+        "reporting",
+        "unknown"
+      ]
+    },
+    "roadmap_link": { "type": "string" },
+    "evidence": {
+      "type": "object",
+      "required": ["timestamp"],
+      "properties": {
+        "url": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" },
+        "screenshot": { "type": "string" }
+      }
+    },
+    "fix_proposal": {
+      "type": "object",
+      "properties": {
+        "problem": { "type": "string" },
+        "repro_steps": { "type": "array", "items": { "type": "string" } },
+        "root_cause_hypothesis": { "type": "string" },
+        "proposed_fix": { "type": "string" },
+        "validation": { "type": "string" },
+        "effort": { "enum": ["S", "M", "L"] },
+        "confidence": { "enum": ["H", "M", "L"] }
+      }
+    }
+  },
+  "additionalProperties": true
+}
