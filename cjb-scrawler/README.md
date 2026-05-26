@@ -20,7 +20,7 @@ python3 scripts/build_cjb_scrawler_report.py
 | `findings/run-*.jsonl` | Raw step logs (gitignored) |
 | `fix-backlog.md` | Prioritized fix cards |
 | `../cjb-scrawler-report.html` | GitHub Pages report (deduped issues + step logs) |
-| `../cjb-scrawler-marketer-walkthrough.html` | Screenshot-by-screenshot marketer audit — [live URL](https://deepakp1308.github.io/klaviyo-flows-competitive-analysis/cjb-scrawler-marketer-walkthrough.html) |
+| `../cjb-marketer-audit/` | **Standalone** screenshot-by-screenshot marketer audit — [live URL](https://deepakp1308.github.io/klaviyo-flows-competitive-analysis/cjb-marketer-audit/) |
 | `screenshots/run-<date>/{step_id}.png` | Per-frame captures (gitignored); paths referenced in walkthrough |
 
 ## Log a finding manually
