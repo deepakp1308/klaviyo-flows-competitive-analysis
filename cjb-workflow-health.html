@@ -3013,7 +3013,51 @@
 </ol>
 </div>
 
-<p class="note"><strong>Methodology:</strong> BigQuery May 2026 snapshot. Trigger usage from <code>bi_activities.users_activities</code> (CJB trigger events). Adoption % denominator: 727,930 paid active users. Segment splits from <code>bi_reporting.users</code>. Competitive data from Klaviyo docs (May 2026), Shopify Flow changelog (May 2026), and product teardowns. VOC from UnitQ feature requests (last 12 months). Microcluster references from Customer Targeting tab (13-cluster model).</p>
+<h2>11. Architectural Barriers &amp; Acceleration Recommendations</h2>
+
+<div class="insight-box">
+  <p><strong>Root cause:</strong> Mailchimp&rsquo;s trigger system is hard-coded at three chokepoints. Adding a new trigger requires code changes in <strong>three separate systems</strong> &mdash; the monolith UI, the Numaflow ingestion layer, and the platform DAG service. Klaviyo&rsquo;s architecture is fundamentally different: any metric synced via integration becomes a flow trigger automatically. Their trigger type is just a metric ID; ours is custom Java code per trigger type.</p>
+</div>
+
+<h3>Barrier 1: Hard-coded trigger types across three systems</h3>
+<p>Each new trigger requires synchronized changes in:</p>
+<ul>
+  <li><strong>Legacy Mailchimp monolith UI</strong> &mdash; the customer-facing journey builder canvas has a fixed &ldquo;Starting Point&rdquo; dropdown. The canvas lives in the monolith, not in <code>crmmktg-mktauto</code>. The <code>customer-journey-builder</code> repo in <code>mailchimp-mcmktg</code> is a 4-commit scaffold from March 2025 &mdash; never written into.</li>
+  <li><strong><code>automations-numaflow/transformer-config.yml</code></strong> &mdash; each trigger maps to one of 13 typed Kafka topic schemas with a dedicated <code>eventdriven/</code> domain handler in Java. Adding a trigger means writing a new handler + SpEL filter expressions + Valkey trigger-setting schema.</li>
+  <li><strong><code>automations-platform</code> DAG Service</strong> &mdash; workflow persistence must know the trigger type to validate and store the workflow DAG.</li>
+</ul>
+<p>Result: shipping one new trigger requires coordinated PRs across <strong>three codebases owned by different teams</strong>. This is why zero new trigger types shipped in 12 months.</p>
+
+<h3>Barrier 2: Monolith &harr; C2 dual-path execution</h3>
+<p>The new C2 platform (<code>automations-platform</code> + <code>automations-numaflow</code> + <code>c2-journey-initiation</code>) is modern, well-tested (85% JaCoCo, 0.5h median PR time), and architecturally sound. But customers still hit the legacy monolith trigger paths for most trigger types. The C2 platform handles ingestion, but the monolith still owns:</p>
+<ul>
+  <li>The customer-facing UI (trigger selection, canvas)</li>
+  <li>Workflow persistence (C2 uses in-memory <code>ConcurrentHashMap</code>; DynamoDB not yet wired)</li>
+  <li>Template service (the <code>prebuilt-journey-service</code> repo is archived with no replacement)</li>
+</ul>
+<p>Shipping a new trigger requires changes in <strong>both</strong> the monolith and C2 &mdash; double the engineering cost and cross-team coordination.</p>
+
+<h3>Barrier 3: No generic event-trigger abstraction</h3>
+<p>The <code>automations-numaflow</code> ingestion layer consumes 13+ specific Kafka topics with per-topic domain handlers. Each handler has custom SpEL filter expressions. There is no generic event handler that could process an arbitrary event type with configurable filter rules. This is the root architectural gap vs Klaviyo, where any integration metric is trigger-eligible by default.</p>
+
+<h3>Recommendations to accelerate trigger shipment</h3>
+
+<table>
+  <thead><tr><th style="width:18%;">Option</th><th style="width:30%;">What to build</th><th style="width:15%;">Effort</th><th style="width:15%;">Unblocks</th><th style="width:22%;">How it works</th></tr></thead>
+  <tbody>
+    <tr style="background:#f2f2f2; font-weight:600;"><td>A. Generic Event Trigger</td><td>Single new Numaflow domain handler that consumes a generic event topic from EventBus. SpEL filter config stored in Valkey (not hard-coded). Monolith UI shows &ldquo;Custom Event&rdquo; starting point with integration event dropdown.</td><td>4&ndash;6 weeks (1 senior eng)</td><td>All integration events as triggers &mdash; closes Klaviyo architectural gap</td><td>Composes existing pieces: SpEL evaluation + Valkey caching + <code>trigger-designer</code> YAML editor. Essentially what Klaviyo&rsquo;s metric trigger does.</td></tr>
+    <tr><td>B. Config-Driven Trigger Registry</td><td>YAML/JSON manifest defining: event topic, SpEL filter, display name, channels, required integration. Numaflow reads at startup; UI reads same registry for dropdown.</td><td>2&ndash;3 sprints for framework; then each new trigger is a config PR</td><td>Turns &ldquo;add a trigger&rdquo; from code change + deploy into config change + restart</td><td>Extends the existing <code>trigger-designer</code> repo to write to a shared registry. New triggers ship without Java code changes.</td></tr>
+    <tr><td>C. Expand <code>event_api</code> Trigger</td><td>Make the existing Events API trigger (387 active users) configurable per integration. Surface integration-synced events in the trigger selection UI.</td><td>2&ndash;4 weeks (UI + catalog mapping)</td><td>Fastest path &mdash; plumbing exists. Gap is surfacing it in UI and connecting to integration event catalogs.</td><td><code>event_api</code> already flows through the standard pipeline. Add integration event catalog + UI picker = done.</td></tr>
+  </tbody>
+</table>
+
+<div class="insight-box">
+  <p><strong>Recommendation:</strong> Start with <strong>Option C</strong> (expand <code>event_api</code>) in Q1 for immediate wins &mdash; it&rsquo;s 2&ndash;4 weeks and the plumbing exists. In parallel, invest in <strong>Option A</strong> (generic event trigger) as the Q2&ndash;Q3 platform bet that permanently closes the Klaviyo architectural gap. Option B (config registry) is the right mid-term pattern if Option A is deemed too risky for the Numaflow pipeline. The key insight: the C2 platform already has SpEL, Valkey, and the trigger-designer &mdash; the pieces exist and just need to be composed into a generic handler.</p>
+</div>
+
+<p style="font-size:8pt; color:#888;">Source: CJB repo forensic analysis (<code>crmmktg-mktauto</code> + <code>mailchimp-mcmktg</code> GitHub orgs). Architecture from <code>automations-platform/AGENTS.md</code>, <code>automations-numaflow/AGENTS.md</code>, and <code>c2-journey-initiation</code> code review. See <a href="cjb-repo-analysis.html">CJB Repo Analysis</a> for full 7-layer forensic.</p>
+
+<p class="note"><strong>Methodology:</strong> BigQuery May 2026 snapshot. Trigger usage from <code>bi_reporting.customer_journey_workflows</code> (starting_point.trigger_type). Adoption % denominator: 727,930 paid active users. Segment splits from <code>bi_reporting.users</code>. Competitive data from Klaviyo docs (May 2026), Shopify Flow changelog (May 2026), and product teardowns. VOC from UnitQ feature requests (last 12 months). Microcluster references from Customer Targeting tab (13-cluster model). Architecture from CJB repo forensic analysis (13 repos).</p>
 
 </div><!-- /panel-trigger-analysis -->
 
