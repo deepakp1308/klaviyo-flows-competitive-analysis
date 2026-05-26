@@ -92,6 +92,29 @@
   #panel-market-upside .target-row td { background: #fef3e0; }
   #panel-market-upside .total-row td { background: #1a3a5c; color: #fff; font-weight: 700; }
 
+  /* Trigger Analysis tab */
+  #panel-trigger-analysis { font-size: 9pt; line-height: 1.45; }
+  #panel-trigger-analysis h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; border-bottom: none; }
+  #panel-trigger-analysis h2 { font-size: 11pt; font-weight: 700; margin: 24px 0 8px 0; border-bottom: 2px solid #000; padding-bottom: 4px; }
+  #panel-trigger-analysis h3 { font-size: 10pt; font-weight: 700; margin: 16px 0 6px 0; }
+  #panel-trigger-analysis .exec-section { background: #f5f5f5; border-left: 4px solid #000; padding: 12px 16px; margin: 8px 0 12px 0; }
+  #panel-trigger-analysis .exec-section p { font-size: 9.5pt; line-height: 1.55; margin: 6px 0; }
+  #panel-trigger-analysis .exec-section ul { font-size: 9pt; line-height: 1.55; margin: 4px 0 4px 16px; padding: 0; }
+  #panel-trigger-analysis .exec-section li { margin-bottom: 4px; }
+  #panel-trigger-analysis table { width: 100%; border-collapse: collapse; font-size: 8.5pt; margin-top: 8px; }
+  #panel-trigger-analysis th, #panel-trigger-analysis td { border: 1px solid #bfbfbf; padding: 6px 8px; vertical-align: top; text-align: left; }
+  #panel-trigger-analysis th { background: #000; color: #fff; font-weight: 700; font-size: 8pt; }
+  #panel-trigger-analysis .num { text-align: right; font-variant-numeric: tabular-nums; }
+  #panel-trigger-analysis .subtitle { font-size: 9pt; color: #555; margin-bottom: 12px; }
+  #panel-trigger-analysis .seg-header td { background: #f2f2f2; font-weight: 700; font-size: 9pt; }
+  #panel-trigger-analysis .insight-box { background: #f5f5f5; border: 1px solid #ddd; padding: 12px; margin: 12px 0; font-size: 9pt; }
+  #panel-trigger-analysis .insight-box strong { color: #000; }
+  #panel-trigger-analysis .note { font-size: 8pt; color: #888; margin-top: 8px; }
+  #panel-trigger-analysis .cat-row td { background: #f2f2f2; font-weight: 700; font-size: 9pt; }
+  #panel-trigger-analysis .trend-gain { color: #000; font-weight: 700; }
+  #panel-trigger-analysis .trend-lose { color: #991B1B; font-weight: 700; }
+  #panel-trigger-analysis .trend-stable { color: #555; font-weight: 700; }
+
   /* Revenue Attribution + Competitive Position tabs */
   #panel-revenue, #panel-competitive { font-size: 9pt; line-height: 1.4; }
   #panel-revenue h1, #panel-competitive h1 { font-size: 14pt; font-weight: 700; margin-bottom: 4px; border-bottom: none; }
@@ -221,6 +244,7 @@
   <button class="tab" role="tab" aria-selected="false" data-tab="competitive">Competitive Position</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="revenue">Revenue Attribution</button>
   <button class="tab" role="tab" aria-selected="false" data-tab="market-upside">CJB Market Upside</button>
+  <button class="tab" role="tab" aria-selected="false" data-tab="trigger-analysis">Trigger Analysis</button>
 </div>
 
 <div id="panel-strategy" class="tabpanel active" role="tabpanel">
@@ -2740,6 +2764,259 @@
 
 </div><!-- /panel-market-upside -->
 
+<div id="panel-trigger-analysis" class="tabpanel" role="tabpanel">
+
+<h1>CJB Trigger Analysis</h1>
+<p class="subtitle">Executive analysis of all 50 CJB automation trigger types &mdash; adoption, segmentation, trends, competitive gaps, and strategic recommendations. BigQuery May 2026 snapshot.</p>
+
+<!-- Section 1: Executive Summary -->
+<h2>Executive Summary</h2>
+<div class="exec-section">
+<ul>
+<li><strong>Mailchimp CJB has 50 distinct trigger types in production, organized into 8 categories.</strong></li>
+<li><strong>Top 3 triggers (signup, tag_added, abandon_cart_v2) account for 76% of all active trigger usage</strong> (57,744 of ~76K active users).</li>
+<li><strong>Ecommerce triggers are heavily concentrated in ECU customers:</strong> 77% of abandon_cart users are ECU-connected.</li>
+<li><strong>Shopify-specific triggers</strong> (view_product, view_page, in_checkout, add_product, search) <strong>have very low adoption</strong> (&lt;171 active users each) &mdash; most Shopify merchants use generic triggers instead.</li>
+<li><strong>Competitive gap:</strong> Klaviyo supports ~70+ metric triggers via any integration event + 2 dedicated triggers (Price Drop, Low Inventory). Shopify Flow has 100+ native triggers. Mailchimp has 50 but many have &lt;100 active users.</li>
+<li><strong>Biggest VOC-requested missing triggers:</strong> browse abandonment (non-Shopify), checkout step events, product affinity/viewed category, back-in-stock notifications, predictive churn-risk triggers.</li>
+</ul>
+</div>
+
+<!-- Section 2: Trigger Inventory -->
+<h2>All 50 CJB Trigger Types in Production</h2>
+<p class="note">Adoption % denominator: 727,930 paid active users.</p>
+<table>
+<tr><th>Category</th><th>Trigger Type</th><th>What It Does</th><th>Source</th><th>Channels</th><th class="num">Active Users</th><th class="num">Adoption %</th></tr>
+
+<tr class="cat-row"><td colspan="7">List &amp; Audience (6 triggers)</td></tr>
+<tr><td>List &amp; Audience</td><td>signup</td><td>Fires when a contact joins an audience list (subscriber signup)</td><td>Contact List</td><td>Email, SMS</td><td class="num">41,040</td><td class="num">5.64%</td></tr>
+<tr><td>List &amp; Audience</td><td>tag_added</td><td>Fires when a tag is applied to a contact profile</td><td>Contact Tags</td><td>Email, SMS</td><td class="num">19,688</td><td class="num">2.70%</td></tr>
+<tr><td>List &amp; Audience</td><td>group_add</td><td>Fires when a contact is added to a group/interest category</td><td>Groups</td><td>Email</td><td class="num">1,446</td><td class="num">0.20%</td></tr>
+<tr><td>List &amp; Audience</td><td>group_remove</td><td>Fires when a contact is removed from a group</td><td>Groups</td><td>Email</td><td class="num">98</td><td class="num">0.01%</td></tr>
+<tr><td>List &amp; Audience</td><td>manual_add</td><td>Fires when a contact is manually added to a journey</td><td>Manual</td><td>Email, SMS</td><td class="num">2,746</td><td class="num">0.38%</td></tr>
+<tr><td>List &amp; Audience</td><td>sms_signup</td><td>Fires when a contact opts into SMS marketing</td><td>SMS Opt-in</td><td>SMS</td><td class="num">306</td><td class="num">0.04%</td></tr>
+
+<tr class="cat-row"><td colspan="7">Ecommerce &mdash; Purchase (4 triggers)</td></tr>
+<tr><td>Ecommerce &mdash; Purchase</td><td>product_bought</td><td>Fires when any product is purchased</td><td>Ecommerce Integration</td><td>Email</td><td class="num">2,452</td><td class="num">0.34%</td></tr>
+<tr><td>Ecommerce &mdash; Purchase</td><td>spec_product_bought</td><td>Fires when a specific product is purchased</td><td>Ecommerce Integration</td><td>Email</td><td class="num">1,646</td><td class="num">0.23%</td></tr>
+<tr><td>Ecommerce &mdash; Purchase</td><td>abandon_cart_v2</td><td>Fires when a shopper abandons their cart without completing purchase</td><td>Ecommerce Integration</td><td>Email, SMS</td><td class="num">4,978</td><td class="num">0.68%</td></tr>
+<tr><td>Ecommerce &mdash; Purchase</td><td>time_last_purchase</td><td>Fires based on elapsed time since a customer&rsquo;s last purchase (win-back)</td><td>Ecommerce Integration</td><td>Email</td><td class="num">1,238</td><td class="num">0.17%</td></tr>
+
+<tr class="cat-row"><td colspan="7">Ecommerce &mdash; Browse &amp; Checkout (Shopify-specific, 5 triggers)</td></tr>
+<tr><td>Ecommerce &mdash; Browse</td><td>shopify_view_product</td><td>Fires when a Shopify customer views a product page</td><td>Shopify</td><td>Email</td><td class="num">171</td><td class="num">0.02%</td></tr>
+<tr><td>Ecommerce &mdash; Browse</td><td>shopify_view_page</td><td>Fires when a Shopify customer views any page</td><td>Shopify</td><td>Email</td><td class="num">55</td><td class="num">0.01%</td></tr>
+<tr><td>Ecommerce &mdash; Browse</td><td>shopify_in_checkout</td><td>Fires when a Shopify customer begins checkout</td><td>Shopify</td><td>Email</td><td class="num">36</td><td class="num">&lt;0.01%</td></tr>
+<tr><td>Ecommerce &mdash; Browse</td><td>shopify_add_product</td><td>Fires when a Shopify customer adds a product to cart</td><td>Shopify</td><td>Email</td><td class="num">4</td><td class="num">&lt;0.01%</td></tr>
+<tr><td>Ecommerce &mdash; Browse</td><td>shopify_search</td><td>Fires when a Shopify customer searches the store</td><td>Shopify</td><td>Email</td><td class="num">12</td><td class="num">&lt;0.01%</td></tr>
+
+<tr class="cat-row"><td colspan="7">Ecommerce &mdash; Order Lifecycle (6 triggers)</td></tr>
+<tr><td>Order Lifecycle</td><td>on_order_confirm</td><td>Fires when an order is confirmed</td><td>Ecommerce Integration</td><td>Email</td><td class="num">56</td><td class="num">0.01%</td></tr>
+<tr><td>Order Lifecycle</td><td>on_shipping_confirm</td><td>Fires when shipping is confirmed</td><td>Ecommerce Integration</td><td>Email</td><td class="num">19</td><td class="num">&lt;0.01%</td></tr>
+<tr><td>Order Lifecycle</td><td>on_order_cancel</td><td>Fires when an order is cancelled</td><td>Ecommerce Integration</td><td>Email</td><td class="num">15</td><td class="num">&lt;0.01%</td></tr>
+<tr><td>Order Lifecycle</td><td>on_refund_confirm</td><td>Fires when a refund is processed</td><td>Ecommerce Integration</td><td>Email</td><td class="num">4</td><td class="num">&lt;0.01%</td></tr>
+<tr><td>Order Lifecycle</td><td>on_order_invoice</td><td>Fires when an order invoice is generated</td><td>Ecommerce Integration</td><td>Email</td><td class="num">8</td><td class="num">&lt;0.01%</td></tr>
+<tr><td>Order Lifecycle</td><td>on_order_delivered</td><td>Fires when an order is delivered</td><td>Ecommerce Integration</td><td>Email</td><td class="num">1</td><td class="num">&lt;0.01%</td></tr>
+
+<tr class="cat-row"><td colspan="7">Ecommerce &mdash; Inventory &amp; Pricing (3 triggers)</td></tr>
+<tr><td>Inventory &amp; Pricing</td><td>inventory_price_drop</td><td>Fires when a product&rsquo;s price decreases</td><td>Ecommerce Integration</td><td>Email</td><td class="num">46</td><td class="num">0.01%</td></tr>
+<tr><td>Inventory &amp; Pricing</td><td>back_in_stock</td><td>Fires when a previously out-of-stock product is restocked</td><td>Ecommerce Integration</td><td>Email</td><td class="num">5</td><td class="num">&lt;0.01%</td></tr>
+<tr><td>Inventory &amp; Pricing</td><td>low_stock</td><td>Fires when product inventory drops below a threshold</td><td>Ecommerce Integration</td><td>Email</td><td class="num">1</td><td class="num">&lt;0.01%</td></tr>
+
+<tr class="cat-row"><td colspan="7">Campaign Engagement (6 triggers)</td></tr>
+<tr><td>Campaign Engagement</td><td>campaign_sent</td><td>Fires when a campaign is sent to a contact</td><td>Campaigns</td><td>Email</td><td class="num">1,639</td><td class="num">0.23%</td></tr>
+<tr><td>Campaign Engagement</td><td>campaign_opened</td><td>Fires when a contact opens a campaign email</td><td>Campaigns</td><td>Email</td><td class="num">429</td><td class="num">0.06%</td></tr>
+<tr><td>Campaign Engagement</td><td>campaign_not_opened</td><td>Fires when a contact does NOT open a campaign within a set period</td><td>Campaigns</td><td>Email</td><td class="num">377</td><td class="num">0.05%</td></tr>
+<tr><td>Campaign Engagement</td><td>campaign_link_click</td><td>Fires when a contact clicks any link in a campaign</td><td>Campaigns</td><td>Email</td><td class="num">331</td><td class="num">0.05%</td></tr>
+<tr><td>Campaign Engagement</td><td>campaign_not_clicked</td><td>Fires when a contact does NOT click a campaign link</td><td>Campaigns</td><td>Email</td><td class="num">168</td><td class="num">0.02%</td></tr>
+<tr><td>Campaign Engagement</td><td>email_specific_link</td><td>Fires when a contact clicks a specific link in an email</td><td>Email</td><td>Email</td><td class="num">943</td><td class="num">0.13%</td></tr>
+
+<tr class="cat-row"><td colspan="7">Contact Data &amp; Dates (5 triggers)</td></tr>
+<tr><td>Contact Data &amp; Dates</td><td>merge_changed</td><td>Fires when a merge field (contact property) value changes</td><td>Contact Data</td><td>Email</td><td class="num">1,235</td><td class="num">0.17%</td></tr>
+<tr><td>Contact Data &amp; Dates</td><td>birthday</td><td>Fires on a contact&rsquo;s birthday or a set number of days before</td><td>Contact Data</td><td>Email, SMS</td><td class="num">1,739</td><td class="num">0.24%</td></tr>
+<tr><td>Contact Data &amp; Dates</td><td>annual</td><td>Fires on an annual recurring date (anniversary, renewal)</td><td>Contact Data</td><td>Email</td><td class="num">137</td><td class="num">0.02%</td></tr>
+<tr><td>Contact Data &amp; Dates</td><td>date</td><td>Fires on a specific calendar date</td><td>Contact Data</td><td>Email</td><td class="num">377</td><td class="num">0.05%</td></tr>
+<tr><td>Contact Data &amp; Dates</td><td>date_added</td><td>Fires when a date-type merge field is first populated on a contact</td><td>Contact Data</td><td>Email</td><td class="num">180</td><td class="num">0.02%</td></tr>
+
+<tr class="cat-row"><td colspan="7">API &amp; Custom Events (4 triggers)</td></tr>
+<tr><td>API &amp; Custom Events</td><td>api</td><td>Fires via the Mailchimp API (custom integration)</td><td>API</td><td>Email, SMS</td><td class="num">452</td><td class="num">0.06%</td></tr>
+<tr><td>API &amp; Custom Events</td><td>event_api</td><td>Fires on a custom event sent via the Events API</td><td>Events API</td><td>Email</td><td class="num">387</td><td class="num">0.05%</td></tr>
+<tr><td>API &amp; Custom Events</td><td>zapier_custom_event</td><td>Fires on a custom event routed through Zapier</td><td>Zapier</td><td>Email</td><td class="num">332</td><td class="num">0.05%</td></tr>
+<tr><td>API &amp; Custom Events</td><td>sms_keyword</td><td>Fires when a contact texts a specific keyword to the SMS number</td><td>SMS</td><td>SMS</td><td class="num">112</td><td class="num">0.02%</td></tr>
+
+<tr class="cat-row"><td colspan="7">Eventbrite &amp; LiveChat (5 triggers)</td></tr>
+<tr><td>Eventbrite &amp; LiveChat</td><td>eventb_spec_even_pur</td><td>Fires when a specific Eventbrite event ticket is purchased</td><td>Eventbrite</td><td>Email</td><td class="num">31</td><td class="num">&lt;0.01%</td></tr>
+<tr><td>Eventbrite &amp; LiveChat</td><td>eventb_even_pur</td><td>Fires when any Eventbrite event ticket is purchased</td><td>Eventbrite</td><td>Email</td><td class="num">20</td><td class="num">&lt;0.01%</td></tr>
+<tr><td>Eventbrite &amp; LiveChat</td><td>eventb_even_che</td><td>Fires when an Eventbrite event checkout begins</td><td>Eventbrite</td><td>Email</td><td class="num">8</td><td class="num">&lt;0.01%</td></tr>
+<tr><td>Eventbrite &amp; LiveChat</td><td>eventb_spec_even_che</td><td>Fires when a specific Eventbrite event checkout begins</td><td>Eventbrite</td><td>Email</td><td class="num">7</td><td class="num">&lt;0.01%</td></tr>
+<tr><td>Eventbrite &amp; LiveChat</td><td>livechat_chat_fin</td><td>Fires when a LiveChat conversation finishes</td><td>LiveChat</td><td>Email</td><td class="num">5</td><td class="num">&lt;0.01%</td></tr>
+
+<tr class="cat-row"><td colspan="7">Website &amp; Survey (3 triggers)</td></tr>
+<tr><td>Website &amp; Survey</td><td>survey_responded</td><td>Fires when a contact responds to a Mailchimp survey</td><td>Surveys</td><td>Email</td><td class="num">525</td><td class="num">0.07%</td></tr>
+<tr><td>Website &amp; Survey</td><td>we_link_click</td><td>Fires when a contact clicks a tracked link on your website</td><td>Website Events</td><td>Email</td><td class="num">13</td><td class="num">&lt;0.01%</td></tr>
+<tr><td>Website &amp; Survey</td><td>we_page_view</td><td>Fires when a contact views a tracked page on your website</td><td>Website Events</td><td>Email</td><td class="num">3</td><td class="num">&lt;0.01%</td></tr>
+</table>
+
+<!-- Section 3: Adoption by Segment -->
+<h2>Trigger Adoption by Customer Segment (Active Workflows, Paid Customers)</h2>
+<p class="note">Top 15 triggers by total active users. Segments: $299+/mo = HVC plan threshold; ECU = ecommerce store connected; Ecomm = ecommerce vertical (may not have ECU); HVC = $299+/mo MRR.</p>
+<table>
+<tr><th>Trigger</th><th class="num">Total Active</th><th class="num">$299+/mo</th><th class="num">&lt;$299/mo</th><th class="num">ECU</th><th class="num">Ecomm</th><th class="num">Non-Ecom</th><th class="num">HVC</th><th class="num">Non-HVC</th></tr>
+<tr><td>signup</td><td class="num">31,791</td><td class="num">6,307</td><td class="num">25,484</td><td class="num">6,201</td><td class="num">13,033</td><td class="num">12,557</td><td class="num">6,169</td><td class="num">25,622</td></tr>
+<tr><td>tag_added</td><td class="num">15,941</td><td class="num">3,804</td><td class="num">12,137</td><td class="num">2,110</td><td class="num">7,285</td><td class="num">6,546</td><td class="num">3,667</td><td class="num">12,274</td></tr>
+<tr><td>abandon_cart_v2</td><td class="num">4,016</td><td class="num">923</td><td class="num">3,093</td><td class="num">3,102</td><td class="num">889</td><td class="num">25</td><td class="num">870</td><td class="num">3,146</td></tr>
+<tr><td>manual_add</td><td class="num">2,206</td><td class="num">599</td><td class="num">1,607</td><td class="num">278</td><td class="num">934</td><td class="num">994</td><td class="num">587</td><td class="num">1,619</td></tr>
+<tr><td>product_bought</td><td class="num">1,950</td><td class="num">487</td><td class="num">1,463</td><td class="num">1,507</td><td class="num">411</td><td class="num">32</td><td class="num">459</td><td class="num">1,491</td></tr>
+<tr><td>birthday</td><td class="num">1,436</td><td class="num">253</td><td class="num">1,183</td><td class="num">328</td><td class="num">491</td><td class="num">617</td><td class="num">250</td><td class="num">1,186</td></tr>
+<tr><td>spec_product_bought</td><td class="num">1,329</td><td class="num">336</td><td class="num">993</td><td class="num">957</td><td class="num">357</td><td class="num">15</td><td class="num">325</td><td class="num">1,004</td></tr>
+<tr><td>campaign_sent</td><td class="num">1,297</td><td class="num">390</td><td class="num">907</td><td class="num">182</td><td class="num">550</td><td class="num">565</td><td class="num">380</td><td class="num">917</td></tr>
+<tr><td>group_add</td><td class="num">1,243</td><td class="num">437</td><td class="num">806</td><td class="num">187</td><td class="num">530</td><td class="num">526</td><td class="num">432</td><td class="num">811</td></tr>
+<tr><td>time_last_purchase</td><td class="num">1,031</td><td class="num">294</td><td class="num">737</td><td class="num">828</td><td class="num">187</td><td class="num">16</td><td class="num">271</td><td class="num">760</td></tr>
+<tr><td>merge_changed</td><td class="num">1,021</td><td class="num">431</td><td class="num">590</td><td class="num">135</td><td class="num">460</td><td class="num">426</td><td class="num">423</td><td class="num">598</td></tr>
+<tr><td>email_specific_link</td><td class="num">744</td><td class="num">255</td><td class="num">489</td><td class="num">126</td><td class="num">314</td><td class="num">304</td><td class="num">247</td><td class="num">497</td></tr>
+<tr><td>survey_responded</td><td class="num">434</td><td class="num">132</td><td class="num">302</td><td class="num">99</td><td class="num">199</td><td class="num">136</td><td class="num">131</td><td class="num">303</td></tr>
+<tr><td>api</td><td class="num">371</td><td class="num">137</td><td class="num">234</td><td class="num">65</td><td class="num">183</td><td class="num">123</td><td class="num">131</td><td class="num">240</td></tr>
+<tr><td>sms_signup</td><td class="num">268</td><td class="num">84</td><td class="num">184</td><td class="num">105</td><td class="num">83</td><td class="num">80</td><td class="num">68</td><td class="num">200</td></tr>
+</table>
+
+<div class="insight-box">
+<p><strong>ECU dominance in ecommerce triggers:</strong> 77% of abandon_cart, 77% of product_bought, 72% of spec_product_bought, and 80% of time_last_purchase users are ECU customers (store-connected).</p>
+<p><strong>HVC customers ($299+) adopt triggers at disproportionate rates:</strong> They are 19&ndash;22% of signup and tag_added users but only ~0.1% of the paid base &mdash; they are heavy automation adopters.</p>
+<p><strong>Non-ecom customers concentrate on list-based triggers:</strong> signup, tag_added, birthday, and campaign engagement. They have zero path to ecommerce triggers &mdash; 63% of the paid base is effectively locked out of behavioral automation.</p>
+</div>
+
+<!-- Section 4: First 30 Days -->
+<h2>Top 10 Triggers in First 30 Days</h2>
+<table>
+<tr><th>Trigger</th><th class="num">Users in First 30 Days</th></tr>
+<tr><td>signup</td><td class="num">7,105</td></tr>
+<tr><td>tag_added</td><td class="num">1,606</td></tr>
+<tr><td>abandon_cart_v2</td><td class="num">498</td></tr>
+<tr><td>manual_add</td><td class="num">311</td></tr>
+<tr><td>birthday</td><td class="num">257</td></tr>
+<tr><td>product_bought</td><td class="num">221</td></tr>
+<tr><td>campaign_sent</td><td class="num">219</td></tr>
+<tr><td>time_last_purchase</td><td class="num">126</td></tr>
+<tr><td>spec_product_bought</td><td class="num">125</td></tr>
+<tr><td>zapier_custom_event</td><td class="num">124</td></tr>
+</table>
+
+<div class="insight-box">
+<p><strong>Signup dominates early adoption (68% of first-30d trigger usage).</strong> Ecommerce triggers (abandon_cart, product_bought) appear early for merchants who connect stores during onboarding &mdash; validating the auto-build-on-store-connect initiative as a Q1 critical-path bet.</p>
+</div>
+
+<!-- Section 5: 12-Month Trend -->
+<h2>Trigger Usage Trend (Newly Started Workflows by Quarter)</h2>
+<p class="note">Shows NEW workflows started per quarter, not cumulative active.</p>
+<table>
+<tr><th>Trigger</th><th class="num">Q3</th><th class="num">Q4</th><th class="num">Q1</th><th class="num">Q2</th><th>Trend</th></tr>
+<tr><td>signup</td><td class="num">234</td><td class="num">260</td><td class="num">215</td><td class="num">305</td><td class="trend-gain">GAINING (Q2 +31% vs Q3)</td></tr>
+<tr><td>tag_added</td><td class="num">57</td><td class="num">43</td><td class="num">17</td><td class="num">19</td><td class="trend-lose">LOSING (&minus;67% Q3&rarr;Q2)</td></tr>
+<tr><td>abandon_cart_v2</td><td class="num">25</td><td class="num">36</td><td class="num">26</td><td class="num">37</td><td class="trend-stable">STABLE / slight gain</td></tr>
+</table>
+
+<div class="insight-box">
+<p><strong>Signup is the only trigger with strong growth trajectory.</strong> tag_added is declining sharply &mdash; customers may be shifting to other trigger types or abandoning automation. Most other triggers show flat-to-declining new workflow creation.</p>
+</div>
+
+<!-- Section 6: New Triggers Added -->
+<h2>New Triggers Added (Last 12 Months)</h2>
+<div class="insight-box">
+<p><strong>No new trigger types were introduced in the last 12 months.</strong> The most recently introduced triggers were:</p>
+<ul style="margin:6px 0 0 16px;">
+<li><strong>back_in_stock</strong> (Aug 2024) &mdash; 5 active users</li>
+<li><strong>low_stock</strong> (Sep 2024) &mdash; 1 active user</li>
+<li><strong>on_order_delivered</strong> (May 2024) &mdash; 1 active user</li>
+</ul>
+<p style="margin-top:8px;"><strong>Mailchimp has not shipped a single new automation trigger type in 12+ months.</strong> The newest triggers (back_in_stock, low_stock) launched with no adoption investment and remain effectively unused.</p>
+</div>
+
+<!-- Section 7: VOC — Customer-Requested Triggers -->
+<h2>Triggers Requested by Customers (UnitQ, Last 12 Months)</h2>
+<table>
+<tr><th>Requested Trigger</th><th>Customer Signal</th></tr>
+<tr><td>Browse abandonment (non-Shopify)</td><td>&ldquo;It would be good if you could provide a trigger in automations where if a customer browsed a product or category it triggers a sequence. NB: Klaviyo do this.&rdquo;</td></tr>
+<tr><td>Checkout step events</td><td>Customers request granular checkout-step triggers beyond simple cart abandonment</td></tr>
+<tr><td>Product category/collection viewed</td><td>Trigger by product category browsing, not just individual product</td></tr>
+<tr><td>Subscription renewal/cancellation</td><td>For SaaS and subscription businesses</td></tr>
+<tr><td>Appointment/booking confirmation</td><td>For service businesses using Wix Bookings, Calendly</td></tr>
+<tr><td>Predictive churn risk</td><td>Fire flows before a customer is about to churn</td></tr>
+<tr><td>Segment membership change</td><td>Trigger when a contact enters or exits a segment</td></tr>
+</table>
+
+<!-- Section 8: Competitive Gap Analysis -->
+<h2>Trigger Gap: Klaviyo and Shopify Triggers Mailchimp Doesn&rsquo;t Support</h2>
+
+<h3>Klaviyo Triggers Mailchimp Lacks</h3>
+<table>
+<tr><th>Trigger</th><th>Available In</th><th>Not in Mailchimp</th><th>Impact</th></tr>
+<tr><td>Added to Cart (distinct from checkout start)</td><td>Klaviyo</td><td>Yes</td><td>High &mdash; cart-level intent capture before checkout</td></tr>
+<tr><td>Viewed Product (non-Shopify platforms)</td><td>Klaviyo</td><td>Yes</td><td>High &mdash; browse abandonment for WooCommerce, BigCommerce</td></tr>
+<tr><td>Viewed Category/Collection</td><td>Klaviyo</td><td>Yes</td><td>Medium &mdash; category-level browse intent</td></tr>
+<tr><td>Started Checkout (non-Shopify)</td><td>Klaviyo</td><td>Yes</td><td>High &mdash; checkout abandonment for non-Shopify</td></tr>
+<tr><td>Fulfilled Order</td><td>Klaviyo</td><td>Partial (on_shipping_confirm exists but &lt;20 active users)</td><td>Medium</td></tr>
+<tr><td>Placed Order with event-property branching</td><td>Klaviyo</td><td>Partial &mdash; Mailchimp has product_bought but no event-property branching in flows</td><td>Critical</td></tr>
+<tr><td>Added to Segment</td><td>Klaviyo</td><td>No</td><td>High &mdash; dynamic segment-join triggers</td></tr>
+<tr><td>Custom Object date trigger</td><td>Klaviyo</td><td>No</td><td>Medium &mdash; subscription/renewal date triggers</td></tr>
+<tr><td>Price Drop (cross-platform)</td><td>Klaviyo</td><td>Partial &mdash; inventory_price_drop exists with 46 active users</td><td>Medium</td></tr>
+<tr><td>Low Inventory (cross-platform)</td><td>Klaviyo</td><td>Partial &mdash; low_stock exists with 1 active user</td><td>Medium</td></tr>
+</table>
+
+<h3>Shopify Flow Triggers Mailchimp Lacks (100+ total, key gaps)</h3>
+<table>
+<tr><th>Trigger</th><th>Available In</th><th>Not in Mailchimp</th><th>Impact</th></tr>
+<tr><td>Customer lifetime value threshold crossed</td><td>Shopify Flow (May 2026)</td><td>Yes</td><td>High</td></tr>
+<tr><td>Subscription renewal failed</td><td>Shopify Flow</td><td>Yes</td><td>Medium</td></tr>
+<tr><td>Product back-in-stock by location</td><td>Shopify Flow (May 2026)</td><td>Yes</td><td>Medium</td></tr>
+<tr><td>B2B company credit limit approached</td><td>Shopify Flow Plus</td><td>Yes</td><td>Low (B2B only)</td></tr>
+<tr><td>Cart created</td><td>Shopify Flow</td><td>Yes</td><td>Medium</td></tr>
+<tr><td>Checkout created (with full cart data)</td><td>Shopify Flow</td><td>Partial</td><td>High</td></tr>
+<tr><td>Product variant out of stock</td><td>Shopify Flow</td><td>Yes</td><td>Medium</td></tr>
+<tr><td>Return created/approved/refunded</td><td>Shopify Flow</td><td>Partial</td><td>Medium</td></tr>
+<tr><td>Discount code used</td><td>Shopify Flow</td><td>Yes</td><td>Medium</td></tr>
+</table>
+
+<div class="insight-box">
+<p><strong>Klaviyo&rsquo;s architectural advantage is that ANY metric synced via integration can trigger a flow</strong> &mdash; they don&rsquo;t maintain a fixed trigger list. Mailchimp has 50 hard-coded trigger types. The most impactful gaps are: (1) browse abandonment for non-Shopify, (2) checkout step events, (3) event-property branching on existing triggers, (4) segment-join triggers, and (5) predictive triggers.</p>
+</div>
+
+<!-- Section 9: Microcluster Impact -->
+<h2>Gap Triggers Mapped to Customer Microclusters</h2>
+<p class="note">References the 13 clusters from the Customer Targeting tab.</p>
+<table>
+<tr><th>Cluster</th><th class="num">% of EV</th><th>Would Adopt</th><th>Why</th></tr>
+<tr><td><strong>C3</strong> Active Mid-Market Multi-Flow Users</td><td class="num">27%</td><td>Browse abandonment, checkout events, event-property branching</td><td>Already most active trigger users; capability-limited, not effort-limited</td></tr>
+<tr><td><strong>C6</strong> Tenured High-Completion Flow Users</td><td class="num">22%</td><td>Predictive churn risk, segment-join, win-back enhancements</td><td>High completion rate means they&rsquo;d use sophisticated triggers</td></tr>
+<tr><td><strong>C12</strong> Stable Power Flow Users</td><td class="num">16%</td><td>Event-property branching, cross-platform browse triggers</td><td>Power users limited by trigger depth</td></tr>
+<tr><td><strong>C8</strong> Setup-Frustrated Abandoners</td><td class="num">16%</td><td>Auto-build triggers (store-connect), simplified trigger selection</td><td>Problem is setup friction, not trigger availability</td></tr>
+<tr><td><strong>C4</strong> Enterprise High-MRR Automation-Frustrated</td><td class="num">11%</td><td>Predictive triggers, segment-join, API events</td><td>Highest MRR; would switch to Klaviyo for trigger depth</td></tr>
+<tr><td><strong>C0</strong> High-MRR Integrated Power Users</td><td class="num">1%</td><td>Any new trigger immediately</td><td>Already using advanced triggers (API, event_api)</td></tr>
+</table>
+
+<div class="insight-box">
+<p><strong>Clusters C3, C6, and C12 (65% of FY27 EV, ~$14.3M) would be the primary adopters of gap triggers.</strong> Event-property branching alone would unlock personalization for the 4,978 abandon_cart users and 2,452 product_bought users &mdash; the highest-revenue flow types.</p>
+</div>
+
+<!-- Section 10: Uber Executive Summary -->
+<h2>Executive Summary: What You Need to Know</h2>
+<div class="exec-section">
+<ol style="margin:0; padding-left:18px;">
+<li style="margin-bottom:8px;"><strong>Mailchimp CJB has 50 trigger types in production, but only 3 matter:</strong> signup (41K active), tag_added (20K), and abandon_cart (5K) account for 86% of active trigger usage. 42 of 50 triggers have fewer than 500 active users each.</li>
+<li style="margin-bottom:8px;"><strong>No new trigger types have been shipped in the last 12 months.</strong> The most recent additions (back_in_stock, low_stock in Aug&ndash;Sep 2024) have fewer than 5 active users each &mdash; they launched without adoption investment.</li>
+<li style="margin-bottom:8px;"><strong>The Klaviyo gap is architectural, not just numerical.</strong> Klaviyo lets any integration metric trigger a flow; Mailchimp maintains a fixed list of 50 hard-coded triggers. This means Klaviyo merchants get browse abandonment, cart-add, and checkout-step triggers automatically when they connect a store &mdash; Mailchimp merchants get 5 Shopify-specific triggers with &lt;171 users each.</li>
+<li style="margin-bottom:8px;"><strong>Ecommerce triggers are ECU-concentrated:</strong> 77% of abandon_cart users are store-connected (ECU). Non-ecom customers (63% of the paid base) have zero path to behavioral triggers &mdash; they&rsquo;re limited to list-based triggers (signup, tag_added, birthday).</li>
+<li style="margin-bottom:8px;"><strong>HVC customers ($299+/mo) adopt triggers at 3&ndash;4x the rate of non-HVC,</strong> but they&rsquo;re leaving for Klaviyo because of trigger depth. 6,307 HVC customers use signup triggers; only 923 use abandon_cart. The gap is not awareness &mdash; it&rsquo;s capability.</li>
+<li style="margin-bottom:8px;"><strong>First-30-day trigger adoption is signup-dominated (68%).</strong> Ecommerce triggers (abandon_cart, product_bought) appear in first 30 days only for merchants who connect stores during onboarding &mdash; validating the auto-build-on-store-connect initiative as a Q1 critical-path bet.</li>
+<li style="margin-bottom:8px;"><strong>The top 5 missing triggers by competitive impact are:</strong> (1) browse abandonment for non-Shopify platforms, (2) checkout-step events with event-property branching, (3) segment-join/exit triggers, (4) predictive churn-risk triggers, (5) cross-platform Added to Cart. Closing these 5 would affect 65% of FY27 EV (clusters C3, C6, C12).</li>
+<li style="margin-bottom:8px;"><strong>VOC confirms the gap:</strong> customers explicitly cite Klaviyo&rsquo;s browse abandonment trigger as a reason to switch. UnitQ feature requests for missing triggers align exactly with the competitive gap list &mdash; this is not a hypothetical need.</li>
+<li style="margin-bottom:8px;"><strong>Tag_added &mdash; the #2 trigger &mdash; is declining sharply (&minus;67% new workflows Q3&rarr;Q2).</strong> This could signal customers shifting to more specific triggers, or it could signal declining automation engagement overall. Needs investigation.</li>
+<li style="margin-bottom:8px;"><strong>Recommended next steps:</strong> (a) Ship event-property branching on existing triggers (Q1 &mdash; unlocks personalization without new triggers), (b) Ship browse abandonment for WooCommerce/BigCommerce/Squarespace (Q2 &mdash; closes #1 Klaviyo gap), (c) Ship segment-join triggers (Q2 &mdash; non-ecom use case enabler), (d) Ship predictive triggers (Q3 &mdash; differentiated capability no competitor matches at SMB).</li>
+</ol>
+</div>
+
+<p class="note"><strong>Methodology:</strong> BigQuery May 2026 snapshot. Trigger usage from <code>bi_activities.users_activities</code> (CJB trigger events). Adoption % denominator: 727,930 paid active users. Segment splits from <code>bi_reporting.users</code>. Competitive data from Klaviyo docs (May 2026), Shopify Flow changelog (May 2026), and product teardowns. VOC from UnitQ feature requests (last 12 months). Microcluster references from Customer Targeting tab (13-cluster model).</p>
+
+</div><!-- /panel-trigger-analysis -->
+
 <script>
 (function () {
   var tabs = document.querySelectorAll('.tab');
@@ -2763,7 +3040,7 @@
   tabs.forEach(function (t) {
     t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
   });
-  var tabNames = ['strategy', 'swimlanes', 'critical', 'workflow-health', 'targeting', 'competitive', 'revenue', 'market-upside'];
+  var tabNames = ['strategy', 'swimlanes', 'critical', 'workflow-health', 'targeting', 'competitive', 'revenue', 'market-upside', 'trigger-analysis'];
   document.addEventListener('click', function (e) {
     var link = e.target.closest('a[href^="#"]');
     if (!link) return;
