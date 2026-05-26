@@ -1,1 +1,6 @@
 _research-mailchimp-campaign-builder/
+
+# CJB Scrawler — credentials, raw audit data, screenshots
+cjb-scrawler/.env
+cjb-scrawler/findings/*.jsonl
+cjb-scrawler/screenshots/

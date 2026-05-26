@@ -1,0 +1,17 @@
+---
+description: Guardrails for CJB Scrawler live Mailchimp UX audits
+globs:
+  - cjb-scrawler/**
+  - cjb-scrawler-report.html
+  - scripts/build_cjb_scrawler_report.py
+---
+
+# CJB Scrawler guardrails
+
+When running or editing CJB Scrawler artifacts:
+
+1. **Never** commit `cjb-scrawler/.env`, `findings/*.jsonl`, or `screenshots/`.
+2. **Draft-only** Mailchimp journeys; do not activate flows or send to production audiences.
+3. Use skill: `.cursor/skills/cjb-scrawler/SKILL.md`.
+4. Findings must use 8-stage taxonomy from `generate_cjb_workflow_health.py`.
+5. Label reports as qualitative N=1 scripted journey, not statistical VoC.

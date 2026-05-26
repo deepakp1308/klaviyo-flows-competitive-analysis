@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CJB Scrawler — Live UX Audit Report</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: Arial, Helvetica, sans-serif; font-size: 10pt; color: #000; background: #fff;
+    line-height: 1.45; padding: 24px 32px; max-width: 1200px; margin: 0 auto; }
+  h1 { font-size: 16pt; margin-bottom: 6px; }
+  h2 { font-size: 12pt; margin: 20px 0 8px; border-bottom: 2px solid #000; padding-bottom: 4px; }
+  .subtitle { color: #555; font-style: italic; margin-bottom: 16px; font-size: 9pt; }
+  .nav { margin-bottom: 16px; padding-bottom: 8px; border-bottom: 2px solid #000; }
+  .nav a { margin-right: 12px; color: #000; font-weight: 700; font-size: 9pt; }
+  .kpi-row { display: flex; gap: 12px; flex-wrap: wrap; margin: 12px 0; }
+  .kpi { border: 1px solid #ccc; padding: 10px 14px; min-width: 120px; }
+  .kpi .v { font-size: 18pt; font-weight: 700; }
+  .kpi .l { font-size: 8pt; color: #555; text-transform: uppercase; }
+  table { width: 100%; border-collapse: collapse; font-size: 9pt; margin-top: 8px; }
+  th, td { border: 1px solid #bfbfbf; padding: 6px 8px; vertical-align: top; text-align: left; }
+  th { background: #d9d9d9; }
+  tr.fail td { background: #fde8e8; }
+  tr.blocked td { background: #fef3e0; }
+  tr.pass td { background: #f5f5f5; }
+  .num { text-align: right; }
+  .issue-card { border: 1px solid #ccc; padding: 12px; margin: 10px 0; }
+  .issue-card h3 { font-size: 11pt; margin-bottom: 6px; }
+  .method { background: #f5f5f5; border-left: 4px solid #000; padding: 10px 14px; margin: 12px 0; font-size: 9pt; }
+</style>
+</head>
+<body>
+<nav class="nav">
+  <a href="mailchimp.html">Mailchimp dossier</a>
+  <a href="cjb-scrawler-marketer-walkthrough.html">Marketer walkthrough</a>
+  <a href="cjb-workflow-health.html">CJB workflow health</a>
+  <a href="cjb-repo-analysis.html">CJB repo forensics</a>
+</nav>
+<h1>CJB Scrawler — Live UX Audit Report</h1>
+<p class="subtitle">Generated 2026-05-26 23:21 UTC · Qualitative N=1 scripted journeys (not statistical VoC). Draft-only, test audience.</p>
+<div class="method">
+  <strong>Method:</strong> Browser automation via CJB Scrawler skill against live Mailchimp CJB.
+  Personas: e-commerce welcome + first-purchase incentive; ProServ lead nurture + consultation CTA.
+  Mapped to 8-stage taxonomy in <code>generate_cjb_workflow_health.py</code>.
+</div>
+<div class="kpi-row">
+  <div class="kpi"><div class="v">17</div><div class="l">Step logs</div></div>
+  <div class="kpi"><div class="v">13</div><div class="l">Pass</div></div>
+  <div class="kpi"><div class="v">2</div><div class="l">Fail</div></div>
+  <div class="kpi"><div class="v">2</div><div class="l">Blocked</div></div>
+  <div class="kpi"><div class="v">4</div><div class="l">Deduped issues</div></div>
+</div>
+<p><strong>Run IDs:</strong> 2026-05-26 · <strong>Personas:</strong> ecom, proserv, setup</p>
+
+<h2>Issues by workflow stage</h2>
+<table><tr><th>Stage</th><th>Name</th><th>P0</th><th>P1</th><th>P2</th><th>P3</th></tr>
+<tr><td>1</td><td>Discover &amp; Choose Intent</td><td class='num'>0</td><td class='num'>1</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>2</td><td>Define Entry &amp; Audience</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>3</td><td>Design the Journey Map</td><td class='num'>0</td><td class='num'>0</td><td class='num'>1</td><td class='num'>0</td></tr>
+<tr><td>4</td><td>Compose Step Content</td><td class='num'>0</td><td class='num'>0</td><td class='num'>1</td><td class='num'>0</td></tr>
+<tr><td>5</td><td>Target, Split &amp; Personalize</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>6</td><td>Validate &amp; Sandbox</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>7</td><td>Activate &amp; Go Live</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0</td></tr>
+<tr><td>8</td><td>Monitor, Measure &amp; Improve</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0</td><td class='num'>0</td></tr>
+</table>
+
+<h2>Deduped issue cards + fix direction</h2>
+<div class='issue-card'><h3>1. [P1] No trigger search</h3><p><strong>Persona:</strong> ecom · <strong>Stage 1:</strong> Discover &amp; Choose Intent</p><p><strong>Observed:</strong> Category tabs only</p><p><strong>Expected:</strong> Per playbook</p><p><strong>HVC theme:</strong> Trigger Selection List Not Searchable (known)</p>
+</div>
+<div class='issue-card'><h3>2. [P2] Emails 3-4 not built</h3><p><strong>Persona:</strong> ecom · <strong>Stage 3:</strong> Design the Journey Map</p><p><strong>Observed:</strong> Partial journey for audit</p><p><strong>Expected:</strong> Per playbook</p><p><strong>HVC theme:</strong> — (novel)</p>
+</div>
+<div class='issue-card'><h3>3. [P2] Legacy vs New Builder</h3><p><strong>Persona:</strong> ecom · <strong>Stage 4:</strong> Compose Step Content</p><p><strong>Observed:</strong> Automation email opens campaign wizard</p><p><strong>Expected:</strong> Per playbook</p><p><strong>HVC theme:</strong> CJB Still Uses Legacy Editor (known)</p>
+</div>
+<div class='issue-card'><h3>4. [—] Scrawler QA segment not created</h3><p><strong>Persona:</strong> setup · <strong>Stage 2:</strong> Define Entry &amp; Audience</p><p><strong>Observed:</strong> Time budget; contacts searchable individually</p><p><strong>Expected:</strong> Per playbook</p><p><strong>HVC theme:</strong> Trigger Selection List Not Searchable (novel)</p>
+</div>
+
+<h2>All step logs</h2>
+<table>
+<tr><th>Persona</th><th>Step</th><th>#</th><th>Stage name</th><th>Status</th><th>Sev</th><th>Title</th><th>Observed (excerpt)</th></tr>
+<tr class='pass'><td>setup</td><td><code>setup_03_login_success</code></td><td>2</td><td>Define Entry &amp; Audience</td><td>pass</td><td><strong>—</strong></td><td>Authenticated to Mailchimp (us17) after 2FA</td><td>Landed on admin home Goodnight Fox account</td></tr>
+<tr class='pass'><td>proserv</td><td><code>proserv_00_nav</code></td><td>1</td><td>Discover &amp; Choose Intent</td><td>pass</td><td><strong>—</strong></td><td>Created ProServ flow id 9172</td><td>Build from scratch; Goodnight Fox</td></tr>
+<tr class='pass'><td>proserv</td><td><code>proserv_02_trigger</code></td><td>2</td><td>Define Entry &amp; Audience</td><td>pass</td><td><strong>—</strong></td><td>Tag added trigger configured</td><td>scrawler-proserv-lead tag created via combobox</td></tr>
+<tr class='pass'><td>proserv</td><td><code>proserv_03_email1</code></td><td>4</td><td>Compose Step Content</td><td>pass</td><td><strong>—</strong></td><td>First email step added</td><td>Create an email step on canvas; content not configured</td></tr>
+<tr class='pass'><td>proserv</td><td><code>proserv_08_review</code></td><td>6</td><td>Validate &amp; Sandbox</td><td>pass</td><td><strong>—</strong></td><td>Saved as Draft</td><td>Save and close; no Turn on</td></tr>
+<tr class='pass'><td>setup</td><td><code>setup_03_audience</code></td><td>1</td><td>Discover &amp; Choose Intent</td><td>pass</td><td><strong>—</strong></td><td>Test contact deepakkumarp13@gmail.com found</td><td>Audience search returned match in Goodnight Fox</td></tr>
+<tr class='blocked'><td>setup</td><td><code>setup_04_segment</code></td><td>2</td><td>Define Entry &amp; Audience</td><td>blocked</td><td><strong>—</strong></td><td>Scrawler QA segment not created</td><td>Time budget; contacts searchable individually</td></tr>
+<tr class='pass'><td>setup</td><td><code>setup_02_tfa</code></td><td>2</td><td>Define Entry &amp; Audience</td><td>pass</td><td><strong>—</strong></td><td>2FA SMS required</td><td>Intuit MFA; user completed in browser</td></tr>
+<tr class='pass'><td>ecom</td><td><code>ecom_00_nav</code></td><td>1</td><td>Discover &amp; Choose Intent</td><td>pass</td><td><strong>—</strong></td><td>Flow id 9171 created</td><td>Scrawler_Ecom_Welcome_FirstPurchase</td></tr>
+<tr class='pass'><td>ecom</td><td><code>ecom_02_trigger</code></td><td>2</td><td>Define Entry &amp; Audience</td><td>pass</td><td><strong>—</strong></td><td>Signs up for Email</td><td>Contact signs up to Goodnight Fox</td></tr>
+<tr class='pass'><td>ecom</td><td><code>ecom_03_email1</code></td><td>4</td><td>Compose Step Content</td><td>pass</td><td><strong>—</strong></td><td>Welcome email subject</td><td>Welcome to Goodnight Fox — here&#x27;s what to expect</td></tr>
+<tr class='pass'><td>ecom</td><td><code>ecom_04_delay1</code></td><td>3</td><td>Design the Journey Map</td><td>pass</td><td><strong>—</strong></td><td>2-day delay</td><td>Changed from default 1 week</td></tr>
+<tr class='pass'><td>ecom</td><td><code>ecom_05_email2</code></td><td>4</td><td>Compose Step Content</td><td>pass</td><td><strong>—</strong></td><td>Second email added</td><td>Subject/content not finished</td></tr>
+<tr class='pass'><td>ecom</td><td><code>ecom_08_review</code></td><td>6</td><td>Validate &amp; Sandbox</td><td>pass</td><td><strong>—</strong></td><td>Saved Draft</td><td>Save and close</td></tr>
+<tr class='fail'><td>ecom</td><td><code>ecom_01_intent</code></td><td>1</td><td>Discover &amp; Choose Intent</td><td>fail</td><td><strong>P1</strong></td><td>No trigger search</td><td>Category tabs only</td></tr>
+<tr class='fail'><td>ecom</td><td><code>ecom_03_email1</code></td><td>4</td><td>Compose Step Content</td><td>fail</td><td><strong>P2</strong></td><td>Legacy vs New Builder</td><td>Automation email opens campaign wizard</td></tr>
+<tr class='blocked'><td>ecom</td><td><code>ecom_06_delay2</code></td><td>3</td><td>Design the Journey Map</td><td>blocked</td><td><strong>P2</strong></td><td>Emails 3-4 not built</td><td>Partial journey for audit</td></tr>
+</table>
+<p class="subtitle" style="margin-top:24px;">Regenerate: <code>python3 scripts/build_cjb_scrawler_report.py</code></p>
+</body>
+</html>
