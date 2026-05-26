@@ -806,6 +806,7 @@
       <button class="tab" role="tab" aria-selected="false" data-tab="lossattr">Loss Attribution</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="canvas">Initiative Canvas</button>
       <button class="tab" role="tab" aria-selected="false" data-tab="memo">Strategy Memo</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="migration">Classic→CJB Migration</button>
     </div>
     <div style="display:flex; gap:8px;">
       <a class="btn" href="index.html">→ Klaviyo</a>
@@ -11936,6 +11937,752 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
 </div><!-- /panel-memo -->
 
 
+<!-- ============== CLASSIC → CJB MIGRATION BRIEFING TAB ============== -->
+<div class="tabpanel" id="panel-migration" role="tabpanel">
+<style>
+  #panel-migration .mig-kpi {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFB 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    border-left: 4px solid var(--brand);
+  }
+  #panel-migration .mig-kpi.bad  { border-left-color: var(--bad);  background: linear-gradient(180deg,#FFF5F2,#FFFFFF); }
+  #panel-migration .mig-kpi.warn { border-left-color: var(--warn); background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-migration .mig-kpi.good { border-left-color: var(--good); background: linear-gradient(180deg,#F4FBF7,#FFFFFF); }
+  #panel-migration .mig-kpi .mk-v {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 26px; font-weight: 700; line-height: 1; color: var(--ink);
+    margin-bottom: 4px;
+  }
+  #panel-migration .mig-kpi.bad .mk-v  { color: var(--bad); }
+  #panel-migration .mig-kpi.warn .mk-v { color: var(--warn); }
+  #panel-migration .mig-kpi.good .mk-v { color: var(--good); }
+  #panel-migration .mig-kpi .mk-l { font-size: 11px; color: var(--muted); line-height: 1.35; }
+
+  #panel-migration .takeaway-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: #fff;
+    border-left: 4px solid var(--ink);
+    margin-bottom: 10px;
+  }
+  #panel-migration .takeaway-card .tk-num {
+    display: inline-block;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 22px; font-weight: 700; color: var(--brand); margin-right: 8px;
+    vertical-align: middle;
+  }
+  #panel-migration .takeaway-card h3 {
+    margin: 0 0 4px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 14.5px; font-weight: 700; color: var(--ink);
+    display: inline; vertical-align: middle;
+  }
+  #panel-migration .takeaway-card p { font-size: 12.5px; color: var(--ink-2); margin: 4px 0 0; }
+
+  #panel-migration .phase-card {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 16px 18px;
+    background: #fff;
+    margin-bottom: 14px;
+  }
+  #panel-migration .phase-card.p1 { border-left: 5px solid var(--good); background: linear-gradient(180deg,#F4FBF7,#FFFFFF); }
+  #panel-migration .phase-card.p2 { border-left: 5px solid var(--warn); background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-migration .phase-card.p3 { border-left: 5px solid var(--bad);  background: linear-gradient(180deg,#FFF5F2,#FFFFFF); }
+  #panel-migration .phase-card .ph-eye {
+    font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 4px;
+  }
+  #panel-migration .phase-card h3 {
+    margin: 0 0 8px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 16px; font-weight: 700; color: var(--ink);
+  }
+  #panel-migration .phase-card .ph-meta {
+    font-size: 11.5px; color: var(--ink-2);
+    background: rgba(0,0,0,0.03);
+    padding: 6px 10px; border-radius: 6px;
+    margin-bottom: 10px;
+    display: inline-block;
+  }
+  #panel-migration .phase-card .ph-section {
+    margin-top: 10px; padding-top: 8px;
+    border-top: 1px dashed var(--line);
+  }
+  #panel-migration .phase-card .ph-section-eye {
+    font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+    color: var(--brand); margin-bottom: 4px;
+  }
+
+  #panel-migration .complication-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 14px 16px;
+    background: #fff;
+    border-left: 4px solid var(--bad);
+    background: linear-gradient(180deg,#FFF5F2,#FFFFFF);
+    margin-bottom: 12px;
+  }
+  #panel-migration .complication-card.c2 { border-left-color: var(--brand); background: linear-gradient(180deg,#FFFCF0,#FFFFFF); }
+  #panel-migration .complication-card.c3 { border-left-color: #4338CA; background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  #panel-migration .complication-card.c4 { border-left-color: var(--warn); background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-migration .complication-card .cc-eye {
+    font-size: 10px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--muted); margin-bottom: 4px;
+  }
+  #panel-migration .complication-card h3 {
+    margin: 0 0 6px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 15px; font-weight: 700; color: var(--ink);
+  }
+
+  #panel-migration .issue-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: #fff;
+    margin-bottom: 8px;
+  }
+  #panel-migration .issue-card.crit { border-left: 4px solid var(--bad);   background: linear-gradient(180deg,#FFF5F2,#FFFFFF); }
+  #panel-migration .issue-card.high { border-left: 4px solid var(--warn);  background: linear-gradient(180deg,#FFFAF0,#FFFFFF); }
+  #panel-migration .issue-card.plat { border-left: 4px solid #4338CA;      background: linear-gradient(180deg,#F4F3FF,#FFFFFF); }
+  #panel-migration .issue-card .ic-num {
+    display: inline-block;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px; font-weight: 700; color: var(--brand); margin-right: 6px; vertical-align: middle;
+  }
+  #panel-migration .issue-card h4 {
+    margin: 0; display: inline; vertical-align: middle;
+    font-family: 'Source Serif 4', Georgia, serif; font-size: 13.5px; font-weight: 700; color: var(--ink);
+  }
+  #panel-migration .issue-card .ic-tag {
+    display: inline-block;
+    font-size: 9.5px; font-weight: 800; letter-spacing: .06em;
+    padding: 2px 6px; border-radius: 4px;
+    margin-left: 6px;
+    background: var(--chip); color: var(--chip-ink);
+    vertical-align: middle;
+  }
+  #panel-migration .issue-card.crit .ic-tag { background: #FFE7E0; color: #9A1F00; }
+  #panel-migration .issue-card.high .ic-tag { background: #FFEFD9; color: #8A4A00; }
+  #panel-migration .issue-card.plat .ic-tag { background: #EEF0FF; color: #2A1FA8; }
+  #panel-migration .issue-card .ic-jtbd {
+    font-size: 11.5px; color: var(--muted); margin-top: 4px;
+    border-left: 2px solid var(--line); padding-left: 8px;
+    font-style: italic;
+  }
+  #panel-migration .issue-card .ic-fix {
+    font-size: 12px; color: var(--ink-2); margin-top: 6px;
+  }
+  #panel-migration .issue-card .ic-fix strong { color: var(--good); }
+
+  #panel-migration .voc-quote {
+    background: #FAFAFB;
+    border-left: 3px solid var(--brand);
+    border-radius: 6px;
+    padding: 8px 12px;
+    margin: 6px 0 4px;
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 12.5px; font-style: italic;
+    color: var(--ink-2);
+  }
+  #panel-migration .voc-quote cite {
+    display: block;
+    font-family: 'Inter', sans-serif;
+    font-size: 10.5px; color: var(--muted);
+    font-style: normal; margin-top: 4px;
+  }
+
+  #panel-migration table.mig-table th { background: #FAFAFB; font-size: 11px; }
+  #panel-migration table.mig-table td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  #panel-migration table.mig-table .hilite { background: #FFFCF0; font-weight: 700; }
+
+  #panel-migration .geo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  @media (max-width: 880px) { #panel-migration .geo-grid { grid-template-columns: 1fr; } }
+
+  #panel-migration .method-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+    background: #FAFAFB;
+    margin-bottom: 8px;
+  }
+  #panel-migration .method-card h4 {
+    margin: 0 0 4px;
+    font-size: 12.5px; font-weight: 700; color: var(--ink);
+  }
+  #panel-migration .method-card p {
+    margin: 0; font-size: 11.5px; color: var(--ink-2);
+  }
+</style>
+
+<!-- ============ PAGE 1: EXECUTIVE SUMMARY ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Tab 14 &middot; Classic &rarr; CJB Migration Briefing</div>
+      <h1>$118.6M ARR stuck on Classic &mdash; migration is losing more users than it converts</h1>
+      <div class="subtitle">Author: <strong>Automations PM team</strong> &middot; Last updated <strong>May 26, 2026</strong> &middot; Data: BigQuery <code style="font-family:'SF Mono',Menlo,monospace;font-size:11px;">cjb_funnel &times; lcm_marketing_account_base</code> (current), Qualtrics In-App Core KPI Survey (2025+), unitQ VOC (trailing 12mo). Pipeline date 2026-05-26.</div>
+    </div>
+    <div class="meta">
+      <strong>v2.0</strong> &middot; 5 pages<br/>
+      <strong>Classic Auto ARR: $118.6M</strong><br/>
+      <strong>71,467 accounts still on Classic only</strong><br/>
+      CJB ARPU uplift: 1.8&times; ($247 vs $138)
+    </div>
+  </div>
+
+  <h2><span class="num">1.1</span>Headline pull</h2>
+  <div class="pull" style="margin-bottom:16px;">
+    Classic Automation users represent <strong>$118.6M ARR across 71,467 accounts</strong>, paying $138 average MRR. CJB users who actually trigger journeys are <strong>1.8&times; higher ARPU ($247 vs $138)</strong> &mdash; migration creates revenue density, not just feature parity. But CJB task completion is <strong>only 28.9% for non-HVC users</strong>: nearly 3 out of 4 fail to complete what they came to do. CJB Established peaked at 156K (Nov 2025) then cliff-dropped to 101K, while CJB Abandoners grew <strong>+249% to 129K</strong>. Classic is declining &mdash; down 71% over 24 months &mdash; but CJB is not reliably catching them. The migration needs a usability-first rescue, not a forced timeline.
+    <cite>Automations PM team analysis, May 2026. BigQuery cjb_funnel &times; lcm_marketing_account_base + Qualtrics + unitQ.</cite>
+  </div>
+
+  <h2><span class="num">1.2</span>Key metrics (BigQuery actuals)</h2>
+  <div class="grid cols-4" style="margin-bottom:16px;">
+    <div class="mig-kpi bad">
+      <div class="mk-v">$118.6M</div>
+      <div class="mk-l">Classic Auto Only ARR<br/>(71,467 accounts &middot; $138 avg MRR)</div>
+    </div>
+    <div class="mig-kpi good">
+      <div class="mk-v">1.8&times;</div>
+      <div class="mk-l">CJB ARPU uplift<br/>($247 CJB Triggered vs $138 Classic)</div>
+    </div>
+    <div class="mig-kpi bad">
+      <div class="mk-v">28.9%</div>
+      <div class="mk-l">CJB task completion (non-HVC)<br/>3 in 4 users fail their task</div>
+    </div>
+    <div class="mig-kpi warn">
+      <div class="mk-v">54.3%</div>
+      <div class="mk-l">CJB top-2 box satisfaction<br/>(Legacy: 56.4% &middot; PBJ: 55.4%)</div>
+    </div>
+  </div>
+  <div class="grid cols-4" style="margin-bottom:18px;">
+    <div class="mig-kpi warn">
+      <div class="mk-v">129K</div>
+      <div class="mk-l">CJB Abandoners (Apr 2026)<br/><span style="color:var(--bad); font-weight:700;">+249% from 37K (May 2024)</span></div>
+    </div>
+    <div class="mig-kpi bad">
+      <div class="mk-v">&minus;71%</div>
+      <div class="mk-l">Classic Established 24mo decline<br/>158K &rarr; 46K (May 2024&ndash;May 2026)</div>
+    </div>
+    <div class="mig-kpi">
+      <div class="mk-v">$115.0M</div>
+      <div class="mk-l">CJB Triggered ARR<br/>(38,790 accounts &middot; $247 avg MRR)</div>
+    </div>
+    <div class="mig-kpi warn">
+      <div class="mk-v">88,384</div>
+      <div class="mk-l">unitQ automation feedback items<br/>(trailing 12mo &middot; 11,101 CJB-specific)</div>
+    </div>
+  </div>
+
+  <h2><span class="num">1.3</span>Executive takeaways</h2>
+
+  <div class="takeaway-card">
+    <span class="tk-num">1</span>
+    <h3>Classic is a $118.6M ARR base decaying without replacement.</h3>
+    <p>71K accounts on Classic-only automation represent $9.9M MRR ($118.6M ARR). Classic Established users declined 71% in 24 months (158K &rarr; 46K). Revenue is walking out the door before CJB can catch it.</p>
+  </div>
+  <div class="takeaway-card">
+    <span class="tk-num">2</span>
+    <h3>CJB creates revenue density &mdash; when it works.</h3>
+    <p>CJB Triggered users average $247 MRR (1.8&times; Classic&rsquo;s $138). Premium CJB users average $1,256 vs $1,027 on Classic. But only 38,790 users have reached Triggered state &mdash; fewer than the 49,132 who created journeys but never triggered them.</p>
+  </div>
+  <div class="takeaway-card">
+    <span class="tk-num">3</span>
+    <h3>CJB usability is the binding constraint, not capability.</h3>
+    <p>Task completion for non-HVC users is 28.9% &mdash; nearly 3 in 4 fail. Satisfaction (54.3%) barely beats Legacy (56.4%). Ease (39.1%) is the only metric where CJB leads. The product is not hard to find; it is hard to finish.</p>
+  </div>
+  <div class="takeaway-card">
+    <span class="tk-num">4</span>
+    <h3>The CJB adoption curve reversed after Nov 2025.</h3>
+    <p>CJB Established surged to 156K (Nov 2025) during forced migration, then cliff-dropped to 101K by Dec 2025. Meanwhile CJB Abandoners grew +249% to 129K. We pushed users in, and they bounced out.</p>
+  </div>
+  <div class="takeaway-card">
+    <span class="tk-num">5</span>
+    <h3>Migration VOC is dominated by broken trust, not missing features.</h3>
+    <p>unitQ: 88,384 automation items in 12 months. Top categories: &ldquo;Difficulty Creating&rdquo; (+168%), &ldquo;Not Working/Failing&rdquo; (+196%), &ldquo;Integration Issues&rdquo; (+211%). Migration subtopics: Disappearing Flows (52%), Forced Builders Break Sends (49%), Toggle Missing (41%).</p>
+  </div>
+
+  <h2><span class="num">1.4</span>Decision asks</h2>
+  <div class="grid cols-2" style="margin-bottom:12px;">
+    <div class="card tinted">
+      <h2>Ask 1: Freeze forced migration until task completion &ge; 50%</h2>
+      <p>Current non-HVC task completion is 28.9%. Each forced-migration cohort adds to CJB Abandoners (now 129K). Gate future deprecation milestones on CJB usability, not calendar dates.</p>
+    </div>
+    <div class="card tinted">
+      <h2>Ask 2: Fund a &ldquo;Classic-to-CJB conversion toolkit&rdquo;</h2>
+      <p>Side-by-side preview, one-click migration, stats carryover, 90-day rollback. The 49K users who created-but-never-triggered are the lowest-hanging fruit &mdash; they chose CJB but got stuck.</p>
+    </div>
+    <div class="card tinted">
+      <h2>Ask 3: Prioritize Legacy Monthly conversion ($4.5M MRR)</h2>
+      <p>Legacy Monthly is the largest Classic segment (17K users, $4.5M MRR, $262 avg). These are high-ARPU users on deprecated plans. Each one migrated to CJB is likely to land in Premium/Standard, growing ARPU further.</p>
+    </div>
+    <div class="card tinted">
+      <h2>Ask 4: Separate CJB CSAT tracking for non-HVC</h2>
+      <p>Non-HVC satisfaction is 47.8% (vs HVC 50.0%). Task completion gap is 10pp (28.9% vs 38.8%). The blended 54.3% hides the worst experience. Track and target non-HVC specifically.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PAGE 2: SITUATION + COMPLICATIONS ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Page 2 of 5</div>
+      <h1>Situation: the automation base by segment, plan, and geography</h1>
+    </div>
+  </div>
+
+  <h2><span class="num">2.1</span>Automation funnel &mdash; all segments (BigQuery actuals)</h2>
+  <table class="mig-table" style="margin-bottom:18px;">
+    <thead>
+      <tr><th>Segment</th><th>Users</th><th style="text-align:right">Total MRR</th><th style="text-align:right">Avg MRR</th><th style="text-align:right">Median MRR</th><th style="text-align:right">ARR</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>No Automation</td><td class="num">370,628</td><td class="num">$37.5M</td><td class="num">$101</td><td class="num">$46</td><td class="num">$450.0M</td></tr>
+      <tr class="hilite"><td><strong>Classic Auto Only</strong></td><td class="num"><strong>71,467</strong></td><td class="num"><strong>$9.9M</strong></td><td class="num"><strong>$138</strong></td><td class="num"><strong>$60</strong></td><td class="num"><strong>$118.6M</strong></td></tr>
+      <tr class="hilite"><td><strong>CJB Triggered</strong></td><td class="num"><strong>38,790</strong></td><td class="num"><strong>$9.6M</strong></td><td class="num"><strong>$247</strong></td><td class="num"><strong>$110</strong></td><td class="num"><strong>$115.0M</strong></td></tr>
+      <tr><td>CJB Created (not triggered)</td><td class="num">49,132</td><td class="num">$9.0M</td><td class="num">$182</td><td class="num">$75</td><td class="num">$107.5M</td></tr>
+      <tr><td>Previous Autos Only</td><td class="num">47,694</td><td class="num">$7.5M</td><td class="num">$158</td><td class="num">$78</td><td class="num">$90.5M</td></tr>
+      <tr><td>CJB Started</td><td class="num">5,904</td><td class="num">$1.4M</td><td class="num">$229</td><td class="num">$103</td><td class="num">$16.3M</td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">2.2</span>Classic Auto Only &mdash; by plan</h2>
+  <table class="mig-table" style="margin-bottom:18px;">
+    <thead>
+      <tr><th>Plan</th><th>Users</th><th style="text-align:right">MRR</th><th style="text-align:right">Avg MRR</th><th>Migration risk</th></tr>
+    </thead>
+    <tbody>
+      <tr class="hilite"><td><strong>Legacy Monthly</strong></td><td class="num">17,035</td><td class="num">$4.5M</td><td class="num">$262</td><td><span class="chip warm">HIGH &mdash; deprecated plan, highest ARPU</span></td></tr>
+      <tr><td>Standard Monthly</td><td class="num">20,333</td><td class="num">$2.5M</td><td class="num">$123</td><td><span class="chip">MEDIUM &mdash; CJB-eligible, largest cohort</span></td></tr>
+      <tr><td>Essentials Monthly</td><td class="num">32,815</td><td class="num">$1.7M</td><td class="num">$51</td><td><span class="chip warm">HIGH &mdash; multi-step CJB paywalled on Standard+</span></td></tr>
+      <tr><td>Premium Monthly</td><td class="num">1,202</td><td class="num">$1.2M</td><td class="num">$1,027</td><td><span class="chip warm">CRITICAL &mdash; HVC accounts, white-glove needed</span></td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">2.3</span>CJB Triggered &mdash; by plan</h2>
+  <table class="mig-table" style="margin-bottom:18px;">
+    <thead>
+      <tr><th>Plan</th><th>Users</th><th style="text-align:right">MRR</th><th style="text-align:right">Avg MRR</th><th>Insight</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Standard Monthly</td><td class="num">20,889</td><td class="num">$3.4M</td><td class="num">$165</td><td>Largest CJB cohort &mdash; 1.34&times; ARPU vs Classic Standard</td></tr>
+      <tr><td>Legacy Monthly</td><td class="num">7,613</td><td class="num">$2.8M</td><td class="num">$365</td><td>Migrated Legacy users pay 1.39&times; more ($365 vs $262)</td></tr>
+      <tr class="hilite"><td><strong>Premium Monthly</strong></td><td class="num"><strong>2,192</strong></td><td class="num"><strong>$2.8M</strong></td><td class="num"><strong>$1,256</strong></td><td><strong>CJB Premium = $1,256 vs Classic Premium $1,027 (+22%)</strong></td></tr>
+      <tr><td>Essentials Monthly</td><td class="num">8,050</td><td class="num">$0.6M</td><td class="num">$73</td><td>Essentials on CJB: 1.43&times; ARPU vs Classic Essentials ($73 vs $51)</td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">2.4</span>Geographic distribution (BigQuery actuals)</h2>
+  <div class="geo-grid" style="margin-bottom:18px;">
+    <div>
+      <h2 style="font-size:14px;">CJB Triggered by geo</h2>
+      <table class="mig-table">
+        <thead><tr><th>Region</th><th>Users</th><th style="text-align:right">MRR</th><th style="text-align:right">Avg MRR</th></tr></thead>
+        <tbody>
+          <tr><td>NA</td><td class="num">19,234</td><td class="num">$4.9M</td><td class="num">$254</td></tr>
+          <tr><td>EMEA</td><td class="num">14,637</td><td class="num">$3.5M</td><td class="num">$238</td></tr>
+          <tr><td>APAC</td><td class="num">3,827</td><td class="num">$0.9M</td><td class="num">$233</td></tr>
+          <tr><td>LATAM</td><td class="num">1,092</td><td class="num">$0.3M</td><td class="num">$288</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <h2 style="font-size:14px;">Classic Auto Only by geo</h2>
+      <table class="mig-table">
+        <thead><tr><th>Region</th><th>Users</th><th style="text-align:right">MRR</th><th style="text-align:right">Avg MRR</th></tr></thead>
+        <tbody>
+          <tr><td>NA</td><td class="num">38,099</td><td class="num">$5.2M</td><td class="num">$137</td></tr>
+          <tr><td>EMEA</td><td class="num">25,179</td><td class="num">$3.4M</td><td class="num">$136</td></tr>
+          <tr><td>APAC</td><td class="num">6,306</td><td class="num">$0.9M</td><td class="num">$140</td></tr>
+          <tr><td>LATAM</td><td class="num">1,883</td><td class="num">$0.4M</td><td class="num">$192</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <h2><span class="num">2.5</span>CSAT &mdash; Qualtrics In-App Core KPI Survey (2025+)</h2>
+  <table class="mig-table" style="margin-bottom:14px;">
+    <thead>
+      <tr><th>Builder</th><th style="text-align:right">Top-2 Box Satisfaction</th><th style="text-align:right">Easy %</th><th style="text-align:right">Task Completion (non-HVC)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>CJB</td><td class="num">54.3%</td><td class="num">39.1%</td><td class="num"><span style="color:var(--bad); font-weight:700;">28.9%</span></td></tr>
+      <tr><td>Legacy</td><td class="num">56.4%</td><td class="num">25.0%</td><td class="num">34.3%</td></tr>
+      <tr><td>PBJ</td><td class="num">55.4%</td><td class="num">37.6%</td><td class="num">17.8%</td></tr>
+    </tbody>
+  </table>
+  <div class="grid cols-2" style="margin-bottom:18px;">
+    <div class="card warm">
+      <h2 style="font-size:14px;">CJB non-HVC breakdown</h2>
+      <p><strong>Satisfaction:</strong> 47.8% &middot; <strong>Task completion:</strong> 28.9%</p>
+      <p>Nearly 3 out of 4 non-HVC users cannot complete what they came to do. This cohort is the majority of automation users.</p>
+    </div>
+    <div class="card">
+      <h2 style="font-size:14px;">CJB HVC breakdown</h2>
+      <p><strong>Satisfaction:</strong> 50.0% &middot; <strong>Task completion:</strong> 38.8%</p>
+      <p>HVC does 10pp better on task completion, but still fails 6 in 10. Even power users struggle with the current CJB UX.</p>
+    </div>
+  </div>
+
+  <h2><span class="num">2.6</span>Product journey trend &mdash; 24 months</h2>
+  <div style="margin-bottom:18px;">
+    <h2 style="font-size:14px; margin-bottom:8px;">Classic Established <span style="color:var(--bad); font-weight:700;">&minus;71% over 24 months</span></h2>
+    <div style="display:flex; gap:4px; align-items:end; height:80px; margin-bottom:6px;">
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:var(--warn); border-radius:3px; width:100%; height:80px;"></div>
+        <span style="font-size:9px; color:var(--muted); margin-top:2px;">158K</span>
+        <span style="font-size:8px; color:var(--muted);">May&rsquo;24</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:var(--warn); border-radius:3px; width:100%; height:65px;"></div>
+        <span style="font-size:9px; color:var(--muted); margin-top:2px;">129K</span>
+        <span style="font-size:8px; color:var(--muted);">Jan&rsquo;25</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:var(--warn); border-radius:3px; width:100%; height:60px;"></div>
+        <span style="font-size:9px; color:var(--muted); margin-top:2px;">119K</span>
+        <span style="font-size:8px; color:var(--muted);">Apr&rsquo;25</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:var(--bad); border-radius:3px; width:100%; height:47px;"></div>
+        <span style="font-size:9px; color:var(--bad); font-weight:700; margin-top:2px;">94K</span>
+        <span style="font-size:8px; color:var(--bad);">Jun&rsquo;25</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:var(--bad); border-radius:3px; width:100%; height:31px;"></div>
+        <span style="font-size:9px; color:var(--muted); margin-top:2px;">61K</span>
+        <span style="font-size:8px; color:var(--muted);">Sep&rsquo;25</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:var(--bad); border-radius:3px; width:100%; height:24px;"></div>
+        <span style="font-size:9px; color:var(--muted); margin-top:2px;">48K</span>
+        <span style="font-size:8px; color:var(--muted);">Apr&rsquo;26</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:var(--bad); border-radius:3px; width:100%; height:23px;"></div>
+        <span style="font-size:9px; color:var(--bad); font-weight:700; margin-top:2px;">46K</span>
+        <span style="font-size:8px; color:var(--bad);">May&rsquo;26</span>
+      </div>
+    </div>
+
+    <h2 style="font-size:14px; margin-top:16px; margin-bottom:8px;">CJB Established <span style="color:var(--warn); font-weight:700;">surge then cliff</span></h2>
+    <div style="display:flex; gap:4px; align-items:end; height:80px; margin-bottom:6px;">
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:var(--good); border-radius:3px; width:100%; height:63px;"></div>
+        <span style="font-size:9px; color:var(--muted); margin-top:2px;">122K</span>
+        <span style="font-size:8px; color:var(--muted);">May&rsquo;24</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:var(--good); border-radius:3px; width:100%; height:56px;"></div>
+        <span style="font-size:9px; color:var(--muted); margin-top:2px;">109K</span>
+        <span style="font-size:8px; color:var(--muted);">Jan&rsquo;25</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:var(--good); border-radius:3px; width:100%; height:57px;"></div>
+        <span style="font-size:9px; color:var(--muted); margin-top:2px;">111K</span>
+        <span style="font-size:8px; color:var(--muted);">Apr&rsquo;25</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:#047857; border-radius:3px; width:100%; height:79px;"></div>
+        <span style="font-size:9px; color:var(--good); font-weight:700; margin-top:2px;">153K</span>
+        <span style="font-size:8px; color:var(--good);">May&rsquo;25</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:#047857; border-radius:3px; width:100%; height:80px;"></div>
+        <span style="font-size:9px; color:var(--good); font-weight:700; margin-top:2px;">156K</span>
+        <span style="font-size:8px; color:var(--good);">Nov&rsquo;25</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:var(--bad); border-radius:3px; width:100%; height:52px;"></div>
+        <span style="font-size:9px; color:var(--bad); font-weight:700; margin-top:2px;">101K</span>
+        <span style="font-size:8px; color:var(--bad);">Dec&rsquo;25</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:var(--warn); border-radius:3px; width:100%; height:54px;"></div>
+        <span style="font-size:9px; color:var(--muted); margin-top:2px;">105K</span>
+        <span style="font-size:8px; color:var(--muted);">Apr&rsquo;26</span>
+      </div>
+    </div>
+
+    <h2 style="font-size:14px; margin-top:16px; margin-bottom:8px;">CJB Abandon <span style="color:var(--bad); font-weight:700;">+249% growth</span></h2>
+    <div style="display:flex; gap:4px; align-items:end; height:80px; margin-bottom:6px;">
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:#E5E7EB; border-radius:3px; width:100%; height:23px;"></div>
+        <span style="font-size:9px; color:var(--muted); margin-top:2px;">37K</span>
+        <span style="font-size:8px; color:var(--muted);">May&rsquo;24</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:#D1D5DB; border-radius:3px; width:100%; height:38px;"></div>
+        <span style="font-size:9px; color:var(--muted); margin-top:2px;">62K</span>
+        <span style="font-size:8px; color:var(--muted);">Jan&rsquo;25</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:#9CA3AF; border-radius:3px; width:100%; height:52px;"></div>
+        <span style="font-size:9px; color:var(--muted); margin-top:2px;">85K</span>
+        <span style="font-size:8px; color:var(--muted);">Jun&rsquo;25</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:#6B7280; border-radius:3px; width:100%; height:64px;"></div>
+        <span style="font-size:9px; color:var(--muted); margin-top:2px;">103K</span>
+        <span style="font-size:8px; color:var(--muted);">Sep&rsquo;25</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:var(--bad); border-radius:3px; width:100%; height:77px;"></div>
+        <span style="font-size:9px; color:var(--bad); font-weight:700; margin-top:2px;">124K</span>
+        <span style="font-size:8px; color:var(--bad);">Dec&rsquo;25</span>
+      </div>
+      <div style="flex:1; display:flex; flex-direction:column; align-items:center;">
+        <div style="background:var(--bad); border-radius:3px; width:100%; height:80px;"></div>
+        <span style="font-size:9px; color:var(--bad); font-weight:700; margin-top:2px;">129K</span>
+        <span style="font-size:8px; color:var(--bad);">Apr&rsquo;26</span>
+      </div>
+    </div>
+  </div>
+
+  <h2><span class="num">2.7</span>Four complications</h2>
+
+  <div class="complication-card">
+    <div class="cc-eye">COMPLICATION 1</div>
+    <h3>CJB absorbed Classic users briefly, then lost ~50K in one month</h3>
+    <p style="font-size:12.5px; color:var(--ink-2);">CJB Established surged from 111K (Apr 2025) to 156K (Nov 2025) as Classic was deprecated in June 2025. But by Dec 2025, CJB Established cliff-dropped to 101K &mdash; a loss of 55K users in a single month. These users either churned from the platform entirely or moved into CJB Abandon. The forced migration created a transient spike, not durable adoption.</p>
+  </div>
+  <div class="complication-card c2">
+    <div class="cc-eye">COMPLICATION 2</div>
+    <h3>49K users created CJB journeys but never triggered them</h3>
+    <p style="font-size:12.5px; color:var(--ink-2);">The &ldquo;CJB Created (not triggered)&rdquo; segment is 49,132 users worth $9.0M MRR ($182 avg). These users intended to use CJB &mdash; they got through the door but could not complete setup. With 28.9% task completion, this is not a surprise. This is the lowest-effort migration win: unblock what they already started.</p>
+  </div>
+  <div class="complication-card c3">
+    <div class="cc-eye">COMPLICATION 3</div>
+    <h3>Essentials users are paywalled out of multi-step CJB</h3>
+    <p style="font-size:12.5px; color:var(--ink-2);">32,815 Essentials users on Classic ($1.7M MRR) cannot use multi-step CJB without upgrading to Standard. At $51 avg MRR, asking them to upgrade creates churn risk, not upsell opportunity. Classic gave them single-step automation for free; CJB demands a plan upgrade for equivalent capability. This is the &ldquo;paywalled tools&rdquo; complaint in unitQ (38% of migration subtopics).</p>
+  </div>
+  <div class="complication-card c4">
+    <div class="cc-eye">COMPLICATION 4</div>
+    <h3>Legacy plan users are highest-ARPU but most migration-fragile</h3>
+    <p style="font-size:12.5px; color:var(--ink-2);">Legacy Monthly on Classic: 17K users, $4.5M MRR, $262 avg. These users are on deprecated plans and cannot access CJB without a plan change. But migrated Legacy users who did land in CJB Triggered average $365 &mdash; a 39% ARPU uplift. The risk/reward is extreme: mishandle them and lose $4.5M MRR; succeed and grow ARPU by $103/user/month.</p>
+  </div>
+</section>
+
+<!-- ============ PAGE 3: WHAT NEEDS TO BE TRUE ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Page 3 of 5</div>
+      <h1>What needs to be true &mdash; 6 migration prerequisites</h1>
+      <div class="subtitle">Phased approach: stabilize usability &rarr; build conversion tools &rarr; unlock paywalled segments &rarr; scale with confidence.</div>
+    </div>
+  </div>
+
+  <div class="phase-card p1">
+    <div class="ph-eye">PHASE 1 &middot; IMMEDIATE (0&ndash;3 MONTHS)</div>
+    <h3>1. CJB task completion must reach &ge; 50% for non-HVC before any further forced migration</h3>
+    <div class="ph-meta">Current: 28.9% &middot; Target: 50% &middot; Gap: +21.1pp</div>
+    <p style="font-size:12.5px; color:var(--ink-2);">Every forced-migration cohort at current completion rates adds to the 129K CJB Abandoners. Fix the top-of-funnel UX: template picker, starting-point builder, inline help. Gate deprecation milestones on measured task completion, not calendar dates.</p>
+    <div class="ph-section">
+      <div class="ph-section-eye">DEPENDENCIES</div>
+      <ul style="font-size:12px;"><li>UX audit of CJB setup flow (top 5 drop-off points)</li><li>Instrumented task-completion tracking in Qualtrics + product analytics</li><li>Weekly CSAT pulse survey for CJB non-HVC cohort</li></ul>
+    </div>
+  </div>
+
+  <div class="phase-card p1">
+    <div class="ph-eye">PHASE 1 &middot; IMMEDIATE (0&ndash;3 MONTHS)</div>
+    <h3>2. Auto-migration toolkit with side-by-side preview and stats carryover</h3>
+    <div class="ph-meta">Targets: 49K &ldquo;Created not triggered&rdquo; + 71K Classic-only</div>
+    <p style="font-size:12.5px; color:var(--ink-2);">One-click migration from Classic to CJB with: (a) side-by-side preview showing original vs converted journey, (b) full stats carryover (opens, clicks, revenue attribution), (c) 90-day rollback guarantee. The 49K &ldquo;Created not triggered&rdquo; users are lowest-hanging fruit &mdash; unblock what they already started.</p>
+    <div class="ph-section">
+      <div class="ph-section-eye">DESIGN PRINCIPLES</div>
+      <ul style="font-size:12px;"><li>&ldquo;Disappearing Flows&rdquo; (52% unitQ) = stats must carry over</li><li>&ldquo;Toggle Missing&rdquo; (41% unitQ) = one-click on/off for converted journeys</li><li>&ldquo;Auto-Archived No Restore&rdquo; (28% unitQ) = 90-day undo window</li></ul>
+    </div>
+  </div>
+
+  <div class="phase-card p2">
+    <div class="ph-eye">PHASE 2 &middot; SHORT-TERM (3&ndash;6 MONTHS)</div>
+    <h3>3. Essentials single-step CJB parity without forced upsell</h3>
+    <div class="ph-meta">At risk: 32,815 Essentials users, $1.7M MRR</div>
+    <p style="font-size:12.5px; color:var(--ink-2);">Classic gave Essentials users single-step automation. CJB paywalls multi-step behind Standard. Either: (a) unlock single-step CJB for Essentials (feature parity), or (b) provide a &ldquo;CJB Lite&rdquo; single-step mode. Without this, 33K users face a &ldquo;pay more for the same thing&rdquo; proposition &mdash; the #1 driver of the &ldquo;Paywalled Tools&rdquo; complaint (38% of migration subtopics).</p>
+  </div>
+
+  <div class="phase-card p2">
+    <div class="ph-eye">PHASE 2 &middot; SHORT-TERM (3&ndash;6 MONTHS)</div>
+    <h3>4. Legacy plan conversion pathway with ARPU-preservation guarantee</h3>
+    <div class="ph-meta">At risk: 17,035 Legacy users, $4.5M MRR, $262 avg</div>
+    <p style="font-size:12.5px; color:var(--ink-2);">Legacy Monthly users are on deprecated plans and cannot access CJB directly. Migrated Legacy users who reach CJB Triggered average $365 (+39% ARPU uplift). Build a dedicated conversion flow that: (a) shows feature-for-feature mapping, (b) guarantees no price increase for 12 months, (c) includes white-glove support for accounts &gt; $500/mo MRR.</p>
+  </div>
+
+  <div class="phase-card p3">
+    <div class="ph-eye">PHASE 3 &middot; MEDIUM-TERM (6&ndash;12 MONTHS)</div>
+    <h3>5. CJB reporting and analytics must match Classic-era decision-grade quality</h3>
+    <div class="ph-meta">CSAT gap: CJB 54.3% vs Legacy 56.4%</div>
+    <p style="font-size:12.5px; color:var(--ink-2);">Legacy scored higher on task completion (34.3% vs 28.9%) despite lower ease (25.0% vs 39.1%). Classic users knew how to read their reports; CJB users find the interface easier but cannot complete their goal. Invest in per-step KPIs, inline revenue attribution, and comparative reporting (before/after migration) to close the decision-confidence gap.</p>
+  </div>
+
+  <div class="phase-card p3">
+    <div class="ph-eye">PHASE 3 &middot; MEDIUM-TERM (6&ndash;12 MONTHS)</div>
+    <h3>6. Geographic migration support for EMEA and APAC</h3>
+    <div class="ph-meta">EMEA: 25K Classic users ($3.4M MRR) &middot; APAC: 6K ($0.9M MRR)</div>
+    <p style="font-size:12.5px; color:var(--ink-2);">NA is the largest Classic cohort (38K users, $5.2M MRR) but EMEA (25K, $3.4M) and APAC (6K, $0.9M) have near-identical ARPU ($136&ndash;$140). Migration tooling, documentation, and support must be localized. LATAM has the highest Classic ARPU ($192) with just 1,883 users &mdash; high-touch opportunity.</p>
+  </div>
+</section>
+
+<!-- ============ PAGE 4: VOC DEEP-DIVE ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Page 4 of 5</div>
+      <h1>Voice of Customer &mdash; unitQ automation feedback (trailing 12 months)</h1>
+      <div class="subtitle">88,384 total automation feedback items &middot; 11,101 CJB-specific &middot; Top categories by volume and YoY growth.</div>
+    </div>
+  </div>
+
+  <h2><span class="num">4.1</span>Top feedback categories</h2>
+  <table class="mig-table" style="margin-bottom:18px;">
+    <thead>
+      <tr><th>Category</th><th style="text-align:right">Volume</th><th style="text-align:right">YoY Growth</th><th>Signal</th></tr>
+    </thead>
+    <tbody>
+      <tr class="hilite"><td><strong>Difficulty Creating Automations</strong></td><td class="num"><strong>17,352</strong></td><td class="num"><span style="color:var(--bad); font-weight:700;">+168%</span></td><td>CJB setup complexity; template gap; multi-step confusion</td></tr>
+      <tr class="hilite"><td><strong>Not Working / Failing</strong></td><td class="num"><strong>15,666</strong></td><td class="num"><span style="color:var(--bad); font-weight:700;">+196%</span></td><td>Automations pausing silently, triggers not firing, delivery failures</td></tr>
+      <tr class="hilite"><td><strong>Integration Issues</strong></td><td class="num"><strong>8,456</strong></td><td class="num"><span style="color:var(--bad); font-weight:700;">+211%</span></td><td>Shopify, WooCommerce, Zapier connections breaking post-migration</td></tr>
+      <tr><td>CJB-specific (subtotal)</td><td class="num">11,101</td><td class="num">&mdash;</td><td>12.6% of all automation feedback is CJB-tagged</td></tr>
+    </tbody>
+  </table>
+
+  <h2><span class="num">4.2</span>Migration-specific subtopics</h2>
+  <div class="grid cols-3" style="margin-bottom:18px;">
+    <div class="mig-kpi bad">
+      <div class="mk-v">52%</div>
+      <div class="mk-l">Disappearing Flows<br/>Stats, history, contacts lost in migration</div>
+    </div>
+    <div class="mig-kpi bad">
+      <div class="mk-v">49%</div>
+      <div class="mk-l">Forced Builders Break Sends<br/>Active automations stop during conversion</div>
+    </div>
+    <div class="mig-kpi warn">
+      <div class="mk-v">41%</div>
+      <div class="mk-l">Toggle Missing<br/>No on/off switch for migrated journeys</div>
+    </div>
+    <div class="mig-kpi warn">
+      <div class="mk-v">38%</div>
+      <div class="mk-l">Paywalled Tools<br/>Features that were free now behind Standard+</div>
+    </div>
+    <div class="mig-kpi">
+      <div class="mk-v">28%</div>
+      <div class="mk-l">Auto-Archived No Restore<br/>Journeys archived without recovery option</div>
+    </div>
+  </div>
+
+  <h2><span class="num">4.3</span>Representative customer voices</h2>
+
+  <div class="issue-card crit">
+    <span class="ic-num">1</span>
+    <h4>Migration destroys history and confidence</h4>
+    <span class="ic-tag">DISAPPEARING FLOWS</span>
+    <div class="voc-quote">
+      &ldquo;My classic automations were archived &amp; i opted to convert to custom journeys &mdash; where do i see the status of that?&rdquo;
+      <cite>unitQ &middot; CJB migration feedback</cite>
+    </div>
+    <div class="ic-fix"><strong>Fix:</strong> Stats carryover + migration status dashboard. Users should never wonder where their data went.</div>
+  </div>
+
+  <div class="issue-card crit">
+    <span class="ic-num">2</span>
+    <h4>Visual migration failures drive reversion to Legacy</h4>
+    <span class="ic-tag">FORCED BUILDERS BREAK SENDS</span>
+    <div class="voc-quote">
+      &ldquo;Tried to transition from Legacy Campaign to Newer campaign and photo issues were so unwieldy that we reverted back to Legacy/Classic.&rdquo;
+      <cite>unitQ &middot; CJB migration feedback</cite>
+    </div>
+    <div class="ic-fix"><strong>Fix:</strong> Visual fidelity validation before migration completes. Side-by-side preview must flag asset rendering differences.</div>
+  </div>
+
+  <div class="issue-card high">
+    <span class="ic-num">3</span>
+    <h4>CJB complexity drives perception of platform regression</h4>
+    <span class="ic-tag">DIFFICULTY CREATING</span>
+    <div class="voc-quote">
+      &ldquo;Setting up a simple automation was way too complicated.&rdquo;
+      <cite>unitQ &middot; automation feedback</cite>
+    </div>
+    <div class="voc-quote">
+      &ldquo;The Customer Journeys module is so not intuitive.&rdquo;
+      <cite>unitQ &middot; CJB feedback</cite>
+    </div>
+    <div class="ic-fix"><strong>Fix:</strong> Guided setup wizard for top 5 use cases (welcome, abandoned cart, post-purchase, win-back, birthday). Cover 80% of Classic automation patterns with template-first flows.</div>
+  </div>
+
+  <div class="issue-card high">
+    <span class="ic-num">4</span>
+    <h4>Brand trust erosion from repeated UX regressions</h4>
+    <span class="ic-tag">PLATFORM TRUST</span>
+    <div class="voc-quote">
+      &ldquo;MC used to be the easy to use email marketing system. The past few years it has been anything but.&rdquo;
+      <cite>unitQ &middot; automation feedback</cite>
+    </div>
+    <div class="ic-fix"><strong>Fix:</strong> This is a compound trust problem. Each migration friction adds to a cumulative narrative. The toolkit must be zero-disruption by design, not zero-disruption by aspiration.</div>
+  </div>
+</section>
+
+<!-- ============ PAGE 5: APPENDIX ============ -->
+<section class="page">
+  <div class="page-head">
+    <div>
+      <div class="eyebrow">Page 5 of 5</div>
+      <h1>Appendix &mdash; methodology, data sources, and definitions</h1>
+    </div>
+  </div>
+
+  <h2><span class="num">5.1</span>Data sources</h2>
+  <div class="grid cols-2" style="margin-bottom:18px;">
+    <div class="method-card">
+      <h4>BigQuery &mdash; MRR and funnel data</h4>
+      <p><strong>Tables:</strong> <code>cjb_funnel</code> joined to <code>lcm_marketing_account_base</code> via account key. <strong>Snapshot:</strong> Current (May 2026). Segments defined by automation state: No Automation, Classic Auto Only, CJB Triggered, CJB Created (not triggered), Previous Autos Only, CJB Started. MRR = monthly recurring revenue from <code>lcm_marketing_account_base</code>. Plan breakdown from <code>plan_name</code> field. Geographic grouping from <code>geo_group</code> field. All MRR figures are actuals from the join, not estimates.</p>
+    </div>
+    <div class="method-card">
+      <h4>Qualtrics &mdash; CSAT data</h4>
+      <p><strong>Survey:</strong> In-App Core KPI Survey (2025+). Metrics: Top-2 Box Satisfaction (4&ndash;5 on 5-point scale), Easy % (ease of use), Task Completion (binary: did you finish what you came to do?). Segments: CJB, Legacy, PBJ. HVC/non-HVC split available for CJB. Non-HVC = accounts below $299/mo MRR threshold.</p>
+    </div>
+    <div class="method-card">
+      <h4>unitQ &mdash; VOC data</h4>
+      <p><strong>Window:</strong> Trailing 12 months. <strong>Volume:</strong> 88,384 automation feedback items total, 11,101 CJB-specific. Categories: Difficulty Creating, Not Working/Failing, Integration Issues. Migration subtopics: Disappearing Flows, Forced Builders Break Sends, Toggle Missing, Paywalled Tools, Auto-Archived No Restore. Percentages represent share of CJB-tagged feedback mentioning each subtopic. YoY growth calculated against prior 12-month window.</p>
+    </div>
+    <div class="method-card">
+      <h4>Product Journey (BigQuery)</h4>
+      <p><strong>Table:</strong> <code>bi_aggregate.product_journey_monthly</code>. States: Unexplored &rarr; Explore &rarr; Try &rarr; Establish &rarr; Abandon. Classic Established and CJB Established tracked monthly from May 2024 through May 2026. CJB Abandon tracked from May 2024 through Apr 2026. All counts are monthly snapshots (not cumulative).</p>
+    </div>
+  </div>
+
+  <h2><span class="num">5.2</span>Key definitions</h2>
+  <table class="mig-table" style="margin-bottom:14px;">
+    <thead>
+      <tr><th>Term</th><th>Definition</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Classic Auto Only</strong></td><td>Accounts that have Classic Automations active and have never used CJB (Customer Journey Builder). From <code>cjb_funnel</code>.</td></tr>
+      <tr><td><strong>CJB Triggered</strong></td><td>Accounts that have created AND triggered at least one Customer Journey (automation is live and sending).</td></tr>
+      <tr><td><strong>CJB Created (not triggered)</strong></td><td>Accounts that created a CJB journey but never activated/triggered it. Indicates setup friction.</td></tr>
+      <tr><td><strong>CJB Started</strong></td><td>Accounts that began the CJB creation flow but did not complete journey creation.</td></tr>
+      <tr><td><strong>Previous Autos Only</strong></td><td>Accounts that previously had automations (Classic or CJB) but have none currently active.</td></tr>
+      <tr><td><strong>HVC</strong></td><td>High-Value Customer. Accounts with MRR &ge; $299/mo.</td></tr>
+      <tr><td><strong>Task Completion</strong></td><td>Qualtrics binary metric: &ldquo;Did you complete what you came to do?&rdquo; Percentage of &ldquo;Yes&rdquo; responses.</td></tr>
+      <tr><td><strong>Top-2 Box Satisfaction</strong></td><td>Percentage of respondents rating 4 or 5 on a 5-point satisfaction scale.</td></tr>
+      <tr><td><strong>ARPU</strong></td><td>Average Revenue Per User. Calculated as Total MRR &divide; Users for each segment.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="source">
+    <strong>Sources:</strong> BigQuery <code style="font-family:'SF Mono',Menlo,monospace;font-size:11px;">cjb_funnel &times; lcm_marketing_account_base</code> (current snapshot, May 2026). Qualtrics In-App Core KPI Survey (2025+ responses). unitQ automation feedback (trailing 12 months, May 2025&ndash;May 2026). Product Journey from <code style="font-family:'SF Mono',Menlo,monospace;font-size:11px;">bi_aggregate.product_journey_monthly</code> (May 2024&ndash;May 2026, 24 months). Geographic groupings: NA (North America), EMEA (Europe/Middle East/Africa), APAC (Asia-Pacific), LATAM (Latin America). <strong>All MRR figures are actuals from BigQuery join; no estimates or extrapolations.</strong> CSAT figures from Qualtrics survey responses; not computed from other metrics. Cross-references: <a href="#canvas" onclick="document.querySelector('[data-tab=canvas]').click();return false;">Initiative Canvas</a> (P3 activation + free-tier), <a href="#health" onclick="document.querySelector('[data-tab=health]').click();return false;">Product Health</a> (adoption lifecycle), <a href="#memo" onclick="document.querySelector('[data-tab=memo]').click();return false;">Strategy Memo</a> (R1 risk), <a href="#hvcrisk" onclick="document.querySelector('[data-tab=hvcrisk]').click();return false;">HVC Risk Map</a>.
+  </div>
+</section>
+
+</div><!-- /panel-migration -->
+
+
 </div>
 
 <script>
@@ -11962,7 +12709,7 @@ abandonment is directly tied to the documented HVC pain ($53.5K/mo across 73 the
       t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
     });
     var initial = (window.location.hash || '').replace('#', '');
-    if (['sentiment','brief','roadmap','hvcrisk','research','health','prdaudit','strategy','growthmodel','lossattr','canvas','memo'].indexOf(initial) >= 0) activate(initial);
+    if (['sentiment','brief','roadmap','hvcrisk','research','health','prdaudit','strategy','growthmodel','lossattr','canvas','memo','migration'].indexOf(initial) >= 0) activate(initial);
   })();
 </script>
 
