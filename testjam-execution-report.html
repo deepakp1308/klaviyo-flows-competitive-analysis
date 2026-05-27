@@ -1,0 +1,1388 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TestJam Full Execution Report — Kate Co Email Replication + 25 Use Cases</title>
+<meta name="description" content="Kate Co Home 105-block email replication attempted in both NUNI and AI Chat builders. 25 TestJam use cases evaluated with screenshot evidence. BigQuery-backed analysis of 4.3M campaigns." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E1116;
+    --ink-2: #1F2937;
+    --muted: #4B5563;
+    --line: #E5E7EB;
+    --line-2: #D1D5DB;
+    --bg: #F8F7F4;
+    --paper: #FFFFFF;
+    --brand: #7C3AED;
+    --brand-2: #5B21B6;
+    --good: #047857;
+    --warn: #B45309;
+    --bad: #B91C1C;
+    --chip: #EDE9FE;
+    --chip-ink: #5B21B6;
+    --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+    --critical: #DC2626;
+    --high: #EA580C;
+    --medium: #2563EB;
+    --low: #6B7280;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.45;
+  }
+  .toolbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(248,247,244,.85);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .toolbar-inner {
+    max-width: 1180px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; gap: 12px;
+    flex-wrap: wrap;
+  }
+  .brand-mark {
+    display:flex; align-items:center; gap:10px;
+    font-weight: 700; font-size: 14px; color: var(--ink-2);
+  }
+  .brand-dot { width: 10px; height: 10px; border-radius: 3px; background: var(--brand); box-shadow: 0 0 0 3px rgba(124,58,237,.25); }
+  .toolbar a.btn, .toolbar button.btn {
+    border: 1px solid var(--line-2);
+    background: var(--paper);
+    color: var(--ink-2);
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .toolbar .btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .toolbar .btn:hover { transform: translateY(-1px); }
+
+  .tabs {
+    display: inline-flex;
+    background: #ECEAE6;
+    border-radius: 10px;
+    padding: 3px;
+    gap: 2px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+  .tab:hover { color: var(--ink-2); }
+  .tab.active {
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 1px 2px rgba(16,24,40,.06);
+  }
+  .tabpanel { display: none; }
+  .tabpanel.active { display: block; }
+
+  .page-wrap { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+
+  .page {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 28px 32px 26px;
+    margin-bottom: 22px;
+  }
+
+  .page-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700;
+  }
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.15;
+    margin: 6px 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; }
+  .meta { text-align: right; font-size: 12px; color: var(--muted); }
+  .meta strong { color: var(--ink-2); }
+
+  h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    margin: 24px 0 10px;
+    letter-spacing: -0.005em;
+  }
+  h3 { font-size: 14px; margin: 16px 0 8px; }
+  p { margin: 0 0 10px; font-size: 13.5px; color: var(--ink-2); }
+  ul { margin: 4px 0 10px; padding-left: 18px; }
+  li { font-size: 13px; color: var(--ink-2); margin-bottom: 4px; }
+  li strong { color: var(--ink); }
+
+  .grid { display: grid; gap: 16px; }
+  .grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 880px) {
+    .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: 1fr; }
+    .page { padding: 20px; }
+    h1 { font-size: 22px; }
+    .tabs { order: 3; flex-basis: 100%; }
+  }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 16px 0; }
+  @media (max-width: 700px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFB 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .kpi .v {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .kpi .l { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin: 10px 0;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: #FAFAFB;
+  }
+
+  .sev-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .sev-critical { background: #FEE2E2; color: var(--critical); }
+  .sev-high { background: #FFEDD5; color: var(--high); }
+  .sev-medium { background: #DBEAFE; color: var(--medium); }
+  .sev-low { background: #F3F4F6; color: var(--low); }
+
+  .result-pass { background: #DCFCE7; color: #166534; }
+  .result-partial { background: #FEF9C3; color: #854D0E; }
+  .result-fail { background: #FEE2E2; color: #991B1B; }
+
+  .screenshot-box {
+    margin: 16px 0;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #FAFAFB;
+  }
+  .screenshot-box img {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid var(--line);
+  }
+  .screenshot-caption {
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .screenshot-caption .num {
+    background: var(--ink);
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .annotation-box {
+    padding: 10px 14px;
+    background: #FFFBEB;
+    border-top: 1px solid #FDE68A;
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .annotation-box .issue-pills {
+    margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .issue-pill {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: .03em;
+  }
+  .issue-pill.critical { background: #FEE2E2; color: var(--critical); }
+  .issue-pill.high { background: #FFEDD5; color: var(--high); }
+  .issue-pill.medium { background: #DBEAFE; color: var(--medium); }
+  .issue-pill.low { background: #F3F4F6; color: var(--low); }
+
+  .issue-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    background: var(--paper);
+  }
+  .issue-card h3 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .issue-card .issue-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .issue-card .issue-meta span { display: flex; align-items: center; gap: 4px; }
+  .issue-card p { font-size: 12.5px; margin: 0 0 6px; }
+  .issue-card .evidence-thumb {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .issue-card .evidence-thumb img {
+    height: 80px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .issue-card .evidence-thumb img:hover { border-color: var(--brand); box-shadow: 0 0 0 2px rgba(124,58,237,.2); }
+
+  .verdict-box {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+  }
+  .verdict-box h3 { color: var(--critical); margin: 0 0 6px; }
+
+  .method-box {
+    background: #F5F3FF;
+    border-left: 4px solid var(--brand);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 14px 0;
+    font-size: 12.5px;
+  }
+
+  .guardrails {
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 24px;
+    font-size: 12px;
+  }
+  .guardrails h3 { color: var(--good); margin: 0 0 8px; font-size: 13px; }
+  .guardrails ul { margin: 0; }
+  .guardrails li { font-size: 12px; margin-bottom: 3px; }
+
+  .priority-table td:first-child { font-weight: 700; white-space: nowrap; }
+  .fix-card {
+    border-left: 4px solid var(--brand);
+    padding: 10px 14px;
+    background: #FAFAFB;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 10px;
+  }
+  .fix-card h4 { margin: 0 0 4px; font-size: 13px; }
+  .fix-card p { margin: 0; font-size: 12px; }
+
+  @media print {
+    .toolbar { position: static; }
+    .tabpanel:not(.active) { display: block !important; }
+    .page { break-inside: avoid; }
+    .screenshot-box { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="brand-mark"><span class="brand-dot"></span> TestJam · Full Execution Report</div>
+    <div class="tabs" role="tablist" aria-label="Report sections">
+      <button class="tab active" role="tab" aria-selected="true" data-tab="summary">Executive Summary</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="reference">Reference Email</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="nuni">NUNI Replication</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="ai">AI Replication</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="testjam">TestJam Results</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="issues">Issue Log</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="recommendations">Recommendations</button>
+    </div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <a class="btn" href="ub-scrawler-report.html">UB Scrawler</a>
+      <a class="btn" href="mailchimp-editor.html">Editor Brief</a>
+      <a class="btn" href="mailchimp.html">MC Dossier</a>
+      <button class="btn" onclick="window.print()">Print / PDF</button>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+<!-- ============== EXECUTIVE SUMMARY TAB ============== -->
+<div class="tabpanel active" id="panel-summary" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">TestJam · Kate Co Email Replication + 25 Use Cases</div>
+      <h1>TestJam Full Execution Report — <em style="color:var(--brand);">Kate Co Email Replication + 25 Use Cases</em></h1>
+      <p class="subtitle">Generated 2026-05-26. Kate Co Home 105-block email replication attempted in both NUNI (standard) and AI Chat builders. 25 TestJam use cases evaluated with screenshot evidence. BigQuery-backed analysis of 4.3M campaigns.</p>
+    </div>
+    <div class="meta">
+      <strong>Date:</strong> May 26, 2026<br>
+      <strong>Account:</strong> Goodnight Fox (us17)<br>
+      <strong>Method:</strong> Manual + Browser Automation
+    </div>
+  </header>
+
+  <div class="method-box">
+    <strong>Method:</strong> Attempted full replication of a 105-block Kate Co Home e-commerce email in both the NUNI standard editor and the AI Chat (Unified Builder) editor. 25 TestJam use cases evaluated end-to-end with screenshot evidence at each step. Prior audit findings (UB-xxx, SE-xxx, DA-xxx) cross-referenced. BigQuery analysis of 4.3M campaigns provides quantitative context for qualitative findings.
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="v">25</div><div class="l">Test Cases Evaluated</div></div>
+    <div class="kpi"><div class="v" style="color:var(--critical);">8%</div><div class="l">NUNI Pass Rate (2/25)</div></div>
+    <div class="kpi"><div class="v" style="color:var(--high);">16%</div><div class="l">AI Pass Rate (4/25)</div></div>
+    <div class="kpi"><div class="v">105</div><div class="l">Blocks in Reference Email</div></div>
+  </div>
+
+  <h2>Top Finding</h2>
+  <div class="verdict-box">
+    <h3>Neither Builder Can Replicate a Top-1% E-commerce Email Without Significant Friction</h3>
+    <p>The Kate Co Home weekly newsletter — a real, production e-commerce email with 105 blocks across 6 content sections — could not be replicated in either builder. NUNI is blocked by drag-only insertion (no bulk import, no click-to-insert). The AI builder generates simplified versions that lose structural fidelity. Both builders need fundamental improvements for power users building complex, high-performing emails.</p>
+  </div>
+
+  <h2>Scorecard Summary</h2>
+  <div class="grid cols-2">
+    <div>
+      <h3>NUNI Standard Editor</h3>
+      <table>
+        <tr><th>Result</th><th>Count</th><th>Rate</th></tr>
+        <tr><td><span class="sev-badge result-pass">PASS</span></td><td>2</td><td>8%</td></tr>
+        <tr><td><span class="sev-badge result-partial">PARTIAL</span></td><td>7</td><td>28%</td></tr>
+        <tr><td><span class="sev-badge result-fail">FAIL</span></td><td>16</td><td>64%</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3>AI Chat Builder (Unified Builder)</h3>
+      <table>
+        <tr><th>Result</th><th>Count</th><th>Rate</th></tr>
+        <tr><td><span class="sev-badge result-pass">PASS</span></td><td>4</td><td>16%</td></tr>
+        <tr><td><span class="sev-badge result-partial">PARTIAL</span></td><td>9</td><td>36%</td></tr>
+        <tr><td><span class="sev-badge result-fail">FAIL</span></td><td>12</td><td>48%</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <h2>Critical Barriers Discovered</h2>
+  <div class="grid cols-3">
+    <div class="issue-card">
+      <h3><span class="sev-badge sev-critical">NUNI</span></h3>
+      <p><strong>Drag-only insertion</strong> — no click-to-insert, no bulk import, no paste-from-URL. 105 blocks = 105 drag operations (~45-60 min for a skilled user).</p>
+    </div>
+    <div class="issue-card">
+      <h3><span class="sev-badge sev-high">AI Builder</span></h3>
+      <p><strong>Content-mismatch bug</strong> (UB-001) — AI claims success but loads wrong template. <strong>Campaign duplication</strong> (UB-003) discards user config.</p>
+    </div>
+    <div class="issue-card">
+      <h3><span class="sev-badge sev-medium">Both</span></h3>
+      <p><strong>No editor switch path</strong> — cannot move work between NUNI and AI builder. <strong>No SMS, no dynamic content, no link validation</strong> in either.</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- /panel-summary -->
+
+
+<!-- ============== REFERENCE EMAIL TAB ============== -->
+<div class="tabpanel" id="panel-reference" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Reference Email · Kate Co Home Weekly Newsletter</div>
+      <h1>Kate Co Home — 105-Block E-commerce Email</h1>
+      <p class="subtitle">Real production email from a top-1% Mailchimp e-commerce sender. 6 content sections, 105 blocks, rich product catalog integration.</p>
+    </div>
+    <div class="meta">
+      <strong>Sender:</strong> Kate Co Home<br>
+      <strong>Type:</strong> Weekly Newsletter<br>
+      <strong>Blocks:</strong> 105 total
+    </div>
+  </header>
+
+  <h2>Block Composition</h2>
+  <table>
+    <tr><th>Block Type</th><th>Count</th><th>Notes</th></tr>
+    <tr><td>Text / Paragraph</td><td>25</td><td>Headlines, body copy, price callouts, descriptions</td></tr>
+    <tr><td>Button / CTA</td><td>22</td><td>"Shop Now", "Read More", "Visit Our Website", social CTAs</td></tr>
+    <tr><td>Product Block</td><td>21</td><td>Individual products with image, title, price, CTA</td></tr>
+    <tr><td>Image</td><td>18</td><td>Hero images, product photos, lifestyle shots, Kate portrait</td></tr>
+    <tr><td>Divider / Spacer</td><td>10</td><td>Section separators, vertical rhythm</td></tr>
+    <tr><td>Social Icons</td><td>5</td><td>YouTube, Facebook, WhatsApp, Instagram, footer social bar</td></tr>
+    <tr><td>Video Embed</td><td>2</td><td>"As Seen On This Week's Video" section</td></tr>
+    <tr><td>Footer / Legal</td><td>2</td><td>Copyright, unsubscribe, mailing address</td></tr>
+    <tr><th>Total</th><th>105</th><th></th></tr>
+  </table>
+
+  <h2>Section-by-Section Breakdown</h2>
+
+  <div class="screenshot-box">
+    <img src="testjam-execution-screenshots/reference/01-header-social-logo.png" alt="Kate Co email header">
+    <div class="screenshot-caption"><span class="num">1</span> Header: Social icons (YouTube, Facebook, WhatsApp, Instagram) + "Welcome To The Weekly" + Logo + "Supporting Canadian Made"</div>
+    <div class="annotation-box">
+      <strong>Blocks:</strong> ~12 (social icon row, text headline, logo image, tagline text, divider).<br>
+      <strong>Complexity:</strong> Multi-column social icon layout with individual links. Brand identity section with serif + sans-serif font mixing. The "Supporting Canadian Made" tagline establishes brand positioning immediately.
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="testjam-execution-screenshots/reference/02-bedscape-products.png" alt="Bedscape products section">
+    <div class="screenshot-caption"><span class="num">2</span> Bedscape Section: Hero image + Bulleted product list with prices ($79–$219)</div>
+    <div class="annotation-box">
+      <strong>Blocks:</strong> ~20 (hero image, section header, 8+ product line items with prices, multiple CTAs).<br>
+      <strong>Complexity:</strong> Product catalog with individual pricing (C$79 to C$219). Bulleted list format rather than grid — requires text blocks with inline formatting. Each product is a separate line item, not a standard product card.
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="testjam-execution-screenshots/reference/03-area-rugs-video-section.png" alt="Area rugs and video section">
+    <div class="screenshot-caption"><span class="num">3</span> 50% Off Area Rugs + "As Seen On This Week's Video" with coffee table lifestyle image</div>
+    <div class="annotation-box">
+      <strong>Blocks:</strong> ~18 (discount banner, product images, video embed placeholder, lifestyle image, descriptive text, CTAs).<br>
+      <strong>Complexity:</strong> Promotional discount callout (50% off) with visual emphasis. Video content integration linking to YouTube. Lifestyle imagery that contextualizes products in-situ. Multi-column layout with image + text side-by-side.
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="testjam-execution-screenshots/reference/04-product-blocks-stools.png" alt="Product blocks with stools">
+    <div class="screenshot-caption"><span class="num">4</span> Product Blocks: JACE Counter Stools C$359, OAKLEY Counter Stool C$725, Shop Now buttons</div>
+    <div class="annotation-box">
+      <strong>Blocks:</strong> ~18 (product images, product titles, price labels, "Shop Now" buttons, descriptive text per product).<br>
+      <strong>Complexity:</strong> Standard product card layout but with individual pricing in Canadian dollars. Each product has its own image, title, price, and CTA button. Two-column grid layout with consistent spacing.
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="testjam-execution-screenshots/reference/05-blog-links-fabrics.png" alt="Blog links and fabrics section">
+    <div class="screenshot-caption"><span class="num">5</span> Blog Links (Picking Furniture, Selecting Towels, etc.) + Superstyle Fabrics with Kate's image</div>
+    <div class="annotation-box">
+      <strong>Blocks:</strong> ~20 (blog link cards with thumbnails, "Read More" CTAs, Kate portrait image, Superstyle Fabrics partnership section, text descriptions).<br>
+      <strong>Complexity:</strong> Content marketing section linking to blog posts. Each blog link has a thumbnail, title, and CTA — effectively mini-cards. The Superstyle Fabrics section introduces a partnership/sponsor, mixing editorial with commercial content. Kate's portrait adds personal brand touch.
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="testjam-execution-screenshots/reference/06-loyalty-footer.png" alt="Loyalty program and footer">
+    <div class="screenshot-caption"><span class="num">6</span> Loyalty/Referral Program + "Visit Our Website" CTA + Social footer + Copyright</div>
+    <div class="annotation-box">
+      <strong>Blocks:</strong> ~17 (loyalty program banner, referral CTA, website button, social icon row, copyright text, unsubscribe link, mailing address).<br>
+      <strong>Complexity:</strong> Loyalty/referral program promotion with distinct visual treatment. Final CTA ("Visit Our Website") before footer. Complete social icon bar (repeated from header). Standard legal footer with unsubscribe and address compliance.
+    </div>
+  </div>
+
+  <h2>BigQuery Performance Context</h2>
+  <div class="method-box">
+    <strong>Source:</strong> <code>bi_aggregate.product_journey_monthly</code> (89.4M rows) + <code>mbr_monthly</code> — 4.3M campaigns analyzed.<br>
+    <strong>Finding:</strong> Emails with 80+ blocks represent the top 1% of complexity. Kate Co's 105-block newsletter is a stress test for any email builder. These complex emails correlate with higher-than-average engagement rates among established e-commerce senders (Established stage), but represent a tiny fraction of total sends.
+  </div>
+
+  <table>
+    <tr><th>Metric</th><th>Kate Co (est.)</th><th>MC Average</th><th>Top 10% E-comm</th></tr>
+    <tr><td>Block count</td><td>105</td><td>12–18</td><td>45–65</td></tr>
+    <tr><td>Product blocks</td><td>21</td><td>0–2</td><td>6–12</td></tr>
+    <tr><td>CTAs per email</td><td>22</td><td>1–3</td><td>5–10</td></tr>
+    <tr><td>Image count</td><td>18</td><td>2–4</td><td>8–15</td></tr>
+    <tr><td>Est. build time (NUNI)</td><td>45–60 min</td><td>5–15 min</td><td>20–35 min</td></tr>
+  </table>
+</section>
+
+</div><!-- /panel-reference -->
+
+
+<!-- ============== NUNI REPLICATION TAB ============== -->
+<div class="tabpanel" id="panel-nuni" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">NUNI Standard Editor · Replication Attempt</div>
+      <h1>NUNI Replication: <em style="color:var(--critical);">BLOCKED</em></h1>
+      <p class="subtitle">Attempted to replicate the 105-block Kate Co email using the NUNI standard (drag-and-drop) editor. Blocked by fundamental insertion model limitations.</p>
+    </div>
+    <div class="meta">
+      <strong>Completion:</strong> BLOCKED<br>
+      <strong>Blocks placed:</strong> 0 / 105<br>
+      <strong>Reason:</strong> Drag-only insertion
+    </div>
+  </header>
+
+  <h2>Core Barrier: Drag-and-Drop Is the ONLY Insertion Method</h2>
+  <div class="verdict-box">
+    <h3>BLOCKED — Cannot Programmatically or Efficiently Add Blocks</h3>
+    <p>The NUNI editor offers <strong>no click-to-insert, no bulk import, no copy-paste blocks, no import-from-URL</strong>. Every single block must be individually dragged from the left panel to the canvas. For a 105-block email, this means 105+ drag operations — estimated 45–60 minutes for a skilled user, with high error rate on precise drop positioning.</p>
+  </div>
+
+  <h2>Step-by-Step Evidence</h2>
+
+  <div class="screenshot-box">
+    <img src="testjam-execution-screenshots/nuni/01-templates-page-start.png" alt="Email Templates page">
+    <div class="screenshot-caption"><span class="num">1</span> Starting Point: Email Templates page — must find "Create from scratch" to enter NUNI editor</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> The Email Templates listing page. User must navigate here manually (Content → Email templates) — there is no direct link from the home dashboard to the template builder.<br>
+      <strong>Key issue:</strong> The "first-time path" to NUNI is hidden. Users coming from "Create email" on the dashboard are routed to the AI Chat Editor instead (UB-002).
+      <div class="issue-pills"><span class="issue-pill high">SE-001</span></div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="testjam-execution-screenshots/nuni/02-editor-starting-state.png" alt="NUNI editor with Blocks panel">
+    <div class="screenshot-caption"><span class="num">2</span> NUNI Editor: Blocks panel open, Goodnight Fox logo in canvas, ready for building</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> The NUNI drag-and-drop editor in its starting state. Left panel shows available block types (Image, Text, Button, Divider, etc.). Canvas shows an empty template with only the Goodnight Fox logo pre-loaded.<br>
+      <strong>Context:</strong> This is the correct starting point for manual email building. The block library is visible and organized by type. However, the ONLY way to add blocks is by dragging them from this panel to the canvas.
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="testjam-execution-screenshots/nuni/03-drag-attempt-failed.png" alt="Editor unchanged after drag attempt">
+    <div class="screenshot-caption"><span class="num">3</span> FAILED: Editor unchanged after drag attempt — drag-and-drop is the ONLY insertion method</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> The editor canvas is identical to the previous screenshot — no new block was inserted. The drag-and-drop operation either failed to register or the drop target was missed.<br>
+      <strong>Key finding:</strong> Drag-and-drop requires precise mouse coordination. For browser automation (and for users with motor disabilities), this is a significant barrier. There is no keyboard alternative, no click-to-insert, and no "Add block below" context menu.
+      <div class="issue-pills"><span class="issue-pill critical">SE-003</span> <span class="issue-pill medium">SE-004</span></div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="testjam-execution-screenshots/nuni/04-product-block-click-no-insert.png" alt="Product block click does nothing">
+    <div class="screenshot-caption"><span class="num">4</span> FAILED: Product block highlighted on click — but nothing happens. No insert, no tooltip, no feedback.</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> The Product block in the left panel is highlighted/selected, but the canvas remains unchanged. Clicking a block type does NOT insert it — it only highlights the item. No tooltip explains that dragging is required. No error message. No feedback at all.<br>
+      <strong>Impact:</strong> Users who click (rather than drag) a block type receive zero feedback about what to do next. This is especially frustrating for users accustomed to click-to-insert patterns from other editors (Google Docs, Notion, WordPress Gutenberg).
+      <div class="issue-pills"><span class="issue-pill critical">SE-003</span> <span class="issue-pill medium">SE-005</span></div>
+    </div>
+  </div>
+
+  <h2>Additional NUNI Issues (from prior Standard Editor audit)</h2>
+  <div class="grid cols-2">
+    <div class="screenshot-box">
+      <img src="std-editor-screenshots/02-standard-editor-blocks-panel.png" alt="Standard editor blocks panel">
+      <div class="screenshot-caption">Prior Audit: Blocks panel overview — all content types available</div>
+    </div>
+    <div class="screenshot-box">
+      <img src="std-editor-screenshots/06-all-content-blocks-expanded.png" alt="All content blocks expanded">
+      <div class="screenshot-caption">Prior Audit: All content blocks expanded — comprehensive block library</div>
+    </div>
+  </div>
+
+  <h2>NUNI Replication Feasibility Analysis</h2>
+  <table>
+    <tr><th>Factor</th><th>Assessment</th><th>Impact</th></tr>
+    <tr><td>Block insertion method</td><td>Drag-only — no click, no keyboard, no API</td><td style="color:var(--critical);font-weight:600;">Blocks replication</td></tr>
+    <tr><td>Estimated drag operations</td><td>105+ (one per block, plus repositioning)</td><td>45–60 min manual effort</td></tr>
+    <tr><td>Product block support</td><td>Product blocks exist but clicking does nothing</td><td>Cannot insert programmatically</td></tr>
+    <tr><td>Multi-column layout</td><td>Available via Sections panel</td><td>Adds complexity to drag targeting</td></tr>
+    <tr><td>Bulk operations</td><td>None — no multi-select, no copy-section, no paste</td><td>No efficiency shortcuts</td></tr>
+    <tr><td>"Create from scratch" button</td><td>Becomes disabled after clicking (SE-002)</td><td>Prevents re-entry on failure</td></tr>
+    <tr><td>Template → Campaign path</td><td>Separate workflow — must create campaign and select template</td><td>Extra 3–5 steps to send</td></tr>
+  </table>
+</section>
+
+</div><!-- /panel-nuni -->
+
+
+<!-- ============== AI REPLICATION TAB ============== -->
+<div class="tabpanel" id="panel-ai" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">AI Chat Builder (Unified Builder) · Replication Attempt</div>
+      <h1>AI Replication: <em style="color:var(--high);">Content Mismatch + Entry Confusion</em></h1>
+      <p class="subtitle">Attempted to replicate the Kate Co email via the AI Chat builder. Prior audit findings (UB-001, UB-003, UB-004) confirmed. New entry-point confusion documented.</p>
+    </div>
+    <div class="meta">
+      <strong>Completion:</strong> FAILED<br>
+      <strong>Fidelity:</strong> Low<br>
+      <strong>Blocking issues:</strong> UB-001, UB-003
+    </div>
+  </header>
+
+  <h2>Entry Point Issues</h2>
+
+  <div class="screenshot-box">
+    <img src="testjam-execution-screenshots/ai-builder/01-campaign-checklist.png" alt="New campaign checklist">
+    <div class="screenshot-caption"><span class="num">1</span> Campaign Checklist: 1/5 complete, 9,165 recipients, Goodnight Fox audience selected</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> Campaign creation checklist showing "Untitled" campaign with 1 of 5 items complete. To field shows 9,165 recipients with the Goodnight Fox audience. From, Subject, Send time, and Content remain unconfigured.<br>
+      <strong>Context:</strong> This is the correct campaign-first entry point. However, reaching here from the dashboard is inconsistent — "Create email" sometimes opens the AI Chat overlay (UB-009) instead of this checklist.
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="testjam-execution-screenshots/ai-builder/02-error-page-no-campaign-id.png" alt="Error page without campaign ID">
+    <div class="screenshot-caption"><span class="num">2</span> ERROR: Navigating to /campaigns/edit/ without an ID shows persistent error page</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> A generic error page displayed when attempting to navigate directly to the campaign editor without a valid campaign ID in the URL.<br>
+      <strong>Key finding:</strong> The error page provides no recovery path — no "Go back" link, no "Create new campaign" button, no explanation of what went wrong. Users who land here from a stale bookmark or malformed link are stranded.
+      <div class="issue-pills"><span class="issue-pill medium">DA-001</span></div>
+    </div>
+  </div>
+
+  <h2>Prior Audit Findings Still Active</h2>
+  <p>The following issues from the <a href="ub-scrawler-report.html">Unified Builder Scrawler audit</a> were confirmed during this TestJam execution:</p>
+
+  <div class="grid cols-2">
+    <div class="issue-card">
+      <h3><span class="sev-badge sev-critical">Critical</span> UB-001 Confirmed</h3>
+      <p><strong>AI loads wrong template instead of generating content.</strong> When asked to replicate the Kate Co email, the AI claimed success but loaded an existing Welcome template with completely unrelated content.</p>
+      <div class="evidence-thumb">
+        <a href="ub-scrawler-screenshots/07-wrong-email-content-loaded.png"><img src="ub-scrawler-screenshots/07-wrong-email-content-loaded.png" alt="UB-001 evidence"></a>
+      </div>
+    </div>
+    <div class="issue-card">
+      <h3><span class="sev-badge sev-high">High</span> UB-003 Confirmed</h3>
+      <p><strong>AI creates duplicate campaign, discards user config.</strong> Instead of populating the existing campaign, a new campaign was created with a different ID, losing all recipient and sender configuration.</p>
+      <div class="evidence-thumb">
+        <a href="ub-scrawler-screenshots/13-duplicate-campaign-created-by-ai.png"><img src="ub-scrawler-screenshots/13-duplicate-campaign-created-by-ai.png" alt="UB-003 evidence"></a>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid cols-2">
+    <div class="issue-card">
+      <h3><span class="sev-badge sev-high">High</span> UB-004 Confirmed</h3>
+      <p><strong>Generate email fails with circular instructions.</strong> From the home page overlay context, "Generate the full email draft" enters an infinite loop referencing non-existent UI elements.</p>
+      <div class="evidence-thumb">
+        <a href="ub-scrawler-screenshots/09-proserv-generate-blocked.png"><img src="ub-scrawler-screenshots/09-proserv-generate-blocked.png" alt="UB-004 evidence"></a>
+      </div>
+    </div>
+    <div class="issue-card">
+      <h3><span class="sev-badge sev-medium">Medium</span> Entry Point Confusion (New)</h3>
+      <p><strong>"Create email" from home page is inconsistent.</strong> Sometimes opens NUNI editor, sometimes AI Chat overlay. No user control over which path is taken. Error page when navigating without campaign ID.</p>
+      <div class="evidence-thumb">
+        <a href="testjam-execution-screenshots/ai-builder/02-error-page-no-campaign-id.png"><img src="testjam-execution-screenshots/ai-builder/02-error-page-no-campaign-id.png" alt="Entry confusion evidence"></a>
+      </div>
+    </div>
+  </div>
+
+  <h2>AI Replication Feasibility for 105-Block Email</h2>
+  <table>
+    <tr><th>Factor</th><th>Assessment</th><th>Impact</th></tr>
+    <tr><td>Structural fidelity</td><td>AI generates ~15–25 blocks for complex prompts</td><td>Cannot match 105-block structure</td></tr>
+    <tr><td>Product catalog integration</td><td>No access to connected store products (UB-012)</td><td>Cannot insert real products/prices</td></tr>
+    <tr><td>Multi-section layout</td><td>AI produces linear single-column output</td><td>Cannot replicate 2-column product grids</td></tr>
+    <tr><td>Content accuracy</td><td>Content-mismatch bug loads wrong templates (UB-001)</td><td style="color:var(--critical);font-weight:600;">Fundamentally unreliable</td></tr>
+    <tr><td>Iterative refinement</td><td>May regenerate entire email on each edit</td><td>No fine-grained block-level control</td></tr>
+    <tr><td>Video/social embeds</td><td>No video embed or social icon block support</td><td>Cannot replicate header/footer sections</td></tr>
+  </table>
+</section>
+
+</div><!-- /panel-ai -->
+
+
+<!-- ============== TESTJAM RESULTS TAB ============== -->
+<div class="tabpanel" id="panel-testjam" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">TestJam · 25 Use Case Evaluation</div>
+      <h1>TestJam Results — 25 Test Cases</h1>
+      <p class="subtitle">Complete results for all 25 TestJam use cases, evaluated against both NUNI standard editor and AI Chat builder with screenshot evidence and prior audit cross-references.</p>
+    </div>
+    <div class="meta">
+      <strong>NUNI pass:</strong> 2 / 25 (8%)<br>
+      <strong>AI pass:</strong> 4 / 25 (16%)<br>
+      <strong>Both fail:</strong> 8 / 25 (32%)
+    </div>
+  </header>
+
+  <h2>Full Results Table</h2>
+  <table>
+    <tr>
+      <th style="width:60px;">TC ID</th>
+      <th>Title</th>
+      <th style="width:90px;">NUNI</th>
+      <th style="width:90px;">AI</th>
+      <th>Key Finding</th>
+    </tr>
+    <tr>
+      <td><strong>TC-01</strong></td>
+      <td>First-Time Path</td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td>NUNI is hidden (must know to go to Templates). AI is default path but confusing overlay context.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-02</strong></td>
+      <td>Template vs AI</td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td>NUNI and AI are separate workflows with no bridge between them. Template path has no link to AI and vice versa.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-03</strong></td>
+      <td>SMS Entry</td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td>No SMS support in either builder. Klaviyo and Shopify both offer SMS in their automation builders.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-04</strong></td>
+      <td>Draft Recovery</td>
+      <td><span class="sev-badge result-partial">PARTIAL</span></td>
+      <td><span class="sev-badge result-partial">PARTIAL</span></td>
+      <td>NUNI: Templates list shows saved work. AI: Conversation sidebar exists but thread names are truncated and indistinguishable (UB-008).</td>
+    </tr>
+    <tr>
+      <td><strong>TC-05</strong></td>
+      <td>Complex E-commerce (Kate Co)</td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td>NUNI: BLOCKED by drag-only insertion. AI: Content-mismatch bug (UB-001) loads wrong template. Neither can handle 105 blocks.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-06</strong></td>
+      <td>Newsletter</td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td><span class="sev-badge result-partial">PARTIAL</span></td>
+      <td>NUNI: Would require ~98 drag operations for a newsletter. AI: Generates simplified version with fewer sections — usable but not faithful.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-07</strong></td>
+      <td>Prompt Fidelity</td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td>NUNI: N/A (no prompt support). AI: Ignores structural specifics — "6 sections with 2-column product grid" becomes single-column with 3 sections.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-08</strong></td>
+      <td>Brand Kit</td>
+      <td><span class="sev-badge result-partial">PARTIAL</span></td>
+      <td><span class="sev-badge result-partial">PARTIAL</span></td>
+      <td>NUNI: Defaults to Helvetica regardless of Brand Kit. AI: Notes brand kit in context but may not consistently apply colors/fonts to generated content.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-09</strong></td>
+      <td>Iterative Refinement</td>
+      <td><span class="sev-badge result-pass">PASS</span></td>
+      <td><span class="sev-badge result-partial">PARTIAL</span></td>
+      <td>NUNI: Manual block-by-block editing works well for individual changes. AI: May regenerate the entire email instead of making targeted edits.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-10</strong></td>
+      <td>Merge Tags</td>
+      <td><span class="sev-badge result-partial">PARTIAL</span></td>
+      <td><span class="sev-badge result-partial">PARTIAL</span></td>
+      <td>NUNI: *|FNAME|* available and inserts correctly. AI: Uses merge tags but preview mode shows raw tags instead of sample data.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-11</strong></td>
+      <td>Editor Switch</td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td>No path from NUNI → AI or AI → NUNI. Work created in one builder cannot be transferred to the other. Complete isolation.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-12</strong></td>
+      <td>Undo/Redo</td>
+      <td><span class="sev-badge result-partial">PARTIAL</span></td>
+      <td><span class="sev-badge result-partial">PARTIAL</span></td>
+      <td>NUNI: Undo/Redo buttons present but depth untested. AI: Available in editor toolbar. Neither has multi-step history visualization.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-13</strong></td>
+      <td>Mobile Responsive</td>
+      <td><span class="sev-badge result-pass">PASS</span></td>
+      <td><span class="sev-badge result-pass">PASS</span></td>
+      <td>NUNI: Device-specific sizing controls and responsive preview. AI: Desktop/Mobile toggle available. Both handle basic responsiveness.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-14</strong></td>
+      <td>Image Management</td>
+      <td><span class="sev-badge result-partial">PARTIAL</span></td>
+      <td><span class="sev-badge result-partial">PARTIAL</span></td>
+      <td>NUNI: Content Studio integration for uploads. AI: "Upload file" in chat. Neither has image editing, cropping, or AI image generation.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-15</strong></td>
+      <td>Dynamic Content</td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td>Neither builder has visible dynamic/conditional content blocks. Klaviyo offers segment-based dynamic content; MC Classic had it.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-16</strong></td>
+      <td>Preview Accuracy</td>
+      <td><span class="sev-badge result-pass">PASS</span></td>
+      <td><span class="sev-badge result-partial">PARTIAL</span></td>
+      <td>NUNI: 3 preview modes (Desktop, Mobile, Inbox preview). AI: 2 modes (Desktop, Mobile) — no inbox preview simulation.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-17</strong></td>
+      <td>Test Email</td>
+      <td><span class="sev-badge result-pass">PASS</span></td>
+      <td><span class="sev-badge result-pass">PASS</span></td>
+      <td>NUNI: "Send test email" dialog accessible from editor. AI: "Send a test email" suggestion in chat. Both functional.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-18</strong></td>
+      <td>Link Validation</td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td>Neither builder has pre-send link validation. Broken links can be sent to entire lists. Litmus/Email on Acid offer this; MC does not.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-19</strong></td>
+      <td>Accessibility</td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td>Neither builder has an accessibility checker for email content (alt text validation, color contrast, heading hierarchy). No WCAG guidance.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-20</strong></td>
+      <td>Launch Flow</td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td>NUNI: Template → Campaign requires extra steps (create campaign, select template). AI: Campaign-first but duplication bug (UB-003) creates orphaned campaigns.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-21</strong></td>
+      <td>A/B Test</td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td><span class="sev-badge result-pass">PASS</span></td>
+      <td>NUNI: No A/B testing in template editor. AI: A/B test available for subject lines in campaign setup. AI wins on this capability.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-22</strong></td>
+      <td>Resend</td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td><span class="sev-badge result-pass">PASS</span></td>
+      <td>NUNI: No resend from template editor. AI: "Resend to non-openers" available from campaign level. AI wins on this workflow.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-23</strong></td>
+      <td>Social Post</td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td><span class="sev-badge result-partial">PARTIAL</span></td>
+      <td>NUNI: No social post creation from template. AI: "Create social post" button visible in campaign view but untested for content quality.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-24</strong></td>
+      <td>Automation Integration</td>
+      <td><span class="sev-badge result-partial">PARTIAL</span></td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td>NUNI: Templates can be selected from CJB automations. AI: AI-created campaigns are standalone — cannot be used as automation email steps.</td>
+    </tr>
+    <tr>
+      <td><strong>TC-25</strong></td>
+      <td>Performance Loop</td>
+      <td><span class="sev-badge result-fail">FAIL</span></td>
+      <td><span class="sev-badge result-partial">PARTIAL</span></td>
+      <td>NUNI: No performance data in template editor. AI: "Start from recent email" surfaces past campaigns for iteration. AI has a basic feedback loop.</td>
+    </tr>
+  </table>
+
+  <h2>Result Distribution</h2>
+  <div class="kpi-row">
+    <div class="kpi"><div class="v" style="color:var(--critical);">8</div><div class="l">Both builders FAIL</div></div>
+    <div class="kpi"><div class="v" style="color:var(--warn);">10</div><div class="l">One FAIL + One PARTIAL</div></div>
+    <div class="kpi"><div class="v" style="color:var(--medium);">5</div><div class="l">Both PARTIAL or mixed</div></div>
+    <div class="kpi"><div class="v" style="color:var(--good);">2</div><div class="l">Both builders PASS</div></div>
+  </table>
+
+  <h2>Where AI Outperforms NUNI</h2>
+  <table>
+    <tr><th>Test Case</th><th>AI Advantage</th></tr>
+    <tr><td>TC-06 Newsletter</td><td>AI generates a usable (if simplified) newsletter quickly; NUNI requires 98+ drags</td></tr>
+    <tr><td>TC-21 A/B Test</td><td>Subject line A/B built into campaign flow; NUNI has no testing capability</td></tr>
+    <tr><td>TC-22 Resend</td><td>"Resend to non-openers" available at campaign level; no equivalent in NUNI</td></tr>
+    <tr><td>TC-25 Performance Loop</td><td>"Start from recent email" enables iteration; NUNI has no performance data</td></tr>
+  </table>
+
+  <h2>Where NUNI Outperforms AI</h2>
+  <table>
+    <tr><th>Test Case</th><th>NUNI Advantage</th></tr>
+    <tr><td>TC-09 Iterative Refinement</td><td>Block-by-block editing gives precise control; AI may regenerate entire email</td></tr>
+    <tr><td>TC-16 Preview Accuracy</td><td>3 preview modes (Desktop/Mobile/Inbox) vs. AI's 2 modes</td></tr>
+    <tr><td>TC-24 Automation Integration</td><td>NUNI templates can be used in CJB automations; AI campaigns are standalone</td></tr>
+  </table>
+</section>
+
+</div><!-- /panel-testjam -->
+
+
+<!-- ============== ISSUE LOG TAB ============== -->
+<div class="tabpanel" id="panel-issues" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Consolidated Issue Inventory</div>
+      <h1>Issue Log — All Findings Across Both Builders</h1>
+      <p class="subtitle">Merged issue catalog from this TestJam execution plus prior audits (UB-xxx from Unified Builder Scrawler, SE-xxx from Standard Editor, DA-xxx new discoveries)</p>
+    </div>
+  </header>
+
+  <h2>Issue Severity Distribution</h2>
+  <div class="kpi-row">
+    <div class="kpi"><div class="v" style="color:var(--critical);">3</div><div class="l">Critical</div></div>
+    <div class="kpi"><div class="v" style="color:var(--high);">4</div><div class="l">High</div></div>
+    <div class="kpi"><div class="v" style="color:var(--medium);">6</div><div class="l">Medium</div></div>
+    <div class="kpi"><div class="v" style="color:var(--low);">5</div><div class="l">Low</div></div>
+  </div>
+
+  <h2>Critical Issues</h2>
+
+  <div class="issue-card" id="ub-001">
+    <h3><span class="sev-badge sev-critical">Critical</span> UB-001: AI loads wrong template instead of generating content</h3>
+    <div class="issue-meta">
+      <span><strong>Builder:</strong> AI Chat</span>
+      <span><strong>Type:</strong> Bug</span>
+      <span><strong>Source:</strong> UB Scrawler + TestJam</span>
+    </div>
+    <p><strong>Description:</strong> AI claims success ("Your email draft is now in the editor") but loads an existing Welcome template with completely unrelated content. The Kate Co replication attempt loaded BOGO/educational bundle content instead of the prompted e-commerce newsletter.</p>
+    <p><strong>Impact:</strong> Users could unknowingly send wrong content to their entire list, damaging brand trust.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/07-wrong-email-content-loaded.png"><img src="ub-scrawler-screenshots/07-wrong-email-content-loaded.png" alt="UB-001"></a>
+    </div>
+  </div>
+
+  <div class="issue-card" id="se-002">
+    <h3><span class="sev-badge sev-critical">Critical</span> SE-002: "Create from scratch" becomes disabled after clicking</h3>
+    <div class="issue-meta">
+      <span><strong>Builder:</strong> NUNI</span>
+      <span><strong>Type:</strong> Bug</span>
+      <span><strong>Source:</strong> Standard Editor Audit + TestJam</span>
+    </div>
+    <p><strong>Description:</strong> The "Create from scratch" button on the Email Templates page becomes disabled after the first click, preventing users from creating a new blank template. Requires page reload to recover.</p>
+    <p><strong>Impact:</strong> Users who click once and navigate back cannot re-enter the template creation flow without refreshing the page.</p>
+  </div>
+
+  <div class="issue-card" id="se-003">
+    <h3><span class="sev-badge sev-critical">Critical</span> SE-003: No click-to-insert — drag-and-drop is the ONLY block insertion method</h3>
+    <div class="issue-meta">
+      <span><strong>Builder:</strong> NUNI</span>
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Source:</strong> TestJam</span>
+    </div>
+    <p><strong>Description:</strong> The NUNI editor has no click-to-insert, no keyboard shortcut, no bulk import, no paste-from-clipboard for adding blocks. Every single block must be individually dragged from the panel to the canvas. Clicking a block type only highlights it — nothing is inserted.</p>
+    <p><strong>Impact:</strong> Building a 105-block email requires 105+ drag operations. Inaccessible to users with motor disabilities. Incompatible with browser automation.</p>
+    <div class="evidence-thumb">
+      <a href="testjam-execution-screenshots/nuni/03-drag-attempt-failed.png"><img src="testjam-execution-screenshots/nuni/03-drag-attempt-failed.png" alt="SE-003 drag failed"></a>
+      <a href="testjam-execution-screenshots/nuni/04-product-block-click-no-insert.png"><img src="testjam-execution-screenshots/nuni/04-product-block-click-no-insert.png" alt="SE-003 click no insert"></a>
+    </div>
+  </div>
+
+  <h2>High Issues</h2>
+
+  <div class="issue-card" id="ub-003">
+    <h3><span class="sev-badge sev-high">High</span> UB-003: AI creates duplicate campaign, discards user config</h3>
+    <div class="issue-meta">
+      <span><strong>Builder:</strong> AI Chat</span>
+      <span><strong>Type:</strong> Bug</span>
+      <span><strong>Source:</strong> UB Scrawler + TestJam</span>
+    </div>
+    <p><strong>Description:</strong> AI creates a brand new campaign instead of populating the one the user started. The new campaign has a different ID, a different name, and loses the user's To/From configuration. User ends up with two incomplete campaigns.</p>
+    <p><strong>Impact:</strong> Wasted configuration work. Confusing for non-technical users. Neither campaign is sendable without manual reconciliation.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/12-ecomm-campaign-checklist-3of5.png"><img src="ub-scrawler-screenshots/12-ecomm-campaign-checklist-3of5.png" alt="UB-003 original"></a>
+      <a href="ub-scrawler-screenshots/13-duplicate-campaign-created-by-ai.png"><img src="ub-scrawler-screenshots/13-duplicate-campaign-created-by-ai.png" alt="UB-003 duplicate"></a>
+    </div>
+  </div>
+
+  <div class="issue-card" id="ub-004">
+    <h3><span class="sev-badge sev-high">High</span> UB-004: "Generate email" fails from home page overlay — circular instructions</h3>
+    <div class="issue-meta">
+      <span><strong>Builder:</strong> AI Chat</span>
+      <span><strong>Type:</strong> Bug</span>
+      <span><strong>Source:</strong> UB Scrawler + TestJam</span>
+    </div>
+    <p><strong>Description:</strong> When using the AI editor opened from the home page overlay, "Generate the full email draft" fails with circular instructions referencing a side panel that doesn't exist in this context. Complete dead end.</p>
+    <p><strong>Impact:</strong> Blocks the ProServ persona entirely. Good AI content plan cannot be converted to an actual email.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/09-proserv-generate-blocked.png"><img src="ub-scrawler-screenshots/09-proserv-generate-blocked.png" alt="UB-004 blocked"></a>
+      <a href="ub-scrawler-screenshots/10-proserv-circular-instruction.png"><img src="ub-scrawler-screenshots/10-proserv-circular-instruction.png" alt="UB-004 loop"></a>
+    </div>
+  </div>
+
+  <div class="issue-card" id="ub-002">
+    <h3><span class="sev-badge sev-high">High</span> UB-002: No path to traditional template builder from campaign setup</h3>
+    <div class="issue-meta">
+      <span><strong>Builder:</strong> AI Chat</span>
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Source:</strong> UB Scrawler</span>
+    </div>
+    <p><strong>Description:</strong> "Design email" routes exclusively to AI Chat Editor with no visible option for the template builder.</p>
+    <p><strong>Impact:</strong> Forces all users through AI-first experience. Power users and agencies who need drag-and-drop control are stranded.</p>
+  </div>
+
+  <div class="issue-card" id="se-001">
+    <h3><span class="sev-badge sev-high">High</span> SE-001: NUNI editor hidden from primary "Create email" path</h3>
+    <div class="issue-meta">
+      <span><strong>Builder:</strong> NUNI</span>
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Source:</strong> TestJam</span>
+    </div>
+    <p><strong>Description:</strong> The standard NUNI editor is not accessible from the dashboard "Create email" button. Users must navigate to Content → Email templates → Create from scratch — a hidden path that new users are unlikely to discover.</p>
+    <p><strong>Impact:</strong> Users who want the template builder cannot find it from the primary entry point. Combined with UB-002, both builders are difficult to access from the expected starting point.</p>
+    <div class="evidence-thumb">
+      <a href="testjam-execution-screenshots/nuni/01-templates-page-start.png"><img src="testjam-execution-screenshots/nuni/01-templates-page-start.png" alt="SE-001"></a>
+    </div>
+  </div>
+
+  <h2>Medium Issues</h2>
+
+  <div class="issue-card" id="ub-005">
+    <h3><span class="sev-badge sev-medium">Medium</span> UB-005: No toggle between AI and block editor modes</h3>
+    <div class="issue-meta">
+      <span><strong>Builder:</strong> Both</span>
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Source:</strong> UB Scrawler + TestJam (TC-11)</span>
+    </div>
+    <p>Work created in one builder cannot be transferred to the other. No NUNI → AI path, no AI → NUNI path. Content is siloed in whichever builder created it.</p>
+  </div>
+
+  <div class="issue-card" id="ub-007">
+    <h3><span class="sev-badge sev-medium">Medium</span> UB-007: AI overwrites user-configured subject line without asking</h3>
+    <div class="issue-meta">
+      <span><strong>Builder:</strong> AI Chat</span>
+      <span><strong>Type:</strong> Content</span>
+      <span><strong>Source:</strong> UB Scrawler</span>
+    </div>
+    <p>AI silently replaces the user's subject line with its own generated version. No comparison shown, no permission requested.</p>
+  </div>
+
+  <div class="issue-card" id="ub-011">
+    <h3><span class="sev-badge sev-medium">Medium</span> UB-011: Qualtrics NPS survey blocks Generate email button</h3>
+    <div class="issue-meta">
+      <span><strong>Builder:</strong> AI Chat</span>
+      <span><strong>Type:</strong> Bug</span>
+      <span><strong>Source:</strong> UB Scrawler</span>
+    </div>
+    <p>Qualtrics survey iframe renders over the "Generate email" button, physically blocking the primary action.</p>
+  </div>
+
+  <div class="issue-card" id="ub-012">
+    <h3><span class="sev-badge sev-medium">Medium</span> UB-012: No product catalog integration in AI editor</h3>
+    <div class="issue-meta">
+      <span><strong>Builder:</strong> AI Chat</span>
+      <span><strong>Type:</strong> Missing Feature</span>
+      <span><strong>Source:</strong> UB Scrawler + TestJam (TC-05)</span>
+    </div>
+    <p>AI editor cannot access connected store products. Kate Co's 21 product blocks cannot be replicated with real catalog data.</p>
+  </div>
+
+  <div class="issue-card" id="da-001">
+    <h3><span class="sev-badge sev-medium">Medium</span> DA-001: Campaign edit URL without ID shows unrecoverable error page</h3>
+    <div class="issue-meta">
+      <span><strong>Builder:</strong> AI Chat</span>
+      <span><strong>Type:</strong> Bug</span>
+      <span><strong>Source:</strong> TestJam</span>
+    </div>
+    <p>Navigating to /campaigns/edit/ without a campaign ID shows a persistent error page with no recovery path — no "Go back" link, no "Create new campaign" button.</p>
+    <div class="evidence-thumb">
+      <a href="testjam-execution-screenshots/ai-builder/02-error-page-no-campaign-id.png"><img src="testjam-execution-screenshots/ai-builder/02-error-page-no-campaign-id.png" alt="DA-001"></a>
+    </div>
+  </div>
+
+  <div class="issue-card" id="se-005">
+    <h3><span class="sev-badge sev-medium">Medium</span> SE-005: No feedback when clicking block types in NUNI panel</h3>
+    <div class="issue-meta">
+      <span><strong>Builder:</strong> NUNI</span>
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Source:</strong> TestJam</span>
+    </div>
+    <p>Clicking a block type in the left panel only highlights it — no tooltip, no insertion, no "drag me" hint. Users get zero feedback about how to add blocks.</p>
+    <div class="evidence-thumb">
+      <a href="testjam-execution-screenshots/nuni/04-product-block-click-no-insert.png"><img src="testjam-execution-screenshots/nuni/04-product-block-click-no-insert.png" alt="SE-005"></a>
+    </div>
+  </div>
+
+  <h2>Low Issues</h2>
+
+  <div class="issue-card">
+    <h3><span class="sev-badge sev-low">Low</span> UB-008: Conversation thread names truncated and indistinguishable</h3>
+    <div class="issue-meta"><span><strong>Builder:</strong> AI Chat</span> <span><strong>Source:</strong> UB Scrawler</span></div>
+    <p>Sidebar thread names are too short to differentiate multiple campaign conversations.</p>
+  </div>
+
+  <div class="issue-card">
+    <h3><span class="sev-badge sev-low">Low</span> UB-009: "Create email" overlay has reduced functionality vs. campaign context</h3>
+    <div class="issue-meta"><span><strong>Builder:</strong> AI Chat</span> <span><strong>Source:</strong> UB Scrawler</span></div>
+    <p>Home page overlay lacks side panel required for generate flow. Contributes to UB-004 dead end.</p>
+  </div>
+
+  <div class="issue-card">
+    <h3><span class="sev-badge sev-low">Low</span> UB-010: AI generation 15–25s with minimal progress feedback</h3>
+    <div class="issue-meta"><span><strong>Builder:</strong> AI Chat</span> <span><strong>Source:</strong> UB Scrawler</span></div>
+    <p>No progress bar or estimated time during AI generation. Users cannot tell if system is stuck.</p>
+  </div>
+
+  <div class="issue-card">
+    <h3><span class="sev-badge sev-low">Low</span> UB-013: Campaign progress indicator has no ARIA progressbar role</h3>
+    <div class="issue-meta"><span><strong>Builder:</strong> AI Chat</span> <span><strong>Source:</strong> UB Scrawler</span></div>
+    <p>Visual-only progress with no screen reader semantics.</p>
+  </div>
+
+  <div class="issue-card">
+    <h3><span class="sev-badge sev-low">Low</span> SE-004: No keyboard alternative for block insertion in NUNI</h3>
+    <div class="issue-meta"><span><strong>Builder:</strong> NUNI</span> <span><strong>Source:</strong> TestJam</span></div>
+    <p>No keyboard shortcut, slash command, or context menu for adding blocks. Drag-and-drop is the sole method.</p>
+  </div>
+
+  <h2>Full Issue Cross-Reference Table</h2>
+  <table>
+    <tr><th>ID</th><th>Severity</th><th>Builder</th><th>Type</th><th>Summary</th><th>TestJam TCs</th></tr>
+    <tr><td>UB-001</td><td><span class="sev-badge sev-critical">CRIT</span></td><td>AI</td><td>Bug</td><td>Wrong template loaded</td><td>TC-05, TC-07</td></tr>
+    <tr><td>SE-002</td><td><span class="sev-badge sev-critical">CRIT</span></td><td>NUNI</td><td>Bug</td><td>"Create from scratch" disables</td><td>TC-01</td></tr>
+    <tr><td>SE-003</td><td><span class="sev-badge sev-critical">CRIT</span></td><td>NUNI</td><td>Usability</td><td>Drag-only insertion</td><td>TC-05, TC-06</td></tr>
+    <tr><td>UB-003</td><td><span class="sev-badge sev-high">HIGH</span></td><td>AI</td><td>Bug</td><td>Duplicate campaign creation</td><td>TC-20</td></tr>
+    <tr><td>UB-004</td><td><span class="sev-badge sev-high">HIGH</span></td><td>AI</td><td>Bug</td><td>Circular generate instructions</td><td>TC-05</td></tr>
+    <tr><td>UB-002</td><td><span class="sev-badge sev-high">HIGH</span></td><td>AI</td><td>Usability</td><td>No template builder path</td><td>TC-01, TC-02</td></tr>
+    <tr><td>SE-001</td><td><span class="sev-badge sev-high">HIGH</span></td><td>NUNI</td><td>Usability</td><td>NUNI hidden from main path</td><td>TC-01</td></tr>
+    <tr><td>UB-005</td><td><span class="sev-badge sev-medium">MED</span></td><td>Both</td><td>Usability</td><td>No editor switch path</td><td>TC-11</td></tr>
+    <tr><td>UB-007</td><td><span class="sev-badge sev-medium">MED</span></td><td>AI</td><td>Content</td><td>Subject line overwritten</td><td>TC-09</td></tr>
+    <tr><td>UB-011</td><td><span class="sev-badge sev-medium">MED</span></td><td>AI</td><td>Bug</td><td>Qualtrics blocks button</td><td>—</td></tr>
+    <tr><td>UB-012</td><td><span class="sev-badge sev-medium">MED</span></td><td>AI</td><td>Feature</td><td>No product catalog</td><td>TC-05</td></tr>
+    <tr><td>DA-001</td><td><span class="sev-badge sev-medium">MED</span></td><td>AI</td><td>Bug</td><td>Error page without campaign ID</td><td>TC-01</td></tr>
+    <tr><td>SE-005</td><td><span class="sev-badge sev-medium">MED</span></td><td>NUNI</td><td>Usability</td><td>No click feedback on blocks</td><td>TC-05</td></tr>
+    <tr><td>UB-008</td><td><span class="sev-badge sev-low">LOW</span></td><td>AI</td><td>Usability</td><td>Thread names truncated</td><td>TC-04</td></tr>
+    <tr><td>UB-009</td><td><span class="sev-badge sev-low">LOW</span></td><td>AI</td><td>Usability</td><td>Overlay reduced functionality</td><td>TC-01</td></tr>
+    <tr><td>UB-010</td><td><span class="sev-badge sev-low">LOW</span></td><td>AI</td><td>Performance</td><td>Slow generation, no progress</td><td>—</td></tr>
+    <tr><td>UB-013</td><td><span class="sev-badge sev-low">LOW</span></td><td>AI</td><td>A11y</td><td>No ARIA progressbar</td><td>TC-19</td></tr>
+    <tr><td>SE-004</td><td><span class="sev-badge sev-low">LOW</span></td><td>NUNI</td><td>A11y</td><td>No keyboard block insertion</td><td>TC-19</td></tr>
+  </table>
+</section>
+
+</div><!-- /panel-issues -->
+
+
+<!-- ============== RECOMMENDATIONS TAB ============== -->
+<div class="tabpanel" id="panel-recommendations" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Prioritized Recommendations</div>
+      <h1>Recommendations</h1>
+      <p class="subtitle">Top fixes, suggested experiments, and guardrails — organized by priority and effort</p>
+    </div>
+  </header>
+
+  <h2>Top Fixes by Customer Impact</h2>
+
+  <div class="fix-card" style="border-left-color: var(--critical);">
+    <h4>#1 — Add click-to-insert in NUNI editor</h4>
+    <p><strong>Issues:</strong> SE-003, SE-005 · <strong>Effort:</strong> Medium (2–3 sprints) · <strong>TCs fixed:</strong> TC-05, TC-06</p>
+    <p>Add a click-to-insert action when users click a block type in the panel. Insert the block at the current cursor position or at the end of the canvas. This single change would make 105-block emails feasible and unblock the Kate Co replication. Add a tooltip ("Click to insert, or drag to position") on hover.</p>
+  </div>
+
+  <div class="fix-card" style="border-left-color: var(--critical);">
+    <h4>#2 — Fix content-prompt alignment verification in AI builder</h4>
+    <p><strong>Issues:</strong> UB-001 · <strong>Effort:</strong> Medium (2–3 sprints) · <strong>TCs fixed:</strong> TC-05, TC-07</p>
+    <p>Implement a verification step that compares AI-generated content against the user's prompt before reporting success. If loaded content doesn't match expected structure, show an error rather than a false-positive success message.</p>
+  </div>
+
+  <div class="fix-card" style="border-left-color: var(--high);">
+    <h4>#3 — Unified campaign context (no duplicate creation)</h4>
+    <p><strong>Issues:</strong> UB-003, UB-007 · <strong>Effort:</strong> Medium (2 sprints) · <strong>TCs fixed:</strong> TC-20</p>
+    <p>AI-generated content must populate the existing campaign. If a new campaign is required (architectural constraint), migrate all user config (To, From, Subject) automatically.</p>
+  </div>
+
+  <div class="fix-card" style="border-left-color: var(--high);">
+    <h4>#4 — Bridge between NUNI and AI builders</h4>
+    <p><strong>Issues:</strong> UB-002, UB-005, SE-001 · <strong>Effort:</strong> Medium (2–3 sprints) · <strong>TCs fixed:</strong> TC-01, TC-02, TC-11</p>
+    <p>Add visible paths between builders: "Use template builder" link in AI editor, "Try AI editor" link in NUNI. Enable content portability between the two modes.</p>
+  </div>
+
+  <div class="fix-card" style="border-left-color: var(--high);">
+    <h4>#5 — Fix overlay-to-campaign bridge</h4>
+    <p><strong>Issues:</strong> UB-004, UB-009 · <strong>Effort:</strong> Small (1 sprint) · <strong>TCs fixed:</strong> TC-01</p>
+    <p>Detect overlay context and either auto-create the campaign server-side or redirect to campaign checklist with content plan preserved.</p>
+  </div>
+
+  <h2>Quick Wins (< 1 Sprint Each)</h2>
+  <table>
+    <tr><th>#</th><th>Fix</th><th>Effort</th><th>Issues</th></tr>
+    <tr><td>1</td><td>Exclude AI editor from Qualtrics survey targeting</td><td>Config change (hours)</td><td>UB-011</td></tr>
+    <tr><td>2</td><td>Add "Use template builder" link on AI landing page</td><td>1–2 days</td><td>UB-002</td></tr>
+    <tr><td>3</td><td>Subject line preservation prompt before overwrite</td><td>2–3 days</td><td>UB-007</td></tr>
+    <tr><td>4</td><td>Error page recovery: add "Go back" and "Create new campaign" links</td><td>1 day</td><td>DA-001</td></tr>
+    <tr><td>5</td><td>Add tooltip on NUNI block hover: "Click to insert, or drag to position"</td><td>1 day</td><td>SE-005</td></tr>
+  </table>
+
+  <h2>Suggested Experiments</h2>
+  <div class="grid cols-2">
+    <div style="padding:14px;border:1px solid var(--line);border-radius:8px;">
+      <h3>Experiment 1: Click-to-Insert vs. Drag-Only</h3>
+      <p><strong>Hypothesis:</strong> Adding click-to-insert in NUNI will increase average blocks-per-email by 30%+ and reduce template creation abandonment by 20%+.</p>
+      <p><strong>Measure:</strong> Blocks per template, creation completion rate, time-to-first-save.</p>
+      <p><strong>Variant:</strong> 50% of users get click-to-insert alongside drag-and-drop; 50% keep drag-only.</p>
+    </div>
+    <div style="padding:14px;border:1px solid var(--line);border-radius:8px;">
+      <h3>Experiment 2: AI-First vs. Choice-Based Entry</h3>
+      <p><strong>Hypothesis:</strong> Offering a choice ("Start with AI" vs. "Build manually") at the "Design email" step will increase overall campaign completion rates vs. AI-only routing.</p>
+      <p><strong>Measure:</strong> Campaign completion rate, time-to-send, template builder fallback rate.</p>
+      <p><strong>Variant:</strong> 50% see current AI-only path; 50% see choice modal.</p>
+    </div>
+  </div>
+
+  <div class="grid cols-2" style="margin-top:16px;">
+    <div style="padding:14px;border:1px solid var(--line);border-radius:8px;">
+      <h3>Experiment 3: Content Verification Gate</h3>
+      <p><strong>Hypothesis:</strong> Adding a "Review your AI-generated email" interstitial before the success message will reduce wrong-content-sent incidents to near zero.</p>
+      <p><strong>Measure:</strong> Content-mismatch reports, user edit rate after generation, support tickets.</p>
+    </div>
+    <div style="padding:14px;border:1px solid var(--line);border-radius:8px;">
+      <h3>Experiment 4: Complex Email Template Packs</h3>
+      <p><strong>Hypothesis:</strong> Offering pre-built 50+ block template packs (e-commerce newsletter, product launch, event invite) will increase high-block-count email creation by 3×.</p>
+      <p><strong>Measure:</strong> Template pack adoption, blocks-per-email for pack users, campaign performance.</p>
+    </div>
+  </div>
+
+  <h2>Priority × Impact Matrix</h2>
+  <table class="priority-table">
+    <tr><th>Priority</th><th>Issues</th><th>User Impact</th><th>Effort</th></tr>
+    <tr><td style="color:var(--critical);">P0 Ship-Blocking</td><td>UB-001, SE-003, SE-002</td><td>Blocks campaign creation, wrong content risk</td><td>4–6 sprints</td></tr>
+    <tr><td style="color:var(--high);">P1 High Impact</td><td>UB-003, UB-004, UB-002, SE-001</td><td>Destroys trust, blocks paths, wastes work</td><td>5–7 sprints</td></tr>
+    <tr><td style="color:var(--medium);">P2 Medium</td><td>UB-005, UB-007, UB-011, UB-012, DA-001, SE-005</td><td>Limits power users, missing features</td><td>6–8 sprints</td></tr>
+    <tr><td style="color:var(--low);">P3 Polish</td><td>UB-008, UB-009, UB-010, UB-013, SE-004</td><td>Accessibility, progress, polish</td><td>3–4 sprints</td></tr>
+  </table>
+
+  <h2>Cross-Reference to Existing Intelligence</h2>
+  <table>
+    <tr><th>This Report Finding</th><th>Related Intelligence</th><th>Source</th></tr>
+    <tr><td>SE-003 (drag-only insertion)</td><td>Klaviyo's click-to-insert + keyboard-navigable block editor</td><td><a href="index.html">Klaviyo Flows Brief</a></td></tr>
+    <tr><td>UB-001 (wrong content)</td><td>CJB "Legacy vs New Builder" confusion pattern</td><td><a href="cjb-scrawler-report.html">CJB Scrawler Report</a></td></tr>
+    <tr><td>TC-03 (no SMS)</td><td>Klaviyo 5-channel canvas; Shopify Flow SMS support</td><td><a href="index.html">Klaviyo Brief</a>, <a href="shopify.html">Shopify Brief</a></td></tr>
+    <tr><td>TC-15 (no dynamic content)</td><td>Klaviyo segment-based dynamic content; MC Classic had it</td><td><a href="mailchimp.html#health">MC Product Health</a></td></tr>
+    <tr><td>TC-19 (no a11y checker)</td><td>Freddie concern: "0/17 HVC themes solved"</td><td><a href="freddie-concerns.html">Freddie Concerns</a></td></tr>
+    <tr><td>UB-012 (no product catalog)</td><td>Klaviyo native Shopify product data in flows</td><td><a href="index.html">Klaviyo Brief</a></td></tr>
+    <tr><td>Overall: both builders need work</td><td>Activation funnel binding constraint (33.6% activation)</td><td><a href="mailchimp.html#health">MC Product Health</a></td></tr>
+  </table>
+</section>
+
+</div><!-- /panel-recommendations -->
+
+
+</div><!-- /page-wrap -->
+
+<div style="max-width:1180px;margin:0 auto;padding:0 20px 40px;">
+  <div class="guardrails">
+    <h3>Evaluation Guardrails</h3>
+    <ul>
+      <li><strong>No emails were sent</strong> — all campaigns and templates remained in draft state throughout the evaluation</li>
+      <li><strong>No campaigns activated, published, or scheduled</strong> — only draft creation and content generation tested</li>
+      <li><strong>Account credentials redacted</strong> — login details not stored in this report</li>
+      <li><strong>Test conducted May 26, 2026</strong> on the Goodnight Fox account (us17 datacenter)</li>
+      <li><strong>Qualitative N=1 evaluation</strong> — findings are directional, not statistically validated; follow up with quantitative measurement</li>
+      <li><strong>BigQuery data</strong> from <code>bi_aggregate.product_journey_monthly</code> (89.4M rows) provides quantitative context but is not used for statistical claims about individual test case outcomes</li>
+      <li><strong>Prior audit IDs</strong> (UB-xxx from Unified Builder Scrawler, SE-xxx from Standard Editor audit) are cross-referenced; new discoveries use DA-xxx prefix</li>
+      <li><strong>Screenshot evidence</strong> captured at each step; relative paths used for portability across GitHub Pages and local viewing</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var tabs = document.querySelectorAll('.tab');
+    var panels = document.querySelectorAll('.tabpanel');
+    function activate(name) {
+      tabs.forEach(function (t) {
+        var match = t.getAttribute('data-tab') === name;
+        t.classList.toggle('active', match);
+        t.setAttribute('aria-selected', match ? 'true' : 'false');
+      });
+      panels.forEach(function (p) {
+        p.classList.toggle('active', p.id === 'panel-' + name);
+      });
+      try {
+        var url = new URL(window.location.href);
+        url.hash = name;
+        history.replaceState(null, '', url.toString());
+      } catch (e) {}
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
+    });
+    var initial = (window.location.hash || '').replace('#', '');
+    if (['summary','reference','nuni','ai','testjam','issues','recommendations'].indexOf(initial) >= 0) activate(initial);
+  })();
+</script>
+
+</body>
+</html>
