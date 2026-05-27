@@ -1,0 +1,2017 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TestJam: 25 Use Cases for AI Unified Builder Evaluation</title>
+<meta name="description" content="Systematic test plan covering designing, testing, verifying, and launching emails and SMS in the Mailchimp AI Unified Builder." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E1116;
+    --ink-2: #1F2937;
+    --muted: #4B5563;
+    --line: #E5E7EB;
+    --line-2: #D1D5DB;
+    --bg: #F8F7F4;
+    --paper: #FFFFFF;
+    --brand: #7C3AED;
+    --brand-2: #5B21B6;
+    --good: #047857;
+    --warn: #B45309;
+    --bad: #B91C1C;
+    --chip: #EDE9FE;
+    --chip-ink: #5B21B6;
+    --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+    --critical: #DC2626;
+    --high: #EA580C;
+    --medium: #2563EB;
+    --low: #6B7280;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.45;
+  }
+  .toolbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(248,247,244,.85);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .toolbar-inner {
+    max-width: 1180px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; gap: 12px;
+    flex-wrap: wrap;
+  }
+  .brand-mark {
+    display:flex; align-items:center; gap:10px;
+    font-weight: 700; font-size: 14px; color: var(--ink-2);
+  }
+  .brand-dot { width: 10px; height: 10px; border-radius: 3px; background: var(--brand); box-shadow: 0 0 0 3px rgba(124,58,237,.25); }
+  .toolbar a.btn, .toolbar button.btn {
+    border: 1px solid var(--line-2);
+    background: var(--paper);
+    color: var(--ink-2);
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .toolbar .btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .toolbar .btn:hover { transform: translateY(-1px); }
+
+  .tabs {
+    display: inline-flex;
+    background: #ECEAE6;
+    border-radius: 10px;
+    padding: 3px;
+    gap: 2px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+  .tab:hover { color: var(--ink-2); }
+  .tab.active {
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 1px 2px rgba(16,24,40,.06);
+  }
+  .tabpanel { display: none; }
+  .tabpanel.active { display: block; }
+
+  .page-wrap { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+
+  .page {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 28px 32px 26px;
+    margin-bottom: 22px;
+  }
+
+  .page-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700;
+  }
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.15;
+    margin: 6px 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; }
+  .meta { text-align: right; font-size: 12px; color: var(--muted); }
+  .meta strong { color: var(--ink-2); }
+
+  h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    margin: 24px 0 10px;
+    letter-spacing: -0.005em;
+  }
+  h3 { font-size: 14px; margin: 16px 0 8px; }
+  p { margin: 0 0 10px; font-size: 13.5px; color: var(--ink-2); }
+  ul { margin: 4px 0 10px; padding-left: 18px; }
+  li { font-size: 13px; color: var(--ink-2); margin-bottom: 4px; }
+  li strong { color: var(--ink); }
+
+  .grid { display: grid; gap: 16px; }
+  .grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 880px) {
+    .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: 1fr; }
+    .page { padding: 20px; }
+    h1 { font-size: 22px; }
+    .tabs { order: 3; flex-basis: 100%; }
+  }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 16px 0; }
+  @media (max-width: 700px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFB 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .kpi .v {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .kpi .l { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin: 10px 0;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: #FAFAFB;
+  }
+
+  .sev-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .sev-critical { background: #FEE2E2; color: var(--critical); }
+  .sev-high { background: #FFEDD5; color: var(--high); }
+  .sev-medium { background: #DBEAFE; color: var(--medium); }
+  .sev-low { background: #F3F4F6; color: var(--low); }
+
+  .issue-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    background: var(--paper);
+  }
+  .issue-card h3 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .issue-card .issue-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .issue-card .issue-meta span { display: flex; align-items: center; gap: 4px; }
+  .issue-card p { font-size: 12.5px; margin: 0 0 6px; }
+
+  .verdict-box {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+  }
+  .verdict-box h3 { color: var(--critical); margin: 0 0 6px; }
+
+  .method-box {
+    background: #F5F3FF;
+    border-left: 4px solid var(--brand);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 14px 0;
+    font-size: 12.5px;
+  }
+
+  .guardrails {
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 24px;
+    font-size: 12px;
+  }
+  .guardrails h3 { color: var(--good); margin: 0 0 8px; font-size: 13px; }
+  .guardrails ul { margin: 0; }
+  .guardrails li { font-size: 12px; margin-bottom: 3px; }
+
+  .priority-table td:first-child { font-weight: 700; white-space: nowrap; }
+  .fix-card {
+    border-left: 4px solid var(--brand);
+    padding: 10px 14px;
+    background: #FAFAFB;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 10px;
+  }
+  .fix-card h4 { margin: 0 0 4px; font-size: 13px; }
+  .fix-card p { margin: 0; font-size: 12px; }
+
+  .tc-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 18px 20px;
+    margin-bottom: 16px;
+    background: var(--paper);
+    transition: box-shadow .15s;
+  }
+  .tc-card:hover { box-shadow: var(--shadow); }
+  .tc-card-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    flex-wrap: wrap;
+  }
+  .tc-card-header h3 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 700;
+    flex: 1;
+    min-width: 200px;
+  }
+  .tc-id {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--brand);
+    background: var(--chip);
+    padding: 3px 9px;
+    border-radius: 5px;
+    white-space: nowrap;
+  }
+  .badge-row {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+  }
+  .badge-priority {
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .badge-p0 { background: #FEE2E2; color: var(--critical); }
+  .badge-p1 { background: #FFEDD5; color: var(--high); }
+  .badge-p2 { background: #DBEAFE; color: var(--medium); }
+  .badge-complexity {
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: .03em;
+  }
+  .complexity-simple { background: #D1FAE5; color: #065F46; }
+  .complexity-medium { background: #DBEAFE; color: #1E40AF; }
+  .complexity-complex { background: #FEE2E2; color: #991B1B; }
+  .badge-time {
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 4px;
+    background: #F3F4F6;
+    color: var(--muted);
+  }
+  .tc-section {
+    margin-top: 10px;
+    padding-top: 8px;
+    border-top: 1px solid var(--line);
+  }
+  .tc-section-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .tc-section p { font-size: 12.5px; margin: 0 0 4px; }
+  .tc-section ul { margin: 2px 0 6px; padding-left: 16px; }
+  .tc-section li { font-size: 12px; margin-bottom: 2px; }
+  .heuristic-chip {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: var(--chip);
+    color: var(--chip-ink);
+    margin: 2px 3px 2px 0;
+  }
+  .bug-ref {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    background: #FEF3C7;
+    color: #92400E;
+    margin: 2px 3px 2px 0;
+  }
+
+  @media print {
+    .toolbar { position: static; }
+    .tabpanel:not(.active) { display: block !important; }
+    .page { break-inside: avoid; }
+    .tc-card { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="brand-mark"><span class="brand-dot"></span> TestJam &middot; AI Unified Builder Evaluation</div>
+    <div class="tabs" role="tablist" aria-label="Report sections">
+      <button class="tab active" role="tab" aria-selected="true" data-tab="overview">Overview</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="entry">Entry &amp; Discovery</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="content">Content Creation</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="editing">Editing &amp; Customization</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="preview">Preview &amp; Testing</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="sending">Sending &amp; Publishing</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="crossproduct">Cross-Product</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="framework">Evaluation Framework</button>
+    </div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <a class="btn" href="ub-scrawler-report.html">&rarr; UB Scrawler</a>
+      <a class="btn" href="std-editor-deep-audit.html">&rarr; Std Editor Audit</a>
+      <a class="btn" href="mailchimp-editor.html">&rarr; Editor Brief</a>
+      <button class="btn" onclick="window.print()">Print / PDF</button>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+<!-- ============== OVERVIEW TAB ============== -->
+<div class="tabpanel active" id="panel-overview" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">TestJam &middot; Unified Builder &middot; Systematic Evaluation Plan</div>
+      <h1>TestJam: 25 Use Cases for <em style="color:var(--brand);">AI Unified Builder</em> Evaluation</h1>
+      <p class="subtitle">Systematic test plan covering designing, testing, verifying, and launching emails and SMS in the Mailchimp AI Unified Builder. Designed to identify all possible bugs, usability issues, heuristic violations, barriers, and frictions.</p>
+    </div>
+    <div class="meta">
+      <strong>Version:</strong> 1.0<br>
+      <strong>Date:</strong> May 26, 2026<br>
+      <strong>Test Cases:</strong> 25
+    </div>
+  </header>
+
+  <div class="method-box">
+    <strong>Informed by:</strong> (1) UB Scrawler AI Chat Editor audit &mdash; 14 issues found, including critical content-mismatch bug; (2) Standard Editor audit &mdash; 17 issues, editor hidden from default flow; (3) BigQuery analysis of 4.3M campaigns &mdash; top 1% use 100+ blocks, &lt;5% AI adoption; (4) Known Mailchimp product constraints &mdash; domain auth, e-commerce store requirements, plan gating.
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="v">25</div><div class="l">Total Test Cases</div></div>
+    <div class="kpi"><div class="v">6</div><div class="l">Categories</div></div>
+    <div class="kpi"><div class="v">7</div><div class="l">Evaluation Dimensions</div></div>
+    <div class="kpi"><div class="v">~18h</div><div class="l">Est. Total Execution Time</div></div>
+  </div>
+
+  <h2>Test Case Matrix</h2>
+  <table>
+    <tr><th>ID</th><th>Category</th><th>Title</th><th>Priority</th><th>Complexity</th><th>Est. Time</th></tr>
+    <tr><td>TC-01</td><td>Entry &amp; Discovery</td><td>First-Time Email Creation Path</td><td><span class="sev-badge sev-critical">P0</span></td><td><span class="badge-complexity complexity-simple">Simple</span></td><td>30m</td></tr>
+    <tr><td>TC-02</td><td>Entry &amp; Discovery</td><td>Template-First vs AI-First Path Comparison</td><td><span class="sev-badge sev-critical">P0</span></td><td><span class="badge-complexity complexity-medium">Medium</span></td><td>45m</td></tr>
+    <tr><td>TC-03</td><td>Entry &amp; Discovery</td><td>SMS Creation Entry Point</td><td><span class="sev-badge sev-high">P1</span></td><td><span class="badge-complexity complexity-medium">Medium</span></td><td>30m</td></tr>
+    <tr><td>TC-04</td><td>Entry &amp; Discovery</td><td>Returning User with Draft Recovery</td><td><span class="sev-badge sev-critical">P0</span></td><td><span class="badge-complexity complexity-medium">Medium</span></td><td>45m</td></tr>
+    <tr><td>TC-05</td><td>Content Creation</td><td>Complex E-commerce Product Email (105-block)</td><td><span class="sev-badge sev-critical">P0</span></td><td><span class="badge-complexity complexity-complex">Complex</span></td><td>90m</td></tr>
+    <tr><td>TC-06</td><td>Content Creation</td><td>Multi-Section Newsletter (98-block)</td><td><span class="sev-badge sev-high">P1</span></td><td><span class="badge-complexity complexity-complex">Complex</span></td><td>90m</td></tr>
+    <tr><td>TC-07</td><td>Content Creation</td><td>AI Prompt Fidelity Test</td><td><span class="sev-badge sev-critical">P0</span></td><td><span class="badge-complexity complexity-medium">Medium</span></td><td>45m</td></tr>
+    <tr><td>TC-08</td><td>Content Creation</td><td>Brand Kit Application Test</td><td><span class="sev-badge sev-high">P1</span></td><td><span class="badge-complexity complexity-medium">Medium</span></td><td>45m</td></tr>
+    <tr><td>TC-09</td><td>Content Creation</td><td>Iterative Refinement Loop</td><td><span class="sev-badge sev-critical">P0</span></td><td><span class="badge-complexity complexity-complex">Complex</span></td><td>60m</td></tr>
+    <tr><td>TC-10</td><td>Content Creation</td><td>Merge Tags and Personalization</td><td><span class="sev-badge sev-high">P1</span></td><td><span class="badge-complexity complexity-medium">Medium</span></td><td>40m</td></tr>
+    <tr><td>TC-11</td><td>Editing &amp; Customization</td><td>Switch Between AI and Standard Editor</td><td><span class="sev-badge sev-critical">P0</span></td><td><span class="badge-complexity complexity-complex">Complex</span></td><td>60m</td></tr>
+    <tr><td>TC-12</td><td>Editing &amp; Customization</td><td>Undo/Redo Deep Test</td><td><span class="sev-badge sev-high">P1</span></td><td><span class="badge-complexity complexity-medium">Medium</span></td><td>40m</td></tr>
+    <tr><td>TC-13</td><td>Editing &amp; Customization</td><td>Mobile Responsiveness Editing</td><td><span class="sev-badge sev-high">P1</span></td><td><span class="badge-complexity complexity-medium">Medium</span></td><td>45m</td></tr>
+    <tr><td>TC-14</td><td>Editing &amp; Customization</td><td>Image Management Stress Test</td><td><span class="sev-badge sev-medium">P2</span></td><td><span class="badge-complexity complexity-complex">Complex</span></td><td>60m</td></tr>
+    <tr><td>TC-15</td><td>Editing &amp; Customization</td><td>Dynamic Content / Conditional Blocks</td><td><span class="sev-badge sev-medium">P2</span></td><td><span class="badge-complexity complexity-complex">Complex</span></td><td>60m</td></tr>
+    <tr><td>TC-16</td><td>Preview &amp; Testing</td><td>Preview Accuracy Across Clients</td><td><span class="sev-badge sev-high">P1</span></td><td><span class="badge-complexity complexity-complex">Complex</span></td><td>60m</td></tr>
+    <tr><td>TC-17</td><td>Preview &amp; Testing</td><td>Test Email Send and Verification</td><td><span class="sev-badge sev-critical">P0</span></td><td><span class="badge-complexity complexity-medium">Medium</span></td><td>40m</td></tr>
+    <tr><td>TC-18</td><td>Preview &amp; Testing</td><td>Link Validation Before Send</td><td><span class="sev-badge sev-high">P1</span></td><td><span class="badge-complexity complexity-medium">Medium</span></td><td>35m</td></tr>
+    <tr><td>TC-19</td><td>Preview &amp; Testing</td><td>Accessibility Compliance Check</td><td><span class="sev-badge sev-medium">P2</span></td><td><span class="badge-complexity complexity-medium">Medium</span></td><td>45m</td></tr>
+    <tr><td>TC-20</td><td>Sending &amp; Publishing</td><td>Full Campaign Launch Flow (Email)</td><td><span class="sev-badge sev-critical">P0</span></td><td><span class="badge-complexity complexity-complex">Complex</span></td><td>60m</td></tr>
+    <tr><td>TC-21</td><td>Sending &amp; Publishing</td><td>A/B Test Setup for Subject Line</td><td><span class="sev-badge sev-high">P1</span></td><td><span class="badge-complexity complexity-medium">Medium</span></td><td>40m</td></tr>
+    <tr><td>TC-22</td><td>Sending &amp; Publishing</td><td>Resend to Non-Openers Flow</td><td><span class="sev-badge sev-medium">P2</span></td><td><span class="badge-complexity complexity-medium">Medium</span></td><td>35m</td></tr>
+    <tr><td>TC-23</td><td>Cross-Product</td><td>Email + Social Post Unified Creation</td><td><span class="sev-badge sev-medium">P2</span></td><td><span class="badge-complexity complexity-medium">Medium</span></td><td>40m</td></tr>
+    <tr><td>TC-24</td><td>Cross-Product</td><td>AI Builder + Automation Integration</td><td><span class="sev-badge sev-critical">P0</span></td><td><span class="badge-complexity complexity-complex">Complex</span></td><td>60m</td></tr>
+    <tr><td>TC-25</td><td>Cross-Product</td><td>Campaign Performance to Next Campaign Loop</td><td><span class="sev-badge sev-high">P1</span></td><td><span class="badge-complexity complexity-medium">Medium</span></td><td>45m</td></tr>
+  </table>
+
+  <h2>Coverage Map</h2>
+  <p>Each test case evaluates multiple dimensions. The matrix below shows which dimensions each category addresses.</p>
+  <table>
+    <tr><th>Category</th><th>Usability</th><th>Bugs</th><th>Heuristics</th><th>Barriers</th><th>Frictions</th><th>Accessibility</th><th>Performance</th></tr>
+    <tr><td><strong>Entry &amp; Discovery</strong></td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9675;</td><td>&#9675;</td></tr>
+    <tr><td><strong>Content Creation</strong></td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9675;</td><td>&#9679;</td></tr>
+    <tr><td><strong>Editing &amp; Customization</strong></td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td></tr>
+    <tr><td><strong>Preview &amp; Testing</strong></td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9675;</td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td></tr>
+    <tr><td><strong>Sending &amp; Publishing</strong></td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9675;</td><td>&#9675;</td></tr>
+    <tr><td><strong>Cross-Product</strong></td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9679;</td><td>&#9675;</td><td>&#9675;</td></tr>
+  </table>
+  <p style="font-size:11px;color:var(--muted);">&#9679; = Primary coverage &nbsp; &#9675; = Secondary/partial coverage</p>
+
+  <h2>Connection to Prior Audit Findings</h2>
+  <div class="grid cols-3">
+    <div style="padding:12px;border:1px solid var(--line);border-radius:8px;">
+      <h3 style="color:var(--critical);margin-top:0;">UB Scrawler (14 issues)</h3>
+      <ul>
+        <li>UB-001: Content mismatch &rarr; TC-05, TC-07, TC-09</li>
+        <li>UB-002: No builder path &rarr; TC-01, TC-02, TC-11</li>
+        <li>UB-003: Duplicate campaigns &rarr; TC-04, TC-20</li>
+        <li>UB-004: Circular instructions &rarr; TC-01, TC-04</li>
+      </ul>
+    </div>
+    <div style="padding:12px;border:1px solid var(--line);border-radius:8px;">
+      <h3 style="color:var(--high);margin-top:0;">Standard Editor (17 issues)</h3>
+      <ul>
+        <li>SE-002: Create disabled &rarr; TC-02</li>
+        <li>SE-003: Template creates template &rarr; TC-02</li>
+        <li>SE-012: Device sizing &rarr; TC-13</li>
+        <li>SE-013: Preview tags &rarr; TC-10, TC-16</li>
+        <li>SE-014: Test merge tags &rarr; TC-17</li>
+      </ul>
+    </div>
+    <div style="padding:12px;border:1px solid var(--line);border-radius:8px;">
+      <h3 style="color:var(--medium);margin-top:0;">BigQuery / Constraints</h3>
+      <ul>
+        <li>DA-001: No bulk insert &rarr; TC-05</li>
+        <li>DA-002: Store required &rarr; TC-05</li>
+        <li>DA-006: No product grid &rarr; TC-05, TC-06</li>
+        <li>Domain auth &rarr; TC-17, TC-20</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+</div><!-- /panel-overview -->
+
+
+<!-- ============== ENTRY & DISCOVERY TAB ============== -->
+<div class="tabpanel" id="panel-entry" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Category 1 &middot; 4 Test Cases</div>
+      <h1>Entry &amp; Discovery</h1>
+      <p class="subtitle">How users find, understand, and enter the AI Unified Builder for the first time or return to in-progress work</p>
+    </div>
+  </header>
+
+  <!-- TC-01 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-01</span>
+      <h3>First-Time Email Creation Path</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p0">P0</span>
+      <span class="badge-complexity complexity-simple">Simple</span>
+      <span class="badge-time">30 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>New Mailchimp user, small business, no prior emails sent</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Click "Create email" from home dashboard</li>
+        <li>Observe what interface loads</li>
+        <li>Attempt to understand AI editor vs traditional editor options</li>
+        <li>Look for alternative non-AI creation paths</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Does the user understand they are entering an AI editor? Is the value proposition clear? Can they find an alternative non-AI path?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p><span class="bug-ref">UB-002</span> Confusion between AI Chat Editor and traditional builder; no explanation of what "Generate emails with Mailchimp AI" means vs traditional editing</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Visibility of system status</span>
+      <span class="heuristic-chip">Match between system and real world</span>
+      <span class="heuristic-chip">User control and freedom</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Time to first understanding of available options</li>
+        <li>Clicks required to start creating content</li>
+        <li>Abandonment indicators (back button, hesitation, confusion)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-02 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-02</span>
+      <h3>Template-First vs AI-First Path Comparison</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p0">P0</span>
+      <span class="badge-complexity complexity-medium">Medium</span>
+      <span class="badge-time">45 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Experienced marketer who prefers templates and has saved template assets</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Navigate to Email Templates section</li>
+        <li>Select a saved template</li>
+        <li>Try to use it in the AI Chat Editor flow</li>
+        <li>Attempt to create a campaign from a template directly</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Can a template-first user seamlessly enter the AI flow? What happens when template and AI workflows collide?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p><span class="bug-ref">SE-003</span><span class="bug-ref">SE-015</span> Template creates template, not campaign; <span class="bug-ref">SE-002</span> "Create from scratch" becomes disabled</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Consistency and standards</span>
+      <span class="heuristic-chip">Flexibility and efficiency</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Number of dead ends encountered</li>
+        <li>Backtracking events (using browser back, navigating away)</li>
+        <li>Whether template content transfers correctly to campaign</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-03 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-03</span>
+      <h3>SMS Creation Entry Point</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p1">P1</span>
+      <span class="badge-complexity complexity-medium">Medium</span>
+      <span class="badge-time">30 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Multi-channel marketer wanting to create SMS campaigns alongside email</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Navigate to SMS section of Mailchimp</li>
+        <li>Attempt to create an SMS campaign using AI builder</li>
+        <li>Check if there is a unified email+SMS creation flow</li>
+        <li>Note any channel fragmentation</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Does AI builder support SMS creation? Is there a unified email+SMS creation flow? How fragmented are the channel experiences?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p>AI Chat Editor may not support SMS; separate SMS flow creates channel fragmentation; no AI-assisted SMS content generation</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Consistency and standards</span>
+      <span class="heuristic-chip">Recognition rather than recall</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Can user create SMS from AI builder? (binary)</li>
+        <li>Steps required to create SMS vs email</li>
+        <li>Consistency of interface patterns between channels</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-04 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-04</span>
+      <h3>Returning User with Draft Recovery</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p0">P0</span>
+      <span class="badge-complexity complexity-medium">Medium</span>
+      <span class="badge-time">45 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>User who started an email yesterday, returns today to finish and send</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Log into Mailchimp after 24 hours</li>
+        <li>Find and resume the draft campaign from yesterday</li>
+        <li>Check if AI Chat conversation context is preserved</li>
+        <li>Verify the relationship between AI threads and campaign drafts</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Can user find their draft easily? Does AI Chat preserve conversation context? What is the relationship between AI conversation threads and campaign drafts?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p><span class="bug-ref">UB-003</span> AI creates duplicate campaigns; <span class="bug-ref">UB-008</span> Conversation threads truncated; drafts may be in different locations (Templates vs Campaigns vs AI Chat)</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Recognition rather than recall</span>
+      <span class="heuristic-chip">Consistency and standards</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Time to find draft (seconds)</li>
+        <li>Clicks required to resume editing</li>
+        <li>Confusion events (wrong draft opened, context lost)</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+</div><!-- /panel-entry -->
+
+
+<!-- ============== CONTENT CREATION TAB ============== -->
+<div class="tabpanel" id="panel-content" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Category 2 &middot; 6 Test Cases</div>
+      <h1>Content Creation</h1>
+      <p class="subtitle">Testing the AI builder's ability to generate, understand, and execute complex email content requests</p>
+    </div>
+  </header>
+
+  <!-- TC-05 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-05</span>
+      <h3>Complex E-commerce Product Email (105-block replication)</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p0">P0</span>
+      <span class="badge-complexity complexity-complex">Complex</span>
+      <span class="badge-time">90 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Home furnishings e-commerce store (based on BigQuery top 1% &mdash; Kate Co Home pattern)</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Use AI builder to create email with: 21 product blocks, 25 text blocks, 22 buttons</li>
+        <li>Request hero image, social icons, promo code section, newsletter signup</li>
+        <li>Include 50% off promo and gift certificates section</li>
+        <li>Measure total output complexity</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Can AI builder generate an email matching this complexity? How close does it get to 105 blocks? How long does generation take?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p><span class="bug-ref">UB-001</span> AI may generate wrong content; <span class="bug-ref">DA-002</span> Product blocks require store connection; <span class="bug-ref">DA-006</span> No product grid layout; <span class="bug-ref">DA-001</span> No bulk insert capability</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">BigQuery Context</div>
+      <p style="background:#F0F9FF;padding:8px 12px;border-radius:6px;border:1px solid #BAE6FD;">This pattern represents the most complex emails actually sent by real e-commerce customers. 105 blocks, 41% open rate, $21K revenue attributed. Top 1% of all campaigns by block count.</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Match between system and real world</span>
+      <span class="heuristic-chip">Flexibility and efficiency</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Block count generated vs requested (target: 105)</li>
+        <li>Content accuracy (product names, prices, descriptions)</li>
+        <li>Time to complete generation</li>
+        <li>Number of iterative prompts required</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-06 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-06</span>
+      <h3>Multi-Section Newsletter (98-block replication)</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p1">P1</span>
+      <span class="badge-complexity complexity-complex">Complex</span>
+      <span class="badge-time">90 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Estate/heritage newsletter publisher (based on BigQuery top 1% &mdash; Revesby Estate pattern)</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Request email with: 5 video embeds, 12 boxed text blocks, 19 image cards</li>
+        <li>Include 8 image groups, editorial sections, event listings</li>
+        <li>Add community news section and Google review CTA</li>
+        <li>Test diverse block type support</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Can AI handle diverse block types? Does it understand video, boxed text, and image card semantics? How does it handle 9 different block types?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p>AI may simplify the layout; video blocks may not be generated; boxed text not a standard AI output type; image groups may render as individual images</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">BigQuery Context</div>
+      <p style="background:#F0F9FF;padding:8px 12px;border-radius:6px;border:1px solid #BAE6FD;">98 blocks, 9 different block types (highest diversity in dataset), 8.8% click rate. Demonstrates the newsletter archetype that requires the most block type variety.</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Match between system and real world</span>
+      <span class="heuristic-chip">Flexibility and efficiency</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Block type diversity generated vs actual (target: 9 types)</li>
+        <li>Layout fidelity to multi-section newsletter structure</li>
+        <li>Video embed support (yes/no/workaround)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-07 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-07</span>
+      <h3>AI Prompt Fidelity Test &mdash; Specific Instructions</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p0">P0</span>
+      <span class="badge-complexity complexity-medium">Medium</span>
+      <span class="badge-time">45 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Marketer with exact specifications and structural requirements</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Provide highly specific prompt: "Create an email with exactly 3 sections: (1) a 2-column layout with image left and text right, (2) a 3-product grid with images, names, and prices, (3) a testimonial in a boxed text block with a call-to-action button below"</li>
+        <li>Verify each structural specification is met</li>
+        <li>Note deviations from instructions</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Does the AI follow specific structural instructions? Can it handle multi-column layouts? Does it understand layout-specific terminology?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p>AI may ignore structural specifics; may not understand "2-column" or "3-product grid" as block instructions; content may be generic placeholder rather than contextual</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Match between system and real world</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Number of specifications met vs requested (target: all 3 sections)</li>
+        <li>Structural accuracy (columns, grid, boxed text)</li>
+        <li>Whether AI acknowledges limitations it cannot fulfill</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-08 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-08</span>
+      <h3>Brand Kit Application Test</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p1">P1</span>
+      <span class="badge-complexity complexity-medium">Medium</span>
+      <span class="badge-time">45 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Company with established brand guidelines (logo, colors, fonts, tone)</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Set up brand kit (logo, 3 brand colors, custom fonts)</li>
+        <li>Create email via AI</li>
+        <li>Verify brand elements are applied automatically</li>
+        <li>Test what happens when brand kit conflicts with template defaults</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Does AI auto-apply brand kit? Are colors, fonts, and logo consistent? What happens if brand kit conflicts with template defaults?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p><span class="bug-ref">SE-011</span> Brand kit may not auto-apply; font may default to Helvetica; AI may use generic colors instead of brand palette</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Consistency and standards</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Brand element match rate (logo, each color, each font)</li>
+        <li>Auto-application vs manual setup required</li>
+        <li>Conflict resolution clarity</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-09 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-09</span>
+      <h3>Iterative Refinement Loop</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p0">P0</span>
+      <span class="badge-complexity complexity-complex">Complex</span>
+      <span class="badge-time">60 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Marketer who wants to improve AI output through iterative conversation</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Generate initial email via AI</li>
+        <li>Request: "make the headline bigger"</li>
+        <li>Request: "change button color to red"</li>
+        <li>Request: "add a second product section"</li>
+        <li>Request: "move the testimonial above the CTA"</li>
+        <li>Verify each change applied correctly and previous changes preserved</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Can AI understand iterative edit requests? Does it modify the correct elements? Does it preserve previous changes across multiple turns?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p>AI may regenerate entire email instead of making targeted edits; may lose context between turns; edits may not map to specific blocks; earlier changes may regress</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">User control and freedom</span>
+      <span class="heuristic-chip">Flexibility and efficiency</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Edit accuracy rate (correct element modified / total requests)</li>
+        <li>Context preservation (previous changes survive new edits)</li>
+        <li>Regression rate (previous changes broken by new edit)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-10 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-10</span>
+      <h3>Content Generation with Merge Tags and Personalization</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p1">P1</span>
+      <span class="badge-complexity complexity-medium">Medium</span>
+      <span class="badge-time">40 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Marketer wanting personalized emails with dynamic content fields</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Request email with *|FNAME|* greeting</li>
+        <li>Ask for location-based content sections</li>
+        <li>Include purchase history references</li>
+        <li>Preview the email and check tag rendering</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Does AI properly insert merge tags? Does it understand Mailchimp-specific personalization syntax? Does preview show tags correctly?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p>AI may use generic placeholders instead of Mailchimp merge tags; <span class="bug-ref">SE-013</span> preview may show raw tags without rendering</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Error prevention</span>
+      <span class="heuristic-chip">Help users recognize and recover</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Merge tag accuracy (correct Mailchimp syntax used)</li>
+        <li>Preview rendering (tags shown vs resolved)</li>
+        <li>Personalization variety supported</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+</div><!-- /panel-content -->
+
+
+<!-- ============== EDITING & CUSTOMIZATION TAB ============== -->
+<div class="tabpanel" id="panel-editing" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Category 3 &middot; 5 Test Cases</div>
+      <h1>Editing &amp; Customization</h1>
+      <p class="subtitle">Testing manual editing capabilities, editor switching, undo/redo, and advanced customization features</p>
+    </div>
+  </header>
+
+  <!-- TC-11 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-11</span>
+      <h3>Switch Between AI Editor and Standard Editor</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p0">P0</span>
+      <span class="badge-complexity complexity-complex">Complex</span>
+      <span class="badge-time">60 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>User who started in AI but wants manual control for fine-tuning</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Generate email in AI Chat Editor</li>
+        <li>Attempt to switch to standard block editor</li>
+        <li>Make manual edits (move block, change text, adjust styling)</li>
+        <li>Switch back to AI editor and verify changes preserved</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Can user switch editors? Are changes preserved in both directions? Is there a working round-trip workflow?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p><span class="bug-ref">UB-002</span><span class="bug-ref">UB-005</span> No visible switch option; changes may be lost on editor switch; AI may not understand manually-edited blocks on return</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">User control and freedom</span>
+      <span class="heuristic-chip">Flexibility and efficiency</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Switch availability (visible option exists: yes/no)</li>
+        <li>Data preservation (content intact after round-trip)</li>
+        <li>Round-trip fidelity (styling, layout, content unchanged)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-12 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-12</span>
+      <h3>Undo/Redo Deep Test</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p1">P1</span>
+      <span class="badge-complexity complexity-medium">Medium</span>
+      <span class="badge-time">40 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>User making multiple sequential edits who needs to backtrack</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Make 10+ sequential edits: add block, edit text, change color, move block, delete block, add image, edit button, change font, add section, resize element</li>
+        <li>Undo all 10 edits</li>
+        <li>Redo 5 edits</li>
+        <li>Verify state at each undo/redo step</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Does undo/redo work reliably? Is the history stack deep enough? Does it handle all edit types (structural, styling, content)?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p>Undo may not work in AI editor; standard editor undo may be shallow; iframe-based edits may not register in undo history; redo may not restore deleted blocks</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">User control and freedom</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Undo depth (maximum undoable steps)</li>
+        <li>Operation coverage (which edit types support undo)</li>
+        <li>Reliability (consistent behavior across attempts)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-13 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-13</span>
+      <h3>Mobile Responsiveness Editing</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p1">P1</span>
+      <span class="badge-complexity complexity-medium">Medium</span>
+      <span class="badge-time">45 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Marketer optimizing email for mobile readers (60%+ of opens)</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Create email in AI builder</li>
+        <li>Switch to mobile preview</li>
+        <li>Identify layout issues (text overflow, image scaling, button size)</li>
+        <li>Attempt to fix mobile-specific problems</li>
+        <li>Verify fixes don't break desktop layout</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Can user make mobile-specific edits? Are device-specific styles discoverable? Does the mobile preview accurately represent real mobile rendering?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p><span class="bug-ref">SE-012</span> Mobile edits may affect desktop; device-specific sizing confusing; no mobile-specific layout tools; preview may not match actual rendering</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Aesthetic and minimalist design</span>
+      <span class="heuristic-chip">Help and documentation</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Mobile rendering accuracy vs actual email clients</li>
+        <li>Edit specificity (can change mobile without affecting desktop)</li>
+        <li>Responsive breakpoint handling</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-14 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-14</span>
+      <h3>Image Management Stress Test</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p2">P2</span>
+      <span class="badge-complexity complexity-complex">Complex</span>
+      <span class="badge-time">60 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>E-commerce marketer with many product images to manage</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Upload 10+ images of varying sizes and formats</li>
+        <li>Place them in email at different positions</li>
+        <li>Resize, crop, and replace images</li>
+        <li>Add alt text to all images</li>
+        <li>Test loading performance with many images</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Is image management smooth? What are file size limits? Does the content studio integrate well with the editor? Are alt text prompts clear?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p>Image upload may be slow; no in-editor crop/resize; content studio may open in separate window; alt text may not be prompted; large images may slow editor</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Error prevention</span>
+      <span class="heuristic-chip">Aesthetic and minimalist design</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Upload time per image (seconds)</li>
+        <li>Management clicks (steps to place, resize, replace)</li>
+        <li>Accessibility compliance (alt text prompted/enforced)</li>
+        <li>Editor performance with 10+ images loaded</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-15 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-15</span>
+      <h3>Dynamic Content / Conditional Blocks</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p2">P2</span>
+      <span class="badge-complexity complexity-complex">Complex</span>
+      <span class="badge-time">60 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Advanced marketer with audience segments wanting personalized blocks</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Create email with dynamic content that shows different products to different segments</li>
+        <li>Set up conditional visibility rules</li>
+        <li>Preview for different segment members</li>
+        <li>Verify conditions render correctly</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Can AI builder create conditional content? Does the standard editor support it? Is the interface understandable for segment-based conditions?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p>AI may not understand dynamic content requests; standard editor dynamic content may be hidden; no visual indication of conditional blocks; preview may not support segment switching</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Visibility of system status</span>
+      <span class="heuristic-chip">Recognition rather than recall</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Feature availability (dynamic content supported: yes/no)</li>
+        <li>Discoverability (can user find the feature unaided)</li>
+        <li>Complexity of condition setup (steps required)</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+</div><!-- /panel-editing -->
+
+
+<!-- ============== PREVIEW & TESTING TAB ============== -->
+<div class="tabpanel" id="panel-preview" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Category 4 &middot; 4 Test Cases</div>
+      <h1>Preview &amp; Testing</h1>
+      <p class="subtitle">Testing preview accuracy, test sends, link validation, and accessibility compliance before final send</p>
+    </div>
+  </header>
+
+  <!-- TC-16 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-16</span>
+      <h3>Preview Accuracy Across Clients</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p1">P1</span>
+      <span class="badge-complexity complexity-complex">Complex</span>
+      <span class="badge-time">60 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Quality-conscious marketer who sends to diverse audience (Gmail, Outlook, Apple Mail)</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Create email with complex layout (multi-column, images, buttons)</li>
+        <li>Preview on Desktop, Mobile, and Inbox views</li>
+        <li>Send test emails and compare with actual rendering in Gmail, Outlook, Apple Mail</li>
+        <li>Check dark mode rendering</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Does preview accurately represent real email client rendering? Are known rendering issues (Outlook columns, dark mode) flagged?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p>Preview may not match Outlook rendering; dark mode not previewed; image blocking not shown; button rendering differences not flagged</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Visibility of system status</span>
+      <span class="heuristic-chip">Help and documentation</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Preview-to-actual fidelity score (% of elements rendering correctly)</li>
+        <li>Dark mode support (previewed: yes/no)</li>
+        <li>Known issue warnings provided</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-17 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-17</span>
+      <h3>Test Email Send and Verification</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p0">P0</span>
+      <span class="badge-complexity complexity-medium">Medium</span>
+      <span class="badge-time">40 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Marketer sending test to team for review before final send</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Send test email to specific address (deepakkumar13@gmail.com)</li>
+        <li>Verify receipt in inbox</li>
+        <li>Check content matches what editor shows</li>
+        <li>Verify merge tags, links, and tracking codes</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Does test email arrive? Does content match the editor? Are merge tags handled correctly in test mode? Do tracking links work?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p><span class="bug-ref">SE-014</span> Merge tags won't populate in test; <span class="bug-ref">UB-006</span> From address may be .mailchimpapp.com; test email may differ from final send in formatting</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Error prevention</span>
+      <span class="heuristic-chip">Visibility of system status</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Delivery success (arrives in inbox, not spam)</li>
+        <li>Content match (visual parity with editor)</li>
+        <li>Functional link count (all links clickable and correct)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-18 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-18</span>
+      <h3>Link Validation Before Send</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p1">P1</span>
+      <span class="badge-complexity complexity-medium">Medium</span>
+      <span class="badge-time">35 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Marketer with many CTAs and product links in a promotional email</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Create email with 10+ links (buttons, text links, image links)</li>
+        <li>Intentionally include 2-3 broken links (404 URLs)</li>
+        <li>Attempt to send / schedule the campaign</li>
+        <li>Check if any validation catches the broken links</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Does Mailchimp validate links before sending? Are broken links flagged? Can user fix them inline without leaving the editor?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p>No pre-send link validation; broken links sent to recipients; no link checker in preview; no inline fix workflow</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Error prevention</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Broken link detection rate (caught / total broken)</li>
+        <li>Fix workflow clarity (inline vs navigation required)</li>
+        <li>Timing of validation (during editing, at preview, at send)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-19 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-19</span>
+      <h3>Accessibility Compliance Check</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p2">P2</span>
+      <span class="badge-complexity complexity-medium">Medium</span>
+      <span class="badge-time">45 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Compliance-focused marketer serving diverse audience including visually impaired</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Create email with images, buttons, and text</li>
+        <li>Check for alt text prompts on all images</li>
+        <li>Verify color contrast meets WCAG AA</li>
+        <li>Test with screen reader (VoiceOver)</li>
+        <li>Check heading hierarchy (H1 &gt; H2 &gt; H3)</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Does the editor help users create accessible emails? Are accessibility issues flagged proactively? Is there an accessibility checker?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p>No accessibility checker built in; images may lack alt text prompts; no contrast checker; heading hierarchy not enforced; AI may generate low-contrast designs</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Error prevention</span>
+      <span class="heuristic-chip">Help and documentation</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Accessibility issue detection (issues flagged vs total present)</li>
+        <li>Remediation guidance quality (actionable: yes/no)</li>
+        <li>Alt text prompting (automatic, on-demand, or absent)</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+</div><!-- /panel-preview -->
+
+
+<!-- ============== SENDING & PUBLISHING TAB ============== -->
+<div class="tabpanel" id="panel-sending" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Category 5 &middot; 3 Test Cases</div>
+      <h1>Sending &amp; Publishing</h1>
+      <p class="subtitle">Testing the final mile: campaign checklist completion, launch flow, A/B testing, and resend workflows</p>
+    </div>
+  </header>
+
+  <!-- TC-20 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-20</span>
+      <h3>Full Campaign Launch Flow (Email)</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p0">P0</span>
+      <span class="badge-complexity complexity-complex">Complex</span>
+      <span class="badge-time">60 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Ready-to-send marketer completing all steps from draft to scheduled/sent</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Complete all campaign checklist items: To (audience), From (sender), Subject (with preview text), Send time (schedule), Content (email body)</li>
+        <li>Review final campaign summary</li>
+        <li>Schedule or send the campaign</li>
+        <li>Verify confirmation and post-send state</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Is the checklist-to-send flow smooth? Are all required fields clear? Does domain auth issue block sending? What warnings appear at final review?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p><span class="bug-ref">UB-006</span> Domain auth rewrite warning; AI auto-sets send time without user confirmation; <span class="bug-ref">UB-003</span> Campaign duplication if entering from AI editor; accidental send risk without confirmation gate</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Error prevention</span>
+      <span class="heuristic-chip">Visibility of system status</span>
+      <span class="heuristic-chip">User control and freedom</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Steps to launch (total clicks from draft to scheduled)</li>
+        <li>Warning clarity (understandable, actionable)</li>
+        <li>Accidental-send prevention (confirmation gate present)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-21 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-21</span>
+      <h3>A/B Test Setup for Subject Line</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p1">P1</span>
+      <span class="badge-complexity complexity-medium">Medium</span>
+      <span class="badge-time">40 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Data-driven marketer wanting to optimize subject lines through testing</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>From campaign setup, click "Create A/B test" on subject line</li>
+        <li>Configure 2-3 subject line variants</li>
+        <li>Set winning criteria (open rate, click rate)</li>
+        <li>Set sample size and test duration</li>
+        <li>Schedule the A/B test</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Is A/B testing discoverable from campaign setup? Can AI suggest test variants? Is the setup intuitive for non-statisticians?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p>A/B test may not integrate with AI-generated subjects; winning criteria may be confusing; sample size guidance unclear; no statistical significance explanation</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Flexibility and efficiency</span>
+      <span class="heuristic-chip">Help and documentation</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Setup completion rate (can complete without help)</li>
+        <li>Configuration errors (invalid settings allowed)</li>
+        <li>AI integration (suggests variants: yes/no)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-22 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-22</span>
+      <h3>Resend to Non-Openers Flow</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p2">P2</span>
+      <span class="badge-complexity complexity-medium">Medium</span>
+      <span class="badge-time">35 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Marketer wanting to maximize campaign reach by re-engaging non-openers</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>After sending a campaign, navigate to resend options</li>
+        <li>Select "Resend to non-openers"</li>
+        <li>Configure a different subject line for the resend</li>
+        <li>Verify audience exclusions are correct (openers excluded)</li>
+        <li>Schedule the resend</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Is the resend flow clear? Does it properly exclude openers? Can user modify content for resend? Are there timing recommendations?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p>Resend may duplicate entire campaign rather than creating a variant; subject line options limited; no A/B test option for resend variant; timing guidance absent</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Consistency and standards</span>
+      <span class="heuristic-chip">Error prevention</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Setup clarity (steps clearly labeled)</li>
+        <li>Audience accuracy (openers correctly excluded)</li>
+        <li>Content modification options available</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+</div><!-- /panel-sending -->
+
+
+<!-- ============== CROSS-PRODUCT TAB ============== -->
+<div class="tabpanel" id="panel-crossproduct" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Category 6 &middot; 3 Test Cases</div>
+      <h1>Cross-Product Integration</h1>
+      <p class="subtitle">Testing how the AI Unified Builder connects with social posting, automations, and campaign performance feedback loops</p>
+    </div>
+  </header>
+
+  <!-- TC-23 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-23</span>
+      <h3>Email + Social Post Unified Creation</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p2">P2</span>
+      <span class="badge-complexity complexity-medium">Medium</span>
+      <span class="badge-time">40 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Multi-channel marketer creating coordinated email + social campaigns</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Create email campaign in AI builder</li>
+        <li>Click "Create a social post" from campaign page</li>
+        <li>Attempt to repurpose email content for social media</li>
+        <li>Check brand consistency between email and social post</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Does the social post flow pull content from the email? Is it a one-click operation? Does it maintain brand consistency?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p>Social post may be completely separate from email; no content repurposing; brand elements may not carry over; AI may not understand cross-channel context</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Consistency and standards</span>
+      <span class="heuristic-chip">Flexibility and efficiency</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Content reuse rate (% of email content usable in social)</li>
+        <li>Additional effort required (steps beyond the email creation)</li>
+        <li>Brand consistency across channels</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-24 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-24</span>
+      <h3>AI Builder + Automation Integration</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p0">P0</span>
+      <span class="badge-complexity complexity-complex">Complex</span>
+      <span class="badge-time">60 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Marketer wanting to create automated email series using AI-generated content</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Create email in AI builder</li>
+        <li>Attempt to use it in a Customer Journey Builder automation</li>
+        <li>Set triggers, delays, and conditions</li>
+        <li>Check if AI-created emails appear as available content in CJB</li>
+        <li>Verify content renders correctly in automation context</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Can AI-created emails be used in automations? Is there a connected workflow? Does the AI understand automation context (welcome series, cart abandonment, etc.)?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p>AI builder creates standalone campaigns, not automation emails; no way to "save to automation" from AI chat; must recreate content in CJB; no content sharing between contexts</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Consistency and standards</span>
+      <span class="heuristic-chip">Flexibility and efficiency</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Workflow connectivity (can use AI email in automation: yes/no)</li>
+        <li>Content reuse (same email usable in both contexts)</li>
+        <li>Steps to achieve integration (if workaround exists)</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- TC-25 -->
+  <div class="tc-card">
+    <div class="tc-card-header">
+      <span class="tc-id">TC-25</span>
+      <h3>Campaign Performance to Next Campaign Loop</h3>
+    </div>
+    <div class="badge-row">
+      <span class="badge-priority badge-p1">P1</span>
+      <span class="badge-complexity complexity-medium">Medium</span>
+      <span class="badge-time">45 min</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Persona</div>
+      <p>Iterative marketer using past performance data to improve future campaigns</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Actions</div>
+      <ul>
+        <li>Review past campaign performance metrics</li>
+        <li>Use insights to inform next campaign via AI</li>
+        <li>Ask AI: "make this better based on what worked in my last campaign"</li>
+        <li>Test "Start from a recent email" feature</li>
+        <li>Verify that successful elements are preserved</li>
+      </ul>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">What to Test / Observe</div>
+      <p>Does the AI builder learn from past campaign performance? Does "Start from recent" preserve successful elements? Can the AI optimize based on data?</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Expected Bugs</div>
+      <p><span class="bug-ref">UB-001</span> AI may not have access to performance data; "Start from recent" may load wrong template; no automated optimization suggestions; performance context not passed to AI</p>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Heuristics Evaluated</div>
+      <span class="heuristic-chip">Match between system and real world</span>
+      <span class="heuristic-chip">Flexibility and efficiency</span>
+    </div>
+    <div class="tc-section">
+      <div class="tc-section-label">Evaluation Criteria</div>
+      <ul>
+        <li>Data utilization (AI references performance data: yes/no)</li>
+        <li>Optimization guidance quality (actionable, specific)</li>
+        <li>"Start from recent" accuracy (correct email loaded)</li>
+      </ul>
+    </div>
+  </div>
+
+</section>
+</div><!-- /panel-crossproduct -->
+
+
+<!-- ============== EVALUATION FRAMEWORK TAB ============== -->
+<div class="tabpanel" id="panel-framework" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Scoring &amp; Methodology</div>
+      <h1>Evaluation Framework</h1>
+      <p class="subtitle">How to score, aggregate, and report findings from TestJam execution</p>
+    </div>
+  </header>
+
+  <h2>Scoring Rubric by Dimension</h2>
+  <table>
+    <tr><th>Dimension</th><th>Score 1 (Fail)</th><th>Score 2 (Poor)</th><th>Score 3 (Adequate)</th><th>Score 4 (Good)</th><th>Score 5 (Excellent)</th></tr>
+    <tr>
+      <td><strong>Usability</strong></td>
+      <td>Cannot complete task</td>
+      <td>Completes with major confusion/errors</td>
+      <td>Completes with minor friction</td>
+      <td>Smooth flow with minor hesitation</td>
+      <td>Intuitive, delightful flow</td>
+    </tr>
+    <tr>
+      <td><strong>Bugs</strong></td>
+      <td>Critical bug blocks task</td>
+      <td>Major bug requires workaround</td>
+      <td>Minor bug, cosmetic impact</td>
+      <td>No bugs, minor edge cases</td>
+      <td>No bugs, graceful edge handling</td>
+    </tr>
+    <tr>
+      <td><strong>Heuristics</strong></td>
+      <td>Multiple violations, severe</td>
+      <td>2-3 violations, significant impact</td>
+      <td>1-2 minor violations</td>
+      <td>No violations, meets standards</td>
+      <td>Exceeds standards, innovative</td>
+    </tr>
+    <tr>
+      <td><strong>Barriers</strong></td>
+      <td>Hard barrier, no path forward</td>
+      <td>Barrier requires external help</td>
+      <td>Soft barrier with visible workaround</td>
+      <td>No barriers encountered</td>
+      <td>Proactive barrier prevention</td>
+    </tr>
+    <tr>
+      <td><strong>Frictions</strong></td>
+      <td>10+ unnecessary steps</td>
+      <td>5-9 unnecessary steps</td>
+      <td>2-4 unnecessary steps</td>
+      <td>1 unnecessary step</td>
+      <td>Optimal path, zero waste</td>
+    </tr>
+    <tr>
+      <td><strong>Accessibility</strong></td>
+      <td>Unusable for assistive tech</td>
+      <td>Major gaps in a11y support</td>
+      <td>Basic a11y, some gaps</td>
+      <td>WCAG AA compliant</td>
+      <td>WCAG AAA, exemplary a11y</td>
+    </tr>
+    <tr>
+      <td><strong>Performance</strong></td>
+      <td>Unusably slow (&gt;30s waits)</td>
+      <td>Noticeably slow (15-30s)</td>
+      <td>Acceptable (5-15s)</td>
+      <td>Fast (2-5s)</td>
+      <td>Instant (&lt;2s), optimistic UI</td>
+    </tr>
+  </table>
+
+  <h2>Aggregation Method</h2>
+  <div class="method-box">
+    <strong>Per Test Case:</strong> Score each applicable dimension 1-5. Calculate weighted average:<br>
+    <code style="font-size:12px;">TC Score = (Usability &times; 0.25) + (Bugs &times; 0.25) + (Heuristics &times; 0.15) + (Barriers &times; 0.15) + (Frictions &times; 0.10) + (Accessibility &times; 0.05) + (Performance &times; 0.05)</code>
+    <br><br>
+    <strong>Per Category:</strong> Average of all TC scores in category, weighted by priority (P0 &times; 3, P1 &times; 2, P2 &times; 1).<br><br>
+    <strong>Overall:</strong> Weighted average of category scores: Entry (15%) + Content (25%) + Editing (20%) + Preview (15%) + Sending (15%) + Cross-Product (10%).
+  </div>
+
+  <h2>Reporting Template</h2>
+  <div class="grid cols-2">
+    <div style="padding:14px;border:1px solid var(--line);border-radius:8px;">
+      <h3 style="margin-top:0;">Per Test Case Output</h3>
+      <ul>
+        <li>TC ID and title</li>
+        <li>Pass/Fail/Blocked status</li>
+        <li>Dimension scores (1-5 each)</li>
+        <li>Issues discovered (ID, severity, description)</li>
+        <li>Screenshot evidence (annotated)</li>
+        <li>Time to complete (actual vs estimated)</li>
+        <li>Tester notes and observations</li>
+      </ul>
+    </div>
+    <div style="padding:14px;border:1px solid var(--line);border-radius:8px;">
+      <h3 style="margin-top:0;">Summary Report Output</h3>
+      <ul>
+        <li>Overall score (1-5) with confidence level</li>
+        <li>Category breakdown with radar chart</li>
+        <li>P0 blockers (must fix before launch)</li>
+        <li>Top 5 improvement opportunities</li>
+        <li>Comparison to prior audit baselines</li>
+        <li>Recommended next steps</li>
+        <li>Competitive gap implications</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Success Criteria</h2>
+  <table>
+    <tr><th>Level</th><th>Overall Score</th><th>P0 Tests Passing</th><th>Interpretation</th></tr>
+    <tr><td style="color:var(--good);font-weight:700;">Ship-Ready</td><td>&ge; 4.0</td><td>100% (9/9)</td><td>AI Unified Builder is ready for GA rollout to all users</td></tr>
+    <tr><td style="color:var(--warn);font-weight:700;">Conditional Ship</td><td>3.0 &ndash; 3.9</td><td>&ge; 78% (7/9)</td><td>Ship with documented known issues; P0 failures need immediate fix</td></tr>
+    <tr><td style="color:var(--high);font-weight:700;">Hold</td><td>2.0 &ndash; 2.9</td><td>&lt; 78%</td><td>Do not expand availability; critical fixes required before broader rollout</td></tr>
+    <tr><td style="color:var(--critical);font-weight:700;">Block</td><td>&lt; 2.0</td><td>&lt; 56% (5/9)</td><td>Product is not viable; fundamental redesign needed before any expansion</td></tr>
+  </table>
+
+  <h2>Priority Definitions</h2>
+  <div class="grid cols-3">
+    <div style="padding:12px;border:2px solid #FEE2E2;border-radius:8px;background:#FEF2F2;">
+      <h3 style="color:var(--critical);margin-top:0;">P0 &mdash; Ship Blocking</h3>
+      <p>Failures here mean the product cannot be trusted for production use. Includes: data loss, content corruption, dead ends, sending wrong content, blocked completion paths.</p>
+      <p style="font-weight:600;">9 test cases: TC-01, TC-02, TC-04, TC-05, TC-07, TC-09, TC-11, TC-17, TC-20, TC-24</p>
+    </div>
+    <div style="padding:12px;border:2px solid #FFEDD5;border-radius:8px;background:#FFF7ED;">
+      <h3 style="color:var(--high);margin-top:0;">P1 &mdash; High Impact</h3>
+      <p>Significant user friction or missed capability. Users can work around but experience is degraded. Includes: channel gaps, rendering issues, testing limitations.</p>
+      <p style="font-weight:600;">9 test cases: TC-03, TC-06, TC-08, TC-10, TC-12, TC-13, TC-16, TC-18, TC-21, TC-25</p>
+    </div>
+    <div style="padding:12px;border:2px solid #DBEAFE;border-radius:8px;background:#EFF6FF;">
+      <h3 style="color:var(--medium);margin-top:0;">P2 &mdash; Enhancement</h3>
+      <p>Polish, advanced features, and edge cases. Absence is noticeable but not blocking. Includes: image management, dynamic content, accessibility, social integration.</p>
+      <p style="font-weight:600;">7 test cases: TC-14, TC-15, TC-19, TC-22, TC-23</p>
+    </div>
+  </div>
+
+  <h2>Heuristic Reference (Nielsen's 10)</h2>
+  <table>
+    <tr><th>#</th><th>Heuristic</th><th>Test Cases Using</th></tr>
+    <tr><td>H1</td><td>Visibility of system status</td><td>TC-01, TC-15, TC-16, TC-17, TC-20</td></tr>
+    <tr><td>H2</td><td>Match between system and real world</td><td>TC-01, TC-05, TC-06, TC-07, TC-25</td></tr>
+    <tr><td>H3</td><td>User control and freedom</td><td>TC-01, TC-09, TC-11, TC-12, TC-20</td></tr>
+    <tr><td>H4</td><td>Consistency and standards</td><td>TC-02, TC-03, TC-04, TC-08, TC-22, TC-23, TC-24</td></tr>
+    <tr><td>H5</td><td>Error prevention</td><td>TC-10, TC-14, TC-17, TC-18, TC-19, TC-20, TC-22</td></tr>
+    <tr><td>H6</td><td>Recognition rather than recall</td><td>TC-03, TC-04, TC-15</td></tr>
+    <tr><td>H7</td><td>Flexibility and efficiency</td><td>TC-02, TC-05, TC-06, TC-09, TC-11, TC-21, TC-24, TC-25</td></tr>
+    <tr><td>H8</td><td>Aesthetic and minimalist design</td><td>TC-13, TC-14</td></tr>
+    <tr><td>H9</td><td>Help users recognize, diagnose, recover</td><td>TC-10</td></tr>
+    <tr><td>H10</td><td>Help and documentation</td><td>TC-13, TC-16, TC-19, TC-21</td></tr>
+  </table>
+
+</section>
+
+<div class="guardrails">
+  <h3>TestJam Execution Guardrails</h3>
+  <ul>
+    <li><strong>Test environment:</strong> Use a dedicated test account (e.g., Goodnight Fox us17) to avoid impacting production data</li>
+    <li><strong>Send tests only to controlled addresses</strong> &mdash; never send test campaigns to real customer lists during evaluation</li>
+    <li><strong>Document everything:</strong> Screenshot every step, including successful flows (establishes baseline)</li>
+    <li><strong>One tester per session:</strong> Each test case should be run by one person in a single session to maintain consistency</li>
+    <li><strong>Time-box strictly:</strong> If a test case exceeds 2x estimated time, mark as BLOCKED and document where you got stuck</li>
+    <li><strong>Fresh state between tests:</strong> Clear browser cache and start new session between category groups</li>
+    <li><strong>Reproduce before reporting:</strong> Attempt to reproduce any bug at least once before logging; note if intermittent</li>
+    <li><strong>Compare with prior audits:</strong> Cross-reference findings with UB Scrawler (14 issues) and Standard Editor (17 issues) reports</li>
+    <li><strong>Qualitative N=1:</strong> These are directional findings from expert evaluation, not statistically validated usability studies</li>
+  </ul>
+</div>
+
+</div><!-- /panel-framework -->
+
+
+</div><!-- /page-wrap -->
+
+<script>
+  (function () {
+    var tabs = document.querySelectorAll('.tab');
+    var panels = document.querySelectorAll('.tabpanel');
+    function activate(name) {
+      tabs.forEach(function (t) {
+        var match = t.getAttribute('data-tab') === name;
+        t.classList.toggle('active', match);
+        t.setAttribute('aria-selected', match ? 'true' : 'false');
+      });
+      panels.forEach(function (p) {
+        p.classList.toggle('active', p.id === 'panel-' + name);
+      });
+      try {
+        var url = new URL(window.location.href);
+        url.hash = name;
+        history.replaceState(null, '', url.toString());
+      } catch (e) {}
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
+    });
+    var initial = (window.location.hash || '').replace('#', '');
+    if (['overview','entry','content','editing','preview','sending','crossproduct','framework'].indexOf(initial) >= 0) activate(initial);
+  })();
+</script>
+
+</body>
+</html>
