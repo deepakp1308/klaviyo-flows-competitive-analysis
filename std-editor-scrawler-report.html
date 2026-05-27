@@ -1,0 +1,1716 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Standard Editor Scrawler — Live UX Audit Report</title>
+<meta name="description" content="Mailchimp Standard Email Editor (drag-and-drop block builder) UX evaluation report: 17 issues, screenshot evidence, comparison with AI Chat Editor, improvement plan." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E1116;
+    --ink-2: #1F2937;
+    --muted: #4B5563;
+    --line: #E5E7EB;
+    --line-2: #D1D5DB;
+    --bg: #F8F7F4;
+    --paper: #FFFFFF;
+    --brand: #7C3AED;
+    --brand-2: #5B21B6;
+    --good: #047857;
+    --warn: #B45309;
+    --bad: #B91C1C;
+    --chip: #EDE9FE;
+    --chip-ink: #5B21B6;
+    --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+    --critical: #DC2626;
+    --high: #EA580C;
+    --medium: #2563EB;
+    --low: #6B7280;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.45;
+  }
+  .toolbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(248,247,244,.85);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .toolbar-inner {
+    max-width: 1180px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; gap: 12px;
+    flex-wrap: wrap;
+  }
+  .brand-mark {
+    display:flex; align-items:center; gap:10px;
+    font-weight: 700; font-size: 14px; color: var(--ink-2);
+  }
+  .brand-dot { width: 10px; height: 10px; border-radius: 3px; background: var(--brand); box-shadow: 0 0 0 3px rgba(124,58,237,.25); }
+  .toolbar a.btn, .toolbar button.btn {
+    border: 1px solid var(--line-2);
+    background: var(--paper);
+    color: var(--ink-2);
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .toolbar .btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .toolbar .btn:hover { transform: translateY(-1px); }
+
+  .tabs {
+    display: inline-flex;
+    background: #ECEAE6;
+    border-radius: 10px;
+    padding: 3px;
+    gap: 2px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+  .tab:hover { color: var(--ink-2); }
+  .tab.active {
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 1px 2px rgba(16,24,40,.06);
+  }
+  .tabpanel { display: none; }
+  .tabpanel.active { display: block; }
+
+  .page-wrap { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+
+  .page {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 28px 32px 26px;
+    margin-bottom: 22px;
+  }
+
+  .page-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700;
+  }
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.15;
+    margin: 6px 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; }
+  .meta { text-align: right; font-size: 12px; color: var(--muted); }
+  .meta strong { color: var(--ink-2); }
+
+  h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    margin: 24px 0 10px;
+    letter-spacing: -0.005em;
+  }
+  h3 { font-size: 14px; margin: 16px 0 8px; }
+  p { margin: 0 0 10px; font-size: 13.5px; color: var(--ink-2); }
+  ul { margin: 4px 0 10px; padding-left: 18px; }
+  li { font-size: 13px; color: var(--ink-2); margin-bottom: 4px; }
+  li strong { color: var(--ink); }
+
+  .grid { display: grid; gap: 16px; }
+  .grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 880px) {
+    .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: 1fr; }
+    .page { padding: 20px; }
+    h1 { font-size: 22px; }
+    .tabs { order: 3; flex-basis: 100%; }
+  }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 16px 0; }
+  @media (max-width: 700px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFB 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .kpi .v {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .kpi .l { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin: 10px 0;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: #FAFAFB;
+  }
+
+  .sev-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .sev-critical { background: #FEE2E2; color: var(--critical); }
+  .sev-high { background: #FFEDD5; color: var(--high); }
+  .sev-medium { background: #DBEAFE; color: var(--medium); }
+  .sev-low { background: #F3F4F6; color: var(--low); }
+
+  .screenshot-box {
+    margin: 16px 0;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #FAFAFB;
+  }
+  .screenshot-box img {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid var(--line);
+  }
+  .screenshot-caption {
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .screenshot-caption .num {
+    background: var(--ink);
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .annotation-box {
+    padding: 10px 14px;
+    background: #FFFBEB;
+    border-top: 1px solid #FDE68A;
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .annotation-box .issue-pills {
+    margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .issue-pill {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: .03em;
+  }
+  .issue-pill.critical { background: #FEE2E2; color: var(--critical); }
+  .issue-pill.high { background: #FFEDD5; color: var(--high); }
+  .issue-pill.medium { background: #DBEAFE; color: var(--medium); }
+  .issue-pill.low { background: #F3F4F6; color: var(--low); }
+
+  .issue-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    background: var(--paper);
+  }
+  .issue-card h3 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .issue-card .issue-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .issue-card .issue-meta span { display: flex; align-items: center; gap: 4px; }
+  .issue-card p { font-size: 12.5px; margin: 0 0 6px; }
+  .issue-card .evidence-thumb {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .issue-card .evidence-thumb img {
+    height: 80px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .issue-card .evidence-thumb img:hover { border-color: var(--brand); box-shadow: 0 0 0 2px rgba(124,58,237,.2); }
+
+  .verdict-box {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+  }
+  .verdict-box h3 { color: var(--critical); margin: 0 0 6px; }
+  .verdict-box.positive {
+    background: #F0FDF4;
+    border-color: #BBF7D0;
+  }
+  .verdict-box.positive h3 { color: var(--good); }
+
+  .method-box {
+    background: #F5F3FF;
+    border-left: 4px solid var(--brand);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 14px 0;
+    font-size: 12.5px;
+  }
+
+  .guardrails {
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 24px;
+    font-size: 12px;
+  }
+  .guardrails h3 { color: var(--good); margin: 0 0 8px; font-size: 13px; }
+  .guardrails ul { margin: 0; }
+  .guardrails li { font-size: 12px; margin-bottom: 3px; }
+
+  .priority-table td:first-child { font-weight: 700; white-space: nowrap; }
+  .fix-card {
+    border-left: 4px solid var(--brand);
+    padding: 10px 14px;
+    background: #FAFAFB;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 10px;
+  }
+  .fix-card h4 { margin: 0 0 4px; font-size: 13px; }
+  .fix-card p { margin: 0; font-size: 12px; }
+
+  .comparison-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 1fr;
+    border-bottom: 1px solid var(--line);
+    font-size: 12.5px;
+  }
+  .comparison-row.header { background: #FAFAFB; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  .comparison-row > div { padding: 10px 12px; }
+  .comparison-row > div:first-child { font-weight: 600; color: var(--ink); background: #FAFAFB; }
+  .comparison-row .winner { background: #F0FDF4; }
+  .comparison-row .loser { background: #FEF2F2; }
+  .comparison-row .neutral { background: var(--paper); }
+
+  .block-card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 12px 14px;
+    text-align: center;
+  }
+  .block-card .block-icon {
+    font-size: 24px;
+    margin-bottom: 6px;
+  }
+  .block-card .block-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink);
+  }
+  .block-card .block-desc {
+    font-size: 11px;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+
+  @media print {
+    .toolbar { position: static; }
+    .tabpanel:not(.active) { display: block !important; }
+    .page { break-inside: avoid; }
+    .screenshot-box { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="brand-mark"><span class="brand-dot"></span> Standard Editor · Drag-and-Drop Block Builder UX Audit</div>
+    <div class="tabs" role="tablist" aria-label="Report sections">
+      <button class="tab active" role="tab" aria-selected="true" data-tab="summary">Executive Summary</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="walkthrough">Editor Walkthrough</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="blocks">Content Blocks</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="styles">Styles &amp; Design</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="preview">Preview &amp; Testing</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="issues">Issue Log</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="comparison">Standard vs AI</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="improvement">Improvement Plan</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="recommendations">Recommendations</button>
+    </div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <a class="btn" href="ub-scrawler-report.html">&#8592; AI Editor Report</a>
+      <a class="btn" href="mailchimp-editor.html">&#8594; Editor Brief</a>
+      <a class="btn" href="mailchimp.html">&#8594; Mailchimp Dossier</a>
+      <button class="btn" onclick="window.print()">Print / PDF</button>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+<!-- ============== EXECUTIVE SUMMARY TAB ============== -->
+<div class="tabpanel active" id="panel-summary" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Standard Editor &middot; Drag-and-Drop Block Builder &middot; Live UX Evaluation</div>
+      <h1>Mailchimp Standard Editor: <em style="color:var(--brand);">Capable but Hidden</em> — a disconnected workflow undermines a strong builder</h1>
+      <p class="subtitle">Qualitative N=1 scripted evaluation &middot; Template-based workflow &middot; Draft-only, no emails sent</p>
+    </div>
+    <div class="meta">
+      <strong>Date:</strong> May 26, 2026<br>
+      <strong>Account:</strong> Goodnight Fox (us17)<br>
+      <strong>Method:</strong> Manual + Browser Automation
+    </div>
+  </header>
+
+  <div class="method-box">
+    <strong>Method:</strong> Manual walkthrough of Mailchimp's Standard Email Editor (drag-and-drop block builder) accessed via Email Templates. Evaluated end-to-end: template discovery &rarr; editor entry &rarr; block library &rarr; style controls &rarr; preview &amp; test &rarr; workflow gaps. All templates saved as drafts only; no emails were sent or scheduled.
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="v" style="color:var(--high);">2</div><div class="l">High Severity</div></div>
+    <div class="kpi"><div class="v" style="color:var(--medium);">7</div><div class="l">Medium Severity</div></div>
+    <div class="kpi"><div class="v" style="color:var(--low);">8</div><div class="l">Low Severity</div></div>
+    <div class="kpi"><div class="v">15</div><div class="l">Content Blocks</div></div>
+  </div>
+
+  <h2>What Was Tested</h2>
+  <p>The Standard Email Editor — Mailchimp's drag-and-drop block builder accessible via the Email Templates page. This is <strong>not</strong> the default "Create email" or "Design email" path, which now routes to the AI Chat Editor (Unified Builder).</p>
+
+  <div class="grid cols-2">
+    <div>
+      <h3>Explored</h3>
+      <ul>
+        <li>Template discovery via Email Templates page</li>
+        <li>Editor entry through "Create from scratch"</li>
+        <li>Full block library (15 content blocks)</li>
+        <li>Section management (Header, Body, Footer)</li>
+        <li>Global style controls (Background, Text, Link, Button, Divider, Image, Logo)</li>
+        <li>Typography system (P, H1&ndash;H4) with device-specific sizing</li>
+        <li>Preview modes (Desktop, Mobile, Inbox)</li>
+        <li>Send Test Email dialog</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Key Discovery</h3>
+      <p style="font-size:14px;font-weight:600;color:var(--high);margin-bottom:8px;">The Standard Editor is NOT accessible from the primary email creation flow.</p>
+      <ul>
+        <li>"Create email" &rarr; routes to AI Chat Editor</li>
+        <li>"Design email" &rarr; routes to AI Chat Editor</li>
+        <li>Standard Editor only accessible via Email Templates page &mdash; a separate, non-obvious path</li>
+        <li>Template editor creates <em>templates</em>, not campaigns &mdash; users must create a template first, then create a separate campaign from it</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Top 5 Issues</h2>
+
+  <div class="issue-card">
+    <h3><span class="sev-badge sev-high">High</span> SE-001: Standard editor is hidden from primary email creation flows</h3>
+    <p>The drag-and-drop block editor is not accessible from "Create email" or "Design email" buttons. Users must navigate to Email Templates — a separate, less discoverable page — to reach it.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/01-email-templates-page.png"><img src="std-editor-screenshots/01-email-templates-page.png" alt="Templates page"></a>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <h3><span class="sev-badge sev-high">High</span> SE-015: Template &rarr; Campaign disconnect adds unnecessary steps</h3>
+    <p>Creating a template does not create a campaign. Users must navigate to Campaigns &rarr; Create email &rarr; select template, adding a multi-step detour that breaks the creation flow.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/01-email-templates-page.png"><img src="std-editor-screenshots/01-email-templates-page.png" alt="Templates page"></a>
+      <a href="std-editor-screenshots/02-standard-editor-blocks-panel.png"><img src="std-editor-screenshots/02-standard-editor-blocks-panel.png" alt="Editor"></a>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <h3><span class="sev-badge sev-medium">Medium</span> SE-008: No inline AI content generation in block editor</h3>
+    <p>AI-Generated Columns exist as pre-structured layouts (Article summary, Upcoming event, Product promotion) but offer no generative AI — no "write this for me" capability within blocks.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/06-all-content-blocks-expanded.png"><img src="std-editor-screenshots/06-all-content-blocks-expanded.png" alt="All blocks"></a>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <h3><span class="sev-badge sev-medium">Medium</span> SE-005: Email canvas in iframe blocks standard DOM interactions</h3>
+    <p>The email canvas renders inside an iframe, meaning sidebar blocks cannot interact with canvas elements through standard DOM events. This architectural choice limits extensibility.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/02-standard-editor-blocks-panel.png"><img src="std-editor-screenshots/02-standard-editor-blocks-panel.png" alt="Editor with iframe"></a>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <h3><span class="sev-badge sev-medium">Medium</span> SE-016: Three builder entry points without clear differentiation</h3>
+    <p>"Create from scratch", "Create a legacy template", and "Code your own" are presented side by side without explaining what each produces or when to use which.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/01-email-templates-page.png"><img src="std-editor-screenshots/01-email-templates-page.png" alt="Three entry points"></a>
+    </div>
+  </div>
+
+  <div class="verdict-box positive">
+    <h3>Verdict: Capable Builder, Broken Workflow</h3>
+    <p>The Standard Editor is a mature, full-featured block builder with 15 content blocks, comprehensive style controls, device-specific typography, and a clean 3-mode preview. It is significantly more reliable and controllable than the AI Chat Editor. However, it is effectively <strong>hidden</strong> from users — buried behind Email Templates with a disconnected template-to-campaign workflow. The editor itself is solid; the problem is that users can't find it and can't use it efficiently.</p>
+  </div>
+</section>
+
+</div><!-- /panel-summary -->
+
+
+<!-- ============== EDITOR WALKTHROUGH TAB ============== -->
+<div class="tabpanel" id="panel-walkthrough" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Visual Evidence Trail</div>
+      <h1>Step-by-Step Editor Walkthrough</h1>
+      <p class="subtitle">Complete sequential record of the Standard Email Editor evaluation with annotated screenshots</p>
+    </div>
+  </header>
+
+  <div class="screenshot-box">
+    <img src="std-editor-screenshots/01-email-templates-page.png" alt="Email Templates landing page">
+    <div class="screenshot-caption"><span class="num">1</span> Email Templates Landing Page — Entry Point Discovery</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> Email Templates page showing three creation buttons: "Create a legacy template", "Code your own", "Create from scratch". Banner about transactional templates. Tabs: Mailchimp templates, Saved (active, 57 templates), Recently sent. Template previews with thumbnail grid.
+      <br><strong>Key Findings:</strong> This is the <em>only</em> path to the Standard Editor. "Create email" and "Design email" in the campaign flow route exclusively to the AI Chat Editor. The "Create from scratch" button was observed to become disabled after first click — possibly a loading state or bug.
+      <div class="issue-pills">
+        <span class="issue-pill high">SE-001</span>
+        <span class="issue-pill medium">SE-002</span>
+        <span class="issue-pill high">SE-015</span>
+        <span class="issue-pill medium">SE-016</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="std-editor-screenshots/02-standard-editor-blocks-panel.png" alt="Standard editor with Blocks panel">
+    <div class="screenshot-caption"><span class="num">2</span> Standard Editor — Blocks Panel (Default View)</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> Full editor interface with left sidebar showing 3 tabs (Blocks active, Sections, Styles). Content Blocks: Image, Heading, Paragraph, Button, Divider, Spacer, Video, Social, Logo + "Show more" link. AI-Generated Columns (New): Article summary, Upcoming event, Product or service promotion. Blank Columns: 1, 2, 3 layouts. Right side shows email canvas with Goodnight Fox logo, image placeholder, "Start typing..." text. Top bar: "Template: Untitled Template", Changes saved, Send test, Save and exit, desktop/mobile toggle, undo/redo, Preview. "How to use this builder" link visible.
+      <br><strong>Context:</strong> Clean, organized interface. Sidebar tabs provide clear navigation between blocks, structure, and styling. The canvas uses an iframe for rendering.
+      <div class="issue-pills">
+        <span class="issue-pill medium">SE-003</span>
+        <span class="issue-pill low">SE-004</span>
+        <span class="issue-pill medium">SE-005</span>
+        <span class="issue-pill medium">SE-006</span>
+        <span class="issue-pill low">SE-009</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="std-editor-screenshots/03-sections-panel.png" alt="Sections panel">
+    <div class="screenshot-caption"><span class="num">3</span> Sections Panel — Email Structure Management</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> Sections tab showing three email regions: Header, Body, Footer with move up/down buttons for reordering. "Add blank section" button at bottom. Sub-tabs for "Manage" (active) and "Library" within sections panel.
+      <br><strong>Positive:</strong> Clean structural view that makes email architecture visible. Move controls provide easy reordering. "Library" sub-tab suggests reusable section templates (unexplored).
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="std-editor-screenshots/04-styles-panel.png" alt="Styles panel">
+    <div class="screenshot-caption"><span class="num">4</span> Styles Panel — Global Email Design Controls</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> Styles tab showing "Email Design" heading with information icon. Seven collapsible sections: Background, Text, Link, Button, Divider, Image, Logo. All sections collapsed by default.
+      <br><strong>Key Finding:</strong> All style sections are collapsed on first load. Users must expand each one to discover available controls. No visual indication of current settings until expanded.
+      <div class="issue-pills"><span class="issue-pill medium">SE-010</span></div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="std-editor-screenshots/05-styles-text-expanded.png" alt="Text styles expanded">
+    <div class="screenshot-caption"><span class="num">5</span> Text Style Controls — Typography System</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> Text style section expanded showing typography hierarchy tabs (P, H1, H2, H3, H4). ALL DEVICES section: Font picker (Helvetica), Font color (black swatch), Bold/Italic toggles, Alignment (L/C/R/J), Letter spacing (0), Text Direction (LTR/RTL). DEVICE-SPECIFIC section: Desktop font size (16), line height (1.5), paragraph spacing (0). Mobile section below with separate controls.
+      <br><strong>Positive:</strong> Comprehensive typography controls with full hierarchy. Device-specific sizing is a powerful feature for responsive emails. LTR/RTL support shows internationalization awareness.
+      <br><strong>Concern:</strong> Defaults to Helvetica even when account has brand kit with specific fonts configured. Device-specific split adds complexity for non-expert users.
+      <div class="issue-pills">
+        <span class="issue-pill low">SE-011</span>
+        <span class="issue-pill low">SE-012</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="std-editor-screenshots/06-all-content-blocks-expanded.png" alt="All content blocks expanded">
+    <div class="screenshot-caption"><span class="num">6</span> Full Block Library — All 15 Content Blocks Visible</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> Complete block inventory after clicking "Show more": Image, Heading, Paragraph, Button, Divider, Spacer, Video, Social, Logo, Survey, Code, Apps, Product, Product Rec, Footer. AI-Generated Columns section below with three pre-structured layout options.
+      <br><strong>Key Finding:</strong> 6 additional blocks (Survey, Code, Apps, Product, Product Rec, Footer) are hidden behind "Show more" by default. Product and Product Rec blocks are particularly important for e-commerce users but require discovery. AI-Generated Columns are layout templates, not generative AI.
+      <div class="issue-pills">
+        <span class="issue-pill low">SE-007</span>
+        <span class="issue-pill medium">SE-008</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="std-editor-screenshots/07-preview-desktop-mode.png" alt="Preview desktop mode">
+    <div class="screenshot-caption"><span class="num">7</span> Preview Modal — Desktop Mode</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> Preview modal with three tabs: Desktop (active), Mobile, Inbox. "Send a Test Email" link in top-right. Full email preview showing Goodnight Fox logo, image placeholder, text area, footer section with merge tags (*|IFNOT:ARCHIVE_PAGE|*, *|LIST:COMPANY|*, etc.).
+      <br><strong>Positive:</strong> Three preview modes cover the major rendering contexts. Clean modal presentation with clear tab navigation.
+      <br><strong>Concern:</strong> Raw merge tags are visible in preview instead of explanatory text or sample data.
+      <div class="issue-pills"><span class="issue-pill low">SE-013</span></div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="std-editor-screenshots/08-send-test-dialog.png" alt="Send test dialog">
+    <div class="screenshot-caption"><span class="num">8</span> Send a Test Email Dialog</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> "Send a Test Email" dialog with warning: "Merge tags won't populate content in test emails". Email input field with placeholder text. Helper text: "Use commas to separate multiple emails." Cancel and "Send Test" buttons.
+      <br><strong>Concern:</strong> Warning about merge tags not populating is honest but doesn't offer a solution — no way to preview with populated merge tags or sample data.
+      <div class="issue-pills"><span class="issue-pill low">SE-014</span></div>
+    </div>
+  </div>
+
+</section>
+</div><!-- /panel-walkthrough -->
+
+
+<!-- ============== CONTENT BLOCKS TAB ============== -->
+<div class="tabpanel" id="panel-blocks" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Block Library Analysis</div>
+      <h1>Content Blocks — Full Inventory</h1>
+      <p class="subtitle">15 content blocks + 3 AI-Generated Column layouts + 3 Blank Column configurations</p>
+    </div>
+  </header>
+
+  <h2>Primary Content Blocks (Visible by Default)</h2>
+  <p>These 9 blocks are immediately visible when the Blocks panel opens.</p>
+  <div class="grid cols-3">
+    <div class="block-card"><div class="block-icon">&#128444;</div><div class="block-name">Image</div><div class="block-desc">Upload or select from file manager</div></div>
+    <div class="block-card"><div class="block-icon">H</div><div class="block-name">Heading</div><div class="block-desc">H1&ndash;H4 with global style inheritance</div></div>
+    <div class="block-card"><div class="block-icon">&#182;</div><div class="block-name">Paragraph</div><div class="block-desc">Rich text with formatting toolbar</div></div>
+    <div class="block-card"><div class="block-icon">&#9744;</div><div class="block-name">Button</div><div class="block-desc">CTA with link, color, border-radius</div></div>
+    <div class="block-card"><div class="block-icon">&mdash;</div><div class="block-name">Divider</div><div class="block-desc">Horizontal rule with style options</div></div>
+    <div class="block-card"><div class="block-icon">&#8597;</div><div class="block-name">Spacer</div><div class="block-desc">Vertical whitespace control</div></div>
+    <div class="block-card"><div class="block-icon">&#9654;</div><div class="block-name">Video</div><div class="block-desc">Thumbnail with play button overlay</div></div>
+    <div class="block-card"><div class="block-icon">&#128101;</div><div class="block-name">Social</div><div class="block-desc">Social media icon links</div></div>
+    <div class="block-card"><div class="block-icon">&#10070;</div><div class="block-name">Logo</div><div class="block-desc">Brand logo with auto-sizing</div></div>
+  </div>
+
+  <h2>Hidden Blocks (Behind "Show More")</h2>
+  <p>These 6 blocks require clicking "Show more" to discover. Several are high-value for specific use cases.</p>
+  <div class="grid cols-3">
+    <div class="block-card" style="border-color:#DBEAFE;"><div class="block-icon">&#128202;</div><div class="block-name">Survey</div><div class="block-desc">Embedded survey/poll block</div></div>
+    <div class="block-card" style="border-color:#DBEAFE;"><div class="block-icon">&lt;/&gt;</div><div class="block-name">Code</div><div class="block-desc">Custom HTML block</div></div>
+    <div class="block-card" style="border-color:#DBEAFE;"><div class="block-icon">&#9881;</div><div class="block-name">Apps</div><div class="block-desc">Third-party app integrations</div></div>
+    <div class="block-card" style="border-color:#FFEDD5;"><div class="block-icon">&#128722;</div><div class="block-name">Product</div><div class="block-desc">Manual product block from catalog</div></div>
+    <div class="block-card" style="border-color:#FFEDD5;"><div class="block-icon">&#11088;</div><div class="block-name">Product Rec</div><div class="block-desc">AI-powered product recommendations</div></div>
+    <div class="block-card" style="border-color:#DBEAFE;"><div class="block-icon">&#9744;</div><div class="block-name">Footer</div><div class="block-desc">Pre-formatted footer with legal</div></div>
+  </div>
+
+  <div class="method-box">
+    <strong>Discovery concern:</strong> Product and Product Rec blocks (highlighted in orange above) are critical for e-commerce users — Mailchimp's largest customer segment — yet they require clicking "Show more" to discover. Klaviyo surfaces product blocks prominently in its flow builder.
+  </div>
+
+  <h2>AI-Generated Columns</h2>
+  <p>Three pre-structured column layouts with placeholder content. Labeled "New" but functionally they are layout templates, not generative AI.</p>
+
+  <table>
+    <tr><th>Layout</th><th>Description</th><th>AI Capability</th></tr>
+    <tr><td><strong>Article summary</strong></td><td>Image + headline + body text + CTA in a content-focused layout</td><td>Template only — no text generation</td></tr>
+    <tr><td><strong>Upcoming event</strong></td><td>Date/time + location + description + RSVP button layout</td><td>Template only — no event data pull</td></tr>
+    <tr><td><strong>Product or service promotion</strong></td><td>Product image + name + price + "Shop now" layout</td><td>Template only — no catalog connection</td></tr>
+  </table>
+
+  <div class="issue-card" style="margin-top:16px;">
+    <h3><span class="sev-badge sev-medium">Medium</span> SE-008: "AI-Generated" is misleading branding</h3>
+    <p>The "AI-Generated Columns" label suggests these layouts are created by AI or offer AI content generation. In reality, they are static layout templates with placeholder text. Users expecting Klaviyo-style AI content generation within blocks will be disappointed.</p>
+  </div>
+
+  <h2>Blank Column Layouts</h2>
+  <div class="grid cols-3">
+    <div class="block-card"><div class="block-name">1 Column</div><div class="block-desc">Full-width single column</div></div>
+    <div class="block-card"><div class="block-name">2 Columns</div><div class="block-desc">50/50 side-by-side layout</div></div>
+    <div class="block-card"><div class="block-name">3 Columns</div><div class="block-desc">33/33/33 three-column layout</div></div>
+  </div>
+
+  <h2>Block Library Comparison: Standard vs. Competitors</h2>
+  <table>
+    <tr><th>Feature</th><th>MC Standard (15)</th><th>Klaviyo</th><th>Shopify Email</th></tr>
+    <tr><td>Core blocks (text, image, button)</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--good);">&#10003;</td></tr>
+    <tr><td>Product blocks</td><td style="color:var(--good);">&#10003; (hidden)</td><td style="color:var(--good);">&#10003; (prominent)</td><td style="color:var(--good);">&#10003; (native)</td></tr>
+    <tr><td>Product recommendations</td><td style="color:var(--good);">&#10003; (hidden)</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--bad);">&#10007;</td></tr>
+    <tr><td>Survey/poll block</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--bad);">&#10007;</td><td style="color:var(--bad);">&#10007;</td></tr>
+    <tr><td>Custom HTML/code</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--good);">&#10003;</td></tr>
+    <tr><td>Video block</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--bad);">&#10007;</td><td style="color:var(--bad);">&#10007;</td></tr>
+    <tr><td>AI content generation in-block</td><td style="color:var(--bad);">&#10007;</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--good);">&#10003; (Sidekick)</td></tr>
+    <tr><td>App/integration blocks</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--bad);">&#10007;</td></tr>
+    <tr><td>Click-to-insert (non-drag)</td><td style="color:var(--bad);">&#10007;</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--good);">&#10003;</td></tr>
+  </table>
+
+  <div class="screenshot-box">
+    <img src="std-editor-screenshots/06-all-content-blocks-expanded.png" alt="All 15 content blocks">
+    <div class="screenshot-caption"><span class="num">6</span> Full block library with all 15 blocks visible after expanding "Show more"</div>
+  </div>
+
+</section>
+</div><!-- /panel-blocks -->
+
+
+<!-- ============== STYLES & DESIGN TAB ============== -->
+<div class="tabpanel" id="panel-styles" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Design System Analysis</div>
+      <h1>Styles &amp; Design Controls</h1>
+      <p class="subtitle">Global style system, typography hierarchy, and device-specific responsive controls</p>
+    </div>
+  </header>
+
+  <h2>Global Style Sections</h2>
+  <p>Seven collapsible sections control the entire email's visual language. All collapsed by default.</p>
+
+  <table>
+    <tr><th>Section</th><th>Controls Available</th><th>Scope</th></tr>
+    <tr><td><strong>Background</strong></td><td>Page background color, content area background color</td><td>Entire email</td></tr>
+    <tr><td><strong>Text</strong></td><td>Font family, color, size, weight, alignment, spacing, direction (LTR/RTL). Per-heading-level (P, H1&ndash;H4). Device-specific sizing.</td><td>All text elements</td></tr>
+    <tr><td><strong>Link</strong></td><td>Link color, underline style</td><td>All hyperlinks</td></tr>
+    <tr><td><strong>Button</strong></td><td>Background color, text color, border-radius, padding, font</td><td>All button blocks</td></tr>
+    <tr><td><strong>Divider</strong></td><td>Color, thickness, style (solid, dashed, dotted), width</td><td>All divider blocks</td></tr>
+    <tr><td><strong>Image</strong></td><td>Border, padding, alignment defaults</td><td>All image blocks</td></tr>
+    <tr><td><strong>Logo</strong></td><td>Size, alignment, linked URL</td><td>Logo block</td></tr>
+  </table>
+
+  <div class="grid cols-2" style="margin-top:16px;">
+    <div class="screenshot-box">
+      <img src="std-editor-screenshots/04-styles-panel.png" alt="Styles panel collapsed">
+      <div class="screenshot-caption"><span class="num">4</span> All style sections collapsed by default</div>
+    </div>
+    <div class="screenshot-box">
+      <img src="std-editor-screenshots/05-styles-text-expanded.png" alt="Text styles expanded">
+      <div class="screenshot-caption"><span class="num">5</span> Text section expanded — full typography controls</div>
+    </div>
+  </div>
+
+  <h2>Typography System</h2>
+  <p>The editor provides a 5-level typography hierarchy with per-level styling. Each level can be independently configured.</p>
+
+  <table>
+    <tr><th>Level</th><th>Default Font</th><th>Default Size (Desktop)</th><th>Use Case</th></tr>
+    <tr><td><strong>P</strong> (Paragraph)</td><td>Helvetica</td><td>16px</td><td>Body text</td></tr>
+    <tr><td><strong>H1</strong></td><td>Helvetica</td><td>Varies</td><td>Email headline</td></tr>
+    <tr><td><strong>H2</strong></td><td>Helvetica</td><td>Varies</td><td>Section headers</td></tr>
+    <tr><td><strong>H3</strong></td><td>Helvetica</td><td>Varies</td><td>Sub-headers</td></tr>
+    <tr><td><strong>H4</strong></td><td>Helvetica</td><td>Varies</td><td>Minor headings</td></tr>
+  </table>
+
+  <h2>Device-Specific Responsive Controls</h2>
+  <p>Each typography level has separate Desktop and Mobile settings for font size, line height, and paragraph spacing. This is a <strong>powerful feature</strong> that many competitors lack.</p>
+
+  <div class="grid cols-2">
+    <div style="padding:14px;border:1px solid var(--line);border-radius:8px;">
+      <h3>Desktop Settings</h3>
+      <ul>
+        <li>Font size (px)</li>
+        <li>Line height (multiplier)</li>
+        <li>Paragraph spacing (px)</li>
+      </ul>
+    </div>
+    <div style="padding:14px;border:1px solid var(--line);border-radius:8px;">
+      <h3>Mobile Settings</h3>
+      <ul>
+        <li>Font size (px) — independent of desktop</li>
+        <li>Line height (multiplier) — independent of desktop</li>
+        <li>Paragraph spacing (px) — independent of desktop</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Shared Controls (ALL DEVICES)</h2>
+  <table>
+    <tr><th>Control</th><th>Options</th><th>Notes</th></tr>
+    <tr><td>Font family</td><td>Web-safe fonts (Helvetica default)</td><td>No brand kit auto-application</td></tr>
+    <tr><td>Font color</td><td>Color picker with swatch</td><td>No brand palette integration</td></tr>
+    <tr><td>Weight</td><td>Bold toggle</td><td>No numeric weight selector</td></tr>
+    <tr><td>Style</td><td>Italic toggle</td><td>Standard</td></tr>
+    <tr><td>Alignment</td><td>Left, Center, Right, Justify</td><td>Full alignment options</td></tr>
+    <tr><td>Letter spacing</td><td>Numeric input (px)</td><td>Defaults to 0</td></tr>
+    <tr><td>Text direction</td><td>LTR / RTL toggle</td><td>Good i18n support</td></tr>
+  </table>
+
+  <div class="issue-card" style="margin-top:16px;">
+    <h3><span class="sev-badge sev-low">Low</span> SE-011: No brand kit auto-application</h3>
+    <p>Despite the account having a Brand Kit configured with specific fonts and colors, the editor defaults to Helvetica and generic black. Users must manually set their brand fonts for every new template.</p>
+    <p><strong>Competitive context:</strong> Klaviyo auto-applies brand styles from their Brand Kit feature. Shopify pulls brand colors from the store theme.</p>
+  </div>
+
+  <div class="issue-card">
+    <h3><span class="sev-badge sev-medium">Medium</span> SE-010: Style sections all collapsed by default</h3>
+    <p>All seven style sections are collapsed when the Styles tab is first opened. Users must expand each section individually to discover what controls are available. No visual preview or summary of current settings is shown in the collapsed state.</p>
+    <p><strong>Recommendation:</strong> Show a one-line summary of current settings in each collapsed section header (e.g., "Helvetica, 16px, Black") or auto-expand the first section.</p>
+  </div>
+
+</section>
+</div><!-- /panel-styles -->
+
+
+<!-- ============== PREVIEW & TESTING TAB ============== -->
+<div class="tabpanel" id="panel-preview" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Preview &amp; QA Analysis</div>
+      <h1>Preview &amp; Testing</h1>
+      <p class="subtitle">Three preview modes, test email functionality, and merge tag handling</p>
+    </div>
+  </header>
+
+  <h2>Preview Modes</h2>
+  <p>The preview modal offers three rendering contexts — more comprehensive than the AI Chat Editor's preview.</p>
+
+  <table>
+    <tr><th>Mode</th><th>Description</th><th>Strengths</th><th>Gaps</th></tr>
+    <tr>
+      <td><strong>Desktop</strong></td>
+      <td>Full-width email render as it would appear in a desktop email client</td>
+      <td>Accurate representation, includes footer with merge tags</td>
+      <td>Raw merge tags shown instead of sample data</td>
+    </tr>
+    <tr>
+      <td><strong>Mobile</strong></td>
+      <td>Narrow viewport render simulating mobile email clients</td>
+      <td>Critical for responsive design validation</td>
+      <td>No specific device simulation (iPhone vs. Android)</td>
+    </tr>
+    <tr>
+      <td><strong>Inbox</strong></td>
+      <td>Preview of how the email appears in the recipient's inbox list (subject line, preview text, sender)</td>
+      <td>Unique feature — helps optimize for open rate</td>
+      <td>Not available in AI Chat Editor</td>
+    </tr>
+  </table>
+
+  <div class="screenshot-box">
+    <img src="std-editor-screenshots/07-preview-desktop-mode.png" alt="Preview desktop mode">
+    <div class="screenshot-caption"><span class="num">7</span> Desktop preview with merge tag display</div>
+    <div class="annotation-box">
+      <strong>Positive:</strong> Full-fidelity render with "Send a Test Email" link readily accessible. Three-tab mode switching is clean and intuitive.
+      <br><strong>Issue:</strong> Footer shows raw merge tags like <code>*|IFNOT:ARCHIVE_PAGE|*</code>, <code>*|LIST:COMPANY|*</code>, <code>*|LIST:ADDRESS|*</code> without explaining what they resolve to. Non-technical users may be confused or alarmed by this syntax.
+      <div class="issue-pills"><span class="issue-pill low">SE-013</span></div>
+    </div>
+  </div>
+
+  <h2>Send Test Email</h2>
+
+  <div class="screenshot-box">
+    <img src="std-editor-screenshots/08-send-test-dialog.png" alt="Send test dialog">
+    <div class="screenshot-caption"><span class="num">8</span> Send a Test Email dialog</div>
+    <div class="annotation-box">
+      <strong>What works:</strong> Simple, focused dialog with clear email input and comma-separated multi-send support. Cancel and Send Test buttons are unambiguous.
+      <br><strong>Issue:</strong> Warning states "Merge tags won't populate content in test emails" but offers no alternative to see populated tags — no sample data preview, no merge tag substitution option.
+      <div class="issue-pills"><span class="issue-pill low">SE-014</span></div>
+    </div>
+  </div>
+
+  <h2>Preview Feature Comparison</h2>
+  <table>
+    <tr><th>Feature</th><th>Standard Editor</th><th>AI Chat Editor</th><th>Klaviyo</th></tr>
+    <tr><td>Desktop preview</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--good);">&#10003;</td></tr>
+    <tr><td>Mobile preview</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--good);">&#10003;</td></tr>
+    <tr><td>Inbox preview</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--bad);">&#10007;</td><td style="color:var(--good);">&#10003;</td></tr>
+    <tr><td>Send test email</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--good);">&#10003;</td><td style="color:var(--good);">&#10003;</td></tr>
+    <tr><td>Merge tag preview</td><td style="color:var(--bad);">&#10007; Raw tags</td><td style="color:var(--bad);">&#10007;</td><td style="color:var(--good);">&#10003; Sample data</td></tr>
+    <tr><td>Dark mode preview</td><td style="color:var(--bad);">&#10007;</td><td style="color:var(--bad);">&#10007;</td><td style="color:var(--good);">&#10003;</td></tr>
+    <tr><td>Email client rendering</td><td style="color:var(--bad);">&#10007;</td><td style="color:var(--bad);">&#10007;</td><td style="color:var(--bad);">&#10007; (Litmus integration)</td></tr>
+  </table>
+
+  <h2>Merge Tag Handling Analysis</h2>
+  <p>Merge tags appear throughout the email template, especially in the auto-generated footer. Current handling exposes raw syntax to users.</p>
+
+  <table>
+    <tr><th>Merge Tag</th><th>What It Does</th><th>Displayed As</th></tr>
+    <tr><td><code>*|FNAME|*</code></td><td>Recipient's first name</td><td>Raw tag in preview</td></tr>
+    <tr><td><code>*|IFNOT:ARCHIVE_PAGE|*</code></td><td>Conditional: content if no archive page</td><td>Raw conditional syntax</td></tr>
+    <tr><td><code>*|LIST:COMPANY|*</code></td><td>Sender's company name</td><td>Raw tag in preview</td></tr>
+    <tr><td><code>*|LIST:ADDRESS|*</code></td><td>Sender's physical address</td><td>Raw tag in preview</td></tr>
+    <tr><td><code>*|UNSUB|*</code></td><td>Unsubscribe link URL</td><td>Raw tag in preview</td></tr>
+  </table>
+
+  <div class="method-box">
+    <strong>Recommendation:</strong> Replace raw merge tags in preview with sample data (e.g., <code>*|FNAME|*</code> &rarr; "Jane") or at minimum show a tooltip explaining what each tag resolves to. Klaviyo shows live sample data from the audience in preview.
+  </div>
+
+</section>
+</div><!-- /panel-preview -->
+
+
+<!-- ============== ISSUE LOG TAB ============== -->
+<div class="tabpanel" id="panel-issues" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Complete Issue Inventory</div>
+      <h1>Issue Log — 17 Findings</h1>
+      <p class="subtitle">All issues discovered during the Standard Editor UX evaluation, with severity, type, and evidence</p>
+    </div>
+  </header>
+
+  <h2>Discovery &amp; Navigation Issues</h2>
+
+  <!-- SE-001 -->
+  <div class="issue-card" id="se-001">
+    <h3><span class="sev-badge sev-high">High</span> SE-001: Standard editor is hidden from primary email creation flows</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Category:</strong> Discovery</span>
+      <span><strong>Location:</strong> Email Templates page</span>
+    </div>
+    <p><strong>Description:</strong> The Standard Editor (drag-and-drop block builder) is not accessible from "Create email" or "Design email" in the campaign flow. These buttons now route exclusively to the AI Chat Editor. The only path to the Standard Editor is via Email Templates — a separate page that requires intentional navigation.</p>
+    <p><strong>Expected:</strong> Users should be able to choose between AI-assisted and manual editing from the primary campaign creation flow.</p>
+    <p><strong>Actual:</strong> AI Chat Editor is the only option from campaign creation. Standard Editor requires navigating to a separate templates section.</p>
+    <p><strong>Impact:</strong> Users who prefer manual control, have established template workflows, or need the block editor for complex layouts cannot reach it from the natural email creation path. Agencies and power users most affected.</p>
+    <p><strong>Recommendation:</strong> Add a "Build manually" or "Use template builder" link alongside the AI Chat Editor entry point in the campaign flow.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/01-email-templates-page.png"><img src="std-editor-screenshots/01-email-templates-page.png" alt="SE-001 evidence"></a>
+    </div>
+  </div>
+
+  <!-- SE-002 -->
+  <div class="issue-card" id="se-002">
+    <h3><span class="sev-badge sev-medium">Medium</span> SE-002: "Create from scratch" button becomes disabled after click</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Category:</strong> Discovery</span>
+      <span><strong>Location:</strong> Email Templates &rarr; Create from scratch button</span>
+    </div>
+    <p><strong>Description:</strong> After clicking "Create from scratch", the button becomes disabled. It's unclear whether this is a loading state (editor is loading in background), a single-use restriction, or a bug.</p>
+    <p><strong>Expected:</strong> Clear loading indicator (spinner, "Opening editor...") if the button triggers navigation, or the button should remain clickable.</p>
+    <p><strong>Actual:</strong> Button grays out with no loading feedback. User is left wondering if their click registered.</p>
+    <p><strong>Impact:</strong> First-time users may click repeatedly, assume the feature is broken, or abandon the flow.</p>
+    <p><strong>Recommendation:</strong> Add a loading spinner or "Opening editor..." text when the button is processing. If the editor opens in a new context, navigate immediately.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/01-email-templates-page.png"><img src="std-editor-screenshots/01-email-templates-page.png" alt="SE-002 evidence"></a>
+    </div>
+  </div>
+
+  <!-- SE-003 -->
+  <div class="issue-card" id="se-003">
+    <h3><span class="sev-badge sev-medium">Medium</span> SE-003: Template editor creates templates, not campaigns</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Category:</strong> Discovery</span>
+      <span><strong>Location:</strong> Standard Editor &rarr; template context</span>
+    </div>
+    <p><strong>Description:</strong> The Standard Editor accessed via Email Templates creates a template — not a campaign. The title bar reads "Template: Untitled Template" and saving produces a template, not a sendable campaign. Users must separately create a campaign and select this template.</p>
+    <p><strong>Expected:</strong> Creating email content should result in a sendable email, or the template-to-campaign connection should be seamless.</p>
+    <p><strong>Actual:</strong> Two separate workflows: (1) create template in Standard Editor, (2) create campaign in Campaigns, (3) select the template. This is a 3-step process for what should be 1 step.</p>
+    <p><strong>Impact:</strong> Users unfamiliar with Mailchimp's template/campaign distinction may design an email and not understand why they can't send it directly. Adds friction to the entire email creation workflow.</p>
+    <p><strong>Recommendation:</strong> Offer "Save as template" and "Create campaign from this template" as dual save options. Or allow the Standard Editor to be invoked from within the campaign creation flow.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/02-standard-editor-blocks-panel.png"><img src="std-editor-screenshots/02-standard-editor-blocks-panel.png" alt="SE-003 evidence"></a>
+    </div>
+  </div>
+
+  <!-- SE-004 -->
+  <div class="issue-card" id="se-004">
+    <h3><span class="sev-badge sev-low">Low</span> SE-004: No click-to-insert for blocks — drag-and-drop only</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Category:</strong> Discovery</span>
+      <span><strong>Location:</strong> Standard Editor &rarr; Blocks panel</span>
+    </div>
+    <p><strong>Description:</strong> Blocks can only be added to the email canvas via drag-and-drop. There is no click-to-insert or "Add block here" mechanism at insertion points in the canvas.</p>
+    <p><strong>Expected:</strong> Both drag-and-drop and click-to-insert should be available. Many users prefer clicking, especially on touch devices or when using assistive technology.</p>
+    <p><strong>Actual:</strong> Drag-and-drop is the sole insertion method.</p>
+    <p><strong>Impact:</strong> Accessibility limitation for users who cannot perform drag operations. Minor efficiency issue for keyboard-primary users. Both Klaviyo and Shopify support click-to-insert.</p>
+    <p><strong>Recommendation:</strong> Add insertion point markers on the canvas that expand on hover, showing an "Add block" button. Clicking opens a quick-select menu of block types.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/02-standard-editor-blocks-panel.png"><img src="std-editor-screenshots/02-standard-editor-blocks-panel.png" alt="SE-004 evidence"></a>
+    </div>
+  </div>
+
+  <!-- SE-005 -->
+  <div class="issue-card" id="se-005">
+    <h3><span class="sev-badge sev-medium">Medium</span> SE-005: Email canvas in iframe limits interaction patterns</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Category:</strong> Discovery</span>
+      <span><strong>Location:</strong> Standard Editor &rarr; Canvas area</span>
+    </div>
+    <p><strong>Description:</strong> The email canvas renders inside an iframe. While this provides accurate email rendering, it means sidebar blocks cannot interact with canvas elements through standard DOM events. Cross-iframe drag-and-drop requires special handling.</p>
+    <p><strong>Expected:</strong> Seamless interaction between sidebar panel and canvas elements regardless of rendering architecture.</p>
+    <p><strong>Actual:</strong> Iframe boundary creates interaction constraints. Drag operations must cross iframe boundaries, which can cause jank or dropped interactions on slower connections.</p>
+    <p><strong>Impact:</strong> Occasional drag-and-drop failures. Limits extensibility for future features. Makes browser automation and testing more complex.</p>
+    <p><strong>Recommendation:</strong> Consider migrating to a shadow DOM approach that provides style isolation without iframe interaction constraints, or ensure robust cross-iframe message passing for all interaction types.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/02-standard-editor-blocks-panel.png"><img src="std-editor-screenshots/02-standard-editor-blocks-panel.png" alt="SE-005 evidence"></a>
+    </div>
+  </div>
+
+  <h2>Content &amp; Editing Issues</h2>
+
+  <!-- SE-006 -->
+  <div class="issue-card" id="se-006">
+    <h3><span class="sev-badge sev-medium">Medium</span> SE-006: "Start typing..." placeholder lacks context</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Category:</strong> Content</span>
+      <span><strong>Location:</strong> Standard Editor &rarr; Canvas default state</span>
+    </div>
+    <p><strong>Description:</strong> The default canvas state shows "Start typing..." as placeholder text. This doesn't indicate what to type, where blocks should be placed, or how to build the email structure.</p>
+    <p><strong>Expected:</strong> Contextual onboarding: "Drag a block from the left panel to start building your email" or an interactive guide overlay for first-time users.</p>
+    <p><strong>Actual:</strong> Generic "Start typing..." that implies the canvas is a text editor rather than a block-based builder.</p>
+    <p><strong>Impact:</strong> First-time users may try typing directly into the canvas rather than using blocks. Misaligns mental model with the builder's interaction paradigm.</p>
+    <p><strong>Recommendation:</strong> Replace with "Drag a content block here to get started" or add a contextual tooltip/overlay on first load.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/02-standard-editor-blocks-panel.png"><img src="std-editor-screenshots/02-standard-editor-blocks-panel.png" alt="SE-006 evidence"></a>
+    </div>
+  </div>
+
+  <!-- SE-007 -->
+  <div class="issue-card" id="se-007">
+    <h3><span class="sev-badge sev-low">Low</span> SE-007: 6 blocks hidden behind "Show more"</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Category:</strong> Content</span>
+      <span><strong>Location:</strong> Standard Editor &rarr; Blocks panel</span>
+    </div>
+    <p><strong>Description:</strong> 6 of 15 content blocks (Survey, Code, Apps, Product, Product Rec, Footer) are hidden behind a "Show more" link. Product and Product Rec blocks are particularly important for e-commerce users.</p>
+    <p><strong>Expected:</strong> All blocks visible, or at minimum e-commerce blocks (Product, Product Rec) should be in the primary visible set.</p>
+    <p><strong>Actual:</strong> Only 9 blocks visible by default; 6 require clicking "Show more" to discover.</p>
+    <p><strong>Impact:</strong> E-commerce users may not discover product-specific blocks. Reduces feature discoverability for power blocks like Code and Apps.</p>
+    <p><strong>Recommendation:</strong> Either show all 15 blocks (scrollable panel) or dynamically prioritize blocks based on user's business type (e.g., show Product first for e-commerce accounts).</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/06-all-content-blocks-expanded.png"><img src="std-editor-screenshots/06-all-content-blocks-expanded.png" alt="SE-007 evidence"></a>
+    </div>
+  </div>
+
+  <!-- SE-008 -->
+  <div class="issue-card" id="se-008">
+    <h3><span class="sev-badge sev-medium">Medium</span> SE-008: No inline AI content generation</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Missing Feature</span>
+      <span><strong>Category:</strong> Content</span>
+      <span><strong>Location:</strong> Standard Editor &rarr; Blocks panel &rarr; AI-Generated Columns</span>
+    </div>
+    <p><strong>Description:</strong> "AI-Generated Columns" are labeled as "New" and include three pre-structured layouts (Article summary, Upcoming event, Product promotion). However, they are static layout templates — not generative AI. No block offers "write this for me", "generate subject line", or any LLM-powered content assistance.</p>
+    <p><strong>Expected:</strong> AI-Generated Columns should either generate content based on user context, or the editor should offer inline AI writing assistance (similar to Klaviyo's AI subject lines or Shopify's Sidekick content generation).</p>
+    <p><strong>Actual:</strong> Template-only layouts with placeholder text. The "AI-Generated" label is misleading.</p>
+    <p><strong>Impact:</strong> Users expecting AI assistance within the block editor will be disappointed. Creates a confusing gap between the AI Chat Editor (fully AI-driven) and the Standard Editor (zero AI assistance). Competitors offer inline AI as a middle ground.</p>
+    <p><strong>Recommendation:</strong> Add an "AI assist" button within text blocks that can generate, rewrite, or expand content. Rename "AI-Generated Columns" to "Pre-built Layouts" or add actual generative capability.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/06-all-content-blocks-expanded.png"><img src="std-editor-screenshots/06-all-content-blocks-expanded.png" alt="SE-008 evidence"></a>
+    </div>
+  </div>
+
+  <!-- SE-009 -->
+  <div class="issue-card" id="se-009">
+    <h3><span class="sev-badge sev-low">Low</span> SE-009: "How to use this builder" link is small and easy to miss</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Category:</strong> Content</span>
+      <span><strong>Location:</strong> Standard Editor &rarr; Top bar</span>
+    </div>
+    <p><strong>Description:</strong> A "How to use this builder" link appears in the top bar of the editor but is rendered in small, unemphasized text that blends with the interface chrome.</p>
+    <p><strong>Expected:</strong> First-time users should see a prominent onboarding prompt or interactive walkthrough. The help link should be visually distinct.</p>
+    <p><strong>Actual:</strong> Small text link that first-time users may not notice.</p>
+    <p><strong>Impact:</strong> Users who would benefit from the guide may miss it entirely. Low severity because experienced users don't need it.</p>
+    <p><strong>Recommendation:</strong> Show a first-time user tooltip pointing to the link, or trigger an interactive walkthrough on first editor load. Consider a "Take a tour" button with higher visual weight.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/02-standard-editor-blocks-panel.png"><img src="std-editor-screenshots/02-standard-editor-blocks-panel.png" alt="SE-009 evidence"></a>
+    </div>
+  </div>
+
+  <h2>Style &amp; Design Issues</h2>
+
+  <!-- SE-010 -->
+  <div class="issue-card" id="se-010">
+    <h3><span class="sev-badge sev-medium">Medium</span> SE-010: All style sections collapsed by default</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Category:</strong> Style</span>
+      <span><strong>Location:</strong> Standard Editor &rarr; Styles tab</span>
+    </div>
+    <p><strong>Description:</strong> All seven style sections (Background, Text, Link, Button, Divider, Image, Logo) are collapsed when the Styles tab opens. Users must expand each one individually to discover what controls are available.</p>
+    <p><strong>Expected:</strong> At minimum, show a summary of current settings in the collapsed state (e.g., "Helvetica, 16px, #000000"). Consider auto-expanding the first section or the section most relevant to the user's last action.</p>
+    <p><strong>Actual:</strong> Seven collapsed sections with no indication of current settings until expanded.</p>
+    <p><strong>Impact:</strong> Users new to the Styles tab don't know what design options exist without clicking through each section. Reduces discoverability of a strong feature set.</p>
+    <p><strong>Recommendation:</strong> Show inline previews or summaries in collapsed headers. Auto-expand "Text" on first visit as it's the most commonly modified.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/04-styles-panel.png"><img src="std-editor-screenshots/04-styles-panel.png" alt="SE-010 evidence"></a>
+    </div>
+  </div>
+
+  <!-- SE-011 -->
+  <div class="issue-card" id="se-011">
+    <h3><span class="sev-badge sev-low">Low</span> SE-011: No brand kit auto-application</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Category:</strong> Style</span>
+      <span><strong>Location:</strong> Standard Editor &rarr; Styles &rarr; Text</span>
+    </div>
+    <p><strong>Description:</strong> The editor defaults to Helvetica for all typography levels even though the account has a Brand Kit configured with specific fonts and colors. Users must manually select their brand fonts for each new template.</p>
+    <p><strong>Expected:</strong> New templates should auto-apply the account's Brand Kit settings (fonts, colors, logo) to reduce manual configuration.</p>
+    <p><strong>Actual:</strong> Generic Helvetica defaults for all text levels. No Brand Kit colors in the palette picker.</p>
+    <p><strong>Impact:</strong> Extra manual work for every new template. Brand consistency depends on user memory rather than system enforcement.</p>
+    <p><strong>Recommendation:</strong> Auto-populate styles from Brand Kit when creating a new template. Offer "Apply Brand Kit" as a one-click action in the Styles panel.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/05-styles-text-expanded.png"><img src="std-editor-screenshots/05-styles-text-expanded.png" alt="SE-011 evidence"></a>
+    </div>
+  </div>
+
+  <!-- SE-012 -->
+  <div class="issue-card" id="se-012">
+    <h3><span class="sev-badge sev-low">Low</span> SE-012: Device-specific sizing adds complexity</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Category:</strong> Style</span>
+      <span><strong>Location:</strong> Standard Editor &rarr; Styles &rarr; Text &rarr; Device-specific</span>
+    </div>
+    <p><strong>Description:</strong> Desktop and Mobile font sizes are configured separately. While powerful for responsive design experts, this adds complexity for non-expert users who may not understand why they need different sizes for different devices.</p>
+    <p><strong>Expected:</strong> Linked Desktop/Mobile sizing by default with an "Unlink" option for advanced users. Auto-scale mobile sizes from desktop (e.g., mobile = desktop × 0.875).</p>
+    <p><strong>Actual:</strong> Fully independent Desktop and Mobile controls that must both be configured.</p>
+    <p><strong>Impact:</strong> Non-expert users may only configure Desktop sizes, resulting in suboptimal mobile rendering. Low severity because the feature itself is correct — it's the default behavior that could be smarter.</p>
+    <p><strong>Recommendation:</strong> Default to linked sizing with auto-scale. Show an "Advanced: Customize for mobile" toggle for users who want independent control.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/05-styles-text-expanded.png"><img src="std-editor-screenshots/05-styles-text-expanded.png" alt="SE-012 evidence"></a>
+    </div>
+  </div>
+
+  <h2>Preview &amp; Testing Issues</h2>
+
+  <!-- SE-013 -->
+  <div class="issue-card" id="se-013">
+    <h3><span class="sev-badge sev-low">Low</span> SE-013: Preview shows raw merge tags</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Content</span>
+      <span><strong>Category:</strong> Preview</span>
+      <span><strong>Location:</strong> Standard Editor &rarr; Preview &rarr; Desktop</span>
+    </div>
+    <p><strong>Description:</strong> The preview mode shows raw merge tags (e.g., <code>*|IFNOT:ARCHIVE_PAGE|*</code>, <code>*|LIST:COMPANY|*</code>) instead of sample data or explanatory text. Non-technical users may not understand what these will resolve to.</p>
+    <p><strong>Expected:</strong> Merge tags should show sample values from the account data (e.g., company name, address) or display explanatory tooltips.</p>
+    <p><strong>Actual:</strong> Raw merge tag syntax displayed verbatim in the preview.</p>
+    <p><strong>Impact:</strong> Confusing for non-technical users. May cause alarm that the email looks "broken." Low severity because the tags work correctly when sent.</p>
+    <p><strong>Recommendation:</strong> Replace merge tags in preview with sample data from the account. Add tooltips explaining each tag's purpose.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/07-preview-desktop-mode.png"><img src="std-editor-screenshots/07-preview-desktop-mode.png" alt="SE-013 evidence"></a>
+    </div>
+  </div>
+
+  <!-- SE-014 -->
+  <div class="issue-card" id="se-014">
+    <h3><span class="sev-badge sev-low">Low</span> SE-014: Test email warning without resolution path</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Category:</strong> Preview</span>
+      <span><strong>Location:</strong> Standard Editor &rarr; Send a Test Email dialog</span>
+    </div>
+    <p><strong>Description:</strong> "Send a Test Email" dialog warns "Merge tags won't populate content in test emails" but doesn't offer any way to preview the email with populated tags. No link to documentation about how to test merge tags.</p>
+    <p><strong>Expected:</strong> Warning should include a path to resolution: "To preview with real data, use Inbox Preview" or "Send to yourself using the campaign preview feature."</p>
+    <p><strong>Actual:</strong> Warning only, no actionable alternative.</p>
+    <p><strong>Impact:</strong> Users cannot verify merge tag behavior without sending through the campaign flow. Minor friction.</p>
+    <p><strong>Recommendation:</strong> Add a "Preview with sample data" option or link to campaign-level preview that populates merge tags.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/08-send-test-dialog.png"><img src="std-editor-screenshots/08-send-test-dialog.png" alt="SE-014 evidence"></a>
+    </div>
+  </div>
+
+  <h2>Structural Issues</h2>
+
+  <!-- SE-015 -->
+  <div class="issue-card" id="se-015">
+    <h3><span class="sev-badge sev-high">High</span> SE-015: Template &rarr; Campaign disconnect adds unnecessary steps</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Category:</strong> Structural</span>
+      <span><strong>Location:</strong> Email Templates &rarr; Standard Editor &rarr; Campaigns</span>
+    </div>
+    <p><strong>Description:</strong> Creating a template in the Standard Editor does not create a campaign. The user must: (1) design the email in the Standard Editor, (2) save as template, (3) navigate to Campaigns, (4) click "Create email", (5) select their template, (6) configure campaign settings (To, From, Subject), (7) send. This is a 7-step process with a context switch in the middle.</p>
+    <p><strong>Expected:</strong> Email creation should be a linear flow: design &rarr; configure &rarr; send. Or at minimum, the Standard Editor should offer "Create campaign from this template" as a save option.</p>
+    <p><strong>Actual:</strong> Template and campaign are completely separate workflows with no direct connection from the editor.</p>
+    <p><strong>Impact:</strong> High friction for the core email creation workflow. Users must understand Mailchimp's internal template/campaign abstraction to use the Standard Editor effectively. New users may abandon after creating a template and not understanding how to send it.</p>
+    <p><strong>Recommendation:</strong> Add "Save and create campaign" as a primary save action alongside "Save as template". This creates the campaign with the template pre-loaded and takes the user directly to the campaign checklist.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/01-email-templates-page.png"><img src="std-editor-screenshots/01-email-templates-page.png" alt="SE-015 evidence"></a>
+      <a href="std-editor-screenshots/02-standard-editor-blocks-panel.png"><img src="std-editor-screenshots/02-standard-editor-blocks-panel.png" alt="SE-015 evidence 2"></a>
+    </div>
+  </div>
+
+  <!-- SE-016 -->
+  <div class="issue-card" id="se-016">
+    <h3><span class="sev-badge sev-medium">Medium</span> SE-016: Three builder entry points without clear differentiation</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Category:</strong> Structural</span>
+      <span><strong>Location:</strong> Email Templates page</span>
+    </div>
+    <p><strong>Description:</strong> The Email Templates page shows three creation options side by side: "Create a legacy template", "Code your own", "Create from scratch". There is no explanation of what each option produces, what editor each opens, or when a user should choose one over another.</p>
+    <p><strong>Expected:</strong> Each option should include a brief description or visual preview showing the editing experience it opens. Ideally, deprecated options (legacy) should be visually de-emphasized.</p>
+    <p><strong>Actual:</strong> Three buttons with no context. "Create a legacy template" implies the others are also legacy. "Code your own" is for developers but appears alongside beginner options.</p>
+    <p><strong>Impact:</strong> Users may choose the wrong entry point, create a template in an outdated format, or waste time exploring options. The word "legacy" raises concern about the entire feature's future.</p>
+    <p><strong>Recommendation:</strong> Add subtitle text to each button (e.g., "Create from scratch — Drag-and-drop block editor"). Visually de-emphasize legacy option. Move "Code your own" to an advanced/developer section.</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/01-email-templates-page.png"><img src="std-editor-screenshots/01-email-templates-page.png" alt="SE-016 evidence"></a>
+    </div>
+  </div>
+
+  <!-- SE-017 -->
+  <div class="issue-card" id="se-017">
+    <h3><span class="sev-badge sev-medium">Medium</span> SE-017: "Mailchimp templates" tab unexplored — unclear offering</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Category:</strong> Structural</span>
+      <span><strong>Location:</strong> Email Templates &rarr; Mailchimp templates tab</span>
+    </div>
+    <p><strong>Description:</strong> The Email Templates page has a "Mailchimp templates" tab alongside "Saved" and "Recently sent". This tab was not explored during the evaluation. It's unclear whether it offers pre-designed layouts, industry-specific templates, or something else.</p>
+    <p><strong>Expected:</strong> The tab should clearly communicate its value: "Browse 100+ professionally designed templates" or similar.</p>
+    <p><strong>Actual:</strong> Tab label alone doesn't communicate value proposition. Users may not click if they don't understand what it offers.</p>
+    <p><strong>Impact:</strong> Potentially valuable pre-designed templates may go undiscovered. Users may spend time building from scratch when a suitable template already exists.</p>
+    <p><strong>Recommendation:</strong> Add a subtitle or badge (e.g., "100+ designs") to the tab. Show a preview carousel on the Saved tab: "Or start from a Mailchimp template →".</p>
+    <div class="evidence-thumb">
+      <a href="std-editor-screenshots/01-email-templates-page.png"><img src="std-editor-screenshots/01-email-templates-page.png" alt="SE-017 evidence"></a>
+    </div>
+  </div>
+
+  <h2>Severity Distribution</h2>
+  <div class="kpi-row">
+    <div class="kpi"><div class="v" style="color:var(--high);">2</div><div class="l">High — blocks core workflow</div></div>
+    <div class="kpi"><div class="v" style="color:var(--medium);">7</div><div class="l">Medium — significant friction</div></div>
+    <div class="kpi"><div class="v" style="color:var(--low);">8</div><div class="l">Low — minor polish gaps</div></div>
+    <div class="kpi"><div class="v">0</div><div class="l">Critical — zero critical bugs</div></div>
+  </div>
+
+</section>
+</div><!-- /panel-issues -->
+
+
+<!-- ============== COMPARISON TAB ============== -->
+<div class="tabpanel" id="panel-comparison" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Head-to-Head Evaluation</div>
+      <h1>Standard Editor vs. AI Chat Editor</h1>
+      <p class="subtitle">Side-by-side comparison across 14 dimensions — two editors, fundamentally different paradigms</p>
+    </div>
+  </header>
+
+  <div class="method-box">
+    <strong>Context:</strong> Both editors were evaluated on the same account (Goodnight Fox, us17) on the same day (May 26, 2026). The AI Chat Editor report is available at <a href="ub-scrawler-report.html">ub-scrawler-report.html</a>. This comparison synthesizes findings from both evaluations.
+  </div>
+
+  <h2>Feature Comparison</h2>
+  <table>
+    <tr><th>Dimension</th><th>Standard Editor</th><th>AI Chat Editor</th><th>Winner</th></tr>
+    <tr>
+      <td><strong>Discovery</strong></td>
+      <td>Hidden behind Email Templates page — not accessible from primary email creation flow</td>
+      <td>Default path from "Create email" and "Design email" — forced entry point</td>
+      <td style="color:var(--medium);font-weight:600;">AI (accessible)</td>
+    </tr>
+    <tr>
+      <td><strong>Content creation method</strong></td>
+      <td>Drag-and-drop blocks — manual placement and configuration</td>
+      <td>Natural language prompts — AI generates content from description</td>
+      <td style="color:var(--muted);">Depends on user</td>
+    </tr>
+    <tr>
+      <td><strong>Block variety</strong></td>
+      <td>15 content blocks including Product, Product Rec, Survey, Code, Apps</td>
+      <td>Limited content types — no block-level control</td>
+      <td style="color:var(--good);font-weight:600;">Standard</td>
+    </tr>
+    <tr>
+      <td><strong>Style control</strong></td>
+      <td>Comprehensive: 7 style sections, 5-level typography, device-specific sizing</td>
+      <td>Minimal: AI controls layout, limited user style overrides</td>
+      <td style="color:var(--good);font-weight:600;">Standard</td>
+    </tr>
+    <tr>
+      <td><strong>Preview modes</strong></td>
+      <td>3 modes: Desktop, Mobile, Inbox</td>
+      <td>2 modes: Desktop, Mobile (no Inbox)</td>
+      <td style="color:var(--good);font-weight:600;">Standard</td>
+    </tr>
+    <tr>
+      <td><strong>Reliability</strong></td>
+      <td>Deterministic — blocks behave as configured every time</td>
+      <td>Non-deterministic — AI loaded wrong content (UB-001), created duplicates (UB-003)</td>
+      <td style="color:var(--good);font-weight:600;">Standard</td>
+    </tr>
+    <tr>
+      <td><strong>Speed to first draft</strong></td>
+      <td>Slower — requires manual block placement, text entry, and styling</td>
+      <td>Faster — AI generates initial draft from a prompt in 15&ndash;25s (when it works)</td>
+      <td style="color:var(--medium);font-weight:600;">AI (when working)</td>
+    </tr>
+    <tr>
+      <td><strong>User control</strong></td>
+      <td>Full control — every element is directly editable</td>
+      <td>Limited control — changes via natural language, not direct manipulation</td>
+      <td style="color:var(--good);font-weight:600;">Standard</td>
+    </tr>
+    <tr>
+      <td><strong>E-commerce support</strong></td>
+      <td>Product and Product Rec blocks (hidden behind "Show more")</td>
+      <td>No product catalog integration in AI editor</td>
+      <td style="color:var(--good);font-weight:600;">Standard</td>
+    </tr>
+    <tr>
+      <td><strong>AI assistance</strong></td>
+      <td>None — "AI-Generated Columns" are static templates only</td>
+      <td>Full AI: content generation, subject lines, strategy planning</td>
+      <td style="color:var(--medium);font-weight:600;">AI</td>
+    </tr>
+    <tr>
+      <td><strong>Campaign integration</strong></td>
+      <td>Creates templates only — separate campaign creation required (SE-015)</td>
+      <td>Creates campaigns directly — but may create duplicates (UB-003)</td>
+      <td style="color:var(--muted);">Both broken</td>
+    </tr>
+    <tr>
+      <td><strong>Send test</strong></td>
+      <td>Direct from editor with clear dialog</td>
+      <td>Available but less prominent</td>
+      <td style="color:var(--good);font-weight:600;">Standard</td>
+    </tr>
+    <tr>
+      <td><strong>Issues found</strong></td>
+      <td>17 issues (0 Critical, 2 High, 7 Medium, 8 Low)</td>
+      <td>14 issues (1 Critical, 3 High, 6 Medium, 4 Low)</td>
+      <td style="color:var(--good);font-weight:600;">Standard (no Critical)</td>
+    </tr>
+    <tr>
+      <td><strong>Persona suitability</strong></td>
+      <td>Power users, agencies, designers, e-commerce owners with specific templates</td>
+      <td>New users, quick-send marketers, users who want AI to handle design</td>
+      <td style="color:var(--muted);">Complementary</td>
+    </tr>
+  </table>
+
+  <h2>Strategic Analysis</h2>
+
+  <div class="grid cols-2">
+    <div class="verdict-box positive">
+      <h3>Standard Editor Strengths</h3>
+      <ul style="margin:0;">
+        <li><strong>Reliability:</strong> Zero critical bugs — deterministic behavior</li>
+        <li><strong>Completeness:</strong> 15 blocks, 7 style sections, 3 preview modes</li>
+        <li><strong>Control:</strong> Full direct manipulation of every element</li>
+        <li><strong>E-commerce:</strong> Product and Product Rec blocks</li>
+        <li><strong>Responsive:</strong> Device-specific typography controls</li>
+      </ul>
+    </div>
+    <div class="verdict-box">
+      <h3>Standard Editor Weaknesses</h3>
+      <ul style="margin:0;">
+        <li><strong>Hidden:</strong> Not accessible from primary email creation flow</li>
+        <li><strong>Disconnected:</strong> Creates templates, not campaigns</li>
+        <li><strong>No AI:</strong> Zero AI content assistance in blocks</li>
+        <li><strong>Drag-only:</strong> No click-to-insert alternative</li>
+        <li><strong>No Brand Kit:</strong> Defaults to generic Helvetica</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="method-box" style="margin-top:16px;">
+    <strong>The Ideal Solution:</strong> A unified editor that combines the Standard Editor's reliability, block variety, and style control with the AI Chat Editor's content generation and speed. Users should be able to start with AI for a first draft, then switch to block-level editing for refinement — without switching editors, losing work, or creating duplicate campaigns.
+  </div>
+
+  <h2>Issue Severity Comparison</h2>
+  <table>
+    <tr><th>Severity</th><th>Standard Editor</th><th>AI Chat Editor</th><th>Commentary</th></tr>
+    <tr>
+      <td><span class="sev-badge sev-critical">Critical</span></td>
+      <td>0</td>
+      <td>1 (UB-001: wrong content loaded)</td>
+      <td>Standard Editor has no trust-breaking bugs</td>
+    </tr>
+    <tr>
+      <td><span class="sev-badge sev-high">High</span></td>
+      <td>2 (hidden editor, workflow disconnect)</td>
+      <td>3 (no builder path, duplicate campaign, circular loop)</td>
+      <td>Standard Editor's High issues are navigational; AI's are functional</td>
+    </tr>
+    <tr>
+      <td><span class="sev-badge sev-medium">Medium</span></td>
+      <td>7</td>
+      <td>6</td>
+      <td>Similar count; Standard Editor's are UX polish, AI's are behavioral</td>
+    </tr>
+    <tr>
+      <td><span class="sev-badge sev-low">Low</span></td>
+      <td>8</td>
+      <td>4</td>
+      <td>Standard Editor has more minor polish issues (more surface area explored)</td>
+    </tr>
+  </table>
+
+</section>
+</div><!-- /panel-comparison -->
+
+
+<!-- ============== IMPROVEMENT PLAN TAB ============== -->
+<div class="tabpanel" id="panel-improvement" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Prioritized Fix Recommendations</div>
+      <h1>Improvement Plan</h1>
+      <p class="subtitle">Quick wins, medium-term improvements, and strategic investments for the Standard Editor</p>
+    </div>
+  </header>
+
+  <h2>Quick Wins (1&ndash;2 Sprints Each)</h2>
+  <p>Highest-impact fixes that can be shipped quickly.</p>
+
+  <div class="fix-card" style="border-left-color: var(--high);">
+    <h4><span class="sev-badge sev-high">High</span> Make Standard Editor accessible from "Design email" flow</h4>
+    <p><strong>Issue:</strong> SE-001 &middot; <strong>Effort:</strong> Small (1 sprint) &middot; <strong>Evidence:</strong> <a href="std-editor-screenshots/01-email-templates-page.png">Screenshot 01</a></p>
+    <p>Add a "Build manually" or "Use drag-and-drop builder" link on the AI Chat Editor landing page. This gives users a choice without removing the AI-first default.</p>
+  </div>
+
+  <div class="fix-card">
+    <h4>Add click-to-insert alongside drag-and-drop</h4>
+    <p><strong>Issue:</strong> SE-004 &middot; <strong>Effort:</strong> Small (1 sprint) &middot; <strong>Evidence:</strong> <a href="std-editor-screenshots/02-standard-editor-blocks-panel.png">Screenshot 02</a></p>
+    <p>Add insertion point markers on the canvas. Clicking shows a quick-select block menu. Improves accessibility and touch-device usability.</p>
+  </div>
+
+  <div class="fix-card">
+    <h4>Fix "Create from scratch" button loading state</h4>
+    <p><strong>Issue:</strong> SE-002 &middot; <strong>Effort:</strong> Trivial &middot; <strong>Evidence:</strong> <a href="std-editor-screenshots/01-email-templates-page.png">Screenshot 01</a></p>
+    <p>Add a loading spinner or "Opening editor..." text when the button is processing to prevent confusion.</p>
+  </div>
+
+  <div class="fix-card">
+    <h4>Show all 15 blocks by default</h4>
+    <p><strong>Issue:</strong> SE-007 &middot; <strong>Effort:</strong> Trivial &middot; <strong>Evidence:</strong> <a href="std-editor-screenshots/06-all-content-blocks-expanded.png">Screenshot 06</a></p>
+    <p>Remove "Show more" gate and display all blocks in a scrollable panel. Alternatively, dynamically prioritize blocks based on account type (e-commerce accounts see Product blocks first).</p>
+  </div>
+
+  <div class="fix-card">
+    <h4>Replace "Start typing..." placeholder</h4>
+    <p><strong>Issue:</strong> SE-006 &middot; <strong>Effort:</strong> Trivial &middot; <strong>Evidence:</strong> <a href="std-editor-screenshots/02-standard-editor-blocks-panel.png">Screenshot 02</a></p>
+    <p>Change to "Drag a content block here to start building your email" or add a first-time interactive overlay.</p>
+  </div>
+
+  <h2>Medium-Term Improvements (3&ndash;4 Sprints)</h2>
+
+  <div class="fix-card" style="border-left-color: var(--high);">
+    <h4><span class="sev-badge sev-high">High</span> Bridge template &rarr; campaign workflow</h4>
+    <p><strong>Issue:</strong> SE-015 &middot; <strong>Effort:</strong> Medium (2&ndash;3 sprints) &middot; <strong>Evidence:</strong> <a href="std-editor-screenshots/01-email-templates-page.png">Screenshot 01</a>, <a href="std-editor-screenshots/02-standard-editor-blocks-panel.png">Screenshot 02</a></p>
+    <p>Add "Save and create campaign" as a primary save action in the Standard Editor. This creates the campaign with the template pre-loaded and navigates to the campaign checklist.</p>
+  </div>
+
+  <div class="fix-card">
+    <h4>Auto-apply Brand Kit to new templates</h4>
+    <p><strong>Issue:</strong> SE-011 &middot; <strong>Effort:</strong> Medium (2 sprints) &middot; <strong>Evidence:</strong> <a href="std-editor-screenshots/05-styles-text-expanded.png">Screenshot 05</a></p>
+    <p>When creating a new template, auto-populate style sections with the account's Brand Kit settings. Add "Apply Brand Kit" one-click action in the Styles panel.</p>
+  </div>
+
+  <div class="fix-card">
+    <h4>Add inline AI content assist to text blocks</h4>
+    <p><strong>Issue:</strong> SE-008 &middot; <strong>Effort:</strong> Medium-Large (3&ndash;4 sprints) &middot; <strong>Evidence:</strong> <a href="std-editor-screenshots/06-all-content-blocks-expanded.png">Screenshot 06</a></p>
+    <p>Add an "AI assist" button within Paragraph and Heading blocks that can generate, rewrite, shorten, or expand content. Rename "AI-Generated Columns" to "Pre-built Layouts" or add actual generative capability.</p>
+  </div>
+
+  <div class="fix-card">
+    <h4>Merge tag preview with sample data</h4>
+    <p><strong>Issues:</strong> SE-013, SE-014 &middot; <strong>Effort:</strong> Medium (2 sprints) &middot; <strong>Evidence:</strong> <a href="std-editor-screenshots/07-preview-desktop-mode.png">Screenshot 07</a></p>
+    <p>Replace raw merge tags in preview with sample account data. Add a "Preview with sample contact" option that pulls from the audience list.</p>
+  </div>
+
+  <h2>Strategic Investments (Multi-Quarter)</h2>
+
+  <div class="fix-card" style="border-left-color: var(--brand);">
+    <h4>Unified editor: AI + block-level control</h4>
+    <p><strong>Issues:</strong> SE-001, SE-008, SE-015 + UB-002, UB-005 &middot; <strong>Evidence:</strong> Both reports</p>
+    <p>The long-term solution is a single editor that combines AI content generation with block-level manual control. Users start with AI for a first draft, then refine with drag-and-drop blocks. No context switch, no duplicate campaigns, no hidden editors.</p>
+  </div>
+
+  <div class="fix-card" style="border-left-color: var(--brand);">
+    <h4>Differentiate and streamline entry points</h4>
+    <p><strong>Issues:</strong> SE-016, SE-017 &middot; <strong>Evidence:</strong> <a href="std-editor-screenshots/01-email-templates-page.png">Screenshot 01</a></p>
+    <p>Consolidate the three Email Templates entry points into a clear decision tree. Deprecate "legacy template" visibly. Add descriptions to each option. Surface Mailchimp template gallery prominently.</p>
+  </div>
+
+  <h2>Priority &times; Impact Matrix</h2>
+  <table class="priority-table">
+    <tr><th>Priority</th><th>Issues</th><th>User Impact</th><th>Effort</th><th>Fixes</th></tr>
+    <tr><td style="color:var(--critical);">P0</td><td>SE-001, SE-015</td><td>Blocks natural workflow, forces template/campaign context switch</td><td>2&ndash;4 sprints total</td><td>2 fixes</td></tr>
+    <tr><td style="color:var(--high);">P1</td><td>SE-002, SE-004, SE-006, SE-007</td><td>First-time user friction, discovery gaps</td><td>2&ndash;3 sprints total</td><td>4 fixes</td></tr>
+    <tr><td style="color:var(--medium);">P2</td><td>SE-008, SE-010, SE-011, SE-016, SE-017</td><td>Feature gaps, missing AI, brand kit, entry confusion</td><td>6&ndash;9 sprints total</td><td>5 fixes</td></tr>
+    <tr><td style="color:var(--low);">P3</td><td>SE-003, SE-005, SE-009, SE-012, SE-013, SE-014</td><td>Polish, architectural, accessibility gaps</td><td>4&ndash;6 sprints total</td><td>6 fixes</td></tr>
+  </table>
+
+</section>
+</div><!-- /panel-improvement -->
+
+
+<!-- ============== RECOMMENDATIONS TAB ============== -->
+<div class="tabpanel" id="panel-recommendations" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Strategic Recommendations</div>
+      <h1>Recommendations</h1>
+      <p class="subtitle">Product fixes, experiments, and next usability tests for the Standard Editor</p>
+    </div>
+  </header>
+
+  <h2>Top Product Fixes by Customer Impact</h2>
+  <table>
+    <tr><th>#</th><th>Fix</th><th>Customer Impact</th><th>Issues Resolved</th></tr>
+    <tr><td>1</td><td><strong>Surface Standard Editor from campaign creation flow</strong></td><td>Restores editor choice for all users; unblocks power users and agencies</td><td>SE-001</td></tr>
+    <tr><td>2</td><td><strong>"Save and create campaign" action</strong></td><td>Eliminates the template/campaign disconnect — single workflow</td><td>SE-015, SE-003</td></tr>
+    <tr><td>3</td><td><strong>Inline AI content generation in blocks</strong></td><td>Bridges the AI gap without forcing users into AI Chat Editor</td><td>SE-008</td></tr>
+    <tr><td>4</td><td><strong>Auto-apply Brand Kit</strong></td><td>Reduces manual setup, enforces brand consistency</td><td>SE-011</td></tr>
+    <tr><td>5</td><td><strong>Show all blocks + click-to-insert</strong></td><td>Improves discoverability and accessibility for all users</td><td>SE-004, SE-007</td></tr>
+  </table>
+
+  <h2>Top Fixes by Ease of Implementation</h2>
+  <table>
+    <tr><th>#</th><th>Fix</th><th>Effort</th><th>Issues Resolved</th></tr>
+    <tr><td>1</td><td><strong>Replace "Start typing..." placeholder</strong></td><td>Trivial (hours)</td><td>SE-006</td></tr>
+    <tr><td>2</td><td><strong>Fix button loading state</strong></td><td>Trivial (hours)</td><td>SE-002</td></tr>
+    <tr><td>3</td><td><strong>Remove "Show more" gate — show all 15 blocks</strong></td><td>Trivial (1 day)</td><td>SE-007</td></tr>
+    <tr><td>4</td><td><strong>Add "Use block editor" link to AI landing</strong></td><td>Small (1&ndash;2 days)</td><td>SE-001</td></tr>
+    <tr><td>5</td><td><strong>Auto-expand first style section</strong></td><td>Small (1 day)</td><td>SE-010</td></tr>
+  </table>
+
+  <h2>Suggested Experiments</h2>
+  <div class="grid cols-2">
+    <div style="padding:14px;border:1px solid var(--line);border-radius:8px;">
+      <h3>A/B Test: Editor Choice</h3>
+      <ul>
+        <li><strong>Hypothesis:</strong> Showing "AI Editor" and "Block Editor" as equal-weight choices on the campaign creation page will increase overall email completion rate</li>
+        <li><strong>Control:</strong> Current AI-only routing from "Design email"</li>
+        <li><strong>Variant:</strong> Choice dialog: "Create with AI" vs. "Build with blocks"</li>
+        <li><strong>Metric:</strong> Campaign completion rate, time to send</li>
+      </ul>
+    </div>
+    <div style="padding:14px;border:1px solid var(--line);border-radius:8px;">
+      <h3>A/B Test: Block Visibility</h3>
+      <ul>
+        <li><strong>Hypothesis:</strong> Showing all 15 blocks by default increases usage of Product, Product Rec, and Survey blocks</li>
+        <li><strong>Control:</strong> Current "Show more" gate (9 visible)</li>
+        <li><strong>Variant:</strong> All 15 blocks visible in scrollable panel</li>
+        <li><strong>Metric:</strong> Block usage diversity, Product block adoption</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="padding:14px;border:1px solid var(--line);border-radius:8px;margin-top:16px;">
+    <h3>A/B Test: Brand Kit Auto-Apply</h3>
+    <ul>
+      <li><strong>Hypothesis:</strong> Auto-applying Brand Kit fonts and colors to new templates reduces time to first send and increases brand consistency</li>
+      <li><strong>Control:</strong> Current Helvetica default</li>
+      <li><strong>Variant:</strong> Brand Kit pre-applied to all style sections on template creation</li>
+      <li><strong>Metric:</strong> Time to save template, style modification rate, template reuse rate</li>
+    </ul>
+  </div>
+
+  <h2>Next Usability Tests</h2>
+  <div class="grid cols-2">
+    <div style="padding:14px;border:1px solid var(--line);border-radius:8px;">
+      <h3>Immediate (This Sprint)</h3>
+      <ul>
+        <li>Verify SE-002 (button disable) is reproducible across browsers</li>
+        <li>Confirm iframe rendering doesn't break drag-and-drop on mobile/tablet</li>
+        <li>Test "Mailchimp templates" tab content and value for new users</li>
+        <li>Measure time-to-send for template &rarr; campaign workflow vs. AI workflow</li>
+      </ul>
+    </div>
+    <div style="padding:14px;border:1px solid var(--line);border-radius:8px;">
+      <h3>Next Sprint</h3>
+      <ul>
+        <li>Usability test: 5 users attempt to send an email using only the Standard Editor path</li>
+        <li>Usability test: 5 users given choice between AI and Standard — observe which they pick and why</li>
+        <li>Accessibility audit: keyboard-only navigation through the entire Standard Editor flow</li>
+        <li>Compare template quality: AI-generated vs. Standard Editor-built across 10 use cases</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="padding:14px;border:1px solid var(--line);border-radius:8px;margin-top:16px;">
+    <h3>Strategic (Next Quarter)</h3>
+    <ul>
+      <li>Prototype unified editor with AI content assist + block-level control and test with 20 users</li>
+      <li>Benchmark Standard Editor block library against Klaviyo (blocks, AI, product integration)</li>
+      <li>Longitudinal study: do AI Chat Editor users eventually want Standard Editor control?</li>
+      <li>Evaluate whether the template/campaign abstraction should be collapsed into a single entity</li>
+      <li>Assess Shopify's free email builder as a competitive threat to Standard Editor for SMBs</li>
+    </ul>
+  </div>
+
+  <h2>Cross-Reference to Existing Intelligence</h2>
+  <table>
+    <tr><th>This Report Finding</th><th>Related Intelligence</th><th>Source</th></tr>
+    <tr>
+      <td>SE-001 (hidden editor)</td>
+      <td>UB-002 (no template builder path) — same problem from the opposite direction</td>
+      <td><a href="ub-scrawler-report.html">AI Editor Scrawler Report</a></td>
+    </tr>
+    <tr>
+      <td>SE-008 (no inline AI)</td>
+      <td>Klaviyo's Flows AI offers 10+ in-flow AI capabilities including content generation</td>
+      <td><a href="index.html">Klaviyo Flows Brief</a></td>
+    </tr>
+    <tr>
+      <td>SE-011 (no Brand Kit auto-apply)</td>
+      <td>Freddie concern: "0/17 HVC themes solved" — Brand Kit integration is an HVC request</td>
+      <td><a href="freddie-concerns.html">Freddie Concerns</a></td>
+    </tr>
+    <tr>
+      <td>SE-015 (template &rarr; campaign disconnect)</td>
+      <td>CJB activation funnel binding constraint (33.6% activation rate)</td>
+      <td><a href="mailchimp.html#health">Product Health tab</a></td>
+    </tr>
+    <tr>
+      <td>SE-008 (no AI in blocks)</td>
+      <td>Shopify Sidekick offers inline AI content generation in their email builder</td>
+      <td><a href="shopify.html">Shopify Brief</a></td>
+    </tr>
+    <tr>
+      <td>Standard Editor overall</td>
+      <td>18-tab unified editor/builder brief covers NEB, SMS, Brand Kit, Freddie strategy</td>
+      <td><a href="mailchimp-editor.html">Editor Brief</a></td>
+    </tr>
+  </table>
+
+</section>
+</div><!-- /panel-recommendations -->
+
+
+</div><!-- /page-wrap -->
+
+<!-- Guardrails -->
+<div style="max-width:1180px;margin:0 auto;padding:0 20px 40px;">
+  <div class="guardrails">
+    <h3>Evaluation Guardrails</h3>
+    <ul>
+      <li><strong>No emails were sent</strong> — all templates remained in draft state throughout the evaluation</li>
+      <li><strong>No campaigns activated, published, or scheduled</strong> — only template creation and editor exploration were tested</li>
+      <li><strong>All templates saved as drafts only</strong> — no content was sent to any recipients</li>
+      <li><strong>Account credentials redacted</strong> — login details not stored in this report</li>
+      <li><strong>Test conducted May 26, 2026</strong> on the Goodnight Fox account (us17 datacenter)</li>
+      <li><strong>Qualitative N=1 evaluation</strong> — findings are directional, not statistically validated; follow up with quantitative measurement</li>
+      <li><strong>Standard Editor accessed via Email Templates</strong> — not via the primary "Create email" or "Design email" campaign flow</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var tabs = document.querySelectorAll('.tab');
+    var panels = document.querySelectorAll('.tabpanel');
+    function activate(name) {
+      tabs.forEach(function (t) {
+        var match = t.getAttribute('data-tab') === name;
+        t.classList.toggle('active', match);
+        t.setAttribute('aria-selected', match ? 'true' : 'false');
+      });
+      panels.forEach(function (p) {
+        p.classList.toggle('active', p.id === 'panel-' + name);
+      });
+      try {
+        var url = new URL(window.location.href);
+        url.hash = name;
+        history.replaceState(null, '', url.toString());
+      } catch (e) {}
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
+    });
+    var initial = (window.location.hash || '').replace('#', '');
+    if (['summary','walkthrough','blocks','styles','preview','issues','comparison','improvement','recommendations'].indexOf(initial) >= 0) activate(initial);
+  })();
+</script>
+
+</body>
+</html>
