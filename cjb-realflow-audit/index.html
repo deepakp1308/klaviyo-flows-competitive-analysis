@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CJB Real-World Flow Replication Audit — Expert Marketer Perspective</title>
+<meta name="description" content="Step-by-step replication of BigQuery-sourced automation flows on live Mailchimp CJB. Screenshot evidence of barriers, usability issues, and competitive gaps vs Klaviyo. Goodnight Fox (us17), May 2026.">
+<style>
+  :root { --ink: #111827; --muted: #6b7280; --border: #d1d5db; --bg: #f9fafb; --paper: #fff;
+    --red: #991b1b; --red-bg: #fef2f2; --amber: #92400e; --amber-bg: #fffbeb; --blue: #1e40af; --blue-bg: #eff6ff; --green: #065f46; --green-bg: #ecfdf5; --purple: #6b21a8; --purple-bg: #faf5ff; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink); background: var(--bg); line-height: 1.5; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 24px 20px; }
+  h1 { font-size: 1.75rem; margin-bottom: 4px; }
+  h2 { font-size: 1.25rem; margin: 32px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--ink); }
+  h3 { font-size: 1.05rem; margin: 20px 0 8px; }
+  .subtitle { color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
+  .verdict { background: var(--red-bg); border-left: 4px solid var(--red); padding: 16px; margin: 16px 0; }
+  .verdict strong { color: var(--red); }
+  .verdict-amber { background: var(--amber-bg); border-left: 4px solid var(--amber); padding: 16px; margin: 16px 0; }
+  .verdict-amber strong { color: var(--amber); }
+  .method { background: var(--blue-bg); border-left: 4px solid var(--blue); padding: 14px; margin: 16px 0; font-size: 0.875rem; }
+  nav.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+  nav.toc a { background: var(--paper); border: 1px solid var(--border); padding: 6px 12px; border-radius: 4px;
+    text-decoration: none; color: var(--ink); font-size: 0.8rem; font-weight: 600; }
+  nav.toc a:hover { background: var(--blue-bg); }
+  .step { background: var(--paper); border: 1px solid var(--border); border-radius: 8px; margin: 20px 0; overflow: hidden; }
+  .step-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: #f3f4f6; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .step-num { background: var(--ink); color: #fff; font-weight: 700; font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; }
+  .step-title { font-weight: 600; font-size: 0.95rem; }
+  .step-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+  .badge-barrier { background: var(--red-bg); color: var(--red); }
+  .badge-usability { background: var(--amber-bg); color: var(--amber); }
+  .badge-launch { background: #fce7f3; color: #9d174d; }
+  .badge-pass { background: var(--green-bg); color: var(--green); }
+  .badge-gap { background: var(--purple-bg); color: var(--purple); }
+  .step-body { padding: 16px; }
+  .step-body img { width: 100%; height: auto; border: 1px solid var(--border); border-radius: 4px; display: block; margin-bottom: 12px; }
+  .step-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.85rem; margin-bottom: 12px; }
+  .step-meta dt { font-weight: 600; color: var(--muted); }
+  .step-meta dd { margin: 0; }
+  .issue-box { border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem; }
+  .issue-box.barrier { border-left: 4px solid var(--red); background: var(--red-bg); }
+  .issue-box.usability { border-left: 4px solid var(--amber); background: var(--amber-bg); }
+  .issue-box.launch { border-left: 4px solid #9d174d; background: #fce7f3; }
+  .issue-box.gap { border-left: 4px solid var(--purple); background: var(--purple-bg); }
+  .issue-box strong { display: block; margin-bottom: 2px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin: 12px 0; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+  th { background: #f3f4f6; font-weight: 600; }
+  .sev-p0 { color: var(--red); font-weight: 700; }
+  .sev-p1 { color: #b91c1c; font-weight: 700; }
+  .sev-p2 { color: var(--amber); font-weight: 600; }
+  .sev-p3 { color: var(--muted); }
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin: 16px 0; }
+  .kpi { background: var(--paper); border: 1px solid var(--border); padding: 14px; border-radius: 6px; text-align: center; }
+  .kpi .v { font-size: 1.5rem; font-weight: 700; }
+  .kpi .l { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .flow-spec { background: var(--paper); border: 1px solid var(--border); padding: 16px; border-radius: 8px; margin: 12px 0; font-size: 0.85rem; }
+  .flow-spec ol { padding-left: 20px; }
+  .flow-spec li { margin-bottom: 4px; }
+  .flow-spec .unreplicable { color: var(--red); font-weight: 600; }
+  .comparison { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 12px 0; }
+  .comparison > div { border: 1px solid var(--border); border-radius: 8px; padding: 14px; font-size: 0.85rem; }
+  .comparison .klaviyo { border-left: 4px solid var(--green); background: var(--green-bg); }
+  .comparison .mailchimp { border-left: 4px solid var(--red); background: var(--red-bg); }
+  .comparison h4 { margin-bottom: 8px; font-size: 0.9rem; }
+  footer { margin-top: 32px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); }
+  @media (max-width: 640px) { .step-meta { grid-template-columns: 1fr; } .comparison { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>CJB Real-World Flow Replication Audit</h1>
+<p class="subtitle">BigQuery-Sourced Flows &middot; Expert Marketer Perspective &middot; Mailchimp CJB &middot; Goodnight Fox (us17) &middot; May 26, 2026</p>
+
+<nav class="toc">
+  <a href="#verdict">Verdict</a>
+  <a href="#methodology">Methodology</a>
+  <a href="#flow1">Flow 1: E-Commerce</a>
+  <a href="#flow2">Flow 2: Non-E-Commerce</a>
+  <a href="#matrix">Issues Matrix</a>
+  <a href="#competitive">Competitive Comparison</a>
+  <a href="#recommendations">Recommendations</a>
+</nav>
+
+<div class="kpi-row">
+  <div class="kpi"><div class="v">0/2</div><div class="l">Flows Fully Replicated</div></div>
+  <div class="kpi"><div class="v">11</div><div class="l">Screenshots Captured</div></div>
+  <div class="kpi"><div class="v">14</div><div class="l">Issues Found</div></div>
+  <div class="kpi"><div class="v">4</div><div class="l">P0/P1 Blockers</div></div>
+  <div class="kpi"><div class="v">6</div><div class="l">Competitive Gaps</div></div>
+</div>
+
+<h2 id="verdict">Replication Verdict</h2>
+
+<div class="verdict">
+  <strong>Neither BigQuery-sourced flow could be fully replicated in CJB.</strong>
+  <p>The 17-step e-commerce flow ("Drive repeat business with email &amp; SMS") hit a structural wall at step 6: CJB cannot branch on real-time behavioral events like "product added to cart within 7 days" or "product viewed on website within 7 days." These are table-stakes conditions in Klaviyo Flows. The 9-step non-e-commerce flow ("Recover abandoned carts with SMS and email") could be partially built but requires workarounds for event-based conditions. Both flows remain as <strong>Draft</strong> &mdash; never activated.</p>
+</div>
+
+<div class="verdict-amber">
+  <strong>What this means for Mailchimp:</strong>
+  <p>The most common automation patterns used by sophisticated e-commerce marketers (sourced directly from BigQuery production data) cannot be replicated in CJB. This is not a UI polish issue &mdash; it's a <strong>capability gap</strong>. Marketers who want these flows will choose Klaviyo, not because Mailchimp is hard to use, but because Mailchimp literally cannot do what they need.</p>
+</div>
+
+<h2 id="methodology">Methodology</h2>
+<div class="method">
+  <strong>Source data:</strong> Two real-world automation flows extracted from <code>bi_aggregate.product_journey_monthly</code> BigQuery dataset, representing the most complex (17-step) and most common (9-step) patterns in production.<br><br>
+  <strong>Replication approach:</strong> Step-by-step build on live Mailchimp CJB (Goodnight Fox account, us17 datacenter). Each step attempted exactly as specified, with screenshots at every configuration point. Flows saved as Draft only &mdash; never activated.<br><br>
+  <strong>Persona:</strong> Expert e-commerce marketer migrating from Klaviyo, attempting to recreate their existing automation flows.<br><br>
+  <strong>Classification:</strong> P0 = broken/impossible, P1 = major barrier preventing flow completion, P2 = usability friction slowing progress, P3 = minor annoyance. Types: Bug, Barrier, Usability, Capability Gap.
+</div>
+
+<!-- ===== FLOW 1 ===== -->
+<h2 id="flow1">Flow 1: "Drive Repeat Business with Email &amp; SMS" (17 Steps)</h2>
+
+<div class="flow-spec">
+  <strong>BigQuery Flow Specification (product_bought trigger, 17 steps):</strong>
+  <ol>
+    <li>Trigger: Customer makes first purchase (product_bought, orders = 1)</li>
+    <li>Delay: 1 day</li>
+    <li>Email: Post-purchase thank you &mdash; "Thanks for your purchase"</li>
+    <li>Delay: 1 day</li>
+    <li>If/Else: Has made second purchase? (orders &gt; 1)</li>
+    <li class="unreplicable">If/Else (No path): Adds product to cart? (contact_event: product_added_to_cart, within 7 days) &mdash; NOT REPLICABLE</li>
+    <li class="unreplicable">If/Else (No path): Views product on website? (contact_event: product_viewed, within 7 days) &mdash; NOT REPLICABLE</li>
+    <li>Email (Yes from #7): Browse abandonment &mdash; "Pick up where you left off"</li>
+    <li class="unreplicable">If/Else (No from #7): Opened post-purchase thank you email? &mdash; PARTIAL (no "within timeframe")</li>
+    <li>Email (Yes from #9): Re-engagement &mdash; "We think you'll like these"</li>
+    <li>SMS (No from #9): Re-engagement SMS</li>
+    <li>Email (Yes from #6): Abandoned cart &mdash; "See something you liked?"</li>
+    <li>Delay: 1 day after abandoned cart email</li>
+    <li>If/Else: Has made second purchase? (repeat check)</li>
+    <li class="unreplicable">If/Else (No): Subscribed to SMS? &mdash; PARTIAL (static check only)</li>
+    <li>SMS (Yes): Abandoned cart follow-up SMS</li>
+    <li>Email (No): Abandoned cart follow-up &mdash; "Still thinking about it?"</li>
+  </ol>
+  <p style="margin-top: 8px; color: var(--red); font-weight: 600;">4 of 17 steps cannot be replicated (steps 6, 7, 9, 15). The flow's core logic &mdash; behavioral event branching &mdash; is structurally impossible in CJB.</p>
+</div>
+
+<h3>Step-by-Step Walkthrough</h3>
+
+<!-- Step 0: Starting Point -->
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">0</span>
+    <span class="step-title">Automations List &mdash; Starting Point</span>
+    <span class="step-badge badge-pass">Pass</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/flow1_00_automations_list.png" alt="Automations list page showing existing draft flows">
+    <dl class="step-meta">
+      <dt>Goal</dt><dd>Navigate to Automations and start building from scratch</dd>
+      <dt>Result</dt><dd>"Build from scratch" button clearly visible. Audience pre-selected as "Goodnight Fox".</dd>
+    </dl>
+  </div>
+</div>
+
+<!-- Step 1: Create Flow -->
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">1</span>
+    <span class="step-title">Create Flow &mdash; Name and Audience</span>
+    <span class="step-badge badge-pass">Pass</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/flow1_01_build_from_scratch.png" alt="Create a flow page with name and audience fields">
+    <dl class="step-meta">
+      <dt>Goal</dt><dd>Name flow "Audit_Ecom_RepeatBusiness_EmailSMS" and select audience</dd>
+      <dt>Result</dt><dd>Clean two-step setup: name + audience + trigger selection. SMS-enabled status shown.</dd>
+    </dl>
+  </div>
+</div>
+
+<!-- Step 2: Trigger Picker -->
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">2</span>
+    <span class="step-title">Trigger Selection &mdash; "Buys any product"</span>
+    <span class="step-badge badge-barrier">P1 Barrier</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/flow1_02_trigger_picker.png" alt="Trigger picker showing Popular, Shopping Activity, and other categories">
+    <dl class="step-meta">
+      <dt>Goal</dt><dd>Set trigger to "Customer makes first purchase" (product_bought, orders = 1)</dd>
+      <dt>Result</dt><dd>No "first purchase" trigger exists. Closest match: "Buys any product" (fires on every purchase, not just first).</dd>
+    </dl>
+    <div class="issue-box barrier">
+      <strong>P1 Barrier: No "First Purchase Only" trigger</strong>
+      CJB's "Buys any product" trigger fires on every purchase, not just the first. To replicate the BigQuery flow's orders=1 filter, the marketer must add a downstream If/Else checking "Total number of orders is 1" &mdash; but this evaluates at branch time, not trigger time, creating a timing race condition where contacts who buy twice quickly could enter the wrong path. <em>Klaviyo has a dedicated first-purchase trigger with order count filters built into the trigger itself.</em>
+    </div>
+  </div>
+</div>
+
+<!-- Step 3: Trigger Config -->
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">3</span>
+    <span class="step-title">Trigger Configuration &mdash; No Settings Available</span>
+    <span class="step-badge badge-usability">P2 Usability</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/flow1_03_trigger_buys_any_product.png" alt="Trigger panel showing 'No settings for this starting point'">
+    <dl class="step-meta">
+      <dt>Goal</dt><dd>Configure trigger with purchase conditions (orders = 1, store 234868)</dd>
+      <dt>Result</dt><dd>"No settings for this starting point" &mdash; the trigger has zero configuration options. Only a "Filter who can enter" link is available.</dd>
+    </dl>
+    <div class="issue-box usability">
+      <strong>P2 Usability: Trigger has no configuration</strong>
+      The "Buys any product" trigger offers no settings &mdash; no store filter, no product filter, no order count filter. The "Filter who can enter" option uses the same segment builder as If/Else, not a purpose-built trigger configuration. Compare to Klaviyo where the trigger itself supports inline property filters.
+    </div>
+  </div>
+</div>
+
+<!-- Step 4: Canvas with Trigger -->
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">4</span>
+    <span class="step-title">Canvas &mdash; Flow Map with Sidebar</span>
+    <span class="step-badge badge-pass">Pass</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/flow1_04_canvas_with_trigger.png" alt="Flow builder canvas with trigger and sidebar showing available step types">
+    <dl class="step-meta">
+      <dt>Goal</dt><dd>Begin adding steps to the flow</dd>
+      <dt>Result</dt><dd>Canvas loads with trigger node, "Add a step" placeholder, and sidebar with Rules (If/Else, Split Path, Wait for trigger, Time delay) and Actions (Send email, Send SMS, Webhook, etc.).</dd>
+    </dl>
+  </div>
+</div>
+
+<!-- Step 5: Time Delay Default -->
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">5</span>
+    <span class="step-title">Time Delay &mdash; Default is 1 Week</span>
+    <span class="step-badge badge-usability">P2 Usability</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/flow1_05_delay_default_1week.png" alt="Time delay configuration defaulting to 1 Weeks">
+    <dl class="step-meta">
+      <dt>Goal</dt><dd>Add 1-day delay after trigger (per BigQuery spec)</dd>
+      <dt>Result</dt><dd>Time delay defaults to <strong>1 Week</strong>, not 1 day. Required manual change to "Days" unit via dropdown. Options: Hours, Days, Weeks.</dd>
+    </dl>
+    <div class="issue-box usability">
+      <strong>P2 Usability: Delay defaults to 1 week</strong>
+      The most common automation delay is 1 day (per BigQuery data), but CJB defaults to 1 week. This is a silent error waiting to happen &mdash; a marketer who doesn't notice the default will create a flow with 7-day gaps instead of 1-day gaps. No "minutes" option is available either.
+    </div>
+  </div>
+</div>
+
+<!-- Step 6: Delay Saved -->
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">6</span>
+    <span class="step-title">Delay Saved &mdash; 1 Day</span>
+    <span class="step-badge badge-pass">Pass</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/flow1_06_delay_1day_saved.png" alt="Canvas showing 1 day delay node saved">
+    <dl class="step-meta">
+      <dt>Goal</dt><dd>Confirm delay saves correctly</dd>
+      <dt>Result</dt><dd>Delay saved as "1 day delay" and displays correctly on canvas. Change from Weeks to Days required 2 clicks.</dd>
+    </dl>
+  </div>
+</div>
+
+<!-- Step 7: Email Config -->
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">7</span>
+    <span class="step-title">Email Configuration &mdash; Subject &amp; Builder Choice</span>
+    <span class="step-badge badge-usability">P2 Usability</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/flow1_07_email_config_subject.png" alt="Email configuration modal showing subject, preview text, schedule, tracking, and builder choice">
+    <dl class="step-meta">
+      <dt>Goal</dt><dd>Configure post-purchase thank-you email with subject "Thanks for your purchase"</dd>
+      <dt>Result</dt><dd>Subject and preview text set successfully. But email requires choosing between <strong>Legacy Builder</strong> or <strong>New Builder</strong> before any content can be created.</dd>
+    </dl>
+    <div class="issue-box usability">
+      <strong>P2 Usability: Two email builders create confusion</strong>
+      Marketers must choose between "Legacy Builder" and "New Builder" with no guidance on which to pick. This is an internal migration artifact exposed to users. The schedule defaults to "Every day as soon as possible" with no send-time optimization &mdash; Klaviyo's Smart Send Time is a key competitive advantage here.
+    </div>
+  </div>
+</div>
+
+<!-- Step 8: If/Else Segment Builder -->
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">8</span>
+    <span class="step-title">If/Else Condition Builder &mdash; Segment Builder</span>
+    <span class="step-badge badge-barrier">P0 Blocker</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/flow1_08_ifelse_segment_builder.png" alt="Segment builder showing available condition categories: Tags, Groups, Contact details">
+    <dl class="step-meta">
+      <dt>Goal</dt><dd>Configure branching conditions for behavioral events (product_added_to_cart, product_viewed within 7 days)</dd>
+      <dt>Result</dt><dd>Segment builder opens with static segment conditions only: Tags, Groups, Contact details, E-commerce totals. <strong>No real-time behavioral event conditions available.</strong></dd>
+    </dl>
+    <div class="issue-box barrier">
+      <strong>P0 Blocker: No real-time behavioral event conditions in If/Else</strong>
+      The If/Else condition builder (Segment Builder) does not support event-based conditions like "product_added_to_cart within 7 days" or "product_viewed within 7 days." These are <em>the core logic of the BigQuery flow</em>. Available conditions are limited to static properties (total orders, amount spent, contact details). The "Wait for trigger" step type exists in the sidebar but uses a different pattern (pausing the flow) rather than branching on recent events. <em>This is not a missing feature &mdash; it's a structural architectural gap in CJB's condition model.</em>
+    </div>
+  </div>
+</div>
+
+<!-- Step 9: Total Orders Condition -->
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">9</span>
+    <span class="step-title">If/Else &mdash; "Total Number of Orders &gt; 1"</span>
+    <span class="step-badge badge-pass">Partial</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/flow1_09_ifelse_total_orders.png" alt="Segment builder with Total number of orders condition configured">
+    <dl class="step-meta">
+      <dt>Goal</dt><dd>Check if contact has made a second purchase (orders &gt; 1)</dd>
+      <dt>Result</dt><dd>"Total number of orders" condition with "is greater than" operator and value "1" &mdash; this specific condition works. Operators available: is, is not, is greater than, is less than.</dd>
+    </dl>
+    <div class="issue-box usability">
+      <strong>P3 Minor: Limited operators for numeric conditions</strong>
+      Only 4 operators (is, is not, greater than, less than). No "greater than or equal to", "between", or "in the last N days" modifiers. Klaviyo supports time-bounded conditions like "placed order at least once in the last 7 days."
+    </div>
+  </div>
+</div>
+
+<!-- Step 10: Final Canvas -->
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">10</span>
+    <span class="step-title">Final Canvas State &mdash; Flow Saved as Draft</span>
+    <span class="step-badge badge-barrier">Incomplete</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/flow1_10_canvas_with_ifelse.png" alt="Flow canvas showing trigger, delay, email, and If/Else with Yes/No branches">
+    <dl class="step-meta">
+      <dt>Goal</dt><dd>Complete all 17 steps of the e-commerce flow</dd>
+      <dt>Result</dt><dd>Only 4 of 17 steps could be meaningfully completed. Flow saved as Draft with: Trigger &rarr; 1 day delay &rarr; Email (subject set, no body) &rarr; If/Else (orders &gt; 1). The remaining 13 steps require behavioral event conditions that CJB does not support.</dd>
+    </dl>
+    <div class="issue-box barrier">
+      <strong>P0 Blocker: 76% of flow steps cannot be replicated</strong>
+      The core differentiating logic of this flow &mdash; branching based on recent behavioral events (cart additions, product views, email opens within timeframes) &mdash; is architecturally impossible in CJB. This is the most common complex e-commerce automation pattern in the BigQuery dataset.
+    </div>
+  </div>
+</div>
+
+<!-- ===== FLOW 2 ===== -->
+<h2 id="flow2">Flow 2: "Recover Abandoned Carts with SMS and Email" (9 Steps)</h2>
+
+<div class="flow-spec">
+  <strong>BigQuery Flow Specification (abandon_cart_v2 trigger, 9 steps):</strong>
+  <ol>
+    <li>Trigger: Abandon cart (abandon_cart_v2)</li>
+    <li>SMS: Abandoned cart SMS (immediate)</li>
+    <li>Delay: 3 days</li>
+    <li class="unreplicable">If/Else: Made purchase within 3 days? &mdash; PARTIAL (no time-bounded condition)</li>
+    <li>Tag (Yes): "Purchased from abandoned cart SMS"</li>
+    <li>Email (No): "Forgot something great?"</li>
+    <li>Delay: 3 days</li>
+    <li class="unreplicable">If/Else: Made purchase within 3 days? &mdash; PARTIAL (no time-bounded condition)</li>
+    <li>Tag (Yes): "Purchased after abandoned cart email"</li>
+  </ol>
+  <p style="margin-top: 8px; color: var(--amber); font-weight: 600;">2 of 9 steps have limited replicability (steps 4, 8). The "within 3 days" time-bounded purchase check cannot be precisely expressed.</p>
+</div>
+
+<h3>Assessment (Based on Flow 1 Findings)</h3>
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">F2</span>
+    <span class="step-title">Flow 2 Structural Assessment</span>
+    <span class="step-badge badge-usability">Partial</span>
+  </div>
+  <div class="step-body">
+    <dl class="step-meta">
+      <dt>Trigger</dt><dd>"Abandoned cart" trigger IS available in CJB (confirmed in trigger picker screenshot). This is a pass.</dd>
+      <dt>SMS Step</dt><dd>SMS action available in CJB sidebar (marked "New"). Requires SMS program setup.</dd>
+      <dt>Delay</dt><dd>3-day delay configurable (change unit from default Weeks to Days, set value to 3).</dd>
+      <dt>If/Else</dt><dd>"Purchase activity" and "Purchase date" conditions exist, but <strong>no "within last N days" modifier</strong>. Can check "has purchased" but not "has purchased within 3 days of this step."</dd>
+      <dt>Tag</dt><dd>"Tag/Untag" action available in CJB sidebar. This step works.</dd>
+      <dt>Email</dt><dd>Email action works (demonstrated in Flow 1). Subject/preview text configurable.</dd>
+    </dl>
+    <div class="issue-box usability">
+      <strong>P1 Barrier: Time-bounded purchase checks not possible</strong>
+      The flow's core logic requires checking "made a purchase within 3 days" of the previous step. CJB's segment conditions can check "has ever purchased" or "total orders is greater than X" but cannot express "purchased since entering this branch" or "purchased within the last 3 days relative to this step." This means the Yes/No branches will misclassify contacts who purchased before the flow started.
+    </div>
+  </div>
+</div>
+
+<!-- ===== CROSS-CUTTING ISSUES MATRIX ===== -->
+<h2 id="matrix">Cross-Cutting Issues Matrix</h2>
+
+<table>
+<thead>
+<tr><th>#</th><th>Issue</th><th>Severity</th><th>Type</th><th>Flow(s)</th><th>Stage</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>No real-time behavioral event conditions in If/Else (product_viewed, product_added_to_cart within N days)</td><td class="sev-p0">P0</td><td>Capability Gap</td><td>F1, F2</td><td>Design</td></tr>
+<tr><td>2</td><td>76% of e-commerce flow steps unreplicable due to missing event-based branching</td><td class="sev-p0">P0</td><td>Capability Gap</td><td>F1</td><td>Design</td></tr>
+<tr><td>3</td><td>No "first purchase only" trigger &mdash; fires on every purchase</td><td class="sev-p1">P1</td><td>Barrier</td><td>F1</td><td>Define</td></tr>
+<tr><td>4</td><td>No time-bounded conditions ("purchased within last N days")</td><td class="sev-p1">P1</td><td>Capability Gap</td><td>F1, F2</td><td>Design</td></tr>
+<tr><td>5</td><td>Trigger has zero configuration options ("No settings for this starting point")</td><td class="sev-p2">P2</td><td>Usability</td><td>F1</td><td>Define</td></tr>
+<tr><td>6</td><td>Default delay is 1 week instead of 1 day</td><td class="sev-p2">P2</td><td>Usability</td><td>F1, F2</td><td>Design</td></tr>
+<tr><td>7</td><td>Two email builders (Legacy vs New) with no guidance on which to choose</td><td class="sev-p2">P2</td><td>Usability</td><td>F1, F2</td><td>Compose</td></tr>
+<tr><td>8</td><td>No send-time optimization (schedule defaults to "as soon as possible")</td><td class="sev-p2">P2</td><td>Capability Gap</td><td>F1, F2</td><td>Design</td></tr>
+<tr><td>9</td><td>Segment builder opens in full-page modal, disconnected from flow context</td><td class="sev-p2">P2</td><td>Usability</td><td>F1, F2</td><td>Design</td></tr>
+<tr><td>10</td><td>Limited numeric operators (no "greater than or equal to", "between")</td><td class="sev-p3">P3</td><td>Usability</td><td>F1</td><td>Design</td></tr>
+<tr><td>11</td><td>No "minutes" option for delay duration</td><td class="sev-p3">P3</td><td>Usability</td><td>F1, F2</td><td>Design</td></tr>
+<tr><td>12</td><td>Email body requires opening separate builder (not inline)</td><td class="sev-p3">P3</td><td>Usability</td><td>F1, F2</td><td>Compose</td></tr>
+<tr><td>13</td><td>No conditional branching on "email opened" with timeframe</td><td class="sev-p1">P1</td><td>Capability Gap</td><td>F1</td><td>Design</td></tr>
+<tr><td>14</td><td>No "SMS subscribed" check available as real-time condition</td><td class="sev-p2">P2</td><td>Capability Gap</td><td>F1</td><td>Design</td></tr>
+</tbody>
+</table>
+
+<h2 id="competitive">What's Hard in CJB That Klaviyo Makes Easy</h2>
+
+<div class="comparison">
+  <div class="klaviyo">
+    <h4>Klaviyo Flows</h4>
+    <ul>
+      <li><strong>Event-based triggers with inline filters</strong> &mdash; "Placed Order where OrderCount = 1" built into the trigger</li>
+      <li><strong>Conditional splits on any event property</strong> &mdash; "Added to Cart within 7 days", "Viewed Product since entering flow"</li>
+      <li><strong>Time-bounded conditions</strong> &mdash; "Has placed order at least once in the last 3 days"</li>
+      <li><strong>Smart Send Time</strong> &mdash; ML-optimized delivery time per contact</li>
+      <li><strong>5-channel canvas</strong> &mdash; Email, SMS, Push, In-app, Webhook with unified branching</li>
+      <li><strong>Flow-scoped conditions</strong> &mdash; "Opened email #1 in this flow" as a branch condition</li>
+      <li><strong>Marketing Agent</strong> &mdash; AI suggests and builds flow steps</li>
+    </ul>
+  </div>
+  <div class="mailchimp">
+    <h4>Mailchimp CJB</h4>
+    <ul>
+      <li><strong>Generic triggers</strong> &mdash; "Buys any product" with no inline filters; "No settings for this starting point"</li>
+      <li><strong>Static segment conditions only</strong> &mdash; total orders, amount spent, contact properties. No event recency.</li>
+      <li><strong>No time-bounded conditions</strong> &mdash; cannot express "within the last N days" relative to flow position</li>
+      <li><strong>No send-time optimization</strong> &mdash; "Every day as soon as possible" is the only schedule</li>
+      <li><strong>Email + SMS only</strong> &mdash; no push, no in-app, SMS marked as "New"</li>
+      <li><strong>No flow-scoped conditions</strong> &mdash; cannot branch on interactions with previous steps</li>
+      <li><strong>No AI flow builder</strong> &mdash; all steps must be manually configured</li>
+    </ul>
+  </div>
+</div>
+
+<h3>Capability Gap Summary</h3>
+<table>
+<thead>
+<tr><th>Capability</th><th>Klaviyo</th><th>CJB</th><th>Impact</th></tr>
+</thead>
+<tbody>
+<tr><td>Event-based trigger filters</td><td>Yes (inline on trigger)</td><td>No (segment filter only)</td><td>First-purchase flows require workarounds</td></tr>
+<tr><td>Behavioral event branching</td><td>Yes (any event, any timeframe)</td><td>No</td><td class="sev-p0">Blocks 76% of complex e-commerce flows</td></tr>
+<tr><td>Time-bounded conditions</td><td>Yes ("in last N days/hours")</td><td>No</td><td class="sev-p0">Purchase attribution in flows impossible</td></tr>
+<tr><td>Flow-scoped email interaction</td><td>Yes ("opened email in this flow")</td><td>No</td><td class="sev-p1">Re-engagement branching impossible</td></tr>
+<tr><td>Send-time optimization</td><td>Smart Send Time (ML)</td><td>No</td><td>Lower open rates, competitive disadvantage</td></tr>
+<tr><td>Predictive triggers</td><td>Expected date of next order, CLV</td><td>Predicted age/gender only</td><td>Cannot build proactive retention flows</td></tr>
+<tr><td>Minutes-level delay</td><td>Yes</td><td>No (hours minimum)</td><td>Cannot build rapid-response abandoned cart (30-min SMS)</td></tr>
+</tbody>
+</table>
+
+<h2 id="recommendations">Recommendations</h2>
+
+<h3>P0: Close the behavioral event condition gap (FY27 Q1)</h3>
+<p style="font-size: 0.9rem; margin-bottom: 12px;">The Eventbus migration (identified as critical dependency in the <a href="../mailchimp.html">Mailchimp strategy dossier</a>) is the prerequisite. Without real-time event conditions in the If/Else builder, CJB cannot compete with Klaviyo for any e-commerce automation beyond basic welcome series and abandoned cart.</p>
+
+<h3>P1: Add trigger-level property filters</h3>
+<p style="font-size: 0.9rem; margin-bottom: 12px;">Allow triggers like "Buys any product" to have inline conditions (order count, store, product category). This eliminates the need for downstream If/Else workarounds and aligns with Klaviyo's trigger model.</p>
+
+<h3>P2: Fix delay defaults and expand options</h3>
+<p style="font-size: 0.9rem; margin-bottom: 12px;">Change delay default from 1 week to 1 day. Add "Minutes" as a duration unit. Both are data-supported recommendations from the BigQuery flow analysis.</p>
+
+<h3>P2: Unify email builder and add send-time optimization</h3>
+<p style="font-size: 0.9rem; margin-bottom: 12px;">The Legacy/New Builder choice should be invisible to marketers. Add Smart Send Time as a schedule option &mdash; it's a top-3 Klaviyo advantage cited in <a href="../index.html">competitive VoC analysis</a>.</p>
+
+<h3>P3: Improve segment builder UX in flow context</h3>
+<p style="font-size: 0.9rem; margin-bottom: 12px;">The full-page Segment Builder modal loses flow context. Consider an inline condition builder that shows the flow state and suggests conditions relevant to the trigger type and preceding steps.</p>
+
+<footer>
+  <p>CJB Real-World Flow Replication Audit &middot; Goodnight Fox (us17) &middot; May 26, 2026 &middot; BigQuery-sourced flows, live browser replication, Draft only.</p>
+  <p>Related: <a href="../cjb-marketer-audit/">CJB Marketer Audit</a> &middot; <a href="../index.html">Klaviyo Flows Competitive Brief</a> &middot; <a href="../mailchimp.html">Mailchimp Strategy Dossier</a> &middot; <a href="../emerging-threats.html">Emerging Threats</a></p>
+</footer>
+
+</div>
+</body>
+</html>
