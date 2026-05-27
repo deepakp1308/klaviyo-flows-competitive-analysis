@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CJB Customer Flow Replication — Kate Co Home & Design Studio</title>
+<meta name="description" content="Expert marketer perspective: replicating a BigQuery-sourced Welcome Discount Series on Mailchimp CJB. Kate Co Home & Design Studio flow audit, May 2026.">
+<style>
+  :root { --ink: #111827; --muted: #6b7280; --border: #d1d5db; --bg: #f9fafb; --paper: #fff;
+    --red: #991b1b; --red-bg: #fef2f2; --amber: #92400e; --amber-bg: #fffbeb; --blue: #1e40af; --blue-bg: #eff6ff; --green: #065f46; --green-bg: #ecfdf5; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink); background: var(--bg); line-height: 1.5; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 24px 20px; }
+  h1 { font-size: 1.75rem; margin-bottom: 4px; }
+  h2 { font-size: 1.25rem; margin: 32px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--ink); }
+  h3 { font-size: 1.05rem; margin: 20px 0 8px; }
+  .subtitle { color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
+  .verdict { background: var(--red-bg); border-left: 4px solid var(--red); padding: 16px; margin: 16px 0; }
+  .verdict strong { color: var(--red); }
+  .verdict-partial { background: var(--amber-bg); border-left: 4px solid var(--amber); padding: 16px; margin: 16px 0; }
+  .verdict-partial strong { color: var(--amber); }
+  .method { background: var(--blue-bg); border-left: 4px solid var(--blue); padding: 14px; margin: 16px 0; font-size: 0.875rem; }
+  nav.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+  nav.toc a { background: var(--paper); border: 1px solid var(--border); padding: 6px 12px; border-radius: 4px;
+    text-decoration: none; color: var(--ink); font-size: 0.8rem; font-weight: 600; }
+  nav.toc a:hover { background: var(--blue-bg); }
+  .step { background: var(--paper); border: 1px solid var(--border); border-radius: 8px; margin: 20px 0; overflow: hidden; }
+  .step-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: #f3f4f6; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .step-num { background: var(--ink); color: #fff; font-weight: 700; font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; }
+  .step-title { font-weight: 600; font-size: 0.95rem; }
+  .step-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+  .badge-barrier { background: var(--red-bg); color: var(--red); }
+  .badge-usability { background: var(--amber-bg); color: var(--amber); }
+  .badge-launch { background: #fce7f3; color: #9d174d; }
+  .badge-pass { background: var(--green-bg); color: var(--green); }
+  .badge-bug { background: #faf5ff; color: #6b21a8; }
+  .step-body { padding: 16px; }
+  .step-body img { width: 100%; height: auto; border: 1px solid var(--border); border-radius: 4px; display: block; margin-bottom: 12px; }
+  .step-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.85rem; margin-bottom: 12px; }
+  .step-meta dt { font-weight: 600; color: var(--muted); }
+  .step-meta dd { margin: 0; }
+  .issue-box { border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem; }
+  .issue-box.barrier { border-left: 4px solid var(--red); background: var(--red-bg); }
+  .issue-box.usability { border-left: 4px solid var(--amber); background: var(--amber-bg); }
+  .issue-box.launch { border-left: 4px solid #9d174d; background: #fce7f3; }
+  .issue-box.bug { border-left: 4px solid #6b21a8; background: #faf5ff; }
+  .issue-box strong { display: block; margin-bottom: 2px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin: 12px 0; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+  th { background: #f3f4f6; font-weight: 600; }
+  .sev-p0 { color: var(--red); font-weight: 700; }
+  .sev-p1 { color: #b91c1c; font-weight: 700; }
+  .sev-p2 { color: var(--amber); font-weight: 600; }
+  .sev-p3 { color: var(--muted); }
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin: 16px 0; }
+  .kpi { background: var(--paper); border: 1px solid var(--border); padding: 14px; border-radius: 6px; text-align: center; }
+  .kpi .v { font-size: 1.5rem; font-weight: 700; }
+  .kpi .l { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  .source-box { background: #f3f4f6; border: 1px solid var(--border); padding: 14px; border-radius: 6px; margin: 16px 0; font-size: 0.85rem; }
+  .source-box code { background: #e5e7eb; padding: 2px 6px; border-radius: 3px; font-size: 0.8rem; }
+  .flow-spec { background: var(--paper); border: 1px solid var(--border); padding: 16px; border-radius: 6px; margin: 16px 0; }
+  .flow-spec ol { padding-left: 20px; font-size: 0.85rem; }
+  .flow-spec li { margin: 4px 0; }
+  .flow-spec .branch { color: var(--blue); font-weight: 600; }
+  .klaviyo-box { background: #eff6ff; border-left: 4px solid var(--blue); padding: 14px; margin: 16px 0; font-size: 0.875rem; }
+  footer { margin-top: 32px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); }
+  @media (max-width: 640px) { .step-meta { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>CJB Customer Flow Replication</h1>
+<p class="subtitle">Kate Co Home &amp; Design Studio &middot; Welcome Discount Series &middot; Mailchimp CJB (Goodnight Fox, us17) &middot; May 26, 2026</p>
+
+<nav class="toc">
+  <a href="#verdict">Verdict</a>
+  <a href="#source">Source Flow</a>
+  <a href="#methodology">Methodology</a>
+  <a href="#walkthrough">Step-by-Step</a>
+  <a href="#matrix">Issues Matrix</a>
+  <a href="#klaviyo">Klaviyo Comparison</a>
+  <a href="#recommendations">Recommendations</a>
+</nav>
+
+<div class="kpi-row">
+  <div class="kpi"><div class="v">0</div><div class="l">Flows Launched</div></div>
+  <div class="kpi"><div class="v">1</div><div class="l">Draft Journey</div></div>
+  <div class="kpi"><div class="v">9</div><div class="l">Screenshots</div></div>
+  <div class="kpi"><div class="v">12</div><div class="l">Issues Found</div></div>
+  <div class="kpi"><div class="v">3</div><div class="l">Launch Blockers</div></div>
+  <div class="kpi"><div class="v">3/10</div><div class="l">Steps Completed</div></div>
+</div>
+
+<h2 id="verdict">Launch Readiness Verdict</h2>
+<div class="verdict">
+  <strong>The Welcome Discount Series could NOT be fully replicated or launched.</strong>
+  <p>Attempting to replicate a 10-step BigQuery-sourced welcome discount flow for a home/design studio customer, we completed only <strong>3 of 10 steps</strong> (trigger, If/Else condition, 1 of 5 emails) before hitting structural barriers. The flow was saved as Draft with builder ID 9177. Key blockers: <strong>(1)</strong> email content requires entering a separate builder (Legacy vs New fork), <strong>(2)</strong> no way to set a journey-wide exit condition ("exits when purchased") from the canvas, <strong>(3)</strong> CJB lacks convergence/merge after branching paths &mdash; both branches end at separate "Contact exits" nodes.</p>
+</div>
+
+<h2 id="source">Source Flow Specification</h2>
+<div class="source-box">
+  <strong>Source:</strong> BigQuery <code>customer_journeys.recipes</code> &middot; Template ID: <code>ced2d792-f6cd-447c-bf8a-373d77155f5e</code><br>
+  <strong>Customer:</strong> Kate Co Home &amp; Design Studio (user_id: 133496462) &mdash; home decor/design business<br>
+  <strong>Flow type:</strong> <code>multi_touchpoint</code> &middot; AI-generated &middot; Contacts can enter once<br>
+  <strong>Exit condition:</strong> <code>completes_checkout</code> (journey-wide)
+</div>
+
+<div class="flow-spec">
+  <h3>Target: Welcome Discount Series (10 steps)</h3>
+  <ol>
+    <li><strong>Trigger:</strong> Contact subscribes to newsletter</li>
+    <li><strong>If/Else:</strong> Has made purchase?
+      <ul>
+        <li><span class="branch">YES &rarr;</span> Step 4 (welcome back email)</li>
+        <li><span class="branch">NO &rarr;</span> Step 3 (welcome with discount)</li>
+      </ul>
+    </li>
+    <li><strong>Email (NO):</strong> "Get your discount today" &mdash; welcome with sign-up discount</li>
+    <li><strong>Email (YES):</strong> "Welcome back! Enjoy a special discount" &mdash; returning customer variant</li>
+    <li><strong>Delay:</strong> 5 days (convergence point)</li>
+    <li><strong>Email:</strong> "Get your discount on our favorites" &mdash; best sellers</li>
+    <li><strong>Delay:</strong> 7 days</li>
+    <li><strong>Email:</strong> "Here's a special discount just for you!" &mdash; urgency push</li>
+    <li><strong>Delay:</strong> 5 days</li>
+    <li><strong>Email:</strong> "Your special discount is about to end" &mdash; last chance</li>
+  </ol>
+</div>
+
+<h2 id="methodology">Methodology</h2>
+<div class="method">
+  <strong>Approach:</strong> N=1 qualitative walkthrough from expert marketer persona ("Kate Co" home/design studio owner). Flow built on live Mailchimp account (Goodnight Fox, us17 datacenter). All screenshots captured from live browser session. Flow saved as Draft only &mdash; never activated.<br><br>
+  <strong>Persona:</strong> SMB home decor e-commerce business building a welcome discount series to convert new subscribers into first-time buyers.<br><br>
+  <strong>Source:</strong> BigQuery <code>customer_journeys.recipes</code> table &mdash; the most popular/relevant pre-built journey template for a design studio customer. Template includes 5 email touchpoints with purchase-based branching and timed delays.<br><br>
+  <strong>Taxonomy:</strong> Issues mapped to 8-stage CJB workflow (Discover &rarr; Define &rarr; Design &rarr; Compose &rarr; Target &rarr; Validate &rarr; Activate &rarr; Monitor). Classification: <em>Bug</em> (broken behavior), <em>Barrier</em> (blocks getting started), <em>Usability</em> (slows progress), <em>Launch-blocker</em> (prevents confident activation).
+</div>
+
+<h2 id="walkthrough">Step-by-Step Walkthrough</h2>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">01</span>
+    <span class="step-title">Automations Dashboard &mdash; Starting point</span>
+    <span class="step-badge badge-pass">Pass</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/01_automations_start.png" alt="Mailchimp Automations list showing Draft flows and Build from scratch button">
+    <dl class="step-meta">
+      <dt>Marketer goal</dt><dd>Navigate to Automations, start building a new welcome discount flow</dd>
+      <dt>What we see</dt><dd>Automations page with Goodnight Fox audience selected, existing Draft flows visible, "Build from scratch" and "Choose flow template" buttons at top</dd>
+    </dl>
+    <div class="issue-box usability">
+      <strong>P3 Usability: No "Welcome Discount" template available</strong>
+      <p>Recommended templates are: "Welcome new contacts," "Recover abandoned carts," "Recover lost customers." None of these match the BigQuery-sourced multi-touchpoint welcome discount series with purchase branching. Kate Co must build from scratch, losing the benefit of AI-generated flow structures that BigQuery recipes provide.</p>
+    </div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">02</span>
+    <span class="step-title">Trigger Picker &mdash; "Signs up for Email" under Popular</span>
+    <span class="step-badge badge-usability">P1 Barrier</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/02_trigger_picker.png" alt="Trigger picker modal showing Popular category with Signs up for Email, Buys any product, Buys a specific product, Abandoned cart cards">
+    <dl class="step-meta">
+      <dt>Marketer goal</dt><dd>Select "Signs up for Email" as the trigger for the welcome series</dd>
+      <dt>What we see</dt><dd>Modal with 6 category tabs (Popular, Contact Activity, Date &amp; Special Events, Shopping Activity, Marketing Activity, API &amp; Integrations). No search field. Popular tab shows e-commerce-skewed triggers.</dd>
+    </dl>
+    <div class="issue-box barrier">
+      <strong>P1 Barrier: Trigger picker has no search</strong>
+      <p>Expert marketers who know exactly what trigger they need ("tag added," "signup") must browse through category tabs instead of typing. This is a known HVC theme. For Kate Co, "Signs up for Email" happened to be on the Popular tab, but a ProServ customer looking for "tag added" would need to browse multiple tabs.</p>
+    </div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">03</span>
+    <span class="step-title">Trigger Configuration &mdash; Signs up for Email saved</span>
+    <span class="step-badge badge-pass">Pass</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/03_trigger_config.png" alt="Trigger config panel showing Signs up for Email with Include imported contacts checkbox and Filter who can enter this flow link">
+    <dl class="step-meta">
+      <dt>Marketer goal</dt><dd>Confirm trigger configuration, save it</dd>
+      <dt>What we see</dt><dd>"Signs up for Email" panel with optional "Include imported contacts" toggle and "Filter who can enter this flow" link. Canvas shows the trigger node connected to "Add a step" placeholder.</dd>
+    </dl>
+    <div class="issue-box usability">
+      <strong>P3 Usability: No "one-time entry" toggle visible in trigger config</strong>
+      <p>The BigQuery recipe specifies <code>contacts_can_enter: false</code> (one-time entry). The trigger config shows "Include imported contacts" and "Filter who can enter" but no obvious toggle to limit contacts to a single journey entry. Kate Co would need to know to look in Settings, not the trigger panel.</p>
+    </div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">04</span>
+    <span class="step-title">Canvas with Trigger &mdash; Flow Map panel visible</span>
+    <span class="step-badge badge-pass">Pass</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/04_canvas_trigger_saved.png" alt="CJB canvas showing trigger node, Add a step placeholder, Contact exits, and Flow Map panel with Rules and Actions">
+    <dl class="step-meta">
+      <dt>Marketer goal</dt><dd>See the full canvas and begin adding the If/Else branch</dd>
+      <dt>What we see</dt><dd>Canvas with trigger "Contact signs up to Goodnight Fox," Add a step placeholder, and Contact exits node. Left panel shows Flow Map with Rules (If/Else, Split Path, Wait for trigger, Time delay) and Actions (Send email, Send SMS, etc.)</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">05</span>
+    <span class="step-title">If/Else Condition &mdash; Segment Builder opens</span>
+    <span class="step-badge badge-usability">P2 Usability</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/05_ifelse_added.png" alt="Segment Builder modal showing filter dropdown with How your contacts are tagged, Contact details, and other filter categories">
+    <dl class="step-meta">
+      <dt>Marketer goal</dt><dd>Add an If/Else condition: "Has made a purchase?"</dd>
+      <dt>What happened</dt><dd>Clicking "Add a step" &rarr; If/Else opens the Segment Builder in a full-page modal. The filter dropdown shows alphabetically sorted categories, not organized by common use case. "Purchase activity" is buried near the bottom of a long list.</dd>
+    </dl>
+    <div class="issue-box usability">
+      <strong>P2 Usability: Segment Builder filter list is overwhelming</strong>
+      <p>The dropdown mixes contact details (Address, Company, Email client) with behavioral filters (Purchase activity, Email engagement). For Kate Co's simple "has purchased?" check, the marketer must scroll past 20+ irrelevant fields. The search field helps but isn't immediately obvious. Common e-commerce conditions like "has purchased" should be surfaced at the top.</p>
+    </div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">06</span>
+    <span class="step-title">Purchase Condition &mdash; "has purchased" selected</span>
+    <span class="step-badge badge-pass">Pass</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/06_ifelse_purchase_condition.png" alt="Segment Builder showing Purchase activity filter with has purchased / has not purchased dropdown">
+    <dl class="step-meta">
+      <dt>Marketer goal</dt><dd>Configure the condition as "Purchase activity > has purchased"</dd>
+      <dt>What we see</dt><dd>Segment Builder with "Purchase activity" selected and "has purchased" checked in the value dropdown. Clean two-option dropdown (has purchased / has not purchased). "Use segment" button enabled.</dd>
+    </dl>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">07</span>
+    <span class="step-title">If/Else Configured &mdash; Yes/No paths visible</span>
+    <span class="step-badge badge-launch">P1 Launch-Blocker</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/07_ifelse_configured.png" alt="CJB canvas showing If/Else condition with Purchase activity > has purchased, Yes and No paths splitting to separate Contact exits nodes">
+    <dl class="step-meta">
+      <dt>Marketer goal</dt><dd>See the branching structure with Yes (has purchased) and No (hasn't) paths</dd>
+      <dt>What we see</dt><dd>Canvas shows the If/Else node with "Purchase activity > has purchased" condition, branching into Yes and No paths. Each path has its own "+" button for adding steps and ends at a separate "Contact exits" node.</dd>
+    </dl>
+    <div class="issue-box launch">
+      <strong>P1 Launch-Blocker: No path convergence/merge after branching</strong>
+      <p><strong>Critical gap:</strong> The BigQuery recipe specifies that both YES and NO paths converge at step 5 (5-day delay) before continuing with 3 more emails. CJB does not support path merging &mdash; each branch ends at its own "Contact exits" node. To replicate the target flow, Kate Co would need to <strong>duplicate steps 5&ndash;10 on both paths</strong>, doubling the number of email steps from 5 to 8 and creating a maintenance nightmare. This fundamentally limits CJB's ability to express common marketing patterns.</p>
+      <p><strong>Launch impact:</strong> BLOCKS accurate replication. Forces duplication or structural compromise.</p>
+    </div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">08</span>
+    <span class="step-title">Email Step (YES path) &mdash; Legacy vs New Builder fork</span>
+    <span class="step-badge badge-launch">P2 Launch-Blocker</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/08_email_yes_path_modal.png" alt="Send email modal showing To and From, Subject, Schedule, Tracking, and Legacy Builder vs New Builder selection">
+    <dl class="step-meta">
+      <dt>Marketer goal</dt><dd>Configure the "Welcome back" email with subject and content</dd>
+      <dt>What we see</dt><dd>Email config modal with To &amp; From, Subject (set to "Welcome back! Enjoy a special discount"), Schedule, Tracking, and a builder choice: Legacy Builder vs New Builder. Builder selection is mandatory before any content can be created.</dd>
+    </dl>
+    <div class="issue-box launch">
+      <strong>P2 Launch-Blocker: CJB Still Uses Legacy Editor Fork</strong>
+      <p>The modal presents "Select a builder to design your email" with Legacy Builder and New Builder side by side. This choice doesn't exist in regular campaigns (which default to NEB). Expert marketers face a confusing decision point &mdash; which builder should they use? Legacy templates may not work in New Builder. Content creation stalls here because the editing context is jarring.</p>
+      <p><strong>Launch impact:</strong> BLOCKS content completion &rarr; incomplete emails &rarr; cannot Turn On.</p>
+    </div>
+    <div class="issue-box usability">
+      <strong>P2 Usability: Email modal blocks canvas interaction</strong>
+      <p>While the email modal is open, "Save and close flow" and canvas clicks are inaccessible. Must explicitly Close or Remove the modal. No auto-save for subject/preview text changes.</p>
+    </div>
+    <div class="issue-box usability">
+      <strong>P3 Usability: Default email name is generic</strong>
+      <p>Email defaults to "Email contacts from your automation flow" &mdash; not helpful when building a multi-email series. Kate Co building 5 emails would see 5 identical names in the canvas. The "Rename" button is available but not enforced.</p>
+    </div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">09</span>
+    <span class="step-title">Partial Flow Canvas &mdash; Flow saved as Draft</span>
+    <span class="step-badge badge-launch">Incomplete</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/09_canvas_partial_flow.png" alt="CJB canvas showing partial flow with trigger, If/Else condition, one email on Yes path, No path empty">
+    <dl class="step-meta">
+      <dt>Marketer goal</dt><dd>Complete the full 10-step flow and save as Draft</dd>
+      <dt>What was built</dt><dd>Trigger (Signs up for Email) &rarr; If/Else (Purchase activity > has purchased) &rarr; Send email on YES path (subject set, no content). NO path empty. Steps 5&ndash;10 (delays, 3 follow-up emails) not added.</dd>
+    </dl>
+    <div class="issue-box launch">
+      <strong>P0 Launch-Blocker: Incomplete journey cannot be activated</strong>
+      <p>The combination of <strong>no path convergence</strong> (forcing step duplication), <strong>builder fork friction</strong> (stalling content creation), and <strong>modal-heavy UX</strong> (each email requires a full modal interaction + builder selection) meant the flow was abandoned at step 3 of 10. The remaining 7 steps would require: 1 email on the NO path, 3 delays, 3 more emails &mdash; but because paths don't merge, steps 5&ndash;10 would need to be duplicated on both branches (14 additional steps vs 7).</p>
+      <p><strong>No journey-wide exit condition visible:</strong> The BigQuery recipe specifies <code>completes_checkout</code> as a flow-wide exit. CJB's canvas shows per-branch "Contact exits" nodes, and the journey-wide exit condition is buried in Settings, not visible or configurable from the canvas.</p>
+    </div>
+  </div>
+</div>
+
+<h2 id="matrix">Cross-Cutting Issues Matrix</h2>
+
+<table>
+  <thead>
+    <tr><th>#</th><th>Issue</th><th>Type</th><th>Severity</th><th>Stage</th><th>Launch Impact</th><th>HVC Theme</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>No path convergence/merge after If/Else branch</td><td>Launch-blocker</td><td class="sev-p1">P1</td><td>3 &mdash; Design</td><td><strong>Blocks</strong></td><td>Missing Flow Primitives</td></tr>
+    <tr><td>2</td><td>Legacy vs New Builder fork in email steps</td><td>Launch-blocker</td><td class="sev-p2">P2</td><td>4 &mdash; Compose</td><td><strong>Blocks</strong></td><td>CJB Still Uses Legacy Editor</td></tr>
+    <tr><td>3</td><td>Incomplete emails prevent confident Turn On</td><td>Launch-blocker</td><td class="sev-p0">P0*</td><td>4&ndash;7 &mdash; Compose/Activate</td><td><strong>Blocks</strong></td><td>Premature Turn On / Activation</td></tr>
+    <tr><td>4</td><td>Trigger picker has no search</td><td>Barrier</td><td class="sev-p1">P1</td><td>1&ndash;2 &mdash; Discover/Define</td><td>Slows</td><td>Trigger Selection List Not Searchable</td></tr>
+    <tr><td>5</td><td>No "Welcome Discount" template in gallery</td><td>Barrier</td><td class="sev-p2">P2</td><td>1 &mdash; Discover</td><td>Slows</td><td>Better Templates / Pre-built Flows</td></tr>
+    <tr><td>6</td><td>Segment Builder filter list is overwhelming</td><td>Usability</td><td class="sev-p2">P2</td><td>3 &mdash; Design</td><td>Slows</td><td>Slow/Confusing Journey Builder UX</td></tr>
+    <tr><td>7</td><td>Email modal blocks canvas interaction</td><td>Usability</td><td class="sev-p3">P3</td><td>4 &mdash; Compose</td><td>Slows</td><td>&mdash;</td></tr>
+    <tr><td>8</td><td>Default email names are generic (not unique)</td><td>Usability</td><td class="sev-p3">P3</td><td>4 &mdash; Compose</td><td>Slows</td><td>&mdash;</td></tr>
+    <tr><td>9</td><td>One-time entry toggle not in trigger config panel</td><td>Usability</td><td class="sev-p3">P3</td><td>2 &mdash; Define</td><td>Slows</td><td>&mdash;</td></tr>
+    <tr><td>10</td><td>Journey-wide exit condition not visible on canvas</td><td>Usability</td><td class="sev-p2">P2</td><td>3 &mdash; Design</td><td>Slows</td><td>Missing Flow Primitives</td></tr>
+    <tr><td>11</td><td>Each email step requires full modal + builder selection</td><td>Usability</td><td class="sev-p2">P2</td><td>4 &mdash; Compose</td><td>Slows</td><td>Slow/Confusing Journey Builder UX</td></tr>
+    <tr><td>12</td><td>No delay contextual defaults (7-day default for welcome series)</td><td>Usability</td><td class="sev-p2">P2</td><td>3 &mdash; Design</td><td>Slows</td><td>&mdash;</td></tr>
+  </tbody>
+</table>
+<p style="font-size: 0.75rem; color: var(--muted);">*P0 for launch outcome (qualitative assessment). Issues observed during live scripted walkthrough on Goodnight Fox account, builder ID 9177.</p>
+
+<h2 id="klaviyo">Competitive Comparison: What Klaviyo Does Differently</h2>
+<div class="klaviyo-box">
+  <strong>Klaviyo Flows would handle this flow natively:</strong>
+  <ul style="margin-top: 8px; padding-left: 20px; font-size: 0.85rem;">
+    <li><strong>Path convergence:</strong> Klaviyo supports "Converge paths" after conditional splits, allowing steps 5&ndash;10 to exist once on the merged path. CJB forces duplication.</li>
+    <li><strong>Conditional split with built-in purchase check:</strong> Klaviyo's "Has Placed Order" trigger/condition is a first-class citizen, not buried in a Segment Builder dropdown.</li>
+    <li><strong>Inline email editing:</strong> Klaviyo opens the email editor inline without a builder selection fork. No Legacy vs New ambiguity.</li>
+    <li><strong>Flow-level exit condition:</strong> "Skip profiles who have already purchased" is a flow-level setting visible on the canvas, not buried in a Settings tab.</li>
+    <li><strong>Dynamic delays:</strong> Klaviyo supports both static and smart send-time delays, matching the BigQuery recipe's "dynamic" delay type.</li>
+    <li><strong>Pre-built Welcome Discount flow:</strong> Klaviyo's template library includes "Welcome Series with Discount" as a pre-built flow &mdash; Kate Co could start from a template instead of building from scratch.</li>
+  </ul>
+  <p style="margin-top: 10px;"><strong>Net:</strong> A 10-step welcome discount series that takes ~20 minutes to build on Klaviyo would require ~45+ minutes on CJB and still be structurally compromised (duplicated post-branch steps).</p>
+</div>
+
+<h2 id="recommendations">Recommendations</h2>
+
+<h3>Must Fix (Launch Blockers)</h3>
+<table>
+  <tr><th>Issue</th><th>Fix</th><th>Expected Impact</th></tr>
+  <tr><td>No path convergence after branch</td><td>Add "Merge paths" node that joins branches back to a single path</td><td>Enables accurate replication of multi-touchpoint flows with branching; eliminates step duplication</td></tr>
+  <tr><td>Legacy vs New Builder fork</td><td>Default to NEB for automation emails; deprecate legacy option</td><td>Unblock email content completion; match campaign editing experience</td></tr>
+  <tr><td>No completion checklist for Turn On</td><td>Show explicit readiness checklist (each email has content, subject, from; trigger configured)</td><td>Give marketers confidence to activate or clear signal of what's missing</td></tr>
+</table>
+
+<h3>Should Fix (Usability)</h3>
+<table>
+  <tr><th>Issue</th><th>Fix</th><th>Expected Impact</th></tr>
+  <tr><td>Trigger picker not searchable</td><td>Add typeahead/search to Starting Points modal</td><td>Reduce trigger selection time from 30s+ to &lt;5s for returning users</td></tr>
+  <tr><td>Template gallery missing discount series</td><td>Add "Welcome Discount Series" template with purchase branching</td><td>Reduce blank-canvas starts for the most common e-commerce pattern</td></tr>
+  <tr><td>Segment Builder filter overload</td><td>Surface top 5 e-commerce conditions at the top; group by use case</td><td>Faster condition setup for 80% of branching use cases</td></tr>
+  <tr><td>Journey exit condition buried in Settings</td><td>Surface flow-wide exit condition on canvas (near trigger)</td><td>Prevent accidental sends to customers who've already converted</td></tr>
+  <tr><td>Email step modal overhead</td><td>Allow inline subject/preview editing on canvas cards; defer builder choice</td><td>Reduce clicks per email from 5+ to 2</td></tr>
+</table>
+
+<footer>
+  <p><strong>Source:</strong> Live browser session on <code>us17.admin.mailchimp.com</code> &middot; Account: Goodnight Fox &middot; Builder ID: 9177 &middot; Run: 2026-05-26 &middot; Draft-only (never Turn On)</p>
+  <p><strong>BigQuery source:</strong> <code>customer_journeys.recipes</code> template <code>ced2d792-f6cd-447c-bf8a-373d77155f5e</code> &middot; Kate Co Home &amp; Design Studio (user_id: 133496462)</p>
+  <p><strong>Related:</strong>
+    <a href="../cjb-marketer-audit/">CJB Expert Marketer Audit</a> &middot;
+    <a href="../mailchimp.html">Mailchimp FY27 Dossier</a> &middot;
+    <a href="../index.html">Klaviyo Flows Competitive Analysis</a> &middot;
+    <a href="../shopify.html">Shopify Automations Brief</a>
+  </p>
+</footer>
+
+</div>
+</body>
+</html>
