@@ -1,6 +1,6 @@
-# Klaviyo Flows Competitive Analysis
+# FY27 CJB Product DeepDive
 
-**Live site:** [deepakp1308.github.io/klaviyo-flows-competitive-analysis](https://deepakp1308.github.io/klaviyo-flows-competitive-analysis/)
+**Live site:** [deepakp1308.github.io/FY27-CJB-Product-DeepDive](https://deepakp1308.github.io/FY27-CJB-Product-DeepDive/)
 
 An AI-agent-powered competitive intelligence platform that produces multi-layered strategy briefs for Mailchimp's automation and editor products. Covers Klaviyo, Shopify, six emerging threats, and Mailchimp's own Unified Builder and CJB roadmap — synthesized from 28K+ Voice-of-Customer data points, BigQuery product health telemetry, internal repo forensics, and live browser-based UX audits.
 
