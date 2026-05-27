@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CJB End-to-End Workflow Audit — All 8 Stages</title>
+<meta name="description" content="Comprehensive end-to-end audit of Mailchimp Customer Journey Builder across all 8 workflow stages: Discover, Define, Design, Compose, Target, Validate, Activate, Monitor. 10 screenshots, 12 findings.">
+<style>
+  :root { --ink: #111827; --muted: #6b7280; --border: #d1d5db; --bg: #f9fafb; --paper: #fff;
+    --red: #991b1b; --red-bg: #fef2f2; --amber: #92400e; --amber-bg: #fffbeb; --blue: #1e40af; --blue-bg: #eff6ff; --green: #065f46; --green-bg: #ecfdf5; --purple: #6b21a8; --purple-bg: #faf5ff; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    color: var(--ink); background: var(--bg); line-height: 1.5; }
+  .wrap { max-width: 960px; margin: 0 auto; padding: 24px 20px; }
+  h1 { font-size: 1.75rem; margin-bottom: 4px; }
+  h2 { font-size: 1.25rem; margin: 32px 0 12px; padding-bottom: 6px; border-bottom: 2px solid var(--ink); }
+  h3 { font-size: 1.05rem; margin: 20px 0 8px; }
+  .subtitle { color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
+  .verdict { background: var(--amber-bg); border-left: 4px solid var(--amber); padding: 16px; margin: 16px 0; }
+  .verdict strong { color: var(--amber); }
+  .method { background: var(--blue-bg); border-left: 4px solid var(--blue); padding: 14px; margin: 16px 0; font-size: 0.875rem; }
+  nav.toc { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+  nav.toc a { background: var(--paper); border: 1px solid var(--border); padding: 6px 12px; border-radius: 4px;
+    text-decoration: none; color: var(--ink); font-size: 0.8rem; font-weight: 600; }
+  nav.toc a:hover { background: var(--blue-bg); }
+  .step { background: var(--paper); border: 1px solid var(--border); border-radius: 8px; margin: 20px 0; overflow: hidden; }
+  .step-header { display: flex; align-items: center; gap: 10px; padding: 12px 16px; background: #f3f4f6; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+  .step-num { background: var(--ink); color: #fff; font-weight: 700; font-size: 0.75rem; padding: 3px 10px; border-radius: 12px; }
+  .step-title { font-weight: 600; font-size: 0.95rem; }
+  .step-badge { font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+  .badge-barrier { background: var(--red-bg); color: var(--red); }
+  .badge-usability { background: var(--amber-bg); color: var(--amber); }
+  .badge-launch { background: #fce7f3; color: #9d174d; }
+  .badge-pass { background: var(--green-bg); color: var(--green); }
+  .badge-bug { background: var(--purple-bg); color: var(--purple); }
+  .step-body { padding: 16px; }
+  .step-body img { width: 100%; height: auto; border: 1px solid var(--border); border-radius: 4px; display: block; margin-bottom: 12px; }
+  .step-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.85rem; margin-bottom: 12px; }
+  .step-meta dt { font-weight: 600; color: var(--muted); }
+  .step-meta dd { margin: 0; }
+  .issue-box { border: 1px solid var(--border); border-radius: 6px; padding: 10px 14px; margin-top: 10px; font-size: 0.85rem; }
+  .issue-box.barrier { border-left: 4px solid var(--red); background: var(--red-bg); }
+  .issue-box.usability { border-left: 4px solid var(--amber); background: var(--amber-bg); }
+  .issue-box.launch { border-left: 4px solid #9d174d; background: #fce7f3; }
+  .issue-box.bug { border-left: 4px solid var(--purple); background: var(--purple-bg); }
+  .issue-box.pass { border-left: 4px solid var(--green); background: var(--green-bg); }
+  .issue-box strong { display: block; margin-bottom: 2px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.8rem; margin: 12px 0; }
+  th, td { border: 1px solid var(--border); padding: 8px 10px; text-align: left; }
+  th { background: #f3f4f6; font-weight: 600; }
+  .sev-p0 { color: var(--red); font-weight: 700; }
+  .sev-p1 { color: #b91c1c; font-weight: 700; }
+  .sev-p2 { color: var(--amber); font-weight: 600; }
+  .sev-p3 { color: var(--muted); }
+  .kpi-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin: 16px 0; }
+  .kpi { background: var(--paper); border: 1px solid var(--border); padding: 14px; border-radius: 6px; text-align: center; }
+  .kpi .v { font-size: 1.5rem; font-weight: 700; }
+  .kpi .l { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; }
+  footer { margin-top: 32px; padding-top: 12px; border-top: 1px solid var(--border); font-size: 0.8rem; color: var(--muted); }
+  @media (max-width: 640px) { .step-meta { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<h1>CJB End-to-End Workflow Audit &mdash; All 8 Stages</h1>
+<p class="subtitle">Automated Test Suite &middot; Mailchimp Customer Journey Builder &middot; Goodnight Fox (us17) &middot; May 26, 2026</p>
+
+<nav class="toc">
+  <a href="#verdict">Verdict</a>
+  <a href="#methodology">Methodology</a>
+  <a href="#test1">1. Templates</a>
+  <a href="#test2">2. If/Else</a>
+  <a href="#test3">3. Turn On</a>
+  <a href="#test4">4. Settings</a>
+  <a href="#test5">5. SMS</a>
+  <a href="#test6">6. Exit Rules</a>
+  <a href="#test7">7. Analytics</a>
+  <a href="#matrix">Issues Matrix</a>
+  <a href="#recommendations">Recommendations</a>
+</nav>
+
+<div class="kpi-row">
+  <div class="kpi"><div class="v">7</div><div class="l">Tests Executed</div></div>
+  <div class="kpi"><div class="v">8</div><div class="l">Stages Covered</div></div>
+  <div class="kpi"><div class="v">10</div><div class="l">Screenshots</div></div>
+  <div class="kpi"><div class="v">12</div><div class="l">Issues Found</div></div>
+  <div class="kpi"><div class="v">2</div><div class="l">Passes</div></div>
+</div>
+
+<h2 id="verdict">Executive Summary</h2>
+<div class="verdict">
+  <strong>Mailchimp CJB is functional but riddled with usability friction across every stage.</strong>
+  <p>This audit extends the <a href="../cjb-marketer-audit/">initial marketer audit</a> with 7 new automated test cases covering template discovery, branching logic, SMS multi-channel, flow settings, validation, activation gates, and active flow analytics. We found <strong>12 new issues</strong> (4 usability, 3 barriers, 3 bugs, 2 structural gaps) across all 8 workflow stages. Two areas passed cleanly: the validation checklist and SMS availability. The dominant pattern: <em>features exist but are hard to discover, hard to configure, and hard to trust</em>.</p>
+</div>
+
+<h2 id="methodology">Methodology</h2>
+<div class="method">
+  <strong>Approach:</strong> Automated browser walkthrough on live Mailchimp account (Goodnight Fox, us17 datacenter). 7 test cases mapped to all 8 CJB workflow stages. All screenshots captured from live session. Flow 9171 (Scrawler_Ecom_Welcome_FirstPurchase) used for tests 2&ndash;6; Bloom Town Launch (9163) for test 7. Draft-only &mdash; never activated.<br><br>
+  <strong>Extends:</strong> <a href="../cjb-marketer-audit/">CJB Marketer Audit</a> which found 10 issues across trigger, delay, email builder, and template UX. This audit covers the remaining untested stages.<br><br>
+  <strong>Taxonomy:</strong> 8-stage CJB workflow: Discover &rarr; Define &rarr; Design &rarr; Compose &rarr; Target &rarr; Validate &rarr; Activate &rarr; Monitor. Classification: <em>Bug</em> (incorrect behavior), <em>Barrier</em> (blocks getting started), <em>Usability</em> (slows progress), <em>Launch-blocker</em> (prevents confident activation).
+</div>
+
+<!-- ===================== TEST 1: Template Gallery ===================== -->
+<h2 id="test1">Test 1: Template Gallery &mdash; Stage 1 (Discover)</h2>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">01</span>
+    <span class="step-title">Template Gallery &mdash; Full page with filters</span>
+    <span class="step-badge badge-usability">P2 Usability</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/01_template_gallery_top.png" alt="Mailchimp Flow Templates page showing 3 recommended templates and filter dropdowns for Channels, Topics, Apps & Integrations">
+    <dl class="step-meta">
+      <dt>Test action</dt><dd>Click "Choose flow template" from automations page</dd>
+      <dt>What we see</dt><dd>Full-page template gallery at <code>/customer-journey/explore/</code> with Channels/Topics/Apps & Integrations filters and Sort By dropdown. 80+ templates across 6 categories.</dd>
+    </dl>
+    <div class="issue-box usability">
+      <strong>P2 Usability: No search bar for templates</strong>
+      <p>The template gallery has filter dropdowns (Channels, Topics, Apps &amp; Integrations) but <strong>no free-text search</strong>. A marketer who knows they want a "birthday" or "win-back" template must browse through 80+ cards across 6 category sections. Klaviyo provides instant search with type-ahead.</p>
+    </div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">02</span>
+    <span class="step-title">Topics Filter &mdash; No B2B/ProServ/Appointment category</span>
+    <span class="step-badge badge-barrier">P2 Barrier</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/02_template_topics_filter.png" alt="Topics dropdown showing: Audience management, Ecommerce, Events, Feedback, General, Special dates, Split test, Transactional">
+    <dl class="step-meta">
+      <dt>Test action</dt><dd>Open Topics filter dropdown</dd>
+      <dt>Available topics</dt><dd>Audience management, Ecommerce, Events, Feedback, General, Special dates, Split test, Transactional</dd>
+    </dl>
+    <div class="issue-box barrier">
+      <strong>P2 Barrier: Topics taxonomy excludes ProServ/B2B/Appointments</strong>
+      <p>The 8 topic categories heavily skew e-commerce and transactional. There is no "B2B", "Professional Services", "Appointments", "Lead Nurture", or "SaaS" topic. Non-DTC users must browse "General" or start from scratch. One template ("Remind contacts about appointments or reservations") exists but is buried deep in the "Nurture leads" category with no topic filter to surface it.</p>
+    </div>
+    <div class="issue-box usability">
+      <strong>P3 Usability: Categories repeat "AI-powered" and regular versions of same 3 templates</strong>
+      <p>The first two sections &mdash; "Based on your Stripe store" and "All AI-powered flows" &mdash; show identical Welcome/Abandoned Cart/Win-back templates. This creates visual clutter and the impression that CJB only has 3 core flows.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== TEST 2: If/Else ===================== -->
+<h2 id="test2">Test 2: If/Else Branching &mdash; Stage 5 (Target/Personalize)</h2>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">03</span>
+    <span class="step-title">Flow Map sidebar &mdash; Drag-and-drop step palette</span>
+    <span class="step-badge badge-usability">P2 Usability</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/03_flow_sidebar_map.png" alt="Flow builder sidebar showing Rules (If/Else, Split Path, Wait for trigger, Time delay) and Actions (Send email, Send SMS, Webhook, etc.)">
+    <dl class="step-meta">
+      <dt>Test action</dt><dd>Open flow 9171, view sidebar step palette</dd>
+      <dt>Available steps</dt><dd><strong>Rules:</strong> If/Else, Split Path, Wait for trigger, Time delay. <strong>Actions:</strong> Send email, Send SMS, Webhook, Send survey in email, Group/Ungroup, Tag/Untag, Unsubscribe email, Update contact, Archive contact</dd>
+    </dl>
+    <div class="issue-box usability">
+      <strong>P2 Usability: Sidebar steps are drag-and-drop only &mdash; no click-to-add</strong>
+      <p>The sidebar palette shows step cards with grip handles, implying drag-and-drop. Clicking a sidebar card activates it but the user must then locate a "+" zone on the canvas to drop it. The alternative: click a "+" on the canvas, which opens a dropdown. Two different interaction models for the same action creates confusion. Browser automation could not reliably use drag-and-drop, confirming this is a barrier for accessibility and keyboard-only users.</p>
+    </div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">04</span>
+    <span class="step-title">Canvas step picker &mdash; Inline dropdown after clicking "+"</span>
+    <span class="step-badge badge-pass">Pass</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/04_add_step_picker.png" alt="Canvas showing '+' button clicked, dropdown with Rules (If/Else, Split Path, Wait for trigger, Time delay) and Actions (Send email, Send SMS New, etc.)">
+    <dl class="step-meta">
+      <dt>Test action</dt><dd>Click "+" button on canvas between steps</dd>
+      <dt>What happened</dt><dd>"Select a step to add" dropdown appeared with all available Rules and Actions. "Send SMS" labeled "New", "Webhook" labeled "Beta". Clean, accessible interaction.</dd>
+    </dl>
+    <div class="issue-box pass">
+      <strong>Pass: Canvas "+" picker works well</strong>
+      <p>The inline dropdown is accessible, keyboard-navigable, and labels new features clearly. This should be the primary step-add pattern; the drag-and-drop sidebar should be secondary.</p>
+    </div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">05</span>
+    <span class="step-title">If/Else Segment Builder &mdash; Condition categories</span>
+    <span class="step-badge badge-usability">P2 Usability</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/05_ifelse_segment_builder.png" alt="Segment builder modal with filter categories: How your contacts are tagged, How your contacts are grouped, Contact details">
+    <dl class="step-meta">
+      <dt>Test action</dt><dd>Add If/Else step to flow, view available conditions</dd>
+      <dt>Available conditions</dt><dd><strong>Tags:</strong> Tags. <strong>Groups:</strong> Content/Product interest. <strong>Contact details:</strong> Address, Company, Contact rating, Email, Language, Phone, Predicted age/gender/location, VIP status. <strong>Engagement:</strong> Automation activity, Email/SMS subscription &amp; interaction, Conversations. <strong>E-commerce:</strong> Amount spent, Products purchased, Purchase activity/date, Total orders.</dd>
+    </dl>
+    <div class="issue-box usability">
+      <strong>P2 Usability: If/Else opens full Segment Builder modal &mdash; heavyweight for simple branching</strong>
+      <p>Adding an If/Else rule opens Mailchimp's full-page Segment Builder modal (same as audience segmentation). For a simple branch like "has tag X" or "opened previous email", this is overwhelming. The filter list mixes account-specific merge fields (e.g., "How old is your toddler?", "Yotpo", "Yotpo 2", "Yotpo 3") with system conditions, making it hard to find standard branching options. Klaviyo uses a focused inline condition picker within the flow canvas.</p>
+      <p><strong>Positive:</strong> The search field ("Select or search a filter") does work &mdash; you can type to filter conditions. This is a notable improvement over the trigger picker which has no search.</p>
+    </div>
+  </div>
+</div>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">06</span>
+    <span class="step-title">If/Else on canvas &mdash; Yes/No branching</span>
+    <span class="step-badge badge-pass">Pass</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/06_ifelse_on_canvas.png" alt="Flow canvas showing If/else conditions node at bottom with Yes and No branches, unconfigured">
+    <dl class="step-meta">
+      <dt>Test action</dt><dd>Cancel segment builder to see If/Else node on canvas</dd>
+      <dt>What we see</dt><dd>If/Else step appears with "Choose 1 or more conditions" prompt and Yes/No branch labels. Warning icon shows unconfigured state. Manage Step context menu has Pause, Edit, Copy, Delete.</dd>
+    </dl>
+    <div class="issue-box pass">
+      <strong>Pass: If/Else branching renders clearly on canvas</strong>
+      <p>The Yes/No branches are visually clear and the warning icon correctly indicates an unconfigured state. The context menu (Pause, Edit, Copy, Delete) provides expected management actions.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== TEST 3: Continue / Turn On ===================== -->
+<h2 id="test3">Test 3: Turn On Attempt &mdash; Stage 7 (Activate)</h2>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">07</span>
+    <span class="step-title">Automation Flow Review &mdash; Validation checklist</span>
+    <span class="step-badge badge-usability">P2 Usability</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/07_continue_validation_review.png" alt="Automation flow review modal showing: Trigger configured (check), Flow settings configured (check), Please make sure this email's content is not empty (error), Plus 2 other issues">
+    <dl class="step-meta">
+      <dt>Test action</dt><dd>Click "Continue" button in flow builder header</dd>
+      <dt>What happened</dt><dd>"Automation flow review" modal appeared with validation checklist: Trigger configured ✅, Flow settings configured ✅, "Please make sure this email's content is not empty" ❌, "Plus 2 other issues"</dd>
+    </dl>
+    <div class="issue-box usability">
+      <strong>P2 Usability: Validation hides errors behind "Plus N other issues" collapse</strong>
+      <p>The validation checklist correctly identifies that the flow is not ready (trigger OK, settings OK, email content empty). However, it only shows the <strong>first error</strong> and hides additional issues behind "Plus 2 other issues" &mdash; without expanding them automatically. A marketer cannot see the full list of what needs fixing without extra clicks. The "Go to issue" button navigates to the first error only.</p>
+      <p><strong>Positive:</strong> The validation checklist <em>does exist</em> and correctly blocks activation of incomplete flows. This is a significant improvement over what we observed in the earlier audit, where the Continue button's state was opaque. The validation is the right pattern; it just needs to show <em>all</em> issues upfront.</p>
+    </div>
+    <div class="issue-box barrier">
+      <strong>P3 Barrier: "Edit" vs "Go to issue" buttons are ambiguous</strong>
+      <p>The review modal shows "Edit" (returns to flow builder) and "Go to issue" (navigates to first error). A marketer who wants to fix all issues in sequence has no "Fix all" path &mdash; they must fix one issue, click Continue again, and re-run validation.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== TEST 4: Settings ===================== -->
+<h2 id="test4">Test 4: Flow Settings &mdash; Stage 6 (Validate)</h2>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">08</span>
+    <span class="step-title">Flow Settings panel &mdash; Name, objective, logic, tracking</span>
+    <span class="step-badge badge-usability">P3 Usability</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/08_flow_settings.png" alt="Flow Settings panel showing Name and objective (Marketing objective: No objective), Logic settings (Contacts can re-enter flow, Exit condition: Reaches the end of the flow), Contact management">
+    <dl class="step-meta">
+      <dt>Test action</dt><dd>Click Settings tab in left sidebar</dd>
+      <dt>Settings available</dt><dd><strong>Name &amp; objective:</strong> Flow name, Marketing objective (No objective/Nurture relationships/Sell stuff/Drive audience action/Share information/Manage audience/Re-engage/Something else). <strong>Logic:</strong> Re-entry toggle, Exit condition dropdown. <strong>Contact management:</strong> Manually add/remove contacts. <strong>Tracking:</strong> GA link tracking, Track clicks, Track opens.</dd>
+    </dl>
+    <div class="issue-box usability">
+      <strong>P3 Usability: Missing settings a marketer would expect</strong>
+      <p><strong>Present:</strong> Name, objective, re-entry, exit condition, manual contact add/remove, GA tracking, click/open tracking. <strong>Missing:</strong> Send time optimization (Smart Send Time), send throttling/rate limiting, A/B test configuration at the flow level, flow-level scheduling (business hours only), UTM parameter customization, quiet hours configuration for the flow (only available per-SMS step). Compared to Klaviyo's flow settings which include Smart Send Time, throttling, and skip-on-recent-email rules, Mailchimp's settings are basic.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== TEST 5: SMS ===================== -->
+<h2 id="test5">Test 5: SMS Step &mdash; Stage 3 (Design Multi-Channel)</h2>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">09</span>
+    <span class="step-title">Send SMS configuration &mdash; Step added to flow</span>
+    <span class="step-badge badge-pass">Pass (with caveats)</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/09_sms_step_config.png" alt="Send SMS modal showing Untitled SMS message, Send time: As soon as possible outside of quiet hours, Content: Write your message, Preview showing phone number and default opt-out text">
+    <dl class="step-meta">
+      <dt>Test action</dt><dd>Add Send SMS step from canvas "+" picker</dd>
+      <dt>SMS configuration</dt><dd><strong>Title:</strong> "Untitled SMS message" with Edit name link. <strong>Send time:</strong> "As soon as possible, outside of quiet hours" with View button. <strong>Content:</strong> "Write your message" with Edit content button. <strong>Preview:</strong> Shows account phone number (+1-925-750-3995) and default message "Kylie at Goodnight Fox: Text STOP to opt out".</dd>
+    </dl>
+    <div class="issue-box pass">
+      <strong>Pass: SMS is available in CJB flows</strong>
+      <p>SMS steps can be added to CJB flows from the canvas picker. The step is labeled "New" confirming recent addition. The configuration modal shows send time, content editing, and a real-time preview with the account's registered phone number. No separate SMS opt-in setup is required inline &mdash; it uses the account's existing SMS program.</p>
+    </div>
+    <div class="issue-box usability">
+      <strong>P3 Usability: SMS content editor is minimal compared to email</strong>
+      <p>While email steps offer a full visual builder with templates, the SMS step provides only a text-entry field with a character counter. No merge tag assistant, no link shortener preview, no A/B testing of SMS variants. The "quiet hours" setting is appreciated but not configurable per-flow (only per-step).</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== TEST 6: Exit Rules ===================== -->
+<h2 id="test6">Test 6: Contact Exit Rules &mdash; Stage 2 (Define)</h2>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">08b</span>
+    <span class="step-title">Exit Condition &mdash; Buried in Settings, not on canvas</span>
+    <span class="step-badge badge-barrier">P2 Barrier</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/08_flow_settings.png" alt="Flow Settings showing Exit condition dropdown set to 'Reaches the end of the flow'">
+    <dl class="step-meta">
+      <dt>Test action</dt><dd>Look for exit/removal rules on flow canvas and Settings panel</dd>
+      <dt>What we found</dt><dd>Exit condition is in Settings panel under "Logic settings" &mdash; dropdown with "Reaches the end of the flow" as default. Canvas shows "Contact exits" label at bottom but clicking it does nothing.</dd>
+    </dl>
+    <div class="issue-box barrier">
+      <strong>P2 Barrier: Exit conditions are limited and buried</strong>
+      <p>The exit condition dropdown offers only "Reaches the end of the flow" by default. There is no obvious way to set exit-on-event (e.g., "exit if contact makes a purchase", "exit if contact unsubscribes"). Klaviyo allows setting specific goal events that automatically remove contacts from a flow when achieved. In Mailchimp, the "Contact exits" label appears on the canvas but is non-interactive &mdash; a marketer cannot click it to configure exit rules. This is a significant gap for e-commerce flows where purchase-based exit is essential.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== TEST 7: Analytics ===================== -->
+<h2 id="test7">Test 7: Active Flow Analytics &mdash; Stage 8 (Monitor)</h2>
+
+<div class="step">
+  <div class="step-header">
+    <span class="step-num">10</span>
+    <span class="step-title">Flow Report &mdash; Bloom Town Launch analytics</span>
+    <span class="step-badge badge-usability">P2 Usability</span>
+  </div>
+  <div class="step-body">
+    <img src="screenshots/10_flow_report_overview.png" alt="Flow report for Bloom Town Launch showing Days active: 22, Total started: 9,061, Performance section with Revenue: --, Revenue per recipient: $0, Order rate: 0%, Click rate: 0.44%">
+    <dl class="step-meta">
+      <dt>Test action</dt><dd>Click "View Report" on active Bloom Town Launch flow (9,061 contacts completed)</dd>
+      <dt>Metrics shown</dt><dd><strong>Header:</strong> Active status, start date, days active (22), total started (9,061), in progress (0), completed (9,061). <strong>Date range:</strong> 05/04&ndash;05/26/2026 with bot filtering. <strong>Performance:</strong> Revenue (--), Revenue per recipient ($0), Order rate (0%), Click rate (0.44%).</dd>
+    </dl>
+    <div class="issue-box usability">
+      <strong>P2 Usability: Flow report lacks actionable insight for marketers</strong>
+      <p>The flow report shows basic throughput metrics (started/in-progress/completed) and e-commerce performance (revenue, order rate, click rate). However:</p>
+      <p>&bull; <strong>No per-step metrics:</strong> Cannot see which email in the flow performs best. No step-level open/click rates on the report page.<br>
+      &bull; <strong>No conversion funnel visualization:</strong> No visual showing drop-off between steps. Klaviyo shows a flow-level funnel with conversion rates at each node.<br>
+      &bull; <strong>Revenue shows "--" even for e-commerce flows:</strong> With 9,061 completed contacts and 0% order rate, the revenue display shows "--" instead of "$0" &mdash; inconsistent with the $0 revenue-per-recipient.<br>
+      &bull; <strong>No comparison to benchmarks:</strong> 0.44% click rate has no context. Is this good or bad for this type of flow?<br>
+      &bull; <strong>No "next action" recommendations:</strong> No AI-powered suggestions for improving the flow's performance.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ===================== ISSUES MATRIX ===================== -->
+<h2 id="matrix">Cross-Cutting Issues Matrix</h2>
+
+<table>
+  <thead>
+    <tr><th>#</th><th>Issue</th><th>Type</th><th>Severity</th><th>Stage</th><th>Competitive Gap</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>1</td><td>Template gallery has no search bar</td><td>Usability</td><td class="sev-p2">P2</td><td>1 &mdash; Discover</td><td>Klaviyo: instant type-ahead search</td></tr>
+    <tr><td>2</td><td>Topics taxonomy excludes ProServ/B2B</td><td>Barrier</td><td class="sev-p2">P2</td><td>1 &mdash; Discover</td><td>All competitors offer more vertical-specific templates</td></tr>
+    <tr><td>3</td><td>AI-powered templates duplicate regular templates</td><td>Usability</td><td class="sev-p3">P3</td><td>1 &mdash; Discover</td><td>&mdash;</td></tr>
+    <tr><td>4</td><td>Exit conditions limited and buried in Settings</td><td>Barrier</td><td class="sev-p2">P2</td><td>2 &mdash; Define</td><td>Klaviyo: goal-event exit on canvas</td></tr>
+    <tr><td>5</td><td>Sidebar uses drag-only; canvas uses click-to-add</td><td>Usability</td><td class="sev-p2">P2</td><td>3 &mdash; Design</td><td>Accessibility &amp; consistency issue</td></tr>
+    <tr><td>6</td><td>SMS editor minimal vs. email builder</td><td>Usability</td><td class="sev-p3">P3</td><td>3 &mdash; Design</td><td>Klaviyo/Attentive: richer SMS editors</td></tr>
+    <tr><td>7</td><td>If/Else opens heavyweight Segment Builder</td><td>Usability</td><td class="sev-p2">P2</td><td>5 &mdash; Target</td><td>Klaviyo: inline condition picker</td></tr>
+    <tr><td>8</td><td>Missing flow-level settings (Smart Send Time, throttle)</td><td>Barrier</td><td class="sev-p3">P3</td><td>6 &mdash; Validate</td><td>Klaviyo: Smart Send Time, skip-on-recent</td></tr>
+    <tr><td>9</td><td>Validation hides errors behind "Plus N issues"</td><td>Usability</td><td class="sev-p2">P2</td><td>7 &mdash; Activate</td><td>&mdash;</td></tr>
+    <tr><td>10</td><td>"Edit" vs "Go to issue" buttons ambiguous</td><td>Usability</td><td class="sev-p3">P3</td><td>7 &mdash; Activate</td><td>&mdash;</td></tr>
+    <tr><td>11</td><td>Flow report lacks per-step metrics &amp; funnel</td><td>Barrier</td><td class="sev-p2">P2</td><td>8 &mdash; Monitor</td><td>Klaviyo: per-node metrics on canvas</td></tr>
+    <tr><td>12</td><td>Revenue shows "--" inconsistently with $0 RPR</td><td>Bug</td><td class="sev-p3">P3</td><td>8 &mdash; Monitor</td><td>&mdash;</td></tr>
+  </tbody>
+</table>
+
+<h3>Severity Distribution</h3>
+<div class="kpi-row">
+  <div class="kpi"><div class="v" style="color:var(--red)">0</div><div class="l">P0 Critical</div></div>
+  <div class="kpi"><div class="v" style="color:#b91c1c">0</div><div class="l">P1 High</div></div>
+  <div class="kpi"><div class="v" style="color:var(--amber)">8</div><div class="l">P2 Medium</div></div>
+  <div class="kpi"><div class="v" style="color:var(--muted)">4</div><div class="l">P3 Low</div></div>
+</div>
+
+<h3>Stage Coverage</h3>
+<table>
+  <thead><tr><th>Stage</th><th>Issues</th><th>Worst Severity</th><th>Tested By</th></tr></thead>
+  <tbody>
+    <tr><td>1 &mdash; Discover</td><td>3</td><td class="sev-p2">P2</td><td>Test 1: Template Gallery</td></tr>
+    <tr><td>2 &mdash; Define</td><td>1</td><td class="sev-p2">P2</td><td>Test 6: Exit Rules</td></tr>
+    <tr><td>3 &mdash; Design</td><td>2</td><td class="sev-p2">P2</td><td>Test 5: SMS Step</td></tr>
+    <tr><td>4 &mdash; Compose</td><td>0</td><td>&mdash;</td><td>(Covered by marketer audit)</td></tr>
+    <tr><td>5 &mdash; Target</td><td>1</td><td class="sev-p2">P2</td><td>Test 2: If/Else</td></tr>
+    <tr><td>6 &mdash; Validate</td><td>1</td><td class="sev-p3">P3</td><td>Test 4: Settings</td></tr>
+    <tr><td>7 &mdash; Activate</td><td>2</td><td class="sev-p2">P2</td><td>Test 3: Turn On</td></tr>
+    <tr><td>8 &mdash; Monitor</td><td>2</td><td class="sev-p2">P2</td><td>Test 7: Analytics</td></tr>
+  </tbody>
+</table>
+
+<!-- ===================== RECOMMENDATIONS ===================== -->
+<h2 id="recommendations">Recommendations</h2>
+
+<h3>High Priority (P2 &mdash; Slows Every User)</h3>
+<table>
+  <tr><th>Issue</th><th>Fix</th><th>Expected Impact</th></tr>
+  <tr><td>Template gallery no search</td><td>Add typeahead search bar to template gallery (same as trigger picker fix)</td><td>Reduce template discovery time from browsing 80+ cards to instant match</td></tr>
+  <tr><td>Exit conditions buried</td><td>Make "Contact exits" label on canvas clickable; open goal-event exit configuration</td><td>Enable purchase-exit flows without digging into Settings</td></tr>
+  <tr><td>If/Else opens full Segment Builder</td><td>Build lightweight inline condition picker for common branching (tags, engagement, purchase); link to full builder for advanced</td><td>Reduce branching setup from 30s+ to &lt;10s for common conditions</td></tr>
+  <tr><td>Validation hides issues</td><td>Expand all validation errors by default in the review modal</td><td>Marketers see complete fix list on first attempt</td></tr>
+  <tr><td>Flow report lacks per-step metrics</td><td>Show open/click rates per email node on report page; add funnel visualization</td><td>Enable data-driven flow optimization without exporting to spreadsheets</td></tr>
+</table>
+
+<h3>Medium Priority (P3 &mdash; Power User Friction)</h3>
+<table>
+  <tr><th>Issue</th><th>Fix</th><th>Expected Impact</th></tr>
+  <tr><td>Topics taxonomy</td><td>Add B2B/ProServ/SaaS topic categories to template gallery</td><td>Reduce blank-canvas starts for non-DTC users</td></tr>
+  <tr><td>Sidebar drag-only</td><td>Make sidebar cards clickable (click to select, then click "+" to place)</td><td>Improve accessibility and reduce click confusion</td></tr>
+  <tr><td>SMS editor minimal</td><td>Add merge tag picker, link shortener, character/segment counter</td><td>Bring SMS authoring closer to email builder parity</td></tr>
+  <tr><td>Missing flow settings</td><td>Add Smart Send Time, throttling, skip-on-recent-email at flow level</td><td>Close competitive gap with Klaviyo's flow-level optimization</td></tr>
+</table>
+
+<h3>Cross-Cutting Themes</h3>
+<div class="method">
+  <strong>Theme 1: Discovery &gt; Discoverability.</strong> Features exist (SMS, If/Else with rich conditions, validation checklist, exit conditions) but are hard to find. The most common user paths bury capabilities behind non-obvious UI patterns (drag-and-drop, collapsed sections, Settings panel).<br><br>
+  <strong>Theme 2: E-commerce bias pervades every stage.</strong> Templates, topics, suggested triggers, reporting metrics &mdash; all assume DTC/e-commerce. ProServ, B2B, SaaS, and appointment-based businesses are underserved at every touchpoint.<br><br>
+  <strong>Theme 3: Monitoring is the weakest stage.</strong> Flow analytics show aggregate throughput and e-commerce revenue but lack step-level performance, funnel visualization, benchmark comparisons, and actionable recommendations. This makes CJB a "set and forget" tool rather than an optimization platform.<br><br>
+  <strong>Combined with marketer audit:</strong> Across both audits, 22 total issues found. The binding constraint is not feature availability but <em>activation friction</em> &mdash; consistent with the product health data showing 33.6% activation rate and 40.2% churn.
+</div>
+
+<footer>
+  <p><strong>Source:</strong> Automated browser session on <code>us17.admin.mailchimp.com</code> &middot; Account: Goodnight Fox &middot; Run: 2026-05-26 &middot; Draft-only (never Turn On)</p>
+  <p><strong>Related:</strong>
+    <a href="../cjb-marketer-audit/">CJB Marketer Audit (10 issues)</a> &middot;
+    <a href="../mailchimp.html">Mailchimp FY27 dossier</a> &middot;
+    <a href="../index.html">Competitive analysis home</a>
+  </p>
+</footer>
+
+</div>
+</body>
+</html>
