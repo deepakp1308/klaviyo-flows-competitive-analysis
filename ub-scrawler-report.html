@@ -1,0 +1,1395 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Unified Builder Scrawler — Live UX Audit Report</title>
+<meta name="description" content="Mailchimp Unified Builder (AI Chat Editor) UX evaluation report: 14 issues across 2 personas, screenshot evidence, improvement plan." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0E1116;
+    --ink-2: #1F2937;
+    --muted: #4B5563;
+    --line: #E5E7EB;
+    --line-2: #D1D5DB;
+    --bg: #F8F7F4;
+    --paper: #FFFFFF;
+    --brand: #7C3AED;
+    --brand-2: #5B21B6;
+    --good: #047857;
+    --warn: #B45309;
+    --bad: #B91C1C;
+    --chip: #EDE9FE;
+    --chip-ink: #5B21B6;
+    --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.06);
+    --critical: #DC2626;
+    --high: #EA580C;
+    --medium: #2563EB;
+    --low: #6B7280;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    line-height: 1.45;
+  }
+  .toolbar {
+    position: sticky; top: 0; z-index: 10;
+    background: rgba(248,247,244,.85);
+    backdrop-filter: saturate(140%) blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .toolbar-inner {
+    max-width: 1180px; margin: 0 auto;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 10px 20px; gap: 12px;
+    flex-wrap: wrap;
+  }
+  .brand-mark {
+    display:flex; align-items:center; gap:10px;
+    font-weight: 700; font-size: 14px; color: var(--ink-2);
+  }
+  .brand-dot { width: 10px; height: 10px; border-radius: 3px; background: var(--brand); box-shadow: 0 0 0 3px rgba(124,58,237,.25); }
+  .toolbar a.btn, .toolbar button.btn {
+    border: 1px solid var(--line-2);
+    background: var(--paper);
+    color: var(--ink-2);
+    padding: 7px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .toolbar .btn.primary { background: var(--ink); color: white; border-color: var(--ink); }
+  .toolbar .btn:hover { transform: translateY(-1px); }
+
+  .tabs {
+    display: inline-flex;
+    background: #ECEAE6;
+    border-radius: 10px;
+    padding: 3px;
+    gap: 2px;
+    flex-wrap: wrap;
+  }
+  .tab {
+    border: 0;
+    background: transparent;
+    color: var(--muted);
+    padding: 7px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    font-family: inherit;
+    white-space: nowrap;
+  }
+  .tab:hover { color: var(--ink-2); }
+  .tab.active {
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 1px 2px rgba(16,24,40,.06);
+  }
+  .tabpanel { display: none; }
+  .tabpanel.active { display: block; }
+
+  .page-wrap { max-width: 1180px; margin: 0 auto; padding: 24px 20px 64px; }
+
+  .page {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    box-shadow: var(--shadow);
+    padding: 28px 32px 26px;
+    margin-bottom: 22px;
+  }
+
+  .page-head {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    gap: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+    margin-bottom: 18px;
+  }
+  .eyebrow {
+    font-size: 11px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--muted); font-weight: 700;
+  }
+  h1 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 28px;
+    line-height: 1.15;
+    margin: 6px 0 4px;
+    letter-spacing: -0.01em;
+  }
+  .subtitle { color: var(--muted); font-size: 14px; }
+  .meta { text-align: right; font-size: 12px; color: var(--muted); }
+  .meta strong { color: var(--ink-2); }
+
+  h2 {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-size: 18px;
+    margin: 24px 0 10px;
+    letter-spacing: -0.005em;
+  }
+  h3 { font-size: 14px; margin: 16px 0 8px; }
+  p { margin: 0 0 10px; font-size: 13.5px; color: var(--ink-2); }
+  ul { margin: 4px 0 10px; padding-left: 18px; }
+  li { font-size: 13px; color: var(--ink-2); margin-bottom: 4px; }
+  li strong { color: var(--ink); }
+
+  .grid { display: grid; gap: 16px; }
+  .grid.cols-2 { grid-template-columns: 1fr 1fr; }
+  .grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
+  .grid.cols-4 { grid-template-columns: repeat(4, 1fr); }
+  @media (max-width: 880px) {
+    .grid.cols-2, .grid.cols-3, .grid.cols-4 { grid-template-columns: 1fr; }
+    .page { padding: 20px; }
+    h1 { font-size: 22px; }
+    .tabs { order: 3; flex-basis: 100%; }
+  }
+
+  .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin: 16px 0; }
+  @media (max-width: 700px) { .kpi-row { grid-template-columns: repeat(2, 1fr); } }
+  .kpi {
+    background: linear-gradient(180deg, #FFFFFF 0%, #FAFAFB 100%);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 12px 14px;
+  }
+  .kpi .v {
+    font-family: 'Source Serif 4', Georgia, serif;
+    font-weight: 700;
+    font-size: 24px;
+    line-height: 1;
+    color: var(--ink);
+  }
+  .kpi .l { font-size: 11px; color: var(--muted); margin-top: 6px; line-height: 1.3; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 12.5px;
+    margin: 10px 0;
+  }
+  th, td {
+    text-align: left;
+    padding: 8px 10px;
+    border-bottom: 1px solid var(--line);
+    vertical-align: top;
+  }
+  th {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .06em;
+    text-transform: uppercase;
+    color: var(--muted);
+    background: #FAFAFB;
+  }
+
+  .sev-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 4px;
+    letter-spacing: .04em;
+    text-transform: uppercase;
+  }
+  .sev-critical { background: #FEE2E2; color: var(--critical); }
+  .sev-high { background: #FFEDD5; color: var(--high); }
+  .sev-medium { background: #DBEAFE; color: var(--medium); }
+  .sev-low { background: #F3F4F6; color: var(--low); }
+
+  .screenshot-box {
+    margin: 16px 0;
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    overflow: hidden;
+    background: #FAFAFB;
+  }
+  .screenshot-box img {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid var(--line);
+  }
+  .screenshot-caption {
+    padding: 10px 14px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--ink-2);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .screenshot-caption .num {
+    background: var(--ink);
+    color: white;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .annotation-box {
+    padding: 10px 14px;
+    background: #FFFBEB;
+    border-top: 1px solid #FDE68A;
+    font-size: 12px;
+    color: var(--ink-2);
+    line-height: 1.5;
+  }
+  .annotation-box .issue-pills {
+    margin-top: 6px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .issue-pill {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 4px;
+    letter-spacing: .03em;
+  }
+  .issue-pill.critical { background: #FEE2E2; color: var(--critical); }
+  .issue-pill.high { background: #FFEDD5; color: var(--high); }
+  .issue-pill.medium { background: #DBEAFE; color: var(--medium); }
+  .issue-pill.low { background: #F3F4F6; color: var(--low); }
+
+  .issue-card {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-bottom: 14px;
+    background: var(--paper);
+  }
+  .issue-card h3 {
+    margin: 0 0 8px;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .issue-card .issue-meta {
+    display: flex;
+    gap: 16px;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+  }
+  .issue-card .issue-meta span { display: flex; align-items: center; gap: 4px; }
+  .issue-card p { font-size: 12.5px; margin: 0 0 6px; }
+  .issue-card .evidence-thumb {
+    display: flex;
+    gap: 8px;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+  .issue-card .evidence-thumb img {
+    height: 80px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  .issue-card .evidence-thumb img:hover { border-color: var(--brand); box-shadow: 0 0 0 2px rgba(124,58,237,.2); }
+
+  .verdict-box {
+    background: #FEF2F2;
+    border: 1px solid #FECACA;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 16px 0;
+  }
+  .verdict-box h3 { color: var(--critical); margin: 0 0 6px; }
+
+  .method-box {
+    background: #F5F3FF;
+    border-left: 4px solid var(--brand);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin: 14px 0;
+    font-size: 12.5px;
+  }
+
+  .guardrails {
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin-top: 24px;
+    font-size: 12px;
+  }
+  .guardrails h3 { color: var(--good); margin: 0 0 8px; font-size: 13px; }
+  .guardrails ul { margin: 0; }
+  .guardrails li { font-size: 12px; margin-bottom: 3px; }
+
+  .priority-table td:first-child { font-weight: 700; white-space: nowrap; }
+  .fix-card {
+    border-left: 4px solid var(--brand);
+    padding: 10px 14px;
+    background: #FAFAFB;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 10px;
+  }
+  .fix-card h4 { margin: 0 0 4px; font-size: 13px; }
+  .fix-card p { margin: 0; font-size: 12px; }
+
+  @media print {
+    .toolbar { position: static; }
+    .tabpanel:not(.active) { display: block !important; }
+    .page { break-inside: avoid; }
+    .screenshot-box { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="toolbar">
+  <div class="toolbar-inner">
+    <div class="brand-mark"><span class="brand-dot"></span> Unified Builder · AI Chat Editor UX Audit</div>
+    <div class="tabs" role="tablist" aria-label="Report sections">
+      <button class="tab active" role="tab" aria-selected="true" data-tab="summary">Executive Summary</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="walkthrough">Walkthrough</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="ecommerce">E-commerce Build</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="proserv">Pro Services Build</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="issues">Issue Log</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="improvement">Improvement Plan</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="metrics">Metrics</button>
+      <button class="tab" role="tab" aria-selected="false" data-tab="recommendations">Recommendations</button>
+    </div>
+    <div style="display:flex; gap:8px; flex-wrap:wrap;">
+      <a class="btn" href="mailchimp.html">→ Mailchimp Dossier</a>
+      <a class="btn" href="cjb-scrawler-report.html">→ CJB Scrawler</a>
+      <a class="btn" href="mailchimp-editor.html">→ Editor Brief</a>
+      <button class="btn" onclick="window.print()">Print / PDF</button>
+    </div>
+  </div>
+</div>
+
+<div class="page-wrap">
+
+<!-- ============== EXECUTIVE SUMMARY TAB ============== -->
+<div class="tabpanel active" id="panel-summary" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Unified Builder · AI Chat Editor · Live UX Evaluation</div>
+      <h1>Mailchimp Unified Builder: <em style="color:var(--brand);">AI-First Email Creation</em> is not ready for non-expert users</h1>
+      <p class="subtitle">Qualitative N=1 scripted evaluation · 2 persona journeys · Draft-only, no emails sent</p>
+    </div>
+    <div class="meta">
+      <strong>Date:</strong> May 26, 2026<br>
+      <strong>Account:</strong> Goodnight Fox (us17)<br>
+      <strong>Method:</strong> Manual + Browser Automation
+    </div>
+  </header>
+
+  <div class="method-box">
+    <strong>Method:</strong> Manual walkthrough of Mailchimp's new AI Chat Editor (Unified Builder) using two personas — e-commerce store owner and professional services marketer. Evaluated end-to-end: campaign creation → AI content generation → editor interaction → send readiness. All campaigns saved as drafts only; no emails sent or scheduled.
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi"><div class="v" style="color:var(--critical);">1</div><div class="l">Critical Issues</div></div>
+    <div class="kpi"><div class="v" style="color:var(--high);">3</div><div class="l">High Severity</div></div>
+    <div class="kpi"><div class="v" style="color:var(--medium);">6</div><div class="l">Medium Severity</div></div>
+    <div class="kpi"><div class="v" style="color:var(--low);">4</div><div class="l">Low Severity</div></div>
+  </div>
+
+  <h2>What Was Tested</h2>
+  <div class="grid cols-2">
+    <div>
+      <h3>E-commerce Persona</h3>
+      <ul>
+        <li>Created campaign from home dashboard "Create email" button</li>
+        <li>Used AI Chat Editor to generate summer sale campaign</li>
+        <li>Attempted to edit generated content in visual editor</li>
+        <li>Verified campaign configuration (To, From, Subject)</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Professional Services Persona</h3>
+      <ul>
+        <li>Started new email campaign for lead nurture</li>
+        <li>Generated content plan via AI conversation</li>
+        <li>Attempted to convert plan into full email draft</li>
+        <li>Explored alternative paths when blocked</li>
+      </ul>
+    </div>
+  </div>
+
+  <h2>Top 5 Issues</h2>
+
+  <div class="issue-card">
+    <h3><span class="sev-badge sev-critical">Critical</span> UB-001: AI loads wrong template instead of generating content</h3>
+    <p>The AI claimed to generate a summer sale email but loaded an existing Welcome template with completely unrelated content (Goodnight Fox BOGO, educational bundles).</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/07-wrong-email-content-loaded.png"><img src="ub-scrawler-screenshots/07-wrong-email-content-loaded.png" alt="Wrong content loaded"></a>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <h3><span class="sev-badge sev-high">High</span> UB-002: No path to traditional template builder</h3>
+    <p>"Design email" in campaign checklist routes exclusively to AI Chat Editor. Users cannot reach the drag-and-drop block editor.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/04-ai-chat-editor-landing.png"><img src="ub-scrawler-screenshots/04-ai-chat-editor-landing.png" alt="AI Chat Editor landing"></a>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <h3><span class="sev-badge sev-high">High</span> UB-003: AI creates duplicate campaign, discards user config</h3>
+    <p>Instead of populating the existing campaign, the AI created a brand new campaign (different ID, different name) — losing the user's To/From configuration.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/12-ecomm-campaign-checklist-3of5.png"><img src="ub-scrawler-screenshots/12-ecomm-campaign-checklist-3of5.png" alt="Original campaign"></a>
+      <a href="ub-scrawler-screenshots/13-duplicate-campaign-created-by-ai.png"><img src="ub-scrawler-screenshots/13-duplicate-campaign-created-by-ai.png" alt="Duplicate campaign"></a>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <h3><span class="sev-badge sev-high">High</span> UB-004: Generate email fails — circular instructions</h3>
+    <p>When triggering "Generate the full email draft" from the home page overlay, the AI responds with instructions to click a button in a panel that doesn't exist, creating an infinite loop.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/09-proserv-generate-blocked.png"><img src="ub-scrawler-screenshots/09-proserv-generate-blocked.png" alt="Generate blocked"></a>
+      <a href="ub-scrawler-screenshots/10-proserv-circular-instruction.png"><img src="ub-scrawler-screenshots/10-proserv-circular-instruction.png" alt="Circular instruction"></a>
+    </div>
+  </div>
+
+  <div class="issue-card">
+    <h3><span class="sev-badge sev-medium">Medium</span> UB-011: Qualtrics survey blocks Generate button</h3>
+    <p>An NPS survey iframe appears over the "Generate email" button, preventing interaction without dismissing it first.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/06-ai-strategy-panel-with-survey.png"><img src="ub-scrawler-screenshots/06-ai-strategy-panel-with-survey.png" alt="Survey blocking button"></a>
+    </div>
+  </div>
+
+  <div class="verdict-box">
+    <h3>Verdict: NOT Ready for Non-Expert Users</h3>
+    <p>The Unified Builder's AI Chat Editor introduces a fundamentally new email creation paradigm but has critical reliability issues. The AI generates incorrect content (UB-001), creates duplicate campaigns that discard user configuration (UB-003), and enters dead-end loops (UB-004). Until these are resolved, the experience will actively harm user trust and increase support tickets.</p>
+  </div>
+</section>
+
+</div><!-- /panel-summary -->
+
+
+<!-- ============== WALKTHROUGH TAB ============== -->
+<div class="tabpanel" id="panel-walkthrough" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Visual Evidence Trail</div>
+      <h1>Step-by-Step Walkthrough</h1>
+      <p class="subtitle">Complete sequential record of the Unified Builder evaluation, both personas</p>
+    </div>
+  </header>
+
+  <div class="screenshot-box">
+    <img src="ub-scrawler-screenshots/01-home-dashboard.png" alt="Home dashboard">
+    <div class="screenshot-caption"><span class="num">1</span> Mailchimp Home Dashboard — Active Account State</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> Marketing snapshot showing 18,173 sends, 99.47% delivery rate, 5.04% open rate, 0.28% click rate. Audience of 17,110 contacts. The teal "Create email" button is prominent in the top right. Revenue section is visible but not connected to e-commerce.
+      <br><strong>Context:</strong> This is the starting point for both persona journeys. The "Create email" button is the primary CTA.
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="ub-scrawler-screenshots/02-home-dashboard-first-visit.png" alt="Home dashboard first visit">
+    <div class="screenshot-caption"><span class="num">2</span> Home Dashboard — Earlier State (First Visit)</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> Dashboard with 19 contacts, 15 email subscribers, 0 revenue. "Create email" button visible. Audience selector shows "Collaborators". No e-commerce store connected.
+      <br><strong>Context:</strong> Earlier session state showing the account before bulk contacts were added. Demonstrates the same "Create email" entry point regardless of account maturity.
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="ub-scrawler-screenshots/03-campaign-checklist-empty.png" alt="Campaign checklist empty">
+    <div class="screenshot-caption"><span class="num">3</span> Campaign Setup Checklist — Initial State</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> Campaign creation page showing "Untitled" campaign with 1/5 checklist items complete. Shows: To (15 recipients configured), From (empty), Subject (empty), Send time (empty), Content ("Design email" button). Email preview skeleton on right side.
+      <br><strong>Context:</strong> After clicking "Create email", users land here. The "Design email" button is the gateway to content creation.
+      <div class="issue-pills"><span class="issue-pill low">UB-013</span></div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="ub-scrawler-screenshots/04-ai-chat-editor-landing.png" alt="AI Chat Editor landing">
+    <div class="screenshot-caption"><span class="num">4</span> AI Chat Editor Landing — KEY DISCOVERY</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> "Generate emails with Mailchimp AI" header. Prompt input area: "Tell us about the email you want to create...". Three quick-start suggestions. "Start from a recent email" showing 3 past campaigns. "Start from a template" showing 4 templates. Left sidebar shows "Brand and business context" panel.
+      <br><strong>Key Finding:</strong> Clicking "Design email" routes EXCLUSIVELY to this AI Chat Editor. There is no visible path to the traditional drag-and-drop template builder. This is a forced paradigm shift with no escape hatch.
+      <div class="issue-pills"><span class="issue-pill high">UB-002</span> <span class="issue-pill low">UB-009</span></div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="ub-scrawler-screenshots/05-ai-working-on-tasks.png" alt="AI working on tasks">
+    <div class="screenshot-caption"><span class="num">5</span> AI Processing — E-commerce Summer Sale Prompt</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> AI response showing "Working on 2 tasks": loading brand context and planning the summer sale campaign. Status reads "Building your campaign plan..." with minimal progress indication.
+      <br><strong>Context:</strong> After submitting the e-commerce summer sale prompt. Processing took 15-25 seconds with only a text status update — no progress bar, no percentage.
+      <div class="issue-pills"><span class="issue-pill low">UB-010</span></div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="ub-scrawler-screenshots/06-ai-strategy-panel-with-survey.png" alt="AI strategy panel with survey">
+    <div class="screenshot-caption"><span class="num">6</span> AI Strategy Panel + Qualtrics Survey Overlap</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> AI strategy panel showing "Summer Sale Campaign" with Goal dropdown, Content section, and Theme toggle on the right side. A Qualtrics NPS survey iframe is overlapping the "Generate email" button at the bottom, blocking interaction.
+      <br><strong>Context:</strong> The strategy panel appears correct, but the NPS survey creates a blocking interaction issue. Also demonstrates AI confidence in overwriting the subject line without asking.
+      <div class="issue-pills"><span class="issue-pill medium">UB-011</span> <span class="issue-pill medium">UB-007</span> <span class="issue-pill medium">UB-012</span> <span class="issue-pill low">UB-014</span></div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="ub-scrawler-screenshots/07-wrong-email-content-loaded.png" alt="Wrong email content loaded">
+    <div class="screenshot-caption"><span class="num">7</span> CRITICAL BUG — Wrong Content Loaded in Editor</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> LEFT SIDE: AI chat confirming "Your email draft is now in the editor with your summer sale headline, hero image, featured products, Shop Now button, and free shipping message." RIGHT SIDE: The actual email displays Goodnight Fox logo, "Hi *|FNAME|*", "Welcome. I'm Kylie", BOGO code content, educational bundles — completely unrelated to the summer sale prompt. Editor controls (Undo, Redo, Preview, Save and exit) and "Send a test email" suggestion are visible.
+      <br><strong>Critical Impact:</strong> The AI hallucinates success while loading an existing template. A non-expert user might send this email believing it was AI-generated content.
+      <div class="issue-pills"><span class="issue-pill critical">UB-001</span> <span class="issue-pill medium">UB-005</span></div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="ub-scrawler-screenshots/08-proserv-ai-content-plan.png" alt="ProServ AI content plan">
+    <div class="screenshot-caption"><span class="num">8</span> Pro Services — AI Content Plan (Correct)</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> AI-generated content plan showing: Subject "Transform Your Space. Elevate Your Brand.", full email structure with testimonial (Jordan M.), services list (Interior Design, Space Planning, Brand Environment Design), CTA "Book a Free Consultation", and 3 action buttons. Left sidebar shows both conversation threads.
+      <br><strong>Context:</strong> The AI successfully generated a high-quality content plan for the ProServ persona. The content is relevant, well-structured, and actionable. This demonstrates the AI can produce good output — when it works.
+      <div class="issue-pills"><span class="issue-pill medium">UB-008</span></div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="ub-scrawler-screenshots/09-proserv-generate-blocked.png" alt="ProServ generate blocked">
+    <div class="screenshot-caption"><span class="num">9</span> Pro Services — Generate Email BLOCKED</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> After clicking "Generate the full email draft", the AI responds: "2 tasks done", then says "To generate the full email draft, you'll first need to create and render a campaign plan in the side panel." No side panel is visible. Shows "Generate the email", "Try a different direction", "Adjust the tone" buttons.
+      <br><strong>Impact:</strong> Despite having a complete content plan, the AI cannot execute the final step — generating the actual email. It refers to UI elements that don't exist in the current context.
+      <div class="issue-pills"><span class="issue-pill high">UB-004</span></div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="ub-scrawler-screenshots/10-proserv-circular-instruction.png" alt="ProServ circular instruction">
+    <div class="screenshot-caption"><span class="num">10</span> Pro Services — Circular Instruction Loop</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> Follow-up AI message: "Click 'Generate email draft' in the side panel and I will draft the email as soon as the campaign is created server-side." Same "Generate the email" buttons visible. Clicking them restarts the same loop.
+      <br><strong>Impact:</strong> Complete dead end. The user has done everything right — provided a prompt, received a good plan — but cannot get the AI to produce the actual email. The instruction to "click a button in the side panel" refers to a panel that doesn't render in the home-page overlay context.
+      <div class="issue-pills"><span class="issue-pill high">UB-004</span></div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="ub-scrawler-screenshots/11-campaigns-list-overview.png" alt="Campaigns list overview">
+    <div class="screenshot-caption"><span class="num">11</span> Campaigns List — Account Overview</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> Campaigns list showing 595 results for "Goodnight Fox". Visible entries include automation flows in draft state: "Welcome new contacts", "Recover abandoned carts", "Scrawler_ProServ_LeadNurture_Appointment". Table columns: Name, Status, Audience, Folder, Analytics, Actions.
+      <br><strong>Context:</strong> Shows the breadth of the test account. Both the CJB Scrawler-created automations and the Unified Builder campaigns are visible in the campaign list.
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="ub-scrawler-screenshots/12-ecomm-campaign-checklist-3of5.png" alt="E-commerce campaign checklist 3/5">
+    <div class="screenshot-caption"><span class="num">12</span> Original E-commerce Campaign (id=14205304) — 3/5 Complete</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> Campaign named "Summer Sale: Up to 40% Off Our Best-Selling Collection". Checklist shows 3/5 complete: To (15 recipients), From (Goodnight Fox • goodnightfoxstudio@gmail.com) with the "ensure delivery" warning about .mailchimpapp.com domain rewrite, Subject with preview text. Send time not set. Content not designed.
+      <br><strong>Context:</strong> This is the ORIGINAL campaign the user created. Note the configured From address, the recipients, and the user-written subject line. Compare with the next screenshot.
+      <div class="issue-pills"><span class="issue-pill medium">UB-006</span></div>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="ub-scrawler-screenshots/13-duplicate-campaign-created-by-ai.png" alt="Duplicate campaign created by AI">
+    <div class="screenshot-caption"><span class="num">13</span> DUPLICATE Campaign Created by AI (id=14205305)</div>
+    <div class="annotation-box">
+      <strong>What's visible:</strong> A DIFFERENT campaign named "Summer Sale Campaign" (not the user's original title). Only 2/5 complete — To and From are NOT configured (user's setup lost). Subject has an AI-generated version. Send time auto-set to "Tuesday, June 2, 2026 @ 12:00 PM PT". Campaign ID is 14205305 (sequential after 14205304).
+      <br><strong>Critical Impact:</strong> The AI created a BRAND NEW campaign instead of populating the one the user started. All user configuration (recipients, from address) was abandoned. The user now has two draft campaigns — one with their config but no content, one with AI content but no config. Neither is sendable.
+      <div class="issue-pills"><span class="issue-pill high">UB-003</span> <span class="issue-pill medium">UB-007</span></div>
+    </div>
+  </div>
+
+</section>
+</div><!-- /panel-walkthrough -->
+
+
+<!-- ============== E-COMMERCE BUILD TAB ============== -->
+<div class="tabpanel" id="panel-ecommerce" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Persona Journey · E-commerce Store Owner</div>
+      <h1>E-commerce Build: Summer Sale Campaign</h1>
+      <p class="subtitle">Objective: Create and configure a promotional email for a summer sale with product highlights, discount codes, and free shipping offer</p>
+    </div>
+    <div class="meta">
+      <strong>Completion:</strong> FAILED<br>
+      <strong>Blocking issue:</strong> UB-001, UB-003
+    </div>
+  </header>
+
+  <h2>Journey Summary</h2>
+  <table>
+    <tr><th>Step</th><th>Action</th><th>Result</th><th>Issues</th></tr>
+    <tr><td>1</td><td>Click "Create email" on dashboard</td><td>Campaign checklist opened (1/5)</td><td>—</td></tr>
+    <tr><td>2</td><td>Configure To (15 recipients)</td><td>Success</td><td>—</td></tr>
+    <tr><td>3</td><td>Configure From (goodnightfoxstudio@gmail.com)</td><td>Success, but domain rewrite warning shown</td><td>UB-006</td></tr>
+    <tr><td>4</td><td>Click "Design email"</td><td>Opens AI Chat Editor (NOT template builder)</td><td>UB-002</td></tr>
+    <tr><td>5</td><td>Submit summer sale prompt</td><td>AI processes for ~20s</td><td>UB-010</td></tr>
+    <tr><td>6</td><td>AI generates strategy panel</td><td>Strategy looks correct; Qualtrics survey blocks button</td><td>UB-011</td></tr>
+    <tr><td>7</td><td>Click "Generate email"</td><td>AI claims success, but loads WRONG content</td><td style="color:var(--critical);font-weight:700;">UB-001</td></tr>
+    <tr><td>8</td><td>Inspect loaded content</td><td>Welcome template (BOGO, educational bundles) — not summer sale</td><td>UB-001</td></tr>
+    <tr><td>9</td><td>Check campaign list</td><td>AI created duplicate campaign (id=14205305)</td><td>UB-003</td></tr>
+    <tr><td>10</td><td>Compare original vs duplicate</td><td>Original has config but no content; duplicate has content but no config</td><td>UB-003, UB-007</td></tr>
+  </table>
+
+  <h2>Content Mismatch Evidence</h2>
+  <p>The critical failure: AI claims generation success while loading unrelated content.</p>
+
+  <div class="grid cols-2">
+    <div>
+      <h3>What the AI promised:</h3>
+      <ul>
+        <li>Summer sale headline</li>
+        <li>Hero image</li>
+        <li>Featured products grid</li>
+        <li>"Shop Now" button</li>
+        <li>Free shipping message</li>
+      </ul>
+    </div>
+    <div>
+      <h3>What actually loaded:</h3>
+      <ul>
+        <li>Goodnight Fox logo</li>
+        <li>"Hi *|FNAME|*" merge tag</li>
+        <li>"Welcome. I'm Kylie" introduction</li>
+        <li>BOGO discount code</li>
+        <li>Educational bundles section</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="screenshot-box">
+    <img src="ub-scrawler-screenshots/07-wrong-email-content-loaded.png" alt="Content mismatch evidence">
+    <div class="screenshot-caption"><span class="num">7</span> Side-by-side: AI claims summer sale (left chat) vs actual Welcome template loaded (right editor)</div>
+    <div class="annotation-box">
+      <strong>Root cause hypothesis:</strong> The AI appears to have loaded the most recent template from the account's template library rather than generating new content. The Welcome template (with Kylie introduction, BOGO code, educational bundles) was likely the last-edited template.
+      <div class="issue-pills"><span class="issue-pill critical">UB-001</span></div>
+    </div>
+  </div>
+
+  <h2>Duplicate Campaign Evidence</h2>
+  <p>The AI silently created a second campaign instead of populating the user's existing one.</p>
+
+  <div class="grid cols-2">
+    <div class="screenshot-box">
+      <img src="ub-scrawler-screenshots/12-ecomm-campaign-checklist-3of5.png" alt="Original campaign">
+      <div class="screenshot-caption"><span class="num">12</span> Original (id=14205304): User's config intact, no content</div>
+    </div>
+    <div class="screenshot-box">
+      <img src="ub-scrawler-screenshots/13-duplicate-campaign-created-by-ai.png" alt="Duplicate campaign">
+      <div class="screenshot-caption"><span class="num">13</span> Duplicate (id=14205305): AI content, user config lost</div>
+    </div>
+  </div>
+
+  <table>
+    <tr><th>Field</th><th>Original (14205304)</th><th>AI-Created Duplicate (14205305)</th></tr>
+    <tr><td>Name</td><td>"Summer Sale: Up to 40% Off Our Best-Selling Collection"</td><td>"Summer Sale Campaign"</td></tr>
+    <tr><td>To</td><td>15 recipients ✓</td><td>Not configured ✗</td></tr>
+    <tr><td>From</td><td>goodnightfoxstudio@gmail.com ✓</td><td>Not configured ✗</td></tr>
+    <tr><td>Subject</td><td>User-written ✓</td><td>AI-generated (different)</td></tr>
+    <tr><td>Send time</td><td>Not set</td><td>Auto: June 2, 2026 @ 12:00 PM PT</td></tr>
+    <tr><td>Content</td><td>Not designed ✗</td><td>Wrong template loaded ✗</td></tr>
+    <tr><td>Sendable?</td><td style="color:var(--bad);font-weight:600;">No (no content)</td><td style="color:var(--bad);font-weight:600;">No (no recipients, wrong content)</td></tr>
+  </table>
+</section>
+</div><!-- /panel-ecommerce -->
+
+
+<!-- ============== PRO SERVICES BUILD TAB ============== -->
+<div class="tabpanel" id="panel-proserv" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Persona Journey · Professional Services Marketer</div>
+      <h1>Pro Services Build: Lead Nurture Email</h1>
+      <p class="subtitle">Objective: Create a lead nurture email with testimonial, services list, and consultation CTA for an interior design firm</p>
+    </div>
+    <div class="meta">
+      <strong>Completion:</strong> BLOCKED<br>
+      <strong>Blocking issue:</strong> UB-004
+    </div>
+  </header>
+
+  <h2>Journey Summary</h2>
+  <table>
+    <tr><th>Step</th><th>Action</th><th>Result</th><th>Issues</th></tr>
+    <tr><td>1</td><td>Open AI Chat Editor from "Create email"</td><td>AI Chat Editor landing page</td><td>UB-002</td></tr>
+    <tr><td>2</td><td>Submit ProServ lead nurture prompt</td><td>AI processes and generates content plan</td><td>UB-010</td></tr>
+    <tr><td>3</td><td>Review AI content plan</td><td>✓ Excellent content plan generated</td><td>—</td></tr>
+    <tr><td>4</td><td>Click "Generate the full email draft"</td><td>AI says "create and render a campaign plan in the side panel"</td><td style="color:var(--high);font-weight:700;">UB-004</td></tr>
+    <tr><td>5</td><td>Click "Generate the email" again</td><td>Circular instruction: "Click 'Generate email draft' in the side panel"</td><td>UB-004</td></tr>
+    <tr><td>6</td><td>Dead end — no further progress possible</td><td>BLOCKED</td><td>UB-004</td></tr>
+  </table>
+
+  <h2>The Successful Content Plan</h2>
+  <p>The AI demonstrated strong content generation capability — the blocking issue is purely a UI/orchestration failure.</p>
+
+  <div class="screenshot-box">
+    <img src="ub-scrawler-screenshots/08-proserv-ai-content-plan.png" alt="ProServ AI content plan">
+    <div class="screenshot-caption"><span class="num">8</span> AI-generated content plan — well-structured, relevant, actionable</div>
+    <div class="annotation-box">
+      <strong>What worked well:</strong> Subject line ("Transform Your Space. Elevate Your Brand."), testimonial with attribution (Jordan M.), services list with clear hierarchy, single clear CTA ("Book a Free Consultation"), and multiple action buttons for the user to choose next steps.
+      <br><strong>Quality verdict:</strong> This content plan would be immediately usable if it could be rendered into an email template. The AI capability itself is strong.
+    </div>
+  </div>
+
+  <h2>The Blocking Failure</h2>
+  <p>When the user tries to convert the plan into an actual email, the system enters a dead-end loop.</p>
+
+  <div class="grid cols-2">
+    <div class="screenshot-box">
+      <img src="ub-scrawler-screenshots/09-proserv-generate-blocked.png" alt="Generate blocked">
+      <div class="screenshot-caption"><span class="num">9</span> First attempt: "create and render a campaign plan in the side panel"</div>
+    </div>
+    <div class="screenshot-box">
+      <img src="ub-scrawler-screenshots/10-proserv-circular-instruction.png" alt="Circular instruction">
+      <div class="screenshot-caption"><span class="num">10</span> Second attempt: "Click 'Generate email draft' in the side panel"</div>
+    </div>
+  </div>
+
+  <div class="annotation-box" style="margin-top:16px;">
+    <strong>Root cause hypothesis:</strong> The AI Chat Editor has two contexts: (1) the home page overlay (accessible from dashboard "Create email") and (2) the campaign checklist context (accessible from an existing campaign). The "Generate email" functionality likely requires the campaign checklist context to create server-side resources. When opened from the home page overlay, the side panel for campaign creation doesn't render, and the AI cannot proceed.
+    <br><br><strong>What would need to change:</strong>
+    <ul style="margin-top:6px;">
+      <li>The AI should detect the overlay context and either auto-create the campaign server-side or redirect the user to the campaign checklist</li>
+      <li>The "Generate email" button should not appear if the required context is unavailable</li>
+      <li>Error messaging should say "Please create a campaign first" instead of circular instructions</li>
+    </ul>
+  </div>
+</section>
+</div><!-- /panel-proserv -->
+
+
+<!-- ============== ISSUE LOG TAB ============== -->
+<div class="tabpanel" id="panel-issues" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Complete Issue Inventory</div>
+      <h1>Issue Log — 14 Findings</h1>
+      <p class="subtitle">All issues discovered during the Unified Builder UX evaluation, with severity, type, persona, and evidence</p>
+    </div>
+  </header>
+
+  <!-- UB-001 -->
+  <div class="issue-card" id="ub-001">
+    <h3><span class="sev-badge sev-critical">Critical</span> UB-001: AI loads existing Welcome template instead of generating summer sale email</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Bug</span>
+      <span><strong>Persona:</strong> Both</span>
+      <span><strong>Location:</strong> AI Chat Editor → Generate flow</span>
+    </div>
+    <p><strong>Description:</strong> After the user prompts the AI to generate a summer sale promotional email, the AI reports success ("Your email draft is now in the editor with your summer sale headline, hero image, featured products...") but the editor actually displays a pre-existing Welcome template with completely unrelated content.</p>
+    <p><strong>Expected:</strong> Generated email content matching the user's prompt — summer sale headline, product grid, discount code, free shipping CTA.</p>
+    <p><strong>Actual:</strong> Existing template loaded: Goodnight Fox logo, "Welcome. I'm Kylie", BOGO code, educational bundles content. Zero overlap with prompt.</p>
+    <p><strong>Impact:</strong> A non-expert user could send incorrect content to their entire list, damaging brand trust and potentially causing compliance issues. The AI's confident false-positive message ("Your draft is ready") makes this especially dangerous.</p>
+    <p><strong>Recommendation:</strong> Implement content-prompt alignment verification before reporting success. Add a diff check between generated content and the loaded editor state. Show the user what was generated before confirming.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/07-wrong-email-content-loaded.png"><img src="ub-scrawler-screenshots/07-wrong-email-content-loaded.png" alt="UB-001 evidence"></a>
+    </div>
+  </div>
+
+  <!-- UB-002 -->
+  <div class="issue-card" id="ub-002">
+    <h3><span class="sev-badge sev-high">High</span> UB-002: No path to traditional template builder from campaign setup</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Persona:</strong> Both</span>
+      <span><strong>Location:</strong> Campaign Checklist → Design email button</span>
+    </div>
+    <p><strong>Description:</strong> The "Design email" button in the campaign checklist routes exclusively to the AI Chat Editor. There is no visible option to use the traditional drag-and-drop block editor, template gallery, or code editor.</p>
+    <p><strong>Expected:</strong> A choice between AI-assisted creation and manual template builder, or at minimum a clearly visible escape hatch from the AI editor to the traditional tools.</p>
+    <p><strong>Actual:</strong> Single-path routing to AI Chat Editor with no alternative visible.</p>
+    <p><strong>Impact:</strong> Users who prefer manual control, have specific templates, or need the drag-and-drop builder for complex layouts are forced through an AI-first experience. Power users and agencies are most affected.</p>
+    <p><strong>Recommendation:</strong> Add a "Use template builder" or "Build manually" link below or alongside the AI Chat Editor landing. Consider user preference memory.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/04-ai-chat-editor-landing.png"><img src="ub-scrawler-screenshots/04-ai-chat-editor-landing.png" alt="UB-002 evidence"></a>
+    </div>
+  </div>
+
+  <!-- UB-003 -->
+  <div class="issue-card" id="ub-003">
+    <h3><span class="sev-badge sev-high">High</span> UB-003: AI creates NEW campaign instead of populating existing one</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Persona:</strong> Both</span>
+      <span><strong>Location:</strong> AI Chat Editor → Campaign creation</span>
+    </div>
+    <p><strong>Description:</strong> When the AI generates email content, it creates a brand new campaign (id=14205305) instead of populating the campaign the user already started (id=14205304). The new campaign has a different name and loses the user's To/From configuration.</p>
+    <p><strong>Expected:</strong> AI-generated content should populate the existing campaign that the user initiated and configured.</p>
+    <p><strong>Actual:</strong> Two campaigns exist: the original with user config (no content) and an AI-created duplicate with content (no config). Neither is sendable.</p>
+    <p><strong>Impact:</strong> User's manual configuration work is wasted. They must either re-configure the AI campaign or manually copy content. Confusing for non-technical users who may not notice the duplication.</p>
+    <p><strong>Recommendation:</strong> The AI should always operate within the existing campaign context. If a new campaign must be created, migrate the user's existing configuration (recipients, from address, subject) to it.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/12-ecomm-campaign-checklist-3of5.png"><img src="ub-scrawler-screenshots/12-ecomm-campaign-checklist-3of5.png" alt="UB-003 evidence - original"></a>
+      <a href="ub-scrawler-screenshots/13-duplicate-campaign-created-by-ai.png"><img src="ub-scrawler-screenshots/13-duplicate-campaign-created-by-ai.png" alt="UB-003 evidence - duplicate"></a>
+    </div>
+  </div>
+
+  <!-- UB-004 -->
+  <div class="issue-card" id="ub-004">
+    <h3><span class="sev-badge sev-high">High</span> UB-004: "Generate email" fails from home page overlay — circular instructions</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Persona:</strong> ProServ</span>
+      <span><strong>Location:</strong> AI Chat Editor (home page overlay context)</span>
+    </div>
+    <p><strong>Description:</strong> When using the AI Chat Editor opened from the home page "Create email" button, clicking "Generate the full email draft" fails. The AI instructs the user to "create and render a campaign plan in the side panel" — but no side panel exists in this context. Repeated attempts loop the same instruction.</p>
+    <p><strong>Expected:</strong> Clicking "Generate the full email draft" should either create the email or clearly explain what prerequisite is missing.</p>
+    <p><strong>Actual:</strong> Infinite loop of circular instructions referencing UI elements that don't exist in the current view.</p>
+    <p><strong>Impact:</strong> Complete dead end for the ProServ persona. Excellent AI-generated content plan cannot be converted to an actual email. User has no recovery path without understanding internal system architecture.</p>
+    <p><strong>Recommendation:</strong> Detect the overlay context and auto-create the required campaign resource server-side, or redirect the user to the campaign flow. At minimum, provide a clear error: "Please create a campaign first from the Campaigns page."</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/09-proserv-generate-blocked.png"><img src="ub-scrawler-screenshots/09-proserv-generate-blocked.png" alt="UB-004 evidence - blocked"></a>
+      <a href="ub-scrawler-screenshots/10-proserv-circular-instruction.png"><img src="ub-scrawler-screenshots/10-proserv-circular-instruction.png" alt="UB-004 evidence - loop"></a>
+    </div>
+  </div>
+
+  <!-- UB-005 -->
+  <div class="issue-card" id="ub-005">
+    <h3><span class="sev-badge sev-medium">Medium</span> UB-005: No access to drag-and-drop block editor from AI Chat Editor</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Persona:</strong> Both</span>
+      <span><strong>Location:</strong> AI Chat Editor → Editor view</span>
+    </div>
+    <p><strong>Description:</strong> Once inside the AI Chat Editor, there is no visible way to switch to the drag-and-drop block editor for manual content editing. The editor shows Undo/Redo/Preview/Save but not the familiar block-level editing interface.</p>
+    <p><strong>Expected:</strong> An option to switch to block editor mode for fine-grained control over layout, images, and content blocks.</p>
+    <p><strong>Actual:</strong> Only AI-mediated editing is available. Users must describe changes in natural language rather than directly manipulating blocks.</p>
+    <p><strong>Impact:</strong> Users who need pixel-level control (agencies, designers) or who want to quickly fix a typo without conversational overhead are underserved.</p>
+    <p><strong>Recommendation:</strong> Add a toggle or "Edit manually" button that opens the block editor with the current AI-generated content pre-loaded.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/07-wrong-email-content-loaded.png"><img src="ub-scrawler-screenshots/07-wrong-email-content-loaded.png" alt="UB-005 evidence"></a>
+    </div>
+  </div>
+
+  <!-- UB-006 -->
+  <div class="issue-card" id="ub-006">
+    <h3><span class="sev-badge sev-medium">Medium</span> UB-006: From email rewritten to .mailchimpapp.com without clear guidance</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Persona:</strong> Both</span>
+      <span><strong>Location:</strong> Campaign Checklist → From configuration</span>
+    </div>
+    <p><strong>Description:</strong> After setting the From address, a warning appears that the email will be rewritten to a .mailchimpapp.com domain for delivery. The messaging is technical and doesn't explain the user impact clearly.</p>
+    <p><strong>Expected:</strong> Clear explanation of why the domain changes, what recipients will see, and how to configure a custom sending domain to avoid this.</p>
+    <p><strong>Actual:</strong> Technical warning about domain rewriting with an "ensure delivery" link but insufficient context for non-technical users.</p>
+    <p><strong>Impact:</strong> Users may be confused about what recipients see in their inbox. Some may abort campaign creation assuming their brand identity is lost.</p>
+    <p><strong>Recommendation:</strong> Show a preview of what the recipient will see. Add a clear one-click path to domain authentication setup.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/12-ecomm-campaign-checklist-3of5.png"><img src="ub-scrawler-screenshots/12-ecomm-campaign-checklist-3of5.png" alt="UB-006 evidence"></a>
+    </div>
+  </div>
+
+  <!-- UB-007 -->
+  <div class="issue-card" id="ub-007">
+    <h3><span class="sev-badge sev-medium">Medium</span> UB-007: AI overwrites user-configured subject line</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Content</span>
+      <span><strong>Persona:</strong> Both</span>
+      <span><strong>Location:</strong> AI Chat Editor → Strategy panel / Campaign creation</span>
+    </div>
+    <p><strong>Description:</strong> The AI generates its own subject line and overwrites whatever the user previously configured in the campaign checklist, without asking for permission or showing a comparison.</p>
+    <p><strong>Expected:</strong> AI should either preserve the user's subject line, offer its suggestion as an alternative, or ask before overwriting.</p>
+    <p><strong>Actual:</strong> AI silently replaces the user's subject line with its own generated version.</p>
+    <p><strong>Impact:</strong> Users who carefully crafted their subject line lose it without notice. Violates the principle of user control over their content.</p>
+    <p><strong>Recommendation:</strong> Show "Your subject: X → AI suggestion: Y — Keep original or use suggestion?" before overwriting.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/06-ai-strategy-panel-with-survey.png"><img src="ub-scrawler-screenshots/06-ai-strategy-panel-with-survey.png" alt="UB-007 evidence - strategy"></a>
+      <a href="ub-scrawler-screenshots/13-duplicate-campaign-created-by-ai.png"><img src="ub-scrawler-screenshots/13-duplicate-campaign-created-by-ai.png" alt="UB-007 evidence - duplicate"></a>
+    </div>
+  </div>
+
+  <!-- UB-008 -->
+  <div class="issue-card" id="ub-008">
+    <h3><span class="sev-badge sev-medium">Medium</span> UB-008: Conversation thread names truncated and indistinguishable</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Persona:</strong> Both</span>
+      <span><strong>Location:</strong> AI Chat Editor → Left sidebar thread list</span>
+    </div>
+    <p><strong>Description:</strong> When multiple conversations exist in the left sidebar, thread names are truncated so aggressively that they become indistinguishable. Users cannot tell which conversation contains which campaign's work.</p>
+    <p><strong>Expected:</strong> Thread names should show enough context to differentiate (e.g., campaign name, date, or first prompt snippet).</p>
+    <p><strong>Actual:</strong> Truncated names that all look similar, especially when the same user creates multiple campaigns in one session.</p>
+    <p><strong>Impact:</strong> Users lose track of which conversation thread corresponds to which campaign, especially in multi-campaign workflows.</p>
+    <p><strong>Recommendation:</strong> Show campaign name in thread title. Allow hover/tooltip for full name. Add timestamp or campaign type icon.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/08-proserv-ai-content-plan.png"><img src="ub-scrawler-screenshots/08-proserv-ai-content-plan.png" alt="UB-008 evidence"></a>
+    </div>
+  </div>
+
+  <!-- UB-009 -->
+  <div class="issue-card" id="ub-009">
+    <h3><span class="sev-badge sev-low">Low</span> UB-009: Create email opens overlay on home page instead of dedicated editor</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Persona:</strong> Both</span>
+      <span><strong>Location:</strong> Home Dashboard → Create email button</span>
+    </div>
+    <p><strong>Description:</strong> "Create email" on the home page opens the AI Chat Editor as an overlay/modal rather than navigating to a dedicated editor page. This overlay context lacks full functionality (see UB-004).</p>
+    <p><strong>Expected:</strong> "Create email" should navigate to a full-page editor experience with complete functionality.</p>
+    <p><strong>Actual:</strong> Opens as an overlay that has reduced capabilities compared to the campaign-context editor.</p>
+    <p><strong>Impact:</strong> Lower severity on its own, but contributes to UB-004's dead-end behavior when the overlay context lacks required side panels.</p>
+    <p><strong>Recommendation:</strong> Either ensure overlay has full feature parity, or navigate to the full campaign creation flow.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/04-ai-chat-editor-landing.png"><img src="ub-scrawler-screenshots/04-ai-chat-editor-landing.png" alt="UB-009 evidence"></a>
+    </div>
+  </div>
+
+  <!-- UB-010 -->
+  <div class="issue-card" id="ub-010">
+    <h3><span class="sev-badge sev-low">Low</span> UB-010: AI generation 15-25s with minimal progress feedback</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Performance</span>
+      <span><strong>Persona:</strong> Both</span>
+      <span><strong>Location:</strong> AI Chat Editor → Generation phase</span>
+    </div>
+    <p><strong>Description:</strong> AI content generation takes 15-25 seconds with only a text status ("Working on 2 tasks...") as feedback. No progress bar, percentage, or estimated time remaining.</p>
+    <p><strong>Expected:</strong> Either faster generation (&lt;5s) or meaningful progress indication showing what's happening and estimated remaining time.</p>
+    <p><strong>Actual:</strong> Text-only status for 15-25 seconds. Users cannot tell if the system is stuck or making progress.</p>
+    <p><strong>Impact:</strong> Users may abandon the flow thinking it's broken, especially on slower connections. Undermines confidence in the AI's reliability.</p>
+    <p><strong>Recommendation:</strong> Add a step-by-step progress indicator showing completed/remaining tasks with animations. Show "typically takes 15-20 seconds" estimate.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/05-ai-working-on-tasks.png"><img src="ub-scrawler-screenshots/05-ai-working-on-tasks.png" alt="UB-010 evidence"></a>
+    </div>
+  </div>
+
+  <!-- UB-011 -->
+  <div class="issue-card" id="ub-011">
+    <h3><span class="sev-badge sev-medium">Medium</span> UB-011: Qualtrics NPS survey blocks Generate email button click</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Bug</span>
+      <span><strong>Persona:</strong> Both</span>
+      <span><strong>Location:</strong> AI Chat Editor → Strategy panel (with Qualtrics intercept)</span>
+    </div>
+    <p><strong>Description:</strong> A Qualtrics NPS survey iframe renders over the "Generate email" button at the bottom of the strategy panel, physically blocking the user from clicking it.</p>
+    <p><strong>Expected:</strong> Survey intercepts should not overlap with primary action buttons. They should appear in non-blocking positions or wait until the user completes their task.</p>
+    <p><strong>Actual:</strong> Survey iframe covers the "Generate email" button. User must dismiss the survey before proceeding.</p>
+    <p><strong>Impact:</strong> Directly blocks the primary action. Users unfamiliar with survey dismiss patterns may think the button is broken.</p>
+    <p><strong>Recommendation:</strong> Add z-index rules or position constraints for Qualtrics intercepts. Exclude the AI editor from survey targeting during active generation flows.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/06-ai-strategy-panel-with-survey.png"><img src="ub-scrawler-screenshots/06-ai-strategy-panel-with-survey.png" alt="UB-011 evidence"></a>
+    </div>
+  </div>
+
+  <!-- UB-012 -->
+  <div class="issue-card" id="ub-012">
+    <h3><span class="sev-badge sev-medium">Medium</span> UB-012: No product catalog or product blocks in AI editor</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Missing Feature</span>
+      <span><strong>Persona:</strong> E-commerce</span>
+      <span><strong>Location:</strong> AI Chat Editor → Strategy panel</span>
+    </div>
+    <p><strong>Description:</strong> The AI strategy panel and editor do not offer product catalog integration, product recommendation blocks, or dynamic product content for e-commerce users — despite having a connected store.</p>
+    <p><strong>Expected:</strong> E-commerce users should be able to insert product blocks, browse their catalog, or have the AI pull real products into the email design.</p>
+    <p><strong>Actual:</strong> Only generic content blocks available. No product-specific content options in the AI editor.</p>
+    <p><strong>Impact:</strong> E-commerce users (Mailchimp's largest segment) cannot use the AI editor for their most common use case: product promotion emails with real catalog data. This is a key Klaviyo differentiator.</p>
+    <p><strong>Recommendation:</strong> Integrate product catalog data into the AI's context. Allow "Add products" as a content block type. Surface connected store's products in the AI's suggestions.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/06-ai-strategy-panel-with-survey.png"><img src="ub-scrawler-screenshots/06-ai-strategy-panel-with-survey.png" alt="UB-012 evidence"></a>
+    </div>
+  </div>
+
+  <!-- UB-013 -->
+  <div class="issue-card" id="ub-013">
+    <h3><span class="sev-badge sev-low">Low</span> UB-013: Progress indicator has no ARIA progressbar role</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Accessibility</span>
+      <span><strong>Persona:</strong> Both</span>
+      <span><strong>Location:</strong> Campaign Checklist → Progress indicator</span>
+    </div>
+    <p><strong>Description:</strong> The campaign completion indicator (e.g., "1/5 complete") does not have appropriate ARIA roles for screen readers. It's rendered as a visual element without semantic meaning.</p>
+    <p><strong>Expected:</strong> Progress indicators should use <code>role="progressbar"</code> with <code>aria-valuenow</code>, <code>aria-valuemin</code>, and <code>aria-valuemax</code> attributes.</p>
+    <p><strong>Actual:</strong> Visual-only progress indicator with no ARIA semantics.</p>
+    <p><strong>Impact:</strong> Screen reader users cannot determine campaign completion status programmatically.</p>
+    <p><strong>Recommendation:</strong> Add <code>role="progressbar" aria-valuenow="1" aria-valuemin="0" aria-valuemax="5" aria-label="Campaign setup progress"</code>.</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/03-campaign-checklist-empty.png"><img src="ub-scrawler-screenshots/03-campaign-checklist-empty.png" alt="UB-013 evidence"></a>
+    </div>
+  </div>
+
+  <!-- UB-014 -->
+  <div class="issue-card" id="ub-014">
+    <h3><span class="sev-badge sev-low">Low</span> UB-014: AI disclaimer text buried and easy to miss</h3>
+    <div class="issue-meta">
+      <span><strong>Type:</strong> Usability</span>
+      <span><strong>Persona:</strong> Both</span>
+      <span><strong>Location:</strong> AI Chat Editor → Strategy panel footer</span>
+    </div>
+    <p><strong>Description:</strong> The AI-generated content disclaimer ("Content generated by AI may not be accurate") is displayed in small, muted text at the bottom of the strategy panel where users are unlikely to read it.</p>
+    <p><strong>Expected:</strong> AI disclaimers should be visible at the point of action — when the user clicks "Generate" or when content is loaded into the editor.</p>
+    <p><strong>Actual:</strong> Small text buried below the fold in the strategy panel.</p>
+    <p><strong>Impact:</strong> Users may not realize they should review AI-generated content carefully before sending. Especially risky given UB-001 (wrong content loaded).</p>
+    <p><strong>Recommendation:</strong> Show a brief, visible reminder when AI content is loaded into the editor: "AI-generated content — please review before sending."</p>
+    <div class="evidence-thumb">
+      <a href="ub-scrawler-screenshots/06-ai-strategy-panel-with-survey.png"><img src="ub-scrawler-screenshots/06-ai-strategy-panel-with-survey.png" alt="UB-014 evidence"></a>
+    </div>
+  </div>
+
+</section>
+</div><!-- /panel-issues -->
+
+
+<!-- ============== IMPROVEMENT PLAN TAB ============== -->
+<div class="tabpanel" id="panel-improvement" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Prioritized Fix Recommendations</div>
+      <h1>Improvement Plan</h1>
+      <p class="subtitle">Organized by priority tier — quick wins, medium-term improvements, and strategic investments</p>
+    </div>
+  </header>
+
+  <h2>P0 — Immediate Fixes (Ship-Blocking)</h2>
+  <p>These issues must be resolved before expanding AI Chat Editor availability to more users.</p>
+
+  <div class="fix-card" style="border-left-color: var(--critical);">
+    <h4><span class="sev-badge sev-critical">Critical</span> Fix: Content-prompt alignment verification</h4>
+    <p><strong>Issue:</strong> UB-001 · <strong>Effort:</strong> Medium (2-3 sprints) · <strong>Evidence:</strong> <a href="ub-scrawler-screenshots/07-wrong-email-content-loaded.png">Screenshot 07</a></p>
+    <p>Implement a verification step that compares AI-generated content against the user's prompt before reporting success. If the loaded content doesn't match expected structure (e.g., contains no mention of keywords from the prompt), show an error rather than a false success message.</p>
+  </div>
+
+  <div class="fix-card" style="border-left-color: var(--high);">
+    <h4><span class="sev-badge sev-high">High</span> Fix: Campaign context preservation</h4>
+    <p><strong>Issue:</strong> UB-003 · <strong>Effort:</strong> Medium (2 sprints) · <strong>Evidence:</strong> <a href="ub-scrawler-screenshots/13-duplicate-campaign-created-by-ai.png">Screenshot 13</a></p>
+    <p>Ensure AI-generated content populates the existing campaign rather than creating a new one. If a new campaign must be created (architectural constraint), migrate all user configuration (To, From, Subject) from the original.</p>
+  </div>
+
+  <div class="fix-card" style="border-left-color: var(--high);">
+    <h4><span class="sev-badge sev-high">High</span> Fix: Overlay context detection for generate flow</h4>
+    <p><strong>Issue:</strong> UB-004 · <strong>Effort:</strong> Small (1 sprint) · <strong>Evidence:</strong> <a href="ub-scrawler-screenshots/09-proserv-generate-blocked.png">Screenshots 09-10</a></p>
+    <p>Detect when the AI editor is running in overlay mode (from home page) and either: (a) auto-create the campaign server-side before generating, or (b) redirect the user to the campaign checklist flow with their content plan preserved.</p>
+  </div>
+
+  <h2>P1 — Quick Wins (1-2 Sprints Each)</h2>
+
+  <div class="fix-card">
+    <h4>Add "Use template builder" escape hatch</h4>
+    <p><strong>Issue:</strong> UB-002 · <strong>Effort:</strong> Small · <strong>Evidence:</strong> <a href="ub-scrawler-screenshots/04-ai-chat-editor-landing.png">Screenshot 04</a></p>
+    <p>Add a visible link/button on the AI Chat Editor landing page: "Prefer to build manually? Use the template builder →". Route to the existing drag-and-drop editor.</p>
+  </div>
+
+  <div class="fix-card">
+    <h4>Exclude AI editor from Qualtrics survey targeting</h4>
+    <p><strong>Issue:</strong> UB-011 · <strong>Effort:</strong> Trivial (config change) · <strong>Evidence:</strong> <a href="ub-scrawler-screenshots/06-ai-strategy-panel-with-survey.png">Screenshot 06</a></p>
+    <p>Update Qualtrics intercept rules to exclude pages/overlays where the AI editor is active. Prevents survey from blocking primary action buttons.</p>
+  </div>
+
+  <div class="fix-card">
+    <h4>Subject line preservation prompt</h4>
+    <p><strong>Issue:</strong> UB-007 · <strong>Effort:</strong> Small · <strong>Evidence:</strong> <a href="ub-scrawler-screenshots/13-duplicate-campaign-created-by-ai.png">Screenshot 13</a></p>
+    <p>Before overwriting a user-configured subject line, show: "Keep your subject line or use AI suggestion?" with both options visible.</p>
+  </div>
+
+  <h2>P2 — Medium-Term Improvements (3-4 Sprints)</h2>
+
+  <div class="fix-card">
+    <h4>Block editor toggle from AI view</h4>
+    <p><strong>Issue:</strong> UB-005 · <strong>Effort:</strong> Medium · <strong>Evidence:</strong> <a href="ub-scrawler-screenshots/07-wrong-email-content-loaded.png">Screenshot 07</a></p>
+    <p>Add a "Switch to block editor" toggle that loads the current AI-generated content into the drag-and-drop interface for manual refinement.</p>
+  </div>
+
+  <div class="fix-card">
+    <h4>Domain authentication guidance</h4>
+    <p><strong>Issue:</strong> UB-006 · <strong>Effort:</strong> Small · <strong>Evidence:</strong> <a href="ub-scrawler-screenshots/12-ecomm-campaign-checklist-3of5.png">Screenshot 12</a></p>
+    <p>Replace technical warning with user-friendly explanation: "Recipients will see your email from [user domain] — we handle delivery behind the scenes." Add one-click domain verification setup.</p>
+  </div>
+
+  <div class="fix-card">
+    <h4>Product catalog integration for e-commerce AI</h4>
+    <p><strong>Issue:</strong> UB-012 · <strong>Effort:</strong> Large · <strong>Evidence:</strong> <a href="ub-scrawler-screenshots/06-ai-strategy-panel-with-survey.png">Screenshot 06</a></p>
+    <p>Surface connected store's product catalog in the AI editor. Allow "Insert product block" and teach the AI to reference real products, prices, and images.</p>
+  </div>
+
+  <h2>P3 — Strategic Improvements (Multi-Quarter)</h2>
+
+  <div class="fix-card">
+    <h4>AI progress experience redesign</h4>
+    <p><strong>Issues:</strong> UB-010, UB-008 · <strong>Evidence:</strong> <a href="ub-scrawler-screenshots/05-ai-working-on-tasks.png">Screenshot 05</a></p>
+    <p>Redesign the generation progress experience with: step-by-step task visualization, estimated time remaining, preview of generated sections as they complete, and clear thread naming for multi-campaign sessions.</p>
+  </div>
+
+  <div class="fix-card">
+    <h4>Accessibility and compliance pass</h4>
+    <p><strong>Issues:</strong> UB-013, UB-014</p>
+    <p>Full accessibility audit of the AI Chat Editor: ARIA roles for all interactive elements, visible AI disclaimers at point of action, keyboard navigation for all editor functions.</p>
+  </div>
+
+  <h2>Priority × Impact Matrix</h2>
+  <table class="priority-table">
+    <tr><th>Priority</th><th>Issues</th><th>User Impact</th><th>Effort</th><th>Fixes</th></tr>
+    <tr><td style="color:var(--critical);">P0</td><td>UB-001, UB-003, UB-004</td><td>Blocks campaign completion, destroys trust</td><td>4-6 sprints total</td><td>3 fixes</td></tr>
+    <tr><td style="color:var(--high);">P1</td><td>UB-002, UB-007, UB-011</td><td>Removes user control, blocks interaction</td><td>2-3 sprints total</td><td>3 fixes</td></tr>
+    <tr><td style="color:var(--medium);">P2</td><td>UB-005, UB-006, UB-012</td><td>Limits power users, confuses e-commerce</td><td>5-7 sprints total</td><td>3 fixes</td></tr>
+    <tr><td style="color:var(--low);">P3</td><td>UB-008, UB-009, UB-010, UB-013, UB-014</td><td>Polish and accessibility gaps</td><td>4-5 sprints total</td><td>5 fixes</td></tr>
+  </table>
+</section>
+</div><!-- /panel-improvement -->
+
+
+<!-- ============== METRICS TAB ============== -->
+<div class="tabpanel" id="panel-metrics" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Measurement Framework</div>
+      <h1>Recommended Metrics for AI Chat Editor</h1>
+      <p class="subtitle">12 metrics to track UX health, adoption, and quality of the Unified Builder AI experience</p>
+    </div>
+  </header>
+
+  <table>
+    <tr><th>Category</th><th>Metric</th><th>Why It Matters</th></tr>
+    <tr>
+      <td><strong>Adoption</strong></td>
+      <td>AI Editor entry rate</td>
+      <td>% of "Design email" clicks that proceed past the AI landing page. Measures first-impression acceptance of the AI-first paradigm.</td>
+    </tr>
+    <tr>
+      <td><strong>Adoption</strong></td>
+      <td>Template builder fallback rate</td>
+      <td>% of users who look for/request the traditional editor. High rate = forced AI adoption is causing friction (UB-002).</td>
+    </tr>
+    <tr>
+      <td><strong>Completion</strong></td>
+      <td>AI-to-send completion rate</td>
+      <td>% of AI editor sessions that result in a sent campaign. The ultimate success metric for the AI editor flow.</td>
+    </tr>
+    <tr>
+      <td><strong>Completion</strong></td>
+      <td>Content generation success rate</td>
+      <td>% of "Generate email" clicks that produce content matching the user's prompt (not wrong templates). Directly measures UB-001.</td>
+    </tr>
+    <tr>
+      <td><strong>Quality</strong></td>
+      <td>Content-prompt alignment score</td>
+      <td>Automated similarity score between user prompt and generated content. Catch template-loading bugs before users do.</td>
+    </tr>
+    <tr>
+      <td><strong>Quality</strong></td>
+      <td>Duplicate campaign creation rate</td>
+      <td>% of AI sessions that create a new campaign instead of populating the existing one. Measures UB-003.</td>
+    </tr>
+    <tr>
+      <td><strong>Performance</strong></td>
+      <td>Time to first content (P50, P95)</td>
+      <td>Seconds from prompt submission to content visible in editor. Measures UB-010 and overall perceived speed.</td>
+    </tr>
+    <tr>
+      <td><strong>Performance</strong></td>
+      <td>Dead-end rate</td>
+      <td>% of sessions hitting circular instruction loops or "generate blocked" states. Measures UB-004 and similar.</td>
+    </tr>
+    <tr>
+      <td><strong>Trust</strong></td>
+      <td>AI content edit rate after generation</td>
+      <td>% of generated emails that users modify before sending. High rate may indicate AI quality concerns or healthy engagement.</td>
+    </tr>
+    <tr>
+      <td><strong>Trust</strong></td>
+      <td>Session abandonment at generation step</td>
+      <td>% of users who leave during or immediately after the AI generation phase. Measures confidence in AI output.</td>
+    </tr>
+    <tr>
+      <td><strong>Engagement</strong></td>
+      <td>Average conversation turns per campaign</td>
+      <td>How many back-and-forth messages users need to get sendable content. Lower is better for simple emails; higher for complex.</td>
+    </tr>
+    <tr>
+      <td><strong>Business</strong></td>
+      <td>AI editor campaign performance vs. manual</td>
+      <td>Open rate, click rate, and conversion rate of campaigns created via AI editor vs. traditional builder. Measures actual value delivery.</td>
+    </tr>
+  </table>
+
+  <h2>Suggested Instrumentation Priority</h2>
+  <div class="grid cols-3">
+    <div style="padding:12px;border:1px solid var(--line);border-radius:8px;">
+      <h3 style="color:var(--critical);">Week 1: Ship-blocking</h3>
+      <ul>
+        <li>Content generation success rate</li>
+        <li>Duplicate campaign creation rate</li>
+        <li>Dead-end rate</li>
+      </ul>
+    </div>
+    <div style="padding:12px;border:1px solid var(--line);border-radius:8px;">
+      <h3 style="color:var(--warn);">Week 2-3: Adoption</h3>
+      <ul>
+        <li>AI Editor entry rate</li>
+        <li>Template builder fallback rate</li>
+        <li>AI-to-send completion rate</li>
+      </ul>
+    </div>
+    <div style="padding:12px;border:1px solid var(--line);border-radius:8px;">
+      <h3 style="color:var(--good);">Week 4+: Quality</h3>
+      <ul>
+        <li>Content-prompt alignment score</li>
+        <li>Time to first content</li>
+        <li>AI campaign performance vs. manual</li>
+      </ul>
+    </div>
+  </div>
+</section>
+</div><!-- /panel-metrics -->
+
+
+<!-- ============== RECOMMENDATIONS TAB ============== -->
+<div class="tabpanel" id="panel-recommendations" role="tabpanel">
+
+<section class="page">
+  <header class="page-head">
+    <div>
+      <div class="eyebrow">Strategic Recommendations</div>
+      <h1>Recommendations</h1>
+      <p class="subtitle">Prioritized product, UX, and process recommendations for the Unified Builder team</p>
+    </div>
+  </header>
+
+  <h2>Top Product Fixes by Customer Impact</h2>
+  <table>
+    <tr><th>#</th><th>Fix</th><th>Customer Impact</th><th>Issues Resolved</th></tr>
+    <tr><td>1</td><td><strong>Content verification before success message</strong></td><td>Prevents wrong email sends, protects brand trust</td><td>UB-001</td></tr>
+    <tr><td>2</td><td><strong>Unified campaign context (no duplicate creation)</strong></td><td>Eliminates wasted configuration work, reduces confusion</td><td>UB-003, UB-007</td></tr>
+    <tr><td>3</td><td><strong>Overlay-to-campaign bridge</strong></td><td>Unblocks the home-page "Create email" path entirely</td><td>UB-004, UB-009</td></tr>
+    <tr><td>4</td><td><strong>Template builder escape hatch</strong></td><td>Restores control for power users and agencies</td><td>UB-002, UB-005</td></tr>
+    <tr><td>5</td><td><strong>Product catalog in AI editor</strong></td><td>Makes AI editor viable for core e-commerce use case</td><td>UB-012</td></tr>
+  </table>
+
+  <h2>Top UX Fixes by Ease of Implementation</h2>
+  <table>
+    <tr><th>#</th><th>Fix</th><th>Effort</th><th>Issues Resolved</th></tr>
+    <tr><td>1</td><td><strong>Exclude AI editor from Qualtrics targeting</strong></td><td>Config change (hours)</td><td>UB-011</td></tr>
+    <tr><td>2</td><td><strong>"Use template builder" link on AI landing</strong></td><td>1-2 days</td><td>UB-002</td></tr>
+    <tr><td>3</td><td><strong>Subject line preservation prompt</strong></td><td>2-3 days</td><td>UB-007</td></tr>
+    <tr><td>4</td><td><strong>Meaningful progress indicator</strong></td><td>3-5 days</td><td>UB-010</td></tr>
+    <tr><td>5</td><td><strong>Thread naming with campaign context</strong></td><td>2-3 days</td><td>UB-008</td></tr>
+  </table>
+
+  <h2>Suggested Next Steps for Testing</h2>
+  <div class="grid cols-2">
+    <div style="padding:14px;border:1px solid var(--line);border-radius:8px;">
+      <h3>Immediate (This Sprint)</h3>
+      <ul>
+        <li>Reproduce UB-001 across 5+ account types to determine scope</li>
+        <li>Verify UB-004 is context-dependent (overlay vs. campaign page)</li>
+        <li>Quantify UB-003 occurrence rate from production logs</li>
+        <li>Check if Qualtrics intercept rules can be updated without code deploy</li>
+      </ul>
+    </div>
+    <div style="padding:14px;border:1px solid var(--line);border-radius:8px;">
+      <h3>Next Sprint</h3>
+      <ul>
+        <li>Usability test with 5 non-expert users (varied personas)</li>
+        <li>A/B test: AI-only vs. AI + template builder choice</li>
+        <li>Measure drop-off rate at each step of the AI editor funnel</li>
+        <li>Compare campaign send rates: AI editor vs. classic editor</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="padding:14px;border:1px solid var(--line);border-radius:8px;margin-top:16px;">
+    <h3>Strategic (Next Quarter)</h3>
+    <ul>
+      <li>Benchmark against Klaviyo's Flows AI for content generation reliability</li>
+      <li>Evaluate whether forced AI-first is the right default or if a choice-based entry is better for activation</li>
+      <li>Test AI editor with connected e-commerce stores to validate product catalog integration value</li>
+      <li>Run longitudinal study: does AI editor improve campaign performance metrics over time?</li>
+      <li>Assess competitive risk: Shopify's free email + Sidekick vs. Mailchimp's gated AI editor</li>
+    </ul>
+  </div>
+
+  <h2>Cross-Reference to Existing Intelligence</h2>
+  <table>
+    <tr><th>This Report Finding</th><th>Related Intelligence</th><th>Source</th></tr>
+    <tr><td>UB-001 (wrong content loaded)</td><td>CJB "Legacy vs New Builder" confusion pattern</td><td><a href="cjb-scrawler-report.html">CJB Scrawler Report</a></td></tr>
+    <tr><td>UB-002 (no template builder path)</td><td>HVC theme: "CJB Still Uses Legacy Editor" — inverse problem</td><td><a href="mailchimp.html#hvcrisk">Mailchimp HVC Risk Map</a></td></tr>
+    <tr><td>UB-003 (duplicate campaign)</td><td>Activation funnel binding constraint (33.6% activation rate)</td><td><a href="mailchimp.html#health">Product Health tab</a></td></tr>
+    <tr><td>UB-012 (no product catalog)</td><td>Klaviyo's 5-channel canvas with native Shopify product data</td><td><a href="index.html">Klaviyo Flows Brief</a></td></tr>
+    <tr><td>Overall AI reliability concerns</td><td>Freddie concern: "0/17 HVC themes solved; AI shipping 8× faster than trust fixes"</td><td><a href="freddie-concerns.html">Freddie Concerns</a></td></tr>
+  </table>
+</section>
+</div><!-- /panel-recommendations -->
+
+
+</div><!-- /page-wrap -->
+
+<!-- Guardrails -->
+<div style="max-width:1180px;margin:0 auto;padding:0 20px 40px;">
+  <div class="guardrails">
+    <h3>Evaluation Guardrails</h3>
+    <ul>
+      <li><strong>No emails were sent</strong> — all campaigns remained in draft state throughout the evaluation</li>
+      <li><strong>No campaigns activated, published, or scheduled</strong> — only draft creation and AI content generation were tested</li>
+      <li><strong>All campaigns saved as drafts only</strong> — confirmed via campaign list review (Screenshot 11)</li>
+      <li><strong>Account credentials redacted</strong> — login details not stored in this report</li>
+      <li><strong>Test conducted May 26, 2026</strong> on the Goodnight Fox account (us17 datacenter)</li>
+      <li><strong>Qualitative N=1 evaluation</strong> — findings are directional, not statistically validated; follow up with quantitative measurement</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var tabs = document.querySelectorAll('.tab');
+    var panels = document.querySelectorAll('.tabpanel');
+    function activate(name) {
+      tabs.forEach(function (t) {
+        var match = t.getAttribute('data-tab') === name;
+        t.classList.toggle('active', match);
+        t.setAttribute('aria-selected', match ? 'true' : 'false');
+      });
+      panels.forEach(function (p) {
+        p.classList.toggle('active', p.id === 'panel-' + name);
+      });
+      try {
+        var url = new URL(window.location.href);
+        url.hash = name;
+        history.replaceState(null, '', url.toString());
+      } catch (e) {}
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    tabs.forEach(function (t) {
+      t.addEventListener('click', function () { activate(t.getAttribute('data-tab')); });
+    });
+    var initial = (window.location.hash || '').replace('#', '');
+    if (['summary','walkthrough','ecommerce','proserv','issues','improvement','metrics','recommendations'].indexOf(initial) >= 0) activate(initial);
+  })();
+</script>
+
+</body>
+</html>
